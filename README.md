@@ -21,6 +21,11 @@ its analysis runs, and its verdict is published either way — see
 registered hypotheses died there; that is the record working). Exploratory tables are
 labeled in place and never re-tested on the data that suggested them.
 
+To see the whole program at a glance — **what we've tried to correlate**, as a
+predictor × outcome matrix, plus the hypothesis → `tc#` → doc crosswalk and the result-doc
+index — start at [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md). New confirmatory experiments
+start from [`docs/_experiment_template.md`](docs/_experiment_template.md).
+
 ## The four guards (pre-registered in the epic before any batch ran)
 
 1. **Temporal ablation** — scans run with `GITGALAXY_DISABLE_GIT_HISTORY=1`, so churn and
