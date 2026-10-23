@@ -92,6 +92,8 @@ evaluates it. Verdicts are summarized here and authoritative in [`HYPOTHESES.md`
 | M-H1..M-H3 | multi-label signatures | curl | tc#1 | ○ pending | — |
 | X-H1 | unpaired-allocation ↔ introduce | kernel harvest | tc#27 | ○ registered | keyword_pools_explore.md |
 | X-H2 | fix-grammar gradient | openssl | tc#26 | ○ registered | keyword_pools_explore.md |
+| DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ○ registered | — |
+| DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ○ registered | — |
 
 ------------------------------------------------------------------------
 
@@ -113,6 +115,7 @@ carry a `Register:` line naming its hypothesis ids (see § naming below).
 | tc#29 | Engine gap: process features ablated to zero — add history-enabled forward-prediction mode | (engine) | open |
 | tc#3 | Panel analyses over the 219-release walk (trajectories, dwell-vs-exposure) | (exploratory) | open |
 | tc#1 | Phase M: multi-label harvesters + M-H1..M-H3 | M-H1..M-H3, W1-* | open |
+| tc#41 | DYN wave: per-file dynamism (`state_heat_triggers`) over size, from gitgalaxy#2720 | DYN-H1, DYN-H2 | open — registered 2026-10-23 |
 
 ------------------------------------------------------------------------
 
