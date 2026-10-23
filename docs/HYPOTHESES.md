@@ -481,3 +481,35 @@ separate gated predictive layer).
   born; evaluates on an introduced-side corpus, tc#27).
 - Method caveat on record: rules run over raw diff text (comments/strings not stripped —
   `branch` matches the English word "for" in comments); same instrument limits as everywhere.
+
+## DYN-H1 / DYN-H2 — registered 2026-10-23 from the gitgalaxy outcome-label pilot (unseen data only)
+
+Mirror of epic comment 6368357162 (gitgalaxy#2982, 2026-10-23T15:23Z); tracked in tc#41. Derived from gitgalaxy#2720,
+which was **not** pre-registered, so neither claim is ever scored on curl or another pilot repo.
+
+Registered **2026-10-23, before any dynamism statistic is computed on the evaluation data.** Source: gitgalaxy's outcome-label pilot (#2720; `docs/research/outcome_label_pilot.md`, memo on #2716). The pilot found per-file dynamism associated with more later fix commits at equal size and evidence: pooled MH rate ratio 1.27 (1.06–1.50), 1.20 (0.98–1.50) with the bulk-commit guard. The ratio shrank as LOC was held tighter (1.81 at 3×3 strata, 1.39 at 6×6, 1.27 at 10×4), and curl and redis carried it. That result is **exploratory** (not pre-registered), so it is never scored on the data that suggested it.
+
+**Predictor.** `state_heat_triggers`, the `file_data` column of the `reflection_metaprogramming` signal: the per-file dynamism count that gitgalaxy#2719's risk term reads. In C (all evaluation repos below) the signal is the union of function-like `#define` and `goto`:
+`^#\s*define\s+[ID_START][ID_CONTINUE]*\([^)]*\)|\bgoto\b` (gitgalaxy `languages/c.py`). If the C pattern differs from this at the scan's engine SHA, the run stops and the registration is amended before any statistic is computed.
+
+**Data (unseen for this predictor).** nDPI security-fix events (`events/ndpi.json`, 121), then openssl (repo #3, tc#26) once harvested. **Excluded from scoring:** curl (it carried the pilot estimate) and every other pilot repo. curl may appear as labelled context only.
+
+**Unit and leakage guard.** Every file in each event's first-parent snapshot (T0) is a candidate. A positive is a T0 file the event commit touches (rename-tracked, the B-H1 join). Every feature is read at T0. Every T0 snapshot is scanned at one engine SHA, recorded in the result doc, under `SCAN_ENV` (`GITGALAXY_DISABLE_GIT_HISTORY=1`).
+
+| id | claim (α=0.01) | supported iff |
+|---|---|---|
+| **DYN-H1** | Dynamism beats LOC at ranking fix-touched files **within size bands** (the gitgalaxy#2987 defect-lift-over-LOC bar) | In ≥1 powered absolute-NLOC band (≤22, 23–48, 49–108, >108; the B-H1 scheme): lift = AUC(`state_heat_triggers`) − AUC(`total_loc`) > 0 with its one-sided event-bootstrap lower bound (5,000 rounds) > 0, Bonferroni α = 0.01 / (number of powered bands) |
+| **DYN-H2** | The pilot's estimand replicates: files with any dynamism are touched by fixes at a higher rate at equal size and evidence | Mantel-Haenszel rate ratio (exposed = `state_heat_triggers` > 0; strata = event × LOC decile × evidence quartile, edges per T0 snapshot; evidence = sum of `EVIDENCE_COLUMNS` in gitgalaxy `tests/tools/outcome_pilot.py` @ `3e3347c`, dynamism excluded) has a one-sided event-bootstrap lower bound (5,000 rounds, α=0.01) > 1.0 |
+
+**Nulls.** A *replicated null* is claimed only by equivalence: DYN-H2's 90% CI inside [0.80, 1.25]; DYN-H1's two-sided 90% CI for the lift inside [−0.02, +0.02] in every powered band. Anything else not supported is *inconclusive*, not null. A band or repo below 20 positives is *not evaluable*.
+
+**Repos.** The verdict is published per repo: nDPI first, openssl added when tc#26 lands. A claim is supported overall iff it is supported on every evaluable repo.
+
+**Decision rule (registered with the claims).**
+- (a) Neither claim supported on any evaluable repo, or both equivalence-null: open a gitgalaxy issue to set the per-file dynamism weight (the #2719 term) to zero, the same rule that zeroed the strictness weight.
+- (b) DYN-H2 supported, DYN-H1 not: keep the current modest weight as a correction; no increase.
+- (c) DYN-H1 supported: keep it, and treat it as a ranking-layer candidate. Before any weight increase, it needs a third-repo replication registered separately.
+
+**Exploratory alongside (no verdicts):** a C construct split (`goto` vs function-like `#define`, counted separately from T0 source), security-fix vs size-matched control context, and curl pre-pin history as context.
+
+**Priors on record:** DYN-H1 expected **not supported** (every structural signal so far reduced to size); DYN-H2 **uncertain** (the pilot's ratio shrank under tighter size control).
