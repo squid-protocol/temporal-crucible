@@ -32,6 +32,8 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **Per-vector exposure** (`safety_score`, `tech_debt`, danger density) | fix Δ; implicated functions | ⚠ | ✗ | curl-only (`safety_score` p=.007); fails to replicate on nDPI; density artifacts caught | H3, R2-H1, N-H3, D-H1, D-H2, D-H1′ |
 | **Fix-shaped grammar** (branch/pointer adds, no new alloc) | security-fix vs control | ✓ | ✗ | **curl/human-report-specific** — not a size artifact (survives churn floor), does not travel to fuzzer-found fixes | G-H1, G-H2, N-GRAM, N-FIXSHAPE, W1-H3 |
 | **Mechanism specificity** (right vector ↔ right CWE) | CWE-family labels | ✗ | n/a | vectors read as one code-mass blob, not mechanism-specific; cert/auth vocab dead on C | S-H0, S-H1, S-H2, S-H3, S-H4 |
+| **Language strictness** (gap count, `analysis_lens.LANGUAGE_STRICTNESS`) | later fix commits per file at equal size + evidence (12 repos, gitgalaxy#2720) | ✗ (pilot) | n/a | **exploratory: no consistent value** — pooled rate ratio 0.67 (0.53–0.84), the *wrong* way; per-repo signs disagree (curl 0.53, redis 5.2); confounded with file role; untestable in single-language repos. Engine weight set to **0** (2026-10-23). | (exploratory) |
+| **Per-file dynamism** (`state_heat_triggers`; in C: function-like `#define` + `goto`) | same | ⚠ (pilot) | ○ | **exploratory: positive, size-sensitive** — rate ratio 1.27 (1.06–1.50), shrinking as LOC is held tighter (1.81 → 1.39 → 1.27); carried by curl + redis; 1.20 (0.98–1.50) with the bulk-commit guard. Registered for unseen data. | DYN-H1, DYN-H2 |
 | **Line count (`LOC`)** | — | — | — | **the baseline** every predictor above must clear | (control) |
 
 **One-sentence standing (after 2 repos, 3 label families):** *history predicts
@@ -45,6 +47,7 @@ only live lead is the mid-size band. Repo #3 (openssl) carries every open questi
 - **CWE families** — memory / cert-auth / info-leak / concurrency (specificity battery; needs repo #3)
 - **Wave-1 classes** — reverts, follow-ups (instrument sanity)
 - **First-CVE files** — pre-event standing vs age/size-matched clean files
+- **Later fix commits** (gitgalaxy outcome pilot, #2720) — subject-labelled fix commits in a 24-month window after a pin, per file (precision ≈ 83%); 12 repos, many languages
 
 ------------------------------------------------------------------------
 
@@ -147,6 +150,7 @@ exploratory docs claim no p-values and feed future registrations.
 - `hcm_variants.md` (family pattern) — HCM design space
 - `instrument_controls_forensics.md` — instrument audit (caught gitgalaxy#2988)
 - `bh_eval.md` (mid-band cells) — exploratory context outside the registered family
+- gitgalaxy [`docs/research/outcome_label_pilot.md`](https://github.com/squid-protocol/gitgalaxy/blob/main/docs/research/outcome_label_pilot.md) — the outcome-label pilot (#2720): language strictness and per-file dynamism vs later fix commits, Mantel-Haenszel at equal size + evidence; not pre-registered, so exploratory here → DYN-H1/DYN-H2
 
 ------------------------------------------------------------------------
 
