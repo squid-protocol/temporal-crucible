@@ -173,6 +173,11 @@ The register grew batch-by-batch, so prefixes historically encoded *which batch*
   *for* (`O-` = openssl/repo-3, `K-` = kernel harvest, `SYS-` = the tc#37 system wave).
 - **`<SCOPE>-<NAME>`** (word, not `H<n>`) for a *named* test that isn't a numbered
   hypothesis in a family — as with `N-GRAM`, `N-FIXSHAPE`, `N-FIRST`.
+- **`AG-H<n>`** for an *agent* experiment (does a tool, brief or setting change how well or how cheaply an AI agent
+  fixes issues?). These are run by churn's experiment lane, designed from
+  [`_agent_experiment_template.md`](_agent_experiment_template.md), registered as `docs/agents/<id>-<slug>.md` and
+  resulted in `docs/agents/<id>-<slug>-result.md`, in two separate PRs. The precedent and its lessons:
+  [`agent_selfscan_ab_explore.md`](agent_selfscan_ab_explore.md).
 - A replication of an existing claim on a new repo keeps the **base name prefixed by the
   new scope** (curl `RW-H2` → nDPI `N-RW2` → openssl `O-RW2`), so a predictor's whole
   cross-repo history reads down one grep.
