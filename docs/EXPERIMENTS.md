@@ -36,6 +36,12 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **Per-file dynamism** (`state_heat_triggers`; in C: function-like `#define` + `goto`) | same | ⚠ (pilot) | ○ | **exploratory: positive, size-sensitive** — rate ratio 1.27 (1.06–1.50), shrinking as LOC is held tighter (1.81 → 1.39 → 1.27); carried by curl + redis; 1.20 (0.98–1.50) with the bulk-commit guard. Registered for unseen data. | DYN-H1, DYN-H2 |
 | **Line count (`LOC`)** | — | — | — | **the baseline** every predictor above must clear | (control) |
 
+**Off-axis: GitGalaxy output as agent context** (the product's claimed use, not defect prediction; same legend):
+
+| Predictor | vs which outcome | repo | Durable finding | Hypotheses |
+|---|---|---|---|---|
+| **Self-scan DB** (`self-scan-query`, `context_pack.py`) given to a fixing agent, vs grep + Read only | agent tokens / time; fix quality (gitgalaxy#4479, 5 paired runs) | gitgalaxy | **exploratory: no cost benefit** (A slower 5/5 with per-task DB rebuild; tokens −21% to +15%, 4/5 inside the 10% band). **Quality unmeasured:** no rubric, no gates run, unblinded, n = 1 per arm. A found an extra issue in 3/5 pairs, which the cost-first rule could not credit. Quality-first replay proposed. | AG-H1..H3 (proposed, not registered) |
+
 **One-sentence standing (after 2 repos, 3 label families):** *history predicts
 (recidivism replicated; change entropy out-of-selection), structure describes* —
 everything structural reduces to size, the fix grammar is curl-specific, and centrality's
@@ -154,6 +160,7 @@ exploratory docs claim no p-values and feed future registrations.
 - `instrument_controls_forensics.md` — instrument audit (caught gitgalaxy#2988)
 - `bh_eval.md` (mid-band cells) — exploratory context outside the registered family
 - gitgalaxy [`docs/research/outcome_label_pilot.md`](https://github.com/squid-protocol/gitgalaxy/blob/main/docs/research/outcome_label_pilot.md) — the outcome-label pilot (#2720): language strictness and per-file dynamism vs later fix commits, Mantel-Haenszel at equal size + evidence; not pre-registered, so exploratory here → DYN-H1/DYN-H2
+- `agent_selfscan_ab_explore.md` — the gitgalaxy#4479 self-scan DB A/B (agent cost and fix quality, 5 pairs), logged with the rubric's gaps → AG-H1..H3 proposed (quality-first historical replay)
 
 ------------------------------------------------------------------------
 
