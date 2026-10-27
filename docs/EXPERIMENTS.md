@@ -103,6 +103,10 @@ evaluates it. Verdicts are summarized here and authoritative in [`HYPOTHESES.md`
 | X-H2 | fix-grammar gradient | openssl | tc#26 | ○ registered | keyword_pools_explore.md |
 | DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ○ registered | — |
 | DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ○ registered | — |
+| AG-H1 | generated-only share of conflicting main-merges > 0.15 (census) | gitgalaxy | tc#46 | ○ registered, not scored (census not run) | agents/e1-does-a-mechanical-merge-of-origin-result.md |
+| AG-H2 | status-quo conflict latency > projected tick latency (census) | gitgalaxy | tc#46 | ○ registered, not scored (census not run) | agents/e1-does-a-mechanical-merge-of-origin-result.md |
+| AG-H3 | every `tick` run clears tool-written conflicts correctly (8/8) | gitgalaxy replay | tc#46 | ✗ 2/8 (lower bound 0.046); sendback 8/8 | agents/e1-does-a-mechanical-merge-of-origin-result.md |
+| AG-H4 | tick pattern drops the PR's change on hand docs (>= 1 of 4) | gitgalaxy replay | tc#46 | ✓ 4/4 | agents/e1-does-a-mechanical-merge-of-origin-result.md |
 
 ------------------------------------------------------------------------
 
@@ -125,6 +129,7 @@ carry a `Register:` line naming its hypothesis ids (see § naming below).
 | tc#3 | Panel analyses over the 219-release walk (trajectories, dwell-vs-exposure) | (exploratory) | open |
 | tc#1 | Phase M: multi-label harvesters + M-H1..M-H3 | M-H1..M-H3, W1-* | open |
 | tc#41 | DYN wave: per-file dynamism (`state_heat_triggers`) over size, from gitgalaxy#2720 | DYN-H1, DYN-H2 | open — registered 2026-10-23 |
+| tc#46 | E1: mechanical tick-side merge vs send-back worker for "conflicts with main" PRs (gitgalaxy#6643) | AG-H1..AG-H4 | replay claims AG-H3 ✗, AG-H4 ✓; census claims AG-H1, AG-H2 unscored |
 
 ------------------------------------------------------------------------
 
@@ -148,6 +153,7 @@ exploratory docs claim no p-values and feed future registrations.
 - `ndpi_rw.md` — N-RW1/N-RW2, nDPI ranking
 - `ndpi_stage2.md` — D-H1′/N-FIRST + equivalence CIs
 - `specificity_curl_heldout.md` — S-H0..H3, held-out curl specificity battery
+- `agents/e1-does-a-mechanical-merge-of-origin-result.md` — AG-H1..AG-H4, E1 replay: a mechanical merge of main drops the PR's change (AG-H3 ✗ 2/8, AG-H4 ✓ 4/4); census claims unscored
 
 **Exploratory / survey (no verdicts; seed future registrations)**
 - `keyword_pools_explore.md` — pairing-deviation pools → X-H1/X-H2
