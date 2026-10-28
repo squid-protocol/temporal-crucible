@@ -153,6 +153,7 @@ exploratory docs claim no p-values and feed future registrations.
 - `ndpi_rw.md` — N-RW1/N-RW2, nDPI ranking
 - `ndpi_stage2.md` — D-H1′/N-FIRST + equivalence CIs
 - `specificity_curl_heldout.md` — S-H0..H3, held-out curl specificity battery
+- `agents/e1-does-a-mechanical-merge-of-origin-result.md` — AG-H1..AG-H4, E1 replay: a mechanical merge of main drops the PR's change (AG-H3 ✗ 2/8, AG-H4 ✓ 4/4); census claims unscored
 
 **Exploratory / survey (no verdicts; seed future registrations)**
 - `keyword_pools_explore.md` — pairing-deviation pools → X-H1/X-H2
