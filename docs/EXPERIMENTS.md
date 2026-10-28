@@ -103,10 +103,10 @@ evaluates it. Verdicts are summarized here and authoritative in [`HYPOTHESES.md`
 | X-H2 | fix-grammar gradient | openssl | tc#26 | ○ registered | keyword_pools_explore.md |
 | DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ○ registered | — |
 | DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ○ registered | — |
-| AG-H1 | generated-only share of conflicting main-merges > 0.15 (census) | gitgalaxy | tc#46 | ○ registered, not scored (census not run) | agents/e1-does-a-mechanical-merge-of-origin-result.md |
-| AG-H2 | status-quo conflict latency > projected tick latency (census) | gitgalaxy | tc#46 | ○ registered, not scored (census not run) | agents/e1-does-a-mechanical-merge-of-origin-result.md |
-| AG-H3 | every `tick` run clears tool-written conflicts correctly (8/8) | gitgalaxy replay | tc#46 | ✗ 2/8 (lower bound 0.046); sendback 8/8 | agents/e1-does-a-mechanical-merge-of-origin-result.md |
-| AG-H4 | tick pattern drops the PR's change on hand docs (>= 1 of 4) | gitgalaxy replay | tc#46 | ✓ 4/4 | agents/e1-does-a-mechanical-merge-of-origin-result.md |
+| AG-H1 | E1: ≥15% of PR-branch main-merge conflicts are generated-files-only (census, 10-11..17) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
+| AG-H2 | E1: status-quo conflict latency exceeds projected tick latency (generated-only) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
+| AG-H3 | E1: `tick` clears tool-written conflicts correctly, 8/8 | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
+| AG-H4 | E1: `tick`'s pattern is too broad (drops the PR's change on hand docs) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
 
 ------------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ carry a `Register:` line naming its hypothesis ids (see § naming below).
 | tc#3 | Panel analyses over the 219-release walk (trajectories, dwell-vs-exposure) | (exploratory) | open |
 | tc#1 | Phase M: multi-label harvesters + M-H1..M-H3 | M-H1..M-H3, W1-* | open |
 | tc#41 | DYN wave: per-file dynamism (`state_heat_triggers`) over size, from gitgalaxy#2720 | DYN-H1, DYN-H2 | open — registered 2026-10-23 |
-| tc#46 | E1: mechanical tick-side merge vs send-back worker for "conflicts with main" PRs (gitgalaxy#6643) | AG-H1..AG-H4 | replay claims AG-H3 ✗, AG-H4 ✓; census claims AG-H1, AG-H2 unscored |
+| tc#46 | E1: does a mechanical tick-side merge clear conflicting PRs cheaper and sooner than a send-back worker? (gitgalaxy#6643) | AG-H1..AG-H4 | open — registered 2026-10-27 |
 
 ------------------------------------------------------------------------
 
