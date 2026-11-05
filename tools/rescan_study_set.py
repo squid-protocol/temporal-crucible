@@ -15,7 +15,8 @@ Resumable: commits already in the new master are skipped. --sample N scans an
 evenly spaced (by commit date) pilot of N commits into --pilot-db instead, for
 timing; the pilot never touches the real master.
 
-    GALAXYSCOPE_BIN=/path/to/pinned/galaxyscope \
+    # spec_match is opt-in since gitgalaxy#3111; the study's 13-slot vector needs it on.
+    GALAXYSCOPE_BIN=/path/to/pinned/galaxyscope TC_ENGINE_ARGS=--spec-alignment \
     python tools/rescan_study_set.py --repo curl \
         --from-db /srv/.../temporal-crucible/dbs/curl_out/curl_galaxy_master.db \
         --jobs 5 --workers-per-scan 2
@@ -91,7 +92,8 @@ def main() -> int:
     todo = [c for c, _ in commits if c not in done]
 
     eng = engine_sha()
-    meta = {"engine_bin": GALAXYSCOPE_BIN, "engine_sha": eng, "from_db": str(args.from_db),
+    meta = {"engine_bin": GALAXYSCOPE_BIN, "engine_sha": eng,
+            "engine_args": os.environ.get("TC_ENGINE_ARGS", ""), "from_db": str(args.from_db),
             "study_commits": total, "selected": len(commits), "todo": len(todo),
             "jobs": args.jobs, "workers_per_scan": args.workers_per_scan,
             "started": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
