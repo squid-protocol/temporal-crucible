@@ -513,3 +513,116 @@ Registered **2026-10-23, before any dynamism statistic is computed on the evalua
 **Exploratory alongside (no verdicts):** a C construct split (`goto` vs function-like `#define`, counted separately from T0 source), security-fix vs size-matched control context, and curl pre-pin history as context.
 
 **Priors on record:** DYN-H1 expected **not supported** (every structural signal so far reduced to size); DYN-H2 **uncertain** (the pilot's ratio shrank under tighter size control).
+
+## FWD-H1..FWD-H3 — forward prediction from engine-native, as-of history (tc#29) — registered 2026-11-05 (unseen data only)
+
+Registered **2026-11-05, before any forward-prediction statistic is computed from as-of scans.** Until now every
+scan in this program ran with history ablated (`GITGALAXY_DISABLE_GIT_HISTORY=1`, correct for causal deltas), so the
+program's two surviving predictors (recidivism, change entropy) were only ever computed ad hoc from git. gitgalaxy#7818
+adds `GITGALAXY_HISTORY_ASOF=1`: history measured as of the scanned commit (window ends at its commit time, whole
+window read, out-of-window files dated by their last ancestor commit). The question is whether the **engine's own**
+history columns, read at time t, predict which files get fixed after t, beyond file size.
+
+**Why curl is not scored.** curl supplied the evidence these claims rest on (IV pooled churn AUC 0.859; walk churn
+proxy 0.855; HCM selected and validated on curl). curl runs the identical pipeline as **instrument check +
+labelled exploratory context only**.
+
+**Data.** nDPI (`events/ndpi.json`, `security-fix` class, 121 events). openssl is added when tc#26 lands.
+
+**Unit, snapshots and outcome (identical on every repo).**
+- Snapshot t: the newest first-parent commit on the default branch dated before each calendar-quarter boundary
+  (Jan/Apr/Jul/Oct 1 UTC), from the first quarter with ≥50 C files through the last quarter whose outcome window
+  closes before the event harvest's end date.
+- Candidates: every C file (`language = 'c'`) in snapshot t. Positive: a candidate that a fix-class event dated in
+  (t, t+180 days] touches (rename-tracked; the walk_trajectories touched-file harvest).
+- Every snapshot is scanned at one engine SHA (recorded in the result doc) with `GITGALAXY_HISTORY_ASOF=1`,
+  `--spec-alignment`, history **enabled**. All features are read from that scan, so nothing after t enters.
+
+| id | claim (α=0.01) | supported iff |
+|---|---|---|
+| **FWD-H1** | Engine churn ranks future-fixed files above LOC **within size bands** | In ≥1 powered absolute-NLOC band (≤22, 23–48, 49–108, >108; the B-H1 scheme): lift = AUC(`raw_churn_freq`) − AUC(`total_loc`) > 0, with a one-sided snapshot-cluster bootstrap (5,000 rounds, seed 2982) lower bound > 0 at Bonferroni α = 0.01 / (number of powered bands) |
+| **FWD-H2** | Engine ownership entropy does the same | As FWD-H1 with `ownership_entropy` |
+| **FWD-H3** | Engine change entropy does the same | As FWD-H1 with the engine's change-entropy column. **Scored only if** the engine implements exactly `HCM1_LD_30` (30-day periods over the 365-day window; HCM1 share-weighted attribution; linear decay max(0, 1 − age/365)), and on every scored snapshot its per-file values have Spearman ≥ 0.99 against `tools/hcm_variants.py`'s `HCM1_LD_30` from the same commit's git log. Otherwise FWD-H3 is *not evaluable* until the registration is amended. |
+
+**Instrument gate (binding, checked before any FWD statistic).** On every scored snapshot, Spearman ≥ 0.95 between
+the engine's `raw_churn_freq` and an independent count (`git log --no-merges` over [t − 365 d, t], `.git-blame-ignore-revs`
+excluded) for C files with ≥1 commit in the window. If any snapshot fails, the run stops and the instrument is fixed
+before anything is scored.
+
+**Nulls.** A *replicated null* is claimed only by equivalence: the two-sided 90% CI for the lift inside
+[−0.02, +0.02] in every powered band. Any other non-support is *inconclusive*. A band or repo with fewer than 20
+positives is *not evaluable*.
+
+**Decision rule (registered with the claims).**
+- (a) Any FWD claim supported on every evaluable repo: open a gitgalaxy issue to promote that history column into the
+  predictive layer (the #2991 disposition "promote history family"), with a separate third-repo replication registered
+  before any weight is set.
+- (b) None supported, or all equivalence-null: history columns stay descriptive. tc#29's as-of mode is kept as
+  infrastructure; there is no predictive claim.
+
+**Exploratory alongside (no verdicts):** the same pipeline on curl (quarterly snapshots and the 219-release walk);
+`silo_risk` and `risk_stability`; and the security-fix vs bug-fix label split on curl.
+
+**Priors on record:** FWD-H1 **uncertain** (on curl, pooled churn sat below LOC: walk 0.855 vs 0.907). FWD-H3
+**leaning supported** (the one feature that beat LOC out-of-selection). FWD-H2 **expected not supported**.
+
+### FWD amendment 1 — 2026-11-05, before any nDPI (scored) statistic
+
+**What prompted it.** The binding instrument gate failed on curl, which is exploratory (44/105 snapshots at
+Spearman ≥ 0.95). Diagnosis found two errors **in the registration's gate, not in the instrument**:
+
+1. The gate called `raw_churn_freq` a commit count. The engine's documented column is a recency-weighted rate,
+   `commits_in_window / sqrt(max(weeks since the file last changed, 1))` (gitgalaxy `signal_processor._calc_raw_temporal_signals`).
+   Reconstructed independently from git (no-merges window count over [t − 365 d, t] by committer time, blame-ignore
+   revs excluded, last change = newest author time of a qualifying commit at or before t), it matches the engine
+   **exactly on every C file** of the five curl snapshots checked (74/74, 112/112, 334/334, 597/597, 822/822; rho 1.0000).
+2. The registration did not handle snapshots where the engine reports **no usable history** (#4548: single-commit
+   span or shallow clone gives every file neutral stability 50 and churn 0). curl's first quarterly snapshot is its
+   one-commit 1999 import. The correlation there is undefined, and there is no history to predict from.
+
+**Amended (applies to every repo; the predictors, outcome, bands, bootstrap and decision rule are unchanged):**
+- The gate compares `raw_churn_freq` with that independent reconstruction of the same formula, still at Spearman ≥ 0.95 on
+  every evaluated snapshot.
+- A snapshot whose every C file has `risk_stability = 50` and `raw_churn_freq = 0` (engine-reported unusable
+  history) is excluded from the gates and from all FWD scoring. The number excluded is reported.
+
+No outcome-linked statistic on nDPI was computed before this amendment. curl's exploratory pooled AUCs had already
+been printed by the failed run; curl is unscored, so they bear on no verdict.
+
+## FWD-H1..FWD-H3 — RESULTS (2026-11-05; registration + amendment 1 above)
+
+Engine `e246915aa` (gitgalaxy#7818: as-of history + persisted change entropy), `--spec-alignment`, history
+enabled as of each snapshot. Reports: `docs/fwd_ndpi.md` (scored), `docs/fwd_curl.md` (exploratory).
+
+**Gates (binding).** On nDPI, the churn reconstruction passed 43/43 snapshots (min rho 0.991) and HCM parity
+passed 43/43 (min 0.995). On curl both passed 104/104 at rho 1.0000, with one one-commit snapshot excluded under
+amendment 1. The engine's history columns are what git says they are, and its change entropy is the validated
+`HCM1_LD_30`.
+
+**nDPI (scored).** 43 quarterly snapshots, 10,018 (snapshot, C file) rows, 452 positives. Powered bands: 49–108
+(136 positives) and >108 (313). Bonferroni α = 0.005.
+
+| claim | 49–108 lift [one-sided lo] | >108 lift [one-sided lo] | verdict |
+|---|---|---|---|
+| **FWD-H1** churn | −0.260 [−0.362] | −0.003 [−0.066] | **not supported** (inconclusive) |
+| **FWD-H2** ownership entropy | −0.153 [−0.335] | −0.046 [−0.086] | **not supported** (inconclusive) |
+| **FWD-H3** change entropy | −0.083 [−0.284] | +0.023 [−0.042] | **not supported** (inconclusive) |
+
+Pooled AUCs: total_loc 0.700, change entropy 0.667, ownership 0.598, churn 0.595. None of the nulls is an
+equivalence null; the CIs are too wide on 43 snapshots. A claim needs every evaluable repo, so none can be
+supported overall whatever openssl shows.
+
+**Decision rule (b) applies.** History columns stay descriptive. The as-of mode stays as infrastructure for causal
+and forward work. No predictive promotion.
+
+**Priors vs outcome.** FWD-H3 was "leaning supported" and is not; H1 "uncertain", H2 "expected not supported".
+
+**Exploratory, no verdicts.**
+- curl: churn and change entropy show positive point lifts over size in the 23–48 and 49–108 bands (+0.02 to
+  +0.06), but every lower bound is below 0, and pooled size wins (0.84). Change entropy's within-band edge on curl
+  does not carry to nDPI's fuzzer-found fixes.
+- nDPI 49–108: churn and ownership rank strongly *inverted* (AUC 0.28 / 0.39). This is plausibly a few mass
+  fuzzer-fix commits dominating the band. Worth a snapshot-level look before any reading.
+- Recency: `risk_stability` (high = long unchanged) has AUC 0.21 on curl. Inverted, "changed recently" is 0.60–0.78
+  in the small bands against size's 0.50–0.56. That makes it a pre-registration candidate for an unseen repo, not a
+  finding (on nDPI it is 0.42, i.e. 0.58 inverted, against size 0.70 pooled).
