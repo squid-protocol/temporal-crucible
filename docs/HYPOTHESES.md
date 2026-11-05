@@ -565,3 +565,26 @@ positives is *not evaluable*.
 
 **Priors on record:** FWD-H1 **uncertain** (on curl, pooled churn sat below LOC: walk 0.855 vs 0.907). FWD-H3
 **leaning supported** (the one feature that beat LOC out-of-selection). FWD-H2 **expected not supported**.
+
+### FWD amendment 1 — 2026-11-05, before any nDPI (scored) statistic
+
+**What prompted it.** The binding instrument gate failed on curl, which is exploratory (44/105 snapshots at
+Spearman ≥ 0.95). Diagnosis found two errors **in the registration's gate, not in the instrument**:
+
+1. The gate called `raw_churn_freq` a commit count. The engine's documented column is a recency-weighted rate,
+   `commits_in_window / sqrt(max(weeks since the file last changed, 1))` (gitgalaxy `signal_processor._calc_raw_temporal_signals`).
+   Reconstructed independently from git (no-merges window count over [t − 365 d, t] by committer time, blame-ignore
+   revs excluded, last change = newest author time of a qualifying commit at or before t), it matches the engine
+   **exactly on every C file** of the five curl snapshots checked (74/74, 112/112, 334/334, 597/597, 822/822; rho 1.0000).
+2. The registration did not handle snapshots where the engine reports **no usable history** (#4548: single-commit
+   span or shallow clone gives every file neutral stability 50 and churn 0). curl's first quarterly snapshot is its
+   one-commit 1999 import. The correlation there is undefined, and there is no history to predict from.
+
+**Amended (applies to every repo; the predictors, outcome, bands, bootstrap and decision rule are unchanged):**
+- The gate compares `raw_churn_freq` with that independent reconstruction of the same formula, still at Spearman ≥ 0.95 on
+  every evaluated snapshot.
+- A snapshot whose every C file has `risk_stability = 50` and `raw_churn_freq = 0` (engine-reported unusable
+  history) is excluded from the gates and from all FWD scoring. The number excluded is reported.
+
+No outcome-linked statistic on nDPI was computed before this amendment. curl's exploratory pooled AUCs had already
+been printed by the failed run; curl is unscored, so they bear on no verdict.
