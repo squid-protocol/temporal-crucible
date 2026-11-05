@@ -513,3 +513,55 @@ Registered **2026-10-23, before any dynamism statistic is computed on the evalua
 **Exploratory alongside (no verdicts):** a C construct split (`goto` vs function-like `#define`, counted separately from T0 source), security-fix vs size-matched control context, and curl pre-pin history as context.
 
 **Priors on record:** DYN-H1 expected **not supported** (every structural signal so far reduced to size); DYN-H2 **uncertain** (the pilot's ratio shrank under tighter size control).
+
+## FWD-H1..FWD-H3 — forward prediction from engine-native, as-of history (tc#29) — registered 2026-11-05 (unseen data only)
+
+Registered **2026-11-05, before any forward-prediction statistic is computed from as-of scans.** Until now every
+scan in this program ran with history ablated (`GITGALAXY_DISABLE_GIT_HISTORY=1`, correct for causal deltas), so the
+program's two surviving predictors (recidivism, change entropy) were only ever computed ad hoc from git. gitgalaxy#7818
+adds `GITGALAXY_HISTORY_ASOF=1`: history measured as of the scanned commit (window ends at its commit time, whole
+window read, out-of-window files dated by their last ancestor commit). The question is whether the **engine's own**
+history columns, read at time t, predict which files get fixed after t, beyond file size.
+
+**Why curl is not scored.** curl supplied the evidence these claims rest on (IV pooled churn AUC 0.859; walk churn
+proxy 0.855; HCM selected and validated on curl). curl runs the identical pipeline as **instrument check +
+labelled exploratory context only**.
+
+**Data.** nDPI (`events/ndpi.json`, `security-fix` class, 121 events). openssl is added when tc#26 lands.
+
+**Unit, snapshots and outcome (identical on every repo).**
+- Snapshot t: the newest first-parent commit on the default branch dated before each calendar-quarter boundary
+  (Jan/Apr/Jul/Oct 1 UTC), from the first quarter with ≥50 C files through the last quarter whose outcome window
+  closes before the event harvest's end date.
+- Candidates: every C file (`language = 'c'`) in snapshot t. Positive: a candidate that a fix-class event dated in
+  (t, t+180 days] touches (rename-tracked; the walk_trajectories touched-file harvest).
+- Every snapshot is scanned at one engine SHA (recorded in the result doc) with `GITGALAXY_HISTORY_ASOF=1`,
+  `--spec-alignment`, history **enabled**. All features are read from that scan, so nothing after t enters.
+
+| id | claim (α=0.01) | supported iff |
+|---|---|---|
+| **FWD-H1** | Engine churn ranks future-fixed files above LOC **within size bands** | In ≥1 powered absolute-NLOC band (≤22, 23–48, 49–108, >108; the B-H1 scheme): lift = AUC(`raw_churn_freq`) − AUC(`total_loc`) > 0, with a one-sided snapshot-cluster bootstrap (5,000 rounds, seed 2982) lower bound > 0 at Bonferroni α = 0.01 / (number of powered bands) |
+| **FWD-H2** | Engine ownership entropy does the same | As FWD-H1 with `ownership_entropy` |
+| **FWD-H3** | Engine change entropy does the same | As FWD-H1 with the engine's change-entropy column. **Scored only if** the engine implements exactly `HCM1_LD_30` (30-day periods over the 365-day window; HCM1 share-weighted attribution; linear decay max(0, 1 − age/365)), and on every scored snapshot its per-file values have Spearman ≥ 0.99 against `tools/hcm_variants.py`'s `HCM1_LD_30` from the same commit's git log. Otherwise FWD-H3 is *not evaluable* until the registration is amended. |
+
+**Instrument gate (binding, checked before any FWD statistic).** On every scored snapshot, Spearman ≥ 0.95 between
+the engine's `raw_churn_freq` and an independent count (`git log --no-merges` over [t − 365 d, t], `.git-blame-ignore-revs`
+excluded) for C files with ≥1 commit in the window. If any snapshot fails, the run stops and the instrument is fixed
+before anything is scored.
+
+**Nulls.** A *replicated null* is claimed only by equivalence: the two-sided 90% CI for the lift inside
+[−0.02, +0.02] in every powered band. Any other non-support is *inconclusive*. A band or repo with fewer than 20
+positives is *not evaluable*.
+
+**Decision rule (registered with the claims).**
+- (a) Any FWD claim supported on every evaluable repo: open a gitgalaxy issue to promote that history column into the
+  predictive layer (the #2991 disposition "promote history family"), with a separate third-repo replication registered
+  before any weight is set.
+- (b) None supported, or all equivalence-null: history columns stay descriptive. tc#29's as-of mode is kept as
+  infrastructure; there is no predictive claim.
+
+**Exploratory alongside (no verdicts):** the same pipeline on curl (quarterly snapshots and the 219-release walk);
+`silo_risk` and `risk_stability`; and the security-fix vs bug-fix label split on curl.
+
+**Priors on record:** FWD-H1 **uncertain** (on curl, pooled churn sat below LOC: walk 0.855 vs 0.907). FWD-H3
+**leaning supported** (the one feature that beat LOC out-of-selection). FWD-H2 **expected not supported**.
