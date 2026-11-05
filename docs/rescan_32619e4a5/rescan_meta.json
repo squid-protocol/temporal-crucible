@@ -1,0 +1,12 @@
+{
+  "engine_bin": "/srv/storage_16tb/projects/gitgalaxy-worktrees/tc-rescan-32619e4a5/.venv-tc/bin/galaxyscope-tc",
+  "engine_sha": "32619e4a5e83c3ae7ba6e8969397e6db364ba8cf",
+  "engine_args": "--spec-alignment",
+  "from_db": "/srv/storage_16tb/projects/temporal-crucible/dbs/curl_out/curl_galaxy_master.db",
+  "study_commits": 3547,
+  "selected": 3547,
+  "todo": 3547,
+  "jobs": 5,
+  "workers_per_scan": 2,
+  "started": "2026-11-04T20:04:55-0500"
+}
