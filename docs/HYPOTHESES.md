@@ -680,3 +680,30 @@ function a fixed one); the share of scored events where every candidate has prio
 
 **Priors on record.** FREC-H1 **uncertain**: most functions will have prior 0, so ties pull AUC toward ½ while size
 does not tie. FREC-H2 **leaning supported**.
+
+## FREC-H1 / FREC-H2 — RESULTS (2026-11-05; registration above)
+
+Engine `32619e4a5`, history ablated. Reports: `docs/frec_curl.md`, `docs/frec_ndpi.md`. Lift = mean within-event
+AUC(score) − AUC(function loc) over scored events (the later half by date); event bootstrap; α = 0.005 one-sided.
+
+| repo | scored events | FREC-H1 prior count | FREC-H2 (prior, then loc) | size AUC |
+|---|---:|---|---|---:|
+| curl | 435 | −0.126 [lo −0.155] **not supported** | −0.023, 90% CI [−0.032, −0.015] **not supported** | 0.792 |
+| nDPI | 51 | −0.170 [lo −0.251] **not supported** | −0.008, 90% CI [−0.022, +0.007] **not supported** (inconclusive; just outside the ±0.02 equivalence band) | 0.865 |
+
+**Decision rule (c) applies.** The function dossier's predictive line stays file-grain.
+
+**Reading.** Function memory carries signal on its own (within-event AUC 0.67 on curl, 0.69 on nDPI; chance is 0.5),
+but function size carries more. Within a touched file, the long function is where the fix lands, and putting prior
+fixes ahead of size makes the ranking worse on curl (CI entirely below 0). Ties are not the cause: only 34/435 curl
+and 8/51 nDPI events had every candidate at prior 0. File-grain recidivism replicated because it separates files that
+differ hugely in size and history. Inside one file, size-by-area dominates.
+
+**Priors vs outcome.** FREC-H1 "uncertain": not supported. FREC-H2 "leaning supported": not supported.
+
+**Exploratory.**
+- recall@1 (is the top-ranked function a fixed one?): curl 0.27 with memory first vs 0.41 for size alone; nDPI
+  0.37 vs 0.33.
+- The lift is negative in every curl label class (security, regression, both bug labels).
+- An untested candidate: memory **per line of function** (prior fixes / loc) as a density, so that size is not
+  simply re-ranked. It belongs to an unseen repo (openssl) and would need registering first.
