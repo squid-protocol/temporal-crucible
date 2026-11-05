@@ -61,6 +61,38 @@ every snapshot.
   walk panels) carry this as a known caveat. The affected file is a public header, not a typical fix target. A rerun
   after the engine fix would settle it.
 
+## openssl (repo #3), validated before any harvest (2026-11-05)
+
+| snapshot | functions vs tree-sitter R / P | vs ctags (C files) R / P | span start / end exact | `#include` R / P (raw) | `#include` P without build-generated headers | call links: agree / wrong / recall |
+|---|---|---|---|---|---|---|
+| OpenSSL 1.0.2 (2015) | 97.40 / 99.07 | 97.77 / 98.49 | 99.07 / 99.48 | 100.0 / 25.46 | **100.0** | 15,049 / 0 / 63.8% |
+| OpenSSL 1.1.1 (2018) | 97.51 / 99.37 | 98.13 / 96.12 | 99.28 / 99.77 | 100.0 / 97.16 | **100.0** | 23,251 / 0 / 71.6% |
+| openssl 3.5.0 (2025) | 98.03 / 99.36 | 98.39 / 79.52 | 99.08 / 99.76 | 99.94 / 88.39 | **99.8** | 45,733 / 1 / 55.9% |
+
+**What each disagreement is (read in source).**
+- **Includes are build-correct, not wrong.** 1.0.2's `include/openssl/` is not in git: `make links` builds it as links to
+  `crypto/<x>/<x>.h`. So all 2,825 "false" edges (`<openssl/rsa.h>` → `crypto/rsa/rsa.h`) are what the compiler
+  sees. In 1.1.1 and 3.5.0, 128 and 1,023 edges point at the `include/openssl/*.h.in` templates that the real headers
+  are generated from.
+- What's left: 15 edges in 3.5.0 are **#7827 again**, with `<sys/time.h>` → `include/internal/time.h`
+  (`crypto/bio/bio_sock.c:29`). That second-repo confirmation and the build-linked counterexample are posted on #7827.
+- **ctags precision 79.5% on 3.5.0 is ctags,** tripping on openssl's `STACK_OF(...)` / `DEFINE_STACK_OF` macros: its
+  "functions" include `STACK_OF`, while `apps/list.c:95 static int cipher_cmp(...)` is real and ctags misses it.
+  tree-sitter agrees with the engine (precision 99.4%).
+- **Call recall is macros.**
+  - `not_extracted` (17,087 edges) is mostly function-like macros that expand to calls: `ERR_raise` 6,966,
+    `OPENSSL_free` 3,220 (→ `CRYPTO_free`), `OPENSSL_malloc` and friends. That's #7828's function-like form, and the
+    evidence is on the issue.
+  - `caller_unmapped` (8,805) is functions that exist only after preprocessing: token-pasted
+    `is_ ## type ## _fetchable` (`apps/list.c:40`) and generator macros (`DEFINE_OSSL_CMP_CTX_get0_NAME`). No
+    non-preprocessing extractor sees them, tree-sitter included.
+
+**Verdict for the openssl study.** Function rows and spans are sound, at 97–98% recall and 99%+ precision. The
+include graph is sound once build-generated headers are understood. The call graph is precise but misses
+macro-expanded calls, and no study here reads it. One study-design consequence: a fix inside a macro-generated
+function has no function row to land in. Any function-grain claim on openssl must report how many fix hunks fall
+outside every function span.
+
 ## Issue 1 (filed as gitgalaxy#7827): C import graph, system include resolved to an unrelated repo header
 
 > **What's wrong.** `#include <sys/types.h>` gets an edge to a repo header that merely shares the basename. In
