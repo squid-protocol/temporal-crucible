@@ -50,7 +50,35 @@ def _pct(a, b):
     return round(100.0 * a / b, 2) if b else None
 
 
+def _deep(fn, *args):
+    """gitgalaxy's tree-sitter audit walks parse trees recursively; openssl's deepest files
+    pass Python's default recursion limit. Run the step in a thread with a large stack."""
+    import threading
+
+    out: dict = {}
+    sys.setrecursionlimit(200_000)
+    threading.stack_size(1024 * 1024 * 1024)
+
+    def run():
+        try:
+            out["v"] = fn(*args)
+        except BaseException as e:  # re-raised in the caller's thread
+            out["e"] = e
+
+    t = threading.Thread(target=run)
+    t.start()
+    t.join()
+    threading.stack_size(0)
+    if "e" in out:
+        raise out["e"]
+    return out["v"]
+
+
 def functions_vs_tree_sitter(snap: pathlib.Path) -> dict:
+    return _deep(_functions_vs_tree_sitter, snap)
+
+
+def _functions_vs_tree_sitter(snap: pathlib.Path) -> dict:
     import tree_sitter_accuracy_audit as tsa
 
     tsa.ensure_corpus = lambda lang: snap

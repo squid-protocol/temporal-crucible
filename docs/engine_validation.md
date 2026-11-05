@@ -42,7 +42,7 @@ every snapshot.
 - nDPI's vendored `src/lib/third_party/` is not scanned (#4545). It accounts for 2,883 of the head snapshot's 2,895
   `caller_unmapped` call edges. With vendored callers left out, nDPI head call recall is 4,022 / 4,847 = **83%**.
 
-**Two real engine gaps (drafts for gitgalaxy issues below).**
+**Two real engine gaps (filed as gitgalaxy#7827 and #7828; text below).**
 1. **`<sys/types.h>` resolves to `include/curl/types.h`.** In Stage 1 of import resolution, a lone same-named file
    is returned without checking the include's directory. That gives curl 7.10.8 46 false edges (precision 90.4%).
    It is still present on gitgalaxy main `79b13e354`.
@@ -61,7 +61,7 @@ every snapshot.
   walk panels) carry this as a known caveat. The affected file is a public header, not a typical fix target. A rerun
   after the engine fix would settle it.
 
-## Draft issue 1: C import graph, system include resolved to an unrelated repo header
+## Issue 1 (filed as gitgalaxy#7827): C import graph, system include resolved to an unrelated repo header
 
 > **What's wrong.** `#include <sys/types.h>` gets an edge to a repo header that merely shares the basename. In
 > curl 7.10.8, every `ares/*.c` file links to `include/curl/types.h`: 46 false edges out of 479 (import precision
@@ -80,7 +80,7 @@ every snapshot.
 > **Impact.** False in-degree, PageRank and blast radius on any C repo whose headers share names with system
 > headers (`types.h`, `time.h`, `string.h`, `signal.h`, …).
 
-## Draft issue 2: C call graph, calls through a `#define` alias are not followed
+## Issue 2 (filed as gitgalaxy#7828): C call graph, calls through a `#define` alias are not followed
 
 > **What's wrong.** curl 7.30.0's `lib/sendf.h:48` has `#define failf Curl_failf` (`infof` likewise). Calls written
 > `failf(data, …)` (lib/ftp.c 43 sites, imap.c 19, url.c 18, smtp.c 16, …) are not linked to `Curl_failf`. libclang
