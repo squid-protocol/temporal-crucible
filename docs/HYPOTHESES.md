@@ -588,3 +588,41 @@ Spearman ≥ 0.95). Diagnosis found two errors **in the registration's gate, not
 
 No outcome-linked statistic on nDPI was computed before this amendment. curl's exploratory pooled AUCs had already
 been printed by the failed run; curl is unscored, so they bear on no verdict.
+
+## FWD-H1..FWD-H3 — RESULTS (2026-11-05; registration + amendment 1 above)
+
+Engine `e246915aa` (gitgalaxy#7818: as-of history + persisted change entropy), `--spec-alignment`, history
+enabled as of each snapshot. Reports: `docs/fwd_ndpi.md` (scored), `docs/fwd_curl.md` (exploratory).
+
+**Gates (binding).** On nDPI, the churn reconstruction passed 43/43 snapshots (min rho 0.991) and HCM parity
+passed 43/43 (min 0.995). On curl both passed 104/104 at rho 1.0000, with one one-commit snapshot excluded under
+amendment 1. The engine's history columns are what git says they are, and its change entropy is the validated
+`HCM1_LD_30`.
+
+**nDPI (scored).** 43 quarterly snapshots, 10,018 (snapshot, C file) rows, 452 positives. Powered bands: 49–108
+(136 positives) and >108 (313). Bonferroni α = 0.005.
+
+| claim | 49–108 lift [one-sided lo] | >108 lift [one-sided lo] | verdict |
+|---|---|---|---|
+| **FWD-H1** churn | −0.260 [−0.362] | −0.003 [−0.066] | **not supported** (inconclusive) |
+| **FWD-H2** ownership entropy | −0.153 [−0.335] | −0.046 [−0.086] | **not supported** (inconclusive) |
+| **FWD-H3** change entropy | −0.083 [−0.284] | +0.023 [−0.042] | **not supported** (inconclusive) |
+
+Pooled AUCs: total_loc 0.700, change entropy 0.667, ownership 0.598, churn 0.595. None of the nulls is an
+equivalence null; the CIs are too wide on 43 snapshots. A claim needs every evaluable repo, so none can be
+supported overall whatever openssl shows.
+
+**Decision rule (b) applies.** History columns stay descriptive. The as-of mode stays as infrastructure for causal
+and forward work. No predictive promotion.
+
+**Priors vs outcome.** FWD-H3 was "leaning supported" and is not; H1 "uncertain", H2 "expected not supported".
+
+**Exploratory, no verdicts.**
+- curl: churn and change entropy show positive point lifts over size in the 23–48 and 49–108 bands (+0.02 to
+  +0.06), but every lower bound is below 0, and pooled size wins (0.84). Change entropy's within-band edge on curl
+  does not carry to nDPI's fuzzer-found fixes.
+- nDPI 49–108: churn and ownership rank strongly *inverted* (AUC 0.28 / 0.39). This is plausibly a few mass
+  fuzzer-fix commits dominating the band. Worth a snapshot-level look before any reading.
+- Recency: `risk_stability` (high = long unchanged) has AUC 0.21 on curl. Inverted, "changed recently" is 0.60–0.78
+  in the small bands against size's 0.50–0.56. That makes it a pre-registration candidate for an unseen repo, not a
+  finding (on nDPI it is 0.42, i.e. 0.58 inverted, against size 0.70 pooled).
