@@ -626,3 +626,84 @@ and forward work. No predictive promotion.
 - Recency: `risk_stability` (high = long unchanged) has AUC 0.21 on curl. Inverted, "changed recently" is 0.60–0.78
   in the small bands against size's 0.50–0.56. That makes it a pre-registration candidate for an unseen repo, not a
   finding (on nDPI it is 0.42, i.e. 0.58 inverted, against size 0.70 pooled).
+
+## FREC-H1 / FREC-H2 — function-grain recidivism (tc#28) — registered 2026-11-05, before any function-grain statistic
+
+**Background.** File-grain recidivism is the program's only cross-repo replicated predictor (RW-H2: curl, then nDPI,
+p < 1e-4 against exposure and LOC). The question is whether, **within the files a fix touches**, the function that
+was fixed before is where the next fix lands, better than function size predicts. A line count has no memory, so it
+cannot imitate this. No function-grain recidivism statistic has been computed on any repository before this entry.
+curl hosted the file-grain discovery, so it is scored only under the temporal split below.
+
+**Data.**
+- curl: `security-fix` (events/curl.json) ∪ `bugfix-fixes`, `bugfix-bug`, `regression` (events/curl_bugs.json),
+  deduplicated by sha.
+- nDPI: `security-fix` (events/ndpi.json).
+- Snapshots are each event's parent and child, scanned at engine `32619e4a5` (history ablated, `--spec-alignment`;
+  the PR #50 rescan for curl, and the same engine for nDPI).
+
+**Unit and labels.**
+- Event date = the fix commit's committer time.
+- Candidates for event e: every `function_data` row with `start_line` and `loc` in each C file e touches, read at
+  e's parent; only files with ≥ 2 such functions.
+- Positive: a candidate whose span [start_line, start_line + loc) overlaps e's parent-side changed lines
+  (`git diff -U0 parent..child`, the signal_anatomy pass-2 mapping).
+- An event qualifies if it has ≥ 1 positive and ≥ 1 negative candidate.
+
+**Predictor (leakage-free by construction).**
+- prior(f, e) = the number of fix-class events of the same repo with committer time strictly before e's whose
+  positives included the same (parent-side file path, function name).
+- History accumulates over **all** events. Renames break lineage, which handicaps the predictor.
+
+**Temporal split.** Only events dated after the median date of the repo's fix-class events are scored. The earlier
+half only builds history.
+
+| id | claim (α = 0.01 / 2 claims = 0.005, one-sided) | supported iff |
+|---|---|---|
+| **FREC-H1** | Prior function-fix count ranks fixed functions above function size, within touched files | mean over scored qualifying events of [AUC_e(prior) − AUC_e(loc)] > 0, with event-bootstrap lower bound (5,000 rounds, seed 2982) > 0. AUC_e is the within-event Mann-Whitney AUC, ties ½ |
+| **FREC-H2** | Memory adds to size: prior count, ties broken by size, beats size alone | the same, with score = (prior, loc) ranked lexicographically |
+
+**Repos.** Verdicts are published per repo. A claim is supported overall iff it is supported on curl **and** nDPI.
+A repo with < 20 scored qualifying events is *not evaluable*.
+
+**Nulls.** A *replicated null* is claimed only by equivalence: the two-sided 90% CI of the mean lift inside
+[−0.02, +0.02]. Otherwise it is *inconclusive*.
+
+**Decision rule.**
+- (a) FREC-H2 supported overall: open a gitgalaxy issue for a function-precise "prior fixes here" line in the
+  function dossier. An openssl replication is registered before it becomes any score input.
+- (b) Only FREC-H1 supported: the same, flagged as a standalone ranking, not an additive one.
+- (c) Neither: the dossier's predictive line stays file-grain.
+
+**Exploratory alongside (no verdicts):** split by label class (security vs bug); recall@1 (is the top-ranked
+function a fixed one); the share of scored events where every candidate has prior = 0.
+
+**Priors on record.** FREC-H1 **uncertain**: most functions will have prior 0, so ties pull AUC toward ½ while size
+does not tie. FREC-H2 **leaning supported**.
+
+## FREC-H1 / FREC-H2 — RESULTS (2026-11-05; registration above)
+
+Engine `32619e4a5`, history ablated. Reports: `docs/frec_curl.md`, `docs/frec_ndpi.md`. Lift = mean within-event
+AUC(score) − AUC(function loc) over scored events (the later half by date); event bootstrap; α = 0.005 one-sided.
+
+| repo | scored events | FREC-H1 prior count | FREC-H2 (prior, then loc) | size AUC |
+|---|---:|---|---|---:|
+| curl | 435 | −0.126 [lo −0.155] **not supported** | −0.023, 90% CI [−0.032, −0.015] **not supported** | 0.792 |
+| nDPI | 51 | −0.170 [lo −0.251] **not supported** | −0.008, 90% CI [−0.022, +0.007] **not supported** (inconclusive; just outside the ±0.02 equivalence band) | 0.865 |
+
+**Decision rule (c) applies.** The function dossier's predictive line stays file-grain.
+
+**Reading.** Function memory carries signal on its own (within-event AUC 0.67 on curl, 0.69 on nDPI; chance is 0.5),
+but function size carries more. Within a touched file, the long function is where the fix lands, and putting prior
+fixes ahead of size makes the ranking worse on curl (CI entirely below 0). Ties are not the cause: only 34/435 curl
+and 8/51 nDPI events had every candidate at prior 0. File-grain recidivism replicated because it separates files that
+differ hugely in size and history. Inside one file, size-by-area dominates.
+
+**Priors vs outcome.** FREC-H1 "uncertain": not supported. FREC-H2 "leaning supported": not supported.
+
+**Exploratory.**
+- recall@1 (is the top-ranked function a fixed one?): curl 0.27 with memory first vs 0.41 for size alone; nDPI
+  0.37 vs 0.33.
+- The lift is negative in every curl label class (security, regression, both bug labels).
+- An untested candidate: memory **per line of function** (prior fixes / loc) as a density, so that size is not
+  simply re-ranked. It belongs to an unseen repo (openssl) and would need registering first.
