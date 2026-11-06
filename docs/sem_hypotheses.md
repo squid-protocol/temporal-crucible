@@ -85,3 +85,7 @@ fix's *pre-fix function body* (the query side, normalised the same way). Everyth
 
 **Prior:** H1 likely now. H3 uncertain: removing fragments may also remove zlib-ng's `len < extra_max`. It should
 not, because that fragment is new in the fix.
+
+**SEM2-H3 audit recorded (before SEM-2 ran).**
+- 20 fresh units (seed 2984), audited on semantics. Aggregate: **20 patched, 0 unpatched, 0 unclear.**
+- Labels: `vz_private/sem2_audit.json`, sha256 `5b3c080791ceb0ca5e47e2348d2b51aa6f417a5dfa4b49e0a1704a917defad83`.

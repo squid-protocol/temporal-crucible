@@ -27,7 +27,8 @@ TOK = re.compile(r"->|<=|>=|==|!=|&&|\|\||<<|>>|\+\+|--|[A-Za-z_]\w*|\d+\w*|[^\s
 DROP = {"(", ")", "if", "while", "for", "return"}
 SPLIT = {"&&", "||", "{", "}", ";", "?", ":", ","}
 CMP = {"<", ">", "<=", ">=", "==", "!="}
-AUDIT = POOL_DIR / "vz_private" / "sem_audit.json"
+AUDIT = POOL_DIR / "vz_private" / ("sem2_audit.json" if "--v2" in sys.argv else "sem_audit.json")
+V2 = "--v2" in sys.argv  # SEM-2: keep only guard fragments absent from the pre-fix function body
 
 
 def norm_toks(text):
@@ -71,11 +72,16 @@ def main() -> int:
     fixes = {}
     for f in Z.FIXES:
         es = Z.engine_spans(Z.OUT / f"zlib@{f[:9]}^" / f"zlib@{f[:9]}^_galaxy_master.db")
-        per_file = defaultdict(lambda: {"R": set(), "A": set()})
+        per_file = defaultdict(lambda: {"R": set(), "A": set(), "F": set()})
         for (path, _nm), d in Z.fix_functions(f, es).items():
             per_file[path]["R"] |= d["R"]
             per_file[path]["A"] |= d["A"]
-        fixes[f[:9]] = {k: {**v, "F": fragments(v["A"])} for k, v in per_file.items()}
+            fr = fragments(d["A"])
+            if V2:
+                pre = "\x01" + "\x01".join(norm_toks(d["pre"])) + "\x01"
+                fr = {x for x in fr if not present(x, pre)}
+            per_file[path]["F"] |= fr
+        fixes[f[:9]] = dict(per_file)
     tasks = [(n, s, c) for n in T.HOSTS for s, c in T.host_states(n)]
     with multiprocessing.get_context("fork").Pool(8) as p:
         states = list(p.imap_unordered(T.state_task, tasks, chunksize=2))
@@ -118,7 +124,7 @@ def main() -> int:
     first = json.loads((POOL_DIR / "vz_private" / "vzt_timelines.json").read_text())["audit_sample"]
     f_keys = [(a["host"], a["sha"], a["fix"], a["file"]) for a in first]
     in_sample = Counter((idx[k]["line"], idx[k]["sem"]) for k in f_keys if k in idx)
-    frag_n = {Z.CVE[fx]: sum(len(v["F"]) for v in pf.values()) for fx, pf in fixes.items()}
+    frag_n = {fx: sum(len(v["F"]) for v in pf.values()) for fx, pf in fixes.items()}
     abst_line = sum(u["line"] == "undetermined" for u in units) / len(units)
     abst_sem = sum(u["sem"] == "undetermined" for u in units) / len(units)
     changed = Counter((u["line"], u["sem"]) for u in units if u["line"] != u["sem"])
@@ -134,7 +140,10 @@ def main() -> int:
          f"- verdict changes line → SEM (all units): {dict(changed)}",
          f"- VZ-T's first audit sample (in-sample, the design example): (line, SEM) = {dict(in_sample)}",
          "", f"Runtime {time.time() - t0:.0f}s."]
-    (DOCS_DIR / "sem.md").write_text("\n".join(L) + "\n")
+    if V2:
+        L[0] = L[0].replace("SEM-H1..H3", "SEM2-H1..H3 (new fragments only)")
+        L = [x.replace("**SEM-H", "**SEM2-H") for x in L]
+    (DOCS_DIR / ("sem2.md" if V2 else "sem.md")).write_text("\n".join(L) + "\n")
     print("\n".join(L))
     return 0
 
