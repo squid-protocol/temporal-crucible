@@ -88,3 +88,46 @@ while cumulative lines ≤ 20%. Baselines: lines-desc and lines-asc.
 - LIB-H2 **leaning supported**.
 - LIB-H3 **uncertain**: curl and harfbuzz name their glue files after the library (`vtls/openssl.c`,
   `hb-coretext.cc`), so file names are a strong baseline there.
+
+---
+
+## Results — 2026-11-06 (scorer `ed87fb3` committed before running; report `lib.md`)
+
+**21 evaluable (repo, dependency) units:**
+- curl: openssl, zlib, libssh2, nghttp2, c-ares, wolfssl, mbedtls, gnutls;
+- libarchive: openssl, zlib, bzip2, xz, zstd;
+- nDPI: libpcap;
+- harfbuzz: freetype, icu, coretext, directwrite, uniscribe, graphite, glib.
+
+Nine units had fewer than 20 snapshots with library work.
+
+| claim | mean Δ recall@20 | lo (α = 0.0033) | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **LIB-H1** coupling to D − stronger size order | **+0.397** | +0.354 | [+0.370, +0.423] | **SUPPORTED** |
+| **LIB-H2** coupling to D − other libraries' coupling | **+0.462** | +0.422 | [+0.438, +0.486] | **SUPPORTED** |
+| **LIB-H3** coupling to D − file-name lookup | **+0.220** | +0.184 | [+0.197, +0.241] | **SUPPORTED** |
+
+**Headline (registered rule) → library coupling is SHOWN.**
+- 20 of 21 units beat size (H1). The exception is libarchive/zlib (−0.250): its zlib-named commits spread over build
+  and compat files that do not call zlib.
+- **The OpenSSL 3 migration** (descriptive): in curl's 76 OpenSSL-work commits from 2020-06 to 2022-12, on average 93%
+  of each commit's touched files sat in the top 20% of code (by lines) ranked by OpenSSL coupling at the preceding
+  quarter. libarchive had 2 such commits, both 100%.
+
+**What it is, and its limits (read before using it).**
+- **Partly expected by construction.** "Work naming D" often *is* maintenance of the project's own D glue (curl's
+  `openssl: fix …`). That glue is where D's API is called. The claim is therefore "work involving a library lands on
+  the code that calls it". It is not specifically about upstream library releases (see BURST for why outside release
+  dates are a weak marker).
+- **H3 is what keeps it from being trivial.** File-name lookup ties exactly where projects name their glue after the
+  library (harfbuzz's `hb-coretext.cc`, `hb-graphite2.cc`: H3 = 0.000). Coupling wins where calls spread beyond the
+  named file: curl/openssl +0.36, curl/gnutls +0.65, curl/zlib +0.71, harfbuzz/freetype +0.60.
+- **The effect is large because library work is concentrated.** A few files hold most of the calls, and size is a weak
+  baseline for such narrow work.
+- **The outcome is subject-named commits.** Work on a library that does not name it is invisible to this test.
+
+**Relation to the other surfaces.**
+- This is the ENV mechanism a second time: a declared dependency on something outside the repo marks where work about
+  it lands.
+- It is far stronger than platform conditionals (+0.40 against +0.05 to +0.17). A library is named by its API calls
+  much more precisely than an environment is by `#ifdef`s.
