@@ -120,3 +120,47 @@ suite in **~26 minutes** in the container: 274 tests OK. gcovr reported 307 file
 So on nDPI the "fuzz-reached but CI-uncovered" quadrant is large, and LV-H4 has the variance the saturated fuzz-only
 test lacked. Recipe: `tools/lv_ci_coverage_build.sh`. At ~26 min per snapshot, 25 quarterly-or-monthly snapshots is
 ≈ 11 container-hours single-file, fewer in parallel.
+
+---
+
+## LV-R — curl replication of LV-H1..H3 — registered 2026-11-06, before any curl coverage report is downloaded
+
+**What is fixed.** Claims LV-H1..H3, the scorer (`tools/lv_eval.py` at `3a487cd`, unchanged), α = 0.01 / 4, the
+block bootstrap, the 90-day window and the 7-day report slack: all exactly as registered for nDPI.
+
+**curl specifics.**
+- OSS-Fuzz project `curl`; report paths `/src/curl/<repo path>`.
+- Branch `master`, labels `events/curl_xc.json` (rules v2, audited in `xc_label_audit.md`), harvest head `04bfe8f`.
+- Monthly snapshots from the first month with a report ≥ 90 days of history behind it.
+- Invocation: `--start 2018-12`. The first report is 2018-08-20, so 2018-12 has a 90-day look-back.
+
+**Prior, and why it differs from nDPI.**
+- curl's CVEs are mostly **human-reported**, unlike nDPI's OSS-Fuzz-bisected events. The frontier theory therefore
+  predicts a **weaker** LV-H1 on curl.
+- A null on curl alongside an nDPI positive would itself support "discovery is *the searcher's* exploration".
+- LV-H1 **uncertain**; LV-H2 **uncertain**; LV-H3 **leaning supported**: fuzz reach marks exercised code in general.
+- **Headline for the pair:** "discovery is exploration" holds across repos iff LV-H1 and LV-H2 are SUPPORTED on curl
+  (nDPI was directional only).
+
+### LV-R results — curl, 2026-11-06 (scorer unchanged from `3a487cd`; report `lv_curl.md`)
+
+- **Data:** 2,848 daily reports (5 days missing upstream); 90 monthly snapshots (2018-12 → 2026-07).
+- **Candidates:** a median of 100 fuzz-instrumented C files; mean fuzz line coverage 58% (nDPI: 96%).
+- About 20% of files gain coverage in a 90-day window.
+
+| claim | curl | 90% CI | verdict | nDPI (for reference) |
+|---|---:|---|---|---:|
+| **LV-H1** frontier → latent beyond size | **−0.195** | [−0.300, −0.095] | **not supported** (wrong direction) | +0.026 |
+| **LV-H2** …more than other fixes | −0.033 | [−0.132, +0.062] | not supported | +0.143 |
+| **LV-H3** reached beats unreached for latent | −0.048 | [−0.181, +0.079] | not supported | +0.088 |
+
+**Pair headline → "discovery is exploration" is NOT supported across repos.**
+- On curl, the fuzz frontier marks CVE files *worse* than size does. No score beats size for any class.
+- nDPI is directional only.
+- The registered prior expected this split: curl's CVEs are mostly human-reported, nDPI's are OSS-Fuzz-found. Read
+  together, the results are *consistent with* "a defect is found where **its own searcher** explores". The OSS-Fuzz
+  frontier predicts nothing about what human reporters find. But nDPI never cleared α, so this is a reading, not a
+  result.
+- **A sharper test (not run).** Split curl's latent fixes by reporter. Its advisories credit the finder, e.g.
+  "OSS-Fuzz" or a named researcher. Then ask whether the fuzz frontier predicts the fuzz-found subset only. That needs
+  its own registration.
