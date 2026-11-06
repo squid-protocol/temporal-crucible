@@ -215,3 +215,37 @@ Platform/compiler/arch conditionals per line (`P per line`), lift over the stron
 - The registration owed is **ENV-H1** on an unseen repo. It needs only git, no engine scan, so it is cheap. The claim:
   `P per line` beats both LOC orders on extrinsic fixes **and** its extrinsic lift exceeds its lift on latent and
   regression fixes. A gitgalaxy engine column for platform-conditional density is the product follow-up if it holds.
+
+## Exploratory follow-up 2 — history dynamics by class, five repos (2026-11-06, NOT registered)
+
+Tool `tools/exploratory/xc_history_dynamics.py` (git only; size = line count). Reports:
+`xc_history_dynamics_{curl,ndpi,openssl,harfbuzz,libarchive}_exploratory.md`. Labels are seen, so nothing here is a
+verdict.
+
+**1. Recidivism is class-dependent.** Lift over the stronger size order:
+
+| outcome | own-class history | pooled fix history | reading |
+|---|---|---|---|
+| **latent** (curl / nDPI / openssl) | **+0.060 / +0.294 / +0.106** | −0.010 / +0.251 / +0.084 | CVE history beats size 3/3, and beats pooled history 3/3 |
+| **extrinsic** (curl / nDPI / openssl / harfbuzz / libarchive) | −0.050 / **+0.097 / +0.063 / +0.123** / −0.041 (last 365 d: −0.009 / … / +0.040) | −0.159 / +0.041 / −0.093 / −0.039 / −0.033 | own history beats pooled 5/5; beats size 3/5 (all-time) |
+| **regression** | −0.053 / +0.144 / −0.047 / −0.046 / (libarchive labels withheld) | −0.031 / +0.138 / +0.066 / −0.062 | no own-class recidivism; on curl, nDPI and openssl pooled history matches or beats it |
+| **other-fix** | all −0.06 … −0.21 | all negative | nothing beats small-files-first |
+
+**2. The extrinsic surface evolves in bursts on a persistent core.**
+- **Bursty everywhere.** Dispersion of the monthly extrinsic share vs binomial: curl 2.22, nDPI 1.39, openssl 2.15,
+  harfbuzz 1.60, **libarchive 4.88** (1 = steady).
+- **The burst months match recognisable outside events:**
+  - new platforms: openssl RISC-V 2022-09, POWER9 and Haiku 2016-04; harfbuzz Windows CE 2014-08; nDPI OpenWRT and
+    FreeBSD 2023-10;
+  - new toolchains: clang 3.8 warnings; Cygwin 1.7 (2009);
+  - new warning regimes: GCC `-W` flags on FreeBSD-current 2012-02; clang-tidy adoption 2026-02. Some "environment"
+    is therefore the project's own choice of tooling.
+- **The rate changes a lot over decades.** Extrinsic share of fixes:
+  - curl: 15–23% in 2003–05 → ~5% in the 2010s → 8–10% again in 2024–26;
+  - openssl: 12–19% before 2014 → 3–9% after;
+  - libarchive: 20–38%, because portability is its product.
+- **A persistent core.** Of each year's extrinsic-touched files, typically 50–80% were already extrinsic files in
+  earlier years (curl 50–82%, libarchive 60–100%). The rest is new spread.
+
+**Next registration owed (BURST-H1).** The extrinsic share rises after dated external shocks: GCC/Clang major
+releases and major-dependency releases. Release calendars come from upstream sources, frozen before the join.
