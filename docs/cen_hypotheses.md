@@ -37,3 +37,20 @@ within the band.
 **Priors.**
 - CEN-H1 / H2 **uncertain, leaning not supported**: the curl cells were two of many and were never replicated.
 - If they hold, centrality's live claim is "in mid-size files, the files many others depend on get more bug fixes".
+
+---
+
+## Results — 2026-11-06 (scorer `9149c2f` committed before running; reports `cen_{openssl,harfbuzz,libarchive}.md`)
+
+Mid band (49–108 lines), lift = AUC(score) − AUC(`total_loc`):
+
+| claim | openssl (1,258 positives) | harfbuzz (381) | libarchive (281) | overall |
+|---|---|---|---|---|
+| **CEN-H1** PageRank | −0.044, CI [−0.072, −0.014] ✗ | −0.051, CI [−0.095, −0.006] ✗ | +0.035, CI [−0.077, +0.151] ✗ | **not supported** |
+| **CEN-H2** popularity | **+0.061**, lo +0.008 ✓ | −0.072, CI [−0.109, −0.034] ✗ | +0.000, CI [−0.050, +0.054] ✗ | **not supported** |
+
+**Headline → the curl mid-band centrality cells do not replicate.**
+- PageRank points the wrong way on two of three repos.
+- Popularity (how many files include this one) helps on openssl only.
+- Centrality is closed as a predictive lead for this program. It stays a descriptive map of how files depend on each
+  other.
