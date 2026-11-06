@@ -36,6 +36,7 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **Per-file dynamism** (`state_heat_triggers`; in C: function-like `#define` + `goto`) | same | ⚠ (pilot) | ○ | **exploratory: positive, size-sensitive** — rate ratio 1.27 (1.06–1.50), shrinking as LOC is held tighter (1.81 → 1.39 → 1.27); carried by curl + redis; 1.20 (0.98–1.50) with the bulk-commit guard. Registered for unseen data. | DYN-H1, DYN-H2 |
 | **Line count (`LOC`)** | — | — | — | **the baseline** every predictor above must clear | (control) |
 | **Archetypes** (file cluster, composition, function k-means labels) | security fixes @review-budget, AUC over size; label stability | ✗ | ✗ | **DESCRIPTIVE ONLY** — stable (deterministic, ~98% kept under ≤5% edits, κ≈0.9 at 1 yr; openssl too) but never beats size at finding fixes (U3/U4 equivalence-null or worse). | ARCH-S1..S5, ARCH-U1..U4, ARCH-Z1..Z4 (fit z / centroid distance: ✗, direction flips by repo) |
+| **New engine metrics** (`fam_*` families, guard balance, wrappers, mitigation tallies; function fan-in/out, pagerank) | security fixes at equal size (strata) | ✗ | ⚠ | **mostly SIZE** — every apparent lead loses head-to-head to LOC; one live lead: `amplified_cascading_flux` (mutation-in-branch) beats size on nDPI + openssl (fuzzer/parser bugs), not curl. 9 engine columns never populated on C. | NM-F, NM-G, AMP-H1 (owed) |
 
 **Off-axis: GitGalaxy output as agent context** (the product's claimed use, not defect prediction; same legend):
 

@@ -66,3 +66,73 @@ describes, history predicts" in `EXPERIMENTS.md`.
 - Most `fam_*` metrics: **no signal at equal size**, the program's standing finding.
 - `rel_guard_balance`: **uncertain**, perhaps negative: more guards per danger site may mean safer.
 - `func_fan_in`: **leaning signal**. Widely-called functions get exercised, fuzzed and reported more.
+
+---
+
+## Results — 2026-11-06 (after registration commit `aa5973c`)
+
+**One sentence.** As registered, the screen finds three file LEADs and one function SIGNAL. The labelled exploratory
+size checks show all of them except one are size the strata failed to remove. The exception is
+`amplified_cascading_flux`, state mutations inside branches, which carries information beyond size on nDPI and openssl
+but not on curl.
+
+### Registered verdicts
+
+**File screen (NM-F, `nm_file_screen.md`).**
+- Entry: 9 metrics entered; 22 failed the entry rule. Most families are near-empty in C:
+  - io, ipc, time, events, tests, credential, threat, ml_ai;
+  - the wrapper counts;
+  - the DB-sink threats;
+  - four of the five mitigation keys.
+- **0 SIGNALs.**
+- **LEADs** (CI excludes 0 on nDPI and openssl; positive but not significant on curl): `amplified_cascading_flux`
+  (+0.045 / +0.204 / +0.144), `fam_mutation` (+0.055 / +0.186 / +0.112), `fam_dead_code` (+0.044 / +0.122 / +0.077).
+- The other six: no signal.
+
+**Function screen (NM-G, `nm_function_screen.md`).**
+- `func_fan_out` is a **SIGNAL**: +0.132 on curl (408 events), +0.143 on nDPI (47).
+- `func_fan_in` and `func_pagerank`: no signal (≈ 0).
+- `is_public` and `is_documented` failed the entry rule only because they are binary (2 distinct values). That is a
+  defect in the rule: they were not tested.
+
+### Why the screen under-controlled size (exploratory, `nm_exploratory_size_checks.md`)
+
+The size strata were too coarse. Run through the same screen, size "predicts" within its own strata:
+
+| | curl | nDPI | openssl |
+|---|---:|---:|---:|
+| `total_loc` within 10 `total_loc` bins (files) | +0.114 | +0.197 | +0.125 |
+| function `loc` within `loc` tertiles | +0.178 | +0.147 | — |
+
+Any metric correlated with size inherits that. Compared head-to-head inside the same strata:
+
+- **`fam_*` leads: residual size.** Every `fam_*` metric loses to `total_loc` (−0.01 to −0.16).
+- **`func_fan_out`: residual size.** It loses to `loc` (−0.046 curl, −0.004 nDPI). Fan-out per line is ≈ 0.
+  Exact-equal-length pairs: +0.06 on curl (139 events), −0.07 on nDPI (12 events). No usable signal.
+- **`amplified_cascading_flux`: the one survivor, on two repos.**
+
+  | | nDPI | openssl | curl |
+  |---|---:|---:|---:|
+  | vs `total_loc`, same 10 bins | +0.007 | +0.020 | −0.068 |
+  | 50 finer bins, metric vs leftover size | +0.105 vs +0.089 | +0.113 vs +0.032 | −0.008 vs +0.061 |
+  | per line, 10 bins | +0.102 | +0.109 | −0.029 |
+
+  The engine counts a state mutation within 150 characters of a branch (`spatial_correlation.py`, #2546): writes inside
+  conditional logic. That is the shape of parsers and protocol state machines, where fuzzer-found bugs cluster (nDPI
+  fixes are OSS-Fuzz-bisected; openssl's include many parser CVEs). curl's human-reported CVEs do not follow it. This
+  is the same repo split the fix-grammar finding showed in reverse.
+
+### Engine findings (worth gitgalaxy issues)
+
+- **Nine `file_data` columns are never populated on C files**, in any of the four engine builds' DBs:
+  - `token_mass`, `financial_read_cost`;
+  - `agentic_isolation_risk`, `requires_hitl`, `appsec_god_mode`;
+  - `hallucination_zone`, `silent_mutation_risk`;
+  - `ai_threat_confidence`, `ai_threat_score`.
+- **Five more are constant on C files:** `arch_sys_config`, `fam_crypto`, `fam_regex`, `fam_serialization`, `fam_ui`.
+
+### Next (registered before use)
+
+- **AMP-H1.** Per-line `amplified_cascading_flux` beats `total_loc` in 50-bin size strata on an unseen fuzzer-era C repo
+  (harfbuzz, the repo-#2 reserve). Size control: exact or 50-bin strata plus a head-to-head against `total_loc`.
+- **Untested binaries.** Re-screen `is_public` and `is_documented` with a binary-aware entry rule.
