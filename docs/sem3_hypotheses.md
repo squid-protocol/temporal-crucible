@@ -57,3 +57,5 @@ For multi-PR expat items, the per-PR sets are unioned; "pre-fix" and "post-fix" 
 - In-sample, on CMB's audited units (the design's motivation), SEM-3 is right on 23 / 30 zlib and 4 / 26 expat.
 
 **Stage 2.** The fresh blind audit (seed 2986; 60 packets, all with full function excerpts) runs as registered.
+
+**S3-H2 blind labels locked before comparison:** `vz_private/sem3_audit_labels.json`, sha256 `e7be8b307773b3cd52863460d18858eb1e91b60f105a41c2a2333cf7a5689c73`.
