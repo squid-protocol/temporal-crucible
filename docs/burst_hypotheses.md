@@ -88,7 +88,7 @@ shock's "before" window can therefore hold a Clang "after" window. This biases H
 Compiler releases reach these projects diffusely, through distro and Xcode adoption months later. So a release date is
 a weak shock marker.
 
-**Decision rule → (b).** Only the *where* of the extrinsic surface is predictable for now (platform-conditional
+**Decision rule → its second branch ("if neither holds").** Only the *where* of the extrinsic surface is predictable for now (platform-conditional
 density; own extrinsic history). The *when* is not tied to toolchain releases.
 
 **If anyone pursues the *when*, the candidate shocks are project-internal and dated in the repo itself:**
