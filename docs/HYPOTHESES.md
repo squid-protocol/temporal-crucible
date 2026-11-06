@@ -854,3 +854,4 @@ question than a reviewer asks.
 
 **Decision rule (a) applies.** Open a gitgalaxy issue for an effort-aware "review budget" ranking on prior security
 fixes and change entropy. A further unseen-repo replication is registered before either feeds any score weight.
+| CHG-H1..H5 | 5 C/C++ repos, function × quarter: a fingerprint change (archetype/complexity) is followed by more regression-word fixes in 180 d vs untouched (H1) and vs same-shape edits (H2), specifically regressions (H3); young (<1 y) vs old (≥3 y) functions get more regression fixes (H4) and a higher regression share of their fixes (H5) | 2026-11-06, before any fix-to-function statistic | **pending** | chg_hypotheses.md | — |
