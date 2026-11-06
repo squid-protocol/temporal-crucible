@@ -40,6 +40,7 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **Fix class split** (extrinsic / latent / regression, harvested + audited) × history and structure | per-class fixes @review-budget | ⚠ | ⚠ | **classes differ in HISTORY, not structure**: CVEs recur in place (3/3); extrinsic fixes recur on an environment-facing membrane (curl, openssl); regressions never recur in place but follow fix activity; change entropy → regressions on openssl only; external-include proxy ✗ | XC-H1..H6 |
 | **Platform-conditional density** (`#if` on platform/compiler/arch macros, per line) | extrinsic fixes @review-budget | ✓ (expl.) | ✓ (expl.) | **SURVIVES on unseen harfbuzz + libarchive** (+0.17 / +0.12 over the stronger size order; worse than size for every other class). The environment-coupling surface, measured statically. | ENV-H1..H3 |
 | **Compiler-release shocks** (GCC 27, Clang 33 majors) | extrinsic share of fixes, 90 d after vs before (5 repos) | ✗ | ✗ | **not timed to releases**: Δ share ≈ 0, placebo as large; extrinsic bursts look project-driven (platform campaigns, new warning sets / CI bots) | BURST-H1..H3 |
+| **Co-change omission** (commit leaves strong co-change partners untouched; history-only model) | regression-inducing commits, within size bins | ✗ | ✗ | **adds nothing over commit size**; equivalence null against the coupled-files placebo. Commit size remains the regression predictor | REG-H1/H2 |
 
 **Off-axis: GitGalaxy output as agent context** (the product's claimed use, not defect prediction; same legend):
 
