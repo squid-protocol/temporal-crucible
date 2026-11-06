@@ -71,3 +71,33 @@ REG-H1 point estimate below 0.
 - REG-H2 **uncertain**.
 - The literature has co-change "missed partner" heuristics (logical coupling, the ROSE line of work). The test here is
   whether they predict regressions beyond size, out of history alone.
+
+---
+
+## Results — 2026-11-06 (labels `c533b67`; scorer `176bcb6` committed before running; report `reg.md`)
+
+**Data.** 64,820 candidate commits; 1,199 regression-inducing (curl 681, openssl 229, harfbuzz 243, nDPI 46). All four
+repos are evaluable; the link audit passed at 0.77–0.87 (`reg_link_audit.md`).
+
+| claim | pooled mean | lo (α = 0.005) | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **REG-H1** omission − size, within size bins | −0.012 | −0.051 | [−0.037, +0.015] | **not supported (inconclusive)** |
+| **REG-H2** omission − coupled-files placebo | −0.002 | −0.020 | [−0.013, +0.009] | **replicated null (equivalence)** |
+
+Per repo, H1 is −0.005 (curl), −0.029 (openssl), −0.035 (harfbuzz) and +0.023 (nDPI). The headline's extra condition
+(no evaluable repo below 0) is not met either.
+
+**Headline → the co-change-omission mechanism is NOT shown.**
+- Omission adds nothing over commit size.
+- Omission is indistinguishable from simply touching well-coupled files. H2 is an equivalence null: proven ≈ 0, not
+  just unproven.
+- Inducing commits do more often leave a partner behind (curl 38% vs 27%; openssl 40% vs 35%), but that is because
+  they are bigger. Within size bins the difference vanishes.
+
+**What does predict them (descriptive).** Commit size, the just-in-time defect-prediction staple: raw AUC 0.70 on curl
+and 0.64 on openssl. Files touched is close behind. harfbuzz's labels are mostly reverts of optimisation attempts, and
+nothing predicts them (size 0.52).
+
+**What it means for the method.** Designing from a mechanism is necessary, not sufficient. "Unstated contracts between
+co-changing files" was a plausible cause, but at commit grain it carries no information beyond how big the change is.
+Two mechanism-first designs held (ENV, LIB), one did not (REG). That is what a real method looks like.
