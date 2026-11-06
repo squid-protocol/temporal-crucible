@@ -66,3 +66,45 @@ stands for the contract. Its build recipe is fixed in a tool committed before an
 - LV-H2 **uncertain**: new coverage also follows new code, which draws every class of fix.
 - LV-H3 **leaning supported**.
 - LV-H4 **uncertain**; feasibility is the first risk.
+
+---
+
+## Results — LV-H1..H3, 2026-11-06 (scorer `3a487cd` committed before the join)
+
+- **Data:** 2,419 OSS-Fuzz daily summaries (3 days missing upstream); 75 monthly snapshots (2020-03 → 2026-07).
+- **Candidates:** a median of 218 instrumented C files per snapshot.
+- Report: `lv_ndpi.md`.
+
+| claim | n | mean lift | lo (α = 0.0025) | 90% CI | verdict |
+|---|---:|---:|---:|---|---|
+| **LV-H1** frontier finds latent fixes beyond size | 63 | +0.026 | −0.156 | [−0.083, +0.136] | **not supported (inconclusive)** |
+| **LV-H2** …more than other fixes | 63 | +0.143 | −0.068 | [+0.018, +0.266] | **not supported (inconclusive)** |
+| **LV-H3** reached beats unreached for latent | 63 | +0.088 | −0.022 | [+0.023, +0.151] | **not supported (inconclusive)** |
+
+Descriptive lift by class:
+
+| score | latent | extrinsic | regression | other-fix |
+|---|---:|---:|---:|---:|
+| frontier | **+0.026** | −0.069 | −0.094 | −0.115 |
+| reached | −0.116 | −0.154 | −0.261 | −0.090 |
+| unreached | −0.205 | −0.055 | −0.180 | −0.213 |
+
+**Headline → not established on nDPI.**
+- Every claim points the predicted way, and H2 and H3 exclude zero at 90%, but none clears the registered α.
+- The frontier is the only score that is positive for latent fixes and negative for every other class.
+
+**Why the test is weak on nDPI (descriptive).**
+- nDPI's fuzzers already reach **~96% of instrumented lines**: the median file's line coverage is near-saturated, so
+  "reached" has little variance.
+- Only **18%** of files gain any coverage in a 90-day window.
+- In a near-saturated project, discovery cannot be explained by reach.
+
+The registered replication on curl or openssl (lower, moving fuzz coverage) is now the informative test.
+Function- or line-grain frontiers, from the per-line HTML reports, are the sharper instrument.
+
+## LV-H4 feasibility (CI coverage)
+
+A pilot built the last quarterly nDPI snapshot in `ubuntu:22.04` with `--coverage` and ran nDPI's own pcap regression
+suite (`tests/do.sh`). The build succeeds, and the suite takes about an hour single-threaded. LV-H4 needs ≥ 20 scored
+snapshots of CI coverage: on the order of 20–30 container-hours, and older snapshots may need older toolchains.
+Not run yet.
