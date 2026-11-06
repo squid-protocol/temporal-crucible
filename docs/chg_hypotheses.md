@@ -82,3 +82,29 @@ All rate ratios are Mantel–Haenszel, with:
 - **H3 uncertain.**
 - **H4 supported** (NH infant mortality plus REG).
 - **H5 uncertain.** That is the "deficient vs merely busy" test.
+
+---
+
+## Gate G-JOIN failed as registered → amendment A1 (2026-11-06, before any claim statistic was computed)
+
+**Run 1 (scorer `6bd6d63`).** G-JOIN = 53,371 / 67,164 = **79.5% → FAIL**. Per the registration, the run stopped
+before computing any claim.
+
+**Diagnosis** (8,313-hit sample, all five repos; script recorded in the PR):
+
+| unmatched cause | share of hits |
+|---|---:|
+| function **born after the preceding snapshot** (present at the next one) | 13.0% |
+| file not present in the preceding snapshot (new file) | 5.4% |
+| **name disagreement** (mostly tree-sitter mis-parsing macro-wrapped code as functions: `if`, `DEFINE_STACK_OF`, `USE_SSH`) | **3.7%** |
+
+The gate was meant to test whether tree-sitter and engine **names agree**. As written, it also counted fixes to
+functions that did not exist yet at the preceding snapshot. Those can never join, and they do not affect any unit: a
+unit is a function present at snapshot k+1, and its outcome window starts after k+1. Harfbuzz's fast growth (26% born
+after) drove the shortfall.
+
+**A1 (binding for run 2).** G-JOIN v2 is **name agreement**:
+- Among hits whose file exists at the preceding snapshot, the share whose (file, name) matches an engine function at
+  the preceding **or** the following snapshot must be ≥ 90%.
+- Nothing else changes: claims, strata, α and windows are as registered.
+- Run-2 results are labelled post-amendment.

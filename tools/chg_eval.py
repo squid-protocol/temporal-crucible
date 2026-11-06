@@ -242,28 +242,33 @@ def main() -> int:
         snaps, per, T = transitions(r)
         cts = [s["ct"] for s in snaps]
         names = [{k for k in d} for d in per]
+        files = [{k[0] for k in d} for d in per]
         resolved = 0
         for (rr_, path, nm, ct, klass) in (h for h in hits if h[0] == r):
             j = bisect.bisect_right(cts, ct) - 1
             if j < 0:
                 continue
-            gate_n += 1
-            key = (path, nm) if (path, nm) in names[j] else (path, nm.split("::")[-1]) if (path, nm.split("::")[-1]) in names[j] else None
-            if key is None:
-                key = (path, nm)
-            else:
-                gate_ok += 1
-                resolved += 1
-            idx[(r,) + key].append((ct, klass))
+            key = None
+            for jj in (j, j + 1):  # amendment A1: name agreement at the preceding or following snapshot
+                if jj < len(names):
+                    for cand in ((path, nm), (path, nm.split("::")[-1])):
+                        if key is None and cand in names[jj]:
+                            key = cand
+            if path in files[j]:
+                gate_n += 1
+                gate_ok += key is not None
+            resolved += key is not None
+            idx[(r,) + (key or (path, nm))].append((ct, klass))
         data[r] = (snaps, T)
         print(f"{r}: {len(snaps)} snapshots, {len(T):,} transitions, {resolved:,} resolved hits ({time.time() - t0:.0f}s)", flush=True)
     for v in idx.values():
         v.sort()
     g = gate_ok / max(gate_n, 1)
     L = ["# CHG-H1..H5 — fingerprint change and code age vs later regression fixes (SCORED)", "",
-         f"**Gate G-JOIN:** {gate_ok:,} / {gate_n:,} fix→function hits match an engine function at the preceding snapshot = **{g:.1%}** → "
-         f"**{'PASS' if g >= 0.8 else 'FAIL'}** (gate ≥ 80%)", ""]
-    if g < 0.8:
+         f"**Gate G-JOIN v2 (amendment A1):** {gate_ok:,} / {gate_n:,} fix→function hits in files present at the preceding snapshot match an engine "
+         f"function at the preceding or following snapshot = **{g:.1%}** → **{'PASS' if g >= 0.9 else 'FAIL'}** (gate ≥ 90%). "
+         "Run 1's G-JOIN v1 failed at 79.5%; see docs/chg_hypotheses.md § amendment A1. Results below are **post-amendment**.", ""]
+    if g < 0.9:
         (DOCS_DIR / "chg.md").write_text("\n".join(L) + "\n")
         print("\n".join(L))
         return 1
