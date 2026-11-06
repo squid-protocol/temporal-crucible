@@ -55,3 +55,54 @@ Only snapshots where the unit has ≥ 3 coupled files count.
 - CPL-H1 / H2 **uncertain**. Mature projects add wrapper layers (curl's `vtls/`), but they also add new backends
   that each carry their own coupling.
 - CPL-H3 **uncertain**, and the most interesting: it tests whether abstraction pays off.
+
+---
+
+## Results — 2026-11-06 (scorer `56bf3b2` committed before running; report `evo.md`)
+
+### SIG — the keyword mix: all three SUPPORTED
+
+| claim | result | verdict |
+|---|---|---|
+| **SIG-H1** stable project fingerprint | a snapshot is identified as its own repo from its keyword mix **95.9%** of the time (390 snapshots; only same-repo snapshots ≥ 5 y away count; chance 20%) | **SUPPORTED** |
+| **SIG-H2** change comes in spurts | the top 10% of quarters carry curl 75%, nDPI 45%, openssl 84%, harfbuzz 89% and libarchive 88% of all drift | **SUPPORTED** |
+| **SIG-H3** files keep their profile | median cosine a year apart **1.000** (lo 1.000) | **SUPPORTED**, with a caveat |
+
+**Caveat on SIG-H3.** The median is 1.0 largely because most files do not change at all in a year (NH: 1–13% of
+functions change shape per quarter). Among *edited* files the similarity is necessarily lower. That conditional figure
+was not registered and is not computed here.
+
+**What the spurts are** (the largest-drift quarters, read from their top files): architecture events, not gradual
+accretion.
+- **Removal:** curl 2025-06 dropped its SecureTransport and BearSSL backends.
+- **Reorganisation:**
+  - libarchive 2011-06 split `archive_write_disk.c` into POSIX and Windows files;
+  - openssl 2017-06 removed engines;
+  - curl 2001-03 replaced `highlevel.c` with `transfer.c`.
+- **Expansion:**
+  - harfbuzz 2026-03 added a raster/GPU layer;
+  - libarchive 2009-06 added its core reader/writer files;
+  - nDPI 2015-08 added protocol dissectors.
+
+### CPL — the coupling surface: none SUPPORTED
+
+| claim | median ρ | units in direction | sign-test p | verdict |
+|---|---:|---:|---:|---|
+| **CPL-H1** coupling centralises with age | −0.26 | 10 / 22 | 0.74 | not supported |
+| **CPL-H2** footprint shrinks as a share of code | −0.22 | 16 / 23 | 0.047 | not supported (leans; misses α = 0.01) |
+| **CPL-H3** concentration → later work touches fewer files | −0.13 | 6 / 9 | 0.25 | not supported (few units have enough data) |
+
+**The direction is project-specific.** That is the finding.
+- **curl centralises.**
+  - OpenSSL coupling concentration rose 0.62 → 0.88 while its footprint fell from 13.2% to 2.4% of files.
+  - c-ares went from 16.0% to 1.1%; libssh2 from 1.1% to 0.3%.
+  - curl walled its dependencies behind backend layers (`vtls/`, `vssh/`, the async resolver modules).
+- **libarchive spreads.** Concentration in bzip2, xz, zstd, openssl and zlib fell (e.g. zstd 0.50 → 0.25), while
+  their footprints grew (zstd 0.5% → 1.1%): more format handlers call the compressors directly.
+- **harfbuzz is mixed.** FreeType was encapsulated (5.8% → 1.4%); glib spread (7.8% → 13.6%).
+- **Platform conditionals** concentrated in curl, nDPI and harfbuzz, and spread in libarchive (11% → 24% of files).
+
+So abstraction over time is a *choice some projects make*, not a law of code evolution. It fits the niche-construction
+reading (`burst_hypotheses.md`): projects decide how they absorb the outside world. Whether concentrating pays off
+(H3) cannot be told from these data. Only 9 units have enough dependency-work commits, and they lean the predicted way
+(6/9).
