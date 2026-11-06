@@ -69,3 +69,55 @@ Hubs = the top 10% of files by in-degree in that snapshot (ties included).
 - **HUB-H2 uncertain.** Linear preferential attachment is a famous claim for networks, but tested on code
   dependency graphs it is often sub-linear.
 - **HUB-H3 leaning supported.** Widely-included headers are risky to edit, so they should change less.
+
+---
+
+## Results — 2026-11-06 (scorer `ed84afe` committed before running; report `nh.md`)
+
+### Function lifecycles
+
+| repo | functions tracked | median lifespan* | alive at 5 y | alive at 10 y |
+|---|---:|---:|---:|---:|
+| curl | 8,477 | 8.0 y | 65% | 44% |
+| nDPI | 2,827 | > span | 84% | 57% |
+| openssl | 29,291 | 15.8 y | 80% | 71% |
+| harfbuzz | 8,668 | 12.2 y | 71% | 62% |
+| libarchive | 5,388 | > span | 85% | 77% |
+
+\*Functions born after the first snapshot (Kaplan-Meier).
+
+| claim | curl / nDPI / openssl / harfbuzz / libarchive | pooled | bound | verdict |
+|---|---|---:|---:|---|
+| **LIFE-H1** infant mortality: death hazard(< 1 y) / (3–5 y) | 1.91 / 2.91 / 3.51 / 1.97 / 7.82 | **2.93** | lo 1.80 | **SUPPORTED** |
+| **LIFE-H2** structural freeze: shape-change rate(≥ 3 y) / (< 1 y) | 0.70 / 0.69 / 0.48 / 0.46 / 0.15 | **0.46** | hi 0.59 | **SUPPORTED** |
+| **LIFE-H3** archetype kept when size or complexity changed | 0.90 / 0.89 / 0.88 / 0.80 / 0.84 | **0.876** | lo 0.862 | **SUPPORTED** |
+
+- **Shape freezes but does not stop.** An old function still changes shape in 1–9% of quarters, against 7–13% for
+  young ones.
+- **The most common archetype transitions** are Parameter Forwarders ⇄ Compute Cores and Compute Cores → Many-Argument
+  Workhorses. Functions that grow tend to accumulate logic and then arguments.
+
+### Include-graph hubs
+
+| repo | hubs still hubs after 1 y (median) | attachment slope | lo | hub vs non-hub, changed in 1 y (MH RR) |
+|---|---:|---:|---:|---:|
+| curl | 0.96 | 0.330 | 0.310 | 1.04 |
+| nDPI | 0.92 | 0.484 | 0.445 | 1.11 |
+| openssl | 0.98 | 0.273 | 0.242 | 1.23 |
+| harfbuzz | 0.97 | 0.237 | 0.199 | 1.02 |
+| libarchive | 1.00 | 0.195 | 0.151 | 1.62 |
+
+- **HUB-H1, stable hubs: SUPPORTED (5/5).** The hub set barely changes from year to year.
+- **HUB-H2, rich get richer: SUPPORTED (5/5), and sub-linear.** Gain in includers ∝ (in-degree)^0.2–0.5: popular files
+  do attract more new includers, but far less than proportionally.
+- **HUB-H3, frozen core: NOT supported. It is reversed.** Hubs are *more* likely than same-size, same-type files to
+  change within a year: pooled RR 1.12 (bound 1.15), every repo ≥ 1.02, libarchive 1.62. Widely-included headers are
+  where new declarations and API surface get added, so they are a stable *position* with active *content*.
+
+### Caveats
+
+- **Function identity is (file, name)**, plus the cross-file move rule. A rename within a file counts as a death and a
+  birth, which can inflate infant mortality slightly.
+- Quarterly resolution.
+- Functions that existed before the first snapshot are excluded from the age-based measures (left truncation).
+- "Changed" for hubs means the git blob differs a year later: any edit counts.
