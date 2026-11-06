@@ -139,10 +139,15 @@ Run 2 uses these fixes. Nothing else changes.
 
 - On verbatim vendored copies, the layered fingerprint finds the copy first **98%** of the time **without names**,
   matching name lookup (97%).
-- **Renamed (13, descriptive):** names find none. FUSED finds all 13 in its top 10, but only 1 at rank 1. The coarse
-  L1 alone ranks 11 of 13 first; the call and shape layers *hurt* here, because renamed copies also changed their
-  calls.
-  - **Lesson:** fusion should down-weight layers that disagree. A renamed-copy benchmark large enough to register is
-    the next need.
+- **Renamed (13): correction, 2026-11-06 (post-results check of the private pair list).**
+  - **11 of the 13 are an artefact.** The CVE-2018-25032 fix turned `_tr_tally` into a macro, so it no longer exists
+    as a function. The text-only truth rule then matched a different function, `compress_block`, at Jaccard ≈ 0.62.
+  - **Only 2 are real renames:** zlib-ng's `zng_` prefix (`zng_tr_flush_block`, `zng_inflate_table`).
+  - So the "renamed" row above is not interpretable. In particular, "L1 ranks 11 of 13 first" reflects the wrong
+    truth, not rename robustness.
+  - **Vendored zlib is essentially never renamed.** H2 was not narrowly missed: this sample has no renamed copies to
+    test.
+  - **Instrument lesson:** truth needs a guard against a query function that ceased to exist (the fix removed or
+    macro-ised it).
 - **Engine finding (product):** the default scan **skipped MySQL's `zlib-1.3.2/` folder** entirely; it appears to
   exclude version-named or vendored directories. Supply-chain use needs an option to *include* vendored code.
