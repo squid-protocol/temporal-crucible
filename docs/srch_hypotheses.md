@@ -51,3 +51,45 @@ modifies, in C/C++ files.
 - H1 **leaning supported** (nDPI and harfbuzz both pointed this way).
 - H2 **uncertain** (small n).
 - H3 **leaning supported**.
+
+---
+
+## Results — 2026-11-06 (scorer `68c01aa` committed before running; report `srch.md`)
+
+2,394 commits blamed (CVE fixes plus up to 300 ordinary commits per repo).
+
+| repo | ordinary commits, median age | CVE fixes: fuzzer-found | CVE fixes: human-found |
+|---|---:|---|---|
+| curl | 327 d | 2,755 d (3), ×8.4 | 691 d (151), ×2.1 |
+| openssl | 242 d | 1,245 d (7), ×5.1 | 892 d (175), ×3.7 |
+| nDPI | 176 d | 111 d (98), **×0.63** | — |
+| harfbuzz | 24 d | 21 d (70), ×0.88 | — |
+| **libxml2** (unseen) | 524 d | 1,104 d (38), **×2.1** | — |
+| **file** (unseen) | 262 d | 874 d (24), **×3.3** | — |
+| libexif (unseen) | 353 d | 61 d (6), ×0.17 (n < 10, not used) | — |
+
+| claim | effect | upper bound | verdict |
+|---|---:|---:|---|
+| **SRCH-H1** fuzzer-found CVE fixes younger than ordinary commits (libxml2, file) | **+0.423 (×2.65 older)** | +0.838 | **not supported**: the opposite direction |
+| **SRCH-H2** openssl fuzzer- vs human-credited | — | — | **not evaluable**: only 7 of the 13 fuzzer-credited fixes have measurable changed lines (< 10) |
+| **SRCH-H3** fuzzer-regime ratio lower than human-regime | −0.298 (×0.50) | +0.135 | **not supported** |
+
+**Headline → the searcher explanation of CVE age is refuted.**
+- On unseen OSS-Fuzz repos, fuzzer-found CVE fixes change code **2–3× older** than ordinary commits, as human-found
+  CVEs do.
+- openssl's and curl's fuzzer-credited CVEs are older still (×5.1, ×8.4; small n).
+- AGE's exploratory split was not about the searcher.
+
+**What survives (descriptive, against the ordinary-commit baseline).**
+- **CVE fixes mostly change older-than-typical code:** ×2.1–3.7 in curl, openssl, libxml2 and file, whoever found them.
+  That is AGE-H2's original prediction ("latent defects live in old code"), visible here against a cleaner baseline.
+- **nDPI (×0.63) and harfbuzz (×0.88) are the exceptions.** They are the two repos whose CVEs track the age of
+  ordinary work rather than exceeding it. In harfbuzz, ordinary code changes are themselves extremely young (24 d
+  median).
+- So the exceptions look like **project-specific** churn regimes (fast-turning code bases), not a fuzzer effect.
+
+**Correcting the record.** The "searcher split" called the program's most consistent pattern after AGE is **not
+supported as an explanation of age**. The earlier searcher observations concern *where* fuzzer-found CVEs land
+relative to search coverage and input code (LV, INP), and stay as they were: directional, unregistered as an age
+claim. A registered test of "CVE fixes change older code than ordinary commits", on unseen repos with a pre-specified
+exception rule, is the natural follow-up.
