@@ -54,3 +54,34 @@
 - SFS-H2 **leaning supported**: renames are a small share of deaths.
 - SFS-H3 **uncertain**: regressions follow activity (XC), but share-of-fixes is a noisy yearly quantity.
 - SFS-H4 **uncertain**.
+
+---
+
+## Results — 2026-11-06 (scorer `401d08a` committed before running; report `sfs.md`)
+
+103 yearly snapshots over 5 repos; `sfs` at population-analyses `5685ec2`.
+
+| claim | result | verdict |
+|---|---|---|
+| **SFS-H1** fingerprints are stable identities | nearest-neighbour identification across eras ≥ 5 y apart: **99.0%** (chance 20%) | **SUPPORTED** |
+| **SFS-H2** name-free retention agrees with name-based survival | Spearman **+0.49** over 98 repo-years (bar 0.50) | **not supported** (by 0.01) |
+| **SFS-H3** structural turnover goes with regression share | mean within-repo ρ +0.16, permutation p 0.107 | **not supported** |
+| **SFS-H4** …more than with CVE share | mean Δρ +0.15, p 0.194 | **not supported** |
+
+Per repo, ρ(turnover, regression share): curl −0.27, nDPI +0.66, openssl +0.31, harfbuzz −0.06. Not consistent.
+
+**What it means.**
+1. **sfs fingerprints are even more stable than SIG's keyword mix** (99.0% vs 95.9%). A project's function-level design,
+   placed in the 37-dimensional reference frame, identifies it across decades.
+2. **Names persist; measured structure turns over.**
+   - Year to year, 95–100% of functions keep their (file, name) (NH's notion of survival).
+   - Only **59–72% keep a structural twin**, a function measured almost identically.
+   - So about a third of the functions that keep their names change their measurements enough in a year to stop being
+     twins.
+   - The two series correlate only moderately (ρ 0.49). This refines NH: **identity is stable, the body is not.**
+     NH's infant-mortality result is about names. A name-free lifecycle would show much faster turnover.
+   - The lowest-retention years are founding or rewrite years: curl 2000, openssl 1999, harfbuzz 2011 and 2018,
+     libarchive 2009, nDPI 2017.
+3. **Yearly turnover does not track the regression share of fixes.** "Change brings regressions" is not visible at
+   yearly grain as a *share* of fixes. That fits XC and REG: regressions scale with activity overall (commit size),
+   not with how much the design moved.
