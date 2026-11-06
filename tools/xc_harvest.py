@@ -55,21 +55,30 @@ def _git(repo, *a, inp=None):
                           input=inp).stdout
 
 
+EXTS = (".c", ".h")
+
+
 def is_c(p):
-    return p.endswith((".c", ".h"))
+    return p.endswith(EXTS)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--repo", required=True)
+    ap.add_argument("--exts", default=".c,.h",
+                    help="candidate source extensions (ENV-H1..H3: harfbuzz adds .cc,.hh,.cpp,.hpp)")
     a = ap.parse_args()
+    global EXTS
+    EXTS = tuple(a.exts.split(","))
     repo = POOL_DIR / a.repo
     walk = json.loads((REPO_ROOT / "walks" / f"{a.repo}_quarterly.json").read_text())
     head = walk["events_head"]
     first_ct = int(_git(repo, "show", "-s", "--format=%ct", walk["revisions"][0]["sha"]).strip())
     since = first_ct - 365 * DAY
-    sec = {e["sha"] for e in json.loads((REPO_ROOT / "events" / f"{a.repo}.json").read_text())["events"]
-           if e["class"] == "security-fix" and e.get("on_master", True)}
+    ev_path = REPO_ROOT / "events" / f"{a.repo}.json"
+    # ENV-H1..H3: repos without a security-fix events file form no latent class
+    sec = {e["sha"] for e in json.loads(ev_path.read_text())["events"]
+           if e["class"] == "security-fix" and e.get("on_master", True)} if ev_path.exists() else set()
 
     raw = _git(repo, "-c", "core.quotepath=off", "log", "--no-merges", f"--since={since}", "--name-only",
                "--format=%x00%x01%H%x1f%ct%x1f%s%x1f%b%x1f", head)
