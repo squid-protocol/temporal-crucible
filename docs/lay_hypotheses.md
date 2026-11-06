@@ -61,3 +61,44 @@ its nesting depth (capped at 6). It is shingled into overlapping 3-grams.
 - **H1 likely.** Callee sets are distinctive for crypto code.
 - **H2 likely.**
 - **H3 uncertain.** BoringSSL renamed many internal helpers in its C++ port, which also hurts L2.
+
+---
+
+## Results — 2026-11-06 (scorer `700bd88` committed before running; report `lay.md`; aggregates only)
+
+**Data.** 90 queries with a name-identified copy of ≥ 6 lines: 73 LibreSSL, 17 BoringSSL.
+
+| claim | difference | lo (α 0.01/3) | verdict |
+|---|---:|---:|---|
+| **LAY-H1** recall@1 call set (L2) − coarse (L1) | **+23.3 pts** | +5.6 | **SUPPORTED** |
+| **LAY-H2** recall@1 fused (L1+L2+L3) − coarse | **+34.4 pts** | +20.0 | **SUPPORTED** |
+| **LAY-H3** recall@10 fused − coarse, BoringSSL (C++) | **+35.3 pts** | +5.9 | **SUPPORTED** (n = 17) |
+
+| subset | L1 @1 / @10 | L2 | L3 | **FUSED** | TOKEN (ceiling) |
+|---|---:|---:|---:|---:|---:|
+| all (90) | 46% / 71% | 69% / 87% | 44% / 53% | **80% / 89%** | 92% / 100% |
+| LibreSSL (73) | 49% / 73% | 75% / 84% | 53% / 63% | **77% / 86%** | 90% / 100% |
+| BoringSSL (17) | 29% / 65% | 41% / 100% | 6% / 12% | **94% / 100%** | 100% / 100% |
+
+**Reading.**
+- **Layering works.** The call set alone lifts top-1 retrieval from 46% to 69%. Fusing the three layers reaches
+  **80%**, without using any names. That is within 12 points of a near-circular text ceiling.
+- **Across the C → C++ rewrite**, fusion finds the BoringSSL copy first 94% of the time, against 29% for the coarse
+  fingerprint.
+- **The layers are complementary.** The control-flow skeleton (L3) is weak alone, and useless on BoringSSL (6%),
+  where C++ restructured control flow. Yet fusion still beats every single layer.
+- **Why L1 here (46%) differs from UT's 12.5%.**
+  - UT measured `sfs`'s strict acceptance rule: reciprocal nearest neighbour plus a distinctiveness ratio, at an
+    estimated 1% false-discovery rate.
+  - LAY measures **ranking**: is the true copy at the top among all candidates?
+  - So the coarse fingerprint often ranks the copy first, but rarely passes the strict twin test. The layered version
+    is needed to make confident calls.
+
+**Caveats.**
+- Truth comes from names (same-name copies, by construction), so renamed copies are not represented. UT found none
+  among accepted twins.
+- BoringSSL has only n = 17.
+- Fusion weights are the standard RRF, not tuned.
+- One fork family. A second benchmark (vendored zlib, SQLite or Lua copies in other projects) is the out-of-sample
+  test.
+- **Ownership.** Building this into `sfs` or the engine is the owner's decision. This entry only measures it.

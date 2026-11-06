@@ -95,3 +95,47 @@ The units are LIB's evaluable units restricted to snapshots in the engine DBs, w
 - **LIBE-H1 likely.**
 - **LIBE-H2 uncertain.** The engine misses `#include`-only coupling and macro-wrapped calls, but sees the calls
   themselves.
+
+---
+
+## Results — 2026-11-06 (scorer `bb11043` committed before running; report `librep.md`)
+
+### LIB-R: replicated on PostgreSQL and libgit2
+
+14 evaluable units: 10 PostgreSQL, 4 libgit2. Nine units had too little library work.
+
+| claim | mean Δ recall@20 | lo (α 0.01/3) | verdict |
+|---|---:|---:|---|
+| **LIBR-H1** coupling − stronger size order | **+0.437** | +0.390 | **SUPPORTED** (14 of 14 units positive) |
+| **LIBR-H2** coupling − other libraries (placebo) | **+0.487** | +0.443 | **SUPPORTED** |
+| **LIBR-H3** coupling − file-name lookup | **+0.182** | +0.149 | **SUPPORTED** |
+
+**Headline (registered rule) → library coupling REPLICATED.**
+- The effect sizes match the original (+0.40 / +0.46 / +0.22).
+- **Where file names win or tie** (H3 ≈ 0), the project names its glue files after the library: PostgreSQL's PL
+  languages (`plperl`, `plpython`, `pltcl`), `llvmjit`, and libgit2's `winhttp` and `ntlm`.
+- **Coupling beats names where calls spread out:** PostgreSQL openssl +0.27, icu +0.40, libxml2 +0.64, ldap +0.68,
+  gssapi +0.27.
+
+### LIB-E: the engine's call graph as the coupling measure (original 21 units)
+
+| claim | mean | lo (α 0.01/2) | verdict |
+|---|---:|---:|---|
+| **LIBE-H1** engine coupling − stronger size order | **+0.335** | +0.293 | **SUPPORTED** |
+| **LIBE-H2** engine − regex (non-inferiority, margin −0.05) | **−0.062** | −0.079 | **not supported**, narrowly |
+
+**Reading.**
+- The engine's own call graph carries the library signal: +0.34 over size, close to the regex's +0.40. So LIB is now
+  partly a GitGalaxy finding.
+- It trails the regex by about 6 points, short of the registered non-inferiority margin.
+- **Where it falls behind:** the regex also counts `#include` lines and non-call API use, which `calls_out_to` does
+  not see.
+  - The large case is harfbuzz/directwrite (0.27 vs 0.85). DirectWrite is a COM interface used through `->` method
+    calls on `IDWrite*` objects, not free function calls.
+  - curl's TLS units also trail by 4–13 points.
+- **Where it is equal:** harfbuzz freetype, icu, coretext, graphite and uniscribe; curl nghttp2.
+- **libarchive/zlib** is the one unit where the engine beats the regex (0.42 vs 0.28), and the one where LIB's regex
+  lost to size.
+- **Engine improvements this points to:** record method calls through interface pointers and `#include`
+  dependencies per file. An engine coupling built from both should reach non-inferiority. That needs a fresh
+  registration.
