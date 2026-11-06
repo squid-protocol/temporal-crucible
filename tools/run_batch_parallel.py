@@ -34,6 +34,7 @@ import argparse
 import json
 import pathlib
 import shutil
+import tempfile
 import sqlite3
 import subprocess
 import sys
@@ -74,26 +75,37 @@ def scan_one(repo_path: str, sha: str, scratch_root: str,
     """
     repo = pathlib.Path(repo_path)
     env = SCAN_ENV if workers_per_scan is None else {**SCAN_ENV, "GALAXYSCOPE_MAX_WORKERS": str(workers_per_scan)}
-    work = pathlib.Path(scratch_root) / sha[:12]
-    shutil.rmtree(work, ignore_errors=True)
-    work.mkdir(parents=True, exist_ok=True)
+    # tc#62: a per-call unique scratch dir. A shared scratch/<sha12> let two scans of one commit
+    # (a walk listing the same sha for several quarters) delete each other's worktree mid-scan.
+    pathlib.Path(scratch_root).mkdir(parents=True, exist_ok=True)
+    work = pathlib.Path(tempfile.mkdtemp(prefix=f"{sha[:12]}-", dir=scratch_root))
     wt = work / repo.name  # basename == repo name == engine's repo_name key
     try:
         with _LOCK:
             _git(repo, "worktree", "add", "--detach", str(wt), sha)
     except subprocess.CalledProcessError as e:
+        shutil.rmtree(work, ignore_errors=True)
         return sha, None, f"WORKTREE FAILED: {e.stderr[-200:]}"
     try:
         res = subprocess.run([GALAXYSCOPE_BIN, str(wt), "--db-only"],
                              cwd=work, env=env, capture_output=True, text=True)
         if res.returncode != 0:
+            shutil.rmtree(work, ignore_errors=True)
             return sha, None, f"SCAN FAILED: {res.stderr[-300:]}"
     finally:
         with _LOCK:
             _git(repo, "worktree", "remove", "--force", str(wt), check=False)
             _git(repo, "worktree", "prune", check=False)
     dbs = sorted(work.rglob("*.db"))
-    return (sha, str(dbs[0]), "scanned") if dbs else (sha, None, "NO DB PRODUCED")
+    if not dbs:
+        shutil.rmtree(work, ignore_errors=True)
+        return sha, None, "NO DB PRODUCED"
+    return sha, str(dbs[0]), "scanned"
+
+
+def scratch_dir_of(db_path: str, scratch_root) -> pathlib.Path:
+    """The per-call scratch dir (tc#62) that holds a shard DB returned by scan_one."""
+    return pathlib.Path(scratch_root) / pathlib.Path(db_path).relative_to(scratch_root).parts[0]
 
 
 def _cols(con, table, drop=("id",)) -> list[str]:
@@ -235,7 +247,7 @@ def main() -> int:
             mcon.commit()
             scanned += 1
             if not args.keep_scratch:
-                shutil.rmtree(pathlib.Path(db_path).parent, ignore_errors=True)
+                shutil.rmtree(scratch_dir_of(db_path, scratch_root), ignore_errors=True)
             print(f"[{done}/{len(todo)}] {sha[:12]} {msg} ({(time.time()-t0)/60:.1f}m)", flush=True)
     if mcon is not None:
         mcon.close()

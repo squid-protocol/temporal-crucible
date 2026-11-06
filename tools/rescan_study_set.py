@@ -114,7 +114,9 @@ def main() -> int:
         con.close()
     else:
         done = set()
-    todo = [c for c, _ in commits if c not in done]
+    # A walk can list one commit for several quarters (no new mainline commit). Scanning the duplicates
+    # concurrently made them share and delete one scratch dir (scratch/<sha[:12]>), corrupting the scan.
+    todo = list(dict.fromkeys(c for c, _ in commits if c not in done))
 
     eng = engine_sha()
     meta = {"engine_bin": GALAXYSCOPE_BIN, "engine_sha": eng,
@@ -151,7 +153,8 @@ def main() -> int:
                 else:
                     msg = status
                     fail += 1
-                shutil.rmtree(scratch_root / sha[:12], ignore_errors=True)
+                if shard:  # failed scans already removed their own per-call scratch dir (tc#62)
+                    shutil.rmtree(run_batch_parallel.scratch_dir_of(shard, scratch_root), ignore_errors=True)
                 el = time.time() - t0
                 eta = el / i * (len(todo) - i)
                 print(f"[{i}/{len(todo)}] {sha[:12]} {msg} | {el/60:.1f}m elapsed, "
