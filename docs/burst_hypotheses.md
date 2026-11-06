@@ -96,3 +96,71 @@ density; own extrinsic history). The *when* is not tied to toolchain releases.
 - warning-flag changes in the build files.
 
 That needs a fresh registration.
+
+---
+
+## Interpretation — the environment is chosen (niche construction), 2026-11-06
+
+*The owner's framing, written up as interpretation. Nothing in this section is a test result; each step names the
+evidence it rests on.*
+
+**The contrast with biology.**
+- In the textbook picture of natural selection, the environment acts on an organism whether it likes it or not.
+- These repos look different. A codebase's "environment" (the platforms it runs on, the compilers and warning levels
+  it is built with, the dependency versions it accepts) arrives **when the builders choose to enter it**.
+- Biology's closer analogue is **niche construction and habitat choice** (Odling-Smee, Laland and Feldman): organisms
+  pick and modify the niches that then select on them.
+
+**The chain of evidence, with its status.**
+
+| step | evidence | status |
+|---|---|---|
+| Extrinsic work is bursty | monthly dispersion 1.4–4.9 on all five repos (`xc_hypotheses.md`, follow-up 2) | exploratory measurement |
+| The bursts are not timed to the outside world's calendar | BURST-H1/H2: Δ share +0.002 / +0.009 after compiler releases, placebo as large | registered; not supported (not an equivalence null) |
+| The burst months coincide with project actions | porting campaigns (openssl RISC-V 2022-09, harfbuzz Windows CE 2014-08), newly enabled warnings or CI bots (libarchive FreeBSD-current `-W` 2012-02, curl clang-tidy 2026-02), new contributors bringing a platform (Cygwin/MinGW 2009) | reading of the burst months |
+| The project writes its chosen niche into the code | platform/compiler `#ifdef` density finds extrinsic fixes beyond size on 5/5 repos | ENV-H1/H3 registered, 2/2 unseen repos |
+| Niche breadth is a product decision | libarchive, whose purpose is portability, has the highest extrinsic share (22.5%) and the burstiest series (4.88) | descriptive |
+
+**A refinement: projects choose their exposure, not all of the pressure.** Three kinds of environmental pressure
+appear in the burst months:
+1. **Chosen entry.** Supporting a new platform, adopting a new toolchain, turning on a stricter warning set or a new CI
+   bot. The project sets both the niche and the timing.
+2. **Imposed exit.** A platform's end of life, or a dependency removing an API (e.g. Windows XP support code removed,
+   OpenSSL 3 deprecations). The pressure is external, but it is felt when the project decides to drop or migrate.
+3. **Ambient drift.** New compiler defaults reaching users through distros and Xcode. This is diffuse, which is why a
+   release date predicts nothing.
+
+In each case **the project controls when it looks**. Its CI matrix and build configurations work like a sensory organ.
+- A platform with no CI job accumulates silent breakage until someone builds there, and then it surfaces as a burst.
+- This mirrors the latent-defect finding (LV-R): **defects of every kind are found where and when somebody looks**.
+  For latent defects the searcher is a fuzzer or a researcher; for extrinsic ones it is the project's own choice of
+  environments.
+
+**What it changes in the intrinsic / extrinsic framing.**
+- "Extrinsic" fixes are less "the world broke us" and more **the maintenance cost of the niche the project chose**.
+- That cost is plannable. It scales with niche breadth (how many platforms, compilers and dependency versions the code
+  promises to fit). It is paid on a predictable set of files: the coupling surface. It is paid when the project
+  enters, re-checks or leaves an environment.
+
+**What GitGalaxy could do with it (proposal).**
+- Describe a project's **niche**: its declared environments, read from platform `#ifdef`s, build-system platform
+  branches and the CI matrix.
+- Show which files pay for each environment.
+- Estimate the cost of entering or leaving one.
+- A port is a deliberate change of niche (z/OS → JVM is the extreme case). The coupling surface is a first estimate of
+  which code pays for that move.
+
+**Predictions that would test this (to register before any join).**
+- **NICHE-H1 (timing).** Extrinsic bursts follow the project's own niche-entry events more than placebo dates do.
+  Niche-entry events, dated from the repo's history: a CI job for a new platform or compiler first appears
+  (`.github/workflows`, `.travis.yml`, `appveyor.yml`, `.cirrus.yml`), or a new platform branch lands in the build
+  system (`configure.ac`, `CMakeLists.txt`).
+- **NICHE-H2 (breadth).** Across repos and over time, niche breadth predicts the extrinsic share of fixes. Breadth =
+  distinct platform/compiler macros tested in the code, or CI-matrix size.
+- **NICHE-H3 (unwatched niches).** Platforms the code supports (has conditionals for) but CI does not build get their
+  extrinsic fixes in rarer, larger bursts. Watched platforms get a steadier trickle.
+
+**Caveats.**
+- Five C/C++ repos; the extrinsic labels are rule-based (audited precision 0.83–1.00).
+- The "self-chosen" reading rests on a registered *null* (the outside calendar does not time the bursts) plus a
+  reading of the burst months, not on a positive test. NICHE-H1 is that positive test.
