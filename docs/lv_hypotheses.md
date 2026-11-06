@@ -120,3 +120,24 @@ suite in **~26 minutes** in the container: 274 tests OK. gcovr reported 307 file
 So on nDPI the "fuzz-reached but CI-uncovered" quadrant is large, and LV-H4 has the variance the saturated fuzz-only
 test lacked. Recipe: `tools/lv_ci_coverage_build.sh`. At ~26 min per snapshot, 25 quarterly-or-monthly snapshots is
 ≈ 11 container-hours single-file, fewer in parallel.
+
+---
+
+## LV-R — curl replication of LV-H1..H3 — registered 2026-11-06, before any curl coverage report is downloaded
+
+**What is fixed.** Claims LV-H1..H3, the scorer (`tools/lv_eval.py` at `3a487cd`, unchanged), α = 0.01 / 4, the
+block bootstrap, the 90-day window and the 7-day report slack: all exactly as registered for nDPI.
+
+**curl specifics.**
+- OSS-Fuzz project `curl`; report paths `/src/curl/<repo path>`.
+- Branch `master`, labels `events/curl_xc.json` (rules v2, audited in `xc_label_audit.md`), harvest head `04bfe8f`.
+- Monthly snapshots from the first month with a report ≥ 90 days of history behind it.
+- Invocation: `--start 2018-12`. The first report is 2018-08-20, so 2018-12 has a 90-day look-back.
+
+**Prior, and why it differs from nDPI.**
+- curl's CVEs are mostly **human-reported**, unlike nDPI's OSS-Fuzz-bisected events. The frontier theory therefore
+  predicts a **weaker** LV-H1 on curl.
+- A null on curl alongside an nDPI positive would itself support "discovery is *the searcher's* exploration".
+- LV-H1 **uncertain**; LV-H2 **uncertain**; LV-H3 **leaning supported**: fuzz reach marks exercised code in general.
+- **Headline for the pair:** "discovery is exploration" holds across repos iff LV-H1 and LV-H2 are SUPPORTED on curl
+  (nDPI was directional only).
