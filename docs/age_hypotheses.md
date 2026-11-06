@@ -55,3 +55,49 @@ evaluable repos. Bootstrap: fixes resampled within each (repo, class), 5,000 rou
 - H2 **leaning supported**: curl's median CVE lurk is about 4.5 years.
 - H3 **leaning supported**.
 - H4 **uncertain**: platform code may be older on average, since adapters accumulate.
+
+---
+
+## Results — 2026-11-06 (scorer `eebc7ae` committed before running; report `age.md`)
+
+4,153 fixes blamed (up to 300 per repo and class).
+
+| claim | repos | pooled effect (log₁₀ days) | factor | 90% CI | verdict |
+|---|---|---:|---:|---|---|
+| **AGE-H1** regression vs generic | curl, openssl, harfbuzz | −0.005 | ×0.99 | [−0.109, +0.191] | **not supported** |
+| **AGE-H2** CVE vs generic | curl, nDPI, openssl, harfbuzz | +0.007 | ×1.02 | [−0.178, +0.199] | **not supported** |
+| **AGE-H3** CVE vs regression | curl, openssl, harfbuzz | +0.050 | ×1.12 | [−0.185, +0.248] | **not supported** |
+| **AGE-H4** extrinsic has no signature | curl, nDPI, openssl, harfbuzz | −0.061 | ×0.87 | [−0.208, +0.093] | **not supported** (inconclusive) |
+
+Median age of the changed code (days; n):
+
+| repo | generic | regression (word) | regression-linked (sanity) | CVE | extrinsic |
+|---|---:|---:|---:|---:|---:|
+| curl | 448 (253) | 144 (209) | 41 (277) | **733** (154) | 509 (246) |
+| nDPI | 139 (272) | — | 25 (50) | 109 (97) | 222 (39) |
+| openssl | 320 (258) | 278 (113) | 14 (257) | **908** (182) | 196 (231) |
+| harfbuzz | 71 (265) | 247 (159) | 0 (259) | **21** (70) | 37 (134) |
+
+**Headline → no pooled age signature.** None of H1–H4 holds when the repos are averaged.
+- The sanity row behaves as built: regressions linked to a commit ≤ 90 days old change code aged 0–41 days.
+
+**Why the pool is flat (exploratory, not a verdict): the CVE effect splits by who finds the bugs.**
+
+| repo | how its CVEs are mostly found | CVE vs generic fix age |
+|---|---|---|
+| curl | human reporters | **×1.6 older** (733 vs 448 days) |
+| openssl | human reporters | **×2.8 older** (908 vs 320) |
+| nDPI | OSS-Fuzz | ×0.8 (109 vs 139) |
+| harfbuzz | OSS-Fuzz | **×0.3 younger** (21 vs 71) |
+
+- **Human-found CVEs** sit in code ~2–2.5 years old: old, frozen code that someone eventually audited.
+- **Fuzzer-found CVEs** sit in code days to months old. Continuous fuzzing catches bugs soon after they are written.
+
+This is the same split seen in LV (frontier), INP (input surface) and KF (curl): **a latent defect's age at discovery
+is set by the searcher, not only by the code.**
+- Pooling the two discovery regimes cancels the effect.
+- A registered test splitting repos by discovery process (or splitting CVEs by reporter, e.g. curl advisories that credit
+  OSS-Fuzz) is owed.
+
+**Regression word labels** are mixed: younger than generic on curl (144 vs 448) and openssl (278 vs 320), older on
+harfbuzz (247 vs 71). The age-independent regression labels show no consistent age signature.
