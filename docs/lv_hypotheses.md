@@ -108,3 +108,15 @@ A pilot built the last quarterly nDPI snapshot in `ubuntu:22.04` with `--coverag
 suite (`tests/do.sh`). The build succeeds, and the suite takes about an hour single-threaded. LV-H4 needs ≥ 20 scored
 snapshots of CI coverage: on the order of 20–30 container-hours, and older snapshots may need older toolchains.
 Not run yet.
+
+**Pilot result (descriptive; no outcome joined).** The last quarterly snapshot (pre-2026-01-01) built and ran nDPI's
+suite in **~26 minutes** in the container: 274 tests OK. gcovr reported 307 files.
+
+| | line coverage |
+|---|---:|
+| **CI suite (the contract)** | **43.5%** of lines; several library files at 0% (bitmap, community-id, filter) |
+| **Fuzzers** | ~96% of instrumented lines |
+
+So on nDPI the "fuzz-reached but CI-uncovered" quadrant is large, and LV-H4 has the variance the saturated fuzz-only
+test lacked. Recipe: `tools/lv_ci_coverage_build.sh`. At ~26 min per snapshot, 25 quarterly-or-monthly snapshots is
+≈ 11 container-hours single-file, fewer in parallel.
