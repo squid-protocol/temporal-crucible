@@ -205,15 +205,24 @@ def state_files(task):
     return libname, name, sha, ct, ver, texts
 
 
+_UL, _CV = {}, {}
+
+
 def cv_verdict(up_f, text, rel):
-    lines = {T.Z.U.norm(x) for x in text.splitlines() if T.Z.U.norm(x)}
-    lines = {x for x in lines if Z.code_line(x)}
-    best = None
-    for norm_txt, v in up_f.items():
-        ul = {x for x in (T.Z.U.norm(y) for y in norm_txt.splitlines()) if Z.code_line(x)}
-        j = len(lines & ul) / max(len(lines | ul), 1)
-        if best is None or (j, v) > best:
-            best = (j, v)
+    """Closest release by Jaccard over normalised code lines. Release line sets and per-text results are memoised
+    (a speed-only change after run 1 was stopped at the state-fetch stage; the result is identical)."""
+    if id(up_f) not in _UL:
+        _UL[id(up_f)] = [({x for x in (T.Z.U.norm(y) for y in t.splitlines()) if Z.code_line(x)}, v) for t, v in up_f.items()]
+    k = (id(up_f), hash(text))
+    if k not in _CV:
+        lines = {x for x in (T.Z.U.norm(y) for y in text.splitlines()) if x and Z.code_line(x)}
+        best = None
+        for ul, v in _UL[id(up_f)]:
+            j = len(lines & ul) / max(len(lines | ul), 1)
+            if best is None or (j, v) > best:
+                best = (j, v)
+        _CV[k] = best
+    best = _CV[k]
     if not best or best[0] < 0.5:
         return None, None
     return ("patched" if best[1] >= rel else "unpatched"), best[1]
