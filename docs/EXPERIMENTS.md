@@ -39,7 +39,9 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **New engine metrics** (`fam_*` families, guard balance, wrappers, mitigation tallies; function fan-in/out, pagerank) | security fixes at equal size (strata) | ✗ | ⚠ | **mostly SIZE** — every apparent lead loses head-to-head to LOC; one live lead: `amplified_cascading_flux` (mutation-in-branch) beats size on nDPI + openssl (fuzzer/parser bugs), not curl. 9 engine columns never populated on C. | NM-F, NM-G, AMP-H1 (owed) |
 | **Fix class split** (extrinsic / latent / regression, harvested + audited) × history and structure | per-class fixes @review-budget | ⚠ | ⚠ | **classes differ in HISTORY, not structure**: CVEs recur in place (3/3); extrinsic fixes recur on an environment-facing membrane (curl, openssl); regressions never recur in place but follow fix activity; change entropy → regressions on openssl only; external-include proxy ✗ | XC-H1..H6 |
 | **Platform-conditional density** (`#if` on platform/compiler/arch macros, per line) | extrinsic fixes @review-budget | ✓ (expl.) | ✓ (expl.) | **SURVIVES on unseen harfbuzz + libarchive** (+0.17 / +0.12 over the stronger size order; worse than size for every other class). The environment-coupling surface, measured statically. | ENV-H1..H3 |
+| **Library-coupling surface** (per-file includes + API calls of dependency D) | where D-named work lands @review-budget | ✓ | ✓ | **SHOWN on 21 (repo, library) units**: +0.40 over size, +0.46 over other libraries, +0.22 over file names; OpenSSL 3 migration: 93% of touched files in the top-20% set. The strongest structural result in the program | LIB-H1..H3 |
 | **Compiler-release shocks** (GCC 27, Clang 33 majors) | extrinsic share of fixes, 90 d after vs before (5 repos) | ✗ | ✗ | **not timed to releases**: Δ share ≈ 0, placebo as large; extrinsic bursts look project-driven (platform campaigns, new warning sets / CI bots) | BURST-H1..H3 |
+| **Co-change omission** (commit leaves strong co-change partners untouched; history-only model) | regression-inducing commits, within size bins | ✗ | ✗ | **adds nothing over commit size**; equivalence null against the coupled-files placebo. Commit size remains the regression predictor | REG-H1/H2 |
 
 **Off-axis: GitGalaxy output as agent context** (the product's claimed use, not defect prediction; same legend):
 
@@ -106,8 +108,8 @@ evaluates it. Verdicts are summarized here and authoritative in [`HYPOTHESES.md`
 | M-H1..M-H3 | multi-label signatures | curl | tc#1 | ○ pending | — |
 | X-H1 | unpaired-allocation ↔ introduce | kernel harvest | tc#27 | ○ registered | keyword_pools_explore.md |
 | X-H2 | fix-grammar gradient | openssl | tc#26 | ○ registered | keyword_pools_explore.md |
-| DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ○ registered | — |
-| DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ○ registered | — |
+| DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ✗ not supported (2026-11-06) | cen_hypotheses.md (DYN section) |
+| DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ✓ SUPPORTED: 2.03 / 2.33, robust to finer strata | cen_hypotheses.md (DYN section) |
 | AG-H1 | E1: ≥15% of PR-branch main-merge conflicts are generated-files-only (census, 10-11..17) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
 | AG-H2 | E1: status-quo conflict latency exceeds projected tick latency (generated-only) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
 | AG-H3 | E1: `tick` clears tool-written conflicts correctly, 8/8 | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
