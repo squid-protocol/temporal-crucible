@@ -140,3 +140,12 @@ The blind audit for **CMB-H2** proceeds as registered.
 - **33 of 60 packets changed.** Their first-round labels are discarded, and **fresh** auditors re-label them.
 - The 27 unchanged packets keep their first-round labels. Four of those are legitimately unclear, because the host
   version lacks the function the fix changed.
+
+**Blind labels locked (2026-11-06, before comparison with any method).**
+- 60 labels: 33 from the fresh re-audit, 27 from the first round (unchanged packets).
+- File `vz_private/cmb_audit_labels.json`, sha256 `889cd94c3e17080e7cf570fabb4e3ed8308eb2398db89c7979044af1cf0b86c7`.
+- **Recorded auditor judgement:** in 11 packets about CVE-2022-37434's *follow-up* fix (a NULL-pointer dereference),
+  the host never had the dereference, but it lacks the main `len < extra_max` bound.
+  - All three re-auditors independently labelled these **unpatched**, for the CVE as a whole.
+  - The labels are used as delivered.
+  - A sensitivity check with those 11 flipped to patched is reported descriptively.
