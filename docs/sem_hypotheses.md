@@ -89,3 +89,33 @@ not, because that fragment is new in the fix.
 **SEM2-H3 audit recorded (before SEM-2 ran).**
 - 20 fresh units (seed 2984), audited on semantics. Aggregate: **20 patched, 0 unpatched, 0 unclear.**
 - Labels: `vz_private/sem2_audit.json`, sha256 `5b3c080791ceb0ca5e47e2348d2b51aa6f417a5dfa4b49e0a1704a917defad83`.
+
+## SEM-2 results — 2026-11-06 (scorer `cb13278`, `--v2`; report `sem2.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **SEM2-H1** no new errors on verbatim truth | **0** wrong / 1,552 (Wilson 99% upper 0.43%) | **SUPPORTED** |
+| **SEM2-H2** meets VZ-T bars | sensitivity 81.5%, specificity 72.9% (unchanged: SEM-2 never fires on verbatim copies) | **not supported** |
+| **SEM2-H3** beats the line check, third fresh audit (seed 2984) | **19 / 20** vs 15 / 20 | **SUPPORTED** |
+
+**Reading.**
+- Requiring guard fragments to be **new**, i.e. absent from the pre-fix function, removes all of SEM-1's false
+  "patched" calls.
+- It keeps the repair: SEM-2 turns 135 of the line check's "unpatched" calls and 25 abstentions into "patched", and
+  on held-out audited units it is right 19 / 20 times.
+- **What SEM-2 is:** a strict improvement on the line check for *modified* copies. It catches fixes written
+  differently, as long as they reuse the fix's new guard condition.
+- **What it is not:**
+  - It does not reduce abstentions on verbatim copies (H2 unchanged).
+  - It yields no new fragments for fixes that are not new conditions: the 2016 pointer-arithmetic and shift fixes,
+    whose new code has no comparison.
+  - Those still depend on the line rule.
+  - In-sample, 3 of VZ-T's original 7 errors remain. They come from the CVE-2022 follow-up fix, whose only new
+    fragment is the `state->head != NULL` check, written differently in zlib-ng.
+- **Overall, on vendored zlib:** code-reading verdicts are correct whenever they decide on known truth (0 / 1,552).
+  On audited modified copies they now beat version strings in 19 / 20 cases.
+- **Remaining gaps:**
+  - abstention on code far from both fix versions;
+  - fixes that are not guard conditions;
+  - a second library;
+  - a head-to-head against hash- or version-based scanners.
