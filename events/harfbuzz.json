@@ -1,0 +1,2039 @@
+{
+ "repo": "harfbuzz",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=harfbuzz)",
+ "pool_head": "316e8022228475d7cf35c2b08f6acd5ebf93da57",
+ "counts": {
+  "security-fix": 90,
+  "introduced": 77,
+  "control": 87,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2018-1",
+   "class": "security-fix",
+   "sha": "e940530c9723c3a581a5d5b31e5f419865dd6cc7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-1",
+   "class": "introduced",
+   "sha": "5d34164d98f04816aafaa0abfc44cd899c7d70b3",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-106",
+   "class": "security-fix",
+   "sha": "2dde6c803a9e50c5bff74095187b0cb2e12eebdd",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-use-after-return in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-106",
+   "class": "introduced",
+   "sha": "acce1fa3ea9707d0883cd66397fd187d3268905c",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-use-after-return in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-108",
+   "class": "security-fix",
+   "sha": "0f85edb7781f4d5ec2de676979be75a0f6559d80",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<int, 4>::operator int"
+  },
+  {
+   "id": "OSV-2018-108",
+   "class": "introduced",
+   "sha": "ab1f30bd059f1d2270793e9726b60666b328d2b8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<int, 4>::operator int"
+  },
+  {
+   "id": "OSV-2018-112",
+   "class": "security-fix",
+   "sha": "f8ccb545c47abe8f0f4ed318ff7b5bf176913893",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-112",
+   "class": "introduced",
+   "sha": "4479d3a2eda57d278700f5c78414ef6ef617d2a9",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-114",
+   "class": "security-fix",
+   "sha": "de6e414c565de5f27b9da8c7b8b11f88659a4c42",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-114",
+   "class": "introduced",
+   "sha": "c9165f5450b99e6d93e2a168b198384a221eef58",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-115",
+   "class": "security-fix",
+   "sha": "72d8f76368b264a42fe58438fe15811d458a7935",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in CFF::BlendArg::set_blends"
+  },
+  {
+   "id": "OSV-2018-115",
+   "class": "introduced",
+   "sha": "7b21319edfd6531a444846f71e87303bc09f4621",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in CFF::BlendArg::set_blends"
+  },
+  {
+   "id": "OSV-2018-116",
+   "class": "security-fix",
+   "sha": "00fdbca4f6a5c4623b9c4838da502cccce8aaa74",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-116",
+   "class": "introduced",
+   "sha": "f7c0b4319c6f82f1e0020a0029469d8953a7a161",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-119",
+   "class": "security-fix",
+   "sha": "a549aa14a0b60436a16f7f8924a5b5f82b4d5b7e",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in AAT::KerxSubTableFormat1<AAT::KerxSubTableHeader>::driver_context_t::transition"
+  },
+  {
+   "id": "OSV-2018-119",
+   "class": "introduced",
+   "sha": "752bd8a192af209f44dacaf1d3510d0bfc6354b8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in AAT::KerxSubTableFormat1<AAT::KerxSubTableHeader>::driver_context_t::transition"
+  },
+  {
+   "id": "OSV-2018-126",
+   "class": "security-fix",
+   "sha": "ca54eba4846d0afda4601929556617a7ebe51714",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<int, 4>::operator int"
+  },
+  {
+   "id": "OSV-2018-127",
+   "class": "security-fix",
+   "sha": "67449c39331babb88f7d29d737895d786cd5da33",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-127",
+   "class": "introduced",
+   "sha": "3789c557ca06aef430726f4942cafecac6fe4eef",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-129",
+   "class": "security-fix",
+   "sha": "79e7e3445efef2dc57f8a10c7e355e802af08868",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-129",
+   "class": "introduced",
+   "sha": "11d2f49af8f53340134c844173f4d8655b00dea3",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-143",
+   "class": "security-fix",
+   "sha": "14d29a10437205566c4bd7bcfa2282d34d9f4f2f",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in CFF::BlendArg::set_blends"
+  },
+  {
+   "id": "OSV-2018-143",
+   "class": "introduced",
+   "sha": "0996c0ff6279f377e2b14f08663df2ce82de2b14",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in CFF::BlendArg::set_blends"
+  },
+  {
+   "id": "OSV-2018-146",
+   "class": "security-fix",
+   "sha": "8dcc1913a1670ede7b124f7b5b775d7ab8791386",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-146",
+   "class": "introduced",
+   "sha": "758c9d68e2143493978d8ac8391f4af2a2abc26a",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-149",
+   "class": "security-fix",
+   "sha": "68b705076808d4b0a4ac3bfa945b8f9ae23db1df",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-149",
+   "class": "introduced",
+   "sha": "de6e414c565de5f27b9da8c7b8b11f88659a4c42",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-150",
+   "class": "security-fix",
+   "sha": "3341c7fbfb9bc8e137afd9f16da8cf18eb67b25b",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-150",
+   "class": "introduced",
+   "sha": "4c27da7638f6d072c3ff93223488c4ab316236c1",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-159",
+   "class": "introduced",
+   "sha": "14ff3cbe0f30dea24e1bb175b1e8e41039f6afdc",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in AAT::LookupFormat8<OT::IntType<unsigned short, 2u> >::get_value"
+  },
+  {
+   "id": "OSV-2018-161",
+   "class": "security-fix",
+   "sha": "aa5af8d041521507f8bc8ded8a365ee56098388c",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::set"
+  },
+  {
+   "id": "OSV-2018-161",
+   "class": "introduced",
+   "sha": "5f17dbc3025093308d2191a4abd2eec24db35c0e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::set"
+  },
+  {
+   "id": "OSV-2018-162",
+   "class": "security-fix",
+   "sha": "40f2b9355cf827c7b82ea5e55b112ce0032a9abf",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-162",
+   "class": "introduced",
+   "sha": "84967537966a76297c89460d95e7336f1bfc332d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-172",
+   "class": "security-fix",
+   "sha": "5c65ed800de4caef5ee9ad2111225fa5d8235737",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in _hb_ot_shape_fallback_kern"
+  },
+  {
+   "id": "OSV-2018-172",
+   "class": "introduced",
+   "sha": "9b0b40b3c1ac8155c80ed5dc976228f4d3ec7e1f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in _hb_ot_shape_fallback_kern"
+  },
+  {
+   "id": "OSV-2018-174",
+   "class": "security-fix",
+   "sha": "8d98c51d133b058a845ed7a84bfe8a43083bbb03",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned char, 1>::operator unsigned char"
+  },
+  {
+   "id": "OSV-2018-174",
+   "class": "introduced",
+   "sha": "095f5add0b1ca39dd09842594b80fae92f0796e4",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned char, 1>::operator unsigned char"
+  },
+  {
+   "id": "OSV-2018-176",
+   "class": "security-fix",
+   "sha": "2c824d3644e16643c2bbe85fb88f9fb6fed53ce7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-179",
+   "class": "security-fix",
+   "sha": "517a1bac97b6273e03562deefcca129648698c31",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::post::accelerator_t::cmp_gids"
+  },
+  {
+   "id": "OSV-2018-179",
+   "class": "introduced",
+   "sha": "bce437cf0b71e9b60bbf058eaf61593fed30ae33",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::post::accelerator_t::cmp_gids"
+  },
+  {
+   "id": "OSV-2018-185",
+   "class": "security-fix",
+   "sha": "4c27da7638f6d072c3ff93223488c4ab316236c1",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-185",
+   "class": "introduced",
+   "sha": "fc812faaa96aa4e67814a92376b2da751d5a0aba",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-26",
+   "class": "security-fix",
+   "sha": "9e9f16c92debecb4caf533fa112898dfec116d98",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<unsigned char, 1>::operator unsigned char"
+  },
+  {
+   "id": "OSV-2018-26",
+   "class": "introduced",
+   "sha": "a953b647507fe2ae8f5187fbfb04e69d2a2952e4",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<unsigned char, 1>::operator unsigned char"
+  },
+  {
+   "id": "OSV-2018-43",
+   "class": "security-fix",
+   "sha": "6482fda519ca7d173e3bcb3717aa30e237f04b25",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::post::accelerator_t::cmp_gids"
+  },
+  {
+   "id": "OSV-2018-54",
+   "class": "security-fix",
+   "sha": "752bd8a192af209f44dacaf1d3510d0bfc6354b8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<short, 2>::operator short"
+  },
+  {
+   "id": "OSV-2018-54",
+   "class": "introduced",
+   "sha": "f4bad0086e40c70d66d6514f038ddda1411657c8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in BEInt<short, 2>::operator short"
+  },
+  {
+   "id": "OSV-2018-56",
+   "class": "introduced",
+   "sha": "b6bc0d4ff62e4509643db3b304306a72bbcb2c38",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::propagate_attachment_offsets"
+  },
+  {
+   "id": "OSV-2018-61",
+   "class": "security-fix",
+   "sha": "7a6686a589ed6bf17a5af0b8012501e4d4ee2ded",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2018-73",
+   "class": "security-fix",
+   "sha": "8d2d41025619e24160ed80edd1c413168a2dda36",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in hb_array_t<char const>::cmp"
+  },
+  {
+   "id": "OSV-2018-73",
+   "class": "introduced",
+   "sha": "dcfa4a8d711716de88b94a370663e9564e3e7ccc",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in hb_array_t<char const>::cmp"
+  },
+  {
+   "id": "OSV-2018-91",
+   "class": "security-fix",
+   "sha": "210f899acad1959d60892538ac1968a36dbbb51b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-91",
+   "class": "introduced",
+   "sha": "a51958819fcf51ade3f8eb38001e680a419ebbba",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned int, 4>::operator unsigned int"
+  },
+  {
+   "id": "OSV-2018-97",
+   "class": "security-fix",
+   "sha": "c31092ab34641072606f854408eb1bea18ed2507",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in CFF::CFF2VariationStore::serialize"
+  },
+  {
+   "id": "OSV-2018-97",
+   "class": "introduced",
+   "sha": "b403be8ad98ffd2dbe95dad73e96c7ed1295d9fc",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in CFF::CFF2VariationStore::serialize"
+  },
+  {
+   "id": "OSV-2020-107",
+   "class": "security-fix",
+   "sha": "758fda728ba5c9d4542ea2385482f7d090ffda0d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-107",
+   "class": "introduced",
+   "sha": "5ad761b943721c3541d0ca0472f34f7d54b89b5b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-121",
+   "class": "security-fix",
+   "sha": "0d729b4b7237934abfca0b5738ad4383f3f22476",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<short, 2>::operator short"
+  },
+  {
+   "id": "OSV-2020-130",
+   "class": "security-fix",
+   "sha": "60262e4ca9dc8acd740e47b14d6e7b586c16ceac",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in OT::TupleVarHeader::calculate_scalar"
+  },
+  {
+   "id": "OSV-2020-1325",
+   "class": "security-fix",
+   "sha": "22f7c61acf8073cb8db8db47e92aef18864a85c6",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-1325",
+   "class": "introduced",
+   "sha": "8ffc9add2237899afc57184ad3297404659bc1cd",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-147",
+   "class": "security-fix",
+   "sha": "99b5b3f1b125010aea0cbb9183950fa18fe089b5",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<short, 2>::operator short"
+  },
+  {
+   "id": "OSV-2020-149",
+   "class": "security-fix",
+   "sha": "57b7de032f60d0499ae2debb293d0f8456acfdfb",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator="
+  },
+  {
+   "id": "OSV-2020-149",
+   "class": "introduced",
+   "sha": "c8cc1e378df500122d8082a2038d68179eec63d0",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator="
+  },
+  {
+   "id": "OSV-2020-1549",
+   "class": "security-fix",
+   "sha": "d307c24abf37b2702706cf9df0fab571a99e2a70",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_vector_t<CFF::op_str_t>::resize"
+  },
+  {
+   "id": "OSV-2020-1549",
+   "class": "introduced",
+   "sha": "c33e8006fdaec3b4acf8927c75e04129e0410a59",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_vector_t<CFF::op_str_t>::resize"
+  },
+  {
+   "id": "OSV-2020-1550",
+   "class": "security-fix",
+   "sha": "d1f13014906d2540ea3f3e6f2aa2781e1314a869",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_vector_t<CFF::dict_val_t>::resize"
+  },
+  {
+   "id": "OSV-2020-1551",
+   "class": "security-fix",
+   "sha": "32f052b033f12fbeb8741c9616860743b1f567c4",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in CFF::parsed_cs_op_t::set_skip"
+  },
+  {
+   "id": "OSV-2020-1551",
+   "class": "introduced",
+   "sha": "48ad745996159337fb4733561e834a0ffbe3a1ae",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in CFF::parsed_cs_op_t::set_skip"
+  },
+  {
+   "id": "OSV-2020-1554",
+   "class": "security-fix",
+   "sha": "53806e5b83cee0e275eac038d0780f95ac56588c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Object-size in void hb_ot_map_t::apply<GPOSProxy>"
+  },
+  {
+   "id": "OSV-2020-1554",
+   "class": "introduced",
+   "sha": "dae32b4f12da5d90de32886b0fd16653e3853e25",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Object-size in void hb_ot_map_t::apply<GPOSProxy>"
+  },
+  {
+   "id": "OSV-2020-1555",
+   "class": "security-fix",
+   "sha": "efd716de3f4c7616aedd5c449bf8d27d565d4ab6",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in OT::VarData::get_scalars"
+  },
+  {
+   "id": "OSV-2020-1563",
+   "class": "security-fix",
+   "sha": "18ab8029d5aab6ac20c240515ad1795bd31dca1e",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::VariationSelectorRecord::operator="
+  },
+  {
+   "id": "OSV-2020-1563",
+   "class": "introduced",
+   "sha": "42237adffcfd951616efc2f8fba2cd195eb002ea",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::VariationSelectorRecord::operator="
+  },
+  {
+   "id": "OSV-2020-16",
+   "class": "security-fix",
+   "sha": "8eba66c1c6d19bcc779a3b4e7b68251511986ee8",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-1606",
+   "class": "security-fix",
+   "sha": "a5f6f869e80c371665026dfe9d156f0088f2553d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in hb_set_digest_lowest_bits_t<unsigned long, 4u>::may_have"
+  },
+  {
+   "id": "OSV-2020-176",
+   "class": "security-fix",
+   "sha": "8614a30bc9763ba7f8b452df5527d806bacf4fd9",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::SBIXGlyph::copy"
+  },
+  {
+   "id": "OSV-2020-176",
+   "class": "introduced",
+   "sha": "93376a64362a0d062aa3f9f39bfe0d7b4328a92e",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::SBIXGlyph::copy"
+  },
+  {
+   "id": "OSV-2020-183",
+   "class": "security-fix",
+   "sha": "0e4b2676bdffeef3cb79b235bc9624f2a49dccad",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in hb_array_t<OT::IntType<unsigned char, 1u> const> hb_array_t<OT::IntType<unsigned"
+  },
+  {
+   "id": "OSV-2020-183",
+   "class": "introduced",
+   "sha": "7dc341fe745bc1784b08efd4c658de292b958b0d",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in hb_array_t<OT::IntType<unsigned char, 1u> const> hb_array_t<OT::IntType<unsigned"
+  },
+  {
+   "id": "OSV-2020-188",
+   "class": "security-fix",
+   "sha": "61208401f41f5d41f32d436cee500c630706f6be",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<short, 2>::operator short"
+  },
+  {
+   "id": "OSV-2020-232",
+   "class": "security-fix",
+   "sha": "a32ecc15aec6518f5a126fb8f3643e563327f74d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-232",
+   "class": "introduced",
+   "sha": "0b39c48064864850193bc80e2566839546be3551",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-243",
+   "class": "security-fix",
+   "sha": "257a197ae723b55d26c3254dbe1edd8b0509af1b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::VarRegionList::serialize"
+  },
+  {
+   "id": "OSV-2020-243",
+   "class": "introduced",
+   "sha": "8f8e8a84795db45098c95e19a7ff83d898d3bc7d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::VarRegionList::serialize"
+  },
+  {
+   "id": "OSV-2020-347",
+   "class": "security-fix",
+   "sha": "3efb7af7e28061f8cd138eb2ed5261bf521abc63",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-347",
+   "class": "introduced",
+   "sha": "02e5e5d939be36d8f108029601a1ce1f533e5ccb",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-388",
+   "class": "security-fix",
+   "sha": "b7be59311f27112791e9b9c6356464e1c3ff92c1",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-use-after-return in bool OT::Coverage::serialize<hb_map_iter_t<hb_map_iter_t<hb_filter_iter_t<OT::Co"
+  },
+  {
+   "id": "OSV-2020-388",
+   "class": "introduced",
+   "sha": "d214b07883a626f3ecebb027797e8bb994e174a4",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-use-after-return in bool OT::Coverage::serialize<hb_map_iter_t<hb_map_iter_t<hb_filter_iter_t<OT::Co"
+  },
+  {
+   "id": "OSV-2020-412",
+   "class": "security-fix",
+   "sha": "b2fcca6e14afc8085cc1c2491b2d7c780dad1450",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-412",
+   "class": "introduced",
+   "sha": "b66094ada0ae7e69d5d08ee8423554629eabccaf",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-484",
+   "class": "security-fix",
+   "sha": "cc8e9a436fa408a1c63f4b9afb7643cea76a079c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in AAT::KerxSubTableFormat4<AAT::KerxSubTableHeader>::driver_context_t::transition"
+  },
+  {
+   "id": "OSV-2020-484",
+   "class": "introduced",
+   "sha": "4009a05ca7de21fff2176621597cd0cd01e9d80e",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in AAT::KerxSubTableFormat4<AAT::KerxSubTableHeader>::driver_context_t::transition"
+  },
+  {
+   "id": "OSV-2020-509",
+   "class": "security-fix",
+   "sha": "503748d8a80dd5db450c8c4dc109f2b97049d989",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in hb_hashmap_t<hb_serialize_context_t::object_t const*, unsigned int,"
+  },
+  {
+   "id": "OSV-2020-509",
+   "class": "introduced",
+   "sha": "59ee61fddc76cd18f19f351bca7dd293eb610333",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in hb_hashmap_t<hb_serialize_context_t::object_t const*, unsigned int,"
+  },
+  {
+   "id": "OSV-2020-516",
+   "class": "security-fix",
+   "sha": "defe9b6da018bc85750c999454c51fde0cadb9b2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in hb_array_t<OT::IntType<unsigned short, 2u> const> hb_array_t<OT::IntType<unsigne"
+  },
+  {
+   "id": "OSV-2020-516",
+   "class": "introduced",
+   "sha": "1f0a9d9be979de01527c05f4dbe6fbc62799597c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in hb_array_t<OT::IntType<unsigned short, 2u> const> hb_array_t<OT::IntType<unsigne"
+  },
+  {
+   "id": "OSV-2020-54",
+   "class": "security-fix",
+   "sha": "06a1fcb3b47050257f7819eb3d6043cf78ebbac2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::HintingDevice* hb_serialize_context_t::embed<OT::HintingDevice>"
+  },
+  {
+   "id": "OSV-2020-54",
+   "class": "introduced",
+   "sha": "c828d7bf76dd039be1775edff1d798dbcc10708b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::HintingDevice* hb_serialize_context_t::embed<OT::HintingDevice>"
+  },
+  {
+   "id": "OSV-2020-704",
+   "class": "security-fix",
+   "sha": "bcb4e505d6ffe33e3268a06698e75d6be0e64957",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned char, 1>::set"
+  },
+  {
+   "id": "OSV-2020-704",
+   "class": "introduced",
+   "sha": "5bbe78a0f353bb806a686fd97ad411fa8a9ebf5b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned char, 1>::set"
+  },
+  {
+   "id": "OSV-2020-708",
+   "class": "security-fix",
+   "sha": "993d81b9c57f2e27d80d276953b0430821129425",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2020-708",
+   "class": "introduced",
+   "sha": "3efb7af7e28061f8cd138eb2ed5261bf521abc63",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2021-1153",
+   "class": "security-fix",
+   "sha": "829b0f33531b3c14b2e08331b8cc5b31fed73129",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in hb_array_t<OT::IntType<unsigned int, 4u> const> hb_array_t<OT::IntType<unsigned "
+  },
+  {
+   "id": "OSV-2021-1153",
+   "class": "introduced",
+   "sha": "a6c6cda48608e988a7debc3c18597186e3b4e2ee",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in hb_array_t<OT::IntType<unsigned int, 4u> const> hb_array_t<OT::IntType<unsigned "
+  },
+  {
+   "id": "OSV-2021-1159",
+   "class": "security-fix",
+   "sha": "d3e09bf4654fe5478b6dbf2b26ebab6271317d81",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_bit_set_invertible_t::set"
+  },
+  {
+   "id": "OSV-2021-1159",
+   "class": "introduced",
+   "sha": "48ad9eef1eb5e5226fcfdb86f3cf5be925456a57",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_bit_set_invertible_t::set"
+  },
+  {
+   "id": "OSV-2021-1310",
+   "class": "security-fix",
+   "sha": "74f96d9d4b359fc138d21709c975a09ba933fb3d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in hb_resolve_overflows"
+  },
+  {
+   "id": "OSV-2021-1310",
+   "class": "introduced",
+   "sha": "3844e58e14f6f528c52df06d49c771dd174730b9",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in hb_resolve_overflows"
+  },
+  {
+   "id": "OSV-2021-1370",
+   "class": "security-fix",
+   "sha": "794b00db4b63e8314aee96c23a20ecb878452eef",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::MathGlyphConstruction::subset"
+  },
+  {
+   "id": "OSV-2021-1370",
+   "class": "introduced",
+   "sha": "ca7b9daef06fc515ec84cfb95e7204e9eef3f00e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::MathGlyphConstruction::subset"
+  },
+  {
+   "id": "OSV-2021-1518",
+   "class": "security-fix",
+   "sha": "0a7563a53ffedd735cb41c03f697269ef48f0ec2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in bool OT::OffsetTo<OT::ClipBox, OT::IntType<unsigned int, 3u>, true>::serialize_c"
+  },
+  {
+   "id": "OSV-2021-1518",
+   "class": "introduced",
+   "sha": "8c583db9b5c63dc790f6553044b8915e1f5906bb",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in bool OT::OffsetTo<OT::ClipBox, OT::IntType<unsigned int, 3u>, true>::serialize_c"
+  },
+  {
+   "id": "OSV-2021-374",
+   "class": "security-fix",
+   "sha": "5ca353a2d026f655af61ae159adcaeace1fdb09c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2021-374",
+   "class": "introduced",
+   "sha": "c7d232ce4e8eccdeaf8fc4bb4b73818b581d3fb9",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2021-573",
+   "class": "security-fix",
+   "sha": "adca4ce071d12998deea6bb53b223daa3aa163c5",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2021-573",
+   "class": "introduced",
+   "sha": "0e1c0fa404e2ad087265dc59130dbec1c4682258",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in BEInt<unsigned short, 2>::operator unsigned short"
+  },
+  {
+   "id": "OSV-2021-618",
+   "class": "security-fix",
+   "sha": "9dc9f0385dce05456d48730bf5dc7cac52eaa4da",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::AnchorFormat1* hb_serialize_context_t::embed<OT::AnchorFormat1>"
+  },
+  {
+   "id": "OSV-2021-618",
+   "class": "introduced",
+   "sha": "6f98a8ed4627b662d9591649328d2d302fc01987",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::AnchorFormat1* hb_serialize_context_t::embed<OT::AnchorFormat1>"
+  },
+  {
+   "id": "OSV-2021-909",
+   "class": "security-fix",
+   "sha": "7416faceeb7a875ba7316cee124edee2d59ea8d0",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::CPALV1Tail::serialize"
+  },
+  {
+   "id": "OSV-2021-909",
+   "class": "introduced",
+   "sha": "f739e1dc6a875d092d94bcc906d1604887729eac",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::CPALV1Tail::serialize"
+  },
+  {
+   "id": "OSV-2022-104",
+   "class": "security-fix",
+   "sha": "4e2f409bce77b97de2d098365977beeeb4447b1e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in hb_bit_set_invertible_t::intersects"
+  },
+  {
+   "id": "OSV-2022-104",
+   "class": "introduced",
+   "sha": "bc899650c7976df7bc62ed55da5268f1d10b9a43",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in hb_bit_set_invertible_t::intersects"
+  },
+  {
+   "id": "OSV-2022-108",
+   "class": "security-fix",
+   "sha": "5363e40de13425938bc833ae2b6c1d9d565bcf65",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in void apply_string<GSUBProxy>"
+  },
+  {
+   "id": "OSV-2022-108",
+   "class": "introduced",
+   "sha": "a75b96f7e5833c9206f6a15d11168a757a85ee59",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in void apply_string<GSUBProxy>"
+  },
+  {
+   "id": "OSV-2022-1209",
+   "class": "security-fix",
+   "sha": "4c49daf7cd961fb47126baf04240243736cae606",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::hb_ot_apply_context_t::skipping_iterator_t::next"
+  },
+  {
+   "id": "OSV-2022-1209",
+   "class": "introduced",
+   "sha": "1fa64c0c23ed86d60117198420587aee81fdc8d8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::hb_ot_apply_context_t::skipping_iterator_t::next"
+  },
+  {
+   "id": "OSV-2022-401",
+   "class": "security-fix",
+   "sha": "ca8a0f3ea32af8fdaf2f99ad87a43e82be854f62",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::gvar::subset"
+  },
+  {
+   "id": "OSV-2022-401",
+   "class": "introduced",
+   "sha": "4fe69bc41327596af540a2f683062b41a4f37f45",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::gvar::subset"
+  },
+  {
+   "id": "OSV-2022-457",
+   "class": "security-fix",
+   "sha": "b59e25f25ef20dddc7e4dff0432c63d1afe287ae",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in CFF::Charset::collect_glyph_to_sid_map"
+  },
+  {
+   "id": "OSV-2022-457",
+   "class": "introduced",
+   "sha": "a4d98b63ea59f17ef5e4795f6048f9cd6baa4340",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in CFF::Charset::collect_glyph_to_sid_map"
+  },
+  {
+   "id": "OSV-2022-613",
+   "class": "security-fix",
+   "sha": "32c85b8c8c1994e318dce49b928a7298a0b23560",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::avar::map_coords"
+  },
+  {
+   "id": "OSV-2022-613",
+   "class": "introduced",
+   "sha": "edca52c3b644f6ebc90eeeb307ed3e87a7245348",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::avar::map_coords"
+  },
+  {
+   "id": "OSV-2023-1272",
+   "class": "security-fix",
+   "sha": "5b325c0ae9cdd7ca03c002d7cae92a6d17f5111b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_"
+  },
+  {
+   "id": "OSV-2023-1272",
+   "class": "introduced",
+   "sha": "bf84135edda601fdead430b231a9ce50d38837d2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_"
+  },
+  {
+   "id": "OSV-2023-137",
+   "class": "security-fix",
+   "sha": "08784baf101aea472c133dcd67604b475ace3772",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::Layout::Common::Coverage::get_population"
+  },
+  {
+   "id": "OSV-2023-137",
+   "class": "introduced",
+   "sha": "918193ebf908d35c88bb71d02dfc14bc41ffc31d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::Layout::Common::Coverage::get_population"
+  },
+  {
+   "id": "OSV-2023-160",
+   "class": "security-fix",
+   "sha": "28b05e1cb6116b07b95af799ff68b883c3f590d1",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in OT::gvar::accelerator_t::apply_deltas_to_points"
+  },
+  {
+   "id": "OSV-2023-160",
+   "class": "introduced",
+   "sha": "f325aba561335a4f0f3c71aa59e42f1a23c774f2",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in OT::gvar::accelerator_t::apply_deltas_to_points"
+  },
+  {
+   "id": "OSV-2023-170",
+   "class": "security-fix",
+   "sha": "75e6498d9a8b600ab7f00b3d279f1054dd72feec",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Invalid-free in hb_free_impl"
+  },
+  {
+   "id": "OSV-2023-170",
+   "class": "introduced",
+   "sha": "c0fac016dc017596e2d979e19e1eb8f88df38ea3",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Invalid-free in hb_free_impl"
+  },
+  {
+   "id": "OSV-2023-222",
+   "class": "security-fix",
+   "sha": "be872001063d263efe708c4db5af569cfaedd3fe",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in hb_subset_plan_t::hb_subset_plan_t"
+  },
+  {
+   "id": "OSV-2023-27",
+   "class": "security-fix",
+   "sha": "b63159e8bf579345a6f56d04ad1b2c28eee66bac",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::Layout::GPOS_impl::PairSet<OT::Layout::MediumTypes>::apply"
+  },
+  {
+   "id": "OSV-2023-27",
+   "class": "introduced",
+   "sha": "af450a757d8471e55b71d1f3eb3c1e1fd3390d7b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::Layout::GPOS_impl::PairSet<OT::Layout::MediumTypes>::apply"
+  },
+  {
+   "id": "OSV-2023-323",
+   "class": "security-fix",
+   "sha": "647b024784e1346f6886565f570cdf940d7b82b4",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::glyf_impl::SubsetGlyph::serialize"
+  },
+  {
+   "id": "OSV-2023-372",
+   "class": "security-fix",
+   "sha": "319a488b3903cf92c3b45d1772717168a10f94d7",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_ot_layout_substitute_start"
+  },
+  {
+   "id": "OSV-2023-372",
+   "class": "introduced",
+   "sha": "8a8fc37c42135b3ed524e4179bcc4add854ae195",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in hb_ot_layout_substitute_start"
+  },
+  {
+   "id": "OSV-2023-376",
+   "class": "security-fix",
+   "sha": "cda646a598207642721b753ef5abcebb2525f61b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in OT::Layout::GPOS_impl::CursivePosFormat1::subset"
+  },
+  {
+   "id": "OSV-2023-376",
+   "class": "introduced",
+   "sha": "1be39729140a6d726de164746e516c1fe5afcb19",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in OT::Layout::GPOS_impl::CursivePosFormat1::subset"
+  },
+  {
+   "id": "OSV-2023-379",
+   "class": "security-fix",
+   "sha": "86658df5d29308d66ddead03f1112442df04ec27",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in void sort_r_simple<>"
+  },
+  {
+   "id": "OSV-2023-458",
+   "class": "security-fix",
+   "sha": "af3fdf1f9e09fb7e47d4528d81fd510730b80745",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Invalid-free in hb_free_impl"
+  },
+  {
+   "id": "OSV-2023-458",
+   "class": "introduced",
+   "sha": "3d08a2f10cada7c72513d9491ddf66820ef008fb",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Invalid-free in hb_free_impl"
+  },
+  {
+   "id": "OSV-2023-551",
+   "class": "security-fix",
+   "sha": "f60dbd906a4bf89354af1ed0616a61a5099d8c1a",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::CmapSubtable::collect_unicodes"
+  },
+  {
+   "id": "OSV-2023-551",
+   "class": "introduced",
+   "sha": "d84504206c420250bfe80bee25f6a59a7177c9eb",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::CmapSubtable::collect_unicodes"
+  },
+  {
+   "id": "OSV-2023-739",
+   "class": "security-fix",
+   "sha": "fd3eb2c6723c3ce241011f1d3429e48c3226af1c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::glyph_variations_t::create_from_glyphs_var_data"
+  },
+  {
+   "id": "OSV-2023-739",
+   "class": "introduced",
+   "sha": "5a4694b6934f9e3ca3dc89cc905b4351920085b6",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in OT::glyph_variations_t::create_from_glyphs_var_data"
+  },
+  {
+   "id": "OSV-2023-930",
+   "class": "security-fix",
+   "sha": "9ceb800ac26fd81a5eaf27ef366d5fce47e80447",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::cvar::decompile_tuple_variations"
+  },
+  {
+   "id": "OSV-2023-930",
+   "class": "introduced",
+   "sha": "0065658e96c79f8b51c2a702908e84d9d23e0971",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OT::cvar::decompile_tuple_variations"
+  },
+  {
+   "id": "OSV-2025-550",
+   "class": "security-fix",
+   "sha": "04d60de6ae06562262f04e8e2e4d9441c66233e0",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in CFF::cff2_cs_opset_t<cff2_cs_opset_subr_subset_t, CFF::subr_subset_param_t, CFF:"
+  },
+  {
+   "id": "OSV-2025-550",
+   "class": "introduced",
+   "sha": "efcb7d3de1efbd17b01263e3cea757c9579b555a",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in CFF::cff2_cs_opset_t<cff2_cs_opset_subr_subset_t, CFF::subr_subset_param_t, CFF:"
+  },
+  {
+   "id": "OSV-2026-121",
+   "class": "security-fix",
+   "sha": "e365cd0e2e5b8cec1a13561036bc3fc4a4f8c11c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in trySubset"
+  },
+  {
+   "id": "OSV-2026-121",
+   "class": "introduced",
+   "sha": "abcb75a5d175c1375c6bed2184656e5738f88ffd",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in trySubset"
+  },
+  {
+   "id": "OSV-2026-53",
+   "class": "security-fix",
+   "sha": "b17fa8ef39b0e8ea3851d43625f366860750e385",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in graph::LigatureSubstFormat1::shrink"
+  },
+  {
+   "id": "OSV-2026-53",
+   "class": "introduced",
+   "sha": "babdb46be3f28b838b66979e5d1a6ca8d80211ec",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in graph::LigatureSubstFormat1::shrink"
+  },
+  {
+   "id": "OSV-2026-962",
+   "class": "security-fix",
+   "sha": "6c2107ace765f95c67d65a21f94b54a2f12d80dc",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in iup_delta_optimize"
+  },
+  {
+   "id": "OSV-2026-962",
+   "class": "introduced",
+   "sha": "fb7af519b5a0e2d72b0621c05ba70fb1b2eaacaf",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in iup_delta_optimize"
+  },
+  {
+   "id": "control-for-OSV-2018-1",
+   "class": "control",
+   "sha": "3d7dea6dfdc9e75dcca100a79525aa3736dbe29c",
+   "matched_to": "e940530c9723c3a581a5d5b31e5f419865dd6cc7"
+  },
+  {
+   "id": "control-for-OSV-2018-106",
+   "class": "control",
+   "sha": "1b6b481262465ae1865c66c4d499b4b2c8d297fb",
+   "matched_to": "2dde6c803a9e50c5bff74095187b0cb2e12eebdd"
+  },
+  {
+   "id": "control-for-OSV-2018-108",
+   "class": "control",
+   "sha": "6aee3bb87cee88525b745a640df294cb721245f6",
+   "matched_to": "0f85edb7781f4d5ec2de676979be75a0f6559d80"
+  },
+  {
+   "id": "control-for-OSV-2018-112",
+   "class": "control",
+   "sha": "1e6599f59680c81356b2e9ddddb61252490337a0",
+   "matched_to": "f8ccb545c47abe8f0f4ed318ff7b5bf176913893"
+  },
+  {
+   "id": "control-for-OSV-2018-114",
+   "class": "control",
+   "sha": "7281cb3eeb00091c6e6085895afd4a38a0516f35",
+   "matched_to": "de6e414c565de5f27b9da8c7b8b11f88659a4c42"
+  },
+  {
+   "id": "control-for-OSV-2018-115",
+   "class": "control",
+   "sha": "78f639b8bf508ccfb27224f12442f8e8a1460e08",
+   "matched_to": "72d8f76368b264a42fe58438fe15811d458a7935"
+  },
+  {
+   "id": "control-for-OSV-2018-116",
+   "class": "control",
+   "sha": "f11c557662dee16a59bb54276c50a96e4e675201",
+   "matched_to": "00fdbca4f6a5c4623b9c4838da502cccce8aaa74"
+  },
+  {
+   "id": "control-for-OSV-2018-119",
+   "class": "control",
+   "sha": "220a5991baa213b7bd173ea02090dc6fc8aef655",
+   "matched_to": "a549aa14a0b60436a16f7f8924a5b5f82b4d5b7e"
+  },
+  {
+   "id": "control-for-OSV-2018-126",
+   "class": "control",
+   "sha": "f92330b5e0b1a5a61768494bd7081e3fc235b182",
+   "matched_to": "ca54eba4846d0afda4601929556617a7ebe51714"
+  },
+  {
+   "id": "control-for-OSV-2018-127",
+   "class": "control",
+   "sha": "24f1d9622489a016904314a5d4e3c637da2e1c77",
+   "matched_to": "67449c39331babb88f7d29d737895d786cd5da33"
+  },
+  {
+   "id": "control-for-OSV-2018-143",
+   "class": "control",
+   "sha": "5cd9546ba73d9f8c8b7b8db0960d657c50b70f64",
+   "matched_to": "14d29a10437205566c4bd7bcfa2282d34d9f4f2f"
+  },
+  {
+   "id": "control-for-OSV-2018-146",
+   "class": "control",
+   "sha": "96cf0889804b7d72a96274b25641bb18f7dd2e1e",
+   "matched_to": "8dcc1913a1670ede7b124f7b5b775d7ab8791386"
+  },
+  {
+   "id": "control-for-OSV-2018-149",
+   "class": "control",
+   "sha": "72bb139b807c21f1569058fb5fb260dcdd81eba4",
+   "matched_to": "68b705076808d4b0a4ac3bfa945b8f9ae23db1df"
+  },
+  {
+   "id": "control-for-OSV-2018-150",
+   "class": "control",
+   "sha": "3676c685d407cc7b9b813b4a08e7c5bcd9a47ea1",
+   "matched_to": "3341c7fbfb9bc8e137afd9f16da8cf18eb67b25b"
+  },
+  {
+   "id": "control-for-OSV-2018-161",
+   "class": "control",
+   "sha": "8be0e5fd4540b18e26b28b414bd99af3bb1548b1",
+   "matched_to": "aa5af8d041521507f8bc8ded8a365ee56098388c"
+  },
+  {
+   "id": "control-for-OSV-2018-162",
+   "class": "control",
+   "sha": "4f9e36e8cf5d9d3d3e5a1ed46149355ee5f5e9fb",
+   "matched_to": "40f2b9355cf827c7b82ea5e55b112ce0032a9abf"
+  },
+  {
+   "id": "control-for-OSV-2018-172",
+   "class": "control",
+   "sha": "247756a7d89008ee6a7d1171dc07ba22454c6034",
+   "matched_to": "5c65ed800de4caef5ee9ad2111225fa5d8235737"
+  },
+  {
+   "id": "control-for-OSV-2018-174",
+   "class": "control",
+   "sha": "6e3ea269fa1fe0a3de7a8a13c6e853c91231808e",
+   "matched_to": "8d98c51d133b058a845ed7a84bfe8a43083bbb03"
+  },
+  {
+   "id": "control-for-OSV-2018-176",
+   "class": "control",
+   "sha": "4b461785bdf356e4b5586cb6e5b226f47da04b7d",
+   "matched_to": "2c824d3644e16643c2bbe85fb88f9fb6fed53ce7"
+  },
+  {
+   "id": "control-for-OSV-2018-185",
+   "class": "control",
+   "sha": "55d5ea666c25f75e9b1bc2eb43cfb104a16ebe04",
+   "matched_to": "4c27da7638f6d072c3ff93223488c4ab316236c1"
+  },
+  {
+   "id": "control-for-OSV-2018-26",
+   "class": "control",
+   "sha": "8bb97d2ce140b7fe81d0726c32e024d887e0be1c",
+   "matched_to": "9e9f16c92debecb4caf533fa112898dfec116d98"
+  },
+  {
+   "id": "control-for-OSV-2018-43",
+   "class": "control",
+   "sha": "28b68cffe4e5ebf82217ebf439f428431d672af3",
+   "matched_to": "6482fda519ca7d173e3bcb3717aa30e237f04b25"
+  },
+  {
+   "id": "control-for-OSV-2018-54",
+   "class": "control",
+   "sha": "3ec2e4fa7bec07ec181a0390e5f5fd695abee611",
+   "matched_to": "752bd8a192af209f44dacaf1d3510d0bfc6354b8"
+  },
+  {
+   "id": "control-for-OSV-2018-61",
+   "class": "control",
+   "sha": "686e6f2e40da378e031b4c9871a471599c6d61cf",
+   "matched_to": "7a6686a589ed6bf17a5af0b8012501e4d4ee2ded"
+  },
+  {
+   "id": "control-for-OSV-2018-73",
+   "class": "control",
+   "sha": "27a6b0a2f7255ed6fc7bfe1f10052c2e344e319b",
+   "matched_to": "8d2d41025619e24160ed80edd1c413168a2dda36"
+  },
+  {
+   "id": "control-for-OSV-2018-91",
+   "class": "control",
+   "sha": "6ff8a8a10b62a54a87d53b0af66ccaba5d58b107",
+   "matched_to": "210f899acad1959d60892538ac1968a36dbbb51b"
+  },
+  {
+   "id": "control-for-OSV-2018-97",
+   "class": "control",
+   "sha": "620d1ef588c6ce25644891cfe4b9c20fd8a9d1db",
+   "matched_to": "c31092ab34641072606f854408eb1bea18ed2507"
+  },
+  {
+   "id": "control-for-OSV-2020-107",
+   "class": "control",
+   "sha": "d2ab1ec65b1697b113b2b923c63e300659cf1998",
+   "matched_to": "758fda728ba5c9d4542ea2385482f7d090ffda0d"
+  },
+  {
+   "id": "control-for-OSV-2020-121",
+   "class": "control",
+   "sha": "ff984ed3cdd18290ed3a37c76961176d9f86c9cd",
+   "matched_to": "0d729b4b7237934abfca0b5738ad4383f3f22476"
+  },
+  {
+   "id": "control-for-OSV-2020-130",
+   "class": "control",
+   "sha": "414529e45a4cb3ee444c2dd5a2a9cbd6be0598af",
+   "matched_to": "60262e4ca9dc8acd740e47b14d6e7b586c16ceac"
+  },
+  {
+   "id": "control-for-OSV-2020-1325",
+   "class": "control",
+   "sha": "eaa2402a793501bc03e7aa7e662333da2b1aadb1",
+   "matched_to": "22f7c61acf8073cb8db8db47e92aef18864a85c6"
+  },
+  {
+   "id": "control-for-OSV-2020-147",
+   "class": "control",
+   "sha": "f253f06cf368d74f1ec5d84c6439ae2a571e99f1",
+   "matched_to": "99b5b3f1b125010aea0cbb9183950fa18fe089b5"
+  },
+  {
+   "id": "control-for-OSV-2020-149",
+   "class": "control",
+   "sha": "e0c3979af1c84f82b8879c710a07f027fe32f564",
+   "matched_to": "57b7de032f60d0499ae2debb293d0f8456acfdfb"
+  },
+  {
+   "id": "control-for-OSV-2020-1549",
+   "class": "control",
+   "sha": "1536271f6b4940eb0a4f28e406bfc96f00d1293d",
+   "matched_to": "d307c24abf37b2702706cf9df0fab571a99e2a70"
+  },
+  {
+   "id": "control-for-OSV-2020-1550",
+   "class": "control",
+   "sha": "24a6f046e467b875c71b8897078af1311dda11be",
+   "matched_to": "d1f13014906d2540ea3f3e6f2aa2781e1314a869"
+  },
+  {
+   "id": "control-for-OSV-2020-1551",
+   "class": "control",
+   "sha": "f7562672f909d9cca8118659c017c552328796af",
+   "matched_to": "32f052b033f12fbeb8741c9616860743b1f567c4"
+  },
+  {
+   "id": "control-for-OSV-2020-1554",
+   "class": "control",
+   "sha": "1d53268dfe39b6842b5129ce731f67021cb1d844",
+   "matched_to": "53806e5b83cee0e275eac038d0780f95ac56588c"
+  },
+  {
+   "id": "control-for-OSV-2020-1555",
+   "class": "control",
+   "sha": "b22f61d86a27e1dcbcab5ecdbbff579175dc5aaf",
+   "matched_to": "efd716de3f4c7616aedd5c449bf8d27d565d4ab6"
+  },
+  {
+   "id": "control-for-OSV-2020-1563",
+   "class": "control",
+   "sha": "040ed094ef3cf032d84c4d65bd81f40c26f6f9e0",
+   "matched_to": "18ab8029d5aab6ac20c240515ad1795bd31dca1e"
+  },
+  {
+   "id": "control-for-OSV-2020-16",
+   "class": "control",
+   "sha": "36f18cecbbaf8635a2179a827242ca99d5283666",
+   "matched_to": "8eba66c1c6d19bcc779a3b4e7b68251511986ee8"
+  },
+  {
+   "id": "control-for-OSV-2020-1606",
+   "class": "control",
+   "sha": "2e0193d7417d1134e1710bf3fa7690332bc561e0",
+   "matched_to": "a5f6f869e80c371665026dfe9d156f0088f2553d"
+  },
+  {
+   "id": "control-for-OSV-2020-176",
+   "class": "control",
+   "sha": "b068e25f8f89d9b07963dddd5d5e14f61539556f",
+   "matched_to": "8614a30bc9763ba7f8b452df5527d806bacf4fd9"
+  },
+  {
+   "id": "control-for-OSV-2020-183",
+   "class": "control",
+   "sha": "3bc86fb237b668e738a78397be04c603e7cf083b",
+   "matched_to": "0e4b2676bdffeef3cb79b235bc9624f2a49dccad"
+  },
+  {
+   "id": "control-for-OSV-2020-188",
+   "class": "control",
+   "sha": "05bcdb39d8648c49f7984c404aee096f2ad1d655",
+   "matched_to": "61208401f41f5d41f32d436cee500c630706f6be"
+  },
+  {
+   "id": "control-for-OSV-2020-232",
+   "class": "control",
+   "sha": "412d6cac3a46d710159ed4b3cc3bb59fd5876d5f",
+   "matched_to": "a32ecc15aec6518f5a126fb8f3643e563327f74d"
+  },
+  {
+   "id": "control-for-OSV-2020-243",
+   "class": "control",
+   "sha": "64a45be5198f6e22c91454bda7bd9a9294552dff",
+   "matched_to": "257a197ae723b55d26c3254dbe1edd8b0509af1b"
+  },
+  {
+   "id": "control-for-OSV-2020-347",
+   "class": "control",
+   "sha": "243a5a6af2565937705d6bc20e65a62b686bb664",
+   "matched_to": "3efb7af7e28061f8cd138eb2ed5261bf521abc63"
+  },
+  {
+   "id": "control-for-OSV-2020-388",
+   "class": "control",
+   "sha": "5266ca86b633b84850492b7982334fb63271ccbc",
+   "matched_to": "b7be59311f27112791e9b9c6356464e1c3ff92c1"
+  },
+  {
+   "id": "control-for-OSV-2020-412",
+   "class": "control",
+   "sha": "d50d2fcbc7233f0473493e17ab3fb243d8d30edd",
+   "matched_to": "b2fcca6e14afc8085cc1c2491b2d7c780dad1450"
+  },
+  {
+   "id": "control-for-OSV-2020-484",
+   "class": "control",
+   "sha": "c87ee72232416099a73b563ca7aaf293b1c87b2a",
+   "matched_to": "cc8e9a436fa408a1c63f4b9afb7643cea76a079c"
+  },
+  {
+   "id": "control-for-OSV-2020-509",
+   "class": "control",
+   "sha": "2b9402a86a4e37e6386f8028bdf3789ae262a4c4",
+   "matched_to": "503748d8a80dd5db450c8c4dc109f2b97049d989"
+  },
+  {
+   "id": "control-for-OSV-2020-516",
+   "class": "control",
+   "sha": "c72589f13f24ca24a0613f7d9bc28b7fe1ef25c0",
+   "matched_to": "defe9b6da018bc85750c999454c51fde0cadb9b2"
+  },
+  {
+   "id": "control-for-OSV-2020-54",
+   "class": "control",
+   "sha": "b5e6805ee777347ae13ba0133ca0d64252ef9d55",
+   "matched_to": "06a1fcb3b47050257f7819eb3d6043cf78ebbac2"
+  },
+  {
+   "id": "control-for-OSV-2020-704",
+   "class": "control",
+   "sha": "01d06e34ffa746d3737df00bb692cdb1e859c1c6",
+   "matched_to": "bcb4e505d6ffe33e3268a06698e75d6be0e64957"
+  },
+  {
+   "id": "control-for-OSV-2020-708",
+   "class": "control",
+   "sha": "41248cce0e32653227a83eb4e42ccf793f040fc2",
+   "matched_to": "993d81b9c57f2e27d80d276953b0430821129425"
+  },
+  {
+   "id": "control-for-OSV-2021-1159",
+   "class": "control",
+   "sha": "bc33b87f5e72648c66949cc9469291e77aa80701",
+   "matched_to": "d3e09bf4654fe5478b6dbf2b26ebab6271317d81"
+  },
+  {
+   "id": "control-for-OSV-2021-1310",
+   "class": "control",
+   "sha": "35ac0de42bc3904e90039c7f00a9daf088f9d363",
+   "matched_to": "74f96d9d4b359fc138d21709c975a09ba933fb3d"
+  },
+  {
+   "id": "control-for-OSV-2021-1370",
+   "class": "control",
+   "sha": "5bd463f130935df282cc2a484ef1bb6dbd047170",
+   "matched_to": "794b00db4b63e8314aee96c23a20ecb878452eef"
+  },
+  {
+   "id": "control-for-OSV-2021-1518",
+   "class": "control",
+   "sha": "641296b5ebb17875550705f1cea45ab6e6a8e562",
+   "matched_to": "0a7563a53ffedd735cb41c03f697269ef48f0ec2"
+  },
+  {
+   "id": "control-for-OSV-2021-374",
+   "class": "control",
+   "sha": "751ed68fee1d32f8a2c13b4fdc4bfaa9856608e8",
+   "matched_to": "5ca353a2d026f655af61ae159adcaeace1fdb09c"
+  },
+  {
+   "id": "control-for-OSV-2021-573",
+   "class": "control",
+   "sha": "2fbd34f89a80fb25aa0f8edd1dbb692c66211842",
+   "matched_to": "adca4ce071d12998deea6bb53b223daa3aa163c5"
+  },
+  {
+   "id": "control-for-OSV-2021-618",
+   "class": "control",
+   "sha": "d9e0244cdfa522d5dfdd523197078968d83dc038",
+   "matched_to": "9dc9f0385dce05456d48730bf5dc7cac52eaa4da"
+  },
+  {
+   "id": "control-for-OSV-2021-909",
+   "class": "control",
+   "sha": "3c8273ab68e37ed5b08b4edacac995fc451d5732",
+   "matched_to": "7416faceeb7a875ba7316cee124edee2d59ea8d0"
+  },
+  {
+   "id": "control-for-OSV-2022-104",
+   "class": "control",
+   "sha": "1b78e04c78338266c200226bccb21188355046ca",
+   "matched_to": "4e2f409bce77b97de2d098365977beeeb4447b1e"
+  },
+  {
+   "id": "control-for-OSV-2022-108",
+   "class": "control",
+   "sha": "d15041be7dbbfbd17f1ec21f3acf4a6c6e91ba9f",
+   "matched_to": "5363e40de13425938bc833ae2b6c1d9d565bcf65"
+  },
+  {
+   "id": "control-for-OSV-2022-1209",
+   "class": "control",
+   "sha": "dc3bb5e0ed4f44e3a11474656ecf2cd8b7d86a68",
+   "matched_to": "4c49daf7cd961fb47126baf04240243736cae606"
+  },
+  {
+   "id": "control-for-OSV-2022-401",
+   "class": "control",
+   "sha": "6454cec085ba51cefcd12b1f8027bc4a647347d5",
+   "matched_to": "ca8a0f3ea32af8fdaf2f99ad87a43e82be854f62"
+  },
+  {
+   "id": "control-for-OSV-2022-457",
+   "class": "control",
+   "sha": "f18eb000d3884795a43ea46ce5faa95086267b2c",
+   "matched_to": "b59e25f25ef20dddc7e4dff0432c63d1afe287ae"
+  },
+  {
+   "id": "control-for-OSV-2022-613",
+   "class": "control",
+   "sha": "71ce931e6ddbb7ba31b9ec3243d3c09eda251ff1",
+   "matched_to": "32c85b8c8c1994e318dce49b928a7298a0b23560"
+  },
+  {
+   "id": "control-for-OSV-2023-1272",
+   "class": "control",
+   "sha": "32cfa37e2edd6a8dbc07c75c010fd2fc68c4346a",
+   "matched_to": "5b325c0ae9cdd7ca03c002d7cae92a6d17f5111b"
+  },
+  {
+   "id": "control-for-OSV-2023-137",
+   "class": "control",
+   "sha": "0f33ea8c4fe39ee1b39a2ce87f07a7522a99808c",
+   "matched_to": "08784baf101aea472c133dcd67604b475ace3772"
+  },
+  {
+   "id": "control-for-OSV-2023-160",
+   "class": "control",
+   "sha": "e4fff64ce31902674a5b8c667c6a7b61e5429381",
+   "matched_to": "28b05e1cb6116b07b95af799ff68b883c3f590d1"
+  },
+  {
+   "id": "control-for-OSV-2023-170",
+   "class": "control",
+   "sha": "ddd0f7f40b5cae71271fcfa7b6143066d8e465df",
+   "matched_to": "75e6498d9a8b600ab7f00b3d279f1054dd72feec"
+  },
+  {
+   "id": "control-for-OSV-2023-222",
+   "class": "control",
+   "sha": "0de7f83a9fe2054ad2d63c3f8e08dc61e1397c62",
+   "matched_to": "be872001063d263efe708c4db5af569cfaedd3fe"
+  },
+  {
+   "id": "control-for-OSV-2023-27",
+   "class": "control",
+   "sha": "5153218b41a5984673900d080daf4e3273e1d117",
+   "matched_to": "b63159e8bf579345a6f56d04ad1b2c28eee66bac"
+  },
+  {
+   "id": "control-for-OSV-2023-323",
+   "class": "control",
+   "sha": "f10a4c9d6aebcc60b525a2342b0cdc6970ba32a3",
+   "matched_to": "647b024784e1346f6886565f570cdf940d7b82b4"
+  },
+  {
+   "id": "control-for-OSV-2023-372",
+   "class": "control",
+   "sha": "323a1fe4968029fd036948533ead5c0ba69b9df2",
+   "matched_to": "319a488b3903cf92c3b45d1772717168a10f94d7"
+  },
+  {
+   "id": "control-for-OSV-2023-376",
+   "class": "control",
+   "sha": "7a87b17742a0cec36ad21d9fddc1c605597eea14",
+   "matched_to": "cda646a598207642721b753ef5abcebb2525f61b"
+  },
+  {
+   "id": "control-for-OSV-2023-379",
+   "class": "control",
+   "sha": "71910fdf9128ca3068e9546a262f61cbf6e8c8f3",
+   "matched_to": "86658df5d29308d66ddead03f1112442df04ec27"
+  },
+  {
+   "id": "control-for-OSV-2023-458",
+   "class": "control",
+   "sha": "937ead2f02a13d551b428a8358a5e17550387ee6",
+   "matched_to": "af3fdf1f9e09fb7e47d4528d81fd510730b80745"
+  },
+  {
+   "id": "control-for-OSV-2023-551",
+   "class": "control",
+   "sha": "0be1e5a73dc0d987848ff32592c569d34e7b2024",
+   "matched_to": "f60dbd906a4bf89354af1ed0616a61a5099d8c1a"
+  },
+  {
+   "id": "control-for-OSV-2023-739",
+   "class": "control",
+   "sha": "73ce3015bbaa04ce5a2a9da358e3695c7db10c44",
+   "matched_to": "fd3eb2c6723c3ce241011f1d3429e48c3226af1c"
+  },
+  {
+   "id": "control-for-OSV-2023-930",
+   "class": "control",
+   "sha": "de2c10732df151156ac55afdf648f3fd296dfa50",
+   "matched_to": "9ceb800ac26fd81a5eaf27ef366d5fce47e80447"
+  },
+  {
+   "id": "control-for-OSV-2025-550",
+   "class": "control",
+   "sha": "01e9c77e30415c032a4afead87c0e3794013f1a7",
+   "matched_to": "04d60de6ae06562262f04e8e2e4d9441c66233e0"
+  },
+  {
+   "id": "control-for-OSV-2026-121",
+   "class": "control",
+   "sha": "1265ff8d990284f04d8768f35b0e20ae5f60daae",
+   "matched_to": "e365cd0e2e5b8cec1a13561036bc3fc4a4f8c11c"
+  },
+  {
+   "id": "control-for-OSV-2026-53",
+   "class": "control",
+   "sha": "68c7cfff436cc3e45629a74b66f63bd7ca8f7413",
+   "matched_to": "b17fa8ef39b0e8ea3851d43625f366860750e385"
+  },
+  {
+   "id": "control-for-OSV-2026-962",
+   "class": "control",
+   "sha": "8ba4149f44b19be42eedfa39f806aadb6d3477b3",
+   "matched_to": "6c2107ace765f95c67d65a21f94b54a2f12d80dc"
+  }
+ ],
+ "missing": []
+}

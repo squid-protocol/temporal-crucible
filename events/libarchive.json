@@ -1,0 +1,347 @@
+{
+ "repo": "libarchive",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=libarchive)",
+ "pool_head": "eb57ffefe20e98eb7ba05829ee1c23b90e589a71",
+ "counts": {
+  "security-fix": 18,
+  "introduced": 11,
+  "control": 12,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2018-125",
+   "class": "security-fix",
+   "sha": "4bc5892128a042780f167ac35aa72f63c426f3b7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2018-125",
+   "class": "introduced",
+   "sha": "58167a9af435618c44e2faef5af5a86af51c003a",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2018-130",
+   "class": "security-fix",
+   "sha": "4bd12b6f40cb4413c8970c52f15f3b6885b5e32f",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in parse_tables"
+  },
+  {
+   "id": "OSV-2018-160",
+   "class": "security-fix",
+   "sha": "b52dd6c9e4ef7cf95c2a6ae5ab7ccac7f6d462a1",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in do_uncompress_block"
+  },
+  {
+   "id": "OSV-2018-68",
+   "class": "security-fix",
+   "sha": "3614747af54e60229a2bf11e8f40e1b975cc9ae6",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2020-238",
+   "class": "security-fix",
+   "sha": "94821008d6eea81e315c5881cdf739202961040a",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in copy_string"
+  },
+  {
+   "id": "OSV-2020-238",
+   "class": "introduced",
+   "sha": "47bb8187d3ef2d49ee8c7841cb2872b3cfa1f6f7",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in copy_string"
+  },
+  {
+   "id": "OSV-2020-273",
+   "class": "security-fix",
+   "sha": "c9267d665c30fa78023bd70b8e9c6f02450777e2",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in copy_string"
+  },
+  {
+   "id": "OSV-2020-32",
+   "class": "introduced",
+   "sha": "c9267d665c30fa78023bd70b8e9c6f02450777e2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2020-372",
+   "class": "security-fix",
+   "sha": "39736c43bd7374beedb372aa300ecf36c9fc4733",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in circular_memcpy"
+  },
+  {
+   "id": "OSV-2020-372",
+   "class": "introduced",
+   "sha": "b52dd6c9e4ef7cf95c2a6ae5ab7ccac7f6d462a1",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in circular_memcpy"
+  },
+  {
+   "id": "OSV-2020-461",
+   "class": "security-fix",
+   "sha": "ba641f73f3d758d9032b3f0e5597a9c6e593a505",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Index-out-of-bounds in parse_file_extra_owner"
+  },
+  {
+   "id": "OSV-2020-461",
+   "class": "introduced",
+   "sha": "e5ade325a7d97772e91444332b4f7d3cfaab24d7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Index-out-of-bounds in parse_file_extra_owner"
+  },
+  {
+   "id": "OSV-2020-483",
+   "class": "security-fix",
+   "sha": "6af08cff8e07824530b4ebef2689fc6cc60c4d03",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in run_arm_filter"
+  },
+  {
+   "id": "OSV-2020-483",
+   "class": "introduced",
+   "sha": "4bd12b6f40cb4413c8970c52f15f3b6885b5e32f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in run_arm_filter"
+  },
+  {
+   "id": "OSV-2020-487",
+   "class": "security-fix",
+   "sha": "47bb8187d3ef2d49ee8c7841cb2872b3cfa1f6f7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in crc32"
+  },
+  {
+   "id": "OSV-2020-506",
+   "class": "security-fix",
+   "sha": "2fce6f81cc59144bf4f2f66f7620233d609b41ef",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in parse_file_extra_owner"
+  },
+  {
+   "id": "OSV-2020-506",
+   "class": "introduced",
+   "sha": "64e68f2034e6c5c6fd20d6b274b67fbdb88c3804",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in parse_file_extra_owner"
+  },
+  {
+   "id": "OSV-2020-543",
+   "class": "security-fix",
+   "sha": "9950d89616d31fe2d83f5134d357560c423794ee",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in circular_memcpy"
+  },
+  {
+   "id": "OSV-2020-628",
+   "class": "security-fix",
+   "sha": "b625b17e6fd6e89b2f54236b402ccd3722ace2bb",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in copy_string"
+  },
+  {
+   "id": "OSV-2021-12",
+   "class": "security-fix",
+   "sha": "56c920eab3352f7877ee0cf9e472c1ab376c7e3e",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2021-12",
+   "class": "introduced",
+   "sha": "840266712006de5e737f8052db920dfea2be4260",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in read_bits_16"
+  },
+  {
+   "id": "OSV-2022-1193",
+   "class": "security-fix",
+   "sha": "45c728b00dce4af6b7f0603df0a0af4bafe6f2ad",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in archive_read_has_encrypted_entries"
+  },
+  {
+   "id": "OSV-2022-1193",
+   "class": "introduced",
+   "sha": "fa4b613f2e2510bd036f2eeed2fece97cd18b079",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in archive_read_has_encrypted_entries"
+  },
+  {
+   "id": "OSV-2022-13",
+   "class": "security-fix",
+   "sha": "52efa50c69653029687bfc545703b7340b7a51e2",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in read_data_compressed"
+  },
+  {
+   "id": "OSV-2022-13",
+   "class": "introduced",
+   "sha": "d7fec62918f48dc1f56457df02eb3c8b0d12863b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in read_data_compressed"
+  },
+  {
+   "id": "OSV-2022-299",
+   "class": "security-fix",
+   "sha": "db714553712debbc447383f735e022031dc13127",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in read_data_compressed"
+  },
+  {
+   "id": "OSV-2022-676",
+   "class": "security-fix",
+   "sha": "fa4b613f2e2510bd036f2eeed2fece97cd18b079",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in archive_read_data"
+  },
+  {
+   "id": "OSV-2022-676",
+   "class": "introduced",
+   "sha": "2eb700495c4c384cde5c5d4c3e9b9d5d5ca674a8",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in archive_read_data"
+  },
+  {
+   "id": "control-for-OSV-2018-130",
+   "class": "control",
+   "sha": "e5046af9abd2a033240793cfc3fa1d4404105b03",
+   "matched_to": "4bd12b6f40cb4413c8970c52f15f3b6885b5e32f"
+  },
+  {
+   "id": "control-for-OSV-2018-160",
+   "class": "control",
+   "sha": "9c84b7426660c09c18cc349f6d70b5f8168b5680",
+   "matched_to": "b52dd6c9e4ef7cf95c2a6ae5ab7ccac7f6d462a1"
+  },
+  {
+   "id": "control-for-OSV-2018-68",
+   "class": "control",
+   "sha": "b94eb5befa20c6b66b9d4218e5595fbd545fbba5",
+   "matched_to": "3614747af54e60229a2bf11e8f40e1b975cc9ae6"
+  },
+  {
+   "id": "control-for-OSV-2020-238",
+   "class": "control",
+   "sha": "7b3068c4bf7a217a1838db280072653197d30012",
+   "matched_to": "94821008d6eea81e315c5881cdf739202961040a"
+  },
+  {
+   "id": "control-for-OSV-2020-273",
+   "class": "control",
+   "sha": "7c5e94c9ec3a70ddaeec6c554149eb13db9cfe60",
+   "matched_to": "c9267d665c30fa78023bd70b8e9c6f02450777e2"
+  },
+  {
+   "id": "control-for-OSV-2020-372",
+   "class": "control",
+   "sha": "a14fe904e2c63fefb99446980226a1bec4a95c5c",
+   "matched_to": "39736c43bd7374beedb372aa300ecf36c9fc4733"
+  },
+  {
+   "id": "control-for-OSV-2020-461",
+   "class": "control",
+   "sha": "40f72fed535be6a7236e91aef3aad641b71f9168",
+   "matched_to": "ba641f73f3d758d9032b3f0e5597a9c6e593a505"
+  },
+  {
+   "id": "control-for-OSV-2020-487",
+   "class": "control",
+   "sha": "96ba4f6afd8209eac9aebc4430a7adb90fbfb9e0",
+   "matched_to": "47bb8187d3ef2d49ee8c7841cb2872b3cfa1f6f7"
+  },
+  {
+   "id": "control-for-OSV-2020-506",
+   "class": "control",
+   "sha": "65a23f5dbee4497064e9bb467f81138a62b0dae1",
+   "matched_to": "2fce6f81cc59144bf4f2f66f7620233d609b41ef"
+  },
+  {
+   "id": "control-for-OSV-2022-1193",
+   "class": "control",
+   "sha": "73afbe2735e16b4a830fa6971b0dc75fdfbb788b",
+   "matched_to": "45c728b00dce4af6b7f0603df0a0af4bafe6f2ad"
+  },
+  {
+   "id": "control-for-OSV-2022-13",
+   "class": "control",
+   "sha": "62e9f87e2adf7feaea1256e7060e3dac2bdacab8",
+   "matched_to": "52efa50c69653029687bfc545703b7340b7a51e2"
+  },
+  {
+   "id": "control-for-OSV-2022-299",
+   "class": "control",
+   "sha": "2cfda000bc5159d46fd8ead7d1bd3ea1f66f7948",
+   "matched_to": "db714553712debbc447383f735e022031dc13127"
+  }
+ ],
+ "missing": []
+}
