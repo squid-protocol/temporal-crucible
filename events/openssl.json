@@ -1,0 +1,6989 @@
+{
+ "repo": "openssl",
+ "source": "github.com/openssl/release-metadata secjson (CVE JSON 5) + master commit trail",
+ "metadata_head": "87411d0d5464389e91a4c683b6a377d227743779",
+ "pool_head": "8ba9860b555e35f6bdfaf80eeaa087e65fdcca11",
+ "counts": {
+  "cve_records": 297,
+  "cves_resolved": 261,
+  "cves_unresolved": 35,
+  "security-fix": 268,
+  "security-fix_on_master": 252,
+  "control": 268,
+  "with_cwe": 241,
+  "rejected_shas": 39,
+  "needs_review": 7,
+  "review_pending": 0,
+  "resolved_via": {
+   "secjson": 166,
+   "trail": 81,
+   "trail+pr": 0,
+   "changes-entry": 15
+  },
+  "introduced": 0
+ },
+ "unresolved": [
+  "CVE-2003-0131",
+  "CVE-2003-0147",
+  "CVE-2003-0851",
+  "CVE-2004-0079",
+  "CVE-2004-0081",
+  "CVE-2004-0112",
+  "CVE-2007-4995",
+  "CVE-2007-5502",
+  "CVE-2009-0590",
+  "CVE-2009-0591",
+  "CVE-2009-0789",
+  "CVE-2009-1387",
+  "CVE-2009-3555",
+  "CVE-2010-5298",
+  "CVE-2011-0014",
+  "CVE-2012-2131",
+  "CVE-2012-2686",
+  "CVE-2013-0169",
+  "CVE-2013-6449",
+  "CVE-2014-0198",
+  "CVE-2014-3512",
+  "CVE-2014-5139",
+  "CVE-2014-8176",
+  "CVE-2015-0292",
+  "CVE-2015-1792",
+  "CVE-2015-3194",
+  "CVE-2015-3195",
+  "CVE-2015-3196",
+  "CVE-2015-3197",
+  "CVE-2016-0703",
+  "CVE-2016-0704",
+  "CVE-2016-0800",
+  "CVE-2016-2177",
+  "CVE-2020-1968",
+  "CVE-2023-0466"
+ ],
+ "rejected": [
+  {
+   "cve": "CVE-2020-1968",
+   "sha": "258aa8181ec01ae2e955318385d1bdd99d37a848",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2020-1971",
+   "sha": "2154ab83e14ede338d2ede9bbe5cdfce5d5a6c9e",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2021-23839",
+   "sha": "30919ab80a478f2d81f2e9acdcca3fa4740cd547",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2021-23840",
+   "sha": "9b1129239f3ebb1d1c98ce9ed41d5c9476c47cb2",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2021-23841",
+   "sha": "8252ee4d90f3f2004d3d0aeeed003ad49c9a7807",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2021-3712",
+   "sha": "ccb0a11145ee72b042d10593a64eaf9e8a55ec12",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2021-4160",
+   "sha": "6fc1aaaf303185aa5e483e06bdfae16daa9193a7",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2022-0778",
+   "sha": "380085481c64de749a6dd25cdf0bcf4360b30f83",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2022-1292",
+   "sha": "548d3f280a6e737673f5b61fce24bb100108dfeb",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2022-2068",
+   "sha": "7a9c027159fe9e1bbc2cd38a8a2914bff0d5abd9",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2022-4304",
+   "sha": "d2ca0f402d337479cc8cfe1c93345155468508ed",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-0215",
+   "sha": "9816136fe31d92ace4037d5da5257f763aeeb4eb",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-0286",
+   "sha": "fd2af07dc083a350c959147097003a14a5e8ac4d",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-0464",
+   "sha": "2dcd4f1e3115f38cefa43e3efbe9b801c27e642e",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-0465",
+   "sha": "10325176f3d3e98c6e2b3bf5ab1e3b334de6947a",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-0466",
+   "sha": "fc814a30fc4f0bc54fcea7d9a7462f5457aab061",
+   "reason": "release / version bump",
+   "code_files": 0,
+   "code_churn": 0,
+   "subject": "Fix documentation of X509_VERIFY_PARAM_add0_policy()"
+  },
+  {
+   "cve": "CVE-2023-0466",
+   "sha": "51e8a84ce742db0f6c70510d0159dad8f7825908",
+   "reason": "release / version bump",
+   "code_files": 0,
+   "code_churn": 0,
+   "subject": "Fix documentation of X509_VERIFY_PARAM_add0_policy()"
+  },
+  {
+   "cve": "CVE-2023-0466",
+   "sha": "0d16b7e99aafc0b4a6d729eec65a411a7e025f0a",
+   "reason": "release / version bump",
+   "code_files": 0,
+   "code_churn": 0,
+   "subject": "Fix documentation of X509_VERIFY_PARAM_add0_policy()"
+  },
+  {
+   "cve": "CVE-2023-0466",
+   "sha": "73398dea26de9899fb4baa94098ad0a61f435c72",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-2650",
+   "sha": "853c5e56ee0b8650c73140816bb8b91d6163422c",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-3446",
+   "sha": "9a0a4d3c1e7138915563c0df4fe6a3f9377b839c",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-3817",
+   "sha": "869ad69aadd985c7b8ca6f4e5dd0eb274c9f3644",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-5678",
+   "sha": "34efaef6c103d636ab507a0cc34dca4d3aecc055",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2023-5678",
+   "sha": "710fee740904b6290fef0dd5536fbcedbc38ff0c",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-0727",
+   "sha": "03b3941d60c4bce58fab69a0c22377ab439bc0e8",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-0727",
+   "sha": "aebaa5883e31122b404e450732dc833dc9dee539",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-13176",
+   "sha": "a2639000db19878d5d89586ae7b725080592ae86",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-13176",
+   "sha": "0d5fd1ab987f7571e2c955d8d8b638fc0fb54ded",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-2511",
+   "sha": "5f8d25770ae6437db119dfc951e207271a326640",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-4741",
+   "sha": "f7a045f3143fc6da2ee66bf52d8df04829590dd4",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-5535",
+   "sha": "b78ec0824da857223486660177d3b1f255c65d87",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-5535",
+   "sha": "9947251413065a05189a63c9b7a6c1d4e224c21c",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-9143",
+   "sha": "8efc0cbaa8ebba8e116f7b81a876a4123594d86a",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2024-9143",
+   "sha": "9d576994cec2b7aa37a91740ea7e680810957e41",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2025-9230",
+   "sha": "dfbaf161d8dafc1132dd88cd48ad990ed9b4c8ba",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2025-9230",
+   "sha": "c2b96348bfa662f25f4fabf81958ae822063dae3",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2026-63076",
+   "sha": "a7af46a92d0ce19a90e669ef56d2576a07924226",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2026-63076",
+   "sha": "cdacfff557389abfa9e4615abded2ec984517d6c",
+   "reason": "missing or merge commit"
+  },
+  {
+   "cve": "CVE-2007-5135",
+   "sha": "db99c52509bd79138924c84d127e9872359689c4",
+   "reason": "manual review: rsa_eay.c double-checked-locking change; unrelated to CVE-2007-5135 (SSL_get_shared_ciphers off-by-one) -- the CHANGES line was added in an unrelated commit"
+  }
+ ],
+ "events": [
+  {
+   "cves": [
+    "CVE-2002-0655",
+    "CVE-2002-0656",
+    "CVE-2002-0657",
+    "CVE-2002-0659"
+   ],
+   "needs_review": true,
+   "id": "CVE-2002-0655",
+   "class": "security-fix",
+   "sha": "c046fffa16cd55c972f71c49051b8ce6b83eed7f",
+   "cve": "CVE-2002-0655",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 18,
+   "code_churn": 504,
+   "review": "2002 advisory commit: s2_clnt/s2_srvr/s3_srvr/asn1_lib = the SSLv2/SSLv3/ASN.1 overflows"
+  },
+  {
+   "cves": [
+    "CVE-2002-1568"
+   ],
+   "needs_review": false,
+   "id": "CVE-2002-1568",
+   "class": "security-fix",
+   "sha": "5574e0ed417c9a09487a270fec3df34d3094f5c6",
+   "cve": "CVE-2002-1568",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 13,
+   "code_churn": 197
+  },
+  {
+   "cves": [
+    "CVE-2003-0078"
+   ],
+   "needs_review": true,
+   "id": "CVE-2003-0078",
+   "class": "security-fix",
+   "sha": "5b0b0e98cec653ae1e65e2251c3e0fc273945df5",
+   "cve": "CVE-2003-0078",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": "CWE-203",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 47,
+   "review": "ssl/s3_pkt.c: Vaudenay CBC timing fix"
+  },
+  {
+   "cves": [
+    "CVE-2003-0543",
+    "CVE-2003-0544",
+    "CVE-2003-0545"
+   ],
+   "needs_review": true,
+   "id": "CVE-2003-0543",
+   "class": "security-fix",
+   "sha": "299024498004473a58e780cdf8ec83e85a04f807",
+   "cve": "CVE-2003-0543",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 15,
+   "review": "asn1_lib.c + tasn_dec.c: the 2003 ASN.1 parsing CVEs"
+  },
+  {
+   "cves": [
+    "CVE-2004-0975"
+   ],
+   "needs_review": false,
+   "id": "CVE-2004-0975",
+   "class": "security-fix",
+   "sha": "5fee606442a6738fd06a756d7076be53b7b7734c",
+   "cve": "CVE-2004-0975",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 308
+  },
+  {
+   "cves": [
+    "CVE-2005-2969"
+   ],
+   "needs_review": false,
+   "id": "CVE-2005-2969",
+   "class": "security-fix",
+   "sha": "72dce7685ecd1017420af0a0497923a88d60735a",
+   "cve": "CVE-2005-2969",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 16
+  },
+  {
+   "cves": [
+    "CVE-2006-2937"
+   ],
+   "needs_review": false,
+   "id": "CVE-2006-2937",
+   "class": "security-fix",
+   "sha": "348be7ec60f7cce7503ba759a1a5a7591a648f1f",
+   "cve": "CVE-2006-2937",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2006-2940"
+   ],
+   "needs_review": false,
+   "id": "CVE-2006-2940",
+   "class": "security-fix",
+   "sha": "5e3225cc44ebdce3a88d04a627e975b3e76a6f9a",
+   "cve": "CVE-2006-2940",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 12,
+   "code_churn": 156
+  },
+  {
+   "cves": [
+    "CVE-2006-3738",
+    "CVE-2006-4343"
+   ],
+   "needs_review": false,
+   "id": "CVE-2006-3738",
+   "class": "security-fix",
+   "sha": "3ff55e9680cc99f330f25e48cd1422e3459c02de",
+   "cve": "CVE-2006-3738",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2006-4339"
+   ],
+   "needs_review": false,
+   "id": "CVE-2006-4339",
+   "class": "security-fix",
+   "sha": "b79aa05e3babdbab92c6356f6e51f7bb43c41576",
+   "cve": "CVE-2006-4339",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-347",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 28
+  },
+  {
+   "cves": [
+    "CVE-2008-0891"
+   ],
+   "needs_review": false,
+   "id": "CVE-2008-0891",
+   "class": "security-fix",
+   "sha": "40a706286febe0279336c96374c607daaa1b1d49",
+   "cve": "CVE-2008-0891",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2008-1672"
+   ],
+   "needs_review": false,
+   "id": "CVE-2008-1672",
+   "class": "security-fix",
+   "sha": "e194fe8f47a5bdc7a9eab19b4d387d00c410e633",
+   "cve": "CVE-2008-1672",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2008-5077"
+   ],
+   "needs_review": true,
+   "id": "CVE-2008-5077",
+   "class": "security-fix",
+   "sha": "bab534057b855a7dbf98261d494897b3542bd9d5",
+   "cve": "CVE-2008-5077",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 10,
+   "code_churn": 26,
+   "review": "stable-branch sync whose content is the CVE-2008-5077 EVP_VerifyFinal/DSA_verify return-check fix in apps/ and ssl/"
+  },
+  {
+   "cves": [
+    "CVE-2009-1377"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-1377",
+   "class": "security-fix",
+   "sha": "88b48dc68024dcc437da4296c9fb04419b0ccbe1",
+   "cve": "CVE-2009-1377",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2009-1378"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-1378",
+   "class": "security-fix",
+   "sha": "abda7c114791fa7fe95672ec7a66fc4733c40dbc",
+   "cve": "CVE-2009-1378",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-401",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2009-1379"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-1379",
+   "class": "security-fix",
+   "sha": "561cbe567846a376153bea7f1f2d061e78029c2d",
+   "cve": "CVE-2009-1379",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2009-1386"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-1386",
+   "class": "security-fix",
+   "sha": "1cbf663a6c89dcf8f7706d30a8bae675e2e0199a",
+   "cve": "CVE-2009-1386",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2009-3245"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-3245",
+   "class": "security-fix",
+   "sha": "7e4cae1d2f555cbe9226b377aff4b56c9f7ddd4d",
+   "cve": "CVE-2009-3245",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2009-4355"
+   ],
+   "needs_review": false,
+   "id": "CVE-2009-4355",
+   "class": "security-fix",
+   "sha": "1b31b5ad560b16e2fe1cad54a755e3e6b5e778a3",
+   "cve": "CVE-2009-4355",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 17
+  },
+  {
+   "cves": [
+    "CVE-2010-0433"
+   ],
+   "needs_review": false,
+   "id": "CVE-2010-0433",
+   "class": "security-fix",
+   "sha": "cca1cd9a3447dd067503e4a85ebd1679ee78a48e",
+   "cve": "CVE-2010-0433",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2010-0740"
+   ],
+   "needs_review": false,
+   "id": "CVE-2010-0740",
+   "class": "security-fix",
+   "sha": "3e8b6485b342d70e980418bc4bb2c60148d844d8",
+   "cve": "CVE-2010-0740",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2010-0742",
+    "CVE-2010-1633"
+   ],
+   "needs_review": false,
+   "id": "CVE-2010-0742",
+   "class": "security-fix",
+   "sha": "3cbb15ee813453c52694c1d6f9a89eb7ae757943",
+   "cve": "CVE-2010-0742",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2010-3864"
+   ],
+   "needs_review": false,
+   "id": "CVE-2010-3864",
+   "class": "security-fix",
+   "sha": "732d31beeeb2e2e9f44d05da8387cfeca06b91b8",
+   "cve": "CVE-2010-3864",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-362",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 73
+  },
+  {
+   "cves": [
+    "CVE-2010-4180"
+   ],
+   "needs_review": false,
+   "id": "CVE-2010-4180",
+   "class": "security-fix",
+   "sha": "88f2a4cf9ced521e2c2874a1c32af0eeaa027f40",
+   "cve": "CVE-2010-4180",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2010-4252"
+   ],
+   "needs_review": true,
+   "id": "CVE-2010-4252",
+   "class": "security-fix",
+   "sha": "300b1d76fe27541c662ca606a6a201b2718e0c65",
+   "cve": "CVE-2010-4252",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": "CWE-287",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 35,
+   "review": "crypto/jpake: J-PAKE validation (CVE-2010-4252)"
+  },
+  {
+   "cves": [
+    "CVE-2011-3207",
+    "CVE-2011-3210"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-3207",
+   "class": "security-fix",
+   "sha": "0486cce653b62d26a8ca37ac12f69f1a6b998844",
+   "cve": "CVE-2011-3207",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-264",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2011-4108"
+   ],
+   "needs_review": true,
+   "id": "CVE-2011-4108",
+   "class": "security-fix",
+   "sha": "e7455724938818eac8bef43f535d148dd4670d06",
+   "cve": "CVE-2011-4108",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 26,
+   "review": "ssl/d1_pkt.c: DTLS CBC plaintext recovery (CVE-2011-4108)"
+  },
+  {
+   "cves": [
+    "CVE-2011-4109",
+    "CVE-2012-0050"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4109",
+   "class": "security-fix",
+   "sha": "855d29184ea88140e3c810e854607cc00a3f1806",
+   "cve": "CVE-2011-4109",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2011-4576"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4576",
+   "class": "security-fix",
+   "sha": "27dfffd5b75ee1db114e32f6dc73e266513889c5",
+   "cve": "CVE-2011-4576",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2011-4577",
+    "CVE-2015-0293"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4577#1",
+   "class": "security-fix",
+   "sha": "98d132cf6a879faf0147aa83ea0c07ff326260ed",
+   "cve": "CVE-2011-4577",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 18
+  },
+  {
+   "cves": [
+    "CVE-2011-4577"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4577#2",
+   "class": "security-fix",
+   "sha": "be71c37296b3ba43c944eaa220ac62413782bad3",
+   "cve": "CVE-2011-4577",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 74
+  },
+  {
+   "cves": [
+    "CVE-2011-4619"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4619#1",
+   "class": "security-fix",
+   "sha": "206310c3056847fef7e657879f05a09763c2131e",
+   "cve": "CVE-2011-4619",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2011-4619"
+   ],
+   "needs_review": false,
+   "id": "CVE-2011-4619#2",
+   "class": "security-fix",
+   "sha": "d0dc991c6228564212ace119440a9ac5f21578bc",
+   "cve": "CVE-2011-4619",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 25
+  },
+  {
+   "cves": [
+    "CVE-2012-0027"
+   ],
+   "needs_review": false,
+   "id": "CVE-2012-0027",
+   "class": "security-fix",
+   "sha": "6bf896d9b1693916d9e8d303f9e3cc04959632b2",
+   "cve": "CVE-2012-0027",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2012-0884"
+   ],
+   "needs_review": false,
+   "id": "CVE-2012-0884",
+   "class": "security-fix",
+   "sha": "146b52edd122f55e2b2bfeb486dae8dbe96f739e",
+   "cve": "CVE-2012-0884",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 6,
+   "code_churn": 177
+  },
+  {
+   "cves": [
+    "CVE-2012-2110"
+   ],
+   "needs_review": false,
+   "id": "CVE-2012-2110",
+   "class": "security-fix",
+   "sha": "d9a9d10f4f8d4ed051f2488a90b012dceb7ec885",
+   "cve": "CVE-2012-2110",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 75
+  },
+  {
+   "cves": [
+    "CVE-2012-2333"
+   ],
+   "needs_review": false,
+   "id": "CVE-2012-2333",
+   "class": "security-fix",
+   "sha": "c46ecc3a55bcbbe4ff31da3864d015e343b0189f",
+   "cve": "CVE-2012-2333",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2013-0166"
+   ],
+   "needs_review": false,
+   "id": "CVE-2013-0166",
+   "class": "security-fix",
+   "sha": "b48310627d1fdc58f64ccf208ac82c732e654dca",
+   "cve": "CVE-2013-0166",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2013-4353"
+   ],
+   "needs_review": false,
+   "id": "CVE-2013-4353",
+   "class": "security-fix",
+   "sha": "197e0ea817ad64820789d86711d55ff50d71f631",
+   "cve": "CVE-2013-4353",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2013-6450"
+   ],
+   "needs_review": false,
+   "id": "CVE-2013-6450",
+   "class": "security-fix",
+   "sha": "20b82b514d81a64f5b240788e5051167456af379",
+   "cve": "CVE-2013-6450",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 23
+  },
+  {
+   "cves": [
+    "CVE-2014-0076"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0076",
+   "class": "security-fix",
+   "sha": "f9b6c0ba4c02497782f801e3c45688f3efaac55c",
+   "cve": "CVE-2014-0076",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 90
+  },
+  {
+   "cves": [
+    "CVE-2014-0160"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0160#1",
+   "class": "security-fix",
+   "sha": "6af080acaf57c74e3cd96642f2900fa602407d10",
+   "cve": "CVE-2014-0160",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 426
+  },
+  {
+   "cves": [
+    "CVE-2014-0160"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0160#2",
+   "class": "security-fix",
+   "sha": "731f431497f463f3a2a97236fe0187b11c44aead",
+   "cve": "CVE-2014-0160",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 40
+  },
+  {
+   "cves": [
+    "CVE-2014-0195"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0195",
+   "class": "security-fix",
+   "sha": "410e444b71bca5af929fe82162cbe37e31c82083",
+   "cve": "CVE-2014-0195",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-120",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2014-0221"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0221",
+   "class": "security-fix",
+   "sha": "b4322e1de8be66ff230e26999b766ca1a42f9476",
+   "cve": "CVE-2014-0221",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2014-0224"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0224#1",
+   "class": "security-fix",
+   "sha": "657da85eea3a5825b2dd25ff25b99ec206c48136",
+   "cve": "CVE-2014-0224",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-326",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 12,
+   "code_churn": 316
+  },
+  {
+   "cves": [
+    "CVE-2014-0224"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0224#2",
+   "class": "security-fix",
+   "sha": "fb8d9ddb9dc19d84dffa84932f75e607c8a3ffe6",
+   "cve": "CVE-2014-0224",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-326",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2014-0224"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0224#3",
+   "class": "security-fix",
+   "sha": "a91be10833e61bcdc9002de28489405101c52650",
+   "cve": "CVE-2014-0224",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-326",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 17
+  },
+  {
+   "cves": [
+    "CVE-2014-0224"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-0224#4",
+   "class": "security-fix",
+   "sha": "a7c682fb6f692c9a3868777a7ff305784714c131",
+   "cve": "CVE-2014-0224",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-326",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2014-3470"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3470",
+   "class": "security-fix",
+   "sha": "a5362db4603910b1bb978163e0e7dc8890727300",
+   "cve": "CVE-2014-3470",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2014-3505"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3505",
+   "class": "security-fix",
+   "sha": "bff1ce4e6a1c57c3d0a5f9e4f85ba6385fccfe8b",
+   "cve": "CVE-2014-3505",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2014-3506"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3506",
+   "class": "security-fix",
+   "sha": "1250f12613b61758675848f6600ebd914ccd7636",
+   "cve": "CVE-2014-3506",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 29
+  },
+  {
+   "cves": [
+    "CVE-2014-3507"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3507",
+   "class": "security-fix",
+   "sha": "d0a4b7d1a2948fce38515b8d862f43e7ba0ebf74",
+   "cve": "CVE-2014-3507",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 22
+  },
+  {
+   "cves": [
+    "CVE-2014-3508"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3508",
+   "class": "security-fix",
+   "sha": "0042fb5fd1c9d257d713b15a1f45da05cf5c1c87",
+   "cve": "CVE-2014-3508",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 46
+  },
+  {
+   "cves": [
+    "CVE-2014-3509"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3509",
+   "class": "security-fix",
+   "sha": "fb0bc2b273bcc2d5401dd883fe869af4fc74bb21",
+   "cve": "CVE-2014-3509",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-362",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 17
+  },
+  {
+   "cves": [
+    "CVE-2014-3510"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3510",
+   "class": "security-fix",
+   "sha": "17160033765480453be0a41335fa6b833691c049",
+   "cve": "CVE-2014-3510",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2014-3511"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3511",
+   "class": "security-fix",
+   "sha": "280b1f1ad12131defcd986676a8fc9717aaa601b",
+   "cve": "CVE-2014-3511",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 30
+  },
+  {
+   "cves": [
+    "CVE-2014-3513"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3513#1",
+   "class": "security-fix",
+   "sha": "3dd814ac4d0581af363068e83b5fa8d5271063d5",
+   "cve": "CVE-2014-3513",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 23
+  },
+  {
+   "cves": [
+    "CVE-2014-3513"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3513#2",
+   "class": "security-fix",
+   "sha": "e659eff2c0ac6da05dd968a9354c9a69ca7f57b4",
+   "cve": "CVE-2014-3513",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 102
+  },
+  {
+   "cves": [
+    "CVE-2014-3567"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3567",
+   "class": "security-fix",
+   "sha": "748270554824d2a51d1718f52a8d3ab34116bbfb",
+   "cve": "CVE-2014-3567",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2014-3568"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3568",
+   "class": "security-fix",
+   "sha": "62f45cc27d07187b59551e4fad3db4e52ea73f2c",
+   "cve": "CVE-2014-3568",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 27
+  },
+  {
+   "cves": [
+    "CVE-2014-3569"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3569",
+   "class": "security-fix",
+   "sha": "392fa7a952e97d82eac6958c81ed1e256e6b8ca5",
+   "cve": "CVE-2014-3569",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2014-3570"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3570",
+   "class": "security-fix",
+   "sha": "a7a44ba55cb4f884c6bc9ceac90072dea38e66d0",
+   "cve": "CVE-2014-3570",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 1055
+  },
+  {
+   "cves": [
+    "CVE-2014-3571"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3571#1",
+   "class": "security-fix",
+   "sha": "248385c606620b29ecc96ca9d3603463f879652b",
+   "cve": "CVE-2014-3571",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2014-3571"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3571#2",
+   "class": "security-fix",
+   "sha": "feba02f3919495e1b960c33ba849e10e77d0785d",
+   "cve": "CVE-2014-3571",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2014-3572"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-3572",
+   "class": "security-fix",
+   "sha": "b15f8769644b00ef7283521593360b7b2135cb63",
+   "cve": "CVE-2014-3572",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 18
+  },
+  {
+   "cves": [
+    "CVE-2014-8275"
+   ],
+   "needs_review": false,
+   "id": "CVE-2014-8275",
+   "class": "security-fix",
+   "sha": "684400ce192dac51df3d3e92b61830a6ef90be3e",
+   "cve": "CVE-2014-8275",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 43
+  },
+  {
+   "cves": [
+    "CVE-2015-0204"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0204",
+   "class": "security-fix",
+   "sha": "ce325c60c74b0fa784f5872404b722e120e5cab0",
+   "cve": "CVE-2015-0204",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 54
+  },
+  {
+   "cves": [
+    "CVE-2015-0205"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0205",
+   "class": "security-fix",
+   "sha": "1421e0c584ae9120ca1b88098f13d6d2e90b83a3",
+   "cve": "CVE-2015-0205",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2015-0206"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0206",
+   "class": "security-fix",
+   "sha": "103b171d8fc282ef435f8de9afbf7782e312961f",
+   "cve": "CVE-2015-0206",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 30
+  },
+  {
+   "cves": [
+    "CVE-2015-0207"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0207",
+   "class": "security-fix",
+   "sha": "e83ee04bb7de800cdb71d522fa562e99328003a3",
+   "cve": "CVE-2015-0207",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2015-0208"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0208",
+   "class": "security-fix",
+   "sha": "09f06923e636019c39c807cb59c481375e720556",
+   "cve": "CVE-2015-0208",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2015-0209"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0209#1",
+   "class": "security-fix",
+   "sha": "5e5d53d341fd9a9b9cc0a58eb3690832ca7a511f",
+   "cve": "CVE-2015-0209",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2015-0209"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0209#2",
+   "class": "security-fix",
+   "sha": "9e442d485008046933cdc7da65080f436a4af089",
+   "cve": "CVE-2015-0209",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2015-0285"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0285",
+   "class": "security-fix",
+   "sha": "e1b568dd2462f7cacf98f3d117936c34e2849a6b",
+   "cve": "CVE-2015-0285",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-310",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2015-0286"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0286",
+   "class": "security-fix",
+   "sha": "e677e8d13595f7b3287f8feef7676feb301b0e8a",
+   "cve": "CVE-2015-0286",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-17",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2015-0287"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0287",
+   "class": "security-fix",
+   "sha": "8106d61c354430d6bbbd7f8e7840a39efc0f5829",
+   "cve": "CVE-2015-0287",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-17",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 24
+  },
+  {
+   "cves": [
+    "CVE-2015-0288"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0288",
+   "class": "security-fix",
+   "sha": "28a00bcd8e318da18031b2ac8778c64147cd54f9",
+   "cve": "CVE-2015-0288",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2015-0289"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0289",
+   "class": "security-fix",
+   "sha": "c225c3cf9bd67297fb0c297768d69cbc03fbdab7",
+   "cve": "CVE-2015-0289",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 90
+  },
+  {
+   "cves": [
+    "CVE-2015-0290"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0290",
+   "class": "security-fix",
+   "sha": "1d2a18dc5a3b3363e17db5af8b6b0273856ac077",
+   "cve": "CVE-2015-0290",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-17",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2015-0291"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-0291",
+   "class": "security-fix",
+   "sha": "34e3edbf3a10953cb407288101fd56a629af22f9",
+   "cve": "CVE-2015-0291",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 16
+  },
+  {
+   "cves": [
+    "CVE-2015-1787"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1787",
+   "class": "security-fix",
+   "sha": "d3cc5e610d1719a35cda52c9152134b490a8c944",
+   "cve": "CVE-2015-1787",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2015-1788"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1788",
+   "class": "security-fix",
+   "sha": "4924b37ee01f71ae19c94a8934b80eeb2f677932",
+   "cve": "CVE-2015-1788",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2015-1789"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1789",
+   "class": "security-fix",
+   "sha": "f48b83b4fb7d6689584cf25f61ca63a4891f5b11",
+   "cve": "CVE-2015-1789",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 57
+  },
+  {
+   "cves": [
+    "CVE-2015-1790"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1790",
+   "class": "security-fix",
+   "sha": "59302b600e8d5b77ef144e447bb046fd7ab72686",
+   "cve": "CVE-2015-1790",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 16
+  },
+  {
+   "cves": [
+    "CVE-2015-1791"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1791#1",
+   "class": "security-fix",
+   "sha": "708cf593587e2fda67dae9782991ff9fccc781eb",
+   "cve": "CVE-2015-1791",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-362",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 72
+  },
+  {
+   "cves": [
+    "CVE-2015-1791"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1791#2",
+   "class": "security-fix",
+   "sha": "98ece4eebfb6cd45cc8d550c6ac0022965071afc",
+   "cve": "CVE-2015-1791",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-362",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 5,
+   "code_churn": 151
+  },
+  {
+   "cves": [
+    "CVE-2015-1793"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1793#1",
+   "class": "security-fix",
+   "sha": "aae41f8c54257d9fa6904d3a9aa09c5db6cefd0d",
+   "cve": "CVE-2015-1793",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-254",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 22
+  },
+  {
+   "cves": [
+    "CVE-2015-1793"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1793#2",
+   "class": "security-fix",
+   "sha": "2aacec8f4a5ba1b365620a7b17fcce311ada93ad",
+   "cve": "CVE-2015-1793",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-254",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2015-1794"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1794#1",
+   "class": "security-fix",
+   "sha": "43596b306b1fe06da3b1a99e07c0cf235898010d",
+   "cve": "CVE-2015-1794",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2015-1794"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1794#2",
+   "class": "security-fix",
+   "sha": "6a009812b2e249fed01488f6f19f9fbfd9ee74c4",
+   "cve": "CVE-2015-1794",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2015-1794"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-1794#3",
+   "class": "security-fix",
+   "sha": "61e72d761c945e128ca13599a98a187ac23650dd",
+   "cve": "CVE-2015-1794",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 22
+  },
+  {
+   "cves": [
+    "CVE-2015-3193"
+   ],
+   "needs_review": false,
+   "id": "CVE-2015-3193",
+   "class": "security-fix",
+   "sha": "29851264f11ccc70c6c0140d7e3d8d93ef5c9b11",
+   "cve": "CVE-2015-3193",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 22
+  },
+  {
+   "cves": [
+    "CVE-2016-0701"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0701",
+   "class": "security-fix",
+   "sha": "b128abc3437600c3143cb2145185ab87ba3156a2",
+   "cve": "CVE-2016-0701",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 35
+  },
+  {
+   "cves": [
+    "CVE-2016-0702"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0702#1",
+   "class": "security-fix",
+   "sha": "317be63875e59efa34be0075eaff3c033ef6969f",
+   "cve": "CVE-2016-0702",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 477
+  },
+  {
+   "cves": [
+    "CVE-2016-0702"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0702#2",
+   "class": "security-fix",
+   "sha": "8fc8f486f7fa098c9fbb6a6ae399e3c6856e0d87",
+   "cve": "CVE-2016-0702",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 1236
+  },
+  {
+   "cves": [
+    "CVE-2016-0702"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0702#3",
+   "class": "security-fix",
+   "sha": "d6d422e1ec48fac1c6194ab672e320281a214a32",
+   "cve": "CVE-2016-0702",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 241
+  },
+  {
+   "cves": [
+    "CVE-2016-0702"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0702#4",
+   "class": "security-fix",
+   "sha": "5ea08bd2fe6538cbccd89f07e6f1cdd5d3e75e3f",
+   "cve": "CVE-2016-0702",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 375
+  },
+  {
+   "cves": [
+    "CVE-2016-0702"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0702#5",
+   "class": "security-fix",
+   "sha": "d6482a82bc2228327aa4ba98aeeecd9979542a31",
+   "cve": "CVE-2016-0702",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 75
+  },
+  {
+   "cves": [
+    "CVE-2016-0705"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0705",
+   "class": "security-fix",
+   "sha": "ab4a81f69ec88d06c9d8de15326b9296d7f498ed",
+   "cve": "CVE-2016-0705",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 65
+  },
+  {
+   "cves": [
+    "CVE-2016-0797"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0797",
+   "class": "security-fix",
+   "sha": "99ba9fd02fd481eb971023a3a0a251a37eb87e4c",
+   "cve": "CVE-2016-0797",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 31
+  },
+  {
+   "cves": [
+    "CVE-2016-0798"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0798",
+   "class": "security-fix",
+   "sha": "380f18ed5f140e0ae1b68f3ab8f4f7c395658d9e",
+   "cve": "CVE-2016-0798",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 4,
+   "code_churn": 118
+  },
+  {
+   "cves": [
+    "CVE-2016-0799"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-0799",
+   "class": "security-fix",
+   "sha": "9cb177301fdab492e4cfef376b28339afe3ef663",
+   "cve": "CVE-2016-0799",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 187
+  },
+  {
+   "cves": [
+    "CVE-2016-2105"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2105",
+   "class": "security-fix",
+   "sha": "ee1e3cac2e83abc77bcc8ff98729ca1e10fcc920",
+   "cve": "CVE-2016-2105",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-190",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2016-2106"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2106",
+   "class": "security-fix",
+   "sha": "3f3582139fbb259a1c3cbb0a25236500a409bf26",
+   "cve": "CVE-2016-2106",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2016-2107"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2107",
+   "class": "security-fix",
+   "sha": "70428eada9bc4cf31424d723d1f992baffeb0dfb",
+   "cve": "CVE-2016-2107",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2016-2108"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2108",
+   "class": "security-fix",
+   "sha": "d7ab691bc479d3cf2eea07329db6ce0e2589f0b9",
+   "cve": "CVE-2016-2108",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2016-2109"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2109",
+   "class": "security-fix",
+   "sha": "c62981390d6cf9e3d612c489b8b77c2913b25807",
+   "cve": "CVE-2016-2109",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 36
+  },
+  {
+   "cves": [
+    "CVE-2016-2176"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2176",
+   "class": "security-fix",
+   "sha": "ea96ad5a206b7b5f25dad230333e8ff032df3219",
+   "cve": "CVE-2016-2176",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2016-2178"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2178",
+   "class": "security-fix",
+   "sha": "399944622df7bd81af62e67ea967c470534090e2",
+   "cve": "CVE-2016-2178",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-203",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2016-2179"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2179",
+   "class": "security-fix",
+   "sha": "26f2c5774f117aea588e8f31fad38bcf14e83bec",
+   "cve": "CVE-2016-2179",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 5,
+   "code_churn": 76
+  },
+  {
+   "cves": [
+    "CVE-2016-2180"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2180",
+   "class": "security-fix",
+   "sha": "0ed26acce328ec16a3aa635f1ca37365e8c7403a",
+   "cve": "CVE-2016-2180",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2016-2181"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2181",
+   "class": "security-fix",
+   "sha": "3884b47b7c255c2e94d9b387ee83c7e8bb981258",
+   "cve": "CVE-2016-2181",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-189",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 3,
+   "code_churn": 65
+  },
+  {
+   "cves": [
+    "CVE-2016-2182"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-2182",
+   "class": "security-fix",
+   "sha": "07bed46f332fce8c1d157689a2cdf915a982ae34",
+   "cve": "CVE-2016-2182",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2016-2183"
+   ],
+   "needs_review": true,
+   "id": "CVE-2016-2183",
+   "class": "security-fix",
+   "sha": "ef28891bab7054667f2f6739f6d376c38b3ca1cc",
+   "cve": "CVE-2016-2183",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "changes-entry",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": "SWEET32 attack on Triple-DES",
+   "code_files": 1,
+   "code_churn": 22,
+   "review": "SWEET32 mitigation: 3DES out of DEFAULT (ssl/s3_lib.c)"
+  },
+  {
+   "cves": [
+    "CVE-2016-6302"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6302",
+   "class": "security-fix",
+   "sha": "e97763c92c655dcf4af2860b3abd2bc4c8a267f9",
+   "cve": "CVE-2016-6302",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2016-6303"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6303",
+   "class": "security-fix",
+   "sha": "55d83bf7c10c7b205fffa23fa7c3977491e56c07",
+   "cve": "CVE-2016-6303",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2016-6304"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6304",
+   "class": "security-fix",
+   "sha": "e408c09bbf7c3057bda4b8d20bec1b3a7771c15b",
+   "cve": "CVE-2016-6304",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-401",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 23
+  },
+  {
+   "cves": [
+    "CVE-2016-6305"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6305",
+   "class": "security-fix",
+   "sha": "b8d243956296458d1782af0d6e7ecfe6deae038a",
+   "cve": "CVE-2016-6305",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2016-6306"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6306",
+   "class": "security-fix",
+   "sha": "006a788c84e541c8920dd2ad85fb62b52185c519",
+   "cve": "CVE-2016-6306",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2016-6307"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6307",
+   "class": "security-fix",
+   "sha": "c1ef7c971d0bbf117c3c80f65b5875e2e7b024b1",
+   "cve": "CVE-2016-6307",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-400",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 2,
+   "code_churn": 21
+  },
+  {
+   "cves": [
+    "CVE-2016-6308"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6308",
+   "class": "security-fix",
+   "sha": "48c054fec3506417b2598837b8062aae7114c200",
+   "cve": "CVE-2016-6308",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-399",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 35
+  },
+  {
+   "cves": [
+    "CVE-2016-6309"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-6309",
+   "class": "security-fix",
+   "sha": "0d698f6696e114a6e47f8b75ff88ec81f9e30175",
+   "cve": "CVE-2016-6309",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-416",
+   "cwe_source": "nvd",
+   "summary": null,
+   "code_files": 1,
+   "code_churn": 20
+  },
+  {
+   "cves": [
+    "CVE-2016-7052"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-7052",
+   "class": "security-fix",
+   "sha": "8b7c51a0e4a03895a657cf2eb8d5c2aa1ca3586f",
+   "cve": "CVE-2016-7052",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Missing CRL sanity check",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2016-7053"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-7053",
+   "class": "security-fix",
+   "sha": "f962541d0be200055e508641ddf3a8ec8819e4df",
+   "cve": "CVE-2016-7053",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "CMS Null dereference",
+   "code_files": 1,
+   "code_churn": 14
+  },
+  {
+   "cves": [
+    "CVE-2016-7054"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-7054",
+   "class": "security-fix",
+   "sha": "bf52165bda53524a267c784696bd074111a2f178",
+   "cve": "CVE-2016-7054",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-284",
+   "cwe_source": "nvd",
+   "summary": "ChaCha20/Poly1305 heap-buffer-overflow",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2016-7055"
+   ],
+   "needs_review": false,
+   "id": "CVE-2016-7055",
+   "class": "security-fix",
+   "sha": "2fac86d9abeaa643677d1ffd0a139239fdf9406a",
+   "cve": "CVE-2016-7055",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": "Montgomery multiplication may produce incorrect results",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2017-3730"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3730",
+   "class": "security-fix",
+   "sha": "b599ce3b64b695cc7430f731a33e0f5bb83ae62c",
+   "cve": "CVE-2017-3730",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Bad (EC)DHE parameters cause a client crash",
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2017-3731"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3731#1",
+   "class": "security-fix",
+   "sha": "2198b3a55de681e1f3c23edb0586afe13f438051",
+   "cve": "CVE-2017-3731",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "Truncated packet could crash via OOB read",
+   "code_files": 2,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2017-3731"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3731#2",
+   "class": "security-fix",
+   "sha": "8e20499629b6bcf868d0072c7011e590b5c2294d",
+   "cve": "CVE-2017-3731",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "Truncated packet could crash via OOB read",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2017-3732"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3732",
+   "class": "security-fix",
+   "sha": "3f4bcf5bb664b47ed369a70b99fac4e0ad141bb3",
+   "cve": "CVE-2017-3732",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": "BN_mod_exp may produce incorrect results on x86_64",
+   "code_files": 1,
+   "code_churn": 16
+  },
+  {
+   "cves": [
+    "CVE-2017-3733"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3733",
+   "class": "security-fix",
+   "sha": "4ad93618d26a3ea23d36ad5498ff4f59eff3a4d2",
+   "cve": "CVE-2017-3733",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-20",
+   "cwe_source": "nvd",
+   "summary": "Encrypt-Then-Mac renegotiation crash",
+   "code_files": 6,
+   "code_churn": 55
+  },
+  {
+   "cves": [
+    "CVE-2017-3735"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3735",
+   "class": "security-fix",
+   "sha": "b23171744b01e473ebbfd6edad70c1c3825ffbcd",
+   "cve": "CVE-2017-3735",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-119",
+   "cwe_source": "nvd",
+   "summary": "Possible Overread in parsing X.509 IPAdressFamily",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2017-3736"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3736",
+   "class": "security-fix",
+   "sha": "668a709a8d7ea374ee72ad2d43ac72ec60a80eee",
+   "cve": "CVE-2017-3736",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": "bn_sqrx8x_internal carry bug on x86_64",
+   "code_files": 1,
+   "code_churn": 12
+  },
+  {
+   "cves": [
+    "CVE-2017-3737"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3737",
+   "class": "security-fix",
+   "sha": "898fb884b706aaeb283de4812340bb0bde8476dc",
+   "cve": "CVE-2017-3737",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "Read/write after SSL object in error state",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2017-3738"
+   ],
+   "needs_review": false,
+   "id": "CVE-2017-3738",
+   "class": "security-fix",
+   "sha": "5630661aecbea5fe3c4740f5fea744a1f07a6253",
+   "cve": "CVE-2017-3738",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": "bn_sqrx8x_internal carry bug on x86_64",
+   "code_files": 1,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2018-0732"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0732",
+   "class": "security-fix",
+   "sha": "91f7361f47b082ae61ffe1a7b17bb2adf213c7fe",
+   "cve": "CVE-2018-0732",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-320",
+   "cwe_source": "nvd",
+   "summary": "Client DoS due to large DH parameter",
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2018-0733"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0733",
+   "class": "security-fix",
+   "sha": "0b020b14882173918b9cc3e8e3bd85fb9ffac948",
+   "cve": "CVE-2018-0733",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": "Incorrect CRYPTO_memcmp on HP-UX PA-RISC",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2018-0734"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0734",
+   "class": "security-fix",
+   "sha": "a9cfb8c2aa7254a4aa6a1716909e3f8cb78049b6",
+   "cve": "CVE-2018-0734",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "Timing attack against DSA",
+   "code_files": 1,
+   "code_churn": 28
+  },
+  {
+   "cves": [
+    "CVE-2018-0735"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0735",
+   "class": "security-fix",
+   "sha": "99540ec79491f59ed8b46b4edf130e17dc907f52",
+   "cve": "CVE-2018-0735",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "Timing attack against ECDSA signature generation",
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2018-0737"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0737",
+   "class": "security-fix",
+   "sha": "6939eab03a6e23d2bd2c3f5e34fe1d48e542e787",
+   "cve": "CVE-2018-0737",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "Cache timing vulnerability in RSA Key Generation",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2018-0739"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-0739",
+   "class": "security-fix",
+   "sha": "2ac4c6f7b2b2af20c0e2b0ba05367e454cd11b33",
+   "cve": "CVE-2018-0739",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-674",
+   "cwe_source": "nvd",
+   "summary": "Constructed ASN.1 types with a recursive definition could exceed the stack",
+   "code_files": 3,
+   "code_churn": 51
+  },
+  {
+   "cves": [
+    "CVE-2018-5407"
+   ],
+   "needs_review": false,
+   "id": "CVE-2018-5407",
+   "class": "security-fix",
+   "sha": "40e48e54582e46c1a01e184ecf5bd31f4f7f8294",
+   "cve": "CVE-2018-5407",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-200",
+   "cwe_source": "nvd",
+   "summary": "Microarchitecture timing vulnerability in ECC scalar multiplication",
+   "code_files": 2,
+   "code_churn": 195
+  },
+  {
+   "cves": [
+    "CVE-2019-1543"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1543",
+   "class": "security-fix",
+   "sha": "2a3d0ee9d59156c48973592331404471aca886d6",
+   "cve": "CVE-2019-1543",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "ChaCha20-Poly1305 with long nonces",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2019-1547"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1547",
+   "class": "security-fix",
+   "sha": "b783beeadf6b80bc431e6f3230b5d5585c87ef87",
+   "cve": "CVE-2019-1547",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": "ECDSA remote timing attack",
+   "code_files": 1,
+   "code_churn": 105
+  },
+  {
+   "cves": [
+    "CVE-2019-1549"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1549",
+   "class": "security-fix",
+   "sha": "849529257c9979c7ca0d28e8b80a47bc4a36d4f2",
+   "cve": "CVE-2019-1549",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-330",
+   "cwe_source": "nvd",
+   "summary": "Fork Protection",
+   "code_files": 9,
+   "code_churn": 69
+  },
+  {
+   "cves": [
+    "CVE-2019-1551"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1551",
+   "class": "security-fix",
+   "sha": "8c6f86c7c5350fadf22d32d6cd4712e2ad4447ba",
+   "cve": "CVE-2019-1551",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-190",
+   "cwe_source": "nvd",
+   "summary": "rsaz_512_sqr overflow bug on x86_64",
+   "code_files": 1,
+   "code_churn": 381
+  },
+  {
+   "cves": [
+    "CVE-2019-1552"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1552",
+   "class": "security-fix",
+   "sha": "54aa9d51b09d67e90db443f682cface795f5af9e",
+   "cve": "CVE-2019-1552",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-295",
+   "cwe_source": "nvd",
+   "summary": "Windows builds with insecure path defaults",
+   "code_files": 3,
+   "code_churn": 117
+  },
+  {
+   "cves": [
+    "CVE-2019-1559"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1559",
+   "class": "security-fix",
+   "sha": "e9bbefbf0f24c57645e7ad6a5a71ae649d18ac8e",
+   "cve": "CVE-2019-1559",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-203",
+   "cwe_source": "nvd",
+   "summary": "0-byte record padding oracle",
+   "code_files": 2,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2019-1563"
+   ],
+   "needs_review": false,
+   "id": "CVE-2019-1563",
+   "class": "security-fix",
+   "sha": "5840ed0cd1e6487d247efbc1a04136a41d7b3a37",
+   "cve": "CVE-2019-1563",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-203",
+   "cwe_source": "nvd",
+   "summary": "Padding Oracle in PKCS7_dataDecode and CMS_decrypt_set1_pkey",
+   "code_files": 4,
+   "code_churn": 36
+  },
+  {
+   "cves": [
+    "CVE-2020-1967"
+   ],
+   "needs_review": false,
+   "id": "CVE-2020-1967",
+   "class": "security-fix",
+   "sha": "a87f3fe01a5a894aa27ccd6a239155fd129988e4",
+   "cve": "CVE-2020-1967",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Segmentation fault in SSL_check_chain",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2020-1971"
+   ],
+   "needs_review": false,
+   "id": "CVE-2020-1971",
+   "class": "security-fix",
+   "sha": "f960d81215ebf3f65e03d4d5d857fb9b666d6920",
+   "cve": "CVE-2020-1971",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "EDIPARTYNAME NULL pointer dereference",
+   "code_files": 1,
+   "code_churn": 45
+  },
+  {
+   "cves": [
+    "CVE-2021-23839"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-23839",
+   "class": "security-fix",
+   "sha": "d9461cbe87b91fec98c4ab99a6f47621390e4aa2",
+   "cve": "CVE-2021-23839",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "trail",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "Incorrect SSLv2 rollback protection",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2021-23840"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-23840",
+   "class": "security-fix",
+   "sha": "c9fb704cf3af5524eb8e79961e31b60eee8c3c47",
+   "cve": "CVE-2021-23840",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-190",
+   "cwe_source": "nvd",
+   "summary": "Integer overflow in CipherUpdate",
+   "code_files": 4,
+   "code_churn": 33
+  },
+  {
+   "cves": [
+    "CVE-2021-23841"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-23841",
+   "class": "security-fix",
+   "sha": "8130d654d1de922ea224fa18ee3bc7262edc39c0",
+   "cve": "CVE-2021-23841",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Null pointer deref in X509_issuer_and_serial_hash()",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2021-3449"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-3449",
+   "class": "security-fix",
+   "sha": "02b1636fe3db274497304a3e95a4e32ced7e841b",
+   "cve": "CVE-2021-3449",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "NULL pointer deref in signature_algorithms processing",
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2021-3450"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-3450",
+   "class": "security-fix",
+   "sha": "2a40b7bc7b94dd7de897a74571e7024f0cf0d63b",
+   "cve": "CVE-2021-3450",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-295",
+   "cwe_source": "nvd",
+   "summary": "CA certificate check bypass with X509_V_FLAG_X509_STRICT",
+   "code_files": 1,
+   "code_churn": 12
+  },
+  {
+   "cves": [
+    "CVE-2021-3711"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-3711",
+   "class": "security-fix",
+   "sha": "36cf45ef3ba71e44a8be06ee81cb31aa02cb0010",
+   "cve": "CVE-2021-3711",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-120",
+   "cwe_source": "nvd",
+   "summary": "SM2 Decryption Buffer Overflow",
+   "code_files": 3,
+   "code_churn": 30
+  },
+  {
+   "cves": [
+    "CVE-2021-3712"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-3712",
+   "class": "security-fix",
+   "sha": "030c5aba94788f152f9ceef3549815df45bef702",
+   "cve": "CVE-2021-3712",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "Read buffer overruns processing ASN.1 strings",
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2021-4044"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-4044",
+   "class": "security-fix",
+   "sha": "c1c1bb7c5e2baa109baec62d2af09d24caae5557",
+   "cve": "CVE-2021-4044",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-835",
+   "cwe_source": "nvd",
+   "summary": "Invalid handling of X509_verify_cert() internal errors in libssl",
+   "code_files": 2,
+   "code_churn": 17
+  },
+  {
+   "cves": [
+    "CVE-2021-4160"
+   ],
+   "needs_review": false,
+   "id": "CVE-2021-4160",
+   "class": "security-fix",
+   "sha": "336923c0c8d705cb8af5216b29a205662db0d590",
+   "cve": "CVE-2021-4160",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": null,
+   "cwe_source": null,
+   "summary": "BN_mod_exp may produce incorrect results on MIPS",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2022-0778"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-0778",
+   "class": "security-fix",
+   "sha": "9eafb53614bf65797db25f467946e735e1b43dc9",
+   "cve": "CVE-2022-0778",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-835",
+   "cwe_source": "nvd",
+   "summary": "Infinite loop in BN_mod_sqrt() reachable when parsing certificates",
+   "code_files": 1,
+   "code_churn": 30
+  },
+  {
+   "cves": [
+    "CVE-2022-1292"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-1292",
+   "class": "security-fix",
+   "sha": "7c33270707b568c524a8ef125fe611a8872cb5e8",
+   "cve": "CVE-2022-1292",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-78",
+   "cwe_source": "nvd",
+   "summary": "The c_rehash script allows command injection",
+   "code_files": 1,
+   "code_churn": 29
+  },
+  {
+   "cves": [
+    "CVE-2022-1343"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-1343",
+   "class": "security-fix",
+   "sha": "21f89f542d745adbf1131338929ae538e200d50d",
+   "cve": "CVE-2022-1343",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-295",
+   "cwe_source": "nvd",
+   "summary": "OCSP_basic_verify may incorrectly verify the response signing certificate",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2022-1434"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-1434",
+   "class": "security-fix",
+   "sha": "33219939c782cf363b30e9e899b9997fb1ced440",
+   "cve": "CVE-2022-1434",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "Incorrect MAC key used in the RC4-MD5 ciphersuite",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2022-1473"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-1473",
+   "class": "security-fix",
+   "sha": "e5da68183410c06f7b350a0721bc2bd6057e438e",
+   "cve": "CVE-2022-1473",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-459",
+   "cwe_source": "nvd",
+   "summary": "Resource leakage when decoding certificates and keys",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2022-2068"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-2068",
+   "class": "security-fix",
+   "sha": "ce60b13707add7e6b54c5817376234c4043506ed",
+   "cve": "CVE-2022-2068",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-78",
+   "cwe_source": "nvd",
+   "summary": "The c_rehash script allows command injection",
+   "code_files": 1,
+   "code_churn": 106
+  },
+  {
+   "cves": [
+    "CVE-2022-2097"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-2097",
+   "class": "security-fix",
+   "sha": "6ebf6d51596f51d23ccbc17930778d104a57d99c",
+   "cve": "CVE-2022-2097",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-327",
+   "cwe_source": "nvd",
+   "summary": "AES OCB fails to encrypt some bytes",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2022-2274"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-2274",
+   "class": "security-fix",
+   "sha": "4d8a88c134df634ba610ff8db1eb8478ac5fd345",
+   "cve": "CVE-2022-2274",
+   "on_master": true,
+   "master_via": "listed",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "nvd",
+   "summary": "Bug in RSA implementation for AVX512IFMA capable CPUs",
+   "code_files": 1,
+   "code_churn": 3
+  },
+  {
+   "cves": [
+    "CVE-2022-3358"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-3358",
+   "class": "security-fix",
+   "sha": "25d47cccf203c3b71171e78865e48ea061a039a8",
+   "cve": "CVE-2022-3358",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Using a Custom Cipher with NID_undef may lead to NULL encryption",
+   "code_files": 2,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2022-3602"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-3602",
+   "class": "security-fix",
+   "sha": "3b421ebc64c7b52f1b9feb3812bdc7781c784332",
+   "cve": "CVE-2022-3602",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "nvd",
+   "summary": "X.509 Email Address 4-byte Buffer Overflow",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2022-3786"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-3786",
+   "class": "security-fix",
+   "sha": "680e65b94c916af259bfdc2e25f1ab6e0c7a97d6",
+   "cve": "CVE-2022-3786",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-120",
+   "cwe_source": "nvd",
+   "summary": "X.509 Email Address Variable Length Buffer Overflow",
+   "code_files": 1,
+   "code_churn": 64
+  },
+  {
+   "cves": [
+    "CVE-2022-3996"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-3996",
+   "class": "security-fix",
+   "sha": "4d0340a6d2f327700a059f0b8f954d6160f8eef5",
+   "cve": "CVE-2022-3996",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-667",
+   "cwe_source": "record",
+   "summary": "X.509 Policy Constraints Double Locking",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2022-4203"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-4203",
+   "class": "security-fix",
+   "sha": "748f478f814bc8e418542c68599ec7dbcbac97b2",
+   "cve": "CVE-2022-4203",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "X.509 Name Constraints Read Buffer Overflow",
+   "code_files": 1,
+   "code_churn": 45
+  },
+  {
+   "cves": [
+    "CVE-2022-4304"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-4304",
+   "class": "security-fix",
+   "sha": "b1892d21f8f0435deb0250f24a97915dc641c807",
+   "cve": "CVE-2022-4304",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-203",
+   "cwe_source": "nvd",
+   "summary": "Timing Oracle in RSA Decryption",
+   "code_files": 6,
+   "code_churn": 812
+  },
+  {
+   "cves": [
+    "CVE-2022-4450"
+   ],
+   "needs_review": false,
+   "id": "CVE-2022-4450",
+   "class": "security-fix",
+   "sha": "ee6243f3947107d655f6dee96f63861561a5aaeb",
+   "cve": "CVE-2022-4450",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-415",
+   "cwe_source": "nvd",
+   "summary": "Double free after calling PEM_read_bio_ex",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2023-0215"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0215",
+   "class": "security-fix",
+   "sha": "9cc85002a1138235bdc272b837d7eb32d6b7aa95",
+   "cve": "CVE-2023-0215",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-416",
+   "cwe_source": "nvd",
+   "summary": "Use-after-free following BIO_new_NDEF",
+   "code_files": 1,
+   "code_churn": 40
+  },
+  {
+   "cves": [
+    "CVE-2023-0216"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0216",
+   "class": "security-fix",
+   "sha": "80253dbdc92bec584f4a9866b43f8674156d838a",
+   "cve": "CVE-2023-0216",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "Invalid pointer dereference in d2i_PKCS7 functions",
+   "code_files": 1,
+   "code_churn": 16
+  },
+  {
+   "cves": [
+    "CVE-2023-0217"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0217",
+   "class": "security-fix",
+   "sha": "bcec03c33cc00a7b5eb89ebeeee59e604570a86a",
+   "cve": "CVE-2023-0217",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "NULL dereference validating DSA public key",
+   "code_files": 2,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2023-0286"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0286",
+   "class": "security-fix",
+   "sha": "2f7530077e0ef79d98718138716bc51ca0cad658",
+   "cve": "CVE-2023-0286",
+   "on_master": false,
+   "master_via": "branch only",
+   "source": "secjson",
+   "severity": "High",
+   "cwe": "CWE-843",
+   "cwe_source": "nvd",
+   "summary": "X.400 address type confusion in X.509 GeneralName",
+   "code_files": 2,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2023-0401"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0401",
+   "class": "security-fix",
+   "sha": "6eebe6c0238178356114a96a7858f36b24172847",
+   "cve": "CVE-2023-0401",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "NULL dereference during PKCS7 data verification",
+   "code_files": 1,
+   "code_churn": 12
+  },
+  {
+   "cves": [
+    "CVE-2023-0464"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0464",
+   "class": "security-fix",
+   "sha": "3a81370f75b832102e9969533a25ca53fe0b254e",
+   "cve": "CVE-2023-0464",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-295",
+   "cwe_source": "nvd",
+   "summary": "Excessive Resource Usage Verifying X.509 Policy Constraints",
+   "code_files": 3,
+   "code_churn": 56
+  },
+  {
+   "cves": [
+    "CVE-2023-0465"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-0465",
+   "class": "security-fix",
+   "sha": "e4142ec43bcc08ffdb090580e24c24a7da302a32",
+   "cve": "CVE-2023-0465",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-295",
+   "cwe_source": "nvd",
+   "summary": "Invalid certificate policies in leaf certificates are silently ignored",
+   "code_files": 1,
+   "code_churn": 12
+  },
+  {
+   "cves": [
+    "CVE-2023-1255"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-1255",
+   "class": "security-fix",
+   "sha": "72dfe46550ee1f1bbfacd49f071419365bc23304",
+   "cve": "CVE-2023-1255",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-125",
+   "cwe_source": "nvd",
+   "summary": "Input buffer over-read in AES-XTS implementation on 64 bit ARM",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2023-2650"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-2650",
+   "class": "security-fix",
+   "sha": "d63b3e7959e79f98d60760a739f7876dc5adc838",
+   "cve": "CVE-2023-2650",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "nvd",
+   "summary": "Possible DoS translating ASN.1 object identifiers",
+   "code_files": 1,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2023-2975"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-2975",
+   "class": "security-fix",
+   "sha": "c426c281cfc23ab182f7d7d7a35229e7db1494d9",
+   "cve": "CVE-2023-2975",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-354",
+   "cwe_source": "nvd",
+   "summary": "AES-SIV implementation ignores empty associated data entries",
+   "code_files": 1,
+   "code_churn": 18
+  },
+  {
+   "cves": [
+    "CVE-2023-3446"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-3446",
+   "class": "security-fix",
+   "sha": "9e0094e2aa1b3428a12d5095132f133c078d3c3d",
+   "cve": "CVE-2023-3446",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-606",
+   "cwe_source": "nvd",
+   "summary": "Excessive time spent checking DH keys and parameters",
+   "code_files": 2,
+   "code_churn": 12
+  },
+  {
+   "cves": [
+    "CVE-2023-3817"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-3817",
+   "class": "security-fix",
+   "sha": "1c16253f3c3a8d1e25918c3f404aae6a5b0893de",
+   "cve": "CVE-2023-3817",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-606",
+   "cwe_source": "nvd",
+   "summary": "Excessive time spent checking DH q parameter value",
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2023-4807"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-4807",
+   "class": "security-fix",
+   "sha": "7b8e27bc2e02238986d89ef0ece067ec1b48e165",
+   "cve": "CVE-2023-4807",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-440",
+   "cwe_source": "nvd",
+   "summary": "POLY1305 MAC implementation corrupts XMM registers on Windows",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2023-5363"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-5363",
+   "class": "security-fix",
+   "sha": "f3a7e6c057b5054aa05710f3d528b92e3e885268",
+   "cve": "CVE-2023-5363",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "MODERATE",
+   "cwe": "CWE-684",
+   "cwe_source": "nvd",
+   "summary": "Incorrect cipher key & IV length processing",
+   "code_files": 1,
+   "code_churn": 36
+  },
+  {
+   "cves": [
+    "CVE-2023-5678"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-5678",
+   "class": "security-fix",
+   "sha": "ec061bf8ff2add8050599058557178c03295bcc0",
+   "cve": "CVE-2023-5678",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": "LOW",
+   "cwe": "CWE-606",
+   "cwe_source": "nvd",
+   "summary": "Excessive time spent in DH check / generation with large Q parameter value",
+   "code_files": 6,
+   "code_churn": 38
+  },
+  {
+   "cves": [
+    "CVE-2023-6129"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-6129",
+   "class": "security-fix",
+   "sha": "8d847a3ffd4f0b17ee33962cf69c36224925b34f",
+   "cve": "CVE-2023-6129",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-440",
+   "cwe_source": "nvd",
+   "summary": "POLY1305 MAC implementation corrupts vector registers on PowerPC",
+   "code_files": 1,
+   "code_churn": 42
+  },
+  {
+   "cves": [
+    "CVE-2023-6237"
+   ],
+   "needs_review": false,
+   "id": "CVE-2023-6237",
+   "class": "security-fix",
+   "sha": "e09fc1d746a4fd15bb5c3d7bbbab950aadd005db",
+   "cve": "CVE-2023-6237",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-606",
+   "cwe_source": "nvd",
+   "summary": "Excessive time spent checking invalid RSA public keys",
+   "code_files": 1,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2024-0727"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-0727",
+   "class": "security-fix",
+   "sha": "041962b429ebe748c8b6b7922980dfb6decfef26",
+   "cve": "CVE-2024-0727",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-476",
+   "cwe_source": "nvd",
+   "summary": "PKCS12 Decoding crashes",
+   "code_files": 4,
+   "code_churn": 35
+  },
+  {
+   "cves": [
+    "CVE-2024-12797"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-12797",
+   "class": "security-fix",
+   "sha": "6ae8e947d8e3f3f03eeb7d9ad993e341791900bc",
+   "cve": "CVE-2024-12797",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-392",
+   "cwe_source": "record",
+   "summary": "RFC7250 handshakes with unauthenticated servers don't abort as expected",
+   "code_files": 1,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2024-13176"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-13176",
+   "class": "security-fix",
+   "sha": "63c40a66c5dc287485705d06122d3a6e74a6a203",
+   "cve": "CVE-2024-13176",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-385",
+   "cwe_source": "record",
+   "summary": "Timing side-channel in ECDSA signature computation",
+   "code_files": 3,
+   "code_churn": 31
+  },
+  {
+   "cves": [
+    "CVE-2024-2511"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-2511",
+   "class": "security-fix",
+   "sha": "7984fa683e9dfac0cad50ef2a9d5a13330222044",
+   "cve": "CVE-2024-2511",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-1325",
+   "cwe_source": "nvd",
+   "summary": "Unbounded memory growth with session handling in TLSv1.3",
+   "code_files": 3,
+   "code_churn": 38
+  },
+  {
+   "cves": [
+    "CVE-2024-4603"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-4603",
+   "class": "security-fix",
+   "sha": "85ccbab216da245cf9a6503dd327072f21950d9b",
+   "cve": "CVE-2024-4603",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-606",
+   "cwe_source": "nvd",
+   "summary": "Excessive time spent checking DSA keys and parameters",
+   "code_files": 1,
+   "code_churn": 44
+  },
+  {
+   "cves": [
+    "CVE-2024-4741"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-4741",
+   "class": "security-fix",
+   "sha": "38690cab18de88198f46478565fab423cf534efa",
+   "cve": "CVE-2024-4741",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-416",
+   "cwe_source": "record",
+   "summary": "Use After Free with SSL_free_buffers",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2024-5535"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-5535",
+   "class": "security-fix",
+   "sha": "2ebbe2d7ca8551c4cb5fbb391ab9af411708090e",
+   "cve": "CVE-2024-5535",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Low",
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "SSL_select_next_proto buffer overread",
+   "code_files": 1,
+   "code_churn": 63
+  },
+  {
+   "cves": [
+    "CVE-2024-6119"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-6119",
+   "class": "security-fix",
+   "sha": "0890cd13d40fbc98f655f3974f466769caa83680",
+   "cve": "CVE-2024-6119",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": "Moderate",
+   "cwe": "CWE-843",
+   "cwe_source": "record",
+   "summary": "Possible denial of service in X.509 name checks",
+   "code_files": 1,
+   "code_churn": 78
+  },
+  {
+   "cves": [
+    "CVE-2024-9143"
+   ],
+   "needs_review": false,
+   "id": "CVE-2024-9143",
+   "class": "security-fix",
+   "sha": "8e008cb8b23ec7dc75c45a66eeed09c815b11cd2",
+   "cve": "CVE-2024-9143",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Low-level invalid GF(2^m) parameters lead to OOB memory access",
+   "code_files": 1,
+   "code_churn": 28
+  },
+  {
+   "cves": [
+    "CVE-2025-11187"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-11187",
+   "class": "security-fix",
+   "sha": "de157b8ff3328d41448779fa23b071c8e88304d2",
+   "cve": "CVE-2025-11187",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Improper validation of PBMAC1 parameters in PKCS#12 MAC verification",
+   "code_files": 1,
+   "code_churn": 18
+  },
+  {
+   "cves": [
+    "CVE-2025-15467"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-15467",
+   "class": "security-fix",
+   "sha": "0ddd6b6bcbdedbe2c8304af05771f8ab11939112",
+   "cve": "CVE-2025-15467",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Stack buffer overflow in CMS (Auth)EnvelopedData parsing",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2025-15468"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-15468",
+   "class": "security-fix",
+   "sha": "293b55de0c434a99d0e744d0521170ca280606a9",
+   "cve": "CVE-2025-15468",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL dereference in SSL_CIPHER_find() function on unknown cipher ID",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2025-15469"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-15469",
+   "class": "security-fix",
+   "sha": "6028c0654ef8350b1a357ad37fd687757ecafac2",
+   "cve": "CVE-2025-15469",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-347",
+   "cwe_source": "record",
+   "summary": "'openssl dgst' one-shot codepath silently truncates inputs >16MB",
+   "code_files": 4,
+   "code_churn": 96
+  },
+  {
+   "cves": [
+    "CVE-2025-4575"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-4575",
+   "class": "security-fix",
+   "sha": "0eb9acc24febb1f3f01f0320cfba9654cf66b0ac",
+   "cve": "CVE-2025-4575",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-295",
+   "cwe_source": "record",
+   "summary": "The x509 application adds trusted use instead of rejected use",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2025-66199"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-66199",
+   "class": "security-fix",
+   "sha": "84f73f79af9f69c1527a9a372b7a9e771a394c2a",
+   "cve": "CVE-2025-66199",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-789",
+   "cwe_source": "record",
+   "summary": "TLS 1.3 CompressedCertificate excessive memory allocation",
+   "code_files": 2,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2025-68160"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-68160",
+   "class": "security-fix",
+   "sha": "b21663c35a6f0ed4c8de06855bdc7a6a21f00c2f",
+   "cve": "CVE-2025-68160",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Heap out-of-bounds write in BIO_f_linebuffer on short writes",
+   "code_files": 1,
+   "code_churn": 32
+  },
+  {
+   "cves": [
+    "CVE-2025-69418"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-69418",
+   "class": "security-fix",
+   "sha": "be9375d5d45dfaf897b56ef148a0b58402491fcb",
+   "cve": "CVE-2025-69418",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-325",
+   "cwe_source": "record",
+   "summary": "Unauthenticated/unencrypted trailing bytes with low-level OCB function calls",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2025-69419"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-69419",
+   "class": "security-fix",
+   "sha": "53b78f2a49cd1ede1c4f86d53b2f6d9ff9e1620e",
+   "cve": "CVE-2025-69419",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Out of bounds write in PKCS12_get_friendlyname() UTF-8 conversion",
+   "code_files": 2,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2025-69420"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-69420",
+   "class": "security-fix",
+   "sha": "ea8fc4c345fbd749048809c9f7c881ea656b0b94",
+   "cve": "CVE-2025-69420",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-754",
+   "cwe_source": "record",
+   "summary": "Missing ASN1_TYPE validation in TS_RESP_verify_response() function",
+   "code_files": 1,
+   "code_churn": 4
+  },
+  {
+   "cves": [
+    "CVE-2025-69421"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-69421",
+   "class": "security-fix",
+   "sha": "2c13bf15286328641a805eb3b7c97e27d42881fb",
+   "cve": "CVE-2025-69421",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Pointer Dereference in PKCS12_item_decrypt_d2i_ex function",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2025-9230"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-9230",
+   "class": "security-fix",
+   "sha": "9c462be2cea54ebfc62953224220b56f8ba22a0c",
+   "cve": "CVE-2025-9230",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Out-of-bounds read & write in RFC 3211 KEK Unwrap",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2025-9231"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-9231",
+   "class": "security-fix",
+   "sha": "dff94dba75490d03926e77be9f2da3bcf4485820",
+   "cve": "CVE-2025-9231",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-385",
+   "cwe_source": "record",
+   "summary": "Timing side-channel in SM2 algorithm on 64 bit ARM",
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2025-9232"
+   ],
+   "needs_review": false,
+   "id": "CVE-2025-9232",
+   "class": "security-fix",
+   "sha": "6bca15039e99d37ce3a3564eb862a3b1ff40e63d",
+   "cve": "CVE-2025-9232",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Out-of-bounds read in HTTP client no_proxy handling",
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2026-14456"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-14456",
+   "class": "security-fix",
+   "sha": "9416706d408bb84deb7cee4647bff3045d2dc7ba",
+   "cve": "CVE-2026-14456",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "Unbounded Memory Growth in QUIC Server Incoming Channel Queue",
+   "code_files": 6,
+   "code_churn": 55
+  },
+  {
+   "cves": [
+    "CVE-2026-14457"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-14457",
+   "class": "security-fix",
+   "sha": "b8e5bb958ee4501a95b424c6f9f457dd013b4d83",
+   "cve": "CVE-2026-14457",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "RPK Server Signature Algorithm Selection Can Dereference a Missing Certificate",
+   "code_files": 1,
+   "code_churn": 14
+  },
+  {
+   "cves": [
+    "CVE-2026-18798"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-18798",
+   "class": "security-fix",
+   "sha": "b6011a9ee87ab25f47d999a716a1567da00e1878",
+   "cve": "CVE-2026-18798",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-415",
+   "cwe_source": "record",
+   "summary": "QUIC Server May Trigger Double Free When Processing INITIAL Packet",
+   "code_files": 3,
+   "code_churn": 83
+  },
+  {
+   "cves": [
+    "CVE-2026-22795",
+    "CVE-2026-22796"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-22795",
+   "class": "security-fix",
+   "sha": "c08264903396074ba9e5f9d5a40843cd521636d7",
+   "cve": "CVE-2026-22795",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-754",
+   "cwe_source": "record",
+   "summary": "Missing ASN1_TYPE validation in PKCS#12 parsing",
+   "code_files": 3,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2026-2673"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-2673",
+   "class": "security-fix",
+   "sha": "9efd7e9e98a98aaade8121bac8f1e53208c3af33",
+   "cve": "CVE-2026-2673",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-757",
+   "cwe_source": "record",
+   "summary": "OpenSSL TLS 1.3 server may choose unexpected key agreement group",
+   "code_files": 1,
+   "code_churn": 171
+  },
+  {
+   "cves": [
+    "CVE-2026-28386"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-28386",
+   "class": "security-fix",
+   "sha": "7464ccdd43f600decd0af571556a1fc56ccd6419",
+   "cve": "CVE-2026-28386",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Out-of-bounds Read in AES-CFB-128 on X86-64 with AVX-512 Support",
+   "code_files": 1,
+   "code_churn": 8
+  },
+  {
+   "cves": [
+    "CVE-2026-28387"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-28387",
+   "class": "security-fix",
+   "sha": "8b5cd6a682f0f6e7b8bf55137137c567d1899c4a",
+   "cve": "CVE-2026-28387",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-416",
+   "cwe_source": "record",
+   "summary": "Potential Use-after-free in DANE Client Code",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2026-28388"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-28388",
+   "class": "security-fix",
+   "sha": "d6ad8595e86dc96ca8771f0a1714b31794befa75",
+   "cve": "CVE-2026-28388",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Pointer Dereference When Processing a Delta CRL",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2026-28389"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-28389",
+   "class": "security-fix",
+   "sha": "dea5c521a6a78a1caed451e53a149d327d2a928d",
+   "cve": "CVE-2026-28389",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "Possible NULL Dereference When Processing CMS KeyAgreeRecipientInfo",
+   "code_files": 2,
+   "code_churn": 27
+  },
+  {
+   "cves": [
+    "CVE-2026-28390"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-28390",
+   "class": "security-fix",
+   "sha": "b388240d34fb913e91171bb665a82867dca68be9",
+   "cve": "CVE-2026-28390",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "Possible NULL Dereference When Processing CMS KeyTransportRecipientInfo",
+   "code_files": 1,
+   "code_churn": 31
+  },
+  {
+   "cves": [
+    "CVE-2026-31789"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-31789",
+   "class": "security-fix",
+   "sha": "3244aa4b9d6ea0220cc14fd97d951c67b5052837",
+   "cve": "CVE-2026-31789",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Heap Buffer Overflow in Hexadecimal Conversion",
+   "code_files": 1,
+   "code_churn": 13
+  },
+  {
+   "cves": [
+    "CVE-2026-31790"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-31790",
+   "class": "security-fix",
+   "sha": "89dde74b69debbf0c4d0a0ee925de87638bbfe16",
+   "cve": "CVE-2026-31790",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-754",
+   "cwe_source": "record",
+   "summary": "Incorrect Failure Handling in RSA KEM RSASVE Encapsulation",
+   "code_files": 1,
+   "code_churn": 17
+  },
+  {
+   "cves": [
+    "CVE-2026-34180"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-34180",
+   "class": "security-fix",
+   "sha": "fcb23806047f5afbe55d5d601a527fc24bf7ca2c",
+   "cve": "CVE-2026-34180",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Heap Buffer Over-read in ASN.1 Content Parsing",
+   "code_files": 1,
+   "code_churn": 24
+  },
+  {
+   "cves": [
+    "CVE-2026-34181"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-34181",
+   "class": "security-fix",
+   "sha": "5a0230b6cc95a576b0c2b7b5b2ba7c74232e7b7c",
+   "cve": "CVE-2026-34181",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-354",
+   "cwe_source": "record",
+   "summary": "PKCS#12 Files with PBMAC1 Are Accepted with Short HMAC Keys",
+   "code_files": 1,
+   "code_churn": 7
+  },
+  {
+   "cves": [
+    "CVE-2026-34182"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-34182",
+   "class": "security-fix",
+   "sha": "206faade8b3872d265524e56583cfc05ac001da5",
+   "cve": "CVE-2026-34182",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-354",
+   "cwe_source": "record",
+   "summary": "CMS AuthEnvelopedData Processing May Accept Forged Messages",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2026-34183"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-34183",
+   "class": "security-fix",
+   "sha": "9bedb613191f2d86def2be626b72f239daf81808",
+   "cve": "CVE-2026-34183",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-1325",
+   "cwe_source": "record",
+   "summary": "Unbounded Memory Growth in the QUIC PATH_CHALLENGE Handler",
+   "code_files": 9,
+   "code_churn": 169
+  },
+  {
+   "cves": [
+    "CVE-2026-35188"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-35188",
+   "class": "security-fix",
+   "sha": "58633b658fe74095c8cdde191e4ce1bf94f8c5f9",
+   "cve": "CVE-2026-35188",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-415",
+   "cwe_source": "record",
+   "summary": "Double-free When Checking OCSP Stapled Response",
+   "code_files": 1,
+   "code_churn": 1
+  },
+  {
+   "cves": [
+    "CVE-2026-35189"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-35189",
+   "class": "security-fix",
+   "sha": "94b39d044a2a304adf8ab373248a00beec2d210a",
+   "cve": "CVE-2026-35189",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "Excessive Memory Allocation in Relative CRLDP Processing",
+   "code_files": 4,
+   "code_churn": 175
+  },
+  {
+   "cves": [
+    "CVE-2026-35191"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-35191",
+   "class": "security-fix",
+   "sha": "ebcd9361a255943407553f8812f66e9ab1be7022",
+   "cve": "CVE-2026-35191",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-440",
+   "cwe_source": "record",
+   "summary": "QUIC Unvalidated Amplification Credit may be Over Accounted",
+   "code_files": 2,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2026-42764"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42764",
+   "class": "security-fix",
+   "sha": "5097ec4dae239112498abb722e255ea60ef7ac48",
+   "cve": "CVE-2026-42764",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Pointer Dereference in QUIC Server Initial Packet Handling",
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2026-42765"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42765",
+   "class": "security-fix",
+   "sha": "a9af3442290e8a04706a3cd5f284ffd5b486e3f6",
+   "cve": "CVE-2026-42765",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Dereference in Certificate Verification with OCSP Checking",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2026-42766"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42766",
+   "class": "security-fix",
+   "sha": "74245170b5a64b234ac4af27c86a25ec251c8b2a",
+   "cve": "CVE-2026-42766",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "Possible NULL Dereference in Password-Based CMS Decryption",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2026-42767"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42767",
+   "class": "security-fix",
+   "sha": "11df4e2ae04fe3f3207aa79b461b6ed90e5f6bce",
+   "cve": "CVE-2026-42767",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Pointer Dereference in CRMF EncryptedValue Decryption",
+   "code_files": 1,
+   "code_churn": 10
+  },
+  {
+   "cves": [
+    "CVE-2026-42768"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42768",
+   "class": "security-fix",
+   "sha": "d5030cdf32d6cd27bd964a0cb7aed2b7cb713369",
+   "cve": "CVE-2026-42768",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-514",
+   "cwe_source": "record",
+   "summary": "Multi-RecipientInfo Bleichenbacher Oracle in CMS_decrypt() and PKCS7_decrypt()",
+   "code_files": 2,
+   "code_churn": 14
+  },
+  {
+   "cves": [
+    "CVE-2026-42769"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42769",
+   "class": "security-fix",
+   "sha": "c2765d53c2649b56bc1ca1bb799e42002953056a",
+   "cve": "CVE-2026-42769",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-295",
+   "cwe_source": "record",
+   "summary": "Trust-Anchor Substitution via cert/issuer Typo in CMP rootCaKeyUpdate",
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2026-42770"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42770",
+   "class": "security-fix",
+   "sha": "0f3fab2eccc7c3417093a8243dd15d95b6cb472d",
+   "cve": "CVE-2026-42770",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-325",
+   "cwe_source": "record",
+   "summary": "FFC-DH Peer Validation Uses Attacker-Supplied q",
+   "code_files": 1,
+   "code_churn": 5
+  },
+  {
+   "cves": [
+    "CVE-2026-42771"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42771",
+   "class": "security-fix",
+   "sha": "b3a555a0a7aa0028887149f6f973af89a4937bea",
+   "cve": "CVE-2026-42771",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Possible Out of Bounds Read in X509_VERIFY_PARAM_set1_email()",
+   "code_files": 1,
+   "code_churn": 6
+  },
+  {
+   "cves": [
+    "CVE-2026-42772"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-42772",
+   "class": "security-fix",
+   "sha": "dbc3ceb4ca582a304eda542f12d4338ed421d3c7",
+   "cve": "CVE-2026-42772",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-407",
+   "cwe_source": "record",
+   "summary": "Potential CPU DoS via O(n^2) Fragment Reassembly in QUIC",
+   "code_files": 8,
+   "code_churn": 2003
+  },
+  {
+   "cves": [
+    "CVE-2026-45445"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-45445",
+   "class": "security-fix",
+   "sha": "f87f0b6a8e04bcdeb98afc82b0da06a2d537f399",
+   "cve": "CVE-2026-45445",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-325",
+   "cwe_source": "record",
+   "summary": "AES-OCB IV Ignored on EVP_Cipher() Path",
+   "code_files": 1,
+   "code_churn": 13
+  },
+  {
+   "cves": [
+    "CVE-2026-45446"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-45446",
+   "class": "security-fix",
+   "sha": "609bcb24866d64f1fc49d38b852edbb39057d721",
+   "cve": "CVE-2026-45446",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-325",
+   "cwe_source": "record",
+   "summary": "Incorrect Tag Processing for Empty Messages in AES-GCM-SIV and AES-SIV modes",
+   "code_files": 2,
+   "code_churn": 30
+  },
+  {
+   "cves": [
+    "CVE-2026-45447"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-45447",
+   "class": "security-fix",
+   "sha": "f4129fbe3cde786d363510069fe297234f99be8f",
+   "cve": "CVE-2026-45447",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-416",
+   "cwe_source": "record",
+   "summary": "Heap Use-After-Free in the PKCS7_verify() Function",
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2026-54872"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54872",
+   "class": "security-fix",
+   "sha": "f297baaa1142ab42e628fdd7a54b96592d2559dd",
+   "cve": "CVE-2026-54872",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-208",
+   "cwe_source": "record",
+   "summary": "Timing Side-Channel in Scalar Multiplication for Non-NIST EC Curves",
+   "code_files": 3,
+   "code_churn": 77
+  },
+  {
+   "cves": [
+    "CVE-2026-54873"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54873",
+   "class": "security-fix",
+   "sha": "1121081b2a4667a77c641e9a4d00257d4c8342b6",
+   "cve": "CVE-2026-54873",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "QUIC STREAM Fragment Metadata DoS",
+   "code_files": 7,
+   "code_churn": 170
+  },
+  {
+   "cves": [
+    "CVE-2026-54874"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54874#1",
+   "class": "security-fix",
+   "sha": "809b52282a3ea6d56fc2e1c427f2d9bd83b06eaa",
+   "cve": "CVE-2026-54874",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-405",
+   "cwe_source": "record",
+   "summary": "Excessive Memory Use Buffering DTLS Records for a Future Epoch",
+   "code_files": 1,
+   "code_churn": 29
+  },
+  {
+   "cves": [
+    "CVE-2026-54874",
+    "CVE-2026-63072"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54874#2",
+   "class": "security-fix",
+   "sha": "13bcff0ab2f5c55696c92cc6b3480d94f80e8e3b",
+   "cve": "CVE-2026-54874",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-405",
+   "cwe_source": "record",
+   "summary": "Excessive Memory Use Buffering DTLS Records for a Future Epoch",
+   "code_files": 2,
+   "code_churn": 18
+  },
+  {
+   "cves": [
+    "CVE-2026-54875"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54875",
+   "class": "security-fix",
+   "sha": "ddb9e22bc3b46d65fba9d2ec58e444c9f7d4749e",
+   "cve": "CVE-2026-54875",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-208",
+   "cwe_source": "record",
+   "summary": "Non-Constant-Time SM2 Scalar Multiplication on ARM64 and RISC-V",
+   "code_files": 1,
+   "code_churn": 249
+  },
+  {
+   "cves": [
+    "CVE-2026-54876"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-54876",
+   "class": "security-fix",
+   "sha": "3693c35ffd07b09e096435521ad27ee7a43a6e08",
+   "cve": "CVE-2026-54876",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-401",
+   "cwe_source": "record",
+   "summary": "Client-Side Memory Leak in OCSP Response Checking",
+   "code_files": 1,
+   "code_churn": 14
+  },
+  {
+   "cves": [
+    "CVE-2026-63073"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-63073",
+   "class": "security-fix",
+   "sha": "958f6f6040385a88a322673dbb465f7259ebf0f2",
+   "cve": "CVE-2026-63073",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-134",
+   "cwe_source": "record",
+   "summary": "Untrusted Sender DN Used as Format String in CMP Response Validation",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2026-63074"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-63074",
+   "class": "security-fix",
+   "sha": "a6c1091a8feadf0a16851cdda38a85aafe41cb11",
+   "cve": "CVE-2026-63074",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "CMP Indefinite Cache Growth of ExtraCerts",
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2026-63075"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-63075",
+   "class": "security-fix",
+   "sha": "b758149ceacb622300430afa1e8cd5fa9a0f3a90",
+   "cve": "CVE-2026-63075",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "QUIC ACK-only Packet Retention Can Cause Memory Exhaustion",
+   "code_files": 3,
+   "code_churn": 83
+  },
+  {
+   "cves": [
+    "CVE-2026-63076"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-63076",
+   "class": "security-fix",
+   "sha": "022a99e2b50cccb94b7d3efb7080077c28276272",
+   "cve": "CVE-2026-63076",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "Invalid Pointer Dereference in CMP Server via Crafted protectionAlg",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "cves": [
+    "CVE-2026-72897"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-72897",
+   "class": "security-fix",
+   "sha": "a4f89aa07fe59075bde0719a0821f0438a366680",
+   "cve": "CVE-2026-72897",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Out-of-Bounds Access After SSL_set_SSL_CTX() During a Handshake",
+   "code_files": 1,
+   "code_churn": 35
+  },
+  {
+   "cves": [
+    "CVE-2026-7383"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-7383",
+   "class": "security-fix",
+   "sha": "97f6b621f7af2c4c4e162c75045a6e12a8fdf8d9",
+   "cve": "CVE-2026-7383",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-787",
+   "cwe_source": "record",
+   "summary": "Possible Heap Buffer Overflow in ASN.1 Multibyte String Conversion",
+   "code_files": 1,
+   "code_churn": 31
+  },
+  {
+   "cves": [
+    "CVE-2026-75803"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-75803",
+   "class": "security-fix",
+   "sha": "5741d29a5f356e05262cd0936a472a9961398d53",
+   "cve": "CVE-2026-75803",
+   "on_master": true,
+   "master_via": "cherry-pick trailer",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-354",
+   "cwe_source": "record",
+   "summary": "AEAD Forgeries with Empty Ciphertext When Using EVP_Cipher()",
+   "code_files": 3,
+   "code_churn": 39
+  },
+  {
+   "cves": [
+    "CVE-2026-75804"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-75804",
+   "class": "security-fix",
+   "sha": "4ae4f4d127b564e6446791d6a799918d3c7095c1",
+   "cve": "CVE-2026-75804",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "QUIC Connection-Level Flow Control is Not Enforced for Streams",
+   "code_files": 1,
+   "code_churn": 11
+  },
+  {
+   "cves": [
+    "CVE-2026-75805"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-75805",
+   "class": "security-fix",
+   "sha": "a61d8a1f1aa90044637c51b1313bf2405597a37c",
+   "cve": "CVE-2026-75805",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-476",
+   "cwe_source": "record",
+   "summary": "NULL Pointer Dereference in CMP Client Revocation Response Handling",
+   "code_files": 1,
+   "code_churn": 15
+  },
+  {
+   "cves": [
+    "CVE-2026-75806"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-75806",
+   "class": "security-fix",
+   "sha": "2bdfe87a13c40a632d9ac5487c08b67cf61f3771",
+   "cve": "CVE-2026-75806",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-1284",
+   "cwe_source": "record",
+   "summary": "Unauthenticated and Undersized DTLS 1.2 AEAD Record Causes DoS",
+   "code_files": 1,
+   "code_churn": 9
+  },
+  {
+   "cves": [
+    "CVE-2026-77696"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-77696",
+   "class": "security-fix",
+   "sha": "2e9244c77879db4618ba24c0e9e771ebf07191a2",
+   "cve": "CVE-2026-77696",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-208",
+   "cwe_source": "record",
+   "summary": "Timing Side-Channel in SM2 Signature Generation",
+   "code_files": 2,
+   "code_churn": 68
+  },
+  {
+   "cves": [
+    "CVE-2026-84782"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-84782",
+   "class": "security-fix",
+   "sha": "2c57351ccdedbb1e3bdd0506c2de152fa9d5b0da",
+   "cve": "CVE-2026-84782",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "DTLS Retransmits Handshake Messages From a Stale Buffer Offset",
+   "code_files": 2,
+   "code_churn": 19
+  },
+  {
+   "cves": [
+    "CVE-2026-84783"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-84783",
+   "class": "security-fix",
+   "sha": "3b1acea33c054ae2bebc5689b39e15d37f437539",
+   "cve": "CVE-2026-84783",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-416",
+   "cwe_source": "record",
+   "summary": "Use-After-Free in X.509 Extension Cache Under Concurrent Use",
+   "code_files": 1,
+   "code_churn": 65
+  },
+  {
+   "cves": [
+    "CVE-2026-84784"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-84784",
+   "class": "security-fix",
+   "sha": "73f897a7e9f01b54818da537019802a1e6a82455",
+   "cve": "CVE-2026-84784",
+   "on_master": true,
+   "master_via": "same subject+author, >=50% shared files",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-770",
+   "cwe_source": "record",
+   "summary": "QUIC: Unbounded RETIRE_CONNECTION_ID Backlog",
+   "code_files": 1,
+   "code_churn": 33
+  },
+  {
+   "cves": [
+    "CVE-2026-9076"
+   ],
+   "needs_review": false,
+   "id": "CVE-2026-9076",
+   "class": "security-fix",
+   "sha": "51d1800e95283a8beec85152e35e3634dab8dd82",
+   "cve": "CVE-2026-9076",
+   "on_master": true,
+   "master_via": "same patch-id",
+   "source": "secjson",
+   "severity": null,
+   "cwe": "CWE-125",
+   "cwe_source": "record",
+   "summary": "Out-of-Bounds Read in CMS Password-Based Decryption",
+   "code_files": 1,
+   "code_churn": 2
+  },
+  {
+   "id": "control-for-CVE-2002-0655",
+   "class": "control",
+   "sha": "0bee0e6294882b18ffa0053597532058a19d6f89",
+   "matched_to": "c046fffa16cd55c972f71c49051b8ce6b83eed7f"
+  },
+  {
+   "id": "control-for-CVE-2002-1568",
+   "class": "control",
+   "sha": "da9b97246695c370702d15be2b3778427cf57082",
+   "matched_to": "5574e0ed417c9a09487a270fec3df34d3094f5c6"
+  },
+  {
+   "id": "control-for-CVE-2003-0078",
+   "class": "control",
+   "sha": "bfa96bc20ee871a97241e4a440bc5e2b0ed15998",
+   "matched_to": "5b0b0e98cec653ae1e65e2251c3e0fc273945df5"
+  },
+  {
+   "id": "control-for-CVE-2003-0543",
+   "class": "control",
+   "sha": "9ba4cc007b3af0b5e893716f8fe44943a5e3b234",
+   "matched_to": "299024498004473a58e780cdf8ec83e85a04f807"
+  },
+  {
+   "id": "control-for-CVE-2004-0975",
+   "class": "control",
+   "sha": "e07d3a021d1e7ef168669cf8c4431f1078de022f",
+   "matched_to": "5fee606442a6738fd06a756d7076be53b7b7734c"
+  },
+  {
+   "id": "control-for-CVE-2005-2969",
+   "class": "control",
+   "sha": "7a06050cd356001ec80a9202f50de6eb4e09f6e7",
+   "matched_to": "72dce7685ecd1017420af0a0497923a88d60735a"
+  },
+  {
+   "id": "control-for-CVE-2006-2937",
+   "class": "control",
+   "sha": "5776c3c4c6663cb1498e83ed20894af4b59c78aa",
+   "matched_to": "348be7ec60f7cce7503ba759a1a5a7591a648f1f"
+  },
+  {
+   "id": "control-for-CVE-2006-2940",
+   "class": "control",
+   "sha": "03919683f9bade36ef1b58e64638ac3ccbbf371a",
+   "matched_to": "5e3225cc44ebdce3a88d04a627e975b3e76a6f9a"
+  },
+  {
+   "id": "control-for-CVE-2006-3738",
+   "class": "control",
+   "sha": "6657b9c73acfddc9b3fe86da0ee63494c7826742",
+   "matched_to": "3ff55e9680cc99f330f25e48cd1422e3459c02de"
+  },
+  {
+   "id": "control-for-CVE-2006-4339",
+   "class": "control",
+   "sha": "75ef718820c44d8eb5efd98425c64b584ce2f5d5",
+   "matched_to": "b79aa05e3babdbab92c6356f6e51f7bb43c41576"
+  },
+  {
+   "id": "control-for-CVE-2008-0891",
+   "class": "control",
+   "sha": "a92ebf229015380882d8a364ad95df00c81534e8",
+   "matched_to": "40a706286febe0279336c96374c607daaa1b1d49"
+  },
+  {
+   "id": "control-for-CVE-2008-1672",
+   "class": "control",
+   "sha": "42fe218b9f17219aa807296a02dff3c55128719b",
+   "matched_to": "e194fe8f47a5bdc7a9eab19b4d387d00c410e633"
+  },
+  {
+   "id": "control-for-CVE-2008-5077",
+   "class": "control",
+   "sha": "0f401ff08be9d35cfddab88ca13578d29a83c034",
+   "matched_to": "bab534057b855a7dbf98261d494897b3542bd9d5"
+  },
+  {
+   "id": "control-for-CVE-2009-1377",
+   "class": "control",
+   "sha": "463f4485951a6a566d1b2b7b6c6ec73a7e106175",
+   "matched_to": "88b48dc68024dcc437da4296c9fb04419b0ccbe1"
+  },
+  {
+   "id": "control-for-CVE-2009-1378",
+   "class": "control",
+   "sha": "c65db618bb22edf4c85c5169949fb29ffa440e5e",
+   "matched_to": "abda7c114791fa7fe95672ec7a66fc4733c40dbc"
+  },
+  {
+   "id": "control-for-CVE-2009-1379",
+   "class": "control",
+   "sha": "dab707594697c001f3aed8c40003293f6727e70d",
+   "matched_to": "561cbe567846a376153bea7f1f2d061e78029c2d"
+  },
+  {
+   "id": "control-for-CVE-2009-1386",
+   "class": "control",
+   "sha": "3fc59c84061373c285eb90c4b8fae075a28daaf3",
+   "matched_to": "1cbf663a6c89dcf8f7706d30a8bae675e2e0199a"
+  },
+  {
+   "id": "control-for-CVE-2009-3245",
+   "class": "control",
+   "sha": "19a0192b428375ca409db355a55d2df3f7b411a6",
+   "matched_to": "7e4cae1d2f555cbe9226b377aff4b56c9f7ddd4d"
+  },
+  {
+   "id": "control-for-CVE-2009-4355",
+   "class": "control",
+   "sha": "2f4c1dc86cca2ad72353357c4ceec09401e9bd81",
+   "matched_to": "1b31b5ad560b16e2fe1cad54a755e3e6b5e778a3"
+  },
+  {
+   "id": "control-for-CVE-2010-0433",
+   "class": "control",
+   "sha": "40c5eaeeec97eadc1e9aab8678e62cccdf1902fe",
+   "matched_to": "cca1cd9a3447dd067503e4a85ebd1679ee78a48e"
+  },
+  {
+   "id": "control-for-CVE-2010-0740",
+   "class": "control",
+   "sha": "77163b6234ce5d032285d0805e1de68bdeba0b64",
+   "matched_to": "3e8b6485b342d70e980418bc4bb2c60148d844d8"
+  },
+  {
+   "id": "control-for-CVE-2010-0742",
+   "class": "control",
+   "sha": "79cfc3ac546565914426ff397a73f2f7ca36ff51",
+   "matched_to": "3cbb15ee813453c52694c1d6f9a89eb7ae757943"
+  },
+  {
+   "id": "control-for-CVE-2010-3864",
+   "class": "control",
+   "sha": "fbd2164044f92383955a801ad1b2857d71e83f27",
+   "matched_to": "732d31beeeb2e2e9f44d05da8387cfeca06b91b8"
+  },
+  {
+   "id": "control-for-CVE-2010-4180",
+   "class": "control",
+   "sha": "a428ac47501745485837633e28ca2fe32a12a66b",
+   "matched_to": "88f2a4cf9ced521e2c2874a1c32af0eeaa027f40"
+  },
+  {
+   "id": "control-for-CVE-2010-4252",
+   "class": "control",
+   "sha": "8d207ee3d1f52dbd96e0a14693cba3bb3e436af8",
+   "matched_to": "300b1d76fe27541c662ca606a6a201b2718e0c65"
+  },
+  {
+   "id": "control-for-CVE-2011-3207",
+   "class": "control",
+   "sha": "837e1b6812d53799cff304630bc3a1a9db86b696",
+   "matched_to": "0486cce653b62d26a8ca37ac12f69f1a6b998844"
+  },
+  {
+   "id": "control-for-CVE-2011-4108",
+   "class": "control",
+   "sha": "33387d4a881882859ecd783a21f28de322f3ab2b",
+   "matched_to": "e7455724938818eac8bef43f535d148dd4670d06"
+  },
+  {
+   "id": "control-for-CVE-2011-4109",
+   "class": "control",
+   "sha": "1fb2e0f940fa77b3b62544a7ce2f589e5cc05826",
+   "matched_to": "855d29184ea88140e3c810e854607cc00a3f1806"
+  },
+  {
+   "id": "control-for-CVE-2011-4576",
+   "class": "control",
+   "sha": "4692f9f7b6059a4175910d9537744446b71ae879",
+   "matched_to": "27dfffd5b75ee1db114e32f6dc73e266513889c5"
+  },
+  {
+   "id": "control-for-CVE-2011-4577#1",
+   "class": "control",
+   "sha": "1fe3549428ea5b976eb2f0e352edd676fe0b1fab",
+   "matched_to": "98d132cf6a879faf0147aa83ea0c07ff326260ed"
+  },
+  {
+   "id": "control-for-CVE-2011-4577#2",
+   "class": "control",
+   "sha": "0985bd4f802e967a363d8e4403af41d69255977c",
+   "matched_to": "be71c37296b3ba43c944eaa220ac62413782bad3"
+  },
+  {
+   "id": "control-for-CVE-2011-4619#1",
+   "class": "control",
+   "sha": "5863163732ed5ba89d1aa6536e733d01f4187fce",
+   "matched_to": "206310c3056847fef7e657879f05a09763c2131e"
+  },
+  {
+   "id": "control-for-CVE-2011-4619#2",
+   "class": "control",
+   "sha": "b3720c34e5f8c2c8d262b719ba827a48bae32a27",
+   "matched_to": "d0dc991c6228564212ace119440a9ac5f21578bc"
+  },
+  {
+   "id": "control-for-CVE-2012-0027",
+   "class": "control",
+   "sha": "0c58d22ad99f548def13574af90087ebaa3e88f3",
+   "matched_to": "6bf896d9b1693916d9e8d303f9e3cc04959632b2"
+  },
+  {
+   "id": "control-for-CVE-2012-0884",
+   "class": "control",
+   "sha": "4379d0e457ebd404f248d2e2c265ff11d25bfab4",
+   "matched_to": "146b52edd122f55e2b2bfeb486dae8dbe96f739e"
+  },
+  {
+   "id": "control-for-CVE-2012-2110",
+   "class": "control",
+   "sha": "43760a2cf02a6d710d40bd6ed43c7bf61918fadd",
+   "matched_to": "d9a9d10f4f8d4ed051f2488a90b012dceb7ec885"
+  },
+  {
+   "id": "control-for-CVE-2012-2333",
+   "class": "control",
+   "sha": "b2141841601645dfb19fe6f768b6394d9551d08c",
+   "matched_to": "c46ecc3a55bcbbe4ff31da3864d015e343b0189f"
+  },
+  {
+   "id": "control-for-CVE-2013-0166",
+   "class": "control",
+   "sha": "66f96fe2d519147097c118d4bf60704c69ed0635",
+   "matched_to": "b48310627d1fdc58f64ccf208ac82c732e654dca"
+  },
+  {
+   "id": "control-for-CVE-2013-4353",
+   "class": "control",
+   "sha": "0ec1a77891e59647e1645631bc7cba294a605e1b",
+   "matched_to": "197e0ea817ad64820789d86711d55ff50d71f631"
+  },
+  {
+   "id": "control-for-CVE-2013-6450",
+   "class": "control",
+   "sha": "a25f9adc778e17568fe2a325e5c3606adb8329f1",
+   "matched_to": "20b82b514d81a64f5b240788e5051167456af379"
+  },
+  {
+   "id": "control-for-CVE-2014-0076",
+   "class": "control",
+   "sha": "ef643cc7bdb24fbff4740192a7fc1fc768fb7693",
+   "matched_to": "f9b6c0ba4c02497782f801e3c45688f3efaac55c"
+  },
+  {
+   "id": "control-for-CVE-2014-0160#1",
+   "class": "control",
+   "sha": "e0202d946d68bd91a3e99f223c66d1fce7db136a",
+   "matched_to": "6af080acaf57c74e3cd96642f2900fa602407d10"
+  },
+  {
+   "id": "control-for-CVE-2014-0160#2",
+   "class": "control",
+   "sha": "26bda7ef2ba1f901a8d81ccc2afb8f83ddd6e6af",
+   "matched_to": "731f431497f463f3a2a97236fe0187b11c44aead"
+  },
+  {
+   "id": "control-for-CVE-2014-0195",
+   "class": "control",
+   "sha": "470990fee0182566d439ef7e82d1abf18b7085d7",
+   "matched_to": "410e444b71bca5af929fe82162cbe37e31c82083"
+  },
+  {
+   "id": "control-for-CVE-2014-0221",
+   "class": "control",
+   "sha": "c7f267397e9f1f8b43ddc84c4268bccc27d52b04",
+   "matched_to": "b4322e1de8be66ff230e26999b766ca1a42f9476"
+  },
+  {
+   "id": "control-for-CVE-2014-0224#1",
+   "class": "control",
+   "sha": "ecf3a1fb181c08540342cceb6549e0408b32d135",
+   "matched_to": "657da85eea3a5825b2dd25ff25b99ec206c48136"
+  },
+  {
+   "id": "control-for-CVE-2014-0224#2",
+   "class": "control",
+   "sha": "53a224bb0ab6c7d0d509141638f7820b859d0ade",
+   "matched_to": "fb8d9ddb9dc19d84dffa84932f75e607c8a3ffe6"
+  },
+  {
+   "id": "control-for-CVE-2014-0224#3",
+   "class": "control",
+   "sha": "6311681236779c386137429b0e45ae7a7eb904f4",
+   "matched_to": "a91be10833e61bcdc9002de28489405101c52650"
+  },
+  {
+   "id": "control-for-CVE-2014-0224#4",
+   "class": "control",
+   "sha": "8e3231642b89332fa56ed2b6f501e28722e2048e",
+   "matched_to": "a7c682fb6f692c9a3868777a7ff305784714c131"
+  },
+  {
+   "id": "control-for-CVE-2014-3470",
+   "class": "control",
+   "sha": "9a3a99748b75d9656467e28de569bd03bf3edd8f",
+   "matched_to": "a5362db4603910b1bb978163e0e7dc8890727300"
+  },
+  {
+   "id": "control-for-CVE-2014-3505",
+   "class": "control",
+   "sha": "2097a17c576f2395a10b05f14490688bc5f45a07",
+   "matched_to": "bff1ce4e6a1c57c3d0a5f9e4f85ba6385fccfe8b"
+  },
+  {
+   "id": "control-for-CVE-2014-3506",
+   "class": "control",
+   "sha": "971a7c5ff751d95bf33117e95a6acf2cfc951537",
+   "matched_to": "1250f12613b61758675848f6600ebd914ccd7636"
+  },
+  {
+   "id": "control-for-CVE-2014-3507",
+   "class": "control",
+   "sha": "841072ef658d701a352adc095f83e3948d31566e",
+   "matched_to": "d0a4b7d1a2948fce38515b8d862f43e7ba0ebf74"
+  },
+  {
+   "id": "control-for-CVE-2014-3508",
+   "class": "control",
+   "sha": "01f2f18f3c7e229bd4b1b2e3e150722175c64971",
+   "matched_to": "0042fb5fd1c9d257d713b15a1f45da05cf5c1c87"
+  },
+  {
+   "id": "control-for-CVE-2014-3509",
+   "class": "control",
+   "sha": "4f2011d981c2489b10e174cbda28a20303f655d1",
+   "matched_to": "fb0bc2b273bcc2d5401dd883fe869af4fc74bb21"
+  },
+  {
+   "id": "control-for-CVE-2014-3510",
+   "class": "control",
+   "sha": "0436369fccd128cb7f6a8538d5fed1c876c437af",
+   "matched_to": "17160033765480453be0a41335fa6b833691c049"
+  },
+  {
+   "id": "control-for-CVE-2014-3511",
+   "class": "control",
+   "sha": "a5ff18bf90a204f04c878d777db6a6b25d9f63a9",
+   "matched_to": "280b1f1ad12131defcd986676a8fc9717aaa601b"
+  },
+  {
+   "id": "control-for-CVE-2014-3513#1",
+   "class": "control",
+   "sha": "d475b2a3bfde8d4aceefb41b21acc3711893d2a8",
+   "matched_to": "3dd814ac4d0581af363068e83b5fa8d5271063d5"
+  },
+  {
+   "id": "control-for-CVE-2014-3513#2",
+   "class": "control",
+   "sha": "ce00c64df9eb78402950e179b54e7745210b04f2",
+   "matched_to": "e659eff2c0ac6da05dd968a9354c9a69ca7f57b4"
+  },
+  {
+   "id": "control-for-CVE-2014-3567",
+   "class": "control",
+   "sha": "af4c6e348e4bad6303e7d214cdcf2536487aabe4",
+   "matched_to": "748270554824d2a51d1718f52a8d3ab34116bbfb"
+  },
+  {
+   "id": "control-for-CVE-2014-3568",
+   "class": "control",
+   "sha": "5c3598307ebbf5a88d1c39fbb2629536e443a5dd",
+   "matched_to": "62f45cc27d07187b59551e4fad3db4e52ea73f2c"
+  },
+  {
+   "id": "control-for-CVE-2014-3569",
+   "class": "control",
+   "sha": "c882abd52269a59ed8e0510e5febf667428ece85",
+   "matched_to": "392fa7a952e97d82eac6958c81ed1e256e6b8ca5"
+  },
+  {
+   "id": "control-for-CVE-2014-3570",
+   "class": "control",
+   "sha": "d5f34443ad889815bde835105e5109b4e98ca237",
+   "matched_to": "a7a44ba55cb4f884c6bc9ceac90072dea38e66d0"
+  },
+  {
+   "id": "control-for-CVE-2014-3571#1",
+   "class": "control",
+   "sha": "97d5809c2b70fdd240990b940c564bcbd77a19c6",
+   "matched_to": "248385c606620b29ecc96ca9d3603463f879652b"
+  },
+  {
+   "id": "control-for-CVE-2014-3571#2",
+   "class": "control",
+   "sha": "fb76ad8d43e37b399f22932c8ccc85578fcdf7b5",
+   "matched_to": "feba02f3919495e1b960c33ba849e10e77d0785d"
+  },
+  {
+   "id": "control-for-CVE-2014-3572",
+   "class": "control",
+   "sha": "f6fa7c53479d79073cf959d7cdc496be2b2372c6",
+   "matched_to": "b15f8769644b00ef7283521593360b7b2135cb63"
+  },
+  {
+   "id": "control-for-CVE-2014-8275",
+   "class": "control",
+   "sha": "e783bae26ae50c1210d525f9c1a548e62066d670",
+   "matched_to": "684400ce192dac51df3d3e92b61830a6ef90be3e"
+  },
+  {
+   "id": "control-for-CVE-2015-0204",
+   "class": "control",
+   "sha": "707b026d7871eb12c23671c975e6a15a8c331785",
+   "matched_to": "ce325c60c74b0fa784f5872404b722e120e5cab0"
+  },
+  {
+   "id": "control-for-CVE-2015-0205",
+   "class": "control",
+   "sha": "4a4d4158572fd8b3dc641851b8378e791df7972d",
+   "matched_to": "1421e0c584ae9120ca1b88098f13d6d2e90b83a3"
+  },
+  {
+   "id": "control-for-CVE-2015-0206",
+   "class": "control",
+   "sha": "fc3968a25ce0c16cab8730ec0d68a59856158029",
+   "matched_to": "103b171d8fc282ef435f8de9afbf7782e312961f"
+  },
+  {
+   "id": "control-for-CVE-2015-0207",
+   "class": "control",
+   "sha": "2b8f33a5741e5c6eab5053140a79673bf972bc13",
+   "matched_to": "e83ee04bb7de800cdb71d522fa562e99328003a3"
+  },
+  {
+   "id": "control-for-CVE-2015-0208",
+   "class": "control",
+   "sha": "849037169d98d070c27d094ac341fc6aca1ed2ca",
+   "matched_to": "09f06923e636019c39c807cb59c481375e720556"
+  },
+  {
+   "id": "control-for-CVE-2015-0209#1",
+   "class": "control",
+   "sha": "3ffbe008083dcaad282622e8e4be69bb29bc6315",
+   "matched_to": "5e5d53d341fd9a9b9cc0a58eb3690832ca7a511f"
+  },
+  {
+   "id": "control-for-CVE-2015-0209#2",
+   "class": "control",
+   "sha": "b0333e697c008d639c56f48e9148cb8cba957e32",
+   "matched_to": "9e442d485008046933cdc7da65080f436a4af089"
+  },
+  {
+   "id": "control-for-CVE-2015-0285",
+   "class": "control",
+   "sha": "5006c32253483ba232dd441c28624801195cd7b5",
+   "matched_to": "e1b568dd2462f7cacf98f3d117936c34e2849a6b"
+  },
+  {
+   "id": "control-for-CVE-2015-0286",
+   "class": "control",
+   "sha": "52e028b9de371da62c1e51b46592517b1068d770",
+   "matched_to": "e677e8d13595f7b3287f8feef7676feb301b0e8a"
+  },
+  {
+   "id": "control-for-CVE-2015-0287",
+   "class": "control",
+   "sha": "d62bc5d30f7d9519aeff9160f98b9ad9aa592c41",
+   "matched_to": "8106d61c354430d6bbbd7f8e7840a39efc0f5829"
+  },
+  {
+   "id": "control-for-CVE-2015-0288",
+   "class": "control",
+   "sha": "3372c4fffa0556a688f8f1f550b095051398f596",
+   "matched_to": "28a00bcd8e318da18031b2ac8778c64147cd54f9"
+  },
+  {
+   "id": "control-for-CVE-2015-0289",
+   "class": "control",
+   "sha": "a258afaf7c0da143f15e1cf636279c7aaee7394f",
+   "matched_to": "c225c3cf9bd67297fb0c297768d69cbc03fbdab7"
+  },
+  {
+   "id": "control-for-CVE-2015-0290",
+   "class": "control",
+   "sha": "7132ac830fa08d9a936e011d7c541b0c52115b33",
+   "matched_to": "1d2a18dc5a3b3363e17db5af8b6b0273856ac077"
+  },
+  {
+   "id": "control-for-CVE-2015-0291",
+   "class": "control",
+   "sha": "c5f2b5336ab72e40ab91e2ca85639f51fa3178c6",
+   "matched_to": "34e3edbf3a10953cb407288101fd56a629af22f9"
+  },
+  {
+   "id": "control-for-CVE-2015-1787",
+   "class": "control",
+   "sha": "e4676e900f165f5272991443225813002300b09b",
+   "matched_to": "d3cc5e610d1719a35cda52c9152134b490a8c944"
+  },
+  {
+   "id": "control-for-CVE-2015-1788",
+   "class": "control",
+   "sha": "addaf977e2ddc7c8e8df8931a3091035cdf70052",
+   "matched_to": "4924b37ee01f71ae19c94a8934b80eeb2f677932"
+  },
+  {
+   "id": "control-for-CVE-2015-1789",
+   "class": "control",
+   "sha": "fc3cec53501ec226a493b0b04b9dd0a6f7944b0f",
+   "matched_to": "f48b83b4fb7d6689584cf25f61ca63a4891f5b11"
+  },
+  {
+   "id": "control-for-CVE-2015-1790",
+   "class": "control",
+   "sha": "f92beb98de0c8fdbf18f29642264258cc2ff05e7",
+   "matched_to": "59302b600e8d5b77ef144e447bb046fd7ab72686"
+  },
+  {
+   "id": "control-for-CVE-2015-1791#1",
+   "class": "control",
+   "sha": "cf9b0b6fb253fd40225d7c648a08646686e62d2d",
+   "matched_to": "708cf593587e2fda67dae9782991ff9fccc781eb"
+  },
+  {
+   "id": "control-for-CVE-2015-1791#2",
+   "class": "control",
+   "sha": "cb2ce7abfd3e2e641851e0ed9dff1a883b38037e",
+   "matched_to": "98ece4eebfb6cd45cc8d550c6ac0022965071afc"
+  },
+  {
+   "id": "control-for-CVE-2015-1793#1",
+   "class": "control",
+   "sha": "6038354cf8ca0792420c1ac0ce50d6d2f0aedebf",
+   "matched_to": "aae41f8c54257d9fa6904d3a9aa09c5db6cefd0d"
+  },
+  {
+   "id": "control-for-CVE-2015-1793#2",
+   "class": "control",
+   "sha": "9cca7be11d62298b2af0722f94345012c86eaed4",
+   "matched_to": "2aacec8f4a5ba1b365620a7b17fcce311ada93ad"
+  },
+  {
+   "id": "control-for-CVE-2015-1794#1",
+   "class": "control",
+   "sha": "ff934cfdc85a7b8ddb4bdebf9ab68d518bf68b7f",
+   "matched_to": "43596b306b1fe06da3b1a99e07c0cf235898010d"
+  },
+  {
+   "id": "control-for-CVE-2015-1794#2",
+   "class": "control",
+   "sha": "6c3cca5793b1ac57daceb8111d842f954a5ecf6a",
+   "matched_to": "6a009812b2e249fed01488f6f19f9fbfd9ee74c4"
+  },
+  {
+   "id": "control-for-CVE-2015-1794#3",
+   "class": "control",
+   "sha": "bca3f06b84de3c0b428724ac535995064c54aee3",
+   "matched_to": "61e72d761c945e128ca13599a98a187ac23650dd"
+  },
+  {
+   "id": "control-for-CVE-2015-3193",
+   "class": "control",
+   "sha": "46a283c01c825ab5b8d9020767383b7087e0cb5b",
+   "matched_to": "29851264f11ccc70c6c0140d7e3d8d93ef5c9b11"
+  },
+  {
+   "id": "control-for-CVE-2016-0701",
+   "class": "control",
+   "sha": "a2074b92874aa5784874e75c969e95086010dddd",
+   "matched_to": "b128abc3437600c3143cb2145185ab87ba3156a2"
+  },
+  {
+   "id": "control-for-CVE-2016-0702#1",
+   "class": "control",
+   "sha": "c8d1c9b06768bab700a3364639614202842eea42",
+   "matched_to": "317be63875e59efa34be0075eaff3c033ef6969f"
+  },
+  {
+   "id": "control-for-CVE-2016-0702#2",
+   "class": "control",
+   "sha": "f4e175e4afe900bce8624882c42d25056fd74188",
+   "matched_to": "8fc8f486f7fa098c9fbb6a6ae399e3c6856e0d87"
+  },
+  {
+   "id": "control-for-CVE-2016-0702#3",
+   "class": "control",
+   "sha": "32eabe3472339b364f23acdcceccf74bcf518953",
+   "matched_to": "d6d422e1ec48fac1c6194ab672e320281a214a32"
+  },
+  {
+   "id": "control-for-CVE-2016-0702#4",
+   "class": "control",
+   "sha": "f578075a93c7418f72ba000d1225cb0d9fd7df5d",
+   "matched_to": "5ea08bd2fe6538cbccd89f07e6f1cdd5d3e75e3f"
+  },
+  {
+   "id": "control-for-CVE-2016-0702#5",
+   "class": "control",
+   "sha": "2e963849b7ec501e4f2d6ffee31e08b2643b6e11",
+   "matched_to": "d6482a82bc2228327aa4ba98aeeecd9979542a31"
+  },
+  {
+   "id": "control-for-CVE-2016-0705",
+   "class": "control",
+   "sha": "2fa2d15ac87645959be4cf736d2169fa5be12c9e",
+   "matched_to": "ab4a81f69ec88d06c9d8de15326b9296d7f498ed"
+  },
+  {
+   "id": "control-for-CVE-2016-0797",
+   "class": "control",
+   "sha": "31305cdf9f5648a18c5a12854b08df7c9e4069fc",
+   "matched_to": "99ba9fd02fd481eb971023a3a0a251a37eb87e4c"
+  },
+  {
+   "id": "control-for-CVE-2016-0798",
+   "class": "control",
+   "sha": "f4a748a17d6a38f410acd342e8539d0e7196cbdb",
+   "matched_to": "380f18ed5f140e0ae1b68f3ab8f4f7c395658d9e"
+  },
+  {
+   "id": "control-for-CVE-2016-0799",
+   "class": "control",
+   "sha": "cedbb1462a1732bf255c4b7767d8a0e4e0d20e30",
+   "matched_to": "9cb177301fdab492e4cfef376b28339afe3ef663"
+  },
+  {
+   "id": "control-for-CVE-2016-2105",
+   "class": "control",
+   "sha": "fbaf30d087a2db2b4e22279e819d481fca21ac5c",
+   "matched_to": "ee1e3cac2e83abc77bcc8ff98729ca1e10fcc920"
+  },
+  {
+   "id": "control-for-CVE-2016-2106",
+   "class": "control",
+   "sha": "b33d1141b6dcce947708b984c5e9e91dad3d675d",
+   "matched_to": "3f3582139fbb259a1c3cbb0a25236500a409bf26"
+  },
+  {
+   "id": "control-for-CVE-2016-2107",
+   "class": "control",
+   "sha": "c96548737363689e6444e424b39279e14c61c80d",
+   "matched_to": "70428eada9bc4cf31424d723d1f992baffeb0dfb"
+  },
+  {
+   "id": "control-for-CVE-2016-2108",
+   "class": "control",
+   "sha": "8fdc99cb5dbf1a79b106cc635c82f59956e39108",
+   "matched_to": "d7ab691bc479d3cf2eea07329db6ce0e2589f0b9"
+  },
+  {
+   "id": "control-for-CVE-2016-2109",
+   "class": "control",
+   "sha": "43800958f1b080e4b75917c55df527cc96e29336",
+   "matched_to": "c62981390d6cf9e3d612c489b8b77c2913b25807"
+  },
+  {
+   "id": "control-for-CVE-2016-2176",
+   "class": "control",
+   "sha": "05aef4bbdbc18e7b9490512cdee41e8a608bcc0e",
+   "matched_to": "ea96ad5a206b7b5f25dad230333e8ff032df3219"
+  },
+  {
+   "id": "control-for-CVE-2016-2178",
+   "class": "control",
+   "sha": "073b1b72f61d81f3cf8bc1728d35f9e7e734bbd2",
+   "matched_to": "399944622df7bd81af62e67ea967c470534090e2"
+  },
+  {
+   "id": "control-for-CVE-2016-2179",
+   "class": "control",
+   "sha": "338fb1688fbfb7efe0bdd475b01791a6de5ef94b",
+   "matched_to": "26f2c5774f117aea588e8f31fad38bcf14e83bec"
+  },
+  {
+   "id": "control-for-CVE-2016-2180",
+   "class": "control",
+   "sha": "52eede5a970fdb30c4ed6d3663e51f36bd1b1c73",
+   "matched_to": "0ed26acce328ec16a3aa635f1ca37365e8c7403a"
+  },
+  {
+   "id": "control-for-CVE-2016-2181",
+   "class": "control",
+   "sha": "a004e72b95835136d3f1ea90517f706c24c03da7",
+   "matched_to": "3884b47b7c255c2e94d9b387ee83c7e8bb981258"
+  },
+  {
+   "id": "control-for-CVE-2016-2182",
+   "class": "control",
+   "sha": "0818dbadf32d193973d84a0736c099166777c071",
+   "matched_to": "07bed46f332fce8c1d157689a2cdf915a982ae34"
+  },
+  {
+   "id": "control-for-CVE-2016-2183",
+   "class": "control",
+   "sha": "626aa24849be549b7ef4f049d8427989940c8a37",
+   "matched_to": "ef28891bab7054667f2f6739f6d376c38b3ca1cc"
+  },
+  {
+   "id": "control-for-CVE-2016-6302",
+   "class": "control",
+   "sha": "c4fbed6c3139726fc719a703d2195f3b6426b748",
+   "matched_to": "e97763c92c655dcf4af2860b3abd2bc4c8a267f9"
+  },
+  {
+   "id": "control-for-CVE-2016-6303",
+   "class": "control",
+   "sha": "ea4b7ded521134492a323b6b0c27e671cadca979",
+   "matched_to": "55d83bf7c10c7b205fffa23fa7c3977491e56c07"
+  },
+  {
+   "id": "control-for-CVE-2016-6304",
+   "class": "control",
+   "sha": "bde588df8a4d9f714cefe9cfd1a3931558de4c3c",
+   "matched_to": "e408c09bbf7c3057bda4b8d20bec1b3a7771c15b"
+  },
+  {
+   "id": "control-for-CVE-2016-6305",
+   "class": "control",
+   "sha": "ba8fa4e53a35a0c46d1e0e81a4d270a026fac2b9",
+   "matched_to": "b8d243956296458d1782af0d6e7ecfe6deae038a"
+  },
+  {
+   "id": "control-for-CVE-2016-6306",
+   "class": "control",
+   "sha": "06a549c435d6095b33d78f136904c5fc2f7bcf24",
+   "matched_to": "006a788c84e541c8920dd2ad85fb62b52185c519"
+  },
+  {
+   "id": "control-for-CVE-2016-6307",
+   "class": "control",
+   "sha": "278a33da3cf10f0a9ab12c2a1f643f9027b06679",
+   "matched_to": "c1ef7c971d0bbf117c3c80f65b5875e2e7b024b1"
+  },
+  {
+   "id": "control-for-CVE-2016-6308",
+   "class": "control",
+   "sha": "3e2dd30d665f3a312a45f945ffafb74ff6c420d6",
+   "matched_to": "48c054fec3506417b2598837b8062aae7114c200"
+  },
+  {
+   "id": "control-for-CVE-2016-6309",
+   "class": "control",
+   "sha": "252cfef151e302dce598503de09fd3a3341810d7",
+   "matched_to": "0d698f6696e114a6e47f8b75ff88ec81f9e30175"
+  },
+  {
+   "id": "control-for-CVE-2016-7052",
+   "class": "control",
+   "sha": "85d6b09ddaf32a67a351521f84651c3193286663",
+   "matched_to": "8b7c51a0e4a03895a657cf2eb8d5c2aa1ca3586f"
+  },
+  {
+   "id": "control-for-CVE-2016-7053",
+   "class": "control",
+   "sha": "fba7b84ca30dc809652e9f35f65e1d55c5b3c6e4",
+   "matched_to": "f962541d0be200055e508641ddf3a8ec8819e4df"
+  },
+  {
+   "id": "control-for-CVE-2016-7054",
+   "class": "control",
+   "sha": "a54aba531327285f64cf13a909bc129e9f9d5970",
+   "matched_to": "bf52165bda53524a267c784696bd074111a2f178"
+  },
+  {
+   "id": "control-for-CVE-2016-7055",
+   "class": "control",
+   "sha": "d2f42576c46ce84662134a68ccbf76bd1cf639ba",
+   "matched_to": "2fac86d9abeaa643677d1ffd0a139239fdf9406a"
+  },
+  {
+   "id": "control-for-CVE-2017-3730",
+   "class": "control",
+   "sha": "e25233d99c30885bdf97bfb6df657e13ca2bf1da",
+   "matched_to": "b599ce3b64b695cc7430f731a33e0f5bb83ae62c"
+  },
+  {
+   "id": "control-for-CVE-2017-3731#1",
+   "class": "control",
+   "sha": "2191dc846a85ce82925cb06b4dd8649da7fc403c",
+   "matched_to": "2198b3a55de681e1f3c23edb0586afe13f438051"
+  },
+  {
+   "id": "control-for-CVE-2017-3731#2",
+   "class": "control",
+   "sha": "b1531d8e6cc95837e38b10d875ae64144c6fdf7a",
+   "matched_to": "8e20499629b6bcf868d0072c7011e590b5c2294d"
+  },
+  {
+   "id": "control-for-CVE-2017-3732",
+   "class": "control",
+   "sha": "c53f7355b93885d1f12237f94b363ad747f03dad",
+   "matched_to": "3f4bcf5bb664b47ed369a70b99fac4e0ad141bb3"
+  },
+  {
+   "id": "control-for-CVE-2017-3733",
+   "class": "control",
+   "sha": "3258e29a385f4800440a96a16889035a83aff437",
+   "matched_to": "4ad93618d26a3ea23d36ad5498ff4f59eff3a4d2"
+  },
+  {
+   "id": "control-for-CVE-2017-3735",
+   "class": "control",
+   "sha": "3f1d1704f215dc11e1fefbb6ecdcb2a08c3a65db",
+   "matched_to": "b23171744b01e473ebbfd6edad70c1c3825ffbcd"
+  },
+  {
+   "id": "control-for-CVE-2017-3736",
+   "class": "control",
+   "sha": "17c84aa763b1d69c5446542bf9b4e2f642c570f2",
+   "matched_to": "668a709a8d7ea374ee72ad2d43ac72ec60a80eee"
+  },
+  {
+   "id": "control-for-CVE-2017-3737",
+   "class": "control",
+   "sha": "046c5f73535c8a46af940c063e00dfa6cce73f18",
+   "matched_to": "898fb884b706aaeb283de4812340bb0bde8476dc"
+  },
+  {
+   "id": "control-for-CVE-2017-3738",
+   "class": "control",
+   "sha": "e44480cc26c9bdf4227d963d84ae271a1efaccd9",
+   "matched_to": "5630661aecbea5fe3c4740f5fea744a1f07a6253"
+  },
+  {
+   "id": "control-for-CVE-2018-0732",
+   "class": "control",
+   "sha": "5f49783c12e9e6100075e50fe727ee2d5cc30445",
+   "matched_to": "91f7361f47b082ae61ffe1a7b17bb2adf213c7fe"
+  },
+  {
+   "id": "control-for-CVE-2018-0733",
+   "class": "control",
+   "sha": "edc79fc99e1efec04c2a0a7f652269364981e6aa",
+   "matched_to": "0b020b14882173918b9cc3e8e3bd85fb9ffac948"
+  },
+  {
+   "id": "control-for-CVE-2018-0734",
+   "class": "control",
+   "sha": "37f4928701aa54937ce8eef422a2165afeec5cec",
+   "matched_to": "a9cfb8c2aa7254a4aa6a1716909e3f8cb78049b6"
+  },
+  {
+   "id": "control-for-CVE-2018-0735",
+   "class": "control",
+   "sha": "ec2d099fccec25e2d92c4cd2958db21f0d0a1d82",
+   "matched_to": "99540ec79491f59ed8b46b4edf130e17dc907f52"
+  },
+  {
+   "id": "control-for-CVE-2018-0737",
+   "class": "control",
+   "sha": "6ad8253306f96e1a749d020ddbb131c71aa1edf8",
+   "matched_to": "6939eab03a6e23d2bd2c3f5e34fe1d48e542e787"
+  },
+  {
+   "id": "control-for-CVE-2018-0739",
+   "class": "control",
+   "sha": "6ac9fda415c822cc5dd8c845893c6048c34492e0",
+   "matched_to": "2ac4c6f7b2b2af20c0e2b0ba05367e454cd11b33"
+  },
+  {
+   "id": "control-for-CVE-2018-5407",
+   "class": "control",
+   "sha": "dbdcc04f27db70ac71748eb595ce23c9733afbe7",
+   "matched_to": "40e48e54582e46c1a01e184ecf5bd31f4f7f8294"
+  },
+  {
+   "id": "control-for-CVE-2019-1543",
+   "class": "control",
+   "sha": "c8147d37ccaaf28c430d3fb45a14af36597e48b8",
+   "matched_to": "2a3d0ee9d59156c48973592331404471aca886d6"
+  },
+  {
+   "id": "control-for-CVE-2019-1547",
+   "class": "control",
+   "sha": "b8441adb593392e224eccc95495e9a7451d04821",
+   "matched_to": "b783beeadf6b80bc431e6f3230b5d5585c87ef87"
+  },
+  {
+   "id": "control-for-CVE-2019-1549",
+   "class": "control",
+   "sha": "6b9e37246d5fd8e701b825c71fa1a018916af33c",
+   "matched_to": "849529257c9979c7ca0d28e8b80a47bc4a36d4f2"
+  },
+  {
+   "id": "control-for-CVE-2019-1551",
+   "class": "control",
+   "sha": "a56f68adb7aaada4848d422125bee87ea6c3f483",
+   "matched_to": "8c6f86c7c5350fadf22d32d6cd4712e2ad4447ba"
+  },
+  {
+   "id": "control-for-CVE-2019-1552",
+   "class": "control",
+   "sha": "ddd16c2fe988ed9fdd5118c2f2617745438fd675",
+   "matched_to": "54aa9d51b09d67e90db443f682cface795f5af9e"
+  },
+  {
+   "id": "control-for-CVE-2019-1559",
+   "class": "control",
+   "sha": "becdc13fd87052058c87dd0ee3894345617085b8",
+   "matched_to": "e9bbefbf0f24c57645e7ad6a5a71ae649d18ac8e"
+  },
+  {
+   "id": "control-for-CVE-2019-1563",
+   "class": "control",
+   "sha": "c750bc08516f1273751ba03fa533e3eb2418b92d",
+   "matched_to": "5840ed0cd1e6487d247efbc1a04136a41d7b3a37"
+  },
+  {
+   "id": "control-for-CVE-2020-1967",
+   "class": "control",
+   "sha": "7da7b27eec58d1efc7012f002c45ddbdd61a5e79",
+   "matched_to": "a87f3fe01a5a894aa27ccd6a239155fd129988e4"
+  },
+  {
+   "id": "control-for-CVE-2020-1971",
+   "class": "control",
+   "sha": "42bb51e59308b3ebc5cc1c35ff4822fba6b52d79",
+   "matched_to": "f960d81215ebf3f65e03d4d5d857fb9b666d6920"
+  },
+  {
+   "id": "control-for-CVE-2021-23839",
+   "class": "control",
+   "sha": "63ae8476796510c15163c9bd18998ccef6c1de16",
+   "matched_to": "d9461cbe87b91fec98c4ab99a6f47621390e4aa2"
+  },
+  {
+   "id": "control-for-CVE-2021-23840",
+   "class": "control",
+   "sha": "7ff9fdd4b31757f70080bd3fa2e633ca080408a4",
+   "matched_to": "c9fb704cf3af5524eb8e79961e31b60eee8c3c47"
+  },
+  {
+   "id": "control-for-CVE-2021-23841",
+   "class": "control",
+   "sha": "aee73562d17499f2660c14f8c150459097680a1d",
+   "matched_to": "8130d654d1de922ea224fa18ee3bc7262edc39c0"
+  },
+  {
+   "id": "control-for-CVE-2021-3449",
+   "class": "control",
+   "sha": "c08138e500ed27c6aa3db98194bd04c400213db3",
+   "matched_to": "02b1636fe3db274497304a3e95a4e32ced7e841b"
+  },
+  {
+   "id": "control-for-CVE-2021-3450",
+   "class": "control",
+   "sha": "2e06150e3928daa06d5ff70c32bffad8088ebe58",
+   "matched_to": "2a40b7bc7b94dd7de897a74571e7024f0cf0d63b"
+  },
+  {
+   "id": "control-for-CVE-2021-3711",
+   "class": "control",
+   "sha": "08ee6addf7343e7523db47dcc7e84e1670d52e15",
+   "matched_to": "36cf45ef3ba71e44a8be06ee81cb31aa02cb0010"
+  },
+  {
+   "id": "control-for-CVE-2021-3712",
+   "class": "control",
+   "sha": "918430ba80d94ec8f05383b43b1872b1ebb13e1a",
+   "matched_to": "030c5aba94788f152f9ceef3549815df45bef702"
+  },
+  {
+   "id": "control-for-CVE-2021-4044",
+   "class": "control",
+   "sha": "e819b5727312477f8c1f56bf928e611ad7e78315",
+   "matched_to": "c1c1bb7c5e2baa109baec62d2af09d24caae5557"
+  },
+  {
+   "id": "control-for-CVE-2021-4160",
+   "class": "control",
+   "sha": "2490d10d5cca0163cad8045857248b175bdf83e7",
+   "matched_to": "336923c0c8d705cb8af5216b29a205662db0d590"
+  },
+  {
+   "id": "control-for-CVE-2022-0778",
+   "class": "control",
+   "sha": "fd989c734dc3f9e15d700ff9ced15125a23d4359",
+   "matched_to": "9eafb53614bf65797db25f467946e735e1b43dc9"
+  },
+  {
+   "id": "control-for-CVE-2022-1292",
+   "class": "control",
+   "sha": "4e26fe508bf18732983212ca4749eabb1f02e142",
+   "matched_to": "7c33270707b568c524a8ef125fe611a8872cb5e8"
+  },
+  {
+   "id": "control-for-CVE-2022-1343",
+   "class": "control",
+   "sha": "bbe909d00e9a593bd5954dfca4d3020467977565",
+   "matched_to": "21f89f542d745adbf1131338929ae538e200d50d"
+  },
+  {
+   "id": "control-for-CVE-2022-1434",
+   "class": "control",
+   "sha": "e3477d3e5ccd971da3d8a90a7d5096b47372d288",
+   "matched_to": "33219939c782cf363b30e9e899b9997fb1ced440"
+  },
+  {
+   "id": "control-for-CVE-2022-1473",
+   "class": "control",
+   "sha": "1ab8b7cd3bef5ae3bcb516a1c2f2fff4abd63c5b",
+   "matched_to": "e5da68183410c06f7b350a0721bc2bd6057e438e"
+  },
+  {
+   "id": "control-for-CVE-2022-2068",
+   "class": "control",
+   "sha": "ef7a9b44f04ef18b652cb47cd9eb3826301cca9e",
+   "matched_to": "ce60b13707add7e6b54c5817376234c4043506ed"
+  },
+  {
+   "id": "control-for-CVE-2022-2097",
+   "class": "control",
+   "sha": "d840f07bcdfc3910de5aa327a245866a67f94799",
+   "matched_to": "6ebf6d51596f51d23ccbc17930778d104a57d99c"
+  },
+  {
+   "id": "control-for-CVE-2022-2274",
+   "class": "control",
+   "sha": "a644cb7c1c19c78e2ca393c8ca36989e7ca61715",
+   "matched_to": "4d8a88c134df634ba610ff8db1eb8478ac5fd345"
+  },
+  {
+   "id": "control-for-CVE-2022-3358",
+   "class": "control",
+   "sha": "2f7e61b8b21ed472a3667b8922843851f94a3d93",
+   "matched_to": "25d47cccf203c3b71171e78865e48ea061a039a8"
+  },
+  {
+   "id": "control-for-CVE-2022-3602",
+   "class": "control",
+   "sha": "6962e21b7c51480343db1a275f52525754dcbe44",
+   "matched_to": "3b421ebc64c7b52f1b9feb3812bdc7781c784332"
+  },
+  {
+   "id": "control-for-CVE-2022-3786",
+   "class": "control",
+   "sha": "9710d72b95f4fc218ed613f42dc90ad0d263b14f",
+   "matched_to": "680e65b94c916af259bfdc2e25f1ab6e0c7a97d6"
+  },
+  {
+   "id": "control-for-CVE-2022-3996",
+   "class": "control",
+   "sha": "a63fa5f711f1f97e623348656b42717d6904ee3e",
+   "matched_to": "4d0340a6d2f327700a059f0b8f954d6160f8eef5"
+  },
+  {
+   "id": "control-for-CVE-2022-4203",
+   "class": "control",
+   "sha": "cf06f34727447fad04cbcbce2b8b3f269c1b9307",
+   "matched_to": "748f478f814bc8e418542c68599ec7dbcbac97b2"
+  },
+  {
+   "id": "control-for-CVE-2022-4304",
+   "class": "control",
+   "sha": "19863d497dd1f74099998d4e5788d270de6423d6",
+   "matched_to": "b1892d21f8f0435deb0250f24a97915dc641c807"
+  },
+  {
+   "id": "control-for-CVE-2022-4450",
+   "class": "control",
+   "sha": "77c8d6d703efd1d935b5c2603fd31f4b15b1214d",
+   "matched_to": "ee6243f3947107d655f6dee96f63861561a5aaeb"
+  },
+  {
+   "id": "control-for-CVE-2023-0215",
+   "class": "control",
+   "sha": "450f96e965f0d5e89737755364df5933b5085639",
+   "matched_to": "9cc85002a1138235bdc272b837d7eb32d6b7aa95"
+  },
+  {
+   "id": "control-for-CVE-2023-0216",
+   "class": "control",
+   "sha": "3147785eb23bb27080a0b7accbbff46ac471e86c",
+   "matched_to": "80253dbdc92bec584f4a9866b43f8674156d838a"
+  },
+  {
+   "id": "control-for-CVE-2023-0217",
+   "class": "control",
+   "sha": "aa2d7e0ee15d1b7015479c38f370a25ceec690fc",
+   "matched_to": "bcec03c33cc00a7b5eb89ebeeee59e604570a86a"
+  },
+  {
+   "id": "control-for-CVE-2023-0286",
+   "class": "control",
+   "sha": "f45c6033cebe2663adf206a7f1da4bff0a4c5276",
+   "matched_to": "2f7530077e0ef79d98718138716bc51ca0cad658"
+  },
+  {
+   "id": "control-for-CVE-2023-0401",
+   "class": "control",
+   "sha": "911045afda06bec038ccd15e9f849bff05b6f1ee",
+   "matched_to": "6eebe6c0238178356114a96a7858f36b24172847"
+  },
+  {
+   "id": "control-for-CVE-2023-0464",
+   "class": "control",
+   "sha": "30667f5c306dbc11ac0e6fddc7d26fd984d546ab",
+   "matched_to": "3a81370f75b832102e9969533a25ca53fe0b254e"
+  },
+  {
+   "id": "control-for-CVE-2023-0465",
+   "class": "control",
+   "sha": "7f7dafe98b10ef54593df175b901654a0f9890a7",
+   "matched_to": "e4142ec43bcc08ffdb090580e24c24a7da302a32"
+  },
+  {
+   "id": "control-for-CVE-2023-1255",
+   "class": "control",
+   "sha": "6c091ca968f4c62744a5161d54f2c2dd89a76993",
+   "matched_to": "72dfe46550ee1f1bbfacd49f071419365bc23304"
+  },
+  {
+   "id": "control-for-CVE-2023-2650",
+   "class": "control",
+   "sha": "1e4a9d882f77977f518dcad418b05822efb172fe",
+   "matched_to": "d63b3e7959e79f98d60760a739f7876dc5adc838"
+  },
+  {
+   "id": "control-for-CVE-2023-2975",
+   "class": "control",
+   "sha": "780b2527476a60f4a2bb791c2d4b1b72f6f0b423",
+   "matched_to": "c426c281cfc23ab182f7d7d7a35229e7db1494d9"
+  },
+  {
+   "id": "control-for-CVE-2023-3446",
+   "class": "control",
+   "sha": "bac3f4da5579887d6e203020e83298676cc982ba",
+   "matched_to": "9e0094e2aa1b3428a12d5095132f133c078d3c3d"
+  },
+  {
+   "id": "control-for-CVE-2023-3817",
+   "class": "control",
+   "sha": "97937cfcd8b5a011dd54e74eb2cc3cc26a533b10",
+   "matched_to": "1c16253f3c3a8d1e25918c3f404aae6a5b0893de"
+  },
+  {
+   "id": "control-for-CVE-2023-4807",
+   "class": "control",
+   "sha": "b139f7a26d0158e42b0f4b9e7364111a8fd17fa2",
+   "matched_to": "7b8e27bc2e02238986d89ef0ece067ec1b48e165"
+  },
+  {
+   "id": "control-for-CVE-2023-5363",
+   "class": "control",
+   "sha": "cd920f8fa1bb603a620bea697027f5573fadc12e",
+   "matched_to": "f3a7e6c057b5054aa05710f3d528b92e3e885268"
+  },
+  {
+   "id": "control-for-CVE-2023-5678",
+   "class": "control",
+   "sha": "7757f5ef731ad4e8d6c0f59ef752e4f726ba4f90",
+   "matched_to": "ec061bf8ff2add8050599058557178c03295bcc0"
+  },
+  {
+   "id": "control-for-CVE-2023-6129",
+   "class": "control",
+   "sha": "3bef14c5367b4e2d7aded4f80e78e8f19b74f710",
+   "matched_to": "8d847a3ffd4f0b17ee33962cf69c36224925b34f"
+  },
+  {
+   "id": "control-for-CVE-2023-6237",
+   "class": "control",
+   "sha": "0c3eb31b55d3c1544e4e044c2e3c939655bac93d",
+   "matched_to": "e09fc1d746a4fd15bb5c3d7bbbab950aadd005db"
+  },
+  {
+   "id": "control-for-CVE-2024-0727",
+   "class": "control",
+   "sha": "d743afe7e83df9473058d68a7fa89649741e6814",
+   "matched_to": "041962b429ebe748c8b6b7922980dfb6decfef26"
+  },
+  {
+   "id": "control-for-CVE-2024-12797",
+   "class": "control",
+   "sha": "2de7e1d69851a363cadd9d6bdd95302b89a4383b",
+   "matched_to": "6ae8e947d8e3f3f03eeb7d9ad993e341791900bc"
+  },
+  {
+   "id": "control-for-CVE-2024-13176",
+   "class": "control",
+   "sha": "539b17b6580f2ca235b5e1db529e87793b8a807c",
+   "matched_to": "63c40a66c5dc287485705d06122d3a6e74a6a203"
+  },
+  {
+   "id": "control-for-CVE-2024-2511",
+   "class": "control",
+   "sha": "99fb31c167e322186c6f576cfaa8f433f4fed117",
+   "matched_to": "7984fa683e9dfac0cad50ef2a9d5a13330222044"
+  },
+  {
+   "id": "control-for-CVE-2024-4603",
+   "class": "control",
+   "sha": "90849b520b3eef012e65075988b6538da39e2fa4",
+   "matched_to": "85ccbab216da245cf9a6503dd327072f21950d9b"
+  },
+  {
+   "id": "control-for-CVE-2024-4741",
+   "class": "control",
+   "sha": "bd73e1e62c4103e0faffb79cb3d34a2a92a95439",
+   "matched_to": "38690cab18de88198f46478565fab423cf534efa"
+  },
+  {
+   "id": "control-for-CVE-2024-5535",
+   "class": "control",
+   "sha": "f6ce48f5b8ad4d8d748ea87d2490cbed08db9936",
+   "matched_to": "2ebbe2d7ca8551c4cb5fbb391ab9af411708090e"
+  },
+  {
+   "id": "control-for-CVE-2024-6119",
+   "class": "control",
+   "sha": "5cec58bdfffeff89cce3cfc64e8e2cb709a8fa8e",
+   "matched_to": "0890cd13d40fbc98f655f3974f466769caa83680"
+  },
+  {
+   "id": "control-for-CVE-2024-9143",
+   "class": "control",
+   "sha": "d7b659e18510771450b7e4794313902815f9e206",
+   "matched_to": "8e008cb8b23ec7dc75c45a66eeed09c815b11cd2"
+  },
+  {
+   "id": "control-for-CVE-2025-11187",
+   "class": "control",
+   "sha": "80db9e92fd1d2b693b0e6f756b4f71b47b57ceae",
+   "matched_to": "de157b8ff3328d41448779fa23b071c8e88304d2"
+  },
+  {
+   "id": "control-for-CVE-2025-15467",
+   "class": "control",
+   "sha": "d62febf758fafdfa90a599df2028cbe1b5d52f2a",
+   "matched_to": "0ddd6b6bcbdedbe2c8304af05771f8ab11939112"
+  },
+  {
+   "id": "control-for-CVE-2025-15468",
+   "class": "control",
+   "sha": "9ae1002d426ab34081fc2ee8cb3314a4456c453a",
+   "matched_to": "293b55de0c434a99d0e744d0521170ca280606a9"
+  },
+  {
+   "id": "control-for-CVE-2025-15469",
+   "class": "control",
+   "sha": "974d00769895605c4076a7f6acdfc31ba328096f",
+   "matched_to": "6028c0654ef8350b1a357ad37fd687757ecafac2"
+  },
+  {
+   "id": "control-for-CVE-2025-4575",
+   "class": "control",
+   "sha": "a198caa5e34a2003f83b5cd4419f864da55eb0a5",
+   "matched_to": "0eb9acc24febb1f3f01f0320cfba9654cf66b0ac"
+  },
+  {
+   "id": "control-for-CVE-2025-66199",
+   "class": "control",
+   "sha": "b0041c909ef4c9d59f1139ed8957ec9a9c12856f",
+   "matched_to": "84f73f79af9f69c1527a9a372b7a9e771a394c2a"
+  },
+  {
+   "id": "control-for-CVE-2025-68160",
+   "class": "control",
+   "sha": "92b5ba86f68b200c0f2549ec21a5edaaf2da4735",
+   "matched_to": "b21663c35a6f0ed4c8de06855bdc7a6a21f00c2f"
+  },
+  {
+   "id": "control-for-CVE-2025-69418",
+   "class": "control",
+   "sha": "b6aed64e47b831305c05a4132e7c7f21257ea663",
+   "matched_to": "be9375d5d45dfaf897b56ef148a0b58402491fcb"
+  },
+  {
+   "id": "control-for-CVE-2025-69419",
+   "class": "control",
+   "sha": "f95dfe09504f5cd9d054ee3b75d9dde4d6e24636",
+   "matched_to": "53b78f2a49cd1ede1c4f86d53b2f6d9ff9e1620e"
+  },
+  {
+   "id": "control-for-CVE-2025-69420",
+   "class": "control",
+   "sha": "3b69cc994cbc5dff5daf890ef3e34916a08ee689",
+   "matched_to": "ea8fc4c345fbd749048809c9f7c881ea656b0b94"
+  },
+  {
+   "id": "control-for-CVE-2025-69421",
+   "class": "control",
+   "sha": "357beec47f331c0e07c2e965f7ac11e507a77b19",
+   "matched_to": "2c13bf15286328641a805eb3b7c97e27d42881fb"
+  },
+  {
+   "id": "control-for-CVE-2025-9230",
+   "class": "control",
+   "sha": "de0944c9b3a77b6f3c7ed07a90f7d463301851a8",
+   "matched_to": "9c462be2cea54ebfc62953224220b56f8ba22a0c"
+  },
+  {
+   "id": "control-for-CVE-2025-9231",
+   "class": "control",
+   "sha": "a629b3ccfaa4b559a37d02d2739fe907dd2493a4",
+   "matched_to": "dff94dba75490d03926e77be9f2da3bcf4485820"
+  },
+  {
+   "id": "control-for-CVE-2025-9232",
+   "class": "control",
+   "sha": "8a4ef31f3ab9c8e512d29600ccc833cf03533b9e",
+   "matched_to": "6bca15039e99d37ce3a3564eb862a3b1ff40e63d"
+  },
+  {
+   "id": "control-for-CVE-2026-14456",
+   "class": "control",
+   "sha": "1b25e3fca5772fce2edd71a6adfc306dbe254c3e",
+   "matched_to": "9416706d408bb84deb7cee4647bff3045d2dc7ba"
+  },
+  {
+   "id": "control-for-CVE-2026-14457",
+   "class": "control",
+   "sha": "bee02b7d509bbd6b49d70a2174f0a8a591883cc1",
+   "matched_to": "b8e5bb958ee4501a95b424c6f9f457dd013b4d83"
+  },
+  {
+   "id": "control-for-CVE-2026-18798",
+   "class": "control",
+   "sha": "ba2f3b557a660cbe2a0fc0e99b1830cb930a090f",
+   "matched_to": "b6011a9ee87ab25f47d999a716a1567da00e1878"
+  },
+  {
+   "id": "control-for-CVE-2026-22795",
+   "class": "control",
+   "sha": "e3e371382289ad60baa9e67850b284c33f03e763",
+   "matched_to": "c08264903396074ba9e5f9d5a40843cd521636d7"
+  },
+  {
+   "id": "control-for-CVE-2026-2673",
+   "class": "control",
+   "sha": "371b259013dc75f20ec1cd7f57bbf90f241d03d0",
+   "matched_to": "9efd7e9e98a98aaade8121bac8f1e53208c3af33"
+  },
+  {
+   "id": "control-for-CVE-2026-28386",
+   "class": "control",
+   "sha": "70837aa2385bc83226375d74f02fe5c03a3e0d21",
+   "matched_to": "7464ccdd43f600decd0af571556a1fc56ccd6419"
+  },
+  {
+   "id": "control-for-CVE-2026-28387",
+   "class": "control",
+   "sha": "fa293c4d62628d434ed46392a9cbea0b91d73671",
+   "matched_to": "8b5cd6a682f0f6e7b8bf55137137c567d1899c4a"
+  },
+  {
+   "id": "control-for-CVE-2026-28388",
+   "class": "control",
+   "sha": "9648c510147e343393a568f1616a5091f1eb3d0a",
+   "matched_to": "d6ad8595e86dc96ca8771f0a1714b31794befa75"
+  },
+  {
+   "id": "control-for-CVE-2026-28389",
+   "class": "control",
+   "sha": "69fb9335ee0f5dd39aabca6d35d1557ca3b2d856",
+   "matched_to": "dea5c521a6a78a1caed451e53a149d327d2a928d"
+  },
+  {
+   "id": "control-for-CVE-2026-28390",
+   "class": "control",
+   "sha": "deba49ff0aa58b16c996a0d446335de2a4722540",
+   "matched_to": "b388240d34fb913e91171bb665a82867dca68be9"
+  },
+  {
+   "id": "control-for-CVE-2026-31789",
+   "class": "control",
+   "sha": "b238d36c50a177eb8d5fb384e51fe03c9e81001a",
+   "matched_to": "3244aa4b9d6ea0220cc14fd97d951c67b5052837"
+  },
+  {
+   "id": "control-for-CVE-2026-31790",
+   "class": "control",
+   "sha": "ebb188f0d08e35e25e9f2f4c5392036c75048014",
+   "matched_to": "89dde74b69debbf0c4d0a0ee925de87638bbfe16"
+  },
+  {
+   "id": "control-for-CVE-2026-34180",
+   "class": "control",
+   "sha": "74edd30c9f6b3a583ca05fc97f296ddd0e161b78",
+   "matched_to": "fcb23806047f5afbe55d5d601a527fc24bf7ca2c"
+  },
+  {
+   "id": "control-for-CVE-2026-34181",
+   "class": "control",
+   "sha": "00fba2aca43261cff42f01f183d654ab0dfc1fd1",
+   "matched_to": "5a0230b6cc95a576b0c2b7b5b2ba7c74232e7b7c"
+  },
+  {
+   "id": "control-for-CVE-2026-34182",
+   "class": "control",
+   "sha": "0ae9d50dd8ba1cebc5ebc699705ae1d7466d64bd",
+   "matched_to": "206faade8b3872d265524e56583cfc05ac001da5"
+  },
+  {
+   "id": "control-for-CVE-2026-34183",
+   "class": "control",
+   "sha": "c7c8dea22984bab394bc227fabfe1b9416df952f",
+   "matched_to": "9bedb613191f2d86def2be626b72f239daf81808"
+  },
+  {
+   "id": "control-for-CVE-2026-35188",
+   "class": "control",
+   "sha": "9fca1b9c2e3efdc3f3358c8260dba118c23e4407",
+   "matched_to": "58633b658fe74095c8cdde191e4ce1bf94f8c5f9"
+  },
+  {
+   "id": "control-for-CVE-2026-35189",
+   "class": "control",
+   "sha": "c9aa42db82c3cf436e1e80481e7fb7eb345fb051",
+   "matched_to": "94b39d044a2a304adf8ab373248a00beec2d210a"
+  },
+  {
+   "id": "control-for-CVE-2026-35191",
+   "class": "control",
+   "sha": "6d2d67f95498842976e63938a44985d2adb0e3a1",
+   "matched_to": "ebcd9361a255943407553f8812f66e9ab1be7022"
+  },
+  {
+   "id": "control-for-CVE-2026-42764",
+   "class": "control",
+   "sha": "d2b48f060d097c33dd36613ca7071167f5cfc118",
+   "matched_to": "5097ec4dae239112498abb722e255ea60ef7ac48"
+  },
+  {
+   "id": "control-for-CVE-2026-42765",
+   "class": "control",
+   "sha": "0a6b6664a48f0e499fc14aeafd9cb408b261f1ad",
+   "matched_to": "a9af3442290e8a04706a3cd5f284ffd5b486e3f6"
+  },
+  {
+   "id": "control-for-CVE-2026-42766",
+   "class": "control",
+   "sha": "d099e33e5733bb9d3975fc4f3ac4a85b6ed1a4cb",
+   "matched_to": "74245170b5a64b234ac4af27c86a25ec251c8b2a"
+  },
+  {
+   "id": "control-for-CVE-2026-42767",
+   "class": "control",
+   "sha": "db3178f4203415f9b25dce42881cf97d2808dc39",
+   "matched_to": "11df4e2ae04fe3f3207aa79b461b6ed90e5f6bce"
+  },
+  {
+   "id": "control-for-CVE-2026-42768",
+   "class": "control",
+   "sha": "7060a2fb0c204eb3a75068f44fadcf60eb7ac7cc",
+   "matched_to": "d5030cdf32d6cd27bd964a0cb7aed2b7cb713369"
+  },
+  {
+   "id": "control-for-CVE-2026-42769",
+   "class": "control",
+   "sha": "4dcf6d276dea963e5d3b1d5de4349f301c17f1ba",
+   "matched_to": "c2765d53c2649b56bc1ca1bb799e42002953056a"
+  },
+  {
+   "id": "control-for-CVE-2026-42770",
+   "class": "control",
+   "sha": "c97318e35ebeb3b973ae06fa43ebabdfb6dce61b",
+   "matched_to": "0f3fab2eccc7c3417093a8243dd15d95b6cb472d"
+  },
+  {
+   "id": "control-for-CVE-2026-42771",
+   "class": "control",
+   "sha": "07485b844a0689354c2c17163604860a82d281bb",
+   "matched_to": "b3a555a0a7aa0028887149f6f973af89a4937bea"
+  },
+  {
+   "id": "control-for-CVE-2026-42772",
+   "class": "control",
+   "sha": "96b16b9a611fdd4f75b86acb837a09eb7a17fc90",
+   "matched_to": "dbc3ceb4ca582a304eda542f12d4338ed421d3c7"
+  },
+  {
+   "id": "control-for-CVE-2026-45445",
+   "class": "control",
+   "sha": "8d165eb843a99c7ed44944620a52cf4c4eba2e22",
+   "matched_to": "f87f0b6a8e04bcdeb98afc82b0da06a2d537f399"
+  },
+  {
+   "id": "control-for-CVE-2026-45446",
+   "class": "control",
+   "sha": "1e5d536b0530bd0578a9dcd3cd3e0a4403f5558b",
+   "matched_to": "609bcb24866d64f1fc49d38b852edbb39057d721"
+  },
+  {
+   "id": "control-for-CVE-2026-45447",
+   "class": "control",
+   "sha": "8f9f0d2da0669a49fcb943eb433af1368461258a",
+   "matched_to": "f4129fbe3cde786d363510069fe297234f99be8f"
+  },
+  {
+   "id": "control-for-CVE-2026-54872",
+   "class": "control",
+   "sha": "a0757394d3f77fd345fdc594ddcc36d2d1c01da0",
+   "matched_to": "f297baaa1142ab42e628fdd7a54b96592d2559dd"
+  },
+  {
+   "id": "control-for-CVE-2026-54873",
+   "class": "control",
+   "sha": "5f9b4da9ddf835aa7c532202d8d84eab02a07067",
+   "matched_to": "1121081b2a4667a77c641e9a4d00257d4c8342b6"
+  },
+  {
+   "id": "control-for-CVE-2026-54874#1",
+   "class": "control",
+   "sha": "d7191d9d35ce320fc1e81c95200078f261d411ce",
+   "matched_to": "809b52282a3ea6d56fc2e1c427f2d9bd83b06eaa"
+  },
+  {
+   "id": "control-for-CVE-2026-54874#2",
+   "class": "control",
+   "sha": "e5d2eaee133290cce1b01bc7cead839bd7e18b8e",
+   "matched_to": "13bcff0ab2f5c55696c92cc6b3480d94f80e8e3b"
+  },
+  {
+   "id": "control-for-CVE-2026-54875",
+   "class": "control",
+   "sha": "f82466c814030cb72b873662360b1dccfd21c6a7",
+   "matched_to": "ddb9e22bc3b46d65fba9d2ec58e444c9f7d4749e"
+  },
+  {
+   "id": "control-for-CVE-2026-54876",
+   "class": "control",
+   "sha": "f5a5e89044174e1b9509841baa2b334b368bdadc",
+   "matched_to": "3693c35ffd07b09e096435521ad27ee7a43a6e08"
+  },
+  {
+   "id": "control-for-CVE-2026-63073",
+   "class": "control",
+   "sha": "ee7c64fbcd24276233d238aff1cdf9996be943cd",
+   "matched_to": "958f6f6040385a88a322673dbb465f7259ebf0f2"
+  },
+  {
+   "id": "control-for-CVE-2026-63074",
+   "class": "control",
+   "sha": "42517c886a25f9f2a9cd659f5987d78fde77be20",
+   "matched_to": "a6c1091a8feadf0a16851cdda38a85aafe41cb11"
+  },
+  {
+   "id": "control-for-CVE-2026-63075",
+   "class": "control",
+   "sha": "857afd02b282314687bc1290d7d12a313d3b9f85",
+   "matched_to": "b758149ceacb622300430afa1e8cd5fa9a0f3a90"
+  },
+  {
+   "id": "control-for-CVE-2026-63076",
+   "class": "control",
+   "sha": "13e3ecbcb94b39d05815e301845e4490278f842a",
+   "matched_to": "022a99e2b50cccb94b7d3efb7080077c28276272"
+  },
+  {
+   "id": "control-for-CVE-2026-72897",
+   "class": "control",
+   "sha": "a857515a0984d869d761a9db194b06e8e8be303f",
+   "matched_to": "a4f89aa07fe59075bde0719a0821f0438a366680"
+  },
+  {
+   "id": "control-for-CVE-2026-7383",
+   "class": "control",
+   "sha": "c629d597bc9e6ff2e31d3101eb9a1e92f022b23a",
+   "matched_to": "97f6b621f7af2c4c4e162c75045a6e12a8fdf8d9"
+  },
+  {
+   "id": "control-for-CVE-2026-75803",
+   "class": "control",
+   "sha": "f454c8fd5d97b80f431dba16b8deacad6b69cbfd",
+   "matched_to": "5741d29a5f356e05262cd0936a472a9961398d53"
+  },
+  {
+   "id": "control-for-CVE-2026-75804",
+   "class": "control",
+   "sha": "859aea422b5be17ee9fc0f7678e9de302eb67b72",
+   "matched_to": "4ae4f4d127b564e6446791d6a799918d3c7095c1"
+  },
+  {
+   "id": "control-for-CVE-2026-75805",
+   "class": "control",
+   "sha": "0025d44f014bf0c5b48554dbc34e23cd061fada3",
+   "matched_to": "a61d8a1f1aa90044637c51b1313bf2405597a37c"
+  },
+  {
+   "id": "control-for-CVE-2026-75806",
+   "class": "control",
+   "sha": "4242c885ba80e9fd0a652d7f07be248afaa7f7f9",
+   "matched_to": "2bdfe87a13c40a632d9ac5487c08b67cf61f3771"
+  },
+  {
+   "id": "control-for-CVE-2026-77696",
+   "class": "control",
+   "sha": "4fc10a5bfe8658d080a44b08fb6229fa666949ac",
+   "matched_to": "2e9244c77879db4618ba24c0e9e771ebf07191a2"
+  },
+  {
+   "id": "control-for-CVE-2026-84782",
+   "class": "control",
+   "sha": "91ae3fe14c59bf10f68bd50f1aaee0bc9fd597aa",
+   "matched_to": "2c57351ccdedbb1e3bdd0506c2de152fa9d5b0da"
+  },
+  {
+   "id": "control-for-CVE-2026-84783",
+   "class": "control",
+   "sha": "90621b1728bda81b33674eb5fbe68f614bbfc51c",
+   "matched_to": "3b1acea33c054ae2bebc5689b39e15d37f437539"
+  },
+  {
+   "id": "control-for-CVE-2026-84784",
+   "class": "control",
+   "sha": "c8af5fc081e8914898c572ff1878c333ee7d4c8a",
+   "matched_to": "73f897a7e9f01b54818da537019802a1e6a82455"
+  },
+  {
+   "id": "control-for-CVE-2026-9076",
+   "class": "control",
+   "sha": "24e69ac1db7da44056f2da5e5ae4ad3cc446c6ea",
+   "matched_to": "51d1800e95283a8beec85152e35e3634dab8dd82"
+  }
+ ]
+}

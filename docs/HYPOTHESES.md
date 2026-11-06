@@ -707,3 +707,130 @@ differ hugely in size and history. Inside one file, size-by-area dominates.
 - The lift is negative in every curl label class (security, regression, both bug labels).
 - An untested candidate: memory **per line of function** (prior fixes / loc) as a density, so that size is not
   simply re-ranked. It belongs to an unseen repo (openssl) and would need registering first.
+
+## EA-H1..EA-H5 — effort-aware history ranking on openssl (repo #3) — registered 2026-11-05, before any openssl scan
+
+**Why this battery.** Every recent claim lost to file size (FWD-H1..H3, FREC-H1/H2) when scored by AUC, which rewards
+finding big files. The one replicated positive, file recidivism (RW-H2), was scored effort-aware: recall when
+reviewing a fixed share of lines. There, prior fixes beat LOC 71–10 on curl even though LOC had the higher AUC. A
+reviewer's cost is lines read, so this battery asks whether history features find fixed files **per line reviewed**.
+openssl is unseen for every claim below: no openssl scan or statistic exists before this entry. The data is
+`events/openssl.json` (harvest/openssl `10e6d33`; engine validated in `docs/engine_validation.md`).
+
+**Snapshots and scans.**
+- Snapshots are quarterly first-parent `origin/master` commits (`tools/fwd_snapshots.py`), from the first quarter
+  with ≥ 50 C files to the last whose outcome window closes before the harvest's pool head.
+- Scans use engine `e246915aa` (gitgalaxy#7818: as-of history plus persisted change entropy), `--spec-alignment`,
+  and `GITGALAXY_HISTORY_ASOF=1`.
+- Snapshots whose every C file reports unusable history are excluded (FWD amendment 1's rule).
+- The instrument gates are binding and are checked before any EA statistic: churn reconstruction Spearman ≥ 0.95
+  and HCM parity ≥ 0.99 on every snapshot, as in FWD.
+
+**Unit and outcome.**
+- Candidates are the C files (`language = 'c'`) of snapshot t.
+- A file is positive if a `security-fix` event with `on_master = true`, dated (committer time) in (t, t+180 d],
+  touches it (parent- or child-side path).
+- Branch-only fixes are excluded: master may not carry the bug.
+
+**Predictors (all read at t from the as-of scan, or from events strictly before t).**
+
+| id | predictor | score (higher = review first) |
+|---|---|---|
+| **EA-H1** | change entropy | `change_entropy` (HCM1_LD_30) |
+| **EA-H2** | churn | `raw_churn_freq` |
+| **EA-H3** | recency | −`risk_stability` (within a snapshot, monotone in time since the file last changed) |
+| **EA-H4** | file recidivism | number of on-master security-fix events dated ≤ t that touched the file |
+| **EA-H5** | recidivism density | EA-H4 count / `total_loc` |
+
+**Primary statistic: recall at 20% of lines reviewed.**
+- Per snapshot, rank C files by the score (ties: smaller `total_loc` first, then path).
+- Take whole files while cumulative `total_loc` ≤ 20% of the snapshot's total C LOC.
+- recall@20 = covered positives / all positives. Only snapshots with ≥ 1 positive count.
+
+**Baselines (a claim must beat both).**
+- **LOC-desc**: largest files first, RW-H2's comparison.
+- **LOC-asc**: smallest files first, the strong effort-aware baseline.
+
+| claim | supported iff |
+|---|---|
+| each EA-Hk | mean over scored snapshots of [recall@20(score) − recall@20(baseline)] > 0 **against both baselines**, each with a one-sided snapshot-cluster bootstrap lower bound > 0 (5,000 rounds, seed 2982) at α = 0.01 / 5 = 0.002 |
+
+This is an intersection-union test: both comparisons must hold, and no further correction is needed.
+
+**Power.** Fewer than 20 scored snapshots makes the battery *not evaluable*.
+
+**Nulls.** A *replicated null* is claimed only by equivalence: the two-sided 90% CI against the stronger baseline lies
+inside [−0.02, +0.02]. Otherwise *inconclusive*.
+
+**Secondary (descriptive, no verdicts).**
+- Pooled and banded AUC against `total_loc`, as in FWD.
+- recall@10 and recall@30.
+- The same pipeline on curl and nDPI as labelled context: these features have been seen there.
+
+**Decision rule.**
+- (a) Any EA claim supported: open a gitgalaxy issue for an effort-aware "review budget" ranking on that feature.
+  A further unseen-repo replication is registered before any score weight.
+- (b) None supported, or all equivalence-null: per-file history ranking is closed as a predictive direction for this
+  program. It stays descriptive.
+
+**Priors on record.**
+- EA-H4 (recidivism) **leaning supported**: it replicated effort-aware on curl and nDPI.
+- EA-H3 (recency) **leaning supported**: curl exploratory.
+- EA-H1, EA-H2 **uncertain**.
+- EA-H5 **uncertain**: density can favour tiny files, which LOC-asc already exploits.
+
+### EA instrument record — 2026-11-05: gate failure, engine fix, rescan (no change to any claim)
+
+- **What happened.** The first scored run (engine `e246915aa`) failed both binding gates on openssl: churn
+  reconstruction passed 108/110 snapshots (min rho 0.564) and HCM parity 107/110, on pre-2014-10, pre-2015-01 and
+  pre-2015-04. As registered, all five verdicts were **withheld**.
+- **I saw those withheld numbers before the fix.** For the record: prior fixes had the highest recall@20, every
+  feature beat LOC-asc, and EA-H1/H4/H5 beat LOC-desc with lower bounds above 0. None of this decided anything below.
+- **Cause (an engine defect, independent of any outcome).** A Latin-1 byte in openssl's 2014 commit metadata raised
+  `UnicodeDecodeError` inside the chronometer's `git log` stream. The stream was abandoned and every later commit
+  was silently dropped: on pre-2014-10 the window kept 333 of about 860 commits, and 194 of 325 active files read
+  zero churn.
+- **Fix.** gitgalaxy#7818 commit `da852aa54` decodes every git subprocess with `errors="replace"`. Its regression test
+  fails on the old code.
+- **The registered path ("the run stops and the instrument is fixed before anything is scored").** Every snapshot is
+  rescanned at the fixed engine and the gates are rerun. Claims, statistic, baselines, α and decision rule are
+  unchanged. The scored result is whatever the fixed instrument gives, including if a gate still fails.
+- **Other studies.** FWD and FREC on curl and nDPI passed these gates at rho ≥ 0.99, so their history windows were
+  intact. The ablated-history studies never ran the stream.
+
+## EA-H1..EA-H5 — RESULTS on openssl (2026-11-05; registration and instrument record above)
+
+Engine `da852aa54` (gitgalaxy#7818 with the UTF-8 fix). **Gates pass on all 110 snapshots** (churn reconstruction
+min rho 0.9998, HCM parity min 0.9989). 75 snapshots have ≥ 1 positive; 252 on-master security fixes. Report:
+`docs/ea_openssl.md`.
+
+| claim | recall@20 | vs LOC-desc (0.271): lift [one-sided lo] | vs LOC-asc (0.128): lift [lo] | verdict |
+|---|---:|---|---|---|
+| **EA-H1** change entropy | 0.343 | +0.072 [+0.013] | +0.215 [+0.096] | **SUPPORTED** |
+| **EA-H2** churn | 0.321 | +0.050 [−0.053] | +0.193 [+0.078] | not supported (inconclusive) |
+| **EA-H3** recency | 0.304 | +0.032 [−0.103] | +0.176 [+0.062] | not supported (inconclusive) |
+| **EA-H4** prior security fixes | 0.451 | +0.180 [+0.047] | +0.323 [+0.202] | **SUPPORTED** |
+| **EA-H5** prior fixes per line | 0.451 | +0.180 [+0.054] | +0.323 [+0.204] | **SUPPORTED** |
+
+**Robustness (post hoc, labelled as such).**
+- **H5 adds nothing to H4 at the registered budget.** In 63 of 75 snapshots every file with a prior fix fits inside
+  20% of lines, so both rankings select the same files. They differ at 10% (0.311 vs 0.288).
+- **Not split-fix mechanics.** Only 4 of 663 positive (snapshot, file) pairs are the same CVE fixed on both sides of
+  t. Removing them leaves EA-H4's lift at +0.180 (lo +0.056).
+- **EA-H1's margin over LOC-desc is narrow** (lower bound +0.013).
+
+**The size wall, re-read.** Under plain AUC, LOC still ranks best: 0.816 pooled, against change entropy 0.751,
+churn 0.734, recency 0.696 and prior fixes 0.639. AUC rewards finding the big files; recall per line reviewed
+rewards finding fixed files cheaply. On openssl, file history wins the second question while losing the first. That
+is consistent with RW-H2 on curl and nDPI, and it says this program's earlier AUC nulls answered a different
+question than a reviewer asks.
+
+**Priors vs outcome.**
+- EA-H4: leaning supported → supported.
+- EA-H3: leaning supported → not supported.
+- EA-H1: uncertain → supported.
+- EA-H2: uncertain → not supported.
+- EA-H5: uncertain → supported, but redundant with EA-H4.
+
+**Decision rule (a) applies.** Open a gitgalaxy issue for an effort-aware "review budget" ranking on prior security
+fixes and change entropy. A further unseen-repo replication is registered before either feeds any score weight.
