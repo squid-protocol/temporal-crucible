@@ -64,3 +64,31 @@ EA's rule.
   the searcher.
 - BUF **more likely than IN**: parsers receive buffers, they rarely call `recv` themselves.
 - H5/H6 **the most informative**: they ask whether structure sees where history is blind.
+
+---
+
+## Results — 2026-11-06 (scorer `15f955c` committed before running; report `inp.md`)
+
+All four repos are evaluable: curl 63, nDPI 26, openssl 75 and harfbuzz 28 snapshots with a CVE positive.
+
+| claim | pooled | 90% CI | curl / nDPI / openssl / harfbuzz | verdict |
+|---|---:|---|---|---|
+| **INP-H1** IN beats size | −0.092 | [−0.129, −0.054] | −0.143 / **+0.096** / −0.174 / −0.147 | not supported |
+| **INP-H2** BUF beats size | −0.054 | [−0.098, −0.011] | −0.038 / **+0.163** / −0.055 / −0.288 | not supported |
+| **INP-H3** IN specific to CVEs | −0.034 | [−0.073, +0.005] | −0.038 / +0.137 / −0.100 / −0.134 | not supported |
+| **INP-H4** BUF specific to CVEs | +0.032 | [−0.018, +0.080] | +0.057 / +0.235 / +0.008 / −0.172 | not supported |
+| **INP-H5** IN where no prior CVE | −0.104 | [−0.153, −0.054] | −0.214 / −0.056 / −0.138 / −0.010 | not supported |
+| **INP-H6** BUF where no prior CVE | −0.044 | [−0.118, +0.030] | −0.019 / +0.185 / −0.057 / −0.284 | not supported |
+
+**Headline → input-facing code is NOT shown.**
+- Both measures are worse than size at finding CVE fixes on curl, openssl and harfbuzz.
+- Only nDPI, whose CVEs are OSS-Fuzz finds in packet dissectors, is positive throughout.
+- BUF leans CVE-specific on three of four repos (H4 +0.03), but not significantly.
+
+**Reading.**
+- **The "declared dependency" pattern did not carry over to input.** Unlike a platform or a library, "handles outside
+  bytes" is not concentrated in a few files. Input flows through buffers into most of the codebase.
+- **The input surface is where *fuzzers* look,** so it shows up on nDPI only. That matches the LV and curl split: CVE
+  locations follow the searcher.
+- **What does track security fixes beyond size is per-file dynamism** (function-like macros and `goto`, DYN-H2, ≈ 2× on
+  nDPI and openssl). A heavier, call-graph reachability version of INP is the remaining untested form.
