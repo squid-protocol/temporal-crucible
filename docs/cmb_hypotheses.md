@@ -130,3 +130,13 @@ verbatim units. Closest-version matching and version strings are perfect.
   whole pre-fix file. Then re-test on both libraries.
 
 The blind audit for **CMB-H2** proceeds as registered.
+
+**Audit packet fix (2026-11-06, before any audit label was compared with any method).**
+- The first-round blind auditors reported that many host excerpts were **cut off before the changed code**. When
+  tree-sitter could not see a function (preprocessor-split old zlib; zlib-ng's `PREFIX(name)` definitions), the
+  excerpt fell back to the first 6,000 characters of the file.
+- **Fix:** take each function from its definition line, including `PREFIX(name)`, to the next column-0 `}`.
+- The packets were rebuilt. The sample is identical (seed 2985); packets still carry no method verdicts.
+- **33 of 60 packets changed.** Their first-round labels are discarded, and **fresh** auditors re-label them.
+- The 27 unchanged packets keep their first-round labels. Four of those are legitimately unclear, because the host
+  version lacks the function the fix changed.

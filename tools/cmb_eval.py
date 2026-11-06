@@ -260,9 +260,20 @@ def build_units():
 
 
 def fn_excerpt(text, names):
+    """Bodies of the named functions. tree-sitter first; for names it cannot see (preprocessor-split C), the text from
+    the definition line to the next column-0 '}' (fix after auditor feedback: v1 packets fell back to the file head)."""
     sp = Z.U.spans(text.encode(), "c")
-    got = [body for _a, _b, nm, body in sp if nm in names]
-    return "\n\n".join(got)[:12000] if got else text[:6000]
+    found = {nm: body for _a, _b, nm, body in sp if nm in names}
+    lines = text.splitlines()
+    for nm in sorted(set(names) - set(found)):
+        rx = re.compile(rf"^[A-Za-z_].*(?:\b{re.escape(nm)}|PREFIX\({re.escape(nm)}\))\s*\(")
+        for i, ln in enumerate(lines):
+            if rx.match(ln) and not ln.rstrip().endswith(";"):
+                j = next((k for k in range(i + 1, min(i + 1500, len(lines))) if lines[k].startswith("}")), min(i + 400, len(lines) - 1))
+                found[nm] = "\n".join(lines[i:j + 1])
+                break
+    got = [found[n] for n in sorted(found)]
+    return "\n\n".join(got)[:24000] if got else text[:6000]
 
 
 def main() -> int:

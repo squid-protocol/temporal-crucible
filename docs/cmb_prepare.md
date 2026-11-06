@@ -22,4 +22,4 @@
 - audit sample (SEM-2 vs CV disagreements, non-verbatim): 60 units; zlib 30, expat 30
 - non-verbatim SEM-2 × CV (both decided): {('zlib', 'unpatched', 'unpatched'): 951, ('zlib', 'patched', 'patched'): 786, ('zlib', 'unpatched', 'patched'): 64, ('zlib', 'patched', 'unpatched'): 53, ('expat', 'unpatched', 'unpatched'): 806, ('expat', 'patched', 'unpatched'): 501, ('expat', 'patched', 'patched'): 339, ('expat', 'unpatched', 'patched'): 6}
 
-Runtime 108s · seed 2985.
+Runtime 114s · seed 2985.
