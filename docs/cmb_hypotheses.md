@@ -94,3 +94,6 @@ private and for the owner.
 - Poco vendored expat first as C++ (`XML/src/xml*.cpp`, from 2006), later as `dependencies/expat/src/*.c`. Both paths
   are followed.
 - **Expat fix mapping:** tree-sitter only (no engine scans of expat), with the ALL-CAPS-macro name filter.
+
+**Owner decision (2026-11-06, before any CMB statistic):** skip the OSV-scanner arm for now. **CMB-H3 is not
+evaluable** in this run. It can be run later as its own registered comparison if the binary is approved.
