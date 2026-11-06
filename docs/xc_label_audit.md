@@ -302,3 +302,107 @@ Seeded random samples (seed 2982, 30 per class × repo), judged by the author fr
 - ✓ `1cbf663a6c` sanity check
 - ✓ `40e48e5458` Elliptic curve scalar multiplication with timing attack defenses
 
+
+## Round 2 — extrinsic only, rule v2 (amendment 1), fresh sample (seed 2983, round-1 commits excluded)
+
+### curl · extrinsic v2 — 27/30 = 0.90 → PASS
+
+- ✓ `86f5bd3c6e` curl_setup.h: fix `FMT_SOCKET_T` to be unsigned on Windows
+- ✓ `cca455a36b` ntlm: support version 2 on 32-bit platforms
+- ✓ `8d1da2e172` http: typecast the httpreq assignment to avoid icc compiler warning
+- ✓ `ef8d98bbba` os400: make vsetopt() non-static as Curl_vsetopt() for os400 support.
+- ✓ `6f93d5f604` lib: fix conversion warnings with gcc on macOS
+- ✓ `94c3e0f702` tool_metalink.c: Added support for Microsoft Windows CryptoAPI
+- ✓ `aaacd02466` GHA/configure-vs-cmake: add Windows build, fix issues
+- ✓ `fb3b0f25ef` libtest: fix MSVC warning C4706
+- ✓ `fc8d6b2370` build: fix for NonStop
+- ✓ `69b1ac7dcd` avoid warning on windows
+- ✓ `6ce9845677` macOS: Fix missing connectx function with Xcode version older than 9.0
+- ✓ `1bf3643f7b` vxworks: drop support
+- ✗ `30ec220a68` mprintf: silence clang-tidy `readability-suspicious-call-argument`
+- ✓ `a08b6ae813` Adapt OS400 SSL (qssl.h) to V5R4 Fix qssl.c wrong error message Upgrade OS400 wrappers and makefiles
+- ✓ `413cbdce3c` Use own typedef as workaround for broken sspi.h header (f.e. Watcom).
+- ✓ `1eb4f5ac9d` build: fix termios issue on android cross-compile
+- ✓ `a712808006` the same fix here too, typecast to prevent win32 compiler warning
+- ✗ `7a08c5d820` ldap: silence clang-tidy v22 warning
+- ✗ `77c66e0247` operate: fix clang-analyzer warning
+- ✓ `fc273027f1` transfer: speed limiting fix for 32bit systems
+- ✓ `66c7427df0` Andres Garcia made the TFTP test server build with mingw ("I also had to copy the 'tftp.h' file from
+- ✓ `9c36a5fd06` fixed largefile feature for MingW32 non-configure builds.
+- ✓ `baa3270846` build: fix llvm 16 or older + Xcode 15 or newer, and gcc
+- ✓ `599d9642ca` Yang Tse fixed MSVC 6.0 warnings
+- ✓ `97a41f3646` trial to fix the HP-UX breakage...
+- ✓ `8144ba38c3` tool_parse_cfg: Avoid 2 fopen() for WIN32
+- ✓ `4515d06465` David Byron's fixes to make the latest curl build fine under MSVC 6.
+- ✓ `1269c80af1` file: Support unicode urls on windows
+- ✓ `240bfaa69e` properly free data returned by aprintf(), and bring back the code to be independent of libssh2 versi
+- ✓ `b8c438f22d` Fix function call pointed data size argument mismatch on 64Bit systems
+
+### ndpi · extrinsic v2 — 28/30 = 0.93 → PASS
+
+- ✓ `8761e3a869` Fix byte packing on Windows
+- ✓ `cfa9a79f67` fix for OpenBSD compile error https://github.com/ntop/nDPI/issues/417
+- ✓ `8972b74fd0` Fix builds on Windows (#2580)
+- ✓ `7152c5c289` Fix (clang) linker issue cuased by missing 'static inline's (#2956)
+- ✓ `8d0c7b1fae` Fixed Mingw64 build, SonerCloud-CI and more. (#1273)
+- ✗ `b5fb2066cb` bins: add support for 64bit bins (#1626)
+- ✓ `6d7f5552de` changed name from _bpf_filter to bpfFilter to avoid compilation error in OpenBSD caused by redefinit
+- ✓ `df1b3367a9` Type change to avoid Windows compilation issues
+- ✓ `1b2c282f47` Fixes Some Windows Tests  (#3150)
+- ✓ `3881d162f7` Windows compilation fixes
+- ✓ `80368772bd` File rename to avoid name clashes (e.g. on Windows)
+- ✓ `5867f43fae` Fix compilation on Windows (#2072)
+- ✓ `dc60cd09c4` fix ahocorasick on big-endian machines (#1401)
+- ✓ `9d040f6317` Windows compilation fix.
+- ✓ `2dfc478ad4` Fix compilation with clang-13 or if some debug macros are enabled (#1326)
+- ✓ `12a3d80f71` Fix 'IPVERSION undeclared' error on WIN32
+- ✓ `6195dbad76` Renamed radius source file to avoid name clashes on Windows
+- ✓ `40d7354dd7` Windows error C2466 fix (array size init with 0).
+- ✓ `e593319ba0` Fix Win32.
+- ✓ `7eb73bc92a` QUIC: fix old GQUIC versions on big-endian machines (#1313)
+- ✓ `c3df3a12aa` Fixed msys2 build warnings and re-activated CI Mingw64 build.
+- ✗ `c7eb8d1082` HTTP: Fix Dead Store (Dead assignement/Dead increment) Warning found by Clang Analyzer
+- ✓ `ba966634f5` Source code rename to avoid conflicts on Windows
+- ✓ `64121162dd` Win32 fix
+- ✓ `33e0be73f7` Fixed ndpi_win32.h so that it compiles on MinGW+GCC
+- ✓ `533b3ab0e3` FreeBSD fixes
+- ✓ `9f46d41eca` FreeBSD compilation fix (C) update
+- ✓ `12b47fece0` fixed missed library netinet/in.h under FreeBSD
+- ✓ `4c776501a6` Fixed shlib xcompile for x86_64-w64-mingw32
+- ✓ `0a4198b35a` Fix for old gcc compilers
+
+### openssl · extrinsic v2 — 30/30 = 1.00 → PASS
+
+- ✓ `a68c7b9171` bn_lib.c: [re-]fix Win64 compiler warning.
+- ✓ `f6484de23d` Enable ARMv8.2 accelerated SHA3 on compatible Apple CPUs
+- ✓ `af7d8d3446` minor fixes for Windows
+- ✓ `856d456a71` Make the DSO code for VMS work again.  First attempt.
+- ✓ `b4b48a107c` ppc64-mont.pl: adapt for 32-bit and engage for all builds.
+- ✓ `cbb15b31b9` aes_platform: add riscv32 zkn asm support
+- ✓ `7d9e120fea` Fixes for compilation using clang
+- ✓ `82b2230527` Add RC4 support to OpenBSD.
+- ✓ `1a797ac67c` * This adds some checking to the 'dlfcn' DSO_METHOD that at least lets   it cope with OpenBSD which 
+- ✓ `37467b2752` Fix a gcc 11.2.0 warning
+- ✓ `c1db5bfc08` fix for Borland C
+- ✓ `4d921bfb8b` Fix a gcc warning about possible fall through
+- ✓ `1d4d68570b` Make the libssl opaque changes compile on VMS
+- ✓ `c66d9760a7` Fix `VC-WIN64-CLANGASM-ARM` target
+- ✓ `98f29466dc` fix truncation of integers on 32bit AIX
+- ✓ `95b31c0335` Workaround Uplink compilation for MINGW 32bit
+- ✓ `77f3936928` Add support for Chacha20-Poly1305 to kernel TLS on FreeBSD.
+- ✓ `be4ce01f9f` Fix the intermittent lhash_test failure on Windows
+- ✓ `dc6c374bdb` Fix a new gcc-9 warning [-Wstringop-truncation]
+- ✓ `6b6981ef29` poly1305/poly1305_ieee754.c: add support for MIPS.
+- ✓ `b74ce8d948` bn/bn_exp.c: Solaris-specific fix, T4 MONTMUL relies on alloca.
+- ✓ `a1f0478277` Fix Windows Compile failure due to missing <inttypes.h>
+- ✓ `52a03d2a5e` Fix some clang warnings
+- ✓ `10bb0dbfec` Changes by Jeffrey Altman <jaltman@columbia.edu> to make RAND_poll() work better in Win32.  Verified
+- ✓ `226f2bf191` Fix strict-warnings build on FreeBSD
+- ✓ `dc01b6b1f2` Changes to have OpenSSL compile on OS/2. Contributed by "Brian Havard" <brianh@kheldar.apana.org.au>
+- ✓ `44bc72a0f2` Fix 32-bit Windows issues related to QUIC_STREAM
+- ✓ `6bc7bad011` Fix windows thread stop code
+- ✓ `cb2e10f257` Fix intermittent windows failures in TLSProxy tests
+- ✓ `d17bdfc26d` Fix intermittent Windows and Cygwin failures in s_server
+
+Misses are static-analyzer findings (clang-tidy / clang-analyzer: intrinsic code quality, not an environment change) and one nDPI feature about 64-bit *histogram bins*.
+
