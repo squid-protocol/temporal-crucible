@@ -237,3 +237,23 @@ non-zero on 93% of curl C rows (range −1.5 to 6.35); `repo_composition_z` is 0
 **Priors on record.**
 - Z1/Z2 **leaning not supported**: distance from a centroid likely tracks extreme size, which LOC-desc already captures.
 - Z3/Z4 **uncertain**.
+
+### ARCH-Z results — 2026-11-06 (after registration commit `f6114f5`)
+
+**No z claim is supported on any repo, and the direction is not consistent across repos.**
+
+| claim | curl (63 snapshots) | nDPI (26) | openssl (75) |
+|---|---|---|---|
+| **Z1** composition fit z, recall@20 vs LOC-desc / LOC-asc | −0.065 / −0.018 → not supported | −0.034 / +0.003 → not supported | −0.123 / +0.021 → not supported |
+| **Z2** file-cluster distance, same | −0.008 / +0.039 → not supported | −0.010 / +0.026 → not supported | −0.004 / +0.139 → not supported |
+| **Z3** fit z, size-stratified AUC − 0.5 | +0.033, CI [+0.004, +0.063], lo −0.014 → not supported | **−0.146**, CI [−0.199, −0.092] → not supported | +0.002 → not supported |
+| **Z4** distance, size-stratified AUC − 0.5 | −0.032 → not supported | **−0.084**, CI [−0.115, −0.054] → not supported | +0.031, CI [+0.001, +0.062], lo −0.019 → not supported |
+
+- **Headline rule → not useful for this outcome.**
+- Atypicality is only loosely tied to size: Spearman ρ with `total_loc` is +0.18 / −0.35 / +0.21 for fit z and
+  +0.33 / +0.19 / +0.11 for distance (curl / nDPI / openssl).
+- The near-misses point in opposite directions: atypical files run slightly riskier on curl and openssl, while on
+  nDPI *typical* files are clearly riskier (sign-flipped stratified AUC 0.646). That fits nDPI's fuzz-found bugs
+  landing in its many look-alike protocol dissectors. Exploratory only; a registration on unseen data would be needed.
+
+Reports: `arch_z_{curl,ndpi,openssl}.md` (tool `tools/arch_z.py`).
