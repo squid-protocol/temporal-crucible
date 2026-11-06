@@ -149,3 +149,34 @@ The blind audit for **CMB-H2** proceeds as registered.
   - All three re-auditors independently labelled these **unpatched**, for the CVE as a whole.
   - The labels are used as delivered.
   - A sensitivity check with those 11 flipped to patched is reported descriptively.
+
+## Results, stage 2 (`score`; report `cmb.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **CMB-H1** SEM-2 no new errors on expat verbatim truth | 687 wrong / 3,228 | **not supported** (stage 1) |
+| **CMB-H2** SEM-2 beats closest-version on blind-audited modified copies | SEM-2 right **31 / 56**, CV **25 / 56**; sign test p = 0.25 | **not supported** |
+| **CMB-H3** vs OSV-scanner | skipped by owner decision | **not evaluable** |
+
+**The pooled null hides a clean split by library** (descriptive):
+
+| modified copies (blind truth) | SEM-2 right | closest-version right |
+|---|---:|---:|
+| zlib (30) | **30** | 0 |
+| zlib, the 11 follow-up-fix labels flipped (sensitivity) | **19** | 11 |
+| expat (26) | 1 | **25** |
+
+**Reading.**
+- **When a library's fixes are surgical (zlib), reading the code beats closest-version decisively** on modified
+  copies: backports, compatibility forks and independent fixes. That holds under either reading of the follow-up-fix
+  labels.
+- **When fixes are large refactoring PRs (expat), reading the code fails** in the same way as H1: old copies are
+  called patched because the fix's "added" lines already existed. Closest-version is nearly always right there.
+- So the method is **not yet general**. Its edge is real but conditional on the fix style.
+- **The next instrument is determined:** count only added lines and fragments that are **new to the whole pre-fix
+  file**. Re-test on both libraries with a fresh registration and fresh blind audit; the expat failure mode predicts
+  the fix.
+- **The blind audit worked as intended.**
+  - It exposed a packet-construction bug (fixed and re-audited).
+  - It flagged a genuine definitional question: follow-up fixes judged per bug vs per CVE.
+  - Independent labels made the zlib/expat contrast unambiguous.
