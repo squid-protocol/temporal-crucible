@@ -141,3 +141,26 @@ block bootstrap, the 90-day window and the 7-day report slack: all exactly as re
 - LV-H1 **uncertain**; LV-H2 **uncertain**; LV-H3 **leaning supported**: fuzz reach marks exercised code in general.
 - **Headline for the pair:** "discovery is exploration" holds across repos iff LV-H1 and LV-H2 are SUPPORTED on curl
   (nDPI was directional only).
+
+### LV-R results — curl, 2026-11-06 (scorer unchanged from `3a487cd`; report `lv_curl.md`)
+
+- **Data:** 2,848 daily reports (5 days missing upstream); 90 monthly snapshots (2018-12 → 2026-07).
+- **Candidates:** a median of 100 fuzz-instrumented C files; mean fuzz line coverage 58% (nDPI: 96%).
+- About 20% of files gain coverage in a 90-day window.
+
+| claim | curl | 90% CI | verdict | nDPI (for reference) |
+|---|---:|---|---|---:|
+| **LV-H1** frontier → latent beyond size | **−0.195** | [−0.300, −0.095] | **not supported** (wrong direction) | +0.026 |
+| **LV-H2** …more than other fixes | −0.033 | [−0.132, +0.062] | not supported | +0.143 |
+| **LV-H3** reached beats unreached for latent | −0.048 | [−0.181, +0.079] | not supported | +0.088 |
+
+**Pair headline → "discovery is exploration" is NOT supported across repos.**
+- On curl, the fuzz frontier marks CVE files *worse* than size does. No score beats size for any class.
+- nDPI is directional only.
+- The registered prior expected this split: curl's CVEs are mostly human-reported, nDPI's are OSS-Fuzz-found. Read
+  together, the results are *consistent with* "a defect is found where **its own searcher** explores". The OSS-Fuzz
+  frontier predicts nothing about what human reporters find. But nDPI never cleared α, so this is a reading, not a
+  result.
+- **A sharper test (not run).** Split curl's latent fixes by reporter. Its advisories credit the finder, e.g.
+  "OSS-Fuzz" or a named researcher. Then ask whether the fuzz frontier predicts the fuzz-found subset only. That needs
+  its own registration.
