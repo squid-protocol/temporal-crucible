@@ -107,3 +107,42 @@ Nothing else changes.
    and empty tables are dropped with a note.
 
 Run 2 uses these fixes. Nothing else changes.
+
+---
+
+## Results — run 2, 2026-11-06 (scorer `2268bb3`; report `vz.md`; per-host detail private)
+
+**Data.** 12 hosts, **185** truth pairs (query function × host), 13 of them renamed.
+
+| claim | result | verdict |
+|---|---|---|
+| **VZ-H1** recall@1 FUSED − L1 | **91% vs 68%**, +23.8 pts (lo +14.5) | **SUPPORTED**: LAY replicates out of sample |
+| **VZ-H2** renamed copies, FUSED − NAME @10 | 13 renamed pairs | **not evaluable** (< 15) |
+| **VZ-H3** patch check vs host version | **123 / 137 = 89.8%** (Wilson lo 81.2%) | **SUPPORTED** |
+
+**H3's 14 disagreements are all one host: rsync (bundled zlib 1.2.8).**
+- Its release notes (`NEWS.md`) record backporting fixes for CVE-2016-9840/41/42/43, CVE-2018-25032 and
+  CVE-2022-37434 into that copy.
+- So the code-line check was right, and the version string was wrong, in every case.
+- Against version **plus** documented backports, the check agrees on **137 / 137**.
+- **The real caveat:** no host carries an unpatched copy, so the check never faced one. Its ability to *detect*
+  unpatched code is **untested** here. UT's audited cases were forks that had fixed things differently, not
+  unpatched either.
+
+**Descriptive.**
+
+| subset | L1 @1/@10 | L2 | L3 | **FUSED** | NAME | TOKEN |
+|---|---:|---:|---:|---:|---:|---:|
+| all (185) | 68/90 | 72/81 | 85/92 | **91/100** | 90/93 | 94/100 |
+| same name (172) | 66/90 | 77/80 | 91/98 | **98/100** | 97/100 | 99/100 |
+| renamed (13) | 85/100 | 8/92 | 8/8 | 8/100 | 0/0 | 15/100 |
+
+- On verbatim vendored copies, the layered fingerprint finds the copy first **98%** of the time **without names**,
+  matching name lookup (97%).
+- **Renamed (13, descriptive):** names find none. FUSED finds all 13 in its top 10, but only 1 at rank 1. The coarse
+  L1 alone ranks 11 of 13 first; the call and shape layers *hurt* here, because renamed copies also changed their
+  calls.
+  - **Lesson:** fusion should down-weight layers that disagree. A renamed-copy benchmark large enough to register is
+    the next need.
+- **Engine finding (product):** the default scan **skipped MySQL's `zlib-1.3.2/` folder** entirely; it appears to
+  exclude version-named or vendored directories. Supply-chain use needs an option to *include* vendored code.
