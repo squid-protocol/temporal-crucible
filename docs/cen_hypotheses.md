@@ -54,3 +54,44 @@ Mid band (49–108 lines), lift = AUC(score) − AUC(`total_loc`):
 - Popularity (how many files include this one) helps on openssl only.
 - Centrality is closed as a predictive lead for this program. It stays a descriptive map of how files depend on each
   other.
+
+---
+
+# DYN-H1 / DYN-H2 results (registered 2026-10-23 in HYPOTHESES.md; scored here 2026-11-06 with `9149c2f`)
+
+**Data.**
+- nDPI: the frec DB (`32619e4a5`, ablated history), 121 security-fix events.
+- openssl: 252 security-fix parent snapshots scanned for this test (`32619e4a5`, ablated; 252 done, 0 failed).
+- The C dynamism pattern was checked identical to the registered regex at `32619e4a5` and `da852aa54`.
+
+Reports: `dyn_ndpi.md`, `dyn_openssl.md`.
+
+| claim | nDPI | openssl | verdict |
+|---|---|---|---|
+| **DYN-H1** dynamism ranks fixed files above LOC within a powered size band | bands 23–48 +0.118, 49–108 −0.054, > 108 −0.071; none passes | > 108 (the only powered band) −0.088 | **not supported** |
+| **DYN-H2** Mantel-Haenszel rate ratio, any dynamism vs none, at equal size + evidence | **2.03** (lo 1.51) | **2.33** (lo 1.74) | **SUPPORTED** (both repos) |
+
+**Robustness (exploratory, `tools/exploratory/dyn_finer_strata.py`).** The registered strata were LOC *deciles*, the
+coarseness that leaked size in NM. With finer LOC strata the ratio barely moves:
+
+| strata | nDPI | openssl |
+|---|---:|---:|
+| 10 LOC bins × 4 evidence | 2.07 | 2.32 |
+| 50 LOC bins | 2.17 | 1.80 |
+| 100 LOC bins | 2.19 | 1.78 |
+| 50 LOC × 4 evidence | 1.97 | 2.25 |
+
+It is not leftover size.
+
+**Reading.**
+- Files with function-like macros or `goto` are touched by security fixes **about 2× as often as files of the same size**,
+  replicated on two repos where this predictor was unseen.
+- As a *ranking* signal it does not beat LOC (H1). Dynamism is common in big files, and a 2× factor on a size-dominated
+  baseline does not reorder the files.
+
+**Decision rule → (b), as registered:** keep the current modest per-file dynamism weight as a correction; no increase.
+
+**Context.**
+- This is the first snapshot property to show a replicated association with **security** fixes beyond size.
+- Plausible mechanism, unproven: in C, function-like macros and `goto` cluster in hand-written parsers and error paths
+  (byte-field access macros, `goto fail` cleanup chains). That is the code where memory-safety bugs live.
