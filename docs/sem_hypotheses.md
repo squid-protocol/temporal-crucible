@@ -54,3 +54,34 @@ So SEM can only *add* "patched" calls where the line rule said unpatched or unde
 - 20 fresh units (seed 2983), audited on the vulnerability's semantics. Aggregate: **20 patched, 0 unpatched,
   0 unclear.**
 - The labels sit in the private file `vz_private/sem_audit.json`, sha256 `fbecbeb5dcc3c3c1c0e01cecb6e69953715f19661872ccad860321594b9173f8`.
+
+---
+
+## SEM-1 results — 2026-11-06 (scorer `934a639`; report `sem.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **SEM-H1** no new errors on verbatim truth | **227 wrong calls** / 1,552 (line check: 0) | **not supported** |
+| **SEM-H2** meets VZ-T bars | sensitivity 64.4%, specificity 91.1% | **not supported** |
+| **SEM-H3** beats the line check on the fresh audit | 17 / 20 vs 12 / 20 | **SUPPORTED** |
+
+**Why H1 failed** (exploratory breakdown, `tools/exploratory/sem_error_breakdown.py`, after scoring):
+- **All 227 errors** call a *verbatim-unpatched* copy "patched". 114 are CVE-2022-37434 and 113 are CVE-2016-9842.
+- **The cause:** guard fragments that are **not new**. The CVE-2022 follow-up fix re-adds `state->head->extra != NULL`,
+  and the CVE-2016-9842 fix keeps the context `strm == NULL` / `strm->state == NULL`. Both already exist in
+  pre-fix code.
+- This is the most dangerous error type: vulnerable code reported as fixed.
+- **SEM-1 must not be used.**
+
+## SEM-2 — registered 2026-11-06, before SEM-2 ran on any unit
+
+**One change to the instrument:** a guard fragment is kept only if its token sequence does **not** occur in the
+fix's *pre-fix function body* (the query side, normalised the same way). Everything else is as SEM-1.
+
+**Claims SEM2-H1..H3:** as SEM-H1..H3. H3 uses a **third** fresh sample:
+- seed 2984;
+- disjoint from the seed 2982 and 2983 samples;
+- audited and hash-locked before SEM-2 runs.
+
+**Prior:** H1 likely now. H3 uncertain: removing fragments may also remove zlib-ng's `len < extra_max`. It should
+not, because that fragment is new in the fix.
