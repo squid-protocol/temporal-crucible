@@ -797,3 +797,40 @@ inside [−0.02, +0.02]. Otherwise *inconclusive*.
   unchanged. The scored result is whatever the fixed instrument gives, including if a gate still fails.
 - **Other studies.** FWD and FREC on curl and nDPI passed these gates at rho ≥ 0.99, so their history windows were
   intact. The ablated-history studies never ran the stream.
+
+## EA-H1..EA-H5 — RESULTS on openssl (2026-11-05; registration and instrument record above)
+
+Engine `da852aa54` (gitgalaxy#7818 with the UTF-8 fix). **Gates pass on all 110 snapshots** (churn reconstruction
+min rho 0.9998, HCM parity min 0.9989). 75 snapshots have ≥ 1 positive; 252 on-master security fixes. Report:
+`docs/ea_openssl.md`.
+
+| claim | recall@20 | vs LOC-desc (0.271): lift [one-sided lo] | vs LOC-asc (0.128): lift [lo] | verdict |
+|---|---:|---|---|---|
+| **EA-H1** change entropy | 0.343 | +0.072 [+0.013] | +0.215 [+0.096] | **SUPPORTED** |
+| **EA-H2** churn | 0.321 | +0.050 [−0.053] | +0.193 [+0.078] | not supported (inconclusive) |
+| **EA-H3** recency | 0.304 | +0.032 [−0.103] | +0.176 [+0.062] | not supported (inconclusive) |
+| **EA-H4** prior security fixes | 0.451 | +0.180 [+0.047] | +0.323 [+0.202] | **SUPPORTED** |
+| **EA-H5** prior fixes per line | 0.451 | +0.180 [+0.054] | +0.323 [+0.204] | **SUPPORTED** |
+
+**Robustness (post hoc, labelled as such).**
+- **H5 adds nothing to H4 at the registered budget.** In 63 of 75 snapshots every file with a prior fix fits inside
+  20% of lines, so both rankings select the same files. They differ at 10% (0.311 vs 0.288).
+- **Not split-fix mechanics.** Only 4 of 663 positive (snapshot, file) pairs are the same CVE fixed on both sides of
+  t. Removing them leaves EA-H4's lift at +0.180 (lo +0.056).
+- **EA-H1's margin over LOC-desc is narrow** (lower bound +0.013).
+
+**The size wall, re-read.** Under plain AUC, LOC still ranks best: 0.816 pooled, against change entropy 0.751,
+churn 0.734, recency 0.696 and prior fixes 0.639. AUC rewards finding the big files; recall per line reviewed
+rewards finding fixed files cheaply. On openssl, file history wins the second question while losing the first. That
+is consistent with RW-H2 on curl and nDPI, and it says this program's earlier AUC nulls answered a different
+question than a reviewer asks.
+
+**Priors vs outcome.**
+- EA-H4: leaning supported → supported.
+- EA-H3: leaning supported → not supported.
+- EA-H1: uncertain → supported.
+- EA-H2: uncertain → not supported.
+- EA-H5: uncertain → supported, but redundant with EA-H4.
+
+**Decision rule (a) applies.** Open a gitgalaxy issue for an effort-aware "review budget" ranking on prior security
+fixes and change entropy. A further unseen-repo replication is registered before either feeds any score weight.
