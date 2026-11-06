@@ -54,3 +54,41 @@ for them. The commit-level study is the right instrument there, and this screen 
   the size bins carried each snapshot's row index, so `groupby(bins)` misaligned the per-bin counts for every snapshot
   after the first. Fixed and verified to match `nm_screen.strat_auc` exactly on 200 random frames. The instrument check
   did its job. No stage-2 decision was taken on run 1.
+- **Run 2 (tool `ac0309a`): valid. Instrument check PASS.** P per line reproduces its exploratory R exactly (+0.119 /
+  +0.048 / +0.133). 225 candidate forms passed entry. Report: `sc_discovery.md`; full table: `sc_discovery_table.csv`.
+
+| class | passing candidates (D > 0 and R > 0 on all three) | frozen after de-duplication |
+|---|---|---|
+| latent | **0** (best D-consistent minR: ownership/change entropy −0.009) | none |
+| extrinsic | 1 | `platform_cond /line` (+) |
+| regression | 2 | `raw_churn_freq /line` (+); `change_entropy /line` dropped, \|ρ\| > 0.8 |
+| other-fix | 2 | `risk_churn /line` (+), `pct_vec_churn /line` (+) |
+
+- **Reading.** Apart from the known platform-conditional density, **no structural metric passes for any class**:
+  archetypes, risk vectors, centrality, signal families, function-shape statistics. Everything else that passes is
+  churn history.
+- Prior same-class history was named as a reference, but it is not a `file_data` column, so this screen does not
+  compute it. XC's CVE-recidivism result stands separately.
+
+## Stage 2 — confirmation registration (2026-11-06, before any holdout join)
+
+- **Frozen list.** `events/sc_frozen_candidates.json`: four (candidate, class) pairs → α = 0.01 / 4 one-sided.
+- **Holdout DBs.** This branch's `dbs/{harfbuzz,libarchive}_out/` (engine `da852aa54`, `--spec-alignment`, as-of).
+  - Candidates: harfbuzz `language IN ('c','cpp')`; libarchive `language = 'c'`.
+  - Engine `language` covers the same files as the ENV extensions. harfbuzz being mostly C++ is an extra test of
+    generality, stated now.
+- **Exclusion.** libarchive commit `0cc23cef` cannot be scanned (engine `FileNotFoundError` in `pathlib.resolve`). Its
+  three quarterly snapshots are excluded, leaving 69 of 72. This is an engine failure, not outcome-driven.
+- **Labels.**
+  - extrinsic / regression / other-fix: from `events/{repo}_xc.json` (rules v2, unchanged; regression is withheld on
+    libarchive).
+  - **latent**: `security-fix` events of `events/{repo}.json` (OSV / OSS-Fuzz, harvested 2026-11-06), restricted to SHAs
+    reachable from the walk head. Those SHAs are removed from the other classes.
+  - Outcome window (t, t + 180 d].
+- **Statistic.** R per snapshot, the size measure being the engine's `total_loc`, as in discovery. `platform_cond`
+  per line uses `PATTERNS["P"]` over the repo's ENV extensions.
+- **Test.** 5,000-round snapshot bootstrap, seed 2982. Fewer than 20 scored snapshots = not evaluable.
+- **CONFIRMED iff SUPPORTED on every evaluable holdout repo.**
+- **Prior.**
+  - `platform_cond /line` **leaning confirmed**: ENV passed on these repos with git line counts.
+  - The churn candidates **uncertain**.

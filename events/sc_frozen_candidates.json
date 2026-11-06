@@ -1,0 +1,25 @@
+{
+ "latent": [],
+ "extrinsic": [
+  {
+   "candidate": "platform_cond /line",
+   "direction": "higher = review first"
+  }
+ ],
+ "regression": [
+  {
+   "candidate": "raw_churn_freq /line",
+   "direction": "higher = review first"
+  }
+ ],
+ "other-fix": [
+  {
+   "candidate": "risk_churn /line",
+   "direction": "higher = review first"
+  },
+  {
+   "candidate": "pct_vec_churn /line",
+   "direction": "higher = review first"
+  }
+ ]
+}
