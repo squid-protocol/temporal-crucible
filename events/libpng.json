@@ -1,0 +1,38 @@
+{
+ "repo": "libpng",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=libpng)",
+ "pool_head": "a70313dbb68987be6834879f449d527687ec659a",
+ "counts": {
+  "security-fix": 1,
+  "introduced": 1,
+  "control": 1,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2017-41",
+   "class": "security-fix",
+   "sha": "a3d1057a735d923626f1f6bdc0f662a13d0cba6f",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OSS_FUZZ_png_combine_row"
+  },
+  {
+   "id": "OSV-2017-41",
+   "class": "introduced",
+   "sha": "ab791fc9d69580c1982af726c9f61b533357234f",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in OSS_FUZZ_png_combine_row"
+  },
+  {
+   "id": "control-for-OSV-2017-41",
+   "class": "control",
+   "sha": "357af1f095320c76f7c9d2bcf7de48dd809358e4",
+   "matched_to": "a3d1057a735d923626f1f6bdc0f662a13d0cba6f"
+  }
+ ],
+ "missing": []
+}
