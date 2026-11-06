@@ -46,3 +46,11 @@ class** at equal size?
 
 **Caveat, stated now.** Regressions are not a property of files (XC-H5). A file-level screen is expected to find little
 for them. The commit-level study is the right instrument there, and this screen does not replace it.
+
+## Run log
+
+- **Run 1 (tool `0a62405`): invalid.** 0 candidates passed for any class, and the **instrument check FAILED**: P per
+  line was not recovered for extrinsic. Diagnosis: in `strat_auc_all` the positives series had a fresh 0…n index while
+  the size bins carried each snapshot's row index, so `groupby(bins)` misaligned the per-bin counts for every snapshot
+  after the first. Fixed and verified to match `nm_screen.strat_auc` exactly on 200 random frames. The instrument check
+  did its job. No stage-2 decision was taken on run 1.

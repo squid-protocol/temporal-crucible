@@ -54,9 +54,12 @@ def recall20(score, loc, path_rank, pos):
 
 def strat_auc_all(df, cols, pos, bins):
     """Pair-pooled within-bin AUC for many columns at once (ties 1/2 via average ranks)."""
+    # positives must share the frame's index, or groupby(bins) misaligns them (bug in the first run: every
+    # snapshot after the first had a non-zero-based index, so its per-bin counts were wrong)
+    ps = pd.Series(pos, index=df.index)
     r = df[cols].groupby(bins).rank(method="average")
-    n1 = pd.Series(pos).groupby(bins).sum()
-    n = pd.Series(pos).groupby(bins).size()
+    n1 = ps.groupby(bins).sum()
+    n = ps.groupby(bins).size()
     den = float((n1 * (n - n1)).sum())
     if den == 0:
         return None
