@@ -778,3 +778,22 @@ inside [−0.02, +0.02]. Otherwise *inconclusive*.
 - EA-H3 (recency) **leaning supported**: curl exploratory.
 - EA-H1, EA-H2 **uncertain**.
 - EA-H5 **uncertain**: density can favour tiny files, which LOC-asc already exploits.
+
+### EA instrument record — 2026-11-05: gate failure, engine fix, rescan (no change to any claim)
+
+- **What happened.** The first scored run (engine `e246915aa`) failed both binding gates on openssl: churn
+  reconstruction passed 108/110 snapshots (min rho 0.564) and HCM parity 107/110, on pre-2014-10, pre-2015-01 and
+  pre-2015-04. As registered, all five verdicts were **withheld**.
+- **I saw those withheld numbers before the fix.** For the record: prior fixes had the highest recall@20, every
+  feature beat LOC-asc, and EA-H1/H4/H5 beat LOC-desc with lower bounds above 0. None of this decided anything below.
+- **Cause (an engine defect, independent of any outcome).** A Latin-1 byte in openssl's 2014 commit metadata raised
+  `UnicodeDecodeError` inside the chronometer's `git log` stream. The stream was abandoned and every later commit
+  was silently dropped: on pre-2014-10 the window kept 333 of about 860 commits, and 194 of 325 active files read
+  zero churn.
+- **Fix.** gitgalaxy#7818 commit `da852aa54` decodes every git subprocess with `errors="replace"`. Its regression test
+  fails on the old code.
+- **The registered path ("the run stops and the instrument is fixed before anything is scored").** Every snapshot is
+  rescanned at the fixed engine and the gates are rerun. Claims, statistic, baselines, α and decision rule are
+  unchanged. The scored result is whatever the fixed instrument gives, including if a gate still fails.
+- **Other studies.** FWD and FREC on curl and nDPI passed these gates at rho ≥ 0.99, so their history windows were
+  intact. The ablated-history studies never ran the stream.
