@@ -65,3 +65,29 @@ rule (ties by fewer lines, then path).
 - ENV-H2 / H3 **leaning supported**.
 - Main risk: libarchive isolates platforms in per-OS files (`archive_*_windows.c`). There the coupling surface may
   be expressed by file name, not conditionals.
+
+---
+
+## Results — 2026-11-06 (labels and walks `ENV labels` commit; scorer `708b36c` committed before labels)
+
+- **Label audit** (`env_label_audit.md`):
+  - harfbuzz: extrinsic 0.93, regression 0.77;
+  - libarchive: extrinsic 0.83, **regression 0.43 → withheld**. Most of its regression-word hits add *regression test*
+    fixtures and fix nothing.
+
+| claim | harfbuzz (62 snapshots) | libarchive (72) |
+|---|---|---|
+| **ENV-H1** P per line beats both size orders on extrinsic fixes | **+0.173**, lo +0.028, 90% CI [+0.085, +0.261] → **SUPPORTED** | **+0.123**, lo +0.031, [+0.067, +0.181] → **SUPPORTED** |
+| **ENV-H2** …by more than on regressions | **+0.269**, lo +0.092 → **SUPPORTED** | **withheld** (label gate). Computed +0.296, lo +0.045: non-binding |
+| **ENV-H3** …by more than on other fixes | **+0.193**, lo +0.045 → **SUPPORTED** | **+0.157**, lo +0.061 → **SUPPORTED** |
+
+- **Mean lift by class.**
+  - harfbuzz: extrinsic +0.173, regression −0.093, other-fix −0.018.
+  - libarchive: extrinsic +0.123, regression −0.098, other-fix −0.031.
+- **Headline (registered rule) → PARTLY REPLICATED.** ENV-H1 and H3 hold on both unseen repos; H2 holds on harfbuzz and
+  is withheld on libarchive by the label gate, not by the measure.
+- **Across five repos** (three exploratory, two registered), platform/compiler/arch conditional density finds extrinsic
+  fixes beyond size, and does worse than size on every other class. It is the first static GitGalaxy-style measure in
+  this program to replicate beyond size on unseen data.
+- **The decision rule** ("open a gitgalaxy issue if replicated") is not strictly met. Whether H1 + H3 on both repos is
+  enough to open the engine-column issue is an owner call.
