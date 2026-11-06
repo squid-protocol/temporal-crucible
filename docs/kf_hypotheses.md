@@ -65,3 +65,39 @@ general effect.
 - H3 **leaning supported**: `goto fail` cleanup chains are where lifetime bugs live.
 - H4 **uncertain**: macros are also used for feature flags and logging, not only byte access.
 - Main risk: the lifetime type is small (nDPI about 15 events).
+
+---
+
+## Results — 2026-11-06 (scorer `8dd98ed` committed before running; report `kf.md`)
+
+**Data.** 344 events pooled: nDPI 110, openssl 234. Fault types: bounds 118 (nDPI 81, openssl 37), lifetime 26
+(nDPI 14, openssl 12), other 200. The median T0 file share exposed is 37% for `goto` and 20% for function-like macros.
+
+| claim | estimate | one-sided lo (α = 0.0025) | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **KF-H1** RR(`goto`), all security fixes | **1.59** | 1.23 | [1.37, 1.90] | **SUPPORTED** |
+| **KF-H2** RR(function-like macro), all security fixes | **1.34** | 1.05 | [1.15, 1.58] | **SUPPORTED** |
+| **KF-H3** RR(`goto` \| lifetime) / RR(`goto` \| bounds) | **7.12** | 2.77 | [3.88, 25.0] | **SUPPORTED** |
+| **KF-H4** RR(macro \| bounds) / RR(macro \| lifetime) | 1.42 | 0.30 | [0.60, 2.98] | not supported (inconclusive) |
+
+**Headline (registered rule) → "keyword → specific fault" is SHOWN, for `goto` ↔ lifetime faults.**
+- Files containing `goto` are ~13× more likely, at equal size and evidence, to be where a **lifetime** fault (leak,
+  use-after-free, double free, uninitialized memory) is fixed.
+- For bounds faults the figure is ~1.9×.
+- Function-like macros raise the rate for every kind of fault (bounds 2.2×, lifetime 1.6×). They are not specific.
+
+**Caveats, which bound how far this goes.**
+1. **The lifetime group is small:** 26 events (nDPI 14, openssl 12). Hence the very wide CI (3.9 to 25).
+2. **Finer size strata shrink it but keep it** (descriptive, 50 LOC bins): `goto` × lifetime 6.27 vs `goto` × bounds 1.19,
+   a ratio of about 5.3. `goto` overall drops from 1.59 to 1.26, so part of the general `goto` effect is size.
+3. **curl does not show it.** curl is context only (it carried the dynamism pilot): `goto` × lifetime 1.08, 20 events.
+   curl's lifetime CVEs are human-reported. This is the same searcher split seen in LV and INP, but it is also simply
+   a non-replication on a third repo.
+4. **Fault types come from two different sources:** OSS-Fuzz crash types for nDPI, CWE codes for openssl. Neither was
+   audited here.
+
+**Next.**
+- **KF-R:** replicate H3 on unseen C repos with enough lifetime CVEs and OSS-Fuzz or NVD types (libxml2, libtiff,
+  libpng, libexif). Register before cloning.
+- **Localize:** do lifetime-fault fixes land *inside the functions* that contain the `goto`, against same-file
+  siblings? That separates "`goto` cleanup code is where lifetime bugs live" from "files with `goto` are a kind of file".
