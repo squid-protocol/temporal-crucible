@@ -77,3 +77,56 @@ The statistic is KF's, verbatim:
 - KFR-H3 **uncertain**: curl did not show it.
 - KFL-H1 **leaning supported**: if `goto fail` cleanup chains are the mechanism, the fix should land in the function
   that owns them.
+
+---
+
+## Results — 2026-11-06 (gates `kfr_gates.md`; scorer `86d58bd` committed before running; report `kfr.md`)
+
+**Gates.**
+- G1: libxml2, libexif, libtiff and libpng pass. **file fails** (tree-sitter recall 94.0%) and is excluded from KF-L.
+- G2: PASS (99.8% / 99.9%).
+- G3: PASS (lifetime 29, bounds 42).
+- All 84 parent snapshots scanned, 0 failed.
+
+### KF-R — file level, five unseen repos (78 events)
+
+| claim | estimate | one-sided lo (α = 0.0025) | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **KFR-H1** RR(`goto`), all security fixes | **2.80** | 1.12 | [1.58, 6.91] | **SUPPORTED** |
+| **KFR-H3** RR(`goto` \| lifetime) / RR(`goto` \| bounds) | 0.54 | 0.02 | [0.10, 2.12] | **not supported (inconclusive)** |
+
+Descriptive:
+- RR(`goto` | lifetime) 2.06 vs RR(`goto` | bounds) 3.83. With 50 LOC bins: 1.82 / 2.07.
+- Per repo, RR(`goto`): libxml2 3.34 (41 events), file 4.50 (24), libexif 0.00 (11), libtiff 0.56 (2).
+
+### KF-L — function level (nDPI, openssl, libxml2, libtiff, libpng, libexif; 387 events: 50 lifetime, 140 bounds)
+
+| claim | estimate | one-sided lo (α = 0.0025) | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **KFL-H1** RR(goto-function \| lifetime) | 2.07 | 0.77 | [1.20, 3.36] | **not supported** |
+| **KFL-H2** lifetime ratio / bounds ratio | 1.02 | 0.33 | [0.54, 1.81] | **not supported (inconclusive)** |
+
+Per repo, lifetime vs bounds RR at function level: nDPI 1.51 / 2.89; openssl 4.32 / 0.90; libxml2 2.01 / 2.19.
+
+### Headline
+
+- **The `goto` ↔ lifetime-fault link does NOT replicate.** On unseen repos `goto` goes with bounds faults at least as
+  much as with lifetime faults. KF-H3's 7× on nDPI + openssl rested on 26 lifetime events and does not travel. It
+  looks like a small-sample, two-repo result (openssl's function-level 4.3 vs 0.9 is the only cell that carries it).
+- **What does replicate is the general `goto` effect.** Files containing `goto` are where security fixes land more
+  often, at equal size and evidence:
+
+  | data | RR(`goto`) |
+  |---|---:|
+  | nDPI + openssl | 1.59 |
+  | five unseen repos | **2.80** (lo 1.12) |
+
+- **Localization is not shown at the registered α.** Within fixed files, lifetime fixes land in `goto`-containing
+  functions about 2× as often as in same-size siblings (90% CI 1.2–3.4), but the one-sided bound at α = 0.0025 is 0.77.
+  It is not specific to lifetime faults either (bounds is similar).
+
+**Program standing on "keywords ↔ specific faults".**
+- **Keyword → *security faults in general*: replicated.** `goto` (and function-like macros, KF-H2) mark security-prone
+  C code beyond size, on seven repos.
+- **Keyword → *a specific fault type*: not replicated.** The one candidate (`goto` → lifetime) failed on unseen data.
+- The engine's dynamism signal is a **general security-risk marker**, not a fault-type fingerprint.
