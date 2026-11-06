@@ -92,3 +92,26 @@ for them. The commit-level study is the right instrument there, and this screen 
 - **Prior.**
   - `platform_cond /line` **leaning confirmed**: ENV passed on these repos with git line counts.
   - The churn candidates **uncertain**.
+
+## Stage 2 results — 2026-11-06 (scorer `193f311` committed before the join; report `sc_confirmation.md`)
+
+| class | candidate | harfbuzz (c + cpp) | libarchive (c) | verdict |
+|---|---|---|---|---|
+| **extrinsic** | `platform_cond /line` | **+0.154**, lo +0.005 ✓ | **+0.102**, lo +0.016 ✓ | **CONFIRMED** |
+| regression | `raw_churn_freq /line` | +0.000, CI [−0.062, +0.063] ✗ | withheld (labels) | not confirmed |
+| other-fix | `risk_churn /line` | +0.038, lo +0.008 ✓ | +0.038, lo −0.012 ✗ | not confirmed |
+| other-fix | `pct_vec_churn /line` | +0.031, lo +0.013 ✓ | −0.005 ✗ | not confirmed |
+
+**Answer to the question this screen asked.** Do GitGalaxy's file metrics help find a *specific* class of fix at
+equal size? Across **225 metric forms**, discovered on three repos and confirmed on two unseen ones:
+
+- **Extrinsic: yes, one metric.** Platform/compiler conditional density, now confirmed with the engine's own size
+  measure as well as with git line counts (ENV), and on a mostly-C++ repo.
+- **Latent (CVEs): none.** No file metric beats size, in discovery or at all. The only predictor that works is the
+  CVE's own history (XC), which is not a snapshot metric.
+- **Regression: none confirmed.** Churn per line passed discovery and is flat on harfbuzz (0.000). This fits XC-H5:
+  regressions are not a property of files.
+- **Other fixes: none confirmed.** A small churn effect (+0.03–0.04) holds on harfbuzz and misses α on libarchive.
+
+**Engine finding.** libarchive commit `0cc23cef` cannot be scanned: `FileNotFoundError` in `pathlib.resolve`,
+plausibly a dangling symlink. That is a robustness bug worth a gitgalaxy issue.
