@@ -97,3 +97,13 @@ Fallback, for queries and host bodies alike:
 - a post-fix body tree-sitter cannot see is the same-size window from the pre-fix signature line.
 
 Nothing else changes.
+
+**Run 1 crashed before any statistic (2026-11-06).** Two bugs; nothing was scored:
+1. **The engine scanned MySQL's `extra/zlib` but skipped its `zlib-1.3.2/` subfolder,** leaving 0 functions.
+   - The engine appears to exclude version-named or vendored directories. *This is a product-relevant finding*: a
+     default GitGalaxy scan may omit vendored copies.
+   - Fix: scan the inner folder `extra/zlib/zlib-1.3.2` (the same code).
+2. **zlib-ng's version lives in `zlib.h.in`,** which the lookup did not search. The lookup now includes `zlib*.h.in`,
+   and empty tables are dropped with a note.
+
+Run 2 uses these fixes. Nothing else changes.

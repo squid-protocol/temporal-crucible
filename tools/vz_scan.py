@@ -9,7 +9,7 @@ FIXES = ["eff308af425b67093bab25f80f1ae950166bece", "1eb7682f845ac9e9bf9ae35bbfb
          "6a043145ca6e9c55184013841a67b2fef87e44c0", "9aaec95e82117c1cb0f9624264c3618fc380cecb", "e54e1299404101a5a9d0cf5e45512b543967f958",
          "d1d577490c15a0c6862473d7576352a9f18ef811"]
 H = POOL_DIR / "vz_hosts"
-HOSTS = {"zlib-ng": H / "zlib-ng", "chromium-zlib": H / "chromium-zlib", "mysql": H / "mysql/extra/zlib",
+HOSTS = {"zlib-ng": H / "zlib-ng", "chromium-zlib": H / "chromium-zlib", "mysql": H / "mysql/extra/zlib/zlib-1.3.2",
          "mongo": H / "mongo/src/third_party/zlib", "assimp": H / "assimp/contrib/zlib",
          "openjdk": H / "openjdk/src/java.base/share/native/libzip/zlib", "qtbase": H / "qtbase/src/3rdparty/zlib",
          "cmake": H / "cmake/Utilities/cmzlib", "rsync": H / "rsync/zlib", "mariadb": H / "mariadb/zlib",

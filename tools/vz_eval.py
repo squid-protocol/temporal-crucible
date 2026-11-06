@@ -121,7 +121,7 @@ def status(body, R, A):
 
 
 def version(root):
-    for p in sorted(root.rglob("zlib.h")) + sorted(root.rglob("zlib*.h")):
+    for p in sorted(root.rglob("zlib.h")) + sorted(root.rglob("zlib*.h")) + sorted(root.rglob("zlib*.h.in")):
         m = re.search(r'define ZLIB_VERSION "([0-9.]+)', p.read_text(errors="replace"))
         if m:
             return tuple(int(x) for x in m.group(1).strip(".").split(".") if x)
@@ -185,6 +185,8 @@ def main() -> int:
     t0 = time.time()
     ref = U.load_reference("structure")
     hosts = {n: Table(n, ref) for n in HOSTS if (OUT / n / f"{n}_galaxy_master.db").exists()}
+    empty = [n for n, t in hosts.items() if len(t.cand) == 0]
+    hosts = {n: t for n, t in hosts.items() if len(t.cand)}
     vers = {n: version(OUT / n / n) for n in hosts}
     print({n: (len(t.cand), vers[n]) for n, t in hosts.items()}, f"({time.time() - t0:.0f}s)", flush=True)
     rows, priv = [], []
@@ -241,7 +243,7 @@ def main() -> int:
     ren = np.array([r["renamed"] for r in rows])
     allm = np.ones(len(rows), bool)
     L = ["# VZ-H1..H3 — vendored zlib (SCORED; aggregates only)", "",
-         f"- hosts scanned: {len(hosts)}; truth pairs (query function × host, text Jaccard ≥ 0.5): **{len(rows)}**; renamed: {int(ren.sum())}",
+         f"- hosts scanned: {len(hosts)} (empty, dropped: {empty}); truth pairs (query function × host, text Jaccard ≥ 0.5): **{len(rows)}**; renamed: {int(ren.sum())}",
          "", "| claim | result | lo | verdict |", "|---|---|---:|---|"]
     x1 = (rk["FUSED"] <= 1).astype(float) - (rk["L1"] <= 1).astype(float)
     lo1 = cluster_lo(x1, allm) if len(rows) else float("nan")
