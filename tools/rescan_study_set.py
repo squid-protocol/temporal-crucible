@@ -37,6 +37,7 @@ from multiprocessing import Manager
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from _engine import GALAXYSCOPE_BIN  # noqa: E402
+import run_batch_parallel  # noqa: E402
 from run_batch_parallel import _init, _init_master, merge_shard, scan_one  # noqa: E402
 from scan_pair import out_dir_for, resolve_repo  # noqa: E402
 
@@ -61,10 +62,25 @@ def study_commits(db: pathlib.Path, repo_name: str) -> list[tuple[str, str]]:
     return [(r[0], r[1] or "") for r in rows]
 
 
+def commits_from_file(path: pathlib.Path) -> list[tuple[str, str]]:
+    text = path.read_text()
+    if path.suffix == ".json":
+        return [(r["sha"], r.get("date", "")) for r in json.loads(text)["revisions"]
+                if r.get("status", "ok") == "ok"]
+    return [(line.split()[0], "") for line in text.splitlines() if line.strip()]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", required=True)
-    ap.add_argument("--from-db", required=True, type=pathlib.Path)
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--from-db", type=pathlib.Path, help="rescan every commit in this study DB")
+    src.add_argument("--commits-file", type=pathlib.Path,
+                     help="one sha per line, or a walks/<repo>_walk.json manifest")
+    ap.add_argument("--history-asof", action="store_true",
+                    help="history ENABLED, measured as of each commit (GITGALAXY_HISTORY_ASOF=1, "
+                         "gitgalaxy#7818) -- the forward-prediction mode (tc#29), not the ablated "
+                         "SCAN_ENV the delta analyses require")
     ap.add_argument("--jobs", type=int, default=5)
     ap.add_argument("--workers-per-scan", type=int, default=2)
     ap.add_argument("--scratch", default="/nvme-data/tc-scratch")
@@ -73,7 +89,16 @@ def main() -> int:
     args = ap.parse_args()
 
     repo = resolve_repo(args.repo)
-    commits = study_commits(args.from_db, repo.name)
+    if args.history_asof:
+        # Workers fork after this, so they inherit the swapped env (scan_one reads
+        # run_batch_parallel.SCAN_ENV at call time).
+        env = {k: v for k, v in run_batch_parallel.SCAN_ENV.items() if k != "GITGALAXY_DISABLE_GIT_HISTORY"}
+        env["GITGALAXY_HISTORY_ASOF"] = "1"
+        run_batch_parallel.SCAN_ENV = env
+    if args.from_db:
+        commits = study_commits(args.from_db, repo.name)
+    else:
+        commits = commits_from_file(args.commits_file)
     total = len(commits)
     if args.sample:
         step = max(1, total // args.sample)
@@ -93,7 +118,8 @@ def main() -> int:
 
     eng = engine_sha()
     meta = {"engine_bin": GALAXYSCOPE_BIN, "engine_sha": eng,
-            "engine_args": os.environ.get("TC_ENGINE_ARGS", ""), "from_db": str(args.from_db),
+            "engine_args": os.environ.get("TC_ENGINE_ARGS", ""),
+            "history": "asof" if args.history_asof else "ablated", "from_db": str(args.from_db or args.commits_file),
             "study_commits": total, "selected": len(commits), "todo": len(todo),
             "jobs": args.jobs, "workers_per_scan": args.workers_per_scan,
             "started": time.strftime("%Y-%m-%dT%H:%M:%S%z")}

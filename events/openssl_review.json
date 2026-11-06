@@ -1,0 +1,37 @@
+{
+ "reviewed_by": "manual diff inspection, 2026-11-05",
+ "events": {
+  "c046fffa16cd55c972f71c49051b8ce6b83eed7f": {
+   "verdict": "accept",
+   "note": "2002 advisory commit: s2_clnt/s2_srvr/s3_srvr/asn1_lib = the SSLv2/SSLv3/ASN.1 overflows"
+  },
+  "5b0b0e98cec653ae1e65e2251c3e0fc273945df5": {
+   "verdict": "accept",
+   "note": "ssl/s3_pkt.c: Vaudenay CBC timing fix"
+  },
+  "299024498004473a58e780cdf8ec83e85a04f807": {
+   "verdict": "accept",
+   "note": "asn1_lib.c + tasn_dec.c: the 2003 ASN.1 parsing CVEs"
+  },
+  "db99c52509bd79138924c84d127e9872359689c4": {
+   "verdict": "reject",
+   "note": "rsa_eay.c double-checked-locking change; unrelated to CVE-2007-5135 (SSL_get_shared_ciphers off-by-one) -- the CHANGES line was added in an unrelated commit"
+  },
+  "bab534057b855a7dbf98261d494897b3542bd9d5": {
+   "verdict": "accept",
+   "note": "stable-branch sync whose content is the CVE-2008-5077 EVP_VerifyFinal/DSA_verify return-check fix in apps/ and ssl/"
+  },
+  "300b1d76fe27541c662ca606a6a201b2718e0c65": {
+   "verdict": "accept",
+   "note": "crypto/jpake: J-PAKE validation (CVE-2010-4252)"
+  },
+  "e7455724938818eac8bef43f535d148dd4670d06": {
+   "verdict": "accept",
+   "note": "ssl/d1_pkt.c: DTLS CBC plaintext recovery (CVE-2011-4108)"
+  },
+  "ef28891bab7054667f2f6739f6d376c38b3ca1cc": {
+   "verdict": "accept",
+   "note": "SWEET32 mitigation: 3DES out of DEFAULT (ssl/s3_lib.c)"
+  }
+ }
+}
