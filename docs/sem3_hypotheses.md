@@ -40,3 +40,20 @@ For multi-PR expat items, the per-PR sets are unioned; "pre-fix" and "post-fix" 
 - **S3-H1 zlib likely.** zlib's fixes are surgical, so A\* ≈ A.
 - **S3-H1 expat uncertain.** Some refactors also add genuinely new boilerplate lines.
 - **S3-H2 uncertain.** It depends on whether expat units still decide after filtering, and decide correctly.
+
+---
+
+## Results, stage 1 (`prepare`, scorer `43c0780`; report `sem3_prepare.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **S3-H1** no new errors on verbatim truth, each library | zlib **0 / 1,258** decided (coverage 81%); expat **74 / 1,509** (4.9%; upper 6.5%; coverage 47%) | **not supported** (expat above 1%) |
+
+**Reading.**
+- The whole-file filter cuts expat's false calls about tenfold, from 687 (28% of decided) to 74 (4.9%). zlib keeps
+  0 errors with slightly higher coverage.
+- The price on expat is coverage: SEM-3 decides on 47% of verbatim units, against SEM-2's 76%.
+- Closest-version remains 0 / 3,228 on expat verbatim units.
+- In-sample, on CMB's audited units (the design's motivation), SEM-3 is right on 23 / 30 zlib and 4 / 26 expat.
+
+**Stage 2.** The fresh blind audit (seed 2986; 60 packets, all with full function excerpts) runs as registered.
