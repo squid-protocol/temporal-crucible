@@ -49,3 +49,8 @@ So SEM can only *add* "patched" calls where the line rule said unpatched or unde
 - **H1 likely.** Guard fragments come from fixed code, and pre-fix copies lack them.
 - **H2 unlikely.** SEM cannot fix abstentions on unpatched copies, and sensitivity was 81.5%.
 - **H3 uncertain.** It works only where the independent fix reuses the guard expression.
+
+**H3 audit recorded (2026-11-06, before SEM ran on any unit).**
+- 20 fresh units (seed 2983), audited on the vulnerability's semantics. Aggregate: **20 patched, 0 unpatched,
+  0 unclear.**
+- The labels sit in the private file `vz_private/sem_audit.json`, sha256 `fbecbeb5dcc3c3c1c0e01cecb6e69953715f19661872ccad860321594b9173f8`.
