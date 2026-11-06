@@ -108,3 +108,40 @@ after) drove the shortfall.
   the preceding **or** the following snapshot must be ≥ 90%.
 - Nothing else changes: claims, strata, α and windows are as registered.
 - Run-2 results are labelled post-amendment.
+
+## Results — run 2, post-amendment A1 (scorer `10fab74`; report `chg.md`)
+
+**Gate G-JOIN v2: PASS**, 96.3% name agreement (56,413 / 58,578).
+
+**Data.** 1,526,252 function-quarters across five repos. Hit in the 180-day window: 1,188 regression-word,
+59,650 other-fix.
+
+| claim | MH RR | lo | verdict |
+|---|---:|---:|---|
+| **CHG-H1** shape-changed vs untouched → regression | **2.88** | 2.18 | **SUPPORTED** (curl 2.7, OpenSSL 4.0, harfbuzz 2.2, nDPI 2.7) |
+| **CHG-H2** shape-changed vs edited-same-shape → regression | **1.42** | 1.02 | **SUPPORTED, barely** (curl 1.38, OpenSSL 1.19; other repos too few) |
+| **CHG-H3** regression share among fixed: shape vs untouched | **1.47** | 1.12 | **SUPPORTED** (four repos 1.2–1.7) |
+| **CHG-H4** young vs old → regression | 1.23 | 0.73 | **not supported** (curl 0.80, OpenSSL 1.57, harfbuzz 3.38, libarchive 1.03) |
+| **CHG-H5** regression share among fixed: young vs old | **0.77** | 0.45 | **not supported**: young code's share is *lower* (1.7% vs 2.4%), except harfbuzz (2.39) |
+
+**Reading.**
+1. **A fingerprint change is a real warning sign.**
+   - Functions whose archetype or complexity changed in a quarter are **2.9× more likely to get a regression fix**
+     in the next six months than size-matched untouched functions.
+   - They are **1.4× more likely than functions edited without a shape change**. The edge over plain editing holds
+     but is modest (lo 1.02, two repos evaluable).
+   - It is **specific**: among functions that got any fix, a higher *share* were regressions (1.47×).
+2. **Young code is busy, not deficient.**
+   - Young functions get about twice the fixes of every kind (other-fix 65 vs 33 per 1,000 quarters).
+   - Their regression rate is not reliably higher once size and change state are matched.
+   - Their regression *share* is lower.
+   - The circular regression-linked sanity row behaves as expected: 4.6 young vs 2.6 old.
+   - **Harfbuzz is the exception** (H4 3.4, H5 2.4).
+   - Together with AGE (CVE fixes land in old code), this says **deficiency shows up as *change in shape*, not as
+     youth.**
+
+**Caveats.**
+- Gate amended after run 1 (documented above, before any claim statistic).
+- Regression-word labels are rare: 648 events, 1,188 hit units.
+- Snapshots are quarterly, so "shape change" is quarter-level.
+- H2 is only evaluable in curl and OpenSSL.
