@@ -97,3 +97,36 @@ private and for the owner.
 
 **Owner decision (2026-11-06, before any CMB statistic):** skip the OSV-scanner arm for now. **CMB-H3 is not
 evaluable** in this run. It can be run later as its own registered comparison if the binary is approved.
+
+---
+
+## Results, stage 1 (`prepare`, scorer `8e10603`; report `cmb_prepare.md`)
+
+**Data.** 956 host states, 12,023 units. 37 of the 43 expat fixes change at least one function in a `lib/*.c` file.
+
+| claim | result | verdict |
+|---|---|---|
+| **CMB-H1** SEM-2 no new errors on expat verbatim truth | **687 wrong** / 2,442 decided (Wilson 99% upper 23%) | **not supported** |
+
+| library | method | wrong calls on verbatim truth | coverage |
+|---|---|---:|---:|
+| zlib | SEM-2 / line / closest-version / version | 0 / 0 / 0 / 1 | 74% / 73% / 62% / 100% |
+| expat | **SEM-2 / line** / closest-version / version | **687 / 570** / 0 / 0 | 70% / 68% / 100% / 99% |
+
+**zlib's clean record does not generalise.** On expat, both code-line checks are wrong on about a quarter of decided
+verbatim units. Closest-version matching and version strings are perfect.
+
+**Diagnosis (exploratory, `tools/exploratory/cmb_expat_error_breakdown.py`, after stage 1).**
+- Nearly every error is the dangerous kind: an **old, unpatched copy called "patched"**. That is 566 of 570 for the
+  line check and 683 of 687 for SEM-2.
+- The errors concentrate in about 13–15 of the 37 fixes, mostly 2026 releases (2.8.x–2.10.0). For each of those, 63
+  to 87 of its 88 verbatim units are wrong.
+- **Likely mechanism:** these fixes are larger pull requests that **move and refactor code**, so many of their
+  "added" lines already exist elsewhere in the file in older releases. The line rule's "≥ 50% of added lines present"
+  then fires on unpatched code.
+  - SEM-2 filters only its *guard fragments* for novelty. The underlying line rule never did.
+  - zlib's surgical fixes hid this.
+- **Repair (not part of this run; needs its own registration):** count only added lines that are absent from the
+  whole pre-fix file. Then re-test on both libraries.
+
+The blind audit for **CMB-H2** proceeds as registered.
