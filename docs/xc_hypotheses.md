@@ -192,3 +192,26 @@ Reports: `xc_curl.md`, `xc_ndpi.md`, `xc_openssl.md`. Lift = recall@20 minus the
 - H6 compares against all other fix history, which is mostly the large other-fix class.
 - The class-specific recidivism table is descriptive. It is the lead to register next, e.g. "a file's
   class-conditioned fix history beats its pooled history", on an unseen repo.
+
+## Exploratory follow-up — a static environment-coupling measure (2026-11-06, NOT registered)
+
+Prompted by the top extrinsic files (`config-win32.h`, `curl_setup.h`, `e_os.h`, `ppccap.c`): count, per C file and
+snapshot, the `#if`/`#ifdef`/`#ifndef`/`#elif` lines testing platform/compiler/arch macros (`P`), `HAVE_*` (`H`), or
+version comparisons (`V`). Tool: `tools/exploratory/xc_envcond.py`. Reports: `xc_envcond_*_exploratory.md`.
+
+Platform/compiler/arch conditionals per line (`P per line`), lift over the stronger LOC order:
+
+| class | curl | nDPI | openssl |
+|---|---:|---:|---:|
+| **extrinsic** | **+0.119** | **+0.048** | **+0.133** |
+| latent | −0.147 | −0.095 | −0.259 |
+| regression | −0.115 | −0.107 | −0.038 |
+| other-fix | −0.098 | −0.115 | −0.089 |
+
+- This is **the first static measure in the program that both beats size and is class-specific**: it finds extrinsic
+  fixes and is worse than size on every other class.
+- `HAVE_*` and version checks do not show the pattern.
+- **Exploratory only.** The labels are seen and the measure was chosen after looking at the top files.
+- The registration owed is **ENV-H1** on an unseen repo. It needs only git, no engine scan, so it is cheap. The claim:
+  `P per line` beats both LOC orders on extrinsic fixes **and** its extrinsic lift exceeds its lift on latent and
+  regression fixes. A gitgalaxy engine column for platform-conditional density is the product follow-up if it holds.
