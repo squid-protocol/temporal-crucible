@@ -115,3 +115,19 @@ equal size? Across **225 metric forms**, discovered on three repos and confirmed
 
 **Engine finding.** libarchive commit `0cc23cef` cannot be scanned: `FileNotFoundError` in `pathlib.resolve`,
 plausibly a dangling symlink. That is a robustness bug worth a gitgalaxy issue.
+
+## Correction — 2026-11-06: the "unscannable" libarchive commit was a batch-tool bug, not an engine bug
+
+- **What I recorded above was wrong.** Both the stage-2 exclusion ("engine `FileNotFoundError`") and the "engine
+  finding" were mistaken.
+- **The cause.** `0cc23cef` appears three times in `walks/libarchive_quarterly.json`: three quarters with no new
+  mainline commit. `rescan_study_set.py` queued all three copies. `run_batch_parallel.scan_one` names its scratch dir
+  `scratch/<sha[:12]>` and deletes it first, so the concurrent duplicates deleted each other's worktrees mid-scan.
+  - The engine scans the commit cleanly when run alone (521 files).
+  - Only libarchive's walk has duplicates (checked: curl, curl_walk, nDPI, openssl and harfbuzz have none), so no
+    other DB is affected.
+- **The fix.** `rescan_study_set.py` now de-duplicates its queue, preserving order. The commit was re-scanned; the DB
+  now holds all 70 distinct commits (72 snapshots).
+- **The registered result is unchanged.** Primary: the 69-snapshot stage 2 above. Sensitivity with all 72 snapshots
+  restored (`sc_confirmation_72snap_sensitivity.md`): every verdict is the same. `platform_cond /line` on libarchive is
+  +0.122 (lo +0.035; registered run +0.102). The two churn candidates still miss.

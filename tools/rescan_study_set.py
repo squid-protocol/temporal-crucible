@@ -114,7 +114,9 @@ def main() -> int:
         con.close()
     else:
         done = set()
-    todo = [c for c, _ in commits if c not in done]
+    # A walk can list one commit for several quarters (no new mainline commit). Scanning the duplicates
+    # concurrently made them share and delete one scratch dir (scratch/<sha[:12]>), corrupting the scan.
+    todo = list(dict.fromkeys(c for c, _ in commits if c not in done))
 
     eng = engine_sha()
     meta = {"engine_bin": GALAXYSCOPE_BIN, "engine_sha": eng,
