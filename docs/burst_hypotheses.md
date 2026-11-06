@@ -60,3 +60,39 @@ shock's "before" window can therefore hold a Clang "after" window. This biases H
   toolchain release just landed: expect extrinsic work on these files".
 - If neither holds, the bursts are project-internal (tooling adoption, platform campaigns), and only the *where* is
   predictable.
+
+---
+
+## Results — 2026-11-06 (scorer `860ff91` committed before the join; report `burst.md`)
+
+| claim | shocks | units | mean | lo | 90% CI | verdict |
+|---|---:|---:|---:|---:|---|---|
+| **BURST-H1** extrinsic share after − before, GCC | 27 | 99 | +0.0020 | −0.0405 | [−0.0226, +0.0264] | **not supported (inconclusive)** |
+| **BURST-H2** same, Clang | 33 | 153 | +0.0086 | −0.0173 | [−0.0069, +0.0244] | **not supported (inconclusive)** |
+| **BURST-H3** own-compiler-named − other-named Δcount | 60 | 252 | +0.087 | −0.227 | [−0.112, +0.311] | **not supported (inconclusive)** |
+
+**Placebo.** Shocks shifted +182 d give GCC +0.0073 and Clang +0.0154: as large as the real dates. H3's placebo is
+−0.061 against +0.087 real, a hint with a CI too wide to read. The 30 d and 180 d windows do not change the picture.
+
+**Headline → the bursts are not timed to compiler releases.**
+- Extrinsic work is bursty (dispersion 1.4–4.9), but a GCC or Clang major release does not measurably raise the
+  extrinsic share of fixes in the following 90 days, on any of the five repos or pooled.
+- The equivalence bounds were not met either, so this is "no detectable effect at this resolution", not a proven zero.
+
+**What the bursts probably are (a reading, not a result).** The burst months in the exploratory note look
+**project-driven**:
+- a platform campaign (openssl RISC-V 2022-09, harfbuzz Windows CE 2014-08);
+- a newly enabled warning set or CI bot (libarchive's FreeBSD-current `-W` series 2012-02; curl's clang-tidy 2026-02);
+- a contributor arriving with a new platform (Cygwin and MinGW fixes, 2009).
+
+Compiler releases reach these projects diffusely, through distro and Xcode adoption months later. So a release date is
+a weak shock marker.
+
+**Decision rule → (b).** Only the *where* of the extrinsic surface is predictable for now (platform-conditional
+density; own extrinsic history). The *when* is not tied to toolchain releases.
+
+**If anyone pursues the *when*, the candidate shocks are project-internal and dated in the repo itself:**
+- the first CI job for a new platform or compiler (`.github/workflows`, `.travis.yml`, `appveyor.yml` history);
+- warning-flag changes in the build files.
+
+That needs a fresh registration.
