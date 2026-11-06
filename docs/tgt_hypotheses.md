@@ -69,3 +69,41 @@ the wrong platform's. H1 says whether targeting adds over the generic measure.
 - H2 **leaning supported**; H3 **leaning supported**.
 - H1 **uncertain**: the generic measure already concentrates on adapter files, and most platform commits are Windows,
   whose macros dominate S_P.
+
+---
+
+## Results — 2026-11-06 (scorer `3128096` committed before running; report `tgt.md`)
+
+1,405 extrinsic commits named exactly one platform family; **1,396 qualify** (curl 477, openssl 385, libarchive 382,
+harfbuzz 121, nDPI 31).
+
+| claim | mean ΔAUC | lo | 90% CI | verdict |
+|---|---:|---:|---|---|
+| **TGT-H1** named platform − generic measure | −0.041 | −0.053 | [−0.048, −0.035] | **not supported** (generic is better) |
+| **TGT-H2** named platform − size | −0.145 | −0.165 | [−0.157, −0.133] | **not supported** (size is better) |
+| **TGT-H3** named platform − wrong platforms | **+0.131** | +0.115 | [+0.121, +0.140] | **SUPPORTED** |
+
+**Headline (registered rule) → "targeted" is NOT shown.**
+- **Platform specificity is real.** A Windows fix's files carry Windows conditionals far more than macOS or BSD ones
+  (Windows +0.195; Apple, BSD and GCC +0.08 to +0.09; rare platforms such as Solaris, AIX, HP-UX and Android ≈ 0).
+- **The named platform's density does not beat size, or the generic measure, at *which files one commit touches*.**
+  Within a commit, the big core files that most multi-file changes touch rank first by size (AUC ≈ 0.80). Many touched
+  files carry no conditional for the named platform at all.
+- **Statistic differs from ENV/SC.** This used per-commit AUC, which rewards size. ENV/SC used effort-aware recall over
+  future windows. The two answer different questions: "which files will absorb environment work, per line read" versus
+  "which files will *this* platform change touch".
+
+### Exploratory follow-up (not registered): a practical ranking
+
+Tool `tools/exploratory/tgt_combined.py`; same 1,396 commits.
+
+| ranking | mean AUC |
+|---|---:|
+| size alone | 0.798 |
+| named platform's conditional density | 0.652 |
+| files with *any* platform conditional first, then by size | 0.823 |
+| **files with the *named* platform's conditional first, then by size** | **0.827** (Windows: 0.831 vs size 0.793) |
+
+So for "we want to support system Y", the useful list is **files that already branch on Y (or on any platform) first,
+largest first**. It is a modest gain over size (+0.03 AUC), and naming Y adds little beyond "any platform" (+0.004).
+This would need its own registration before it is called shown.
