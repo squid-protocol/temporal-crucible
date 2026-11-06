@@ -1,0 +1,53 @@
+{
+ "repo": "libtiff",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=libtiff)",
+ "pool_head": "bd830b774b8113a3b882868008ae87cf4afb08e6",
+ "counts": {
+  "security-fix": 2,
+  "introduced": 1,
+  "control": 2,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2020-1232",
+   "class": "security-fix",
+   "sha": "3519ab6c7fd9c7b3692a7053d2dac5a8958a6ab2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in TIFFYCbCrtoRGB"
+  },
+  {
+   "id": "OSV-2020-1232",
+   "class": "introduced",
+   "sha": "33f1b16788b86d4501f82678090d209364b3ca49",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in TIFFYCbCrtoRGB"
+  },
+  {
+   "id": "OSV-2020-1306",
+   "class": "security-fix",
+   "sha": "1a4efdd151ed5eea231004aa6daaaf3493954876",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in TIFFYCbCrtoRGB"
+  },
+  {
+   "id": "control-for-OSV-2020-1232",
+   "class": "control",
+   "sha": "68c928923a86c115cc7dedf8099b8b214196a357",
+   "matched_to": "3519ab6c7fd9c7b3692a7053d2dac5a8958a6ab2"
+  },
+  {
+   "id": "control-for-OSV-2020-1306",
+   "class": "control",
+   "sha": "a21714f0287174a693e40b7a6b6ad21bf5fd4f09",
+   "matched_to": "1a4efdd151ed5eea231004aa6daaaf3493954876"
+  }
+ ],
+ "missing": []
+}
