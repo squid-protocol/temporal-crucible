@@ -1,0 +1,647 @@
+{
+ "repo": "file",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=file)",
+ "pool_head": "f851f46b999c71b6f29ec931a22ad6357e531e97",
+ "counts": {
+  "security-fix": 29,
+  "introduced": 22,
+  "control": 29,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2016-1",
+   "class": "security-fix",
+   "sha": "a317154a5acbdcc82db79063742481ce83abafe7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in mprint"
+  },
+  {
+   "id": "OSV-2016-1",
+   "class": "introduced",
+   "sha": "c8ef8f414952634d217b2b5e19d38b92d0341bc2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in mprint"
+  },
+  {
+   "id": "OSV-2016-2",
+   "class": "security-fix",
+   "sha": "8c16c9e3c9a82f859c3ed47c34c14eea6a3d7b18",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in file_regexec"
+  },
+  {
+   "id": "OSV-2016-3",
+   "class": "security-fix",
+   "sha": "c8ef8f414952634d217b2b5e19d38b92d0341bc2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in file_regexec"
+  },
+  {
+   "id": "OSV-2016-3",
+   "class": "introduced",
+   "sha": "eba76b4a66d1cf50a46c0d70720473a0e49b32e8",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in file_regexec"
+  },
+  {
+   "id": "OSV-2016-6",
+   "class": "security-fix",
+   "sha": "8a667072e65294efa6a7b7d9a3bc417e145e0aea",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in mprint"
+  },
+  {
+   "id": "OSV-2016-6",
+   "class": "introduced",
+   "sha": "8a667072e65294efa6a7b7d9a3bc417e145e0aea",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in mprint"
+  },
+  {
+   "id": "OSV-2016-7",
+   "class": "security-fix",
+   "sha": "8f3da601845253629efdda72f9341ed9762b3f2d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in mcopy"
+  },
+  {
+   "id": "OSV-2016-7",
+   "class": "introduced",
+   "sha": "583b3c262f0797ab4e7062e029003dde162b82ab",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in mcopy"
+  },
+  {
+   "id": "OSV-2017-102",
+   "class": "security-fix",
+   "sha": "393dafa41b26a7d8ed593912e0ec1f1e7bd4e406",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in match"
+  },
+  {
+   "id": "OSV-2017-102",
+   "class": "introduced",
+   "sha": "c7facd0442d4640bb9ccd86f4765cb6ff79dff97",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in match"
+  },
+  {
+   "id": "OSV-2017-131",
+   "class": "security-fix",
+   "sha": "6fc66d12c0ca172f4681adb63c6f662ac33cbc7c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in mprint"
+  },
+  {
+   "id": "OSV-2017-131",
+   "class": "introduced",
+   "sha": "a317154a5acbdcc82db79063742481ce83abafe7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in mprint"
+  },
+  {
+   "id": "OSV-2017-134",
+   "class": "security-fix",
+   "sha": "19ccebafb7663c422c714e0c67fa4775abf91c43",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_file_property_info"
+  },
+  {
+   "id": "OSV-2017-134",
+   "class": "introduced",
+   "sha": "17ee4cf670c363de8d2ea4a4897d7a699837873f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_file_property_info"
+  },
+  {
+   "id": "OSV-2017-16",
+   "class": "security-fix",
+   "sha": "77a7041fae5b7c8cc3844bcd29b88a193b8e3752",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_strncmp"
+  },
+  {
+   "id": "OSV-2017-16",
+   "class": "introduced",
+   "sha": "17f892b32cc92f7505f02d198142c1a57204582f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_strncmp"
+  },
+  {
+   "id": "OSV-2017-52",
+   "class": "security-fix",
+   "sha": "55cb70a24a58fc73b7a2b9d1b2a49845668342cc",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in mcopy"
+  },
+  {
+   "id": "OSV-2017-52",
+   "class": "introduced",
+   "sha": "1562e15149268477b395ec71309d13f8be99a83b",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in mcopy"
+  },
+  {
+   "id": "OSV-2018-15",
+   "class": "security-fix",
+   "sha": "87f27958cfbb05d262504976f66db70c24d5061f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse_string"
+  },
+  {
+   "id": "OSV-2018-15",
+   "class": "introduced",
+   "sha": "3077baa14978e8c7cd9b41991bbcda9190527ee6",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse_string"
+  },
+  {
+   "id": "OSV-2018-18",
+   "class": "security-fix",
+   "sha": "473e039b48fd72660dd00f4b52a2880cc0dd5632",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse_object"
+  },
+  {
+   "id": "OSV-2020-1193",
+   "class": "security-fix",
+   "sha": "06de62c022138f63de9bcd04074491945eaa8662",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2020-1193",
+   "class": "introduced",
+   "sha": "07d847a8d4c440da564fbef4992bca2531fe676f",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2020-1280",
+   "class": "security-fix",
+   "sha": "46a8443f76cec4b41ec736eca396984c74664f84",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2020-184",
+   "class": "security-fix",
+   "sha": "3c6b51d4a1f5682f8144fef1553b0357d3d83aaf",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_strncmp"
+  },
+  {
+   "id": "OSV-2020-184",
+   "class": "introduced",
+   "sha": "020876142969029eefc7a52d5545d0475203c472",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_strncmp"
+  },
+  {
+   "id": "OSV-2020-190",
+   "class": "security-fix",
+   "sha": "4f1887eb56f4abdf448274afc5abdc8f9d078929",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in file_vprintf"
+  },
+  {
+   "id": "OSV-2020-190",
+   "class": "introduced",
+   "sha": "0717383f58e5737cc4aa28446f5a8839d484caf4",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in file_vprintf"
+  },
+  {
+   "id": "OSV-2020-391",
+   "class": "security-fix",
+   "sha": "dcda2612a5f38a3d9e15c0ac9a7d156d74b3a395",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in mprint"
+  },
+  {
+   "id": "OSV-2020-535",
+   "class": "security-fix",
+   "sha": "ecca6e54f49f251bb4c16fe145d04c2b45923dc3",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in looks_ucs32"
+  },
+  {
+   "id": "OSV-2020-535",
+   "class": "introduced",
+   "sha": "f0a26da7b371127e4460cc6d2da1b410c3d85ad9",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in looks_ucs32"
+  },
+  {
+   "id": "OSV-2020-75",
+   "class": "security-fix",
+   "sha": "29955546ee23b05359f2a4ed6986de590ed0b9f2",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Index-out-of-bounds in der_tag"
+  },
+  {
+   "id": "OSV-2020-75",
+   "class": "introduced",
+   "sha": "648bbd918a00661b5a4f355cb40f9a0f3c58007d",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Index-out-of-bounds in der_tag"
+  },
+  {
+   "id": "OSV-2021-1238",
+   "class": "security-fix",
+   "sha": "a9c8d2a9493c4e0cd201db57801f3502e65c686c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2021-1238",
+   "class": "introduced",
+   "sha": "c8deb32eab1089d1841482fb2e91833f114b6712",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN READ in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2021-1322",
+   "class": "security-fix",
+   "sha": "46df39b68e51fd803d382348c0059fcb2e40b5ef",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2021-1322",
+   "class": "introduced",
+   "sha": "a9c8d2a9493c4e0cd201db57801f3502e65c686c",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in cdf_read_property_info"
+  },
+  {
+   "id": "OSV-2022-468",
+   "class": "security-fix",
+   "sha": "46976e05f97e4b2bc77476a16f7107ff0be12df1",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse"
+  },
+  {
+   "id": "OSV-2022-468",
+   "class": "introduced",
+   "sha": "87060b287acdc06297bb73e668445e57023f3a75",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse"
+  },
+  {
+   "id": "OSV-2022-534",
+   "class": "security-fix",
+   "sha": "16756ff9286df9a43b4b6e21824975a1c6809835",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse"
+  },
+  {
+   "id": "OSV-2022-534",
+   "class": "introduced",
+   "sha": "522e7901a20dc6f2d1ceafb5d12d44f94946e11a",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in json_parse"
+  },
+  {
+   "id": "OSV-2022-923",
+   "class": "security-fix",
+   "sha": "66efe2fa6abc233011a58965d6de2bb0f91328bd",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_magwarn"
+  },
+  {
+   "id": "OSV-2022-923",
+   "class": "introduced",
+   "sha": "fc5ce7ab57ab4755430cd05706d4289a7d704b03",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_magwarn"
+  },
+  {
+   "id": "OSV-2022-924",
+   "class": "security-fix",
+   "sha": "411ec5bf0708dcd5ec99e4d0961740fca30a6bc7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in file_zmagic"
+  },
+  {
+   "id": "OSV-2022-952",
+   "class": "security-fix",
+   "sha": "e94d52646d646125cc5452b33f3a70f4e601c59e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in regcomp"
+  },
+  {
+   "id": "OSV-2023-1398",
+   "class": "security-fix",
+   "sha": "81a0cbd10c347496bdee7dde78f7e47a16b4e79f",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in load_1"
+  },
+  {
+   "id": "OSV-2023-1398",
+   "class": "introduced",
+   "sha": "fc601ce4124603d86277d6bf12242edbbb5ab6de",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in load_1"
+  },
+  {
+   "id": "OSV-2023-443",
+   "class": "security-fix",
+   "sha": "c7eddddfd5d99821ea52e52e24468b43282c8f90",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-after-poison in file_is_simh"
+  },
+  {
+   "id": "OSV-2023-443",
+   "class": "introduced",
+   "sha": "b17d1647cba360469ae1c22b1f7de1a3a15528b7",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-after-poison in file_is_simh"
+  },
+  {
+   "id": "OSV-2023-505",
+   "class": "security-fix",
+   "sha": "1fc9175166fc5c5117838a1dcfb309b7c595eb56",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "UNKNOWN WRITE in regcomp"
+  },
+  {
+   "id": "control-for-OSV-2016-1",
+   "class": "control",
+   "sha": "d4ec58aae8cb489a6e28f4cd359c8b40a4e2c9dc",
+   "matched_to": "a317154a5acbdcc82db79063742481ce83abafe7"
+  },
+  {
+   "id": "control-for-OSV-2016-2",
+   "class": "control",
+   "sha": "75aefaab4dafb41576260bd1e224d662eee2a292",
+   "matched_to": "8c16c9e3c9a82f859c3ed47c34c14eea6a3d7b18"
+  },
+  {
+   "id": "control-for-OSV-2016-3",
+   "class": "control",
+   "sha": "ade74e7f7e7a3619f5a25b2fd1aa7268c393ca30",
+   "matched_to": "c8ef8f414952634d217b2b5e19d38b92d0341bc2"
+  },
+  {
+   "id": "control-for-OSV-2016-6",
+   "class": "control",
+   "sha": "18ae02d178b5c1b3056fcedccff6ef1567112ef3",
+   "matched_to": "8a667072e65294efa6a7b7d9a3bc417e145e0aea"
+  },
+  {
+   "id": "control-for-OSV-2016-7",
+   "class": "control",
+   "sha": "db5818858c49bb02391f61047d6b4a4450692e93",
+   "matched_to": "8f3da601845253629efdda72f9341ed9762b3f2d"
+  },
+  {
+   "id": "control-for-OSV-2017-102",
+   "class": "control",
+   "sha": "eb97342819e57c10abc55758abd8c41d865106bb",
+   "matched_to": "393dafa41b26a7d8ed593912e0ec1f1e7bd4e406"
+  },
+  {
+   "id": "control-for-OSV-2017-131",
+   "class": "control",
+   "sha": "2d1905e903c835cf0eb925c50aaa11f76a9c9d9b",
+   "matched_to": "6fc66d12c0ca172f4681adb63c6f662ac33cbc7c"
+  },
+  {
+   "id": "control-for-OSV-2017-134",
+   "class": "control",
+   "sha": "f0bcdd072ac801984d8503844570c98e2c3cfac0",
+   "matched_to": "19ccebafb7663c422c714e0c67fa4775abf91c43"
+  },
+  {
+   "id": "control-for-OSV-2017-16",
+   "class": "control",
+   "sha": "695d72d42f8e4f3c6bbe157bc900e18214d1d2ad",
+   "matched_to": "77a7041fae5b7c8cc3844bcd29b88a193b8e3752"
+  },
+  {
+   "id": "control-for-OSV-2017-52",
+   "class": "control",
+   "sha": "d36738b8644ab6fec0db7881718ae166c6a0b54c",
+   "matched_to": "55cb70a24a58fc73b7a2b9d1b2a49845668342cc"
+  },
+  {
+   "id": "control-for-OSV-2018-15",
+   "class": "control",
+   "sha": "ea51f78caee6895c8ffd26d84cb89392e4458830",
+   "matched_to": "87f27958cfbb05d262504976f66db70c24d5061f"
+  },
+  {
+   "id": "control-for-OSV-2018-18",
+   "class": "control",
+   "sha": "b9e60f088847f885b5c9fde61ff8fc9645843506",
+   "matched_to": "473e039b48fd72660dd00f4b52a2880cc0dd5632"
+  },
+  {
+   "id": "control-for-OSV-2020-1193",
+   "class": "control",
+   "sha": "fa46ca9d09abcf33f35a5a3fab2f13f55bbb4dd9",
+   "matched_to": "06de62c022138f63de9bcd04074491945eaa8662"
+  },
+  {
+   "id": "control-for-OSV-2020-1280",
+   "class": "control",
+   "sha": "d349f80ffd8f23524dc6409ef72e9e0532dca7fc",
+   "matched_to": "46a8443f76cec4b41ec736eca396984c74664f84"
+  },
+  {
+   "id": "control-for-OSV-2020-184",
+   "class": "control",
+   "sha": "36490fd919cb4268a57e010ad8ccdc0883853fe2",
+   "matched_to": "3c6b51d4a1f5682f8144fef1553b0357d3d83aaf"
+  },
+  {
+   "id": "control-for-OSV-2020-190",
+   "class": "control",
+   "sha": "3486e6dd783765831e421c4e844e62ae75b2a4e1",
+   "matched_to": "4f1887eb56f4abdf448274afc5abdc8f9d078929"
+  },
+  {
+   "id": "control-for-OSV-2020-391",
+   "class": "control",
+   "sha": "748048b5b74822283d49003ec46e1510b5316784",
+   "matched_to": "dcda2612a5f38a3d9e15c0ac9a7d156d74b3a395"
+  },
+  {
+   "id": "control-for-OSV-2020-535",
+   "class": "control",
+   "sha": "d2f82e2601e551badc03c4ac7a463d8e18f53e32",
+   "matched_to": "ecca6e54f49f251bb4c16fe145d04c2b45923dc3"
+  },
+  {
+   "id": "control-for-OSV-2020-75",
+   "class": "control",
+   "sha": "21d5bac0f1366800d75324b636dff80c5fdd34dc",
+   "matched_to": "29955546ee23b05359f2a4ed6986de590ed0b9f2"
+  },
+  {
+   "id": "control-for-OSV-2021-1238",
+   "class": "control",
+   "sha": "d87574bae713fd5c2cbe9bf4399eac029891c934",
+   "matched_to": "a9c8d2a9493c4e0cd201db57801f3502e65c686c"
+  },
+  {
+   "id": "control-for-OSV-2021-1322",
+   "class": "control",
+   "sha": "093a216e8a18a481ed455849b4a03f64b38ff010",
+   "matched_to": "46df39b68e51fd803d382348c0059fcb2e40b5ef"
+  },
+  {
+   "id": "control-for-OSV-2022-468",
+   "class": "control",
+   "sha": "d9f343409198a64b027c54efe4342ac2470dafb3",
+   "matched_to": "46976e05f97e4b2bc77476a16f7107ff0be12df1"
+  },
+  {
+   "id": "control-for-OSV-2022-534",
+   "class": "control",
+   "sha": "d471022b2772071877895759f209f2c346757a4c",
+   "matched_to": "16756ff9286df9a43b4b6e21824975a1c6809835"
+  },
+  {
+   "id": "control-for-OSV-2022-923",
+   "class": "control",
+   "sha": "8ca930fb70fdce13ea6787947d204aee0e63bf0b",
+   "matched_to": "66efe2fa6abc233011a58965d6de2bb0f91328bd"
+  },
+  {
+   "id": "control-for-OSV-2022-924",
+   "class": "control",
+   "sha": "f042050f59bfc037677871c4d1037c33273f5213",
+   "matched_to": "411ec5bf0708dcd5ec99e4d0961740fca30a6bc7"
+  },
+  {
+   "id": "control-for-OSV-2022-952",
+   "class": "control",
+   "sha": "07f454f4cb1e55f946ac55165c11f0cb61a21a2f",
+   "matched_to": "e94d52646d646125cc5452b33f3a70f4e601c59e"
+  },
+  {
+   "id": "control-for-OSV-2023-1398",
+   "class": "control",
+   "sha": "7ab7a5d9372815b5d70639bc059a0ffc5781457a",
+   "matched_to": "81a0cbd10c347496bdee7dde78f7e47a16b4e79f"
+  },
+  {
+   "id": "control-for-OSV-2023-443",
+   "class": "control",
+   "sha": "1ffb35d523a4847750ba0efe0ce3af1527354c00",
+   "matched_to": "c7eddddfd5d99821ea52e52e24468b43282c8f90"
+  },
+  {
+   "id": "control-for-OSV-2023-505",
+   "class": "control",
+   "sha": "d23a29261948d630f43823f5a038c915f03d82d9",
+   "matched_to": "1fc9175166fc5c5117838a1dcfb309b7c595eb56"
+  }
+ ],
+ "missing": []
+}

@@ -1,0 +1,917 @@
+{
+ "repo": "libxml2",
+ "source": "https://api.osv.dev/v1/query (ecosystem=OSS-Fuzz, package=libxml2)",
+ "pool_head": "febeb5c91fffeca92b84162d57a1832fe5a60b09",
+ "counts": {
+  "security-fix": 41,
+  "introduced": 32,
+  "control": 41,
+  "missing_shas": 0
+ },
+ "events": [
+  {
+   "id": "OSV-2020-1623",
+   "class": "security-fix",
+   "sha": "dba82a8c0453b7d4d138167a771c1c2988b889be",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeIncludeNode"
+  },
+  {
+   "id": "OSV-2020-1623",
+   "class": "introduced",
+   "sha": "6c128fd58a0e4641c23a345d413672494622db1b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeIncludeNode"
+  },
+  {
+   "id": "OSV-2020-1667",
+   "class": "security-fix",
+   "sha": "ba589adc2f86c6be9ad7e0d771d4c9b09d059b89",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlTextReaderRead"
+  },
+  {
+   "id": "OSV-2020-1667",
+   "class": "introduced",
+   "sha": "00ed736eecf93aeab49089abb06e0e5fc0e7e091",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlTextReaderRead"
+  },
+  {
+   "id": "OSV-2020-1726",
+   "class": "security-fix",
+   "sha": "b215c270fa3b1436314cc56654718bd12182cfec",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXPathNodeSetAdd"
+  },
+  {
+   "id": "OSV-2020-1726",
+   "class": "introduced",
+   "sha": "f0fd1b67fc883a24cdd039abb3d4fe4696104d72",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXPathNodeSetAdd"
+  },
+  {
+   "id": "OSV-2020-1885",
+   "class": "security-fix",
+   "sha": "847a3a1181d59dc49c1b446d646d344d0543af3e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlStaticCopyNode"
+  },
+  {
+   "id": "OSV-2020-215",
+   "class": "security-fix",
+   "sha": "2af3c2a8b974cb5896cd3beb74561ba979de9f34",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in xmlStrdup"
+  },
+  {
+   "id": "OSV-2020-755",
+   "class": "security-fix",
+   "sha": "477c7f6affcb665305b333f92ce0a782325b4156",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlParserPrintFileContextInternal"
+  },
+  {
+   "id": "OSV-2020-755",
+   "class": "introduced",
+   "sha": "84bab955fe01c50e64382481de67259047d917a9",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlParserPrintFileContextInternal"
+  },
+  {
+   "id": "OSV-2020-908",
+   "class": "security-fix",
+   "sha": "3f18e7486d5feb8ae41911ce3c122e05641a4c3d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlParserPrintFileContextInternal"
+  },
+  {
+   "id": "OSV-2022-1071",
+   "class": "security-fix",
+   "sha": "938105b572433e0772c507d434a8e7985e6cdf5d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeCopyXPointer"
+  },
+  {
+   "id": "OSV-2022-1071",
+   "class": "introduced",
+   "sha": "7f04e297318b1b908cec20711f74f75625afed7f",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeCopyXPointer"
+  },
+  {
+   "id": "OSV-2022-1120",
+   "class": "security-fix",
+   "sha": "075cee9e9f1bedb6b2ca87e73a952fb2e92da3c1",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeDoProcess"
+  },
+  {
+   "id": "OSV-2022-1120",
+   "class": "introduced",
+   "sha": "5f664ab2cfcf5b817924e303ca9e6699487b2af9",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlXIncludeDoProcess"
+  },
+  {
+   "id": "OSV-2023-1000",
+   "class": "security-fix",
+   "sha": "fef12ed81619c79729bf66a906701308a02d6b2b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlParserPrintFileContextInternal"
+  },
+  {
+   "id": "OSV-2023-1000",
+   "class": "introduced",
+   "sha": "36374bc9fcf6e670dc9521ac032474066521858b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlParserPrintFileContextInternal"
+  },
+  {
+   "id": "OSV-2023-1301",
+   "class": "security-fix",
+   "sha": "8e13133dbd2c10e8a498235a62f9beceb19b87a1",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlDictLookupInternal"
+  },
+  {
+   "id": "OSV-2023-1301",
+   "class": "introduced",
+   "sha": "e115194e6fc7f86e2e47224b758653f43501e6fe",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlDictLookupInternal"
+  },
+  {
+   "id": "OSV-2023-1303",
+   "class": "security-fix",
+   "sha": "69d88566b6063b6e11f473fccddaa0174b60d6a6",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in htmlCurrentChar"
+  },
+  {
+   "id": "OSV-2023-1303",
+   "class": "introduced",
+   "sha": "8e13133dbd2c10e8a498235a62f9beceb19b87a1",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in htmlCurrentChar"
+  },
+  {
+   "id": "OSV-2023-1365",
+   "class": "security-fix",
+   "sha": "f3fa34dcad6fbfaadb5c68d67315149e6c652a93",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlStaticCopyNode"
+  },
+  {
+   "id": "OSV-2023-1365",
+   "class": "introduced",
+   "sha": "ecfbcc8a52b4376de0653ba4138493faeb6c7fa4",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlStaticCopyNode"
+  },
+  {
+   "id": "OSV-2023-1373",
+   "class": "security-fix",
+   "sha": "ca5965d594aaedafc69ade7bee7f63be359cdad9",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlRemoveID"
+  },
+  {
+   "id": "OSV-2023-1373",
+   "class": "introduced",
+   "sha": "d025cfbb4bf05785d970e268e46d674580a8a686",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlRemoveID"
+  },
+  {
+   "id": "OSV-2023-162",
+   "class": "security-fix",
+   "sha": "56cc2211bcfad496c346c7e4da3b0ad273a08e16",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlCurrentChar"
+  },
+  {
+   "id": "OSV-2023-162",
+   "class": "introduced",
+   "sha": "42322eba820022eaebb9b6e7c083a8aadddea286",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlCurrentChar"
+  },
+  {
+   "id": "OSV-2023-174",
+   "class": "security-fix",
+   "sha": "3eb6bf03869b449bbe990efe7e5101457d40f36e",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in htmlCurrentChar"
+  },
+  {
+   "id": "OSV-2023-185",
+   "class": "security-fix",
+   "sha": "ca2bfecea9c23f8d2e11741fff7c6a5372c56bb8",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlNextChar"
+  },
+  {
+   "id": "OSV-2023-185",
+   "class": "introduced",
+   "sha": "cabde70f8b144c416a7aef74971dcb4882a697cd",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlNextChar"
+  },
+  {
+   "id": "OSV-2023-188",
+   "class": "introduced",
+   "sha": "b167c7314497b6cb0d9a587a31874ae0d273ffaa",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlParseQName"
+  },
+  {
+   "id": "OSV-2023-195",
+   "class": "security-fix",
+   "sha": "8090e5856465c0b8e26e2a080f4b498f37fa83ab",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in htmlParseDocument"
+  },
+  {
+   "id": "OSV-2023-199",
+   "class": "security-fix",
+   "sha": "3e85d7b7ab511b67d54ccf5dfd2f5953050eec83",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlParseQName"
+  },
+  {
+   "id": "OSV-2023-204",
+   "class": "security-fix",
+   "sha": "067986fa674f0811614dab4c4572f5f7ff483400",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in htmlParseChunk"
+  },
+  {
+   "id": "OSV-2023-204",
+   "class": "introduced",
+   "sha": "9ef2a9abf357f747c2fb03841b7f479cc0dfd3ef",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in htmlParseChunk"
+  },
+  {
+   "id": "OSV-2023-211",
+   "class": "security-fix",
+   "sha": "7fbd454d9f70f0f0c0a0c27a7d541fed4d038c2a",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlStrndup"
+  },
+  {
+   "id": "OSV-2023-211",
+   "class": "introduced",
+   "sha": "ca2bfecea9c23f8d2e11741fff7c6a5372c56bb8",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlStrndup"
+  },
+  {
+   "id": "OSV-2023-212",
+   "class": "security-fix",
+   "sha": "04d1bedd8c3fc5d9e41d11e2d0da08a966b732d3",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlParseEntityDecl"
+  },
+  {
+   "id": "OSV-2023-212",
+   "class": "introduced",
+   "sha": "3e85d7b7ab511b67d54ccf5dfd2f5953050eec83",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlParseEntityDecl"
+  },
+  {
+   "id": "OSV-2023-213",
+   "class": "security-fix",
+   "sha": "44ecefc8cc299a66ac21ffec141eb261e92638da",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in htmlParseDocument"
+  },
+  {
+   "id": "OSV-2023-249",
+   "class": "security-fix",
+   "sha": "1061537efdf3874c91fd50d18f98c4b8a3518e52",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlStrndup"
+  },
+  {
+   "id": "OSV-2023-249",
+   "class": "introduced",
+   "sha": "7fbd454d9f70f0f0c0a0c27a7d541fed4d038c2a",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlStrndup"
+  },
+  {
+   "id": "OSV-2023-474",
+   "class": "security-fix",
+   "sha": "b236b7a588ac2973a057ec578011cdc17c26f16d",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlDictLookup"
+  },
+  {
+   "id": "OSV-2023-474",
+   "class": "introduced",
+   "sha": "20f5c73457df065df21bf25aa081a0a4cd028046",
+   "severity": null,
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Global-buffer-overflow in xmlDictLookup"
+  },
+  {
+   "id": "OSV-2023-61",
+   "class": "security-fix",
+   "sha": "5d55315e32b34af7070d38060ccf9a60941b9696",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlParseTryOrFinish"
+  },
+  {
+   "id": "OSV-2023-61",
+   "class": "introduced",
+   "sha": "c63900fbc1a7c20eb872996ae700f264ba6d75ef",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlParseTryOrFinish"
+  },
+  {
+   "id": "OSV-2023-684",
+   "class": "security-fix",
+   "sha": "5db5a704eb6b030e6bebec9d358d739f1eb24fed",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in __xmlRaiseError"
+  },
+  {
+   "id": "OSV-2023-684",
+   "class": "introduced",
+   "sha": "ec7be50662ec17104355e7357f5067d43c47b207",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in __xmlRaiseError"
+  },
+  {
+   "id": "OSV-2023-953",
+   "class": "security-fix",
+   "sha": "71aae4e98b7e325463e528242ca363b0380a6c92",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlDictLookupInternal"
+  },
+  {
+   "id": "OSV-2023-953",
+   "class": "introduced",
+   "sha": "0533daf5d2747860a2aa636466bcf02972c2dfba",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlDictLookupInternal"
+  },
+  {
+   "id": "OSV-2023-969",
+   "class": "security-fix",
+   "sha": "97e99f411228fe4f65ebb60e4f2c56f9ee9cdb1c",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlStaticCopyNode"
+  },
+  {
+   "id": "OSV-2023-969",
+   "class": "introduced",
+   "sha": "fa48187304039f8792d8e19129df7d64422e7f69",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlStaticCopyNode"
+  },
+  {
+   "id": "OSV-2023-988",
+   "class": "security-fix",
+   "sha": "4fc5340ec55a12cd6819395030d5d132a219984a",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlCopyCharMultiByte"
+  },
+  {
+   "id": "OSV-2023-988",
+   "class": "introduced",
+   "sha": "8afd321abd2f75cf795f679b54333237b364d4d9",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlCopyCharMultiByte"
+  },
+  {
+   "id": "OSV-2023-990",
+   "class": "security-fix",
+   "sha": "36374bc9fcf6e670dc9521ac032474066521858b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in __xmlRaiseError"
+  },
+  {
+   "id": "OSV-2023-990",
+   "class": "introduced",
+   "sha": "b76d81dab3869f16a5c3506d9902526dff583b3e",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in __xmlRaiseError"
+  },
+  {
+   "id": "OSV-2024-103",
+   "class": "security-fix",
+   "sha": "c444c96e20253e5996f4209a123b96a6c273dac6",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlRemoveID"
+  },
+  {
+   "id": "OSV-2024-1209",
+   "class": "security-fix",
+   "sha": "bf3619c3282143fee564ca5ff0634559cce3923d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlValidateOneElement"
+  },
+  {
+   "id": "OSV-2024-1209",
+   "class": "introduced",
+   "sha": "577e2516d0ed3669c7e9879ba9f04214658bfd1b",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlValidateOneElement"
+  },
+  {
+   "id": "OSV-2024-193",
+   "class": "security-fix",
+   "sha": "ad9a5637f9fa35dc380d0718af3c8c1a81f6c0b0",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Use-of-uninitialized-value in api.c"
+  },
+  {
+   "id": "OSV-2024-217",
+   "class": "security-fix",
+   "sha": "bfb02fbca9b0aaadae6689b1dfc78dd5d1d2e71c",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in dropNode"
+  },
+  {
+   "id": "OSV-2024-634",
+   "class": "security-fix",
+   "sha": "aa6aec19b094bb26e75c6582de2d429a8e134688",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in htmlCurrentChar"
+  },
+  {
+   "id": "OSV-2024-634",
+   "class": "introduced",
+   "sha": "da68639926eaf0010488450e99d7d6e8a011c591",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in htmlCurrentChar"
+  },
+  {
+   "id": "OSV-2024-698",
+   "class": "introduced",
+   "sha": "36ea881b9d92166568b1d107181a05f673fd4ab1",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlCharEncCloseFunc"
+  },
+  {
+   "id": "OSV-2024-77",
+   "class": "security-fix",
+   "sha": "1a66b176055d25ee635bf328c7b35b381db0b71d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlRemoveID"
+  },
+  {
+   "id": "OSV-2024-81",
+   "class": "security-fix",
+   "sha": "13962b06d55aca59ae878383be6ded18de72587d",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlRemoveID"
+  },
+  {
+   "id": "OSV-2024-82",
+   "class": "introduced",
+   "sha": "f3fa34dcad6fbfaadb5c68d67315149e6c652a93",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-use-after-free in xmlValidatePopElement"
+  },
+  {
+   "id": "OSV-2025-457",
+   "class": "security-fix",
+   "sha": "a3992815b3d4caa4a6709406ca085c9f93856809",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlParsePubidLiteral"
+  },
+  {
+   "id": "OSV-2025-457",
+   "class": "introduced",
+   "sha": "bb7169b5ad77209989a7e60b530976618a7f0339",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlParsePubidLiteral"
+  },
+  {
+   "id": "OSV-2025-74",
+   "class": "security-fix",
+   "sha": "22ada0a0bfd92961acb257deae5e7045aaf12d08",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in xmlValidateElementContent"
+  },
+  {
+   "id": "OSV-2025-74",
+   "class": "introduced",
+   "sha": "971ce40409978809a202ff4f6f684055ed8184fe",
+   "severity": "HIGH",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Stack-buffer-overflow in xmlValidateElementContent"
+  },
+  {
+   "id": "OSV-2026-565",
+   "class": "security-fix",
+   "sha": "a7511af09f99995cdf81994db21f4eba564276b5",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlFAParsePosCharGroup"
+  },
+  {
+   "id": "OSV-2026-565",
+   "class": "introduced",
+   "sha": "d1bccc480fd00b40c86ac26d3f3b6c91c46d18f7",
+   "severity": "MEDIUM",
+   "cwe": null,
+   "cwe_desc": null,
+   "summary": "Heap-buffer-overflow in xmlFAParsePosCharGroup"
+  },
+  {
+   "id": "control-for-OSV-2020-1623",
+   "class": "control",
+   "sha": "aec2bf715346251ad0fd59e62184e82ed786e618",
+   "matched_to": "dba82a8c0453b7d4d138167a771c1c2988b889be"
+  },
+  {
+   "id": "control-for-OSV-2020-1667",
+   "class": "control",
+   "sha": "2b4769a6bd1d6a568fa067f21ff6f96700936642",
+   "matched_to": "ba589adc2f86c6be9ad7e0d771d4c9b09d059b89"
+  },
+  {
+   "id": "control-for-OSV-2020-1726",
+   "class": "control",
+   "sha": "fbb7fa9a9ad8269834d32ff872b1477ff7b9c705",
+   "matched_to": "b215c270fa3b1436314cc56654718bd12182cfec"
+  },
+  {
+   "id": "control-for-OSV-2020-1885",
+   "class": "control",
+   "sha": "1fbcf4098ba2aefe241de8d7ceb229b995d8daec",
+   "matched_to": "847a3a1181d59dc49c1b446d646d344d0543af3e"
+  },
+  {
+   "id": "control-for-OSV-2020-215",
+   "class": "control",
+   "sha": "1f09aea26d1a0b7343dcb5185a19aa7fa896807f",
+   "matched_to": "2af3c2a8b974cb5896cd3beb74561ba979de9f34"
+  },
+  {
+   "id": "control-for-OSV-2020-755",
+   "class": "control",
+   "sha": "855c19efb7cd30d927d673b3658563c4959ca6f0",
+   "matched_to": "477c7f6affcb665305b333f92ce0a782325b4156"
+  },
+  {
+   "id": "control-for-OSV-2020-908",
+   "class": "control",
+   "sha": "b88ae6d2e1c9f22931f59ff1ec490befe201fb26",
+   "matched_to": "3f18e7486d5feb8ae41911ce3c122e05641a4c3d"
+  },
+  {
+   "id": "control-for-OSV-2022-1071",
+   "class": "control",
+   "sha": "a41878bd4c4223732630b3de2f46c0a597c5a70c",
+   "matched_to": "938105b572433e0772c507d434a8e7985e6cdf5d"
+  },
+  {
+   "id": "control-for-OSV-2022-1120",
+   "class": "control",
+   "sha": "128c0261c633cf14a8488f85ad1064333f98fd0e",
+   "matched_to": "075cee9e9f1bedb6b2ca87e73a952fb2e92da3c1"
+  },
+  {
+   "id": "control-for-OSV-2023-1000",
+   "class": "control",
+   "sha": "99cba4b37b1a39d477f1b5acf782c6bd2d16d0ee",
+   "matched_to": "fef12ed81619c79729bf66a906701308a02d6b2b"
+  },
+  {
+   "id": "control-for-OSV-2023-1301",
+   "class": "control",
+   "sha": "5e9b167dce73bd6a804ab107ae4c4b95e6849597",
+   "matched_to": "8e13133dbd2c10e8a498235a62f9beceb19b87a1"
+  },
+  {
+   "id": "control-for-OSV-2023-1303",
+   "class": "control",
+   "sha": "862e9ce0e63a74fb39522a4bc9152cdddef51f8f",
+   "matched_to": "69d88566b6063b6e11f473fccddaa0174b60d6a6"
+  },
+  {
+   "id": "control-for-OSV-2023-1365",
+   "class": "control",
+   "sha": "7e511f35f1e6849e7a2f5e97d15745fcb039960b",
+   "matched_to": "f3fa34dcad6fbfaadb5c68d67315149e6c652a93"
+  },
+  {
+   "id": "control-for-OSV-2023-1373",
+   "class": "control",
+   "sha": "08d9b2588fa5a14c6f720124a1898fff8dd87326",
+   "matched_to": "ca5965d594aaedafc69ade7bee7f63be359cdad9"
+  },
+  {
+   "id": "control-for-OSV-2023-162",
+   "class": "control",
+   "sha": "4499143a8737148b9be4e3c05e71bc60c5b52e4f",
+   "matched_to": "56cc2211bcfad496c346c7e4da3b0ad273a08e16"
+  },
+  {
+   "id": "control-for-OSV-2023-174",
+   "class": "control",
+   "sha": "d0ab5c4fe6218ebe49dc20ae53420e79d5ce5aad",
+   "matched_to": "3eb6bf03869b449bbe990efe7e5101457d40f36e"
+  },
+  {
+   "id": "control-for-OSV-2023-185",
+   "class": "control",
+   "sha": "7e3f469be9abf85de67b1624aac084bb32c2a98a",
+   "matched_to": "ca2bfecea9c23f8d2e11741fff7c6a5372c56bb8"
+  },
+  {
+   "id": "control-for-OSV-2023-195",
+   "class": "control",
+   "sha": "14c62e0dd337208c6a5de45a90312eab0a6cf4e4",
+   "matched_to": "8090e5856465c0b8e26e2a080f4b498f37fa83ab"
+  },
+  {
+   "id": "control-for-OSV-2023-199",
+   "class": "control",
+   "sha": "f00739c12e356c48a47b00368114bee94264466f",
+   "matched_to": "3e85d7b7ab511b67d54ccf5dfd2f5953050eec83"
+  },
+  {
+   "id": "control-for-OSV-2023-204",
+   "class": "control",
+   "sha": "b75976e02999c453ae80bb1ade72f704a78b95ce",
+   "matched_to": "067986fa674f0811614dab4c4572f5f7ff483400"
+  },
+  {
+   "id": "control-for-OSV-2023-211",
+   "class": "control",
+   "sha": "c9e4c6d416d00968f2e2d7c68a9c0e809265baf2",
+   "matched_to": "7fbd454d9f70f0f0c0a0c27a7d541fed4d038c2a"
+  },
+  {
+   "id": "control-for-OSV-2023-212",
+   "class": "control",
+   "sha": "079da5b26d7b9542b6505da1c706b96a4bda24f5",
+   "matched_to": "04d1bedd8c3fc5d9e41d11e2d0da08a966b732d3"
+  },
+  {
+   "id": "control-for-OSV-2023-213",
+   "class": "control",
+   "sha": "f6fddb78a541ad693b567ad887d4e2320fd0f844",
+   "matched_to": "44ecefc8cc299a66ac21ffec141eb261e92638da"
+  },
+  {
+   "id": "control-for-OSV-2023-249",
+   "class": "control",
+   "sha": "62f199ed7d1c99999030810495bd12fd5b86fee1",
+   "matched_to": "1061537efdf3874c91fd50d18f98c4b8a3518e52"
+  },
+  {
+   "id": "control-for-OSV-2023-474",
+   "class": "control",
+   "sha": "b8961df65d077457863780892f2d39ac4c04c0af",
+   "matched_to": "b236b7a588ac2973a057ec578011cdc17c26f16d"
+  },
+  {
+   "id": "control-for-OSV-2023-61",
+   "class": "control",
+   "sha": "3dc645227ed1ac463c9d333c6eb92d1b6bb26ae9",
+   "matched_to": "5d55315e32b34af7070d38060ccf9a60941b9696"
+  },
+  {
+   "id": "control-for-OSV-2023-684",
+   "class": "control",
+   "sha": "58de9d31da4d0e8cb6bcf7f5e99714f9df2c4411",
+   "matched_to": "5db5a704eb6b030e6bebec9d358d739f1eb24fed"
+  },
+  {
+   "id": "control-for-OSV-2023-953",
+   "class": "control",
+   "sha": "89ee0369d24db9ce0ebce84166208490bd3f49d4",
+   "matched_to": "71aae4e98b7e325463e528242ca363b0380a6c92"
+  },
+  {
+   "id": "control-for-OSV-2023-969",
+   "class": "control",
+   "sha": "5aff27ae7833d43478897fb8ae6ab6b28729ce29",
+   "matched_to": "97e99f411228fe4f65ebb60e4f2c56f9ee9cdb1c"
+  },
+  {
+   "id": "control-for-OSV-2023-988",
+   "class": "control",
+   "sha": "eca1116b81b4240a8bcda261bc5f5d6948403a19",
+   "matched_to": "4fc5340ec55a12cd6819395030d5d132a219984a"
+  },
+  {
+   "id": "control-for-OSV-2023-990",
+   "class": "control",
+   "sha": "cde44997789c8fc4e28bb279a021417e56fc0811",
+   "matched_to": "36374bc9fcf6e670dc9521ac032474066521858b"
+  },
+  {
+   "id": "control-for-OSV-2024-103",
+   "class": "control",
+   "sha": "02a2038de469bace0595dd764205c853f3fa526d",
+   "matched_to": "c444c96e20253e5996f4209a123b96a6c273dac6"
+  },
+  {
+   "id": "control-for-OSV-2024-1209",
+   "class": "control",
+   "sha": "d04e152d9c289a11bde69842c0521189723aea3a",
+   "matched_to": "bf3619c3282143fee564ca5ff0634559cce3923d"
+  },
+  {
+   "id": "control-for-OSV-2024-193",
+   "class": "control",
+   "sha": "7b316c11395677b34ee5a83bde374ef90ab963ba",
+   "matched_to": "ad9a5637f9fa35dc380d0718af3c8c1a81f6c0b0"
+  },
+  {
+   "id": "control-for-OSV-2024-217",
+   "class": "control",
+   "sha": "de3f70146dc531a1f2c0976dc1c2bff84529f161",
+   "matched_to": "bfb02fbca9b0aaadae6689b1dfc78dd5d1d2e71c"
+  },
+  {
+   "id": "control-for-OSV-2024-634",
+   "class": "control",
+   "sha": "82e0455cf6e0042bfbced3b8d6bfbb01fb20eddb",
+   "matched_to": "aa6aec19b094bb26e75c6582de2d429a8e134688"
+  },
+  {
+   "id": "control-for-OSV-2024-77",
+   "class": "control",
+   "sha": "83c1ae13d8bb3ec4f266f7f84fc6db775f0b0961",
+   "matched_to": "1a66b176055d25ee635bf328c7b35b381db0b71d"
+  },
+  {
+   "id": "control-for-OSV-2024-81",
+   "class": "control",
+   "sha": "e42faa6d78c782a86fdb983bb21bb638bca6cd7a",
+   "matched_to": "13962b06d55aca59ae878383be6ded18de72587d"
+  },
+  {
+   "id": "control-for-OSV-2025-457",
+   "class": "control",
+   "sha": "0f8543e11d0309179605ba251b5d7a147779da7b",
+   "matched_to": "a3992815b3d4caa4a6709406ca085c9f93856809"
+  },
+  {
+   "id": "control-for-OSV-2025-74",
+   "class": "control",
+   "sha": "0dd910e82bf74cdebcabe1a576f6178e0092cb5d",
+   "matched_to": "22ada0a0bfd92961acb257deae5e7045aaf12d08"
+  },
+  {
+   "id": "control-for-OSV-2026-565",
+   "class": "control",
+   "sha": "c537ccf0aea640e625abce653d5890afc934b340",
+   "matched_to": "a7511af09f99995cdf81994db21f4eba564276b5"
+  }
+ ],
+ "missing": []
+}
