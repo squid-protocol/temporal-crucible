@@ -80,3 +80,31 @@ A confirmed unpatched copy in a fork's current head could be a **live vulnerabil
 - **H3 expected null or near-null:** both forks track OpenSSL advisories closely, and LibreSSL and BoringSSL removed
   a lot of code. An "unpatched-looking" twin will mostly turn out "fixed differently" or "not applicable". A
   confirmed case would be significant and is handled under the disclosure rule.
+
+---
+
+## Results — 2026-11-06 (scorer `26bd206` committed before running; report `ut.md`; aggregates only, per the disclosure rule)
+
+**Data.** 192 post-fork OpenSSL CVE fixes → 780 (fix, function, fork) rows. 567 rows have no counterpart in the fork
+by either name or twin: the code was removed, or never present.
+
+| claim | result | verdict |
+|---|---|---|
+| **UT-H1** twins are real copies | only **21** accepted twins; 13 are textual copies (61.9%, Wilson lo 35%) | **not evaluable** (< 30) |
+| **UT-H2** renamed copies found | **0** | **not supported** |
+| **UT-H3** audited-unpatched copies | 4 unpatched-looking twins, all audited: **0 confirmed-unpatched**; 1 fixed (same core change); 1 fixed differently; 1 not applicable (API refactor); 1 unclear (referred to the owner privately) | **not supported** |
+
+**The headline is recall: the coarse L1 fingerprint finds few copies.**
+- Of the 104 copies that name matching finds (same name, Jaccard ≥ 0.5), twin search retrieves the same function
+  only **12.5%** of the time.
+- In **BoringSSL** it finds **none**: its C++ rewrite changes the signal profile.
+- Every twin that is a real copy keeps its OpenSSL name. Here name matching is strictly better.
+- This settles the question the layered-fingerprint discussion left open: **L1 is too coarse for copy-finding.**
+  Behaviour and shape layers (calls, constants, control flow) are needed. The next step is a registered benchmark
+  on these same pairs.
+
+**Instrument lessons, for the follow-up.**
+- The line-presence status rule was fooled by comment and assert lines in fixes. The follow-up needs code-only lines.
+- The `latent` label covers whole commits, including refactor hunks unrelated to the flaw: one audited case.
+- Name-matched LibreSSL copies show 17 "unpatched-looking". Given the 0-of-4 audit, that count is mostly instrument
+  noise and **not a finding**.
