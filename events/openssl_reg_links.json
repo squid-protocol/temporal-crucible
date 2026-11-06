@@ -1,0 +1,2754 @@
+{
+ "repo": "openssl",
+ "skipped": {
+  "regression word only": 158,
+  "unresolved": 2
+ },
+ "links": [
+  {
+   "fix": "a3ab4d2e89ee429b5095cc317ece84e91bd7e9e6",
+   "fix_ct": 1793711750,
+   "fix_subject": "crypto/bio/bss_dgram_pair.c: use pcap_mutex only when built with enable-threads",
+   "how": "sha-reference",
+   "inducing": "6cbb3f950a5f66ba7bb3e573c36aa598821fded7",
+   "inducing_ct": 1793273356,
+   "inducing_subject": "allow dgram pair to dump datagrams into libpcapp"
+  },
+  {
+   "fix": "2b78d2c40d06dc1efd4d6f21824b6410c1a7019c",
+   "fix_ct": 1793547023,
+   "fix_subject": "crypto/bio/bss_dgram_pair.c: fix memory leak in dgram_pair_ctrl_make_bio_pair()",
+   "how": "sha-reference",
+   "inducing": "f99bbcd5afff69840f2bfed92458cd5ac092cf91",
+   "inducing_ct": 1789159854,
+   "inducing_subject": "Dont have dgram_pairs track bios, track bio_dgram_pair_st instead"
+  },
+  {
+   "fix": "27c3dddb01f8b0d4f92461e758ebf2147233aa2f",
+   "fix_ct": 1793363028,
+   "fix_subject": "crypto/bio/bss_dgram_pair.c: avoid performing pcap when there is no pair",
+   "how": "sha-reference",
+   "inducing": "d53cf1fe3dd9a9ea6066481c6e4bb39128636c11",
+   "inducing_ct": 1793273370,
+   "inducing_subject": "Update doc/man3/BIO_s_dgram_pair.pod"
+  },
+  {
+   "fix": "5337f03d3458679e4d7ebf9ff43a7b4d6f747fad",
+   "fix_ct": 1793121787,
+   "fix_subject": "ssl/ssl_lib.c: add error checking to X509_up_ref in ssl_ctx_add_handshake_cert()",
+   "how": "sha-reference",
+   "inducing": "54dacb1710cf0dd00d7c6f2c4c7ee7a19d5028a4",
+   "inducing_ct": 1792601068,
+   "inducing_subject": "Cache decoded certs on client in CTX to avoid multiple asn1 parsing"
+  },
+  {
+   "fix": "87af1458a7dcc94556aad5691305d429605dbad2",
+   "fix_ct": 1793120989,
+   "fix_subject": "apps/x509.c: fail on X509_VERIFY_PARAM_new() failure under -checkend",
+   "how": "sha-reference",
+   "inducing": "8da3880874acaac2e338665f216e430f78f976f1",
+   "inducing_ct": 1788789604,
+   "inducing_subject": "apps/x509.c: failing exit status on every failure path reaching err:"
+  },
+  {
+   "fix": "4d885b16ebc6e6cc76f8a72fb4b7a00db127990f",
+   "fix_ct": 1793043925,
+   "fix_subject": "scan_ext_flags(): There is no libctx in x509 anymore",
+   "how": "sha-reference",
+   "inducing": "a0945b66bc0369fab5b5dd79f444799700d48a7f",
+   "inducing_ct": 1793041465,
+   "inducing_subject": "Remove the library context from X509"
+  },
+  {
+   "fix": "bbb301ae5692f1b7ff197338a60745914a3833ce",
+   "fix_ct": 1793025913,
+   "fix_subject": "test/quicapitest.c: Skip tests requiring X25519MLKEM768 with old fips providers",
+   "how": "sha-reference",
+   "inducing": "c69b5af10a754051274ef2e5ed17f47753bd6ea9",
+   "inducing_ct": 1792760033,
+   "inducing_subject": "QUIC: resend the whole ClientHello after a Retry"
+  },
+  {
+   "fix": "667bd7d15c86e523fe586b212c4c235c08ee0f14",
+   "fix_ct": 1792596963,
+   "fix_subject": "CMS_verify() stops at the first failure without CMS_VERIFY_PARTIAL",
+   "how": "sha-reference",
+   "inducing": "5af9dbf12832f49800054c071a7052be20b36582",
+   "inducing_ct": 1787836350,
+   "inducing_subject": "Implement partial verification for CMS with multiple signatures"
+  },
+  {
+   "fix": "6d76833d61fad07a171219d9cb1444bc37f88b8f",
+   "fix_ct": 1792064971,
+   "fix_subject": "test/cmp_vfy_test.c: prevent memory leak in test_msg_check_update_malicious_sender",
+   "how": "sha-reference",
+   "inducing": "a6286cd01801a50aec5fc5b10e7ac73399d160f0",
+   "inducing_ct": 1787576016,
+   "inducing_subject": "Add test for CVE-2026-63073"
+  },
+  {
+   "fix": "ed57129cd43b77e077c68fd5f7ea951976766f38",
+   "fix_ct": 1791977936,
+   "fix_subject": "test/dtlsssllistenertest.c: fix flaky zero-wait handshake loops",
+   "how": "sha-reference",
+   "inducing": "271222650b44fcb931866d1e9c2ff61cc9b6c677",
+   "inducing_ct": 1788273739,
+   "inducing_subject": "dtls: fix flaky cookie exchange loop in listener test"
+  },
+  {
+   "fix": "bb908b895bef4bf5965ddb483f12eb1fe1ec5b40",
+   "fix_ct": 1791620183,
+   "fix_subject": "test/quicapitest.c: fix BIO leak in test_quic_amplification_limit()",
+   "how": "sha-reference",
+   "inducing": "dc13cfb931200f3f720e3f6f0769e7601dd99801",
+   "inducing_ct": 1790682733,
+   "inducing_subject": "Add a test to check for quic unvalidated credit"
+  },
+  {
+   "fix": "8de91c52544d8685bde740c0a959f2c00adbbd87",
+   "fix_ct": 1791589005,
+   "fix_subject": "Fix deref before NULL check in ossl_method_store_fetch()",
+   "how": "sha-reference",
+   "inducing": "3233fe19a19ac7e93d58ce3207cdecbcd7543d65",
+   "inducing_ct": 1791192665,
+   "inducing_subject": "Defer implementation freeing in method store until the libctx is freed"
+  },
+  {
+   "fix": "a171583914306f50ac4f0f475687f36a57642828",
+   "fix_ct": 1791476141,
+   "fix_subject": "Keep pending client credentials out of cached sessions",
+   "how": "sha-reference",
+   "inducing": "95dcb1b719a1c94ab0a8389c94c323fb2ec1d371",
+   "inducing_ct": 1787837563,
+   "inducing_subject": "Allow SSL_set_retry_verify() on server session"
+  },
+  {
+   "fix": "57ef98cf8da038e22170729f2fb33f698f758295",
+   "fix_ct": 1790714358,
+   "fix_subject": "use proper loop index when building new cid in packet",
+   "how": "sha-reference",
+   "inducing": "596baa5b032dc4bc3f89f97f4b57ae63c56d5f93",
+   "inducing_ct": 1790681437,
+   "inducing_subject": "CVE-2026-84784 QUIC: unbounded RETIRE_CONNECTION_ID backlog (memory DoS)"
+  },
+  {
+   "fix": "8b2632d90fac3b0e0a9e6f0ade41ca03c43edeed",
+   "fix_ct": 1789159838,
+   "fix_subject": "Revert \"Free connections before listeners in the radix test cleanup\"",
+   "how": "revert",
+   "inducing": "31c32ca387a01b1134b459941d5111ab977b8197",
+   "inducing_ct": 1787310395,
+   "inducing_subject": "Free connections before listeners in the radix test cleanup"
+  },
+  {
+   "fix": "4e78dbf925d5b37b1b8affecbce8c521db8dc6af",
+   "fix_ct": 1788792532,
+   "fix_subject": "statem_clnt_construct_test.c: Use snprintf() instead of BIO_snprintf()",
+   "how": "sha-reference",
+   "inducing": "bfa50e13f857dc85428a693fbad3b60c54c1511b",
+   "inducing_ct": 1788787595,
+   "inducing_subject": "statem: test tls_construct_client_key_exchange"
+  },
+  {
+   "fix": "91ae3fe14c59bf10f68bd50f1aaee0bc9fd597aa",
+   "fix_ct": 1788427345,
+   "fix_subject": "CMS/PKCS7: do not leave stale errors on the queue",
+   "how": "sha-reference",
+   "inducing": "02d0f65c9f8579cd1625a8d084ee8479093beb1b",
+   "inducing_ct": 1785740803,
+   "inducing_subject": "CMS/PKCS7: use EVP_CIPHER_fetch() for SMIMECapabilities"
+  },
+  {
+   "fix": "66985198d23337651f48c3affbdc7564bcdb903a",
+   "fix_ct": 1788270459,
+   "fix_subject": "TLS 1.3: Apply the cap to the lifetime hint in the session",
+   "how": "sha-reference",
+   "inducing": "5a85e4152d817749400b0e30ebbbcce738fbfbb5",
+   "inducing_ct": 1781785509,
+   "inducing_subject": "Enforce RFC 8446 ticket lifetime limit for TLS 1.3 client"
+  },
+  {
+   "fix": "d44817c5cb03361379b6c48fc8367debbd276e75",
+   "fix_ct": 1787566032,
+   "fix_subject": "Revert \"Allow X448MLKEM1024 to be fips approved\"",
+   "how": "revert",
+   "inducing": "b64f68a94e61fa2363c598c75444482b48056697",
+   "inducing_ct": 1787321697,
+   "inducing_subject": "Allow X448MLKEM1024 to be fips approved"
+  },
+  {
+   "fix": "d078067a26422aa1a1ce5a4cdba0d0da69f8ff1e",
+   "fix_ct": 1787306934,
+   "fix_subject": "file_store_any2obj.c: validate blob length before allocation",
+   "how": "sha-reference",
+   "inducing": "0f5493e60b9e8ec500de5812fe28b9f564408608",
+   "inducing_ct": 1786528428,
+   "inducing_subject": "storemgmt: Validate msblob length before buffer allocation"
+  },
+  {
+   "fix": "723e67bb0d66208730344e9d56db32b75a44cf06",
+   "fix_ct": 1787154325,
+   "fix_subject": "Fix X509_ATTRIBUTE_set1_data() for BIT STRING attribute values",
+   "how": "sha-reference",
+   "inducing": "9044e5f42556e5a3bdf49226406144d806123697",
+   "inducing_ct": 1784379673,
+   "inducing_subject": "Convert internal use of ASN1_STRING_set and ASN1_STRING_length"
+  },
+  {
+   "fix": "0b9dacf5ef252775a9fab0e876a05415b23651ab",
+   "fix_ct": 1786605504,
+   "fix_subject": "test: use portable function-name macro in QUIC test helper",
+   "how": "sha-reference",
+   "inducing": "0461a5636deca9af034db70ff017ad1138836c8c",
+   "inducing_ct": 1786546776,
+   "inducing_subject": "test/quicapitest.c: add test for pending connections limit enforcement"
+  },
+  {
+   "fix": "a2eea872d0af948e5b889083f248e270d7326be7",
+   "fix_ct": 1785771951,
+   "fix_subject": "ssl: Remove shadowed variable in write retry path",
+   "how": "sha-reference",
+   "inducing": "5f3db0d811329b600045842116a062520437c2a1",
+   "inducing_ct": 1785760663,
+   "inducing_subject": "Fix false success on zero BIO write"
+  },
+  {
+   "fix": "cb9a9021752b0c3499fccbb965e1e525b357a0f0",
+   "fix_ct": 1784215710,
+   "fix_subject": "Fix dsaparams decoding from DER files",
+   "how": "sha-reference",
+   "inducing": "d8a7e8eec78b04249c2f5dbdaab99fbadd634bd9",
+   "inducing_ct": 1783956748,
+   "inducing_subject": "apps: test dsaparam app DER output paths"
+  },
+  {
+   "fix": "a89400969d49d42eb8699c6afaf2f613f917fc5b",
+   "fix_ct": 1783330937,
+   "fix_subject": "Fix new statem_clnt_test when dtls is disabled",
+   "how": "sha-reference",
+   "inducing": "c36a9b463e765001c2d558bb73f06b0bf8612158",
+   "inducing_ct": 1782809678,
+   "inducing_subject": "statem: add direct tests for tls_construct_client_hello"
+  },
+  {
+   "fix": "7c9b263005c5e886b4442e38ca846bbd2badd75b",
+   "fix_ct": 1782977178,
+   "fix_subject": "crypto/pem/pem_info.c: avoid switching on PEM_INFO_NONE",
+   "how": "sha-reference",
+   "inducing": "0e8f2844ed3e6c8fde0e5da0db6322735eb6593f",
+   "inducing_ct": 1782389549,
+   "inducing_subject": "fix function pointer type mismatch in PEM_X509_INFO_read_bio_ex"
+  },
+  {
+   "fix": "8a57600f2348a2a097127110c6db4730091e7c17",
+   "fix_ct": 1782897250,
+   "fix_subject": "Use more recent default for _WIN32_WINNT",
+   "how": "sha-reference",
+   "inducing": "1eaf29ef6c49ff5c98430c143acf79b7e4d3630e",
+   "inducing_ct": 1781953232,
+   "inducing_subject": "Remove direct includes of windows.h where possible"
+  },
+  {
+   "fix": "635ffe8bb9c0d14ce33c5368d90d5e87781480c3",
+   "fix_ct": 1782897250,
+   "fix_subject": "Fix use of BCryptGenRandom",
+   "how": "sha-reference",
+   "inducing": "1eaf29ef6c49ff5c98430c143acf79b7e4d3630e",
+   "inducing_ct": 1781953232,
+   "inducing_subject": "Remove direct includes of windows.h where possible"
+  },
+  {
+   "fix": "ab612a9baff64b776d5dc3bd58fdf37c109bf1cc",
+   "fix_ct": 1782663740,
+   "fix_subject": "test/asn1_string_test.c: allocate tmpstring properly in asn1_string_new_not_owned_test",
+   "how": "sha-reference",
+   "inducing": "68c0321e90d015ebe851b33761c0acdbaebc12bd",
+   "inducing_ct": 1780486892,
+   "inducing_subject": "Provide ASN1_STRING_new_not_owned()"
+  },
+  {
+   "fix": "ea7dbd4fee74c42a5432768a88d1123994477031",
+   "fix_ct": 1782371570,
+   "fix_subject": "rec_layer_s3.c: prevent max_early_data overflow in ossl_early_data_count_ok()",
+   "how": "sha-reference",
+   "inducing": "d41a9225196be4863e7b72a152769a93f9faf917",
+   "inducing_ct": 1782085736,
+   "inducing_subject": "tls_common.c: prevent max_early_data overflow in rlayer_early_data_count_ok()"
+  },
+  {
+   "fix": "25b37961f7341de7ccb0f01e61fcdefc61a30e36",
+   "fix_ct": 1782305346,
+   "fix_subject": "Prevent integer overflow in ASN1_mbstring_ncopy",
+   "how": "sha-reference",
+   "inducing": "97f6b621f7af2c4c4e162c75045a6e12a8fdf8d9",
+   "inducing_ct": 1781190521,
+   "inducing_subject": "Reject oversized inputs in ASN1_mbstring_ncopy()"
+  },
+  {
+   "fix": "b593fb151eb7373cb85f352e86bcb7225f9850d9",
+   "fix_ct": 1782112444,
+   "fix_subject": "Fix OSSL_ATOMICS_LOCKLESS detection for Windows toolchains",
+   "how": "sha-reference",
+   "inducing": "26c57423933cab9e5aef6a30cb08c68528ac21b6",
+   "inducing_ct": 1777549943,
+   "inducing_subject": "Use the actually correct define for solaris and gcc"
+  },
+  {
+   "fix": "f3f163243a4fd6f5caea7bdb5ecc655f8c600cbb",
+   "fix_ct": 1781698491,
+   "fix_subject": "Revert \"convert CRYPTO_THREAD_run_once to use InitOnceExecuteOnce api\"",
+   "how": "revert",
+   "inducing": "d053fe41a4add4e55dc5633e8aef6602a6a4b90b",
+   "inducing_ct": 1781120813,
+   "inducing_subject": "convert CRYPTO_THREAD_run_once to use InitOnceExecuteOnce api"
+  },
+  {
+   "fix": "afd25111f12ac3f8c7009ea84d827718e5620e31",
+   "fix_ct": 1781196634,
+   "fix_subject": "Revert \"Add indirect CRL path validation tests\"",
+   "how": "revert",
+   "inducing": "35c1d7b16d5853a10d290cdbde0a997b1e5abee7",
+   "inducing_ct": 1781193504,
+   "inducing_subject": "Add indirect CRL path validation tests"
+  },
+  {
+   "fix": "efff9b82788c561d7033ed043f22b9a11d04b29f",
+   "fix_ct": 1780905106,
+   "fix_subject": "Reapply \"Preserve connection custom extensions in SSL_set_SSL_CTX()\"",
+   "how": "revert",
+   "inducing": "7836b7d5b6a6b27a441c4e4c8564be6b270580c4",
+   "inducing_ct": 1778689396,
+   "inducing_subject": "Revert \"Preserve connection custom extensions in SSL_set_SSL_CTX()\""
+  },
+  {
+   "fix": "a21f77dbc99c242b73b5b420714a2cd36bee084a",
+   "fix_ct": 1780224917,
+   "fix_subject": "crypto/evp: fix double free of tmp_keymgmt in sig/kem/asym init",
+   "how": "sha-reference",
+   "inducing": "ecb4757b377ffb468b39bee76ed6d38f6bf51416",
+   "inducing_ct": 1779809222,
+   "inducing_subject": "crypto/evp/m_sigver.c: fix potential double free on error path in do_sigver_init"
+  },
+  {
+   "fix": "7836b7d5b6a6b27a441c4e4c8564be6b270580c4",
+   "fix_ct": 1778689396,
+   "fix_subject": "Revert \"Preserve connection custom extensions in SSL_set_SSL_CTX()\"",
+   "how": "revert",
+   "inducing": "403ba31a02e47d37070036529966d5a94d98c6fd",
+   "inducing_ct": 1750431329,
+   "inducing_subject": "Preserve connection custom extensions in SSL_set_SSL_CTX()"
+  },
+  {
+   "fix": "5b2abf8f9c4083478e7e1ae6832d9ddfbdaf98b2",
+   "fix_ct": 1778665574,
+   "fix_subject": "test/ffc_internal_test.c: The ffc_params_copy_mfail test needs DSA enabled",
+   "how": "sha-reference",
+   "inducing": "df53ee4fa00bd5e1108b2f396be7f6d47e85628a",
+   "inducing_ct": 1778484104,
+   "inducing_subject": "Add mfail test for ossl_ffc_params_copy"
+  },
+  {
+   "fix": "0a91e12cb9089cf5b618d49042067b40e09f3845",
+   "fix_ct": 1778459290,
+   "fix_subject": "crypto/evp/evp_lib.c: call va_end() in EVP_PKEY_Q_keygen() on error",
+   "how": "sha-reference",
+   "inducing": "18472994f065cfca14d53a9bb62ce0fe077bba20",
+   "inducing_ct": 1778085940,
+   "inducing_subject": "The EVP_PKEY_Q_keygen function now explicitly handles NULL curve name"
+  },
+  {
+   "fix": "6000ce924519ed48d6ee39f812cd212e24c6733e",
+   "fix_ct": 1778458756,
+   "fix_subject": "quic_channel.c: fix potential memory leak on failure in ossl_quic_channel_alloc",
+   "how": "sha-reference",
+   "inducing": "35dc6c353bfeac6f94ba294cc336e1455d6b4453",
+   "inducing_ct": 1773753304,
+   "inducing_subject": "QUIC: Make more transport parameters configurable"
+  },
+  {
+   "fix": "00fba2aca43261cff42f01f183d654ab0dfc1fd1",
+   "fix_ct": 1778155901,
+   "fix_subject": "The tag value must fit into int",
+   "how": "sha-reference",
+   "inducing": "35852da1d9e24cb74034b2f418cef3a58203b127",
+   "inducing_ct": 1777040829,
+   "inducing_subject": "Add intelligence to asn1_d2i_read_bio for reading entire header without blocking for extra data"
+  },
+  {
+   "fix": "3ecae5960a16317c0195c01a9e640ea884c16871",
+   "fix_ct": 1777745436,
+   "fix_subject": "ssl/record/methods/tls_common.c: call BIO_free_all() on rl->bio in tls_int_free",
+   "how": "sha-reference",
+   "inducing": "435feadaf4f9efd9bd05eab9c89cf273c26b86b7",
+   "inducing_ct": 1777358358,
+   "inducing_subject": "Fix record layer leak when swapping chained transport BIO"
+  },
+  {
+   "fix": "9d856e4d7f9adc7ed822d3297fce004544b6c79e",
+   "fix_ct": 1777745232,
+   "fix_subject": "Avoid needless casting away of const in X509_VERIFY_PARAM_get1_ip_asc",
+   "how": "sha-reference",
+   "inducing": "f584ae959cbc36a297fefa6b677d830709dfc747",
+   "inducing_ct": 1771941819,
+   "inducing_subject": "Let's support multiple names for certificate verification"
+  },
+  {
+   "fix": "f33bb236fc44afe40a8b4787e14913f82d501dca",
+   "fix_ct": 1777475504,
+   "fix_subject": "ssl/quic/quic_record_tx.c: refactor qtx->cons obtaining",
+   "how": "sha-reference",
+   "inducing": "16892155e15340ba9725d01cd9593726376fd995",
+   "inducing_ct": 1775940909,
+   "inducing_subject": "quic: fix NULL txl dereference in qtx_resize_txe"
+  },
+  {
+   "fix": "33958827f7ca17f02fdea18b9585ad31daab8a41",
+   "fix_ct": 1777203327,
+   "fix_subject": "apps: Move PATH_MAX define out of the win32 block",
+   "how": "sha-reference",
+   "inducing": "a2e5848d9d11952a26c68ea7cca86b17aafbb028",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "s_client and s_server options for ECH"
+  },
+  {
+   "fix": "d53bba4eb0b0955f8a28f476870538f74ce052cf",
+   "fix_ct": 1776842568,
+   "fix_subject": "Use proper compiler features abstraction for older compilers",
+   "how": "sha-reference",
+   "inducing": "74d47c8e66e02c1b6d97323ad4507292b02e9e5b",
+   "inducing_ct": 1770928869,
+   "inducing_subject": "Provide ASN1_BIT_STRING_set1()"
+  },
+  {
+   "fix": "8d2a17d4e043f8d5c2512f9fa5cfa41639dbe20c",
+   "fix_ct": 1775642896,
+   "fix_subject": "crypto/pkcs12/p12_add.c: Restore ERR_set_mark and ERR_pop_to_mark",
+   "how": "sha-reference",
+   "inducing": "2ea6e785f526f88f913cc6f49372aae9dc54bc63",
+   "inducing_ct": 1770920572,
+   "inducing_subject": "EVP_get_digestbynid/EVP_get_cipherbynid turns into..."
+  },
+  {
+   "fix": "854ea3aa93a29e672d0a8f46e415002f3a75fe4b",
+   "fix_ct": 1775642717,
+   "fix_subject": "quic_channel.c: avoid clipping in ack_delay_exponent/disable_active_migration setters",
+   "how": "sha-reference",
+   "inducing": "35dc6c353bfeac6f94ba294cc336e1455d6b4453",
+   "inducing_ct": 1773753304,
+   "inducing_subject": "QUIC: Make more transport parameters configurable"
+  },
+  {
+   "fix": "78ced6c88ae3114a408428c54cac9ee9b883cc42",
+   "fix_ct": 1775642717,
+   "fix_subject": "quic_channel.c: avoid integer overflow in ossl_quic_channel_set_max_data_request",
+   "how": "sha-reference",
+   "inducing": "35dc6c353bfeac6f94ba294cc336e1455d6b4453",
+   "inducing_ct": 1773753304,
+   "inducing_subject": "QUIC: Make more transport parameters configurable"
+  },
+  {
+   "fix": "cfd4dca5c946d93e06bdf28f196ab9f989a26400",
+   "fix_ct": 1775642716,
+   "fix_subject": "quic_channel.c: check the setters return values",
+   "how": "sha-reference",
+   "inducing": "35dc6c353bfeac6f94ba294cc336e1455d6b4453",
+   "inducing_ct": 1773753304,
+   "inducing_subject": "QUIC: Make more transport parameters configurable"
+  },
+  {
+   "fix": "681b19bc7b1f917d4433bb36da503e3a7ca6dbf8",
+   "fix_ct": 1775114267,
+   "fix_subject": "Revert \"Make cpuid_setup non-constructor\"",
+   "how": "revert",
+   "inducing": "1d770fc6a9a0a7d6e20f3232180b80c366c2d4df",
+   "inducing_ct": 1745929191,
+   "inducing_subject": "Make cpuid_setup non-constructor"
+  },
+  {
+   "fix": "18097ee96131dfe0d12cd3ecd55410669a71530d",
+   "fix_ct": 1775047561,
+   "fix_subject": "apps/lib/apps.c: use fstat on an opened fd in app_mmap_file()",
+   "how": "sha-reference",
+   "inducing": "80b7e49c273f9977394de54f338baec9273dd47a",
+   "inducing_ct": 1774628731,
+   "inducing_subject": "Use mmap for pkeyutl -rawin and dgst one-shot input"
+  },
+  {
+   "fix": "22a3bf628db5f4e7896800ace035f827098830ad",
+   "fix_ct": 1774924679,
+   "fix_subject": "Fix -Wdiscarded-qualifiers warnings shown when glibc-2.43 is used",
+   "how": "sha-reference",
+   "inducing": "f584ae959cbc36a297fefa6b677d830709dfc747",
+   "inducing_ct": 1771941819,
+   "inducing_subject": "Let's support multiple names for certificate verification"
+  },
+  {
+   "fix": "b9cd3ae9af17583341c911ec3ef2a7e307e958ac",
+   "fix_ct": 1774917178,
+   "fix_subject": "crypto/property/property.c: avoid NULL dereference in impl_cache_free()",
+   "how": "sha-reference",
+   "inducing": "95ac190979ecf38cfe07e79e3f69cf5677adca18",
+   "inducing_ct": 1774369383,
+   "inducing_subject": "convert ALGORITHM cache to use internal hashtable"
+  },
+  {
+   "fix": "0a5316e46536c788bb972c57b3923151aeb76d0b",
+   "fix_ct": 1774540517,
+   "fix_subject": "cmp_client_test.c: disable KUR_bad_pkiConf_protection",
+   "how": "sha-reference",
+   "inducing": "525a4f1efbab0d3c2aff59ab8e671b8d9f35ddee",
+   "inducing_ct": 1774431724,
+   "inducing_subject": "cmp_vfy.c,doc/,test/: when trying to use cached CMP message sender cert, no more check its revocation and chain"
+  },
+  {
+   "fix": "d21db261c1d16c1eca54b5176675152ec67d9a56",
+   "fix_ct": 1774374943,
+   "fix_subject": "quic: fix off-by-one in QUIC_MAX_MAX_ACK_DELAY",
+   "how": "sha-reference",
+   "inducing": "35dc6c353bfeac6f94ba294cc336e1455d6b4453",
+   "inducing_ct": 1773753304,
+   "inducing_subject": "QUIC: Make more transport parameters configurable"
+  },
+  {
+   "fix": "fae68066ec117bd0d38166687e9bc62fd43bd42f",
+   "fix_ct": 1774374743,
+   "fix_subject": "crypto/idea/i_ofb64.c: mask the num value after negativity check",
+   "how": "sha-reference",
+   "inducing": "5ba9029bc7b387ab0768b051518c5325316c0fdb",
+   "inducing_ct": 1773817891,
+   "inducing_subject": "Mask *num on entry in deprecated low-level OFB/CFB implementations"
+  },
+  {
+   "fix": "efbcbc3612b074ec6d00ce00fa9535548d2a6517",
+   "fix_ct": 1774140659,
+   "fix_subject": "crypto/threads_win.c: type casted destination of InterlockedExchange{,64} calls",
+   "how": "sha-reference",
+   "inducing": "cc7195da30388ae21377746df04b55443f245dc9",
+   "inducing_ct": 1771476455,
+   "inducing_subject": "Make FIPS self test state access atomic"
+  },
+  {
+   "fix": "b73a5743253dbc6484bcb0021c94edc59aceb161",
+   "fix_ct": 1774137027,
+   "fix_subject": "crypto/idea/i_cfb64.c: condition 'n < 0' can never be met after doing 'n = n & 0x07'",
+   "how": "sha-reference",
+   "inducing": "5ba9029bc7b387ab0768b051518c5325316c0fdb",
+   "inducing_ct": 1773817891,
+   "inducing_subject": "Mask *num on entry in deprecated low-level OFB/CFB implementations"
+  },
+  {
+   "fix": "d8ea426e09314416d88f1cef9a25acb4caafcf80",
+   "fix_ct": 1774029849,
+   "fix_subject": "ech: fix off-by-one in hpke_decrypt_encch extensions length bounds check",
+   "how": "sha-reference",
+   "inducing": "6c3edd4f3a8ad16b0b17a3d2507752c78036a524",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add server-side handling of Encrypted Client Hello"
+  },
+  {
+   "fix": "232f17f065e089cab931d2babbed548e5958e6b2",
+   "fix_ct": 1774029295,
+   "fix_subject": "Fix windows build failure for arm64ec",
+   "how": "sha-reference",
+   "inducing": "3a69b1902892883d81c41747b2230c5168511026",
+   "inducing_ct": 1766461661,
+   "inducing_subject": "Added AVX2 encoding + scalar improvements"
+  },
+  {
+   "fix": "8911fedcda3075bdcd172fb9f6f1425b87b58bdf",
+   "fix_ct": 1773840690,
+   "fix_subject": "ca.c: Partially revert incorrect simplification of string check",
+   "how": "sha-reference",
+   "inducing": "25c2ada8961316a699e3396ffea036b9248cf682",
+   "inducing_ct": 1773660407,
+   "inducing_subject": "Clean up asn1/ca.c"
+  },
+  {
+   "fix": "6cf011385f9d9877ab0dd56d35bbaf613400daf4",
+   "fix_ct": 1773746144,
+   "fix_subject": "Revert \"fix: disable of ECDH and ECDSA algorithms\"",
+   "how": "revert",
+   "inducing": "b60869717dd9d5c873ed74d248faecbd2cf110f3",
+   "inducing_ct": 1773417131,
+   "inducing_subject": "fix: disable of ECDH and ECDSA algorithms"
+  },
+  {
+   "fix": "22be3f1b8e3d8d09de89794a6d59f00176b32b2d",
+   "fix_ct": 1773314999,
+   "fix_subject": "fix NULL pointer dereference when pass1 is NULL",
+   "how": "sha-reference",
+   "inducing": "adc8e4abd962b448354756fef24be499278875ae",
+   "inducing_ct": 1773164547,
+   "inducing_subject": "Fix Memory leak in app_passwd"
+  },
+  {
+   "fix": "b0ba5c81e43053ae0b8a6cb3559e54b7f6d025d9",
+   "fix_ct": 1773167331,
+   "fix_subject": "namemap: handle NULL names in name2num lookups",
+   "how": "sha-reference",
+   "inducing": "aec9e7fe1693967c2d12a5b88f17eb58431d2ddc",
+   "inducing_ct": 1772544177,
+   "inducing_subject": "Allow core_namemap to limit hashtable key sizes"
+  },
+  {
+   "fix": "81cc6cb97ef83ad138eebd47129368b9e963e8cd",
+   "fix_ct": 1772832563,
+   "fix_subject": "Revert \"Constify X509_find_by_subject\"",
+   "how": "revert",
+   "inducing": "0da29907e7da10f7582072c29a10df297b4e68b5",
+   "inducing_ct": 1771937148,
+   "inducing_subject": "Constify X509_find_by_subject"
+  },
+  {
+   "fix": "e491465c499d26b16a6cc99c3576027023a6ac1d",
+   "fix_ct": 1772832563,
+   "fix_subject": "Un-constify the return value of X509_find_by_issuer_and_serial()",
+   "how": "sha-reference",
+   "inducing": "07ee3d5db8a291e0809a9ff0789b539daf6fadf0",
+   "inducing_ct": 1772031903,
+   "inducing_subject": "constify X509_find_by_issuer_and_serial"
+  },
+  {
+   "fix": "3298dadd88c5454cd49f70e68af60e731a4f65c5",
+   "fix_ct": 1772819400,
+   "fix_subject": "Revert \"Make X509_up_ref and X509_free take const X509 *\"",
+   "how": "revert",
+   "inducing": "ae8d50f211231c8aa9fcb3bd0a6c38604dbd6de4",
+   "inducing_ct": 1772642606,
+   "inducing_subject": "Make X509_up_ref and X509_free take const X509 *"
+  },
+  {
+   "fix": "70e71ac2ae18c719adae2875bc3d5b5353ca7bb8",
+   "fix_ct": 1772562379,
+   "fix_subject": "X509 returned by X509_REQ_to_X509() should not be (const ...)",
+   "how": "sha-reference",
+   "inducing": "37436ba6977e5a1e939aa044353237cb39a59945",
+   "inducing_ct": 1771604833,
+   "inducing_subject": "Constify X509_to_X509_REQ and X509_REQ_to_X509"
+  },
+  {
+   "fix": "2a150015820866f6a5719c4101a3e8d571e77254",
+   "fix_ct": 1772479981,
+   "fix_subject": "ossl_lms_key_to_text(): Fix NULL pointer dereference of `key` argument",
+   "how": "sha-reference",
+   "inducing": "3d82b990d1fdd7b8af23d69f140cd4aff56ee6ad",
+   "inducing_ct": 1772203197,
+   "inducing_subject": "Added LMS support for OpenSSL commandline signature verification using pkeyutl."
+  },
+  {
+   "fix": "f6c9ce7e671257dc9663ef02b2ab28edc19b4c5d",
+   "fix_ct": 1772017824,
+   "fix_subject": "test/ech_test.c: avoid memory leaks in ech_api_basic_calls()",
+   "how": "sha-reference",
+   "inducing": "5e5a76fc2c08c1db7036076512acf8c404e9f1f4",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add tests and documentation and fix a couple of issues identified by added tests"
+  },
+  {
+   "fix": "2f4ef4a912f2fd0548ebb46d2c274a908acd0a72",
+   "fix_ct": 1772017824,
+   "fix_subject": "test/ech_corrupt_test.c: avoid memory leak in tls_corrupt_write()",
+   "how": "sha-reference",
+   "inducing": "5e5a76fc2c08c1db7036076512acf8c404e9f1f4",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add tests and documentation and fix a couple of issues identified by added tests"
+  },
+  {
+   "fix": "e531a13df407d2f04045a59177a97bf9c744852e",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/statem/statem_srvr.c: avoid WPACKET momory leak in tls_process_client_hello",
+   "how": "sha-reference",
+   "inducing": "6c3edd4f3a8ad16b0b17a3d2507752c78036a524",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add server-side handling of Encrypted Client Hello"
+  },
+  {
+   "fix": "869506ded60d3408c89e1950b37feb72a6970f28",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/statem/extensions_clnt.c: superfluous NULL check in tls_construct_ctos_psk()",
+   "how": "sha-reference",
+   "inducing": "ade10c5dbf2063d716c8130204fc8a905a769b39",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH client side"
+  },
+  {
+   "fix": "3a5fa572bec5fcd18cf7161fed05228801d6fbb4",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_store.c: avoid NULL dereference in ech_decode_one_entry()",
+   "how": "sha-reference",
+   "inducing": "4af71a77387cc07da326df26af12b5b35ea0d99c",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH CLI implementation"
+  },
+  {
+   "fix": "bbd93b02c469fddc27383b7c449714ea9c066ee4",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_store.c: avoid uninitialised WPACKET use in OSSL_ECHSTORE_new_config",
+   "how": "sha-reference",
+   "inducing": "4af71a77387cc07da326df26af12b5b35ea0d99c",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH CLI implementation"
+  },
+  {
+   "fix": "5366d8c9420b3d266cf07fdcebf0789867da0928",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_store.c: avoid memory leak on error path in OSSL_ECHSTORE_new",
+   "how": "sha-reference",
+   "inducing": "7debe0ddeff79d62cb17182fbba86ebb5ad14074",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH external APIs"
+  },
+  {
+   "fix": "3a0a16fa2786cc6498039647824ead57b1d809da",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: avoid memory leak on ech_decode_inbound_ech() error path",
+   "how": "sha-reference",
+   "inducing": "6c3edd4f3a8ad16b0b17a3d2507752c78036a524",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add server-side handling of Encrypted Client Hello"
+  },
+  {
+   "fix": "9fe7bf38822b60fd79504710c169db97ad522315",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: avoid NULL dereference in ossl_ech_get_ch_offsets",
+   "how": "sha-reference",
+   "inducing": "6c3edd4f3a8ad16b0b17a3d2507752c78036a524",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add server-side handling of Encrypted Client Hello"
+  },
+  {
+   "fix": "054027e1ba3ef0fe359d432df4662ded147f908a",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: avoid truncating time_t value in ossl_ech_status_print",
+   "how": "sha-reference",
+   "inducing": "ade10c5dbf2063d716c8130204fc8a905a769b39",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH client side"
+  },
+  {
+   "fix": "3dc9834fb0da094a0f71d82f404f07d6bcc6a3b4",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: avoid memory leak in ossl_ech_get_retry_configs()",
+   "how": "sha-reference",
+   "inducing": "0bdae603e82f74f037711a3b813c721d510b8ebb",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ossl_ech_get_retry_configs(): Check for integer overflow"
+  },
+  {
+   "fix": "3e08902de4bb19862c346dde7969ca907c5d7528",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: check WPACKET_get_total_written in ossl_ech_send_grease",
+   "how": "sha-reference",
+   "inducing": "ade10c5dbf2063d716c8130204fc8a905a769b39",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH client side"
+  },
+  {
+   "fix": "8abd64ab61e9ba59539b5bee3e53266ac662172f",
+   "fix_ct": 1772017824,
+   "fix_subject": "ssl/ech/ech_internal.c: avoid superfluous extval check in ossl_ech_early_decrypt",
+   "how": "sha-reference",
+   "inducing": "6c3edd4f3a8ad16b0b17a3d2507752c78036a524",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "Add server-side handling of Encrypted Client Hello"
+  },
+  {
+   "fix": "2bd2451da269fe16279145c9824cd1464411dc7d",
+   "fix_ct": 1772017823,
+   "fix_subject": "apps/s_server.c: call OPENSSL_DIR_end after directory traversal in ech_load_dir",
+   "how": "sha-reference",
+   "inducing": "a2e5848d9d11952a26c68ea7cca86b17aafbb028",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "s_client and s_server options for ECH"
+  },
+  {
+   "fix": "08f6739dfa742cebddd54e1827dbc7520a424420",
+   "fix_ct": 1772017823,
+   "fix_subject": "apps/s_server.c: free ECH storage in ech_load_dir() on return",
+   "how": "sha-reference",
+   "inducing": "a2e5848d9d11952a26c68ea7cca86b17aafbb028",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "s_client and s_server options for ECH"
+  },
+  {
+   "fix": "3770f02f933cc73a18711e972c031dc7c40d533d",
+   "fix_ct": 1772017823,
+   "fix_subject": "apps/ech.c: free the resources on option help printing",
+   "how": "sha-reference",
+   "inducing": "4af71a77387cc07da326df26af12b5b35ea0d99c",
+   "inducing_ct": 1771605625,
+   "inducing_subject": "ECH CLI implementation"
+  },
+  {
+   "fix": "776a4604545edee49bf14040e7c6a1528f6e02bc",
+   "fix_ct": 1771586116,
+   "fix_subject": "Revert \"fips-jitter: Force use jitter entropy in the FIPS 3.0.9 provider callback\"",
+   "how": "revert",
+   "inducing": "aa5f1b4cf562d7f0b65ae7ef93179ebc1102fbeb",
+   "inducing_ct": 1740512757,
+   "inducing_subject": "fips-jitter: Force use jitter entropy in the FIPS 3.0.9 provider callback"
+  },
+  {
+   "fix": "6f13c02b7f83c9e459f4403327ab5b3f0dcb7d51",
+   "fix_ct": 1771432434,
+   "fix_subject": "srtpkdf: cipher is written twice with the same value",
+   "how": "sha-reference",
+   "inducing": "5b310281af9a77d180a81c6dc0a093022931b1cb",
+   "inducing_ct": 1771222957,
+   "inducing_subject": "SRTP: Fixup settable input limits and test them."
+  },
+  {
+   "fix": "ed57d1e06dca28689190e00d9893e0fd7ecc67c1",
+   "fix_ct": 1769605006,
+   "fix_subject": "test/evp_test.c: avoid resource leak in digest_test_run()",
+   "how": "sha-reference",
+   "inducing": "9c738431411e9f87d144793802b74e5ffd019403",
+   "inducing_ct": 1769177271,
+   "inducing_subject": "Add support for CSHAKE."
+  },
+  {
+   "fix": "63f62bf4e55111d87898f534ad0a2164e13ba289",
+   "fix_ct": 1769605006,
+   "fix_subject": "srtpkdf.c: avoid ctx NULL dereference kdf_srtpkdf_set_ctx_params()",
+   "how": "sha-reference",
+   "inducing": "fe67753da40968765166f13f128ae7a3dc54081b",
+   "inducing_ct": 1769163571,
+   "inducing_subject": "Add SRTPKDF implementation"
+  },
+  {
+   "fix": "7ad410d6c6a238260b2f7da547f4a38bd023b706",
+   "fix_ct": 1769605006,
+   "fix_subject": "crypto/bio/bf_buff.c: drop extraneous ctx NULL check in buffer_ctrl()",
+   "how": "sha-reference",
+   "inducing": "f17230ae6c9f622418b3f45bb68ed9014b4b79c4",
+   "inducing_ct": 1769101933,
+   "inducing_subject": "Fix of EOF and retry handling in BIO implementations"
+  },
+  {
+   "fix": "8bf30b21bda96462658d84fa44af2d55237550fc",
+   "fix_ct": 1768934692,
+   "fix_subject": "Fix type-limits and add this warning to default strict warnings",
+   "how": "sha-reference",
+   "inducing": "b6aed64e47b831305c05a4132e7c7f21257ea663",
+   "inducing_ct": 1767567116,
+   "inducing_subject": "Fix overflow in EVP_EncodeFinal"
+  },
+  {
+   "fix": "32a33dae788742c4511eade62336e2e814c7c68f",
+   "fix_ct": 1764952112,
+   "fix_subject": "ssl_do_config(): Check for NULL name argument",
+   "how": "sha-reference",
+   "inducing": "0c2a196af8ab9c12da27826fa6024ca1b22f6db1",
+   "inducing_ct": 1764767751,
+   "inducing_subject": "CONF: Add support for configurations per OSSL_LIB_CTX"
+  },
+  {
+   "fix": "376f7ee4d123f3842d85ef3c03fd070fb411ec0f",
+   "fix_ct": 1763485544,
+   "fix_subject": "CRYPTO_R_ cannot be used with ERR_LIB_OSSL_STORE",
+   "how": "sha-reference",
+   "inducing": "e9e643bc580e4ba0c6f8f9b4dd2ce59397b1b786",
+   "inducing_ct": 1761343638,
+   "inducing_subject": "store: check for NULL uri argument"
+  },
+  {
+   "fix": "7420ab4866e69da6f0d52b09c6d80356b19ee128",
+   "fix_ct": 1761159738,
+   "fix_subject": "x509-store: reduce number of pre-allocated hashtable buckets",
+   "how": "sha-reference",
+   "inducing": "04589b59ef50b1f8a4cec5d15ce172c32e0aa01c",
+   "inducing_ct": 1760620280,
+   "inducing_subject": "x509store: reduce lock contention in X509_STORE"
+  },
+  {
+   "fix": "55a0adf220baa1ee25fa1bab846bde5d57b484e1",
+   "fix_ct": 1761086208,
+   "fix_subject": "x509_store: fix unreliable value of objs inside the second locked section",
+   "how": "sha-reference",
+   "inducing": "04589b59ef50b1f8a4cec5d15ce172c32e0aa01c",
+   "inducing_ct": 1760620280,
+   "inducing_subject": "x509store: reduce lock contention in X509_STORE"
+  },
+  {
+   "fix": "3206bb708246a97b281133009a419fb7421971d9",
+   "fix_ct": 1759003279,
+   "fix_subject": "Revert \"fips: remove redundant RSA encrypt/decrypt KAT\"",
+   "how": "revert",
+   "inducing": "635bf4946a7e948f26a348ddc3b5a8d282354f64",
+   "inducing_ct": 1732281961,
+   "inducing_subject": "fips: remove redundant RSA encrypt/decrypt KAT"
+  },
+  {
+   "fix": "7ca0240e5b4947f8e451cc10d3967242233ec95b",
+   "fix_ct": 1758638087,
+   "fix_subject": "Ensure q variable is freed",
+   "how": "sha-reference",
+   "inducing": "d88c43a64408616572941e5d0b127194d80f562f",
+   "inducing_ct": 1758096579,
+   "inducing_subject": "Ensure that empty or 1 element stacks are always sorted."
+  },
+  {
+   "fix": "5a299cb0d4c4fa0d7ac25855ceba288278efda7f",
+   "fix_ct": 1758209490,
+   "fix_subject": "Revert \"rsa: expose pairwise consistency test API\"",
+   "how": "revert",
+   "inducing": "dc5cd6f70a0eeb30e272fe885a64f3e3d76b5e42",
+   "inducing_ct": 1753987147,
+   "inducing_subject": "rsa: expose pairwise consistency test API"
+  },
+  {
+   "fix": "a71c36b39828efde20989c0b723a8f176ca61687",
+   "fix_ct": 1758204224,
+   "fix_subject": "test/p_ossltest.c: check for return values in OSSL_PARAM_* calls",
+   "how": "sha-reference",
+   "inducing": "032297054ab5ff6cac4eae87a6fa9b686b4d62e5",
+   "inducing_ct": 1758068506,
+   "inducing_subject": "Implement an ossltest provider to replace ossltest engine"
+  },
+  {
+   "fix": "6c3046657e712240e8e931ca5bfe528684f95fb3",
+   "fix_ct": 1757692670,
+   "fix_subject": "test/bioprinttest.c: silence more width/precision checks",
+   "how": "sha-reference",
+   "inducing": "a29d157fdb6d5260888b4505c11f0d360fab16f8",
+   "inducing_ct": 1757612700,
+   "inducing_subject": "Replace homebrewed implementation of *printf*() functions with libc"
+  },
+  {
+   "fix": "ea85fbce9fac7bf87c5c0a82151dbde259bbfc4f",
+   "fix_ct": 1757618730,
+   "fix_subject": "remove test_big() the return value we compare varies between libc implementations. removing this test makes test suite more rubust.",
+   "how": "sha-reference",
+   "inducing": "a29d157fdb6d5260888b4505c11f0d360fab16f8",
+   "inducing_ct": 1757612700,
+   "inducing_subject": "Replace homebrewed implementation of *printf*() functions with libc"
+  },
+  {
+   "fix": "a1cdea4907954b61e301f534c59420eeb3e378dc",
+   "fix_ct": 1756900053,
+   "fix_subject": "test/bioprinttest.c: fix UB in %n result handling",
+   "how": "sha-reference",
+   "inducing": "9deaf83833382d909bde1ddceb0d2a80b775bc7f",
+   "inducing_ct": 1756484310,
+   "inducing_subject": "test/bioprinttest.c: add some checks for integer and string printing"
+  },
+  {
+   "fix": "0b00e23df82af08ba04f482745bd7ddbff2da34b",
+   "fix_ct": 1756502426,
+   "fix_subject": "test/bioprinttest.c: move the %n result to the field that is later checked",
+   "how": "sha-reference",
+   "inducing": "9deaf83833382d909bde1ddceb0d2a80b775bc7f",
+   "inducing_ct": 1756484310,
+   "inducing_subject": "test/bioprinttest.c: add some checks for integer and string printing"
+  },
+  {
+   "fix": "e489bfbcd58b8ac91e108c6bb669bf5f07217b2c",
+   "fix_ct": 1756502426,
+   "fix_subject": "test/bioprinttest.c: fix sloppy length modifier usage in int_data",
+   "how": "sha-reference",
+   "inducing": "9deaf83833382d909bde1ddceb0d2a80b775bc7f",
+   "inducing_ct": 1756484310,
+   "inducing_subject": "test/bioprinttest.c: add some checks for integer and string printing"
+  },
+  {
+   "fix": "a0a73f52ad5a33576fec69ab9d74c29fa4621aea",
+   "fix_ct": 1755629274,
+   "fix_subject": "test/mem_alloc_test.c: tfix in test_xaligned_alloc",
+   "how": "sha-reference",
+   "inducing": "d090695101a96fedd5457d1d867726ba5e92ddee",
+   "inducing_ct": 1754670130,
+   "inducing_subject": "test: add a sanity test for memory allocation functions"
+  },
+  {
+   "fix": "2b76895152fe7c7bcd11b9ae6e712c0437aee8c3",
+   "fix_ct": 1755629274,
+   "fix_subject": "test/mem_alloc_test.c: avoid referencing potentially freed old_ret",
+   "how": "sha-reference",
+   "inducing": "d090695101a96fedd5457d1d867726ba5e92ddee",
+   "inducing_ct": 1754670130,
+   "inducing_subject": "test: add a sanity test for memory allocation functions"
+  },
+  {
+   "fix": "5e34d6476016db7630aed77e927d95dd94fc67b0",
+   "fix_ct": 1755609604,
+   "fix_subject": "Fix the return value of OBJ_create",
+   "how": "sha-reference",
+   "inducing": "88a1fbb8d1b22a7c54483e50eed9ca77d28ee441",
+   "inducing_ct": 1753809825,
+   "inducing_subject": "reduce lock contention when adding objects to ADDED_OBJ hash table"
+  },
+  {
+   "fix": "1b1a859d3d8aafbdda2977f9955ceee6f32f7ea4",
+   "fix_ct": 1754924285,
+   "fix_subject": "test/sanitytest.c: fix setitimer usage in timer disarmament",
+   "how": "sha-reference",
+   "inducing": "760929f6ba18952c052e92acb2f0c0163ab7720a",
+   "inducing_ct": 1754767988,
+   "inducing_subject": "crypto/sleep.c: avoid returning early due to signal"
+  },
+  {
+   "fix": "b20da2328018107414fe896e59e7d4d6c8af8174",
+   "fix_ct": 1753987180,
+   "fix_subject": "Revert \"Pairwise check for DH keys import as part of FIPS\"",
+   "how": "revert",
+   "inducing": "e08b83cbb3b853ae9dc364c32d927405172918ac",
+   "inducing_ct": 1753794602,
+   "inducing_subject": "Pairwise check for DH keys import as part of FIPS"
+  },
+  {
+   "fix": "b9ff440dd613e0c65527ef7eaf565f618979ecce",
+   "fix_ct": 1753892828,
+   "fix_subject": "Only report generic error if provider did not put an error on the error queue",
+   "how": "sha-reference",
+   "inducing": "72351b0d18078170af270418b2d5e9fc579cb1af",
+   "inducing_ct": 1747768774,
+   "inducing_subject": "crypto/evp: compensate for providers not adding error queue entries for keymgmt, sigver, and asymcipher"
+  },
+  {
+   "fix": "0d5c7766946f0bb423e9256ccdaf194e6befd619",
+   "fix_ct": 1751533523,
+   "fix_subject": "The check-ansi job is failing in the openssl-3.5 branch as a result of commit 60775e3. Fix that.",
+   "how": "sha-reference",
+   "inducing": "60775e31123e6ef66a7cf86f199289d6e250dceb",
+   "inducing_ct": 1751389617,
+   "inducing_subject": "decoders: Fix prioritization of decoders via property query"
+  },
+  {
+   "fix": "339ced70da1206bf090c3de981093b99cfa0d39a",
+   "fix_ct": 1749801981,
+   "fix_subject": "s390x: Fix HMAC to fail update or final call when already finalized",
+   "how": "sha-reference",
+   "inducing": "a5d1eadde1d566b528cfe495953300cd9f9fe1e9",
+   "inducing_ct": 1748953946,
+   "inducing_subject": "Regression test for incorrect HMAC API usage"
+  },
+  {
+   "fix": "29864f2b0f1046177e8048a5b17440893d3f9425",
+   "fix_ct": 1745604271,
+   "fix_subject": "Fix P-384 curve on lower-than-P9 PPC64 targets",
+   "how": "sha-reference",
+   "inducing": "85cabd94958303859b1551364a609d4ff40b67a5",
+   "inducing_ct": 1741969252,
+   "inducing_subject": "Fix Minerva timing side-channel signal for P-384 curve on PPC"
+  },
+  {
+   "fix": "8419baf31222c5f439b09ceb41f7a6e1916eab3b",
+   "fix_ct": 1744792936,
+   "fix_subject": "Fix winstore provider to work with recent decoder changes",
+   "how": "sha-reference",
+   "inducing": "31b5f3f38225e0b694bd564e8e77d9fefb51ff65",
+   "inducing_ct": 1740841449,
+   "inducing_subject": "Further decoder tuning possibly better perf"
+  },
+  {
+   "fix": "6e7be995fd7fd24d38b95982cf90f801ac045743",
+   "fix_ct": 1741187056,
+   "fix_subject": "RCU: Ensure that qp's are actually retired in order",
+   "how": "sha-reference",
+   "inducing": "5949918f9afa85d72535676f114346ed541e0b1e",
+   "inducing_ct": 1739474628,
+   "inducing_subject": "Rework and simplify RCU code"
+  },
+  {
+   "fix": "65787e2dc219685c30539c6f60eb6b64b890bf6f",
+   "fix_ct": 1739474613,
+   "fix_subject": "Revert \"rcu: Ensure that updates to the ID field of a qp don't lose refs\"",
+   "how": "revert",
+   "inducing": "fbd34c03e3ca94d3805e97a01defdf8b6037f61c",
+   "inducing_ct": 1737573371,
+   "inducing_subject": "rcu: Ensure that updates to the ID field of a qp don't lose refs"
+  },
+  {
+   "fix": "ed3ce7545797e2c7202a6fcbf83c8bba3ead460d",
+   "fix_ct": 1738094234,
+   "fix_subject": "Revert \"Work around Windows ftell() bug as per Microsoft engineering's suggestion\"",
+   "how": "revert",
+   "inducing": "8300a8742b2abc487594a09b5e6ee726dbd30771",
+   "inducing_ct": 1603260175,
+   "inducing_subject": "Work around Windows ftell() bug as per Microsoft engineering's suggestion"
+  },
+  {
+   "fix": "b8028d489037033a6eaa02b11755e5be0e688523",
+   "fix_ct": 1736765249,
+   "fix_subject": "speed: Pass IV to EVP_CipherInit_ex for -evp runs with non-AEAD ciphers",
+   "how": "sha-reference",
+   "inducing": "607a46d003f472d4bce646f3df6e85725094d68a",
+   "inducing_ct": 1730711063,
+   "inducing_subject": "apps/speed.c: Fix the benchmarking for AEAD ciphers"
+  },
+  {
+   "fix": "d7e8f6f7816f2be3ab5e498d180424940fd58695",
+   "fix_ct": 1732543868,
+   "fix_subject": "Fix potential memory leak on failure of dsa_gen_init()",
+   "how": "sha-reference",
+   "inducing": "47a80fd2034cd4314d3b4958539dcd3106087109",
+   "inducing_ct": 1732120826,
+   "inducing_subject": "pkeyutl.c: Avoid freeing pkey at multiple places"
+  },
+  {
+   "fix": "dc5afb7e87ee448f4fecad0dc624c643505ba7f1",
+   "fix_ct": 1725614766,
+   "fix_subject": "s390x: Fix s390x_shake_squeeze() when MSA 12 is available",
+   "how": "sha-reference",
+   "inducing": "25f5d7b85f6657cd2f9f1ab7ae87f319d9bafe54",
+   "inducing_ct": 1724952366,
+   "inducing_subject": "s390x: support CPACF sha3/shake performance improvements"
+  },
+  {
+   "fix": "979dc530010e3c0f045edf6e38c7ab894ffba7f2",
+   "fix_ct": 1725614765,
+   "fix_subject": "s390x: Fix s390x_sha3_absorb() when no data is processed by KIMD",
+   "how": "sha-reference",
+   "inducing": "25f5d7b85f6657cd2f9f1ab7ae87f319d9bafe54",
+   "inducing_ct": 1724952366,
+   "inducing_subject": "s390x: support CPACF sha3/shake performance improvements"
+  },
+  {
+   "fix": "f60b3c5fdcf75fc3e9a257c2f67867ffae63006b",
+   "fix_ct": 1725550228,
+   "fix_subject": "crypto/pkcs12/p12_mutl.c: Add check and EVP_MD_free() for EVP_MD_fetch()",
+   "how": "sha-reference",
+   "inducing": "fe79159be0c6a576b475001ca111185901637692",
+   "inducing_ct": 1723017616,
+   "inducing_subject": "Implementation of the RFC 9579, PBMAC1 in PKCS#12"
+  },
+  {
+   "fix": "c23ce3522540735e51e047f81a171c9261a1ed23",
+   "fix_ct": 1725390983,
+   "fix_subject": "s390x: Fix prehash-by-caller handling for ED25519 and ED448",
+   "how": "sha-reference",
+   "inducing": "66966827740a04249300b0b25735e9d4c9bcab26",
+   "inducing_ct": 1724951587,
+   "inducing_subject": "Add ED25519 and ED448 support for EVP_PKEY_{sign,verify}_init_ex2()"
+  },
+  {
+   "fix": "223e0020e47e6e8eb6079258ea9d563d1d115132",
+   "fix_ct": 1724248289,
+   "fix_subject": "x_attrib: fix a memory leak",
+   "how": "sha-reference",
+   "inducing": "be5adfd6e36817fe8d5b5793f8c23189dc412045",
+   "inducing_ct": 1719236001,
+   "inducing_subject": "Support subjectDirectoryAttributes and associatedInformation exts"
+  },
+  {
+   "fix": "c14003578a3ea24daf03c76719db7c0c1fb11097",
+   "fix_ct": 1723772064,
+   "fix_subject": "Revert \"fipsinstall: add ed_no_verify_digested option\"",
+   "how": "revert",
+   "inducing": "70b6d57fd94fe11fa2510bc8026fa6a6ead51d68",
+   "inducing_ct": 1723014778,
+   "inducing_subject": "fipsinstall: add ed_no_verify_digested option"
+  },
+  {
+   "fix": "f1b17245b6b56ad064fe10508d6192262a0a3b15",
+   "fix_ct": 1723772062,
+   "fix_subject": "Revert \"fips: add no digested option to FIPS provider\"",
+   "how": "revert",
+   "inducing": "889277effb65b7f276e375cf0176c4c8597f4203",
+   "inducing_ct": 1723014778,
+   "inducing_subject": "fips: add no digested option to FIPS provider"
+  },
+  {
+   "fix": "7de4770234582c9e95ea78e5a9ee51cce01faa1d",
+   "fix_ct": 1723771957,
+   "fix_subject": "Revert \"EdDSA: disallow verification from a pregenerated hash when in FIPS\"",
+   "how": "revert",
+   "inducing": "2d759937e2ee78c27c83f1433f79b33256ab1a39",
+   "inducing_ct": 1723014778,
+   "inducing_subject": "EdDSA: disallow verification from a pregenerated hash when in FIPS"
+  },
+  {
+   "fix": "357e3265a4280bb644f1ea6d164934b68f68f302",
+   "fix_ct": 1723771957,
+   "fix_subject": "Revert \"test: omit failing test when using a FIPS provider that supports eddsa_no_verify_digested\"",
+   "how": "revert",
+   "inducing": "54933db9f0e1a03b644cecc6735f8f2025b748b5",
+   "inducing_ct": 1723014778,
+   "inducing_subject": "test: omit failing test when using a FIPS provider that supports eddsa_no_verify_digested"
+  },
+  {
+   "fix": "1348f4b5cff93025713157eea1f5ed228a5c61d6",
+   "fix_ct": 1723771957,
+   "fix_subject": "Revert \"Apply the FIPS_eddsa_no_verify_digested indicator on prehash EdDSA only\"",
+   "how": "revert",
+   "inducing": "ca112fccdd34a8538f14ddf8c3569b8331eae357",
+   "inducing_ct": 1723661567,
+   "inducing_subject": "Apply the FIPS_eddsa_no_verify_digested indicator on prehash EdDSA only"
+  },
+  {
+   "fix": "20da3dabc43ee8c664090981336ec11605ff174b",
+   "fix_ct": 1720779836,
+   "fix_subject": "o_fopen: fix coding style and build error with VS2010",
+   "how": "sha-reference",
+   "inducing": "917f37195ac95252a4c90e86d7d7414c5569aed8",
+   "inducing_ct": 1720512104,
+   "inducing_subject": "Allow OPENSSLDIR/ENGINESDIR/MODULESDIR to be NULL"
+  },
+  {
+   "fix": "a9064366e8dcff56c722d0c8f1306d84d6c3f255",
+   "fix_ct": 1719324562,
+   "fix_subject": "Fix memory leak in x509_req_test",
+   "how": "sha-reference",
+   "inducing": "7d2c0a4b1feb152ee1190dfedc65dfd1c928f9e5",
+   "inducing_ct": 1718998845,
+   "inducing_subject": "Make x509_req_test ANSI Compatible"
+  },
+  {
+   "fix": "f94d773f9455a7b48158738106c5b676f1fd04ff",
+   "fix_ct": 1715693066,
+   "fix_subject": "crypto/riscvcap: fix function declaration for hwprobe_to_cap",
+   "how": "sha-reference",
+   "inducing": "66ad636b979554ddde5cd5908feabda79d07317b",
+   "inducing_ct": 1715244642,
+   "inducing_subject": "riscv: use hwprobe syscall for capability detection"
+  },
+  {
+   "fix": "327261c076b8468382e1effea14d79446cc22b4d",
+   "fix_ct": 1714983862,
+   "fix_subject": "test/threadstest.c: Add checks for CRYPTO_THREAD_lock_new()",
+   "how": "sha-reference",
+   "inducing": "5f8b812931e5da24df08913c05ff8e4f4494f014",
+   "inducing_ct": 1712045536,
+   "inducing_subject": "Add locking to atomic operations in rw/rcu tests"
+  },
+  {
+   "fix": "bc930bed20d7462afecbb9d947286a335975c04a",
+   "fix_ct": 1710268352,
+   "fix_subject": "Add check for xor_get_aid()",
+   "how": "sha-reference",
+   "inducing": "f4ed6eed2c8fcb1852938683669218655fe4f894",
+   "inducing_ct": 1708602501,
+   "inducing_subject": "SSL_set1_groups_list(): Fix memory corruption with 40 groups and more"
+  },
+  {
+   "fix": "39ea78379826fa98e8dc8c0d2b07e2c17cd68380",
+   "fix_ct": 1706722813,
+   "fix_subject": "Revert \"Improved detection of engine-provided private \"classic\" keys\"",
+   "how": "revert",
+   "inducing": "2b74e75331a27fc89cad9c8ea6a26c70019300b5",
+   "inducing_ct": 1696377720,
+   "inducing_subject": "Improved detection of engine-provided private \"classic\" keys"
+  },
+  {
+   "fix": "58eeb4350ca89c52d603b42119a0893129a25c09",
+   "fix_ct": 1702467142,
+   "fix_subject": "pkcs12: Do not forcibly load the config file",
+   "how": "sha-reference",
+   "inducing": "21f7a09ca256eee0ccc9a8fc498e8427469ab506",
+   "inducing_ct": 1697815843,
+   "inducing_subject": "Convert jdkTrustedKeyUsage to be a pkcs12 cmd line option"
+  },
+  {
+   "fix": "5cd17920167a8b4f7a81722a1ed3b514115702de",
+   "fix_ct": 1702395594,
+   "fix_subject": "Deprecate SPT threading support on NonStop.",
+   "how": "sha-reference",
+   "inducing": "f63e1b48ac893dd6110452e70ed08f191547cd89",
+   "inducing_ct": 1699944213,
+   "inducing_subject": "Force Nonstop to use fcntl(F_GETFL) in BIO_sock_nbio"
+  },
+  {
+   "fix": "11e61b3174762ec21ce0875a6449c61e316b4a0b",
+   "fix_ct": 1700034066,
+   "fix_subject": "Fix BLAKE2s reporting the same EVP_MD_get_size() as BLAKE2b (64)",
+   "how": "sha-reference",
+   "inducing": "6d1e730a1ea2c64bdffa88c6b3bee4c3f5bed602",
+   "inducing_ct": 1699432933,
+   "inducing_subject": "Implement BLAKE2s with the same macro as BLAKE2b"
+  },
+  {
+   "fix": "4209ce68d8fe8b1506494efa03d378d05baf9ff8",
+   "fix_ct": 1680603207,
+   "fix_subject": "Revert \"Fix Timing Oracle in RSA decryption\"",
+   "how": "revert",
+   "inducing": "b1892d21f8f0435deb0250f24a97915dc641c807",
+   "inducing_ct": 1675785910,
+   "inducing_subject": "Fix Timing Oracle in RSA decryption"
+  },
+  {
+   "fix": "759ab5984eb981f2dd165979a7abb950ddad81ae",
+   "fix_ct": 1677025742,
+   "fix_subject": "Revert \"Put EdDSA back as approved algorithms.\"",
+   "how": "revert",
+   "inducing": "09627a8ceb69e19d2855b36228f44a3660af177a",
+   "inducing_ct": 1675802994,
+   "inducing_subject": "Put EdDSA back as approved algorithms."
+  },
+  {
+   "fix": "1dbfd7fe24bcd50117bc57942b2046e483a3c5a5",
+   "fix_ct": 1676905470,
+   "fix_subject": "fuzz: fix coverity warnings",
+   "how": "sha-reference",
+   "inducing": "2b9e2afc382490592078cdb69d06f54f0fefd4c6",
+   "inducing_ct": 1675869197,
+   "inducing_subject": "fuzz: make post handshake reachable"
+  },
+  {
+   "fix": "e3663717fc16bd140f54ee7f1600bdced7f9ea66",
+   "fix_ct": 1675293252,
+   "fix_subject": "Fix incomplete check on EVP_CIPHER_param_to_asn1()",
+   "how": "sha-reference",
+   "inducing": "114d99b46bfb212ffc510865df317ca2c1542623",
+   "inducing_ct": 1674656834,
+   "inducing_subject": "Fix incomplete checks for EVP_CIPHER_asn1_to_param"
+  },
+  {
+   "fix": "6e193d4d03f6c7bdf95e82e226c5fccbd67562f2",
+   "fix_ct": 1674832278,
+   "fix_subject": "Revert \"Give BIO_s_mem() the ability to support datagrams\"",
+   "how": "revert",
+   "inducing": "5a4ba72f00f9b336a4d65abff822699ceb9617c6",
+   "inducing_ct": 1658992012,
+   "inducing_subject": "Give BIO_s_mem() the ability to support datagrams"
+  },
+  {
+   "fix": "92d306b32b63dd502531a89fb96c4172be0ddb49",
+   "fix_ct": 1673692638,
+   "fix_subject": "Revert \"Limit size of modulus for BN_mod_exp_mont_consttime()\"",
+   "how": "revert",
+   "inducing": "4378e3cd2a4d73a97a2349efaa143059d8ed05e8",
+   "inducing_ct": 1668098515,
+   "inducing_subject": "Limit size of modulus for BN_mod_exp_mont_consttime()"
+  },
+  {
+   "fix": "f83490fb9ce4dd1c09d4f94526fbcad14bd2fd85",
+   "fix_ct": 1673249359,
+   "fix_subject": "Revert \"Fix an occasional CI failure due to unaligned access\"",
+   "how": "revert",
+   "inducing": "8511520842b744d1794ea794c032ce5f78cd874b",
+   "inducing_ct": 1665663909,
+   "inducing_subject": "Fix an occasional CI failure due to unaligned access"
+  },
+  {
+   "fix": "a5342007e7832cbd427fb62af24998f81d20c5f6",
+   "fix_ct": 1670882052,
+   "fix_subject": "Fix-up to f3090fc7",
+   "how": "sha-reference",
+   "inducing": "f3090fc710e30a749acaf9e5dfbe20dd163cf15d",
+   "inducing_ct": 1669793513,
+   "inducing_subject": "Implement deterministic ECDSA sign (RFC6979)"
+  },
+  {
+   "fix": "ccc860a77e542bee24f64e44f7bcea5706068866",
+   "fix_ct": 1668079504,
+   "fix_subject": "Revert \"Remove conditional FIPS dependence for 3DES\"",
+   "how": "revert",
+   "inducing": "464c1011b02936850fc779739013dba52650840a",
+   "inducing_ct": 1667338966,
+   "inducing_subject": "Remove conditional FIPS dependence for 3DES"
+  },
+  {
+   "fix": "a0ea8ac134e8f503876f19bdc04da69e8862f3a7",
+   "fix_ct": 1668079504,
+   "fix_subject": "Put 3DES back into the FIPS provider as a non-approved algorithm",
+   "how": "revert",
+   "inducing": "fc0bb3411bd0c6ca264f610303933d0bf4f4682c",
+   "inducing_ct": 1667338966,
+   "inducing_subject": "Remove DES cipher from the FIPS provider"
+  },
+  {
+   "fix": "a8086e6bfc37355626393751a94bc5c92df7e9d3",
+   "fix_ct": 1666368155,
+   "fix_subject": "stack: Do not add error if pop/shift/value accesses outside of the stack",
+   "how": "sha-reference",
+   "inducing": "30eba7f35983a917f1007bce45040c0af3442e42",
+   "inducing_ct": 1663315635,
+   "inducing_subject": "stack.c: add missing direct error reporting and improve coding style"
+  },
+  {
+   "fix": "963e0bc43369a6dbe6644f709630f6c9f63dccf9",
+   "fix_ct": 1666278152,
+   "fix_subject": "Fix no longer implicitly refresh the cached TBSCertificate",
+   "how": "revert",
+   "inducing": "9249a34b076df9a9d55ab74ab465d336980cae6a",
+   "inducing_ct": 1662817348,
+   "inducing_subject": "X509 x_all.c: Set 'modified' flag when ASN1_item_sign{,_ctx} call was successful"
+  },
+  {
+   "fix": "d12b824ddaee502400c19bf8c32e1ada3111fc50",
+   "fix_ct": 1664290342,
+   "fix_subject": "Fix HPKE and DHKEM for X25519 and X448 on s390x",
+   "how": "sha-reference",
+   "inducing": "78c44b05945be07eae86f0164b9b777e2de2295b",
+   "inducing_ct": 1663921487,
+   "inducing_subject": "Add HPKE DHKEM provider support for EC, X25519 and X448."
+  },
+  {
+   "fix": "eae70100fadbc94f18ba7a729bf065cb524a9fc9",
+   "fix_ct": 1660734050,
+   "fix_subject": "Revert \"Revert \"bn: Add fixed length (n=6), unrolled PPC Montgomery Multiplication\"\"",
+   "how": "revert",
+   "inducing": "712d9cc90e355b2c98a959d4e9398610d2269c9e",
+   "inducing_ct": 1655279642,
+   "inducing_subject": "Revert \"bn: Add fixed length (n=6), unrolled PPC Montgomery Multiplication\""
+  },
+  {
+   "fix": "b2ccfd81025fa115f1138123b9aa61657e779352",
+   "fix_ct": 1660720841,
+   "fix_subject": "APPS: genrsa: Support setting properties",
+   "how": "sha-reference",
+   "inducing": "30b2c3592e8511b60d44f93eb657a1ecb3662c08",
+   "inducing_ct": 1656666683,
+   "inducing_subject": "APPS: dsaparam, gendsa: Support setting properties"
+  },
+  {
+   "fix": "653a7706781ebbe8a6a4b84d29b39d001c395ffe",
+   "fix_ct": 1660720841,
+   "fix_subject": "APPS: dgst: Support properties when signing",
+   "how": "sha-reference",
+   "inducing": "30b2c3592e8511b60d44f93eb657a1ecb3662c08",
+   "inducing_ct": 1656666683,
+   "inducing_subject": "APPS: dsaparam, gendsa: Support setting properties"
+  },
+  {
+   "fix": "0185538799803a1a98823f42ac2402ede04f56da",
+   "fix_ct": 1660720841,
+   "fix_subject": "APPS: pkeyparam: Support setting properties",
+   "how": "sha-reference",
+   "inducing": "30b2c3592e8511b60d44f93eb657a1ecb3662c08",
+   "inducing_ct": 1656666683,
+   "inducing_subject": "APPS: dsaparam, gendsa: Support setting properties"
+  },
+  {
+   "fix": "2b8f687d7627a4b15bba6a820825944185980376",
+   "fix_ct": 1660720841,
+   "fix_subject": "APPS: ecparam: Support setting properties",
+   "how": "sha-reference",
+   "inducing": "30b2c3592e8511b60d44f93eb657a1ecb3662c08",
+   "inducing_ct": 1656666683,
+   "inducing_subject": "APPS: dsaparam, gendsa: Support setting properties"
+  },
+  {
+   "fix": "ae3c30acac17271693e91dcae42c804cd96e8f93",
+   "fix_ct": 1660720841,
+   "fix_subject": "APPS: dhparam: Support setting properties",
+   "how": "sha-reference",
+   "inducing": "30b2c3592e8511b60d44f93eb657a1ecb3662c08",
+   "inducing_ct": 1656666683,
+   "inducing_subject": "APPS: dsaparam, gendsa: Support setting properties"
+  },
+  {
+   "fix": "48e35b99bd0071207cfe39da22eb2502db5c09dc",
+   "fix_ct": 1658834879,
+   "fix_subject": "s390x: Fix GCM setup",
+   "how": "sha-reference",
+   "inducing": "92c9086e5c2b63606cd28a7f13f09b9ff35a0de3",
+   "inducing_ct": 1658493253,
+   "inducing_subject": "Use separate function to get GCM functions"
+  },
+  {
+   "fix": "a6843e6ae8ae0551aae8555783f06dab7951f112",
+   "fix_ct": 1658730932,
+   "fix_subject": "Fix no-dtls1_2",
+   "how": "sha-reference",
+   "inducing": "7bf2e4d7f0c7ae19b7a8c416910886a7171e9820",
+   "inducing_ct": 1651993080,
+   "inducing_subject": "tls: ban SSL3, TLS1, TLS1.1 and DTLS1.0 at security level one and above"
+  },
+  {
+   "fix": "086d88a637ecf537af62260e16d4e0011dbb8d1b",
+   "fix_ct": 1657816046,
+   "fix_subject": "s390x: Fix Keccak implementation",
+   "how": "sha-reference",
+   "inducing": "a8b238f0e4c1198935e066ef19579ca694253286",
+   "inducing_ct": 1657495699,
+   "inducing_subject": "Fix SHA, SHAKE, and KECCAK ASM flag passing"
+  },
+  {
+   "fix": "712d9cc90e355b2c98a959d4e9398610d2269c9e",
+   "fix_ct": 1655279642,
+   "fix_subject": "Revert \"bn: Add fixed length (n=6), unrolled PPC Montgomery Multiplication\"",
+   "how": "revert",
+   "inducing": "0d40ca47bd86e74a95c3a2f5fb6c67cdbee93c79",
+   "inducing_ct": 1620470369,
+   "inducing_subject": "bn: Add fixed length (n=6), unrolled PPC Montgomery Multiplication"
+  },
+  {
+   "fix": "619c9bad41d041bab2ac6ba3933d526b48ceee2a",
+   "fix_ct": 1642765470,
+   "fix_subject": "Revert \"crypto/bio: fix build on UEFI\"",
+   "how": "revert",
+   "inducing": "328bf5adf9e23da523d4195db309083aa02403c4",
+   "inducing_ct": 1641727034,
+   "inducing_subject": "crypto/bio: fix build on UEFI"
+  },
+  {
+   "fix": "e7414634a59aa61c7917193a31382ced95d40eeb",
+   "fix_ct": 1636468855,
+   "fix_subject": "Fix sigsize usage in apps/speed.c",
+   "how": "sha-reference",
+   "inducing": "43da9a14f0e73f42f28ae34219929b44df5d1a11",
+   "inducing_ct": 1634888606,
+   "inducing_subject": "Prevent an overflow if an application supplies a buffer that is too small"
+  },
+  {
+   "fix": "3e4981dd59d301f60bcc85f7c893db1ee4a21906",
+   "fix_ct": 1619510966,
+   "fix_subject": "Avoid #include with inline function on C++Builder",
+   "how": "sha-reference",
+   "inducing": "6b2978406d050b910a889a33f7a0e14b1217976d",
+   "inducing_ct": 1619101165,
+   "inducing_subject": "e_os.h: Include wspiapi.h to improve Windows backward compatibility"
+  },
+  {
+   "fix": "c39352e4e4952a9f4b2171134af0e015a4d40768",
+   "fix_ct": 1618905439,
+   "fix_subject": "Fix compile errors on s390.",
+   "how": "sha-reference",
+   "inducing": "f6c95e46c03025b2694241e1ad785d8bd3ac083b",
+   "inducing_ct": 1618732987,
+   "inducing_subject": "Add \"origin\" field to EVP_CIPHER, EVP_MD"
+  },
+  {
+   "fix": "c1fd710297a21336ec0410fe86784c322945b805",
+   "fix_ct": 1617887938,
+   "fix_subject": "d2i_PrivateKey{,_ex}() and PEM_X509_INFO_read_bio_ex(): Fix handling of RSA/DSA/EC private key",
+   "how": "sha-reference",
+   "inducing": "576892d78f80cf9a169e7f766319c843e430f378",
+   "inducing_ct": 1613726368,
+   "inducing_subject": "Fix d2i_AutoPrivateKey_ex so that is uses the new decoder (and produces non legacy keys)."
+  },
+  {
+   "fix": "927e704e8c2ec47ca58a86f57dc1900d48ebb985",
+   "fix_ct": 1617880689,
+   "fix_subject": "Partially Revert \"Remove curve448 architecture specific files\"",
+   "how": "revert",
+   "inducing": "7e492f3372ed83af074a63d5920f13de7e3455b6",
+   "inducing_ct": 1519131570,
+   "inducing_subject": "Remove curve448 architecture specific files"
+  },
+  {
+   "fix": "bf477a40d742c82826dc6979a33306eb0120d6ad",
+   "fix_ct": 1617868186,
+   "fix_subject": "Revert \"Fix AES-CBC perf test failure issue\"",
+   "how": "revert",
+   "inducing": "bec9289143c955b330a8f9ad32f26f3da76e2685",
+   "inducing_ct": 1617802023,
+   "inducing_subject": "Fix AES-CBC perf test failure issue"
+  },
+  {
+   "fix": "a8eb71ad577bbbd41cea915315451f0ef9f11581",
+   "fix_ct": 1614192610,
+   "fix_subject": "Allow the sshkdf type to be passed as a single character",
+   "how": "sha-reference",
+   "inducing": "270a5ce1d9ea579a2f1d45887971582b1ef2b6a1",
+   "inducing_ct": 1611846350,
+   "inducing_subject": "Fix parameter types in sshkdf"
+  },
+  {
+   "fix": "63ae8476796510c15163c9bd18998ccef6c1de16",
+   "fix_ct": 1613362108,
+   "fix_subject": "x509_vfy: remove redundant stack allocation",
+   "how": "sha-reference",
+   "inducing": "d53b437f9992f974c1623e9b9b9bdf053aefbcc3",
+   "inducing_ct": 1612420091,
+   "inducing_subject": "Allow NULL arg to OPENSSL_sk_{dup,deep_copy} returning empty stack"
+  },
+  {
+   "fix": "1dccccf33351a732dac3c700b2de05d34f708e33",
+   "fix_ct": 1610528689,
+   "fix_subject": "Fix enable-weak-ssl-ciphers",
+   "how": "sha-reference",
+   "inducing": "e260bee0a97d4e6de60eae2c86d7c11ed03f2010",
+   "inducing_ct": 1609931315,
+   "inducing_subject": "Only perform special TLS handling if TLS has been configured"
+  },
+  {
+   "fix": "f6d3359d6548930c9da9eca438f428a03bad7707",
+   "fix_ct": 1608235570,
+   "fix_subject": "apps/cmp.c: Fix bug on -path option introduced in commit 3c9d6266ed85",
+   "how": "sha-reference",
+   "inducing": "3c9d6266ed857c9ea1d30085c131c4a65fea5b69",
+   "inducing_ct": 1605011145,
+   "inducing_subject": "apps/cmp.c: Improve order of -path option: just after -server"
+  },
+  {
+   "fix": "25b16562d386bfd30c7059366d09864260d9f271",
+   "fix_ct": 1600999942,
+   "fix_subject": "Hide ECX_KEY again",
+   "how": "sha-reference",
+   "inducing": "7c664b1f1b5f60bf896f5fdea5c08c401c541dfe",
+   "inducing_ct": 1596246679,
+   "inducing_subject": "DESERIALIZER: Add deserializers for the rest of our asymmetric key types"
+  },
+  {
+   "fix": "b250fc7be771d912460b60285ad7124e0b38ef94",
+   "fix_ct": 1599638334,
+   "fix_subject": "Deprecate SHA and MD5 again.",
+   "how": "revert",
+   "inducing": "a978dc3bffb63e6bfc40fe6955e8798bdffb4e7e",
+   "inducing_ct": 1579392879,
+   "inducing_subject": "TODO: undo md5.h and sha.h changes temporarily"
+  },
+  {
+   "fix": "0f9fdefeb05768b86f4364a8e976c87ee197638e",
+   "fix_ct": 1596246934,
+   "fix_subject": "Fix an ENGINE leak in asn1_item_digest_with_libctx",
+   "how": "sha-reference",
+   "inducing": "6725682d77510bf6d499957897d7be124d603f40",
+   "inducing_ct": 1595595207,
+   "inducing_subject": "Add X509 related libctx changes."
+  },
+  {
+   "fix": "660c534435e238c6bd8065c1d544a1c4d3c555a3",
+   "fix_ct": 1594902067,
+   "fix_subject": "Revert \"kdf: make function naming consistent.\"",
+   "how": "revert",
+   "inducing": "765d04c9460a304c8119f57941341a149498b9db",
+   "inducing_ct": 1591838061,
+   "inducing_subject": "kdf: make function naming consistent."
+  },
+  {
+   "fix": "865adf97c9b8271788ee7293ecde9e8a643a1c45",
+   "fix_ct": 1594902067,
+   "fix_subject": "Revert \"The EVP_MAC functions have been renamed for consistency.  The EVP_MAC_CTX_*\"",
+   "how": "revert",
+   "inducing": "d9c2fd51e2e278bc3f7793a104ff7b4879f6d63a",
+   "inducing_ct": 1591838197,
+   "inducing_subject": "The EVP_MAC functions have been renamed for consistency.  The EVP_MAC_CTX_* functions are now EVP_MAC functions, usually with ctx in their names."
+  },
+  {
+   "fix": "2bd928a1bff7e39070992df1876b8d9ea9634301",
+   "fix_ct": 1590400897,
+   "fix_subject": "Revert \"Guard use of struct tms with #ifdef __TMS\"",
+   "how": "revert",
+   "inducing": "db71d315479762eefbf2bcda8be3b44b1867133f",
+   "inducing_ct": 1589566808,
+   "inducing_subject": "Guard use of struct tms with #ifdef __TMS like done earlier in apps/lib/apps.c"
+  },
+  {
+   "fix": "5a8848fa7fec532fee30fd6131a3ebd59a5c5902",
+   "fix_ct": 1580723045,
+   "fix_subject": "Revert \"Legacy digests can have custom control values\"",
+   "how": "revert",
+   "inducing": "1f457256ce6a1b2fd7e3f62eee8faa74cd5c835e",
+   "inducing_ct": 1579713183,
+   "inducing_subject": "Legacy digests can have custom control values"
+  },
+  {
+   "fix": "7671420d9ebd18242f571866c6adca6f8bcb2f90",
+   "fix_ct": 1578626928,
+   "fix_subject": "testutil_init.c: fix compilation error with enable-trace",
+   "how": "sha-reference",
+   "inducing": "e79ae962fbed99cf80feb32b326f701778ca7434",
+   "inducing_ct": 1576694564,
+   "inducing_subject": "APPS & TEST: Adapt to use the new BIO_f_prefix()"
+  },
+  {
+   "fix": "6e49b514067a2b6a30d064d2ae1fdfd8050c184b",
+   "fix_ct": 1578213346,
+   "fix_subject": "Fix disabled ecdsa in apps/speed",
+   "how": "sha-reference",
+   "inducing": "f3fdfbf78c6bfc97abf9c70b03859a28ebf6b66d",
+   "inducing_ct": 1577352859,
+   "inducing_subject": "Fix a race condition in the speed command"
+  },
+  {
+   "fix": "7c6a0d909abda7c854b44831ef43ebdda49ed42e",
+   "fix_ct": 1573561834,
+   "fix_subject": "Reinstate the KDF error macros",
+   "how": "revert",
+   "inducing": "fe6ec26b204a056aee2a24b79df09a45b2308603",
+   "inducing_ct": 1567762077,
+   "inducing_subject": "Cleanse KDF error files"
+  },
+  {
+   "fix": "fa3eb248e29ca8031e6a14e8a2c6f3cd58b5450e",
+   "fix_ct": 1568105850,
+   "fix_subject": "Fix a potential crash in rand_unix.c",
+   "how": "sha-reference",
+   "inducing": "a6a66e4511eec0f4ecc2943117a42b3723eb2222",
+   "inducing_ct": 1563869239,
+   "inducing_subject": "Make rand_pool buffers more dynamic in their sizing."
+  },
+  {
+   "fix": "bacaa618c26411d212015493d0eb82076a3e76a1",
+   "fix_ct": 1568027005,
+   "fix_subject": "[ec] Match built-in curves on EC_GROUP_new_from_ecparameters",
+   "how": "sha-reference",
+   "inducing": "b783beeadf6b80bc431e6f3230b5d5585c87ef87",
+   "inducing_ct": 1567675264,
+   "inducing_subject": "[crypto/ec] for ECC parameters with NULL or zero cofactor, compute it"
+  },
+  {
+   "fix": "653b883b97f72a15d35d21246696881aa65311e2",
+   "fix_ct": 1565953094,
+   "fix_subject": "Fix 9bf682f which broke nistp224_method",
+   "how": "sha-reference",
+   "inducing": "9bf682f62bd819d2fbceb95eeabd61dd4532240f",
+   "inducing_ct": 1565879258,
+   "inducing_subject": "Enable curve-spefific ECDSA implementations via EC_METHOD"
+  },
+  {
+   "fix": "c50fd0f959de5b256d8eefb8ad2a82fcdcb899c3",
+   "fix_ct": 1565174819,
+   "fix_subject": "Fix BN error reporting",
+   "how": "sha-reference",
+   "inducing": "ed57f7f93508776b898e4c23b65d67f3479edaf1",
+   "inducing_ct": 1564548201,
+   "inducing_subject": "ERR: Implement the macros ERR_raise() and ERR_raise_data() and use them"
+  },
+  {
+   "fix": "2b2eb210a1365f80a125cebdd05ed567cb3ca7cf",
+   "fix_ct": 1564654458,
+   "fix_subject": "Fix commit a672a02a s390x build breakage",
+   "how": "sha-reference",
+   "inducing": "a672a02a6443a29aa368c0d8abeebc809c1a9f28",
+   "inducing_ct": 1564574116,
+   "inducing_subject": "Add gcm ciphers (aes and aria) to providers."
+  },
+  {
+   "fix": "6f34d7bc7d0c7fcd86c6f2772f26e42c925d8505",
+   "fix_ct": 1561569655,
+   "fix_subject": "Revert \"Delay setting the sig algs until after the cert_cb has been called\"",
+   "how": "revert",
+   "inducing": "524006dd1b80c1a86a20119ad988666a80d8d8f5",
+   "inducing_ct": 1537547938,
+   "inducing_subject": "Delay setting the sig algs until after the cert_cb has been called"
+  },
+  {
+   "fix": "1d12afc310e8334e731d2c7acf1c3f1d0395cd03",
+   "fix_ct": 1561230712,
+   "fix_subject": "crypto/trace.c: Remove unexisting categories",
+   "how": "sha-reference",
+   "inducing": "fe26f798526c14a3f8c9bb55d0eaf8eaa0d086e1",
+   "inducing_ct": 1561186942,
+   "inducing_subject": "OSSL_TRACE: ensure it's initialised"
+  },
+  {
+   "fix": "cb30e46b45589166a83703f923aa89881dab1e0c",
+   "fix_ct": 1559564831,
+   "fix_subject": "Really fail if we have a test failure",
+   "how": "sha-reference",
+   "inducing": "c5f7a99645aa1718e226e6d867efcd5cabcbd610",
+   "inducing_ct": 1557397269,
+   "inducing_subject": "Test skip option."
+  },
+  {
+   "fix": "d4d89a076262aa118c07a4766daf17202aef17f0",
+   "fix_ct": 1558908336,
+   "fix_subject": "Fix input checks wrt legacy code",
+   "how": "sha-reference",
+   "inducing": "d2c2e49eab69c7446c1c2c7227f63f8618ca99a5",
+   "inducing_ct": 1557273178,
+   "inducing_subject": "Coverity CID 1444958: Null pointer dereferences"
+  },
+  {
+   "fix": "2c23689402f1894861519d0c1ad762a3e52f4677",
+   "fix_ct": 1558445938,
+   "fix_subject": "Revert \"EVP_*Update: ensure that input NULL with length 0 isn't passed\"",
+   "how": "revert",
+   "inducing": "dcb982d792d6064ed3493e79749208d8c257ff04",
+   "inducing_ct": 1554875575,
+   "inducing_subject": "EVP_*Update: ensure that input NULL with length 0 isn't passed"
+  },
+  {
+   "fix": "705a27f7e07c006b167b59070ff635a61f8e0407",
+   "fix_ct": 1554209394,
+   "fix_subject": "Revert \"crypto/rand/rand_win.c: include \"e_os.h\" to get the default _WIN32_WINNT\"",
+   "how": "revert",
+   "inducing": "cc8926ec8fcecae89ceab91ef753de93e49568f9",
+   "inducing_ct": 1554196450,
+   "inducing_subject": "crypto/rand/rand_win.c: include \"e_os.h\" to get the default _WIN32_WINNT"
+  },
+  {
+   "fix": "0fda9f7c291de7b3a1e576ce43801dfa91b42f0e",
+   "fix_ct": 1553900346,
+   "fix_subject": "trace: don't pretend success if it's not enabled",
+   "how": "sha-reference",
+   "inducing": "d33d76168fb7642916cdcb7ccb0513abdb6f5f05",
+   "inducing_ct": 1552547571,
+   "inducing_subject": "Don't fail when tracing is disabled"
+  },
+  {
+   "fix": "711a161f03ef9ed7cd149a22bf1203700c103e96",
+   "fix_ct": 1553815447,
+   "fix_subject": "Fix broken change from b3d113e.",
+   "how": "sha-reference",
+   "inducing": "b3d113ed2993801ee643126118ccf6592ad18ef7",
+   "inducing_ct": 1553232119,
+   "inducing_subject": "Cosmetic rand/drbg changes."
+  },
+  {
+   "fix": "91958d71aaea98854a9709a8489263c79a01addd",
+   "fix_ct": 1550824976,
+   "fix_subject": "engines/e_devcrypto.c: fix cipher_ctrl function",
+   "how": "sha-reference",
+   "inducing": "c703a808a1394fea7f77067db20c9508e6964d0b",
+   "inducing_ct": 1549998360,
+   "inducing_subject": "eng_devcrypto.c: close open session on init"
+  },
+  {
+   "fix": "bcc1f3e2baa9caa83a0a94bd19fb37488ef3ee57",
+   "fix_ct": 1548337178,
+   "fix_subject": "Revert \"Keep the DTLS timer running after the end of the handshake if appropriate\"",
+   "how": "revert",
+   "inducing": "f7506416b1311e65d5c440defdbcfe176f633c50",
+   "inducing_ct": 1525768817,
+   "inducing_subject": "Keep the DTLS timer running after the end of the handshake if appropriate"
+  },
+  {
+   "fix": "ed371b8cbac0d0349667558c061c1ae380cf75eb",
+   "fix_ct": 1544007292,
+   "fix_subject": "Revert \"Reduce stack usage in tls13_hkdf_expand\"",
+   "how": "revert",
+   "inducing": "ec0c5f5693e39c5a013f81e6dd9dfd09ec65162d",
+   "inducing_ct": 1537797504,
+   "inducing_subject": "Reduce stack usage in tls13_hkdf_expand"
+  },
+  {
+   "fix": "2aaa0b146b967397a6e61fa8df969e7847f82086",
+   "fix_ct": 1541304765,
+   "fix_subject": "Restore sensible \"sess_accept\" counter tracking",
+   "how": "sha-reference",
+   "inducing": "9ef9088c1585e13b9727796f15f77da64dbbe623",
+   "inducing_ct": 1533625703,
+   "inducing_subject": "ssl/*: switch to switch to Thread-Sanitizer-friendly primitives."
+  },
+  {
+   "fix": "8817215d5c52a76f2b184b624bde4df8556dee6d",
+   "fix_ct": 1540535899,
+   "fix_subject": "RAND_add()/RAND_seed(): fix failure on short input or low entropy",
+   "how": "sha-reference",
+   "inducing": "5b4cb385c18a5bb4e118e300f1c746bf7c2a5628",
+   "inducing_ct": 1540212895,
+   "inducing_subject": "RAND_add(): fix heap corruption in error path"
+  },
+  {
+   "fix": "ec2d099fccec25e2d92c4cd2958db21f0d0a1d82",
+   "fix_ct": 1540535860,
+   "fix_subject": "RAND_load_file(): return error if reseeding failed",
+   "how": "sha-reference",
+   "inducing": "5b4cb385c18a5bb4e118e300f1c746bf7c2a5628",
+   "inducing_ct": 1540212895,
+   "inducing_subject": "RAND_add(): fix heap corruption in error path"
+  },
+  {
+   "fix": "2c0267fdc99f8a06cb205f0faecc2ff06f0de8bf",
+   "fix_ct": 1536330087,
+   "fix_subject": "Restore historical SSL_get_servername() behavior",
+   "how": "sha-reference",
+   "inducing": "1c4aa31d79821dee9be98e915159d52cc30d8403",
+   "inducing_ct": 1532088744,
+   "inducing_subject": "Normalize SNI hostname handling for SSL and SSL_SESSION"
+  },
+  {
+   "fix": "345bee916ac5ad28dd269afc24c27fe234c4045b",
+   "fix_ct": 1533822091,
+   "fix_subject": "Fix no-comp",
+   "how": "sha-reference",
+   "inducing": "8839324450b569a6253e0dd237ee3e417ef17771",
+   "inducing_ct": 1533625022,
+   "inducing_subject": "stack/stack.c: omit redundant NULL checks."
+  },
+  {
+   "fix": "1049ae985e58f87e433b6b00f08853914147adac",
+   "fix_ct": 1533821830,
+   "fix_subject": "Revert \"stack/stack.c: omit redundant NULL checks.\"",
+   "how": "revert",
+   "inducing": "8839324450b569a6253e0dd237ee3e417ef17771",
+   "inducing_ct": 1533625022,
+   "inducing_subject": "stack/stack.c: omit redundant NULL checks."
+  },
+  {
+   "fix": "a75be9fd34b5d66f349186f21cd8d063d2fa87a4",
+   "fix_ct": 1532635613,
+   "fix_subject": "Improve backwards compat for SSL_get_servername()",
+   "how": "sha-reference",
+   "inducing": "1c4aa31d79821dee9be98e915159d52cc30d8403",
+   "inducing_ct": 1532088744,
+   "inducing_subject": "Normalize SNI hostname handling for SSL and SSL_SESSION"
+  },
+  {
+   "fix": "1f1563216d6827e1dc8212795344c82e0f5d5933",
+   "fix_ct": 1530607475,
+   "fix_subject": "Restore behaviour from commit 36ff232cf that was incorrectly removed",
+   "how": "sha-reference",
+   "inducing": "36ff232cf2bf5dfcaf9e60a8c492439428a243bb",
+   "inducing_ct": 1526572105,
+   "inducing_subject": "Change the default number of NewSessionTickets we send to 2"
+  },
+  {
+   "fix": "12bd4e141eac30543a790156154deca195ace1b7",
+   "fix_ct": 1529622274,
+   "fix_subject": "testutil/driver.c: Fix function prototype warning [-Wstrict-prototypes]",
+   "how": "sha-reference",
+   "inducing": "91860165820daf7a17836597f18752f094b887c8",
+   "inducing_ct": 1529600659,
+   "inducing_subject": "Add -Wstrict-prototypes option to --strict-warnings"
+  },
+  {
+   "fix": "fee33643a8aa64a8eb72ac92fd3a04d3aa7005d3",
+   "fix_ct": 1529428898,
+   "fix_subject": "Fix enable-ssl3 enable-ssl3-method",
+   "how": "sha-reference",
+   "inducing": "4aa5a5669c69a66fbd8b31c52014356f1e960501",
+   "inducing_ct": 1528728381,
+   "inducing_subject": "Fix TLSv1.3 alert handling"
+  },
+  {
+   "fix": "309371d6266877a8f04d0aa7b0f6add6d269d962",
+   "fix_ct": 1528361329,
+   "fix_subject": "Fix EAP-FAST",
+   "how": "sha-reference",
+   "inducing": "61fb59238dad6452a37ec14513fae617a4faef29",
+   "inducing_ct": 1526046669,
+   "inducing_subject": "Rework the decrypt ticket callback"
+  },
+  {
+   "fix": "ac52f42aca9fe0933f7564581268ac50c826bd39",
+   "fix_ct": 1528360910,
+   "fix_subject": "Fix no-dsa",
+   "how": "sha-reference",
+   "inducing": "0336df2fa316a3e08b8f0d2d0e8d4bc175e46634",
+   "inducing_ct": 1528214881,
+   "inducing_subject": "Issue warnings for large DSA and RSA keys"
+  },
+  {
+   "fix": "a0cef658d6e15c0711c6e27c5969281a76acf20f",
+   "fix_ct": 1527540448,
+   "fix_subject": "ECDSA_SIG: restore doc comments which were deleted accidentally",
+   "how": "sha-reference",
+   "inducing": "0396401d1c3fd65487116b0623e634b65bf28670",
+   "inducing_ct": 1527527483,
+   "inducing_subject": "ECDSA_SIG: add simple getters for commonly used struct members"
+  },
+  {
+   "fix": "07824f304a220ea09ec369bad60f4fcfd01d5d14",
+   "fix_ct": 1527179143,
+   "fix_subject": "Revert \"Support EVP_PKEY_sign() and EVP_PKEY_verify() for EdDSA\"",
+   "how": "revert",
+   "inducing": "a6f5b1163452a36da1c8378eab3f29ae234e5c7f",
+   "inducing_ct": 1523005805,
+   "inducing_subject": "Support EVP_PKEY_sign() and EVP_PKEY_verify() for EdDSA"
+  },
+  {
+   "fix": "5f96a95e2562f026557f625e50c052e77c7bc2e8",
+   "fix_ct": 1526120340,
+   "fix_subject": "Set sess to NULL after freeing it.",
+   "how": "sha-reference",
+   "inducing": "61fb59238dad6452a37ec14513fae617a4faef29",
+   "inducing_ct": 1526046669,
+   "inducing_subject": "Rework the decrypt ticket callback"
+  },
+  {
+   "fix": "96de2e590bad00575baa7c2c6be5767b43aa017c",
+   "fix_ct": 1524649466,
+   "fix_subject": "Revert \"Check directory is able to create files for various -out option\"",
+   "how": "revert",
+   "inducing": "555c94a0db9661428da0a45cb32b9f002324eefd",
+   "inducing_ct": 1519839896,
+   "inducing_subject": "Check directory is able to create files for various -out option"
+  },
+  {
+   "fix": "b47b6650164711de449a7738112a3efb733213e2",
+   "fix_ct": 1524649465,
+   "fix_subject": "Revert \"Add VMS version of app_dirname()\"",
+   "how": "revert",
+   "inducing": "215a6730f1eaf53b01a4eb10d75bd09fd74f70cc",
+   "inducing_ct": 1519840084,
+   "inducing_subject": "Add VMS version of app_dirname()"
+  },
+  {
+   "fix": "b9a354d08810e95c03dec1f796fdd4069a4001e7",
+   "fix_ct": 1524649465,
+   "fix_subject": "Revert \"Check on VMS as well\"",
+   "how": "revert",
+   "inducing": "f6d765988f37c43edb1056ab83165f2569182e9d",
+   "inducing_ct": 1519840084,
+   "inducing_subject": "Check on VMS as well"
+  },
+  {
+   "fix": "b7fb239438fb289a69e9420ad1edacf3bd1c5d69",
+   "fix_ct": 1523897032,
+   "fix_subject": "Revert \"Add OPENSSL_VERSION_AT_LEAST\"",
+   "how": "revert",
+   "inducing": "3c5a61dd0f9d9a9eac098419bcaf47d1c296ca81",
+   "inducing_ct": 1517509368,
+   "inducing_subject": "Add OPENSSL_VERSION_AT_LEAST"
+  },
+  {
+   "fix": "e46931108a1c4ae35903e4b6b481b341545f3ea3",
+   "fix_ct": 1521561185,
+   "fix_subject": "Fix the OCSP responder mode",
+   "how": "sha-reference",
+   "inducing": "3e3c7c3646878fbbef07865aca007e112cf0fc26",
+   "inducing_ct": 1520438623,
+   "inducing_subject": "Implement multi-process OCSP responder."
+  },
+  {
+   "fix": "c845ff070d03052f10d9d183682388429cf4fd92",
+   "fix_ct": 1521118294,
+   "fix_subject": "Revert \"Don't allow an empty Subject when creating a Certificate\"",
+   "how": "revert",
+   "inducing": "e505f1e86874acfd98826d64c53bf2ddfd9c1399",
+   "inducing_ct": 1516615661,
+   "inducing_subject": "Don't allow an empty Subject when creating a Certificate"
+  },
+  {
+   "fix": "62e394de9178df055265f528fc6b6c015951dd46",
+   "fix_ct": 1521118294,
+   "fix_subject": "Revert \"Don't crash on a missing Subject in index.txt\"",
+   "how": "revert",
+   "inducing": "1e05c6d07ff963107286d028f6778d2ccc863a9a",
+   "inducing_ct": 1516615661,
+   "inducing_subject": "Don't crash on a missing Subject in index.txt"
+  },
+  {
+   "fix": "c517ac4c3f6d48cf35b75f148515ce7f3677a03b",
+   "fix_ct": 1518038324,
+   "fix_subject": "Revert \"Modify test/afalgtest to fail if the afalg engine couldn't be loaded\"",
+   "how": "revert",
+   "inducing": "227a1e3f45bf06fdb00f2bdfb922f6f0d1f1d1de",
+   "inducing_ct": 1518016547,
+   "inducing_subject": "Modify test/afalgtest to fail if the afalg engine couldn't be loaded"
+  },
+  {
+   "fix": "63ab5ea13b671cb60dd4b7cfde2bcae9d14c5a60",
+   "fix_ct": 1517423128,
+   "fix_subject": "Revert the crypto \"global lock\" implementation",
+   "how": "revert",
+   "inducing": "75551e07bd2339dfea06ef1d31d69929e13a4495",
+   "inducing_ct": 1504222923,
+   "inducing_subject": "Address feedback"
+  },
+  {
+   "fix": "df05f155a69b96b174e0e47bc689bf729de684b6",
+   "fix_ct": 1516990528,
+   "fix_subject": "Fix some style nits in commit eee8a40",
+   "how": "sha-reference",
+   "inducing": "eee8a40aa5e06841eed6fa8eb4f6109238d59aea",
+   "inducing_ct": 1516889879,
+   "inducing_subject": "Make the s_server command listen on IPv6 only when requested"
+  },
+  {
+   "fix": "7203c94e98c9fa76b0859c25b723b2bde4a9059b",
+   "fix_ct": 1516735652,
+   "fix_subject": "Revert \"EVP_PKEY_asn1_add0(): Check that this method isn't already registered\"",
+   "how": "revert",
+   "inducing": "d85722d31ac9ff0dc54c06cdc8d125acf56ca27a",
+   "inducing_ct": 1509384073,
+   "inducing_subject": "EVP_PKEY_asn1_add0(): Check that this method isn't already registered"
+  },
+  {
+   "fix": "436ad81f056cd88de374ea4a27da39b4cafb4b27",
+   "fix_ct": 1514907022,
+   "fix_subject": "Fix minor 'the the' typos",
+   "how": "sha-reference",
+   "inducing": "17b602802114d53017ff7894319498934a580b17",
+   "inducing_ct": 1513941608,
+   "inducing_subject": "Remove extra `the` in SSL_SESSION_set1_id.pod"
+  },
+  {
+   "fix": "67d4fee8177ef4b6eac15b26668c6441b472484e",
+   "fix_ct": 1513005759,
+   "fix_subject": "Fix typo in comment",
+   "how": "sha-reference",
+   "inducing": "eff1752b66cb7bf6ca8af816eb10ead26910d025",
+   "inducing_ct": 1505331771,
+   "inducing_subject": "Fix typo in comment"
+  },
+  {
+   "fix": "4ff71d6740adde74acfa7d017fc2257be831caf3",
+   "fix_ct": 1510788382,
+   "fix_subject": "Revert \"Add padding spaces before printing algo.\"",
+   "how": "revert",
+   "inducing": "26a374a271dabd49f3fa7f43a74e05d34aca010e",
+   "inducing_ct": 1510783910,
+   "inducing_subject": "Add padding spaces before printing algo."
+  },
+  {
+   "fix": "f4eb24839228675386d0cbfd3e5c2291763a0be4",
+   "fix_ct": 1505348814,
+   "fix_subject": "Manually revert \"Ensure allocation size fits into size_t\"",
+   "how": "revert",
+   "inducing": "cc9c56894606fdf324933cd8090d9a54d967bf5b",
+   "inducing_ct": 1455131606,
+   "inducing_subject": "Ensure allocation size fits into size_t"
+  },
+  {
+   "fix": "582e2ed2718bd367e747cb9077d2044cf51cc9a4",
+   "fix_ct": 1505348814,
+   "fix_subject": "Revert \"Reuse strndup(), simplify code\"",
+   "how": "revert",
+   "inducing": "1caaea133873d549fa52fbf265298d2d35442477",
+   "inducing_ct": 1457458594,
+   "inducing_subject": "Reuse strndup(), simplify code"
+  },
+  {
+   "fix": "4cacc9d510c20368d13dcaf2c95c25d6d1ceef6c",
+   "fix_ct": 1505348814,
+   "fix_subject": "Revert \"GH614: Use memcpy()/strdup() when possible\"",
+   "how": "revert",
+   "inducing": "a89c9a0d855bce735116acfe147b24e386f566ba",
+   "inducing_ct": 1454532356,
+   "inducing_subject": "GH614: Use memcpy()/strdup() when possible"
+  },
+  {
+   "fix": "da9b249fd994124e954d871ff220cc2c0ddf9e6a",
+   "fix_ct": 1503611795,
+   "fix_subject": "Check range of test values using isascii before diving into the full range of ctype functions.",
+   "how": "revert",
+   "inducing": "6ac589081b53a62bff5f0abe62c1c109c419c7a0",
+   "inducing_ct": 1503411004,
+   "inducing_subject": "Don't try to compare the ctype functions on values > 127"
+  },
+  {
+   "fix": "f7d1d2a479adaaae222d88710c6ceb85706ebb0f",
+   "fix_ct": 1503577201,
+   "fix_subject": "Fix enable-sctp",
+   "how": "sha-reference",
+   "inducing": "b99fe5f4927b305bae88daac2484c284fe749329",
+   "inducing_ct": 1503013825,
+   "inducing_subject": "Remove tests dependence on e_os.h"
+  },
+  {
+   "fix": "c9b820aa3c447df991c9146f07ca1f6faafe0437",
+   "fix_ct": 1503505695,
+   "fix_subject": "Fix BN_print()",
+   "how": "sha-reference",
+   "inducing": "27c6d63dad0844280b9db3c7e9ad8dd5befb51c3",
+   "inducing_ct": 1503438142,
+   "inducing_subject": "Improvement the formatting in bn_print.c Movely removal of unnecessary brackets but some could be bugs addressed too."
+  },
+  {
+   "fix": "12997aa984cf0e5def1045fd22d7b0675caaa0a1",
+   "fix_ct": 1502804558,
+   "fix_subject": "Revert \"Add some casts for %j\"",
+   "how": "revert",
+   "inducing": "c4d2e483a39176a476c56d35879423fe6e33c0cd",
+   "inducing_ct": 1502755194,
+   "inducing_subject": "Add some casts for %j"
+  },
+  {
+   "fix": "222417eb71a91f28381f5b3f93d7db690e8d92bf",
+   "fix_ct": 1499440743,
+   "fix_subject": "Fix s_client crash where the hostname is provided as a positional arg",
+   "how": "sha-reference",
+   "inducing": "729ef85611d2490da8f10ea546279c961e6de4a6",
+   "inducing_ct": 1497858130,
+   "inducing_subject": "s_client accepts host/port as positional argument."
+  },
+  {
+   "fix": "c91ec013654e97ca1754db26bd2da62c8bbf7b47",
+   "fix_ct": 1498578593,
+   "fix_subject": "Fix return-value checks in OCSP_resp_get1_id()",
+   "how": "sha-reference",
+   "inducing": "db17e43d882ecde217e1dce4a2b8c76c3ed134bf",
+   "inducing_ct": 1498071714,
+   "inducing_subject": "Add OCSP_resp_get1_id() accessor"
+  },
+  {
+   "fix": "cfba06758ea8ab49118dedd88fd3b2437aebf7b7",
+   "fix_ct": 1498235005,
+   "fix_subject": "Treat all failures from EVP_DigestVerify() as a bad signature",
+   "how": "sha-reference",
+   "inducing": "72ceb6a6923456d9ff036cd81014024cf54280c4",
+   "inducing_ct": 1498050661,
+   "inducing_subject": "Convert key exchange to one shot call"
+  },
+  {
+   "fix": "1ee2125922d3302e3ea738442bf2b051a445cac0",
+   "fix_ct": 1496419898,
+   "fix_subject": "Fix ex_data and session_dup issues",
+   "how": "sha-reference",
+   "inducing": "b3c31a6572bd7b89f469deb3c78f85f6e303df47",
+   "inducing_ct": 1490011891,
+   "inducing_subject": "Fix the error handling in CRYPTO_dup_ex_data. Fix a strict aliasing issue in ui_dup_method_data. Add test coverage for CRYPTO_dup_ex_data, use OPENSSL_assert."
+  },
+  {
+   "fix": "068e3d73ce6814879832c9400c10afe2458c2004",
+   "fix_ct": 1494322533,
+   "fix_subject": "Fix an s_server infinite loop",
+   "how": "sha-reference",
+   "inducing": "c4666bfa13480c1e700a0d487300da2a56e889af",
+   "inducing_ct": 1493115219,
+   "inducing_subject": "Ask libssl if we should retry not the socket"
+  },
+  {
+   "fix": "bb78552ee14c1caa867dfe782f6d1222c776e439",
+   "fix_ct": 1493910128,
+   "fix_subject": "Revert \"Fix clang compile time error\"",
+   "how": "revert",
+   "inducing": "1608d658af4163d2096cb469705d4ba96067877b",
+   "inducing_ct": 1493869050,
+   "inducing_subject": "Fix clang compile time error"
+  },
+  {
+   "fix": "de6ac50ddc6c901d43afcd914a1708f9b87efcf2",
+   "fix_ct": 1493909005,
+   "fix_subject": "Fix an uninit read in igetest",
+   "how": "sha-reference",
+   "inducing": "0e534337b24ee7b56480d85f01b9dda923fa42fc",
+   "inducing_ct": 1493766034,
+   "inducing_subject": "Update igetest to use the test framework."
+  },
+  {
+   "fix": "9d9d2879627ba796db9dd7c688302f36c635a3c6",
+   "fix_ct": 1492707791,
+   "fix_subject": "fix dh_test.",
+   "how": "sha-reference",
+   "inducing": "93d02986656bf4a3ae145f65afc1ca52d2810950",
+   "inducing_ct": 1492566506,
+   "inducing_subject": "Convert dhtest, dsatest, cipherbytes_test"
+  },
+  {
+   "fix": "a8e75d56804540dfc588bad9cf1c412c675cab89",
+   "fix_ct": 1491223539,
+   "fix_subject": "Fix a typo in the SSL_get_max_early_data() declarations",
+   "how": "sha-reference",
+   "inducing": "3fc8d856105e4716d3121348996ea3c61e7e4b7d",
+   "inducing_ct": 1488476654,
+   "inducing_subject": "Construct the ticket_early_data_info extension"
+  },
+  {
+   "fix": "77815a026cbedbb7b9a89558612f69e6294fe1ea",
+   "fix_ct": 1490090444,
+   "fix_subject": "Fix resumption after HRR",
+   "how": "sha-reference",
+   "inducing": "6b1bb98fad044a6f6b1aec9daee95d6cb450210e",
+   "inducing_ct": 1487875226,
+   "inducing_subject": "Add SSL_CTX early callback"
+  },
+  {
+   "fix": "9998b32cb63b0bdd3d014abfa1d70e9a2c20a283",
+   "fix_ct": 1489753979,
+   "fix_subject": "Fix no-dtls builds",
+   "how": "sha-reference",
+   "inducing": "f2ff1432fc50e5033471859dc9899eb219278a7a",
+   "inducing_ct": 1489661019,
+   "inducing_subject": "Simplify code around next_proto.len by changing 'len' data type."
+  },
+  {
+   "fix": "d913a0557f040e54120d028ced0a29767f7b12bb",
+   "fix_ct": 1487613279,
+   "fix_subject": "Revert \"Use memcmp() instead of CRYPTO_memcmp() when fuzzing\"",
+   "how": "revert",
+   "inducing": "3aad8e18707bccaabee5f111de2db0696b45781c",
+   "inducing_ct": 1487509213,
+   "inducing_subject": "Use memcmp() instead of CRYPTO_memcmp() when fuzzing"
+  },
+  {
+   "fix": "82c9c030173898b9536a1c8da4e49b4b19251dbd",
+   "fix_ct": 1479894626,
+   "fix_subject": "Fix EXTMS error introduced by commit 94ed2c6",
+   "how": "sha-reference",
+   "inducing": "94ed2c6739754d13306fe510bb8bc19c2ad42749",
+   "inducing_ct": 1479290986,
+   "inducing_subject": "Fixed various style issues in the key_share code"
+  },
+  {
+   "fix": "beacb0f0c1ae7b0542fe053b95307f515b578eb7",
+   "fix_ct": 1479761668,
+   "fix_subject": "Make SSL_read and SSL_write return the old behaviour and document it.",
+   "how": "revert",
+   "inducing": "4880672a9b41a09a0984b55e219f02a2de7ab75e",
+   "inducing_ct": 1477642429,
+   "inducing_subject": "A zero return from BIO_read()/BIO_write() could be retryable"
+  },
+  {
+   "fix": "b612799a80af398040efc2416e0d09dcb0da1cf5",
+   "fix_ct": 1479218013,
+   "fix_subject": "Revert \"Remove heartbeats completely\"",
+   "how": "revert",
+   "inducing": "6c62f9e1639a7d1a879f363a99882920104dfedb",
+   "inducing_ct": 1479203121,
+   "inducing_subject": "Remove heartbeats completely"
+  },
+  {
+   "fix": "1fda5bc435ada1c70f2d3342bb9db98ac5840dc9",
+   "fix_ct": 1479124513,
+   "fix_subject": "Revert \"Fixed deadlock in CRYPTO_THREAD_run_once for Windows\"",
+   "how": "revert",
+   "inducing": "349d1cfddcfa33d352240582a3803f2eba39d9a0",
+   "inducing_ct": 1479069785,
+   "inducing_subject": "Fixed deadlock in CRYPTO_THREAD_run_once for Windows"
+  },
+  {
+   "fix": "10b0b5ecd93097179a2b13a7d34e0ab580d23fa2",
+   "fix_ct": 1478791442,
+   "fix_subject": "Revert \"Move algorithm specific ppccap code from crypto/ppccap.c\"",
+   "how": "revert",
+   "inducing": "e3fb4d3d52e188b83ccb8506aa2f16cb686f4d6c",
+   "inducing_ct": 1478655636,
+   "inducing_subject": "Move algorithm specific ppccap code from crypto/ppccap.c"
+  },
+  {
+   "fix": "56e36bdaef442536681bce2a1579385c0279bec8",
+   "fix_ct": 1475088025,
+   "fix_subject": "Revert \"Call ENGINE_init() before trying to use keys from engine\"",
+   "how": "revert",
+   "inducing": "0a72002993b8619fd0642d19af3364bafbd9a06c",
+   "inducing_ct": 1475079317,
+   "inducing_subject": "Call ENGINE_init() before trying to use keys from engine"
+  },
+  {
+   "fix": "98c1f5b429d036c0370de15f4d6851eed41fa5b3",
+   "fix_ct": 1474897233,
+   "fix_subject": "Fix HelloVerifyRequest construction",
+   "how": "sha-reference",
+   "inducing": "c536b6be1a72aefd632d5530106a67c516cb9f4b",
+   "inducing_ct": 1474582358,
+   "inducing_subject": "Convert HelloVerifyRequest construction to WPACKET"
+  },
+  {
+   "fix": "4588cb4443552f1d251a637b48f39d891051ee1c",
+   "fix_ct": 1474468623,
+   "fix_subject": "Revert \"Constify code about X509_VERIFY_PARAM\"",
+   "how": "revert",
+   "inducing": "81f9ce1e1965e0e33db6d2391285c4c1b6af0434",
+   "inducing_ct": 1474172520,
+   "inducing_subject": "Constify code about X509_VERIFY_PARAM"
+  },
+  {
+   "fix": "3c0c68ae460e947aaae5702bda6258fb812e1029",
+   "fix_ct": 1473976117,
+   "fix_subject": "Revert \"Abort on unrecognised warning alerts\"",
+   "how": "revert",
+   "inducing": "77a6be4dfc2ecf406c2559a99bea51317ce0f533",
+   "inducing_ct": 1473763860,
+   "inducing_subject": "Abort on unrecognised warning alerts"
+  },
+  {
+   "fix": "099e2968ed3c7d256cda048995626664082b1b30",
+   "fix_ct": 1471869528,
+   "fix_subject": "Fix overflow check in BN_bn2dec()",
+   "how": "sha-reference",
+   "inducing": "07bed46f332fce8c1d157689a2cdf915a982ae34",
+   "inducing_ct": 1471303159,
+   "inducing_subject": "Check for errors in BN_bn2dec()"
+  },
+  {
+   "fix": "e125c12f5718cf589b3469aa40a54421a2536bd2",
+   "fix_ct": 1469563422,
+   "fix_subject": "Use sk_CONF_VALUE_pop_free in do_ext_nconf error path.",
+   "how": "sha-reference",
+   "inducing": "8605abf13523579ecab8b1f2a4bcb8354d94af79",
+   "inducing_ct": 1465573325,
+   "inducing_subject": "Fix an error path leak in do_ext_nconf()"
+  },
+  {
+   "fix": "9d6daf99c286d260e50278f63ddb7d164462256e",
+   "fix_ct": 1467487813,
+   "fix_subject": "Fix broken loading of client CAs",
+   "how": "sha-reference",
+   "inducing": "3c82e437bb3af822ea13cd5a24bab0745c556246",
+   "inducing_ct": 1466687009,
+   "inducing_subject": "Add checks on sk_TYPE_push() returned result"
+  },
+  {
+   "fix": "f219a1b0485309b6814f00985f7bbb45e72ee374",
+   "fix_ct": 1466095057,
+   "fix_subject": "Revert \"RT4526: Call TerminateProcess, not ExitProcess\"",
+   "how": "revert",
+   "inducing": "9c1a9ccf65d0ea1912675d3a622fa8e51b524b9e",
+   "inducing_ct": 1466012331,
+   "inducing_subject": "RT4526: Call TerminateProcess, not ExitProcess"
+  },
+  {
+   "fix": "11ed851db0c49f9fdd534fbd8a2791266f32c5b8",
+   "fix_ct": 1464007022,
+   "fix_subject": "Fix and simplify error handling in (RSA/EC_kmeth)_new_method()",
+   "how": "sha-reference",
+   "inducing": "2bbf0baa9565cce937d85592f12d1279871dfaf6",
+   "inducing_ct": 1461868661,
+   "inducing_subject": "Add checks on CRYPTO_new_ex_data return value... with some adaptation to new multi-threading API."
+  },
+  {
+   "fix": "fcb318c64b8c3ff24ec36f99797880386bed5867",
+   "fix_ct": 1463782098,
+   "fix_subject": "Fix Windows 64 bit crashes",
+   "how": "sha-reference",
+   "inducing": "5c4328f04f63bc288d4e069e1453ab18b0309f16",
+   "inducing_ct": 1463415386,
+   "inducing_subject": "Fold threads.h into crypto.h making API public"
+  },
+  {
+   "fix": "b8f1c116a357285ccb4905cd88c83f5076bafb52",
+   "fix_ct": 1461917123,
+   "fix_subject": "Don't free the BIGNUM passed to BN_mpi2bn",
+   "how": "sha-reference",
+   "inducing": "91fb42ddbef7a88640d1a0f853c941c20df07de7",
+   "inducing_ct": 1461845589,
+   "inducing_subject": "Free a BIGNUM on error in BN_mpi2bn"
+  },
+  {
+   "fix": "098c1e3d1425ffdad15e6001b4fc9f2a606f3d83",
+   "fix_ct": 1461917123,
+   "fix_subject": "Fix a leak in i2b_PVK",
+   "how": "sha-reference",
+   "inducing": "8e588e2812f82419fb177e42480b4edffc676070",
+   "inducing_ct": 1461845589,
+   "inducing_subject": "Don't leak memory on error in i2b_PVK"
+  },
+  {
+   "fix": "acde647fb0347f64af8f8678b73ce41f2f499c02",
+   "fix_ct": 1461381867,
+   "fix_subject": "Fix EC_KEY_set_private_key() to call key->group->meth->set_private()",
+   "how": "sha-reference",
+   "inducing": "6903e2e7e9a47bb350920ae640287cf9f43a22ce",
+   "inducing_ct": 1456700093,
+   "inducing_subject": "Extended EC_METHOD customisation support."
+  },
+  {
+   "fix": "36c6f0ad0f1464d47493309c24e2275af7f09c1e",
+   "fix_ct": 1460987963,
+   "fix_subject": "Fix PKCS7 memory leak",
+   "how": "sha-reference",
+   "inducing": "f0e0fd51fd8307f6eae64862ad9aaea113f1177a",
+   "inducing_ct": 1460740903,
+   "inducing_subject": "Make many X509_xxx types opaque."
+  },
+  {
+   "fix": "1ee7b8b97c90e8e59627bfcbda3714f18368a9e1",
+   "fix_ct": 1460668532,
+   "fix_subject": "Fix ex_data locks issue",
+   "how": "sha-reference",
+   "inducing": "ff2344052bfa0132260ee3154962a2552f3d95f5",
+   "inducing_ct": 1460636344,
+   "inducing_subject": "Ensure all locks are properly cleaned up"
+  },
+  {
+   "fix": "bdcd660e33710079b495cf5cc6a1aaa5d2dcd317",
+   "fix_ct": 1460616090,
+   "fix_subject": "Bugfix: in asn1parse avoid erroneous len after a sub-sequence",
+   "how": "sha-reference",
+   "inducing": "79c7f74d6cefd5d32fa20e69195ad3de834ce065",
+   "inducing_ct": 1459366124,
+   "inducing_subject": "Fix buffer overrun in ASN1_parse()."
+  },
+  {
+   "fix": "173f613b6a9029f34454b642ee4f3db6c6566fcb",
+   "fix_ct": 1459810283,
+   "fix_subject": "Fix a shadow symbol warning",
+   "how": "sha-reference",
+   "inducing": "c5137473bdc7bcf7c43b4bd5d28827f8ddd70490",
+   "inducing_ct": 1459795094,
+   "inducing_subject": "Use X509_REQ_get0_pubkey"
+  },
+  {
+   "fix": "e771eea6d8ca3caa48076367ee86c3b55249dcb3",
+   "fix_ct": 1459800703,
+   "fix_subject": "Revert \"various spelling fixes\"",
+   "how": "revert",
+   "inducing": "620d540bd47a96fb6905fbbdd8ea5167a8841a3e",
+   "inducing_ct": 1459796792,
+   "inducing_subject": "various spelling fixes"
+  },
+  {
+   "fix": "9f2a142b13a8fc37b811bc590baf847cc6be7ab3",
+   "fix_ct": 1459800664,
+   "fix_subject": "Revert \"Fix an error code spelling.\"",
+   "how": "revert",
+   "inducing": "2b0bcfaf834e2fb7cd52888d7330b247e3878115",
+   "inducing_ct": 1459796792,
+   "inducing_subject": "Fix an error code spelling."
+  },
+  {
+   "fix": "ffc8d605e81c12d4ce06bce758df84f7945c0f02",
+   "fix_ct": 1458408575,
+   "fix_subject": "Revert \"Generate apps/progs.h on the fly\"",
+   "how": "revert",
+   "inducing": "04e2a527379ad12ca512aef4e838f94af22d7f79",
+   "inducing_ct": 1458348571,
+   "inducing_subject": "Generate apps/progs.h on the fly"
+  },
+  {
+   "fix": "1e7e1c8d5c06207c4f99eab1f3cff7a033358ae1",
+   "fix_ct": 1458408550,
+   "fix_subject": "Revert \"Include progs.h directly in openssl.c instead of via apps.h\"",
+   "how": "revert",
+   "inducing": "a45d7d5388c6774a484cff4af13f188240d3d50b",
+   "inducing_ct": 1458348571,
+   "inducing_subject": "Include progs.h directly in openssl.c instead of via apps.h"
+  },
+  {
+   "fix": "ffbc5b577d6283429c2348b23bca5eac46c80854",
+   "fix_ct": 1457603783,
+   "fix_subject": "Allow OPENSSL_NO_SOCK in e_os.h even for non-Windows/DOS platforms",
+   "how": "sha-reference",
+   "inducing": "963bb62195109fb863dc4d88c7470ce7f9af25ac",
+   "inducing_ct": 1457380268,
+   "inducing_subject": "Allow OPENSSL_NO_SOCK in e_os.h even for non-Windows/DOS platforms"
+  },
+  {
+   "fix": "a1673e1536729d49cb758b988ac7be368e9b1fdb",
+   "fix_ct": 1457574739,
+   "fix_subject": "Avoid negative array index in BIO_debug_callback()",
+   "how": "sha-reference",
+   "inducing": "9cb177301fdab492e4cfef376b28339afe3ef663",
+   "inducing_ct": 1456440358,
+   "inducing_subject": "Fix memory issues in BIO_*printf functions"
+  },
+  {
+   "fix": "37b1f8bd6260ab7d07dcc5c16f2ed88941278e82",
+   "fix_ct": 1457384231,
+   "fix_subject": "Revert \"Allow OPENSSL_NO_SOCK in e_os.h even for non-Windows/DOS platforms\"",
+   "how": "revert",
+   "inducing": "963bb62195109fb863dc4d88c7470ce7f9af25ac",
+   "inducing_ct": 1457380268,
+   "inducing_subject": "Allow OPENSSL_NO_SOCK in e_os.h even for non-Windows/DOS platforms"
+  },
+  {
+   "fix": "afcee950b4559a3975bde06c484e98eddef5837e",
+   "fix_ct": 1456516285,
+   "fix_subject": "Revert \"EC_KEY_priv2buf (): check parameter sanity\"",
+   "how": "revert",
+   "inducing": "acae59bb29ddc769743ab4a8ae373b5ff2f42b57",
+   "inducing_ct": 1456503498,
+   "inducing_subject": "EC_KEY_priv2buf (): check parameter sanity"
+  },
+  {
+   "fix": "316fae2a948afc1eb3a6d3d8b294156c011df133",
+   "fix_ct": 1456159689,
+   "fix_subject": "Partial revert of 1288f26 and fix for no-async",
+   "how": "sha-reference",
+   "inducing": "1288f26fb9c3cfe6c5919b706e30d3f0b2d55b0b",
+   "inducing_ct": 1455734031,
+   "inducing_subject": "RT4310: Fix varous no-XXX builds"
+  },
+  {
+   "fix": "21b80f9a1246e4af099ed580f1c352ed5bde87cb",
+   "fix_ct": 1455723575,
+   "fix_subject": "RT4318: Fix OSSL_SSIZE_MAX for UEFI build",
+   "how": "sha-reference",
+   "inducing": "e634b448c3113545ff5f9a70e74a0ce694a00e77",
+   "inducing_ct": 1455358974,
+   "inducing_subject": "Defines OSSL_SSIZE_MAX"
+  },
+  {
+   "fix": "6a78ae2821e89a8838714496524fd39d9d21fb1b",
+   "fix_ct": 1455718561,
+   "fix_subject": "RT4313: Fix build for !IMPLEMENTED code path in CRYPTO_secure_free()",
+   "how": "sha-reference",
+   "inducing": "05c7b1631b4f6884b9ef5f0943a3d16d36383f52",
+   "inducing_ct": 1455700369,
+   "inducing_subject": "Implement the use of heap manipulator implementions"
+  },
+  {
+   "fix": "ce023e77d7b208016276157fa14a6e2636649e85",
+   "fix_ct": 1455216819,
+   "fix_subject": "Fix MacOS/X build warnings",
+   "how": "sha-reference",
+   "inducing": "7823d792d0cad3b44ad5389a8d3381becefe7f44",
+   "inducing_ct": 1455211174,
+   "inducing_subject": "RT3495: Add a hash for faster dup detection."
+  },
+  {
+   "fix": "64f9f40696f993406e53c16d7c9d815004afd8ad",
+   "fix_ct": 1454923769,
+   "fix_subject": "Handle SSL_shutdown while in init more appropriately #2",
+   "how": "sha-reference",
+   "inducing": "7bb196a71adef8440b6152b6174651a9c25588f1",
+   "inducing_ct": 1453298292,
+   "inducing_subject": "Handle SSL_shutdown while in init more appropriately"
+  },
+  {
+   "fix": "ebd8df0ed8a2f39a63662a5246df9e00e240efec",
+   "fix_ct": 1452199208,
+   "fix_subject": "Fix build-break; 'make update'",
+   "how": "sha-reference",
+   "inducing": "bbd86bf5424a611cb6b77a3a17fc522931c4dcb8",
+   "inducing_ct": 1452197658,
+   "inducing_subject": "mem functions cleanup"
+  },
+  {
+   "fix": "5320c071935ac7b52ed30ba66492da9549ad1c05",
+   "fix_ct": 1449966511,
+   "fix_subject": "Revert \"Allow ChaCha20-Poly1305 in DTLS\"",
+   "how": "revert",
+   "inducing": "777f482d993322d69025014bf1b99c270c978fc0",
+   "inducing_ct": 1449863289,
+   "inducing_subject": "Allow ChaCha20-Poly1305 in DTLS"
+  },
+  {
+   "fix": "8ca8fc480469e60d73997f5db5a6d07744fe031e",
+   "fix_ct": 1449872280,
+   "fix_subject": "Fix compile failure",
+   "how": "sha-reference",
+   "inducing": "94d61512360c4d16762a13e27fcad39ca4f5e506",
+   "inducing_ct": 1449859118,
+   "inducing_subject": "Make no-dh work, plus other no-dh problems found by Richard."
+  },
+  {
+   "fix": "686cf15e9dfd3263ec05019f4b2b52253cdcf38e",
+   "fix_ct": 1449579659,
+   "fix_subject": "Fix merge error",
+   "how": "sha-reference",
+   "inducing": "6140f0365311e6d08cdde63932c56ee741d9a605",
+   "inducing_ct": 1449575799,
+   "inducing_subject": "Add some new cipher ctrl constants"
+  },
+  {
+   "fix": "1f08d945a79ad79c98fb84167c613934ee96d8e1",
+   "fix_ct": 1444986706,
+   "fix_subject": "Fix error message when loading engines from config",
+   "how": "sha-reference",
+   "inducing": "a0a82324f965bbcc4faed4e1ee3fcaf81ea52166",
+   "inducing_ct": 1444685460,
+   "inducing_subject": "Centralise loading default apps config file"
+  },
+  {
+   "fix": "57e4e926da904677be06d29c4c756303be8293b0",
+   "fix_ct": 1443703891,
+   "fix_subject": "Revert \"Custom cipher constants\"",
+   "how": "revert",
+   "inducing": "3aabc1dd1c969e60bdea8f827d6645ff04c56b67",
+   "inducing_ct": 1443690551,
+   "inducing_subject": "Custom cipher constants"
+  },
+  {
+   "fix": "05e97f1d4f940c765e5c93771fe20820acca4438",
+   "fix_ct": 1442441542,
+   "fix_subject": "Fix build on mingw",
+   "how": "sha-reference",
+   "inducing": "df2ee0e27d2db02660c1d15fe6a3e38be9df0a60",
+   "inducing_ct": 1441943515,
+   "inducing_subject": "Enable -Wmissing-variable-declarations and -Wincompatible-pointer-types-discards-qualifiers (the latter did not require any code changes)."
+  },
+  {
+   "fix": "6d41fc80e6152a6bf9d062b2a8e835a388ed0062",
+   "fix_ct": 1441795625,
+   "fix_subject": "PACKET: add PACKET_memdup and PACKET_strndup",
+   "how": "sha-reference",
+   "inducing": "c3fc7eeab884b6876a1b4006163f190d325aa047",
+   "inducing_ct": 1438693510,
+   "inducing_subject": "PACKETise NextProto"
+  },
+  {
+   "fix": "c83eda8c22f08346d5434662643de523a469c81e",
+   "fix_ct": 1439568011,
+   "fix_subject": "Fix session tickets",
+   "how": "sha-reference",
+   "inducing": "9ceb2426b0a7972434a49a34e78bdcc6437e04ad",
+   "inducing_ct": 1438596102,
+   "inducing_subject": "PACKETise ClientHello processing"
+  },
+  {
+   "fix": "04fe876b5616793b32e92e965a662bbbed7f71d1",
+   "fix_ct": 1438897469,
+   "fix_subject": "Revert \"Fix uninitalised warning.\"",
+   "how": "revert",
+   "inducing": "704563f04a8401781b359906c1f88a30e12af69c",
+   "inducing_ct": 1438893178,
+   "inducing_subject": "Fix uninitalised warning."
+  },
+  {
+   "fix": "f6a103133abefd7795260af3f439d84430331e33",
+   "fix_ct": 1434906785,
+   "fix_subject": "Revert \"Avoid duplication.\"",
+   "how": "revert",
+   "inducing": "d480e182fe20fcaeca7817a4693eeaf594bb1a32",
+   "inducing_ct": 1434896962,
+   "inducing_subject": "Avoid duplication."
+  },
+  {
+   "fix": "b1ad95e328fd7de5aad72fc6fdcbefd6bf05c3fe",
+   "fix_ct": 1430860568,
+   "fix_subject": "Fix windows build",
+   "how": "sha-reference",
+   "inducing": "b4faea50c35d92a67d1369355b49cc3efba78406",
+   "inducing_ct": 1430766013,
+   "inducing_subject": "Use safer sizeof variant in malloc"
+  },
+  {
+   "fix": "aacb4f1a6ec12efff96fa7e51ca7b57254e2b2c8",
+   "fix_ct": 1430813175,
+   "fix_subject": "ssl/ssl_asn1.c: Fix typo introduced via cc5b6a03a320f1",
+   "how": "sha-reference",
+   "inducing": "cc5b6a03a320f1bdace59ea8f41c3d525202d38e",
+   "inducing_ct": 1428076724,
+   "inducing_subject": "Rewrite ssl_asn1.c using new ASN.1 code."
+  },
+  {
+   "fix": "59ef580a14a526f6dd8d86b632d67022976fabcd",
+   "fix_ct": 1430692585,
+   "fix_subject": "ssl/s3_srvr.c: Fix typo introduced via 69f682374868b.",
+   "how": "sha-reference",
+   "inducing": "69f682374868ba2b19a8aeada496bf03dbb037cf",
+   "inducing_ct": 1427124191,
+   "inducing_subject": "Fix missing return value checks"
+  },
+  {
+   "fix": "219338115bea8a0450f39af2026c281375448310",
+   "fix_ct": 1420542661,
+   "fix_subject": "Revert \"CHANGES: mention \"universal\" ARM support.\"",
+   "how": "revert",
+   "inducing": "4fec91506975f62a2f93be71a46acc7fae7eef45",
+   "inducing_ct": 1420539001,
+   "inducing_subject": "CHANGES: mention \"universal\" ARM support."
+  },
+  {
+   "fix": "4ad2d3ac0ef338a064c6df3b5437d974def538ba",
+   "fix_ct": 1418824457,
+   "fix_subject": "Revert \"RT3425: constant-time evp_enc\"",
+   "how": "revert",
+   "inducing": "4aac102f75b517bdb56b1bcfd0a856052d559f6e",
+   "inducing_ct": 1411568358,
+   "inducing_subject": "RT3425: constant-time evp_enc"
+  },
+  {
+   "fix": "f50ffd10fa08c0762489119a4f36fa86163679ef",
+   "fix_ct": 1417792700,
+   "fix_subject": "Fix broken build",
+   "how": "sha-reference",
+   "inducing": "33eab3f6af51c6d7fe68ee4960930df4f1616bd5",
+   "inducing_ct": 1417733324,
+   "inducing_subject": "Replace GOST_R_MALLOC_FAILURE and GOST_R_NO_MEMORY with ERR_R_MALLOC_FAILURE"
+  },
+  {
+   "fix": "71c16698fa7b88e4ef4fd34ad4bc1920eb09f93a",
+   "fix_ct": 1417702670,
+   "fix_subject": "Remove incorrect code inadvertently introduced through commit 59669b6ab.",
+   "how": "sha-reference",
+   "inducing": "59669b6abf620d1ed2ef4d1e2df25c998b89b64d",
+   "inducing_ct": 1417598652,
+   "inducing_subject": "Remove instances in libssl of the constant 28 (for size of IPv4 header + UDP) and instead use the value provided by the underlying BIO. Also provide some new DTLS_CTRLs so that the library user can set the mtu without needing to know this constant. These new DTLS_CTRLs provide the capability to set the link level mtu to be used (i.e. including this IP/UDP overhead). The previous DTLS_CTRLs required the library user to subtract this overhead first."
+  },
+  {
+   "fix": "b5ff559ff90124c6fd53bbb49dae5edb4e821e0a",
+   "fix_ct": 1411300471,
+   "fix_subject": "Fixed error introduced in commit f2be92b94dad3c6cbdf79d99a324804094cf1617 that fixed PR#3450 where an existing cast masked an issue when i was changed from int to long in that commit",
+   "how": "sha-reference",
+   "inducing": "f2be92b94dad3c6cbdf79d99a324804094cf1617",
+   "inducing_ct": 1408141654,
+   "inducing_subject": "Fixed out-of-bounds read errors in ssl3_get_key_exchange."
+  },
+  {
+   "fix": "b00f586a812c965a7a34938df00ff6eb2130754a",
+   "fix_ct": 1407792777,
+   "fix_subject": "Fix d4a4370050f7d72239b92a60ab9d4a2dd5e9fd84",
+   "how": "sha-reference",
+   "inducing": "d4a4370050f7d72239b92a60ab9d4a2dd5e9fd84",
+   "inducing_ct": 1407779011,
+   "inducing_subject": "RT 2517: Various typo's. Reviewed-by: Emilia Kasper"
+  },
+  {
+   "fix": "6cd13f70bb51eb7982db8ab9f56c776b0c32b3ed",
+   "fix_ct": 1405510657,
+   "fix_subject": "Revert \"Engage GHASH for PowerISA 2.07.\"",
+   "how": "revert",
+   "inducing": "14aaf883d93fb2e321ef1fe25f687fb7b62ef8fe",
+   "inducing_ct": 1405490614,
+   "inducing_subject": "Engage GHASH for PowerISA 2.07."
+  },
+  {
+   "fix": "cf1b08cdd7005a7e8f8935872a09da5f91d64557",
+   "fix_ct": 1403472956,
+   "fix_subject": "Revert \"Fix off-by-one errors in ssl_cipher_get_evp()\"",
+   "how": "revert",
+   "inducing": "abfb989fe0b749ad61f1aa4cdb0ea4f952fc13e0",
+   "inducing_ct": 1402603860,
+   "inducing_subject": "Fix off-by-one errors in ssl_cipher_get_evp()"
+  },
+  {
+   "fix": "043fd6468986e61f7379bc7e989507f639de8d14",
+   "fix_ct": 1402670120,
+   "fix_subject": "Revert \"Fixed incorrect return code handling in ssl3_final_finish_mac\"",
+   "how": "revert",
+   "inducing": "2f1dffa88e1b120add4f0b3a794fbca65aa7768d",
+   "inducing_ct": 1402439510,
+   "inducing_subject": "Fixed incorrect return code handling in ssl3_final_finish_mac"
+  }
+ ]
+}

@@ -41,6 +41,7 @@ Legend: ✓ survives · ✗ falsified/reduces-to-size · ⚠ contested/discounte
 | **Platform-conditional density** (`#if` on platform/compiler/arch macros, per line) | extrinsic fixes @review-budget | ✓ (expl.) | ✓ (expl.) | **SURVIVES on unseen harfbuzz + libarchive** (+0.17 / +0.12 over the stronger size order; worse than size for every other class). The environment-coupling surface, measured statically. | ENV-H1..H3 |
 | **Library-coupling surface** (per-file includes + API calls of dependency D) | where D-named work lands @review-budget | ✓ | ✓ | **SHOWN on 21 (repo, library) units**: +0.40 over size, +0.46 over other libraries, +0.22 over file names; OpenSSL 3 migration: 93% of touched files in the top-20% set. The strongest structural result in the program | LIB-H1..H3 |
 | **Compiler-release shocks** (GCC 27, Clang 33 majors) | extrinsic share of fixes, 90 d after vs before (5 repos) | ✗ | ✗ | **not timed to releases**: Δ share ≈ 0, placebo as large; extrinsic bursts look project-driven (platform campaigns, new warning sets / CI bots) | BURST-H1..H3 |
+| **Co-change omission** (commit leaves strong co-change partners untouched; history-only model) | regression-inducing commits, within size bins | ✗ | ✗ | **adds nothing over commit size**; equivalence null against the coupled-files placebo. Commit size remains the regression predictor | REG-H1/H2 |
 
 **Off-axis: GitGalaxy output as agent context** (the product's claimed use, not defect prediction; same legend):
 

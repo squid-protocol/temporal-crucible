@@ -1,0 +1,2448 @@
+{
+ "repo": "harfbuzz",
+ "skipped": {
+  "regression word only": 186,
+  "unresolved": 23
+ },
+ "links": [
+  {
+   "fix": "cb995b575462cb1d3510117c5c07ab7c546226d1",
+   "fix_ct": 1790808475,
+   "fix_subject": "[ft] Fix self-deadlock in hb_font_destroy() after hb_ft_font_set_funcs() (#6300)",
+   "how": "sha-reference",
+   "inducing": "46644f885d39c7c18975dd2abc525e3734b109e7",
+   "inducing_ct": 1788200350,
+   "inducing_subject": "[ft] Serialize access to the static FreeType library (#6225)"
+  },
+  {
+   "fix": "943da2a4fbd9bc1778497894f655836db6c94e5d",
+   "fix_ct": 1788501278,
+   "fix_subject": "Revert \"OT: Cache lookup subtable indices\"",
+   "how": "revert",
+   "inducing": "e42994749c548bb6736e565ec91db59dcbd38560",
+   "inducing_ct": 1788501273,
+   "inducing_subject": "OT: Cache lookup subtable indices"
+  },
+  {
+   "fix": "2f3c21aae7b3d2967fae74c8d2c5be3597de1f3f",
+   "fix_ct": 1788500249,
+   "fix_subject": "Revert \"OT: Hoist lookup apply-function selection\"",
+   "how": "revert",
+   "inducing": "932aae5e46ed66657b9842c2bcb8cc888a9c1b54",
+   "inducing_ct": 1788499439,
+   "inducing_subject": "OT: Hoist lookup apply-function selection"
+  },
+  {
+   "fix": "633af3bd1cc0c6eac01e0dff0f93fc3a642215b9",
+   "fix_ct": 1788500231,
+   "fix_subject": "Revert \"OT: Specialize lookup traversal by apply function\"",
+   "how": "revert",
+   "inducing": "3a565d72bae2b9b1e179cea5176046db001a1ab7",
+   "inducing_ct": 1788500021,
+   "inducing_subject": "OT: Specialize lookup traversal by apply function"
+  },
+  {
+   "fix": "fc85680fec3968658539c0bfaac28e38857d0f76",
+   "fix_ct": 1784653188,
+   "fix_subject": "Revert \"[subset-repack] bug fixes (#6077)\"",
+   "how": "revert",
+   "inducing": "0b590d6b54aa19b57f643a5f644998adc450a1b0",
+   "inducing_ct": 1784652943,
+   "inducing_subject": "[subset-repack] bug fixes (#6077)"
+  },
+  {
+   "fix": "09795f3215944b5d7f242fa29dd24d7571ad0643",
+   "fix_ct": 1777745301,
+   "fix_subject": "[post] Fix flipped glyph-name sort comparator on macOS",
+   "how": "sha-reference",
+   "inducing": "d3a1de25e33ca1cfb99c3efdfc6dfb6e462946ea",
+   "inducing_ct": 1777743137,
+   "inducing_subject": "[array] Replace std::sort with internal sort_r_simple"
+  },
+  {
+   "fix": "d17dbe74d1dd3cec94018611d97671817f1cd96a",
+   "fix_ct": 1776415219,
+   "fix_subject": "Revert \"[vector] Remove is_foreground substitution from paint backends\"",
+   "how": "revert",
+   "inducing": "9d1ce8c942c477e1f7db88fd5afcd6ceaecd7335",
+   "inducing_ct": 1776413681,
+   "inducing_subject": "[vector] Remove is_foreground substitution from paint backends"
+  },
+  {
+   "fix": "cd1af387bae5a54b523509f77d810a42ae454ddd",
+   "fix_ct": 1776274804,
+   "fix_subject": "Revert \"[vector] Flat mode: inline clip-path=\"path('...')\" instead of <clipPath>\"",
+   "how": "revert",
+   "inducing": "3fe077d71383467232f7ffb1d8a10180d823e4ae",
+   "inducing_ct": 1776274491,
+   "inducing_subject": "[vector] Flat mode: inline clip-path=\"path('...')\" instead of <clipPath>"
+  },
+  {
+   "fix": "2adb01a47cfec4f9dd902956820d4f9a800b736c",
+   "fix_ct": 1776225897,
+   "fix_subject": "[internal] Replace remaining vector resize(0) with clear()",
+   "how": "sha-reference",
+   "inducing": "d134f8882458a84b672dc41f6e74b2ec7dc4213e",
+   "inducing_ct": 1774319178,
+   "inducing_subject": "[vector] Fix clear() when vector is in error state"
+  },
+  {
+   "fix": "a63afbee9ee750a81861d95732678e7c49a5afda",
+   "fix_ct": 1776146045,
+   "fix_subject": "[gpu] Regenerate hb-gpu-fragment-msl.hh",
+   "how": "sha-reference",
+   "inducing": "6ef71b9a695cb98c1e6107a88ef90dbdadd1bed2",
+   "inducing_ct": 1776145998,
+   "inducing_subject": "[gpu] Fix missing closing brace in Metal fragment shader"
+  },
+  {
+   "fix": "83c737109812919ea98fe89caf8d4e9b57d3bff6",
+   "fix_ct": 1776070038,
+   "fix_subject": "[vector] Check offsets.resize result in PDF render",
+   "how": "sha-reference",
+   "inducing": "891cb21c7b84da769b3753ad804eb77ba8f69233",
+   "inducing_ct": 1776068256,
+   "inducing_subject": "[vector] Fix NULL write in hb_pdf_get_resources under OOM"
+  },
+  {
+   "fix": "4f9048cd27c27230677ffe572ac9c7a526e25a20",
+   "fix_ct": 1775110685,
+   "fix_subject": "Revert \"Revert small-size MSAA experiment\"",
+   "how": "revert",
+   "inducing": "3c291a501509c03b532e343346de8244aad38927",
+   "inducing_ct": 1775106576,
+   "inducing_subject": "Revert small-size MSAA experiment"
+  },
+  {
+   "fix": "4d8aec2d3fd4f0cb72c432b7ed6e9afcede6f39c",
+   "fix_ct": 1774926003,
+   "fix_subject": "Revert \"[gpu] Hint --demo when no font file is provided\"",
+   "how": "revert",
+   "inducing": "452f742628eb9d6177c5a5ea9baf11dd16d7777c",
+   "inducing_ct": 1774925988,
+   "inducing_subject": "[gpu] Hint --demo when no font file is provided"
+  },
+  {
+   "fix": "a7367b65e219f3d35f718070adb7da65f24659e9",
+   "fix_ct": 1774917560,
+   "fix_subject": "Revert \"[webgpu] Align touch handoff with WebGL fixes\"",
+   "how": "revert",
+   "inducing": "00a3475ce018a0cbae156348354fc83116dff1f8",
+   "inducing_ct": 1774917414,
+   "inducing_subject": "[webgpu] Align touch handoff with WebGL fixes"
+  },
+  {
+   "fix": "f776a25657329be66fa3136bdce7bf4b5b11aa2d",
+   "fix_ct": 1774900112,
+   "fix_subject": "Revert \"[gpu] Add trail mode (p key)\"",
+   "how": "revert",
+   "inducing": "17bdcac84fcd564e692900b3ee1cbfecbba8c3b2",
+   "inducing_ct": 1774899761,
+   "inducing_subject": "[gpu] Add trail mode (p key)"
+  },
+  {
+   "fix": "32e6eea7639147051993f8a8aab4a75561142fa5",
+   "fix_ct": 1774900091,
+   "fix_subject": "Revert \"[gpu] Add exponential fade to trail mode\"",
+   "how": "revert",
+   "inducing": "fa576c3a6e61fd49ba17695e822630cdd2482a5b",
+   "inducing_ct": 1774899944,
+   "inducing_subject": "[gpu] Add exponential fade to trail mode"
+  },
+  {
+   "fix": "8aae9a0e0d7004454a17356ac03757e4316ca3f8",
+   "fix_ct": 1774844790,
+   "fix_subject": "Reapply \"[gpu] Add fullscreen toggle (F key) to D3D11 demo\"",
+   "how": "revert",
+   "inducing": "ddcedece1daa3f40757273e9ce2e3892205ce710",
+   "inducing_ct": 1774844742,
+   "inducing_subject": "Revert \"[gpu] Add fullscreen toggle (F key) to D3D11 demo\""
+  },
+  {
+   "fix": "ddcedece1daa3f40757273e9ce2e3892205ce710",
+   "fix_ct": 1774844742,
+   "fix_subject": "Revert \"[gpu] Add fullscreen toggle (F key) to D3D11 demo\"",
+   "how": "revert",
+   "inducing": "66ce80063197bc5ebaf474bb55677ec09f1b5f11",
+   "inducing_ct": 1774844706,
+   "inducing_subject": "[gpu] Add fullscreen toggle (F key) to D3D11 demo"
+  },
+  {
+   "fix": "41de3c3272abff16995c2053e753d8e72b00a4b7",
+   "fix_ct": 1774556381,
+   "fix_subject": "[vector] Destruct items in clear() when vector is in error state",
+   "how": "sha-reference",
+   "inducing": "d134f8882458a84b672dc41f6e74b2ec7dc4213e",
+   "inducing_ct": 1774319178,
+   "inducing_subject": "[vector] Fix clear() when vector is in error state"
+  },
+  {
+   "fix": "6a90ed9c39a6c6950cb87d440d39eaf26566f803",
+   "fix_ct": 1772045235,
+   "fix_subject": "Revert \"[util/raster] Use glyph extents for margins; drop AA pad\"",
+   "how": "revert",
+   "inducing": "3d48a0bce0f7e13991a0729df10cbe5117ab1c66",
+   "inducing_ct": 1772030802,
+   "inducing_subject": "[util/raster] Use glyph extents for margins; drop AA pad"
+  },
+  {
+   "fix": "b7969504bc43e4bbeb994f938a69d55e52e85fd3",
+   "fix_ct": 1771904574,
+   "fix_subject": "Revert \"raster-paint: use bounded clip masks and clipped group compositing\"",
+   "how": "revert",
+   "inducing": "7f707557d3d9c9703b67859c46dc67197ffb8d8c",
+   "inducing_ct": 1771904284,
+   "inducing_subject": "raster-paint: use bounded clip masks and clipped group compositing"
+  },
+  {
+   "fix": "1659d27a48127573a309e8af8afdb8c658ecbedf",
+   "fix_ct": 1771902644,
+   "fix_subject": "Revert \"raster-paint: reuse clip stack storage via logical top\"",
+   "how": "revert",
+   "inducing": "473f69f555d377f5b180b1f3d4cc8c213c351b79",
+   "inducing_ct": 1771902611,
+   "inducing_subject": "raster-paint: reuse clip stack storage via logical top"
+  },
+  {
+   "fix": "f5c32f870414a986e18a08dddbc0928ce4f3f0d4",
+   "fix_ct": 1770361944,
+   "fix_subject": "Revert \"[VARC] Another long shot\"",
+   "how": "revert",
+   "inducing": "582af96b00f446c30171043c7bbf0697d7777f9c",
+   "inducing_ct": 1770361431,
+   "inducing_subject": "[VARC] Another long shot"
+  },
+  {
+   "fix": "f6ba182e6582fb35c616c96f3e91073d45bb1076",
+   "fix_ct": 1766375862,
+   "fix_subject": "Revert \"[VARC] Use non-thread-safe scalar-cache\"",
+   "how": "revert",
+   "inducing": "2c0dbf1f92f60d701ae3f3a2a1e696b22c844977",
+   "inducing_ct": 1766375812,
+   "inducing_subject": "[VARC] Use non-thread-safe scalar-cache"
+  },
+  {
+   "fix": "1a93e9b30de8949ef1f469b6507126c20454efa9",
+   "fix_ct": 1762922502,
+   "fix_subject": "Fix featureParams sanitization",
+   "how": "sha-reference",
+   "inducing": "665afc08f6770d01ab1ccfeb28f1904ac9741530",
+   "inducing_ct": 1762727299,
+   "inducing_subject": "[sanitize] Remove table-altering code parts"
+  },
+  {
+   "fix": "73f98256c6f215ec2cbf4cfb49e9f37165436acd",
+   "fix_ct": 1760926595,
+   "fix_subject": "Revert \"[match-backtrack] Fix syllable-setting logic (#5617)\" (#5620)",
+   "how": "revert",
+   "inducing": "2c934a6b396171df50bd867295b4c644316869f5",
+   "inducing_ct": 1760848291,
+   "inducing_subject": "[match-backtrack] Fix syllable-setting logic (#5617)"
+  },
+  {
+   "fix": "059fc205d998a8e31c3ad17050f67fd1f3a9b117",
+   "fix_ct": 1760374693,
+   "fix_subject": "Fix documentation of offsets in text glyph serialization format (#5606)",
+   "how": "sha-reference",
+   "inducing": "7c2105a52e6b50e448064e82c760dad0b5f4bdb9",
+   "inducing_ct": 1760353070,
+   "inducing_subject": "Bump github/codeql-action from 3.30.6 to 4.30.8"
+  },
+  {
+   "fix": "6a2453bb20b77097d2c1198c1a30c5f124ed20d3",
+   "fix_ct": 1758851660,
+   "fix_subject": "Reapply \"[VARC] Graduate out of experimental\" (#5588)",
+   "how": "revert",
+   "inducing": "673934f2ce569b81a2ac094d2316033425ab6928",
+   "inducing_ct": 1754629094,
+   "inducing_subject": "Revert \"[VARC] Graduate out of experimental\""
+  },
+  {
+   "fix": "2be836c1513ad3783e680a3e8382e8c9fda1d201",
+   "fix_ct": 1758083510,
+   "fix_subject": "Revert \"[instancer] Preallocate coordinate maps from alloc pool as well\"",
+   "how": "revert",
+   "inducing": "3f71afe7605cdc7260990f8925e6ed49521fe728",
+   "inducing_ct": 1758083200,
+   "inducing_subject": "[instancer] Preallocate coordinate maps from alloc pool as well"
+  },
+  {
+   "fix": "fb0ef230c98b527ca584ea059978aa909a5a052a",
+   "fix_ct": 1758042990,
+   "fix_subject": "Revert \"[tuplevars] Allocate from pool\"",
+   "how": "revert",
+   "inducing": "94d78de954ab22f3717cc399920670f877616567",
+   "inducing_ct": 1758042799,
+   "inducing_subject": "[tuplevars] Allocate from pool"
+  },
+  {
+   "fix": "ca9a8aba5e4841eb708da650e6086000b19021a0",
+   "fix_ct": 1757670646,
+   "fix_subject": "Revert \"[instancer/varstore] Micro-optimize\"",
+   "how": "revert",
+   "inducing": "7484eb5807d6127bea6b888a7d8fdad1b73a8c0b",
+   "inducing_ct": 1757668619,
+   "inducing_subject": "[instancer/varstore] Micro-optimize"
+  },
+  {
+   "fix": "12c4623757b8bd22c734b1b6d583062153f81e97",
+   "fix_ct": 1757657137,
+   "fix_subject": "Revert \"[instancer/varstore] Change chars_t storage scheme\"",
+   "how": "revert",
+   "inducing": "aaeea5729b97813eb71b1d809212534a77436ca2",
+   "inducing_ct": 1757657101,
+   "inducing_subject": "[instancer/varstore] Change chars_t storage scheme"
+  },
+  {
+   "fix": "724ae78d4ca1ffee05615a13800b902b08eb6bce",
+   "fix_ct": 1756149283,
+   "fix_subject": "Revert \"[check-glyph-properties] Cache current lookup-prop's matching result.\" (#5497)",
+   "how": "revert",
+   "inducing": "5b6836e10802266b4c216208e517d617c0a75693",
+   "inducing_ct": 1753443851,
+   "inducing_subject": "[check-glyph-properties] Cache current lookup-prop's matching result."
+  },
+  {
+   "fix": "8bdedb3b9efdd51a189f6e79de9cae9c238a2b8e",
+   "fix_ct": 1755671261,
+   "fix_subject": "Limit external caches (#5483)",
+   "how": "revert",
+   "inducing": "9794ad9e00ff66741c36ec9511e3e968663b74a7",
+   "inducing_ct": 1755381065,
+   "inducing_subject": "[external_cache] Remove a conditional (#5471)"
+  },
+  {
+   "fix": "96f3cae59e53c7c52bab6fbe4d77213f145379bf",
+   "fix_ct": 1755378157,
+   "fix_subject": "Revert \"[set-digest] Branch-free tests (#5469)\" (#5470)",
+   "how": "revert",
+   "inducing": "a4d4c41023dd738d35f2e917d8deea2b473a38aa",
+   "inducing_ct": 1755374146,
+   "inducing_subject": "[set-digest] Branch-free tests (#5469)"
+  },
+  {
+   "fix": "673934f2ce569b81a2ac094d2316033425ab6928",
+   "fix_ct": 1754629094,
+   "fix_subject": "Revert \"[VARC] Graduate out of experimental\"",
+   "how": "revert",
+   "inducing": "7a708a935c9642a26ffa903759c41b5bd5289898",
+   "inducing_ct": 1753313814,
+   "inducing_subject": "[VARC] Graduate out of experimental"
+  },
+  {
+   "fix": "7af1df6725b1bc46ef7189307943d246f6ba6b22",
+   "fix_ct": 1753719885,
+   "fix_subject": "Revert \"Merge branch 'main' into HVF\"",
+   "how": "revert",
+   "inducing": "3a64fce9b73bc601e257d13d1ea8ac7f32ce60b6",
+   "inducing_ct": 1753252195,
+   "inducing_subject": "Merge branch 'main' into HVF"
+  },
+  {
+   "fix": "57565de18a55b9663261b7679102feca352d5458",
+   "fix_ct": 1753719628,
+   "fix_subject": "Revert \"[hvgl] Fix cast-align issue\"",
+   "how": "revert",
+   "inducing": "b03089bf56794b3e96898231c1ca6fbcb4f6454b",
+   "inducing_ct": 1753378414,
+   "inducing_subject": "[hvgl] Fix cast-align issue"
+  },
+  {
+   "fix": "78822b6336e542d9896aef9769c9bc84baaecfcf",
+   "fix_ct": 1745144615,
+   "fix_subject": "Revert \"[COLRv1] Move paint boundedness check to font layer\"",
+   "how": "revert",
+   "inducing": "c9a26fbf47f01fdd55df1a0ccc81111cb07bf108",
+   "inducing_ct": 1745144552,
+   "inducing_subject": "[COLRv1] Move paint boundedness check to font layer"
+  },
+  {
+   "fix": "45b2d28d0476e8e6a00f135d25c66291959eb166",
+   "fix_ct": 1741828692,
+   "fix_subject": "Revert \"[aat] Clear buffer glyph set\"",
+   "how": "revert",
+   "inducing": "b1a9219ac5ad1c159aecd9b2e3ffbc942433ba6d",
+   "inducing_ct": 1741828394,
+   "inducing_subject": "[aat] Clear buffer glyph set"
+  },
+  {
+   "fix": "827be1b23c124040af85d9f923ae688486b6ae37",
+   "fix_ct": 1740504190,
+   "fix_subject": "Revert \"[MultiVarStore] Micro-optimize\"",
+   "how": "revert",
+   "inducing": "13d98f1ded00d025b85816ceee056da6f121d555",
+   "inducing_ct": 1740472819,
+   "inducing_subject": "[MultiVarStore] Micro-optimize"
+  },
+  {
+   "fix": "491c8c4e10caeb5f4a8316447a1531620d22b382",
+   "fix_ct": 1738760409,
+   "fix_subject": "Revert \"[aat] Change threshold from 4 to 16\"",
+   "how": "revert",
+   "inducing": "624d6edfe4a4b854cf5e66c3fdeb6fc2e1916e14",
+   "inducing_ct": 1738759585,
+   "inducing_subject": "[aat] Change threshold from 4 to 16"
+  },
+  {
+   "fix": "e1cb3b155a219e03fffac1355140a24b6f856cc8",
+   "fix_ct": 1738690163,
+   "fix_subject": "Revert \"[aat] Remove set-digest\"",
+   "how": "revert",
+   "inducing": "832f199607292a41b4621b87a646c30cddc00124",
+   "inducing_ct": 1738582130,
+   "inducing_subject": "[aat] Remove set-digest"
+  },
+  {
+   "fix": "359d163d25bbaa97b9a8d9647598b949e9ad789d",
+   "fix_ct": 1738689150,
+   "fix_subject": "Revert \"[aat] Remove buffer-digest stuff\"",
+   "how": "revert",
+   "inducing": "7642366593826c0e04ad58df83fa63ec53960486",
+   "inducing_ct": 1738675183,
+   "inducing_subject": "[aat] Remove buffer-digest stuff"
+  },
+  {
+   "fix": "7d23e642a2cb271ff67664a53fd4b518be06830f",
+   "fix_ct": 1738689150,
+   "fix_subject": "Revert \"[aat] Remove dead code\"",
+   "how": "revert",
+   "inducing": "bf36f5c3a4ff0003d330e2c2fc410c0cde911cba",
+   "inducing_ct": 1738675951,
+   "inducing_subject": "[aat] Remove dead code"
+  },
+  {
+   "fix": "d109947672f1c32bef0f1953663ce5f990e34ec6",
+   "fix_ct": 1738689150,
+   "fix_subject": "Revert \"[aat] Remove unused macro\"",
+   "how": "revert",
+   "inducing": "2ddcccd26ea4962a97ba6858952a5a71d032e6c1",
+   "inducing_ct": 1738688745,
+   "inducing_subject": "[aat] Remove unused macro"
+  },
+  {
+   "fix": "e1269215f9be3eb560fa4e07a53414b0698f8c7b",
+   "fix_ct": 1728846069,
+   "fix_subject": "Revert \"Fix a compiler warning\"",
+   "how": "revert",
+   "inducing": "377e3c67a435932f9da0e4f9baec1c34f4f45a15",
+   "inducing_ct": 1728785214,
+   "inducing_subject": "Fix a compiler warning"
+  },
+  {
+   "fix": "595def8fb8e545af64b4ebe00ee84089500266f8",
+   "fix_ct": 1710441279,
+   "fix_subject": "Revert \"Fixing compiler warnings\"",
+   "how": "revert",
+   "inducing": "61a1ba2ff0fc1b1ed9db0b7c1dd0f59a4312e6e6",
+   "inducing_ct": 1710339343,
+   "inducing_subject": "Fixing compiler warnings"
+  },
+  {
+   "fix": "5d1ff191c08780cee792de008f8092d0ec69fee1",
+   "fix_ct": 1708407059,
+   "fix_subject": "Fix return type",
+   "how": "sha-reference",
+   "inducing": "1bddeb974ff0c08332c8225f6f5b5bd45bcddfdc",
+   "inducing_ct": 1708104129,
+   "inducing_subject": "Use literal bools when possible rather than ints."
+  },
+  {
+   "fix": "2feac50b40f1dff06655c8efcadcc55088b34dad",
+   "fix_ct": 1690854786,
+   "fix_subject": "Revert \"[gsubgpos] Keep another digest in the applicable_t\"",
+   "how": "revert",
+   "inducing": "fd79c7cecdf68fe4626943f29bd5edf1e603d2b2",
+   "inducing_ct": 1690854735,
+   "inducing_subject": "[gsubgpos] Keep another digest in the applicable_t"
+  },
+  {
+   "fix": "f19ca24a8ed92373342adb0c69ac5975b44f50e1",
+   "fix_ct": 1690737971,
+   "fix_subject": "Revert \"Revert \"Require numerator and denominator in auto fraction\"\"",
+   "how": "revert",
+   "inducing": "8fe506e153c530affd529e7175e813c3a878faed",
+   "inducing_ct": 1690736977,
+   "inducing_subject": "Revert \"Require numerator and denominator in auto fraction\""
+  },
+  {
+   "fix": "8fe506e153c530affd529e7175e813c3a878faed",
+   "fix_ct": 1690736977,
+   "fix_subject": "Revert \"Require numerator and denominator in auto fraction\"",
+   "how": "revert",
+   "inducing": "f3e86937df345d7709de879af1d1a1502e84e1e9",
+   "inducing_ct": 1690734360,
+   "inducing_subject": "Require numerator and denominator in auto fraction"
+  },
+  {
+   "fix": "cb320d22228d366c06dd97d43bf06f7ad7afd5f2",
+   "fix_ct": 1690476187,
+   "fix_subject": "Revert \"[cff] Use float instead of double\"",
+   "how": "revert",
+   "inducing": "c8f67ac28eb18e65adda75818e2c472ad3936874",
+   "inducing_ct": 1690475685,
+   "inducing_subject": "[cff] Use float instead of double"
+  },
+  {
+   "fix": "b36b100ef1c94012456c807167b2ac07443380ce",
+   "fix_ct": 1690404166,
+   "fix_subject": "[var] Remove byte_data_t; use hb_bytes_t",
+   "how": "sha-reference",
+   "inducing": "5690840ceb190341f9960d2b975c4366566ae86b",
+   "inducing_ct": 1690386855,
+   "inducing_subject": "[map] Another try at fixing archaic clang"
+  },
+  {
+   "fix": "62e10c9fa0fce0b4798ccc13640f9fe85206f227",
+   "fix_ct": 1689518598,
+   "fix_subject": "Revert \"[gsubgpos] Allocate iterators further up\"",
+   "how": "revert",
+   "inducing": "b9f364b8fcacf8ab32d0272190d8509f214e55f2",
+   "inducing_ct": 1689518595,
+   "inducing_subject": "[gsubgpos] Allocate iterators further up"
+  },
+  {
+   "fix": "c2f454c7e2e8f05636cfbf76f5e6b3dc3919378d",
+   "fix_ct": 1689517439,
+   "fix_subject": "[gsubgpos] Fix residual from 5af80f349c4e040bfa853ee3f561ac16538b5988",
+   "how": "sha-reference",
+   "inducing": "5af80f349c4e040bfa853ee3f561ac16538b5988",
+   "inducing_ct": 1689514048,
+   "inducing_subject": "[ChainContext] Cache two class values"
+  },
+  {
+   "fix": "867640af31e8f88d65cd72a2c7f86f4632b98539",
+   "fix_ct": 1689361756,
+   "fix_subject": "Revert \"[set] Add test_and_add / test_and_del\"",
+   "how": "revert",
+   "inducing": "de1237fbf2660b5952dde4db171a62d9b1a77c92",
+   "inducing_ct": 1689359936,
+   "inducing_subject": "[set] Add test_and_add / test_and_del"
+  },
+  {
+   "fix": "d00b88737e0a704d2af3b6539592dd9bb33a4722",
+   "fix_ct": 1689355611,
+   "fix_subject": "Revert \"[subset/closure] Batch recursions in scheduled stages\"",
+   "how": "revert",
+   "inducing": "f2aaeeb3016e10bf91c251296391a381d5fc6385",
+   "inducing_ct": 1689355152,
+   "inducing_subject": "[subset/closure] Batch recursions in scheduled stages"
+  },
+  {
+   "fix": "5e42f7bb6d025f14955e60c94ea08aca472e08dd",
+   "fix_ct": 1689355598,
+   "fix_subject": "Revert \"Revert \"[priority-queue] Inline a couple more\"\"",
+   "how": "revert",
+   "inducing": "915410e5267cba5bfc6154548c8856ae077bfefe",
+   "inducing_ct": 1689355152,
+   "inducing_subject": "Revert \"[priority-queue] Inline a couple more\""
+  },
+  {
+   "fix": "915410e5267cba5bfc6154548c8856ae077bfefe",
+   "fix_ct": 1689355152,
+   "fix_subject": "Revert \"[priority-queue] Inline a couple more\"",
+   "how": "revert",
+   "inducing": "8704d73213da2294281687ecd7a40d408e9bf26a",
+   "inducing_ct": 1689034310,
+   "inducing_subject": "[priority-queue] Inline a couple more"
+  },
+  {
+   "fix": "73ee9c346f3acccbe14a4caf258b636de7c459be",
+   "fix_ct": 1688791640,
+   "fix_subject": "Revert \"[sanitize] Only check trailing edge of ranges\"",
+   "how": "revert",
+   "inducing": "e4856cf8098b9741a910e7f7979096cf11d8fead",
+   "inducing_ct": 1688788665,
+   "inducing_subject": "[sanitize] Only check trailing edge of ranges"
+  },
+  {
+   "fix": "7a85663c2bd9a0e553bf6c02ca92f7c645bed915",
+   "fix_ct": 1688779313,
+   "fix_subject": "Revert \"[sanitize] Add \"fastpath\" for ArrayOfOffset16To<> objects with max size\"",
+   "how": "revert",
+   "inducing": "10f8556c73f3cf231c6b5a900a6a1903f9516f90",
+   "inducing_ct": 1688776623,
+   "inducing_subject": "[sanitize] Add \"fastpath\" for ArrayOfOffset16To<> objects with max size"
+  },
+  {
+   "fix": "f2a3680fab317a67416c267ea8fc51cc7206b3f0",
+   "fix_ct": 1688779263,
+   "fix_subject": "Revert \"[gsubgpos] Limit (Chain)ContextFormat3 for consistency\"",
+   "how": "revert",
+   "inducing": "90b48917dadbef51bc5e90904d0f81e81199b9e2",
+   "inducing_ct": 1688777548,
+   "inducing_subject": "[gsubgpos] Limit (Chain)ContextFormat3 for consistency"
+  },
+  {
+   "fix": "8795ccedd61ea26793d0912b5ee02fe9ae45c9aa",
+   "fix_ct": 1687980569,
+   "fix_subject": "Revert \"[SimpleGlyph] Avoid branches in read_points\"",
+   "how": "revert",
+   "inducing": "ba062c713e469f91f57f3c85990f721789ec7c2a",
+   "inducing_ct": 1687980277,
+   "inducing_subject": "[SimpleGlyph] Avoid branches in read_points"
+  },
+  {
+   "fix": "ad620af6f6d36f2e10d6affaf2112e3f35c656c9",
+   "fix_ct": 1686171635,
+   "fix_subject": "Revert \"[iter] Another try at writing some for loops as range loops\"",
+   "how": "revert",
+   "inducing": "69c6928289cad871b5b096fbdcd2827fdb80c3ad",
+   "inducing_ct": 1686168662,
+   "inducing_subject": "[iter] Another try at writing some for loops as range loops"
+  },
+  {
+   "fix": "41369b661735242937ebc7734edea27984ca3b1d",
+   "fix_ct": 1686168282,
+   "fix_subject": "Revert \"[subset/cff1] Optimize writing of consecutive names\"",
+   "how": "revert",
+   "inducing": "3b25a630403b65eb5608d10c3b8d082a141bd5c8",
+   "inducing_ct": 1686168265,
+   "inducing_subject": "[subset/cff1] Optimize writing of consecutive names"
+  },
+  {
+   "fix": "78082357c8bcee2adea53caa9da8cee1c7ec2970",
+   "fix_ct": 1686163385,
+   "fix_subject": "Revert \"[iter] Rewrite some loops as range loops\"",
+   "how": "revert",
+   "inducing": "7a5242a30f3c41755a095909989221b4d22690ef",
+   "inducing_ct": 1686162975,
+   "inducing_subject": "[iter] Rewrite some loops as range loops"
+  },
+  {
+   "fix": "858a022358807720d6ff7fc20206484997766524",
+   "fix_ct": 1685897741,
+   "fix_subject": "Revert \"[cff] Optimize writing out Index offsets\"",
+   "how": "revert",
+   "inducing": "78ba23c58766c16992ddc4e3af403824aa845fe2",
+   "inducing_ct": 1685897539,
+   "inducing_subject": "[cff] Optimize writing out Index offsets"
+  },
+  {
+   "fix": "38fa0323303bf6c289314932ad4d41ac40734eac",
+   "fix_ct": 1685839869,
+   "fix_subject": "Revert \"[subset/loca] Build in the serializer memory\"",
+   "how": "revert",
+   "inducing": "546b51818666ca1ddb01824f752eccbd6a751b4b",
+   "inducing_ct": 1685839835,
+   "inducing_subject": "[subset/loca] Build in the serializer memory"
+  },
+  {
+   "fix": "f014112d16a205e5b9e9406205e7854076df8b02",
+   "fix_ct": 1685838444,
+   "fix_subject": "Revert \"[subset] Allow adding table directly from subset()\"",
+   "how": "revert",
+   "inducing": "25a6514887ebe899bd4ede1e283e067f97e15def",
+   "inducing_ct": 1685838396,
+   "inducing_subject": "[subset] Allow adding table directly from subset()"
+  },
+  {
+   "fix": "b04ca1c188bfd7113c9c4ef546fa8b1535a28d30",
+   "fix_ct": 1685673787,
+   "fix_subject": "Revert \"[subset/glyf] Exact allocation\"",
+   "how": "revert",
+   "inducing": "a830f085c849846f8441f5d92d4db36130ef71f8",
+   "inducing_ct": 1685673706,
+   "inducing_subject": "[subset/glyf] Exact allocation"
+  },
+  {
+   "fix": "4a93576bca0f56e82a1d8ad67733df9c5ddb8dcd",
+   "fix_ct": 1685301842,
+   "fix_subject": "Revert \"[map] Speedup for int types\"",
+   "how": "revert",
+   "inducing": "c1b75f5ff0460274229801816265a0efe5731b3a",
+   "inducing_ct": 1685300584,
+   "inducing_subject": "[map] Speedup for int types"
+  },
+  {
+   "fix": "12b0680e60ece83844436f61d4269ce38f689c8f",
+   "fix_ct": 1684860581,
+   "fix_subject": "[map] Fix set()",
+   "how": "sha-reference",
+   "inducing": "2133aa2407657d0b3b4b73a4951c05ed26d055f2",
+   "inducing_ct": 1684224722,
+   "inducing_subject": "[map] Inline code for set()"
+  },
+  {
+   "fix": "abb92388cc8bebff0cf40cbed0045292e038bcd8",
+   "fix_ct": 1683651294,
+   "fix_subject": "Revert \"[map] Adjust resizing criteria\"",
+   "how": "revert",
+   "inducing": "1fa4b415315257bdbae08e6539f2ca63423572e8",
+   "inducing_ct": 1683651178,
+   "inducing_subject": "[map] Adjust resizing criteria"
+  },
+  {
+   "fix": "3194963657a3049961fb64c9be86c1629afcea4b",
+   "fix_ct": 1683239388,
+   "fix_subject": "Revert \"[layout] Cache subtable coverages in hb_map_t\"",
+   "how": "revert",
+   "inducing": "7a715d74e06720c17d28ba7b4c3da0b583f8d1d3",
+   "inducing_ct": 1683239291,
+   "inducing_subject": "[layout] Cache subtable coverages in hb_map_t"
+  },
+  {
+   "fix": "a4b4536a17cd308fdc59639d67d64049d4964326",
+   "fix_ct": 1682622892,
+   "fix_subject": "Revert \"[glyf] Micro-optimize\"",
+   "how": "revert",
+   "inducing": "2bbb605d08298047164a20a242f4cfcfbe68c309",
+   "inducing_ct": 1682550052,
+   "inducing_subject": "[glyf] Micro-optimize"
+  },
+  {
+   "fix": "7cb95c8ab7d29d9ccc265d74a98a63ee3b514b63",
+   "fix_ct": 1682620080,
+   "fix_subject": "Revert \"[VarComposite] Optimize translate()\"",
+   "how": "revert",
+   "inducing": "6a55e73d6aa9a378789d4101849f1508ac6fff3d",
+   "inducing_ct": 1682618163,
+   "inducing_subject": "[VarComposite] Optimize translate()"
+  },
+  {
+   "fix": "4129061e37824433f9c81eaa99d1618af2f2d69a",
+   "fix_ct": 1682363045,
+   "fix_subject": "Revert \"Move hb-ot-name-language-static.hh out of hb-static.cc\"",
+   "how": "revert",
+   "inducing": "7b5f0dd3a8b4a126b7952fea1c4c30b8b456083e",
+   "inducing_ct": 1673561119,
+   "inducing_subject": "Move hb-ot-name-language-static.hh out of hb-static.cc"
+  },
+  {
+   "fix": "c67c0086ef66e05228f9cc1f4c169f690e130511",
+   "fix_ct": 1677702764,
+   "fix_subject": "[GPOS] Fix indexing in MarkLigPos",
+   "how": "sha-reference",
+   "inducing": "8708b9e081192786c027bb7f5f23d76dbe5c19e8",
+   "inducing_ct": 1675720285,
+   "inducing_subject": "[GPOS] Avoid O(n^2) behavior in mark-attachment"
+  },
+  {
+   "fix": "5c462865920681246422a1d23d38cc62a94f1870",
+   "fix_ct": 1677611806,
+   "fix_subject": "Revert \".\"",
+   "how": "revert",
+   "inducing": "59434578cd453d9dcdcaf5d010d5f5686c17717e",
+   "inducing_ct": 1677611635,
+   "inducing_subject": "."
+  },
+  {
+   "fix": "9c27fe625f592fdb97dc94c4006f928877e7cb61",
+   "fix_ct": 1677014714,
+   "fix_subject": "Revert \"[doc] Fix a couple of gtk-doc warnings\"",
+   "how": "revert",
+   "inducing": "ed42b2fcb556a1d47a620f77cc98069123d1670c",
+   "inducing_ct": 1677013695,
+   "inducing_subject": "[doc] Fix a couple of gtk-doc warnings"
+  },
+  {
+   "fix": "64fa5cd482d0be2e215998aa1c2a05b978133e7c",
+   "fix_ct": 1675810373,
+   "fix_subject": "[GPOS] Fix assert fail introduced recently",
+   "how": "sha-reference",
+   "inducing": "8708b9e081192786c027bb7f5f23d76dbe5c19e8",
+   "inducing_ct": 1675720285,
+   "inducing_subject": "[GPOS] Avoid O(n^2) behavior in mark-attachment"
+  },
+  {
+   "fix": "1930760bc2c2b4185a772e38b6ecc174a95a47b2",
+   "fix_ct": 1675724049,
+   "fix_subject": "[buffer] Fix up previous commit",
+   "how": "sha-reference",
+   "inducing": "85be877925ddbf34f74a1229f3ca1716bb6170dc",
+   "inducing_ct": 1675306843,
+   "inducing_subject": "[layout] Limit how far we skip when looking back"
+  },
+  {
+   "fix": "661050b4659ee490dfe622821bc7fde7d1c40510",
+   "fix_ct": 1675714154,
+   "fix_subject": "Revert \"[layout] Limit how far we skip when looking back\"",
+   "how": "revert",
+   "inducing": "85be877925ddbf34f74a1229f3ca1716bb6170dc",
+   "inducing_ct": 1675306843,
+   "inducing_subject": "[layout] Limit how far we skip when looking back"
+  },
+  {
+   "fix": "6622e04aa1b9d8b38e53cbe3e71c0b7066fd7208",
+   "fix_ct": 1675008412,
+   "fix_subject": "[solver] Fix unused-variable error",
+   "how": "sha-reference",
+   "inducing": "223abd72b9f48c951ce1e99d89328edbcff43515",
+   "inducing_ct": 1674671827,
+   "inducing_subject": "[subset] Add unfinished port of fonttools instancer solver"
+  },
+  {
+   "fix": "a4420479a8f2d4d9b11039f5b7862f7f5f684db1",
+   "fix_ct": 1674682630,
+   "fix_subject": "Revert \"[VarComposite] Fix skew\"",
+   "how": "revert",
+   "inducing": "8cf7076309da014e8e2af033b1c636785ae407cd",
+   "inducing_ct": 1674682535,
+   "inducing_subject": "[VarComposite] Fix skew"
+  },
+  {
+   "fix": "6b72a4ddb05c7226d58d0f156db13153dec4a0e8",
+   "fix_ct": 1674524164,
+   "fix_subject": "Revert \"[sanitize] Simplify(?) check_range\"",
+   "how": "revert",
+   "inducing": "af0b1ef8a72d4f6b778dbba3606ebe7df39d5288",
+   "inducing_ct": 1674509470,
+   "inducing_subject": "[sanitize] Simplify(?) check_range"
+  },
+  {
+   "fix": "db4c87475867bea79069132544b736c19895cfe2",
+   "fix_ct": 1673374101,
+   "fix_subject": "Revert \"Revert \"[aat] Support feature ranges\"\"",
+   "how": "revert",
+   "inducing": "6a7a38521f940216f1e9e2fa2bf22f7b45ce2aef",
+   "inducing_ct": 1673324979,
+   "inducing_subject": "Revert \"[aat] Support feature ranges\""
+  },
+  {
+   "fix": "6a7a38521f940216f1e9e2fa2bf22f7b45ce2aef",
+   "fix_ct": 1673324979,
+   "fix_subject": "Revert \"[aat] Support feature ranges\"",
+   "how": "revert",
+   "inducing": "1b7994cb3a3c35f3618d7f40c7289496bdab6f06",
+   "inducing_ct": 1673324180,
+   "inducing_subject": "[aat] Support feature ranges"
+  },
+  {
+   "fix": "622a68695256d8505517ed58885b94b8520efe07",
+   "fix_ct": 1673324180,
+   "fix_subject": "Revert \"Revert \"Revert \"[aat] Allow disable feature ranges\"\"\"",
+   "how": "revert",
+   "inducing": "5202053c2c5fb2c8af9704e690b25a26bf2a0295",
+   "inducing_ct": 1673312349,
+   "inducing_subject": "Revert \"Revert \"[aat] Allow disable feature ranges\"\""
+  },
+  {
+   "fix": "5202053c2c5fb2c8af9704e690b25a26bf2a0295",
+   "fix_ct": 1673312349,
+   "fix_subject": "Revert \"Revert \"[aat] Allow disable feature ranges\"\"",
+   "how": "revert",
+   "inducing": "82b3e8af69b09fd908d1cd27b669234328d4a500",
+   "inducing_ct": 1673310532,
+   "inducing_subject": "Revert \"[aat] Allow disable feature ranges\""
+  },
+  {
+   "fix": "82b3e8af69b09fd908d1cd27b669234328d4a500",
+   "fix_ct": 1673310532,
+   "fix_subject": "Revert \"[aat] Allow disable feature ranges\"",
+   "how": "revert",
+   "inducing": "24a4d397bae6b614215086c85a714dc789af3e7f",
+   "inducing_ct": 1673310408,
+   "inducing_subject": "[aat] Allow disable feature ranges"
+  },
+  {
+   "fix": "2764a6169141a09f354abedee39c3430179e90e6",
+   "fix_ct": 1672956894,
+   "fix_subject": "Revert \"[gsubgpos] Use swap instead of move\"",
+   "how": "revert",
+   "inducing": "8a17cc4ecf21f6754e2d90562d0ced7496870f74",
+   "inducing_ct": 1672953338,
+   "inducing_subject": "[gsubgpos] Use swap instead of move"
+  },
+  {
+   "fix": "167b7c604603d8a70e15c89714fa601e59248f08",
+   "fix_ct": 1672955300,
+   "fix_subject": "Revert \"[gsubgpos] Reduce hb_set_t allocations\"",
+   "how": "revert",
+   "inducing": "0b7f6d6cf0e2deba637783ab3880fdfb90ca8ac3",
+   "inducing_ct": 1672952711,
+   "inducing_subject": "[gsubgpos] Reduce hb_set_t allocations"
+  },
+  {
+   "fix": "3947cedd09a2386be5774400ac0b582d8173d078",
+   "fix_ct": 1672955267,
+   "fix_subject": "Revert \"[gsubgpos] Cache pos_glyphs allocation in closure\"",
+   "how": "revert",
+   "inducing": "3961cc46bf438947b19063cb7e735247358f1d4f",
+   "inducing_ct": 1672952337,
+   "inducing_subject": "[gsubgpos] Cache pos_glyphs allocation in closure"
+  },
+  {
+   "fix": "7b0f9abc897f656addc55ad875bd4737cbb17128",
+   "fix_ct": 1672169929,
+   "fix_subject": "[paint] Add back \"remote-control\" API",
+   "how": "revert",
+   "inducing": "f146299a405b8338542a245b85e664de29f0c972",
+   "inducing_ct": 1671827879,
+   "inducing_subject": "[paint] Drop unnecessary api"
+  },
+  {
+   "fix": "392463bff591fd0cec2ea2476b30427251f7c9f4",
+   "fix_ct": 1671723241,
+   "fix_subject": "[cff] Fix extent rounding",
+   "how": "sha-reference",
+   "inducing": "b0abbfd8684e9970ed2cac78781643edb7cce0ae",
+   "inducing_ct": 1671719535,
+   "inducing_subject": "[font] Centralize glyph-extents scaling"
+  },
+  {
+   "fix": "9ab2c8034ee137e84749b9aa2c197b2acec206aa",
+   "fix_ct": 1670785469,
+   "fix_subject": "Revert \"[glyf] Use component phantom points after transformation\"",
+   "how": "revert",
+   "inducing": "a756bd1944404da6e53173c4061a2aef262e60f3",
+   "inducing_ct": 1665703099,
+   "inducing_subject": "[glyf] Use component phantom points after transformation"
+  },
+  {
+   "fix": "5e713e99bf5121a7d0cd2341c40db3d79bd09879",
+   "fix_ct": 1670542344,
+   "fix_subject": "Revert \"[map] Speed up is_real()\"",
+   "how": "revert",
+   "inducing": "f5307c3ba8401fbaf9008705d7f8dfa7d28e944c",
+   "inducing_ct": 1670180056,
+   "inducing_subject": "[map] Speed up is_real()"
+  },
+  {
+   "fix": "22b0390e2dcefcf737d70f8d965d99b902831a29",
+   "fix_ct": 1670258616,
+   "fix_subject": "Revert \"[VarData] Don't clear memory we are going to fill in completely\"",
+   "how": "revert",
+   "inducing": "e28e2dad03a453c5e5c4c5a9d6fd276182c5f80b",
+   "inducing_ct": 1670108203,
+   "inducing_subject": "[VarData] Don't clear memory we are going to fill in completely"
+  },
+  {
+   "fix": "2c0abf02580ba109abcd6fb1da890f8b7500a9b1",
+   "fix_ct": 1670191416,
+   "fix_subject": "Revert \"[harfbuzz-subset.cc] Trim down!\"",
+   "how": "revert",
+   "inducing": "a335458d5776135f8672bfc98681b8862f657d5c",
+   "inducing_ct": 1670190980,
+   "inducing_subject": "[harfbuzz-subset.cc] Trim down!"
+  },
+  {
+   "fix": "dbbb8e8006ea71519546105f229ce635105bf855",
+   "fix_ct": 1670177619,
+   "fix_subject": "Revert \"[map] Add hb_map_filter_invalid\"",
+   "how": "revert",
+   "inducing": "8d7e92111786b21906157127c24b72b1e444e6e7",
+   "inducing_ct": 1670176935,
+   "inducing_subject": "[map] Add hb_map_filter_invalid"
+  },
+  {
+   "fix": "8e9e94dba971e3b09d4a9853a8abcf68d5c6dc62",
+   "fix_ct": 1670007695,
+   "fix_subject": "Revert \"[vector] Optimize grow_vector() for size\"",
+   "how": "revert",
+   "inducing": "1dd9396c7a4c24fe9d578551fab735bdd699e52a",
+   "inducing_ct": 1668816074,
+   "inducing_subject": "[vector] Optimize grow_vector() for size"
+  },
+  {
+   "fix": "0c70bc7f3286ea0c04164f110a6d2caac805812c",
+   "fix_ct": 1669315728,
+   "fix_subject": "[skippy-iter] Fix two logic errors",
+   "how": "sha-reference",
+   "inducing": "42681bdb55a75520d4ac194302fe936d1ce3cb34",
+   "inducing_ct": 1669264603,
+   "inducing_subject": "[gsubgpos] No logic-change minor rewrite"
+  },
+  {
+   "fix": "d7b492e3f589f8ba0d034a818a83a1d14a86b443",
+   "fix_ct": 1669097331,
+   "fix_subject": "Revert \"[array] Remove hash specializations for bytes\"",
+   "how": "revert",
+   "inducing": "213117317cefeb4e75d21c5c21e383309f116bb0",
+   "inducing_ct": 1668817484,
+   "inducing_subject": "[array] Remove hash specializations for bytes"
+  },
+  {
+   "fix": "3ff8abf27287da410883b0f4305cb9426206a60f",
+   "fix_ct": 1668825492,
+   "fix_subject": "Revert \"[map] Allow std::move-ing keys into the map\"",
+   "how": "revert",
+   "inducing": "f657ef7e57c889309c2d9d37934368ca255f9d5b",
+   "inducing_ct": 1668824223,
+   "inducing_subject": "[map] Allow std::move-ing keys into the map"
+  },
+  {
+   "fix": "ebc382a8474af5a8829750db8f641b384f6f47ec",
+   "fix_ct": 1668466786,
+   "fix_subject": "Revert \"Avoid use values () in hb-hashmap if value_t has an overriden operator &\"",
+   "how": "revert",
+   "inducing": "b92e4cc0091e093f6941019e1a53cc04a137017a",
+   "inducing_ct": 1668457195,
+   "inducing_subject": "Avoid use values () in hb-hashmap if value_t has an overriden operator &"
+  },
+  {
+   "fix": "27c8bbcb04d506670dad8bbe3b9e9d1bde466aa8",
+   "fix_ct": 1667944118,
+   "fix_subject": "Revert \"[name] Simplify buffer-length calculation\"",
+   "how": "revert",
+   "inducing": "d70595657e8d56b52d5714d082092d8eb104093e",
+   "inducing_ct": 1667942156,
+   "inducing_subject": "[name] Simplify buffer-length calculation"
+  },
+  {
+   "fix": "82d19c08fc5f2b083d3769d2e6bd818368d6ac40",
+   "fix_ct": 1665703023,
+   "fix_subject": "Revert \"[glyf/Composite] Remove phantom points when not needed anymore\"",
+   "how": "revert",
+   "inducing": "527e63a3bd8487d21e423a8a358eee30672eddb6",
+   "inducing_ct": 1665702820,
+   "inducing_subject": "[glyf/Composite] Remove phantom points when not needed anymore"
+  },
+  {
+   "fix": "b57ea3b053d45f5437cae54a9ee23040124047da",
+   "fix_ct": 1659731367,
+   "fix_subject": "Revert \"[iter] Use && in uses of is_source_of\"",
+   "how": "revert",
+   "inducing": "ccbba667a9bdc096f0053d5e3ee951a8b6298e8a",
+   "inducing_ct": 1659721911,
+   "inducing_subject": "[iter] Use && in uses of is_source_of"
+  },
+  {
+   "fix": "a5d9012e94978a5af32021c5c478a8db95aea195",
+   "fix_ct": 1659145860,
+   "fix_subject": "Revert \"[ot-font] Minor simplification\"",
+   "how": "revert",
+   "inducing": "28c02b37684b41bf584ed81d910a448bdf9f706a",
+   "inducing_ct": 1659131716,
+   "inducing_subject": "[ot-font] Minor simplification"
+  },
+  {
+   "fix": "5d7556e1841bafc851d043bb9d0195651edb0ce3",
+   "fix_ct": 1658422716,
+   "fix_subject": "Revert \"[subst/SingleSubstFormat1] Rewrite nicer\"",
+   "how": "revert",
+   "inducing": "bababe10724c27b2cbb09bf25e7dcf4aeea07588",
+   "inducing_ct": 1658420727,
+   "inducing_subject": "[subst/SingleSubstFormat1] Rewrite nicer"
+  },
+  {
+   "fix": "46a36771f4369994df67535e15ac7af71fad345a",
+   "fix_ct": 1657648980,
+   "fix_subject": "[draw] Fix leak from e0a5231657a6f09ca4afc93e1b2224eba7a0b544",
+   "how": "sha-reference",
+   "inducing": "e0a5231657a6f09ca4afc93e1b2224eba7a0b544",
+   "inducing_ct": 1655408444,
+   "inducing_subject": "[draw] Lazy-allocate user-data/destroy callback vector"
+  },
+  {
+   "fix": "3e881efbe4e8ad0a6c67112b150205297561c38e",
+   "fix_ct": 1657108316,
+   "fix_subject": "Revert \"Revert \"Revert \"[hb-directwrite] Don't load dwrit.dll dynamically\"\"\"",
+   "how": "revert",
+   "inducing": "361a438658dcddea29d7c8b9c68bf2bc88109bde",
+   "inducing_ct": 1638381348,
+   "inducing_subject": "Revert \"Revert \"[hb-directwrite] Don't load dwrit.dll dynamically\"\""
+  },
+  {
+   "fix": "7eac779abf14243124af2c6e89cff71e18e41cb3",
+   "fix_ct": 1656280947,
+   "fix_subject": "Revert \"Revert \"[glyf] Optimize shape loading\"\"",
+   "how": "revert",
+   "inducing": "164bd288cfe66f1742183ab38fa9bd121b1cd8a0",
+   "inducing_ct": 1656280875,
+   "inducing_subject": "Revert \"[glyf] Optimize shape loading\""
+  },
+  {
+   "fix": "164bd288cfe66f1742183ab38fa9bd121b1cd8a0",
+   "fix_ct": 1656280875,
+   "fix_subject": "Revert \"[glyf] Optimize shape loading\"",
+   "how": "revert",
+   "inducing": "f0819301b74871c4c0a58e16918d3f8df2c6f74d",
+   "inducing_ct": 1656280374,
+   "inducing_subject": "[glyf] Optimize shape loading"
+  },
+  {
+   "fix": "17c80035adc61c52a9e9600664496e3e4b837e37",
+   "fix_ct": 1654769858,
+   "fix_subject": "Revert \"[cplusplus] Internally allow using hb_unique_ptr with hb_free()\"",
+   "how": "revert",
+   "inducing": "b5f621b08d56c15832ab4f588a0673fce03305a0",
+   "inducing_ct": 1654438531,
+   "inducing_subject": "[cplusplus] Internally allow using hb_unique_ptr with hb_free()"
+  },
+  {
+   "fix": "e6409d3905d8801d1be647d505524f71230c6ca1",
+   "fix_ct": 1654433857,
+   "fix_subject": "Revert \"[layout] Use a cache for main input ClassDef of (Chain)ContextLookups\"",
+   "how": "revert",
+   "inducing": "57d1c08739d0acd94b96da2f9d5dd6c0ff3b3722",
+   "inducing_ct": 1654433659,
+   "inducing_subject": "[layout] Use a cache for main input ClassDef of (Chain)ContextLookups"
+  },
+  {
+   "fix": "fc4d42ff99018f9f640d3191bcd621c547ed61ea",
+   "fix_ct": 1654089158,
+   "fix_subject": "[ft] Add API to notify that hb_font_t changed",
+   "how": "sha-reference",
+   "inducing": "56e0ff9ea129aa91dfcc746cd61f8cbbc427dba7",
+   "inducing_ct": 1653562970,
+   "inducing_subject": "[ft] If hb_font changed, update FT_Face"
+  },
+  {
+   "fix": "315ef83b4eae5fe7792df8c3959656fd7c3c0c5e",
+   "fix_ct": 1653908966,
+   "fix_subject": "Revert \"Revert \"[ot-lang] Use atomic int for cache\"\"",
+   "how": "revert",
+   "inducing": "c56ce8681c209abd147328142806769752091b1c",
+   "inducing_ct": 1653733551,
+   "inducing_subject": "Revert \"[ot-lang] Use atomic int for cache\""
+  },
+  {
+   "fix": "c56ce8681c209abd147328142806769752091b1c",
+   "fix_ct": 1653733551,
+   "fix_subject": "Revert \"[ot-lang] Use atomic int for cache\"",
+   "how": "revert",
+   "inducing": "d61b2074915cf5f8044dcb8e3dafc04b5b58c6b8",
+   "inducing_ct": 1653611083,
+   "inducing_subject": "[ot-lang] Use atomic int for cache"
+  },
+  {
+   "fix": "f1bf14ea89ea082e5edd4e9c90738370bffcab1c",
+   "fix_ct": 1653000567,
+   "fix_subject": "Revert \"[set] Cache hash value\"",
+   "how": "revert",
+   "inducing": "44952bcc259a906b8875ed62dc40de96ade8b95c",
+   "inducing_ct": 1652990568,
+   "inducing_subject": "[set] Cache hash value"
+  },
+  {
+   "fix": "3aace2431b9bd503cb706760d831ae313d059107",
+   "fix_ct": 1652216044,
+   "fix_subject": "Revert \"[cff-common] Optimize INDEX::operator[]\"",
+   "how": "revert",
+   "inducing": "9edb03ac7ac4b4d0814f3fd1f20cc8d2be99e971",
+   "inducing_ct": 1652215380,
+   "inducing_subject": "[cff-common] Optimize INDEX::operator[]"
+  },
+  {
+   "fix": "b31ef081db0d91fd6d3e72a59fc97248ab28a904",
+   "fix_ct": 1652215960,
+   "fix_subject": "Revert \"[cff] Add an unlikely()\"",
+   "how": "revert",
+   "inducing": "9ba9adb7ed6d48504e97a2af117b7da1fdb28450",
+   "inducing_ct": 1652215380,
+   "inducing_subject": "[cff] Add an unlikely()"
+  },
+  {
+   "fix": "61486746d3d8937c2b656c3ba72bd666fadef76c",
+   "fix_ct": 1648504627,
+   "fix_subject": "Revert \"[indic] Clear syllables before presentation features\"",
+   "how": "revert",
+   "inducing": "90f09b1e877dc6edf63fc4ac2b397ef4e5c92083",
+   "inducing_ct": 1647898928,
+   "inducing_subject": "[indic] Clear syllables before presentation features"
+  },
+  {
+   "fix": "7bdc20ec810c14056d6362b076aa6717f10f26a0",
+   "fix_ct": 1647717145,
+   "fix_subject": "restores unintended addition in 43be5ba",
+   "how": "sha-reference",
+   "inducing": "43be5ba442548528c89ad31c0927cc68515b736e",
+   "inducing_ct": 1641306413,
+   "inducing_subject": "[buffer] Group shape-related members together"
+  },
+  {
+   "fix": "8e900f2cda0acd938eb50d8294a0b074761f9a91",
+   "fix_ct": 1645126144,
+   "fix_subject": "Revert \"hb-algs.hh: Fix build on Visual Studio 2015\"",
+   "how": "revert",
+   "inducing": "52c536bb8d90cf0f09e13f5e9e21bf489cc08c23",
+   "inducing_ct": 1644521216,
+   "inducing_subject": "hb-algs.hh: Fix build on Visual Studio 2015"
+  },
+  {
+   "fix": "1173ed1f7f401b0f21bacc0f35c4a18f6947a99d",
+   "fix_ct": 1642344482,
+   "fix_subject": "Try fix Mac build",
+   "how": "sha-reference",
+   "inducing": "985b63b3eeee5be1f5234fc7f13077eacf5e5b94",
+   "inducing_ct": 1642105987,
+   "inducing_subject": "[map] Allow invalid items to be pointer to static object"
+  },
+  {
+   "fix": "ce7f19a2ccb04181b015005f9aa12381da606c63",
+   "fix_ct": 1641850827,
+   "fix_subject": "Revert \"[map] Actually use k/v invalid types for declaration!\"",
+   "how": "revert",
+   "inducing": "6f559346ac70fd188cb22d41f4b03ec227feee25",
+   "inducing_ct": 1641850176,
+   "inducing_subject": "[map] Actually use k/v invalid types for declaration!"
+  },
+  {
+   "fix": "361a438658dcddea29d7c8b9c68bf2bc88109bde",
+   "fix_ct": 1638381348,
+   "fix_subject": "Revert \"Revert \"[hb-directwrite] Don't load dwrit.dll dynamically\"\"",
+   "how": "revert",
+   "inducing": "ecbe224743c205c99aa459b27e7fb241cc4b1dc5",
+   "inducing_ct": 1635020379,
+   "inducing_subject": "Revert \"[hb-directwrite] Don't load dwrit.dll dynamically\""
+  },
+  {
+   "fix": "c484641304daff090111171d2dc3404735e14ed6",
+   "fix_ct": 1635814104,
+   "fix_subject": "Revert \"[vector] Add initializer_list constructor & tests\"",
+   "how": "revert",
+   "inducing": "aa6182453b29b2d1cc974756fe0ae4220a846bf4",
+   "inducing_ct": 1635813417,
+   "inducing_subject": "[vector] Add initializer_list constructor & tests"
+  },
+  {
+   "fix": "ecbe224743c205c99aa459b27e7fb241cc4b1dc5",
+   "fix_ct": 1635020379,
+   "fix_subject": "Revert \"[hb-directwrite] Don't load dwrit.dll dynamically\"",
+   "how": "revert",
+   "inducing": "6119ff9d806db7de3ceef73de67fe589507800bb",
+   "inducing_ct": 1622859766,
+   "inducing_subject": "[hb-directwrite] Don't load dwrit.dll dynamically"
+  },
+  {
+   "fix": "195c05df9925c7c4a4982a286ef9c416b2cde3af",
+   "fix_ct": 1630719679,
+   "fix_subject": "Revert \"[ot-shape-normalize] Move buffer out of hb_ot_shape_normalize_context_t\"",
+   "how": "revert",
+   "inducing": "8cdbea5580731c2bf66e56bf619c1fbb2978692e",
+   "inducing_ct": 1629822933,
+   "inducing_subject": "[ot-shape-normalize] Move buffer out of hb_ot_shape_normalize_context_t"
+  },
+  {
+   "fix": "bf81bbfb3541ea4a39bacdbe0568e9e170b1b0f7",
+   "fix_ct": 1630563382,
+   "fix_subject": "Revert \"[arabic] Do not re-compose Unicode sequences\"",
+   "how": "revert",
+   "inducing": "ff34c240b0a60014a219b8af49c1be2d7e08b388",
+   "inducing_ct": 1630562125,
+   "inducing_subject": "[arabic] Do not re-compose Unicode sequences"
+  },
+  {
+   "fix": "04cf6212d72ceffb164b2aaf7315711d4227445f",
+   "fix_ct": 1630370126,
+   "fix_subject": "[util/hb-subset] Fix --version and --help again",
+   "how": "sha-reference",
+   "inducing": "38ad093216d8204df2dce18a112ee43964031357",
+   "inducing_ct": 1630252002,
+   "inducing_subject": "[util/hb-subset] Don't ignore errors during face parsing"
+  },
+  {
+   "fix": "060de189ecdf2327c6583b97f02c33c21889ca15",
+   "fix_ct": 1629356314,
+   "fix_subject": "[bit-page] Fix sanitizer error",
+   "how": "sha-reference",
+   "inducing": "9449cfeefd7e3b761c8035c45330abd7a5201604",
+   "inducing_ct": 1629075598,
+   "inducing_subject": "[set] Simplify page_t::next/prev()"
+  },
+  {
+   "fix": "0e37c07f4c116c983693ce87ae6828b1ca77a347",
+   "fix_ct": 1627671179,
+   "fix_subject": "Revert \"Construct user_data in hb_object\"",
+   "how": "revert",
+   "inducing": "a78eb43c79e7a2d870add6b686426748e104b7b3",
+   "inducing_ct": 1627596236,
+   "inducing_subject": "Construct user_data in hb_object"
+  },
+  {
+   "fix": "2d54c34680fd22e195eb6bd9e87c25a94e9a4b8b",
+   "fix_ct": 1627541376,
+   "fix_subject": "[subset/VarStore] Fix OOM in fuzzer test",
+   "how": "sha-reference",
+   "inducing": "c68a00b92eb62fdc79f9a2bd1fc7a6acc24a3602",
+   "inducing_ct": 1627414089,
+   "inducing_subject": "[subset] Fix possible overflows in VarRegionList serialize"
+  },
+  {
+   "fix": "25dee6097741e9594d545ff764623c30289e5c58",
+   "fix_ct": 1627502304,
+   "fix_subject": "[sanitize] Revert some from c68a00b92eb62fdc79f9a2bd1fc7a6acc24a3602",
+   "how": "sha-reference",
+   "inducing": "c68a00b92eb62fdc79f9a2bd1fc7a6acc24a3602",
+   "inducing_ct": 1627414089,
+   "inducing_subject": "[subset] Fix possible overflows in VarRegionList serialize"
+  },
+  {
+   "fix": "087e2705de1ea5195eb77e144ef9196058d1ee7d",
+   "fix_ct": 1627494168,
+   "fix_subject": "Fix signed-ness error in 0ded6a70c829284a8220ce30a405b0a974061df4",
+   "how": "sha-reference",
+   "inducing": "0ded6a70c829284a8220ce30a405b0a974061df4",
+   "inducing_ct": 1627493727,
+   "inducing_subject": "[subset] Fix another fuzzer issue"
+  },
+  {
+   "fix": "f3e031539f72d67e9bcfad96b28798367a79f1ec",
+   "fix_ct": 1627493794,
+   "fix_subject": "Revert \"[ci] Bin FontTools version due to recent COLRv1 changes\"",
+   "how": "revert",
+   "inducing": "163748b5059e7b02a8ea57e263b009020a3ed499",
+   "inducing_ct": 1627335168,
+   "inducing_subject": "[ci] Bin FontTools version due to recent COLRv1 changes"
+  },
+  {
+   "fix": "93e6a9bc4e1ac16abeccc9c0bead08a1eded1540",
+   "fix_ct": 1623793129,
+   "fix_subject": "Revert \"Remove unneeded buffer clear_output / remove_output calls\"",
+   "how": "revert",
+   "inducing": "06175b71433bc42edc07d342e6354035e37fb5fd",
+   "inducing_ct": 1623789207,
+   "inducing_subject": "Remove unneeded buffer clear_output / remove_output calls"
+  },
+  {
+   "fix": "ed2ee8a8c26dc39e39172c169d8a0d434083fefe",
+   "fix_ct": 1618602823,
+   "fix_subject": "Revert \"Disable -Wunused-macros under GCC\"",
+   "how": "revert",
+   "inducing": "1b1413246b8b4a9c6f7e0aac16afd6d110c142cf",
+   "inducing_ct": 1618601522,
+   "inducing_subject": "Disable -Wunused-macros under GCC"
+  },
+  {
+   "fix": "3c5b7886ebeee112ba7d2f2f7d7e581981ab61b0",
+   "fix_ct": 1610763964,
+   "fix_subject": "Revert \"Avoid category duplication between C++ and Ragel\"",
+   "how": "revert",
+   "inducing": "67ea8133d3fa82b3365cd917fb266ba752f16169",
+   "inducing_ct": 1610763892,
+   "inducing_subject": "Avoid category duplication between C++ and Ragel"
+  },
+  {
+   "fix": "bbbcad0dbbe980209be946612de352cadae98522",
+   "fix_ct": 1600280618,
+   "fix_subject": "Revert \"[ENOMEM] don't perform set process operations if the other set is in an error state.\"",
+   "how": "revert",
+   "inducing": "f3929abafe3b64f15d0dc2d21ad7b493eeb92dfe",
+   "inducing_ct": 1600277790,
+   "inducing_subject": "[ENOMEM] don't perform set process operations if the other set is in an error state. Running a process while the other set is in an error state can potentially corrupt this sets map map (for example by overwritting all of the major values with 0)."
+  },
+  {
+   "fix": "9748ae7299330f0245e97f7b1f18cd1207043e62",
+   "fix_ct": 1597170108,
+   "fix_subject": "Revert \"Reordering fails when GDEF table is absent #2140\"",
+   "how": "revert",
+   "inducing": "f4cd99f28eefe695b86876736166fd119e22e04e",
+   "inducing_ct": 1587591957,
+   "inducing_subject": "Reordering fails when GDEF table is absent #2140"
+  },
+  {
+   "fix": "55c41f219f539464335c16dc8392787fd0ac1b46",
+   "fix_ct": 1596740863,
+   "fix_subject": "[glyf] Clamp advance value result",
+   "how": "sha-reference",
+   "inducing": "02d1ec16585738d5e55354224bcfcc552b079a76",
+   "inducing_ct": 1596736115,
+   "inducing_subject": "[gvar] Don't fail on imprefect gvar"
+  },
+  {
+   "fix": "3fe719571362e39e70eb12ea9d7be9dabb505c4c",
+   "fix_ct": 1592441468,
+   "fix_subject": "Revert \"[gpos] Break cycle-of-2 when cursive attaching\"",
+   "how": "revert",
+   "inducing": "7090707de67e660ae626ecf774f6af8a63a692ab",
+   "inducing_ct": 1592440908,
+   "inducing_subject": "[gpos] Break cycle-of-2 when cursive attaching"
+  },
+  {
+   "fix": "1b64b73080994ac577a6d936a0109b3c6f5d21de",
+   "fix_ct": 1585579763,
+   "fix_subject": "Revert \"Add messages for GPOS/GSUB phases\"",
+   "how": "revert",
+   "inducing": "b07714d6b53bb20a2796f5efa607dc32aac587f1",
+   "inducing_ct": 1584993764,
+   "inducing_subject": "Add messages for GPOS/GSUB phases"
+  },
+  {
+   "fix": "2e1bf61dd5afcef71957b349254b80e7cfd14e45",
+   "fix_ct": 1585247368,
+   "fix_subject": "[gsubgpos] Use FeatureVariations::NOT_FOUND_INDEX instead Index::",
+   "how": "sha-reference",
+   "inducing": "b143e34ee1bb56d104e33b78abff70302a93d3d0",
+   "inducing_ct": 1585208172,
+   "inducing_subject": "[gsubgpos] Initialize variation index on HB_NO_VAR"
+  },
+  {
+   "fix": "f253f06cf368d74f1ec5d84c6439ae2a571e99f1",
+   "fix_ct": 1583250124,
+   "fix_subject": "[fuzz] Add another fixed case",
+   "how": "sha-reference",
+   "inducing": "d38360397609d2f3d2dd115bcb0f58d10a1bb4a3",
+   "inducing_ct": 1583176268,
+   "inducing_subject": "Limit OT::Lookup subtables (#2219)"
+  },
+  {
+   "fix": "44169f3396af0c60ebc74fd4c624988d871dcf0f",
+   "fix_ct": 1582979643,
+   "fix_subject": "[draw] Fix invalid rendering of some glyph on Estedad-VF",
+   "how": "sha-reference",
+   "inducing": "11f3fca01d6840f3a690b59040ad7452e5343abf",
+   "inducing_ct": 1582022317,
+   "inducing_subject": "[glyf/gvar] Remove need of passing end points vector around"
+  },
+  {
+   "fix": "e90213868b121af72d19b6022a671ebe72ff55aa",
+   "fix_ct": 1582912491,
+   "fix_subject": "Revert \"collect_unicodes() to check gid < num_glyphs with cmap 12\"",
+   "how": "revert",
+   "inducing": "15b43a410400c74a32d40f4b89dbea02fa7cd6e1",
+   "inducing_ct": 1582908339,
+   "inducing_subject": "collect_unicodes() to check gid < num_glyphs with cmap 12"
+  },
+  {
+   "fix": "1f5a54c768159e1bcf1c772ab236737994f638aa",
+   "fix_ct": 1582542007,
+   "fix_subject": "[gvar] fix infinite loop introduced by 11f3fca",
+   "how": "sha-reference",
+   "inducing": "11f3fca01d6840f3a690b59040ad7452e5343abf",
+   "inducing_ct": 1582022317,
+   "inducing_subject": "[glyf/gvar] Remove need of passing end points vector around"
+  },
+  {
+   "fix": "e171beeb5f3f26dee84373b4db223512675f5837",
+   "fix_ct": 1579882892,
+   "fix_subject": "Revert \"[subset] Add \"--name-languages\" and \"--name-legacy\" options\"",
+   "how": "revert",
+   "inducing": "fd85818b5b85fb0ad2db71c60e94ca0689d38bca",
+   "inducing_ct": 1579829045,
+   "inducing_subject": "[subset] Add \"--name-languages\" and \"--name-legacy\" options Make name table subsetting consistent with fontTools"
+  },
+  {
+   "fix": "03028a5fe512978a8f8e2396001cf8e425b44f72",
+   "fix_ct": 1572295616,
+   "fix_subject": "Revert \"Don't include codepoint 0 in the results of collect_unicodes.\"",
+   "how": "revert",
+   "inducing": "14ad96ffbf77c33d8d33d2686d17c2375381989e",
+   "inducing_ct": 1572292564,
+   "inducing_subject": "Don't include codepoint 0 in the results of collect_unicodes. It is always assumed to be the notdef glyph."
+  },
+  {
+   "fix": "39cf8e21be2bf69717cf60a339b3ad26c6f7985b",
+   "fix_ct": 1567853850,
+   "fix_subject": "[number] Add overflow checks used to be done in parse_bcd",
+   "how": "sha-reference",
+   "inducing": "1083df8b80b08aa1a4f2dabfe414aaa4a0ec8aa1",
+   "inducing_ct": 1567546449,
+   "inducing_subject": "Use hb_parse_double in CFF::dict_opset_t::parse_bcd"
+  },
+  {
+   "fix": "3aceee2527ad921e0d589e42a1fe451e0fc67ee0",
+   "fix_ct": 1567786638,
+   "fix_subject": "Revert \"[null] Silence undefined-behavior complaints with too-small null bytes\"",
+   "how": "revert",
+   "inducing": "911c76abcdfe89770b252eb0d4eb621c0db00ad5",
+   "inducing_ct": 1567785191,
+   "inducing_subject": "[null] Silence undefined-behavior complaints with too-small null bytes"
+  },
+  {
+   "fix": "d3b984d3790d61931d4427ad7c0ae6547f8f1076",
+   "fix_ct": 1567432683,
+   "fix_subject": "Revert in-house pow10 (d80a3ea) and fix oss-fuzz/16922",
+   "how": "sha-reference",
+   "inducing": "d80a3ea983534e291aee273dba5b1c6e889dadfa",
+   "inducing_ct": 1567330516,
+   "inducing_subject": "[cff] Implement in-house power of 10"
+  },
+  {
+   "fix": "7eafe94705bb818aac71fbc142158a22da622d19",
+   "fix_ct": 1567272296,
+   "fix_subject": "Revert \"[array] Add chop()\"",
+   "how": "revert",
+   "inducing": "545fe9d9f0870568c40c17591f3f224c228feba6",
+   "inducing_ct": 1567118901,
+   "inducing_subject": "[array] Add chop()"
+  },
+  {
+   "fix": "ed67efcc8c3638c625b2904833af3f27ef51db14",
+   "fix_ct": 1563471740,
+   "fix_subject": "Revert \"[Myanmar] Prevent reordering between Asat and Dot below\"",
+   "how": "revert",
+   "inducing": "1c8654ead41ca746d577549c92d2a41c594ab639",
+   "inducing_ct": 1360610939,
+   "inducing_subject": "[Myanmar] Prevent reordering between Asat and Dot below"
+  },
+  {
+   "fix": "6157bbe5127bbcbd17348622601976cffcd11c63",
+   "fix_ct": 1563387608,
+   "fix_subject": "Revert \"Revert previous change\"",
+   "how": "revert",
+   "inducing": "b8e90ca1a10fbd472eda1aa8cc3797011da52356",
+   "inducing_ct": 1563383299,
+   "inducing_subject": "Revert previous change"
+  },
+  {
+   "fix": "4730b350b7ee90338caf3e962343af42412ce3df",
+   "fix_ct": 1562971115,
+   "fix_subject": "Revert \"Update Graphite API to latest (#1215)\"",
+   "how": "revert",
+   "inducing": "e4e74c2751ac24178086cce2811d34d8019b6f85",
+   "inducing_ct": 1538595206,
+   "inducing_subject": "Update Graphite API to latest (#1215)"
+  },
+  {
+   "fix": "2e7021da7d1726a37822e6a001b9218f82255bc8",
+   "fix_ct": 1562572307,
+   "fix_subject": "Revert \"Minor\" - revert moving extern \"C\" definitions in-function",
+   "how": "revert",
+   "inducing": "62e60322cb9e18b3ee75f1b4a2a6d3069f587407",
+   "inducing_ct": 1562108933,
+   "inducing_subject": "Minor"
+  },
+  {
+   "fix": "4cb180d227c1adc32e921c241a93cd1f50a98d33",
+   "fix_ct": 1562121858,
+   "fix_subject": "Revert \"Use constexpr to replace passthru_ bools\"",
+   "how": "revert",
+   "inducing": "c4aa10ebc8dc28b1f9c90af2ca2092a7535f8395",
+   "inducing_ct": 1562120103,
+   "inducing_subject": "Use constexpr to replace passthru_ bools"
+  },
+  {
+   "fix": "896416bd4c6ac486eb4e1926eaa09d5a9b693763",
+   "fix_ct": 1560803989,
+   "fix_subject": "Partially revert \"[ft/ot] Remove implementation of deprecated kerning funcs\"",
+   "how": "revert",
+   "inducing": "47030b1855f04c0d75899ffb6f5021fea3c19b90",
+   "inducing_ct": 1539059445,
+   "inducing_subject": "[ft/ot] Remove implementation of deprecated kerning funcs"
+  },
+  {
+   "fix": "2682efb02df72fb254c819cb76fc23592c30fc45",
+   "fix_ct": 1560803929,
+   "fix_subject": "Revert \"Deprecate font kern API\"",
+   "how": "revert",
+   "inducing": "d219f899f4b2fb4b39ebc1dff9fb648fc5d6d112",
+   "inducing_ct": 1539057669,
+   "inducing_subject": "Deprecate font kern API"
+  },
+  {
+   "fix": "451edbd4d063a4b43c1ca3d2b60c7392602ae7b7",
+   "fix_ct": 1560196014,
+   "fix_subject": "Revert \"Test new solution for HB_PARTIALIZE\"",
+   "how": "revert",
+   "inducing": "a0c4900799c26e4ff34180842a5ff21048fe31a0",
+   "inducing_ct": 1560195203,
+   "inducing_subject": "Test new solution for HB_PARTIALIZE"
+  },
+  {
+   "fix": "b213042f87dd736bad7a852fe98269f84cbff493",
+   "fix_ct": 1557906648,
+   "fix_subject": "Revert \"Revert symmetric OffsetTo overloads\"",
+   "how": "revert",
+   "inducing": "01912efb74fc554a81c8cfe572145ce45b8fa58b",
+   "inducing_ct": 1557906167,
+   "inducing_subject": "Revert symmetric OffsetTo overloads"
+  },
+  {
+   "fix": "8461ade7832110d28001dc641342d3f9461e03b0",
+   "fix_ct": 1557781848,
+   "fix_subject": "Revert \"[ragel] Regenerate ragel-generated files using ragel 7.0.0.11 May 2018\"",
+   "how": "revert",
+   "inducing": "9b05db33b54e6e5f0b4658f4c06e7fe563f8923b",
+   "inducing_ct": 1557254384,
+   "inducing_subject": "[ragel] Regenerate ragel-generated files using ragel 7.0.0.11 May 2018"
+  },
+  {
+   "fix": "52c15b053aec06d351404a4c15609384946b26e1",
+   "fix_ct": 1557781828,
+   "fix_subject": "Revert \"[ragel] Switch to -T1 output instead of -F1\"",
+   "how": "revert",
+   "inducing": "ae8719eb596485ebff07dd5016256015cd0cf86b",
+   "inducing_ct": 1557775840,
+   "inducing_subject": "[ragel] Switch to -T1 output instead of -F1"
+  },
+  {
+   "fix": "0d5fd168f8e3c1202358a82161a28e407149b1b4",
+   "fix_ct": 1556905052,
+   "fix_subject": "Revert \"[WIP] [name] Port to fancy serializer machinery\"",
+   "how": "revert",
+   "inducing": "c7f366fbbb208d0a9103ac4ee4ac00ff726c31e4",
+   "inducing_ct": 1556856271,
+   "inducing_subject": "[WIP] [name] Port to fancy serializer machinery"
+  },
+  {
+   "fix": "a98e4068e76d50bd9562d85a452b56e681f1d62b",
+   "fix_ct": 1555123364,
+   "fix_subject": "Revert \"Hide symbols in hb-iter\"",
+   "how": "revert",
+   "inducing": "98f14c4cdb837a962083a6702f401d41b4c1ec5c",
+   "inducing_ct": 1555107126,
+   "inducing_subject": "Hide symbols in hb-iter"
+  },
+  {
+   "fix": "dab92bdd4623aa7dac8eb00b14131566d75d095e",
+   "fix_ct": 1555123178,
+   "fix_subject": "Revert \"Hide more symbols\"",
+   "how": "revert",
+   "inducing": "2e86d50915cf1a791da9acb95245aa820a3d70f4",
+   "inducing_ct": 1555106862,
+   "inducing_subject": "Hide more symbols"
+  },
+  {
+   "fix": "eca466e6b1a3e29532af92a2d30b2555c0fafbfc",
+   "fix_ct": 1553900344,
+   "fix_subject": "Err.  Fixup C++11 polyfill removal",
+   "how": "sha-reference",
+   "inducing": "1d75db19fb5df139b9648ff3f5e6184a5c554345",
+   "inducing_ct": 1553898034,
+   "inducing_subject": "Remove C++<11 polyfill"
+  },
+  {
+   "fix": "cc8e9a436fa408a1c63f4b9afb7643cea76a079c",
+   "fix_ct": 1547754905,
+   "fix_subject": "[AAT] Fully sanitize ankr table at sanitize time",
+   "how": "sha-reference",
+   "inducing": "6879efc2c1596d11a6a6ad296f80063b558d5e0f",
+   "inducing_ct": 1547752082,
+   "inducing_subject": "[AAT] Fix anchor bound checking, again"
+  },
+  {
+   "fix": "c986ca15a6320d78471adf950394f391e8729b15",
+   "fix_ct": 1547578699,
+   "fix_subject": "Improve overflow avoidance",
+   "how": "sha-reference",
+   "inducing": "480406cd3ef9e5ab8476ddfa04498bf23906c508",
+   "inducing_ct": 1547497654,
+   "inducing_subject": "Fix assertion on address overflow"
+  },
+  {
+   "fix": "b80b97b549dacc10d314bf8b5fd4ace596ccdfe1",
+   "fix_ct": 1545368885,
+   "fix_subject": "Revert \"Remove unused hb-iter.hh\"",
+   "how": "revert",
+   "inducing": "969ff3c7aadbe721cdd414488eb170433f10d00c",
+   "inducing_ct": 1545104580,
+   "inducing_subject": "Remove unused hb-iter.hh"
+  },
+  {
+   "fix": "f9d211af1d6d78d092038d263b222ec8a65cf09d",
+   "fix_ct": 1544625870,
+   "fix_subject": "Revert \"Minor fix re sanitize of Lookup subtables\"",
+   "how": "revert",
+   "inducing": "7146718bef81492e13aede0a2801cda1da41ce35",
+   "inducing_ct": 1544589869,
+   "inducing_subject": "Minor fix re sanitize of Lookup subtables"
+  },
+  {
+   "fix": "84efe0438e1cfc5b070e114b70e8c070be6119ca",
+   "fix_ct": 1543772354,
+   "fix_subject": "[aat] Fix division sign fallout",
+   "how": "sha-reference",
+   "inducing": "11d2f49af8f53340134c844173f4d8655b00dea3",
+   "inducing_ct": 1543687941,
+   "inducing_subject": "New approach to change BigEndian casts to be int-sized"
+  },
+  {
+   "fix": "c3a8b047aab47e40dc107a952b3a1472068ec932",
+   "fix_ct": 1543641999,
+   "fix_subject": "Revert \"Change BigEndian casts to be int-sized\"",
+   "how": "revert",
+   "inducing": "eb5ddd32bf4e458ca0af8d5784f8fd46485ad225",
+   "inducing_ct": 1543640581,
+   "inducing_subject": "Change BigEndian casts to be int-sized"
+  },
+  {
+   "fix": "fb059082138bf17a5a8616410d9a35f927f9fd85",
+   "fix_ct": 1543629375,
+   "fix_subject": "Revert ugly fixes",
+   "how": "revert",
+   "inducing": "abd81ed4f5cbc5a94171747909bc6b77551cb929",
+   "inducing_ct": 1543596761,
+   "inducing_subject": "Umm.  Cryptic, yes"
+  },
+  {
+   "fix": "748198a6718adbb200ee24ac013c617f62c946a4",
+   "fix_ct": 1543115819,
+   "fix_subject": "Revert \"[aat.morx] Remove set_object() business\"",
+   "how": "revert",
+   "inducing": "ae8ed58a6e53441d9ccbf67afd8a00b815cde99e",
+   "inducing_ct": 1543097649,
+   "inducing_subject": "[aat.morx] Remove set_object() business"
+  },
+  {
+   "fix": "c8a2dc820eb0ee3124e3762cb1167ac9e528ad28",
+   "fix_ct": 1543115813,
+   "fix_subject": "Revert \"[aat.kerx] Remove kerx subtable boundary enforcement\"",
+   "how": "revert",
+   "inducing": "15905a2a2998f7ddd964f920a4828602235d6b00",
+   "inducing_ct": 1543097679,
+   "inducing_subject": "[aat.kerx] Remove kerx subtable boundary enforcement"
+  },
+  {
+   "fix": "9eeebd8ddedb96c03860ce7eb5500aafa3969d6b",
+   "fix_ct": 1543115807,
+   "fix_subject": "Revert \"[sanitize] Remove now-unused set_object() machinery\"",
+   "how": "revert",
+   "inducing": "bbdb6edb3e1cea4c5b7076c4f6b3e6998ae36dae",
+   "inducing_ct": 1543097738,
+   "inducing_subject": "[sanitize] Remove now-unused set_object() machinery"
+  },
+  {
+   "fix": "cff4c6087fdb667a40f54f20ca3c49251bf076de",
+   "fix_ct": 1542409481,
+   "fix_subject": "Fix vertical fallback space sign",
+   "how": "sha-reference",
+   "inducing": "cf203af8a33591c163b63dbdf0fd341bc4606190",
+   "inducing_ct": 1541035629,
+   "inducing_subject": "Implement space fallback in vertical direction"
+  },
+  {
+   "fix": "55c66c7c56c1ecd493f51fe66fd434b28addfb41",
+   "fix_ct": 1541970578,
+   "fix_subject": "Revert \"Declare Null() constexpr\"",
+   "how": "revert",
+   "inducing": "442a72d95ab1fb3a47b486d8d1eb68e909d0ffb8",
+   "inducing_ct": 1541969483,
+   "inducing_subject": "Declare Null() constexpr"
+  },
+  {
+   "fix": "1d66cdcf770e45d995a318592352e4349faecb71",
+   "fix_ct": 1541897871,
+   "fix_subject": "Better fix for MSVC 2008",
+   "how": "sha-reference",
+   "inducing": "b4c61130324455bfd42095b01fa14ac901e441f1",
+   "inducing_ct": 1541885739,
+   "inducing_subject": "Try fixing MSVC 2008 build"
+  },
+  {
+   "fix": "d0163afb7bed83935c6a54d57a0e7366caeba0b3",
+   "fix_ct": 1541295510,
+   "fix_subject": "Revert \"Add operator char * to the naked array types as well\"",
+   "how": "revert",
+   "inducing": "db889c182ee5f54127285bfaab5bc94dafe46bda",
+   "inducing_ct": 1541275459,
+   "inducing_subject": "Add operator char * to the naked array types as well"
+  },
+  {
+   "fix": "7f5941e162bf7806299656edafd452a47b5a55b9",
+   "fix_ct": 1540624008,
+   "fix_subject": "Remove stale comment",
+   "how": "sha-reference",
+   "inducing": "30eab97a0072fbc22d353082249e0e6e546cd86b",
+   "inducing_ct": 1540616080,
+   "inducing_subject": "Fix invalid memory read"
+  },
+  {
+   "fix": "5eb7e7f6461bcf5b1e1d8ccb49eb904382762533",
+   "fix_ct": 1539721994,
+   "fix_subject": "Revert \"[vector] Simplify Sort\" and \"More of the same\"",
+   "how": "revert",
+   "inducing": "de0b9a466490c2c13d6ec6f59d5122b0a87d3180",
+   "inducing_ct": 1539720087,
+   "inducing_subject": "[vector] More of the same"
+  },
+  {
+   "fix": "2a5cb37fdb43230217e055f3d7c770a35cfd5c21",
+   "fix_ct": 1538959035,
+   "fix_subject": "Revert \"[morx] Fix MORX-35\"",
+   "how": "revert",
+   "inducing": "f62f6e90ad1f1a83f77771ad65ee1ffb79470a8a",
+   "inducing_ct": 1538952768,
+   "inducing_subject": "[morx] Fix MORX-35"
+  },
+  {
+   "fix": "7810bb1a59ea71afeed7ea489400801ebdf642e4",
+   "fix_ct": 1538641763,
+   "fix_subject": "[morx] Only insert glyphs at mark when a mark has been set before",
+   "how": "revert",
+   "inducing": "f4072e8cb81072cd6d51a2607efedb76c02e7db1",
+   "inducing_ct": 1538144063,
+   "inducing_subject": "[morx] Remove mark_set from Insertion"
+  },
+  {
+   "fix": "1dd1e56bf42af5b11afc3e34f78869e93d39867e",
+   "fix_ct": 1538324758,
+   "fix_subject": "Revert \"Fix glib-mkenum warning\"",
+   "how": "revert",
+   "inducing": "247756a7d89008ee6a7d1171dc07ba22454c6034",
+   "inducing_ct": 1538322573,
+   "inducing_subject": "Fix glib-mkenum warning"
+  },
+  {
+   "fix": "5c65ed800de4caef5ee9ad2111225fa5d8235737",
+   "fix_ct": 1538322573,
+   "fix_subject": "Fix bug introduced in 9b0b40b3c1ac8155c80ed5dc976228f4d3ec7e1f",
+   "how": "sha-reference",
+   "inducing": "9b0b40b3c1ac8155c80ed5dc976228f4d3ec7e1f",
+   "inducing_ct": 1538182403,
+   "inducing_subject": "Fix fallback kerning to check for current glyph's mask"
+  },
+  {
+   "fix": "a6f4b2f7cd088aeb44e1aac672434641f4f9e484",
+   "fix_ct": 1537797277,
+   "fix_subject": "Fix normalization",
+   "how": "sha-reference",
+   "inducing": "62d1e0852a5549a1b510ad46a4b89f12730bb708",
+   "inducing_ct": 1537752738,
+   "inducing_subject": "Prefer decomposed form if font has GPOS mark feature"
+  },
+  {
+   "fix": "606bf57430370810f7bb62ba12b9685d8943685d",
+   "fix_ct": 1537119279,
+   "fix_subject": "Revert forcing use of single-parameter static_assert()",
+   "how": "revert",
+   "inducing": "94bfea0ce6a7b4d5641c198d50751748a353df11",
+   "inducing_ct": 1537117939,
+   "inducing_subject": "Fix build, another try"
+  },
+  {
+   "fix": "0f520adaacca3c7b6d8e84a7722343184105f612",
+   "fix_ct": 1536660459,
+   "fix_subject": "Revert \"Remove unused hb_cache_t\"",
+   "how": "revert",
+   "inducing": "473b17af4d421f4ce7ac18c769731bb2aa4088f8",
+   "inducing_ct": 1508069469,
+   "inducing_subject": "Remove unused hb_cache_t"
+  },
+  {
+   "fix": "20a11a824d2a07a8544649477ad03e809bdd8e19",
+   "fix_ct": 1536580588,
+   "fix_subject": "Revert \"[subset] Disable GSUB/GPOS subsetting for now\"",
+   "how": "revert",
+   "inducing": "616fd34a69bb69bc35c7e4ea939e71c3ea2e92cb",
+   "inducing_ct": 1536571189,
+   "inducing_subject": "[subset] Disable GSUB/GPOS subsetting for now"
+  },
+  {
+   "fix": "aa3b6017ed71fc251522ff1bedcdae965b4c1c1c",
+   "fix_ct": 1533801388,
+   "fix_subject": "Revert \"[iter] Make operator bool explicit\"",
+   "how": "revert",
+   "inducing": "66920a6bace7c54c8166c4ed938b6ffc5fabcf2b",
+   "inducing_ct": 1533594733,
+   "inducing_subject": "[iter] Make operator bool explicit"
+  },
+  {
+   "fix": "1a7fed631880fff8a947ebec9c7427efff581916",
+   "fix_ct": 1533109544,
+   "fix_subject": "Revert \"Add a new API, hb_ot_layout_get_feature_name_ids (#976)\" (#1121)",
+   "how": "revert",
+   "inducing": "0c1b287b72e91e0898d75acb5d5acf1c6b9a7498",
+   "inducing_ct": 1532191488,
+   "inducing_subject": "Add a new API, hb_ot_layout_get_feature_name_ids (#976)"
+  },
+  {
+   "fix": "06b91d935da1a40ef9de6697717eb0af1015989e",
+   "fix_ct": 1533094116,
+   "fix_subject": "Revert \"[atomic] Make pointer get op relaxed instead of acquire\"",
+   "how": "revert",
+   "inducing": "b1e5650c67266dc158f22355fed206cd1c413f70",
+   "inducing_ct": 1533024151,
+   "inducing_subject": "[atomic] Make pointer get op relaxed instead of acquire"
+  },
+  {
+   "fix": "3edef5a19b5c0f30381ae6fe01c3370ded37f6ca",
+   "fix_ct": 1531817401,
+   "fix_subject": "Revert \"Implement C++11-style GCC builtin atomic ops\"",
+   "how": "revert",
+   "inducing": "21fa170f0bfb0109c506ed17f5aff8b062564ffa",
+   "inducing_ct": 1531756682,
+   "inducing_subject": "Implement C++11-style GCC builtin atomic ops"
+  },
+  {
+   "fix": "f9abbf83b6404bc9eb0c0983f562c9dbba1ef57c",
+   "fix_ct": 1527979568,
+   "fix_subject": "Fix fallout from 975bdd5ef562e37655067b703b2b9ca7481f4985",
+   "how": "sha-reference",
+   "inducing": "975bdd5ef562e37655067b703b2b9ca7481f4985",
+   "inducing_ct": 1527899833,
+   "inducing_subject": "[vector] Keep success status"
+  },
+  {
+   "fix": "a7dd90f519fb7ab046e92ea3b7101c21d5040bbc",
+   "fix_ct": 1527894645,
+   "fix_subject": "Revert \"Remove HB_DISALLOW_COPY_AND_ASSIGN\"",
+   "how": "revert",
+   "inducing": "ff92de766bf775bfdd3a01bda94de699180ff86a",
+   "inducing_ct": 1527644925,
+   "inducing_subject": "Remove HB_DISALLOW_COPY_AND_ASSIGN"
+  },
+  {
+   "fix": "6f12ce47c0ed8c2c4bb251cd6e685459af104db8",
+   "fix_ct": 1527637506,
+   "fix_subject": "Revert \"[map] Return bool from set()\"",
+   "how": "revert",
+   "inducing": "face7cf55d4895ffca314c8448c0a749a26cc182",
+   "inducing_ct": 1527637143,
+   "inducing_subject": "[map] Return bool from set()"
+  },
+  {
+   "fix": "fc51c45079feb7d77d25204c4c17a0733f1eca56",
+   "fix_ct": 1527637495,
+   "fix_subject": "Revert \"[map] Make hb_map_set() return bool\"",
+   "how": "revert",
+   "inducing": "7bf1980146cfc081b06264ac367b23ae9397adf1",
+   "inducing_ct": 1527637375,
+   "inducing_subject": "[map] Make hb_map_set() return bool"
+  },
+  {
+   "fix": "93bdf9b2dfe18af0f1aa93b890f0be260f31d90e",
+   "fix_ct": 1525892057,
+   "fix_subject": "Use arrayZ on hb-coretext and hb-uniscribe and fix macOS/Win bots (#1024)",
+   "how": "sha-reference",
+   "inducing": "63f57f4dab3d3179838d5d1cd03d116837a7e5c2",
+   "inducing_ct": 1525823771,
+   "inducing_subject": "Mark more unsized array's as arrayZ"
+  },
+  {
+   "fix": "86a0ac284fc4c2ce96354bfdf32878b6db5c77bd",
+   "fix_ct": 1521125222,
+   "fix_subject": "Revert \"hb-private.hh: Add fallback implementation for round()\"",
+   "how": "revert",
+   "inducing": "b9dcbb1f8312d8606b230f75594d40b7d4087004",
+   "inducing_ct": 1520943472,
+   "inducing_subject": "hb-private.hh: Add fallback implementation for round()"
+  },
+  {
+   "fix": "41906cd5efc2fe17f5fff3fa5fe8488e0cdc6399",
+   "fix_ct": 1518399966,
+   "fix_subject": "[subset] Another fixup",
+   "how": "sha-reference",
+   "inducing": "c31fcf4c58d96eb7d9781a986991b1a79ac7be44",
+   "inducing_ct": 1518294010,
+   "inducing_subject": "[subset] Replace auto_array with prealloced_array"
+  },
+  {
+   "fix": "0e3b3379a04a67a22e44e17d6bf849359f4fca68",
+   "fix_ct": 1515690070,
+   "fix_subject": "[aat] Actually fix d887f931485b715775e922516a4b0de5bb92c34f",
+   "how": "sha-reference",
+   "inducing": "d887f931485b715775e922516a4b0de5bb92c34f",
+   "inducing_ct": 1515688894,
+   "inducing_subject": "[aat] Make bots happy"
+  },
+  {
+   "fix": "93f7c1652a05e806c2e3ac7edf498d2f4a508a3a",
+   "fix_ct": 1510685994,
+   "fix_subject": "Revert \"[glib/ucdn/icu/ft/ot] Make returned funcs inert\"",
+   "how": "revert",
+   "inducing": "5daf3bd4494cce6b4fb074533be9e99c4d9e0edd",
+   "inducing_ct": 1509143831,
+   "inducing_subject": "[glib/ucdn/icu/ft/ot] Make returned funcs inert"
+  },
+  {
+   "fix": "83d68027360ff655d3b59371fb606fc9e40df4ac",
+   "fix_ct": 1510633502,
+   "fix_subject": "Clean up GlyphID",
+   "how": "sha-reference",
+   "inducing": "4a27c17ea0234dfe33e62f5830d9f92c26d48d30",
+   "inducing_ct": 1509136152,
+   "inducing_subject": "Fix IntType.cmp() to avoid narrowing down integer types"
+  },
+  {
+   "fix": "923a8f520addba095384b975ba8934e5a18fb696",
+   "fix_ct": 1509310854,
+   "fix_subject": "Fix up 5de83fab947e23cc729d69f8d44a28311298af9d",
+   "how": "sha-reference",
+   "inducing": "5de83fab947e23cc729d69f8d44a28311298af9d",
+   "inducing_ct": 1509242044,
+   "inducing_subject": "[ot] Speed up get_glyph_name()"
+  },
+  {
+   "fix": "cb6c6b0c425e560f32b297c15dc6775e297d5b1d",
+   "fix_ct": 1509039813,
+   "fix_subject": "Fix warning",
+   "how": "sha-reference",
+   "inducing": "49a41dc75931cc2d2f7e74b7801f8cc327039e8e",
+   "inducing_ct": 1508969865,
+   "inducing_subject": "[test] Add more hb-set tests"
+  },
+  {
+   "fix": "7c561dacc3c5fb9306db8bda27b7289331bd523f",
+   "fix_ct": 1508438151,
+   "fix_subject": "[myanmar] Fix unsafe usage of FLAG_SAFE()",
+   "how": "sha-reference",
+   "inducing": "f559c633073f63b9d87cb2440048b4413cfa1c05",
+   "inducing_ct": 1507036807,
+   "inducing_subject": "[indic] Implement Consonent_With_Stacker"
+  },
+  {
+   "fix": "4c05a405acc25c4ef0d70a97c0ae59013abca2df",
+   "fix_ct": 1507115211,
+   "fix_subject": "Revert \"Treat HAMZA ABOVE similar to SHADD for sorting purposes\"",
+   "how": "revert",
+   "inducing": "5a330575768f5a213072230b9ec8faabac9c5737",
+   "inducing_ct": 1502324608,
+   "inducing_subject": "Treat HAMZA ABOVE similar to SHADD for sorting purposes"
+  },
+  {
+   "fix": "47e7a1800fba9b8bf042a1f4976a15ab012ebfc7",
+   "fix_ct": 1489180982,
+   "fix_subject": "Revert \"Fix Context lookup application when moving back after a glyph delete\"",
+   "how": "revert",
+   "inducing": "b9b005f3a44ccf78a45b212b126287b69b9f4b40",
+   "inducing_ct": 1488407243,
+   "inducing_subject": "Fix Context lookup application when moving back after a glyph delete"
+  },
+  {
+   "fix": "7cf9952e7fc015d0b08d3de6c95357662d57ad8d",
+   "fix_ct": 1483948554,
+   "fix_subject": "[USE] Remove non-canonical decompositions",
+   "how": "sha-reference",
+   "inducing": "f6ba63b2e8eb577385f70758efdd3b8408c8a9cb",
+   "inducing_ct": 1482950732,
+   "inducing_subject": "Port decompositions from Indic to USE shaper"
+  },
+  {
+   "fix": "c4ca49d55b49c65e04f0b2acecacd6a5c70978f4",
+   "fix_ct": 1482781928,
+   "fix_subject": "Revert \"[indic] Remove redundant Chakma decomposition rule\"",
+   "how": "revert",
+   "inducing": "805f76fc002d703acfcc4c5727f0b4d1baecefaa",
+   "inducing_ct": 1482779559,
+   "inducing_subject": "[indic] Remove redundant Chakma decomposition rule"
+  },
+  {
+   "fix": "1a0f4aa6dfee69236b422f7c8825eff940f45c19",
+   "fix_ct": 1482439394,
+   "fix_subject": "Revert \"Synthesize GDEF glyph class for any glyph that does not have one in GDEF\"",
+   "how": "revert",
+   "inducing": "69f9fbc4200442a35484d3c790ae8f4979be5d60",
+   "inducing_ct": 1458241183,
+   "inducing_subject": "Synthesize GDEF glyph class for any glyph that does not have one in GDEF"
+  },
+  {
+   "fix": "654f9ab0d8d5ee032b5da763e34e7b1f454416b9",
+   "fix_ct": 1480906584,
+   "fix_subject": "[cbdt] Fix sign bug",
+   "how": "sha-reference",
+   "inducing": "d495fc5e38038f4cfb20425b1109324fa70bf2f9",
+   "inducing_ct": 1480744353,
+   "inducing_subject": "[cbdt] Clean up some more"
+  },
+  {
+   "fix": "6dd80faf0dcb3e8a8915c3a25da44e2a67cb0cd8",
+   "fix_ct": 1459805665,
+   "fix_subject": "Fix FixedVersion::to_int()",
+   "how": "sha-reference",
+   "inducing": "9a13ed453ef96822a47d6e6f58332b87f38d5c59",
+   "inducing_ct": 1456123124,
+   "inducing_subject": "Make FixedVersion a template"
+  },
+  {
+   "fix": "dd8598c1c7f29fc92253b0cd4e856c1941b1d0c0",
+   "fix_ct": 1456366805,
+   "fix_subject": "[test] Pass closure to hb_font_set_glyph_func()",
+   "how": "sha-reference",
+   "inducing": "c335fd7986fe360ab8e1c032c9b988d0d30511eb",
+   "inducing_ct": 1456359365,
+   "inducing_subject": "In trampoline implementation of get_glyph(), don't destroy user data twice!"
+  },
+  {
+   "fix": "ebd7431f824c718db6ce5b85e94f2b3911127af4",
+   "fix_ct": 1456296820,
+   "fix_subject": "Partially revert 86c68c7a2c971efe8e35b1f1bd99401dc8b688d2",
+   "how": "sha-reference",
+   "inducing": "86c68c7a2c971efe8e35b1f1bd99401dc8b688d2",
+   "inducing_ct": 1455613640,
+   "inducing_subject": "[GPOS] Fix interaction of mark attachments and cursive chaining"
+  },
+  {
+   "fix": "da2fcfdc51a2cc0d0a782efa6c91b733f7aa84ba",
+   "fix_ct": 1452000225,
+   "fix_subject": "Don't count fixing-up FeatureParams offset as error",
+   "how": "sha-reference",
+   "inducing": "14c2de321826c36037adde859ccca3e2011325a9",
+   "inducing_ct": 1446688857,
+   "inducing_subject": "Limit max edits during sanitize to 8"
+  },
+  {
+   "fix": "45b7ec365225109eb0854e6c417f48860b5f24af",
+   "fix_ct": 1450446436,
+   "fix_subject": "[indic] Followup fix for Malayalam context matching",
+   "how": "sha-reference",
+   "inducing": "508cc3d3cfcfb0383df0fe795cc28db4e0fd5729",
+   "inducing_ct": 1450373477,
+   "inducing_subject": "[indic] Allow context when matching for Malayalam new-spec"
+  },
+  {
+   "fix": "f11c11a1f123ef245e59ba892230db14170a8e5a",
+   "fix_ct": 1450282116,
+   "fix_subject": "Fix Since: tags for new API",
+   "how": "sha-reference",
+   "inducing": "e1d4d0f1dbd8518b5672245c05d73f22a9ed03ea",
+   "inducing_ct": 1449762967,
+   "inducing_subject": "Merge branch 'font-extents'"
+  },
+  {
+   "fix": "c41c145c7386ebe72b1cfb0475d836a689fecc5e",
+   "fix_ct": 1448581395,
+   "fix_subject": "Make nil glyph_h_origin() function return true",
+   "how": "sha-reference",
+   "inducing": "44f82750807475aa5b16099ccccd917d488df703",
+   "inducing_ct": 1446698623,
+   "inducing_subject": "[ft] Remove font funcs that do nothing"
+  },
+  {
+   "fix": "13188cba7f0eaacd587beeb1c2258526ae24c438",
+   "fix_ct": 1447963187,
+   "fix_subject": "Revert \"Fix hang in OOM situations\"",
+   "how": "revert",
+   "inducing": "f0599db761d7fc2d585d86e757a797f75ebc7499",
+   "inducing_ct": 1446796551,
+   "inducing_subject": "Fix hang in OOM situations"
+  },
+  {
+   "fix": "18e1c6b6ef7c85a1b02e3dae86280d8ed6b65118",
+   "fix_ct": 1447962658,
+   "fix_subject": "Revert \"Make sure we make progress in OOM situations\"",
+   "how": "revert",
+   "inducing": "68b507a3c3c62c28c38e13fee733702bb703b6ca",
+   "inducing_ct": 1446797366,
+   "inducing_subject": "Make sure we make progress in OOM situations"
+  },
+  {
+   "fix": "5337db29af39084d677a63154f404eca0c20cfeb",
+   "fix_ct": 1446855489,
+   "fix_subject": "Revert \"Don't process lookups if buffer is in error\"",
+   "how": "revert",
+   "inducing": "f92bd86cc8c11d262d1830c631cb7c63fc9d4bc8",
+   "inducing_ct": 1446796349,
+   "inducing_subject": "Don't process lookups if buffer is in error"
+  },
+  {
+   "fix": "df698f3299d92867e3305715f675b2621c316acd",
+   "fix_ct": 1446581712,
+   "fix_subject": "[ot-font] Fix hmtx table length checking, *again*",
+   "how": "sha-reference",
+   "inducing": "63ef0b41dc48d6112d1918c1b1de9de8ea90adb5",
+   "inducing_ct": 1444924468,
+   "inducing_subject": "[ot-font] Fix hmtx wrong table length check"
+  },
+  {
+   "fix": "ca97ea7aa2cb7186f432aaba76f4f151aa90c1d0",
+   "fix_ct": 1444951222,
+   "fix_subject": "[ft] Revert change-of-behavior of hb_ft_font_create() introduced in 1.0.5",
+   "how": "sha-reference",
+   "inducing": "2a9627c5641cd000e2adff0e42a0dc687b53ec70",
+   "inducing_ct": 1444253977,
+   "inducing_subject": "[ft] API: Add hb_font_[sg]et_load_flags() API"
+  },
+  {
+   "fix": "f396fbb000dc1c8acddbf6a16e193b328c5e551e",
+   "fix_ct": 1444407955,
+   "fix_subject": "Fix return value of sanitize when subformat is not readable",
+   "how": "sha-reference",
+   "inducing": "c917965b9e6fe2b21ed6c51559673288fa3af4b7",
+   "inducing_ct": 1443534335,
+   "inducing_subject": "Add missing returns"
+  },
+  {
+   "fix": "8cfbc304ee563ec96e402beed34b10b6c0950a6a",
+   "fix_ct": 1437586870,
+   "fix_subject": "Fix hide-default-ignorables after f0010dfd01ef4a927b0bdc175dd4e343a8637174",
+   "how": "sha-reference",
+   "inducing": "f0010dfd01ef4a927b0bdc175dd4e343a8637174",
+   "inducing_ct": 1437582983,
+   "inducing_subject": "[ot] Hide default-ignorables before finishing off positioning"
+  },
+  {
+   "fix": "2dbd3d29d6548bd96fd976606ed689fac8ad8817",
+   "fix_ct": 1437586187,
+   "fix_subject": "Fix hide-ignorables if font doesn't have space glyph",
+   "how": "sha-reference",
+   "inducing": "82b521aeb7cc73879b44ca4278d6fa8b4347527f",
+   "inducing_ct": 1434745563,
+   "inducing_subject": "Rewrite hide_default_ignorables"
+  },
+  {
+   "fix": "9ae156b76820d9079bae062e7e38c34a386d9bd2",
+   "fix_ct": 1436132597,
+   "fix_subject": "Fix pragma usage",
+   "how": "sha-reference",
+   "inducing": "cdcdfe61b97a0a48ccf834b6d924d187da9609be",
+   "inducing_ct": 1428524704,
+   "inducing_subject": "Err, instead of warn, if mutex / atomic / unicode funcs are missing"
+  },
+  {
+   "fix": "3029e8b59d1667dc6a53355be89a2b55d7089b88",
+   "fix_ct": 1429043542,
+   "fix_subject": "Revert \"Add MSVC pragma for UTF-8 source code\"",
+   "how": "revert",
+   "inducing": "89cbd4d9533011fb5487caa99a0cd58923e7cf59",
+   "inducing_ct": 1428953228,
+   "inducing_subject": "Add MSVC pragma for UTF-8 source code"
+  },
+  {
+   "fix": "350f3a02ce225e5d78db8ac96de1351ff9f96dd5",
+   "fix_ct": 1419818368,
+   "fix_subject": "[ft] Add hb_ft_face_create_referenced() and hb_ft_font_create_referenced()",
+   "how": "sha-reference",
+   "inducing": "395b35903e052aecc97d0807e4f813c64c0d2b0b",
+   "inducing_ct": 1419811406,
+   "inducing_subject": "Avoid accessing layout tables at face destruction"
+  },
+  {
+   "fix": "272226f294382b0c6921b36e0e67fc53daa765d3",
+   "fix_ct": 1408036293,
+   "fix_subject": "Revert \"Fix build on clang after previous commit\"",
+   "how": "revert",
+   "inducing": "9c80cbc87f23040a334e30c750f64523d9ef10c8",
+   "inducing_ct": 1408036192,
+   "inducing_subject": "Fix build on clang after previous commit"
+  },
+  {
+   "fix": "fd0001d7dbe6ede99a9f87f96f231ffb53303be8",
+   "fix_ct": 1407854041,
+   "fix_subject": "[coretext] Compare CGFont and PS name, if CTFont didn't match",
+   "how": "sha-reference",
+   "inducing": "5a0eed3b50629be4826e4e9428f2c3255195395d",
+   "inducing_ct": 1407815236,
+   "inducing_subject": "[coretext] Implement vertical shaping"
+  },
+  {
+   "fix": "0fc0a1022854324261fea8893678a3e9fd9443eb",
+   "fix_ct": 1405955607,
+   "fix_subject": "[win] Fix Cygwin build",
+   "how": "sha-reference",
+   "inducing": "db308280488c2ee11ba865a9922eb6a0c1abeef3",
+   "inducing_ct": 1405801924,
+   "inducing_subject": "[win] Consolidate windows.h include tips and tricks"
+  },
+  {
+   "fix": "5209c505061130854a2bfea8849928ade3ee92f3",
+   "fix_ct": 1405614224,
+   "fix_subject": "Revert \"Show U+FFFD REPLACEMENT CHARACTER for invalid Unicode codepoints\"",
+   "how": "revert",
+   "inducing": "efe74214bbb68eaa3d7621e73869b5d58210107e",
+   "inducing_ct": 1405094388,
+   "inducing_subject": "Show U+FFFD REPLACEMENT CHARACTER for invalid Unicode codepoints"
+  },
+  {
+   "fix": "9e7c720100e432b43564ed5ff12f3175ca2ed74a",
+   "fix_ct": 1405613888,
+   "fix_subject": "Fix CoreText build after a8b89a09f6d3a34",
+   "how": "sha-reference",
+   "inducing": "a8b89a09f6d3a3466282aae07fd65e143f9f8f83",
+   "inducing_ct": 1405102681,
+   "inducing_subject": "Simplify hb_in_range()"
+  },
+  {
+   "fix": "976c8f455221eb599d1c446eafd88d51d7d2aa65",
+   "fix_ct": 1405539260,
+   "fix_subject": "New API: hb_buffer_[sg]et_replacement_codepoint()",
+   "how": "sha-reference",
+   "inducing": "6f13b6d62daae4989e3cc2fe4b168e5c59650964",
+   "inducing_ct": 1405035579,
+   "inducing_subject": "When parsing UTF-16, generate invalid codepoint for lonely low surrogate"
+  },
+  {
+   "fix": "71b4c999a511bf018acaf48a45e070470c0daf12",
+   "fix_ct": 1382917407,
+   "fix_subject": "Revert \"Zero marks by GDEF for Tibetan\"",
+   "how": "revert",
+   "inducing": "d5bd0590ae2fbc7b0dee86385a565aef00ffb835",
+   "inducing_ct": 1382113049,
+   "inducing_subject": "Zero marks by GDEF for Tibetan"
+  },
+  {
+   "fix": "da72042c52ed3cc0ee19d3eabb8db7c7dd34d3ed",
+   "fix_ct": 1382004154,
+   "fix_subject": "[otlayout] Fix up recent Context matching change",
+   "how": "sha-reference",
+   "inducing": "6b65a76b40522a4f57a6fedcbdfc5a4d736f1d3c",
+   "inducing_ct": 1381769691,
+   "inducing_subject": "[otlayout] Fix (Chain)Context recursion!"
+  },
+  {
+   "fix": "5a5350b39b81e0128d36ebc81307a6d698a4dc50",
+   "fix_ct": 1378253461,
+   "fix_subject": "Revert \"Round when scaling values\"",
+   "how": "revert",
+   "inducing": "10f964623f003c70f6bdd33423420abda3820ce0",
+   "inducing_ct": 1376055601,
+   "inducing_subject": "Round when scaling values"
+  },
+  {
+   "fix": "bdd8873fd8ae5c794018f6edac242b0a8b62ff31",
+   "fix_ct": 1375912705,
+   "fix_subject": "Revert \"[Indic] don't apply 'calt' by default in Indic shaper\"",
+   "how": "revert",
+   "inducing": "952121007c6f6f374e4cf1734ebcfe2d2d71c71c",
+   "inducing_ct": 1375799774,
+   "inducing_subject": "[Indic] don't apply 'calt' by default in Indic shaper"
+  },
+  {
+   "fix": "8751de50831338ce550601c34c17d152ad89c1fd",
+   "fix_ct": 1374179390,
+   "fix_subject": "Followup fix for 3f9e2dced298c3d00f31b2dfc38685bb071a3a22",
+   "how": "sha-reference",
+   "inducing": "3f9e2dced298c3d00f31b2dfc38685bb071a3a22",
+   "inducing_ct": 1372290415,
+   "inducing_subject": "Fix contextual lookup recursion indexing"
+  },
+  {
+   "fix": "29b596ac67806c44441e65f3ece227df0fe2bb63",
+   "fix_ct": 1373294235,
+   "fix_subject": "[uniscribe] Fix buffer allocation",
+   "how": "sha-reference",
+   "inducing": "2a17f9568d9724e045d2c1d660e007f3acd747d9",
+   "inducing_ct": 1369761226,
+   "inducing_subject": "Bug 55494 - ScriptItemizeOpenType doesn't exists under Windows XP"
+  },
+  {
+   "fix": "1357c2dd120d005ceecfa83ed328d05dc634d7bc",
+   "fix_ct": 1366163260,
+   "fix_subject": "Revert \"Speed up hb_set_digest_common_bits_t calcs\"",
+   "how": "revert",
+   "inducing": "3d1b66a35e1ab3be19335705f310b278d76d66d2",
+   "inducing_ct": 1344127348,
+   "inducing_subject": "Speed up hb_set_digest_common_bits_t calcs"
+  },
+  {
+   "fix": "9e5ac7b8c02c86a4f28c79173a5237503eaa7115",
+   "fix_ct": 1361834342,
+   "fix_subject": "Fix blob test to match c3ba49b6fa1865e8318926eaa6c0f2063d1053bb",
+   "how": "sha-reference",
+   "inducing": "c3ba49b6fa1865e8318926eaa6c0f2063d1053bb",
+   "inducing_ct": 1361829995,
+   "inducing_subject": "Always create sub-blobs in MEMORY_MODE_READONLY"
+  },
+  {
+   "fix": "cb90b1bbe6d27ca6968b70d2dbfea7ab7fb73293",
+   "fix_ct": 1360929728,
+   "fix_subject": "[OTLayout] Respect syllable boundaries for backtrack/lookahead matching",
+   "how": "sha-reference",
+   "inducing": "2c7d0b6b80d412de3fddd443ed1a485ea1cbb03c",
+   "inducing_ct": 1360775408,
+   "inducing_subject": "[OTLayou] Unbreak backtrack matching"
+  },
+  {
+   "fix": "adff3778155facb7b149ce66ab7d573368e048de",
+   "fix_ct": 1360212207,
+   "fix_subject": "Revert \"[Indic] Import ragel-generated Indic machine in git\"",
+   "how": "revert",
+   "inducing": "fab7a71f110ed646745d54b23284537c50058c21",
+   "inducing_ct": 1348537873,
+   "inducing_subject": "[Indic] Import ragel-generated Indic machine in git"
+  },
+  {
+   "fix": "08b29c08094097f1c23ec53b10084bc390cea833",
+   "fix_ct": 1358145132,
+   "fix_subject": "Revert \"Minor\"",
+   "how": "revert",
+   "inducing": "0a492357016bc9a614d2a726f2006c10af68ca58",
+   "inducing_ct": 1342200049,
+   "inducing_subject": "Minor"
+  },
+  {
+   "fix": "f18ff5a84d9fe859c40a7a0c9a207cb40df0e84a",
+   "fix_ct": 1354255626,
+   "fix_subject": "[OTLayout] Return correct value from recursion",
+   "how": "sha-reference",
+   "inducing": "4c4e8f0e754b79ac6190d21878eaaf0b790c7579",
+   "inducing_ct": 1353737600,
+   "inducing_subject": "[OTLayout] Reuse apply context for recursion"
+  },
+  {
+   "fix": "dc5df5af6b349c3d9e4ab876864d9dec8096401f",
+   "fix_ct": 1346185883,
+   "fix_subject": "Revert \"Minor\"",
+   "how": "revert",
+   "inducing": "3e0a03978b91994bb7fa7922593cbdfc50878dfc",
+   "inducing_ct": 1346101802,
+   "inducing_subject": "Minor"
+  },
+  {
+   "fix": "1f2bb172fe9a173ecfd61054f1fdd850943ef059",
+   "fix_ct": 1345752637,
+   "fix_subject": "Revert \"[Indic/GSUB] Ignore context when matching would_apply()\"",
+   "how": "revert",
+   "inducing": "24dd4e56743c6ce5e01cb710ca9e01b3e527af58",
+   "inducing_ct": 1345751230,
+   "inducing_subject": "[Indic/GSUB] Ignore context when matching would_apply()"
+  },
+  {
+   "fix": "a321e1d51e0e7fa02738410e8d6e77c841bc6b13",
+   "fix_ct": 1344551434,
+   "fix_subject": "Revert \"Reject lookups with no subTable\"",
+   "how": "revert",
+   "inducing": "30ec9002d84e8b49290e782e6192069821ffa942",
+   "inducing_ct": 1343510720,
+   "inducing_subject": "Reject lookups with no subTable"
+  },
+  {
+   "fix": "2eaf482b371034ce6ebfaedee98049b036fd3493",
+   "fix_ct": 1344551405,
+   "fix_subject": "Revert \"[GSUB/GPOS] Reject Context/ChainContext lookups with zero input\"",
+   "how": "revert",
+   "inducing": "0981068b75710397f08e0d2d776a0a2ea68d7117",
+   "inducing_ct": 1343509319,
+   "inducing_subject": "[GSUB/GPOS] Reject Context/ChainContext lookups with zero input"
+  },
+  {
+   "fix": "a973b5ce86051e8ef0d20df362db1a50488842ab",
+   "fix_ct": 1343627266,
+   "fix_subject": "[GSUB] Further adjustments to mark-attachment vs ligation interaction",
+   "how": "sha-reference",
+   "inducing": "d1d69ec52e75a78575b620a1c456d528b6078170",
+   "inducing_ct": 1343623907,
+   "inducing_subject": "[GSUB] Don't ligate glyphs attached to different components of ligatures"
+  },
+  {
+   "fix": "a3313e54008167e415b72c780ca7b9cda958d07e",
+   "fix_ct": 1343255871,
+   "fix_subject": "[GPOS] Fix MarkMarkPos applied to results of MultipleSubst",
+   "how": "sha-reference",
+   "inducing": "7b84c536c10ab90ed96a033d88e9ad232d46c5b8",
+   "inducing_ct": 1339207463,
+   "inducing_subject": "In MarkBase attachment, only attach to first of a MultipleSubst sequence"
+  },
+  {
+   "fix": "6d08c7f1b3601095f9a12630045331dd0fe75380",
+   "fix_ct": 1342044087,
+   "fix_subject": "Revert \"Towards templatizing common Lookup types\"",
+   "how": "revert",
+   "inducing": "727135f3a9938c1ebd5b9f5015a46c7ccc8573c5",
+   "inducing_ct": 1342044028,
+   "inducing_subject": "Towards templatizing common Lookup types"
+  },
+  {
+   "fix": "68b76121f83fc9b87dc84f03e8bef38d4332734d",
+   "fix_ct": 1339166820,
+   "fix_subject": "Fix regressions introduced by sed.  Ouch!",
+   "how": "sha-reference",
+   "inducing": "99c2695759a6af855d565f4994bbdf220570bb48",
+   "inducing_ct": 1336916718,
+   "inducing_subject": "Add accessort to buffer for current info, current pos, and prev info"
+  },
+  {
+   "fix": "5e4e21fce4b548b0b8a5951bc8f35a9f27428192",
+   "fix_ct": 1336920368,
+   "fix_subject": "Revert \"[Indic] Refactoring\"",
+   "how": "revert",
+   "inducing": "0831061efb78983b9c6e1e72574c977e56383c08",
+   "inducing_ct": 1336756078,
+   "inducing_subject": "[Indic] Refactoring"
+  },
+  {
+   "fix": "3007ffa9e53e6100a761c2363f50a2b19a0764fc",
+   "fix_ct": 1314256133,
+   "fix_subject": "Reorder combining-class to better suit Arabic shadda mark-mark positioning",
+   "how": "sha-reference",
+   "inducing": "34c22f816808d061a980cffca12de03beb437fa0",
+   "inducing_ct": 1311368660,
+   "inducing_subject": "Implement Unicode Canonical Reordering Algorithm"
+  },
+  {
+   "fix": "21deab2bdc58d8e9f1a3ba1f9c61c30a79e288a1",
+   "fix_ct": 1306768120,
+   "fix_subject": "Fixed inifinite loop introduced in 7403e055cd1463f",
+   "how": "sha-reference",
+   "inducing": "7403e055cd1463f38215ad9faedd61c3e1b66ac5",
+   "inducing_ct": 1306335135,
+   "inducing_subject": "[Vertical] fix vertical gpos"
+  },
+  {
+   "fix": "11bb8fe7b3925bc9b019ad0c0218a231e581f152",
+   "fix_ct": 1305071820,
+   "fix_subject": "[font] Fix internal sign of x/y_scale",
+   "how": "sha-reference",
+   "inducing": "da975419884a535281745f30f4b32fee0bc8a7a1",
+   "inducing_ct": 1303413302,
+   "inducing_subject": "[API] Allow negative font x_scale/y_scale"
+  },
+  {
+   "fix": "15c7379c16dbb9ee8ed1c0333ca7492532ce8423",
+   "fix_ct": 1274885290,
+   "fix_subject": "Revert \"Merge remote branch 'martin/master'\"",
+   "how": "revert",
+   "inducing": "80af2812fb3b231ddcb4608ec13c6038a681c818",
+   "inducing_ct": 1274721264,
+   "inducing_subject": "Merge remote branch 'martin/master'"
+  }
+ ]
+}

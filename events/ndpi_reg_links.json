@@ -1,0 +1,522 @@
+{
+ "repo": "ndpi",
+ "skipped": {
+  "regression word only": 6,
+  "unresolved": 0
+ },
+ "links": [
+  {
+   "fix": "49ed06a6180512271249bc3268735b0f2d71d238",
+   "fix_ct": 1786692403,
+   "fix_subject": "Revert \"QUIC: refactoring\"",
+   "how": "revert",
+   "inducing": "50afd07f28731639813700e1a347187e8acac634",
+   "inducing_ct": 1786643324,
+   "inducing_subject": "QUIC: refactoring"
+  },
+  {
+   "fix": "b1f2f44a966419bceb6fc9bab2447a70db1d4800",
+   "fix_ct": 1776355790,
+   "fix_subject": "Fix export of TLS info. See cb7bd3890623c11d660301 (#3162)",
+   "how": "sha-reference",
+   "inducing": "cb7bd3890623c11d6603014f721ce1d98b0d9576",
+   "inducing_ct": 1776325797,
+   "inducing_subject": "Extended quic dump"
+  },
+  {
+   "fix": "2619729661df87e10c6998f0a55320d531deebb0",
+   "fix_ct": 1758468045,
+   "fix_subject": "fuzz: improve per-fuzzer introspector statistics (#2970)",
+   "how": "sha-reference",
+   "inducing": "f2bccee04e9f374fd016607e8b316f500047555b",
+   "inducing_ct": 1758034625,
+   "inducing_subject": "fuzz: an attempt to get better introspector stats (#2968)"
+  },
+  {
+   "fix": "f4995e5d5f6a3c8775e83bca8c83c7c0b6753076",
+   "fix_ct": 1756660033,
+   "fix_subject": "Revert \"Always compute nDPI fingerprint (#2950)\"",
+   "how": "revert",
+   "inducing": "2531c2555e4db27a285d828cb4c0cf9e5e472cef",
+   "inducing_ct": 1756649516,
+   "inducing_subject": "Always compute nDPI fingerprint (#2950)"
+  },
+  {
+   "fix": "d323bc77c2a36056f869b99703feec2499db3d19",
+   "fix_ct": 1756660022,
+   "fix_subject": "Revert \"nDPI fingerprint: we always calculate it at `internal_giveup()`\"",
+   "how": "revert",
+   "inducing": "096539c477679868ccdca78385dc3f9ad17c4f37",
+   "inducing_ct": 1756655976,
+   "inducing_subject": "nDPI fingerprint: we always calculate it at `internal_giveup()`"
+  },
+  {
+   "fix": "81ca06b0c7528a3da65ab0c8fab0b0b88c2f859d",
+   "fix_ct": 1751437691,
+   "fix_subject": "websocket: `ndpi_set_detected_protocol()` should be called only once",
+   "how": "sha-reference",
+   "inducing": "b07a910dc5152fa968fd6f3a06a55dd92ef5c01e",
+   "inducing_ct": 1751396782,
+   "inducing_subject": "websocket: `ndpi_set_detected_protocol()` should be called only once (#2911)"
+  },
+  {
+   "fix": "ed29a8f9633933db7be173d9d944e2bc5e2cae01",
+   "fix_ct": 1747830636,
+   "fix_subject": "Fix `isAppProtocol` for GTP_U (#2837)",
+   "how": "sha-reference",
+   "inducing": "c590dc49551b32f12ebb4850e13a99cacbf90366",
+   "inducing_ct": 1747775699,
+   "inducing_subject": "Added new APi calls - ndpi_is_master_only_protocol() - ndpi_normalize_protocol()"
+  },
+  {
+   "fix": "c0c9f649ed807c25a2a14f840d52132521244f04",
+   "fix_ct": 1739793306,
+   "fix_subject": "Fix/restore some public defines (#2734)",
+   "how": "sha-reference",
+   "inducing": "6899f6c17c79b5744f30400e1a2565ea60b7e799",
+   "inducing_ct": 1739730139,
+   "inducing_subject": "Added defines"
+  },
+  {
+   "fix": "214a2e53566aefd4641d7233587b2e391e9c29b5",
+   "fix_ct": 1732635692,
+   "fix_subject": "SIP: export metadata via json (#2630)",
+   "how": "sha-reference",
+   "inducing": "1bda2bf414b22ce2e983e9c9a849698ccdbb1bf1",
+   "inducing_ct": 1731414865,
+   "inducing_subject": "SIP: extract some basic metadata"
+  },
+  {
+   "fix": "456bc2a52c06c16e12e01c5ec8426bc8783961c1",
+   "fix_ct": 1726686243,
+   "fix_subject": "Tls out of order (#2561)",
+   "how": "revert",
+   "inducing": "eb15b22e7757cb70894fdcde440e62bc40f22df1",
+   "inducing_ct": 1726592641,
+   "inducing_subject": "Added fix for handling Server Hello before CLient Hello"
+  },
+  {
+   "fix": "81e42b748e46666158596cc22224b0ec11d85be0",
+   "fix_ct": 1717000270,
+   "fix_subject": "RTP: fix detection over TCP (#2462)",
+   "how": "sha-reference",
+   "inducing": "6127e04900d14682f524cca5b5720b2fb9f0e283",
+   "inducing_ct": 1716926468,
+   "inducing_subject": "support rtp/rtcp over tcp (#2422) (#2457)"
+  },
+  {
+   "fix": "399be12585f83302178175396bcaf4487ffd57a9",
+   "fix_ct": 1716224784,
+   "fix_subject": "Small fixes after API cleanup done in c63446e59 (#2449)",
+   "how": "sha-reference",
+   "inducing": "c63446e59220efd3b133bccbbd44ed97c86c78f1",
+   "inducing_ct": 1715956682,
+   "inducing_subject": "Cleaned up API"
+  },
+  {
+   "fix": "bb978907e63a058894643a6a612734eeab291b58",
+   "fix_ct": 1688560658,
+   "fix_subject": "STUN: fix detection of Google Voip apps (#2031)",
+   "how": "sha-reference",
+   "inducing": "2c7fb9179493c1d1d4e4763e5757bc98db61b518",
+   "inducing_ct": 1687854808,
+   "inducing_subject": "Hangout: detect Hangout/Duo/GoogleMeet/... in the STUN code (#2025)"
+  },
+  {
+   "fix": "6e9dce357bc9bcd7adbfb5e7b2749329e2b6319c",
+   "fix_ct": 1682715633,
+   "fix_subject": "Added ndpi_guess_undetected_protocol_v4() to restore logic that was removed in https://github.com/ntop/nDPI/commit/032e778a6dc1ee2173c4cdb2c671180c5b5df245",
+   "how": "sha-reference",
+   "inducing": "032e778a6dc1ee2173c4cdb2c671180c5b5df245",
+   "inducing_ct": 1681303150,
+   "inducing_subject": "Simplify `ndpi_internal_guess_undetected_protocol()` (#1941)"
+  },
+  {
+   "fix": "3047e286c082902415554f6cdf761a5502962469",
+   "fix_ct": 1677763820,
+   "fix_subject": "Fix insert of ip addresses into patricia tree(s) (#1895)",
+   "how": "sha-reference",
+   "inducing": "d0b46dcf88475609e7c5b1f19183ea14b6a60f51",
+   "inducing_ct": 1677227726,
+   "inducing_subject": "Enhanced custom port definition and improved error reporting in case of duplications"
+  },
+  {
+   "fix": "5e8c1ebbb7f67033916ed4878cd6c2a662073898",
+   "fix_ct": 1674221253,
+   "fix_subject": "fuzz: fix memory allocation failure logic (#1867)",
+   "how": "sha-reference",
+   "inducing": "29be01ef3a111fe467eb59876864574c168560df",
+   "inducing_ct": 1673940719,
+   "inducing_subject": "Add some fuzzers to test algorithms and data structures (#1852)"
+  },
+  {
+   "fix": "b9f63458e69011aea9aabdd3ffe157d0d4531cc2",
+   "fix_ct": 1670088584,
+   "fix_subject": "CI: GitHub is updating Ubuntu runners (#1817)",
+   "how": "sha-reference",
+   "inducing": "557bbcfc5a5165c9eb43bbdd78435796239cd3c9",
+   "inducing_ct": 1670063549,
+   "inducing_subject": "Improved HTTP header parsing skipping lines that won't match"
+  },
+  {
+   "fix": "ac7a3669dabef5b084f00c3a52fa6c63b0a0a768",
+   "fix_ct": 1664105517,
+   "fix_subject": "Fix value of `ndpi_protocol->protocol_by_ip`",
+   "how": "sha-reference",
+   "inducing": "a7c2734b387f6817088593f7c4e78d01dd6e0b74",
+   "inducing_ct": 1663705487,
+   "inducing_subject": "Remove classification \"by-ip\" from protocol stack (#1743)"
+  },
+  {
+   "fix": "79653f99e051500b6a41e2d59143c20b1322f8d2",
+   "fix_ct": 1661850720,
+   "fix_subject": "Internal gcrypt: fix memory leak",
+   "how": "sha-reference",
+   "inducing": "ef99eb674e86eeb9b5ae3e6edb8cac88f654c19c",
+   "inducing_ct": 1661787748,
+   "inducing_subject": "Improved AES-NI presence check on Linux"
+  },
+  {
+   "fix": "df2e11ef51ea34f595d79e526ab6f3ac89cb6462",
+   "fix_ct": 1659089320,
+   "fix_subject": "Revert \"Patricia tree, Ahocarasick automa, LRU cache: add statistics (#1677)\" (#1682)",
+   "how": "revert",
+   "inducing": "bb83899985c25097341b947c2c535f56254a075c",
+   "inducing_ct": 1659089261,
+   "inducing_subject": "Patricia tree, Ahocarasick automa, LRU cache: add statistics (#1677)"
+  },
+  {
+   "fix": "172e698bb8239d0060d9d494adfba928507f95b2",
+   "fix_ct": 1659004758,
+   "fix_subject": "TINC: avoid processing SYN packets (#1676)",
+   "how": "sha-reference",
+   "inducing": "e6b332aa4a1399e33df68998cf8351bccaee3fc4",
+   "inducing_ct": 1658677584,
+   "inducing_subject": "Add support for flow client/server information (#1671)"
+  },
+  {
+   "fix": "b190dab6bc23bcacf127f1f8d93df257f40bb898",
+   "fix_ct": 1658746653,
+   "fix_subject": "Improve handling of HTTP-Proxy and HTTP-Connect (#1673)",
+   "how": "sha-reference",
+   "inducing": "938e89ca333db0d39f19c0f759f13a938f4b3014",
+   "inducing_ct": 1654531489,
+   "inducing_subject": "Reimplemented 1kxun application protocol. (#1585)"
+  },
+  {
+   "fix": "175f863665ce9850398a415fc35ec4ee848b096f",
+   "fix_ct": 1657104025,
+   "fix_subject": "Label SMTP w/ STARTTLS as SMTPS *and* dissect TLS clho. (#1639)",
+   "how": "revert",
+   "inducing": "52d987b603f49d996b4060f43265d1cf43c3c482",
+   "inducing_ct": 1657033221,
+   "inducing_subject": "SMTP with STARTTLS is now identified as SMTPS"
+  },
+  {
+   "fix": "7419cfee6407ff2dad687733da8eb27edd181ef9",
+   "fix_ct": 1654362773,
+   "fix_subject": "Added RSH dissector. Fixes #202. (#1581)",
+   "how": "sha-reference",
+   "inducing": "09fbe0a64a11b08a35435f516e9a19f7e0c20d7c",
+   "inducing_ct": 1654273289,
+   "inducing_subject": "Fixed syslog false positives. (#1577)"
+  },
+  {
+   "fix": "ff8e1e197e900e0d716bca1bb92c44164e66b9ba",
+   "fix_ct": 1654325267,
+   "fix_subject": "Fix syslog heap overflow introduced in 09fbe0a64a11b08a35435f516e9a19f7e0c20d7c. (#1579)",
+   "how": "sha-reference",
+   "inducing": "09fbe0a64a11b08a35435f516e9a19f7e0c20d7c",
+   "inducing_ct": 1654273289,
+   "inducing_subject": "Fixed syslog false positives. (#1577)"
+  },
+  {
+   "fix": "4ff1bf29dfbfa860bb79e34536de7090cc009ddc",
+   "fix_ct": 1654121752,
+   "fix_subject": "TLS: fix use-of-uninitialized-value error (#1573)",
+   "how": "sha-reference",
+   "inducing": "9040bc74c94dbd44cd86b29ec3de40621df53467",
+   "inducing_ct": 1653986022,
+   "inducing_subject": "TLS: fix stack-buffer-overflow error (#1567)"
+  },
+  {
+   "fix": "739dfc54b06a6995bc4d286eb400e2675b480feb",
+   "fix_ct": 1650308053,
+   "fix_subject": "Kerberos: fix Undefined-shift error (#1516)",
+   "how": "sha-reference",
+   "inducing": "4775be3d85434d4e385f43a47b783844bbfb2571",
+   "inducing_ct": 1649866256,
+   "inducing_subject": "Kerberos: fix some memory access errors (#1514)"
+  },
+  {
+   "fix": "59993e294eb20d84db1a42b59cbd0f3be03d1400",
+   "fix_ct": 1645348846,
+   "fix_subject": "EthernetIP: add missing initialization (#1448)",
+   "how": "sha-reference",
+   "inducing": "1e1cfb89d23c7759f0f84dede7eef9f070f0231d",
+   "inducing_ct": 1642020519,
+   "inducing_subject": "Added EthernetIP dissector"
+  },
+  {
+   "fix": "f229068fd3844cd2fd458e5ae76c20ec059c8d3e",
+   "fix_ct": 1644403599,
+   "fix_subject": "Fix memory access in ndpi_strnstr() (#1438)",
+   "how": "sha-reference",
+   "inducing": "79968f3245ae7bf277e01d8c5a28349b75d9ac74",
+   "inducing_ct": 1643986637,
+   "inducing_subject": "Sync utests (#1433)"
+  },
+  {
+   "fix": "5bb5bec477e1a10a404fd9228ddc0f5041b51123",
+   "fix_ct": 1643566692,
+   "fix_subject": "Remove `struct ndpi_id_struct` (#1427)",
+   "how": "sha-reference",
+   "inducing": "91bb77a8806ee2987e856f66674cf3aa8b1d60db",
+   "inducing_ct": 1640199246,
+   "inducing_subject": "A final(?) effort to reduce memory usage per flow (#1389)"
+  },
+  {
+   "fix": "05734f3d314a31facbce61799b98206ccc5963a5",
+   "fix_ct": 1642357719,
+   "fix_subject": "Zattoo: fix Null-dereference READ with ipv6 traffic (#1410)",
+   "how": "sha-reference",
+   "inducing": "20b5f6d7ccec517cf7455911040d114d8c2eba29",
+   "inducing_ct": 1642264496,
+   "inducing_subject": "Improve IPv6 support, enabling IPv6 traffic on (almost) all dissectors. (#1406)"
+  },
+  {
+   "fix": "b080a1c136fadb675c42bb72309e7c479ac7d292",
+   "fix_ct": 1642015497,
+   "fix_subject": "Fix two use-of-uninitialized-value errors (#1398)",
+   "how": "sha-reference",
+   "inducing": "f5545a80f95a90a5219bbb319b346f964b1e1548",
+   "inducing_ct": 1641933927,
+   "inducing_subject": "Removed legacy code"
+  },
+  {
+   "fix": "91bb77a8806ee2987e856f66674cf3aa8b1d60db",
+   "fix_ct": 1640199246,
+   "fix_subject": "A final(?) effort to reduce memory usage per flow (#1389)",
+   "how": "sha-reference",
+   "inducing": "730c2360bd7c7df7c284f74cd0d56b52a553c03b",
+   "inducing_ct": 1633441792,
+   "inducing_subject": "Remove `struct ndpi_packet_struct` from `struct ndpi_flow_struct` (#1319)"
+  },
+  {
+   "fix": "947896ad7dce9602dea1e70948363e568718cbb0",
+   "fix_ct": 1638645725,
+   "fix_subject": "Fix configure script (after fb85dac9) (#1381)",
+   "how": "sha-reference",
+   "inducing": "fb85dac9059a93078921c23f5983ed6a70453a8e",
+   "inducing_ct": 1638620517,
+   "inducing_subject": "Configure improvements Fixed invalid anomaly detection in rrd_anomaly"
+  },
+  {
+   "fix": "333a6d60e8ab9c9cd5479a058f8b0c482c5cd2d9",
+   "fix_ct": 1634907469,
+   "fix_subject": "TLS: fix a heap-buffer-overflow (#1356)",
+   "how": "sha-reference",
+   "inducing": "c3d1c69722f31791ad718bfe3a265c0df22b9997",
+   "inducing_ct": 1634760467,
+   "inducing_subject": "Fixed heap-buffer-overflow in TLS dissector"
+  },
+  {
+   "fix": "8db8c8ae34da09dd09453c312fe9ebdac897f73d",
+   "fix_ct": 1634672575,
+   "fix_subject": "Fix QUIC log and remove SoulSeek leftovers after b97dc6ba (#1351)",
+   "how": "sha-reference",
+   "inducing": "b97dc6baa497b5c2d64e342108237ced6bf34b2c",
+   "inducing_ct": 1634311647,
+   "inducing_subject": "Removed outdated (and broken) soulseek dissector"
+  },
+  {
+   "fix": "fea3991ad168ee0a69a35c7be15e0732f2351d56",
+   "fix_ct": 1634638067,
+   "fix_subject": "Fix some invalid memory reads (#1350)",
+   "how": "sha-reference",
+   "inducing": "730c2360bd7c7df7c284f74cd0d56b52a553c03b",
+   "inducing_ct": 1633441792,
+   "inducing_subject": "Remove `struct ndpi_packet_struct` from `struct ndpi_flow_struct` (#1319)"
+  },
+  {
+   "fix": "57b8969a3d30cfdefe54fc46f4d5552d76bd1b82",
+   "fix_ct": 1626704559,
+   "fix_subject": "Fix setting of flow risks on 32 bit machines (#1251)",
+   "how": "sha-reference",
+   "inducing": "19a29e1e228f4a821c7ce89be064f70d80f4282a",
+   "inducing_ct": 1626254002,
+   "inducing_subject": "TLS Risks - Certificate Validity Too Long (#1239)"
+  },
+  {
+   "fix": "398ad8e5ffc69640d5a41ef73d0c2f146bc94f06",
+   "fix_ct": 1625661177,
+   "fix_subject": "Fix for #1230 (#1235)",
+   "how": "revert",
+   "inducing": "58665e93a98d014b53d131b2481ccab074efc9ff",
+   "inducing_ct": 1625590514,
+   "inducing_subject": "Fix return value of ndpi_match_string_subprotocol() (#1230)"
+  },
+  {
+   "fix": "12c6ab768d716aa54a343a82ac333c9c5fb02af4",
+   "fix_ct": 1620565814,
+   "fix_subject": "TLS: fix another use-of-uninitialized-value error in ClientHello parsing (#1179)",
+   "how": "sha-reference",
+   "inducing": "8c3674e9a30a0870effdb4c7eb5ad792f7ba6b6a",
+   "inducing_ct": 1618774681,
+   "inducing_subject": "TLS: fix some use-of-uninitialized-value errors in ClientHello parsing (#1169)"
+  },
+  {
+   "fix": "a772e18977ec215dbf39cfaa259d6f890f7bd5a0",
+   "fix_ct": 1612349797,
+   "fix_subject": "Fix a warning (#1125)",
+   "how": "sha-reference",
+   "inducing": "5f7b9d802498215f5769a8bfa39d92356da2cfdd",
+   "inducing_ct": 1610013528,
+   "inducing_subject": "Increase SNI hostname buffer length to 256. (#1111)"
+  },
+  {
+   "fix": "3bb12fde6357136c8309e05bd08134f9440bb8ad",
+   "fix_ct": 1609760790,
+   "fix_subject": "Fix memory leak introduced in b7376cc6 (#1100)",
+   "how": "sha-reference",
+   "inducing": "b7376cc6903b0e1e111fad38484e592676883faa",
+   "inducing_ct": 1609326753,
+   "inducing_subject": "Restored QUIC stats"
+  },
+  {
+   "fix": "8da5f42fa0e0cda39e079c97f315ffcafdb587fb",
+   "fix_ct": 1596881111,
+   "fix_subject": "Changed ndpi_ssl_version2str function call in ndpiSimpleIntegration.",
+   "how": "sha-reference",
+   "inducing": "23c07215388f6d5a2ee3a0e3b63fba92e2cbb085",
+   "inducing_ct": 1594422339,
+   "inducing_subject": "Fixed race condition in ndpi_ssl_version2str() caused by static qualifier in the version string buffer."
+  },
+  {
+   "fix": "4a6c525db845fc8f6564ce18963b91d153a5a354",
+   "fix_ct": 1593450479,
+   "fix_subject": "Improved fuzz_ndpi_reader which supports now SMP/MT w/o race-coniditions.",
+   "how": "sha-reference",
+   "inducing": "317d3ffd3ee6a417a804d79248eb98e0eea5a9de",
+   "inducing_ct": 1593339201,
+   "inducing_subject": "Fix undefined behaviour in internal tests"
+  },
+  {
+   "fix": "b24f5c4c0af2df8fd519e79cbcdf699a3b7c38bd",
+   "fix_ct": 1593338712,
+   "fix_subject": "Fix memory leak about purged/expired flows",
+   "how": "sha-reference",
+   "inducing": "1a62f4c799186244da0a2923d1db79f8e4e3c10b",
+   "inducing_ct": 1592780574,
+   "inducing_subject": "Added ndpi_bin_XXX API Added packet lenght distribution bins"
+  },
+  {
+   "fix": "b40732d8a502c61898095bacea59d8aa6c00341c",
+   "fix_ct": 1586351734,
+   "fix_subject": "Fix an harmless memory leak",
+   "how": "sha-reference",
+   "inducing": "90e08b3568d8963a459cf06c4e67ff6fc99298e3",
+   "inducing_ct": 1582151913,
+   "inducing_subject": "Fixes #845"
+  },
+  {
+   "fix": "e282e43279df4d1f562a7fc67994ab3ca0f66e73",
+   "fix_ct": 1584048067,
+   "fix_subject": "Fixes netbios overread",
+   "how": "sha-reference",
+   "inducing": "7a2bcd9c395f9fe554109e04add33e9e65564d82",
+   "inducing_ct": 1584019366,
+   "inducing_subject": "Fix buffer overread in netbios"
+  },
+  {
+   "fix": "2f15ce706ffc8d0d68438b519546afc13ddd7fa5",
+   "fix_ct": 1584047339,
+   "fix_subject": "Fixed API change which removed ndpi_netbios_name_interpret",
+   "how": "revert",
+   "inducing": "7a2bcd9c395f9fe554109e04add33e9e65564d82",
+   "inducing_ct": 1584019366,
+   "inducing_subject": "Fix buffer overread in netbios"
+  },
+  {
+   "fix": "7f510c10fe1f764bf42417110cd53cf6ac765a4b",
+   "fix_ct": 1570026412,
+   "fix_subject": "Fix double free after b19bfa1e207a8d4972bfc701fde5d5c014f95383",
+   "how": "sha-reference",
+   "inducing": "b19bfa1e207a8d4972bfc701fde5d5c014f95383",
+   "inducing_ct": 1570017739,
+   "inducing_subject": "Fixes leaks in ndpi_add_host_url_subprotocol"
+  },
+  {
+   "fix": "9590b18fdd0868c81271b330b766dc28083d1a60",
+   "fix_ct": 1562015803,
+   "fix_subject": "Fixed invalid changes in ndpi_get_proto_category() and ndpi_get_proto_name() dur to https://github.com/ntop/nDPI/pull/731/commits/4b717276614e20feada22e6fe29ea2099ba9fd37",
+   "how": "sha-reference",
+   "inducing": "4b717276614e20feada22e6fe29ea2099ba9fd37",
+   "inducing_ct": 1561733700,
+   "inducing_subject": "Fix two potential OOB reads in ndpi_main.c"
+  },
+  {
+   "fix": "2b4321b5c3f8f00b99f2e52aea520c39f81a2beb",
+   "fix_ct": 1527776388,
+   "fix_subject": "Fixes invalid NDPI_MAX_SUPPORTED_PROTOCOLS",
+   "how": "sha-reference",
+   "inducing": "c77ec63ed88c4154cd185f320d6fd5a3d6e9fd2e",
+   "inducing_ct": 1527273277,
+   "inducing_subject": "Added VidTO streaming service"
+  },
+  {
+   "fix": "441e43c167a88021854b56852e38a2317c2ac5bf",
+   "fix_ct": 1508857548,
+   "fix_subject": "Revert the revert of 2155dd9 after fixing ntopng Travis",
+   "how": "revert",
+   "inducing": "4f72b954da705f8d54a9dd61eae46b2b36b24dc0",
+   "inducing_ct": 1508764830,
+   "inducing_subject": "Undoes 2155dd9 that breaks ntopng Travis"
+  },
+  {
+   "fix": "4f72b954da705f8d54a9dd61eae46b2b36b24dc0",
+   "fix_ct": 1508764830,
+   "fix_subject": "Undoes 2155dd9 that breaks ntopng Travis",
+   "how": "sha-reference",
+   "inducing": "2155dd9153457886c4f5dac58dcf269eeb2a8122",
+   "inducing_ct": 1508422256,
+   "inducing_subject": "Add libcache to installed headers and removed relative import"
+  },
+  {
+   "fix": "56b6c7ed93b7fbdc1963200c208437c16fe5437f",
+   "fix_ct": 1492588254,
+   "fix_subject": "Fixed thread crash caused by commit 29cd6ef9942188633b79b5c1fe62360f048a6450",
+   "how": "sha-reference",
+   "inducing": "29cd6ef9942188633b79b5c1fe62360f048a6450",
+   "inducing_ct": 1492208993,
+   "inducing_subject": "fix segmentation fault caused by missing spanning tree check - add control for threads return values"
+  },
+  {
+   "fix": "1e19b689c4b50c69239bb207951a42b8a2ae8d45",
+   "fix_ct": 1479207722,
+   "fix_subject": "minor fix for https://github.com/ntop/nDPI/commit/0f94a46f868e6818790b0c278121c081a63c9eeb",
+   "how": "sha-reference",
+   "inducing": "0f94a46f868e6818790b0c278121c081a63c9eeb",
+   "inducing_ct": 1479207045,
+   "inducing_subject": "Merge branch 'mkfsn-bjnp-protocol' into dev"
+  },
+  {
+   "fix": "0e49eb1d17c33b784359f8dbdbb59041cac7aaab",
+   "fix_ct": 1467476942,
+   "fix_subject": "added drda protocol - fix quic output after commit 87717dd77f3c16d6b1a997a257ed442435ee93ec",
+   "how": "sha-reference",
+   "inducing": "87717dd77f3c16d6b1a997a257ed442435ee93ec",
+   "inducing_ct": 1467299016,
+   "inducing_subject": "Added QUICK subprotocol support"
+  },
+  {
+   "fix": "efae85de84290a3b4803c5b0be34e5a7078af91a",
+   "fix_ct": 1460536979,
+   "fix_subject": "Combined ASAN overflow detection and buffer modify",
+   "how": "sha-reference",
+   "inducing": "6a63ea46a469b6af61a03b0eefc37cafc94f7e5c",
+   "inducing_ct": 1459798823,
+   "inducing_subject": "Added check for alerting when nDPI modified packet payload (should not happen)"
+  }
+ ]
+}
