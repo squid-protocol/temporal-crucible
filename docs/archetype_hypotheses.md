@@ -196,3 +196,44 @@ Reports: `arch_useful_{curl,ndpi,openssl}.md`, `arch_useful_curl_allfix_explorat
 - Do not use them as a risk or review-priority input.
 - If a combined model ever wants them, it must beat size plus prior fixes on an unseen repo first.
 - The low-margin flag (S5) is the one stability property worth surfacing: "this label is borderline".
+
+---
+
+## ARCH-Z1..Z4 — does archetype *atypicality* (fit z-score / centroid distance) mark fixed files? — registered 2026-11-06, before any z × outcome statistic
+
+**Why.** ARCH-U tested the archetype *label*. The engine also records how well a file fits its label. A file far from
+its centroid is atypical for its kind, and "unusual code" is a plausible risk marker. No z or distance column has been
+related to any outcome in this repo (checked with `git grep` over `docs/` and `tools/` on `land/stack-51-53`). All
+three repos are unseen. Before writing this entry the author looked only at value ranges: `composition_file_z` is
+non-zero on 93% of curl C rows (range −1.5 to 6.35); `repo_composition_z` is 0 everywhere, so it is out of scope.
+`func_z_*` are within-file complexity z-scores, not archetype fit, so they are out of scope too.
+
+**Data, unit and outcome.** As ARCH-U1–U3, verbatim: quarterly snapshots; C files; on-master `security-fix` in
+(t, t + 180 d].
+
+**Scores (read at t only; nothing is learned).**
+- `zc` = `composition_file_z`.
+- `dc` = nearest file-cluster centroid distance, min(`file_fingerprint`).
+- Higher = more atypical = review first.
+
+| id | claim | statistic | supported iff |
+|---|---|---|---|
+| **Z1** | atypical-for-composition finds fixes per line reviewed | recall@20 by `zc` (EA's rule) | mean lift > 0 vs **both** LOC-desc and LOC-asc, each one-sided snapshot-bootstrap lo > 0 |
+| **Z2** | same, file-cluster distance | recall@20 by `dc` | as Z1 |
+| **Z3** | `zc` marks fixes *at equal size* | per-snapshot size-stratified AUC: pairs compared only within the same absolute LOC band (`centrality_bands.ABS_CUTS`), pooled over bands by pair count; lift = AUC − 0.5 | mean lift > 0, one-sided lo > 0 |
+| **Z4** | `dc` marks fixes at equal size | as Z3 | as Z3 |
+
+**Tests and headline.**
+- 5,000 snapshot-bootstrap rounds, seed 2982; α = 0.01 / 4 = 0.0025 one-sided per (claim, repo); < 20 scored
+  snapshots = not evaluable.
+- Equivalence null: the 90% CI against the stronger baseline (Z1/Z2), or of the lift (Z3/Z4), lies inside
+  [−0.02, +0.02].
+- Headline rule as ARCH-U: supported on every evaluable repo = useful; on some = repo-specific; on none = not useful.
+
+**Secondary (descriptive).**
+- Spearman ρ of `zc` and `dc` with `total_loc`: is atypicality just size?
+- Raw pooled AUC, and the same statistics with the sign flipped (are *typical* files riskier?), labelled exploratory.
+
+**Priors on record.**
+- Z1/Z2 **leaning not supported**: distance from a centroid likely tracks extreme size, which LOC-desc already captures.
+- Z3/Z4 **uncertain**.
