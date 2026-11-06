@@ -124,3 +124,75 @@ A snapshot is scored iff it has ≥ 1 positive and its training set has ≥ 1 po
 - U1/U2 **leaning not supported**: every static structural score so far has tied or lost to LOC effort-aware (RW-H1).
 - U3 **uncertain**.
 - U4 **leaning not supported**: FREC showed function size is hard to beat.
+
+---
+
+## Results — 2026-11-06 (run on branch `archetype/validation` after the registration commit `24b6336`)
+
+**One sentence.** The archetypes are a stable, well-behaved *description* of code, but they are not a *risk
+signal*. On three C repos, knowing a file's or function's archetype finds no more fixes than knowing its size.
+Every usefulness claim failed, and four of the eleven (claim, repo) cells are equivalence nulls.
+
+### Stability: passes everywhere
+
+| | curl (3,547 snapshots) | nDPI (555) | openssl (110) |
+|---|---:|---:|---:|
+| **S1** file cluster, unchanged blob (gate ≥ 0.999) | **1.00000** (2.09 M pairs) PASS | **0.99993** (132 k) PASS | **0.99997** (91 k) PASS |
+| **S1** function, unchanged blob | **1.00000** (10.0 M) PASS | **1.00000** (623 k) PASS | **1.00000** (502 k) PASS |
+| S4 composition, unchanged blob | 1.00000 | 0.99998 | 0.99992 |
+| **S2** file cluster kept, edits ≤ 5% (bar 0.90) | **0.980** trackable | **0.980** trackable | **0.967** trackable |
+| S2 kept, edits 5–20% / > 20% | 0.888 / 0.789 | 0.916 / 0.639 | 0.870 / 0.659 |
+| S3 one year apart: agreement (κ) | 0.929 (0.914) | 0.906 (0.884) | 0.947 (0.941) |
+| files with one label all their life (≥ 10 snapshots) | 65% | 75% | 65% |
+| function kept when (loc, complexity) unchanged / changed | 0.999 / 0.699 | 0.999 / 0.919 | 0.998 / 0.840 |
+
+- The labels are deterministic.
+- They move in proportion to how much the code moves: ~98% survive a ≤ 5% edit, and 64–79% survive a rewrite of
+  more than 20%.
+- The population mix drifts slowly: JSD from the first snapshot is 0.09–0.15 bits after 7–26 years.
+
+**Two engine observations, both too small to fail the gate:**
+
+- **The "file-local" file-cluster model is not strictly file-local.** On nDPI, 9 unchanged `fuzz/*.c` files changed
+  label (`file_cluster_16`→`file_cluster_12`) at one commit pair; openssl has 3 such files. A cross-file input,
+  plausibly `dependency_density` through resolved internal links, reaches the model.
+- **A thin centroid margin is a usable "unstable" flag** (S5). In the lowest margin decile, 8–13% of edited files flip,
+  against 1–3% in the middle deciles. The curve rises again at the far tail: outlier files far from every centroid
+  flip more often too.
+
+Reports: `arch_stability_{curl,ndpi,openssl}.md` (tool `tools/arch_stability.py`).
+
+### Usefulness: not supported anywhere
+
+| claim | curl | nDPI | openssl |
+|---|---|---|---|
+| **U1** file-cluster fix density, recall@20 vs LOC-desc / LOC-asc | −0.020 / +0.045 → **not supported** | −0.060 / −0.009 → **not supported** | −0.015 / +0.127 → **not supported** |
+| **U2** composition fix density, same | −0.013 / +0.051 → **not supported** | −0.008 / +0.044 → **not supported** | −0.070 / +0.073 → **not supported** |
+| **U3** LOC × d(file cluster), AUC lift over LOC | −0.027, CI [−0.055, −0.005] → **not supported** (worse than size) | −0.014, CI [−0.025, −0.004] → **not supported** (worse than size) | −0.005, CI [−0.018, +0.005] → **replicated null** |
+| **U4** loc × d_f(function archetype), within-event AUC lift | −0.009, CI [−0.016, −0.003] → **replicated null** | −0.003, CI [−0.012, +0.006] → **replicated null** | not evaluable (registered) |
+
+Scored units: U1–U3 had 61 / 23 / 73 snapshots. U4 had 435 events on curl and 51 on nDPI, the same candidate set as
+FREC (curl matches FREC exactly: 26,370 functions, 1,302 positives, loc AUC 0.7917).
+
+- **Headline rule → not useful for this outcome (decision rule d).**
+- The archetype rankings sit between the two size orderings: better than smallest-first on curl and openssl, never
+  better than largest-first.
+- Adjusting size by archetype (U3, U4) makes the ranking slightly *worse* on curl and nDPI. The learned per-label
+  densities do differ (openssl 0.10×–1.5× the global rate), but they do not carry forward to the next half-year's
+  fixes better than size does.
+
+**Exploratory (labelled, no verdicts):**
+- With all fix classes on curl (1,293 events), U1 vs LOC-desc is +0.003 and U3 is −0.003: the same picture.
+- A label flip in the prior year does not mark future fixes beyond "the file was edited" on curl (0.034 vs 0.030; the
+  flipped files are also larger) or openssl (0.0126 vs 0.0121). nDPI shows 0.099 vs 0.055 on 525 flipped files, not
+  size-adjusted. It is the only lead, and it needs its own registration on unseen data.
+
+Reports: `arch_useful_{curl,ndpi,openssl}.md`, `arch_useful_curl_allfix_exploratory.md`,
+`arch_func_useful_{curl,ndpi}.md` (tools `tools/arch_useful.py`, `tools/arch_func_useful.py`).
+
+### What this means for GitGalaxy
+
+- Keep the archetypes as **vocabulary**: what kind of code a file or function is, tracked reliably over time.
+- Do not use them as a risk or review-priority input.
+- If a combined model ever wants them, it must beat size plus prior fixes on an unseen repo first.
+- The low-margin flag (S5) is the one stability property worth surfacing: "this label is borderline".
