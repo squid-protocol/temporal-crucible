@@ -87,3 +87,10 @@ private and for the owner.
   independent fixes, and lose on CV-correct cases where it decides wrongly; it has never decided wrongly on known
   truth so far.
 - **H3:** pending approval.
+
+**Pre-data path corrections (2026-11-06; presence checks only, no contents compared).**
+- ITK's copy is `Modules/ThirdParty/Expat/src/itkexpat/lib`.
+- AOSP's is `expat/lib`.
+- Poco vendored expat first as C++ (`XML/src/xml*.cpp`, from 2006), later as `dependencies/expat/src/*.c`. Both paths
+  are followed.
+- **Expat fix mapping:** tree-sitter only (no engine scans of expat), with the ALL-CAPS-macro name filter.
