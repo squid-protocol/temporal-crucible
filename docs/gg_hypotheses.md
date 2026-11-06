@@ -69,3 +69,66 @@ Otherwise the study stops.
   results were not read for this entry.
 - **GG-H2 uncertain.** The transition was gradual: Claude-marked shares rose over months.
 - **GG-H3 uncertain.**
+
+---
+
+## Results — 2026-11-06 (gate `gg_gate.md`; scorer `b930c1b` committed before running; report `gg.md`)
+
+**Gate G-PY: PASS.** Engine vs tree-sitter-python on the head package: recall 99.71%, precision 100% (3,136 / 3,145
+functions).
+
+**Data.** 32 weekly snapshots. Functions born: Gemini era 366, Claude era 2,549, transition 35 (excluded).
+
+| claim | result | verdict |
+|---|---|---|
+| **GG-H1** era distinguishable beyond within-era drift | cross-era AUC **0.877**; placebos: early vs late Gemini 0.725, early vs late Claude 0.669; margin **+0.152** (lo +0.086) | **SUPPORTED** |
+| **GG-H2** drastic change point at the switch | both best breaks (keyword mix and `sfs` fingerprint) land on **2026-10-12**, not in 07-01 → 08-12 | **not supported** |
+| **GG-H3** Gemini code rewritten faster after the switch | weekly death hazard of Gemini-born functions: before 0.026, after **0.0065**; ratio **0.25** | **not supported**: the opposite direction |
+
+### What distinguishes the eras (descriptive)
+
+Standardised mean differences, Claude − Gemini, at birth:
+- **Shorter** (log loc −0.78).
+- **Denser branching** (complexity/loc +0.76, branch hits +0.79).
+- **More generics / type syntax** (+0.81).
+- Higher keyword density (+0.81).
+- **Fewer print statements** (−0.62).
+- More encapsulation (+0.34).
+
+Archetype mix of functions born in each era:
+
+| archetype | Gemini | Claude |
+|---|---:|---:|
+| Many-Argument Workhorses | **29.5%** | 8.9% |
+| I/O & Config Routines | **7.7%** | 0.4% |
+| Generic / Templated Code | 9.8% | **22.4%** |
+| Encapsulated Accessors | 4.9% | **11.7%** |
+| Stateful Encapsulated Methods | 29.5% | 33.9% |
+
+**The two eras in a sentence.** Gemini-era code is fewer, larger, many-argument "workhorse" functions with print-style
+I/O. Claude-era code is many small, typed, branch-dense helpers and accessors.
+
+### Why the claims came out as they did
+
+- **H2.** The largest structural break is not the model switch but the **scale-up**. Between 2026-09-14 and 10-26 the
+  package went from 413 to 2,769 functions, during the autonomous-fleet period (995 commits in the week of 10-19).
+  The switch week itself shows only a small retention dip (0.85 on 07-27).
+- **H3.** Gemini-era code died *more* while it was young (infant mortality, as NH found), not after Claude arrived.
+  By July it had settled. Claude mostly **added around it** rather than rewriting it.
+
+### Caveats (these bound GG-H1)
+
+1. **The era is a whole regime, not only a model.** The Claude switch coincided with:
+   - adopting mypy and ruff (the first Claude-era PRs are "clear all N mypy errors…" sessions, which plausibly drive
+     the type-syntax difference);
+   - PR-based workflow, CI gates and CLAUDE.md conventions;
+   - a different phase of the product (mainframe/COBOL tooling).
+
+   The placebos remove ordinary drift, but not a simultaneous process change. **GG-H1 shows the eras are
+   structurally distinct, not that the model alone caused it.**
+2. **One repo, one owner.**
+3. **ChatGPT commits** (a few) count with their era.
+4. Gemini-era sample: 366 functions.
+
+**What would isolate the model.** Same task, same repo state, same rules, Claude vs Gemini side by side. That is the
+design of the population-analyses `agent-habits` studies, whose results this entry did not read.
