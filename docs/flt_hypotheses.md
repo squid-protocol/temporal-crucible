@@ -52,3 +52,40 @@ user), from the GitHub API.
 - **FLT-H2 uncertain.** Within the same directory, task type may dominate.
 - **FLT-H3 leaning supported.**
 - **The main confound** is task mix (fleet tasks are ladder, census and validation tooling). H2 is the partial control.
+
+---
+
+## Results — 2026-11-06 (scorer `7659c86` committed before running; report `flt.md`)
+
+**Data.** 1,538 functions born from 2026-10-05: **fleet 636, interactive 899** attributed, 3 dropped (no PR in the
+first-parent subject).
+
+| claim | result | verdict |
+|---|---|---|
+| **FLT-H1** fleet vs interactive distinguishable beyond drift | AUC **0.640**; placebos: fleet early-vs-late 0.709, interactive 0.678; margin **−0.069** (lo −0.136) | **not supported** |
+| **FLT-H2** …inside `gitgalaxy/tools/` | AUC 0.624 (343 vs 639); placebos 0.713 / 0.681; margin −0.089 | **not supported** |
+| **FLT-H3** fleet concentrates in tools/ | share in tools/: fleet **54%**, interactive **71%**; difference **−0.17** (lo −0.24) | **not supported**: the opposite direction |
+
+**Headline → the fleet writes Claude code.**
+- Functions written by the autonomous fleet are **no more different from the owner's interactive Claude sessions than
+  either group is from itself a few weeks later.** AUC 0.64 sits below both within-group drift placebos.
+- Compare GG-H1: Gemini-era vs Claude-era AUC 0.877, with a +0.15 margin over the placebos.
+- So the structural signature tracks the **model and its working regime**, not whether a person is in the loop.
+
+**Corrects GG's exploratory note.** GG said post-break code went 59% into `gitgalaxy/tools/`, and attributed that to
+the fleet. The attribution shows the reverse:
+- **interactive** sessions wrote most of the new tooling (71% of their functions);
+- the **fleet** worked relatively more in `gitgalaxy/core` (211 of 636 functions vs 133 of 899).
+
+The October break is a **volume** step (both modes writing at once). It is not a fleet style.
+
+**Small descriptive differences.**
+- The fleet writes more Stateful Encapsulated Methods (38.8% vs 24.5%) and fewer Defensive Guards (5.0% vs 9.7%) and
+  Generic/Templated code (20.6% vs 26.9%).
+- Signal differences are small (|SMD| ≤ 0.22).
+- Median size is the same (12 vs 11 lines).
+
+**Caveats.**
+- "Interactive" means non-fleet branches. Some of those sessions ran unattended too (`claude/…` worktree sessions).
+- The labels rest on the PR that last touched each function's `def` line at its birth week.
+- One repo.
