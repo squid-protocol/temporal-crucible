@@ -99,3 +99,27 @@ its own predictor.
 - XC-H3 / H4 **uncertain**: the extrinsic labels may be thin in C files.
 - XC-H5 **leaning supported**: regressions cluster in recently-churned files.
 - XC-H6 **uncertain**.
+
+## Amendment 1 — 2026-11-06, after the round-1 label audit and before any predictor statistic
+
+- **Round 1** (`docs/xc_label_audit.md`):
+  - regression passed: curl 0.87, nDPI 0.77, openssl 0.73;
+  - latent passed: curl 1.00, nDPI 0.70, openssl 0.90;
+  - **extrinsic failed on all three repos**: curl 0.33, nDPI 0.40, openssl 0.30.
+- **Why extrinsic failed.** Generic "fix compiler warning" says nothing about the environment changing. Bare library
+  names collide with the repo's own modules: curl's TLS backends, openssl's own `openssl` app.
+- **The amended rule** (`tools/xc_harvest.py`, `EXT_ENV` v2). The environment must be named explicitly as one of:
+  - a platform, OS or arch;
+  - a named compiler (with or without version);
+  - a C standard;
+  - a libc;
+  - toolchain / LTO / cross-compiling;
+  - a dependency **with** a version or a newer/older/API qualifier.
+
+  Generic `compiler`, `warning(s)`, `-W…`, `linker`, `deprecat*`, `autoconf`/`cmake` and bare dependency names are
+  dropped.
+- Everything else is unchanged, including the class order. Only the extrinsic rule changed; latent and regression
+  labels are identical.
+- **Re-audit:** a fresh sample (seed 2983, excluding round-1 commits) of 30 extrinsic commits per repo, same ≥ 0.70 gate.
+  Under the registration this is the one amendment, so a failure now withholds extrinsic on that repo (XC-H3, H4 and H6
+  become *not evaluable* there).

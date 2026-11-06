@@ -31,14 +31,20 @@ REGR_WORD = re.compile(r"\bregress(ion|ed|es)?\b", re.I)
 REVERT_SUBJ = re.compile(r'^Revert "')
 REVERT_BODY = re.compile(r"This reverts commit [0-9a-f]{7,40}")
 SHA_TOKEN = re.compile(r"(?<![0-9a-zA-Z])[0-9a-f]{7,40}(?![0-9a-zA-Z])")
+# Amendment 1 (2026-11-06, after the v1 audit failed on all three repos; recorded in docs/xc_hypotheses.md):
+# generic "compiler warning" and bare library names are dropped. Only the environment named explicitly counts:
+# platform / OS / arch, a named compiler, a C standard, a libc, the toolchain, or a dependency WITH a version or
+# newer/older/API qualifier.
+_DEPS = (r"openssl|boringssl|libressl|wolfssl|mbedtls|gnutls|nss|rustls|quiche|ngtcp2|nghttp2|nghttp3|libssh2?|zlib|"
+         r"brotli|zstd|libidn2?|c-ares|libpsl|libpcap|libgcrypt|gcrypt|json-c|libmaxminddb|pcre2?|glib")
 EXT_ENV = re.compile(
-    r"\b(gcc\d*|clang\d*|msvc|visual studio|vs20\d\d|mingw\w*|cygwin|msys\w*|windows|win32|win64|uwp|macos|mac os|osx|"
-    r"darwin|apple|freebsd|netbsd|openbsd|dragonfly|android|ios|solaris|illumos|aix|hp-?ux|haiku|qnx|vxworks|"
-    r"32-?bit|64-?bit|big.?endian|little.?endian|endian\w*|glibc|musl|uclibc|c89|c90|c99|c11|c17|c23|ansi c|"
-    r"openssl\s*[0-9.]*|boringssl|libressl|wolfssl|mbedtls|gnutls|schannel|securetransport|nss|rustls|quiche|ngtcp2|"
-    r"nghttp2|nghttp3|libssh2?|zlib|brotli|zstd|libidn2?|c-ares|libpsl|libpcap|gcrypt|libgcrypt|json-c|"
-    r"newer|older|api change|deprecat\w*|toolchain|cross-?compil\w*|sanitizer version|autoconf|automake|libtool|"
-    r"cmake|compiler|linker|-W[a-z-]+|warnings?)\b", re.I)
+    r"\b(windows|win32|win64|uwp|mingw\w*|cygwin|msys\w*|macos|mac os( x)?|osx|darwin|ios|android|freebsd|netbsd|openbsd|"
+    r"dragonfly(bsd)?|solaris|illumos|aix|hp-?ux|haiku|qnx|vxworks|os/2|os400|vms|openvms|nonstop|openwrt|"
+    r"riscv\w*|aarch64|arm64|armv\d\w*|s390x?|ppc\w*|powerpc\w*|mips\w*|sparc\w*|32-?bit|64-?bit|big.?endian|"
+    r"little.?endian|gcc[ -]?\d*|clang[ -]?\d*|msvc|visual studio|vs20\d\d|icc|xlc|sun ?pro|tcc|watcom|borland|"
+    r"c89|c90|c99|c11|c17|c23|ansi c|glibc|musl|uclibc|bionic|lto|gold linker|cross-?compil\w*|toolchain|"
+    rf"(?:{_DEPS})[ -]?v?\d+(?:\.\d+)+|(?:newer|older|recent|new|old) (?:versions? of )?(?:{_DEPS})|"
+    rf"(?:{_DEPS}) (?:api|version|release)s?|(?:newer|older) (?:compiler|version|release)s?)\b", re.I)
 EXT_ACTION = re.compile(r"\b(fix(es|ed)?|silence\w*|suppress\w*|avoid\w*|work ?around|adapt\w*|compat\w*|port(ed|ing)?|"
                         r"make .{0,40}\b(build|compile|work)\w*|build(s)? (with|on|again)|compile(s)? (with|on)|"
                         r"support)\b", re.I)
