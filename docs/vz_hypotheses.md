@@ -86,3 +86,14 @@
 - **H1 likely.**
 - **H2 uncertain.** zlib-ng's rewrite may push its copies below the 0.5 text threshold, leaving few renamed pairs.
 - **H3 likely**, since most hosts track zlib releases verbatim.
+
+**Pre-run clarification (2026-11-06; no host statistic computed yet).** A smoke test showed tree-sitter loses
+pre-2017 `inflate.c`: `#ifdef` blocks split function bodies, so `inflate()` was never recognised. It also names a
+function after a visibility macro (`ZLIB_INTERNAL`).
+
+Fallback, for queries and host bodies alike:
+- where tree-sitter finds no enclosing function, or returns an ALL-CAPS macro as the name, use the engine's function
+  span (its start line to the next function's start, from the same scan) for the name and body;
+- a post-fix body tree-sitter cannot see is the same-size window from the pre-fix signature line.
+
+Nothing else changes.
