@@ -108,8 +108,8 @@ evaluates it. Verdicts are summarized here and authoritative in [`HYPOTHESES.md`
 | M-H1..M-H3 | multi-label signatures | curl | tc#1 | ○ pending | — |
 | X-H1 | unpaired-allocation ↔ introduce | kernel harvest | tc#27 | ○ registered | keyword_pools_explore.md |
 | X-H2 | fix-grammar gradient | openssl | tc#26 | ○ registered | keyword_pools_explore.md |
-| DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ○ registered | — |
-| DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ○ registered | — |
+| DYN-H1 | per-file dynamism > LOC within size bands | nDPI, openssl | tc#41 | ✗ not supported (2026-11-06) | cen_hypotheses.md (DYN section) |
+| DYN-H2 | dynamism rate ratio > 1 at equal size + evidence (pilot replication) | nDPI, openssl | tc#41 | ✓ SUPPORTED: 2.03 / 2.33, robust to finer strata | cen_hypotheses.md (DYN section) |
 | AG-H1 | E1: ≥15% of PR-branch main-merge conflicts are generated-files-only (census, 10-11..17) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
 | AG-H2 | E1: status-quo conflict latency exceeds projected tick latency (generated-only) | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
 | AG-H3 | E1: `tick` clears tool-written conflicts correctly, 8/8 | gitgalaxy | tc#46 | ○ registered | agents/e1-does-a-mechanical-merge-of-origin.md |
