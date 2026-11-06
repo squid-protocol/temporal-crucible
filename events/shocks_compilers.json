@@ -1,0 +1,476 @@
+{
+ "source": "upstream git tags via GitHub API (gcc-mirror/gcc releases/gcc-*, llvm/llvm-project llvmorg-*); date = annotated-tag date or tagged-commit date",
+ "fetched": "2026-11-06",
+ "rule": "GCC: 3.x.0 and 4.x.0, then N.1.0 for N>=5; LLVM/Clang: earliest final tag per release series (2.x/3.x minor series, then per major from 4)",
+ "shocks": [
+  {
+   "compiler": "gcc",
+   "version": "3.0.0",
+   "date": "2001-06-17",
+   "tag": "releases/gcc-3.0.0",
+   "sha": "b58080295efffd79bc0875cd425bb1d232c41ccf"
+  },
+  {
+   "compiler": "gcc",
+   "version": "3.1.0",
+   "date": "2002-06-24",
+   "tag": "releases/gcc-3.1.0",
+   "sha": "64629404d8d56db4148e8dba734382a7cd0ca7a4"
+  },
+  {
+   "compiler": "gcc",
+   "version": "3.2.0",
+   "date": "2002-08-14",
+   "tag": "releases/gcc-3.2.0",
+   "sha": "3d9df6b3a2eb8d0b4a6424025758204a923a77e6"
+  },
+  {
+   "compiler": "gcc",
+   "version": "3.3.0",
+   "date": "2003-05-14",
+   "tag": "releases/gcc-3.3.0",
+   "sha": "c51557328584ce06a4f00240e87f042a7be2e91e"
+  },
+  {
+   "compiler": "gcc",
+   "version": "3.4.0",
+   "date": "2004-04-19",
+   "tag": "releases/gcc-3.4.0",
+   "sha": "b5c77e3b18ebef8731e0cc850f34ecfeae7c8e2e"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.0.0",
+   "date": "2005-04-21",
+   "tag": "releases/gcc-4.0.0",
+   "sha": "d89dab3130e93bf415da3719355e24ef4cd039ca"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.1.0",
+   "date": "2006-02-28",
+   "tag": "releases/gcc-4.1.0",
+   "sha": "dcaac250fcc1a1ce514d97613e4547aded83033c"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.2.0",
+   "date": "2007-05-14",
+   "tag": "releases/gcc-4.2.0",
+   "sha": "bfbec2aae3586d0aed03b24e2b5998b8a1a844a0"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.3.0",
+   "date": "2008-03-05",
+   "tag": "releases/gcc-4.3.0",
+   "sha": "3abe25d9230b52e13470da1a70e75bdf668e587d"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.4.0",
+   "date": "2009-04-21",
+   "tag": "releases/gcc-4.4.0",
+   "sha": "b7fc996728085c0591ea7c5d0e1c84a8f6a29bd8"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.5.0",
+   "date": "2010-04-14",
+   "tag": "releases/gcc-4.5.0",
+   "sha": "2f77df704ff54372859661815055b84056a75e41"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.6.0",
+   "date": "2011-03-25",
+   "tag": "releases/gcc-4.6.0",
+   "sha": "7a3af1a36b1965ae3d60e1f397a0d3ca17619d43"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.7.0",
+   "date": "2012-03-22",
+   "tag": "releases/gcc-4.7.0",
+   "sha": "ae02e369d7a25c78527e89ca132ec1909902631d"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.8.0",
+   "date": "2013-03-22",
+   "tag": "releases/gcc-4.8.0",
+   "sha": "372a443092ee1656c6d866a16e6da6df32b1f71d"
+  },
+  {
+   "compiler": "gcc",
+   "version": "4.9.0",
+   "date": "2014-04-22",
+   "tag": "releases/gcc-4.9.0",
+   "sha": "ade89f291493b5e697047441c1193e5fc8278d3e"
+  },
+  {
+   "compiler": "gcc",
+   "version": "5.1.0",
+   "date": "2015-04-22",
+   "tag": "releases/gcc-5.1.0",
+   "sha": "ea29f0882c0cb710b0444744eaf368cf0143d7a0"
+  },
+  {
+   "compiler": "gcc",
+   "version": "6.1.0",
+   "date": "2016-04-27",
+   "tag": "releases/gcc-6.1.0",
+   "sha": "a9425683787eeba7b9a4bb6c36588885160ab1f1"
+  },
+  {
+   "compiler": "gcc",
+   "version": "7.1.0",
+   "date": "2017-05-02",
+   "tag": "releases/gcc-7.1.0",
+   "sha": "303f81ad7e9f278d5ea5a8bd4193ed9da76bc251"
+  },
+  {
+   "compiler": "gcc",
+   "version": "8.1.0",
+   "date": "2018-05-02",
+   "tag": "releases/gcc-8.1.0",
+   "sha": "406c2abec3f998e9064919b22db62f38a7c0e7b9"
+  },
+  {
+   "compiler": "gcc",
+   "version": "9.1.0",
+   "date": "2019-05-03",
+   "tag": "releases/gcc-9.1.0",
+   "sha": "c8913260b0756f977ab5e6e6392c51a83657fffc"
+  },
+  {
+   "compiler": "gcc",
+   "version": "10.1.0",
+   "date": "2020-05-07",
+   "tag": "releases/gcc-10.1.0",
+   "sha": "6e6e3f144a33ae504149dc992453b4f6dea12fdb"
+  },
+  {
+   "compiler": "gcc",
+   "version": "11.1.0",
+   "date": "2021-04-27",
+   "tag": "releases/gcc-11.1.0",
+   "sha": "50bc9185c2821350f0b785d6e23a6e9dcde58466"
+  },
+  {
+   "compiler": "gcc",
+   "version": "12.1.0",
+   "date": "2022-05-06",
+   "tag": "releases/gcc-12.1.0",
+   "sha": "1ea978e3066ac565a1ec28a96a4d61eaf38e2726"
+  },
+  {
+   "compiler": "gcc",
+   "version": "13.1.0",
+   "date": "2023-04-26",
+   "tag": "releases/gcc-13.1.0",
+   "sha": "cc035c5d8672f87dc8c2756d9f8367903aa72d93"
+  },
+  {
+   "compiler": "gcc",
+   "version": "14.1.0",
+   "date": "2024-05-07",
+   "tag": "releases/gcc-14.1.0",
+   "sha": "cd0059a1976303638cea95f216de129334fc04d1"
+  },
+  {
+   "compiler": "gcc",
+   "version": "15.1.0",
+   "date": "2025-04-25",
+   "tag": "releases/gcc-15.1.0",
+   "sha": "1b306039ac49f8ad91ca71d3de3150a3c9fa792a"
+  },
+  {
+   "compiler": "gcc",
+   "version": "16.1.0",
+   "date": "2026-04-30",
+   "tag": "releases/gcc-16.1.0",
+   "sha": "6afcc4f6da931eb93f3ab001a0dd9650ea71d1ea"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.0.0",
+   "date": "2007-05-23",
+   "tag": "llvmorg-2.0.0",
+   "sha": "45d5bd27cbddfcd75eca31d681384e10ff1311c5"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.1.0",
+   "date": "2007-09-27",
+   "tag": "llvmorg-2.1.0",
+   "sha": "58b88bd03fe4a3d0216995ead840f1b851cb16aa"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.2.0",
+   "date": "2008-02-12",
+   "tag": "llvmorg-2.2.0",
+   "sha": "ef55b5d87a5b6c7b78178971242aeff6bf5b9c4f"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.3.0",
+   "date": "2008-06-10",
+   "tag": "llvmorg-2.3.0",
+   "sha": "379f6c725a8c3261daf0e972bbe827b4c0538d1f"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.4.0",
+   "date": "2008-11-10",
+   "tag": "llvmorg-2.4.0",
+   "sha": "5f298e09cafb494b7832f0146e6badf631d9ce9c"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.5.0",
+   "date": "2009-03-03",
+   "tag": "llvmorg-2.5.0",
+   "sha": "44bfe305ddcbf8b17dde408db3b97afd13de0399"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.6.0",
+   "date": "2009-10-24",
+   "tag": "llvmorg-2.6.0",
+   "sha": "442d5f5ea8c0d32e9218c44f457019a977ede326"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.7.0",
+   "date": "2010-04-27",
+   "tag": "llvmorg-2.7.0",
+   "sha": "18665516ade1efd7b3febabf70ffda2d9cb9f3e2"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.8.0",
+   "date": "2010-10-06",
+   "tag": "llvmorg-2.8.0",
+   "sha": "174b5ffc4b61ce599310e0a0fc7c7a8696666343"
+  },
+  {
+   "compiler": "clang",
+   "version": "2.9.0",
+   "date": "2011-04-07",
+   "tag": "llvmorg-2.9.0",
+   "sha": "b6316e8ae7dbb57450e0e2200de4dbe715e01ab0"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.0.0",
+   "date": "2011-11-29",
+   "tag": "llvmorg-3.0.0",
+   "sha": "bc12345cbebd4137c25b3955fd08006c485fe04e"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.1.0",
+   "date": "2012-05-14",
+   "tag": "llvmorg-3.1.0",
+   "sha": "7f03d15581b5abad9799e6d369e27822401802be"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.2.0",
+   "date": "2013-01-14",
+   "tag": "llvmorg-3.2.0",
+   "sha": "7373e62925a3ab6ee056ae10c0ea8cdbf3241728"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.3.0",
+   "date": "2013-06-07",
+   "tag": "llvmorg-3.3.0",
+   "sha": "465d2ab836ab3907916652ac93a715364b53e0b2"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.4.0",
+   "date": "2013-12-24",
+   "tag": "llvmorg-3.4.0",
+   "sha": "1255f5f451a1b6b110f8c6f34fb813102d6e1f2d"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.5.0",
+   "date": "2014-09-02",
+   "tag": "llvmorg-3.5.0",
+   "sha": "d355b771d6e0ff9638aed38b9289f70642857f5d"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.6.0",
+   "date": "2015-02-25",
+   "tag": "llvmorg-3.6.0",
+   "sha": "27bbb819f083683efcb137b3f920dcd461499488"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.7.0",
+   "date": "2015-08-28",
+   "tag": "llvmorg-3.7.0",
+   "sha": "3812919dc0588eeb74d440d3e3d8b1a097756f95"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.8.0",
+   "date": "2016-03-03",
+   "tag": "llvmorg-3.8.0",
+   "sha": "08f0372c351a57b01afee6c64066961203da28c5"
+  },
+  {
+   "compiler": "clang",
+   "version": "3.9.0",
+   "date": "2016-08-31",
+   "tag": "llvmorg-3.9.0",
+   "sha": "ce25e1a77e895c7ef32c156f6cff3012f6c5a946"
+  },
+  {
+   "compiler": "clang",
+   "version": "4.0.0",
+   "date": "2017-03-09",
+   "tag": "llvmorg-4.0.0",
+   "sha": "ed7ec907afb20156df6b49e22e05bde6f321fb61"
+  },
+  {
+   "compiler": "clang",
+   "version": "5.0.0",
+   "date": "2017-09-05",
+   "tag": "llvmorg-5.0.0",
+   "sha": "a7a5059842edfdbe955355f11ab79f9bda78465b"
+  },
+  {
+   "compiler": "clang",
+   "version": "6.0.0",
+   "date": "2018-03-02",
+   "tag": "llvmorg-6.0.0",
+   "sha": "e4f84abd37bf64bb18352fbef1fdcc88a2431a72"
+  },
+  {
+   "compiler": "clang",
+   "version": "7.0.0",
+   "date": "2018-09-17",
+   "tag": "llvmorg-7.0.0",
+   "sha": "00b161b8971bc6d3cb55f13502288b8fe0dbaa42"
+  },
+  {
+   "compiler": "clang",
+   "version": "8.0.0",
+   "date": "2019-03-18",
+   "tag": "llvmorg-8.0.0",
+   "sha": "d2298e74235598f15594fe2c99bbac870a507c59"
+  },
+  {
+   "compiler": "clang",
+   "version": "9.0.0",
+   "date": "2019-09-19",
+   "tag": "llvmorg-9.0.0",
+   "sha": "0399d5a9682b3cef71c653373e38890c63c4c365"
+  },
+  {
+   "compiler": "clang",
+   "version": "10.0.0",
+   "date": "2020-03-24",
+   "tag": "llvmorg-10.0.0",
+   "sha": "d32170dbd5b0d54436537b6b75beaf44324e0c28"
+  },
+  {
+   "compiler": "clang",
+   "version": "11.0.0",
+   "date": "2020-10-12",
+   "tag": "llvmorg-11.0.0",
+   "sha": "176249bd6732a8044d457092ed932768724a6f06"
+  },
+  {
+   "compiler": "clang",
+   "version": "12.0.0",
+   "date": "2021-04-14",
+   "tag": "llvmorg-12.0.0",
+   "sha": "d28af7c654d8db0b68c175db5ce212d74fb5e9bc"
+  },
+  {
+   "compiler": "clang",
+   "version": "13.0.0",
+   "date": "2021-10-01",
+   "tag": "llvmorg-13.0.0",
+   "sha": "d7b669b3a30345cfcdb2fde2af6f48aa4b94845d"
+  },
+  {
+   "compiler": "clang",
+   "version": "14.0.0",
+   "date": "2022-03-23",
+   "tag": "llvmorg-14.0.0",
+   "sha": "329fda39c507e8740978d10458451dcdb21563be"
+  },
+  {
+   "compiler": "clang",
+   "version": "15.0.0",
+   "date": "2022-09-06",
+   "tag": "llvmorg-15.0.0",
+   "sha": "4ba6a9c9f65bbc8bd06e3652cb20fd4dfc846137"
+  },
+  {
+   "compiler": "clang",
+   "version": "16.0.0",
+   "date": "2023-03-17",
+   "tag": "llvmorg-16.0.0",
+   "sha": "08d094a0e457360ad8b94b017d2dc277e697ca76"
+  },
+  {
+   "compiler": "clang",
+   "version": "17.0.0",
+   "date": "2023-09-19",
+   "tag": "llvmorg-17.0.0",
+   "sha": "88bf774c565080e30e0a073676c316ab175303af"
+  },
+  {
+   "compiler": "clang",
+   "version": "18.1.0",
+   "date": "2024-03-06",
+   "tag": "llvmorg-18.1.0",
+   "sha": "461274b81d8641eab64d494accddc81d7db8a09e"
+  },
+  {
+   "compiler": "clang",
+   "version": "19.1.0",
+   "date": "2024-09-17",
+   "tag": "llvmorg-19.1.0",
+   "sha": "a4bf6cd7cfb1a1421ba92bca9d017b49936c55e4"
+  },
+  {
+   "compiler": "clang",
+   "version": "20.1.0",
+   "date": "2025-03-04",
+   "tag": "llvmorg-20.1.0",
+   "sha": "24a30daaa559829ad079f2ff7f73eb4e18095f88"
+  },
+  {
+   "compiler": "clang",
+   "version": "21.1.0",
+   "date": "2025-08-26",
+   "tag": "llvmorg-21.1.0",
+   "sha": "3623fe661ae35c6c80ac221f14d85be76aa870f1"
+  },
+  {
+   "compiler": "clang",
+   "version": "22.1.0",
+   "date": "2026-02-24",
+   "tag": "llvmorg-22.1.0",
+   "sha": "4434dabb69916856b824f68a64b029c67175e532"
+  },
+  {
+   "compiler": "clang",
+   "version": "23.1.0",
+   "date": "2026-08-25",
+   "tag": "llvmorg-23.1.0",
+   "sha": "ea7d852a70e8bdfaf601d6626a760f9771b2c4b4"
+  }
+ ]
+}
