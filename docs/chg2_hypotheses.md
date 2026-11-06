@@ -59,3 +59,41 @@ negatives (weight 10), seed 2982.
 - **H2 uncertain.**
 - **If M1 does not beat B0,** the engine's value lies outside regression ranking (identity, provenance, targeting),
   and CHG's H2 is best read as small.
+
+---
+
+## Results — 2026-11-06 (scorer `be0ebfe` committed before running; report `chg2.md`)
+
+**Data.** 1,526,252 function-quarters, 1,188 regression-hit; 100,885 commits mapped for churn.
+
+| claim | test positives | recall@20% loc, B0 churn | M1 churn + engine | difference (lo) | verdict |
+|---|---:|---:|---:|---:|---|
+| **CHG2-H1** forward (train < 2020, test ≥ 2020) | 666 | **41.3%** | 38.7% | −2.6% (−5.5%) | **not supported** |
+| **CHG2-H2** leave-one-repo-out | 1,188 | **36.7%** | 33.8% | −2.9% (−6.7%) | **not supported** |
+
+**Reading.**
+- **The engine's change features add nothing over churn for regression ranking.** Adding them makes the ranking
+  slightly *worse*: noise from 38 extra features.
+- M1 is not better in any fold except harfbuzz (+1.4 points).
+- The fitted M1 relies on the churn and size terms. Among the engine terms, |Δpointers| and |Δcomplexity| carry
+  small positive weight; the rest are near zero or negative.
+- **CHG-H2's shape-vs-edit increment** (1.42, lo 1.02) is best read as **edit magnitude**: shape-changing edits are
+  bigger edits. Churn lines capture that directly.
+
+**Churn is the strong signal.**
+- Forward: churn catches 41% of later regressions in 20% of the code.
+- Leave-one-repo-out: churn 37% against a size-only ordering's 11%.
+- This is the classic defect-prediction result, reproduced here with the engine's function spans and identity.
+
+**What this settles.**
+- For "which functions will need a regression fix", use **churn**.
+- The engine's distinct value lies elsewhere, where it has passed registered tests:
+  - library and platform coupling for security-fix targeting (LIB, ENV);
+  - identity and twin fingerprints (SIG, SFS);
+  - era and regime provenance (GG);
+  - natural history (NH).
+
+**Caveats.**
+- Labels are the 648 regression-word events.
+- One feature set, fixed in advance. A different engine feature design might do better, but that would need its own
+  registration on fresh data.
