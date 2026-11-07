@@ -53,3 +53,33 @@ Public files give aggregates only.
 
 - **H1 likely, modest** (AUC gain of a few points): FIXK effects are 1.3–1.7×.
 - **H2 uncertain.**
+
+---
+
+## Results — 2026-11-06 (scorer `f6b0b57`; report `silent.md`; candidate list private)
+
+**Data.** 19,088 fix commits. 613 CVE fixes, of which **451 silent**; 17,392 ordinary fixes.
+
+| claim | result | verdict |
+|---|---|---|
+| **SIL-H1** signature beats patch size on silent CVE fixes (held-out repos) | AUC **0.569** vs size 0.507 (lo +0.012). The four known defensive rules alone give **0.572** | **SUPPORTED, but weak** |
+| **SIL-H2** silent CVE fixes concentrate in the top 10% | **1.51×** (lo 1.09; bar 1.5) | **not supported** |
+
+Per held-out repo, AUC full vs size: curl 0.583 / 0.525, OpenSSL 0.573 / 0.579, nDPI 0.571 / 0.499, harfbuzz
+0.557 / 0.480. Explicit (security-worded) CVE fixes: 0.554.
+
+**Reading.**
+- **FIXK's signatures are population tendencies, not a detector.**
+  - The CVE-fix signature is real (FIXK), and it generalises across repos: AUC above patch size in 3 of 4 held-out
+    repos.
+  - But it separates individual commits barely better than chance.
+  - All of the gain comes from the known defensive rules (branch, pointers, exits). The other 47 rules add nothing.
+- **Not usable as-is:** 6,315 ordinary fixes score above the median silent CVE fix. 62% of CVE fixes gain a branch
+  (FIXK), but so do 42% of ordinary fixes.
+- **What might make silent-patch detection work:**
+  1. **Combine *where* and *how*:** prior security fixes in the same file (recidivism, RW-H2, the strongest location
+     signal), coupling surfaces and defended-code context, alongside the change signature.
+  2. A **semantic** reading of the change: is the new branch a comparison against a size or limit followed by an
+     exit? That is the FIXK pattern made specific, beyond keyword counts.
+  3. The "model judges" route.
+- Each needs its own registration.
