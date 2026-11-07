@@ -172,3 +172,20 @@ The top 5 exact signal-presence signatures cover 8.9% of 6.94M functions. They f
   with `_`. TypeScript: `export` / `public`. Java: `public` / `protected`. C: a non-static function definition.
 - Fingerprint #1 is therefore "a function with arguments and a structural keyword (usually `return`), and nothing
   else". #2 adds "and it is public".
+
+### Exploratory: fingerprint #6 (`top_signatures.py --top 6`)
+
+- **Signals:** branch + structural keywords + args + function start + state mutation + pointers + `static`. That is #3 without
+  `struct_class_start`.
+- **Size and spread:** 73,614 functions (1.1%), 84 repos (largest 39%), 98% C, median 19 lines, 2% in tests.
+- **What it is:** ReactOS / Wine COM methods (`*_AddRef`, `*_QueryInterface`), graphics primitives (`putimage`, `vertline`),
+  and driver `init_hw`.
+- **Reading:** the private-C family (#3, #4, #6) forms its own ladder.
+  - #4 = static pointer one-liner;
+  - #6 = #4 + branch + mutation;
+  - #3 = #6 + struct declarations.
+
+  It mirrors the public OO ladder (#1 → #2 → #5).
+- **Corpus caveat:** these shapes are concentrated in a few OS-scale repos (Linux, FreeBSD, ReactOS, Haiku). The function-weighted
+  ranking reflects corpus composition; the bricks (#1, #2, #5) are the shapes that hold across hundreds of repos.
+- **Coverage gap seen here:** Windows `Interlocked*` is not counted as concurrency in C (gitgalaxy#8016 comment).
