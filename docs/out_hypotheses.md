@@ -79,3 +79,5 @@ paths.
   check, not an OUT result.
 
 **Stage 2.** The blind code-only audit (80 packets) is running.
+
+**OUT-H1 blind labels locked before comparison:** `vz_private/out_audit_labels.json`, sha256 `cd8982df35ec3a797255fa5739743a58d810eb85b427d33d882303ce9a524f27`.
