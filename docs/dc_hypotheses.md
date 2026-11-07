@@ -126,3 +126,34 @@ need a new registration whose gate is scoped to the languages it uses.
   `DATE-WRITTEN` … text), which standard COBOL ignores, are counted as code. That is too small (19 headers) to file
   without a dedicated check.
 - The other non-COBOL gaps (Perl POD, Haskell/SQL precision, Ada/PowerShell recall) are unverified in the same way.
+
+## DC-2 results — 2026-11-06 (scorer `1fcbed0`; report `dc.md`)
+
+**Data.** 43,233 births with comment information. 18,816 had ≥ 1 comment line at birth; 2,182 of those (12%) had
+danger language.
+
+| claim | result | verdict |
+|---|---|---|
+| **DC-H1** danger-commented vs plain-commented → whole-life first-CVE rate | **1.45** [1.08, 1.89]; first-CVE events 144 / 523. curl 1.29, OpenSSL 1.59, nDPI 1.59, harfbuzz 1.81 | **SUPPORTED**: the authors' words were right |
+| **DC-H2** CVE-specific (÷ other-fix) | 1.30 (lo 0.95); other-fix 1.12 | **not supported** (narrowly) |
+
+**Descriptive.**
+- Regression 1.01; extrinsic 1.20.
+- Commented vs uncommented functions: 1.08.
+- Most frequent danger words in CVE-hit functions: *must be* 39, *do not* 28, *security* 17, *assume* 16,
+  *trusted* 13, *must not* 12, *warning* 12, *overflow* 10, *validation* 10, *XXX* 6.
+
+**Reading.**
+- **When authors *write down* that a function is dangerous, they are right.** Functions whose comments at birth use
+  danger language reach their first CVE fix about 1.45× as fast as size- and history-matched functions with ordinary
+  comments, in every repo.
+- **The contrast with INT-S is the finding.** Defensive *code* at birth (guard keywords) did not predict CVEs (0.96).
+  Defensive *words* do. Authors' sense of danger shows in what they say, not in how many checks they write.
+- **Not proven CVE-specific.** Danger-commented functions also get somewhat more ordinary fixes (1.12). The CVE
+  excess (1.30×) has a lower bound just under 1.
+  - Read: these are trickier functions overall, with security risk the strongest part.
+  - Regressions show nothing (1.01).
+- **Product angle:** "danger comments" are a cheap, cross-language, history-free risk marker, available at the
+  moment code is written. That is useful where no fix history exists, such as new code and legacy estates without
+  version control.
+- **Caveats:** C/C++ repos only; a fixed English lexicon; association, not cause.
