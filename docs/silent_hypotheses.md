@@ -123,3 +123,34 @@ whether the two **combine**.
 - AUC of all four models, per repo.
 - Precision in the top 1%, 5% and 10% vs the base rate.
 - The count of unlabelled ordinary fixes above the median silent positive (private list, as SILENT).
+
+### WH results — 2026-11-06 (scorer `8e20de6`; report `wh.md`; candidate list private)
+
+| model | held-out AUC (silent CVE fixes vs ordinary fixes) |
+|---|---:|
+| SIZE | 0.507 |
+| HOW (change signature) | 0.569 |
+| **WHERE (location history)** | **0.720** |
+| WHERE+HOW | 0.681 |
+
+| claim | result | verdict |
+|---|---|---|
+| **WH-H1** location adds to the signature | +0.111 (lo +0.079) | **SUPPORTED** |
+| **WH-H2** the signature adds to location | **−0.039** (lo −0.076): adding it *lowers* AUC | **not supported** |
+| **WH-H3** usable: top-10% enrichment (WHERE+HOW) | **2.93×** (lo 2.37) | **SUPPORTED** |
+
+- Precision, WHERE+HOW: top 1% **11.2%** (4.4× the 2.53% base rate), top 5% 9.0%, top 10% 7.4%.
+- **Every held-out repo shows the same ordering** (WHERE best): curl 0.734, OpenSSL 0.690, nDPI 0.662,
+  harfbuzz 0.688.
+
+**Reading.**
+- **Location history, not the change's structure, is what finds silent security fixes.** Four features (prior CVE
+  fixes in the same files, prior fix activity, guard density of the touched code) reach AUC 0.72 on repos the model
+  never saw.
+- The 102 change-signature features add noise. The registered WHERE+HOW model still clears the usability bar
+  (2.9×), but WHERE alone is stronger (descriptive).
+- This is the recidivism result (RW-H2) again, now as a **silent-patch detector**: "a fix landing where past
+  security fixes landed, in defended code, is probably a security fix, whatever its message says".
+- **Practical use:** when backporting or auditing a vendored library, rank its unlabelled fixes by location history.
+  The top 1% is about 4× richer in real security fixes than random.
+- Still far from a clean detector (11% precision at the top 1%), but useful as a triage ordering.
