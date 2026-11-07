@@ -71,3 +71,28 @@ vulnerabilities later show up there? In other words, did they correctly sense da
   - functions censored at death or at the end of the labels.
 
   That needs a fresh registration.
+
+---
+
+## INT-S — whole-life version — registered 2026-11-06, before INT-S ran
+
+**Why.** INT's two-year window caught only 106 CVE hits. CVEs surface years after code is written (SRCH).
+
+**Changes from INT (everything else unchanged):**
+- **Follow-up:** each function from its birth snapshot until the **first** fix of class X, its **death** (the first
+  snapshot without it, under CHG's identity and move rule), or the repo's last labelled fix, whichever comes first.
+- **Fix mapping:** each hit is resolved to a function **identity** at the snapshot preceding it (A1 join), so fixes to
+  functions that later moved file are counted.
+- **Estimate:** the stratified **Mantel–Haenszel rate ratio** of first-event rates per function-year, high vs low
+  third (same strata as INT). File-cluster bootstrap, 2,000.
+- No minimum follow-up: all births after the first snapshot are included.
+
+| id | claim | supported iff (α = 0.01/2) |
+|---|---|---|
+| **INTS-H1** | defensive-at-birth code reaches a CVE fix at a higher rate over its life | rate ratio > 1 and lo > 1 ("the authors were right"). Reversed if < 1 and hi < 1 ("defended code is safer") |
+| **INTS-H2** | …specifically CVEs | RR_latent ÷ RR_other-fix (first-event rates) > 1, lo > 1 |
+
+**Descriptive.**
+- Cumulative share with a first CVE fix by 5 and 10 years (life-table), per group.
+- Per-repo rate ratios.
+- Regression and extrinsic first-event rate ratios.
