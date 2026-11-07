@@ -211,3 +211,37 @@ The top 200 signatures (49.7% of functions) form two trees.
 Smaller families: Rust pointer code, generics, and shell / config fragments.
 
 Draft only: rules as of `b64f42bf` (before #8010 / #8011 / #8016), function-weighted.
+
+### Exploratory: is the lattice sparser than chance? (`tools/exploratory/lattice_null.py`; report `lattice_null_exploratory.md`)
+
+Null model: each signal independent, with a per-language, size-dependent probability (the KW size placebo). One draw on a
+2.0M-function sample.
+
+- **Real code builds 0.63× as many distinct shapes as the null** (149,312 vs 235,222). In the mid rungs (k = 4–11)
+  it builds about **half** as many. That is constraint, not just arithmetic.
+- **Above 12 signals the ratio flips** (1.6× at k = 14, up to about 10× at k = 19–22). Large functions mix more
+  families than independence predicts: every big function is its own shape.
+- **No pair of signals is forbidden** (0 pairs at under 1/10 of expectation). The holes are role exclusions:
+
+  | pair | observed / expected |
+  |---|---:|
+  | public + private | 0.22 |
+  | tests + private | 0.24 |
+  | tests + logging | 0.32 |
+  | tests + error exits | 0.38 |
+
+- **The attractions are paired constructs:**
+
+  | pair | observed / expected |
+  |---|---:|
+  | emitters + listeners | 10× |
+  | exec + IPC | 9× |
+  | exec + error exits | 9× |
+  | async + locks | 5× |
+  | alloc + cleanup | 5× |
+
+- **Local connectivity is near chance:** 66% of the one-signal neighbours of the 200 commonest shapes exist in real
+  code (null 73%). The lattice is not a sparse skeleton. It is a normally connected space where some regions are
+  heavily favoured.
+- **The raw combinatorial space is meaningless as a yardstick.** k = 8 alone allows 2.9 billion combinations for
+  237k functions. Only a null model can say what "missing" means.

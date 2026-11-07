@@ -880,3 +880,4 @@ question than a reviewer asks.
 
 **Decision rule (a) applies.** Open a gitgalaxy issue for an effort-aware "review budget" ranking on prior security
 fixes and change entropy. A further unseen-repo replication is registered before either feeds any score weight.
+| LAT-F1..F3, LAT-M1..M3 | **DRAFT** — fingerprint lattice: CVE fixes land in private-C upper rungs (F1), fix classes differ by family × rung beyond size vs permutation + size placebo (F2/F3); lattice-move features add regression recall@20% beyond CHG-2's churn baseline forward and LORO (M1), half-step edits precede regressions (M2), shuffle control (M3); sensitivity without #8010/#8016-affected signals | 2026-11-07 draft | docs/lat_hypotheses.md | awaiting owner OK |
