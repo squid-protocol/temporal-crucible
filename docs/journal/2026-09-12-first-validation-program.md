@@ -38,3 +38,13 @@ History predicts; structure describes. A per-file structural score is not a defe
 ## What it changed
 
 The engine renamed its risk_* vectors to descriptive surface names (gitgalaxy#2991, Option A). The program turned from "does structure predict bugs" to "what is the engine actually good for", which is the November arc below.
+
+This entry is the overview. The arcs have their own entries:
+- [curl exposure deltas and signal anatomy](2026-09-12-curl-exposure-deltas-and-signal-anatomy.md);
+- [recidivism and the review budget](2026-09-12-recidivism-and-review-budget.md);
+- [fix shape and the fix grammar](2026-09-12-fix-shape-and-fix-grammar.md);
+- [the nDPI replication battery](2026-09-12-ndpi-replication-battery.md);
+- [mechanism specificity](2026-09-12-mechanism-specificity.md);
+- [change entropy and centrality bands](2026-09-12-change-entropy-and-centrality-bands.md);
+- [the bug-label expansion](2026-09-13-bug-label-expansion.md);
+- [history forward tests and review budgets](2026-11-05-history-forward-and-effort-aware.md).
