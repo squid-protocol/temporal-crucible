@@ -65,3 +65,6 @@ comment says, not whether one exists.
 **CMT-G amendment (2026-11-06, before any gate number).** Run 1 was stopped after 17 minutes at 100% CPU: one or more
 huge crucible files, such as an amalgamation, ran too long in the comment splitter. Files now run in parallel with a
 **60-second per-file limit**. Timed-out files are excluded and **listed in the gate report**. Nothing else changes.
+**CMT-G amendment 2 (before any gate number).** The 60-second limit only stopped *waiting*: workers kept grinding on
+pathological files and jammed the pool. Timing showed typical and very large files take well under 1 second. Each
+file now runs in its own child process, **killed** after 60 seconds. Timed-out files are listed in the report.

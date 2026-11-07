@@ -74,28 +74,54 @@ def one(task):
     return ("ok", lang, len(eng & ref), len(eng), len(ref))
 
 
+def _child(task, conn):
+    try:
+        conn.send(one(task))
+    except Exception as e:  # noqa: BLE001
+        conn.send(("skip", f"error {type(e).__name__}", task[0]))
+    conn.close()
+
+
 def main() -> int:
+    """Each file runs in its own forked child, killed after 60 s (a hard limit: an in-process timer cannot interrupt
+    a long regex match). Eight children at a time."""
     import multiprocessing as mp
+    import time as _t
     con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     files = con.execute("SELECT file_path, language FROM file_data").fetchall()
     con.close()
     stats, skipped, timed_out = defaultdict(lambda: [0, 0, 0]), defaultdict(int), []
-    with mp.get_context("fork").Pool(8, maxtasksperchild=50) as pool:
-        futs = [(t, pool.apply_async(one, (t,))) for t in files]
-        for t, fu in futs:
-            try:
-                res = fu.get(timeout=60)
-            except mp.TimeoutError:
+    ctx = mp.get_context("fork")
+    pending, running = list(files), []
+    while pending or running:
+        while pending and len(running) < 8:
+            t = pending.pop()
+            pa, ch = ctx.Pipe(False)
+            pr = ctx.Process(target=_child, args=(t, ch))
+            pr.start()
+            running.append((t, pr, pa, _t.time()))
+        still = []
+        for t, pr, pa, t0 in running:
+            if pa.poll():
+                res = pa.recv()
+                pr.join()
+                if res[0] == "skip":
+                    skipped[res[1]] += 1
+                else:
+                    st_ = stats[res[1]]
+                    st_[0] += res[2]
+                    st_[1] += res[3]
+                    st_[2] += res[4]
+            elif _t.time() - t0 > 60:
+                pr.kill()
+                pr.join()
                 timed_out.append(t[0])
-                continue
-            if res[0] == "skip":
-                skipped[res[1]] += 1
-                continue
-            s = stats[res[1]]
-            s[0] += res[2]
-            s[1] += res[3]
-            s[2] += res[4]
-        pool.terminate()
+            elif not pr.is_alive():
+                skipped["child died"] += 1
+            else:
+                still.append((t, pr, pa, t0))
+        running = still
+        _t.sleep(0.01)
     rows = []
     for lang, (tp, ne, nr) in sorted(stats.items()):
         if nr == 0:
