@@ -128,3 +128,32 @@ construction; the within-archetype pair grammar is the informative part.
 - **Reading:** most code is built from a small vocabulary of a few hundred recurring keyword combinations, plus a
   long tail of rare ones. The space they live in is not reducible to a handful of axes. That supports a
   multi-signal fingerprint over a few summary scores.
+
+### Exploratory: the five most common fingerprints (`tools/exploratory/top_signatures.py`; report `top_signatures_exploratory.md`)
+
+The top 5 exact signal-presence signatures cover 8.9% of 6.94M functions. They fall into two families.
+
+**Universal "bricks":** tiny, cross-language, and they differ from each other by one signal.
+
+| # | signals | share | repos | median size | in tests | what it is |
+|---|---|---:|---:|---:|---:|---|
+| 1 | linear + args + function start | 2.6% | 386 | 3 lines | 35% | the one-step function: a wrapper, delegator, stub, or tiny pure computation (`easeInQuint`). JS / C++ / TS / Kotlin / Swift … |
+| 2 | #1 + **API** (public / exported) | 2.5% | 318 | 4 | 23% | public one-liners: `toString`, `getName`, `equals`, `hashCode`, `__construct`, `getValue`. PHP / Python / Java / C / C# |
+| 5 | #2 + **state mutation** | 1.2% | 294 | 5 | 35% | public setters and initialisers: `__construct`, `setUp`, `init`, `setX`. PHP / Python / C# / Java |
+
+**Dialect shapes:** large, C-only, and concentrated in a few repos (examples are from Linux, FreeBSD, ReactOS).
+
+| # | signals | share | repos (largest single repo) | median size | in tests | what it is |
+|---|---|---:|---:|---:|---:|---|
+| 3 | branch + linear + args + struct + mutation + pointers + `static` | 1.4% | 40 (77%) | 23 | 1% | kernel-driver C: `*_probe`, `vidioc_*`, lock-annotated (`__acquires` / `__releases`) functions |
+| 4 | linear + args + pointers + `static` | 1.3% | 89 (57%) | 5 | 3% | static C pointer accessors: `impl_from_IUnknown`, `to_state`, `container_of`-style casts |
+
+**Reading.**
+- The commonest code is a **ladder of tiny bricks**: one-step function → public one-step function → public one-step
+  mutator. Each rung adds one keyword family. They recur in hundreds of repos and every major language, and a third
+  sit in tests.
+- Next come **regional dialects**: kernel-style C shapes that are large, branchy and pointer-heavy, owned by a few
+  repos.
+- So the vocabulary has a **universal core** (bricks) plus **ecosystem idioms**.
+- **Measurement note:** shape #1 also captures functions that only return a big string or template (`infoPlist` in
+  Go) and COM `E_NOTIMPL` stubs. The signal set sees no branch or call structure there, so they look "linear".
