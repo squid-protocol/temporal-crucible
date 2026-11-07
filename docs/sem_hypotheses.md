@@ -1,0 +1,121 @@
+# SEM — a semantic "fixed differently" patch check: does looking for the fix's *guard condition* rather than its exact lines repair the line check's blind spot without new errors? — registered 2026-11-06, before the instrument was run on any host state
+
+**Why.** VZ-T's line-based check never erred when it decided on verbatim copies (1,229 / 1,229). But on its audited
+disagreements it was wrong 7 / 20 times. Every error was an **independent fix**: zlib-ng guarded CVE-2022-37434 with
+its own `if (len < state->head->extra_max)`, kept zlib's removed line, and so was called "unpatched".
+
+**Design-bias note.** The instrument below was conceived **after seeing that example**. That example and VZ-T's first
+audit sample (seed 2982) are therefore excluded from the claims. Scoring uses VZ-T's verbatim truth, plus a **fresh**
+audit sample (seed 2983, disjoint from the first).
+
+## Instrument (fixed now)
+
+**Guard fragments.** For each (fix, file), from the fix's added code lines (VZ-T's A set):
+1. **Tokenise:** identifiers, numbers and multi-character operators as single tokens.
+2. **Drop** all `(` `)` tokens and the keywords `if`, `while`, `for`, `return`; map `Z_NULL` → `NULL`.
+3. **Split** the token list at `&&`, `||`, `{`, `}`, `;`, `?`, `:`, `,`.
+4. **Keep** each piece that contains a comparison operator (`<` `>` `<=` `>=` `==` `!=`) and has ≥ 3 tokens.
+
+**Presence.** A fragment is present if its token sequence occurs contiguously in the host file's token stream after
+the same normalisation (steps 1–2).
+
+**SEM verdict.** The first rule that fires:
+1. **patched** if ≥ 50% of the (fix, file)'s guard fragments are present (and there is ≥ 1 fragment);
+2. otherwise VZ-T's **line verdict**: patched / unpatched / undetermined.
+
+So SEM can only *add* "patched" calls where the line rule said unpatched or undetermined. It can never add an
+"unpatched" call.
+
+## Claims (VZ-T's units, hosts and truth; α = 0.01/3)
+
+| id | claim | supported iff |
+|---|---|---|
+| **SEM-H1** | **no new errors on known truth** | on VZ-T's verbatim units (1,552), SEM's wrong calls ≤ 1%, Wilson 99% upper bound ≤ 2% |
+| **SEM-H2** | it meets the bars VZ-T missed | sensitivity on verbatim-unpatched ≥ 90% **and** specificity on verbatim-patched ≥ 90%, each Wilson lo ≥ 75% |
+| **SEM-H3** | it repairs "fixed differently" **out of sample** | on a fresh seeded sample of 20 non-verbatim code-vs-version disagreements (seed 2983, excluding VZ-T's 20), hand-audited before SEM's verdicts are looked at: SEM correct > line check correct |
+
+**Audit protocol (H3).**
+- The 20 fresh units are drawn and audited by reading code and commits.
+- Each unit's truth (patched / unpatched / unclear) is recorded **before** the SEM column is computed for them.
+- Unclear units are excluded.
+
+**Descriptive.**
+- SEM vs line on VZ-T's first audit sample (in-sample, for transparency).
+- Which CVEs yield guard fragments.
+- SEM's change to the abstention rate.
+
+## Priors
+
+- **H1 likely.** Guard fragments come from fixed code, and pre-fix copies lack them.
+- **H2 unlikely.** SEM cannot fix abstentions on unpatched copies, and sensitivity was 81.5%.
+- **H3 uncertain.** It works only where the independent fix reuses the guard expression.
+
+**H3 audit recorded (2026-11-06, before SEM ran on any unit).**
+- 20 fresh units (seed 2983), audited on the vulnerability's semantics. Aggregate: **20 patched, 0 unpatched,
+  0 unclear.**
+- The labels sit in the private file `vz_private/sem_audit.json`, sha256 `fbecbeb5dcc3c3c1c0e01cecb6e69953715f19661872ccad860321594b9173f8`.
+
+---
+
+## SEM-1 results — 2026-11-06 (scorer `934a639`; report `sem.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **SEM-H1** no new errors on verbatim truth | **227 wrong calls** / 1,552 (line check: 0) | **not supported** |
+| **SEM-H2** meets VZ-T bars | sensitivity 64.4%, specificity 91.1% | **not supported** |
+| **SEM-H3** beats the line check on the fresh audit | 17 / 20 vs 12 / 20 | **SUPPORTED** |
+
+**Why H1 failed** (exploratory breakdown, `tools/exploratory/sem_error_breakdown.py`, after scoring):
+- **All 227 errors** call a *verbatim-unpatched* copy "patched". 114 are CVE-2022-37434 and 113 are CVE-2016-9842.
+- **The cause:** guard fragments that are **not new**. The CVE-2022 follow-up fix re-adds `state->head->extra != NULL`,
+  and the CVE-2016-9842 fix keeps the context `strm == NULL` / `strm->state == NULL`. Both already exist in
+  pre-fix code.
+- This is the most dangerous error type: vulnerable code reported as fixed.
+- **SEM-1 must not be used.**
+
+## SEM-2 — registered 2026-11-06, before SEM-2 ran on any unit
+
+**One change to the instrument:** a guard fragment is kept only if its token sequence does **not** occur in the
+fix's *pre-fix function body* (the query side, normalised the same way). Everything else is as SEM-1.
+
+**Claims SEM2-H1..H3:** as SEM-H1..H3. H3 uses a **third** fresh sample:
+- seed 2984;
+- disjoint from the seed 2982 and 2983 samples;
+- audited and hash-locked before SEM-2 runs.
+
+**Prior:** H1 likely now. H3 uncertain: removing fragments may also remove zlib-ng's `len < extra_max`. It should
+not, because that fragment is new in the fix.
+
+**SEM2-H3 audit recorded (before SEM-2 ran).**
+- 20 fresh units (seed 2984), audited on semantics. Aggregate: **20 patched, 0 unpatched, 0 unclear.**
+- Labels: `vz_private/sem2_audit.json`, sha256 `5b3c080791ceb0ca5e47e2348d2b51aa6f417a5dfa4b49e0a1704a917defad83`.
+
+## SEM-2 results — 2026-11-06 (scorer `cb13278`, `--v2`; report `sem2.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **SEM2-H1** no new errors on verbatim truth | **0** wrong / 1,552 (Wilson 99% upper 0.43%) | **SUPPORTED** |
+| **SEM2-H2** meets VZ-T bars | sensitivity 81.5%, specificity 72.9% (unchanged: SEM-2 never fires on verbatim copies) | **not supported** |
+| **SEM2-H3** beats the line check, third fresh audit (seed 2984) | **19 / 20** vs 15 / 20 | **SUPPORTED** |
+
+**Reading.**
+- Requiring guard fragments to be **new**, i.e. absent from the pre-fix function, removes all of SEM-1's false
+  "patched" calls.
+- It keeps the repair: SEM-2 turns 135 of the line check's "unpatched" calls and 25 abstentions into "patched", and
+  on held-out audited units it is right 19 / 20 times.
+- **What SEM-2 is:** a strict improvement on the line check for *modified* copies. It catches fixes written
+  differently, as long as they reuse the fix's new guard condition.
+- **What it is not:**
+  - It does not reduce abstentions on verbatim copies (H2 unchanged).
+  - It yields no new fragments for fixes that are not new conditions: the 2016 pointer-arithmetic and shift fixes,
+    whose new code has no comparison.
+  - Those still depend on the line rule.
+  - In-sample, 3 of VZ-T's original 7 errors remain. They come from the CVE-2022 follow-up fix, whose only new
+    fragment is the `state->head != NULL` check, written differently in zlib-ng.
+- **Overall, on vendored zlib:** code-reading verdicts are correct whenever they decide on known truth (0 / 1,552).
+  On audited modified copies they now beat version strings in 19 / 20 cases.
+- **Remaining gaps:**
+  - abstention on code far from both fix versions;
+  - fixes that are not guard conditions;
+  - a second library;
+  - a head-to-head against hash- or version-based scanners.
