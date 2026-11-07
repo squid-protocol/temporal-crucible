@@ -58,3 +58,34 @@ GR asks whether that grammar:
 - **H3 uncertain.**
 - **H4 uncertain.** CHG-2 found that change features add nothing beyond churn, but H4 compares within edited functions
   and asks about direction.
+
+---
+
+## Results — 2026-11-06 (scorer `cddc9ec`; report `gr.md`)
+
+**Data.** 32 crucible consensus pairs over 15 signals; 8–12 of those signals are used per repo. 1,484,262
+function-quarters; 1,227,577 with ≥ 2 used signals.
+
+| claim | result | verdict |
+|---|---|---|
+| **GR-H1** crucible grammar holds in the five repos | **53 / 77 = 69%** of pair signs agree (p = 0.0006). nDPI 15/16, libarchive 15/20, OpenSSL 10/14; curl 7/15, harfbuzz 6/12 | **SUPPORTED** |
+| **GR-H2** atypical functions → latent (CVE) fixes | RR **0.66** (lo 0.48); events 281 / 1,701 | **not supported**: the opposite direction |
+| **GR-H3** atypical functions → regression fixes | RR 0.95 (lo 0.65) | **not supported** |
+| **GR-H4** grammar-fit drop → regressions | 13 exposed transitions | **not evaluable** (design flaw, below) |
+
+**Reading.**
+1. **The grammar generalises.** A pattern learned on 22 languages of unrelated code predicts the sign of most
+   signal pairings in five independent C codebases. Example: cleanup goes with negative-safety state in harfbuzz,
+   nDPI and libarchive, as in the crucible. It is weakest in curl and harfbuzz.
+2. **CVE fixes land in *grammatical* functions, not atypical ones** (descriptive reversal of H2). The point RR
+   against atypical code is 0.62–0.82 in each of the four repos with data.
+   - This fits the grammar's content: the conforming combinations are *defensive control*, i.e. guards, early exits
+     and cleanup, typical of parsing and input-handling code, where CVEs live.
+   - So "grammatical" partly marks the dangerous kind of code, not the safe kind.
+   - Observed, not registered; it would need its own test.
+3. **Regressions show no grammar effect** (0.95; repos split between 0.47 and 2.72).
+4. **H4 design flaw.** Grammar weights are small (|w| ≈ 0.1–0.8), so a drop of ≥ 1 unit almost never happens: 13 of
+   about 60,000 edited transitions. A threshold scaled to the weights' spread (e.g. the lower 10% of ΔG) is needed.
+   That needs a fresh registration.
+5. **Edits do not drift toward the grammar:** fit goes up in 11% of edits, down in 10%, and is unchanged in 79%.
+   The grammar is a stable property of code, not something edits converge to.
