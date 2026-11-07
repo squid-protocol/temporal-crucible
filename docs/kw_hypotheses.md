@@ -150,3 +150,30 @@ in KW's exploratory step. Confirmation belongs on a fresh population scan.
 | **KWR-H2** | grammar remains under ratios | real mean r > label-shuffle null 99.5th percentile (2,000) **and** real − placebo ≥ 0.10 |
 
 **Sensitivity (descriptive):** pseudocounts 0.1 and 1.0; the top universal ρ pairs.
+
+### KW-R results — 2026-11-06 (scorer `bf6023c`; report `kwr.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **KWR-H1** ratios remove size | size-only placebo cross-language r = **0.221** (bar ≤ 0.05; the decile method gave 0.242) | **not supported** |
+| **KWR-H2** grammar under ratios | real 0.247; shuffle null 0.032; real − placebo **+0.026** | **not supported** |
+
+Pseudocount sensitivity: 0.1 gives 0.207 / 0.149 and 1.0 gives 0.270 / 0.248 (real / placebo). The conclusion holds
+at every setting.
+
+**Reading.**
+- **Per-function log-ratios do not remove the artefact, because functions are sparse.** Most signals count 0 or 1
+  per function, so log-ratios are dominated by zeros and the pseudocount.
+- What is left mostly encodes **how common each signal is**, and that is similar in every language.
+- The very common `struct_branch` comes out "anti-proportional" to nearly everything, often with 100% sign agreement.
+  This is the closure artefact of compositional data, not grammar.
+- **Both function-level methods (deciles and ratios) are dominated by size plus signal frequency.**
+- Population-analyses' "stoichiometry" works because it applies **shares at the file level**, where counts are dense.
+  Note that its *set-of-active-traits* signatures, in `mine_dna_stoichiometry.py`, do **not** remove size.
+
+**Implication for the confirmatory design (population scan).**
+1. Make **placebo correction the primary measure** (real minus size-and-frequency placebo association). It is the
+   only one of the three that left a cross-language residual (decile residual r 0.12, exploratory).
+2. Measure grammar at the **file level**, on composition shares of signals or of function archetypes, where
+   compositional methods are well posed.
+3. Keep both placebos binding.
