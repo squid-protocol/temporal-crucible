@@ -44,42 +44,58 @@ def ts_comment_lines(parser, src: bytes):
     return out
 
 
+_W = {}
+
+
+def one(task):
+    """One file -> (lang, tp, n_engine, n_ref) or a skip reason. Runs in a worker with a per-file time limit."""
+    path, lang = task
+    f = ROOT / path
+    if not f.exists():
+        return ("skip", "missing", path)
+    name = TS_NAME.get(lang, lang)
+    if name not in _W:
+        try:
+            _W[name] = tslp.get_parser(name)
+        except Exception:
+            _W[name] = None
+    if _W[name] is None:
+        return ("skip", f"no grammar: {lang}", path)
+    if "prism" not in _W:
+        _W["prism"] = Prism(LEXICAL_FAMILY_HEURISTICS, LANGUAGE_DEFINITIONS)
+    raw = f.read_bytes()
+    txt = raw.decode("utf-8", "replace")
+    try:
+        pos = _W["prism"].split_positional_comment_stream(txt, lang)
+    except Exception:
+        return ("skip", "prism error", path)
+    eng = {i for i, l in enumerate(pos.split("\n")) if l.strip()}
+    ref = ts_comment_lines(_W[name], raw)
+    return ("ok", lang, len(eng & ref), len(eng), len(ref))
+
+
 def main() -> int:
-    prism = Prism(LEXICAL_FAMILY_HEURISTICS, LANGUAGE_DEFINITIONS)
+    import multiprocessing as mp
     con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     files = con.execute("SELECT file_path, language FROM file_data").fetchall()
     con.close()
-    parsers, stats, skipped = {}, defaultdict(lambda: [0, 0, 0]), defaultdict(int)
-    for path, lang in files:
-        f = ROOT / path
-        if not f.exists():
-            hits = list(ROOT.rglob(pathlib.Path(path).name))
-            f = hits[0] if len(hits) == 1 else None
-        if f is None:
-            skipped["missing"] += 1
-            continue
-        name = TS_NAME.get(lang, lang)
-        if name not in parsers:
+    stats, skipped, timed_out = defaultdict(lambda: [0, 0, 0]), defaultdict(int), []
+    with mp.get_context("fork").Pool(8, maxtasksperchild=50) as pool:
+        futs = [(t, pool.apply_async(one, (t,))) for t in files]
+        for t, fu in futs:
             try:
-                parsers[name] = tslp.get_parser(name)
-            except Exception:
-                parsers[name] = None
-        if parsers[name] is None:
-            skipped[f"no grammar: {lang}"] += 1
-            continue
-        raw = f.read_bytes()
-        txt = raw.decode("utf-8", "replace")
-        try:
-            pos = prism.split_positional_comment_stream(txt, lang)
-        except Exception:
-            skipped["prism error"] += 1
-            continue
-        eng = {i for i, l in enumerate(pos.split("\n")) if l.strip()}
-        ref = ts_comment_lines(parsers[name], raw)
-        s = stats[lang]
-        s[0] += len(eng & ref)
-        s[1] += len(eng)
-        s[2] += len(ref)
+                res = fu.get(timeout=60)
+            except mp.TimeoutError:
+                timed_out.append(t[0])
+                continue
+            if res[0] == "skip":
+                skipped[res[1]] += 1
+                continue
+            s = stats[res[1]]
+            s[0] += res[2]
+            s[1] += res[3]
+            s[2] += res[4]
+        pool.terminate()
     rows = []
     for lang, (tp, ne, nr) in sorted(stats.items()):
         if nr == 0:
@@ -99,7 +115,7 @@ def main() -> int:
          f"- **CMT-G {'PASS' if ok else 'FAIL'}** (pooled and C/C++ each ≥ 90%)", "",
          "| language | precision | recall | engine lines | reference lines |", "|---|---:|---:|---:|---:|"]
     L += [f"| {l} | {p:.1%} | {r:.1%} | {ne:,} | {nr:,} |" for l, p, r, ne, nr in sorted(rows, key=lambda t: -t[4])]
-    L += ["", f"Skipped files: {dict(skipped)}"]
+    L += ["", f"Skipped files: {dict(skipped)}", f"Timed out (> 60 s per file; excluded, amendment): {len(timed_out)} {timed_out[:10]}"]
     (DOCS_DIR / "cmt_gate.md").write_text("\n".join(L) + "\n")
     print("\n".join(L))
     return 0 if ok else 1

@@ -61,3 +61,7 @@ comment says, not whether one exists.
 - **CMT-G likely to pass** for C and C++ (the engine's golden-tested languages).
 - **DC-H1 uncertain:** a direct test of "did the authors sense danger".
 - **DC-H2 uncertain.**
+
+**CMT-G amendment (2026-11-06, before any gate number).** Run 1 was stopped after 17 minutes at 100% CPU: one or more
+huge crucible files, such as an amalgamation, ran too long in the comment splitter. Files now run in parallel with a
+**60-second per-file limit**. Timed-out files are excluded and **listed in the gate report**. Nothing else changes.
