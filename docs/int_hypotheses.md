@@ -96,3 +96,32 @@ vulnerabilities later show up there? In other words, did they correctly sense da
 - Cumulative share with a first CVE fix by 5 and 10 years (life-table), per group.
 - Per-repo rate ratios.
 - Regression and extrinsic first-event rate ratios.
+
+### INT-S results — 2026-11-06 (scorer `7943375`; report `ints.md`)
+
+**Data.** 44,046 functions born after the first snapshot; 126,308 function-years (median observed life 4.6 years);
+562 first-CVE events in the high and low thirds.
+
+| claim | result | verdict |
+|---|---|---|
+| **INTS-H1** first-CVE-fix rate, high vs low defence at birth | **0.96** [0.73, 1.28]; events 245 / 317 | **not supported**: a fairly tight null |
+| **INTS-H2** CVE-specific | 0.90 (lo 0.67); other-fix 1.06 | **not supported** |
+
+**Descriptive.**
+- Cumulative share reaching a CVE fix, crude and **not** size-stratified: 5 years high 1.6% vs low 2.5%; 10 years
+  3.1% vs 4.1%.
+- Per repo: OpenSSL 1.38, curl 0.79, nDPI 0.64.
+- harfbuzz has only 2 low-defence events, so its stratified estimate is degenerate (0.00).
+- Regression 0.80; extrinsic 1.74.
+
+**Reading.**
+- **Writing a function defensively from the start neither predicts nor prevents its later CVEs.** Over whole
+  lifetimes, size- and file-history-matched, the rate ratio is 0.96. The data rule out effects much beyond ±30%.
+- The repos disagree in direction: OpenSSL leans "the authors were right", curl and nDPI lean "defended code is
+  safer". No consistent effect pooled.
+- **This fits the rest of the program.**
+  - CVE-fixed code is usually guarded (FORT: 72%) because most code is (70%).
+  - What predicts security fixes is **history**: prior CVE fixes in the same place (RW-H2, WH: AUC 0.72). It is not
+    the author's initial defensiveness.
+  - The danger is learned by being found, not sensed at creation, or at least the sensing does not show in
+    guard-keyword density.
