@@ -72,3 +72,49 @@ residual shared by every language could mimic a "shared grammar".
   prevalence in the function's fine loc bin (50 quantile bins).
 - Compute the same mean cross-language r on each.
 - H1 and H2 now **also** require: observed − mean placebo r ≥ 0.10.
+
+---
+
+## Results — 2026-11-06 (scorer `71277b0`; report `kw.md`, matrices `kw_matrices.json`)
+
+**Data.** 43,473 functions (loc ≥ 3); 22 languages with ≥ 500 functions, from Ada and AGC assembly to COBOL, Zig and
+TypeScript.
+
+| claim | observed | label-shuffle null (99.67th pct) | size-only placebo | verdict |
+|---|---:|---:|---:|---|
+| **KW-H1** mean cross-language r of co-occurrence | 0.167 | 0.037 | **0.242** | **not supported** (below the placebo; below 0.30) |
+| **KW-H2** …cross-family pairs only | 0.182 | 0.043 | **0.258** | **not supported** |
+| **KW-H3** module agreement (mean ARI, k = 6) | 0.083 | 0.028 | (none registered) | **SUPPORTED, weak**; may carry the same size leak |
+
+**Reading.**
+- Co-occurrence is far from random across languages (r ≈ 0.17 against a shuffle null of about 0).
+- **But size-only signals reproduce even more cross-language agreement (0.24).** At decile stratification, the
+  apparent "universal grammar" is dominated by function size leaking through: long functions contain more of
+  everything, consistently in every language.
+- The size placebo, added before the run, is what caught this. Without it, H1 would have looked like a success.
+
+**Beyond size (exploratory, after scoring; `tools/exploratory/kw_beyond_size.py`).**
+- Method: subtract each pair's size-placebo association (20 simulations) from its real association.
+- **The residual is still shared across languages: mean r = 0.12** (230 language pairs; shuffle null ≈ 0). There is
+  a modest genuine grammar.
+- **Universal beyond-size pairs**, median residual log OR (share of languages agreeing in sign):
+
+| relationship | residual | agreement | reading |
+|---|---:|---:|---|
+| safety guard + branch | **+1.19** | 76% of 21 | defensive logic is branching logic |
+| concurrency + linear code | +1.01 | 73% | |
+| early exit (bailout) + branch | +0.76 | 76% | |
+| concurrency + safety guard; concurrency + early exit | +0.73 / +0.66 | 64–83% | concurrent code is guarded code |
+| cleanup + safety guard | +0.58 | **91%** | guard-and-release idiom |
+| **API surface × branch** | **−0.49** | **93%** | API or declaration functions are branch-free wrappers |
+| **early exit × state mutation** | **−0.50** | 82% | state-mutating code rarely bails out |
+
+**What this suggests architecturally.** A recurring "defensive control" module (branch, guard, early exit, cleanup;
+concurrency joins it), kept apart from two other roles: **interface code** (API surface, branch-free) and
+**state-mutation code** (no early exits). This is the clearest form of the module result.
+
+**Next (needs fresh data to be confirmatory).**
+- Re-register the beyond-size claims (placebo-corrected association shared across languages; the specific pairs and
+  modules above, as directional predictions) on the **population scan** the owner proposed: local repos rescanned with
+  the current engine into `gitgalaxy_raw_output`.
+- A finer size control, such as per-line densities or exact-loc matching, belongs in the design from the start.
