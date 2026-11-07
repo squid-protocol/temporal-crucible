@@ -1,7 +1,8 @@
 # LAT — the fingerprint lattice: fix families (LAT-F) and lattice moves (LAT-M)
 
-**Status: DRAFT registration (2026-11-07), awaiting owner OK.** No outcome data has been read for these hypotheses.
-The scorer (`tools/lat_eval.py`) is committed before any run; nothing is scored before that commit.
+**Status: REGISTERED 2026-11-07.** The owner OKed the draft ("lets start these experiments"). No outcome data has
+been read for these hypotheses. The scorer (`tools/lat_eval.py`) is committed after this registration and before any
+run.
 
 ## Why
 
@@ -118,3 +119,37 @@ A verdict that flips under the sensitivity run is reported as **fragile**.
 - **Disclosure:**
   - public files carry aggregates only;
   - per-function CVE specifics stay in `temporal-crucible-pool/vz_private/`.
+
+## Amendment 0 — pre-run clarifications (2026-11-07, at registration, before the scorer exists or any data is read)
+
+The draft left these operational choices open. They are fixed here, before any outcome statistic.
+
+1. **Half-step.**
+   - A signal *gained* in an interval (absent at the start, present at the end) is a half-step when it has at least
+     one positive GR consensus partner and **none** of those partners is present at the end. It arrived without its
+     usual companions.
+   - `half_steps` = the number of such gained signals.
+2. **Lattice signal set.**
+   - The union of signals appearing in the 200 frozen shapes, as `function_data` column names.
+   - Shapes, rungs (k), families and Jaccard distances are all computed on this set, intersected with the signals
+     each data source provides.
+3. **LAT-F measurement (pre-fix shape).**
+   - **Locating the function:** for each FIXK fix commit, map changed lines to function definitions in the
+     **parent** blob, with tree-sitter (`chg_eval.map_fix` logic), C or C++ by extension as in FIXK.
+   - **Measuring it:** the function's text is reduced to the engine's comment-free code stream (Prism), then the
+     engine's C/C++ keyword rules (engine `32619e4a5`, the version behind the LAT-M scan DBs) give presence per rule.
+   - **Naming:** rule keys are mapped to column names with the engine's `SHORT_KEY_MAP`.
+   - **Exclusions:** functions under FIXK's excluded paths (`tests/`, `docs/`, `.github/`, `scripts/`).
+   - **Units and size:** one unit per (commit, function). Size = the function's line count in the parent.
+4. **LAT-F classes:** latent (CVE), regression, extrinsic, other-fix, as in FIXK. `regression-linked` is excluded.
+   Cluster for the bootstrap = repo:file.
+5. **LAT-F2 / F3 details.**
+   - Categories: family (14) × rung band (k ≤ 3, 4–5, ≥ 6).
+   - F3 uses 200 placebo draws: each signal re-drawn from a per-repo logistic in standardised log10 size, fitted on
+     all touched functions.
+6. **LAT-M features.**
+   - Computed on the CHG-2 units' start and end signal vectors (presence = value > 0), restricted to the lattice
+     signal set.
+   - `off_lattice` = the end shape is not one of the 200 and none of its one-signal neighbours is.
+7. **LAT-M3 permutation.** Lattice features are permuted jointly (rows shuffled) within churn decile × log-size bin
+   strata, in train and test, then M2 is refitted.

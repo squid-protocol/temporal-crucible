@@ -1,17 +1,17 @@
 ---
 date: 2026-11-07
-title: Do fix kinds live in different shape families, and do lattice moves predict regressions? (LAT, draft)
+title: Do fix kinds live in different shape families, and do lattice moves predict regressions? (LAT)
 type: confirmatory
-status: draft
+status: registered
 verdict: pending
 theme: fingerprints
 ids: LAT-F1..F3, LAT-M1..M3
 docs: docs/lat_hypotheses.md
 links: 
-takehome: Registered (draft): whether CVE fixes concentrate in the private-C upper rungs, and whether lattice moves (jumps, half-steps) add regression recall beyond churn. The prior for the moves is null (CHG-2).
+takehome: Registered: whether CVE fixes concentrate in the private-C upper rungs, and whether lattice moves (jumps, half-steps) add regression recall beyond churn. The prior for the moves is null (CHG-2).
 ---
 
-# Do fix kinds live in different shape families, and do lattice moves predict regressions? (LAT, draft)
+# Do fix kinds live in different shape families, and do lattice moves predict regressions? (LAT)
 
 ## Question
 
@@ -23,7 +23,7 @@ FIXK showed class-specific signatures; CHG-2 showed raw change features add noth
 
 ## What we did
 
-Draft registration: frozen inputs (tree data hash a27d2c93f817), the FIXK commit set for F, CHG-2 units and baseline for M, a size placebo, a permutation and a shuffle control, and a sensitivity run without the signals affected by gitgalaxy#8010 and #8016.
+Registration: frozen inputs (tree data hash a27d2c93f817), the FIXK commit set for F, CHG-2 units and baseline for M, a size placebo, a permutation and a shuffle control, and a sensitivity run without the signals affected by gitgalaxy#8010 and #8016.
 
 ## What we found
 
@@ -35,4 +35,4 @@ Pending.
 
 ## What it changed
 
-Awaiting owner OK. Then the scorer is committed, the study runs, and this entry is updated with verdicts.
+Owner OK on 2026-11-07. Registration finalised with Amendment 0 (pre-run clarifications); the scorer is committed next, then the run, then this entry is updated with verdicts.
