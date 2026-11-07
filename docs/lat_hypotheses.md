@@ -153,3 +153,29 @@ The draft left these operational choices open. They are fixed here, before any o
    - `off_lattice` = the end shape is not one of the 200 and none of its one-signal neighbours is.
 7. **LAT-M3 permutation.** Lattice features are permuted jointly (rows shuffled) within churn decile × log-size bin
    strata, in train and test, then M2 is refitted.
+
+## Results (scored 2026-11-07; `tools/lat_eval.py` at c5e478e; full output `docs/lat.md`)
+
+| id | verdict | result | sensitivity |
+|---|---|---|---|
+| **LAT-F1** | ✗ not supported | CVE-fixed functions in private-C upper rungs 59.3% vs other-fix 56.9%; MH RR 1.08 [1.00, 1.14] (bar 1.25) | same (1.08 [1.00, 1.17]) |
+| **LAT-F2** | ✓ supported | fix classes × family/rung, Cramér's V 0.068, within-stratum permutation p 0.0005 | same |
+| **LAT-F3** | ✓ supported | V 0.068 vs size-only placebo 99th percentile 0.043 | same |
+| **LAT-M1** | ✗ not supported | recall@20%: forward 42.5% → 42.9% (+0.5, lo −1.9); LORO 36.6% → 36.6% (+0.0, lo −2.0) | same |
+| **LAT-M2** | ✗ not supported (underpowered) | 2,007 half-step units, only 5 regression-hit; RR 1.23 [0.20, 3.17] | same |
+| **LAT-M3** | ✓ control passed | permuted features: forward +0.0, LORO −0.8 points | — |
+
+**Reading.**
+- **The fix kinds differ by shape, beyond size, but modestly** (V 0.07).
+  - Regression fixes sit in *lower* rungs: k ≤ 5 in 18.5% of them vs 7.9% of other fixes. They hit simpler
+    functions, more often in the private-C family (F8: 70% vs 61%).
+  - CVE fixes look like ordinary fixes (F8 64% vs 61%), so the specific F1 prediction fails.
+  - Useful for describing and routing fixes; not a detector.
+- **Lattice moves add nothing to regression prediction beyond churn,** as the CHG-2 prior predicted. Structuring
+  change by the lattice does not rescue it. The half-step idea could not be tested properly: only 5 events.
+- **Descriptive:**
+  - 70.9% of functions never change shape over their observed life.
+  - 82% of edits leave the shape unchanged.
+  - Moves are 68% single-signal steps; family changes are mostly F7 ↔ F8 (public ↔ private-C).
+  - Edits that move the shape have a *lower* regression rate (0.28%) than edits that do not (0.38%).
+- **Closes the "lattice as a risk signal" line.** The lattice remains a descriptive and stratifying tool.
