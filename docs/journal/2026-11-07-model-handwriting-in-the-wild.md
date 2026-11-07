@@ -2,13 +2,13 @@
 date: 2026-11-07
 title: Does model handwriting survive inside a shared codebase? (WILD)
 type: confirmatory
-status: registered
-verdict: pending
+status: scored
+verdict: not-supported
 theme: natural-history
 ids: WILD-H1..H2, WILD-C1
-docs: docs/wild_hypotheses.md
+docs: docs/wild_hypotheses.md; docs/wild.md
 links: squid-protocol/agent-habits
-takehome: Registered: whether Sonnet- and Opus-written functions in GitGalaxy's own codebase are structurally distinguishable beyond directory and size, or whether the codebase's conventions dominate.
+takehome: Inside GitGalaxy's shared codebase, Sonnet- and Opus-written functions are barely distinguishable (AUC 0.57, inside the commit-permutation null): the lab's strong model handwriting mostly vanishes under a codebase's conventions.
 ---
 
 
@@ -26,12 +26,23 @@ Born Python functions in single-model Sonnet 5.5 / Opus 5.5 commits on GitGalaxy
 
 ## What we found
 
-Pending.
+- **H1 ✗:** stratified AUC 0.572; the week-blocked commit-permutation null reaches 0.557 (99th percentile 0.582);
+  p 0.089.
+- **H2 ✗ as registered:** context/model distance ratio 0.922 (99% CI 0.897–0.946). The direction is right but the
+  registered < 0.90 bar is missed.
+- **C1:** passed (0.482).
+- **Data:** 13,145 born functions from 2,016 commits.
+- **Descriptive:** Sonnet's new functions are smaller, have fewer docstrings (32% vs 44%), fewer calls and less
+  nesting. The family mix is identical.
 
 ## Take-home
 
-Pending.
+- Model handwriting is a property of a model writing alone.
+- Inside a shared codebase, in one era, conventions and review make Sonnet and Opus code nearly indistinguishable,
+  function by function. This matches FLT.
 
 ## What it changed
 
-Pending.
+- Forensic attribution of individual functions inside team codebases is not supported by structure alone. Lab-style
+  identification (whole programs written autonomously) remains promising: round 3 tests it on fresh runs.
+- Attribution claims need commit-blocked nulls: clustered labels alone inflate AUC to about 0.56.

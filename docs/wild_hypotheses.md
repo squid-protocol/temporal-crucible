@@ -103,3 +103,29 @@ statistic.
 
 **The fix.** The detector now accepts either form. Nothing else changed: same features, tests, bars and seed. The
 scorer is re-run from the start.
+
+## Results (scored 2026-11-07; scorer at 29925db after Amendment 1; full output `docs/wild.md`)
+
+**Data.** 2,016 single-model commits; 13,145 born functions (Sonnet 5.5: 7,849; Opus 5.5: 5,296); 62 directory ×
+size strata contain both models.
+
+| id | verdict | result |
+|---|---|---|
+| **WILD-H1** | ✗ not supported | stratified AUC 0.572. The week-blocked commit-permutation null alone reaches a median of 0.557 (99th percentile 0.582); p = 0.089 |
+| **WILD-H2** | ✗ not supported (as registered) | context/model distance ratio 0.922, 99% CI 0.897–0.946. Same-directory functions by different models *are* closer than same-model functions in other directories (upper bound < 1), but not by the registered margin (< 0.90) |
+| **WILD-C1** | ✓ control passed | pseudo-model split AUC 0.482 |
+
+**Reading.**
+- **Inside one shared codebase, in one era, the two models' new functions are barely distinguishable from
+  structure.** The 0.57 is almost entirely what commit clustering produces by chance.
+- This agrees with FLT (fleet vs interactive, AUC 0.64 below placebo). It contrasts sharply with the lab, where
+  same-job programs identify their model 83–84% of the time.
+- **H2's direction holds, its size does not:** context pulls functions together only modestly (0.92). In the lab,
+  model mattered as much as the task (0.62 vs 0.63) and same-model runs were about twice as close (ratio 0.52).
+- **Model handwriting is strong when a model writes a whole program alone, and weak once a codebase's conventions,
+  review and task routing shape the code.**
+- **Descriptive differences that exist but do not separate individual functions:** Sonnet's new functions are
+  smaller (median 7 vs 9 lines), carry fewer docstrings (32% vs 44%), make fewer calls and nest less. Families are
+  identical (F7 81% vs 80%).
+- **Note for future designs:** the permutation null's median of 0.557 shows that commit-clustered labels alone push
+  AUC above 0.5. Any per-function attribution claim needs a commit-blocked null like this one.

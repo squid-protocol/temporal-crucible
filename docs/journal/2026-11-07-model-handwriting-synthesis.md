@@ -2,13 +2,13 @@
 date: 2026-11-07
 title: Model handwriting: what we know so far (synthesis)
 type: program
-status: draft
-verdict: pending
+status: scored
+verdict: mixed
 theme: natural-history
 ids: WILD-H1..H2, WILD-C1
 docs: docs/agents_lattice_exploratory.md; docs/gg_lattice_exploratory.md; docs/wild_hypotheses.md; docs/gg_hypotheses.md; docs/flt_hypotheses.md
 links: squid-protocol/agent-habits; gitgalaxy-population-analyses agent-habits-round3
-takehome: AI models leave a consistent structural handwriting that independent lenses detect in the lab (83–84%) and across GitGalaxy's eras (AUC 0.88), with habits that repeat between settings. Whether it survives inside one shared codebase (WILD) decides how far it can go for attribution.
+takehome: Models have a strong structural handwriting when they write whole programs alone (83–84% identification in the lab, independent lenses agree; eras of a codebase separate at AUC 0.88), but inside one shared codebase it nearly vanishes (WILD: AUC 0.57, within chance): conventions launder it.
 ---
 
 # Model handwriting: what we know so far (synthesis)
@@ -48,7 +48,7 @@ No new analysis. This collects the results of:
 | Gemini-era vs Claude-era functions | GitGalaxy | AUC 0.877 vs drift placebo ~0.7 | **registered (GG)** |
 | same, lattice + habits | GitGalaxy | AUC 0.88, 0.86 size-matched; within-Claude drift 0.71 | exploratory |
 | fleet (mostly Sonnet) vs interactive (mostly Opus) | GitGalaxy, same era | AUC 0.64, below within-group placebo | **registered (FLT), null** |
-| Sonnet 5.5 vs Opus 5.5, matched directory × size | GitGalaxy, same era | *WILD pending* | registered |
+| Sonnet 5.5 vs Opus 5.5, matched directory × size | GitGalaxy, same era | stratified AUC 0.572, inside the commit-permutation null (p 0.089) | **registered (WILD), null** |
 
 **Habits that repeat across settings:**
 - **Private helpers:** Claude models write about twice the human rate (lab 34% vs 17–21%; GitGalaxy Gemini → Claude
@@ -77,7 +77,12 @@ documents functions more than both rivals in 10 of 10 jobs (registered, confirme
 - **The likeliest near-term use:** "AI vs human, and roughly which family", at file or PR level, by combining
   signals. Exact per-function model attribution is harder.
 
-*WILD's result will be added here.*
+**WILD settles the middle question:**
+- inside a shared codebase, in one era, structure alone barely separates Sonnet from Opus (AUC 0.57, null 0.56);
+- context pulls code together only modestly (ratio 0.92).
+
+Handwriting is real for a model writing alone, and laundered by a shared codebase. Era-level differences, like
+GitGalaxy's Gemini → Claude switch, remain visible because whole ways of working changed with them.
 
 ## What it changed
 
@@ -86,7 +91,7 @@ The path to forensic-grade evidence:
 | requirement | status |
 |---|---|
 | holds on fresh code | round 3 registered (90 runs + a new task; lattice lens added as R3-S5) |
-| holds inside real codebases | WILD (running) |
+| holds inside real codebases | **WILD: no, for individual functions in one shared codebase and era** |
 | holds across organisations | not started |
 | known error rates per function / file / PR | not measured |
 | robust to formatters, linters, human edits, disguise | not tested |

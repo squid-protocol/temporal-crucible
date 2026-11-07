@@ -51,14 +51,15 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
   constructs.
 - Several rule leaks are fixed (gitgalaxy#8024). Kernel and Windows vocabulary gaps are open (gitgalaxy#8016).
 
-**6. AI models leave a structural handwriting.** *Exploratory, plus registered GG / FLT; WILD pending.*
+**6. AI models leave a structural handwriting, until a shared codebase launders it.** *Exploratory, plus registered GG / FLT / WILD.*
 - **Lab:** two independent lenses find each model in the lab 83–84% of the time; Sonnet vs Haiku is as separable as
   Claude vs Codex.
 - **GitGalaxy:** the eras separate at AUC 0.88.
 - **Habits that repeat between settings:** private helpers, small call-heavy functions, cleaner grammar, no trivial
   functions.
-- **Against it:** FLT found no same-era difference.
-- **Next tests:** fresh code (round 3) and a shared codebase (WILD). Synthesis:
+- **Inside one codebase and era (WILD, registered):** Sonnet vs Opus functions are barely distinguishable (AUC 0.57,
+  within the commit-permutation null), as FLT found.
+- **Next test:** fresh whole programs (round 3). Synthesis:
   [journal](journal/2026-11-07-model-handwriting-synthesis.md).
 
 **Corrections to keep in mind when quoting older summaries:** see [`SYNTHESIS_2026-11-06.md`](SYNTHESIS_2026-11-06.md) § 3
@@ -81,8 +82,8 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### How code lives: natural history and regimes
 
-- **AI models leave a consistent structural handwriting that independent lenses detect in the lab (83–84%) and across GitGalaxy's eras (AUC 0.88), with habits that repeat between settings. Whether it survives inside one shared codebase (WILD) decides how far it can go for attribution.** — pending, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-synthesis.md)
-- **Registered: whether Sonnet- and Opus-written functions in GitGalaxy's own codebase are structurally distinguishable beyond directory and size, or whether the codebase's conventions dominate.** — pending, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-in-the-wild.md)
+- **Models have a strong structural handwriting when they write whole programs alone (83–84% identification in the lab, independent lenses agree; eras of a codebase separate at AUC 0.88), but inside one shared codebase it nearly vanishes (WILD: AUC 0.57, within chance): conventions launder it.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-synthesis.md)
+- **Inside GitGalaxy's shared codebase, Sonnet- and Opus-written functions are barely distinguishable (AUC 0.57, inside the commit-permutation null): the lab's strong model handwriting mostly vanishes under a codebase's conventions.** — not-supported, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-in-the-wild.md)
 - **Gemini-era GitGalaxy functions were long, nested, inline-commented and public; Claude-era ones are short, call-heavy and twice as often private helpers (as in the lab). Functions rarely change shape (88% never; 2.8% of weeks), and when they do it is one signal at a time, mostly growing.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-gitgalaxy-eras-and-lattice-movement.md)
 - **Development regimes leave a structural mark (Gemini-era vs Claude-era AUC 0.877), but the autonomous fleet does not write measurably differently from interactive sessions.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-eras-and-authorship.md)
 - **No fix class has a pooled age signature, and the exploratory idea that the searcher (fuzzer vs human) sets CVE age was refuted on unseen repos; descriptively, CVE fixes mostly change code 2.1–3.7× older than ordinary commits, whoever finds them.** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-cve-age-and-who-finds-it.md)
@@ -116,6 +117,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 - **The crucible's keyword grammar holds across 2.9M functions in 22 languages and inside 97% of individual repos, well beyond size (r 0.235 vs size placebo −0.006).** — replicated, 2026-11-07 · [journal](journal/2026-11-07-keyword-grammar-at-population-scale.md)
 - **Functions that break the grammar are mostly ordinary code (55% vs 64% for controls). They concentrate in test directories, but a "weirdness detector" would not find interesting code.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-grammar-outliers.md)
+- **The rules code follows are pairwise. Of 2,791 three-signal combinations, only one is avoided beyond what its pairs explain, and it is not universal; the lattice's missing middle is pair constraints (role conflicts, paired constructs) multiplied out.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-constrained-middle.md)
 - **A keyword grammar exists beyond size in the curated crucible (32 consensus pairs, signs hold in 69% of C-repo pairs), but breaking it does not mark CVE-prone code.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-keyword-grammar-in-the-crucible.md)
 
 ### Function fingerprints and the shape lattice
