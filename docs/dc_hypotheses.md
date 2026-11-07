@@ -68,3 +68,29 @@ huge crucible files, such as an amalgamation, ran too long in the comment splitt
 **CMT-G amendment 2 (before any gate number).** The 60-second limit only stopped *waiting*: workers kept grinding on
 pathological files and jammed the pool. Timing showed typical and very large files take well under 1 second. Each
 file now runs in its own child process, **killed** after 60 seconds. Timed-out files are listed in the report.
+
+## CMT-G result — 2026-11-06 (scorer `0a6f72f`; report `cmt_gate.md`): **FAIL as registered → DC stops**
+
+| | precision | recall |
+|---|---:|---:|
+| pooled, 35 languages | 97.5% | **80.3%** (bar 90%) |
+| **C** | 99.9% | 98.0% |
+| **C++** | 100.0% | 99.4% |
+
+**What fails.**
+- **COBOL recall 27.6%** (16,643 engine vs 60,009 reference lines). It is the largest language in the pool, so it
+  sinks the pooled recall.
+- **Perl** precision 65%: likely POD or heredoc handling differs from tree-sitter.
+- **Haskell** precision 24% and **SQL** 25%: small samples.
+- **Ada** recall 73% and **PowerShell** 72%.
+- Most other languages are 97–100%.
+
+**Two engine findings for the owner.**
+1. **14 COBOL copybooks (cobrix test copybooks) time out (> 60 s) in `Prism.split_positional_comment_stream`.** This
+   is a performance pathology in COBOL comment splitting, in GitGalaxy's core market.
+2. **COBOL comment recall vs tree-sitter-cobol is 27.6%.** This needs a definitional check before it is called an
+   engine bug: tree-sitter's COBOL comment nodes may include the sequence area (columns 1–6) or the identification
+   area (73–80), which the engine rightly does not treat as comments.
+
+**DC did not run** (registered rule). The C and C++ split that DC would use is accurate (98–100%). A DC run would
+need a new registration whose gate is scoped to the languages it uses.
