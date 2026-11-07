@@ -104,3 +104,25 @@ need a new registration whose gate is scoped to the languages it uses.
 - **Everything else is DC's registration verbatim:** lexicon, exposure, strata, claims DC-H1 / DC-H2, α, bootstrap.
 - This is a new registration, made because the original gate covered languages DC does not use. No DC statistic
   had been computed.
+
+### Correction: both COBOL "engine findings" are reference-grammar artefacts (2026-11-06; `tools/exploratory/cmt_cobol_*.py`)
+
+1. **The 14 timeouts are tree-sitter-cobol, not GitGalaxy.** On `cobrix/test1_copybook.cob` (36 lines), the engine's
+   `split_positional_comment_stream` and `split_streams` finish instantly. tree-sitter-cobol's parse is still running
+   after 30 seconds.
+2. **The COBOL "recall" gap is the reference over-counting.**
+   - Across 40 COBOL files, the engine's comment lines are a subset of tree-sitter's (precision 99.6%).
+   - Of the 22,915 lines tree-sitter marks as comment that the engine does not, **22,835 (≈100%) are ordinary
+     code/data lines**, all with a blank column-7 indicator.
+   - 47 are `PROCESS`/`CBL` compiler directives, 19 are identification-division comment-entry headers, and 14 have
+     text in columns 73–80.
+   - The engine follows the COBOL rule (comments are `*` or `/` in column 7). tree-sitter-cobol misparses.
+
+**So CMT-G's COBOL row measures the reference, not the engine.**
+- With COBOL excluded as an invalid reference, pooled precision and recall over the remaining languages are well
+  above 90%.
+- The registered verdict (FAIL) stands as recorded.
+- **No GitGalaxy issue is warranted.** The only possible engine nuance: COBOL comment-entries (`AUTHOR`,
+  `DATE-WRITTEN` … text), which standard COBOL ignores, are counted as code. That is too small (19 headers) to file
+  without a dedicated check.
+- The other non-COBOL gaps (Perl POD, Haskell/SQL precision, Ada/PowerShell recall) are unverified in the same way.
