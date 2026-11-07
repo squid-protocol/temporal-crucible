@@ -83,3 +83,43 @@ Per held-out repo, AUC full vs size: curl 0.583 / 0.525, OpenSSL 0.573 / 0.579, 
      exit? That is the FIXK pattern made specific, beyond keyword counts.
   3. The "model judges" route.
 - Each needs its own registration.
+
+---
+
+## WH — where + how: does combining location history with the change signature make silent-patch detection usable? — registered 2026-11-06, before any WH model was fitted
+
+**Why.** SILENT's change signature alone ("how") gave held-out AUC 0.569. Location ("where") is the program's
+strongest security signal: recidivism (RW-H2), with CVEs landing in already-defended code (GR, FORT). WH tests
+whether the two **combine**.
+
+**Data, positives, negatives, folds, model:** exactly SILENT's.
+- 4 repos, leave one out;
+- silent CVE fixes vs ordinary fixes;
+- L2 logistic regression, λ = 1.
+
+**Location features ("where"), from history strictly before each commit:**
+- **prior_sec:** log1p of the number of earlier CVE (latent) commits, in the same row set, touching any of this
+  commit's kept files; plus an indicator > 0.
+- **prior_fix:** log1p of the number of earlier fix commits of any class in the row set touching those files.
+- **defended:** guard clauses per 100 lines in the functions the commit touches, at its parent (FORT's guard
+  definition and mapping). 0 if no touched function was mapped.
+
+**Models.**
+
+| model | features |
+|---|---|
+| SIZE | log changed lines, log files |
+| WHERE | SIZE + the location features |
+| HOW | SILENT full (rule gain/loss flags + size) |
+| WHERE+HOW | all of the above |
+
+| id | claim | supported iff (paired commit bootstrap, 2,000; α = 0.01/3) |
+|---|---|---|
+| **WH-H1** | location adds to the change signature | AUC(WHERE+HOW) − AUC(HOW) > 0, lo > 0 |
+| **WH-H2** | the change signature adds to location | AUC(WHERE+HOW) − AUC(WHERE) > 0, lo > 0 |
+| **WH-H3** | the combination is usable | top-10% enrichment of silent CVE fixes with WHERE+HOW, lo > 1.5 |
+
+**Descriptive.**
+- AUC of all four models, per repo.
+- Precision in the top 1%, 5% and 10% vs the base rate.
+- The count of unlabelled ordinary fixes above the median silent positive (private list, as SILENT).
