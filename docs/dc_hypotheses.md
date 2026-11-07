@@ -229,3 +229,25 @@ That outcome will be reported as such, not as a failure to replicate.
 - **DC-H1 therefore stands as a single-study result** (four repos, every one positive), not yet replicated.
 - Stronger replication needs more labelled CVEs, e.g. OSV-linked fix commits for libtiff and libpng, whose label
   files here hold only 2 and 1.
+
+### CFIX results — 2026-11-06 (scorer `d8c0554`; report `cfix.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **CF-H1** CVE fixes add danger-language comments more than ordinary fixes | **8.8% vs 5.4%**; MH RR **1.61** (lo 1.10) | **SUPPORTED** |
+| **CF-H2** comment changes add to WHERE for silent patches | WHERE 0.720 → WHERE + comments **0.707** (−0.013); comment features alone 0.462 | **not supported** |
+
+**Descriptive.**
+- Fixes that add any comment line: 44.2% vs 38.0% (RR 1.11).
+- 8.4% of *silent* CVE fixes add a danger comment.
+- Top-10% enrichment: 3.15× for WHERE, 2.86× for WHERE + comments.
+
+**Reading.**
+- **Security fixes do leave words behind.** They add warning or validation comments about 1.6× as often as ordinary
+  fixes of the same size, including silent ones, whose commit messages say nothing.
+- **But it is rare.** Only about 1 in 11 CVE fixes does it, too rare to help rank commits. Location history (WHERE)
+  remains the detector; adding comment features dilutes it.
+- **The pattern across today's comment studies:**
+  - danger words mark **risky code** (DC-2: 1.45× at birth) and **security repairs** (CF-H1: 1.61×), as population
+    tendencies;
+  - per-item detection still comes from history.
