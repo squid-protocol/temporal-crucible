@@ -149,3 +149,44 @@ text.
 | **FIXK-H3** | CVE and regression signatures **differ** | Jaccard(latent signature, regression signature) < 0.5, with both non-empty |
 
 **Descriptive.** The full gain and loss RR table per class; extrinsic's signature.
+
+### FORT-V and FIXK results — 2026-11-06 (scorer `66bc10e`; report `fortv_fixk.md`)
+
+**Deviation, recorded.** Of the 54 named rules, **51** are regex rules and were counted. The other 3 are
+configuration entries.
+
+| claim | result | verdict |
+|---|---|---|
+| **FORTV-H1** new guards in already-guarded functions check an already-guarded variable (latent vs other-fix) | latent **84.2%**, other-fix 80.3%, regression 83.1%; MH RR **1.04** [0.97, 1.12] | **inconclusive** (a tight null) |
+| **FIXK-H1** CVE signature beyond the known defensive rules | `#define` gain (1.65), pointer / `size_t` / `->` gain (1.42), exit-keyword gain (1.28), plus branch (1.40) | **SUPPORTED** |
+| **FIXK-H2** regression signature exists | 23 rules (below) | **SUPPORTED** |
+| **FIXK-H3** CVE and regression signatures differ | Jaccard **0.17** | **SUPPORTED** |
+
+**Rule names, translated for C** (the engine's C regexes): `reflection_metaprogramming` = `#define` lines;
+`structural_boundaries` = mostly `return`/`break`/`continue` plus `struct`/`typedef`/`enum`; `pointers` = `->`,
+`size_t`/`ptrdiff_t`, address-of; `encapsulation` = `static`; `immutability_locks` = `const`.
+
+**Reading.**
+1. **Extending an existing defence is the norm for every fix class.** About 80–84% of new guards in already-guarded
+   functions check a variable an existing guard already checks. CVE fixes are no different. "Incompleteness vs
+   exposure" therefore cannot be separated with this measure either: nearly all fortification is incremental.
+2. **CVE fixes have a narrow signature: bounds checks with named limits.** They gain branches, early exits, pointer
+   and `size_t` arithmetic, and **new `#define` constants**, all beyond patch size. In plain terms: *add a check
+   against a named limit, and bail out*.
+3. **Regression fixes have a broad, different signature: restructuring.** Versus ordinary fixes of the same size,
+   they gain:
+   - **new functions** (`func_start` 1.97×, 40% vs 11%);
+   - **new globals** (2.52×);
+   - `static` helpers (1.72×), `const` (1.58×), arguments (1.49×), state mutation (1.42×), allocation (1.85×),
+     locks (rare, 12.9×).
+
+   And they *lose* macros, casts and outgoing calls. A regression fix often **re-architects** the broken change
+   (new helper, new state) rather than patching a line. They also add guards (FORT-H3).
+4. **Extrinsic fixes are platform adaptation:** macros (2.57×), inline asm, imports, I/O, API surface. This matches
+   ENV.
+5. **Overall: each fix class leaves a distinct structural change signature in the engine's own rules.**
+   - CVE = guarded bounds with limits.
+   - Regression = restructuring with new functions and state.
+   - Extrinsic = platform macros and imports.
+   - The engine reads *how* code is repaired distinctly by class, even though it cannot predict *where* regressions
+     occur (CHG-2).
