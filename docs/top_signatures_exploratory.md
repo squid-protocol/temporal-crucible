@@ -1,6 +1,6 @@
 # EXPLORATORY — the most common function fingerprints (exact signal-presence signatures), population DB v2.12.0-b64f42bf
 
-- functions (loc ≥ 3): 6,936,799; distinct signatures 314,979; top 5 cover 8.9%
+- functions (loc ≥ 3): 6,936,799; distinct signatures 314,979; top 6 cover 10.0%
 
 ## #1: {struct_linear, struct_args, struct_func_start}
 
@@ -13,79 +13,77 @@
 
 Examples:
 
-- typescript · Excalibur · `easeInQuint` (3 lines)
+- rust · swc · `visit_export_all` (4 lines)
 
 ```
-export function easeInQuint(currentTime: number): number {
-  return currentTime * currentTime * currentTime * currentTime * currentTime;
-}
-
-// Decelerating to zero velocity
-export function easeOutQuint(currentTime: number): number {
-  const t1 = currentTime - 1;
-```
-
-- go · go · `infoPlist` (19 lines)
-
-```
-func infoPlist(pkgpath string) string {
-	return `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-<key>CFBundleName</key><string>golang.gotest</string>
-<key>CFBundleSupportedPlatforms</key><array><string>iPhoneOS</string></array>
-<key>CFBundleExecutable</key><string>gotest</string>
-```
-
-- cpp · runtime · `TriggerCustomMarshaler` (7 lines)
-
-```
-    virtual HRESULT STDMETHODCALLTYPE TriggerCustomMarshaler(
-        /*[in]*/ IUnknown* objIn,
-        /*[in,out]*/ IUnknown** objRef,
-        /*[out,retval]*/ IUnknown* pRetVal)
-    {
-        return E_NOTIMPL;
+    fn visit_export_all(&mut self, n: &ExportAll) {
+        let src = str_to_atom(&n.src);
+        *self.flag_record.entry(src).or_default() |= LinkFlag::EXPORT_STAR;
     }
-    virtual HRESULT STDMETHODCALLTYPE DoubleHVAValues (
+
+    fn visit_import(&mut self, _: &Import) {
+        self.dynamic_import_found = true;
 ```
 
-- javascript · swc · `formatUTCWeekNumberSunday` (3 lines)
+- cpp · runtime · `LCM` (4 lines)
 
 ```
-function formatUTCWeekNumberSunday(d, p) {
-    return pad(utcSunday.count(utcYear(d) - 1, d), p, 2);
+DWORD LCM(DWORD u, DWORD v)
+{
+    return u / GCD(u, v) * v;
 }
-function UTCdISO(d) {
-    var day = d.getUTCDay();
-    return day >= 4 || 0 === day ? utcThursday(d) : utcThursday.ceil(d);
+#endif
+
+bool InitLargePagesPrivilege()
+```
+
+- typescript · workers-sdk · `_hasInnerBindings` (3 lines)
+
+```
+	_hasInnerBindings(): boolean {
+		return !$.utils.isNull($.utils.getPointer(2, this));
+	}
+	_initInnerBindings(length: number): $.List<Worker_Binding> {
+		return $.utils.initList(
+			2,
+			Worker_Binding_WrappedBinding._InnerBindings,
+```
+
+- javascript · discourse · `staffFlagsAvailable` (3 lines)
+
+```
+  get staffFlagsAvailable() {
+    return this.flagsAvailable.length > 1;
+  }
+
+  get submitEnabled() {
+    if (!this.selected) {
+      return false;
+```
+
+- dart · sdk · `test` (4 lines)
+
+```
+  void test() {
+    var x = deconstruct(this);
+    x.foo; // Check that we implement A<dynamic>
+  }
 }
+
+// Test the same examples with top level normalization
 ```
 
-- cpp · zig · `IsWindowsXPSP2OrGreater` (3 lines)
+- typescript · material-ui · `createObjectType` (6 lines)
 
 ```
-VERSIONHELPERAPI IsWindowsXPSP2OrGreater(void) {
-    return IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WINXP), LOBYTE(_WIN32_WINNT_WINXP), 2);
+export function createObjectType(init: { jsDoc: string | undefined }): ObjectType {
+  return {
+    type: 'ObjectNode',
+    jsDoc: init.jsDoc,
+  };
 }
 
-VERSIONHELPERAPI IsWindowsXPSP3OrGreater(void) {
-    return IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WINXP), LOBYTE(_WIN32_WINNT_WINXP), 3);
-}
-```
-
-- kotlin · kotlin · `serializeSingleTarget` (11 lines)
-
-```
-    fun serializeSingleTarget(
-        node: CirRootNode,
-        targetIndex: Int,
-        statsCollector: StatsCollector?,
-        moduleConsumer: (KlibModuleMetadata) -> Unit
-    ) {
-        node.accept(
-            CirTreeSerializationVisitor(statsCollector, moduleConsumer),
+export function createStringType(init: { jsDoc: string | undefined }): StringType {
 ```
 
 ## #2: {struct_linear, struct_args, struct_func_start, arch_api}
@@ -99,79 +97,77 @@ VERSIONHELPERAPI IsWindowsXPSP3OrGreater(void) {
 
 Examples:
 
-- php · mediawiki · `provideAddDeletedUserFilter` (30 lines)
+- java · spring-boot · `getWeb` (3 lines)
 
 ```
-	public static function provideAddDeletedUserFilter() {
-		return [
-			'unauthorized' => [
-				false,
-				[
-					'tables' => [ 'table' ],
-					'fields' => [ 'hu_deleted' => '1=0' ],
-					'conds' => [ '(SELECT  1  FROM "block_target" "hu_block_target" ' .
-```
-
-- python · cpython · `remove_writer` (4 lines)
-
-```
-    def remove_writer(self, fd):
-        """Remove a writer callback."""
-        self._ensure_fd_no_transport(fd)
-        return self._remove_writer(fd)
-
-    async def sock_recv(self, sock, n):
-        """Receive data from the socket.
-```
-
-- c · sokol-zig · `sokol_main` (6 lines)
-
-```
-sapp_desc sokol_main(int argc, char* argv[]) {
-    _SOKOL_UNUSED(argc);
-    _SOKOL_UNUSED(argv);
-    _SAPP_STRUCT(sapp_desc, desc);
-    return desc;
-}
-#else
-/* likewise, in normal mode, sapp_run() is just an empty stub */
-```
-
-- typescript · vscode · `addOverlayWidget` (5 lines)
-
-```
-	public addOverlayWidget(widgetData: IOverlayWidgetData): void {
-		this._overlayWidgets.addWidget(widgetData.widget);
-		this.layoutOverlayWidget(widgetData);
-		this._scheduleRender();
+	public Web getWeb() {
+		return this.web;
 	}
 
-	public layoutOverlayWidget(widgetData: IOverlayWidgetData): void {
+	public System getSystem() {
+		return this.system;
+	}
 ```
 
-- python · cpython · `do_work` (20 lines)
+- php · magento2 · `addFormCodeFilter` (4 lines)
 
 ```
-            def do_work():
-                _interpreters.run_string(interpid, f"""if True:
-                    waiting = False
-                    done = False
-                    def subthread():
-                        while not waiting:
-                            pass
-                        os.write({w_ready}, b'\\0')
+    public function addFormCodeFilter($code)
+    {
+        return $this->addFieldToFilter('main_table.form_code', $code);
+    }
+
+    /**
+     * Set order by attribute sort order
 ```
 
-- dart · sdk · `test` (3 lines)
+- python · freebsd-src · `testDefaultBehaviorWithShards` (8 lines)
 
 ```
-int test(int a) {
-  return a;
-}
+  def testDefaultBehaviorWithShards(self):
+    """Tests the behavior without the filter, with sharding enabled."""
 
-main() {
-  // 1 positional arg, as expected. Param x does not exist.
-  test(10, x: 99);
+    self.RunAndVerifyWithSharding(None, 1, ACTIVE_TESTS)
+    self.RunAndVerifyWithSharding(None, 2, ACTIVE_TESTS)
+    self.RunAndVerifyWithSharding(None, len(ACTIVE_TESTS) - 1, ACTIVE_TESTS)
+    self.RunAndVerifyWithSharding(None, len(ACTIVE_TESTS), ACTIVE_TESTS)
+    self.RunAndVerifyWithSharding(None, len(ACTIVE_TESTS) + 1, ACTIVE_TESTS)
+```
+
+- csharp · runtime · `ReadAttributeValue` (4 lines)
+
+```
+        public override bool ReadAttributeValue()
+        {
+            return _reader.ReadAttributeValue();
+        }
+
+        //
+        // IDisposable interface
+```
+
+- java · selenium · `fromElement` (3 lines)
+
+```
+    public static Origin fromElement(WebElement element) {
+      return new Origin(Require.nonNull("Element", element));
+    }
+  }
+
+  public static PointerEventProperties eventProperties() {
+    return new PointerEventProperties();
+```
+
+- csharp · runtime · `ModuloNullableShort` (4 lines)
+
+```
+        public static short ModuloNullableShort(short a, short b)
+        {
+            return (short)(a % b);
+        }
+
+        public static uint ModuloNullableUInt(uint a, uint b)
+        {
 ```
 
 ## #3: {struct_branch, struct_linear, struct_args, struct_func_start, struct_class_start, state_flux, state_pointers, def_encapsulation}
@@ -185,17 +181,17 @@ main() {
 
 Examples:
 
-- c · linux · `__flush_addrs` (11 lines)
+- c · freebsd-src · `vtblk_queue_complete_one` (28 lines)
 
 ```
-static void __flush_addrs(struct list_head *list)
+static struct bio *
+vtblk_queue_complete_one(struct vtblk_softc *sc, struct vtblk_request *req)
 {
-	while (!list_empty(list)) {
-		struct mptcp_pm_addr_entry *cur;
+	struct bio *bp;
 
-		cur = list_entry(list->next,
-				 struct mptcp_pm_addr_entry, list);
-		list_del_rcu(&cur->list);
+	if (sc->vtblk_req_ordered != NULL) {
+		MPASS(sc->vtblk_req_ordered == req);
+		sc->vtblk_req_ordered = NULL;
 ```
 
 ## #4: {struct_linear, struct_args, struct_func_start, state_pointers, def_encapsulation}
@@ -209,79 +205,77 @@ static void __flush_addrs(struct list_head *list)
 
 Examples:
 
-- c · linux · `wle` (4 lines)
+- c · linux · `mega_create_proc_entry` (3 lines)
 
 ```
-static inline void wle(uint32_t val, uint32_t *x)
+static inline void mega_create_proc_entry(int index, struct proc_dir_entry *parent)
 {
-	put_unaligned_le32(val, x);
+}
+#endif
+
+
+/*
+```
+
+- go · go · `newImplNoInline` (3 lines)
+
+```
+func newImplNoInline() *Impl {
+	return &Impl{} // ERROR "&Impl{} escapes to heap$"
 }
 
-static inline void w8be(uint64_t val, uint64_t *x)
-{
+//go:noinline
+func newImpl2ret2() (string, *Impl2) {
+	return "str", &Impl2{} // ERROR "&Impl2{} escapes to heap$"
 ```
 
-- go · grafana · `schema_pkg_apis_iam_v0alpha1_GetSearchTeamsResponse` (69 lines)
+- solidity · openzeppelin-contracts · `_safeTransfer` (4 lines)
 
 ```
-func schema_pkg_apis_iam_v0alpha1_GetSearchTeamsResponse(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-```
-
-- solidity · openzeppelin-contracts · `decodeBool` (3 lines)
-
-```
-    function decodeBool(bytes memory item) internal pure returns (bool) {
-        return readBool(item.asSlice());
+    function _safeTransfer(address from, address to, uint256 tokenId, bytes memory data) internal virtual {
+        _transfer(from, to, tokenId);
+        ERC721Utils.checkOnERC721Received(_msgSender(), from, to, tokenId, data);
     }
 
-    /// @dev Decode an RLP encoded address from bytes. See {readAddress}
-    function decodeAddress(bytes memory item) internal pure returns (address) {
-        return readAddress(item.asSlice());
+    /**
+     * @dev Approve `to` to operate on `tokenId`
 ```
 
-- csharp · runtime · `test_51` (7 lines)
+- csharp · runtime · `test_282` (7 lines)
 
 ```
-    private static unsafe long test_51()
+    private static unsafe long test_282(B[,] ab, long i, long j)
     {
-        fixed (B* pb = &AA.s_x.m_b)
+        fixed (B* pb = &ab[i, j])
         {
-            return pb[0].m_bval;
+            return AA.get_i2(pb->m_bval);
         }
     }
-    private static unsafe long test_58(B* pb, long i)
+    private static unsafe long test_289(B* pb1)
 ```
 
-- c · linux · `thread_wake_up` (4 lines)
+- c · linux · `btrfs_inc_block_group_reservations` (5 lines)
 
 ```
-static void thread_wake_up(struct timer_list *unused)
+static void
+btrfs_inc_block_group_reservations(struct btrfs_block_group *bg)
 {
-	wake_up_interruptible_all(&speakup_event);
+	atomic_inc(&bg->reservations);
 }
 
-static DEFINE_TIMER(thread_timer, thread_wake_up);
-
+/*
 ```
 
-- c · freebsd-src · `test_serialize_tags` (11 lines)
+- c · linux · `cdns_clk_rst_deinit` (5 lines)
 
 ```
-static void test_serialize_tags(void **_CBOR_UNUSED(_state)) {
-  cbor_item_t *item = cbor_new_tag(21);
-  cbor_item_t *one = cbor_build_uint8(1);
-  cbor_tag_set_item(item, one);
+static void cdns_clk_rst_deinit(struct cdns_starfive *data)
+{
+	reset_control_assert(data->resets);
+	clk_bulk_disable_unprepare(data->num_clks, data->clks);
+}
 
-  assert_size_equal(2, cbor_serialize(item, buffer, 512));
-  assert_memory_equal(buffer, ((unsigned char[]){0xD5, 0x01}), 2);
-  assert_size_equal(cbor_serialized_size(item), 2);
+static int cdns_starfive_probe(struct platform_device *pdev)
 ```
 
 ## #5: {struct_linear, struct_args, struct_func_start, arch_api, state_flux}
@@ -295,80 +289,164 @@ static void test_serialize_tags(void **_CBOR_UNUSED(_state)) {
 
 Examples:
 
-- php · symfony · `setResolvedTypeFactory` (6 lines)
+- csharp · runtime · `foo2233` (5 lines)
 
 ```
-    public function setResolvedTypeFactory(ResolvedFormTypeFactoryInterface $resolvedTypeFactory): static
+        public static void foo2233()
+        {
+            ActualResult = (ActualResult + "2233");
+            return;
+        }
+
+        public static void foo2234()
+```
+
+- python · django · `get_search_fields` (4 lines)
+
+```
+    def get_search_fields(self, request):
+        search_fields = super().get_search_fields(request)
+        search_fields += ("age",)
+        return search_fields
+
+
+class EmptyValueChildAdmin(admin.ModelAdmin):
+```
+
+- php · magento2 · `__construct` (5 lines)
+
+```
+    public function __construct(
+        ModuleDataSetupInterface $moduleDataSetup
+    ) {
+        $this->moduleDataSetup = $moduleDataSetup;
+    }
+
+    /**
+```
+
+- java · elasticsearch · `LengthFunctionProcessor` (3 lines)
+
+```
+    public LengthFunctionProcessor(StreamInput in) throws IOException {
+        input = in.readNamedWriteable(Processor.class);
+    }
+
+    @Override
+    public final void writeTo(StreamOutput out) throws IOException {
+        out.writeNamedWriteable(input);
+```
+
+- c · illumos-gate · `set_using_pkcs_functions` (4 lines)
+
+```
+void set_using_pkcs_functions( int val )
+{
+    using_pkcs_functions = val;
+}
+
+
+/*
+```
+
+- python · scipy · `setup` (4 lines)
+
+```
+    def setup(self, n, m):
+        rng = np.random.default_rng(1234)
+        self.A = sparse.eye(n, n) + sparse.rand(n, n, density=0.01, random_state=rng)
+        self.b = np.ones(n)
+
+    def time_inner(self, n, m):
+        lgmres(self.A, self.b, inner_m=m, maxiter=1)
+```
+
+## #6: {struct_branch, struct_linear, struct_args, struct_func_start, state_flux, state_pointers, def_encapsulation}
+
+- **73,614 functions (1.1%)** in **84 repos**; largest single repo holds 39%
+- size: median 19 lines (IQR 13–29)
+- in test paths: 2%
+- languages: c 98%, go 2%, csharp 0%, livecode 0%, solidity 0%, python 0%, swift 0%, dart 0%
+- archetypes: Stateful Encapsulated Methods 79%, Many-Argument Workhorses 8%, Encapsulated Accessors 7%, Compute Cores 3%, I/O & Config Routines 2%
+- most common names: `putimage#` 39, `vertline#` 29, `diagline#` 28, `cleararea#` 28, `horzline#` 28, `i_psvc_constructor_#_#` 23, `__must_hold` 20, `classfactory_queryinterface` 16, `flush_events` 16, `init_hw` 14, `releasehandle` 13, `prog_name` 13
+
+Examples:
+
+- c · reactos · `IDirectPlay4Impl_AddRef` (12 lines)
+
+```
+static ULONG WINAPI IDirectPlay4Impl_AddRef(IDirectPlay4 *iface)
+{
+    IDirectPlayImpl *This = impl_from_IDirectPlay4( iface );
+    ULONG ref = InterlockedIncrement( &This->ref4 );
+
+    TRACE( "(%p) ref4=%d\n", This, ref );
+
+    if ( ref == 1 )
+```
+
+- go · go · `walkRecv` (10 lines)
+
+```
+func walkRecv(n *ir.UnaryExpr) ir.Node {
+	if n.Typecheck() == 0 {
+		base.Fatalf("missing typecheck: %+v", n)
+	}
+	init := ir.TakeInit(n)
+
+	n.X = walkExpr(n.X, &init)
+	call := walkExpr(mkcall1(chanfn("chanrecv1", 2, n.X.Type()), nil, &init, n.X, typecheck.NodNil()), &init)
+```
+
+- livecode · livecode · `_svgParsePreserveAspectRatio` (14 lines)
+
+```
+private function _svgParsePreserveAspectRatio @xValue
+	if xValue is "none" then
+		return true
+	end if
+	if word 1 of xValue is among the items of "xMinYMin,xMidYMin,xMaxYMin,xMinYMid,xMidYMid,xMaxYMid,xMinYMax,xMidYMax,xMaxYMax" then
+		if word 2 of xValue is empty then
+			put " meet" after xValue
+		end if
+```
+
+- csharp · PowerToys · `TryLoadIndirectString` (13 lines)
+
+```
+    private static bool TryLoadIndirectString(string input, out string? output)
     {
-        $this->resolvedTypeFactory = $resolvedTypeFactory;
-
-        return $this;
-    }
-
-    public function addExtension(FormExtensionInterface $extension): static
+        var outBuffer = new StringBuilder(1024);
+        var hr = NativeMethods.SHLoadIndirectString(input, outBuffer, outBuffer.Capacity, IntPtr.Zero);
+        if (hr == 0)
+        {
+            output = outBuffer.ToString();
+            return !string.IsNullOrWhiteSpace(output);
 ```
 
-- java · gradle · `setDeployName` (3 lines)
+- c · reactos · `IRecordInfoImpl_GetFieldNames` (22 lines)
 
 ```
-    public void setDeployName(String deployName) {
-        this.deployName = deployName;
-    }
+static HRESULT WINAPI IRecordInfoImpl_GetFieldNames(IRecordInfo *iface, ULONG *pcNames,
+                                                BSTR *rgBstrNames)
+{
+    IRecordInfoImpl *This = impl_from_IRecordInfo(iface);
+    ULONG n = This->n_vars, i;
 
-    public String getContextPath() {
-        return contextPath;
-    }
-```
-
-- python · tensorflow · `testWithPrivateSpecialType` (9 lines)
+    TRACE("(%p)->(%p %p)\n", This, pcNames, rgBstrNames);
 
 ```
-  def testWithPrivateSpecialType(self):
-    rt = ragged_tensor.RaggedTensor.from_value_rowids(
-        array_ops.constant([[1, 2], [3, 4], [5, 6]]), [0, 0, 1])
-    pst = _PrivateSpecialType(rt)
-    pst_shape = array_ops.shape_v2(pst)
-    st = structured_tensor.StructuredTensor.from_fields_and_rank({"r": pst}, 1)
-    st_shape = st._ragged_shape
-    self.assertEqual(1, st.rank)
-```
 
-- c · reactos · `NtUserSetImeHotKey` (15 lines)
+- c · ldb-ecm-raspberry-pi · `HorzLine24` (8 lines)
 
 ```
-BOOL
-NTAPI
-NtUserSetImeHotKey(
-    _In_ DWORD dwHotKeyId,
-    _In_ UINT uModifiers,
-    _In_ UINT uVirtualKey,
-    _In_opt_ HKL hKL,
-    _In_ DWORD dwAction)
-```
-
-- php · symfony · `getMessageCount` (8 lines)
-
-```
-    public function getMessageCount(): int
-    {
-        $queryBuilder = $this->createAvailableMessagesQueryBuilder()
-            ->select('COUNT(m.id) AS message_count')
-            ->setMaxResults(1);
-
-        return $this->executeQuery($queryBuilder->getSQL(), $queryBuilder->getParameters(), $queryBuilder->getParameterTypes())->fetchOne();
-    }
-```
-
-- lua · darwin-xnu · `QueueTest` (6 lines)
-
-```
-function QueueTest(num_cores)
-    table.insert(tests, {
-        path = benchmark.opt.path,
-        num_cores = num_cores,
-    })
-end
-
-if benchmark.opt.through_max_workers then
+static void HorzLine24 (INTDC* dc, uint_fast32_t cx, int_fast8_t dir) {
+	RGB* __attribute__((aligned(1))) video_wr_ptr = (RGB*)(uintptr_t)(dc->fb + (dc->curPos.y * dc->pitch * 3) + (dc->curPos.x * 3));
+	for (uint_fast32_t i = 0; i < cx; i++) {						// For each x pixel
+		video_wr_ptr[0] = dc->TxtColor.rgb;							// Write the colour
+		video_wr_ptr += dir;										// Positive offset to next pixel
+	}
+	dc->curPos.x += (cx * dir);										// Set current x position
+}
 ```
 

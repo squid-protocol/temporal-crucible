@@ -13,6 +13,31 @@ The method is **event-pair scanning**: for each labeled event commit, scan its f
 and the commit itself with the real `galaxyscope` CLI, join per-file exposure across the two
 snapshots, and record the delta. No per-commit sweeps, no tag panels — two scans per label.
 
+## Start here
+
+| if you want… | read |
+|---|---|
+| **what we have learned**, in a page | [`docs/TAKEHOMES.md`](docs/TAKEHOMES.md) |
+| **the story**, study by study, newest first | [the experiment journal](docs/journal/README.md) |
+| exactly what was claimed and how it came out | [`docs/HYPOTHESES.md`](docs/HYPOTHESES.md), the register of record |
+| what has been tried against what | [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md), the predictor × outcome map |
+| the latest full synthesis | [`docs/SYNTHESIS_2026-11-06.md`](docs/SYNTHESIS_2026-11-06.md) |
+
+The program grew from the curl pilot below into studies of what GitGalaxy is good for:
+- coupling, copy-finding and provenance;
+- codebase natural history;
+- the keyword grammar of functions;
+- function fingerprints and their lattice.
+
+Most of these are scanned over code history and across a 745-target, 8.17M-function population. **The one-line
+standing:** the engine is good at what code is, where it came from, how it lives and where the outside world touches
+it; it is not a bug predictor beyond history and size.
+
+**Adding an experiment:** register it (`docs/HYPOTHESES.md` plus a `docs/<study>_hypotheses.md`), open its journal
+entry the same day (`python tools/journal.py new …`), commit the scorer, run, then update the entry and run
+`python tools/journal.py build`. CI checks the journal. The full workflow is in
+[`docs/journal/README.md`](docs/journal/README.md).
+
 ## The hypothesis ledger
 
 Every confirmatory claim this program makes is pre-registered (direction, test, α) before

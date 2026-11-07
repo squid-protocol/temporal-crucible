@@ -8,6 +8,9 @@ came out. It is a *view*, not a source of truth — the authoritative record is 
 `tc#` issues (registrations and open work). If this file and the register disagree,
 the register wins; fix this file.
 
+The narrative of each study (question, why, finding, take-home) is in the [experiment journal](journal/README.md); the
+short version is [`TAKEHOMES.md`](TAKEHOMES.md).
+
 Read order for someone new: this file (what's been tried) → [`HYPOTHESES.md`](HYPOTHESES.md)
 § "plain-language summary" (what we learned) → the specific result doc (how).
 

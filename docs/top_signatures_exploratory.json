@@ -880,5 +880,189 @@
    ]
   ],
   "median_loc": 5.0
+ },
+ {
+  "signals": [
+   "struct_branch",
+   "struct_linear",
+   "struct_args",
+   "struct_func_start",
+   "state_flux",
+   "state_pointers",
+   "def_encapsulation"
+  ],
+  "n": 73614,
+  "repos": 84,
+  "langs": [
+   [
+    "c",
+    72040
+   ],
+   [
+    "go",
+    1313
+   ],
+   [
+    "csharp",
+    165
+   ],
+   [
+    "livecode",
+    46
+   ],
+   [
+    "solidity",
+    36
+   ],
+   [
+    "python",
+    8
+   ],
+   [
+    "swift",
+    3
+   ],
+   [
+    "dart",
+    2
+   ],
+   [
+    "assembly",
+    1
+   ]
+  ],
+  "arch": [
+   [
+    "Stateful Encapsulated Methods",
+    58447
+   ],
+   [
+    "Many-Argument Workhorses",
+    5969
+   ],
+   [
+    "Encapsulated Accessors",
+    5083
+   ],
+   [
+    "Compute Cores",
+    2547
+   ],
+   [
+    "I/O & Config Routines",
+    1503
+   ],
+   [
+    "Parameter Forwarders",
+    55
+   ],
+   [
+    "Interface Declarations",
+    10
+   ]
+  ],
+  "names": [
+   [
+    "putimage#",
+    39
+   ],
+   [
+    "vertline#",
+    29
+   ],
+   [
+    "diagline#",
+    28
+   ],
+   [
+    "cleararea#",
+    28
+   ],
+   [
+    "horzline#",
+    28
+   ],
+   [
+    "i_psvc_constructor_#_#",
+    23
+   ],
+   [
+    "__must_hold",
+    20
+   ],
+   [
+    "classfactory_queryinterface",
+    16
+   ],
+   [
+    "flush_events",
+    16
+   ],
+   [
+    "init_hw",
+    14
+   ],
+   [
+    "releasehandle",
+    13
+   ],
+   [
+    "prog_name",
+    13
+   ],
+   [
+    "getexecbasename",
+    13
+   ],
+   [
+    "asm_x#_write_byte_#",
+    12
+   ],
+   [
+    "common_init",
+    11
+   ],
+   [
+    "r#a#_pin_to_pocctrl",
+    11
+   ],
+   [
+    "establish_machine_state",
+    10
+   ],
+   [
+    "dispatchex_queryinterface",
+    10
+   ],
+   [
+    "writesquashedline#x",
+    10
+   ],
+   [
+    "dcn#_resource_destruct",
+    10
+   ],
+   [
+    "rt#_bbp_init",
+    9
+   ],
+   [
+    "serviceprovider_queryservice",
+    9
+   ],
+   [
+    "handle_signal",
+    9
+   ],
+   [
+    "nbio_v#_#_sdma_doorbell_range",
+    9
+   ],
+   [
+    "nbio_v#_#_ih_doorbell_range",
+    9
+   ]
+  ],
+  "median_loc": 19.0
  }
 ]

@@ -46,6 +46,22 @@ a p-value and a verdict, not a descriptive/exploratory table):
    table wider than one registered claim. Don't quietly drop a guard to make
    a table simpler.
 
+## The experiment journal (every study gets an entry)
+
+[`docs/journal/`](docs/journal/README.md) is the program's lab notebook: one dated entry per study, arc or engine
+finding. Each entry has a question, why, what we did, what we found, a take-home and what it changed.
+
+- **At registration:** create the entry (`python tools/journal.py new --date … --slug … --title …`) with
+  `status: registered` (or `draft` until the owner OKs), `verdict: pending` and the register `ids`. Commit it with the
+  registration.
+- **After scoring:** fill in the findings, the take-home and what changed; set `status: scored` and the `verdict`.
+  Then run `python tools/journal.py build` to refresh `docs/journal/README.md` and the generated part of
+  `docs/TAKEHOMES.md`. If the result shifts the big picture, edit the curated part of `TAKEHOMES.md` by hand.
+- **Exploratory work and engine findings** get entries too (`type: exploratory` / `engine-finding`), never a
+  confirmatory verdict.
+- **CI runs `python tools/journal.py check`.** The register stays the record of truth: an entry cites register ids,
+  it does not replace them.
+
 ## Long batches: run detached, never through a 600-second-capped shell
 
 `run_batch.py` and `walk_history.py` scan real commits with a real

@@ -172,3 +172,76 @@ The top 5 exact signal-presence signatures cover 8.9% of 6.94M functions. They f
   with `_`. TypeScript: `export` / `public`. Java: `public` / `protected`. C: a non-static function definition.
 - Fingerprint #1 is therefore "a function with arguments and a structural keyword (usually `return`), and nothing
   else". #2 adds "and it is public".
+
+### Exploratory: fingerprint #6 (`top_signatures.py --top 6`)
+
+- **Signals:** branch + structural keywords + args + function start + state mutation + pointers + `static`. That is #3 without
+  `struct_class_start`.
+- **Size and spread:** 73,614 functions (1.1%), 84 repos (largest 39%), 98% C, median 19 lines, 2% in tests.
+- **What it is:** ReactOS / Wine COM methods (`*_AddRef`, `*_QueryInterface`), graphics primitives (`putimage`, `vertline`),
+  and driver `init_hw`.
+- **Reading:** the private-C family (#3, #4, #6) forms its own ladder.
+  - #4 = static pointer one-liner;
+  - #6 = #4 + branch + mutation;
+  - #3 = #6 + struct declarations.
+
+  It mirrors the public OO ladder (#1 → #2 → #5).
+- **Corpus caveat:** these shapes are concentrated in a few OS-scale repos (Linux, FreeBSD, ReactOS, Haiku). The function-weighted
+  ranking reflects corpus composition; the bricks (#1, #2, #5) are the shapes that hold across hundreds of repos.
+- **Coverage gap seen here:** Windows `Interlocked*` is not counted as concurrency in C (gitgalaxy#8016 comment).
+
+### Exploratory: draft family trees (`tools/exploratory/fingerprint_trees.py`, `fingerprint_tree_viz.py`)
+
+The top 200 signatures (49.7% of functions) form two trees.
+
+**Growth tree:**
+- Each shape hangs under its most common sub-shape. 196 of 199 edges add exactly **one** signal.
+- 148 shapes have at least one other one-signal parent among the 200 (219 alternative edges, the gray dotted lines in
+  `docs/fingerprint_tree.html` / `.png`).
+
+**Similarity families** (average-linkage Jaccard, 14 clusters):
+
+| family | share | spread |
+|---|---:|---|
+| F7 public / general | 17.5% | 504 repos |
+| F8 private C + pointers | 15.8% | 356 repos, Linux 34% |
+| F6 bare one-step functions | 4.7% | |
+| F3 annotated / test methods | 3.3% | Java / Rust / C#, 53% tests |
+
+Smaller families: Rust pointer code, generics, and shell / config fragments.
+
+Draft only: rules as of `b64f42bf` (before #8010 / #8011 / #8016), function-weighted.
+
+### Exploratory: is the lattice sparser than chance? (`tools/exploratory/lattice_null.py`; report `lattice_null_exploratory.md`)
+
+Null model: each signal independent, with a per-language, size-dependent probability (the KW size placebo). One draw on a
+2.0M-function sample.
+
+- **Real code builds 0.63× as many distinct shapes as the null** (149,312 vs 235,222). In the mid rungs (k = 4–11)
+  it builds about **half** as many. That is constraint, not just arithmetic.
+- **Above 12 signals the ratio flips** (1.6× at k = 14, up to about 10× at k = 19–22). Large functions mix more
+  families than independence predicts: every big function is its own shape.
+- **No pair of signals is forbidden** (0 pairs at under 1/10 of expectation). The holes are role exclusions:
+
+  | pair | observed / expected |
+  |---|---:|
+  | public + private | 0.22 |
+  | tests + private | 0.24 |
+  | tests + logging | 0.32 |
+  | tests + error exits | 0.38 |
+
+- **The attractions are paired constructs:**
+
+  | pair | observed / expected |
+  |---|---:|
+  | emitters + listeners | 10× |
+  | exec + IPC | 9× |
+  | exec + error exits | 9× |
+  | async + locks | 5× |
+  | alloc + cleanup | 5× |
+
+- **Local connectivity is near chance:** 66% of the one-signal neighbours of the 200 commonest shapes exist in real
+  code (null 73%). The lattice is not a sparse skeleton. It is a normally connected space where some regions are
+  heavily favoured.
+- **The raw combinatorial space is meaningless as a yardstick.** k = 8 alone allows 2.9 billion combinations for
+  237k functions. Only a null model can say what "missing" means.

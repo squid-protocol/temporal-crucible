@@ -39,6 +39,11 @@ jobs:
       - name: Byte-compile every tool
         run: python -m py_compile tools/*.py
 
+      # The experiment journal (docs/journal/): every entry well-formed, its register ids real, its linked docs present,
+      # and the generated index (docs/journal/README.md) and take-homes list (docs/TAKEHOMES.md) up to date.
+      - name: Check the experiment journal
+        run: python tools/journal.py check
+
       - name: Restore the fixture pool clone (tests/fixtures/fixture_repo.tar.gz)
         run: |
           mkdir -p /tmp/pool/curl
