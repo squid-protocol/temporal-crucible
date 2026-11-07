@@ -189,3 +189,25 @@ The top 5 exact signal-presence signatures cover 8.9% of 6.94M functions. They f
 - **Corpus caveat:** these shapes are concentrated in a few OS-scale repos (Linux, FreeBSD, ReactOS, Haiku). The function-weighted
   ranking reflects corpus composition; the bricks (#1, #2, #5) are the shapes that hold across hundreds of repos.
 - **Coverage gap seen here:** Windows `Interlocked*` is not counted as concurrency in C (gitgalaxy#8016 comment).
+
+### Exploratory: draft family trees (`tools/exploratory/fingerprint_trees.py`, `fingerprint_tree_viz.py`)
+
+The top 200 signatures (49.7% of functions) form two trees.
+
+**Growth tree:**
+- Each shape hangs under its most common sub-shape. 196 of 199 edges add exactly **one** signal.
+- 148 shapes have at least one other one-signal parent among the 200 (219 alternative edges, the gray dotted lines in
+  `docs/fingerprint_tree.html` / `.png`).
+
+**Similarity families** (average-linkage Jaccard, 14 clusters):
+
+| family | share | spread |
+|---|---:|---|
+| F7 public / general | 17.5% | 504 repos |
+| F8 private C + pointers | 15.8% | 356 repos, Linux 34% |
+| F6 bare one-step functions | 4.7% | |
+| F3 annotated / test methods | 3.3% | Java / Rust / C#, 53% tests |
+
+Smaller families: Rust pointer code, generics, and shell / config fragments.
+
+Draft only: rules as of `b64f42bf` (before #8010 / #8011 / #8016), function-weighted.
