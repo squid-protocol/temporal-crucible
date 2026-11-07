@@ -43,8 +43,11 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
   - a public/OO ladder used everywhere;
   - a private-C ladder concentrated in operating-system repos.
 - **Constraint:** real code builds about half the mid-size shapes chance would.
-- **Next:** whether fix kinds live in different families, and whether lattice moves predict regressions, is
-  registered as LAT (draft).
+- **LAT (scored):**
+  - fix kinds land on different families beyond size, modestly (regression fixes hit simpler, lower-rung
+    functions);
+  - lattice moves add nothing to regression prediction beyond churn;
+  - 71% of functions never change shape. *Supported / not supported.*
 
 **5. Read signals by what their rules match, not by their column names.**
 - The engine now carries display names: `struct_linear` = structural keywords, `state_safety_neg` = unsafe
@@ -122,7 +125,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Function fingerprints and the shape lattice
 
-- **Registered (draft): whether CVE fixes concentrate in the private-C upper rungs, and whether lattice moves (jumps, half-steps) add regression recall beyond churn. The prior for the moves is null (CHG-2).** — pending, 2026-11-07 · [journal](journal/2026-11-07-lattice-fix-families-and-moves.md)
+- **Fix kinds sit in different shape families beyond size, modestly (V 0.07; regression fixes hit simpler, lower-rung functions), but lattice moves add nothing to regression prediction beyond churn; 71% of functions never change shape.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-lattice-fix-families-and-moves.md)
 - **Code is built from a few hundred keyword combinations plus a long tail. The commonest are tiny universal "bricks" (one-step, public one-step, public setter) and C dialect shapes (driver functions, static pointer helpers) concentrated in a few OS repos.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-function-fingerprints-and-archetypes.md)
 - **Common shapes grow one keyword family at a time (196 of 199 tree edges), and real code builds about half the mid-size shapes chance would: role conflicts are the holes, paired constructs the attractions.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-fingerprint-lattice.md)
 - **AI coding agents skip the tiny "brick" functions humans write (0% bare one-step vs 5–8%), the Claude models write far more private helpers, Codex fits the human grammar worst, and a program's lattice family mix alone identifies its model 84% of the time (chance 28%).** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-agent-code-on-the-lattice.md)
