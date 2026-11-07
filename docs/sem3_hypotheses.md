@@ -59,3 +59,33 @@ For multi-PR expat items, the per-PR sets are unioned; "pre-fix" and "post-fix" 
 **Stage 2.** The fresh blind audit (seed 2986; 60 packets, all with full function excerpts) runs as registered.
 
 **S3-H2 blind labels locked before comparison:** `vz_private/sem3_audit_labels.json`, sha256 `e7be8b307773b3cd52863460d18858eb1e91b60f105a41c2a2333cf7a5689c73`.
+
+## Results, stage 2 (`score`; report `sem3.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **S3-H2** SEM-3 beats closest-version on a fresh blind audit | SEM-3 **31 / 59**, CV **28 / 59**; sign test p = 0.40 | **not supported** |
+
+| fresh blind audit | SEM-3 right | closest-version right |
+|---|---:|---:|
+| zlib (30) | **30** | 0 |
+| expat (29) | 1 | **28** |
+
+**Reading.**
+- **The library split replicates exactly on a fresh sample.** On zlib's modified copies, code reading beats
+  closest-version decisively, for the third independent audit (CMB 30 / 30, SEM-2 held-out 19 / 20, now 30 / 30).
+- **On expat, SEM-3 still calls genuinely unpatched modified copies "patched"** (28 / 29), though far less often on
+  verbatim copies (74 vs 687).
+- **Line- and fragment-level evidence is not enough for a library whose security fixes are large rewrites.**
+- **Disclosure check (private):** every audited-unpatched expat unit is a *historical* state (Poco, CPython, VTK).
+  None is a host's current head.
+
+**Where this leaves code reading, across UT, VZ, VZ-T, SEM, CMB and SEM-3.**
+- Reliable for libraries with **surgical** fixes, such as zlib. There it beats version strings and closest-version
+  on backports, compatibility forks and independent fixes.
+- **Not reliable** for libraries whose fixes **refactor**, such as expat. There closest-version matching should be
+  the method.
+- **An observation for a future registration:** the blind auditor agents judged patch status from the fix diff plus
+  host code consistently, flagging truncation and definitional issues on their own. A pipeline in which the engine's
+  fingerprint *finds* the copy and a model *judges* patch status is a candidate. It would need its own validation
+  against verbatim truth.
