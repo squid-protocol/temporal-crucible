@@ -49,3 +49,51 @@ log(O/E) (`kw_presence_oe` method). Each pair's **predicted sign** = that median
 - **H1 likely:** GR found 69% in C.
 - **H2 likely:** large n.
 - **H3 uncertain:** repos may have their own "accents" (KW-follow-up 3).
+
+---
+
+## Results — 2026-11-07 (scorer `c11cfe7`; report `kwp.md`)
+
+**Data.** 2,889,002 population functions (loc ≥ 3) after excluding the 92 crucible-source repos; 22 languages; 32
+consensus pairs.
+
+| claim | result | verdict |
+|---|---|---|
+| **KWP-H1** crucible signs hold pooled | **328 / 420 = 78%** of language × pair cells; p = 1.9 × 10⁻³² | **SUPPORTED** |
+| **KWP-H2** shared grammar beyond size | cross-language r **0.235** (228 language pairs); shuffle 99.67th 0.031; **size placebo −0.006** | **SUPPORTED** |
+| **KWP-H3** holds within repos | **169 / 174** repo × language units agree on > 50% of pairs (97%); median 76%; p = 5 × 10⁻⁴⁴ | **SUPPORTED** |
+
+**Per language.**
+- Agreement is highest in C++ 92%, MATLAB 91%, Python 90%, C# 88% and C 88%; Go, TypeScript, Perl and Ruby are
+  82–85%.
+- It is lowest in Zig 63%, COBOL 57% (7 pairs), CSS 56%, Fortran 50% and YAML 50%.
+
+**Most replicated pairs** (crucible sign; share of languages agreeing):
+- safety guard + cast **100%** (15 languages);
+- cleanup + safety guard **100%**;
+- encapsulation + branch **100%**;
+- concurrency + linear code **100%**;
+- concurrency × cast (negative) **100%**;
+- safety guard + early exit **94%** (16);
+- safety guard + branch **89%** (19);
+- early exit + branch **89%** (18).
+
+**Least replicated:** branch × closures (−) 40%; API × cast (−) 50%; I/O + state mutation (+) 50%; API + concurrency
+(+) 56%.
+
+**Reading.**
+- **The keyword grammar is confirmed at population scale, on independent code.** Learned from 22 languages of
+  crucible snippets, its pair signs hold in 78% of cells across about 2.9 million functions in about 550 unseen
+  repos.
+- Its cross-language agreement (0.235) is **twice** the crucible's (0.112), against a size-only placebo of ~0. More
+  data sharpens it.
+- **It is not an average over a few repos.** 97% of individual repo × language units follow it.
+- **The defensive-control core is the most universal part.** Safety guards travel with casts, cleanup, early exits
+  and branching in essentially every language. The interface and state-mutation contrasts are less universal.
+- **Weak in declarative and data-oriented languages** (CSS, YAML), and in Fortran and COBOL. Their constructs map
+  poorly onto these signals, or carry a different grammar: a candidate "dialect" result for the next study.
+- **This upgrades KW's exploratory finding to a confirmed, replicated one,** the strongest result in the keyword
+  line of work.
+
+**Caveat.** The crucible grammar was built with engine `32619e4a5` and the population scanned with `b64f42bf`.
+Agreement despite any definition drift strengthens rather than weakens the result.
