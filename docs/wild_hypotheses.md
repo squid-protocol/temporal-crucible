@@ -88,3 +88,18 @@ codebase, in one era.
 - H1 and H2 are each tested at α = 0.01; C1 is a validity gate.
 - Public outputs are aggregates; no per-commit lists.
 - Any deviation is recorded here, dated, before the affected numbers.
+
+## Amendment 1 (2026-11-07, before any WILD statistic was seen)
+
+**The defect.** The scorer's `has a docstring` feature (`habits()`) tested for an `expression_statement` wrapping a
+`string`. In the tree-sitter-python grammar in the engine venv, a docstring is a bare `string` child of the function
+body, so the feature was constant 0.
+
+**How it was found.** In a separate exploratory script on the same day, which showed 0% docstrings in GitGalaxy code.
+
+**What happened to the run.** The first run (scorer `4da929c`) was stopped during its H1 permutations. It had printed
+only progress lines (labelled commits 2,782: Sonnet 2,255, Opus 527; born functions 13,145 from 2,016 commits) and no
+statistic.
+
+**The fix.** The detector now accepts either form. Nothing else changed: same features, tests, bars and seed. The
+scorer is re-run from the start.

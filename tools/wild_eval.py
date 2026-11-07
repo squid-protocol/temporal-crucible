@@ -115,7 +115,7 @@ def habits(n, text_lines):
     doc = 0
     if body is not None and body.children:
         f = body.children[0]
-        doc = int(f.type == "expression_statement" and f.children and f.children[0].type == "string")
+        doc = int(f.type == "string" or (f.type == "expression_statement" and bool(f.children) and f.children[0].type == "string"))
     comments = sum(1 for ln in text_lines if ln.strip().startswith("#"))
     cnt = defaultdict(int)
     depth = 0
