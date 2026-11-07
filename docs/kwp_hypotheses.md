@@ -97,3 +97,34 @@ consensus pairs.
 
 **Caveat.** The crucible grammar was built with engine `32619e4a5` and the population scanned with `b64f42bf`.
 Agreement despite any definition drift strengthens rather than weakens the result.
+
+---
+
+## Exploratory (not registered): keyword anatomy of archetypes, and the fingerprint distribution (`tools/exploratory/arch_anatomy.py`; report `arch_anatomy_exploratory.md`)
+
+**Circularity:** archetypes were clustered on these signal densities. Per-archetype presence follows partly by
+construction; the within-archetype pair grammar is the informative part.
+
+**Structural absences.** Among signals with ≥ 5% overall prevalence, true near-zeros (< 0.1%) are rare:
+- **Parameter Forwarders never contain safety checks, generics or casts.** They are pure pass-through code.
+- **State Mutators never start a class.**
+- Every other archetype contains every common signal at least occasionally. Archetypes differ by *degree*, not by
+  hard exclusion.
+
+**The confirmed pair grammar holds inside 12 of 14 archetypes:**
+- Compute Cores 90%; Parameter Forwarders 89%; Encapsulated Accessors 87%; Generic / Templated and Callbacks /
+  Closures 86%.
+- It is weak only in **C Struct Operations (56%)** and **State Mutators (60%)**, each with few testable pairs.
+- So the grammar is **not an artefact of mixing archetypes**: it holds *within* kinds of function, which is the less
+  circular test.
+
+**Fingerprint distribution** (exact signal-presence signatures over 6.94M functions):
+- **314,979 distinct signatures. Just 205 cover half of all functions; 19,238 cover 90%.**
+- 57% of signatures are singletons, but they hold only 2.6% of functions.
+- Rank–frequency slope **−1.28**: steeper than Zipf (−1), i.e. more concentrated than word frequencies in natural
+  language.
+- The per-line density profile is genuinely **high-dimensional**: 3 components explain only 30%, and the
+  participation ratio is 15.7 effective dimensions out of 20.
+- **Reading:** most code is built from a small vocabulary of a few hundred recurring keyword combinations, plus a
+  long tail of rare ones. The space they live in is not reducible to a handful of axes. That supports a
+  multi-signal fingerprint over a few summary scores.

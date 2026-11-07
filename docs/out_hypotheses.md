@@ -81,3 +81,22 @@ paths.
 **Stage 2.** The blind code-only audit (80 packets) is running.
 
 **OUT-H1 blind labels locked before comparison:** `vz_private/out_audit_labels.json`, sha256 `cd8982df35ec3a797255fa5739743a58d810eb85b427d33d882303ce9a524f27`.
+
+## Results, stage 2 (`score`; report `out.md`)
+
+| claim | result | verdict |
+|---|---|---|
+| **OUT-H1** outliers rarely ordinary hand-written (blind, code-only audit) | ordinary: outliers **22 / 40 = 55%** vs controls **25 / 39 = 64%**; gap 9 points (bar 20); p = 0.28 | **not supported** |
+
+Audit categories:
+- outliers: ordinary 22, **test or fixture 16**, vendored 1, data / declarative 1;
+- controls: ordinary 25, test 12, generated 1, minified 1.
+
+**Reading.**
+- **Grammar outliers are mostly ordinary code.** The audit agrees with H2: their distinctive feature is **test code**,
+  with 16 vs 12 in the audit and test paths 1.5× over stratum expectation.
+- They are not a hidden population of generated, minified or obfuscated code.
+- **The keyword grammar is a tendency, not a rule, so breaking it is common and usually innocent.** A
+  language-agnostic "unnatural code" detector cannot be built from pair-grammar fit alone.
+- The modest test enrichment is plausible: tests set up states that production code avoids, e.g. asserting on
+  failure paths without guards.
