@@ -70,6 +70,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 ### How code lives: natural history and regimes
 
 - **Registered: whether Sonnet- and Opus-written functions in GitGalaxy's own codebase are structurally distinguishable beyond directory and size, or whether the codebase's conventions dominate.** — pending, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-in-the-wild.md)
+- **Gemini-era GitGalaxy functions were long, nested, inline-commented and public; Claude-era ones are short, call-heavy and twice as often private helpers (as in the lab). Functions rarely change shape (88% never; 2.8% of weeks), and when they do it is one signal at a time, mostly growing.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-gitgalaxy-eras-and-lattice-movement.md)
 - **Development regimes leave a structural mark (Gemini-era vs Claude-era AUC 0.877), but the autonomous fleet does not write measurably differently from interactive sessions.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-eras-and-authorship.md)
 
 ### Predicting fixes, regressions and CVEs
