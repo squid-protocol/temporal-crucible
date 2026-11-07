@@ -100,3 +100,52 @@ extrinsic 4,459.
      regressions wherever code was just changed.
    - "Fortifications are tough to get right" fits both: CVEs are defences that fall short over time, regressions are
      defences that a change broke or omitted.
+
+---
+
+## FORT-V and FIXK — registered 2026-11-06, before either ran
+
+### FORT-V: does a CVE fix extend an existing defence, or add a new one?
+
+FORT-H2 was a tight null at the function level. FORT-V asks at the level of the **guarded variable**.
+
+**Units.** FORT's touches where the pre-fix body has ≥ 1 guard clause **and** the fix adds a **new** guard: a
+post-fix guard whose whitespace-normalised condition text is not among the pre-fix guard conditions.
+
+**Identifiers of a guard.** The tree-sitter `identifier` and `field_identifier` nodes in its condition, excluding
+ALL-CAPS tokens (macros and constants) and `NULL`.
+
+**Extension.** A new guard is an extension if its identifiers intersect the union of the pre-fix guards'
+identifiers. A touch is "extending" if any of its new guards is.
+
+| id | claim | supported iff |
+|---|---|---|
+| **FORTV-H1** | CVE fixes **extend** existing defences more than ordinary fixes (incompleteness) | MH RR of P(extending), latent vs other-fix, strata repo × loc bin: lo > 1. **Exposure** if hi < 1; else inconclusive. 99.67% commit-cluster bootstrap |
+
+Regression vs other-fix is descriptive.
+
+### FIXK: which structural elements does each fix class add or remove?
+
+**Units.** Fix commits (XC classes, as FORT).
+- Patch text = the added and removed lines of `git diff -U0 <sha>^ <sha>` in C/C++ files outside `tests/`, `docs/`,
+  `.github/` and `scripts/` (`hunk_grammar.py`'s rule).
+- Commits with no kept file are dropped.
+
+**Rules.** The **engine's own** C rules (`LANGUAGE_DEFINITIONS["c"]["rules"]`, pinned checkout `32619e4a5`): every
+named rule except the private `_…` keys, 54 in all. Counts are regex `findall` on the added text and on the removed
+text.
+- **Gains rule k:** added − removed ≥ 1.
+- **Loses rule k:** removed − added ≥ 1.
+
+**Comparison.** Each class (latent, regression, extrinsic) against other-fix.
+- Cochran–Mantel–Haenszel test and MH RR, stratified by repo × patch size (log₁₀ of changed lines, 0.25-wide bins).
+- **Benjamini–Hochberg** over the 54 rules × {gain, loss} within each class.
+- A class's **change signature** = rules with BH q < 0.01 **and** RR ≥ 1.25 or ≤ 0.80.
+
+| id | claim | supported iff |
+|---|---|---|
+| **FIXK-H1** | CVE fixes have structural changes **beyond** the known defensive ones | the latent signature contains ≥ 1 rule outside {branch, safety, panics_and_aborts, cleanup} |
+| **FIXK-H2** | regression fixes have a signature | the regression signature is non-empty |
+| **FIXK-H3** | CVE and regression signatures **differ** | Jaccard(latent signature, regression signature) < 0.5, with both non-empty |
+
+**Descriptive.** The full gain and loss RR table per class; extrinsic's signature.
