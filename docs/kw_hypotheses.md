@@ -177,3 +177,47 @@ at every setting.
 2. Measure grammar at the **file level**, on composition shares of signals or of function archetypes, where
    compositional methods are well posed.
 3. Keep both placebos binding.
+
+### Exploratory: yes/no presence with a continuous size model (after KW and KW-R; `tools/exploratory/kw_presence_oe.py`)
+
+**Method.**
+- Presence per function (yes/no).
+- Per language and signal, a logistic model of presence on log loc (plus its square).
+- Pair association = log(observed co-presence ÷ the co-presence expected if the two signals were independent given
+  each function's size).
+
+**The method passes its size check:**
+
+| | cross-language r |
+|---|---:|
+| real | **0.112** |
+| size-only placebo | **0.003** (deciles 0.242, ratios 0.221) |
+| shuffle null, 99.5th percentile | 0.029 |
+| real, without `struct_branch` | 0.110 |
+
+**A modest shared grammar, and it is not branch-driven.** Pairs that occur together more than size predicts (median
+over languages; share of languages agreeing):
+
+| together more | × size-expected | agreement |
+|---|---:|---:|
+| concurrency + early exit (bailout) | 1.73 | 83% |
+| cleanup + safety guard | 1.22 | **91%** |
+| safety guard + early exit | 1.18 | 88% |
+| negative-safety state + cleanup / comprehensions / closures | 1.26–1.31 | 73–82% |
+| API + concurrency | 1.33 | 75% |
+
+| together less | × size-expected | agreement |
+|---|---:|---:|
+| concurrency × casts | 0.71 | 83% |
+| early exit × state mutation | 0.90 | 88% |
+| API × branch | 0.92 | 87% |
+| API × casts | 0.91 | 83% |
+
+**Reading.**
+- The same structure appears under three differently built analyses (decile-placebo residual, this model; and partly
+  under ratios). The cleanest version is a **"defensive control" cluster**: guards, early exits, cleanup and
+  concurrency, kept apart from interface (API) code and from state-mutation code.
+- **Effects are modest** (×0.7 to ×1.7). This is a grammar of tendencies, not rules.
+
+**Confirmation plan.** Register this measure, with these pairs as signed directional predictions, on the population
+scan, both at function level and at file level. Size placebo and shuffle null are binding.
