@@ -54,6 +54,17 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
   constructs.
 - Several rule leaks are fixed (gitgalaxy#8024). Kernel and Windows vocabulary gaps are open (gitgalaxy#8016).
 
+**6. AI models leave a structural handwriting, until a shared codebase launders it.** *Exploratory, plus registered GG / FLT / WILD.*
+- **Lab:** two independent lenses find each model in the lab 83–84% of the time; Sonnet vs Haiku is as separable as
+  Claude vs Codex.
+- **GitGalaxy:** the eras separate at AUC 0.88.
+- **Habits that repeat between settings:** private helpers, small call-heavy functions, cleaner grammar, no trivial
+  functions.
+- **Inside one codebase and era (WILD, registered):** Sonnet vs Opus functions are barely distinguishable (AUC 0.57,
+  within the commit-permutation null), as FLT found.
+- **Next test:** fresh whole programs (round 3). Synthesis:
+  [journal](journal/2026-11-07-model-handwriting-synthesis.md).
+
 **Corrections to keep in mind when quoting older summaries:** see [`SYNTHESIS_2026-11-06.md`](SYNTHESIS_2026-11-06.md) § 3
 (LIB's outcome is library-named work, SRCH refuted the searcher-age story, CHG's 2.9× was mostly churn, and others).
 
@@ -63,29 +74,53 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Identity, copies and provenance
 
+- **A project's keyword mix (95.9%) and its sfs structural fingerprint (99.0%) identify it across eras five or more years apart, and its mix changes in spurts at architecture events; but turnover does not track regressions, and whether coupling centralises with age is project-specific.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-project-identity-fingerprints.md)
 - **Code-reading patch checks work for libraries whose security fixes are surgical (zlib: 0 of 1,229 wrong, 30/30 on modified copies) and fail for refactoring-fix libraries (expat).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-patch-status-by-reading-code.md)
 - **A layered fingerprint (call set + control-flow skeleton + profile) finds copies the coarse one misses: fork copies 46% to 80%, C to C++ BoringSSL 29% to 94%, vendored zlib 91%.** — supported, 2026-11-06 · [journal](journal/2026-11-06-finding-copies-of-code.md)
 
 ### Where the outside world touches code
 
 - **Files that call a library's API receive the work that names that library (replicated, +0.44 over size), and platform conditionals mark where extrinsic fixes land.** — replicated, 2026-11-06 · [journal](journal/2026-11-06-library-and-platform-coupling.md)
+- **Extrinsic (platform, compiler, dependency) work is bursty, but the bursts are not timed to GCC or Clang major releases (share change +0.002 and +0.009, with a placebo just as large); only where extrinsic work lands is predictable, not when.** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-compiler-release-bursts.md)
 
 ### How code lives: natural history and regimes
 
+- **Models have a strong structural handwriting when they write whole programs alone (83–84% identification in the lab, independent lenses agree; eras of a codebase separate at AUC 0.88), but inside one shared codebase it nearly vanishes (WILD: AUC 0.57, within chance): conventions launder it.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-synthesis.md)
+- **Inside GitGalaxy's shared codebase, Sonnet- and Opus-written functions are barely distinguishable (AUC 0.57, inside the commit-permutation null): the lab's strong model handwriting mostly vanishes under a codebase's conventions.** — not-supported, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-in-the-wild.md)
+- **Gemini-era GitGalaxy functions were long, nested, inline-commented and public; Claude-era ones are short, call-heavy and twice as often private helpers (as in the lab). Functions rarely change shape (88% never; 2.8% of weeks), and when they do it is one signal at a time, mostly growing.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-gitgalaxy-eras-and-lattice-movement.md)
 - **Development regimes leave a structural mark (Gemini-era vs Claude-era AUC 0.877), but the autonomous fleet does not write measurably differently from interactive sessions.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-eras-and-authorship.md)
+- **No fix class has a pooled age signature, and the exploratory idea that the searcher (fuzzer vs human) sets CVE age was refuted on unseen repos; descriptively, CVE fixes mostly change code 2.1–3.7× older than ordinary commits, whoever finds them.** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-cve-age-and-who-finds-it.md)
+- **Code has a natural history: young functions die 2.9× faster than mid-aged ones, shape change slows to 0.46× with age, 88% of edited functions keep their archetype, and include hubs are stable and grow sub-linearly, but hubs change more than other files, not less.** — supported, 2026-11-06 · [journal](journal/2026-11-06-codebase-natural-history.md)
 
 ### Predicting fixes, regressions and CVEs
 
+- **Of the engine's newer metrics, the screen's leads were almost all leftover size; the one survivor is amplified_cascading_flux (state writes inside branches), which beats size on nDPI and openssl but not curl, so it needs its own test on an unseen repo (AMP-H1).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-untested-engine-metrics-screen.md)
+- **Of 225 GitGalaxy file-metric forms, only platform-conditional density per line finds one fix class (extrinsic) at equal size on unseen repos (+0.154 harfbuzz, +0.102 libarchive); no metric finds CVEs beyond size, and the churn candidates for regressions and other fixes failed holdout.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-the-225-metric-screen.md)
 - **To find unannounced security fixes, history (where past CVE fixes and fix activity were) beats the change signature: AUC 0.720, top-10% enrichment 2.93×.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-silent-patches.md)
+- **Files that call input APIs or handle raw byte buffers with a length lose to size at finding CVE fixes on curl, openssl and harfbuzz (pooled −0.092 and −0.054); only nDPI, with its fuzzer-found parser CVEs, is positive.** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-input-facing-code.md)
+- **Files containing goto get security fixes more often at equal size (1.59 on nDPI + openssl, 2.80 on five unseen repos), but the goto-to-lifetime-fault link (7.1×) did not replicate: goto is a general security-risk marker, not a fault-type fingerprint.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-goto-macros-and-fault-types.md)
+- **Code that OSS-Fuzz has just started reaching does not carry the next CVE fixes beyond size: directional only on nDPI, where fuzz coverage is about 96% saturated, and worse than size on curl (−0.195).** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-fuzz-frontier.md)
 - **CVE fixes add guard clauses 1.88× as often as ordinary fixes, and the three fix kinds have distinct keyword signatures: CVE = branch + pointers + `#define`; regression = new functions, globals, state; extrinsic = macros, asm, imports.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-fortification-and-fix-signatures.md)
+- **Fix classes have distinct histories (CVEs recur in place, extrinsic fixes recur on an environment-facing set of files, regressions follow general fix activity and never recur in place), but no snapshot metric sees the class.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-fix-classes-have-different-histories.md)
 - **Functions born with more defensive code get CVE fixes at the same rate as others (whole-life rate ratio 0.96, a fairly tight null).** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-defensive-code-at-birth.md)
+- **A commit that skips files that usually change with the ones it touches is not more often regression-inducing once commit size is controlled (−0.012), and omission is equivalent to merely touching well-coupled files; commit size stays the best predictor.** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-co-change-omission.md)
 - **Shape change looked like a 2.9× regression signal, but it is edit size: engine change features lower churn's recall (41.3% to 38.7%).** — not-supported, 2026-11-06 · [journal](journal/2026-11-06-change-shape-vs-regressions.md)
+- **Scored by AUC, the engine's own history columns lose to file size on nDPI and function memory loses to function size, but scored per line reviewed on unseen openssl, prior security fixes (recall@20 0.451 vs 0.271) and change entropy beat both size orders.** — mixed, 2026-11-05 · [journal](journal/2026-11-05-history-forward-and-effort-aware.md)
+- **Files with function-like macros or goto get security fixes about twice as often as files of the same size (2.03 nDPI, 2.33 openssl; replicated), though as a ranking this does not beat size; mid-size-file centrality fails on unseen repos and is closed as a lead.** — mixed, 2026-10-23 · [journal](journal/2026-10-23-centrality-and-dynamism.md)
+- **On 957 fresh curl bug-label events, change entropy (HCM1_LD_30, frozen from the CVE selection) beat a line count out of selection (AUC 0.868 vs 0.830), while small-file centrality died (PageRank inverted, AUC 0.259) and the monotone lift shape failed in 5,000 of 5,000 bootstraps.** — mixed, 2026-09-13 · [journal](journal/2026-09-13-bug-label-expansion.md)
+- **The file that had the last security fix is where the next one lands: prior-fix count beats both structural exposure and a line count at a 20%-of-lines review budget on curl and nDPI (p<1e-4), while structural exposure ties a line count.** — replicated, 2026-09-12 · [journal](journal/2026-09-12-recidivism-and-review-budget.md)
+- **On nDPI, recidivism replicated and every structural null held (equivalence-confirmed), but every structural positive from curl (safety_score, the fix grammar, the fix-shaped signature, danger density) failed; the one surviving structure signal for the first CVE was centrality, the hot-files axis.** — mixed, 2026-09-12 · [journal](journal/2026-09-12-ndpi-replication-battery.md)
+- **On curl's held-out later CVEs, the memory-danger and IO vectors do not beat a line count for their own CWE families, and the vectors are not specific (the memory set ranks highest even for info leaks); cert/auth vocabulary is dead on C and concurrency was untestable.** — not-supported, 2026-09-12 · [journal](journal/2026-09-12-mechanism-specificity.md)
+- **curl's security fixes have a recognisable shape (branch and pointer additions without new allocations) that is not a fix-size artifact, but it does not travel to nDPI's fuzzer-found fixes at any size floor; reverts read as net removal, a clean instrument check.** — mixed, 2026-09-12 · [journal](journal/2026-09-12-fix-shape-and-fix-grammar.md)
 - **History predicts fixes (recidivism, change entropy); per-file structural scores reduce to file size.** — not-supported, 2026-09-12 · [journal](journal/2026-09-12-first-validation-program.md)
+- **On curl, security fixes do not lower aggregate structural exposure (p=0.77) and introducing commits do not raise it; only the safety_score vector moved its assumed way (p=0.0072, curl only), and the function-level guard-deficit and danger-density ideas did not hold.** — mixed, 2026-09-12 · [journal](journal/2026-09-12-curl-exposure-deltas-and-signal-anatomy.md)
+- **Among 36 change-entropy (Hassan HCM) variants, none clears the size wall in 3 of 4 LOC bands; the best, HCM1_LD_30, beat a line count only as a discounted best-of-36 result; small-file centrality could not be evaluated on CVE labels (1 and 4 positives).** — inconclusive, 2026-09-12 · [journal](journal/2026-09-12-change-entropy-and-centrality-bands.md)
 
 ### The keyword grammar of functions
 
 - **The crucible's keyword grammar holds across 2.9M functions in 22 languages and inside 97% of individual repos, well beyond size (r 0.235 vs size placebo −0.006).** — replicated, 2026-11-07 · [journal](journal/2026-11-07-keyword-grammar-at-population-scale.md)
 - **Functions that break the grammar are mostly ordinary code (55% vs 64% for controls). They concentrate in test directories, but a "weirdness detector" would not find interesting code.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-grammar-outliers.md)
+- **The rules code follows are pairwise. Of 2,791 three-signal combinations, only one is avoided beyond what its pairs explain, and it is not universal; the lattice's missing middle is pair constraints (role conflicts, paired constructs) multiplied out.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-constrained-middle.md)
 - **A keyword grammar exists beyond size in the curated crucible (32 consensus pairs, signs hold in 69% of C-repo pairs), but breaking it does not mark CVE-prone code.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-keyword-grammar-in-the-crucible.md)
 
 ### Function fingerprints and the shape lattice
@@ -93,6 +128,8 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 - **Fix kinds sit in different shape families beyond size, modestly (V 0.07; regression fixes hit simpler, lower-rung functions), but lattice moves add nothing to regression prediction beyond churn; 71% of functions never change shape.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-lattice-fix-families-and-moves.md)
 - **Code is built from a few hundred keyword combinations plus a long tail. The commonest are tiny universal "bricks" (one-step, public one-step, public setter) and C dialect shapes (driver functions, static pointer helpers) concentrated in a few OS repos.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-function-fingerprints-and-archetypes.md)
 - **Common shapes grow one keyword family at a time (196 of 199 tree edges), and real code builds about half the mid-size shapes chance would: role conflicts are the holes, paired constructs the attractions.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-fingerprint-lattice.md)
+- **AI coding agents skip the tiny "brick" functions humans write (0% bare one-step vs 5–8%), the Claude models write far more private helpers, Codex fits the human grammar worst, and a program's lattice family mix alone identifies its model 84% of the time (chance 28%).** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-agent-code-on-the-lattice.md)
+- **Archetype labels are deterministic and track how much code changes (about 98% kept under small edits), but neither the label nor how atypical a file is for its label finds fixes beyond file size on curl, nDPI or openssl.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-archetypes-stable-not-useful.md)
 
 ### What comments say
 
