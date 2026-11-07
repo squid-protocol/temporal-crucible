@@ -40,3 +40,34 @@ vulnerabilities later show up there? In other words, did they correctly sense da
 
 - **H1 leaning "right"** (GR, KF-R).
 - **H2 uncertain.** Defensive code may just be more complex, busier code.
+
+---
+
+## Results — 2026-11-06 (scorer `a40747d`; report `int.md`)
+
+**Data.** 37,541 functions born with a full two-year follow-up: curl 6,219, OpenSSL 24,084, nDPI 1,873, harfbuzz
+5,365. 9,111 in the high third, 5,774 in the low third.
+
+| claim | result | verdict |
+|---|---|---|
+| **INT-H1** defensive-at-birth → CVE fix within 2 years | RR **0.97** [0.46, 1.72]; 52 vs 54 events | **not supported**: inconclusive, the interval spans both answers |
+| **INT-H2** specific to CVEs | ratio 0.99 (lo 0.46) | **not supported** |
+
+**Descriptive.**
+- Per repo: OpenSSL 1.45, harfbuzz 2.86 (14 vs 2 events), curl 0.88, nDPI 0.52.
+- Any defence vs none: 0.69.
+- Regression 0.68; extrinsic 1.29.
+
+**Reading.**
+- **The question is not answered: the test is underpowered.**
+  - Only 106 CVE fixes hit any function within two years of its birth.
+  - CVE fixes overwhelmingly change *old* code: SRCH found them 2–4× older than ordinary commits.
+  - So a two-year window after birth misses most vulnerabilities. They surface years later.
+- That is itself a finding that bears on "were the authors right": **if authors sensed danger, the payoff, or the
+  vulnerability, shows up years after the code is written, not in its first two years.**
+- **The right design** is survival analysis over each function's whole observed life:
+  - Cox-style hazard of a first CVE fix vs defence at birth;
+  - the same strata;
+  - functions censored at death or at the end of the labels.
+
+  That needs a fresh registration.
