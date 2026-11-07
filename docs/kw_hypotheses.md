@@ -62,3 +62,13 @@
 - **H1 likely**: shared programming idioms such as allocation with cleanup, and guards with error handling.
 - **H2 likely, smaller.**
 - **H3 uncertain**: clustering is sensitive to the signal set, and k = 6 is a convention.
+
+**Pre-run clarification (2026-11-06; no statistic on the crucible computed yet).** A synthetic check found that
+size-only signals keep a small residual association within loc deciles: about +0.03 on average, but noisy. A
+residual shared by every language could mimic a "shared grammar".
+
+**Added size-only placebo, binding for H1 and H2:**
+- Per language, simulate 20 datasets in which each used signal is drawn independently, with probability equal to its
+  prevalence in the function's fine loc bin (50 quantile bins).
+- Compute the same mean cross-language r on each.
+- H1 and H2 now **also** require: observed − mean placebo r ≥ 0.10.
