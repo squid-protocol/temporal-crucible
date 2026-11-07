@@ -56,3 +56,26 @@ Reported both overall and split into vendored / generated / test.
 
 - **H2 likely.**
 - **H1 likely,** but "unnatural" hand-written code (heavy macros, odd styles) may dilute it.
+
+---
+
+## Results, stage 1 (`prepare`, scorer `34f21c3`; report `out_prepare.md`)
+
+**Data.** 6,936,799 functions read; 6,549,411 in strata with ≥ 1,000 functions; **4,288 outliers**. The grammar fit
+is discrete with many ties, so the rank-based bottom 0.1% holds fewer than 0.1% of functions.
+
+| claim | result | verdict |
+|---|---|---|
+| **OUT-H2** outliers concentrate in vendored/generated/test paths | flagged 35.4% vs stratum-expected 23.4%: **1.51×** (lo 1.42) | **SUPPORTED** (just over the 1.5 bar) |
+
+**What the enrichment is.** Almost entirely **test** paths: 34.9% of outliers, against 0.4% in vendored or generated
+paths.
+
+**Descriptive.**
+- Outliers by language: C 1,118, C++ 600, Python 422, Java 355, C# 351.
+- Repos with the most outliers: dotnet runtime 467, FreeBSD 347, illumos 219, Kotlin 156.
+- **The engine threat-signal columns read 0 for every function** (outliers and all), so the overlap check is
+  uninformative. Those `threat_*` function columns appear to be unpopulated in this DB: an engine or DB observation to
+  check, not an OUT result.
+
+**Stage 2.** The blind code-only audit (80 packets) is running.
