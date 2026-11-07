@@ -207,3 +207,25 @@ labels come from `events/<repo>.json`.
 
 **Power caveat (fixed now).** These repos carry 84 security-fix commits in total, so DCR-H1 may be not evaluable.
 That outcome will be reported as such, not as a failure to replicate.
+
+### DC-R result — 2026-11-06 (scorer `dca8606`; report `dcr.md`)
+
+**Data.** 7,423 commented births across the five unseen repos; 1,180 (16%) danger-commented.
+
+| claim | result | verdict |
+|---|---|---|
+| **DCR-H1** danger-commented → first-CVE rate (unseen repos) | **1.13** [0.48, 3.08] (99%); events 17 / 58 (evaluable) | **not supported**: inconclusive, the interval contains both 1 and DC-2's 1.45 |
+
+**Per repo:**
+- libxml2 0.88 (12 / 49 events): the bulk of the data;
+- `file` 1.81 (3 / 7);
+- libtiff, libexif, libpng have 0–3 events each and are not interpretable.
+
+**Descriptive.** Inverse-variance pooled with DC-2: **1.42**.
+
+**Reading.**
+- The replication has too little CVE data to confirm or refute DC-2: 75 events, 61 of them from libxml2.
+- **It does not contradict DC-2.** The estimate leans positive, and pooling barely moves 1.45.
+- **DC-H1 therefore stands as a single-study result** (four repos, every one positive), not yet replicated.
+- Stronger replication needs more labelled CVEs, e.g. OSV-linked fix commits for libtiff and libpng, whose label
+  files here hold only 2 and 1.
