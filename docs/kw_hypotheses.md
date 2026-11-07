@@ -118,3 +118,35 @@ concurrency joins it), kept apart from two other roles: **interface code** (API 
   modules above, as directional predictions) on the **population scan** the owner proposed: local repos rescanned with
   the current engine into `gitgalaxy_raw_output`.
 - A finer size control, such as per-line densities or exact-loc matching, belongs in the design from the start.
+
+---
+
+## KW-R — method check: stoichiometric (compositional log-ratio) co-occurrence — registered 2026-11-06, before KW-R ran
+
+**Why.** KW's decile stratification leaked size: a size-only placebo produced *more* cross-language agreement than
+real code. Population-analyses' file-composition "stoichiometry" uses **shares**, which are size-free. KW-R applies
+that idea to signals: compare signals by their **ratios** within each function, so a function that is twice as big
+with twice of everything looks identical.
+
+**This is a method check on the same crucible scan, not a confirmation.** The crucible's beyond-size pairs were seen
+in KW's exploratory step. Confirmation belongs on a fresh population scan.
+
+**Measure.**
+- Per language (KW's languages and used signals), keep functions whose total count over the used signals is ≥ 3.
+- **Per-function centred log-ratios:** clr_s = log(c_s + 0.5) − the mean over used signals of log(c + 0.5).
+- **Pair association = proportionality** ρ_ij = 1 − var(clr_i − clr_j) / (var(clr_i) + var(clr_j)), across that
+  language's functions.
+- **Cross-language agreement:** the mean Pearson r over language pairs of their ρ vectors on shared pairs, as KW.
+
+**Size-only placebo.**
+- Per language, 20 simulated datasets with counts c_s ~ Poisson(λ_s · loc), where λ_s is the language's per-line
+  rate of signal s.
+- Signals are therefore independent and scale only with size.
+- The same filter and statistic are applied.
+
+| id | claim | supported iff |
+|---|---|---|
+| **KWR-H1** | **the ratio method removes size** | placebo mean cross-language r ≤ 0.05 |
+| **KWR-H2** | grammar remains under ratios | real mean r > label-shuffle null 99.5th percentile (2,000) **and** real − placebo ≥ 0.10 |
+
+**Sensitivity (descriptive):** pseudocounts 0.1 and 1.0; the top universal ρ pairs.
