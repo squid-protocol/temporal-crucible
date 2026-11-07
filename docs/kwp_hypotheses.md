@@ -157,3 +157,18 @@ The top 5 exact signal-presence signatures cover 8.9% of 6.94M functions. They f
 - So the vocabulary has a **universal core** (bricks) plus **ecosystem idioms**.
 - **Measurement note:** shape #1 also captures functions that only return a big string or template (`infoPlist` in
   Go) and COM `E_NOTIMPL` stubs. The signal set sees no branch or call structure there, so they look "linear".
+
+### Correction: what two signal names actually mean (2026-11-07; from `record_keeper.py`'s rule → column map, engine `b64f42bf`)
+
+| column | engine rule | what it actually counts | earlier (wrong) description in this program |
+|---|---|---|---|
+| `struct_linear` | `structural_boundaries` | structural **keywords**: `return`, `def`, `function`, `void`, `export`, `class`, `break`, `continue`… (per language) | "linear / straight-line code" |
+| `state_safety_neg` | `safety_bypasses` | constructs that **bypass** safety (per-language rule) | "negative safety checks (e.g. `!ptr`)" |
+
+- The **statistics are unaffected**: the signals are the same. Only the plain-language readings change.
+- Read "concurrency + linear code" as "concurrency + structural keywords".
+- Read pairs with "negative-safety" as "safety-bypass constructs".
+- Also confirmed: `arch_api` = the **public / exported** surface. Python: a `def` / `class` whose name does not start
+  with `_`. TypeScript: `export` / `public`. Java: `public` / `protected`. C: a non-static function definition.
+- Fingerprint #1 is therefore "a function with arguments and a structural keyword (usually `return`), and nothing
+  else". #2 adds "and it is public".
