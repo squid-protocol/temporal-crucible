@@ -94,8 +94,10 @@ def comment_task(t):
 
 def main() -> int:
     gate = (DOCS_DIR / "cmt_gate.md").read_text()
-    if "CMT-G PASS" not in gate:
-        print("CMT-G did not pass: DC stops (registered).")
+    # DC-2: the gate is scoped to C and C++ (each P and R >= 90%), the languages DC uses
+    m = re.search(r"C: P ([\d.]+)% / R ([\d.]+)%; C\+\+: P ([\d.]+)% / R ([\d.]+)%", gate)
+    if not m or min(float(x) for x in m.groups()) < 90.0:
+        print("DC-2 C/C++ gate did not pass: stops (registered).")
         return 1
     t0 = time.time()
     ev, last = [], {}
@@ -180,7 +182,7 @@ def main() -> int:
     ec = np.array([1.0 if u[4] >= 1 else 0.0 for u in U])
     stc = np.array([f"{u[0]}|{u[2]}|{u[3]}" for u in U])
     evc, ptc = evpt("latent", U)
-    L = ["# DC-H1..H2 — danger comments at birth vs whole-life first CVE fix (SCORED)", "",
+    L = ["# DC-2 (DC-H1..H2) — danger comments at birth vs whole-life first CVE fix (SCORED)", "",
          f"- births with comment info {len(U):,}; with ≥ 1 comment line {len(Uc):,}; danger-commented {int(e.sum()):,} ({e.mean():.0%} of commented)", "",
          "| claim | result | verdict |", "|---|---|---|",
          f"| **DC-H1** danger-commented vs plain-commented → first CVE fix rate | rate ratio **{rr['latent']:.2f}** [{lo1:.2f}, {hi1:.2f}]; first-CVE events {int((EV['latent'][0] * e).sum())} / {int((EV['latent'][0] * (1 - e)).sum())} | **{v1}** |",

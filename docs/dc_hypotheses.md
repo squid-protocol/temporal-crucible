@@ -94,3 +94,13 @@ file now runs in its own child process, **killed** after 60 seconds. Timed-out f
 
 **DC did not run** (registered rule). The C and C++ split that DC would use is accurate (98–100%). A DC run would
 need a new registration whose gate is scoped to the languages it uses.
+
+---
+
+## DC-2 — registered 2026-11-06 (owner approved), after CMT-G failed and before any DC outcome was computed
+
+- **Gate scope:** **C and C++ only.** These are the only languages DC's four repos use. CMT-G's measured C (P 99.9%,
+  R 98.0%) and C++ (P 100%, R 99.4%) pass the 90% bar. CMT-G's pooled failure (COBOL) is recorded above and stands.
+- **Everything else is DC's registration verbatim:** lexicon, exposure, strata, claims DC-H1 / DC-H2, α, bootstrap.
+- This is a new registration, made because the original gate covered languages DC does not use. No DC statistic
+  had been computed.
