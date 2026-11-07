@@ -1,0 +1,63 @@
+# CMT-G and DC — is the engine's comment stream accurate, and do functions whose comments express danger at birth get more CVE fixes over their life? — registered 2026-11-06, before either ran
+
+**Why.**
+- GitGalaxy's `Prism.split_streams` separates every file into a code stream and a comment stream, AST-free, across
+  50+ languages.
+- INT-S found that *defensive code* at birth (guard keywords) neither predicts nor prevents later CVEs (rate ratio
+  0.96).
+- Its caveat: authors may express a sense of danger in **comments** instead ("caller must…", "assumes…", "not
+  thread-safe").
+- DC tests that, after a gate checks the comment stream itself.
+
+## CMT-G — comment-stream gate (binding for DC)
+
+- **Corpus:** the language-crucible export (`kw_scan`, `757545ba6fd6`), with the engine language per file from that
+  scan.
+- **Engine comment lines:** the lines that are non-blank in `Prism.split_positional_comment_stream(content, lang)`
+  (engine `32619e4a5`, `LEXICAL_FAMILY_HEURISTICS` plus `LANGUAGE_DEFINITIONS`).
+- **Reference:** lines spanned by any tree-sitter node whose type contains `comment`, using
+  `tree_sitter_language_pack`, for languages whose grammar loads.
+- **Metric:** line-level precision and recall per language, and pooled over languages with ≥ 200 reference comment
+  lines.
+- **Pass:** pooled precision and recall ≥ 0.90, **and** C and C++ each ≥ 0.90 (the DC repos). Otherwise DC stops.
+
+## DC — danger comments at birth vs later CVE fixes
+
+**Data.** INT-S's: curl, OpenSSL, nDPI and harfbuzz; functions born after the first snapshot with loc ≥ 3;
+whole-life follow-up from birth to the first event, death or the end of labels; identity-resolved fix hits.
+
+**A function's comments at birth.** At the birth snapshot's file version, the engine comment lines (CMT-G's) that
+fall either:
+- **inside** the function's tree-sitter span (matched by name); or
+- in the **contiguous comment block directly above** its first line (at most one blank line between).
+
+**Danger lexicon (fixed now; case-insensitive, word-bounded):** must not, must be, caller(s) must, caller is
+responsible, assume / assumes / assumed / assuming / assumption(s), unsafe, not safe, not thread-safe,
+thread-unsafe, careful(ly), beware, warning, danger(ous), untrusted, trust / trusted / trusts, validate / validated /
+validates / validation, sanitiz…, overflow, underflow, bound(s), out of range, null-terminat…, do not,
+never call / use / pass, undefined behaviour / behavior, race, reentran…, security, attacker, malicious, exploit…,
+vulnerab…, XXX.
+
+**Exposure.** Among functions with **≥ 1 comment line** at birth: **danger-commented** (≥ 1 lexicon match) vs
+**commented without danger words**. Functions with no comments are excluded, so the contrast is about *what* the
+comment says, not whether one exists.
+
+**Strata.** INT-S's: repo × log₁₀ loc bin × file had a CVE fix before birth.
+
+| id | claim | supported iff (α = 0.01/2; MH rate ratio of first-event rates; file-cluster bootstrap, 2,000) |
+|---|---|---|
+| **DC-H1** | danger-commented functions reach a CVE fix at a higher rate ("the authors' words were right") | rate ratio > 1, lo > 1. Reversed if < 1, hi < 1 |
+| **DC-H2** | …specifically CVEs | RR_latent ÷ RR_other-fix > 1, lo > 1 |
+
+**Descriptive.**
+- Danger-word prevalence.
+- Per-repo RRs.
+- Regression and extrinsic RRs.
+- The most frequent matched words among CVE-hit functions.
+- Commented vs uncommented functions (a separate contrast).
+
+## Priors
+
+- **CMT-G likely to pass** for C and C++ (the engine's golden-tested languages).
+- **DC-H1 uncertain:** a direct test of "did the authors sense danger".
+- **DC-H2 uncertain.**
