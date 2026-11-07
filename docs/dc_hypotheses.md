@@ -157,3 +157,53 @@ danger language.
   moment code is written. That is useful where no fix history exists, such as new code and legacy estates without
   version control.
 - **Caveats:** C/C++ repos only; a fixed English lexicon; association, not cause.
+
+---
+
+## CFIX and DC-R — registered 2026-11-06, before either ran
+
+### CFIX: do CVE fixes add danger-language *comments*, and does that find silent patches?
+
+**Units.** SILENT's fix commits: curl, OpenSSL, nDPI, harfbuzz; latent and other-fix; kept C/C++ files.
+
+**Comment change of a commit.**
+- For each kept file, take the engine comment lines (CMT-G's `split_positional_comment_stream`, C/C++ validated) of
+  the parent and post-fix versions, whitespace-normalised, ≥ 3 characters.
+- **Added comment lines** = post-fix lines not in the parent's set. **Removed** = the reverse.
+- DC's danger lexicon is applied to the added lines.
+
+**Features.**
+- adds-comment (≥ 1 added line);
+- adds-danger (≥ 1 lexicon match in added lines);
+- log1p(added comment lines);
+- log1p(danger matches added).
+
+| id | claim | supported iff (α = 0.01/2) |
+|---|---|---|
+| **CF-H1** | CVE fixes add danger-language comments more than ordinary fixes | MH RR of adds-danger, latent vs other-fix, strata repo × patch-size bin (log₁₀ changed lines, 0.25): lo > 1 (2,000-round commit bootstrap) |
+| **CF-H2** | comment changes improve silent-patch detection beyond location | WH's design: LORO, silent positives vs ordinary negatives. AUC(WHERE + comment features) − AUC(WHERE) > 0, paired commit bootstrap lo > 0 |
+
+**Descriptive.** The same for comments that add without danger words; the top-10% enrichment of WHERE + comments.
+
+### DC-R: danger comments replicated on unseen repos (git + tree-sitter only)
+
+**Repos.** libxml2, libexif, `file`, libtiff, libpng: pool clones at their KF-R pool heads. Their CVE (security-fix)
+labels come from `events/<repo>.json`.
+
+**Reconstruction, no engine DBs.**
+- **Quarterly snapshots:** the last first-parent commit before each quarter boundary, first to last.
+- **Functions:** tree-sitter C `function_definition` (file, name, span) in `.c` files outside `test`/`fuzz`
+  directories, with CHG's identity and move rule.
+- **Loc:** span lines.
+- **Comments at birth:** as DC, from the engine's C comment stream on the birth-snapshot file.
+- **Lexicon, exposure, strata, whole-life MH rate ratio, file-cluster bootstrap:** as DC.
+- **CVE hits:** CHG's tree-sitter fix mapping of each security-fix commit, resolved to identities.
+
+| id | claim | supported iff |
+|---|---|---|
+| **DCR-H1** | danger-commented functions reach a CVE fix at a higher rate (replication of DC-H1) | rate ratio > 1, lo > 1 at α = 0.01; **not evaluable** if either side has < 15 first-CVE events |
+
+**Descriptive.** Per-repo estimates, and DC + DC-R pooled (inverse-variance on log RR).
+
+**Power caveat (fixed now).** These repos carry 84 security-fix commits in total, so DCR-H1 may be not evaluable.
+That outcome will be reported as such, not as a failure to replicate.
