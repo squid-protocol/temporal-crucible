@@ -16,3 +16,19 @@ The ACC-3 run was killed by the kernel's out-of-memory handler (the scorer held 
 includes every dependency edge; 25 GB). No Go statistic was computed. ACC-3b changes only the plumbing: `callgraph`
 output is streamed and lines whose caller and callee are both outside the repo are dropped as they arrive, under a
 12 GB memory cap. Design, bars and gate are unchanged. If this run fails, Go is descriptive in LAWS; no further retry.
+
+## Result (ACC-3b run, 2026-11-09 00:03)
+
+| repo | precision | recall (direct) | in-degree ρ | hub Jaccard | coupling κ |
+|---|---:|---:|---:|---:|---:|
+| prometheus (Go) | 0.61 | 0.81 | 0.71 | 0.27 | 0.82 |
+
+- 3,984 functions matched; agreeing edges are resolved mostly by file (3,002), import (1,282), unique name (857)
+  and receiver (506).
+- **ACC3-H1 ✗, ACC3-H3 ✗, gate ✗.**
+- **Caveat:** `-algo=cha` added no edges beyond `-algo=static` after the in-repo filter. That is implausible for Go
+  interfaces, so engine edges to interface implementations may be scored as false positives; precision is likely
+  understated. The hub disagreement (Jaccard 0.27) fails the gate regardless.
+
+**Gate after ACC, ACC-2 and ACC-3:** C passes; Java (1 of 2 repos), Go and Python do not. The engine's resolution of
+same-arity Java overloads and Go receivers and interfaces is where the hub sets diverge.
