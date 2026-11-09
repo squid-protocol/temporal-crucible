@@ -2,13 +2,13 @@
 date: 2026-11-08
 title: Hubs, efficiency, bad shapes and dead code in call networks over time
 type: confirmatory
-status: registered
-verdict: pending
+status: scored
+verdict: mixed
 theme: natural-history
 ids: CGN-A1..E1
-docs: docs/cgn_hypotheses.md
+docs: docs/cgn_hypotheses.md; docs/cgn.md
 links: temporal-crucible#92
-takehome: One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.
+takehome: Hubs are a stable skeleton that grows rich-get-richer; networks centralise and drift toward more cross-file wiring rather than optimising; files in call cycles or with heavy coupling get more later fixes beyond size, churn and their own fix history.
 ---
 
 <!--
@@ -44,12 +44,25 @@ later fixes with size, churn and prior-fix strata; concurrency vs hubs and core;
 
 ## What we found
 
-Pending.
+- **Hubs (✓ A1-A3):** 76-100% of surviving hubs are still top-5% central five years on; most hubs are made within two
+  years of birth; new calls go to already-central functions (70th-83rd percentile targets).
+- **Efficiency (✗ B1, ✗ B2, ✓ B3):** no sign of optimisation. Directory modularity falls in OpenSSL and libarchive;
+  cross-file wiring rises in curl, libarchive and nDPI; networks centralise in four of five repos.
+- **Bad shapes (✓ C1, ✓ C3, ✗ C2, ✗ C4):** beyond file size, churn and prior fixes, files in call cycles get 1.20x and
+  highly coupled files 1.76x the later fixes; duplicated wiring goes with fewer fixes (0.86x); coupled files' fixes are
+  not more often regressions.
+- **Concurrency (✗ D1, ✓ D2):** concurrency code sits at the network periphery (0.24x odds of being in the core); too
+  rare in these C libraries (48 functions) to test hub avoidance.
+- **Dead code (✓ E1):** uncalled private functions are deleted slightly sooner (1.08x).
 
 ## Take-home
 
-Pending.
+Call networks grow around a stable skeleton of hubs that get richer; they centralise and drift toward more
+cross-file wiring rather than optimising; and cycles and heavy coupling mark files that will need more fixes, beyond
+size, churn and their own history.
 
 ## What it changed
 
-Pending.
+- With CGT-4, three network signals (rewiring, cycles, coupling) now survive the controls that sank earlier structural
+  predictors here: leads to replicate on unseen repos (CGN-CR), not yet claims.
+- The owner's optimisation idea is not supported on these repos; Lehman-style drift fits better.
