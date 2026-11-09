@@ -142,6 +142,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Engine findings (GitGalaxy itself)
 
+- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-call-graph-accuracy.md)
 - **Eleven signal names misdescribed their rules (struct_linear counts return/def/void keywords, not linear code), several tokens were counted by two rules, and 36 function columns are always zero. Display names and rule fixes went into the engine.** — engine-finding, 2026-11-07 · [journal](journal/2026-11-07-signal-names-and-rule-fixes.md)
 
 <!-- journal:end -->
