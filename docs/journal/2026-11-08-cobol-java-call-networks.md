@@ -2,13 +2,13 @@
 date: 2026-11-08
 title: Does a COBOL program's call network survive into its Java port?
 type: confirmatory
-status: registered
-verdict: pending
+status: scored
+verdict: mixed
 theme: provenance
 ids: WIRE-H1..H3
-docs: docs/wire_hypotheses.md
+docs: docs/wire_hypotheses.md; docs/wire.md
 links: gitgalaxy#7532; gitgalaxy#7533
-takehome: One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.
+takehome: A COBOL program's paragraph call network survives mechanical translation and alone finds a port's own source 24% of the time (sfs 2.4%, chance 0.7%), but GitGalaxy cannot read it through the translator's dispatcher, which half the ports use.
 ---
 
 <!--
@@ -46,12 +46,25 @@ Weisfeiler-Lehman graph similarity for name-free identification.
 
 ## What we found
 
-Pending.
+- **WIRE-H3 supported:** with names discarded, the call network ranks a structured port's own COBOL source first for
+  33 of 138 programs (24%); chance 0.7%, p 0.0001; sfs whole-program fingerprints managed 3 of 124.
+- **WIRE-H1 not supported:** mean match 0.52 against 0.08 shuffled, but only 41% of programs beat their own null.
+  Post-hoc (exploratory): 57 of 125 "structured" ports silently keep the dispatcher (all of CBSA and GenApp); the 68
+  truly structured ones match 0.95 and 76% beat the null; small programs (3-5 paragraphs) cannot beat it at all.
+- **WIRE-H2 not supported, as predicted:** dispatch ports read as no paragraph calls at all; resolving `perform(a, b)`
+  with a parser (descriptive) gives a 0.69 match, so the wiring is there and the engine cannot see it.
+- The model-refined ports drop the translator's paragraph headers, so they cannot be traced.
 
 ## Take-home
 
-Pending.
+A COBOL program's design (which paragraph performs which) survives mechanical translation and identifies the port's
+source ten times better than whole-program fingerprints. GitGalaxy cannot yet read it through a dispatcher.
 
 ## What it changed
 
-Pending.
+- The DOOM wiring idea now has a registered, positive result on a second corpus (identification), and a measured
+  blind spot (dispatchers).
+- H1 with the dispatcher taken into account is likely supported (exploratory reading of the same data: truly
+  structured ports 0.95 / 76% beat the null; parser-resolved dispatch 0.69 / 73%); to be registered on new cases.
+- Follow-ups: gitgalaxy#8151 (resolve the translator's `perform(int, int)` idiom in the engine; keep paragraph headers
+  through refinement); H1 re-registered with the dispatcher taken into account and a power floor, on new cases only.
