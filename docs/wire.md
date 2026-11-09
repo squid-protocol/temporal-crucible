@@ -50,9 +50,22 @@ programs**. Raw output: `wire-study/wire_result.json` (outside the repo; third-p
 - **What this does not establish:** fidelity of non-mechanical ports. The refined ports lose the map, so a fidelity
   check of a model-written port needs the map carried through refinement.
 
+## Note: H1 with the dispatcher taken into account is likely supported (owner, 2026-11-08; EXPLORATORY)
+
+H1 failed because its population mixed two kinds of port, not because the call network was lost. Taking the
+dispatcher into account, both kinds clear H1's own bars on this data:
+- **truly structured ports** (no dispatcher, 68): mean J 0.95, 76% beat their null (bar 50%);
+- **dispatch ports with `perform(a, b)` resolved** (124, parser-resolved): mean J 0.69 vs 0.09 shuffled, 73% beat
+  their null.
+
+This is a reading of data already seen, so it is **not a verdict**: H1 stays ✗ as registered. The variant (H1 with
+dispatch resolved, or measured on truly structured ports) is the first follow-up below, to be registered before it
+meets new data. The engine half of it is gitgalaxy#8151.
+
 ## Follow-ups (for unseen data only)
 
-- H1 restricted to truly structured ports (no dispatcher), with a power floor (≥ 6 mapped units), on ports generated
-  after this study (new cases), registered before they exist.
-- Engine: resolve `perform(a, b)` to the dispatched paragraph methods (gitgalaxy issue to file).
+- **H1-D (likely supported, see the note above):** H1 with the dispatcher taken into account (engine-resolved
+  `perform(a, b)` once #8151 lands, or truly structured ports only), with a power floor (≥ 6 mapped units), on ports
+  of cases added after this study, registered before they exist.
+- Engine: resolve `perform(a, b)` to the dispatched paragraph methods (gitgalaxy#8151).
 - Translator / refine: keep the paragraph header through B2 refinement, so refined ports stay traceable.
