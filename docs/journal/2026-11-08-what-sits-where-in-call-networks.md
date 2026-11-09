@@ -2,13 +2,13 @@
 date: 2026-11-08
 title: What kind of code sits where in the call network, and where do fix classes land?
 type: confirmatory
-status: registered
-verdict: pending
+status: scored
+verdict: mixed
 theme: fingerprints
 ids: CGK-K1..F11
-docs: docs/cgk_hypotheses.md
+docs: docs/cgk_hypotheses.md; docs/cgk.md
 links: temporal-crucible#94
-takehome: One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.
+takehome: Hubs are public, decision-dense entry points and workhorses, not simple utilities; callers of many are straight-line glue; the periphery is private, low-level code; and only extrinsic fixes map onto the network, landing in peripheral files that host hubs.
 ---
 
 <!--
@@ -42,12 +42,24 @@ class x file network position.
 
 ## What we found
 
-Pending.
+- **Hubs (✓ K3, ✗ K1, ✗ H1):** the most-called functions are 6x more often public, more decision-dense per line than
+  same-size functions (opposite of the registered direction), and built from rich shapes (rungs 5-9), not bricks.
+  Archetypes: parameter forwarders, compute cores, many-argument workhorses, defensive guards.
+- **Orchestrators (✗ K2):** functions that call many are less decision-dense: straight-line, stateful glue
+  (pointers, state changes, casts, safety checks).
+- **Periphery:** globals, private scope, bit operations, memory allocation, unsafe constructs.
+- **Fix classes:** extrinsic fixes land in peripheral files that host hubs (wrapper and compatibility layers) and
+  avoid coupled and cyclic files; CVE fixes and regressions show no network preference at the bar.
 
 ## Take-home
 
-Pending.
+Network position has a clear keyword profile: hubs are public decision-makers, orchestrators are glue, the
+periphery is private low-level code. Of the three fix classes, only platform-driven (extrinsic) fixes have a network
+signature.
 
 ## What it changed
 
-Pending.
+- Two registered directions came out reversed (K1, K2, H1): the "hubs are simple helpers" intuition is wrong for these
+  C libraries.
+- Extrinsic work joins library coupling (LIB) as a place where the outside world touches the network: a lead to
+  replicate.

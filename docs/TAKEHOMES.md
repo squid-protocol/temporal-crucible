@@ -128,7 +128,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Function fingerprints and the shape lattice
 
-- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-what-sits-where-in-call-networks.md)
+- **Hubs are public, decision-dense entry points and workhorses, not simple utilities; callers of many are straight-line glue; the periphery is private, low-level code; and only extrinsic fixes map onto the network, landing in peripheral files that host hubs.** — mixed, 2026-11-08 · [journal](journal/2026-11-08-what-sits-where-in-call-networks.md)
 - **Fix kinds sit in different shape families beyond size, modestly (V 0.07; regression fixes hit simpler, lower-rung functions), but lattice moves add nothing to regression prediction beyond churn; 71% of functions never change shape.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-lattice-fix-families-and-moves.md)
 - **Code is built from a few hundred keyword combinations plus a long tail. The commonest are tiny universal "bricks" (one-step, public one-step, public setter) and C dialect shapes (driver functions, static pointer helpers) concentrated in a few OS repos.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-function-fingerprints-and-archetypes.md)
 - **Common shapes grow one keyword family at a time (196 of 199 tree edges), and real code builds about half the mid-size shapes chance would: role conflicts are the holes, paired constructs the attractions.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-fingerprint-lattice.md)
