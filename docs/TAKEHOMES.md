@@ -86,6 +86,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### How code lives: natural history and regimes
 
+- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-software-network-laws-many-labs.md)
 - **Call networks are static most quarters and change in jumps, but the jumps mostly track code volume; CVE fixes rewire calls more than other fixes (extrinsic fixes least), and rewired files attract more later fixes beyond churn and partly beyond size.** — mixed, 2026-11-08 · [journal](journal/2026-11-08-call-networks-over-time.md)
 - **Hubs are a stable skeleton that grows rich-get-richer; networks centralise and drift toward more cross-file wiring rather than optimising; files in call cycles or with heavy coupling get more later fixes beyond size, churn and their own fix history.** — mixed, 2026-11-08 · [journal](journal/2026-11-08-call-network-shape.md)
 - **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-call-network-replication.md)
@@ -142,6 +143,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Engine findings (GitGalaxy itself)
 
+- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-call-graph-accuracy.md)
 - **Eleven signal names misdescribed their rules (struct_linear counts return/def/void keywords, not linear code), several tokens were counted by two rules, and 36 function columns are always zero. Display names and rule fixes went into the engine.** — engine-finding, 2026-11-07 · [journal](journal/2026-11-07-signal-names-and-rule-fixes.md)
 
 <!-- journal:end -->

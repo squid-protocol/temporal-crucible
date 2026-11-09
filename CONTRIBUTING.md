@@ -32,15 +32,18 @@ a p-value and a verdict, not a descriptive/exploratory table):
    registration AND that same hypothesis's verdict in one shot is, by
    definition, not pre-registered — split it, or say plainly in the PR that
    it's post-hoc/exploratory and label it as such in the output.
-2. **Verdicts get published either way.** A null or contradicted result is
+2. **Prior work before registration.** The registration names the closest published results and says whether the
+   claim replicates, extends or contradicts them (template section *Prior work*). See
+   [`docs/PROGRAMME_call_networks.md`](docs/PROGRAMME_call_networks.md) for why (2026-11-08).
+3. **Verdicts get published either way.** A null or contradicted result is
    not a reason to drop the table from the doc — it's the finding. Update
    the register's `verdict` column regardless of which way it went.
-3. **Exploratory stays labeled exploratory**, in the doc and in any generated
+4. **Exploratory stays labeled exploratory**, in the doc and in any generated
    report (`docs/exposure_history_report.md`, `docs/signal_anatomy.md`,
    `docs/rw_hypotheses.md`, ...). An exploratory observation can graduate
    into a registered hypothesis, but only for data it hasn't seen yet — never
    re-tested on the sample that suggested it.
-4. Every test keeps its guards: size-matched controls, length-matched pairs
+5. Every test keeps its guards: size-matched controls, length-matched pairs
    at function grain, temporal ablation (`GITGALAXY_DISABLE_GIT_HISTORY=1`
    — see below), rename tracking, and multiple-comparison awareness on any
    table wider than one registered claim. Don't quietly drop a guard to make
