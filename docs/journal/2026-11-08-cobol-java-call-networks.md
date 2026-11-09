@@ -66,5 +66,5 @@ source ten times better than whole-program fingerprints. GitGalaxy cannot yet re
   blind spot (dispatchers).
 - H1 with the dispatcher taken into account is likely supported (exploratory reading of the same data: truly
   structured ports 0.95 / 76% beat the null; parser-resolved dispatch 0.69 / 73%); to be registered on new cases.
-- Follow-ups: gitgalaxy#8151 (resolve the translator's `perform(int, int)` idiom in the engine; keep headers through refinement); keep paragraph headers through
-  refinement; H1 re-registered on truly structured ports with a power floor, on new cases only.
+- Follow-ups: gitgalaxy#8151 (resolve the translator's `perform(int, int)` idiom in the engine; keep paragraph headers
+  through refinement); H1 re-registered with the dispatcher taken into account and a power floor, on new cases only.
