@@ -86,6 +86,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### How code lives: natural history and regimes
 
+- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-call-networks-over-time.md)
 - **Models have a strong structural handwriting when they write whole programs alone (83–84% identification in the lab, independent lenses agree; eras of a codebase separate at AUC 0.88), but inside one shared codebase it nearly vanishes (WILD: AUC 0.57, within chance): conventions launder it.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-synthesis.md)
 - **Inside GitGalaxy's shared codebase, Sonnet- and Opus-written functions are barely distinguishable (AUC 0.57, inside the commit-permutation null): the lab's strong model handwriting mostly vanishes under a codebase's conventions.** — not-supported, 2026-11-07 · [journal](journal/2026-11-07-model-handwriting-in-the-wild.md)
 - **Gemini-era GitGalaxy functions were long, nested, inline-commented and public; Claude-era ones are short, call-heavy and twice as often private helpers (as in the lab). Functions rarely change shape (88% never; 2.8% of weeks), and when they do it is one signal at a time, mostly growing.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-gitgalaxy-eras-and-lattice-movement.md)
