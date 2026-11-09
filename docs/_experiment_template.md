@@ -13,6 +13,11 @@ in the same PR. See CONTRIBUTING.md — registration and verdict never ship toge
 **Predictor(s):** <what GitGalaxy measures>  **Outcome:** <label family>  **Repo:** <curl | nDPI | openssl | ...>
 **Tool:** `tools/<script>.py`   **Data:** `events/<repo>.json` (pool_head `<sha>`)
 
+## Prior work (required before registration)
+
+<The closest published results (authors, year, venue, DOI), what they found, and whether this study replicates,
+extends or contradicts them; the controls and null models they used. Write it before freezing any hypothesis.>
+
 ## Registered claim (verbatim)
 
 > <the direction + test + α, quoted exactly as registered — before any statistic ran>

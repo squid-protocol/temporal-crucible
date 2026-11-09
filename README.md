@@ -15,6 +15,8 @@ snapshots, and record the delta. No per-commit sweeps, no tag panels — two sca
 
 ## Start here
 
+- **Call-network research programme** (2026-11-08): [`docs/PROGRAMME_call_networks.md`](docs/PROGRAMME_call_networks.md) — accuracy, an evolution panel, many-labs replications, keyword × network science, translation fidelity.
+
 | if you want… | read |
 |---|---|
 | **what we have learned**, in a page | [`docs/TAKEHOMES.md`](docs/TAKEHOMES.md) |
