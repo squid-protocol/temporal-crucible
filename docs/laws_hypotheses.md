@@ -176,3 +176,40 @@ The tuning measures the engine on 20 candidate repos and the engine's own gate c
 
    Also excluded: the engine's call-graph gate corpus (`tests/import_graph_corpus.json` entries scored for call
    graphs) and the ACC repos (apache/commons-io, commons-lang, prometheus, sphinx, libgit2, redis; already excluded).
+
+## Amendment 2 (2026-11-09, owner OK; before any panel repo is selected, scanned or labelled)
+
+**Context.** Engine tuning (gitgalaxy epic #8161) has raised the engine's call-graph quality in languages LAWS lists
+as descriptive (Rust, JS/TS, C++), and the engine parses languages no ACC study has measured (C#, Kotlin, PHP).
+This amendment lets those languages earn confirmatory status through the same ACC-P gate, without changing the
+primary test or re-scaling it to the languages that pass (M2).
+
+1. **The primary test is unchanged.** "Universal" remains the M2 partial-conjunction test for at least 3 of the 4
+   languages C, Java, Go and Python. An ACC-failed or non-evaluable language among those 4 still contributes
+   p_ℓ = 1.
+2. **ACC-P covers every candidate language.** ACC-P (Amendment 1, item 1) runs for C, Java, Go, Python, C++, Rust,
+   JS/TS and C#, plus Kotlin and PHP if they are admitted under item 4. Every language that passes ACC-H3 on both
+   ACC-P repos at both snapshots is **confirmatory**: 12 repos, per-language law claims at the registered 99% bar.
+   A language that fails stays descriptive with 8 repos. The repos are always the first 12 or 8 of that language's
+   seeded draw order; ACC-P uses draws 1 and 2.
+3. **A secondary, extended universality test, fixed now.** Let n be the number of languages that enter ACC-P,
+   counted before any ACC-P result, and r = ⌈2n/3⌉. A law is **universal (extended)** iff the Benjamini–Heller
+   partial-conjunction p-value for "at least r of n", p^{r/n} = (n − r + 1)·p_(r), survives Holm at α = 0.01
+   across the nine laws, **and** no language's pooled effect is opposite at one-sided p < 0.01. ACC-failed or
+   non-evaluable languages contribute p_ℓ = 1. The extended test is reported beside the primary one and never
+   replaces it. A law that fails the primary test is reported as failing it, whatever the extended test shows.
+4. **Admission of new languages (C#, Kotlin, PHP).** Before the draw, a measurement-only survey runs the engine
+   and a compiler-grade reference on one development repo per language. The references are scip-dotnet (C#),
+   scip-java with the Kotlin compiler plugin (Kotlin) and scip-php (PHP), each pinned. A language is admitted to
+   the panel and ACC-P iff:
+   - the reference produces a call graph on its repo;
+   - the engine's confident-link precision against it is ≥ 0.80 (the ACC-H1 bar).
+
+   The survey also reports recall and the three ACC-H3 statistics, descriptively; they are not an admission bar.
+   The admission result is recorded in this file before the draw. C#, already listed as descriptive, is in the
+   panel either way and needs admission only to enter ACC-P. Ruby and Swift are not candidates.
+5. **Development-set dry run.** Before the draw, the three ACC-H3 statistics are computed on development repos
+   only (the ACC repos, the engine's call-graph gate corpus and the survey repos) with the panel engine. They are
+   reported as a pre-draw check, not a gate, and they cannot change items 1–4.
+6. **Excluded from the panel by name:** the survey repos JamesNK/Newtonsoft.Json (C#), square/kotlinpoet (Kotlin)
+   and composer/composer (PHP), and any substitute the survey logs when one fails to build.
