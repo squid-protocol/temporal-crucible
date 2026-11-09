@@ -74,7 +74,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### Identity, copies and provenance
 
-- **One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level.** — pending, 2026-11-08 · [journal](journal/2026-11-08-cobol-java-call-networks.md)
+- **A COBOL program's paragraph call network survives mechanical translation and alone finds a port's own source 24% of the time (sfs 2.4%, chance 0.7%), but GitGalaxy cannot read it through the translator's dispatcher, which half the ports use.** — mixed, 2026-11-08 · [journal](journal/2026-11-08-cobol-java-call-networks.md)
 - **A project's keyword mix (95.9%) and its sfs structural fingerprint (99.0%) identify it across eras five or more years apart, and its mix changes in spurts at architecture events; but turnover does not track regressions, and whether coupling centralises with age is project-specific.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-project-identity-fingerprints.md)
 - **Code-reading patch checks work for libraries whose security fixes are surgical (zlib: 0 of 1,229 wrong, 30/30 on modified copies) and fail for refactoring-fix libraries (expat).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-patch-status-by-reading-code.md)
 - **A layered fingerprint (call set + control-flow skeleton + profile) finds copies the coarse one misses: fork copies 46% to 80%, C to C++ BoringSSL 29% to 94%, vendored zlib 91%.** — supported, 2026-11-06 · [journal](journal/2026-11-06-finding-copies-of-code.md)
