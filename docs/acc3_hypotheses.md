@@ -9,3 +9,10 @@ printed token offsets (`{{.Caller.Pos}}`) instead of positions. A format check (
 the same bars. Only the template changes. **Claims:** ACC3-H1 (precision and recall ≥ 0.80) and ACC3-H3 (in-degree
 ρ ≥ 0.80, hub Jaccard ≥ 0.50, coupling κ ≥ 0.60) for Go; **ACC3-G:** Go passes the LAWS gate iff ACC3-H3 holds.
 One run; if the oracle fails again, Go is descriptive in LAWS.
+
+## ACC-3b (2026-11-09 00:02, before any Go statistic)
+
+The ACC-3 run was killed by the kernel's out-of-memory handler (the scorer held the full `-algo=cha` output, which
+includes every dependency edge; 25 GB). No Go statistic was computed. ACC-3b changes only the plumbing: `callgraph`
+output is streamed and lines whose caller and callee are both outside the repo are dropped as they arrive, under a
+12 GB memory cap. Design, bars and gate are unchanged. If this run fails, Go is descriptive in LAWS; no further retry.

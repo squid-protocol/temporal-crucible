@@ -21,10 +21,14 @@ def go(study, repo, env):
     fmt = "{{posn .Caller}}\t{{posn .Callee}}\t{{.Caller.Name}}\t{{.Callee.Name}}"
     out = {}
     for algo in ("static", "cha"):
-        p = subprocess.run(["callgraph", f"-algo={algo}", f"-format={fmt}", "./..."], cwd=root, env=env,
-                           capture_output=True, text=True)
+        p = subprocess.Popen(["callgraph", f"-algo={algo}", f"-format={fmt}", "./..."], cwd=root, env=env,
+                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
         es = set()
-        for line in p.stdout.splitlines():
+        rs = str(root)
+        for line in p.stdout:
+            line = line.rstrip("\n")
+            if line.count(rs) < 2:  # ACC-3b: keep only edges with both ends inside the repo, as they stream
+                continue
             parts = line.split("\t")
             if len(parts) != 4:
                 continue
@@ -40,6 +44,7 @@ def go(study, repo, env):
             a, b = pos(parts[0]), pos(parts[1])
             if a and b:
                 es.add(((a[0], parts[2], a[1]), (b[0], parts[3], b[1])))
+        p.wait()
         out[algo], out[algo + "_rc"] = es, p.returncode
     return {"direct": out["static"], "dynamic": out["cha"] - out["static"], "rc": [out["static_rc"], out["cha_rc"]], "err": ""}
 
