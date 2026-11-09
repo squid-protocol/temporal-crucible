@@ -148,3 +148,31 @@ they win. The following decisions complete them:
    8. one run.
 
    No law statistic is computed before step 8.
+
+## Amendment 1 (2026-11-09, owner OK; before any panel repo is selected, scanned or labelled)
+
+**Context.** ACC, ACC-2 and ACC-3 (`docs/acc.md`, `docs/acc2.md`, `docs/acc3_hypotheses.md`) admitted only C through
+the gate. The engine is now being tuned to reach its reference tools' quality (gitgalaxy epic #8161, four PRs).
+The tuning measures the engine on 20 candidate repos and the engine's own gate corpus.
+
+1. **ACC-P is the post-tuning validation.** No separate ACC-4 study is run. ACC-P (Amendment 0, M4) runs the
+   oracles on 2 randomly drawn panel repos per language, at an early and a late snapshot, before any law statistic.
+   Those repos are new to every study and in the panel anyway, so no additional repos are spent. ACC-P uses the
+   **engine's resolved call graph with confident links only** (as the engine's own gates score; ambiguous links are
+   reported, never used as network edges), and its result is the language gate.
+2. **Engine version.** The panel is scanned with the gitgalaxy commit that contains the last merged PR of epic #8161
+   that is merged before the draw. That commit is recorded in this file before the draw; it replaces `8f96d76ba`.
+   Engine changes after the draw need a dated amendment and a full rescan before the scorer freeze.
+3. **Excluded from the panel by name** (the engine-tuning set; the engine is tuned on them, so they cannot validate
+   it):
+   - C++: google/leveldb, gabime/spdlog, jbeder/yaml-cpp;
+   - C: jqlang/jq, facebook/zstd, jedisct1/libsodium;
+   - Rust: sharkdp/fd, sharkdp/hyperfine, casey/just;
+   - TypeScript: immerjs/immer, ianstormtaylor/superstruct, typestack/class-validator;
+   - Python: psf/requests, pallets/click, python-attrs/attrs;
+   - Java: jhy/jsoup, JodaOrg/joda-time;
+   - Go: gin-gonic/gin, spf13/viper;
+   - JavaScript: koajs/koa.
+
+   Also excluded: the engine's call-graph gate corpus (`tests/import_graph_corpus.json` entries scored for call
+   graphs) and the ACC repos (apache/commons-io, commons-lang, prometheus, sphinx, libgit2, redis; already excluded).
