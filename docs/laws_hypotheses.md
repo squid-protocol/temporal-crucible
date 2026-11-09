@@ -213,3 +213,20 @@ primary test or re-scaling it to the languages that pass (M2).
    reported as a pre-draw check, not a gate, and they cannot change items 1–4.
 6. **Excluded from the panel by name:** the survey repos JamesNK/Newtonsoft.Json (C#), square/kotlinpoet (Kotlin)
    and composer/composer (PHP), and any substitute the survey logs when one fails to build.
+
+### Amendment 2, item 4: admission result (2026-11-09, before the draw)
+
+The survey ran on the engine at gitgalaxy `19e6b9c91`. Its scoring is the gate's `call_graph_resolution._score`, used unchanged, with LAWS M3 exclusions on both sides. Precision is agree / (agree + wrong) over confident links.
+
+| language | repo @ SHA | reference | confident precision (judged) | recall | ρ / J / κ (descriptive) | admitted |
+|---|---|---|---|---|---|---|
+| C# | JamesNK/Newtonsoft.Json @ 52fa3ae | scip-dotnet 0.2.16 | 0.818 (3,415) | 0.591 | 0.774 / 0.375 / 0.668 | **yes** |
+| Kotlin | square/kotlinpoet @ d438267 | scip-java v0.13.2 (scip-kotlinc) | 0.819 (542; 95% CI 0.787–0.851) | 0.320 | 0.502 / 0.250 / 0.656 | **yes** (point estimate, as the bar is written) |
+| PHP | composer/composer @ 3a5137b | scip-php v0.0.2 | 0.998 (2,670) | 0.871 | 0.727 / 0.458 / 0.736 | **yes** |
+
+C#, Kotlin and PHP enter the panel and ACC-P, so n = 10 for the extended test (item 3), and r = 7.
+
+Descriptive notes:
+- 577 of C#'s 623 wrong links, and 88 of Kotlin's 98, are another overload of the right method.
+- scip-php v0.0.2 has no edge for 36% of the engine's confident links. With scip-php main @ 71a5b11, precision is 0.995.
+- None of the three meets ACC-H3 on its development repo.
