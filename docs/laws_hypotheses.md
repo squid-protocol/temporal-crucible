@@ -107,3 +107,44 @@ connected by a directed path, sampled for large graphs); rewiring per quarter.
 - One engine; one scorer committed before its run; verdicts per repo, per language and pooled, either way.
 - Null models with every network law; size-adjusted headlines; process controls on every defect law; label
   validation and the ACC gate before confirmatory claims; forward validation for prediction.
+
+## Amendment 0 (2026-11-08, after an independent methods review, before any panel repo is selected, scanned or labelled)
+
+An independent methods review (`docs/laws_methods_review.md`, verdict: major revision, all fixable pre-data) found
+that several tests above could be passed by trivial artefacts, that the synthesis lacked variances and a valid
+"universal" test, and that tests, vendored and generated code, label workflows and the sampling frame were
+unspecified. **This amendment adopts every must-fix item M1–M9 (section (a)) and every should-fix item 1–15
+(section (b)) of that review, in the amendment text as written there.** Where they conflict with the text above,
+they win. The following decisions complete them:
+
+1. **Panel size.** **12 repos per confirmatory language** (C, Java, Go, Python); 8 per descriptive language
+   (C++, Rust, JS/TS, C#). The power table in M1 is part of this registration. At k = 12 and the 99% bar,
+   80% power needs a pooled effect of about 1.15–1.25 between-repo SDs.
+2. **Laws labelled descriptive now, before any data** (M1), because their plausible effect is below what k = 12 can
+   detect or the programme has already seen them be project-specific:
+   - **LAW-5** (decay: CGN B1 held in 1 of 5 repos);
+   - **LAW-9** (security-patch locality, whose evaluable-repo count depends on OSV coverage). It becomes
+     confirmatory only if ≥ 5 repos per language are evaluable, a count checked before any LAW-9 statistic.
+
+   LAW-6, LAW-7 and LAW-8 stay confirmatory under M2's rule that a non-significant result is "inconclusive" unless
+   the registered equivalence test passes.
+3. **Label raters** (M6). The first rater is Claude (`claude-opus-5-5`); the second is an independent Claude session
+   given only the commit message, the diff and the class definitions (no first-rater labels, no network
+   measures). Prompts, model id and temperature are committed with the scorer, before any audit label is produced.
+4. **Pilot** (should-fix 9). The CGR replication set (libgit2, PostgreSQL, libxml2, redis, prometheus, commons-lang,
+   sphinx, ripgrep: development data, never panel results) is the required pilot. The LAWS scorer runs end to end on
+   it, and any scorer change after the pilot is committed before the panel draw.
+5. **Engine** (should-fix 15): `8f96d76ba`. The pilot confirms its Go, Java, Python and Rust parsers on development
+   repos (CGR). If a language fails, it is descriptive, decided before the draw.
+6. **Node identity** (M4) uses the engine's `parent_class_id` (enclosing class) where it is set.
+7. **Order of work:**
+   1. ACC and ACC-P gates;
+   2. pilot;
+   3. frame build and hashed candidate list (pushed);
+   4. the seeded draw;
+   5. scans;
+   6. label audit;
+   7. scorer freeze (committed);
+   8. one run.
+
+   No law statistic is computed before step 8.
