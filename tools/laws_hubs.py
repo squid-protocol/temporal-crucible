@@ -24,9 +24,11 @@ Two things the pilot (the CGR development repos) settled, to be listed at the sc
   - Callers. The followed functions are those present at both snapshots, but their in-degree counts every caller,
     also functions born or gone in between (callers="all"). Counting only edges between two persisting functions
     left 53 to 589 added edges per pair, and observed = null to three decimals in every pilot repo.
-  - Ceiling. Where observed and null are identical in every pair (a hub's kept edges alone hold it in the top 5%:
-    redis, even with 3,779 added edges per pair), the effect is 0 with zero variance. Such a repo carries no
-    information on the law; it is "not evaluable (ceiling)" and counted, never pooled as a 0.
+  - Ceiling. Where the null does not move (the mean over pairs of the null's SD across replicates is below
+    CEILING_SD), who is in the top 5% is fixed by the edges that are kept and removed, whatever the added edges
+    do: redis, even with 3,779 added edges per pair, has observed = null to six decimals in every pair. Such a repo
+    carries no information on the law; it is "not evaluable (ceiling)" and counted, never pooled as a 0 (its
+    near-zero variance would outweigh every other repo).
 """
 from __future__ import annotations
 
@@ -41,6 +43,7 @@ YEARS_APART = 5
 TOP_HUB, TOP_LATER = 0.01, 0.05
 MIN_HUBS = 10
 MIN_PAIRS = 3
+CEILING_SD = 0.005
 
 
 def top_weights(values: np.ndarray, share: float) -> np.ndarray:
@@ -128,8 +131,10 @@ def fit(yearly_nets: list, seed: int = SEED, boot: int = BOOT, callers: str = "a
         return {**out, "why": f"fewer than {MIN_PAIRS} five-year pairs with {MIN_HUBS} hubs"}
     eff = np.array([p["effect"] for p in pairs])
     reps = rng.choice(eff, (boot, len(eff))).mean(axis=1)
-    if float(reps.std(ddof=1)) == 0.0:
-        return {**out, "why": "ceiling: observed and null persistence are identical in every pair", "ceiling": True,
+    null_sd = float(np.mean([p["null_sd"] for p in pairs]))
+    if null_sd < CEILING_SD or float(reps.std(ddof=1)) == 0.0:
+        return {**out, "why": f"ceiling: the null does not move (mean SD {null_sd:.4f} < {CEILING_SD})", "ceiling": True,
+                "null_sd_mean": null_sd,
                 "observed_mean": float(np.mean([p["observed"] for p in pairs])),
                 "null_mean": float(np.mean([p["null_mean"] for p in pairs]))}
     return {**out, "evaluable": True, "effect": float(eff.mean()), "se": float(reps.std(ddof=1)),

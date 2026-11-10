@@ -13,7 +13,7 @@ SCHEMA = ["CREATE TABLE walk (boundary TEXT PRIMARY KEY, commit_hash TEXT, ref T
           "CREATE TABLE snap (commit_hash TEXT, ref TEXT, date TEXT, boundary TEXT, rc INTEGER, engine TEXT, scanned_at TEXT)",
           "CREATE TABLE file (id INTEGER PRIMARY KEY, commit_hash TEXT, path TEXT, language TEXT, total_loc INTEGER, coding_loc INTEGER, generated INTEGER)",
           "CREATE TABLE attrs (commit_hash TEXT, path TEXT, text TEXT)",
-          "CREATE TABLE func (id INTEGER PRIMARY KEY, commit_hash TEXT, file_id INTEGER, name TEXT, start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER)",
+          "CREATE TABLE func (id INTEGER PRIMARY KEY, commit_hash TEXT, file_id INTEGER, name TEXT, start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER, signature TEXT)",
           "CREATE TABLE edge (commit_hash TEXT, src INTEGER, dst INTEGER, step TEXT, kind TEXT)",
           "CREATE TABLE unresolved (commit_hash TEXT, step TEXT, kind TEXT, n INTEGER)"]
 
@@ -41,7 +41,7 @@ def con():
     funcs = [(1, 1, "Run", 10, None), (2, 1, "String", 5, "A"), (3, 1, "String", 4, "B"), (4, 2, "help", 6, None),
              (5, 2, "tiny", 2, None), (6, 3, "TestRun", 9, None), (7, 4, "Vend", 9, None), (8, 5, "Gen", 9, None),
              (9, 6, "py", 9, None), (10, 7, "Own", 9, None), (11, 2, "help", 3, None)]
-    c.executemany("INSERT INTO func VALUES (?, 's1', ?, ?, 1, ?, ?, 0)", funcs)
+    c.executemany("INSERT INTO func VALUES (?, 's1', ?, ?, 1, ?, ?, 0, '1')", funcs)
     edges = [(1, 4, "file"), (1, 11, "file"), (1, 2, "receiver"), (2, 3, "typed"), (4, 4, "file"), (6, 1, "import"),
              (1, 7, "import"), (1, 5, "file"), (4, 11, "unique"), (3, 1, "tie")]
     c.executemany("INSERT INTO edge VALUES ('s1', ?, ?, ?, 'call')", edges)
@@ -80,3 +80,14 @@ def test_only_successful_scans_are_snapshots_and_the_yearly_one_is_the_october_b
     snaps = N.snapshots(con)
     assert [s[0] for s in snaps] == ["s1", "s1", "s2", "s2"]  # a quiet quarter repeats its commit; the failed scan is out
     assert [(s[0], s[2][:10]) for s in N.yearly(snaps)] == [("s1", "2020-10-01"), ("s2", "2022-10-01")]
+
+
+def test_overloads_are_separate_nodes_only_in_the_languages_that_overload(con):
+    con.execute("INSERT INTO file VALUES (20, 's1', 'src/J.java', 'java', 9, 9, 0)")
+    con.executemany("INSERT INTO func VALUES (?, 's1', 20, 'join', 1, 9, 'S', 0, ?)",
+                    [(30, '["int[]","char"]'), (31, '["List","char"]'), (32, '["List","char"]')])
+    java = N.network(con, "s1", "2020-09-30", "java")
+    assert set(java.nodes) == {("src/J.java", "S", 'join(["int[]","char"])'), ("src/J.java", "S", 'join(["List","char"])')}
+    assert java.profile["functions"] == 3 and java.profile["merged_share"] == pytest.approx(1 / 3, abs=1e-4)
+    go = N.network(con, "s1", "2020-09-30", "go")  # Go does not overload: a signature is not part of who a function is
+    assert ("src/a.go", "", "Run") in go.nodes and not any("(" in n[2] for n in go.nodes)
