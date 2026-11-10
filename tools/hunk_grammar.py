@@ -95,9 +95,23 @@ from delta_report import median  # noqa: E402
 # zero-dependency, so PYTHONPATH alone is enough; no galaxyscope binary or DB
 # involved anywhere in this tool.
 sys.path.insert(0, str(GITGALAXY_PATH))
+from gitgalaxy.core.prism import Prism  # noqa: E402
+from gitgalaxy.standards.gitgalaxy_config import LEXICAL_FAMILY_HEURISTICS  # noqa: E402
 from gitgalaxy.standards.language_standards import LANGUAGE_DEFINITIONS  # noqa: E402
 
 C_RULES = LANGUAGE_DEFINITIONS["c"]["rules"]
+_C_PRISM = Prism(LEXICAL_FAMILY_HEURISTICS, LANGUAGE_DEFINITIONS)
+
+
+def _strip_c_comments(text: str) -> str:
+    """Strip C comments via Prism so English prose words (`if`, `for`, `do`) in
+    added/removed comment lines do not match code-stream `C_RULES`, plus blank
+    leading `*` comment-continuation lines whose opening `/*` was outside the
+    `-U0` hunk window."""
+    if not text:
+        return ""
+    code_stream = _C_PRISM.split_streams(text, "c")["code_stream"]
+    return re.sub(r"(?m)^[ \t]*\*[^\n]*$", "", code_stream)
 
 # rule key (c.py) -> (file_data column it feeds, short concept label)
 HEADLINE_RULES = {
@@ -210,8 +224,8 @@ def event_stats(repo: pathlib.Path, sha: str):
     if not kept:
         return {**base, "bystander_only": True}
 
-    added_text = "\n".join(s["added_text"] for s in kept)
-    removed_text = "\n".join(s["removed_text"] for s in kept)
+    added_text = _strip_c_comments("\n".join(s["added_text"] for s in kept))
+    removed_text = _strip_c_comments("\n".join(s["removed_text"] for s in kept))
     n_added_lines = sum(s["n_added"] for s in kept)
     n_removed_lines = sum(s["n_removed"] for s in kept)
 
