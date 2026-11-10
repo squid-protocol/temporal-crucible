@@ -9,7 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 import laws_net as N  # noqa: E402
 import laws_units as U  # noqa: E402
 
-SCHEMA = ["CREATE TABLE snap (commit_hash TEXT, ref TEXT, date TEXT, boundary TEXT, rc INTEGER, engine TEXT, scanned_at TEXT)",
+SCHEMA = ["CREATE TABLE walk (boundary TEXT PRIMARY KEY, commit_hash TEXT, ref TEXT, date TEXT)",
+          "CREATE TABLE snap (commit_hash TEXT, ref TEXT, date TEXT, boundary TEXT, rc INTEGER, engine TEXT, scanned_at TEXT)",
           "CREATE TABLE file (id INTEGER PRIMARY KEY, commit_hash TEXT, path TEXT, language TEXT, total_loc INTEGER, coding_loc INTEGER, generated INTEGER)",
           "CREATE TABLE attrs (commit_hash TEXT, path TEXT, text TEXT)",
           "CREATE TABLE func (id INTEGER PRIMARY KEY, commit_hash TEXT, file_id INTEGER, name TEXT, start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER)",
@@ -29,6 +30,10 @@ def con():
     c.executemany("INSERT INTO snap VALUES (?, 'r', ?, ?, ?, 'e', 't')",
                   [("s1", "2020-09-30", "2020-10-01T00:00:00+00:00", 0), ("s2", "2021-06-30", "2021-07-01T00:00:00+00:00", 0),
                    ("bad", "2021-09-30", "2021-10-01T00:00:00+00:00", 1)])
+    c.executemany("INSERT INTO walk VALUES (?, ?, 'r', ?)",
+                  [("2020-10-01T00:00:00+00:00", "s1", "2020-09-30"), ("2021-01-01T00:00:00+00:00", "s1", "2020-09-30"),
+                   ("2021-07-01T00:00:00+00:00", "s2", "2021-06-30"), ("2021-10-01T00:00:00+00:00", "bad", "2021-09-30"),
+                   ("2022-10-01T00:00:00+00:00", "s2", "2021-06-30")])
     files = [(1, "src/a.go", 0), (2, "src/b.go", 0), (3, "src/a_test.go", 0), (4, "vendor/x/v.go", 0), (5, "src/gen.go", 1),
              (6, "src/tool.py", 0), (7, "internal/own.go", 0)]
     c.executemany("INSERT INTO file VALUES (?, 's1', ?, 'go', 10, 10, ?)", files)
@@ -73,4 +78,5 @@ def test_tests_as_callers_adds_their_edges_but_never_makes_them_targets(con):
 
 def test_only_successful_scans_are_snapshots_and_the_yearly_one_is_the_october_boundary(con):
     snaps = N.snapshots(con)
-    assert [s[0] for s in snaps] == ["s1", "s2"] and [s[0] for s in N.yearly(snaps)] == ["s1"]
+    assert [s[0] for s in snaps] == ["s1", "s1", "s2", "s2"]  # a quiet quarter repeats its commit; the failed scan is out
+    assert [(s[0], s[2][:10]) for s in N.yearly(snaps)] == [("s1", "2020-10-01"), ("s2", "2022-10-01")]

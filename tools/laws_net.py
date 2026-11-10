@@ -52,8 +52,10 @@ class Net:
 
 
 def snapshots(con: sqlite3.Connection) -> list[tuple[str, str, str]]:
-    """(commit, date, boundary) of the scanned snapshots, oldest first."""
-    return list(con.execute("SELECT commit_hash, date, boundary FROM snap WHERE rc = 0 ORDER BY boundary, date"))
+    """(commit, date, boundary) per quarter boundary whose commit was scanned, oldest first. Two boundaries share a
+    commit when a quarter had no commit, so the walk, not the scan table, lists the snapshots."""
+    return list(con.execute("SELECT w.commit_hash, w.date, w.boundary FROM walk w JOIN snap s ON s.commit_hash = w.commit_hash "
+                            "WHERE s.rc = 0 ORDER BY w.boundary"))
 
 
 def yearly(snaps: list[tuple[str, str, str]]) -> list[tuple[str, str, str]]:
