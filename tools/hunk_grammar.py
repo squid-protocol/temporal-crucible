@@ -111,7 +111,15 @@ def _strip_c_comments(text: str) -> str:
     if not text:
         return ""
     code_stream = _C_PRISM.split_streams(text, "c")["code_stream"]
-    return re.sub(r"(?m)^[ \t]*\*[^\n]*$", "", code_stream)
+    return _ORPHAN_COMMENT_LINE.sub("", code_stream)
+
+
+# An orphaned comment-continuation line: one or more `*` followed by nothing,
+# a closing `/`, or whitespace plus prose (` * text`, `** text`, `*/`, `****`).
+# A pointer write or deref starts `*` + identifier/paren/`+`/`-` (`*done = TRUE;`,
+# `*(int *)p = 0;`, `*++start = *next;`) and is real code, so it is kept, as is a
+# `* b;` expression continuation, which ends in `;`.
+_ORPHAN_COMMENT_LINE = re.compile(r"(?m)^[ \t]*\*+(?:/[^\n]*|[ \t][^\n]*)?$(?<!;)(?<!;[ \t])")
 
 # rule key (c.py) -> (file_data column it feeds, short concept label)
 HEADLINE_RULES = {
