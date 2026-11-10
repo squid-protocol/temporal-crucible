@@ -40,6 +40,13 @@ def _counts(x: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     return v.astype(float), c.astype(float)
 
 
+def _nm(start) -> dict:
+    """Nelder-Mead options. A refit that starts from fitted parameters (the bootstrap) gets a short budget: the
+    log-normal and the stretched exponential reach the power law as a limit, along a plateau where the optimiser
+    would otherwise walk for thousands of steps without changing the likelihood."""
+    return {"xatol": 1e-6, "fatol": 1e-8, "maxiter": 300 if start else 4000}
+
+
 def _nll(c, logp) -> float:
     """The negative log-likelihood, or a large penalty where the likelihood is not finite."""
     val = -float((c * logp).sum())
@@ -87,7 +94,7 @@ def ln_fit(v, c, xmin, start=None):
     m0 = (c * lv).sum() / c.sum()
     s0 = max(0.3, math.sqrt((c * (lv - m0) ** 2).sum() / c.sum()))
     f = lambda q: _nll(c, ln_logpmf((q[0], math.exp(min(q[1], 50.0))), v, xmin))  # noqa: E731
-    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options={"xatol": 1e-6, "fatol": 1e-8, "maxiter": 4000})
+    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options=_nm(start))
                 for x0 in (((start[0], math.log(start[1])),) if start else
                            ((m0, math.log(s0)), (m0 - 2.0, math.log(s0 * 2)), (0.0, math.log(2.0))))), key=lambda r: r.fun)
     return (float(best.x[0]), float(math.exp(min(best.x[1], 50.0))))
@@ -102,7 +109,7 @@ def se_logpmf(p, v, xmin):
 def se_fit(v, c, xmin, start=None):
     f = lambda q: _nll(c, se_logpmf((math.exp(min(q[0], 600.0)), math.exp(min(q[1], 50.0))), v, xmin))  # noqa: E731
     m = (c * v).sum() / c.sum()
-    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options={"xatol": 1e-6, "fatol": 1e-8, "maxiter": 4000})
+    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options=_nm(start))
                 for x0 in (((math.log(start[0]), math.log(start[1])),) if start else
                            ((math.log(1 / m), 0.0), (math.log(1 / m), math.log(0.5)), (math.log(10 / m), math.log(0.3))))),
                key=lambda r: r.fun)
@@ -124,7 +131,7 @@ def tpl_logpmf(p, v, xmin):
 def tpl_fit(v, c, xmin, start=None):
     a0 = pl_fit(v, c, xmin)[0]
     f = lambda q: _nll(c, tpl_logpmf((q[0], math.exp(min(q[1], 50.0))), v, xmin)) if 0.2 < q[0] < 12 else 1e18  # noqa: E731
-    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options={"xatol": 1e-6, "fatol": 1e-8, "maxiter": 4000})
+    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options=_nm(start))
                 for x0 in (((start[0], math.log(max(start[1], 1e-9))),) if start else
                            ((a0, math.log(1e-3)), (max(1.0, a0 - 0.5), math.log(1e-2))))), key=lambda r: r.fun)
     return (float(best.x[0]), float(math.exp(best.x[1])))
@@ -144,7 +151,7 @@ def nb_fit(v, c, xmin, start=None):
     starts = ((0.0, special.logit(1 / (1 + m))), (math.log(0.2), special.logit(0.2 / (0.2 + m))), (math.log(5.0), special.logit(5 / (5 + m))))
     if start:
         starts = ((math.log(max(start[0], NB_R_MIN)), special.logit(min(max(start[1], 1e-9), 1 - 1e-9))),)
-    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options={"xatol": 1e-6, "fatol": 1e-8, "maxiter": 4000})
+    best = min((optimize.minimize(f, x0, method="Nelder-Mead", options=_nm(start))
                 for x0 in starts), key=lambda r: r.fun)
     return (float(max(NB_R_MIN, math.exp(min(best.x[0], 50.0)))), float(special.expit(best.x[1])))
 
