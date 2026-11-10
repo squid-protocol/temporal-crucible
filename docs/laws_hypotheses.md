@@ -230,3 +230,48 @@ Descriptive notes:
 - 577 of C#'s 623 wrong links, and 88 of Kotlin's 98, are another overload of the right method.
 - scip-php v0.0.2 has no edge for 36% of the engine's confident links. With scip-php main @ 71a5b11, precision is 0.995.
 - None of the three meets ACC-H3 on its development repo.
+
+## Amendment 3 (2026-11-09, owner OK; before the sampling frame is built or any panel repo is selected)
+
+**Context.** Amendment 0 adopted 12 repos per confirmatory language from the methods review (M1, "also consider
+strongly"). The review's power table has no k = 12 row and does not cover the universal test, which runs under
+Holm across nine laws. The exact power (noncentral t, Hartung–Knapp t_{k−1}, 99% two-sided; δ = pooled mean /
+√(τ² + v̄)) is:
+
+| k per language | δ = 0.8 | δ = 1.0 | δ = 1.25 | δ = 1.5 | smallest δ at 80% |
+|---|---|---|---|---|---|
+| 8 | 0.21 | 0.35 | 0.55 | 0.74 | 1.60 |
+| 12 | 0.41 | 0.64 | 0.86 | 0.96 | 1.17 |
+| 16 | 0.61 | 0.83 | 0.97 | 1.00 | 0.96 |
+| 20 | 0.75 | 0.93 | 0.99 | 1.00 | 0.84 |
+
+Power of the primary universal test (≥ 3 of 4, partial conjunction; equal δ in every language), at the first and
+last Holm step (α = 0.01/9 and α = 0.01):
+
+| k | δ = 1.0 | δ = 1.25 | δ = 1.5 |
+|---|---|---|---|
+| 12 | 0.07 / 0.55 | 0.34 / 0.90 | 0.74 / 0.99 |
+| 16 | 0.34 / 0.87 | 0.82 / 0.99 | 0.99 / 1.00 |
+
+The extended test (≥ 7 of 10) at δ = 1.5 has power 0.50 / 0.99 at k = 12, and 0.99 / 1.00 at k = 16.
+
+1. **Panel size.** **16 repos per confirmatory language** (replaces Amendment 0 item 1 and Amendment 2 item 2's
+   "12"). Descriptive languages keep 8. The repos are the first 16 or 8 of the language's seeded draw order;
+   ACC-P uses draws 1 and 2.
+2. **Thin pools.** A language with fewer than 16 eligible repos takes all of them. A language with fewer than 12
+   eligible repos is descriptive whatever ACC-P shows. Pool sizes are counted from the frame before the draw and
+   recorded in this file.
+3. **Unchanged:**
+   - the label audit (25 commits per class per language);
+   - ACC-P (2 repos per language, two snapshots);
+   - every test, bar and Holm family.
+
+   The cost of this amendment is scan compute only.
+4. **What the power means for interpretation (stated before the data).**
+   - The network laws LAW-1 to LAW-4 are expected to have δ well above 2, so their verdicts are informative at any
+     k here.
+   - For the defect laws LAW-6 to LAW-8, δ ≈ 1 is plausible. At k = 16, a non-significant universal result is
+     informative only for δ ≥ 1.25, and the report says so. M2's rule that a non-significant result is
+     "inconclusive" stands.
+5. **Power code.** The power numbers come from `scipy.stats.nct` with ncp = δ√k and the critical t_{k−1}. A
+   language passes a partial-conjunction step at level α when its one-sided p ≤ α/(n − r + 1).
