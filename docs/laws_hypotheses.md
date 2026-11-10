@@ -176,3 +176,125 @@ The tuning measures the engine on 20 candidate repos and the engine's own gate c
 
    Also excluded: the engine's call-graph gate corpus (`tests/import_graph_corpus.json` entries scored for call
    graphs) and the ACC repos (apache/commons-io, commons-lang, prometheus, sphinx, libgit2, redis; already excluded).
+
+## Amendment 2 (2026-11-09, owner OK; before any panel repo is selected, scanned or labelled)
+
+**Context.** Engine tuning (gitgalaxy epic #8161) has raised the engine's call-graph quality in languages LAWS lists
+as descriptive (Rust, JS/TS, C++), and the engine parses languages no ACC study has measured (C#, Kotlin, PHP).
+This amendment lets those languages earn confirmatory status through the same ACC-P gate, without changing the
+primary test or re-scaling it to the languages that pass (M2).
+
+1. **The primary test is unchanged.** "Universal" remains the M2 partial-conjunction test for at least 3 of the 4
+   languages C, Java, Go and Python. An ACC-failed or non-evaluable language among those 4 still contributes
+   p_ℓ = 1.
+2. **ACC-P covers every candidate language.** ACC-P (Amendment 1, item 1) runs for C, Java, Go, Python, C++, Rust,
+   JS/TS and C#, plus Kotlin and PHP if they are admitted under item 4. Every language that passes ACC-H3 on both
+   ACC-P repos at both snapshots is **confirmatory**: 12 repos, per-language law claims at the registered 99% bar.
+   A language that fails stays descriptive with 8 repos. The repos are always the first 12 or 8 of that language's
+   seeded draw order; ACC-P uses draws 1 and 2.
+3. **A secondary, extended universality test, fixed now.** Let n be the number of languages that enter ACC-P,
+   counted before any ACC-P result, and r = ⌈2n/3⌉. A law is **universal (extended)** iff the Benjamini–Heller
+   partial-conjunction p-value for "at least r of n", p^{r/n} = (n − r + 1)·p_(r), survives Holm at α = 0.01
+   across the nine laws, **and** no language's pooled effect is opposite at one-sided p < 0.01. ACC-failed or
+   non-evaluable languages contribute p_ℓ = 1. The extended test is reported beside the primary one and never
+   replaces it. A law that fails the primary test is reported as failing it, whatever the extended test shows.
+4. **Admission of new languages (C#, Kotlin, PHP).** Before the draw, a measurement-only survey runs the engine
+   and a compiler-grade reference on one development repo per language. The references are scip-dotnet (C#),
+   scip-java with the Kotlin compiler plugin (Kotlin) and scip-php (PHP), each pinned. A language is admitted to
+   the panel and ACC-P iff:
+   - the reference produces a call graph on its repo;
+   - the engine's confident-link precision against it is ≥ 0.80 (the ACC-H1 bar).
+
+   The survey also reports recall and the three ACC-H3 statistics, descriptively; they are not an admission bar.
+   The admission result is recorded in this file before the draw. C#, already listed as descriptive, is in the
+   panel either way and needs admission only to enter ACC-P. Ruby and Swift are not candidates.
+5. **Development-set dry run.** Before the draw, the three ACC-H3 statistics are computed on development repos
+   only (the ACC repos, the engine's call-graph gate corpus and the survey repos) with the panel engine. They are
+   reported as a pre-draw check, not a gate, and they cannot change items 1–4.
+6. **Excluded from the panel by name:** the survey repos JamesNK/Newtonsoft.Json (C#), square/kotlinpoet (Kotlin)
+   and composer/composer (PHP), and any substitute the survey logs when one fails to build.
+
+### Amendment 2, item 4: admission result (2026-11-09, before the draw)
+
+The survey ran on the engine at gitgalaxy `19e6b9c91`. Its scoring is the gate's `call_graph_resolution._score`, used unchanged, with LAWS M3 exclusions on both sides. Precision is agree / (agree + wrong) over confident links.
+
+| language | repo @ SHA | reference | confident precision (judged) | recall | ρ / J / κ (descriptive) | admitted |
+|---|---|---|---|---|---|---|
+| C# | JamesNK/Newtonsoft.Json @ 52fa3ae | scip-dotnet 0.2.16 | 0.818 (3,415) | 0.591 | 0.774 / 0.375 / 0.668 | **yes** |
+| Kotlin | square/kotlinpoet @ d438267 | scip-java v0.13.2 (scip-kotlinc) | 0.819 (542; 95% CI 0.787–0.851) | 0.320 | 0.502 / 0.250 / 0.656 | **yes** (point estimate, as the bar is written) |
+| PHP | composer/composer @ 3a5137b | scip-php v0.0.2 | 0.998 (2,670) | 0.871 | 0.727 / 0.458 / 0.736 | **yes** |
+
+C#, Kotlin and PHP enter the panel and ACC-P, so n = 10 for the extended test (item 3), and r = 7.
+
+Descriptive notes:
+- 577 of C#'s 623 wrong links, and 88 of Kotlin's 98, are another overload of the right method.
+- scip-php v0.0.2 has no edge for 36% of the engine's confident links. With scip-php main @ 71a5b11, precision is 0.995.
+- None of the three meets ACC-H3 on its development repo.
+
+## Amendment 3 (2026-11-09, owner OK; before the sampling frame is built or any panel repo is selected)
+
+**Context.** Amendment 0 adopted 12 repos per confirmatory language from the methods review (M1, "also consider
+strongly"). The review's power table has no k = 12 row and does not cover the universal test, which runs under
+Holm across nine laws. The exact power (noncentral t, Hartung–Knapp t_{k−1}, 99% two-sided; δ = pooled mean /
+√(τ² + v̄)) is:
+
+| k per language | δ = 0.8 | δ = 1.0 | δ = 1.25 | δ = 1.5 | smallest δ at 80% |
+|---|---|---|---|---|---|
+| 8 | 0.21 | 0.35 | 0.55 | 0.74 | 1.60 |
+| 12 | 0.41 | 0.64 | 0.86 | 0.96 | 1.17 |
+| 16 | 0.61 | 0.83 | 0.97 | 1.00 | 0.96 |
+| 20 | 0.75 | 0.93 | 0.99 | 1.00 | 0.84 |
+
+Power of the primary universal test (≥ 3 of 4, partial conjunction; equal δ in every language), at the first and
+last Holm step (α = 0.01/9 and α = 0.01):
+
+| k | δ = 1.0 | δ = 1.25 | δ = 1.5 |
+|---|---|---|---|
+| 12 | 0.07 / 0.55 | 0.34 / 0.90 | 0.74 / 0.99 |
+| 16 | 0.34 / 0.87 | 0.82 / 0.99 | 0.99 / 1.00 |
+
+The extended test (≥ 7 of 10) at δ = 1.5 has power 0.50 / 0.99 at k = 12, and 0.99 / 1.00 at k = 16.
+
+1. **Panel size.** **16 repos per confirmatory language** (replaces Amendment 0 item 1 and Amendment 2 item 2's
+   "12"). Descriptive languages keep 8. The repos are the first 16 or 8 of the language's seeded draw order;
+   ACC-P uses draws 1 and 2.
+2. **Thin pools.** A language with fewer than 16 eligible repos takes all of them. A language with fewer than 12
+   eligible repos is descriptive whatever ACC-P shows. Pool sizes are counted from the frame before the draw and
+   recorded in this file.
+3. **Unchanged:**
+   - the label audit (25 commits per class per language);
+   - ACC-P (2 repos per language, two snapshots);
+   - every test, bar and Holm family.
+
+   The cost of this amendment is scan compute only.
+4. **What the power means for interpretation (stated before the data).**
+   - The network laws LAW-1 to LAW-4 are expected to have δ well above 2, so their verdicts are informative at any
+     k here.
+   - For the defect laws LAW-6 to LAW-8, δ ≈ 1 is plausible. At k = 16, a non-significant universal result is
+     informative only for δ ≥ 1.25, and the report says so. M2's rule that a non-significant result is
+     "inconclusive" stands.
+5. **Power code.** The power numbers come from `scipy.stats.nct` with ncp = δ√k and the critical t_{k−1}. A
+   language passes a partial-conjunction step at level α when its one-sided p ≤ α/(n − r + 1).
+
+### Amendment 1, item 2: panel engine (2026-11-10, before the sampling frame is built or any panel repo is selected)
+
+**The panel engine is gitgalaxy `b873edc5b059f79e49858fa8e124f6b3e3f3e24f`.** It is the merge commit of
+gitgalaxy#8202, the last PR of epic #8161, merged 2026-11-10T14:04Z. It replaces `8f96d76ba` (the PANEL section and
+Amendment 0 item 5) for every panel scan, the pilot, the development-set dry run and ACC-P. No other PR of the
+epic was open when this was recorded.
+
+The epic's merged PRs, in order: #8162 (`4b23f2187`), #8175 (`18ae0dddb`), #8186 (`19e6b9c91`, the admission
+survey's engine), #8190 (`a94f75eb8`), #8202 (`b873edc5b`).
+
+What is known of this engine on development repos, descriptive only (gitgalaxy CI run 42820825390 on #8202's head
+`92d4fca2c`, the gate's own scoring; not ACC-P and not a gate here):
+
+| language | repo | reference | confident precision (judged) | recall |
+|---|---|---|---|---|
+| C# | JamesNK/Newtonsoft.Json | scip-dotnet | 0.997 (3,747) | 0.790 |
+| Kotlin | square/kotlinpoet | scip-java (kotlin) | 0.973 (512) | 0.359 |
+
+The PHP lane does not run in CI; its numbers in #8202's description are from a local run and are not repeated here.
+
+Engine changes after the draw need a dated amendment and a full rescan before the scorer freeze (Amendment 1,
+item 2). Nothing else in the registration changes.

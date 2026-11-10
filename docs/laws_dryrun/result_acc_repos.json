@@ -1,0 +1,209 @@
+{
+ "engine": "b873edc5b059f79e49858fa8e124f6b3e3f3e24f",
+ "engine_dir": "engine-b873edc5b",
+ "confident_steps": [
+  "class",
+  "qualified",
+  "typed",
+  "file",
+  "import",
+  "unique",
+  "proximate"
+ ],
+ "bars": {
+  "indegree_spearman": 0.8,
+  "hub_jaccard": 0.5,
+  "coupling_kappa": 0.6
+ },
+ "status": "descriptive pre-draw check (LAWS Amendment 2 item 5); not a gate",
+ "repos": {
+  "libgit2": {
+   "language": "c",
+   "evaluable": true,
+   "links": {
+    "confident": 28718,
+    "ambiguous_not_used": 0,
+    "by_step": {
+     "unique": 14796,
+     "import": 8703,
+     "file": 5194,
+     "proximate": 25
+    }
+   },
+   "matched_functions": 7229,
+   "engine_nodes": 9410,
+   "oracle_direct_edges": 23231,
+   "oracle_dynamic_edges": 0,
+   "engine_edges_on_matched": 24937,
+   "precision": 0.7598748847094678,
+   "recall_direct": 0.8156773277086652,
+   "oracle_only_dynamic_share": 0.0,
+   "indegree_spearman": 0.830085730588313,
+   "hub_jaccard": 0.6941176470588235,
+   "coupling_kappa": 0.8671613327136652,
+   "bars_met": {
+    "indegree_spearman": true,
+    "hub_jaccard": true,
+    "coupling_kappa": true
+   },
+   "all_three_met": true
+  },
+  "redis": {
+   "language": "c",
+   "evaluable": true,
+   "links": {
+    "confident": 20994,
+    "ambiguous_not_used": 0,
+    "by_step": {
+     "import": 9872,
+     "file": 7578,
+     "unique": 3544
+    }
+   },
+   "matched_functions": 4989,
+   "engine_nodes": 6677,
+   "oracle_direct_edges": 14832,
+   "oracle_dynamic_edges": 0,
+   "engine_edges_on_matched": 16813,
+   "precision": 0.8426217807648844,
+   "recall_direct": 0.9551645091693636,
+   "oracle_only_dynamic_share": 0.0,
+   "indegree_spearman": 0.8715732694092614,
+   "hub_jaccard": 0.7,
+   "coupling_kappa": 0.919090428344791,
+   "bars_met": {
+    "indegree_spearman": true,
+    "hub_jaccard": true,
+    "coupling_kappa": true
+   },
+   "all_three_met": true
+  },
+  "commons-lang": {
+   "language": "java",
+   "evaluable": true,
+   "links": {
+    "confident": 13239,
+    "ambiguous_not_used": 6200,
+    "by_step": {
+     "receiver": 4693,
+     "qualified": 3959,
+     "class": 3840,
+     "typed": 2916,
+     "overload": 1505,
+     "unique": 1097,
+     "import": 921,
+     "file": 506,
+     "unseen": 2
+    }
+   },
+   "matched_functions": 1957,
+   "engine_nodes": 10934,
+   "oracle_direct_edges": 1528,
+   "oracle_dynamic_edges": 551,
+   "engine_edges_on_matched": 2049,
+   "precision": 0.9443631039531479,
+   "recall_direct": 0.9528795811518325,
+   "oracle_only_dynamic_share": 0.5,
+   "indegree_spearman": 0.9259628245753746,
+   "hub_jaccard": 0.6666666666666666,
+   "coupling_kappa": 0.8964847962044425,
+   "bars_met": {
+    "indegree_spearman": true,
+    "hub_jaccard": true,
+    "coupling_kappa": true
+   },
+   "all_three_met": true
+  },
+  "commons-io": {
+   "language": "java",
+   "evaluable": true,
+   "links": {
+    "confident": 9783,
+    "ambiguous_not_used": 4493,
+    "by_step": {
+     "receiver": 3466,
+     "class": 2815,
+     "qualified": 2493,
+     "typed": 2375,
+     "import": 1135,
+     "overload": 973,
+     "unique": 727,
+     "file": 238,
+     "nearest": 28,
+     "unseen": 26
+    }
+   },
+   "matched_functions": 1471,
+   "engine_nodes": 6845,
+   "oracle_direct_edges": 1113,
+   "oracle_dynamic_edges": 357,
+   "engine_edges_on_matched": 1448,
+   "precision": 0.9226519337016574,
+   "recall_direct": 0.9290206648697215,
+   "oracle_only_dynamic_share": 0.41044776119402987,
+   "indegree_spearman": 0.897724872951236,
+   "hub_jaccard": 0.8235294117647058,
+   "coupling_kappa": 0.8798076923076922,
+   "bars_met": {
+    "indegree_spearman": true,
+    "hub_jaccard": true,
+    "coupling_kappa": true
+   },
+   "all_three_met": true
+  },
+  "prometheus": {
+   "language": "go",
+   "evaluable": true,
+   "links": {
+    "confident": 17816,
+    "ambiguous_not_used": 8623,
+    "by_step": {
+     "import": 10665,
+     "receiver": 8564,
+     "file": 4076,
+     "typed": 1631,
+     "class": 1387,
+     "unseen": 59,
+     "qualified": 57
+    }
+   },
+   "matched_functions": 4767,
+   "engine_nodes": 8697,
+   "oracle_direct_edges": 7040,
+   "oracle_dynamic_edges": 14929,
+   "engine_edges_on_matched": 6690,
+   "precision": 0.9254110612855008,
+   "recall_direct": 0.8410511363636364,
+   "oracle_only_dynamic_share": 0.9290784636836101,
+   "indegree_spearman": 0.11307208466433512,
+   "hub_jaccard": 0.009174311926605505,
+   "coupling_kappa": 0.45037828215398346,
+   "bars_met": {
+    "indegree_spearman": false,
+    "hub_jaccard": false,
+    "coupling_kappa": false
+   },
+   "all_three_met": false
+  },
+  "sphinx": {
+   "language": "python",
+   "evaluable": false,
+   "links": {
+    "confident": 6470,
+    "ambiguous_not_used": 1874,
+    "by_step": {
+     "import": 2611,
+     "receiver": 1815,
+     "class": 1741,
+     "typed": 1036,
+     "file": 985,
+     "qualified": 95,
+     "unseen": 58,
+     "unique": 2,
+     "nearest": 1
+    }
+   },
+   "error": "pycg.machinery.imports.ImportManagerError: Can't add edge to a non existing node"
+  }
+ }
+}
