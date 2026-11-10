@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+# ==============================================================================
+# temporal-crucible
+# Copyright (c) 2026 Joe Esquibel
+# Licensed under the PolyForm Noncommercial License 1.0.0 (see LICENSE).
+# ==============================================================================
+"""LAWS data (docs/laws_hypotheses.md): quarterly snapshot scans with the panel engine, kept as one compact
+per-repo database of the engine's RESOLVED call graph. No statistic is computed here.
+
+    python tools/laws_build.py --gg PANEL_ENGINE_CHECKOUT --py ENGINE_PY --out DIR --repos a,b [--jobs 2] [--limit N]
+
+Reads walks/<repo>_quarterly.json (tools/cgr_build.py's make_walk writes one for a repo that has none) and the
+clone pool. Writes DIR/dbs/<repo>.db. Resumable: a snapshot already in `snap` is skipped.
+
+Tables (ids are per database, not the engine's):
+  snap(commit_hash, ref, date, boundary, rc, engine, scanned_at)
+  file(id, commit_hash, path, language, total_loc, coding_loc)
+  func(id, commit_hash, file_id, name, start_line, loc, class_name, n_calls_out)   n_calls_out: call tokens the
+        function makes (resolved or not), for the resolution profile (methods review M4 b)
+  edge(commit_hash, src, dst, step, kind)   every fcall_data row with both ends resolved; `step` is the engine's
+        resolution step, so the scorer applies "confident links only" (Amendment 1 item 1) and can report the rest
+  unresolved(commit_hash, step, kind, n)    fcall_data rows with no destination function, counted by step
+
+Every file the engine scanned is kept: the LAWS M3 exclusions (tests, vendored, generated code) are the scorer's.
+Scans run with git history off (GITGALAXY_DISABLE_GIT_HISTORY=1), as every temporal-crucible snapshot scan.
+"""
+from __future__ import annotations
+
+import argparse
+import concurrent.futures as cf
+import datetime as dt
+import json
+import os
+import sqlite3
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from _engine import POOL_DIR, REPO_ROOT  # noqa: E402
+
+SCHEMA = [
+    "CREATE TABLE IF NOT EXISTS snap (commit_hash TEXT PRIMARY KEY, ref TEXT, date TEXT, boundary TEXT, rc INTEGER, "
+    "engine TEXT, scanned_at TEXT)",
+    "CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, commit_hash TEXT, path TEXT, language TEXT, "
+    "total_loc INTEGER, coding_loc INTEGER)",
+    "CREATE TABLE IF NOT EXISTS func (id INTEGER PRIMARY KEY, commit_hash TEXT, file_id INTEGER, name TEXT, "
+    "start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER)",
+    "CREATE TABLE IF NOT EXISTS edge (commit_hash TEXT, src INTEGER, dst INTEGER, step TEXT, kind TEXT)",
+    "CREATE TABLE IF NOT EXISTS unresolved (commit_hash TEXT, step TEXT, kind TEXT, n INTEGER)",
+    "CREATE INDEX IF NOT EXISTS idx_file_commit ON file(commit_hash)",
+    "CREATE INDEX IF NOT EXISTS idx_func_commit ON func(commit_hash)",
+    "CREATE INDEX IF NOT EXISTS idx_edge_commit ON edge(commit_hash)",
+]
+
+
+def n_tokens(text) -> int:
+    """How many call tokens a calls_out_to cell holds (a JSON list, or a comma-separated string)."""
+    if not text:
+        return 0
+    s = str(text).strip()
+    if s.startswith("["):
+        try:
+            return len(json.loads(s))
+        except ValueError:
+            pass
+    return sum(1 for t in s.split(",") if t.strip())
+
+
+def copy_snapshot(con: sqlite3.Connection, scan_db: Path, src_root: str, sha: str) -> tuple[int, int, int]:
+    """One engine master DB into the compact tables; (files, functions, edges) written."""
+    s = sqlite3.connect(f"file:{scan_db}?mode=ro", uri=True)
+    cls = dict(s.execute("SELECT id, class_name FROM class_data"))
+    fmap, gmap = {}, {}
+    for fid, path, lang, tloc, cloc in s.execute("SELECT id, file_path, language, total_loc, coding_loc FROM file_data"):
+        rel = str(path)
+        if rel.startswith(src_root):
+            rel = rel[len(src_root):].lstrip("/")
+        fmap[fid] = con.execute("INSERT INTO file (commit_hash, path, language, total_loc, coding_loc) VALUES (?, ?, ?, ?, ?)",
+                                (sha, rel, lang, tloc, cloc)).lastrowid
+    for gid, fid, name, start, loc, pc, calls in s.execute(
+            "SELECT id, file_id, func_name, start_line, loc, parent_class_id, calls_out_to FROM function_data"):
+        if fid in fmap:
+            gmap[gid] = con.execute(
+                "INSERT INTO func (commit_hash, file_id, name, start_line, loc, class_name, n_calls_out) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (sha, fmap[fid], name, start, loc, cls.get(pc), n_tokens(calls))).lastrowid
+    edges = [(sha, gmap[a], gmap[b], step, kind) for a, b, step, kind in s.execute(
+        "SELECT src_func_id, dst_func_id, step, kind FROM fcall_data WHERE dst_func_id IS NOT NULL") if a in gmap and b in gmap]
+    con.executemany("INSERT INTO edge VALUES (?, ?, ?, ?, ?)", edges)
+    con.executemany("INSERT INTO unresolved VALUES (?, ?, ?, ?)", [(sha, step, kind, n) for step, kind, n in s.execute(
+        "SELECT step, kind, COUNT(*) FROM fcall_data WHERE dst_func_id IS NULL GROUP BY step, kind")])
+    s.close()
+    return len(fmap), len(gmap), len(edges)
+
+
+def scan_repo(r: str, gg: Path, py: str, out: Path, engine: str, limit: int | None) -> tuple[str, int, int, int]:
+    repo = POOL_DIR / r
+    db = out / "dbs" / f"{r}.db"
+    db.parent.mkdir(parents=True, exist_ok=True)
+    con = sqlite3.connect(db)
+    for stmt in SCHEMA:
+        con.execute(stmt)
+    con.commit()
+    done = {x[0] for x in con.execute("SELECT commit_hash FROM snap")}
+    walk = json.loads((REPO_ROOT / "walks" / f"{r}_quarterly.json").read_text())
+    env = {**os.environ, "PYTHONPATH": str(gg), "GITGALAXY_LICENSE_KEY": "COMMUNITY_FREE_TIER",
+           "GITGALAXY_DISABLE_GIT_HISTORY": "1"}
+    revs = [v for v in walk["revisions"] if v.get("status", "ok") == "ok"]
+    if limit:  # newest and oldest first, for a smoke run
+        revs = (revs[-(limit - limit // 2):] + revs[:limit // 2]) if len(revs) > limit else revs
+    new = fails = 0
+    for rev in revs:
+        sha = rev["sha"]
+        if sha in done:
+            continue
+        with tempfile.TemporaryDirectory(dir=out) as tmp:
+            src, res = Path(tmp) / "src", Path(tmp) / "out"
+            src.mkdir()
+            res.mkdir()
+            arch = subprocess.run(["git", "-C", str(repo), "archive", sha], capture_output=True)
+            subprocess.run(["tar", "-x", "-C", str(src)], input=arch.stdout, capture_output=True)
+            p = subprocess.run([py, "-m", "gitgalaxy.galaxyscope", str(src), "--output", str(res) + "/"], env=env,
+                               capture_output=True, text=True, errors="replace")
+            dbs = sorted(res.glob("*_galaxy_master.db"))
+            rc = p.returncode if (p.returncode != 0 or dbs) else 1
+            if rc == 0:
+                copy_snapshot(con, dbs[0], str(src), sha)
+                new += 1
+            else:
+                fails += 1
+                (out / "logs").mkdir(exist_ok=True)
+                (out / "logs" / f"{r}-{sha[:12]}.err").write_text((p.stdout + p.stderr)[-4000:])
+            con.execute("INSERT OR REPLACE INTO snap VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        (sha, rev.get("ref"), rev.get("date"), rev.get("boundary"), rc, engine, dt.datetime.now().isoformat()))
+            con.commit()
+    con.close()
+    return r, len(revs), new, fails
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--gg", type=Path, required=True, help="the panel engine checkout")
+    ap.add_argument("--py", required=True, help="a Python with the engine's dependencies")
+    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--repos", required=True)
+    ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--limit", type=int, help="scan only N snapshots per repo (smoke run)")
+    a = ap.parse_args()
+    engine = subprocess.run(["git", "-C", str(a.gg), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    print(f"engine {engine}", flush=True)
+    a.out.mkdir(parents=True, exist_ok=True)
+    with cf.ThreadPoolExecutor(a.jobs) as ex:
+        for r, n, new, fails in ex.map(lambda r: scan_repo(r, a.gg, a.py, a.out, engine, a.limit), a.repos.split(",")):
+            print(f"{r}: {n} snapshots in the walk, {new} scanned now, {fails} failed", flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
