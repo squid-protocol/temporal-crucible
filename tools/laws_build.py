@@ -13,7 +13,9 @@ Reads walks/<repo>_quarterly.json (tools/cgr_build.py's make_walk writes one for
 clone pool. Writes DIR/dbs/<repo>.db. Resumable: a snapshot already in `snap` is skipped.
 
 Tables (ids are per database, not the engine's):
-  snap(commit_hash, ref, date, boundary, rc, engine, scanned_at)
+  walk(boundary, commit_hash, ref, date)    the quarterly walk: one row per quarter boundary. Two boundaries share a
+        commit when a quarter had no commit, so the boundary, not the commit, is the snapshot's key
+  snap(commit_hash, ref, date, boundary, rc, engine, scanned_at)   one row per scanned commit
   file(id, commit_hash, path, language, total_loc, coding_loc, generated)   generated: 1 when one of the file's
         first 5 lines matches GENERATED (methods review M3 ii); the path rules are the scorer's
   attrs(commit_hash, path, text)            every .gitattributes in the snapshot (M3 i: linguist-vendored /
@@ -45,6 +47,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from _engine import POOL_DIR, REPO_ROOT  # noqa: E402
 
 SCHEMA = [
+    "CREATE TABLE IF NOT EXISTS walk (boundary TEXT PRIMARY KEY, commit_hash TEXT, ref TEXT, date TEXT)",
     "CREATE TABLE IF NOT EXISTS snap (commit_hash TEXT PRIMARY KEY, ref TEXT, date TEXT, boundary TEXT, rc INTEGER, "
     "engine TEXT, scanned_at TEXT)",
     "CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, commit_hash TEXT, path TEXT, language TEXT, "
@@ -129,6 +132,9 @@ def scan_repo(r: str, gg: Path, py: str, out: Path, engine: str, limit: int | No
     env = {**os.environ, "PYTHONPATH": str(gg), "GITGALAXY_LICENSE_KEY": "COMMUNITY_FREE_TIER",
            "GITGALAXY_DISABLE_GIT_HISTORY": "1"}
     revs = [v for v in walk["revisions"] if v.get("status", "ok") == "ok"]
+    con.executemany("INSERT OR REPLACE INTO walk VALUES (?, ?, ?, ?)",
+                    [(v.get("boundary"), v["sha"], v.get("ref"), v.get("date")) for v in revs])
+    con.commit()
     if limit:  # newest and oldest first, for a smoke run
         revs = (revs[-(limit - limit // 2):] + revs[:limit // 2]) if len(revs) > limit else revs
     new = fails = 0
