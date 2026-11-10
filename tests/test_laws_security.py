@@ -104,3 +104,16 @@ def test_the_confirmatory_gate_keeps_law9_descriptive_at_three_of_eight():
     for i in range(8):
         per_repo[f"r{i}"]["evaluable"] = i < 5
     assert S.confirmatory_gate(per_repo)["class"] == "confirmatory"
+
+
+def test_the_rank_effect_size_is_reported_where_the_shift_is_degenerate():
+    """Tiny tied counts pin the shift at 0 even when the rank test sees a difference (the libxml2 case)."""
+    rows = fixes(ratio=0.5, seed=11)
+    # 1 file for a CVE fix; most other fixes also touch 1, a minority touch more. Most pairwise differences are
+    # then 0, so their median is 0, while the rank test still sees the other class's heavier tail.
+    for rec in rows:
+        rec["files"] = 1 if rec["cve"] else (1 if rec["ct"] % 5 < 3 else 3)
+    m = S.law9(rows, boot=60)["metrics"]["files"]
+    assert m["effect"] == 0.0 and m["se"] == 0.0        # the shift cannot express a sub-unit difference
+    assert m["p"] < 0.05 and m["p_smaller"] > 0.5       # the rank test and its effect size can
+    assert S.shift([1, 1, 1], [1, 1, 1])["p_smaller"] == pytest.approx(0.5)  # no difference at all

@@ -18,6 +18,14 @@ Effect, per metric in METRICS (files touched, functions changed, non-test source
   its p-value, and unlike the difference of two medians it is defined and stable on these small, heavily tied
   count distributions; `median_difference` reports the difference of medians beside it. SE and a percentile
   interval by a bootstrap of both classes (commits are the unit; a fix commit is in one class only).
+
+  **What the pilot found about this estimator.** On libxml2 the shift is exactly 0.00 with SE 0.00 for files
+  touched and functions changed, because those counts are tiny and heavily tied (median 1 file, 2 functions) and
+  most pairwise differences are 0. The rank test on the same data is significant for files (p = 0.003), so the
+  difference is real but smaller than one file -- and the registered conjunction "each < 0" can never fire on a
+  shift that is pinned at 0. `p_smaller` is reported for exactly this reason. Nothing here is changed: the shift
+  stays the registered effect and the pilot reading stands, but the scorer-freeze amendment should decide whether
+  LAW-9's effect is the shift or `p_smaller`, with these numbers in front of it.
   p one-sided Mann-Whitney (alternative "less": a CVE fix is smaller), tie-corrected.
 
 The law holds for a repo when **all three** effects are negative with p < ALPHA. That conjunction is an
@@ -72,6 +80,10 @@ def shift(cve: np.ndarray, other: np.ndarray, boot: int = BOOT, seed: int = SEED
     lo, hi = np.percentile(reps, [2.5, 97.5])
     return {"effect": effect, "se": float(np.std(reps, ddof=1)), "ci": [float(lo), float(hi)],
             "p": float(mw.pvalue), "u": float(mw.statistic), "boot": boot,
+            # P(a random CVE fix is the smaller of a CVE/other pair), ties counted half: the rank test's own
+            # effect size. Unlike the shift it is never degenerate on tied counts, so it says how big the
+            # difference the p-value found actually is. 0.5 is no difference; above 0.5 is "CVE fixes smaller".
+            "p_smaller": float(1 - mw.statistic / (len(cve) * len(other))),
             "median_cve": float(np.median(cve)), "median_other": float(np.median(other)),
             "median_difference": float(np.median(cve) - np.median(other)),
             "n_cve": int(len(cve)), "n_other": int(len(other))}
