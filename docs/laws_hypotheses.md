@@ -298,3 +298,47 @@ The PHP lane does not run in CI; its numbers in #8202's description are from a l
 
 Engine changes after the draw need a dated amendment and a full rescan before the scorer freeze (Amendment 1,
 item 2). Nothing else in the registration changes.
+
+## Amendment 4 (2026-11-10; before the sampling frame is built or any panel repo is selected)
+
+Owner OK, 2026-11-10: replace the Go oracle's CHA pass with a more precise algorithm, tested on the development
+repo first. The choice of algorithm below follows that test.
+
+**Context.** The development-set dry run (`docs/laws_dryrun.md`) ran the registered Go oracle on prometheus
+(`callgraph -algo=static` as direct edges, `-algo=cha` minus static as dynamic edges). In ACC-3 the CHA pass
+contributed 0 in-repo edges, which ACC-3 called implausible. In the dry run the same command contributed 14,929.
+Why ACC-3's pass returned none is not known. ACC-P is the language gate, so Go's reference cannot be left to
+whether that pass returns edges. CHA also adds an edge to every method that could implement an interface call,
+which is an upper bound, not a call graph.
+
+Development-repo test (prometheus @ c45b13bbdd96, panel engine, confident links only, ACC-2's node set; every
+pass exit 0; descriptive, not a gate):
+
+| reference | dynamic edges on matched functions | in-degree ρ | hub Jaccard | coupling κ | precision / recall |
+|---|---|---|---|---|---|
+| static only | 0 | 0.805 | 0.466 | 0.852 | 0.911 / 0.841 |
+| static + VTA | 6,504 | 0.262 | 0.119 | 0.642 | 0.924 / 0.841 |
+| static + RTA | 10,049 | 0.211 | 0.010 | 0.466 | 0.923 / 0.841 |
+| static + CHA (as registered) | 14,929 | 0.113 | 0.009 | 0.450 | 0.925 / 0.841 |
+
+1. **Go's oracle, for ACC-P and any later Go accuracy run.** Direct edges: `callgraph -algo=static`. Dynamic
+   edges: **`callgraph -algo=vta`** minus static. The in-repo filter, the position template and the matching are
+   ACC-3's, unchanged. The tool and toolchain stay as ACC (x/tools callgraph v0.52.0, go1.27.3). CHA and RTA are
+   not used.
+2. **Not evaluable.** A Go snapshot where either pass exits non-zero, or is killed, is not evaluable. A pass that
+   exits 0 is taken as it is, whatever its edge count; the edge counts of both passes are reported.
+3. **Unchanged:** the three ACC-H3 statistics and their bars, confident links only (Amendment 1 item 1), every
+   other language's oracle, ACC-P's design, and every law test.
+4. **Why VTA.** It is the most precise of the tool's algorithms for interface and function-value calls, so its
+   edges are the closest the tool gives to the calls that can happen. **Why not static only:** interface calls
+   are part of a Go program's call network, which is what the laws are about; and static only is the one
+   reference under which Go came near the bars, so choosing it would be choosing the reference by its outcome.
+5. **Stated before the data.** Under this reference Go does not meet ACC-H3 on its development repo. The panel
+   engine's confident links hold no interface-dispatch edges (8,564 `receiver` links on prometheus are ambiguous
+   and not used). Go is therefore expected to stay descriptive in LAWS, with 8 repos. This is an expectation,
+   not an ACC-P result: ACC-P still runs for Go. Go is one of the four languages of the primary universal test,
+   where an ACC-failed language contributes p = 1 (Amendment 2 item 1), so that test would need all three of C,
+   Java and Python.
+6. **If the engine is changed for Go before the draw** (typed receivers resolved confidently), the panel engine
+   record is replaced by a dated entry and the development-set dry run is repeated with it. After the draw,
+   Amendment 1 item 2 applies.

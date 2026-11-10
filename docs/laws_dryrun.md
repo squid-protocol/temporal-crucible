@@ -57,3 +57,17 @@ whether the CHA pass returns edges, which differed between two runs of the same 
 reference for dynamic dispatch needs to be stated before the draw (for example a named, more precise algorithm, or
 direct edges only for the three statistics), by a dated amendment. Java's reference (java-callgraph) is not
 affected in this run.
+
+## Go against the tool's other algorithms (2026-11-10, one-off diagnostic, not registered)
+
+Same snapshot, engine, node set and matching; only the dynamic pass changes. Every pass exited 0.
+
+| reference | dynamic edges on matched functions | ρ | hub Jaccard | κ | precision / recall |
+|---|---|---|---|---|---|
+| static only | 0 | 0.805 | 0.466 | 0.852 | 0.911 / 0.841 |
+| static + VTA | 6,504 | 0.262 | 0.119 | 0.642 | 0.924 / 0.841 |
+| static + RTA | 10,049 | 0.211 | 0.010 | 0.466 | 0.923 / 0.841 |
+| static + CHA | 14,929 | 0.113 | 0.009 | 0.450 | 0.925 / 0.841 |
+
+The gap is not only CHA's over-approximation: the most precise algorithm still leaves Go far from the bars. The
+engine's confident Go links contain no interface-dispatch edges. LAWS Amendment 4 fixes the reference (VTA).
