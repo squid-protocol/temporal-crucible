@@ -20,8 +20,11 @@ Tables (ids are per database, not the engine's):
         first 5 lines matches GENERATED (methods review M3 ii); the path rules are the scorer's
   attrs(commit_hash, path, text)            every .gitattributes in the snapshot (M3 i: linguist-vendored /
         linguist-generated are read per snapshot)
-  func(id, commit_hash, file_id, name, start_line, loc, class_name, n_calls_out)   n_calls_out: call tokens the
-        function makes (resolved or not), for the resolution profile (methods review M4 b)
+  func(id, commit_hash, file_id, name, start_line, loc, class_name, n_calls_out, signature)   n_calls_out: call
+        tokens the function makes (resolved or not), for the resolution profile (methods review M4 b). signature: the
+        engine's declared parameter types where it reads them (Java), else its argument count; tools/laws_net.py adds
+        it to a function's identity in the languages that overload (the pilot: 34% of commons-lang's functions
+        shared a (path, class, name))
   edge(commit_hash, src, dst, step, kind)   every fcall_data row with both ends resolved; `step` is the engine's
         resolution step, so the scorer applies "confident links only" (Amendment 1 item 1) and can report the rest
   unresolved(commit_hash, step, kind, n)    fcall_data rows with no destination function, counted by step
@@ -54,7 +57,7 @@ SCHEMA = [
     "total_loc INTEGER, coding_loc INTEGER, generated INTEGER)",
     "CREATE TABLE IF NOT EXISTS attrs (commit_hash TEXT, path TEXT, text TEXT)",
     "CREATE TABLE IF NOT EXISTS func (id INTEGER PRIMARY KEY, commit_hash TEXT, file_id INTEGER, name TEXT, "
-    "start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER)",
+    "start_line INTEGER, loc INTEGER, class_name TEXT, n_calls_out INTEGER, signature TEXT)",
     "CREATE TABLE IF NOT EXISTS edge (commit_hash TEXT, src INTEGER, dst INTEGER, step TEXT, kind TEXT)",
     "CREATE TABLE IF NOT EXISTS unresolved (commit_hash TEXT, step TEXT, kind TEXT, n INTEGER)",
     "CREATE INDEX IF NOT EXISTS idx_file_commit ON file(commit_hash)",
@@ -104,12 +107,16 @@ def copy_snapshot(con: sqlite3.Connection, scan_db: Path, src_root: str, sha: st
         if ga.is_file():
             con.execute("INSERT INTO attrs VALUES (?, ?, ?)",
                         (sha, str(ga.relative_to(src_root)), ga.read_text(encoding="utf-8", errors="replace")[:200000]))
-    for gid, fid, name, start, loc, pc, calls in s.execute(
-            "SELECT id, file_id, func_name, start_line, loc, parent_class_id, calls_out_to FROM function_data"):
+    have = {c[1] for c in s.execute("PRAGMA table_info(function_data)")}
+    types = "param_types" if "param_types" in have else "NULL"
+    for gid, fid, name, start, loc, pc, calls, args, ptypes in s.execute(
+            f"SELECT id, file_id, func_name, start_line, loc, parent_class_id, calls_out_to, args, {types} FROM function_data"):
         if fid in fmap:
+            sig = ptypes if ptypes and str(ptypes).strip() not in ("", "[]") else (None if args is None else str(args))
             gmap[gid] = con.execute(
-                "INSERT INTO func (commit_hash, file_id, name, start_line, loc, class_name, n_calls_out) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (sha, fmap[fid], name, start, loc, cls.get(pc), n_tokens(calls))).lastrowid
+                "INSERT INTO func (commit_hash, file_id, name, start_line, loc, class_name, n_calls_out, signature) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (sha, fmap[fid], name, start, loc, cls.get(pc), n_tokens(calls), sig)).lastrowid
     edges = [(sha, gmap[a], gmap[b], step, kind) for a, b, step, kind in s.execute(
         "SELECT src_func_id, dst_func_id, step, kind FROM fcall_data WHERE dst_func_id IS NOT NULL") if a in gmap and b in gmap]
     con.executemany("INSERT INTO edge VALUES (?, ?, ?, ?, ?)", edges)
@@ -126,6 +133,8 @@ def scan_repo(r: str, gg: Path, py: str, out: Path, engine: str, limit: int | No
     con = sqlite3.connect(db)
     for stmt in SCHEMA:
         con.execute(stmt)
+    if "signature" not in {c[1] for c in con.execute("PRAGMA table_info(func)")}:  # a database built before the column
+        con.execute("ALTER TABLE func ADD COLUMN signature TEXT")
     con.commit()
     done = {x[0] for x in con.execute("SELECT commit_hash FROM snap")}
     walk = json.loads((REPO_ROOT / "walks" / f"{r}_quarterly.json").read_text())

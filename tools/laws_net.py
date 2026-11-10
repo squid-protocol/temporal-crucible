@@ -7,8 +7,10 @@
 """LAWS call networks (docs/laws_hypotheses.md): one network per snapshot, from a tools/laws_build.py database.
 
   Nodes   functions with loc >= 3 in a source file of the repo's language that M3 does not exclude
-          (tools/laws_units.py). Identity is (path, enclosing class or "", name) (Amendment 0 item 6); functions that
-          share an identity (overloads) are one node, and the share merged is reported (methods review M4).
+          (tools/laws_units.py). Identity is (path, enclosing class or "", name) (Amendment 0 item 6). In the
+          languages that overload (OVERLOAD: the engine's own list) the name carries the signature, `name(types)`,
+          so overloads are separate nodes; elsewhere it does not, so a function that gains a parameter stays itself.
+          Functions that still share an identity are one node, and the share merged is reported (methods review M4).
   Edges   the engine's resolved `call` links whose resolution step is CONFIDENT (Amendment 1 item 1), between two
           nodes, without self-loops. Links of other steps and unresolved links are counted, never used.
 
@@ -31,6 +33,7 @@ import laws_units as U  # noqa: E402
 # gitgalaxy core/call_resolver.py at the panel engine: the steps whose resolution is "scoped" or "unique"
 CONFIDENT_STEPS = frozenset({"class", "qualified", "typed", "file", "import", "unique", "proximate"})
 MIN_LOC = 3
+OVERLOAD = frozenset({"java", "cpp", "csharp", "kotlin"})  # gitgalaxy core/call_resolver.py OVERLOAD_LANGS at the panel engine
 
 Node = tuple[str, str, str]
 
@@ -86,12 +89,13 @@ def network(con: sqlite3.Connection, sha: str, date: str, language: str, tests_a
         if reason is None or (tests_as_callers and reason == "test"):
             keep[fid] = (path, reason == "test")
     ident, raw = {}, 0
-    for gid, fid, name, loc, cls in con.execute(
-            "SELECT id, file_id, name, loc, class_name FROM func WHERE commit_hash = ?", (sha,)):
+    sig = "signature" if "signature" in {c[1] for c in con.execute("PRAGMA table_info(func)")} else "NULL"
+    for gid, fid, name, loc, cls, signature in con.execute(
+            f"SELECT id, file_id, name, loc, class_name, {sig} FROM func WHERE commit_hash = ?", (sha,)):
         if fid not in keep or not name or (loc or 0) < MIN_LOC:
             continue
         path, test = keep[fid]
-        node = (path, cls or "", str(name))
+        node = (path, cls or "", f"{name}({signature})" if language in OVERLOAD and signature is not None else str(name))
         raw += 1
         ident[gid] = node
         cur = net.nodes.setdefault(node, {"loc": 0, "n": 0, "file": path, "test": test})
