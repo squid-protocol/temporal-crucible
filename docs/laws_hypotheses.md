@@ -275,3 +275,26 @@ The extended test (≥ 7 of 10) at δ = 1.5 has power 0.50 / 0.99 at k = 12, and
      "inconclusive" stands.
 5. **Power code.** The power numbers come from `scipy.stats.nct` with ncp = δ√k and the critical t_{k−1}. A
    language passes a partial-conjunction step at level α when its one-sided p ≤ α/(n − r + 1).
+
+### Amendment 1, item 2: panel engine (2026-11-10, before the sampling frame is built or any panel repo is selected)
+
+**The panel engine is gitgalaxy `b873edc5b059f79e49858fa8e124f6b3e3f3e24f`.** It is the merge commit of
+gitgalaxy#8202, the last PR of epic #8161, merged 2026-11-10T14:04Z. It replaces `8f96d76ba` (the PANEL section and
+Amendment 0 item 5) for every panel scan, the pilot, the development-set dry run and ACC-P. No other PR of the
+epic was open when this was recorded.
+
+The epic's merged PRs, in order: #8162 (`4b23f2187`), #8175 (`18ae0dddb`), #8186 (`19e6b9c91`, the admission
+survey's engine), #8190 (`a94f75eb8`), #8202 (`b873edc5b`).
+
+What is known of this engine on development repos, descriptive only (gitgalaxy CI run 42820825390 on #8202's head
+`92d4fca2c`, the gate's own scoring; not ACC-P and not a gate here):
+
+| language | repo | reference | confident precision (judged) | recall |
+|---|---|---|---|---|
+| C# | JamesNK/Newtonsoft.Json | scip-dotnet | 0.997 (3,747) | 0.790 |
+| Kotlin | square/kotlinpoet | scip-java (kotlin) | 0.973 (512) | 0.359 |
+
+The PHP lane does not run in CI; its numbers in #8202's description are from a local run and are not repeated here.
+
+Engine changes after the draw need a dated amendment and a full rescan before the scorer freeze (Amendment 1,
+item 2). Nothing else in the registration changes.
