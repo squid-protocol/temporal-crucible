@@ -69,10 +69,20 @@ The snapshot is **2026-06-01**, after the auditor's May 2026 knowledge cutoff, s
 post-dates what the model could have memorized. Both SHAs are pinned here before any scoring; the window end is the
 pool clone's head, not "today", so it cannot be stretched after seeing results.
 
-Approximate sizing from a subject-grep pre-count (the registered outcome uses the v3c labeler, not this grep):
-**curl 149 fix-like commits touching 295 distinct `.c`/`.h` files (30% of the universe); nDPI 31 commits touching
-38 files (9%)**. curl can therefore carry a recall estimate on its own; **nDPI is declared direction-only in
-advance** and no nDPI number will be reported as a result in its own right.
+**Measured outcomes (2026-11-11, `tools/aiat_eval.py sample`, the registered v3c rule applied through
+`fixlike_v2.drop_reason`):**
+
+| repo | commits in window | v3c fix commits | files fixed | positive rate |
+|---|---|---|---|---|
+| curl | 1,391 | 112 | **85 of 988** | **8.6%** |
+| nDPI | 152 | 30 | **35 of 426** | **8.2%** |
+
+**nDPI is declared direction-only in advance** and no nDPI number will be reported as a result in its own right.
+
+**Erratum (2026-11-11, before any scoring).** An earlier draft of this section put curl's positive rate at 30%,
+from a subject grep used for sizing. The registered v3c rule is far stricter — it drops 972 of curl's 1,391 window
+commits for carrying no fix word in the subject — and the true rate is **8.6%**. The 30% figure was never used for
+anything but sizing, and §6 is corrected below accordingly. No outcome had been scored when this was found.
 
 ## 4 · The instrument
 
@@ -96,20 +106,43 @@ covariate model sees history and structure, this sees only code.
 **Reported, never used as a filter:** per-file score distribution, refusal and parse-failure rate, and the
 auditor's own stated reasons for the top-ranked files (as text, for a human read).
 
-## 6 · Sampling and power
+## 6 · Sampling and power — corrected from the measurement
 
-Stratified by LOC decile within each repo, review budget defined **within the sample** so recall@20% is estimable:
-target **400 files from curl, 300 from nDPI**, final n fixed by the §7 cost probe and recorded before scoring. At
-curl's ~30% positive rate a 400-file sample holds ~120 positive files, which clears the program's ≥20-positives-per-
-cell power rule for every LOC stratum in AIAT-P1. nDPI at ~9% holds ~27 and clears it only pooled — which is why it
-is direction-only.
+**The whole snapshot universe is scored, not a sample: curl 988 files, nDPI 426.** Two reasons, both measured
+before any scoring:
+
+- At the real 8.6% positive rate, a 400-file sample holds ~34 positives. Spread over ten LOC deciles that is ~3 per
+  cell, nowhere near the program's **≥20-positives-per-cell** rule, so the AIAT-P1 gate would have been
+  uncomputable as originally written.
+- The whole universe costs **$7.86 (curl) + $5.27 (nDPI) = $13.13** through the Batches API — inside the §7 gate —
+  so there is no reason to pay sampling error for a saving the budget does not need.
+
+**The AIAT-P1 gate is evaluated over three equal-count LOC bands, not ten deciles.** curl's 85 positives give ~28
+per band, which clears the ≥20 rule; deciles would give ~8. Deciles are still reported, descriptively, and any band
+holding fewer than 20 positives is printed as **UNDERPOWERED** rather than read as a result. nDPI's 35 positives
+give ~12 per band and clear the rule nowhere — exactly why it is direction-only.
+
+`--n` still subsamples, for a cheap smoke run; it is not the registered configuration.
 
 ## 7 · Cost gate
 
 The experiment framework requires a stated cost and a 6-month payoff of ≥ 3× cost including slot-hours at $10, with
-a $40 ceiling. **Procedure: score 25 curl files first, measure actual input and output tokens, extrapolate, then fix
-the sample size so the whole pilot lands under $40.** If 400 + 300 files cannot fit under the cap, the sample
-shrinks; the design does not change. The probe's measured numbers are recorded in this file before the main run.
+a $40 ceiling.
+
+**Measured 2026-11-11** (`tools/aiat_eval.py estimate`, character-based token estimate, `claude-opus-5`, Batches
+API at 50%):
+
+| item | files | input tokens | batch cost |
+|---|---|---|---|
+| curl, whole universe | 988 | 2,550,876 | **$7.86** |
+| nDPI, whole universe | 426 | 1,851,605 | **$5.27** |
+| AIAT-P2 reliability (100 files × 5 runs) | 500 | ~1.3M | ~$4 |
+| **total** | | | **≈ $17** |
+
+That leaves headroom under the $40 cap for the AIAT-P3 contrast run. The estimate is character-based; `estimate
+--count-tokens` measures it exactly with `messages.count_tokens` (free) before the first paid run, and the measured
+figure replaces this table. Scoring goes through the Batches API because latency is irrelevant to a pilot and it
+halves the bill.
 
 ## 8 · What this cannot establish
 

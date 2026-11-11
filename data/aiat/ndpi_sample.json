@@ -1,0 +1,2580 @@
+{
+ "repo": "ndpi",
+ "snapshot": "7b43393d8a36cf71b61f582093b1185c4ed0b0b9",
+ "pool_head": "2b8c2989f",
+ "seed": 2982,
+ "universe": 426,
+ "sample_n": 426,
+ "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+ "outcome": {
+  "commits_in_window": 152,
+  "dropped_by_rule": {
+   "C": 99,
+   "A": 3,
+   "B2": 10,
+   "B": 7,
+   "B3": 3
+  },
+  "rule": "fixlike_v2.drop_reason(rules='v3c')"
+ },
+ "universe_positives": 35,
+ "sample_positives": 35,
+ "files": [
+  {
+   "path": "example/ndpiReader.c",
+   "loc": 5964,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "example/ndpiSimpleIntegration.c",
+   "loc": 1192,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "example/reader_util.c",
+   "loc": 2826,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "example/reader_util.h",
+   "loc": 512,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "example/utests.c",
+   "loc": 2500,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_alg_crc32_md5.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_common_code.c",
+   "loc": 93,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_common_code.h",
+   "loc": 28,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_dga.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_dns_parse.c",
+   "loc": 98,
+   "stratum": 5,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_categories.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_category.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_config.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_malicious_ja4.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_malicious_sha1.c",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_protocols.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_filecfg_risk_domains.c",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_http_parse.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_is_stun.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_is_stun_tcp.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_libinjection.c",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_match_custom_category.c",
+   "loc": 28,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_decode_tls_blocks.c",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader.c",
+   "loc": 272,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_alloc_fail.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_nalloc.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_payload_analyzer.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_64k.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_internal.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_only_subclassification.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_randomize_ports.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_simplest.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_ndpi_reader_pl7m_simplest_internal.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_process_packet.c",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "fuzz/fuzz_quic_get_crypto_data.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_tls_certificate.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 1
+  },
+  {
+   "path": "fuzz/fuzz_tls_client_server_hello.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 1
+  },
+  {
+   "path": "influxdb/metric_anomaly.c",
+   "loc": 166,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "rrdtool/rrd_anomaly.c",
+   "loc": 181,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "rrdtool/rrd_similarity.c",
+   "loc": 302,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_api.h",
+   "loc": 2757,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/include/ndpi_classify.h",
+   "loc": 100,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_encryption.h",
+   "loc": 408,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_includes.h",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_includes_OpenBSD.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_main.h",
+   "loc": 96,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_patricia_typedefs.h",
+   "loc": 130,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_private.h",
+   "loc": 1142,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/include/ndpi_protocol_ids.h",
+   "loc": 528,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_replace_printf.h",
+   "loc": 56,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_typedefs.h",
+   "loc": 2279,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/include/ndpi_unix.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_usdt.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/include/ndpi_win32.h",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_analyze.c",
+   "loc": 2606,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_binary_bitmap.c",
+   "loc": 180,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_bitmap.c",
+   "loc": 274,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_bitmap64_fuse.c",
+   "loc": 212,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_cache.c",
+   "loc": 660,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_classify.c",
+   "loc": 728,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_community_id.c",
+   "loc": 370,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_config.c",
+   "loc": 890,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/ndpi_domain_classify.c",
+   "loc": 228,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_domains.c",
+   "loc": 184,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_filter.c",
+   "loc": 107,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_fingerprint.c",
+   "loc": 335,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/ndpi_geoip.c",
+   "loc": 315,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_hash.c",
+   "loc": 151,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_main.c",
+   "loc": 13149,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/ndpi_memory.c",
+   "loc": 172,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_plugin.c",
+   "loc": 186,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/ndpi_serializer.c",
+   "loc": 3140,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/ndpi_utils.c",
+   "loc": 6320,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/plugins/myproto_plugin.c",
+   "loc": 129,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/activision.c",
+   "loc": 107,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/afp.c",
+   "loc": 86,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ajp.c",
+   "loc": 129,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/alicloud.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/amazon_video.c",
+   "loc": 73,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/among_us.c",
+   "loc": 57,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/amqp.c",
+   "loc": 82,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/armagetron.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/atg.c",
+   "loc": 63,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/avast.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/avast_securedns.c",
+   "loc": 63,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bacnet.c",
+   "loc": 96,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/beckhoff_ads.c",
+   "loc": 121,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bfcp.c",
+   "loc": 86,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bfd.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bgp.c",
+   "loc": 65,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bitcoin.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bittorrent.c",
+   "loc": 662,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/bjnp.c",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/blizzard.c",
+   "loc": 152,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/btlib.c",
+   "loc": 472,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/btlib.h",
+   "loc": 181,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/c1222.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/can.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/capwap.c",
+   "loc": 140,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cassandra.c",
+   "loc": 100,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ceph.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/checkmk.c",
+   "loc": 82,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cip.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ciscovpn.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/citrix.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cloudflare_warp.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cnp-ip.c",
+   "loc": 63,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/coap.c",
+   "loc": 159,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cod_mobile.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/collectd.c",
+   "loc": 199,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/corba.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/cpha.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/crossfire.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/crynet.c",
+   "loc": 110,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dcerpc.c",
+   "loc": 103,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dhcp.c",
+   "loc": 216,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/dhcpv6.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/diameter.c",
+   "loc": 115,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dicom.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dingtalk.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/discord.c",
+   "loc": 84,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dlep.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dnp3.c",
+   "loc": 64,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dns.c",
+   "loc": 1003,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/dnscrypt.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dofus.c",
+   "loc": 64,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/drda.c",
+   "loc": 99,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/dropbox.c",
+   "loc": 83,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/eaq.c",
+   "loc": 88,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/easyweather.c",
+   "loc": 61,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/edonkey.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/egd.c",
+   "loc": 61,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/elastic_search.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/epicgames.c",
+   "loc": 83,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ethereum.c",
+   "loc": 160,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ethernet_ip.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ethersbus.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ethersio.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/fastcgi.c",
+   "loc": 244,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/fins.c",
+   "loc": 118,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/fix.c",
+   "loc": 72,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/flute.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ftp_control.c",
+   "loc": 259,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ftp_data.c",
+   "loc": 202,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/gaijin_entertainment.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/gearman.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/gearup_booster.c",
+   "loc": 132,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/genshin_impact.c",
+   "loc": 82,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/git.c",
+   "loc": 83,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/glbp.c",
+   "loc": 81,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/gnutella.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/gtp.c",
+   "loc": 136,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/guildwars2.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/h323.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hamachi.c",
+   "loc": 173,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/haproxy.c",
+   "loc": 97,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hart-ip.c",
+   "loc": 109,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hcl_notes.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hislip.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hl7.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hots.c",
+   "loc": 73,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hpvirtgrp.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/hsrp.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/http.c",
+   "loc": 1803,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/http2.c",
+   "loc": 64,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/i3d.c",
+   "loc": 84,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iax.c",
+   "loc": 105,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iec60870-5-104.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iec62056.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ieee-c37118.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/imo.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ipp.c",
+   "loc": 65,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ipsec.c",
+   "loc": 447,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iqiyi.c",
+   "loc": 64,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/irc.c",
+   "loc": 106,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iris.c",
+   "loc": 250,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/iso9506-1-mms.c",
+   "loc": 81,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/jabber.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/jrmi.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/json-rpc.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/json.c",
+   "loc": 123,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/kafka.c",
+   "loc": 94,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/kakaotalk_voice.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/kcp.c",
+   "loc": 101,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/kerberos.c",
+   "loc": 705,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/kismet.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/knxnet_ip.c",
+   "loc": 127,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/lagofast.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ldap.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ldp.c",
+   "loc": 123,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/line.c",
+   "loc": 119,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/lisp.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/lol_wild_rift.c",
+   "loc": 81,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/lustre.c",
+   "loc": 86,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mail_imap.c",
+   "loc": 269,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mail_pop.c",
+   "loc": 213,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mail_smtp.c",
+   "loc": 393,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/matter.c",
+   "loc": 87,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/megaco.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/melsec.c",
+   "loc": 63,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/memcached.c",
+   "loc": 182,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/merakicloud.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mgcp.c",
+   "loc": 111,
+   "stratum": 5,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/mikrotik.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mining.c",
+   "loc": 104,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/modbus.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/monero.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mongodb.c",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mpegdash.c",
+   "loc": 96,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mpegts.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mqtt.c",
+   "loc": 258,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/msdo.c",
+   "loc": 73,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/msgpack.c",
+   "loc": 298,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mssql_tds.c",
+   "loc": 85,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mudfish.c",
+   "loc": 97,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/mumble.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/munin.c",
+   "loc": 88,
+   "stratum": 4,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/mysql.c",
+   "loc": 71,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nano.c",
+   "loc": 88,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/natpmp.c",
+   "loc": 197,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nats.c",
+   "loc": 81,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nest_log_sink.c",
+   "loc": 72,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/netbios.c",
+   "loc": 424,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/netease_games.c",
+   "loc": 85,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/netflow.c",
+   "loc": 192,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nexon.c",
+   "loc": 71,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nfs.c",
+   "loc": 98,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nintendo.c",
+   "loc": 63,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/noe.c",
+   "loc": 81,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/nomachine.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/non_tcp_udp.c",
+   "loc": 184,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ntp.c",
+   "loc": 149,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/oicq.c",
+   "loc": 97,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ookla.c",
+   "loc": 126,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/opc-ua.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/openflow.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/openvpn.c",
+   "loc": 504,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/openwire.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/oracle.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/paltalk.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/path_of_exile.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/pfcp.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/postgres.c",
+   "loc": 133,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/pptp.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/profinet_io.c",
+   "loc": 84,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/protobuf.c",
+   "loc": 258,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ptpv2.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/qq.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/quic.c",
+   "loc": 2076,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/radius_proto.c",
+   "loc": 82,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/radmin.c",
+   "loc": 97,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/raft.c",
+   "loc": 106,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/raknet.c",
+   "loc": 400,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rdp.c",
+   "loc": 204,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/resp.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/riotgames.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ripe_atlas.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rmcp.c",
+   "loc": 96,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/roughtime.c",
+   "loc": 133,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rsh.c",
+   "loc": 159,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rsync.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rtmp.c",
+   "loc": 101,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rtp.c",
+   "loc": 552,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rtps.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rtsp.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/rx.c",
+   "loc": 222,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/s7comm.c",
+   "loc": 241,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/samsung_sdp.c",
+   "loc": 65,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/sbe.c",
+   "loc": 122,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/sd_rtn.c",
+   "loc": 93,
+   "stratum": 4,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/sflow.c",
+   "loc": 65,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/sip.c",
+   "loc": 282,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/skinny.c",
+   "loc": 100,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/slp.c",
+   "loc": 330,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/smb.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/smpp.c",
+   "loc": 319,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/snmp_proto.c",
+   "loc": 153,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/soap.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/socks45.c",
+   "loc": 132,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/softether.c",
+   "loc": 355,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/someip.c",
+   "loc": 202,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/sonos.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/source_engine.c",
+   "loc": 103,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/spotify.c",
+   "loc": 86,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ssdp.c",
+   "loc": 212,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/ssh.c",
+   "loc": 740,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/steam.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/steam_datagram_relay.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/stomp.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/stun.c",
+   "loc": 1357,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/syncthing.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/syslog.c",
+   "loc": 120,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tailscale.c",
+   "loc": 56,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tcp_udp.c",
+   "loc": 64,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/teamspeak.c",
+   "loc": 103,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/teamviewer.c",
+   "loc": 93,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/telegram.c",
+   "loc": 120,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/telnet.c",
+   "loc": 216,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tencent_games.c",
+   "loc": 94,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/teredo.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/teso.c",
+   "loc": 87,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tftp.c",
+   "loc": 291,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/threema.c",
+   "loc": 98,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/thrift.c",
+   "loc": 264,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tinc.c",
+   "loc": 151,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tivoconnect.c",
+   "loc": 142,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tls.c",
+   "loc": 3797,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/tocaboca.c",
+   "loc": 86,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tplink_shp.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/trdp.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tristation.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/tuya_lp.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ubntac2.c",
+   "loc": 81,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/uftp.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/ultrasurf.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/usenet.c",
+   "loc": 105,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/viber.c",
+   "loc": 108,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/vmware.c",
+   "loc": 53,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/vnc.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/vxlan.c",
+   "loc": 73,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/websocket.c",
+   "loc": 157,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/whatsapp.c",
+   "loc": 129,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/whoisdas.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/wireguard.c",
+   "loc": 207,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/wsd.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/xbox.c",
+   "loc": 108,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/xdmcp.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/xiaomi.c",
+   "loc": 118,
+   "stratum": 6,
+   "fixed": 1
+  },
+  {
+   "path": "src/lib/protocols/yojimbo.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/z3950.c",
+   "loc": 133,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/zabbix.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/zeromq.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/zoom.c",
+   "loc": 255,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/protocols/zug.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/MurmurHash3.h",
+   "loc": 8,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/aes.h",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ahocorasick.h",
+   "loc": 284,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ball.h",
+   "loc": 107,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/binaryfusefilter.h",
+   "loc": 736,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/aes.h",
+   "loc": 271,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/aesni.h",
+   "loc": 130,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/cipher.h",
+   "loc": 934,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/cipher_wrap.h",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/common.h",
+   "loc": 368,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/digest.h",
+   "loc": 26,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/error.h",
+   "loc": 201,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt/gcm.h",
+   "loc": 364,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/gcrypt_light.h",
+   "loc": 95,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/hll.h",
+   "loc": 28,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/isolation_forest.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/kdtree.h",
+   "loc": 121,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libcache.h",
+   "loc": 117,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libinjection.h",
+   "loc": 65,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libinjection_html5.h",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libinjection_sqli.h",
+   "loc": 294,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libinjection_sqli_data.h",
+   "loc": 9652,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/libinjection_xss.h",
+   "loc": 21,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ndpi_md5.h",
+   "loc": 18,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ndpi_patricia.h",
+   "loc": 256,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ndpi_sha1.h",
+   "loc": 17,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/ndpi_sha256.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/pl7m.h",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/rce_injection.h",
+   "loc": 618,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/roaring.h",
+   "loc": 3203,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/roaring_v2.h",
+   "loc": 1143,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/secure_memzero.h",
+   "loc": 194,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/shoco.h",
+   "loc": 24,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/shoco_domains_model.h",
+   "loc": 172,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/uthash.h",
+   "loc": 1138,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/windows/dirent.h",
+   "loc": 1239,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/include/windows/getopt.h",
+   "loc": 136,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/aes.c",
+   "loc": 599,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ahocorasick.c",
+   "loc": 1317,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ball.c",
+   "loc": 573,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/fuzz/nallocinc.c",
+   "loc": 350,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/fuzz/pl7m.c",
+   "loc": 1564,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/aes.c",
+   "loc": 516,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/aesni.c",
+   "loc": 538,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/cipher.c",
+   "loc": 591,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/cipher_wrap.c",
+   "loc": 234,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/digest.c",
+   "loc": 321,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt/gcm.c",
+   "loc": 671,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/gcrypt_light.c",
+   "loc": 384,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/hll/MurmurHash3.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/hll/hll.c",
+   "loc": 172,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/isolation_forest.c",
+   "loc": 196,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/kdtree.c",
+   "loc": 670,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/libcache.c",
+   "loc": 328,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/libinjection_html5.c",
+   "loc": 868,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/libinjection_sqli.c",
+   "loc": 2334,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/libinjection_xss.c",
+   "loc": 545,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ndpi_md5.c",
+   "loc": 204,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ndpi_patricia.c",
+   "loc": 1110,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ndpi_sha1.c",
+   "loc": 284,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/ndpi_sha256.c",
+   "loc": 160,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/roaring.c",
+   "loc": 27390,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/roaring_v2.c",
+   "loc": 19772,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/sha1-fast.c",
+   "loc": 148,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/shoco.c",
+   "loc": 233,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/strptime.c",
+   "loc": 440,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/windows/getopt.c",
+   "loc": 972,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/lib/third_party/src/windows/gettimeofday.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/dga/dga_evaluate.c",
+   "loc": 121,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/performance/gcrypt.c",
+   "loc": 220,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/performance/geo.c",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/performance/patriciasearch.c",
+   "loc": 104,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/performance/substringsearch.c",
+   "loc": 99,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit.c",
+   "loc": 423,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "utils/hosts2domains.c",
+   "loc": 62,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "utils/print_rank.c",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/Win32-Extensions.h",
+   "loc": 113,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/bittypes.h",
+   "loc": 137,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/ip6_misc.h",
+   "loc": 163,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap-bpf.h",
+   "loc": 47,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap-namedb.h",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap-stdinc.h",
+   "loc": 93,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap.h",
+   "loc": 45,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap/bpf.h",
+   "loc": 934,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/pcap/pcap.h",
+   "loc": 407,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "windows/WpdPack/Include/remote-ext.h",
+   "loc": 444,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "windows/src/getopt.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/src/getopt.h",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/src/ndpi_config.h",
+   "loc": 3,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "windows/src/ndpi_define.h",
+   "loc": 298,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "windows/src/win-gettimeofday.c",
+   "loc": 1,
+   "stratum": 0,
+   "fixed": 0
+  }
+ ]
+}
