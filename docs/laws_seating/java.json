@@ -1,0 +1,96 @@
+{
+ "language": "java",
+ "attempts": [
+  {
+   "repo": "wenmingvs/androidprocess",
+   "eligible": false,
+   "why": "pre-screen: 71 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "netgloo/spring-boot-samples",
+   "eligible": false,
+   "why": "pre-screen: 105 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "intellectualsites/fastasyncworldedit",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 5180,
+   "snapshots_with_files": 64,
+   "quarters": 64,
+   "quarters_with_commit": 64,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "devunwired/recyclerview-playground",
+   "eligible": false,
+   "why": "pre-screen: 84 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "wequick/small",
+   "eligible": false,
+   "why": "pre-screen: 825 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "telenav/nodeflow",
+   "eligible": false,
+   "why": "pre-screen: 34 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "baoyongzhang/android-pullrefreshlayout",
+   "eligible": false,
+   "why": "pre-screen: 59 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "lauriewired/malimite",
+   "eligible": false,
+   "why": "pre-screen: 98 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pchab/androidrtc",
+   "eligible": false,
+   "why": "pre-screen: 72 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "morpheapp/morphe-patches",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 297,
+   "why": "fewer than 2000 first-parent commits (297)"
+  },
+  {
+   "repo": "gauravk95/bubble-navigation",
+   "eligible": false,
+   "why": "pre-screen: 52 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hypixeldev/publicapi",
+   "eligible": false,
+   "why": "pre-screen: 399 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "openaev-platform/openaev",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 5045,
+   "snapshots_with_files": 20,
+   "quarters": 20,
+   "quarters_with_commit": 20,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "intellectualsites/fastasyncworldedit",
+  "openaev-platform/openaev"
+ ]
+}

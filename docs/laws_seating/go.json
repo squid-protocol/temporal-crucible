@@ -1,0 +1,300 @@
+{
+ "language": "go",
+ "attempts": [
+  {
+   "repo": "weibaohui/k8m",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 3090,
+   "snapshots_with_files": 7,
+   "quarters": 7,
+   "quarters_with_commit": 7,
+   "why": "fewer than 20 quarters with 50 source files (7)"
+  },
+  {
+   "repo": "notaryproject/notation",
+   "eligible": false,
+   "why": "pre-screen: 591 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hoanhan101/algo",
+   "eligible": false,
+   "why": "pre-screen: 439 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "disposaboy/gosublime",
+   "eligible": false,
+   "why": "pre-screen: 1996 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "werf/kubedog",
+   "eligible": false,
+   "why": "pre-screen: 688 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "thealgorithms/go",
+   "eligible": false,
+   "why": "pre-screen: 621 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "boldsoftware/meat",
+   "eligible": false,
+   "why": "pre-screen: 50 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "kubesphere/kubeeye",
+   "eligible": false,
+   "why": "pre-screen: 687 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pgaskin/kepubify",
+   "eligible": false,
+   "why": "pre-screen: 369 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mudler/localrecall",
+   "eligible": false,
+   "why": "pre-screen: 141 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "go-check/check",
+   "eligible": false,
+   "why": "pre-screen: 160 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "haproxytech/kubernetes-ingress",
+   "eligible": false,
+   "why": "pre-screen: 1744 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "openimsdk/open-im-server",
+   "eligible": false,
+   "why": "pre-screen: 1751 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jessevdk/go-flags",
+   "eligible": false,
+   "why": "pre-screen: 688 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mpolden/echoip",
+   "eligible": false,
+   "why": "pre-screen: 356 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mkevac/debugcharts",
+   "eligible": false,
+   "why": "pre-screen: 44 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "google/syzkaller",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 12799,
+   "snapshots_with_files": 44,
+   "quarters": 44,
+   "quarters_with_commit": 44,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "fastclaw-ai/fastclaw",
+   "eligible": false,
+   "why": "pre-screen: 633 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "wasmerio/wasmer-go",
+   "eligible": false,
+   "why": "pre-screen: 673 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "stacktower-io/stacktower",
+   "eligible": false,
+   "why": "pre-screen: 77 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "tcnksm/gcli",
+   "eligible": false,
+   "why": "pre-screen: 304 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "cloudwego/shmipc-go",
+   "eligible": false,
+   "why": "pre-screen: 39 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mkchoi212/fac",
+   "eligible": false,
+   "why": "pre-screen: 207 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "kernel/kernel-images",
+   "eligible": false,
+   "why": "pre-screen: 320 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "echosong/beego_blog",
+   "eligible": false,
+   "why": "pre-screen: 25 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "c-sto/bananaphone",
+   "eligible": false,
+   "why": "pre-screen: 25 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "gohouse/gorose",
+   "eligible": false,
+   "why": "pre-screen: 685 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "multigres/multigres",
+   "eligible": false,
+   "why": "pre-screen: 1372 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "olebedev/emitter",
+   "eligible": false,
+   "why": "pre-screen: 58 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "projectdiscovery/tlsx",
+   "eligible": false,
+   "why": "pre-screen: 1107 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "cockroachdb/copyist",
+   "eligible": false,
+   "why": "pre-screen: 70 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "eolinker/apinto",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 427,
+   "why": "fewer than 2000 first-parent commits (427)"
+  },
+  {
+   "repo": "lmittmann/tint",
+   "eligible": false,
+   "why": "pre-screen: 63 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "xyproto/permissions2",
+   "eligible": false,
+   "why": "pre-screen: 364 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "andeya/faygo",
+   "eligible": false,
+   "why": "pre-screen: 431 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "yaoapp/yao",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1935,
+   "why": "fewer than 2000 first-parent commits (1935)"
+  },
+  {
+   "repo": "gaowanliang/downloadbot",
+   "eligible": false,
+   "why": "pre-screen: 71 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "togettoyou/fabric-realty",
+   "eligible": false,
+   "why": "pre-screen: 233 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "maxence-charriere/lofimusic",
+   "eligible": false,
+   "why": "pre-screen: 130 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "appleboy/gin-jwt",
+   "eligible": false,
+   "why": "pre-screen: 438 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "get-woke/woke",
+   "eligible": false,
+   "why": "pre-screen: 373 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "uptrace/uptrace",
+   "eligible": false,
+   "why": "pre-screen: 1012 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "almeidapaulopt/tsdproxy",
+   "eligible": false,
+   "why": "pre-screen: 1062 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "one2nc/cloudlens",
+   "eligible": false,
+   "why": "pre-screen: 349 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "blevesearch/bleve",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1669,
+   "why": "fewer than 2000 first-parent commits (1669)"
+  },
+  {
+   "repo": "botlabs-gg/yagpdb",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 3259,
+   "snapshots_with_files": 41,
+   "quarters": 41,
+   "quarters_with_commit": 41,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "google/syzkaller",
+  "botlabs-gg/yagpdb"
+ ]
+}
