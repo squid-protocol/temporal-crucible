@@ -139,7 +139,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### What comments say
 
-- **Registered, not yet scored.** — pending, 2026-11-11 · [journal](journal/2026-11-11-scar-fix-scars.md)
+- **Danger comments at birth predict CVE fixes even in files with no CVE history (1.55×), so they are foresight rather than inherited scars; whether the warnings that CVE fixes leave behind mark lasting fragility is still underpowered.** — mixed, 2026-11-11 · [journal](journal/2026-11-11-scar-fix-scars.md)
 - **After gitgalaxy#8255, the engine's commented-out-code rule is about 93% precise across 5 repos' fix-event files (Wave A's 4% was a curl include-comment artefact), so COM-H3 can use it, run directly on git blobs.** — exploratory, 2026-11-11 · [journal](journal/2026-11-11-dead-code-panel.md)
 - **Among danger-commented functions, nothing the engine measures at birth (telemetry, lattice family, call-graph position) beat size + repo + prior-CVE-file at telling which got a CVE fix within 5 years; the discovery signature did not survive held-out functions.** — not-supported, 2026-11-10 · [journal](journal/2026-11-10-dcs-danger-comment-signature.md)
 - **Comment prose is 14% of hunk-grain branch hits but does not drive the fix gradient; the new header-comment flag is about 95% precise on curl; but the commented-out-code signal is about 4% precise on curl (mostly "/* for foo() */" include notes), so no study should read it until the rule is fixed.** — exploratory, 2026-11-10 · [journal](journal/2026-11-10-comment-extraction-wave-a.md)
