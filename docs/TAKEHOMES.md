@@ -140,10 +140,11 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 ### What comments say
 
 - **Registered, not yet scored.** — pending, 2026-11-11 · [journal](journal/2026-11-11-scar-fix-scars.md)
-- **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-dcs-danger-comment-signature.md)
+- **After gitgalaxy#8255, the engine's commented-out-code rule is about 93% precise across 5 repos' fix-event files (Wave A's 4% was a curl include-comment artefact), so COM-H3 can use it, run directly on git blobs.** — exploratory, 2026-11-11 · [journal](journal/2026-11-11-dead-code-panel.md)
+- **Among danger-commented functions, nothing the engine measures at birth (telemetry, lattice family, call-graph position) beat size + repo + prior-CVE-file at telling which got a CVE fix within 5 years; the discovery signature did not survive held-out functions.** — not-supported, 2026-11-10 · [journal](journal/2026-11-10-dcs-danger-comment-signature.md)
 - **Comment prose is 14% of hunk-grain branch hits but does not drive the fix gradient; the new header-comment flag is about 95% precise on curl; but the commented-out-code signal is about 4% precise on curl (mostly "/* for foo() */" include notes), so no study should read it until the rule is fixed.** — exploratory, 2026-11-10 · [journal](journal/2026-11-10-comment-extraction-wave-a.md)
 - **A header comment left untouched while the code keeps changing does not mark CVE risk; if anything those functions got fewer CVE fixes (0.67, CI 0.42–1.06, inconclusive).** — not-supported, 2026-11-10 · [journal](journal/2026-11-10-com-h4-comment-drift.md)
-- **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-cmr-comments-by-role.md)
+- **Comments sit by call-graph role (hubs explained more, the periphery less but with more warnings), but no role changes what a danger comment predicts.** — mixed, 2026-11-10 · [journal](journal/2026-11-10-cmr-comments-by-role.md)
 - **Functions born with danger-language comments get CVE fixes 1.45× as often [1.08, 1.89]; the replication on unseen repos was inconclusive (1.13), and CVE fixes themselves add such comments (1.61×).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-danger-comments.md)
 
 ### Engine findings (GitGalaxy itself)
