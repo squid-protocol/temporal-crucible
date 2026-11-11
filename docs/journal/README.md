@@ -46,6 +46,7 @@ Disclosure rule: entries are public, so they carry aggregates only (no per-host 
 
 | date | entry | type | status | verdict | register ids | take-home |
 |---|---|---|---|---|---|---|
+| 2026-11-11 | [Scars: what do the danger comments that fixes leave behind mean? (SCAR)](2026-11-11-scar-fix-scars.md) | confirmatory | draft | pending | SCAR-R1, SCAR-R2, SCAR-I1, SCAR-I2 | Draft registration, not yet scored. |
 | 2026-11-10 | [Danger comments that stayed safe: is there a code signature? (DCS)](2026-11-10-dcs-danger-comment-signature.md) | confirmatory | registered | pending | DCS-T, DCS-F, DCS-C, DCS-ALL | Registered, not yet scored. |
 | 2026-11-10 | [Can we trust the comment instruments? (comment-extraction Wave A)](2026-11-10-comment-extraction-wave-a.md) | exploratory | scored | n/a | — | Comment prose is 14% of hunk-grain branch hits but does not drive the fix gradient; the new header-comment flag is about 95% precise on curl; but the commented-out-code signal is about 4% precise on curl (mostly "/* for foo() */" include notes), so no study should read it until the rule is fixed. |
 | 2026-11-10 | [Do functions whose header comment goes stale get more CVE fixes? (COM-H4)](2026-11-10-com-h4-comment-drift.md) | confirmatory | scored | not-supported | COM-H4a..H4b | A header comment left untouched while the code keeps changing does not mark CVE risk; if anything those functions got fewer CVE fixes (0.67, CI 0.42–1.06, inconclusive). |
