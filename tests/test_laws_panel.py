@@ -106,3 +106,34 @@ def test_file_graph_metrics(dbs):
     rows, s = P.file_years(*dbs, "go")
     y1 = {r["path"]: r for r in rows if r["year"] == 2018}
     assert y1["src/a.go"]["in_cycle"] == 0 and y1["src/a.go"]["giant"] == 1  # 2 of 4 files: above the 20% cap of 1
+
+
+def test_revised_fix_labels_override_the_database_and_are_counted(dbs):
+    """tools/laws_github.py's M6 label replaces the keyword label per sha; a sha it does not name keeps the
+    database's own, which is the fallback for bots, commits touching no unit source file, and non-GitHub repos."""
+    net, hist = dbs
+    base = P.History(hist)
+    assert base.labels_applied == {"given": 0, "changed": 0, "made": 0, "unmade": 0}
+    fixes = [s for s, v in base.commits.items() if v[3]]
+    others = [s for s, v in base.commits.items() if not v[3]]
+    assert fixes and others, "the fixture needs both a fix and a non-fix commit"
+    revised = P.History(hist, {others[0]: True, fixes[0]: False})
+    assert revised.commits[others[0]][3] == 1 and revised.commits[fixes[0]][3] == 0
+    assert revised.labels_applied == {"given": 2, "changed": 2, "made": 1, "unmade": 1}
+    for sha in base.commits:                      # everything else is untouched, ct and author included
+        if sha not in (others[0], fixes[0]):
+            assert revised.commits[sha] == base.commits[sha]
+    agreeing = P.History(hist, {fixes[0]: True})  # a mapping that agrees changes nothing
+    assert agreeing.labels_applied == {"given": 1, "changed": 0, "made": 0, "unmade": 0}
+
+
+def test_file_years_passes_the_revised_labels_through_to_the_outcome(dbs):
+    net, hist = dbs
+    rows, summary = P.file_years(net, hist, "go")
+    assert summary["fix_labels"] == {"given": 0, "changed": 0, "made": 0, "unmade": 0}
+    base_positives = summary["positives"]
+    unfix = {s for s, v in P.History(hist).commits.items() if v[3]}
+    rows2, summary2 = P.file_years(net, hist, "go", {s: False for s in unfix})
+    assert summary2["fix_labels"]["unmade"] == len(unfix) and summary2["positives"] == 0
+    assert base_positives > 0 and len(rows2) == len(rows)   # the same file-years, a different outcome
+    assert all(r["fix_commit"] is None for r in rows2)
