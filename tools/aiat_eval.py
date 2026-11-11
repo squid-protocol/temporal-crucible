@@ -365,6 +365,42 @@ def recall_at_budget(items: list[tuple[float, int, int]], frac: float = 0.20) ->
     return got / total_pos
 
 
+def loc_baseline(items: list[tuple[float, int, int]]) -> tuple[float, str]:
+    """The STRONGER of the two size orderings, which is the baseline the auditor must beat.
+
+    At a line budget, big-files-first spends the budget on few files and small-files-first reviews
+    many. Which wins depends on how the positives are distributed, so neither is "the size order":
+    picking one in advance can hand the instrument a baseline it beats for free. A random ranking
+    beat big-files-first on curl (0.212 vs 0.129) in a smoke test before any real score existed,
+    which is exactly the trap. The program's own convention elsewhere is lift over the *stronger*
+    size order (ENV-H1..H3), and that is what is used here.
+    """
+    desc = recall_at_budget([(float(l), l, y) for _s, l, y in items])
+    asc = recall_at_budget([(-float(l), l, y) for _s, l, y in items])
+    return (desc, "big-first") if desc >= asc else (asc, "small-first")
+
+
+def positive_bands(items: list[tuple[float, int, int]], bands: int = 3) -> dict[int, int]:
+    """Index -> band, cutting on LOC so each band holds a comparable number of POSITIVES.
+
+    Equal-count bands put 1, 10 and 74 of curl's 85 positives in the three bands, because positives
+    concentrate in large files, leaving the gate evaluable in one band only. Cut points are fixed
+    from LOC and the outcome, never from any score, so they cannot favour the auditor over LOC.
+    """
+    order = sorted(range(len(items)), key=lambda i: items[i][1])
+    total_pos = sum(y for _s, _l, y in items)
+    if not total_pos:
+        return {i: 0 for i in range(len(items))}
+    per = total_pos / bands
+    out, seen, b = {}, 0, 0
+    for i in order:
+        out[i] = b
+        seen += items[i][2]
+        if seen >= per * (b + 1) and b < bands - 1:
+            b += 1
+    return out
+
+
 def spearman(xs: list[float], ys: list[float]) -> float:
     def rank(v):
         order = sorted(range(len(v)), key=lambda i: v[i])
@@ -389,35 +425,63 @@ def spearman(xs: list[float], ys: list[float]) -> float:
     return num / den if den else float("nan")
 
 
+
+# ---------------------------------------------------------------- AIAT-P7: class split
+XC_HARVEST_END = "2026-09-11"  # events/<repo>_xc.json stops here; P7 runs on this sub-window only
+
+
+def class_labels(repo: str) -> dict[str, set[str]]:
+    """class -> files touched by a fix of that class between the snapshot and the xc harvest's end.
+
+    Registered as AIAT-P7. These are the harvester's audited classes, not the v3c approximation the
+    primary outcome uses, and they cover a SHORTER window, so P7 is a secondary on a subset. The
+    primary outcome is not recomputed here.
+    """
+    f = Path("events") / f"{repo}_xc.json"
+    if not f.exists():
+        return {}
+    d = json.loads(f.read_text())
+    ev = d["events"] if isinstance(d, dict) and "events" in d else d
+    snap_ct = int(subprocess.run(["git", "-C", str(POOL / repo), "show", "-s", "--format=%ct",
+                                  SNAPSHOT[repo]], capture_output=True).stdout.decode().strip() or 0)
+    out: dict[str, set[str]] = {}
+    for e in ev:
+        if not e.get("ct") or int(e["ct"]) < snap_ct:
+            continue
+        out.setdefault(e.get("class") or "?", set()).update(e.get("c_files") or [])
+    return out
+
+
 def cmd_metrics(a) -> int:
     rec = json.loads(sample_path(a.repo).read_text())
     scores = load_scores(a.repo, a.model)
-    rows = [(scores[f["path"]]["p"], f["loc"], f["fixed"], f["stratum"])
+    rows = [(scores[f["path"]]["p"], f["loc"], f["fixed"], f["stratum"], f["path"])
             for f in rec["files"] if f["path"] in scores and "p" in scores[f["path"]]]
     if not rows:
         return _die("no scores yet: run `score` first")
-    print(f"{a.repo}: {len(rows)} scored, {sum(y for _, _, y, _ in rows)} positive "
-          f"({sum(y for _, _, y, _ in rows) / len(rows):.1%}), model {a.model}")
-    by_score = [(p, l, y) for p, l, y, _ in rows]
-    by_loc = [(float(l), l, y) for p, l, y, _ in rows]
+    print(f"{a.repo}: {len(rows)} scored, {sum(y for _, _, y, _st, _pa in rows)} positive "
+          f"({sum(y for _, _, y, _st, _pa in rows) / len(rows):.1%}), model {a.model}")
+    by_score = [(p, l, y) for p, l, y, _st, _pa in rows]
+    by_loc = [(float(l), l, y) for p, l, y, _st, _pa in rows]
     print("\nAIAT-P1 -- is it a size proxy?")
-    print(f"  spearman(score, log loc)      {spearman([p for p, _, _, _ in rows], [math.log(l) for _, l, _, _ in rows]):+.3f}")
+    print(f"  spearman(score, log loc)      {spearman([p for p, _, _, _st, _pa in rows], [math.log(l) for _, l, _, _st, _pa in rows]):+.3f}")
+    base, which = loc_baseline(by_score)
     print(f"  recall@20% lines, score order {recall_at_budget(by_score):.3f}")
-    print(f"  recall@20% lines, LOC order   {recall_at_budget(by_loc):.3f}  (the baseline to beat)")
+    print(f"  recall@20% lines, LOC order   {base:.3f}  (the STRONGER size order: {which})")
+    print(f"    both size orders: big-first {recall_at_budget(by_loc):.3f}, "
+          f"small-first {recall_at_budget([(-float(l), l, y) for _p, l, y, _st, _pa in rows]):.3f}")
     print("  within LOC bands (the gate -- the pooled line is confounded by size).")
-    print("  Three equal-count bands, not deciles: at the measured ~8.5% positive rate deciles hold")
-    print("  ~8 positives each, under the program's >=20-per-cell rule; bands hold ~28 (curl).")
+    print("  Three EQUAL-POSITIVE LOC bands: equal-count bands hold 1/10/74 of curl's positives,")
+    print("  since positives concentrate in large files. Cut points come from LOC and the outcome,")
+    print("  never from a score, so they cannot favour the auditor over size.")
     wins = tot = 0
-    order = sorted(range(len(rows)), key=lambda i: rows[i][1])
-    band = {}
-    for rank, i in enumerate(order):
-        band[i] = min(2, rank * 3 // max(1, len(order)))
+    band = positive_bands(by_score, 3)
     for s in (0, 1, 2):
         sub = [(rows[i][0], rows[i][1], rows[i][2]) for i in band if band[i] == s]
-        subl = [(float(rows[i][1]), rows[i][1], rows[i][2]) for i in band if band[i] == s]
+        subl = sub  # loc_baseline derives both size orders from the same rows
         if sum(y for _, _, y in sub) < 1 or len(sub) < 5:
             continue
-        rs, rl = recall_at_budget(sub), recall_at_budget(subl)
+        rs, (rl, _w) = recall_at_budget(sub), loc_baseline(sub)
         tot += 1
         wins += rs > rl
         under = sum(y for _, _, y in sub) < 20
@@ -427,6 +491,32 @@ def cmd_metrics(a) -> int:
     if tot:
         print(f"  score beats LOC in {wins}/{tot} evaluable bands "
               f"-- the registered kill criterion is 'adds nothing over LOC within strata'")
+
+    # AIAT-P7, registered before scoring: lift must be largest for latent, near zero for regression
+    classes = class_labels(a.repo)
+    if classes:
+        print(f"\nAIAT-P7 -- where does the lift land by fix class? "
+              f"(classes from events/{a.repo}_xc.json, sub-window to {XC_HARVEST_END})")
+        print("  registered prediction: lift(latent) > lift(regression); a flat lift undermines the")
+        print("  attention reading and looks like a second size proxy.")
+        print(f"    {'class':11} {'pos':>4} {'score':>7} {'LOC':>7} {'lift':>7}")
+        lifts = {}
+        for cls in ("latent", "extrinsic", "regression", "other-fix"):
+            paths = classes.get(cls) or set()
+            items = [(p_, l, int(pa in paths)) for p_, l, _y, _st, pa in rows]
+            pos = sum(y for _, _, y in items)
+            if pos < 1:
+                continue
+            rs = recall_at_budget(items)
+            rl, _which = loc_baseline(items)
+            lifts[cls] = rs - rl
+            flag = "" if pos >= 20 else "  UNDERPOWERED"
+            print(f"    {cls:11} {pos:4} {rs:7.3f} {rl:7.3f} {rs - rl:+7.3f}{flag}")
+        if "latent" in lifts and "regression" in lifts:
+            verdict = ("SUPPORTS the attention reading" if lifts["latent"] > lifts["regression"]
+                       else "UNDERMINES it (regression >= latent)")
+            print(f"  lift(latent) {lifts['latent']:+.3f} vs lift(regression) "
+                  f"{lifts['regression']:+.3f}  ->  {verdict}")
     if a.replicate_model:
         other = load_scores(a.repo, a.replicate_model)
         both = [(scores[p]["p"], other[p]["p"]) for p in scores
