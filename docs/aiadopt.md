@@ -70,6 +70,32 @@ What it does establish is that **the question is answerable** — 583 exposed co
 a matched design is a real study, not a fishing trip — and that the crude framing people usually quote
 (58% vs 46%) is worthless.
 
+## 4b · Within-author, the residual disappears (2026-11-11, `aiadopt_eval.py author`)
+
+The sibling structural study's design, applied to this study's outcome: compare each person's AI-marked
+commits against **that same person's** unmarked commits, matched on edit size. Who reaches for a tool, and
+how good they are, then cancels — which is the selection §4 could not touch.
+
+| contrast | strata | matched RR | 95% CI | z |
+|---|---|---|---|---|
+| within-repo (§3) | repo × size × area × breadth | 1.114× | [0.99, 1.26] | +1.75 |
+| **within-author** | repo × author × size | **0.984×** | **[0.87, 1.11]** | −0.27 |
+| within-author, tighter | repo × author × size × area | 1.054× | [0.92, 1.20] | +0.79 |
+| within-author, 180-day window | repo × author × size | 0.955× | [0.84, 1.09] | −0.69 |
+
+**The residual is gone.** 339 events in the AI arm, so this is a powered null, not an absence of data, and it
+holds under a tighter stratification and a doubled follow-up window. The sign test agrees exactly: of the 10
+authors with ≥5 commits in both arms, **5 are up and 5 are down**.
+
+The mechanism is visible in the per-author table. One author — harfbuzz's maintainer — supplies 387 of the
+583 AI-marked commits, at 63.0% against his own 59.3%. The pooled 1.114× in §3 was **composition**: which
+authors adopt AI, not what AI does to the code.
+
+**Reading.** On declared AI use in this corpus, code written with AI help is followed by a fix no more often
+than the same person's own code of the same size. That is a cleaner answer than §3's, and it is still not a
+verdict: the exposure is declared-only, the window is 90 days, and a person may still reach for a tool on
+their hairier tasks — confounding by indication survives a within-author contrast.
+
 ## 5 · Sibling studies in this program, and what they settle
 
 Three AI studies landed the same day from another lane, all on the same trailer-declared exposure:
