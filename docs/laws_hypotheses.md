@@ -678,3 +678,55 @@ decision, and making one would cost more than it buys.
 **Evidence.** `docs/otherfix_audit.md` and `docs/otherfix_round3_summary.json` for the per-repo counts;
 intervals are Wilson 95%; the 136 figure is a one-sided normal-approximation sample size for
 p₀ = 0.70 vs p₁ = 0.60 at α = 0.05 and 80% power.
+
+## Amendment 8 (2026-11-11, owner OK; before the label audit, the candidate fingerprint and the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** A check prompted by `docs/ceil.md` — which measured defect-model effects on the eight CGR
+repos — asked whether those repos could be drawn into the panel and so compromise the replication's
+independence. **They cannot: the registration already excludes them** (PANEL, "Excluded": every repo
+used in any temporal-crucible study to date, naming PostgreSQL, libgit2, libxml2, redis, prometheus,
+commons-lang, sphinx and ripgrep). The guard was already in place and no new exclusion is needed. This
+amendment records the check, fixes the one gap it exposed, and files two items that follow from it.
+
+1. **The exclusion is registered but not implemented — it must be applied before the draw.** The frame
+   files produced by the frame search (`laws-study/pilot/frame/<lang>.json`) are **raw GitHub search
+   candidates**: every one of the eight excluded repos appears among them (libgit2, postgres and
+   libxml2 in `c.json`; redis in `c.json` and `go.json`; prometheus in `cpp/go/python`; commons-lang in
+   `java.json`; sphinx in `cpp/python`; ripgrep in `rust.json`). No exclusion list exists anywhere in
+   `tools/laws_*.py`. Since the draw is "uniformly at random from the eligible list", an unfiltered
+   list would silently draw an excluded repo.
+
+   **Required before the seeded draw:** the PANEL exclusion is applied to the candidate list, the
+   removed repos are **logged by name with the draw**, and the candidate fingerprint (M9) is computed
+   over the **post-exclusion** list. The exclusion list is the registration's own, unchanged.
+
+2. **`docs/ceil.md` is development-set evidence, and is now explicitly so.** Its eight repos are
+   excluded panel candidates, which the registration defines as the development set ("Development set:
+   the excluded repos above (pilot tools there, never panel results)"). Its results may therefore be
+   used as priors and for tooling, and **never as panel results**.
+
+3. **Pre-draw prior for LAW-6: in-cycle is expected to fail outside C.** On the development set, with
+   FIXLIKE v3c labels and the registered controls (size, churn, prior fixes, authors, change coupling,
+   file-clustered SEs), the in-cycle odds ratio is **1.218 pooled** but **1.073 outside C, z = 1.0,
+   95% CI [0.93, 1.24] — crossing 1**. Rewiring (1.322) and coupling (1.570) stay clear of 1 outside C;
+   in-cycle does not. Cleaner labels moved it: on v1 labels the same term read 1.218 outside C.
+
+   This is recorded **before** the draw, in the spirit of LAW-8's registered "expected to fail", so the
+   outcome is interpreted against a stated expectation rather than rationalised afterwards. It changes
+   **no** direction, bar or verdict rule for LAW-6, which stays confirmatory as Amendment 0 item 2 left
+   it.
+
+4. **Erratum to Amendment 6 item 7.** That item cites `docs/ceil.md`'s re-fit as showing author count
+   "the strongest single term in its re-fit (OR 2.06 [1.92, 2.22]), ahead of prior fixes". That figure
+   is from the **v1-label** re-fit and does not survive the label fix: under FIXLIKE v3c, prior fixes
+   rise to **1.893** and authors fall to **1.774**, so recidivism is the stronger term pooled. The
+   point Amendment 6 was making is unaffected — both controls earn their place, and change coupling
+   (1.072) still fails to displace network coupling — but the ranking is label-dependent and the v3c
+   figures are the ones to quote.
+
+5. **Unchanged.** The PANEL exclusion list itself, the scorer freeze (Amendment 5 item 8), the
+   controls, the panel size, the draw procedure and seed, and every law's direction and bar.
+
+**Evidence.** Registration PANEL section ("Excluded", "Development set");
+`laws-study/pilot/frame/<lang>.json` for the candidate lists; `docs/ceil_v3c.json` (`m1_refit`) for the
+re-fit figures in items 3 and 4; `docs/ceil.md` §5.
