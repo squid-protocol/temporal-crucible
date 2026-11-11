@@ -22,7 +22,11 @@ def ok(effect, se):
 def test_the_margins_and_directions_are_the_registered_ones():
     assert {k: (v["margin"], v["direction"]) for k, v in RUN.SPEC.items()} == {
         "LAW-1": (0.0, 1), "LAW-2": (0.0, 1), "LAW-3": (0.0, 1), "LAW-4": (0.0, 1), "LAW-5": (0.0, 1),
-        "LAW-6": (0.0, 1), "LAW-7": (0.5, 1), "LAW-8": (0.02, 1), "LAW-9": (0.0, -1)}
+        "LAW-6": (0.0, 1), "LAW-7": (0.5, 1), "LAW-8": (0.02, 1), "LAW-9": (0.5, 1)}
+    # Amendment 5: LAW-2's effect is the excess over the fitness null, LAW-9's is P(cve smaller) against 0.5
+    assert RUN.SPEC["LAW-2"]["path"] == ("fitness_null",)
+    assert (RUN.SPEC["LAW-2"]["effect_key"], RUN.SPEC["LAW-2"]["se_key"]) == ("excess", "se_excess")
+    assert (RUN.SPEC["LAW-9"]["effect_key"], RUN.SPEC["LAW-9"]["se_key"]) == ("p_smaller", "se_p_smaller")
     assert RUN.SPEC["LAW-8"]["equivalence"] == 0.02
     assert RUN.SPEC["LAW-7"]["metrics"] == D.METRICS and RUN.SPEC["LAW-9"]["metrics"] == S.METRICS
     assert [k for k, v in RUN.SPEC.items() if not v["confirmatory"]] == ["LAW-5", "LAW-9"]
@@ -34,14 +38,14 @@ def test_only_usable_effects_reach_a_pool():
             repo("c", **{"LAW-1": ok(2.0, float("nan"))}),      # a NaN SE cannot be a variance
             repo("d", **{"LAW-1": ok(2.0, 0.0)}),               # nor can zero
             repo("e", **{})]                                    # the law never ran
-    assert RUN._effects(rows, "LAW-1") == [("a", 1.0, 0.1)]
+    assert RUN._effects(rows, "LAW-1", RUN.SPEC["LAW-1"]) == [("a", 1.0, 0.1)]
 
 
 def test_a_metric_bearing_law_is_read_per_metric():
     rows = [repo("a", **{"LAW-7": {"evaluable": True, "metrics": {"coupling": ok(0.9, 0.2),
                                                                   "k_mean": {"evaluable": False}}}})]
-    assert RUN._effects(rows, "LAW-7", "coupling") == [("a", 0.9, 0.2)]
-    assert RUN._effects(rows, "LAW-7", "k_mean") == []
+    assert RUN._effects(rows, "LAW-7", RUN.SPEC["LAW-7"], "coupling") == [("a", 0.9, 0.2)]
+    assert RUN._effects(rows, "LAW-7", RUN.SPEC["LAW-7"], "k_mean") == []
 
 
 def test_law5s_two_legs_are_read_from_their_own_keys():
@@ -112,19 +116,20 @@ def test_a_metric_law_enters_universality_through_its_weakest_metric():
 def test_a_metric_record_without_its_own_flag_falls_back_to_the_laws():
     """LAW-7's metrics gate themselves; LAW-9's are shift() records with no `evaluable` key, which exist only
     when the law is evaluable. Requiring the key on both made LAW-9 unreachable in the first pilot run."""
+    sp9 = RUN.SPEC["LAW-9"]
     law9 = [repo("libxml2", "c", **{"LAW-9": {"evaluable": True, "metrics": {
-        "files": {"effect": -0.5, "se": 0.2}, "functions": {"effect": -0.1, "se": 0.1},
-        "lines": {"effect": -1.0, "se": 0.4}}}})]
+        m: {"p_smaller": 0.6, "se_p_smaller": 0.05} for m in S.METRICS}}})]
     for m in S.METRICS:
-        assert RUN._effects(law9, "LAW-9", m), f"{m} should reach the pool"
+        assert RUN._effects(law9, "LAW-9", sp9, m), f"{m} should reach the pool"
     not_evaluable = [repo("redis", "c", **{"LAW-9": {"evaluable": False, "metrics": {
-        "files": {"effect": -0.5, "se": 0.2}}}})]
-    assert RUN._effects(not_evaluable, "LAW-9", "files") == []   # the law's own flag still governs
+        "files": {"p_smaller": 0.6, "se_p_smaller": 0.05}}}})]
+    assert RUN._effects(not_evaluable, "LAW-9", sp9, "files") == []   # the law's own flag still governs
     # and a metric that gates itself off is still excluded even when the law is evaluable
+    sp7 = RUN.SPEC["LAW-7"]
     mixed = [repo("a", "c", **{"LAW-7": {"evaluable": True, "metrics": {
         "coupling": {"evaluable": True, "effect": 0.9, "se": 0.2},
         "k_mean": {"evaluable": False, "effect": 0.4, "se": 0.1}}}})]
-    assert RUN._effects(mixed, "LAW-7", "coupling") and RUN._effects(mixed, "LAW-7", "k_mean") == []
+    assert RUN._effects(mixed, "LAW-7", sp7, "coupling") and RUN._effects(mixed, "LAW-7", sp7, "k_mean") == []
 
 
 def test_thinning_keeps_roughly_the_share_and_is_persistent_across_snapshots():
@@ -153,3 +158,46 @@ def test_thinning_keeps_roughly_the_share_and_is_persistent_across_snapshots():
     assert RUN.thinned(nets, 0.57, seed=7)[0].edges != out[0].edges        # the seed still moves the mask
     assert RUN.thinned(nets, 1.0, seed=2982)[0].edges == edges             # share 1.0 keeps everything
     assert RUN.thinned(nets, 0.0, seed=2982)[0].edges == set()
+
+
+def test_law2s_effect_is_read_from_its_fitness_null_not_the_plain_fit():
+    """Amendment 5. The plain alpha stays in the record descriptively; the effect the synthesis pools is the
+    excess over the fitness-only null, which lives one level down."""
+    sp = RUN.SPEC["LAW-2"]
+    rows = [repo("libgit2", "c", **{"LAW-2": {
+        "evaluable": True, "effect": 1.310, "se": 0.030,
+        "fitness_null": {"evaluable": True, "excess": 0.220, "se_excess": 0.031}}})]
+    assert RUN._effects(rows, "LAW-2", sp) == [("libgit2", 0.220, 0.031)]   # not (1.310, 0.030)
+    # a repo whose null did not run contributes nothing, even though its plain fit is evaluable
+    no_null = [repo("x", "c", **{"LAW-2": {"evaluable": True, "effect": 1.3, "se": 0.03,
+                                           "fitness_null": {"evaluable": False, "why": "too few events"}}})]
+    assert RUN._effects(no_null, "LAW-2", sp) == []
+    assert RUN._rec_for(rows[0], "LAW-2", sp)["excess"] == 0.220
+    assert RUN._rec_for(rows[0], "LAW-2", {})["effect"] == 1.310   # no path: the plain fit
+
+
+def test_law9s_effect_is_p_smaller_against_a_half_null():
+    sp = RUN.SPEC["LAW-9"]
+    rows = [repo("libxml2", "c", **{"LAW-9": {"evaluable": True, "metrics": {
+        "files": {"p_smaller": 0.584, "se_p_smaller": 0.04}}}})]
+    assert RUN._effects(rows, "LAW-9", sp, "files") == [("libxml2", 0.584, 0.04)]
+    # the null is 0.5 and the direction is positive, so 0.584 points the predicted way and 0.42 does not
+    above = RUN._pool_one([("a", 0.584, 0.02)], sp["margin"], sp["direction"], None)["single_study"]
+    below = RUN._pool_one([("a", 0.420, 0.02)], sp["margin"], sp["direction"], None)["single_study"]
+    assert above["p"] < 0.001 and below["p"] > 0.999
+
+
+def test_the_matched_coverage_share_is_the_worst_languages_typical_repo():
+    """Amendment 5 item 4: minimum over languages of that language's median coverage. A language is represented
+    by its typical repo, and the comparison is made at the quality of the worst-measured language, because that
+    is the only level every language can actually be measured at."""
+    def r(name, lang, share):
+        return {"repo": name, "language": lang, "profile": {"share_confident_of_repo_links": share}}
+    repos = [r("libgit2", "c", 0.989), r("libxml2", "c", 0.999),           # c median 0.999
+             r("commons-lang", "java", 0.556),                              # java median 0.556
+             r("prometheus", "go", 0.596), r("sphinx", "python", 0.581)]
+    assert RUN.matched_share(repos) == 0.556                                # java is the worst language
+    # the median within a language, not its minimum: three c repos take the middle one
+    assert RUN.matched_share([r("a", "c", 0.2), r("b", "c", 0.9), r("c", "c", 0.95)]) == 0.9
+    assert RUN.matched_share([]) is None
+    assert RUN.matched_share([{"repo": "x", "language": "c", "profile": {}}]) is None

@@ -69,7 +69,10 @@ from laws_defect_run import LANGUAGE, labels_for  # noqa: E402
 # law -> (margin, direction, confirmatory). A metric-bearing law lists its metrics instead of one effect.
 SPEC: dict[str, dict] = {
     "LAW-1": {"margin": 0.0, "direction": 1, "confirmatory": True},
-    "LAW-2": {"margin": 0.0, "direction": 1, "confirmatory": True},
+    # Amendment 5: LAW-2's effect is the excess over the fitness-only null, not alpha against zero. Pure
+    # fitness yields alpha about 1.09, above a true exponent of 1.0, so alpha against 0 does not test the law.
+    "LAW-2": {"margin": 0.0, "direction": 1, "confirmatory": True,
+              "path": ("fitness_null",), "effect_key": "excess", "se_key": "se_excess"},
     "LAW-3": {"margin": 0.0, "direction": 1, "confirmatory": True},
     "LAW-4": {"margin": 0.0, "direction": 1, "confirmatory": True},
     "LAW-5": {"margin": 0.0, "direction": 1, "confirmatory": False,
@@ -77,7 +80,10 @@ SPEC: dict[str, dict] = {
     "LAW-6": {"margin": 0.0, "direction": 1, "confirmatory": True},
     "LAW-7": {"margin": 0.5, "direction": 1, "confirmatory": True, "metrics": D.METRICS},
     "LAW-8": {"margin": 0.02, "direction": 1, "confirmatory": True, "equivalence": 0.02},
-    "LAW-9": {"margin": 0.0, "direction": -1, "confirmatory": False, "metrics": S.METRICS},
+    # Amendment 5: LAW-9's effect is P(cve smaller) against a null of 0.5. The registered Hodges-Lehmann shift
+    # is exactly 0.00 with SE 0.00 on two of three legs, so it cannot enter a variance-weighted pool at all.
+    "LAW-9": {"margin": 0.5, "direction": 1, "confirmatory": False, "metrics": S.METRICS,
+              "effect_key": "p_smaller", "se_key": "se_p_smaller"},
 }
 
 
@@ -157,6 +163,8 @@ def one_repo(out: Path, repo: str, language: str, labels: dict[str, bool], boot:
     degrees = [k for k in nets[-1].in_degree().values() if k >= 1]
     rec["LAW-1"] = guarded("LAW-1", lambda: T.fit(degrees, boot=boot), failures)
     rec["LAW-2"] = guarded("LAW-2", lambda: A.fit(nets), failures)
+    # Amendment 5: the law's effect is the excess over the fitness-only null; the plain fit stays descriptive
+    rec["LAW-2"]["fitness_null"] = guarded("LAW-2-null", lambda: A.fitness_null(nets), failures)
     rec["LAW-3"] = guarded("LAW-3", lambda: H.fit(yearly, boot=boot), failures)
     law2 = rec["LAW-2"]
     rec["LAW-4"] = guarded("LAW-4", lambda: C.fit(nets, law2, **({"sims": sims} if sims else {})), failures)
@@ -177,11 +185,22 @@ def one_repo(out: Path, repo: str, language: str, labels: dict[str, bool], boot:
     return rec
 
 
-def _effects(repos: list[dict], law: str, key: str | None = None) -> list[tuple[str, float, float]]:
-    """(repo, effect, se) for the repos where this law (or one metric of it) is evaluable."""
+def _rec_for(repo: dict, law: str, spec: dict) -> dict:
+    """The record a law's effect is read from: its own, or a nested one where the spec names a `path` (LAW-2's
+    effect lives in its fitness-null record, not in the plain fit)."""
+    rec = repo.get(law) or {}
+    for step in spec.get("path", ()):
+        rec = rec.get(step) or {}
+    return rec
+
+
+def _effects(repos: list[dict], law: str, spec: dict, key: str | None = None) -> list[tuple[str, float, float]]:
+    """(repo, effect, se) for the repos where this law (or one metric of it) is evaluable. The effect and SE keys
+    come from the spec, because Amendment 5 gives LAW-2 and LAW-9 effects that are not called `effect`."""
+    ekey, skey = spec.get("effect_key", "effect"), spec.get("se_key", "se")
     out = []
     for r in repos:
-        rec = r.get(law) or {}
+        rec = _rec_for(r, law, spec)
         ok = bool(rec.get("evaluable"))
         if key:
             sub = (rec.get("metrics") or {}).get(key) or {}
@@ -192,7 +211,7 @@ def _effects(repos: list[dict], law: str, key: str | None = None) -> list[tuple[
             rec = sub
         if not ok:
             continue
-        e, se = rec.get("effect"), rec.get("se")
+        e, se = rec.get(ekey), rec.get(skey)
         if e is None or se is None or not (se == se) or se <= 0:  # NaN or non-positive SE: unusable in a pool
             continue
         out.append((r["repo"], float(e), float(se)))
@@ -243,6 +262,25 @@ def _pool_one(rows: list[tuple[str, float, float]], margin: float, direction: in
     return out
 
 
+def matched_share(repos: list[dict]) -> float | None:
+    """The coverage share every network is thinned to for Amendment 5's matched-coverage pass: the MINIMUM over
+    languages of that language's median `share_confident_of_repo_links`.
+
+    Minimum over languages, median within one: a language is represented by its typical repo, and the comparison
+    is then made at the quality of the worst-measured language, because that is the only level every language can
+    actually be measured at. The figure is a floor rather than a true rate (the `unresolved` table cannot be
+    scoped like the numerator), so this is a conservative amount of thinning."""
+    by_lang: dict[str, list[float]] = {}
+    for r in repos:
+        share = (r.get("profile") or {}).get("share_confident_of_repo_links")
+        if share:
+            by_lang.setdefault(r["language"], []).append(float(share))
+    if not by_lang:
+        return None
+    medians = [sorted(v)[len(v) // 2] for v in by_lang.values()]
+    return min(medians)
+
+
 def synthesise(repos: list[dict]) -> dict:
     languages = sorted({r["language"] for r in repos})
     by_lang = {lang: [r for r in repos if r["language"] == lang] for lang in languages}
@@ -255,14 +293,15 @@ def synthesise(repos: list[dict]) -> dict:
         for lang, rs in by_lang.items():
             if "metrics" in spec:
                 entry["languages"][lang] = {
-                    m: _pool_one(_effects(rs, law, m), spec["margin"], spec["direction"], spec.get("equivalence"))
+                    m: _pool_one(_effects(rs, law, spec, m), spec["margin"], spec["direction"],
+                                 spec.get("equivalence"))
                     for m in spec["metrics"]}
             elif "legs" in spec:
                 entry["languages"][lang] = {
                     name: _pool_one(_leg_effects(rs, law, ek, sk), spec["margin"], d, None)
                     for name, (ek, sk, d) in spec["legs"].items()}
             else:
-                entry["languages"][lang] = _pool_one(_effects(rs, law), spec["margin"], spec["direction"],
+                entry["languages"][lang] = _pool_one(_effects(rs, law, spec), spec["margin"], spec["direction"],
                                                      spec.get("equivalence"))
         per_law[law] = entry
         if not spec["confirmatory"]:
@@ -293,6 +332,9 @@ def main() -> int:
     ap.add_argument("--tag", default=None, help="names the output file")
     ap.add_argument("--thin", type=float, default=None,
                     help="keep this share of each network's edges (the coverage sensitivity; LAW-1 to LAW-5)")
+    ap.add_argument("--matched-coverage", action="store_true",
+                    help="Amendment 5 item 4: after the full-coverage pass, re-run every law with each network "
+                         "thinned to the minimum per-language median coverage across the run's languages")
     ap.add_argument("--thin-seed", type=int, default=2982)
     a = ap.parse_args()
     t0 = time.time()
@@ -311,7 +353,27 @@ def main() -> int:
         print(f"{name} ({language}): laws {laws}  {len(rec['failures'])} failed  [{rec['seconds']}s]")
         for law, f in rec["failures"].items():
             print(f"    {law} FAILED: {f['error']}")
-    rec = {"repos": repos, "synthesis": synthesise(repos) if repos else None,
+    matched = None
+    if a.matched_coverage and repos and a.thin is None:
+        share = matched_share(repos)
+        if share is None:
+            print("\nmatched coverage: no repo reports a coverage share; skipped")
+        else:
+            print(f"\n=== matched-coverage pass: thinning every network to {share:.3f} "
+                  f"(the minimum per-language median) ===")
+            matched = {"share": share, "repos": []}
+            for name in [r["repo"] for r in repos]:
+                language = LANGUAGE[name]
+                labels, _ = ({}, "") if a.labels == "keyword" else labels_for(a.out, name)
+                m = one_repo(a.out, name, language, labels, a.boot, a.sims, share, a.thin_seed)
+                matched["repos"].append(m)
+                laws = " ".join(f"{k.split('-')[1]}{'+' if (m.get(k) or {}).get('evaluable') else '-'}"
+                                for k in SPEC)
+                print(f"{name} ({language}) [matched {share:.3f}]: laws {laws}  "
+                      f"{len(m['failures'])} failed  [{m['seconds']}s]")
+            matched["synthesis"] = synthesise(matched["repos"])
+
+    rec = {"repos": repos, "synthesis": synthesise(repos) if repos else None, "matched_coverage": matched,
            "labels": a.labels, "boot": a.boot, "sims": a.sims, "thin": a.thin,
            "seconds": round(time.time() - t0, 1),
            "failures": {r["repo"]: list(r["failures"]) for r in repos if r["failures"]}}

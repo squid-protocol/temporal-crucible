@@ -23,9 +23,11 @@ Effect, per metric in METRICS (files touched, functions changed, non-test source
   touched and functions changed, because those counts are tiny and heavily tied (median 1 file, 2 functions) and
   most pairwise differences are 0. The rank test on the same data is significant for files (p = 0.003), so the
   difference is real but smaller than one file -- and the registered conjunction "each < 0" can never fire on a
-  shift that is pinned at 0. `p_smaller` is reported for exactly this reason. Nothing here is changed: the shift
-  stays the registered effect and the pilot reading stands, but the scorer-freeze amendment should decide whether
-  LAW-9's effect is the shift or `p_smaller`, with these numbers in front of it.
+  shift that is pinned at 0. **Amendment 5 settled it: LAW-9's effect is `p_smaller`, against a null of 0.5, in
+  the direction "CVE smaller".** It is the rank test's own effect size, it is never degenerate on tied counts, and
+  it carries a bootstrap SE (`se_p_smaller`) so it can enter a variance-weighted pool -- which the shift could
+  not, two of its three legs having SE exactly 0. The shift and the difference of medians stay in the record,
+  descriptively.
   p one-sided Mann-Whitney (alternative "less": a CVE fix is smaller), tie-corrected.
 
 The law holds for a repo when **all three** effects are negative with p < ALPHA. That conjunction is an
@@ -75,8 +77,14 @@ def shift(cve: np.ndarray, other: np.ndarray, boot: int = BOOT, seed: int = SEED
     mw = stats.mannwhitneyu(cve, other, alternative="less", method="asymptotic")
     rng = np.random.default_rng(seed)
     reps = np.empty(boot)
+    reps_p = np.empty(boot)
     for i in range(boot):
-        reps[i] = hodges_lehmann(rng.choice(cve, len(cve), replace=True), rng.choice(other, len(other), replace=True))
+        a = rng.choice(cve, len(cve), replace=True)
+        b = rng.choice(other, len(other), replace=True)
+        reps[i] = hodges_lehmann(a, b)
+        # p_smaller needs an SE of its own: Amendment 5 makes it LAW-9's effect, so it has to enter a
+        # variance-weighted pool, which the shift could not (its SE is exactly 0 on tied counts).
+        reps_p[i] = 1 - stats.mannwhitneyu(a, b, alternative="less", method="asymptotic").statistic / (len(a) * len(b))
     lo, hi = np.percentile(reps, [2.5, 97.5])
     return {"effect": effect, "se": float(np.std(reps, ddof=1)), "ci": [float(lo), float(hi)],
             "p": float(mw.pvalue), "u": float(mw.statistic), "boot": boot,
@@ -84,6 +92,8 @@ def shift(cve: np.ndarray, other: np.ndarray, boot: int = BOOT, seed: int = SEED
             # effect size. Unlike the shift it is never degenerate on tied counts, so it says how big the
             # difference the p-value found actually is. 0.5 is no difference; above 0.5 is "CVE fixes smaller".
             "p_smaller": float(1 - mw.statistic / (len(cve) * len(other))),
+            "se_p_smaller": float(np.std(reps_p, ddof=1)) if boot > 1 else float("nan"),
+            "p_smaller_ci": [float(np.percentile(reps_p, 2.5)), float(np.percentile(reps_p, 97.5))],
             "median_cve": float(np.median(cve)), "median_other": float(np.median(other)),
             "median_difference": float(np.median(cve) - np.median(other)),
             "n_cve": int(len(cve)), "n_other": int(len(other))}

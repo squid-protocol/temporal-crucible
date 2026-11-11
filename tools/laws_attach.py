@@ -46,7 +46,7 @@ MIN_FE_APPEAR = 2  # a target chosen fewer times than this carries a level, not 
 FE_RIDGE = 1.0
 RIDGES = (0.1, 1.0, 10.0)
 FE_BOOT = 40  # quarters resampled for alpha_fe's SE; coarse, and reported as such
-FITNESS_REPS = 50  # simulated fitness-only histories
+FITNESS_REPS = 100  # simulated fitness-only histories (Amendment 5 raised this from 50)
 FITNESS_EPS = 0.5  # a target that never took an edge still has some propensity
 
 
@@ -274,6 +274,10 @@ def fitness_null(nets: list, seed: int = SEED, reps: int = FITNESS_REPS) -> dict
     own synthetic check, fitness alone yields alpha about 1.09 -- more than a true attachment exponent of 1.0 --
     which is exactly why this comparison is needed rather than a test against zero.
 
+    Amendment 5 makes this excess LAW-2's registered effect, with margin 0 in the positive direction and
+    v = se_observed^2 + sd(alpha_null)^2; alpha itself stays descriptive. R is raised to FITNESS_REPS so the
+    rank p is not floored, though the rank p is reported rather than used.
+
     The null draws ignore same-file and same-directory locality, so a simulated history has no locality signal
     while the real one does; both are estimated with the same controls in the model. Not registered in this
     form: it belongs in the scorer-freeze amendment.
@@ -332,7 +336,10 @@ def fitness_null(nets: list, seed: int = SEED, reps: int = FITNESS_REPS) -> dict
             "alpha_observed": observed["effect"], "se_observed": observed["se"],
             "alpha_null_mean": float(arr.mean()), "alpha_null_sd": float(arr.std(ddof=1)),
             "alpha_null_q": [float(np.percentile(arr, 2.5)), float(np.percentile(arr, 97.5))],
-            "excess": float(observed["effect"] - arr.mean()), "p": p_val,
+            "excess": float(observed["effect"] - arr.mean()),
+            # Amendment 5: the excess is LAW-2's effect, and this is the variance the synthesis pools. The
+            # observed alpha's own uncertainty and the null's spread both bear on whether the gap is real.
+            "se_excess": float(math.sqrt(observed["se"] ** 2 + arr.var(ddof=1))), "p": p_val,
             "beyond_fitness": bool(p_val < 0.05)}
 
 
