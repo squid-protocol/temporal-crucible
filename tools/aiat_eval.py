@@ -172,6 +172,11 @@ def scores_path(repo: str, model: str) -> Path:
     return Path("data/aiat") / f"{repo}_scores_{model.replace('.', '-')}.json"
 
 
+def tag(a) -> str:
+    """The score-file key: an anonymised run must never share a file with a plain one."""
+    return a.model + ("-anon" if getattr(a, "anon", False) else "")
+
+
 def cmd_sample(a) -> int:
     repo = a.repo
     paths = snapshot_files(repo)
@@ -227,6 +232,78 @@ def cmd_estimate(a) -> int:
 
 
 # ---------------------------------------------------------------- scoring
+
+# ---------------------------------------------------------------- anonymisation (the recognition check)
+# The scored run named the project in 96.7% of its curl reasons. The cutoff protects the OUTCOME; it does
+# nothing about the PREDICTOR, because a model that recognises curl can recall which of its files churn.
+# This rewrites project-specific identity out of the source while leaving the code's structure intact:
+#   - identifiers, field names and type names are renamed consistently to opaque tokens, EXCEPT names on
+#     the standard-library allowlist (malloc, printf, size_t...). Those are part of what a C function IS,
+#     and blanking them would remove real signal along with the identity.
+#   - string and char literal contents are replaced;
+#   - comments are dropped -- they carry the project name directly.
+# Comments going with the identity is a known confound: a drop in lift could be the loss of comments rather
+# than the loss of recognition. AIAT-P4 (comment-only ablation) separates them and is not run here.
+STDLIB = {
+    "malloc", "calloc", "realloc", "free", "memcpy", "memmove", "memset", "memcmp", "strlen", "strcpy",
+    "strncpy", "strcmp", "strncmp", "strcat", "strncat", "strchr", "strrchr", "strstr", "strdup",
+    "snprintf", "sprintf", "printf", "fprintf", "vsnprintf", "sscanf", "fopen", "fclose", "fread",
+    "fwrite", "fseek", "ftell", "read", "write", "open", "close", "send", "recv", "socket", "connect",
+    "bind", "listen", "accept", "select", "poll", "time", "gettimeofday", "abort", "exit", "assert",
+    "size_t", "ssize_t", "ptrdiff_t", "uint8_t", "uint16_t", "uint32_t", "uint64_t", "int8_t", "int16_t",
+    "int32_t", "int64_t", "bool", "true", "false", "NULL", "FILE", "va_list", "va_start", "va_end",
+    "errno", "stdin", "stdout", "stderr", "toupper", "tolower", "isdigit", "isalpha", "isspace",
+    "atoi", "strtol", "strtoul", "qsort", "abs", "min", "max",
+}
+_ANON_PARSER = None
+
+
+def _anon_parser():
+    global _ANON_PARSER
+    if _ANON_PARSER is None:
+        import tree_sitter_language_pack as tslp
+        _ANON_PARSER = tslp.get_parser("c")
+    return _ANON_PARSER
+
+
+def anonymise(src: str) -> str:
+    """Project identity removed, control structure preserved. Deterministic for a given file."""
+    data = src.encode("utf-8", "replace")
+    tree = _anon_parser().parse(data)
+    edits, names = [], {}
+
+    def walk(n):
+        t = n.type
+        if t in ("identifier", "field_identifier", "type_identifier", "statement_identifier"):
+            txt = n.text.decode("utf-8", "replace")
+            if txt not in STDLIB and not txt.startswith("__"):
+                if txt not in names:
+                    names[txt] = f"{'fn' if t == 'identifier' else 'm' if t == 'field_identifier' else 'T'}{len(names)}"
+                edits.append((n.start_byte, n.end_byte, names[txt].encode()))
+            return
+        if t in ("comment",):
+            edits.append((n.start_byte, n.end_byte, b""))
+            return
+        if t in ("string_content", "char_literal"):
+            edits.append((n.start_byte, n.end_byte, b"s" if t == "string_content" else b"'x'"))
+            return
+        for c in n.children:
+            walk(c)
+
+    walk(tree.root_node)
+    edits.sort(key=lambda e: e[0])
+    out, pos = [], 0
+    for a, b, rep in edits:
+        if a < pos:
+            continue
+        out.append(data[pos:a])
+        out.append(rep)
+        pos = b
+    out.append(data[pos:])
+    text = b"".join(out).decode("utf-8", "replace")
+    return "\n".join(ln for ln in text.split("\n") if ln.strip())
+
+
 def _client():
     try:
         import anthropic
@@ -263,7 +340,7 @@ def cmd_score(a) -> int:
     rec = json.loads(sample_path(a.repo).read_text())
     if rec["prompt_sha256"] != prompt_sha():
         return _die("the prompt changed since the sample was built: rebuild the sample or restore it")
-    scores = load_scores(a.repo, a.model)
+    scores = load_scores(a.repo, tag(a))
     todo = [f for f in rec["files"] if f["path"] not in scores][: a.limit] if a.limit \
         else [f for f in rec["files"] if f["path"] not in scores]
     if not todo:
@@ -277,17 +354,19 @@ def cmd_score(a) -> int:
     bodies = {}
     for f in todo:
         body = git(a.repo, "show", f"{SNAPSHOT[a.repo]}:{f['path']}")
+        if a.anon:
+            body = anonymise(body)
         if len(body.encode()) > MAX_FILE_BYTES:
             scores[f["path"]] = {"error": "oversized", "bytes": len(body.encode())}
             continue
         bodies[f["path"]] = body
-    save_scores(a.repo, a.model, scores)
+    save_scores(a.repo, tag(a), scores)
     if a.batch:
         n = _score_batch(client, a, bodies, scores)
     else:
         n = _score_live(client, a, bodies, scores)
     print(f"{a.repo}: {n} scored this run, {len([v for v in scores.values() if 'p' in v])} total "
-          f"-> {scores_path(a.repo, a.model)}")
+          f"-> {scores_path(a.repo, tag(a))}")
     return 0
 
 
@@ -306,7 +385,7 @@ def _score_live(client, a, bodies: dict, scores: dict) -> int:
         scores[path] = {**(got or {"error": "unparseable", "raw": text[:200]}),
                         "model": a.model, "prompt_sha256": prompt_sha(),
                         "usage": {"in": r.usage.input_tokens, "out": r.usage.output_tokens}}
-        save_scores(a.repo, a.model, scores)  # after every file: a kill loses nothing
+        save_scores(a.repo, tag(a), scores)  # after every file: a kill loses nothing
         done += 1
         if a.budget_s and done % 10 == 0 and time.monotonic() - _START > a.budget_s:
             print(f"budget of {a.budget_s}s reached; {done} done, the rest stays for the next run")
@@ -341,7 +420,7 @@ def _score_batch(client, a, bodies: dict, scores: dict) -> int:
                         "prompt_sha256": prompt_sha(),
                         "usage": {"in": msg.usage.input_tokens, "out": msg.usage.output_tokens}}
         done += 1
-        save_scores(a.repo, a.model, scores)
+        save_scores(a.repo, tag(a), scores)
     return done
 
 
@@ -454,7 +533,7 @@ def class_labels(repo: str) -> dict[str, set[str]]:
 
 def cmd_metrics(a) -> int:
     rec = json.loads(sample_path(a.repo).read_text())
-    scores = load_scores(a.repo, a.model)
+    scores = load_scores(a.repo, tag(a))
     rows = [(scores[f["path"]]["p"], f["loc"], f["fixed"], f["stratum"], f["path"])
             for f in rec["files"] if f["path"] in scores and "p" in scores[f["path"]]]
     if not rows:
@@ -549,6 +628,8 @@ def main() -> int:
     ap.add_argument("--live", dest="batch", action="store_false", help="score with live calls instead")
     ap.add_argument("--budget-s", type=int, help="score --live: stop after this many seconds")
     ap.add_argument("--confirm", action="store_true", help="score: required, because it spends money")
+    ap.add_argument("--anon", action="store_true",
+                    help="score/metrics: the recognition check -- rewrite project identity out of the source")
     a = ap.parse_args()
     if a.step == "prompt":
         print(PROMPT)
