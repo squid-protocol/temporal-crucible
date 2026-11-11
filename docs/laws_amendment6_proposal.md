@@ -1,9 +1,12 @@
-# LAWS Amendment 6 — PROPOSAL (not filed): adopt FIXLIKE v3c as the fix-class rule
+# LAWS Amendment 6 — FILED: adopt FIXLIKE v3c as the fix-class rule
 
-**Drafted 2026-11-11. NOT YET IN THE REGISTER.** Amendments in `docs/laws_hypotheses.md` carry owner OK
-by convention (Amendments 1, 2 and 3 each say so), so this is a draft for the owner to file, not a
-change made on its own authority. To take effect without a rescan it must be filed **before the panel
-draw** — Amendment 1 item 2 requires a full rescan for any change landing after it.
+> **STATUS: FILED 2026-11-11 (owner OK), commit `c236f2b` on branch `laws/amendment-6`.** It is in
+> `docs/laws_hypotheses.md` as Amendment 6, filed **after the frame search and before the label audit,
+> the candidate fingerprint and the seeded draw**, so no rescan is owed (Amendment 1 item 2). The filed
+> text is authoritative and carries four items this draft did not: the frame clearance (item 6,
+> `tools/laws_frame.py` reads no fix label, so the frame built 2026-11-11 stands), the explicit
+> scorer-freeze and controls non-change (item 7), the per-language-vs-per-repo gate flagged as open
+> (item 8) and the known residual (item 9). This file is kept as the drafting record only.
 
 ## Why this is needed, specifically for LAWS
 
