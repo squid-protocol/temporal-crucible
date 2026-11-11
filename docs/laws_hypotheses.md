@@ -3,6 +3,37 @@
 **Programme steps 2 and 3** (`docs/PROGRAMME_call_networks.md`). The panel protocol (PANEL) and the law claims
 (LAW-1 … LAW-9) are registered together, so the sample cannot be chosen after seeing any network statistic.
 
+## Amendment log
+
+Every amendment below, in order, with the two facts that decide whether this registration can be trusted:
+**was it made before or after outcome data existed**, and **did it make any law easier to pass**. The full text
+of each is at the bottom of this file; this table is the audit trail, not a substitute for it.
+
+| # | date | what changed | before data? | effect on what can be claimed |
+|---|---|---|---|---|
+| 0 | 11-08 | after an independent methods review: panel 12 per confirmatory language; **LAW-5 and LAW-9 demoted to descriptive**; Claude label raters; the CGR set fixed as the required pilot and as development data; engine `8f96d76ba`; node identity via `parent_class_id` | yes | **weakened** — two laws demoted before any data |
+| 1 | 11-09 | ACC-P becomes the post-tuning validation (no separate ACC-4); engine pinned to the last merged PR of epic #8161; **20 engine-tuning repos, the call-graph gate corpus and the ACC repos excluded by name** | yes | **tightened** — adds a validation gate and more exclusions |
+| 2 | 11-09 | ACC-P extended to every candidate language; a secondary "universal (extended)" test fixed in advance, reported beside the primary one and never replacing it; admission survey for C#, Kotlin and PHP; development-set dry run; 3 survey repos excluded | yes | **neutral/tightened** — the primary test is explicitly unchanged |
+| 3 | 11-09 | **panel size 12 → 16 per confirmatory language**; thin-pool rule; power interpretation stated in advance | yes | **tightened** — more power, same bars |
+| 4 | 11-10 | Go's oracle is `callgraph -algo=vta`, not CHA; not-evaluable rules for Go snapshots; states in advance that **Go does not meet ACC-H3 on its development repo** | yes | **weakened** — Go expected to stay descriptive |
+| 5 | 11-10 | LAW-2's effect becomes the **excess over a fitness-only null**, not α against zero; LAW-2's fixed-effects sensitivity recorded as attempted and uninformative; LAW-9's effect becomes P(CVE smaller) against 0.5; coverage reported with every law and every law re-run at matched coverage; a two-instrument sensitivity registered; **law numbers may come only from `tools/laws_run.py`, invalidating earlier development-set figures**; item 8: **the scorer freeze** | yes | **tightened** — harder nulls, earlier figures invalidated, scorer frozen |
+| 6 | 11-11 | adopts **FIXLIKE v3c** as the `other-fix` class rule after `docs/otherfix_audit.md` measured the registered gate at 0.383 outside C; scoped to `other-fix` only; costs 43% of `other-fix` events | yes | **mixed** — label precision 0.38 → 0.77, at ~22% of real fixes in power |
+| 7 | 11-11 | **no per-repo class gate**; the M6 audit sized at ≈136 stratified judgments per language; per-repo precision reported, never used as a filter; a sub-0.70 sensitivity pre-registered; a CI-upper-bound floor as backstop | yes | **neutral** — declines a filter, adds a sensitivity and a backstop |
+| 8 | 11-11 | records that the CGR repos were **already** excluded; **requires the registered exclusion to be applied before the draw**, with logged removals and a post-exclusion fingerprint; states `docs/ceil.md` is development-set evidence; files a pre-draw prior that **LAW-6's in-cycle term is expected to fail outside C**; erratum on Amendment 6's author-count parenthetical | yes | **weakened** — enforces a guard and lowers expectations for LAW-6 |
+| 9 | 11-11 | resolves a contradiction between two stated orders of work in favour of Amendment 0 item 7 (**draw → scans → label audit**, not audit first), names the audit's repo set as the **drawn panel**, and commits the post-exclusion eligible list and its M9 fingerprint `12e03a14…` | yes | **neutral** — settles an ambiguity and fulfils a commitment; no bar, direction or size changes |
+
+**Read across the last two columns.** All ten entries predate any panel outcome data: no panel repo has been
+selected, scanned or labelled. **Not one amendment loosened a bar, widened a direction, or made a law easier to
+pass.** Several did the opposite — Amendment 0 demoted two laws, Amendment 4 expects Go to stay descriptive,
+Amendment 5 invalidated earlier development-set figures and froze the scorer, Amendment 6 gave up about a fifth
+of the fix events for label precision, and Amendment 8 filed a prior that one registered law is expected to fail
+outside C.
+
+**Why there are nine of them.** The registration was filed on 11-08 and the pilot, the methods review, the
+engine-tuning work and the label audit all landed after it. That is the honest cost of registering before the
+design had settled, and the lesson for the next study is to pilot first and register second. It is not evidence
+of fitting the protocol to results, which is what this table exists to let a reader check.
+
 ## Prior work
 
 [v] = details confirmed by web search on 2026-11-08 (lit review, `gitgalaxy/cgt-study/lit_review.md`);
@@ -534,3 +565,251 @@ and Python has no working oracle for the two-instrument check.
 
 **Next, in order:** the label audit; the sampling frame under M9 with its candidate fingerprint committed and
 pushed; the seeded draw; ACC-P on draws 1 and 2 per language; the panel scans; one scorer run and the synthesis.
+
+## Amendment 6 (2026-11-11, owner OK; after the frame search, before the label audit, before the candidate fingerprint is committed and before the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** `docs/otherfix_audit.md` measured the label precision of the residual `other-fix` class
+produced by `tools/xc_harvest.py`, which this registration names as the class source (Fix labels,
+item 1), over 440 hand judgments in three rounds. Under the registered v1 gate it is **0.558 pooled
+and 0.383 outside C** (per repo: libxml2 0.80, postgres 0.77, redis 0.73, libgit2 0.63, sphinx 0.60,
+prometheus 0.40, commons-lang 0.27, ripgrep 0.27). `other-fix` carries **85–97% of fix-event mass in
+every repo**. Under the class gate (Fix labels, item 3: a class below 70% precision in a language is
+descriptive-only there), `other-fix` would therefore fail in Go, Java, Python and Rust, and **LAW-6,
+LAW-7 and LAW-8 would become descriptive-only across most of the panel** — the three laws Amendment 0
+item 2 deliberately kept confirmatory. The cause is community vocabulary, not a defect in the
+harvester: outside C, "fix" mostly introduces lint, type-checker, javadoc, formatting and typo
+changes.
+
+1. **Class rule.** The `other-fix` class is produced by `tools/xc_harvest.py` **followed by
+   `tools/fixlike_v2.py --rules v3c`** (FIXLIKE v3c), which drops a commit when its touched in-scope
+   files are all under test / doc / example / benchmark trees; when its subject is non-behavioural (a
+   conventional-commit `docs`/`chore`/`style`/`test`/`build` type, a named linter or type checker,
+   javadoc/doxygen/docstring, typo/spelling/grammar, whitespace/formatting, warning-only, changelog,
+   refactor/cleanup/performance/portability/build, or an edit to a code comment — exempting operations
+   *on* comments, so an XML parser's "Fix EOF handling in comments" survives); or when **no fix word
+   appears in the subject**. Measured precision **0.761 pooled, 0.750 C, 0.773 non-C, 7 of 8 repos
+   over the gate**, on a confirmatory sample drawn after the rule was written (seed 2984, 25 per repo,
+   all 480 previously-judged commits excluded).
+
+2. **Rule C is the operative change.** The v1 gate matched a fix word in the subject **or body**, so
+   plain feature commits whose body said "fixes #123" were admitted. The path and prose exclusions
+   alone reach only 0.660 pooled and still fail 5 of 8 repos; requiring the fix word in the **subject**
+   is what carries the result. Rule C was designed on a 240-commit development set and tested on a
+   later 200-commit sample, so 0.761 is out-of-sample. **Quote 0.761, not the development set's
+   0.932** — the tuned figure was optimistic by about 0.17.
+
+3. **Applied to `other-fix` only** — the class it was developed and audited on. `latent` (OSV-derived),
+   `regression` and `extrinsic` keep their own measured precision from `docs/xc_label_audit.md`
+   (regression 0.73–0.87; extrinsic v2 0.90–1.00). Two of them must not be touched by these rules in
+   any case: `regression` via revert reaches its class *before* the fix-like gate, so rule C would
+   discard `Revert "..."` commits, the cleanest regression signal available; and `extrinsic` is
+   already gated on a subject-matched environment **and** action, so rule C would drop legitimate
+   entries such as "port to AIX" that carry no fix word. Extending v3c to those classes would need an
+   audit of those classes.
+
+4. **Cost.** 43.0% of `other-fix` events and 35.7% of all events are dropped, which works out to
+   roughly **22% of real fixes given up to remove roughly 69% of the noise** (development set:
+   fixes-kept 0.813, noise-caught 0.925). Non-destructive: v3c event sets are written to
+   `events/<repo>_xc2.json` and the v1 sets are untouched, so every published v1 result stays
+   reproducible.
+
+5. **v3c is the starting rule, not a substitute for the label audit.** `docs/otherfix_audit.md` covers
+   C, Go, Java, Python and Rust — **5 of the 10 candidate languages**. PHP, C#, Kotlin, C++ and JS/TS
+   are unaudited. The M6 label audit and the class gate still decide per language; this amendment only
+   changes which rule that audit is run against.
+
+6. **The sampling frame is unaffected and is not rebuilt.** `tools/laws_frame.py` admits a repo on
+   `MIN_COMMITS`, `MIN_SNAPSHOTS` and `MIN_FILES` alone and reads no fix label, so the frame search
+   completed 2026-11-11 stands. This amendment changes labels only, and it is filed before the label
+   audit, the candidate fingerprint and the draw.
+
+7. **Unchanged.** The scorer freeze (Amendment 5 item 8) stands — **no scorer change is made or
+   needed**: LAW-8 already measures the right quantity (forward, effort-aware gain in recall@20% LOC),
+   and the oracle-ladder ceiling estimator of `docs/ceil.md` is deliberately **not** added, since a new
+   estimator after the freeze would force a full rescan for marginal gain. The controls are unchanged:
+   distinct authors and change coupling are already registered (Controls on every defect claim), a
+   choice `docs/ceil.md` independently vindicates — author count came out the strongest single term in
+   its re-fit (OR 2.06 [1.92, 2.22]), ahead of prior fixes, and adding it moved prior fix 2.10 → 1.65
+   and churn 1.22 → 1.10. Panel size, the draw procedure and every law's direction and bar are
+   unchanged.
+
+8. **Open, not decided here: the class gate is per language, not per repo.** libgit2 fails all three
+   audit rounds (0.63 / 0.60 / 0.60) on build-and-warning churn that reads exactly like a bug fix, so a
+   single weak repo can ride inside a passing language pool and add noise without tripping the gate.
+   Flagged for a later decision; this amendment does not change the gate.
+
+9. **Known residual.** Several libgit2 misses are cheap pattern gaps rather than hard cases — bare
+   `Fix warnings`, plural `broken tests`, `misspelling`, `linting`, `Javadocs`, `PEP8`. They are
+   deliberately left unfixed: the round-3 sample is now a test set and patching against it would repeat
+   the development-set overfit noted in item 2. They are a candidate later amendment, to be validated
+   on a fresh round-4 sample.
+
+**Evidence.** `docs/otherfix_audit.md` (both rounds, all 440 verdicts listed),
+`docs/fixlike_v2_impact.md`, `tools/fixlike_v2.py`, `tools/otherfix_sample.py`, journal
+`docs/journal/2026-11-11-otherfix-precision.md`. Companion ceiling result, which measured the effect of
+this label change on a defect model (realized share of attainable signal 0.780 → 0.823; the C/non-C gap
+0.061 → 0.019): `docs/ceil.md` §5.
+
+## Amendment 7 (2026-11-11, owner OK; before the label audit, the candidate fingerprint and the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** Amendment 6 item 8 left open whether the class gate (Fix labels, item 3) should apply per
+**repo** as well as per language, since libgit2 fails all three audit rounds (0.63 / 0.60 / 0.60) and
+could ride inside a passing C pool. It should not. The measurement does not support a per-repo binary
+decision, and making one would cost more than it buys.
+
+1. **No per-repo class gate. The gate stays per language.** Four reasons, in order of weight:
+   - **The measurement cannot resolve it.** On the v3c audit, the Wilson 95% interval of **every one of
+     the eight repos spans 0.70**: libxml2 0.86 [0.67, 0.95], prometheus 0.83 [0.55, 0.95], ripgrep
+     0.82 [0.52, 0.95], sphinx 0.78 [0.58, 0.90], redis 0.75 [0.51, 0.90], postgres 0.74 [0.51, 0.88],
+     commons-lang 0.70 [0.48, 0.85], libgit2 0.60 **[0.36, 0.80]**. The repo that prompted the question
+     cannot be told apart from 0.80.
+   - **Closing those intervals is prohibitive.** Telling a true 0.70 from a true 0.60 needs **136
+     commits per repo** (one-sided, α = 0.05, 80% power) — **21,760 judgments** for 16 repos × 10
+     languages, against 440 in the whole audit so far. At the language level the same 136 buys one
+     estimate per language, **1,360 judgments**, which is affordable. The binary decision therefore
+     belongs at the level where the data can support it.
+   - **It would be post-hoc exclusion after seeing the labels**, a researcher degree of freedom that
+     many-labs designs exist to remove. "We dropped the repos that did not work" is the most
+     attackable move available in a replication, and this study's whole guard structure is built to
+     avoid it.
+   - **The risk direction is already safe.** Every defect law here predicts an effect > 0, and label
+     noise attenuates toward the null, so a noisy repo makes the test harder, not easier. (The noise is
+     not perfectly random, but v3c's path rule removes the doc/test-path concentration that was the
+     specific worry.)
+
+2. **Per-repo precision is not a stable property of a repository.** Changing the rule reshuffled it
+   violently: prometheus 0.40 → 0.83, ripgrep 0.27 → 0.82, commons-lang 0.27 → 0.70, while libxml2
+   stayed top (0.80 → 0.86) and libgit2 stayed bottom (0.63 → 0.60). It is largely a property of the
+   rule interacting with that community's commit vocabulary, not of the project. A gate on it would be
+   a gate on rule artifact.
+
+3. **Audit size and sampling for the per-language gate (M6).** The label audit draws **≈ 136
+   `other-fix` commits per language, stratified by repo in proportion to that repo's `other-fix` event
+   mass** — about 1,360 judgments over 10 languages. 136 is the one-sided n above. One sample serves
+   both the gate decision and the per-repo sensitivity in item 5.
+
+4. **Per-repo precision is reported, never applied as a filter.** Every per-repo verdict is published
+   beside that repo's `other-fix` precision and the n behind it, so a reader can weigh a result against
+   its label quality instead of having repos silently removed.
+
+5. **A pre-registered sensitivity, not an exclusion.** The headline runs on the full drawn panel. A
+   second run, specified here before any label exists, repeats it dropping repos whose `other-fix`
+   precision **point estimate** is below 0.70. Both are reported. If the two disagree, that is a result
+   about label quality and is reported as one — it is not grounds for pruning the panel.
+
+6. **Backstop — a floor, not a gate.** A repo is excluded only when the Wilson 95% **upper** bound of
+   its `other-fix` precision falls below 0.70, i.e. when it is demonstrably broken rather than merely
+   measured low. On the current audit this fires on **nothing** under v3c (libgit2's upper bound is
+   0.80) and would have fired on ripgrep, commons-lang and prometheus under v1. It is a safety net
+   against a genuinely broken label set, not a pruning rule.
+
+7. **Unchanged.** The scorer freeze (Amendment 5 item 8), the controls, the panel size, the draw
+   procedure, and every law's direction and bar.
+
+**Evidence.** `docs/otherfix_audit.md` and `docs/otherfix_round3_summary.json` for the per-repo counts;
+intervals are Wilson 95%; the 136 figure is a one-sided normal-approximation sample size for
+p₀ = 0.70 vs p₁ = 0.60 at α = 0.05 and 80% power.
+
+## Amendment 8 (2026-11-11, owner OK; before the label audit, the candidate fingerprint and the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** A check prompted by `docs/ceil.md` — which measured defect-model effects on the eight CGR
+repos — asked whether those repos could be drawn into the panel and so compromise the replication's
+independence. **They cannot: the registration already excludes them** (PANEL, "Excluded": every repo
+used in any temporal-crucible study to date, naming PostgreSQL, libgit2, libxml2, redis, prometheus,
+commons-lang, sphinx and ripgrep). The guard was already in place and no new exclusion is needed. This
+amendment records the check, fixes the one gap it exposed, and files two items that follow from it.
+
+1. **The exclusion is registered but not implemented — it must be applied before the draw.** The frame
+   files produced by the frame search (`laws-study/pilot/frame/<lang>.json`) are **raw GitHub search
+   candidates**: every one of the eight excluded repos appears among them (libgit2, postgres and
+   libxml2 in `c.json`; redis in `c.json` and `go.json`; prometheus in `cpp/go/python`; commons-lang in
+   `java.json`; sphinx in `cpp/python`; ripgrep in `rust.json`). No exclusion list exists anywhere in
+   `tools/laws_*.py`. Since the draw is "uniformly at random from the eligible list", an unfiltered
+   list would silently draw an excluded repo.
+
+   **Required before the seeded draw:** the PANEL exclusion is applied to the candidate list, the
+   removed repos are **logged by name with the draw**, and the candidate fingerprint (M9) is computed
+   over the **post-exclusion** list. The exclusion list is the registration's own, unchanged.
+
+2. **`docs/ceil.md` is development-set evidence, and is now explicitly so.** Its eight repos are
+   excluded panel candidates, which the registration defines as the development set ("Development set:
+   the excluded repos above (pilot tools there, never panel results)"). Its results may therefore be
+   used as priors and for tooling, and **never as panel results**.
+
+3. **Pre-draw prior for LAW-6: in-cycle is expected to fail outside C.** On the development set, with
+   FIXLIKE v3c labels and the registered controls (size, churn, prior fixes, authors, change coupling,
+   file-clustered SEs), the in-cycle odds ratio is **1.218 pooled** but **1.073 outside C, z = 1.0,
+   95% CI [0.93, 1.24] — crossing 1**. Rewiring (1.322) and coupling (1.570) stay clear of 1 outside C;
+   in-cycle does not. Cleaner labels moved it: on v1 labels the same term read 1.218 outside C.
+
+   This is recorded **before** the draw, in the spirit of LAW-8's registered "expected to fail", so the
+   outcome is interpreted against a stated expectation rather than rationalised afterwards. It changes
+   **no** direction, bar or verdict rule for LAW-6, which stays confirmatory as Amendment 0 item 2 left
+   it.
+
+4. **Erratum to Amendment 6 item 7.** That item cites `docs/ceil.md`'s re-fit as showing author count
+   "the strongest single term in its re-fit (OR 2.06 [1.92, 2.22]), ahead of prior fixes". That figure
+   is from the **v1-label** re-fit and does not survive the label fix: under FIXLIKE v3c, prior fixes
+   rise to **1.893** and authors fall to **1.774**, so recidivism is the stronger term pooled. The
+   point Amendment 6 was making is unaffected — both controls earn their place, and change coupling
+   (1.072) still fails to displace network coupling — but the ranking is label-dependent and the v3c
+   figures are the ones to quote.
+
+5. **Unchanged.** The PANEL exclusion list itself, the scorer freeze (Amendment 5 item 8), the
+   controls, the panel size, the draw procedure and seed, and every law's direction and bar.
+
+**Evidence.** Registration PANEL section ("Excluded", "Development set");
+`laws-study/pilot/frame/<lang>.json` for the candidate lists; `docs/ceil_v3c.json` (`m1_refit`) for the
+re-fit figures in items 3 and 4; `docs/ceil.md` §5.
+
+## Amendment 9 (2026-11-11, owner OK; before the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** Two statements of the order of work disagree, and the disagreement decides whether the
+label audit precedes or follows the draw — exactly the question a referee asks. Amendment 0 item 7's
+numbered "Order of work" reads: frame build and hashed candidate list (pushed) → **the seeded draw** →
+scans → **label audit** → scorer freeze → one run. Amendment 5's closing "**Next, in order**" line
+reads: **the label audit** → the sampling frame with its fingerprint → the seeded draw → ACC-P → the
+panel scans → one run. Both cannot hold.
+
+1. **Amendment 0 item 7 governs the order of work.** Amendment 5's closing "Next, in order" line is
+   narrative summary, not a numbered amendment item, and is superseded on this point only. The order is:
+   frame and committed fingerprint → **seeded draw** → panel scans → **label audit** → one scorer run →
+   synthesis. (The scorer freeze is already done, Amendment 5 item 8.)
+
+   **Why that way round.** The label audit measures the precision of the labels the laws are actually
+   scored on, and those labels are harvested from the drawn panel's own history. Amendment 7 item 3
+   samples the audit "stratified by repo in proportion to that repo's `other-fix` event mass", which
+   presupposes a panel. An audit run before the draw would measure a different repo set from the one
+   the verdicts rest on, which is the wrong quantity however convenient the timing.
+
+   **What this does not license.** No law statistic is computed before the single scorer run
+   (Amendment 0 item 7's closing rule, unchanged). The class gate still decides descriptive vs
+   confirmatory status per language, and it is applied from the audit's result *before* any verdict is
+   read — the audit follows the scans but precedes every claim.
+
+2. **The audit's repo set, which Amendment 7 item 3 left unstated:** the **drawn panel repos** of that
+   language. Not the candidate frame, not the development set.
+
+3. **The post-exclusion eligible list and its fingerprint are committed**, satisfying M9's "the SHA-256
+   of the candidate file is committed and pushed before the draw" and Amendment 8 item 1's
+   post-exclusion requirement:
+
+   - `docs/laws_panel/<lang>_eligible.json` — the list the seeded draw samples from, each with every
+     removal by name **and the rule that removed it**;
+   - `docs/laws_panel/SHA256SUMS`, `docs/laws_panel/README.md`, and
+     `docs/laws_panel/name_collisions.json`;
+   - **81,060 candidates in, 81,006 eligible out, 54 removed**;
+   - **M9 combined fingerprint
+     `12e03a147f8b62b0c7a890aba5bd2c336f207c4e8145caff0cbec759ede56451`.**
+
+   The list is reproducible from committed inputs alone — the raw frame in `docs/laws_frame`, the
+   exclusion sources in `tools/laws_exclude.py` and this register, and
+   `docs/laws_collision_decisions.json` — so the commitment is checkable, not merely recorded.
+
+4. **With item 3 committed, the seeded draw may proceed.** Its remaining prerequisites are met: ACC-P
+   admission (Amendment 2 item 4), the pilot (Amendment 0 item 4), the development-set dry run
+   (Amendment 2 item 5), the engine pin (Amendment 1 item 2), the scorer freeze (Amendment 5 item 8)
+   and the exclusion (Amendment 8 item 1).
+
+5. **Unchanged.** Every law's direction, bar and verdict rule; the panel size and the draw seed; the
+   controls; the scorer freeze; the class gate and the audit size of Amendment 7 item 3.

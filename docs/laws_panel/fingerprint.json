@@ -1,0 +1,17 @@
+{
+ "combined_sha256": "12e03a147f8b62b0c7a890aba5bd2c336f207c4e8145caff0cbec759ede56451",
+ "per_language": {
+  "c": "2dc5b93cb3c63628ee079b23bd6cc067c67787cc85c698c490b70ea3c0275158",
+  "cpp": "5dfbaf030f9f36aff9d83b634e9e8ad8946f7f6ad8e204cd87222ab69d2dc77b",
+  "csharp": "a87ae2eb789df30a3782f85aac35fd79c8f1d895fc67fedaa99b04066b840cdd",
+  "go": "bdadc1c2f83c52e8925150217bd191e3c91b05651d8ebacd4438cf6bf0454eae",
+  "java": "5a2378c8a2859a15fb88a2424714312a5e98ed8e93c82be4e54bf72de0f2c523",
+  "jsts": "d2d79e95abdd14b3634fe3f479fe189f8965078ad69abab8de2ea1ea1aa93261",
+  "kotlin": "3065d66b77813b3add397cb4d0ad21ccffe39a6517d267bda5019f3b9089ec39",
+  "php": "a9ceae79171307e0c50ad0f4b4328ffe814349665d3aed6e374f88064da3d62a",
+  "python": "e891ff0beb8b3d7340e4db9c8625d62aa62b33978400b51ce199c578379a87b3",
+  "rust": "c5cba65f17e08de290da9c2c9ddd4d3376953d46a91195f5060ae89106307498"
+ },
+ "definition": "sha256 over '<lang>:<per-language digest>\\n' for languages in sorted order",
+ "required_by": "Amendment 8 item 1"
+}
