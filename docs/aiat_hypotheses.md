@@ -129,19 +129,20 @@ give ~12 per band and clear the rule nowhere — exactly why it is direction-onl
 The experiment framework requires a stated cost and a 6-month payoff of ≥ 3× cost including slot-hours at $10, with
 a $40 ceiling.
 
-**Measured 2026-11-11** (`tools/aiat_eval.py estimate`, character-based token estimate, `claude-opus-5`, Batches
-API at 50%):
+**Measured exactly 2026-11-11** with `messages.count_tokens` (free) over every file, `claude-opus-5`, Batches API
+at 50% — this replaces the earlier character-based estimate, which was **1.74× optimistic** (C source tokenises
+denser than 3.5 chars/token):
 
 | item | files | input tokens | batch cost |
 |---|---|---|---|
-| curl, whole universe | 988 | 2,550,876 | **$7.86** |
-| nDPI, whole universe | 426 | 1,851,605 | **$5.27** |
-| AIAT-P2 reliability (100 files × 5 runs) | 500 | ~1.3M | ~$4 |
-| **total** | | | **≈ $17** |
+| curl, whole universe | 988 | **4,330,051** | **$12.31** |
+| nDPI, whole universe | 426 | **3,238,793** | **$8.74** |
+| AIAT-P2 reliability (100 files × 5 runs) | 500 | ~2.2M | ~$5.50 |
+| **total before the P3 contrast** | | | **≈ $26.50** |
 
-That leaves headroom under the $40 cap for the AIAT-P3 contrast run. The estimate is character-based; `estimate
---count-tokens` measures it exactly with `messages.count_tokens` (free) before the first paid run, and the measured
-figure replaces this table. Scoring goes through the Batches API because latency is irrelevant to a pilot and it
+That fits the $40 cap but no longer comfortably: the AIAT-P3 contrast run must be sized against what is left,
+roughly $13, rather than assumed. If P3 cannot fit, it is deferred and said to be deferred — the cap is not
+renegotiated after the fact. Scoring goes through the Batches API because latency is irrelevant to a pilot and it
 halves the bill.
 
 ## 8 · What this cannot establish
