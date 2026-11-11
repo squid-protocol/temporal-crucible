@@ -110,3 +110,46 @@ Readings, all descriptive on five development repos:
 - The coverage amendment above.
 - The label audit, on the M6 workflow label (`docs/laws_defect_labels.md`), and the LAW-9 effect decision.
 - Then the scorer hash.
+
+## Re-run under Amendment 5 (the registered effects, not the old ones)
+
+`laws_run_amend5.json`, 5 repos, all nine laws, **0 failures, 1,285 s** (up from 635 s: each repo now also
+simulates 100 fitness-only histories for LAW-2). The scorer now reads what Amendment 5 registers -- LAW-2's
+effect as the excess over its fitness null with `v = se_observed² + sd(alpha_null)²`, and LAW-9's as
+`P(cve smaller)` against 0.5 with a bootstrap SE.
+
+### LAW-2: the registered variance is far more conservative than the rank p
+
+| repo | alpha | excess | SE of excess | excess / SE | rank p |
+|---|---|---|---|---|---|
+| sphinx | +1.788 | +0.429 | 0.079 | **5.4** | 0.0099 |
+| libgit2 | +1.310 | +0.221 | 0.031 | **7.1** | 0.0099 |
+| libxml2 | +1.272 | +0.133 | 0.038 | **3.5** | 0.0099 |
+| prometheus | +1.492 | +0.221 | 0.169 | 1.3 | 0.0099 |
+| commons-lang | +1.237 | +0.059 | 0.074 | 0.8 | 0.0396 |
+
+**The rank p says "beyond fitness" in all five repos; the registered effect and variance say three of five.**
+The two answer different questions. The rank p asks only whether any simulated history reached the observed
+alpha -- and with 100 reps, four repos are at its 1/101 floor because none did. The variance-based test asks
+whether the gap is large relative to the observed alpha's own uncertainty, which is the question the synthesis
+pools. Where they disagree, the registered quantity governs, and it is the conservative one.
+
+The gap is dominated by `se_observed`, not by the null: prometheus's alpha carries SE 0.168 against a null SD of
+0.017, so its imprecision is in the attachment estimate itself. commons-lang is simply a small effect (+0.059).
+So LAW-2's attachment component is clear in sphinx, libgit2 and libxml2, and not established in prometheus or
+commons-lang -- a materially more cautious reading than `docs/laws_law2_fitness.md` gave from the rank p alone,
+and the one the panel will be scored on.
+
+### LAW-9: all three legs now enter the synthesis
+
+With `se_p_smaller` from the same bootstrap, libxml2's three metrics are files 0.584 ± 0.022, functions
+0.545 ± 0.031 and lines 0.516 ± 0.032. Under the old registered shift, two of the three had SE exactly 0 and
+could not be pooled at all. Against the 0.5 null, files is 3.8 SE above it and the other two are not -- the law
+is a conjunction, so it still does not hold, but it now fails for a readable reason rather than an undefined one.
+
+### Matched coverage is now automatic
+
+`--matched-coverage` adds a second pass over every law with each network thinned to `matched_share(repos)`: the
+**minimum over languages of that language's median** `share_confident_of_repo_links`. A language is represented
+by its typical repo, and the comparison is made at the quality of the worst-measured language, because that is
+the only level every language can actually be measured at. On the pilot that is java's 0.556.

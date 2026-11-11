@@ -95,3 +95,34 @@ pinned panel engine before the draw without re-pinning under Amendment 1.
 **Owed before the freeze:** the scanner's file column on `unresolved` (so the coverage figure becomes a rate), the
 amendment registering matched-coverage reporting, and -- if LAW-4 is to carry a between-language claim -- a
 selective rather than uniform thinning null.
+
+## The matched-coverage pass, run end to end on five repos
+
+`laws_run_matched.json` (`--matched-coverage`): both passes over all nine laws, 10 repo-runs, **0 failures,
+2,080 s**. `matched_share` chose **0.556** -- java's median, the worst-measured language -- and every network in
+the second pass was thinned to it with the edge-persistent mask.
+
+| repo | LAW-1 | LAW-2 excess | LAW-3 | LAW-4 |
+|---|---|---|---|---|
+| commons-lang (java) | +0.113 → +0.100 (−0.2) | +0.059 → **+0.258** (+2.7) | evaluable → **not** | +0.025 → +0.029 (+1.1) |
+| prometheus (go) | +0.088 → +0.065 (−1.3) | +0.221 → +0.259 (+0.2) | +0.044 → +0.023 (−0.7) | +0.015 → +0.017 (+0.6) |
+| sphinx (python) | +0.100 → +0.094 (−0.3) | +0.429 → +0.511 (+1.0) | +0.124 → +0.084 (−0.9) | −0.005 → −0.005 (0.0) |
+| libgit2 (c) | +0.184 → +0.178 (−0.1) | +0.221 → +0.227 (+0.2) | +0.013 → +0.033 (+1.8) | +0.004 → +0.004 (+0.1) |
+| libxml2 (c) | +0.062 → +0.055 (−0.2) | +0.133 → +0.164 (+0.8) | evaluable → **not** | +0.026 → **+0.018** (−2.5) |
+
+Shifts are in SEs of the full-coverage estimate. Four readings, each extending what the two-repo test found:
+
+1. **LAW-1 is robust in all five repos**, not just the two C ones: −1.3 to −0.1 SE after losing 44% of edges.
+2. **LAW-2's excess is robust but biased UPWARD by coverage loss** -- every shift is positive (+0.2 to +2.7 SE).
+   commons-lang's excess goes from +0.059 ± 0.074 (0.8 SE, not established) to +0.258 ± 0.104 (2.5 SE). So the
+   earlier finding that low coverage inflates alpha carries through to the excess. The consequence matters for
+   the paper: a worse-measured language's LAW-2 excess is biased **up**, so matched-coverage comparison equalises
+   that bias rather than removing it, and the absolute excess at matched coverage is an over-estimate. The
+   full-coverage figure remains the one to quote per repo.
+3. **LAW-3's dropout is confirmed and is not C-specific.** commons-lang and libxml2 both become not evaluable at
+   matched coverage -- 3 of 5 evaluable instead of 5 of 5 -- so a worse-measured language loses LAW-3 repos
+   non-randomly, in java as well as C. This is the differential-dropout Amendment 5 item 4 asks to be reported.
+4. **LAW-4's attenuation is repo-specific, not uniform.** libxml2 loses 2.5 SE (+0.026 → +0.018, the ~30% seen
+   before) while the other four move by at most 1.1 SE. Against effects of 0.004 to 0.029 that is still enough to
+   make a between-language claim unsafe, which is why Amendment 5 makes it descriptive -- but the attenuation is
+   not a constant factor that could simply be corrected for.
