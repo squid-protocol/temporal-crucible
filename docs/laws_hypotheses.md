@@ -534,3 +534,87 @@ and Python has no working oracle for the two-instrument check.
 
 **Next, in order:** the label audit; the sampling frame under M9 with its candidate fingerprint committed and
 pushed; the seeded draw; ACC-P on draws 1 and 2 per language; the panel scans; one scorer run and the synthesis.
+
+## Amendment 6 (2026-11-11, owner OK; after the frame search, before the label audit, before the candidate fingerprint is committed and before the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** `docs/otherfix_audit.md` measured the label precision of the residual `other-fix` class
+produced by `tools/xc_harvest.py`, which this registration names as the class source (Fix labels,
+item 1), over 440 hand judgments in three rounds. Under the registered v1 gate it is **0.558 pooled
+and 0.383 outside C** (per repo: libxml2 0.80, postgres 0.77, redis 0.73, libgit2 0.63, sphinx 0.60,
+prometheus 0.40, commons-lang 0.27, ripgrep 0.27). `other-fix` carries **85–97% of fix-event mass in
+every repo**. Under the class gate (Fix labels, item 3: a class below 70% precision in a language is
+descriptive-only there), `other-fix` would therefore fail in Go, Java, Python and Rust, and **LAW-6,
+LAW-7 and LAW-8 would become descriptive-only across most of the panel** — the three laws Amendment 0
+item 2 deliberately kept confirmatory. The cause is community vocabulary, not a defect in the
+harvester: outside C, "fix" mostly introduces lint, type-checker, javadoc, formatting and typo
+changes.
+
+1. **Class rule.** The `other-fix` class is produced by `tools/xc_harvest.py` **followed by
+   `tools/fixlike_v2.py --rules v3c`** (FIXLIKE v3c), which drops a commit when its touched in-scope
+   files are all under test / doc / example / benchmark trees; when its subject is non-behavioural (a
+   conventional-commit `docs`/`chore`/`style`/`test`/`build` type, a named linter or type checker,
+   javadoc/doxygen/docstring, typo/spelling/grammar, whitespace/formatting, warning-only, changelog,
+   refactor/cleanup/performance/portability/build, or an edit to a code comment — exempting operations
+   *on* comments, so an XML parser's "Fix EOF handling in comments" survives); or when **no fix word
+   appears in the subject**. Measured precision **0.761 pooled, 0.750 C, 0.773 non-C, 7 of 8 repos
+   over the gate**, on a confirmatory sample drawn after the rule was written (seed 2984, 25 per repo,
+   all 480 previously-judged commits excluded).
+
+2. **Rule C is the operative change.** The v1 gate matched a fix word in the subject **or body**, so
+   plain feature commits whose body said "fixes #123" were admitted. The path and prose exclusions
+   alone reach only 0.660 pooled and still fail 5 of 8 repos; requiring the fix word in the **subject**
+   is what carries the result. Rule C was designed on a 240-commit development set and tested on a
+   later 200-commit sample, so 0.761 is out-of-sample. **Quote 0.761, not the development set's
+   0.932** — the tuned figure was optimistic by about 0.17.
+
+3. **Applied to `other-fix` only** — the class it was developed and audited on. `latent` (OSV-derived),
+   `regression` and `extrinsic` keep their own measured precision from `docs/xc_label_audit.md`
+   (regression 0.73–0.87; extrinsic v2 0.90–1.00). Two of them must not be touched by these rules in
+   any case: `regression` via revert reaches its class *before* the fix-like gate, so rule C would
+   discard `Revert "..."` commits, the cleanest regression signal available; and `extrinsic` is
+   already gated on a subject-matched environment **and** action, so rule C would drop legitimate
+   entries such as "port to AIX" that carry no fix word. Extending v3c to those classes would need an
+   audit of those classes.
+
+4. **Cost.** 43.0% of `other-fix` events and 35.7% of all events are dropped, which works out to
+   roughly **22% of real fixes given up to remove roughly 69% of the noise** (development set:
+   fixes-kept 0.813, noise-caught 0.925). Non-destructive: v3c event sets are written to
+   `events/<repo>_xc2.json` and the v1 sets are untouched, so every published v1 result stays
+   reproducible.
+
+5. **v3c is the starting rule, not a substitute for the label audit.** `docs/otherfix_audit.md` covers
+   C, Go, Java, Python and Rust — **5 of the 10 candidate languages**. PHP, C#, Kotlin, C++ and JS/TS
+   are unaudited. The M6 label audit and the class gate still decide per language; this amendment only
+   changes which rule that audit is run against.
+
+6. **The sampling frame is unaffected and is not rebuilt.** `tools/laws_frame.py` admits a repo on
+   `MIN_COMMITS`, `MIN_SNAPSHOTS` and `MIN_FILES` alone and reads no fix label, so the frame search
+   completed 2026-11-11 stands. This amendment changes labels only, and it is filed before the label
+   audit, the candidate fingerprint and the draw.
+
+7. **Unchanged.** The scorer freeze (Amendment 5 item 8) stands — **no scorer change is made or
+   needed**: LAW-8 already measures the right quantity (forward, effort-aware gain in recall@20% LOC),
+   and the oracle-ladder ceiling estimator of `docs/ceil.md` is deliberately **not** added, since a new
+   estimator after the freeze would force a full rescan for marginal gain. The controls are unchanged:
+   distinct authors and change coupling are already registered (Controls on every defect claim), a
+   choice `docs/ceil.md` independently vindicates — author count came out the strongest single term in
+   its re-fit (OR 2.06 [1.92, 2.22]), ahead of prior fixes, and adding it moved prior fix 2.10 → 1.65
+   and churn 1.22 → 1.10. Panel size, the draw procedure and every law's direction and bar are
+   unchanged.
+
+8. **Open, not decided here: the class gate is per language, not per repo.** libgit2 fails all three
+   audit rounds (0.63 / 0.60 / 0.60) on build-and-warning churn that reads exactly like a bug fix, so a
+   single weak repo can ride inside a passing language pool and add noise without tripping the gate.
+   Flagged for a later decision; this amendment does not change the gate.
+
+9. **Known residual.** Several libgit2 misses are cheap pattern gaps rather than hard cases — bare
+   `Fix warnings`, plural `broken tests`, `misspelling`, `linting`, `Javadocs`, `PEP8`. They are
+   deliberately left unfixed: the round-3 sample is now a test set and patching against it would repeat
+   the development-set overfit noted in item 2. They are a candidate later amendment, to be validated
+   on a fresh round-4 sample.
+
+**Evidence.** `docs/otherfix_audit.md` (both rounds, all 440 verdicts listed),
+`docs/fixlike_v2_impact.md`, `tools/fixlike_v2.py`, `tools/otherfix_sample.py`, journal
+`docs/journal/2026-11-11-otherfix-precision.md`. Companion ceiling result, which measured the effect of
+this label change on a defect model (realized share of attainable signal 0.780 → 0.823; the C/non-C gap
+0.061 → 0.019): `docs/ceil.md` §5.
