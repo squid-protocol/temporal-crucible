@@ -1,0 +1,805 @@
+{
+ "language": "jsts",
+ "attempts": [
+  {
+   "repo": "prem-k-r/materialyounewtab",
+   "eligible": false,
+   "why": "pre-screen: 965 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "johnweisz/typedjson",
+   "eligible": false,
+   "why": "pre-screen: 422 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "dotenvx/dotenvx",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1986,
+   "why": "fewer than 2000 first-parent commits (1986)"
+  },
+  {
+   "repo": "web-fragments/web-fragments",
+   "eligible": false,
+   "why": "pre-screen: 570 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "bloomberg/goldpinger",
+   "eligible": false,
+   "why": "pre-screen: 475 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "metabase/dataset-generator",
+   "eligible": false,
+   "why": "pre-screen: 122 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ryanseddon/react-frame-component",
+   "eligible": false,
+   "why": "pre-screen: 293 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pacholoamit/chatgpt-prompts",
+   "eligible": false,
+   "why": "pre-screen: 171 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "googlechrome/chrome-launcher",
+   "eligible": false,
+   "why": "pre-screen: 293 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jaypokale/chisle",
+   "eligible": false,
+   "why": "pre-screen: 315 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "react-toolbox/react-toolbox",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1064,
+   "why": "fewer than 2000 first-parent commits (1064)"
+  },
+  {
+   "repo": "lanceli/cnodejs-ionic",
+   "eligible": false,
+   "why": "pre-screen: 133 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "overlayeddev/overlayed",
+   "eligible": false,
+   "why": "pre-screen: 1063 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ooples/token-optimizer-mcp",
+   "eligible": false,
+   "why": "pre-screen: 693 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "i5ting/i5ting_ztree_toc",
+   "eligible": false,
+   "why": "pre-screen: 74 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "felixpalmer/procedural-gl-js",
+   "eligible": false,
+   "why": "pre-screen: 119 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "unjs/jiti",
+   "eligible": false,
+   "why": "pre-screen: 581 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "voxmedia/meme",
+   "eligible": false,
+   "why": "pre-screen: 89 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "codergautam/worldguessr",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1748,
+   "why": "fewer than 2000 first-parent commits (1748)"
+  },
+  {
+   "repo": "ooboqoo/shiping",
+   "eligible": false,
+   "why": "pre-screen: 216 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "m3y54m/embedded-engineering-roadmap",
+   "eligible": false,
+   "why": "pre-screen: 663 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "element-hq/element-call",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 2793,
+   "snapshots_with_files": 19,
+   "quarters": 19,
+   "quarters_with_commit": 19,
+   "why": "fewer than 20 quarters with 50 source files (19)"
+  },
+  {
+   "repo": "busiyiworld/maimemo-export",
+   "eligible": false,
+   "why": "pre-screen: 35 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hexclave/pgmock",
+   "eligible": false,
+   "why": "pre-screen: 26 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "panicsteve/cloud-to-butt",
+   "eligible": false,
+   "why": "pre-screen: 29 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "qmiai/qmedia",
+   "eligible": false,
+   "why": "pre-screen: 14 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "shaunwei/realchar",
+   "eligible": false,
+   "why": "pre-screen: 679 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "coffee-and-fun/google-profanity-words",
+   "eligible": false,
+   "why": "pre-screen: 87 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "euangoddard/clipboard2markdown",
+   "eligible": false,
+   "why": "pre-screen: 83 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mpetazzoni/sse.js",
+   "eligible": false,
+   "why": "pre-screen: 163 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "alyssaxuu/mapus",
+   "eligible": false,
+   "why": "pre-screen: 35 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "gagakj/gagamall",
+   "eligible": false,
+   "why": "pre-screen: 111 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "wooyundota/droidsslunpinning",
+   "eligible": false,
+   "why": "pre-screen: 39 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "nobruf/shadcn-landing-page",
+   "eligible": false,
+   "why": "pre-screen: 15 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "antennaio/jquery-bar-rating",
+   "eligible": false,
+   "why": "pre-screen: 228 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "geometrycollective/geometry-processing-js",
+   "eligible": false,
+   "why": "pre-screen: 94 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "yyx990803/html5-clear",
+   "eligible": false,
+   "why": "pre-screen: 26 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "alibaba/f2e-spec",
+   "eligible": false,
+   "why": "pre-screen: 455 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ra2web/ra2web.github.io",
+   "eligible": false,
+   "why": "pre-screen: 313 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "binux/qiandao",
+   "eligible": false,
+   "why": "pre-screen: 239 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "bnoordhuis/node-heapdump",
+   "eligible": false,
+   "why": "pre-screen: 67 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pandaai-tech/panda_quantflow",
+   "eligible": false,
+   "why": "pre-screen: 34 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "lidge-jun/opencodex",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 5487,
+   "snapshots_with_files": 2,
+   "quarters": 2,
+   "quarters_with_commit": 2,
+   "why": "fewer than 20 quarters with 50 source files (2)"
+  },
+  {
+   "repo": "reactjsresources/react-webpack-babel",
+   "eligible": false,
+   "why": "pre-screen: 476 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mediacrush/mediacrush",
+   "eligible": false,
+   "why": "pre-screen: 1969 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "openannotation/annotator",
+   "eligible": false,
+   "why": "pre-screen: 1721 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "schneegans/fly-pie",
+   "eligible": false,
+   "why": "pre-screen: 1859 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "nxzai/nextexplorer",
+   "eligible": false,
+   "why": "pre-screen: 894 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ichord/caret.js",
+   "eligible": false,
+   "why": "pre-screen: 94 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "addyosmani/bg-remove",
+   "eligible": false,
+   "why": "pre-screen: 30 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "juliusmarminge/acme-corp",
+   "eligible": false,
+   "why": "pre-screen: 231 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sylviiu/ezytdl",
+   "eligible": false,
+   "why": "pre-screen: 1260 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jshint/fixmyjs",
+   "eligible": false,
+   "why": "pre-screen: 416 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "oboard/claude-code-rev",
+   "eligible": false,
+   "why": "pre-screen: 13 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pierrecomputer/pierre",
+   "eligible": false,
+   "why": "pre-screen: 1325 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "m-damien/visualstorywriting",
+   "eligible": false,
+   "why": "pre-screen: 3 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "qihang666/bluetoothprinter",
+   "eligible": false,
+   "why": "pre-screen: 14 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "bradtraversy/devconnector_2.0",
+   "eligible": false,
+   "why": "pre-screen: 380 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "swimlane/ngx-graph",
+   "eligible": false,
+   "why": "pre-screen: 360 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "input-output-hk/scorex",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1076,
+   "why": "fewer than 2000 first-parent commits (1076)"
+  },
+  {
+   "repo": "foone/sierradeathgenerator",
+   "eligible": false,
+   "why": "pre-screen: 617 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "cncf/mentoring",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1572,
+   "why": "fewer than 2000 first-parent commits (1572)"
+  },
+  {
+   "repo": "goatplatform/goatdb",
+   "eligible": false,
+   "why": "pre-screen: 641 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "darula-hpp/shimmer-from-structure",
+   "eligible": false,
+   "why": "pre-screen: 275 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "styled-icons/styled-icons",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1221,
+   "why": "fewer than 2000 first-parent commits (1221)"
+  },
+  {
+   "repo": "devrnt/react-use-wizard",
+   "eligible": false,
+   "why": "pre-screen: 456 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "orbitdb/orbitdb",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 997,
+   "why": "fewer than 2000 first-parent commits (997)"
+  },
+  {
+   "repo": "voocel/openclaw-mini",
+   "eligible": false,
+   "why": "pre-screen: 30 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "devongovett/regexgen",
+   "eligible": false,
+   "why": "pre-screen: 40 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "botmonster/jquery-bootpag",
+   "eligible": false,
+   "why": "pre-screen: 89 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "dolag233/serpent",
+   "eligible": false,
+   "why": "pre-screen: 1858 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "phoboslab/impact",
+   "eligible": false,
+   "why": "pre-screen: 267 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "nondanee/vsc-netease-music",
+   "eligible": false,
+   "why": "pre-screen: 224 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hotheadhacker/youtube-player",
+   "eligible": false,
+   "why": "pre-screen: 37 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "cosmicstack-labs/mercury-agent",
+   "eligible": false,
+   "why": "pre-screen: 1061 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "danilo-znamerovszkij/draw-your-font",
+   "eligible": false,
+   "why": "pre-screen: 20 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pythongosssss/comfyui-custom-scripts",
+   "eligible": false,
+   "why": "pre-screen: 525 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "diffusionstudio/lottie",
+   "eligible": false,
+   "why": "pre-screen: 93 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ytiurin/html5tooltipsjs",
+   "eligible": false,
+   "why": "pre-screen: 158 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pqrs-org/ke-complex_modifications",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1999,
+   "why": "fewer than 2000 first-parent commits (1999)"
+  },
+  {
+   "repo": "moon-studio/vite-vue-bpmn-process",
+   "eligible": false,
+   "why": "pre-screen: 319 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jeremydaly/lambda-warmer",
+   "eligible": false,
+   "why": "pre-screen: 98 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "looeee/discoverthreejs-site",
+   "eligible": false,
+   "why": "pre-screen: 286 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "defunkt/hurl",
+   "eligible": false,
+   "why": "pre-screen: 584 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "xxtomm/spell-ui",
+   "eligible": false,
+   "why": "pre-screen: 153 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sidebase/sidebase",
+   "eligible": false,
+   "why": "pre-screen: 68 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "skilldrick/easy6502",
+   "eligible": false,
+   "why": "pre-screen: 102 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "haskell-things/implicitcad",
+   "eligible": false,
+   "why": "pre-screen: 1994 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ladunjexa/reactjs18-3d-portfolio",
+   "eligible": false,
+   "why": "pre-screen: 70 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "udacimak/udacimak",
+   "eligible": false,
+   "why": "pre-screen: 262 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "reduxjs/redux-mock-store",
+   "eligible": false,
+   "why": "pre-screen: 140 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "graphile/migrate",
+   "eligible": false,
+   "why": "pre-screen: 505 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "yuzujs/setimmediate",
+   "eligible": false,
+   "why": "pre-screen: 118 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "a7650/vue3-draggable-resizable",
+   "eligible": false,
+   "why": "pre-screen: 35 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "node-usb/node-usb",
+   "eligible": false,
+   "why": "pre-screen: 907 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "vincit/objection.js",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2022,
+   "snapshots_with_files": 46,
+   "quarters": 46,
+   "quarters_with_commit": 46,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "shelljs/shx",
+   "eligible": false,
+   "why": "pre-screen: 179 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "adamcohenhillel/adeus",
+   "eligible": false,
+   "why": "pre-screen: 330 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "db-migrate/node-db-migrate",
+   "eligible": false,
+   "why": "pre-screen: 1298 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "potatameister/paperknife",
+   "eligible": false,
+   "why": "pre-screen: 253 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pingcap/ossinsight",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 2469,
+   "snapshots_with_files": 19,
+   "quarters": 19,
+   "quarters_with_commit": 19,
+   "why": "fewer than 20 quarters with 50 source files (19)"
+  },
+  {
+   "repo": "node-config/node-config",
+   "eligible": false,
+   "why": "pre-screen: 893 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "wxsms/uiv",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1917,
+   "why": "fewer than 2000 first-parent commits (1917)"
+  },
+  {
+   "repo": "viliusle/minipaint",
+   "eligible": false,
+   "why": "pre-screen: 832 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "carloscuesta/gitmoji",
+   "eligible": false,
+   "why": "pre-screen: 1348 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sergey-pimenov/awesome-web-animation",
+   "eligible": false,
+   "why": "pre-screen: 374 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ant-design/ant-motion",
+   "eligible": false,
+   "why": "pre-screen: 569 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "steven-tey/novel",
+   "eligible": false,
+   "why": "pre-screen: 625 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "aeonfun/aeon",
+   "eligible": false,
+   "why": "pre-screen: 1555 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "itechmeat/open-second-brain",
+   "eligible": false,
+   "why": "pre-screen: 265 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "trojanowski/react-apollo-hooks",
+   "eligible": false,
+   "why": "pre-screen: 94 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "itdragonblog/daydayup",
+   "eligible": false,
+   "why": "pre-screen: 176 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "puppyone-ai/puppyone",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 94,
+   "why": "fewer than 2000 first-parent commits (94)"
+  },
+  {
+   "repo": "ruyadorno/ntl",
+   "eligible": false,
+   "why": "pre-screen: 158 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "karlhadwen/todoist",
+   "eligible": false,
+   "why": "pre-screen: 52 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "prinsss/twitter-web-exporter",
+   "eligible": false,
+   "why": "pre-screen: 206 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "code-yeongyu/senpi",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 7164,
+   "snapshots_with_files": 5,
+   "quarters": 5,
+   "quarters_with_commit": 5,
+   "why": "fewer than 20 quarters with 50 source files (5)"
+  },
+  {
+   "repo": "nystik-gh/ignis",
+   "eligible": false,
+   "why": "pre-screen: 342 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pizza-bot-app/pizza-bot",
+   "eligible": false,
+   "why": "pre-screen: 176 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "muhammadsammy/tailwindcss-classnames",
+   "eligible": false,
+   "why": "pre-screen: 602 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "vercel/ncc",
+   "eligible": false,
+   "why": "pre-screen: 643 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "uku/unblock-youku",
+   "eligible": false,
+   "why": "pre-screen: 1187 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pchab/projectrtc",
+   "eligible": false,
+   "why": "pre-screen: 129 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hashlips/hashlips_art_engine",
+   "eligible": false,
+   "why": "pre-screen: 131 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "phaserjs/template-webpack",
+   "eligible": false,
+   "why": "pre-screen: 58 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "gkaramanis/tidytuesday",
+   "eligible": false,
+   "why": "pre-screen: 1564 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mui/material-ui",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 20228,
+   "snapshots_with_files": 48,
+   "quarters": 48,
+   "quarters_with_commit": 48,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "vincit/objection.js",
+  "mui/material-ui"
+ ]
+}
