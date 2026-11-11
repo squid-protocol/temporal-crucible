@@ -7,6 +7,12 @@ The draw order is `random.Random(2982).sample` over each language's lower-cased,
 byte-sorted eligible candidates (M9). It depends only on the candidate SET, so it is reproducible from
 the committed list: re-running the tool reproduces these records byte for byte, which was checked.
 
+**Depth (Amendment 10, 2026-11-11).** These records hold the first **400** of each order. The original 40-entry
+heads are preserved byte for byte and were verified to reproduce from the committed eligible lists before the
+extension; the seed, the eligible lists and their fingerprints are unchanged. The extension exists because only
+**20%** of candidates clear the clone-time commit bar (measured over 2,000 candidates), so a 40-deep order could not
+seat six of the ten languages. Depth is not panel size.
+
 **What a draw order is.** It is not the panel. Per M9 and Amendment 2 item 2, the clone-time checks are
 walked in this order and the panel is the first 16 (confirmatory language) or 8 (descriptive) that pass.
 A candidate failing a clone-time check is replaced by **the next in this order**, never by a re-draw,

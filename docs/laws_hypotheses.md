@@ -21,6 +21,7 @@ of each is at the bottom of this file; this table is the audit trail, not a subs
 | 7 | 11-11 | **no per-repo class gate**; the M6 audit sized at ≈136 stratified judgments per language; per-repo precision reported, never used as a filter; a sub-0.70 sensitivity pre-registered; a CI-upper-bound floor as backstop | yes | **neutral** — declines a filter, adds a sensitivity and a backstop |
 | 8 | 11-11 | records that the CGR repos were **already** excluded; **requires the registered exclusion to be applied before the draw**, with logged removals and a post-exclusion fingerprint; states `docs/ceil.md` is development-set evidence; files a pre-draw prior that **LAW-6's in-cycle term is expected to fail outside C**; erratum on Amendment 6's author-count parenthetical | yes | **weakened** — enforces a guard and lowers expectations for LAW-6 |
 | 9 | 11-11 | resolves a contradiction between two stated orders of work in favour of Amendment 0 item 7 (**draw → scans → label audit**, not audit first), names the audit's repo set as the **drawn panel**, and commits the post-exclusion eligible list and its M9 fingerprint `12e03a14…` | yes | **neutral** — settles an ambiguity and fulfils a commitment; no bar, direction or size changes |
+| 10 | 11-11 | records the **measured 20% clone-time pass rate** and extends the committed draw order from depth 40 to 400 **in the same seeded permutation** (no re-draw; every committed head reproduces byte for byte); allows a reject-only API pre-screen; notes the OSI-licence rule is enforced nowhere | yes | **neutral** — no bar, direction, seed or panel size changes; the sample is not re-drawn |
 
 **Read across the last two columns.** All ten entries predate any panel outcome data: no panel repo has been
 selected, scanned or labelled. **Not one amendment loosened a bar, widened a direction, or made a law easier to
@@ -813,3 +814,55 @@ panel scans → one run. Both cannot hold.
 
 5. **Unchanged.** Every law's direction, bar and verdict rule; the panel size and the draw seed; the
    controls; the scorer freeze; the class gate and the audit size of Amendment 7 item 3.
+
+## Amendment 10 (2026-11-11, owner OK; before any panel repo is cloned, scanned or labelled)
+
+**Context.** Preparing ACC-P, the first two candidates of each language's draw order were checked against the
+registered eligibility rules. Seventeen of those twenty fail one. That is not a defect: PANEL defers the history
+rules to clone time (`eligible_history` — first-parent commits ≥ 2,000, ≥ 20 quarters with ≥ 50 source files,
+quarter commit coverage), and the search frame applies only `stars:>=500 fork:false archived:false language:<L>`,
+so failures are the walk working as designed. The **rate** is the problem. Screening all 400 drawn candidates
+against the commit bar alone leaves **79, or 20%**, and that is an upper bound: the screen uses GitHub's total
+commit count, which is ≥ the first-parent count the rule tests, and applies no quarterly rule at all. Six of ten
+languages cannot be seated from a 40-deep order — python 2 of 16 needed, go 4 of 16, java 7, C 8, jsts 4 of 8,
+php 5 of 8. Recorded with the measurements in tc#148.
+
+1. **The clone-time walk goes deeper in the same committed order; the draw is not re-taken.** M9 defines the draw
+   order as `random.Random(2982).sample(ordered, len(ordered))` — a **full permutation** of the post-exclusion
+   eligible list — and the committed records store only its head (the field is `draw_order_head`). Walking further
+   down introduces no new randomness and no new seed: it reads an order that was fixed, and whose definition was
+   committed, before the draw. **No re-draw, and no change to seed, panel size, eligibility rule or bar.**
+
+2. **Integrity check, run before the records were extended.** The full permutation rebuilt from each committed
+   `docs/laws_panel/<L>_eligible.json` reproduces that language's committed 40-entry head **byte for byte**, for
+   all ten languages, at the same `eligible_file_sha256`, `eligible_list_sha256` and seed 2982. Had any head failed
+   to reproduce, the order would not have been extended.
+
+3. **Records extended to depth 400 per language** (`tools/laws_frame.py draw --n 400`), with `docs/laws_draw/SHA256SUMS`
+   refreshed. 400 is a depth, not a panel: the panel remains the first 16 (confirmatory) or 8 (descriptive) that pass
+   the clone-time checks, each replacement still logged.
+
+   The depth was chosen from the pre-screen, not guessed. Over 2,000 candidates (200 per language) **409, or 20%**,
+   clear the commit bar, and the depth at which each language would seat its panel on that bar alone is: cpp 21,
+   kotlin 24, csharp 31, rust 31, php 52, jsts 65, **C 83, java 96, go 102, python 178**. Because the pre-screen is
+   an upper bound, every one of those depths is optimistic, and **python at 178 of 200 had no usable margin** — its
+   true seating depth is expected to exceed 200 once first-parent counting and the quarterly rules apply. 400 is set
+   to carry that margin rather than require a second amendment mid-walk. If a language still fails to seat at 400,
+   that is a thin-pool case under Amendment 3 item 2 and is reported, not fixed by a re-draw.
+
+4. **An API pre-screen may be used as the first stage of the walk, and may only reject.** The commit bar can be
+   screened from GitHub metadata in batches of 40 repositories per GraphQL query. Because the total commit count is
+   an upper bound on the first-parent count, a candidate below 2,000 is a certain fail and need not be cloned; a
+   candidate that clears the pre-screen still takes the full clone-time check, unchanged. This is a cost measure
+   only — it can remove a candidate the registered rule would have removed anyway, and can admit nothing.
+
+5. **Noted, not resolved: the OSI-licence rule is enforced nowhere.** PANEL lists "OSI licence read from the repo",
+   and neither the search query nor `eligible_history` checks one; 26 of the first 120 candidates have no
+   OSI-identified licence. This amendment does **not** drop the rule and does not implement it. It affects whether a
+   repo may be used, not any statistic. Dropping or implementing it is an owner decision, filed as tc#148 item 4.
+
+6. **Unchanged.** Every law's direction, bar and verdict rule; the seed; the panel sizes; the eligibility rules
+   themselves; the engine pin; the scorer freeze; the class gate and audit size; the order of work.
+
+**Effect on what can be claimed: neutral.** No bar moved, no direction widened, no law became easier to pass. The
+sample was not re-drawn and no candidate was selected after seeing an outcome — no outcome data exists yet.
