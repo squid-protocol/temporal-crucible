@@ -67,7 +67,13 @@ LAW-7 and LAW-8 would be descriptive-only across most of the panel** — the thr
 
 - **libgit2 fails all three audit rounds** (0.63 / 0.60 / 0.60) on build-and-warning churn that reads
   exactly like a bug fix. LAWS's class gate is **per language**, not per repo, so one bad C repo may
-  not trip it while still adding noise. Worth deciding whether the gate should also apply per repo.
+  not trip it while still adding noise. **DECIDED — filed as Amendment 7 (`d238339`): no per-repo
+  gate.** Every repo's Wilson 95% interval spans 0.70 (libgit2 [0.36, 0.80]), resolving 0.70 vs 0.60
+  per repo would take 136 commits each (21,760 panel-wide, against 440 done), per-repo precision proved
+  unstable across rule versions, and post-hoc exclusion after seeing labels is the most attackable move
+  in a replication. Instead: ~136 judgments per language stratified by event mass, per-repo precision
+  reported as a covariate, a pre-registered sub-0.70 sensitivity, and a floor that excludes only when
+  the CI *upper* bound is below 0.70 (fires on nothing under v3c).
 - Several libgit2 misses are cheap regex gaps (bare `Fix warnings`, plural `broken tests`,
   `misspelling`, `linting`, `Javadocs`, `PEP8`), deliberately left unfixed so as not to overfit the
   round-3 test set. They are candidate amendment 3 to `xc_harvest`, pending a fresh round-4 sample.
