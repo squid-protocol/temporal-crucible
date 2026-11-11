@@ -1,0 +1,1001 @@
+id	repo	path	line	match	context	label
+curl-000	curl	ares/windows_port.c	41	//t -= EPOCHFILETIME;     /* Offset to the Epoch time */	"        li.HighPart = ft.dwHighDateTime;
+        t  = li.QuadPart;       /* In 100-nanosecond intervals */
+        //t -= EPOCHFILETIME;     /* Offset to the Epoch time */
+        t /= 10;                /* In microseconds */
+        tv->tv_sec  = (long)(t / 1000000);"	code
+curl-001	curl	lib/config-os400.h	268	/* int send(int, char *, int, int); */	"#define RECV_TYPE_RETV          int
+
+/* int send(int, char *, int, int); */
+#define SEND_TYPE_ARG1          int
+#define SEND_NONCONST_ARG2"	proto
+curl-002	curl	lib/curl_darwinssl.c	693	"/*os_version_point = strtok(NULL, ""."");*/"	"  os_version_major = strtok(os_version, ""."");
+  os_version_minor = strtok(NULL, ""."");
+  /*os_version_point = strtok(NULL, ""."");*/
+  *major = atoi(os_version_major);
+  *minor = atoi(os_version_minor);"	code
+curl-003	curl	lib/curl_darwinssl.c	1220	/*struct SessionHandle *data = conn->data;*/	"                              CURLcode *curlcode)
+{
+  /*struct SessionHandle *data = conn->data;*/
+  struct ssl_connect_data *connssl = &conn->ssl[sockindex];
+  size_t processed;"	code
+curl-004	curl	lib/curl_path.c	165	"/*error(""Empty quotes"");*/"	"
+    if(j == 0) {
+      /*error(""Empty quotes"");*/
+      goto fail;
+    }"	code
+curl-005	curl	lib/curlx/inet_pton.c	192	/* int inet_pton(af, src, dst)	"}
+
+/* int inet_pton(af, src, dst)
+ *      convert from presentation format (which usually means ASCII printable)
+ *      to network format (which is usually some kind of binary format)."	proto
+curl-006	curl	lib/easy.c	621	"/* curl_mfprintf(stderr, ""call curl_multi_socket_action(TIMEOUT)\n""); */"	"      /* timeout! */
+      ev->ms = 0;
+      /* curl_mfprintf(stderr, ""call curl_multi_socket_action(TIMEOUT)\n""); */
+      mresult = curl_multi_socket_action(multi, CURL_SOCKET_TIMEOUT, 0,
+                                         &ev->running_handles);"	code
+curl-007	curl	lib/easy.c	609	"/* fprintf(stderr, ""call curl_multi_socket_action( TIMEOUT )\n""); */"	"      /* timeout! */
+      ev->ms = 0;
+      /* fprintf(stderr, ""call curl_multi_socket_action( TIMEOUT )\n""); */
+      mcode = curl_multi_socket_action(multi, CURL_SOCKET_TIMEOUT, 0,
+                                       &ev->running_handles);"	code
+curl-008	curl	lib/ftp.c	2736	/* if(ftpcode) */	"      break;
+    }
+  } /* if(ftpcode) */
+
+  return result;"	annotation
+curl-009	curl	lib/functypes.h	48	/* int send(SOCKET, const char *, int, int); */	"#define RECV_TYPE_RETV int
+
+/* int send(SOCKET, const char *, int, int); */
+#define SEND_TYPE_ARG1 SOCKET
+#define SEND_TYPE_ARG2 char *"	proto
+curl-010	curl	lib/functypes.h	62	/* int send(int, char *, int, int); */	"#define RECV_TYPE_RETV long
+
+/* int send(int, char *, int, int); */
+#define SEND_TYPE_ARG1 int
+#define SEND_NONCONST_ARG2"	proto
+curl-011	curl	lib/getpass.c	159	"/*perror(""ioctl"");*/"	"  if(ioctl(outfd, TCGETA, &orig) != 0)
+  {
+    ; /*perror(""ioctl"");*/
+  }
+  noecho = orig;"	code
+curl-012	curl	lib/getpass.c	147	"/*perror(""tcgetattr"");*/"	"  if(tcgetattr(outfd, &orig) != 0)
+  {
+    ; /*perror(""tcgetattr"");*/
+  }
+  noecho = orig;"	code
+curl-013	curl	lib/highlevel.c	522	/* if (! header and data to read ) */	"            }
+
+          } /* if (! header and data to read ) */
+        } /* if( read from socket ) */
+"	annotation
+curl-014	curl	lib/highlevel.c	523	/* if( read from socket ) */	"
+          } /* if (! header and data to read ) */
+        } /* if( read from socket ) */
+
+        if((keepon & KEEP_WRITE) && FD_ISSET(conn->writesockfd, &writefd)) {"	annotation
+curl-015	curl	lib/http2.c	155	/* return NGHTTP2_ERR_PAUSE; */	"  else {
+    infof(conn->data, ""EEEEEEK: %d > %d\n"", len, c->len);
+    /* return NGHTTP2_ERR_PAUSE; */
+  }
+"	code
+curl-016	curl	lib/http_negotiate.c	264	/* conn->bits.close = FALSE; */	"
+  neg_ctx->output_token = output_token;
+  /* conn->bits.close = FALSE; */
+
+  return 0;"	code
+curl-017	curl	lib/inet_pton.c	221	/* bcopy(tmp, dst, IN6ADDRSZ); */	" if (tp != endp)
+  return (0);
+ /* bcopy(tmp, dst, IN6ADDRSZ); */
+ memcpy(dst, tmp, IN6ADDRSZ);
+ return (1);"	code
+curl-018	curl	lib/inet_pton.c	122	/* bcopy(tmp, dst, INADDRSZ); */	" if (octets < 4)
+  return (0);
+ /* bcopy(tmp, dst, INADDRSZ); */
+ memcpy(dst, tmp, INADDRSZ);
+ return (1);"	code
+curl-019	curl	lib/krb4.c	422	/*code = -1;***/	"    if(/*ret != CONTINUE*/conn->data->buffer[0] != '3'){
+ set_command_prot(conn, save);
+ /*code = -1;***/
+ return;
+    }"	code
+curl-020	curl	lib/krb4.c	327	/*passivemode = 1;***/	"    */
+
+   /*passivemode = 1;***/
+   /*printf(""Setting: Passive mode on.\n"");***/
+ }"	code
+curl-021	curl	lib/krb4.c	334	"/*printf(""Local address is %s\n"", inet_ntoa(localaddr->sin_addr));***/"	"#endif
+
+    /*printf(""Local address is %s\n"", inet_ntoa(localaddr->sin_addr));***/
+    /*printf(""Remote address is %s\n"", inet_ntoa(remoteaddr->sin_addr));***/
+"	code
+curl-022	curl	lib/krb4.c	328	"/*printf(""Setting: Passive mode on.\n"");***/"	"
+   /*passivemode = 1;***/
+   /*printf(""Setting: Passive mode on.\n"");***/
+ }
+      }"	code
+curl-023	curl	lib/netrc.c	169	/* while (tok) */	" } /* switch (state) */
+ tok = strtok_r(NULL, "" \t\n"", &tok_buf);
+      } /* while (tok) */
+    } /* while fgets() */
+"	annotation
+curl-024	curl	lib/ssh.c	2487	"/*error(""Unterminated quote"");*/"	"      }
+      if(cp[i] == '\0') {  /* End of string */
+        /*error(""Unterminated quote"");*/
+        goto fail;
+      }"	code
+curl-025	curl	lib/transfer.c	450	"/* DEBUGF(infof(data, ""sendrecv, KEEP_SEND_TIMED, RUN ul"")); */"	"  }
+  else if(data->req.keepon & KEEP_SEND_TIMED) {
+    /* DEBUGF(infof(data, ""sendrecv, KEEP_SEND_TIMED, RUN ul"")); */
+    select_bits = CURL_CSELECT_OUT;
+  }"	code
+curl-026	curl	lib/transfer.c	507	/* if (! header and data to read ) */	"              return urg;
+
+          } /* if (! header and data to read ) */
+        } /* if( read from socket ) */
+"	annotation
+curl-027	curl	lib/transfer.c	665	/* if(! header and data to read ) */	"      }
+
+    } /* if(! header and data to read ) */
+
+    if(is_empty_data) {"	annotation
+curl-028	curl	lib/transfer.c	2698	/* if(k->getheader || !data->set.opt_no_body) */	"      }
+    } /* if(conn->writesockfd != CURL_SOCKET_BAD) */
+  } /* if(k->getheader || !data->set.opt_no_body) */
+
+  return CURLE_OK;"	annotation
+curl-029	curl	lib/url.c	3789	/* if(!conn->bits.proxy || sockindex) */	"{
+  CURLcode result = CURLE_OK;
+  /* if(!conn->bits.proxy || sockindex) */
+    /* this magic only works for the primary socket as the secondary is used
+       for FTP only and it has FTP specific magic in ftp.c */"	code
+curl-030	curl	lib/url.c	320	"/* printf(""tag: %d\n"", tag); */"	" param_func = va_arg(arg, func_T );
+
+      /* printf(""tag: %d\n"", tag); */
+     
+"	code
+curl-031	curl	lib/vtls/darwinssl.c	2383	/*struct SessionHandle *data = conn->data;*/	"                              CURLcode *curlcode)
+{
+  /*struct SessionHandle *data = conn->data;*/
+  struct ssl_connect_data *connssl = &conn->ssl[sockindex];
+  size_t processed = 0UL;"	code
+curl-032	curl	lib/vtls/mbedtls.c	307	/* ver_max = MBEDTLS_SSL_VERSION_TLS1_2; */	"#endif
+  case CURL_SSLVERSION_MAX_TLSv1_2:
+    /* ver_max = MBEDTLS_SSL_VERSION_TLS1_2; */
+    break;
+#if MBEDTLS_VERSION_NUMBER < 0x03000000"	code
+curl-033	curl	lib/vtls/openssl.c	912	/* j = ERR_R_ASN1_LIB; */	"
+  if(type == SSL_FILETYPE_ASN1) {
+    /* j = ERR_R_ASN1_LIB; */
+    x = d2i_X509_bio(in, NULL);
+  }"	code
+curl-034	curl	src/main.c	3938	/* my_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L); */	"            my_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+            /* libcurl default is strict verifyhost -> 2L   */
+            /* my_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L); */
+          }
+        }"	code
+curl-035	curl	src/tool_cfgable.h	238	/*bool proxy_ssl_no_revoke; */	"
+  bool ssl_no_revoke;       /* disable SSL certificate revocation checks */
+  /*bool proxy_ssl_no_revoke; */
+
+  bool use_metalink;        /* process given URLs as metalink XML file */"	code
+curl-036	curl	src/tool_getparam.c	2968	/* if(ARGTYPE(a->desc) == ARG_STRG) */	"      if(ARGTYPE(a->desc) == ARG_FILE)
+        err = opt_file(config, a, nextarg);
+      else /* if(ARGTYPE(a->desc) == ARG_STRG) */
+        err = opt_string(config, a, nextarg);
+      if(a->desc & ARG_CLEAR)"	annotation
+curl-037	curl	src/tool_getpass.c	71	/* struct _iosb iosb;                                        */	"  /* MSK, 23-JAN-2004, iosbdef.h wasn't in VAX V7.2 or CC 6.4  */
+  /* distribution so I created this.  May revert back later to */
+  /* struct _iosb iosb;                                        */
+  struct _iosb
+     {"	code
+curl-038	curl	src/urlglob.c	420	"/* printf(""illegal matching expression\n"");"	"      if (!isdigit((int)*++filename) ||
+   *filename == '0') {  /* only '#1' ... '#9' allowed */
+ /* printf(""illegal matching expression\n"");
+           exit(CURLE_URL_MALFORMAT);*/
+        continue;"	code
+curl-039	curl	src/urlglob.c	113	"/*printf(""error: illegal pattern at pos %d\n"", pos);*/"	"
+    case ']':    /* illegal closing bracket */
+      /*printf(""error: illegal pattern at pos %d\n"", pos);*/
+      return GLOB_ERROR;
+"	code
+openssl-040	openssl	apps/ca.c	1711	/* X509V3_set_ctx_test(&ctx); */	"
+            /* Test the structure (needed?) */
+            /* X509V3_set_ctx_test(&ctx); */
+
+            /* Adds exts contained in the configuration file */"	code
+openssl-041	openssl	apps/s_server.c	395	/*      return(BIO_gets(bp->next_bio,buf,size));*/	"    if (next == NULL)
+        return 0;
+/*      return(BIO_gets(bp->next_bio,buf,size));*/
+    for (i = 0; i < size - 1; ++i) {
+        ret = ebcdic_read(bp, &buf[i], 1);"	code
+openssl-042	openssl	apps/s_server.c	3556	/*X509_STORE_set_verify_cb(ch, verify_callback);*/	"  if (!X509_STORE_load_locations(ch, chCAfile, chCApath))
+   goto err;
+  /*X509_STORE_set_verify_cb(ch, verify_callback);*/
+  SSL_CTX_set1_chain_cert_store(ctx, ch);
+  }"	code
+openssl-043	openssl	apps/s_time.c	562	/*      BIO_set_conn_port(conn,port);*/	"        return (NULL);
+
+/*      BIO_set_conn_port(conn,port);*/
+    BIO_set_conn_hostname(conn, host);
+"	code
+openssl-044	openssl	apps/sc.c	350	"/* BIO_printf(bio_err,""error seting default verify locations\n""); */"	"  (!SSL_CTX_set_default_verify_paths(ctx)))
+  {
+  /* BIO_printf(bio_err,""error seting default verify locations\n""); */
+  ERR_print_errors(bio_err);
+  /* goto end; */"	code
+openssl-045	openssl	apps/speed.c	3082	/* DSA_generate_key(dsa_key[testnum]); */	"            continue;
+
+        /* DSA_generate_key(dsa_key[testnum]); */
+        /* DSA_sign_setup(dsa_key[testnum],NULL); */
+        for (i = 0; i < loopargs_len; i++) {"	code
+openssl-046	openssl	apps/speed.c	4128	/* exit(1);  disable exit until default provider enabled */	"        BIO_printf(bio_err, ""%s error!\n"", names[alg]);
+        ERR_print_errors(bio_err);
+        /* exit(1);  disable exit until default provider enabled */
+        return;
+    }"	code
+openssl-047	openssl	apps/speed.c	2809	//EVP_PKEY_free(loopargs[i].ecdh_b[k]);	"            EC_KEY_free(loopargs[i].ecdsa[k]);
+            //EVP_PKEY_free(loopargs[i].ecdh_a[k]);
+            //EVP_PKEY_free(loopargs[i].ecdh_b[k]);
+            EVP_PKEY_CTX_free(loopargs[i].ecdh_ctx[k]);
+        }"	code
+openssl-048	openssl	crypto/aes/aes_ige.c	131	"//			hexdump(stdout, ""iv"", ivec, AES_BLOCK_SIZE);"	"   AES_decrypt(tmp, out, key);
+   //   hexdump(stdout, ""dec"", out, AES_BLOCK_SIZE);
+   //   hexdump(stdout, ""iv"", ivec, AES_BLOCK_SIZE);
+   for(n=0 ; n < AES_BLOCK_SIZE ; ++n)
+    out[n] ^= ivec[n];"	code
+openssl-049	openssl	crypto/asn1/a_object.c	251	/* ret->flags=ASN1_OBJECT_FLAG_DYNAMIC; we know it is dynamic */	" ret->sn=NULL;
+ ret->ln=NULL;
+ /* ret->flags=ASN1_OBJECT_FLAG_DYNAMIC; we know it is dynamic */
+ p+=len;
+"	code
+openssl-050	openssl	crypto/bio/bf_null.c	104	"/*	a->ptr=NULL;"	" {
+ if (a == NULL) return(0);
+/* a->ptr=NULL;
+ a->init=0;
+ a->flags=0;*/"	code
+openssl-051	openssl	crypto/bio/bss_mem.c	156	/* memmove(&(bm->data[0]),&(bm->data[ret]), bm->length); */	"  memcpy(out,bm->data,ret);
+  bm->length-=ret;
+  /* memmove(&(bm->data[0]),&(bm->data[ret]), bm->length); */
+  if(b->flags & BIO_FLAGS_MEM_RDONLY) bm->data += ret;
+  else {"	code
+openssl-052	openssl	crypto/bn/bn_div.c	210	/* bn_check_top(num); *//* 'num' has been checked already */	" bn_check_top(dv);
+ bn_check_top(rm);
+ /* bn_check_top(num); */ /* 'num' has been checked already */
+ bn_check_top(divisor);
+"	code
+openssl-053	openssl	crypto/bn/bn_lib.c	431	"/*		memset(&(p[b->max]),0,((words+1)-b->max)*sizeof(BN_ULONG)); */"	"#endif
+  
+/*  memset(&(p[b->max]),0,((words+1)-b->max)*sizeof(BN_ULONG)); */
+/* { int i; for (i=b->max; i<words+1; i++) p[i]=i;} */
+   Free(b->d);"	code
+openssl-054	openssl	crypto/bn/bn_mul.c	239	"/*	if (n == 4)"	" bn_sub_words(&(t[n]),b,      &(b[n]),n); /* - */
+
+/* if (n == 4)
+  {
+  bn_mul_comba4(&(t[n2]),t,&(t[n]));"	code
+openssl-055	openssl	crypto/des/set_key.c	176	"/*	PERM_OP(d,c,t,4,0x0f0f0f0fL);"	"
+ /* do PC1 in 60 simple operations */ 
+/* PERM_OP(d,c,t,4,0x0f0f0f0fL);
+ HPERM_OP(c,t,-2, 0xcccc0000L);
+ HPERM_OP(c,t,-1, 0xaaaa0000L);"	code
+openssl-056	openssl	crypto/engine/eng_openssl.c	156	/* openssl_load_error_strings(); */	"  return 0;
+ /* If we add errors to this ENGINE, ensure the error handling is setup here */
+ /* openssl_load_error_strings(); */
+ return 1;
+ }"	code
+openssl-057	openssl	crypto/evp/evp.h	323	/* int set_asn1_parameters(EVP_CIPHER_CTX,ASN1_TYPE *); */	" void (*cleanup)(); /* used by cipher method */ 
+ int ctx_size;  /* how big the ctx needs to be */
+ /* int set_asn1_parameters(EVP_CIPHER_CTX,ASN1_TYPE *); */
+ int (*set_asn1_parameters)(); /* Populate a ASN1_TYPE with parameters */
+ /* int get_asn1_parameters(EVP_CIPHER_CTX,ASN1_TYPE *); */"	proto
+openssl-058	openssl	crypto/evp/evp_test.c	351	/* ENGINE_set_cipher_flags(ENGINE_CIPHER_FLAG_NOINIT); */	"     * It'll prevent ENGINEs being ENGINE_init()ialised for cipher/digest use if
+     * they weren't already initialised. */
+    /* ENGINE_set_cipher_flags(ENGINE_CIPHER_FLAG_NOINIT); */
+#endif
+"	code
+openssl-059	openssl	crypto/md5/md5_dgst.c	422	"/*	memset((char *)&c,0,sizeof(c));*/"	"  * but I'm not worried :-) */
+ c->num=0;
+/* memset((char *)&c,0,sizeof(c));*/
+ }
+"	code
+openssl-060	openssl	crypto/objects/obj_dat.c	621	/* return(num); */	"  num++;
+  }
+ /* return(num); */
+ }
+"	code
+openssl-061	openssl	crypto/rsa/rsa_sp800_56b_check.c	221	/* return LCM(p-1, q-1) */	"}
+
+/* return LCM(p-1, q-1) */
+int rsa_get_lcm(BN_CTX *ctx, const BIGNUM *p, const BIGNUM *q,
+                BIGNUM *lcm, BIGNUM *gcd, BIGNUM *p1, BIGNUM *q1,"	prose
+openssl-062	openssl	crypto/x509/x509name.c	206	/* if (set >= 0) */	"            set = sk_X509_NAME_ENTRY_value(sk, loc - 1)->set;
+        }
+    } else {                    /* if (set >= 0) */
+
+        if (loc >= n) {"	annotation
+openssl-063	openssl	engines/ccgost/gost_eng.c	163	"/*printf(""Digest no %d requested\n"",nid);*/"	"  return 2; 
+  }
+ /*printf(""Digest no %d requested\n"",nid);*/
+ if(nid == NID_id_GostR3411_94) 
+  {"	code
+openssl-064	openssl	fips/des/fips_desmovs.c	232	"/*	    DebugValue(""nk"",nk,24);*/"	"     /* accumulate material for the next key */
+     shiftin(nk,text,Sizes[imode]);
+     /*     DebugValue(""nk"",nk,24);*/
+     if((dir && (imode == TCFB1 || imode == TCFB8
+   || imode == TCFB64 || imode == TCBC)) || imode == TOFB)"	code
+openssl-065	openssl	include/openssl/bio.h	606	/* int BIO_get_ex_num(BIO *bio); */	"
+/* These two aren't currently implemented */
+/* int BIO_get_ex_num(BIO *bio); */
+/* void BIO_set_ex_free_func(BIO *bio,int idx,void (*cb)()); */
+int BIO_set_ex_data(BIO *bio, int idx, void *data);"	proto
+openssl-066	openssl	include/openssl/bio.h	607	/* void BIO_set_ex_free_func(BIO *bio,int idx,void (*cb)()); */	"/* These two aren't currently implemented */
+/* int BIO_get_ex_num(BIO *bio); */
+/* void BIO_set_ex_free_func(BIO *bio,int idx,void (*cb)()); */
+int BIO_set_ex_data(BIO *bio, int idx, void *data);
+void *BIO_get_ex_data(BIO *bio, int idx);"	proto
+openssl-067	openssl	include/openssl/engine.h	1044	/* int ENGINE_clear_defaults(void); */	"
+/* Deprecated functions ... */
+/* int ENGINE_clear_defaults(void); */
+
+/**************************/"	proto
+openssl-068	openssl	ssl/bio_ssl.c	241	"/*	ret=SSL_do_handshake(ssl);"	" BIO_clear_retry_flags(b);
+
+/* ret=SSL_do_handshake(ssl);
+ if (ret > 0) */
+ ret=SSL_write(ssl,out,outl);"	code
+openssl-069	openssl	ssl/d1_msg.c	61	"/* fprintf(stderr, ""not done with alert\n""); */"	"    if (i <= 0) {
+        s->s3.alert_dispatch = 1;
+        /* fprintf(stderr, ""not done with alert\n""); */
+    } else {
+        (void)BIO_flush(s->wbio);"	code
+openssl-070	openssl	ssl/quic/qlog.c	114	"/* strlen(""client"" / ""server""); strlen("".sqlog""); _; separator; _; NUL */"	"    qlogdir_sep = ossl_determine_dirsep(qlogdir);
+
+    /* strlen(""client"" / ""server""); strlen("".sqlog""); _; separator; _; NUL */
+    strl = l + info->odcid.id_len * 2 + 6 + 7 + 2;
+    filename = OPENSSL_malloc(strl + 1);"	prose
+openssl-071	openssl	ssl/s2_clnt.c	934	"/*	c->cert_type=type; */"	" s->session->cert=c;
+
+/* c->cert_type=type; */
+
+ c->pkeys[SSL_PKEY_RSA_ENC].x509=x509;"	code
+openssl-072	openssl	ssl/s3_both.c	69	/* SSL3err(SSL_F_SSL3_GET_FINISHED,SSL_R_EXCESSIVE_MESSAGE_SIZE);	"#define BREAK break
+
+/* SSL3err(SSL_F_SSL3_GET_FINISHED,SSL_R_EXCESSIVE_MESSAGE_SIZE);
+ */
+"	code
+openssl-073	openssl	ssl/s3_enc.c	214	/* Was j=(exp)?5:EVP_CIPHER_key_length(c); */	" j=exp ? (cl < SSL_C_EXPORT_KEYLENGTH(s->s3->tmp.new_cipher) ?
+   cl : SSL_C_EXPORT_KEYLENGTH(s->s3->tmp.new_cipher)) : cl;
+ /* Was j=(exp)?5:EVP_CIPHER_key_length(c); */
+ k=EVP_CIPHER_iv_length(c);
+ if ( (which == SSL3_CHANGE_CIPHER_CLIENT_WRITE) ||"	code
+openssl-074	openssl	ssl/s3_srvr.c	183	/* s->version=SSL3_VERSION; */	"   if ((s->version>>8) != 3)
+    abort();
+   /* s->version=SSL3_VERSION; */
+   s->type=SSL_ST_ACCEPT;
+"	code
+openssl-075	openssl	ssl/ssl_asn1.c	426	/* if (ssl_version>>8 == SSL2_VERSION_MAJOR) */	" if ((ssl_version>>8) == SSL3_VERSION_MAJOR)
+  i=SSL3_MAX_SSL_SESSION_ID_LENGTH;
+ else /* if (ssl_version>>8 == SSL2_VERSION_MAJOR) */
+  i=SSL2_MAX_SSL_SESSION_ID_LENGTH;
+"	annotation
+openssl-076	openssl	ssl/ssl_lib.c	1474	"/*	ret->s2->challenge=NULL;"	"
+/* ret->cipher=NULL;*/
+/* ret->s2->challenge=NULL;
+ ret->master_key=NULL;
+ ret->key_arg=NULL;"	code
+openssl-077	openssl	ssl/ssl_lib.c	3304	/*      if (!BIO_set_write_buffer_size(bbio,16*1024)) */	"    }
+    (void)BIO_reset(bbio);
+/*      if (!BIO_set_write_buffer_size(bbio,16*1024)) */
+    if (!BIO_set_read_buffer_size(bbio, 1)) {
+        SSLerr(SSL_F_SSL_INIT_WBIO_BUFFER, ERR_R_BUF_LIB);"	code
+openssl-078	openssl	ssl/ssl_sess.c	458	/* ret->time=time(NULL); *//* rezero timeout? */	" s->ctx->stats.sess_hit++;
+
+ /* ret->time=time(NULL); */ /* rezero timeout? */
+ /* again, just leave the session 
+  * if it is the same session, we have just incremented and"	code
+openssl-079	openssl	ssl/ssltest.c	1672	/*SSL_CTX_set_srp_strength(c_ctx, srp_client_arg.strength);*/	"  SSL_CTX_set_srp_cb_arg(c_ctx,&srp_client_arg);
+  SSL_CTX_set_srp_client_pwd_callback(c_ctx, ssl_give_srp_client_pwd_cb);
+  /*SSL_CTX_set_srp_strength(c_ctx, srp_client_arg.strength);*/
+  }
+"	code
+harfbuzz-080	harfbuzz	src/OT/Layout/GPOS.hh	101	/*if (type & GPOS_impl::ATTACH_TYPE_MARK)*/	"      pos[i].x_offset += pos[j].x_offset;
+  }
+  else /*if (type & GPOS_impl::ATTACH_TYPE_MARK)*/
+  {
+    pos[i].x_offset += pos[j].x_offset;"	annotation
+harfbuzz-081	harfbuzz	src/OT/Layout/GPOS/MarkBasePosFormat1.hh	131	//if (!_hb_glyph_info_is_base_glyph (&buffer->info[skippy_iter.idx])) { return_trace (false); }	"
+    /* Checking that matched glyph is actually a base glyph by GDEF is too strong; disabled */
+    //if (!_hb_glyph_info_is_base_glyph (&buffer->info[skippy_iter.idx])) { return_trace (false); }
+
+    unsigned int base_index = (this+baseCoverage).get_coverage  (buffer->info[skippy_iter.idx].codepoint);"	code
+harfbuzz-082	harfbuzz	src/OT/glyf/Glyph.hh	238	/* extents->x_bearing = hb_min (glyph_header.xMin, glyph_header.xMax); */	"    {
+      /* Undocumented rasterizer behavior: shift glyph to the left by (lsb - xMin), i.e., xMin = lsb */
+      /* extents->x_bearing = hb_min (glyph_header.xMin, glyph_header.xMax); */
+      extents->x_bearing = font->em_scale_x (glyf_accelerator.hmtx->get_side_bearing (gid));
+      extents->y_bearing = font->em_scale_y (hb_max (yMin, yMax));"	code
+harfbuzz-083	harfbuzz	src/hb-aat-layout-morx-table.hh	424	//ligature_idx = 0; // XXX Yes or no?	"     buffer->replace_glyph (lig);
+
+     //ligature_idx = 0; // XXX Yes or no?
+   }
+   else"	code
+harfbuzz-084	harfbuzz	src/hb-algs.hh	1029	"/* for(size_t i=0; i<nel; i++) {printf(""%4i"", *(int*)(b + i*sizeof(int)));}"	"  char *b = (char *)base, *end = b + nel*w;
+
+  /* for(size_t i=0; i<nel; i++) {printf(""%4i"", *(int*)(b + i*sizeof(int)));}
+  printf(""\n""); */
+"	code
+harfbuzz-085	harfbuzz	src/hb-algs.hh	1132	"/*for(size_t i=0; i<nel; i++) {printf(""%4i"", *(int*)(b + i*sizeof(int)));}"	"    sort_r_swap_blocks(pr, pre-pr, end-pre);
+
+    /*for(size_t i=0; i<nel; i++) {printf(""%4i"", *(int*)(b + i*sizeof(int)));}
+    printf(""\n"");*/
+"	code
+harfbuzz-086	harfbuzz	src/hb-depend-data.hh	194	//   fv_context_set = new_set(e.second.fv_indexes);	"      // hb_codepoint_t fv_context_set {HB_CODEPOINT_INVALID};
+      // if (!e.second.fv_indexes.is_empty ())
+      //   fv_context_set = new_set(e.second.fv_indexes);
+      add_depend_layout(target, HB_OT_TAG_GSUB, t, dependent, lig_set,
+                        context_set); // , fv_context_set, !e.second.full);"	code
+harfbuzz-087	harfbuzz	src/hb-graphite2.cc	306	//    if (pPos->x_advance < 0 && gr_slot_attached_to(is))	"    pPos->x_advance = gr_slot_advance_X(is, grface, grfont);
+    pPos->y_advance = gr_slot_advance_Y(is, grface, grfont);
+//    if (pPos->x_advance < 0 && gr_slot_attached_to(is))
+//      pPos->x_advance = 0;
+    curradvx += pPos->x_advance;"	code
+harfbuzz-088	harfbuzz	src/hb-old/harfbuzz-arabic.c	949	"/*                                 qDebug("" lam of lam-alef ligature""); */"	"                            case 0x25:
+                            case 0x27:
+/*                                 qDebug("" lam of lam-alef ligature""); */
+                                map = arabicUnicodeLamAlefMapping[(pch & 0xff) - 0x22][shape];
+                                goto next;"	code
+harfbuzz-089	harfbuzz	src/hb-old/harfbuzz-arabic.c	937	"/*            qDebug(""mapping U+%x to shape %d glyph=0x%x"", ch->unicode(), shape, getShape(c, shape)); */"	"            int pos = i + from;
+            int shape = properties[i].shape;
+/*            qDebug(""mapping U+%x to shape %d glyph=0x%x"", ch->unicode(), shape, getShape(c, shape)); */
+            /* take care of lam-alef ligatures (lam right of alef) */
+            hb_uint16 map;"	code
+harfbuzz-090	harfbuzz	src/hb-old/harfbuzz-arabic.c	975	/*glyphs[gpos].attributes.zeroWidth = zeroWidth; */	"        }
+        /* ##### Fixme */
+        /*glyphs[gpos].attributes.zeroWidth = zeroWidth; */
+        if (HB_GetUnicodeCharCategory(*ch) == HB_Mark_NonSpacing) {
+            attributes[gpos].mark = TRUE;"	code
+harfbuzz-091	harfbuzz	src/hb-old/harfbuzz-arabic.c	964	"/*qDebug("" alef of lam-alef ligature""); */"	"                    if (prevChar(uc, pos) == 0x0644) {
+                        /* have a lam alef ligature */
+                        /*qDebug("" alef of lam-alef ligature""); */
+                        goto skip;
+                    }"	code
+harfbuzz-092	harfbuzz	src/hb-old/harfbuzz-arabic.c	859	"/*qDebug(""leftChar: pos=%d"", pos); */"	"static HB_UChar16 prevChar(const HB_UChar16 *str, int pos)
+{
+    /*qDebug(""leftChar: pos=%d"", pos); */
+    const HB_UChar16 *ch = str + pos - 1;
+    pos--;"	code
+harfbuzz-093	harfbuzz	src/hb-old/harfbuzz-arabic.c	876	"/*qDebug(""rightChar: %d isLetter=%d, joining=%d"", pos, ch.isLetter(), ch.joining()); */"	"    pos++;
+    while(pos < len) {
+        /*qDebug(""rightChar: %d isLetter=%d, joining=%d"", pos, ch.isLetter(), ch.joining()); */
+        if(HB_GetUnicodeCharCategory(*ch) != HB_Mark_NonSpacing)
+            return *ch;"	code
+harfbuzz-094	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	82	"//          qDebug(""markInfo: %f/%f (%f/%f) off=%f/%f"", markInfo.x, markInfo.y, markInfo.width, markInfo.height, markInfo.xoff, markInfo.yoff);"	"        HB_FixedPoint p;
+        p.x = p.y = 0;
+//          qDebug(""markInfo: %f/%f (%f/%f) off=%f/%f"", markInfo.x, markInfo.y, markInfo.width, markInfo.height, markInfo.xoff, markInfo.yoff);
+
+        HB_Fixed offset = offsetBase;"	code
+harfbuzz-095	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	904	"//     DEBUG(""unpositioned: "");"	"
+    // calulate the advances for the shaped glyphs
+//     DEBUG(""unpositioned: "");
+
+    // positioning code:"	code
+harfbuzz-096	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	822	//     dump_string(hb_buffer);	"    for (int i = 0; i < length; ++i)
+        DEBUG(""   glyph=%4x"", hb_buffer->in_string[i].gindex);
+//     dump_string(hb_buffer);
+#endif
+"	code
+harfbuzz-097	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	58	"//     qDebug(""baseInfo: %f/%f (%f/%f) off=%f/%f"", baseInfo.x, baseInfo.y, baseInfo.width, baseInfo.height, baseInfo.xoff, baseInfo.yoff);"	"
+//     qDebug(""---> positionCluster: cluster from %d to %d"", gfrom, glast);
+//     qDebug(""baseInfo: %f/%f (%f/%f) off=%f/%f"", baseInfo.x, baseInfo.y, baseInfo.width, baseInfo.height, baseInfo.xoff, baseInfo.yoff);
+
+    HB_Fixed size = item->font->klass->getFontMetric(item->font, HB_FontAscent) / 10;"	code
+harfbuzz-098	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	67	"//     qDebug(""offset = %f"", offsetBase);"	"        offsetBase += size;
+    //qreal offsetBase = (size - 4) / 4 + qMin<qreal>(size, 4) + 1;
+//     qDebug(""offset = %f"", offsetBase);
+
+    bool rightToLeft = item->item.bidiLevel % 2;"	code
+harfbuzz-099	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	636	"//DEBUG(""error loading gdef table: %d"", error);"	"    error = HB_Err_Not_Covered;
+    if (!gdefStream || (error = HB_Load_GDEF_Table(gdefStream, &face->gdef))) {
+        //DEBUG(""error loading gdef table: %d"", error);
+        face->gdef = 0;
+    }"	code
+harfbuzz-100	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	646	"//DEBUG(""error loading gsub table: %d"", error);"	"        face->gsub = 0;
+        if (error != HB_Err_Not_Covered) {
+            //DEBUG(""error loading gsub table: %d"", error);
+        } else {
+            //DEBUG(""face doesn't have a gsub table"");"	code
+harfbuzz-101	harfbuzz	src/hb-old/harfbuzz-shaper.cpp	648	"//DEBUG(""face doesn't have a gsub table"");"	"            //DEBUG(""error loading gsub table: %d"", error);
+        } else {
+            //DEBUG(""face doesn't have a gsub table"");
+        }
+    }"	code
+harfbuzz-102	harfbuzz	src/hb-open-type.hh	62	//TODO(C++11)IntType<Type, Size>& operator = (wide_type v) { set (v); return *this; }	"  typedef typename hb_signedness_int (hb_is_signed (Type)) wide_type;
+
+  //TODO(C++11)IntType<Type, Size>& operator = (wide_type v) { set (v); return *this; }
+  void set (wide_type i) { v.set (i); }
+  operator wide_type () const { return v; }"	code
+harfbuzz-103	harfbuzz	src/hb-ot-glyf-table.hh	905	/* extents->x_bearing = MIN (glyph_header.xMin, glyph_header.xMax); */	"
+      /* Undocumented rasterizer behavior: shift glyph to the left by (lsb - xMin), i.e., xMin = lsb */
+      /* extents->x_bearing = MIN (glyph_header.xMin, glyph_header.xMax); */
+      extents->x_bearing = hmtx_accel.get_side_bearing (glyph);
+      extents->y_bearing = MAX (glyph_header.yMin, glyph_header.yMax);"	code
+harfbuzz-104	harfbuzz	src/hb-ot-layout-common-private.hh	1344	//if (coord == 0) return 0;	"
+    int start = startCoord, peak = peakCoord, end = endCoord;
+    //if (coord == 0) return 0;
+    //if (start < 0 && end > 0) return 0.;
+    if (coord < start || coord > end) return 0.;"	code
+harfbuzz-105	harfbuzz	src/hb-ot-layout-gpos-table.hh	1031	/*return TRACE_RETURN (false);*/	"
+    /* The following assertion is too strong, so we've disabled it. */
+    if (!(property & HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH)) {/*return TRACE_RETURN (false);*/}
+
+    unsigned int base_index = (this+baseCoverage) (c->buffer->info[skippy_iter.idx].codepoint);"	code
+harfbuzz-106	harfbuzz	src/hb-ot-layout-gpos-table.hh	1630	//  pos[i].x_advance = 0;	"  unsigned int j = i - pos[i].attach_lookback();
+
+//  pos[i].x_advance = 0;
+//  pos[i].y_advance = 0;
+  pos[i].x_offset += pos[j].x_offset;"	code
+harfbuzz-107	harfbuzz	src/hb-ot-layout-gpos-table.hh	2320	//if (!_hb_glyph_info_is_ligature (&buffer->info[skippy_iter.idx])) { return_trace (false); }	"
+    /* Checking that matched glyph is actually a ligature by GDEF is too strong; disabled */
+    //if (!_hb_glyph_info_is_ligature (&buffer->info[skippy_iter.idx])) { return_trace (false); }
+
+    unsigned int j = skippy_iter.idx;"	code
+harfbuzz-108	harfbuzz	src/hb-ot-layout-gsub-table.hh	1405	//struct GSUB *out = c->serializer->start_embed<GSUB> ();	"  {
+    TRACE_SUBSET (this);
+    //struct GSUB *out = c->serializer->start_embed<GSUB> ();
+    if (unlikely (!GSUBGPOS::subset (c))) return_trace (false);
+    /* TODO Replace following with c->iter_copy_and_subset()ish. */"	code
+harfbuzz-109	harfbuzz	src/hb-ot-layout.cc	54	//   if (unlikely (!hb_ot_shaper_face_data_ensure (face))) return Null(OT::BASE);	"// _get_base (hb_face_t *face)
+// {
+//   if (unlikely (!hb_ot_shaper_face_data_ensure (face))) return Null(OT::BASE);
+//   hb_ot_face_data_t *data = hb_ot_face_data (face);
+//   return *(data->base.get ());"	code
+harfbuzz-110	harfbuzz	src/hb-ot-layout.cc	1331	//   return _get_base (face).has_data ();	"// hb_ot_base_has_data (hb_face_t *face)
+// {
+//   return _get_base (face).has_data ();
+// }
+"	code
+harfbuzz-111	harfbuzz	src/hb-ot-shape-complex-indic.cc	381	//info[j].mask &= !mask_array[CJCT];	"  * investigating.
+  */
+ //info[j].mask &= !mask_array[CJCT];
+ if (non_joiner)
+   info[j].mask &= !mask_array[HALF];"	code
+harfbuzz-112	harfbuzz	src/hb-ot-shape-normalize.cc	294	//mode = HB_OT_SHAPE_NORMALIZATION_MODE_DECOMPOSED;	"    if (plan->has_gpos_mark)
+      // https://github.com/harfbuzz/harfbuzz/issues/653#issuecomment-423905920
+      //mode = HB_OT_SHAPE_NORMALIZATION_MODE_DECOMPOSED;
+      mode = HB_OT_SHAPE_NORMALIZATION_MODE_COMPOSED_DIACRITICS;
+    else"	code
+harfbuzz-113	harfbuzz	src/hb-ot-shape.cc	314	//map = allocator.find_feature (HB_TAG ('r','t','l','m'));	"      map = allocator.find_feature (HB_TAG ('r','t','l','a'));
+      add_feature (face, table_tag, map->index, map->mask, lookups, num_lookups, room_lookups);
+      //map = allocator.find_feature (HB_TAG ('r','t','l','m'));
+      add_feature (face, table_tag, map->index, MASK_RTLM, lookups, num_lookups, room_lookups);
+      break;"	code
+harfbuzz-114	harfbuzz	src/hb-serialize.hh	104	// link.position = 0;	"      // link.is_signed = 0;
+      // link.whence = 0;
+      // link.position = 0;
+      // link.bias = 0;
+"	code
+harfbuzz-115	harfbuzz	src/hb-serialize.hh	101	// link.width = 0;	"      link.objidx = objidx;
+      // Remaining fields were previously zero'd by push():
+      // link.width = 0;
+      // link.is_signed = 0;
+      // link.whence = 0;"	code
+harfbuzz-116	harfbuzz	src/hb-shape.cc	98	//buffer->props.language = hb_language_get_default ();	"  if (buffer->props.language == NULL) {
+    /* TODO get_default_for_script? using $LANGUAGE */
+    //buffer->props.language = hb_language_get_default ();
+  }
+"	code
+harfbuzz-117	harfbuzz	src/hb-subset.cc	182	//result = _subset2<const OT::GSUB> (plan);	"
+    case HB_OT_TAG_GSUB:
+      //result = _subset2<const OT::GSUB> (plan);
+      break;
+    case HB_OT_TAG_GPOS:"	code
+harfbuzz-118	harfbuzz	src/hb-tt-font.cc	71	//  return likely (face->tt && face->tt->hhea) ? *face->tt->hhea : Null(hhea);	"_get_hhea (hb_face_t *face)
+{
+//  return likely (face->tt && face->tt->hhea) ? *face->tt->hhea : Null(hhea);
+}
+"	code
+harfbuzz-119	harfbuzz	src/hb-uniscribe.cc	308	//bidi_control.fMergeNeutralItems = TRUE;	"
+  /* MinGW32 doesn't define fMergeNeutralItems, so we bruteforce */
+  //bidi_control.fMergeNeutralItems = TRUE;
+  *(uint32_t*)&bidi_control |= 1<<24;
+"	code
+ndpi-120	ndpi	example/ndpiReader.c	3939	// hwUnitTest2();	"    if(ndpi_info_mod == NULL) return -1;
+    
+    // hwUnitTest2();
+    
+    /* Internal checks */    "	code
+ndpi-121	ndpi	example/ndpiReader.c	7308	// if(do_trace)  ndpi_print_ranking(&rank);	"  ndpi_init_ranking(&rank, num+1 /* max_num_items */, 8 /* num_epochs */);
+  assert(ndpi_serialize_ranking(&rank, path) == true);
+  // if(do_trace)  ndpi_print_ranking(&rank);
+  ndpi_term_ranking(&rank);
+"	code
+ndpi-122	ndpi	example/ndpiReader.c	1431	"// printf(""\n\nTotal Flow Traffic: %llu (diff: %llu)\n"", total_flow_bytes, cumulative_stats.total_ip_bytes-total_flow_bytes);"	"  }
+
+  // printf(""\n\nTotal Flow Traffic: %llu (diff: %llu)\n"", total_flow_bytes, cumulative_stats.total_ip_bytes-total_flow_bytes);
+
+  if((verbose == 1) || (verbose == 2)) {"	code
+ndpi-123	ndpi	example/utests.c	2122	"// printf(""Similarity: %f\n\n"", ndpi_bin_similarity(&b1, &b2, 1));"	"    }
+  }
+  // printf(""Similarity: %f\n\n"", ndpi_bin_similarity(&b1, &b2, 1));
+
+  for(i=0; i<num_bins; i++)"	code
+ndpi-124	ndpi	influxdb/metric_anomaly.c	129	"// printf(""->>> '%s'"", buf);"	"      continue;
+
+    // printf(""->>> '%s'"", buf);
+      
+    value *= 100; /* trick to avoid dealing with floats */"	code
+ndpi-125	ndpi	src/include/ndpi_api.h	799	//void * ndpi_calloc(unsigned long count, size_t size);	"          ndpi_debug_function_ptr ndpi_debug_printf);
+  //void * ndpi_malloc(size_t size);
+  //void * ndpi_calloc(unsigned long count, size_t size);
+  //void ndpi_free(void *ptr);
+  u_int8_t ndpi_get_api_version(void);"	proto
+ndpi-126	ndpi	src/include/ndpi_api.h	800	//void ndpi_free(void *ptr);	"  //void * ndpi_malloc(size_t size);
+  //void * ndpi_calloc(unsigned long count, size_t size);
+  //void ndpi_free(void *ptr);
+  u_int8_t ndpi_get_api_version(void);
+"	proto
+ndpi-127	ndpi	src/lib/ndpi_main.c	4089	/*     flow->packet.detected_protocol_stack[0] = flow->guessed_host_protocol_id; */	"
+/*     /\* app proto for packet *\/ */
+/*     flow->packet.detected_protocol_stack[0] = flow->guessed_host_protocol_id; */
+/*     /\* master proto for packet *\/ */
+/*     flow->packet.detected_protocol_stack[1] = flow->guessed_protocol_id; */"	code
+ndpi-128	ndpi	src/lib/ndpi_main.c	4091	/*     flow->packet.detected_protocol_stack[1] = flow->guessed_protocol_id; */	"/*     flow->packet.detected_protocol_stack[0] = flow->guessed_host_protocol_id; */
+/*     /\* master proto for packet *\/ */
+/*     flow->packet.detected_protocol_stack[1] = flow->guessed_protocol_id; */
+    
+/*   } */"	code
+ndpi-129	ndpi	src/lib/ndpi_main.c	4492	/*   if((s = *stringp) == NULL) */	"/*   char *tok; */
+
+/*   if((s = *stringp) == NULL) */
+/*     return (NULL); */
+/*   for(tok = s;;) { */"	code
+ndpi-130	ndpi	src/lib/ndpi_main.c	5446	/* if(flow->protos.stun.num_processed_pkts || flow->protos.stun.num_udp_pkts) */	"     (flow->guessed_protocol_id == NDPI_PROTOCOL_STUN)) {
+  check_stun_export:
+    /* if(flow->protos.stun.num_processed_pkts || flow->protos.stun.num_udp_pkts) */ {
+      // if(/* (flow->protos.stun.num_processed_pkts >= NDPI_MIN_NUM_STUN_DETECTION) */
+      *protocol_was_guessed = 1;"	code
+ndpi-131	ndpi	src/lib/ndpi_main.c	3410	"/* printf(""+ %s/%d\n"", addr, cidr ? atoi(cidr) : 32); */"	" addr4.s_addr = inet_addr(addr);
+
+ /* printf(""+ %s/%d\n"", addr, cidr ? atoi(cidr) : 32); */
+ node = add_to_ptree(ptree->v4, AF_INET, &addr4, cidr ? atoi(cidr) : 32 /* bits */);
+      } else {"	code
+ndpi-132	ndpi	src/lib/ndpi_main.c	650	"/*printf(""[DEBUG] %s\n"", j ? expressions[j - 1] : ""No Expression"");*/"	"      }
+    }
+    /*printf(""[DEBUG] %s\n"", j ? expressions[j - 1] : ""No Expression"");*/
+  }
+"	code
+ndpi-133	ndpi	src/lib/ndpi_main.c	5867	"// printf(""%s(): FAIL_WITH_UNKNOWN\n"", __FUNCTION__);"	"
+  if(flow->fail_with_unknown) {
+    // printf(""%s(): FAIL_WITH_UNKNOWN\n"", __FUNCTION__);
+    return(ret);
+  }"	code
+ndpi-134	ndpi	src/lib/ndpi_util.c	611	"/* printf(""\nWARNING: timestamp bug in the pcap file (ts delta: %llu, repairing)\n"", ndpi_thread_info[thread_id].last_time - time); */"	"  /* safety check */
+  if(workflow->last_time > time) {
+    /* printf(""\nWARNING: timestamp bug in the pcap file (ts delta: %llu, repairing)\n"", ndpi_thread_info[thread_id].last_time - time); */
+    time = workflow->last_time;
+  }"	code
+ndpi-135	ndpi	src/lib/protocols/btlib.c	340	"// DEBUG_TRACE(printf(""BUG! r.nodes length %d not %% 38\n"",cbd->v.s.l));"	"  if(STREQ(cbd->buf,""r.nodes6"")) {
+    if(cbd->v.s.l % 38) {
+      // DEBUG_TRACE(printf(""BUG! r.nodes length %d not %% 38\n"",cbd->v.s.l));
+      return;
+    }"	code
+ndpi-136	ndpi	src/lib/protocols/btlib.c	301	"// DEBUG_TRACE(printf(""BUG! r.values6 not in list! %08x %08x \n"", p->r.values+(p->r.nv6*21),s));"	"      } else {
+ if(s != p->r.values6+(p->r.nv6*21)) {
+   // DEBUG_TRACE(printf(""BUG! r.values6 not in list! %08x %08x \n"", p->r.values+(p->r.nv6*21),s));
+   return;
+ }"	code
+ndpi-137	ndpi	src/lib/protocols/dns.c	252	"/* printf(""---?? '%c'\n"", c); */"	"   _hostname[j++] = tolower(c);
+ } else {
+   /* printf(""---?? '%c'\n"", c); */
+   
+   hostname_is_valid = 0;"	code
+ndpi-138	ndpi	src/lib/protocols/fasttrack.c	42	//      struct ndpi_id_struct         *src=ndpi_struct->src;	" struct ndpi_packet_struct *packet = &flow->packet;
+ 
+//      struct ndpi_id_struct         *src=ndpi_struct->src;
+//      struct ndpi_id_struct         *dst=ndpi_struct->dst;
+"	code
+ndpi-139	ndpi	src/lib/protocols/http.c	42	/* if(flow->detected_protocol_stack[0] == NDPI_PROTOCOL_UNKNOWN) */	"
+    /* If no custom protocol has been detected */
+    /* if(flow->detected_protocol_stack[0] == NDPI_PROTOCOL_UNKNOWN) */ {
+      if(protocol == NDPI_PROTOCOL_HTTP) {
+ ndpi_int_reset_protocol(flow);"	code
+ndpi-140	ndpi	src/lib/protocols/mail_imap.c	105	/* command = &(packet->payload[command_start]); */	" }
+ command_start = space_pos + 1;
+ /* command = &(packet->payload[command_start]); */
+      } else {
+ command_start = 0;"	code
+ndpi-141	ndpi	src/lib/protocols/mdns_proto.c	83	"/* printf(""==> [%d] %s\n"", j, answer);  */"	"    answer[j] = '\0';
+
+    /* printf(""==> [%d] %s\n"", j, answer);  */
+
+    if(!ndpi_struct->disable_metadata_export) {"	code
+ndpi-142	ndpi	src/lib/protocols/msn.c	166	/*     if(packet->detected_protocol_stack[0] == NDPI_PROTOCOL_HTTP) { */	"/* #ifdef NDPI_PROTOCOL_HTTP */
+/*     /\* we have to examine two http packets *\/ */
+/*     if(packet->detected_protocol_stack[0] == NDPI_PROTOCOL_HTTP) { */
+/*     } */
+/* #endif */"	code
+ndpi-143	ndpi	src/lib/protocols/quic.c	507	/* gcry_cipher_reset(pp_cipher->pp_cipher); */	"  phton64(nonce + sizeof(nonce) - 8, pntoh64(nonce + sizeof(nonce) - 8) ^ packet_number);
+
+  /* gcry_cipher_reset(pp_cipher->pp_cipher); */
+  err = gcry_cipher_setiv(pp_cipher->pp_cipher, nonce, QUIC_TLS13_AEAD_NONCE_LENGTH);
+  if(err) {"	code
+ndpi-144	ndpi	src/lib/protocols/quic.c	444	"/* printf(""unmasked_byte0 0x%x pkn_len %d\n"", unmasked_byte0, pkn_len); */"	"  }
+  pkn_len = (unmasked_byte0 & 0x03) + 1;
+  /* printf(""unmasked_byte0 0x%x pkn_len %d\n"", unmasked_byte0, pkn_len); */
+
+  memcpy(pkn_bytes, packet_payload + pn_offset, pkn_len);"	code
+ndpi-145	ndpi	src/lib/protocols/rtp.c	365	"/* printf(""********* %02X [bits %u]\n"", evs[0], num_bits); */"	"
+ flow->flow_multimedia_types = ndpi_multimedia_audio_flow;
+ /* printf(""********* %02X [bits %u]\n"", evs[0], num_bits); */
+   
+ if(num_bits == 56) {"	code
+ndpi-146	ndpi	src/lib/protocols/rtp.c	129	"// printf(""==> %s()\n"", __FUNCTION__);"	"  u_int16_t dest = ntohs(packet->udp->dest);
+  
+  // printf(""==> %s()\n"", __FUNCTION__);
+  
+  /* printf(""*** %s(pkt=%d)\n"", __FUNCTION__, flow->packet_counter); */"	code
+ndpi-147	ndpi	src/lib/protocols/sip.c	180	//  struct ndpi_flow_struct   *flow = ndpi_struct->flow;	"{
+  struct ndpi_packet_struct *packet = &flow->packet;
+  //  struct ndpi_flow_struct   *flow = ndpi_struct->flow;
+  //      struct ndpi_id_struct         *src=ndpi_struct->src;
+  //      struct ndpi_id_struct         *dst=ndpi_struct->dst;"	code
+ndpi-148	ndpi	src/lib/protocols/skype.c	158	"/* printf(""[SKYPE] [id: %u][len: %d]\n"", flow->l4.tcp.skype_packet_id, payload_len);  */"	"      }
+
+      /* printf(""[SKYPE] [id: %u][len: %d]\n"", flow->l4.tcp.skype_packet_id, payload_len);  */
+#endif
+    } else {"	code
+ndpi-149	ndpi	src/lib/protocols/ssl.c	642	"// printf(""SSL [extension_offset/len: %u/%u]\n"", extension_offset, extension_len);"	"
+#ifdef CERTIFICATE_DEBUG
+      // printf(""SSL [extension_offset/len: %u/%u]\n"", extension_offset, extension_len);
+#endif
+    }"	code
+ndpi-150	ndpi	src/lib/protocols/tls.c	432	"// if(len != (buffer_len-1)) printf(""len=%u  / buffer_len-1=%u\n"", len, buffer_len-1);"	"       buffer[len] = '\0';
+
+       // if(len != (buffer_len-1)) printf(""len=%u  / buffer_len-1=%u\n"", len, buffer_len-1);
+       
+       /* We now have to check if this looks like an IP address or host name */"	code
+ndpi-151	ndpi	src/lib/third_party/src/gcrypt/digest.c	176	/* memset(W, 0, sizeof(W)); */	"
+  /* Wipe variables */
+  /* memset(W, 0, sizeof(W)); */
+  /* memset(T, 0, sizeof(T)); */
+}"	code
+ndpi-152	ndpi	src/lib/third_party/src/libinjection_xss.c	354	"/*      printf(""Got XMLNS and XLINK tags\n""); */"	"        /* XMLNS can be used to create arbitrary tags */
+        if (cstrcasecmp_with_null(""XMLNS"", s, 5) == 0 || cstrcasecmp_with_null(""XLINK"", s, 5) == 0) {
+            /*      printf(""Got XMLNS and XLINK tags\n""); */
+            return TYPE_BLACK;
+        }"	code
+ndpi-153	ndpi	src/lib/third_party/src/libinjection_xss.c	289	"/* printf(""    %c != %c\n"", *a, cb); */"	"
+        if (*a != (char) cb) {
+            /* printf(""    %c != %c\n"", *a, cb); */
+            /* mismatch */
+            return 0;"	code
+ndpi-154	ndpi	src/lib/third_party/src/ndpi_patricia.c	78	/* if(family == AF_MAC) */	"  if(family == AF_INET) return ((u_char *) & prefix->add.sin);
+  else if(family == AF_INET6) return ((u_char *) & prefix->add.sin6);
+  else /* if(family == AF_MAC) */ return ((u_char *) & prefix->add.mac);
+
+  return ((u_char *) & prefix->add.sin);"	annotation
+ndpi-155	ndpi	src/lib/third_party/src/roaring.c	556	//  return CROARING_DEFAULT;	"
+//static inline uint32_t dynamic_croaring_detect_supported_architectures() {
+//  return CROARING_DEFAULT;
+//}
+"	code
+ndpi-156	ndpi	src/lib/third_party/src/roaring.cc	5500	// c1 = get_writable_copy_if_shared(c1,&type1);	"){
+    assert(type1 != SHARED_CONTAINER_TYPE);
+    // c1 = get_writable_copy_if_shared(c1,&type1);
+    c2 = container_unwrap_shared(c2, &type2);
+    container_t *result = NULL;"	code
+ndpi-157	ndpi	src/lib/third_party/src/roaring.cc	7029	"// printf(""you have little endian machine"");"	"#ifdef __LITTLE_ENDIAN__
+// This is what we expect!
+// printf(""you have little endian machine"");
+#endif
+#ifdef __BIG_ENDIAN__"	code
+ndpi-158	ndpi	src/lib/third_party/src/roaring_v2.c	11875	// assert(run_container_cardinality(answer) == c->cardinality);	"    // now prev is the last seen value
+    add_run(answer, run_start, prev);
+    // assert(run_container_cardinality(answer) == c->cardinality);
+    return answer;
+}"	code
+ndpi-159	ndpi	stun.c	401	"/* printf(""====>>>> %04X\n"", attribute); */"	"        case 0x0800:
+        case 0x8006: /* This is found on skype calls) */
+          /* printf(""====>>>> %04X\n"", attribute); */
+#ifdef DEBUG_STUN
+          printf(""==> Skype (2) found\n"");"	code
+libarchive-160	libarchive	cat/test/main.c	326	"/* printf(""Checked %s:%d\n"", file, line); */"	" /* Uncomment to print file:line after every assertion.
+  * Verbose, but occasionally useful in tracking down crashes. */
+ /* printf(""Checked %s:%d\n"", file, line); */
+}
+"	code
+libarchive-161	libarchive	cpio/cpio_windows.c	787	"/* fprintf(stderr, ""unrecognized win32 error code: %lu"", e); */"	" }
+
+ /* fprintf(stderr, ""unrecognized win32 error code: %lu"", e); */
+ errno = EINVAL;
+ return;"	code
+libarchive-162	libarchive	cpio/test/main.c	271	"/* printf(""Checked %s:%d\n"", file, line); */"	" /* Uncomment to print file:line after every assertion.
+  * Verbose, but occasionally useful in tracking down crashes. */
+ /* printf(""Checked %s:%d\n"", file, line); */
+}
+"	code
+libarchive-163	libarchive	cpio/test/main.c	292	/* test_filename = filename; */	" /* Record another failure for this line. */
+ ++failures;
+ /* test_filename = filename; */
+ failed_lines[line].count++;
+"	code
+libarchive-164	libarchive	libarchive/archive_entry_copy_bhfi.c	73	/* archive_entry_set_mode(entry, st->st_mode); */	" archive_entry_set_size(entry, (((int64_t)bhfi->nFileSizeHigh) << 32)
+  + bhfi->nFileSizeLow);
+ /* archive_entry_set_mode(entry, st->st_mode); */
+}
+#endif"	code
+libarchive-165	libarchive	libarchive/archive_ppmd8.c	366	/* AllocUnits(p, PPMD_NUM_INDEXES - 1); */	"  p->MinContext->Flags = 0;
+  p->MinContext->SummFreq = 256 + 1;
+  p->FoundState = (CPpmd_State *)p->LoUnit; /* AllocUnits(p, PPMD_NUM_INDEXES - 1); */
+  p->LoUnit += U2B(256 / 2);
+  p->MinContext->Stats = REF(p->FoundState);"	code
+libarchive-166	libarchive	libarchive/archive_read_disk_posix.c	2404	/* t->dirname_length = t->path_length; */	"   tree_append(t, t->stack->name.s,
+       archive_strlen(&(t->stack->name)));
+   /* t->dirname_length = t->path_length; */
+   /* tree_pop(t); */
+   t->stack->flags &= ~needsFirstVisit;"	code
+libarchive-167	libarchive	libarchive/archive_read_disk_posix.c	1665	//tree_pop(t);	"       archive_strlen(&(t->stack->name)));
+   //t->dirname_length = t->path_length;
+   //tree_pop(t);
+   t->stack->flags &= ~needsFirstVisit;
+   return (t->visit_type = TREE_REGULAR);"	code
+libarchive-168	libarchive	libarchive/archive_read_support_format_iso9660.c	1125	"/* fprintf(stderr, "" *** Discarding CE data.\n""); */"	"  /* CE area precedes actual file data? Ignore it. */
+  if (file->ce_offset > file->offset) {
+   /* fprintf(stderr, "" *** Discarding CE data.\n""); */
+   file->ce_offset = 0;
+   file->ce_size = 0;"	code
+libarchive-169	libarchive	libarchive/archive_read_support_format_rar.c	1470	/*return (ARCHIVE_FATAL);*/	"       extract information about the currently processed entry and don't need
+       to return ARCHIVE_FATAL here. */
+    /*return (ARCHIVE_FATAL);*/
+  }
+"	code
+libarchive-170	libarchive	libarchive/archive_read_support_format_zip.c	454	/* version = p[4]; */	"  }
+  zip->have_central_directory = 1;
+  /* version = p[4]; */
+  zip_entry->system = p[5];
+  /* version_required = archive_le16dec(p + 6); */"	code
+libarchive-171	libarchive	libarchive/archive_read_support_format_zip.c	456	/* version_required = archive_le16dec(p + 6); */	"  /* version = p[4]; */
+  zip_entry->system = p[5];
+  /* version_required = archive_le16dec(p + 6); */
+  zip_entry->flags = archive_le16dec(p + 8);
+  zip_entry->compression = (char)archive_le16dec(p + 10);"	code
+libarchive-172	libarchive	libarchive/archive_read_support_format_zip.c	3182	/*return (ARCHIVE_OK);	" __archive_read_consume(a, 4);
+
+ /*return (ARCHIVE_OK);
+  * This is not fully implemented yet.*/
+ archive_set_error(&a->archive, ARCHIVE_ERRNO_FILE_FORMAT,"	code
+libarchive-173	libarchive	libarchive/archive_read_support_format_zip.c	3284	/*zip->entry_uncompressed_bytes_read += ENC_HEADER_SIZE;*/	"     zip->entry_bytes_remaining -= ENC_HEADER_SIZE;
+ }
+ /*zip->entry_uncompressed_bytes_read += ENC_HEADER_SIZE;*/
+ zip->entry_compressed_bytes_read += ENC_HEADER_SIZE;
+ zip->decrypted_bytes_remaining = 0;"	code
+libarchive-174	libarchive	libarchive/archive_read_support_format_zip.c	1455	//return (ARCHIVE_OK);	" __archive_read_consume(a, 4);
+
+ //return (ARCHIVE_OK);
+ archive_set_error(&a->archive, ARCHIVE_ERRNO_FILE_FORMAT,
+     ""Encrypted file is unsupported"");"	code
+libarchive-175	libarchive	libarchive/archive_windows.c	757	"/* fprintf(stderr, ""unrecognized win32 error code: %lu"", e); */"	" }
+
+ /* fprintf(stderr, ""unrecognized win32 error code: %lu"", e); */
+ errno = EINVAL;
+ return;"	code
+libarchive-176	libarchive	libarchive/archive_write_set_format_ustar.c	435	/* h[USTAR_checksum_offset + 7] = ' '; *//* This is pre-set in the template. */	"  checksum += 255 & (unsigned int)h[i];
+ h[USTAR_checksum_offset + 6] = '\0'; /* Can't be pre-set in the template. */
+ /* h[USTAR_checksum_offset + 7] = ' '; */ /* This is pre-set in the template. */
+ format_octal(checksum, h + USTAR_checksum_offset, 6);
+ return (ret);"	code
+libarchive-177	libarchive	libarchive/test/main.c	230	"/* printf(""Checked %s:%d\n"", file, line); */"	" /* Uncomment to print file:line after every assertion.
+  * Verbose, but occasionally useful in tracking down crashes. */
+ /* printf(""Checked %s:%d\n"", file, line); */
+}
+"	code
+libarchive-178	libarchive	libarchive/test/main.c	828	//close_descriptors(1);	" (*tests[i].func)();
+ /* Close stray descriptors, record as errors against this test. */
+ //close_descriptors(1);
+ /* Summarize the results of this test. */
+ summarize();"	code
+libarchive-179	libarchive	libarchive/test/test_read_disk_directory_traversals.c	1095	"/* failure(""Atime should be restored""); */"	" /* On FreeBSD (and likely other systems), atime on
+    dirs does not change when it is read. */
+ /* failure(""Atime should be restored""); */
+ /* assertFileAtimeRecent(""at""); */
+ failure(""Atime should be restored"");"	code
+libarchive-180	libarchive	libarchive/test/test_write_format_zip.c	171	//assertEqualInt((S_IFDIR | 0755), archive_entry_mode(ae));	" assertEqualInt(0, archive_entry_ctime(ae));
+ assertEqualString(""dir/"", archive_entry_pathname(ae));
+ //assertEqualInt((S_IFDIR | 0755), archive_entry_mode(ae));
+ assertEqualInt(0, archive_entry_size(ae));
+ assertEqualIntA(a, 0, archive_read_data(a, filedata, 10));"	code
+libarchive-181	libarchive	libarchive/test/test_write_format_zip64_stream.c	144	/* assertEqualInt(i2le(p + 30), 28); *//* Extra field length: See below */	" assertEqualInt(i4le(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2le(p + 28), strlen(file_name)); /* Pathname length */
+ /* assertEqualInt(i2le(p + 30), 28); */ /* Extra field length: See below */
+ assertEqualInt(i2le(p + 32), 0); /* File comment length */
+ assertEqualInt(i2le(p + 34), 0); /* Disk number start */"	code
+libarchive-182	libarchive	libarchive/test/test_write_format_zip_file.c	158	/* assertEqualInt(i2le(p + 30), 28); *//* Extra field length: See below */	" assertEqualInt(i4le(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2le(p + 28), strlen(file_name)); /* Pathname length */
+ /* assertEqualInt(i2le(p + 30), 28); */ /* Extra field length: See below */
+ assertEqualInt(i2le(p + 32), 0); /* File comment length */
+ assertEqualInt(i2le(p + 34), 0); /* Disk number start */"	code
+libarchive-183	libarchive	libarchive/test/test_write_format_zip_file.c	207	/* assertEqualInt(i4(p + 18), sizeof(file_data)); *//* Compressed size */	" assertEqualInt(i2(p + 12), ((tm->tm_year - 80) * 512) + ((tm->tm_mon + 1) * 32) + tm->tm_mday); /* File date */
+ assertEqualInt(i4(p + 14), 0); /* CRC-32 */
+ /* assertEqualInt(i4(p + 18), sizeof(file_data)); */ /* Compressed size */
+ /* assertEqualInt(i4(p + 22), sizeof(file_data)); */ /* Uncompressed size not stored because we're using length-at-end. */
+ assertEqualInt(i2(p + 26), strlen(file_name)); /* Pathname length */"	code
+libarchive-184	libarchive	libarchive/test/test_write_format_zip_file.c	189	/* assertEqualInt(i4(q + 18), sizeof(file_data)); *//* Compressed size */	" assertEqualInt(i2(q + 12), ((tm->tm_year - 80) * 512) + ((tm->tm_mon + 1) * 32) + tm->tm_mday); /* File date */
+ assertEqualInt(i4(q + 14), 0); /* CRC-32 */
+ /* assertEqualInt(i4(q + 18), sizeof(file_data)); */ /* Compressed size */
+ /* assertEqualInt(i4(q + 22), sizeof(file_data)); */ /* Uncompressed size not stored because we're using length-at-end. */
+ assertEqualInt(i2(q + 26), strlen(file_name)); /* Pathname length */"	code
+libarchive-185	libarchive	libarchive/test/test_write_format_zip_file.c	228	/* assertEqualInt(i4(q + 8), ???); *//* compressed size */	" assertEqualMem(q, ""PK\007\010"", 4);
+ assertEqualInt(i4(q + 4), crc); /* CRC-32 */
+ /* assertEqualInt(i4(q + 8), ???); */ /* compressed size */
+ assertEqualInt(i4(q + 12), sizeof(file_data)); /* uncompressed size */
+"	code
+libarchive-186	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	165	/* assertEqualInt(i2(p + 30), 28); *//* Extra field length: See below */	" assertEqualInt(i4(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2(p + 28), strlen(file_name)); /* Pathname length */
+ /* assertEqualInt(i2(p + 30), 28); */ /* Extra field length: See below */
+ assertEqualInt(i2(p + 32), 0); /* File comment length */
+ assertEqualInt(i2(p + 34), 0); /* Disk number start */"	code
+libarchive-187	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	159	/* assertEqualInt(i2le(p + 30), 28); *//* Extra field length: See below */	" assertEqualInt(i4le(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2le(p + 28), strlen(file_name)); /* Pathname length */
+ /* assertEqualInt(i2le(p + 30), 28); */ /* Extra field length: See below */
+ assertEqualInt(i2le(p + 32), 0); /* File comment length */
+ assertEqualInt(i2le(p + 34), 0); /* Disk number start */"	code
+libarchive-188	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	235	/* assertEqualInt(i4(p + 18), sizeof(file_data)); *//* Compressed size */	" assertEqualInt(i2(p + 12), ((tm->tm_year - 80) * 512) + ((tm->tm_mon + 1) * 32) + tm->tm_mday); /* File date */
+ assertEqualInt(i4(p + 14), 0); /* CRC-32 */
+ /* assertEqualInt(i4(p + 18), sizeof(file_data)); */ /* Compressed size */
+ /* assertEqualInt(i4(p + 22), sizeof(file_data)); */ /* Uncompressed size not stored because we're using length-at-end. */
+ assertEqualInt(i2(p + 26), strlen(file_name)); /* Pathname length */"	code
+libarchive-189	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	162	/* assertEqualInt(i4(p + 20), sizeof(file_data)); *//* Compressed size */	" crc = bitcrc32(0, file_data, sizeof(file_data));
+ assertEqualInt(i4(p + 16), crc); /* CRC-32 */
+ /* assertEqualInt(i4(p + 20), sizeof(file_data)); */ /* Compressed size */
+ assertEqualInt(i4(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2(p + 28), strlen(file_name)); /* Pathname length */"	code
+libarchive-190	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	156	/* assertEqualInt(i4le(p + 20), sizeof(file_data)); *//* Compressed size */	" crc = bitcrc32(0, file_data, sizeof(file_data));
+ assertEqualInt(i4le(p + 16), crc); /* CRC-32 */
+ /* assertEqualInt(i4le(p + 20), sizeof(file_data)); */ /* Compressed size */
+ assertEqualInt(i4le(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2le(p + 28), strlen(file_name)); /* Pathname length */"	code
+libarchive-191	libarchive	libarchive/test/test_write_format_zip_file_zip64.c	287	/* assertEqualInt(i8(p + 8), ???); *//* compressed size */	" assertEqualMem(p, ""PK\007\010"", 4);
+ assertEqualInt(i4(p + 4), crc); /* CRC-32 */
+ /* assertEqualInt(i8(p + 8), ???); */ /* compressed size */
+ assertEqualInt(i8(p + 16), sizeof(file_data)); /* uncompressed size */
+"	code
+libarchive-192	libarchive	libarchive/test/test_write_format_zip_large.c	425	/* assertEqualMem(p - 10, ..., 4); */	" /* TODO: Check size of central directory?  Maybe verify
+    that this matches size in Zip64 end-of-cd record? */
+ /* assertEqualMem(p - 10, ..., 4); */
+ /* Start of CD offset should be 0xffffffff */
+ assertEqualMem(p - 6, ""\xff\xff\xff\xff"", 4);"	code
+libarchive-193	libarchive	libarchive/test/test_write_format_zip_stream.c	147	/* assertEqualInt(i2(p + 30), 28); *//* Extra field length: See below */	" assertEqualInt(i4(p + 24), sizeof(file_data)); /* Uncompressed size */
+ assertEqualInt(i2(p + 28), strlen(file_name)); /* Pathname length */
+ /* assertEqualInt(i2(p + 30), 28); */ /* Extra field length: See below */
+ assertEqualInt(i2(p + 32), 0); /* File comment length */
+ assertEqualInt(i2(p + 34), 0); /* Disk number start */"	code
+libarchive-194	libarchive	tar/test/main.c	1044	/* _set_fmode(_O_BINARY); */	"  * explicitly use O_BINARY flag to open() and ""b"" to
+  * fopen(): */
+ /* _set_fmode(_O_BINARY); */
+ /* Disable annoying assertion message box. */
+ _CrtSetReportMode(_CRT_ASSERT, 0);"	code
+libarchive-195	libarchive	tar/test/main.c	327	"/* printf(""Checked %s:%d\n"", file, line); */"	" /* Uncomment to print file:line after every assertion.
+  * Verbose, but occasionally useful in tracking down crashes. */
+ /* printf(""Checked %s:%d\n"", file, line); */
+}
+"	code
+libarchive-196	libarchive	tar/tree.c	295	"/* printf(""Looking for wildcard in %s\n"", path); */"	" memset(t, 0, sizeof(*t));
+ /* First item is set up a lot like a symlink traversal. */
+ /* printf(""Looking for wildcard in %s\n"", path); */
+ if (strchr(path, '*') || strchr(path, '?')) {
+  // It has a wildcard in it..."	code
+libarchive-197	libarchive	tar/tree.c	436	//t->dirname_length = t->path_length;	"   t->current = t->stack;
+   tree_append(t, t->stack->name, strlen(t->stack->name));
+   //t->dirname_length = t->path_length;
+   //tree_pop(t);
+   t->stack->flags &= ~needsFirstVisit;"	code
+libarchive-198	libarchive	tar/write.c	777	/* lst = tree_current_lstat(tree); */	"    descend = 0;
+   /* 'P': Archive symlink to file as symlink. */
+   /* lst = tree_current_lstat(tree); */
+   break;
+  }"	code
+libarchive-199	libarchive	test_utils/test_main.c	354	"/* printf(""Checked %s:%d\n"", file, line); */"	" /* Uncomment to print file:line after every assertion.
+  * Verbose, but occasionally useful in tracking down crashes. */
+ /* printf(""Checked %s:%d\n"", file, line); */
+}
+"	code
