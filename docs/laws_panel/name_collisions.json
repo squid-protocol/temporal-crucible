@@ -1,0 +1,50 @@
+[
+ {
+  "language": "cpp",
+  "candidate": "amov-lab/Prometheus"
+ },
+ {
+  "language": "cpp",
+  "candidate": "saturn-xvi/prometheus"
+ },
+ {
+  "language": "cpp",
+  "candidate": "sphinxsearch/sphinx"
+ },
+ {
+  "language": "go",
+  "candidate": "heartleo/zlib"
+ },
+ {
+  "language": "go",
+  "candidate": "hoisie/redis"
+ },
+ {
+  "language": "jsts",
+  "candidate": "cujojs/curl"
+ },
+ {
+  "language": "jsts",
+  "candidate": "denodrivers/postgres"
+ },
+ {
+  "language": "jsts",
+  "candidate": "porsager/postgres"
+ },
+ {
+  "language": "php",
+  "candidate": "ixudra/curl"
+ },
+ {
+  "language": "python",
+  "candidate": "EuniAI/Prometheus"
+ },
+ {
+  "language": "python",
+  "candidate": "MishaLaskin/curl"
+ },
+ {
+  "language": "python",
+  "candidate": "starsliao/Prometheus"
+ }
+]

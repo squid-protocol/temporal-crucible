@@ -1,0 +1,23 @@
+{
+ "about": "Operator resolutions of the bare-name collisions reported by tools/laws_exclude.py. These are NOT a new exclusion rule: they apply the registration's existing prose clause (PANEL, 'Excluded': every repo used in any temporal-crucible study to date) to specific candidates that share a name with an excluded project. Each decision cites what the repo actually is, checked against the GitHub API, so a reader can audit the call rather than trust it. Recorded with the draw as Amendment 8 item 1 requires.",
+ "decided": "2026-11-11",
+ "decided_by": "owner",
+ "rule_applied": "A candidate is excluded only if it carries the SOURCE of a studied project, so that drawing it would re-test studied code. A project that merely shares a name is kept - dropping eligible repos that were never studied biases the frame exactly as much as keeping repos that were.",
+ "decisions": [
+  {"repo": "krzyzanowskim/OpenSSL", "language": "C", "what_it_is": "OpenSSL package for SwiftPM, CocoaPod and Carthage, multiplatform", "decision": "exclude", "why": "packages real OpenSSL C source, so drawing it re-tests openssl/openssl's code"},
+  {"repo": "tporadowski/redis", "language": "C", "what_it_is": "Native port of Redis for Windows; unofficial port of the Redis codebase", "decision": "exclude", "why": "is the Redis codebase ported, so drawing it re-tests redis/redis's code"},
+
+  {"repo": "heartleo/zlib", "language": "Go", "what_it_is": "command-line tool for Z-Library (search, download, send to Kindle)", "decision": "keep", "why": "unrelated to zlib compression; the name is Z-Library"},
+  {"repo": "hoisie/redis", "language": "Go", "what_it_is": "a Redis client for Go", "decision": "keep", "why": "a client, not the Redis codebase"},
+  {"repo": "sphinxsearch/sphinx", "language": "C++", "what_it_is": "Sphinx search server", "decision": "keep", "why": "unrelated to sphinx-doc/sphinx, the documentation generator"},
+  {"repo": "cujojs/curl", "language": "JavaScript", "what_it_is": "curl.js, an AMD/CommonJS module loader", "decision": "keep", "why": "unrelated to curl/curl"},
+  {"repo": "ixudra/curl", "language": "PHP", "what_it_is": "a PHP curl helper library for Laravel", "decision": "keep", "why": "a wrapper around libcurl, not curl/curl's source"},
+  {"repo": "MishaLaskin/curl", "language": "Python", "what_it_is": "CURL: Contrastive Unsupervised Representation Learning (RL paper code)", "decision": "keep", "why": "unrelated to curl/curl"},
+  {"repo": "amov-lab/Prometheus", "language": "C++", "what_it_is": "open source software for autonomous drones", "decision": "keep", "why": "unrelated to prometheus/prometheus"},
+  {"repo": "saturn-xvi/prometheus", "language": "C++", "what_it_is": "Overwatch research and reverse-engineering project", "decision": "keep", "why": "unrelated to prometheus/prometheus"},
+  {"repo": "EuniAI/Prometheus", "language": "Python", "what_it_is": "a knowledge-graph-driven AI agent", "decision": "keep", "why": "unrelated to prometheus/prometheus"},
+  {"repo": "starsliao/Prometheus", "language": "Python", "what_it_is": "Grafana dashboards for Prometheus exporters", "decision": "keep", "why": "dashboards that consume Prometheus; not its codebase"},
+  {"repo": "denodrivers/postgres", "language": "TypeScript", "what_it_is": "PostgreSQL driver for Deno", "decision": "keep", "why": "a client driver, not PostgreSQL's source"},
+  {"repo": "porsager/postgres", "language": "JavaScript", "what_it_is": "Postgres.js, a PostgreSQL client", "decision": "keep", "why": "a client, not PostgreSQL's source"}
+ ]
+}
