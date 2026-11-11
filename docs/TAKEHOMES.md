@@ -139,6 +139,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### What comments say
 
+- **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-dcs-danger-comment-signature.md)
 - **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-com-h4-comment-drift.md)
 - **Functions born with danger-language comments get CVE fixes 1.45× as often [1.08, 1.89]; the replication on unseen repos was inconclusive (1.13), and CVE fixes themselves add such comments (1.61×).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-danger-comments.md)
 

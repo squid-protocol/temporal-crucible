@@ -46,6 +46,7 @@ Disclosure rule: entries are public, so they carry aggregates only (no per-host 
 
 | date | entry | type | status | verdict | register ids | take-home |
 |---|---|---|---|---|---|---|
+| 2026-11-10 | [Danger comments that stayed safe: is there a code signature? (DCS)](2026-11-10-dcs-danger-comment-signature.md) | confirmatory | registered | pending | DCS-T, DCS-F, DCS-C, DCS-ALL | Registered, not yet scored. |
 | 2026-11-10 | [Do functions whose header comment goes stale get more CVE fixes? (COM-H4)](2026-11-10-com-h4-comment-drift.md) | confirmatory | registered | pending | COM-H4a..H4b | Registered, not yet scored. |
 | 2026-11-08 | [What kind of code sits where in the call network, and where do fix classes land?](2026-11-08-what-sits-where-in-call-networks.md) | confirmatory | scored | mixed | CGK-K1..F11 | Hubs are public, decision-dense entry points and workhorses, not simple utilities; callers of many are straight-line glue; the periphery is private, low-level code; and only extrinsic fixes map onto the network, landing in peripheral files that host hubs. |
 | 2026-11-08 | [Which classic software-network laws hold across languages and decades?](2026-11-08-software-network-laws-many-labs.md) | confirmatory | registered | pending | PANEL, LAW-1..9 | One sentence a newcomer can quote. Write it once the study is scored; keep it honest about evidence level. |
