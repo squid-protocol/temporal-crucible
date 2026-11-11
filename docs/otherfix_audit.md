@@ -336,3 +336,92 @@ rule can fix this.
 - [ ] `af8c386d5e` (1f) doc: fix typo in --heading flag help
 - [ ] `2af77242c5` (1f) doc: fix typo in --engine flag docs
 
+
+---
+
+# Round 2 — FIXLIKE tightened (amendment 2), and re-audited
+
+**2026-11-11.** Round 1 above measured the v1 gate. This round builds the tightened rule and scores
+it on a fresh sample. Rule code: `tools/fixlike_v2.py`. Non-destructive: v2/v3/v3c event sets are
+written to `events/<repo>_xc2.json`; `events/<repo>_xc.json` (v1) is untouched, so every published v1
+result stays reproducible. `latent` is exempt — it comes from a curated security-fix list, not the
+keyword gate.
+
+## The rule ladder
+
+| rule | what it adds |
+|---|---|
+| **A** | drop a commit whose touched in-scope files are **all** under test / doc / example / benchmark trees |
+| **B** | drop a non-behavioural subject: conventional-commit `docs/chore/style/test/build` type, named linter or type checker, javadoc/doxygen/docstring, typo/spelling/grammar, whitespace/formatting, warning-only, changelog |
+| **B2/B3** | drop refactor / cleanup / performance / portability / build subjects, and subjects that edit a **code comment** (exempting operations *on* comments, so an XML parser's "Fix EOF handling in comments" survives) |
+| **C** | **require the fix word in the SUBJECT.** v1 matched subject *or body*, so a plain feature commit whose body said "fixes #123" was kept. This is the single biggest precision lever and the only one with a real recall cost. |
+
+Rule A cannot carry this alone: in Java, Python and Rust the documentation lives *inside* the source
+file (javadoc, docstrings, doc comments), so a doc-only fix is indistinguishable from a code change by
+path. That is a large part of why non-C precision was so much worse in round 1.
+
+## Development set (the 240 round-1 judgments)
+
+| rule | noise caught | real fixes kept | surviving precision |
+|---|---|---|---|
+| v2 = A+B | 0.566 | 0.978 | 0.740 |
+| v3 = A+B+B2+B3 | 0.755 | 0.948 | 0.830 |
+| v3c = A+B+B2+B3+C | 0.925 | 0.813 | 0.932 |
+
+These are **tuned on this set and therefore optimistic** — see the confirmatory numbers below, which
+came in well under them.
+
+## Confirmatory round — fresh sample (seed 2984, 25 per repo, all 480 previously-seen commits excluded)
+
+| repo | lang | v3 | | v3c | |
+|---|---|---|---|---|---|
+| libxml2 | C | 21/25 = 0.84 | PASS | 19/22 = 0.86 | PASS |
+| postgres | C | 18/25 = 0.72 | PASS | 14/19 = 0.74 | PASS |
+| sphinx | non-C | 18/25 = 0.72 | PASS | 18/23 = 0.78 | PASS |
+| redis | C | 17/25 = 0.68 | FAIL | 12/16 = 0.75 | PASS |
+| prometheus | non-C | 15/25 = 0.60 | FAIL | 10/12 = 0.83 | PASS |
+| commons-lang | non-C | 15/25 = 0.60 | FAIL | 14/20 = 0.70 | PASS |
+| **libgit2** | C | 15/25 = 0.60 | FAIL | **9/15 = 0.60** | **FAIL** |
+| ripgrep | non-C | 13/25 = 0.52 | FAIL | 9/11 = 0.82 | PASS |
+
+| | v3 | v3c |
+|---|---|---|
+| pooled | 132/200 = **0.660** | 105/138 = **0.761** |
+| C pooled | 71/100 = 0.710 | 54/72 = **0.750** |
+| non-C pooled | 61/100 = 0.610 | 51/66 = **0.773** |
+
+Rule C retains **69%** of v3's surviving events.
+
+## Decision: adopt v3c
+
+- **7 of 8 repos clear the 0.70 gate**, against 3 of 8 under v1 and 3 of 8 under v3.
+- **Pooled precision 0.38 → 0.77 outside C**, and the language gap closes: C 0.750 vs non-C 0.773,
+  against 0.733 vs 0.383 under v1. This was the whole problem, and it is gone.
+- Rule C was designed on the round-1 development set and tested here on a sample drawn after it was
+  written, so this is an out-of-sample estimate, not a tuned one.
+- **Cost, stated precisely.** v3c drops **44.6% of all events** (34,423 → 19,082) and **43.0% of
+  `other-fix`** (28,601 → 16,296). That headline overstates the signal lost, because most of what goes
+  is noise: at v1's 0.558 precision the 28,601 `other-fix` events held roughly 16,000 real fixes; at
+  v3c's 0.761 the surviving 16,296 hold roughly 12,400. So the trade is **about 22% of real fixes given
+  up to remove about 69% of the noise** — consistent with the development set's 0.813 fixes-kept. For a
+  rate model that is the right side of the trade; the alternative, v3, leaves non-C at 0.61 and fails 5
+  of 8 repos.
+
+**Honest note on the gap.** The development set predicted 0.932 and the confirmatory sample gave 0.761.
+The rule is tuned, so the dev figure was optimistic by ~0.17. Quote 0.761.
+
+## Known outlier: libgit2
+
+libgit2 fails in all three rounds (0.63 v1, 0.60 v3, 0.60 v3c). Its residual noise is build and
+warning churn that reads exactly like a bug fix: `Include openssl headers last`, `Check for
+__CLANG_INTTYPES_H`, `Fix warnings`, `Fix double-defines when using GIT_OLD_ERRORS`, `Fixing broken
+tests.`, `Fix misspelling word "ge" -> "get"`.
+
+Several of those are cheap regex misses rather than hard cases — `Fix warnings` bare, `broken tests`
+plural (the pattern matches only the singular), `misspelling` (the pattern anchors on `spelling`),
+`linting`, `Javadocs` plural, `java doc` spaced, `PEP8`. **Those are not fixed here on purpose:** the
+round-3 sample is now a test set, and patching the rule against it would repeat the overfit the note
+above warns about. They are candidate amendment 3, to be validated on a fresh round-4 sample.
+
+Until then: **libgit2's file-year results should carry the 0.60 caveat**, and the other seven repos
+clear the gate.

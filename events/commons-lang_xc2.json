@@ -1,0 +1,4390 @@
+{
+ "repo": "commons-lang",
+ "head": "42bd1f218caf86df139b08d010334e97392af80d",
+ "branch": "first-parent",
+ "since": 1001811010,
+ "rules": "docs/xc_hypotheses.md + FIXLIKE v3c (amendment 2, 2026-11-11); see docs/otherfix_audit.md",
+ "counts": {
+  "no C file": 2850,
+  "not a fix": 5933,
+  "regression": 48,
+  "other-fix": 1028,
+  "sweep (> 50 C files)": 53,
+  "extrinsic": 7
+ },
+ "events": [
+  {
+   "sha": "0f76857f50615046721a883b5c2062a4e0030859",
+   "ct": 1792933356,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Clarify ExceptionUtils common-frame removal and strengthen regression coverage",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionUtils.java",
+    "src/test/java/org/apache/commons/lang3/exception/ExceptionUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "f4bdd4e1d2c99cdab12e5177989fc11e1add33d5",
+   "ct": 1792862751,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix FastDateParser normalization of out-of-range ISO day-of-week values (#1839)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "45c80d99559017ea6efcb5db6156bb9a5c850d34",
+   "ct": 1792362792,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Keep EventCountCircuitBreaker event count from wrapping on int overflow (#1825)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreakerTest.java"
+   ]
+  },
+  {
+   "sha": "9bf62e20594f049195d1eed167decec6dca42f3d",
+   "ct": 1792362110,
+   "class": "other-fix",
+   "why": "",
+   "subject": "keep EventCountCircuitBreaker event count from wrapping on int overflow (#1825)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreakerTest.java"
+   ]
+  },
+  {
+   "sha": "8b126aa9c30c16ea05ddcc79d9851ae3d64fb4fe",
+   "ct": 1792264507,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix resource paths for unnamed packages (#1824)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassPathUtils.java"
+   ]
+  },
+  {
+   "sha": "e985f2eec421adac19fbf070734cee0a1348d61f",
+   "ct": 1792263850,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1838] Fix resource paths for unnamed packages (#1824)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassPathUtils.java",
+    "src/test/java/ClassPathUtilsDefaultPackage.java",
+    "src/test/java/org/apache/commons/lang3/ClassPathUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "5b3a81dcd5e4c8bcee87b5bb07f4c0672be48545",
+   "ct": 1792160992,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix unmatched-quote handling in ExtendedMessageFormat",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/ExtendedMessageFormat.java",
+    "src/test/java/org/apache/commons/lang3/text/ExtendedMessageFormatTest.java"
+   ]
+  },
+  {
+   "sha": "110683aa672b874d7ccecc1b1e89baf7774dd3c4",
+   "ct": 1792093342,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Follow up: Fix TypeUtils.isAssignable rejecting Class<X> to Class<?> assignments (#1820)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "99618eb840cf18d31413c4fdfad2e4503322fd70",
+   "ct": 1792092528,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix TypeUtils.isAssignable rejecting Class<X> to Class<?> assignments (#1820)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "fa2470369bc43d1806f92685d81f49b8d828160d",
+   "ct": 1790364651,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix Range serialization compatibility and hash reconstruction (#1802)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Range.java",
+    "src/test/java/org/apache/commons/lang3/RangeReadObjectTest.java"
+   ]
+  },
+  {
+   "sha": "9a92df9fa33d2f84a7c2037c52ca37e9cb647be1",
+   "ct": 1790026830,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix NumberUtils.createNumber() and isCreatable() for positive Long literals with explicit '+' sign (#1796)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java",
+    "src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "82483775157159a8edcc9220498f034fa1621611",
+   "ct": 1789829202,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix ConstructorUtils.getMatchingAccessibleConstructor on non-public classes (#1793)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/ConstructorUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/ConstructorUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "55dcbc4bb1449aa9f7c6ee422cc22b465a35fa2f",
+   "ct": 1789828611,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix mutable time zone keys in the FastDateFormat cache",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/AbstractFormatCache.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateFormatTest.java"
+   ]
+  },
+  {
+   "sha": "e992a498d711fc4302d5ad89e80511db41db2f11",
+   "ct": 1789762044,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1834 Fix Fraction reduction for Integer.MIN_VALUE (#1794)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "45f08d9e3b03177e12559878fc95cf3266b65052",
+   "ct": 1789338395,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix TypeUtils.toString() recursion and bound handling on recursive generic types (#1789).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e1ce120c6a60df8fe1bf37b78127eea7562662e4",
+   "ct": 1789338271,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix TypeUtils.toString() recursion and bound handling on recursive generic types (#1789)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d8f4116d4ba03ed32b104b3af891de7a67f2ce97",
+   "ct": 1788935584,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix MethodUtils.invokeMethod on instances of non-public classes (#1783)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/MethodUtilsTest.java",
+    "src/test/resources/org/apache/commons/lang3/reflect/testbed9/PrivateInterfaceBean.java",
+    "src/test/resources/org/apache/commons/lang3/reflect/testbed9/PrivateInterfaceLabels.java"
+   ]
+  },
+  {
+   "sha": "e213b85ce46aca72b284813c74a15e9ac9d55d90",
+   "ct": 1788910294,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Fraction.add and subtract for operands not in lowest terms (#1784)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "df1e91895d3d5380efa18a8e8e9d3d7b64ecceab",
+   "ct": 1788870491,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix TypeUtils.isAssignable() for wildcards with multiple upper bounds (#1782)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "680bceccdf337ec1094812720564c357ee83a559",
+   "ct": 1788635454,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ArrayUtils.addAll/insert length arithmetic overflows (undeclared NegativeArraySizeException) while sibling concat is overflow-checked (f023).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "7f5bbbf0a2d201194fcbd7eb8aeb15c5c691420f",
+   "ct": 1788634340,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fraction.getFraction(String) throws undeclared ArithmeticException on crafted numeric strings ('9999999999.5', '1/0', mixed-number overflow) (f021).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "e4380908b4675dda241247422d6c3dd021bf1253",
+   "ct": 1788401095,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix DurationFormatUtils.formatPeriod() calculation when pattern omits M (#1780)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0edbb4ae03fbe14a8204dbb866b0a17f22a4c6f1",
+   "ct": 1788296128,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix int overflow in Conversion count and position bounds guards (#1779)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Conversion.java",
+    "src/test/java/org/apache/commons/lang3/ConversionTest.java"
+   ]
+  },
+  {
+   "sha": "7f8b51413a8cc2dfadaba137144815932e7b243f",
+   "ct": 1786932578,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix CharRange.contains(CharRange) for negated argument ranges (#1775).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharRange.java"
+   ]
+  },
+  {
+   "sha": "1d6ef29ce004309e50bd91e27f0f5e80e1a57a76",
+   "ct": 1786932148,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix CharRange.contains for negated argument ranges (#1775)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharRange.java",
+    "src/test/java/org/apache/commons/lang3/CharRangeTest.java"
+   ]
+  },
+  {
+   "sha": "4ee32aa56d596e31f50fbf325c2641591e9e1ea4",
+   "ct": 1786548858,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix low surrogate false match in containsAny/containsNone/indexOfAny (#1771)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsContainsTest.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java",
+    "src/test/java/org/apache/commons/lang3/Supplementary.java"
+   ]
+  },
+  {
+   "sha": "10f4421456b891d5a426348511383f387c99f3e1",
+   "ct": 1786360650,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix spurious overflow in Fraction.multiplyBy for unreduced operands (#1769)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "9288e2c95f39abd1ff115aeddafaa276ceafae6d",
+   "ct": 1785844295,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix the overflow bound direction in Instants.toMillisSince(Instant) (#1766)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/Instants.java",
+    "src/test/java/org/apache/commons/lang3/time/InstantsTest.java"
+   ]
+  },
+  {
+   "sha": "7e5906fb0cb679d630527fc1bc18018f935518dc",
+   "ct": 1785413067,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1815] Fix AnnotationUtils.equals for package-private annotations. (#1760)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/AnnotationUtils.java",
+    "src/main/java/org/apache/commons/lang3/builder/AbstractReflection.java",
+    "src/test/java/org/apache/commons/lang3/builder/AbstractReflectionSetAccessibleTest.java",
+    "src/test/java/org/apache/commons/lang3/external/AnnotationEqualsTest.java"
+   ]
+  },
+  {
+   "sha": "0add789ed39fb3d59ce16048a3960821ee313bf7",
+   "ct": 1785408948,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix negative week year formatting in FastDatePrinter (#1762)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java"
+   ]
+  },
+  {
+   "sha": "b1aba6833f31ac2c9cc5a1302cac966f997db31e",
+   "ct": 1785405122,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix StrBuilder.lastIndexOf(String) start index for an empty search (#1759)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java",
+    "src/test/java/org/apache/commons/lang3/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "1d1044848b38fa82063de9e33b9e54caaddfbf09",
+   "ct": 1784318994,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix int overflow in FluentBitSet.setInclusive at Integer.MAX_VALUE (#1751)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/util/FluentBitSet.java",
+    "src/test/java/org/apache/commons/lang3/util/FluentBitSetTest.java"
+   ]
+  },
+  {
+   "sha": "98dc24990bf93234cf63ed5c5dd43a4f07847baa",
+   "ct": 1784297314,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix sign extension in BitField.getValue for top-bit fields (#1749)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BitField.java",
+    "src/test/java/org/apache/commons/lang3/BitFieldTest.java"
+   ]
+  },
+  {
+   "sha": "c99f2ddfe2fc9294070b697cdd1f603b0a31078b",
+   "ct": 1784296914,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix ArrayUtils.reverse range underflow on Integer.MIN_VALUE end (#1750)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+    "src/test/java/org/apache/commons/lang3/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0c409392897ac41e06f76ecdd1c639e4bee52505",
+   "ct": 1783952864,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix FieldUtils.getField false ambiguity on inherited interface field (#1748)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/FieldUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/FieldUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d4b4d8c352d048f5dab3c85dd6ef380cfe04bdee",
+   "ct": 1783189380,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Keep FastDateParser numeric parse from throwing on int overflow (#1741)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "35d652e9e26461ddbeb19aa32bc6acd012ccc641",
+   "ct": 1782825760,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Strings.CI.indexOf returning out-of-range index for empty search (#1737)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Strings.java",
+    "src/test/java/org/apache/commons/lang3/StringsTest.java"
+   ]
+  },
+  {
+   "sha": "ae85262f04df19b6307de18758cfdcc31cae733d",
+   "ct": 1782768622,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1828] Fix OOM in StringUtils.leftPad/rightPad when size is Integer.MIN_VALUE (#1736).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "aafee70bfdfc7617ed509b54e3971441a3a5f57d",
+   "ct": 1782472675,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix NumberUtils min/max varargs dropping the sign of zero (#1733)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java",
+    "src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7e29cde71c6c1673c2dd1d7f88f58416582d7158",
+   "ct": 1782415341,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix StringUtils.getDigits dropping supplementary digits (#1729)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "6c4269eb8a2aeb722ee81a41a4a88a46c2deccf8",
+   "ct": 1782414639,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix WordUtils.containsAllWords missing words across line breaks (#1732)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/WordUtils.java",
+    "src/test/java/org/apache/commons/lang3/text/WordUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "aae7f0e61c51040dbdc7556f9eca5786eb9f63bd",
+   "ct": 1782239733,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix getMatchingMethod false ambiguity for boxed primitive args (#1727)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/MethodUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "581ce79c4d39571ac98db3e32b0d813540684324",
+   "ct": 1782042477,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1824] Fix Strings.replace overflow on large replacements (#1716).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Strings.java",
+    "src/test/java/org/apache/commons/lang3/StringsTest.java"
+   ]
+  },
+  {
+   "sha": "13d93944ff76c6ca3e140d15478111b18acad0e6",
+   "ct": 1782041634,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1824] Fix Strings.replace overflow on large replacements (#1716)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Strings.java",
+    "src/test/java/org/apache/commons/lang3/StringsTest.java"
+   ]
+  },
+  {
+   "sha": "6dbbbb308bb77ba9c0ddab1ae400ee2ff76026b4",
+   "ct": 1782038949,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix unescapeCsv bounds error on a single quote field (#1723)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringEscapeUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringEscapeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "13d25e0591e640e53f1238e78f6b0e69d0fd6aea",
+   "ct": 1781975074,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix int overflow in DurationFormatUtils.formatPeriod (#1720)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a0ffef035d6a0e7803da8405ebceacb011efbaa0",
+   "ct": 1781870668,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix silent int overflow in Fraction.getFraction(double) (#1717)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "ddf5625d50a4c2fbe9346f12a26fc60e68af894e",
+   "ct": 1781787334,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix int mask sign extension in BitField long methods (#1711)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BitField.java",
+    "src/test/java/org/apache/commons/lang3/BitFieldTest.java"
+   ]
+  },
+  {
+   "sha": "53172785c29bb450479c5ba2c198102a5aa9a753",
+   "ct": 1781723080,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix indexOfDifference splitting a surrogate pair (#1713)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "46d9a80e548f792c5ee1a9e63f82a84256bf18a4",
+   "ct": 1781722378,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix spurious overflow in Fraction.add/subtract for coprime denominators (#1709)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "8e0dd9df142dd25fdb0de1d7b34937980c08c03f",
+   "ct": 1781525064,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix substringAfter(Last) for supplementary code points (#1707)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsSubstringTest.java"
+   ]
+  },
+  {
+   "sha": "86ed42da5c1ac09888dfe2481aaa06df13fb1a68",
+   "ct": 1781524659,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix RandomStringUtils.random() false rejection of letters and digits (#1703)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "2240c1f93e5f96b12a83ec8615c29dfac46258e9",
+   "ct": 1781131174,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix int overflow in StringUtils.midString() length handling (#1699)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsSubstringTest.java",
+    "src/test/java/org/apache/commons/lang3/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "80bf07c61721520ef12679fc394ac5584c1e9536",
+   "ct": 1780831704,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix lookup translator code point count for supplementary keys (#1691)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+    "src/test/java/org/apache/commons/lang3/text/translate/LookupTranslatorTest.java"
+   ]
+  },
+  {
+   "sha": "5b87be5e67f393cf62a11dbc8ffcbec56cdde12b",
+   "ct": 1780762352,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix indexOfAny matching an unpaired trailing high surrogate (#1687)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "bdd674f7c64dbc2c8ff043ee995fcd9f6f59a13b",
+   "ct": 1780444113,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix CharSequenceUtils.lastIndexOf for supplementary code points (#1684)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "0b4a9d95df610bfcc83c375110ac100d08662ba1",
+   "ct": 1779110625,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LocaleUtils.parseLocale(String) operator precedence bug allows invalid language with numeric country (#1658)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/LocaleUtils.java",
+    "src/test/java/org/apache/commons/lang3/LocaleUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "9f7d3b5ec3aab40ee404a652495848213a608f01",
+   "ct": 1779058440,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix `WordUtils.wrap` for `wrapOn` matches different from one character (#1655)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/WordUtils.java",
+    "src/test/java/org/apache/commons/lang3/text/WordUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "313d877d57abefdbb1ad0c42781bf719b83d5a35",
+   "ct": 1778155731,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Two fixes in RandomStringUtils.random(int, int, int, boolean, boolean, (#1638)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "677e57f56bfae93af520637d47a615013c930266",
+   "ct": 1772652558,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in StopWatch.getStopTime()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/StopWatch.java",
+    "src/test/java/org/apache/commons/lang3/time/StopWatchTest.java"
+   ]
+  },
+  {
+   "sha": "aa47951bd0223d674d2b85d06ccc6f7f1749a682",
+   "ct": 1772652126,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix: Make stopInstant be in sync with stopTimeNanos for split (#1610)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/StopWatch.java",
+    "src/test/java/org/apache/commons/lang3/time/StopWatchTest.java"
+   ]
+  },
+  {
+   "sha": "a9a0dd8a72c51b14f0e5ea4bddfbf228685ff977",
+   "ct": 1771794424,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-771 Fix DateUtils.ceiling increment on exact boundary (#1609)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "4052e9862bf540f0b294bcf58aad5b5e85eae4ad",
+   "ct": 1769632186,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1818: Fix ClassUtils.getShortClassName(Class) to correctly handle $ in valid class names (#1591)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+    "src/test/java/org/apache/commons/lang3/ClassUtilsShortClassNameTest.java"
+   ]
+  },
+  {
+   "sha": "7bcb03a49923bc12f7e3f2c04912d0925f178978",
+   "ct": 1769568456,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix StringIndexOutOfBoundsException message in StrBuilder.append(char[], int, int)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java"
+   ]
+  },
+  {
+   "sha": "52c06bea2f2b6c277c517dc9f5bb0d62d17e073c",
+   "ct": 1769563502,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix LANG-1816 (#1589)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+    "src/test/java/org/apache/commons/lang3/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "26ead6134ad55bf1350e41f05f4d0cbe6d0be4be",
+   "ct": 1769453902,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1814] ArrayUtils.subarray(..) may overflow index arithmetic and violate contract for extreme index values #1585",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+    "src/test/java/org/apache/commons/lang3/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "b6224451728562b0a4b33b63e8589753b1e2a57c",
+   "ct": 1769110568,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix ClassNotFoundException message variable (#1577)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+    "src/test/java/org/apache/commons/lang3/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "386af293e1f460d19ee4e5b8ddf795e302f16934",
+   "ct": 1768745386,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NumberUtils.isParsable duplicate Long::parseLong (#1570)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java"
+   ]
+  },
+  {
+   "sha": "4a5ef8ed29f0c135627f43b58c7ab7b6defe37b7",
+   "ct": 1768654503,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix handling of null marker in StringUtils.abbreviate(String, String, int, int)  (#1571)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsAbbreviateTest.java"
+   ]
+  },
+  {
+   "sha": "b8d382039a850dff10a90c9abfbbf62228fd8fd1",
+   "ct": 1766064002,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1804] Fix CharSet#getInstance returns null instead of EMPTY when input setStrs is null (#1530)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSet.java",
+    "src/test/java/org/apache/commons/lang3/CharSetTest.java"
+   ]
+  },
+  {
+   "sha": "bd40b4511ca092bac23423bff9fbdc2a12e9dd24",
+   "ct": 1765722045,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix race condition in Range.hashCode()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Range.java"
+   ]
+  },
+  {
+   "sha": "a64817368d6bf980f08488124eef9a8585a05168",
+   "ct": 1765719854,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix race condition in Fraction.hashCode()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java"
+   ]
+  },
+  {
+   "sha": "97e572cb7e104b09573bba1881a764d9bac81bc8",
+   "ct": 1765717295,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1802] Fix collision in CharRange.hashCode()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharRange.java",
+    "src/test/java/org/apache/commons/lang3/CharRangeTest.java"
+   ]
+  },
+  {
+   "sha": "e1852e78d58631a782c6f1ac42247689e9679062",
+   "ct": 1764863323,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Non-final Static Singleton Variables Break Thread Safety and Singleton Design in RandomStringUtils (#1513)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java"
+   ]
+  },
+  {
+   "sha": "5bcedccec3ed93586947a5df0d49775aee7a37c7",
+   "ct": 1764183075,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in ReflectionDiffBuilder.getExcludeFieldNames() when instance created with ReflectionDiffBuilder.ReflectionDiffBuilder(T, T, ToStringStyle)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionDiffBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "6513eb0bbb4b3e8d427cce632f786c115f2a3516",
+   "ct": 1759144677,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix internal inverted logic in private isEnum() method and correct its usage in getFirstEnum() (#1454)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/EnumUtils.java"
+   ]
+  },
+  {
+   "sha": "e2b349d046ec9945ece518b068ae38bc73b7f83c",
+   "ct": 1756503427,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix exception message",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java"
+   ]
+  },
+  {
+   "sha": "1e455838963a99f7e76e334850c00293262f9573",
+   "ct": 1752769424,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "LANG-1778 fix by reversing order (#1414)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/MethodUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "2621600f8096da0a93b9ba33962233b9e2c2fc2d",
+   "ct": 1752274274,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix/classutils outdated javadocs (#1410)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java"
+   ]
+  },
+  {
+   "sha": "8cc6363673bbcbff0777dc20343d207a443eed4a",
+   "ct": 1751653435,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerExceptions in org.apache.commons.lang3.compare.ComparableUtils.ComparableCheckBuilder",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/compare/ComparableUtils.java",
+    "src/test/java/org/apache/commons/lang3/compare/ComparableUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "76ec155eea3b1b10b5ddd46e31b38782afbff848",
+   "ct": 1750863294,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix edge-case NullPointerException in org.apache.commons.lang3.EnumUtils.getEnum(Class, String, E)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/EnumUtils.java",
+    "src/test/java/org/apache/commons/lang3/EnumUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e61abab25a4814c165adf4f4958bd43da4fa1d11",
+   "ct": 1750858873,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix edge-case NullPointerException in org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(JavaVersion)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "301a6261c97f7848a2526f5b40d9fc8c92d1c0f9",
+   "ct": 1750857865,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in org.apache.commons.lang3.SystemUtils.IS_OS_ANDROID",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "6622a46857509a8920a3f085dbca007286c703ac",
+   "ct": 1749921803,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix generics in org.apache.commons.lang3.stream.Streams.toArray(Class) signature",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/stream/Streams.java",
+    "src/test/java/org/apache/commons/lang3/stream/StreamsTest.java"
+   ]
+  },
+  {
+   "sha": "c2260f094d78c236bb8a2e3e153d422c7d7ad6bf",
+   "ct": 1748123617,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1772] Restrict size of cache to prevent overflow errors (#1379)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CachedRandomBits.java",
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "5ba76850bd009dfb3638a91e0b673d455c173e08",
+   "ct": 1738075934,
+   "class": "other-fix",
+   "why": "",
+   "subject": "No need to break string up",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/FieldUtils.java"
+   ]
+  },
+  {
+   "sha": "4e228a53509bd8cb01220939906a538dcd1baa40",
+   "ct": 1730729945,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix StackOverflowError in TypeUtils.typeVariableToString(TypeVariable), TypeUtils.toString(Type)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d8faf082bbb5fedc6d19fc3ec89499123b5679d2",
+   "ct": 1730582855,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in FastDateParser.TimeZoneStrategy.setCalendar(FastDateParser, Calendar, String) on Java 23",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "972aa7b29a7cb7306b9e0737bac86fa42d6218ac",
+   "ct": 1729013483,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix: default ttl in recursive replacement (#1297)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "fd866a9c2d6c69f9f6462a5e498b58293597d611",
+   "ct": 1726015644,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix handling of non-ASCII letters & numbers in RandomStringUtils (#1273)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "90a5e8ad37bca75eb82d76e06bef5108453abcc0",
+   "ct": 1720292628,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix CodeQL Code scanning alerts",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "352f9671b22448e69fba49d072561444388b1426",
+   "ct": 1716469493,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix TEXT-234 (#1223)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java"
+   ]
+  },
+  {
+   "sha": "77e3913ea37edb392b10c01f0a8ab796510f3f9f",
+   "ct": 1716466691,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fixed LANG-1735 (#1222)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/util/FluentBitSet.java"
+   ]
+  },
+  {
+   "sha": "6f2c93ceeecc48f4eca2c52345a7bf33329211c1",
+   "ct": 1701873880,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1721: Fix wrong number check that cause StringIndexOutOfBoundsException (#1140)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java",
+    "src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "b55d278cce19df99fd50f2ae800c5de2fc0991f7",
+   "ct": 1696689490,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix ThresholdCircuitBreaker (#1100)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/ThresholdCircuitBreaker.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/ThresholdCircuitBreakerTest.java"
+   ]
+  },
+  {
+   "sha": "15ff8f999780b566d21b53550a6c3e0c5cbe8994",
+   "ct": 1693136682,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1710] ReflectionToStringBuilder changes in version 3.13.0 has broken the logic for overriding classes",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionToStringBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/ReflectionToStringBuilderCustomImplementationTest.java"
+   ]
+  },
+  {
+   "sha": "90b327a96cc31a156e86e8eb7e98f84cb2d822bb",
+   "ct": 1690632343,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix java doc: 'c1' to 'comparable1', 'c2' to 'comparable2' (#1090)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/compare/ComparableUtils.java"
+   ]
+  },
+  {
+   "sha": "2c7dbba0f2f2be7f8b0a0137c8a19b6cc3c13f76",
+   "ct": 1690136315,
+   "class": "extrinsic",
+   "why": "env 'macOS'",
+   "subject": "SystemUtils.java: Fix and updates related to macOS (#1085)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "7b15f3e61defc5264d77f43c1c7db51c7e6cdfdf",
+   "ct": 1681156223,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Update URL for JDK bug",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "af27d810d3c045c0bfe901680d03bdde5f99251d",
+   "ct": 1673384228,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix my mistake",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "c18803a47f4a4e51f08c1cb1ef9b84b21e106e6f",
+   "ct": 1655210651,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix code duplication",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/WordUtils.java"
+   ]
+  },
+  {
+   "sha": "ef07c645efe7a490f21ae80473814d6117832ded",
+   "ct": 1655001700,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix StringUtils.upperCase(String str) java doc",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "af157c49d5adf5b48e7816bf5e9e6820e2c3fd52",
+   "ct": 1652644860,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix, lambda & in-line single use variable that cannot be null.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/CalendarUtils.java"
+   ]
+  },
+  {
+   "sha": "517a9e063002ba2154c8727bf87a92f1622ab686",
+   "ct": 1649020403,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed NPE getting Stack Trace if Throwable is null #733",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "1926e35e3e1e94a43c64cb4d65f51d115fae02cd",
+   "ct": 1649019720,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed NPE getting Stack Trace if Throwable is null (#733)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionUtils.java",
+    "src/test/java/org/apache/commons/lang3/exception/ContextedExceptionTest.java"
+   ]
+  },
+  {
+   "sha": "4a5ef835ccb3cf8f765ee1e95962bf0863af8ce8",
+   "ct": 1647797238,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix unintended commit.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/Memoizer.java"
+   ]
+  },
+  {
+   "sha": "45d454b3e7aeccfadf855dda8bdfca93d90fef0c",
+   "ct": 1638630450,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in ThreadUtils.getSystemThreadGroup() when the current thread is stopped.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ThreadUtils.java"
+   ]
+  },
+  {
+   "sha": "03edee74511bfb4f61cec5d15de48ce1c48ff3e8",
+   "ct": 1629378656,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1669: Fixed issue with parsing certain locales using day periods introduced in OpenJDK 16 and later resolved in OpenJDK 17 (#791)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "9281de1b1b05bb538a09d1437403d3d4f5994716",
+   "ct": 1614135485,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix toString() formatting.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "c6314067f071d125d1d6e951a4f8a25d52f5e70a",
+   "ct": 1614132658,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix some formatting.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "804e7c818f12f857d446e7cdf5d147d7fee7bb1d",
+   "ct": 1613858957,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix broken links to commons-text (#712)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrLookup.java",
+    "src/main/java/org/apache/commons/lang3/text/StrMatcher.java",
+    "src/main/java/org/apache/commons/lang3/text/translate/AggregateTranslator.java"
+   ]
+  },
+  {
+   "sha": "63f644daa847e193d9f70791ef2337816f6409a6",
+   "ct": 1609966274,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1637] Fix 2 digit week year formatting (#688)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java"
+   ]
+  },
+  {
+   "sha": "c6f577555b2e789791fbf3c0aec9e59a2666b2e8",
+   "ct": 1605643879,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1610: Fix StringUtils.unwrap throws StringIndexOutOfBoundsException (#636)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "35799d095886243ad32f46c81a77f85743d5fb05",
+   "ct": 1605458951,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1420] TypeUtils.isAssignable returns wrong result for GenericArrayType and ParameterizedType.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e123bab1989576ce29a5503e6f3e95e8c06fdb3c",
+   "ct": 1605455753,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix potential NPE in TypeUtils.isAssignable(Type, ParameterizedType, Map, Type>).",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java"
+   ]
+  },
+  {
+   "sha": "54afd64c79064d76037b31e88cc68d5895d9b85c",
+   "ct": 1603636594,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix param name.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SerializationUtils.java"
+   ]
+  },
+  {
+   "sha": "772f97c4378613d241ecacc2076fdda20d59e982",
+   "ct": 1598826437,
+   "class": "regression",
+   "why": "references 1dddec8ba8 (67 d earlier)",
+   "subject": "[LANG-1600] Restore handling of collections for non-JSON ToStringStyle (#610)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/DefaultToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/MultiLineToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/NoClassNameToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/NoFieldNamesToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/ShortPrefixToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/SimpleToStringStyleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/StandardToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "ff4ef533a558a7a176e4649ce5c6d54fb2383217",
+   "ct": 1594499954,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Redo this class after Rob Tompkins found a bug.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/locks/LockingVisitors.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/locks/LockingVisitorsTest.java"
+   ]
+  },
+  {
+   "sha": "c10c62ed737b57abaec72acca4c830492e2595c7",
+   "ct": 1593010020,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix boxing/unboxing.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Functions.java"
+   ]
+  },
+  {
+   "sha": "94d5208dd90c645290c3e184c4a8592c4cb3028a",
+   "ct": 1593009886,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix boxing/unboxing.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/function/Failable.java"
+   ]
+  },
+  {
+   "sha": "1dddec8ba867bc31233ba194f0753ea35818cbfd",
+   "ct": 1593005171,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1542] ToStringBuilder.reflectionToString - Wrong JSON format when object has a List/Array of Enum.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/JsonToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "a7be33e9c6603cb15fb873ab721fbca1ef300600",
+   "ct": 1593002781,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed Javadocs for setTestRecursive() (#556)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/EqualsBuilder.java"
+   ]
+  },
+  {
+   "sha": "4453bb3ede27278e414cb634c2db1ad268116622",
+   "ct": 1592478795,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix @since for new o.a.c.lang3.stream.Streams class.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/stream/Streams.java"
+   ]
+  },
+  {
+   "sha": "2c7e5e4b29c80d5475e971232458d3481bbe7136",
+   "ct": 1590414078,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1545] CharSequenceUtils.regionMatches is wrong dealing with Georgian. (#529)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "22500d11ae62c0d54021081d1909b504178e0276",
+   "ct": 1587416935,
+   "class": "other-fix",
+   "why": "",
+   "subject": "(doc) Fix throwable is returned, not index (#518)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "f4c2ed4995d19c595ec0bf5c49d210df9046fda9",
+   "ct": 1582378113,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1518 - fix searchSupers for generic classes (#494)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/MethodUtilsTest.java",
+    "src/test/java/org/apache/commons/lang3/reflect/testbed/GenericParent.java",
+    "src/test/java/org/apache/commons/lang3/reflect/testbed/StringParameterizedChild.java"
+   ]
+  },
+  {
+   "sha": "bfc88d23cb83448f6f5ac98cece5da92deeb221e",
+   "ct": 1579875361,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1516] Fix generics in API signatures of ExceptionUtils.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "325d9a97d6265722c747f02bcc7b21b2bd6757a0",
+   "ct": 1576842322,
+   "class": "other-fix",
+   "why": "",
+   "subject": "EventListenerSupport: Fix string format of Validate#isTrue call in constructor.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java"
+   ]
+  },
+  {
+   "sha": "06aea7e74cfe4a1578cb76672f1562132090c205",
+   "ct": 1566691926,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1475 Fix unwrap StringIndexOutOfBoundsException",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7ab94f46fd6dd38eea696a6059ea981f80de6230",
+   "ct": 1554380028,
+   "class": "other-fix",
+   "why": "",
+   "subject": "(fix) unused imports",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/main/java/org/apache/commons/lang3/RandomUtils.java"
+   ]
+  },
+  {
+   "sha": "cb686673a70a6f14c35575550c48c37d19a1598b",
+   "ct": 1520511420,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1384: Fix NPE when version >= 11",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/JavaVersion.java",
+    "src/test/java/org/apache/commons/lang3/JavaVersionTest.java"
+   ]
+  },
+  {
+   "sha": "c614fbcc79615f93d2c60a153db6e82d7474c425",
+   "ct": 1515057308,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1374: fix logic in isJsonArray method of JsonToStringStyle",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/JsonToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "d8ec011d770e1e04ef4f87fba673f3748f363278",
+   "ct": 1513786688,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1371: Fix TypeUtils.parameterize to work correctly with narrower-typed varargs array (closes #307)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7d061e33e59e23dc4b03378f35f50a7d70f033b3",
+   "ct": 1511598772,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1370 Fix EventCountCircuitBreaker increment batch",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/EventCountCircuitBreakerTest.java"
+   ]
+  },
+  {
+   "sha": "f746c508d197c3662509037e8975a2a58b847689",
+   "ct": 1509800748,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1365] Fix NullPointerException in isJavaVersionAtLeast on Java 10, add SystemUtils.IS_JAVA_10, add JavaVersion.JAVA_10.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/JavaVersion.java"
+   ]
+  },
+  {
+   "sha": "a618b844c5a261ced37385ab3947de6e215d46f7",
+   "ct": 1509730414,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-1365] Fix NullPointerException in isJavaVersionAtLeast on Java 10, add SystemUtils.IS_JAVA_10, add JavaVersion.JAVA_10.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/JavaVersion.java",
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java",
+    "src/test/java/org/apache/commons/lang3/JavaVersionTest.java",
+    "src/test/java/org/apache/commons/lang3/SystemUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "3e08af573f8b50da5202f55df62c925f88a47f3d",
+   "ct": 1504887544,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1349: EqualsBuilder#isRegistered: swappedPair construction bug (closes #282)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/EqualsBuilder.java"
+   ]
+  },
+  {
+   "sha": "cc94767e7eabdfcf9d1cab1d8d1d8556864394c6",
+   "ct": 1503329281,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1350] ConstructorUtils.invokeConstructor(Class, Object...) regression",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MemberUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/ConstructorUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "6d74e8f83e96f536cbbad98cd4fe6fbd1cd67663",
+   "ct": 1493491386,
+   "class": "other-fix",
+   "why": "",
+   "subject": "javadocs - fixed faulty samples of isNoneEmpty/isNoneBlank and added new ones to isAnyEmpty/isNoneEmpty/isAnyBlank/isNoneBlank for better understanding",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "811dbe7226ba0ede04c2062c2dba8f72a1c03e58",
+   "ct": 1489930639,
+   "class": "other-fix",
+   "why": "",
+   "subject": "restore deprecated annotation of StringUtils#getJaroWinklerDistance",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "f4ee399e31eb61741f5f2167d6af8f49c0e991b6",
+   "ct": 1489929920,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"LANG-1269: Wrong name or result of StringUtils#getJaroWinklerDistance (closes #198)\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "12e597a78cbf9d82414b944a5b285d81a2e27e51",
+   "ct": 1489031931,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1300: fixed CharSequenceUtils indexOf for Supplementary chars",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "b5f5449cf338376d12404d0190054525987f4276",
+   "ct": 1488687404,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fixed CharSequenceUtils to check for supplementary chars",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java",
+    "src/test/java/org/apache/commons/lang3/CharSequenceUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "f643b4fa939e89348618ddffae20a804f4461363",
+   "ct": 1481696824,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix for LANG-1286: RandomStringUtils random method can overflow...",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a08ec31dbf212a033953dc6916a743dccbb93e37",
+   "ct": 1480620508,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixes LANG-1292: WordUtils.wrap throws StringIndexOutOfBoundsException",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/WordUtils.java",
+    "src/test/java/org/apache/commons/lang3/text/WordUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "dfd69e038cc7035031d1807c4ade870d2a7e2ece",
+   "ct": 1479505124,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix unbox warning. Show when we are unboxing.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java"
+   ]
+  },
+  {
+   "sha": "f55530a2ffd3c481f6554d98e9d73f2e8c62ec8d",
+   "ct": 1479504969,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"LANG-1289\" type=\"fix\" dev=\"ggregory\">JavaVersion class depends on Apache Commons Math class NumberUtils.\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/JavaVersion.java"
+   ]
+  },
+  {
+   "sha": "9dcd87f9c46786f3da54af7ac1ba4696840dffa8",
+   "ct": 1479501022,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1289\" type=\"fix\" dev=\"ggregory\">JavaVersion class depends on Apache Commons Math class NumberUtils.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/JavaVersion.java"
+   ]
+  },
+  {
+   "sha": "a40b2a907a69e51675d7d0502b2608833c4da343",
+   "ct": 1477675162,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1269: Wrong name or result of StringUtils#getJaroWinklerDistance (closes #198)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a945ecbbdda782b51d5c2c670345fbf4dffacab7",
+   "ct": 1477243838,
+   "class": "other-fix",
+   "why": "",
+   "subject": "StringUtils#replacePattern: fix source code formatting",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "e2dbe55d56bd6c1209276050f527d36717e33e1d",
+   "ct": 1477147752,
+   "class": "other-fix",
+   "why": "",
+   "subject": "MethodUtils#invokeMethod(Object object, boolean forceAccess, String methodName, Object[] args, Class<?>[] parameterTypes): do not restore the accessibility of the method object, because Method#setAccessible only modifies the behavior of the AccessibleObject not of the actual method.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/MethodUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "ab60f735c721103ac888d8d7b801055921336687",
+   "ct": 1473602792,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix whitespaces, add missing @since tag",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java"
+   ]
+  },
+  {
+   "sha": "bd9adbb637a8a4aa5eb61c6fde2c576d0ab3c4fa",
+   "ct": 1468722457,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "LANG-1248: FastDatePrinter Memory allocation regression closes #169",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java"
+   ]
+  },
+  {
+   "sha": "8d6bc0ca625f3a1a98b486541fa613b2fac4b41c",
+   "ct": 1465730635,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1018: Fix precision loss on NumberUtils.createNumber(String) (closes #156)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java",
+    "src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7fd021d82ff431fb31f42bc6c5c44a3b979cb426",
+   "ct": 1465556004,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1241 StringUtils.ordinalIndexOf broken",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "9bd439b4e0aa69050ef1baa537e552fa4620e5d4",
+   "ct": 1465417301,
+   "class": "regression",
+   "why": "revert",
+   "subject": "LANG-1229: Performance regression due to cyclic hashCode guard",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/HashCodeBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "c35a04102274b330aa833030c15f722b00062812",
+   "ct": 1465141152,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1199: Fix implementation of StringUtils.getJaroWinklerDistance()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "ff902c15612f2d771483ce6bb06e55609247c34e",
+   "ct": 1460581798,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Formatting fixes per https://patch-diff.githubusercontent.com/raw/apache/commons-lang/pull/128.diff",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "d75fe46b8f1b0d5c27887052ee4714d6a9c7ea4b",
+   "ct": 1449841282,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1193 ordinalIndexOf(\"abc\", \"ab\", 1) gives incorrect answer of -1 (correct answer should be 0) Revert LANG-1077",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "5556026ed1dc17e70946a4a030842ade3a33baeb",
+   "ct": 1447997045,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix NullPointerException in FastDateParser$TimeZoneStrategy",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParser_TimeZoneStrategyTest.java"
+   ]
+  },
+  {
+   "sha": "6d3796e64bdd5f3f4857bfca6982e6ecf98a2b33",
+   "ct": 1444819568,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1002: Several predefined ISO FastDateFormats in DateFormatUtils are incorrect",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateFormatUtils.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDateFormat.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java"
+   ]
+  },
+  {
+   "sha": "958029bdd45c3e341eb146031ed38b4487d7b0b7",
+   "ct": 1436334653,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1002 Several predefined ISO FastDateFormats in DateFormatUtils are incorrect",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "39380da86acc717f419da48f070f8cf7d9f9ec94",
+   "ct": 1430883783,
+   "class": "other-fix",
+   "why": "",
+   "subject": "add checkNotNull method in ReflectionToStringBuilder.java to fix #LANG-1132",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionToStringBuilder.java"
+   ]
+  },
+  {
+   "sha": "fb7335ab163588fe6ee67ef26d3b3edad5cf4bd5",
+   "ct": 1430276759,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix the JsonToStringStyle:except number types and boolean type, all other types in java should be 'appendAsString'",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java"
+   ]
+  },
+  {
+   "sha": "e2c0ea4374c02539ad9bc6c4328b74f25eb72405",
+   "ct": 1430251641,
+   "class": "other-fix",
+   "why": "",
+   "subject": "#LAN-1114 fixes bug in TypeUtils.equals(WildcardType, Type) where it was incorrectly returning true when the second argument was not a Wildcard type.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "1b9d938d66a172b200fd90d4a61707852bdb4b8f",
+   "ct": 1430249574,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1118 Fix StringUtils.repeat(char, int) dealing with negative repeat value",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "73a8fba6fb23af45ee77f52f33bb8d791a9caa05",
+   "ct": 1429127990,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Updates for LANG-1058: StringUtils.uncapitalize performance improvement. Similar fix also applied to StringUtils.capitalize (as mentioned in issue). Thanks to Leo Wang.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "20c733229df741e57b8ac205788ece2d563b2f3d",
+   "ct": 1428460745,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1111 - Fix FindBugs warnings in DurationFormatUtils",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "86c76dd5ea04d1881a52d79113d6dbb1d57c38a6",
+   "ct": 1428459542,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1107 Fix parsing edge cases in FastDateParser",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserSDFTest.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "09c42e7d12b2936ac0dc5c67200c28b6412bd395",
+   "ct": 1428062947,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-821: Support OS X versions in SystemUtils. This also fixes #59 from github. Thanks to Timo Kockert.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "9c7b0fb8e681b901e5fc40c699e4730855f2c14d",
+   "ct": 1428062519,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-794: SystemUtils.IS_OS_WINDOWS_2008, VISTA are incorrect. This also fixes #60 from github. Thanks to Timo Kockert.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "bf6ee5c56eb32bb572c240d765d542c048ec9565",
+   "ct": 1426337162,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-948: Exception while using ExtendedMessageFormat and escaping braces. This fixes #19 from github. Thanks to Andrey Khobnya.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/ExtendedMessageFormat.java",
+    "src/test/java/org/apache/commons/lang3/text/ExtendedMessageFormatTest.java"
+   ]
+  },
+  {
+   "sha": "3328387a53e6abc26e171b97d8d3dc1c2b5d4971",
+   "ct": 1426335906,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-990: Avoid String allocation in StrBuilder.append(CharSequence). This fixes #51 from github. Thanks to Mikhail Mazurskiy and Fabian Lange.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java",
+    "src/test/java/org/apache/commons/lang3/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "8aa1b44ada759e7948f87f55bb29ab87b5eb5469",
+   "ct": 1426278546,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1092: Wrong formating of time zones with daylight saving time in FastDatePrinter",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java"
+   ]
+  },
+  {
+   "sha": "1f75a8f7cc28fef663eaca75e831c9da11ea2b0e",
+   "ct": 1426270739,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-877: Performance improvements for StringEscapeUtils. This fixes #49 from github. Thanks to Fabian Lange.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharUtils.java",
+    "src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java",
+    "src/main/java/org/apache/commons/lang3/text/translate/UnicodeEscaper.java",
+    "src/test/java/org/apache/commons/lang3/CharUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d38919fcbda835f0ad82d65f25349bd7105b67cc",
+   "ct": 1426231761,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1093: Add ClassUtils.getAbbreviatedName(). This fixes #48 from github. Thanks to Fabian Lange.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+    "src/test/java/org/apache/commons/lang3/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "bdb5d9723056941a0a29aabc2eaf81b2c96956b5",
+   "ct": 1424722549,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1086: Remove busy wait from AtomicSafeInitializer.get(). This also fixes #46 from github. Thanks to github user artnaseef.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/AtomicSafeInitializer.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/AbstractConcurrentInitializerTest.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/AtomicInitializerTest.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/AtomicSafeInitializerTest.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/LazyInitializerTest.java"
+   ]
+  },
+  {
+   "sha": "ffc38b1f3b35ddfadb942240b9d2f933ec83d1be",
+   "ct": 1422001543,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1081: DiffBuilder.append(String, Object left, Object right) does not do a left.equals(right) check. This fixes #41 from github. Thanks to Jonathan Baker.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/DiffBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/DiffBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "63f1d6b83bc10a2880f5ec17a172fab284d2eff5",
+   "ct": 1422000624,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1055: StrSubstitutor.replaceSystemProperties does not work consistently. This fixes #43 from github. Thanks to Jonathan Baker.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrLookup.java",
+    "src/test/java/org/apache/commons/lang3/text/StrLookupTest.java"
+   ]
+  },
+  {
+   "sha": "38ed1a07259862eceaad05c6581b7f34e85f6be7",
+   "ct": 1421999774,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1082: Add option to disable the objectsTriviallyEqual test in DiffBuilder. This fixes #44 from github. Thanks to Jonathan Baker.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/DiffBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/DiffBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "6eac3468d4569e64f18757225aa8f7fd6f2a5241",
+   "ct": 1421775011,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1083: Add (T) casts to get unit tests to pass in old JDK. This fixes #42 from github. Thanks to Jonathan Baker.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SerializationUtils.java",
+    "src/test/java/org/apache/commons/lang3/exception/AbstractExceptionContextTest.java"
+   ]
+  },
+  {
+   "sha": "c4ddbe6456c9631c301171098a8ac016eb4e582c",
+   "ct": 1420138901,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1015: Add JsonToStringStyle implementation to ToStringStyle. This fixes #12 and #26 from github. Thanks to Thiago Andrade.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/JsonToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "4a2cc4f5da0fbf9552d2b35aa457de64c47626b9",
+   "ct": 1418581326,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1073 Read wrong component type of array in add in ArrayUtils",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "635e41ea181c5fee8860a7044c84ae3557b51189",
+   "ct": 1415537232,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-1052: Multiline recursive to string style. This fixes #34 from github. Thanks to Jan Mat\u00e8rne.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/MultilineRecursiveToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "7406d02eb0f0dd812332b933b28207ac92e01f0e",
+   "ct": 1411992131,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix for LANG-827: CompareToBuilder's doc doesn't specify precedence of fields it uses in performing comparisons",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/CompareToBuilder.java"
+   ]
+  },
+  {
+   "sha": "248fd21601c1156cbd58558a7ca23a09adfcef88",
+   "ct": 1404040286,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Restore previous behavior that allows function results (arrays of booleans) to be modified.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/Conversion.java"
+   ]
+  },
+  {
+   "sha": "68a6fd6125302169a5a0687e795d26b5cbd97303",
+   "ct": 1400015584,
+   "class": "other-fix",
+   "why": "",
+   "subject": "TypeUtils wildcard fixes",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java"
+   ]
+  },
+  {
+   "sha": "b4b51a8fc9eed7274a045b2f3192d77782b0e4fa",
+   "ct": 1398894575,
+   "class": "other-fix",
+   "why": "",
+   "subject": "<action issue=\"LANG-1001\" type=\"fix\" dev=\"ggregory\" due-to=\"Michael Osipov\">ISO 8601 misspelled throughout the Javadocs</action>",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateFormatUtils.java",
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDateFormat.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/main/java/org/apache/commons/lang3/time/StopWatch.java",
+    "src/test/java/org/apache/commons/lang3/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "fbb0f7f88c84001e0a92dae6a71b7e43bda65a56",
+   "ct": 1397222910,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-995: Fix bug with stripping spaces on last line in WordUtils.wrap(). This fixes #18 from github. Thanks to Andrey Khobnya",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/WordUtils.java",
+    "src/test/java/org/apache/commons/lang3/text/WordUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "cf03e6173b70ad64337704402bea51600cddd1ba",
+   "ct": 1395976227,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-992 Fix NumberUtils#isNumber() returns false for \"0.0\", \"0.4790\", et al",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java",
+    "src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "80bd3fdb42a5d816ded9d9111c7dac3ce57c3101",
+   "ct": 1394746826,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-987: DateUtils.getFragmentInDays(Date, Calendar.MONTH) returns wrong days, reported by Jay Xu.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsFragmentTest.java"
+   ]
+  },
+  {
+   "sha": "edbd9842cfca892b10c2e9c8da0384fe005cd67a",
+   "ct": 1393574202,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Restore binary compartibility",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java"
+   ]
+  },
+  {
+   "sha": "5feaa5fe2c79f1f2e81bdf4730f5cab831024dae",
+   "ct": 1391997966,
+   "class": "other-fix",
+   "why": "",
+   "subject": "<action issue=\"LANG-969\" type=\"fix\" dev=\"ggregory\" due-to=\"Matt Bishop\">StringUtils.toEncodedString(byte[], Charset) needlessly throws UnsupportedEncodingException</action>",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "1837ea77829fe9045deacdd51769ac6c409916ad",
+   "ct": 1390839595,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix raw type warnings, as pointed out by Duncan Jones",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassPathUtils.java"
+   ]
+  },
+  {
+   "sha": "8cd2339a9788cf2c6e44b6761d3a19259fbe1df3",
+   "ct": 1390378762,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Eli Lindsey's patch to Yaniv Kunda's report in LANG-936 that StringUtils.getLevensteinDistance(String, String, int) gave the wrong answer when the int threshold is near Integer.MAX_VALUE",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0942ef04f1fa911d382b79a92dca1dd4b3eb88e6",
+   "ct": 1390238399,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-951: Fragments are wrong by 1 day when using fragment YEAR or MONTH - applying patch provided by Sebastian G\u00f6tz, several tests now fail because of wrong assertions, will fix them in a separate commit",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsFragmentTest.java"
+   ]
+  },
+  {
+   "sha": "10fee7abaf6c5efd335ccab56876b90baffbec13",
+   "ct": 1389552796,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-940: Fix deprecation warnings; found some more usages",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ObjectUtils.java",
+    "src/test/java/org/apache/commons/lang3/ObjectUtilsTest.java",
+    "src/test/java/org/apache/commons/lang3/text/StrTokenizerTest.java"
+   ]
+  },
+  {
+   "sha": "d048a375029149f4fabeae6050583a4521d6e2fd",
+   "ct": 1389551209,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-940: Fix deprecation warnings",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ObjectUtils.java",
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/main/java/org/apache/commons/lang3/concurrent/ConstantInitializer.java",
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/main/java/org/apache/commons/lang3/text/ExtendedMessageFormat.java",
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java",
+    "src/main/java/org/apache/commons/lang3/tuple/Pair.java",
+    "src/main/java/org/apache/commons/lang3/tuple/Triple.java",
+    "src/test/java/org/apache/commons/lang3/ObjectUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "8ea0c0284810bd6ec00f608be31abd20dbd4b72b",
+   "ct": 1389445596,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-915: Wrong locale handling in LocaleUtils.toLocale(). Thanks to Sergio Fern\u00e1ndez",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/LocaleUtils.java",
+    "src/test/java/org/apache/commons/lang3/LocaleUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "cf171ddc98b2d19c7da8d92e101608b4adae9c04",
+   "ct": 1387546522,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix svn props",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/Typed.java"
+   ]
+  },
+  {
+   "sha": "6ea7f2f7afcd6d60d62a5cd1392feda3471fc666",
+   "ct": 1382753675,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying github pull request https://github.com/apache/commons-lang/pull/5, linked as LANG-928, fixing a bug in OctalEscaper trying to parse octal numbers longer than 3 digits",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/translate/OctalUnescaper.java",
+    "src/test/java/org/apache/commons/lang3/text/translate/OctalUnescaperTest.java"
+   ]
+  },
+  {
+   "sha": "70b3504b9fe03f267ce0f97c6ff21de5f5fbd2f3",
+   "ct": 1382689169,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Thomas Neidhart's patch for LANG-905; fixing a bug in which EqualsBuilder considers two arrays of the same type to be equal, without considering the contents",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/EqualsBuilder.java",
+    "src/test/java/org/apache/commons/lang3/builder/EqualsBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "aadbea734d78e8d535d3a5837643336ca1384bd2",
+   "ct": 1381861900,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-921 - BooleanUtils.xor(boolean...) produces wrong results",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BooleanUtils.java",
+    "src/test/java/org/apache/commons/lang3/BooleanUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "01fce8e3219d63e8689c80748c1e2b81579a9a0a",
+   "ct": 1381778462,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Document (wrong?) behavior of xor methods",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BooleanUtils.java"
+   ]
+  },
+  {
+   "sha": "beda6986707728509b53f2a3ce334269657f6c17",
+   "ct": 1379686092,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add missing separator between subclasses. Fix provided by Dave Hughes via github.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java"
+   ]
+  },
+  {
+   "sha": "9e529c7c6a44a2ce8abde19487c1a504de0e7825",
+   "ct": 1367521475,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix some formatting.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "d49d8093e2497013c4d78b11d1462a33f451dfda",
+   "ct": 1366471088,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-754] Fix ClassUtils.getShortName to only do a reverse lookup for array types.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java"
+   ]
+  },
+  {
+   "sha": "d80be57d6eecc99411a77ab9575e1991bb616abc",
+   "ct": 1364401765,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Document why double exponent (e and E) seems to work even though the index will be wrong",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java"
+   ]
+  },
+  {
+   "sha": "fbf996cb7e637fe2f7ec81cc546452c5d0e2d8e5",
+   "ct": 1363937823,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing urls to point to new oracle pages and not old, sometimes broken, sun urls",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharEncoding.java",
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+    "src/main/java/org/apache/commons/lang3/Validate.java",
+    "src/main/java/org/apache/commons/lang3/builder/EqualsBuilder.java",
+    "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java"
+   ]
+  },
+  {
+   "sha": "0c9622b749f3d49798059c74ad66a51f3c782b5a",
+   "ct": 1353722180,
+   "class": "other-fix",
+   "why": "",
+   "subject": "<action issue=\"LANG-858\" type=\"fix\">StringEscapeUtils.escapeJava() and escapeEcmaScript() do not output the escaped surrogate pairs that are Java parsable</action>",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringEscapeUtils.java",
+    "src/main/java/org/apache/commons/lang3/text/translate/JavaUnicodeEscaper.java",
+    "src/main/java/org/apache/commons/lang3/text/translate/UnicodeEscaper.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e582456625cc8a7056cc9354d2a75913f4ceb393",
+   "ct": 1348611134,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-828 FastDateParser does not handle non-Gregorian calendars properly Fix bug in Java 7 (Locale.toString() format has changed)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "c7ef0b7eb707160fcfbac023be28a22b56921599",
+   "ct": 1345785875,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-816 - followup incorporating ggregory's doc suggestion, some doc fixes, addition of CONST_BYTE() and CONST_SHORT(), and Junit improvements to test doc examples and make sure CONST_BYTE() and CONST_SHORT() throw IllegalArgumentException as required.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ObjectUtils.java",
+    "src/test/java/org/apache/commons/lang3/ObjectUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "840d5cf4f22868fbefcae094939112c620ab23cc",
+   "ct": 1330540658,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Javdoc.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateParser.java"
+   ]
+  },
+  {
+   "sha": "81797ed4402a982f90bd903c7437aeea4e3933f5",
+   "ct": 1330525496,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Javdoc.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DatePrinter.java"
+   ]
+  },
+  {
+   "sha": "8183099c0e2fbd5b352a10cc59b32e3549dd61ab",
+   "ct": 1330525439,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Javdoc.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "58d279ce5e362e7f485b2b98e02c5e448b309476",
+   "ct": 1329643566,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Felix M\u00fcller's patch from LANG-462 to fix a timezone assumption in a test and remove Java 6 interface implementation @Override statements",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateFormat.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "c71d0f03dab384f98ef2c0ba0050822fba22a063",
+   "ct": 1321574376,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[LANG-775] [LANG-776] fix related bugs dealing with type variable inheritance",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java"
+   ]
+  },
+  {
+   "sha": "1db449142ae9b9e1a8b40429edc904ff0f4b6a59",
+   "ct": 1315503004,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-752 Fix createLong() so it behaves like createInteger()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/NumberUtils.java"
+   ]
+  },
+  {
+   "sha": "3513ecb0b751620e07004960e88ee232e8b4d926",
+   "ct": 1306337371,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix toString(format)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/tuple/Pair.java"
+   ]
+  },
+  {
+   "sha": "3933e63c7c38ab549cd52815fbe0a4b49cffacdd",
+   "ct": 1306334142,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Make ImmutablePair final; Minor fixes",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/tuple/ImmutablePair.java",
+    "src/main/java/org/apache/commons/lang3/tuple/MutablePair.java",
+    "src/main/java/org/apache/commons/lang3/tuple/Pair.java"
+   ]
+  },
+  {
+   "sha": "e00c223382705697c0c92ca5bb831d3609ec6300",
+   "ct": 1302903741,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added more @since 3.0 CharSequence changes. Fixed an @since 3.1 to 3.0",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "8d01b77e2e4c604164966b1e6b5e82976023aa0d",
+   "ct": 1302451147,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix introduced failures having to do with removing the call to internal helper method #toNoNullStringArray()",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionToStringBuilder.java"
+   ]
+  },
+  {
+   "sha": "bbc7fd046a8a8076cc5bf9fd513ded2c503b0351",
+   "ct": 1299243605,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix order of modifiers to public static final",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DateUtils.java"
+   ]
+  },
+  {
+   "sha": "79cddd4ea5b4fad17f74878e40b3dcd0c54d9cf6",
+   "ct": 1299243258,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix brace positions",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BooleanUtils.java",
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/main/java/org/apache/commons/lang3/Validate.java",
+    "src/main/java/org/apache/commons/lang3/builder/CompareToBuilder.java",
+    "src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java",
+    "src/main/java/org/apache/commons/lang3/event/EventUtils.java",
+    "src/main/java/org/apache/commons/lang3/exception/DefaultExceptionContext.java",
+    "src/main/java/org/apache/commons/lang3/mutable/MutableObject.java",
+    "src/main/java/org/apache/commons/lang3/text/StrBuilder.java",
+    "src/main/java/org/apache/commons/lang3/text/StrSubstitutor.java",
+    "src/main/java/org/apache/commons/lang3/text/StrTokenizer.java",
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "03cf8fd714e9b9963bf328dfb274cf343f3b375e",
+   "ct": 1296378077,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Scratch that, compiler disagrees (aka, I'm wrong)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/translate/UnicodeUnescaper.java"
+   ]
+  },
+  {
+   "sha": "2270d830fda743de1ce8a61e33b9542cb39a0f4b",
+   "ct": 1295238605,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Adding first method check from Math's MathUtils.gcd method; and unit tests showing that this was needed. Bug reported and solved by Christian Semrau [LANG-662]",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java",
+    "src/test/java/org/apache/commons/lang3/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "7e8d044b7b8c6d2786a88f416d17eed2f472445c",
+   "ct": 1295237556,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Adding note that this has overflow issues and pointing to BigFraction",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/math/Fraction.java"
+   ]
+  },
+  {
+   "sha": "dd5f8ea30755268dc43bbf2cd5024412674eb1b0",
+   "ct": 1289666147,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-658 Fix remaining entries",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/translate/EntityArrays.java"
+   ]
+  },
+  {
+   "sha": "c8c7a0c491f3b18f086f10809ffb11ab7f02db52",
+   "ct": 1289665032,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-658 Fix ograve entry",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/translate/EntityArrays.java"
+   ]
+  },
+  {
+   "sha": "14a0cc2a9baf84a97348263975082ef3857daf97",
+   "ct": 1283926197,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying my fix to LANG-645, and Mikael's test case; fixing the FastDateFormat to properly include the locale when formatting a Date",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateFormat.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateFormatTest.java"
+   ]
+  },
+  {
+   "sha": "37dba589f77b73f4cc642b65f7d024667eef9ffb",
+   "ct": 1281595663,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix wrong cast.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/ConstructorUtils.java"
+   ]
+  },
+  {
+   "sha": "5e9fd18a887eb071a42983a8c6df1ae3062f3a88",
+   "ct": 1278117046,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix cloning of array types.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ObjectUtils.java",
+    "src/test/java/org/apache/commons/lang3/ObjectUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "eb79f7c6f37d0d9c4d9252b1020bc19a617a4d23",
+   "ct": 1275064403,
+   "class": "extrinsic",
+   "why": "env 'Android'",
+   "subject": "(LANG-624) SystemUtils.getJavaVersionAsFloat throws StringIndexOutOfBoundsException on Android runtime/Dalvik VM. Oops, fix return type.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java",
+    "src/test/java/org/apache/commons/lang3/SystemUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "53d9ad9ffba73e38af2e32ac4fc718da943bb1fd",
+   "ct": 1268850756,
+   "class": "other-fix",
+   "why": "",
+   "subject": "'stolen' is a cute word, but given it means taking without permission it's incorrect here",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java"
+   ]
+  },
+  {
+   "sha": "6505531d5c81b879be9fd5406e1351570f354e83",
+   "ct": 1268678857,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix tabs to spaces, thank you J\u00f6rg.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "022d08cfd31475073c664da109ad50bfe9539d82",
+   "ct": 1268673115,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix DefaultExceptionContext.addValue that overwrites information in a recursive situation (LANG-605). Allow explicit replacement of a label with the new replaceValue methods.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/exception/ContextedException.java",
+    "src/main/java/org/apache/commons/lang3/exception/ContextedRuntimeException.java",
+    "src/main/java/org/apache/commons/lang3/exception/DefaultExceptionContext.java",
+    "src/main/java/org/apache/commons/lang3/exception/ExceptionContext.java",
+    "src/test/java/org/apache/commons/lang3/exception/ContextedExceptionTest.java",
+    "src/test/java/org/apache/commons/lang3/exception/ContextedRuntimeExceptionTest.java",
+    "src/test/java/org/apache/commons/lang3/exception/DefaultExceptionContextTest.java"
+   ]
+  },
+  {
+   "sha": "7780fa0ad53baaa4b24803bf3e30933eed16294f",
+   "ct": 1268588528,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Oops, experiment in progress. Back out last change.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java"
+   ]
+  },
+  {
+   "sha": "5b7817cc3f5260b9c40d4da118cbed5f579dcdc0",
+   "ct": 1268588003,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix defaultIsEmpty typing.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java",
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d0b2568ee1f3e3ad2316f20b651698eaa22afe22",
+   "ct": 1264447928,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix raw types",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/text/StrSubstitutor.java"
+   ]
+  },
+  {
+   "sha": "e5ccf096569244af25820f7d8d94893fff00ce8c",
+   "ct": 1261120870,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Switching from getTime() to getTimeInMillis() per Sebb's report that it still fixes LANG-538 and is going to be lighter weight",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/time/FastDateFormat.java"
+   ]
+  },
+  {
+   "sha": "8fdfbff87c84f2005eb8fed6939e5fa835315113",
+   "ct": 1261112651,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-568 - @SuppressWarnings(\"unchecked\") is used too generally Partial fix - some warnings remain to be addressed",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/builder/CompareToBuilder.java"
+   ]
+  },
+  {
+   "sha": "ed3d84438bd4a2fed15926c31ef23f63df977cf4",
+   "ct": 1261112622,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-568 - @SuppressWarnings(\"unchecked\") is used too generally Partial fix - some warnings remain to be addressed",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "1b85d8ba9e7bea6e4c7742b57bf71c38f1bf0a27",
+   "ct": 1261034485,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying 'fix' for LANG-530. DateUtils.parseDate now protects the common use case of FastDateFormat ZZ output, namely ZZ on the end of the pattern, from being passed to SimpleDateFormat as is. Use of ZZ elsewhere in the pattern isn't protected and will want to consider emulating the String changes made in this patch.",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/time/DateUtils.java",
+    "src/test/org/apache/commons/lang3/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "db9b110a7e968bbd585380e4d9289ab56f965fd0",
+   "ct": 1260803174,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix up some raw types. May need to adjust some types if lookup() is made generic (see LANG-564)",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/text/StrLookup.java"
+   ]
+  },
+  {
+   "sha": "62a047cc697cfc6aa2c832565500cb7b8ece3103",
+   "ct": 1260798867,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix up raw types",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "56550bf2779990da78d2bac1d8287c8a693c6e4b",
+   "ct": 1260777065,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying fix for LANG-552. StringUtils.replaceEach(String, String[], String[]) no longer NPEs when null appears in the last String[]",
+   "c_files": [
+    "src/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e346542745e578e661ed7a23a5be0c94a39b3c3b",
+   "ct": 1259232779,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Removing broken @see",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringEscapeUtils.java"
+   ]
+  },
+  {
+   "sha": "55559050cf261290f665477f0b6992cd8ab32961",
+   "ct": 1258826835,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix generics",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Range.java"
+   ]
+  },
+  {
+   "sha": "34b9c73a6d4a1c91c92b59e3f0d188b9a74a607c",
+   "ct": 1258450241,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to handle null input array, and remove check for NULL",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ObjectUtils.java",
+    "src/test/org/apache/commons/lang/ObjectUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7072a549e5b2eca9158c2d6126fb9d8c05b93bdf",
+   "ct": 1256471055,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix some raw types",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/ConstructorUtils.java"
+   ]
+  },
+  {
+   "sha": "835085d912e6ce9e8ad236256448776c641bd79e",
+   "ct": 1256399290,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Eclipse case drop-thru warnings",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java"
+   ]
+  },
+  {
+   "sha": "6622091f9baa46aa099026c57c1a49cefcd8f272",
+   "ct": 1256391791,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix internal raw types",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/ConstructorUtils.java"
+   ]
+  },
+  {
+   "sha": "fdb8010676661124227542be2b18ace2b65d490f",
+   "ct": 1256391466,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix raw Class types",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/MethodUtils.java"
+   ]
+  },
+  {
+   "sha": "7bd9b8ada16d265de6e36002cf9367ac0c6d0f87",
+   "ct": 1249841218,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix failing unit test of Contexted(Runtime)Exception, adjust formatted message.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/DefaultExceptionContext.java",
+    "src/test/org/apache/commons/lang/exception/ContextedExceptionTest.java",
+    "src/test/org/apache/commons/lang/exception/ContextedRuntimeExceptionTest.java"
+   ]
+  },
+  {
+   "sha": "bda5d16000ab6750d2e071cfac08702868baf39b",
+   "ct": 1245905839,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing bug in below/above implementations found while implementing NumericEntityEscaper",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/translate/UnicodeEscaper.java"
+   ]
+  },
+  {
+   "sha": "0904ecd4fa7c04c22ac4f56e404c7b7bc8e76449",
+   "ct": 1241071396,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Removing NumberUtils.compare(float,float) and NumberUtils.compare(double,double). These are now foud in Float and Double respectively. Keeping the unit tests, but pointing to the JDK methods as a regression. LANG-492",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/CompareToBuilder.java",
+    "src/java/org/apache/commons/lang/math/NumberUtils.java",
+    "src/java/org/apache/commons/lang/math/Range.java",
+    "src/java/org/apache/commons/lang/mutable/MutableDouble.java",
+    "src/java/org/apache/commons/lang/mutable/MutableFloat.java",
+    "src/test/org/apache/commons/lang/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "07c1324202bfa5a60de6ab41777186d0050e3cd7",
+   "ct": 1237597221,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Generic fix",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "e8512544ed84787dec4340dc2cfcff86ec24da3b",
+   "ct": 1237323292,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-369 - must use fixed object as lock target",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "dc08c40f60c00a4adb8c794abd365c388fa45069",
+   "ct": 1237047129,
+   "class": "other-fix",
+   "why": "",
+   "subject": "revert Oops, readers need to be synch too - misread field name",
+   "c_files": [
+    "src/java/org/apache/commons/lang/LocaleUtils.java"
+   ]
+  },
+  {
+   "sha": "fb94c3fe596b01d253e11e26ad6548647308aabe",
+   "ct": 1237046899,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Oops, readers need to be synch too",
+   "c_files": [
+    "src/java/org/apache/commons/lang/LocaleUtils.java"
+   ]
+  },
+  {
+   "sha": "c0683957931ffa3df218ff68ca31e257174a6466",
+   "ct": 1235940880,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Alexander Kjall's patch from LANG-480; along with a unit test made from his example. Fixes unicode conversion above U+00FFFF being done into 2 characters",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Entities.java",
+    "src/test/org/apache/commons/lang/StringEscapeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a38e2e942d622c1a84ed35bedb9aba045db7ab79",
+   "ct": 1231538714,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix for LANG-477 OutOfMemory with custom format registry and a pattern containing single quotes - thanks to Duncan Eley",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java",
+    "src/test/org/apache/commons/lang/text/ExtendedMessageFormatTest.java"
+   ]
+  },
+  {
+   "sha": "b1e8a26177324ece7c786da8cd063076bc131ea1",
+   "ct": 1226003777,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Updating the BigDecimal.compareTo(Object) to BigDecimal.compareTo(BigDecimal) to match JDK change - fixes LANG-468/LANG-464",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/EqualsBuilder.java"
+   ]
+  },
+  {
+   "sha": "0d0061f247b9c28b59b1af7e7a10def74718ac94",
+   "ct": 1225902805,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying test/fix from LANG-457 - getting a StringIndexOutOfBounds from createNumber rather than a NumberFormatException",
+   "c_files": [
+    "src/java/org/apache/commons/lang/NumberUtils.java",
+    "src/test/org/apache/commons/lang/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "3ed99652c84339375f1e6b99bd9c7f71d565e023",
+   "ct": 1221580994,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-459 HashCodeBuilder.reflectionHashCode() can generate incorrect hashcodes",
+   "c_files": [
+    "src/java/org/apache/commons/lang/IDKey.java",
+    "src/java/org/apache/commons/lang/builder/HashCodeBuilder.java"
+   ]
+  },
+  {
+   "sha": "db5c7106a44107b94332ee6844514b003f538a51",
+   "ct": 1212995844,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Robert Scholte's fix for LANG-440, replicating the SEMI_MONTH logic for AM_PM requests",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java"
+   ]
+  },
+  {
+   "sha": "4342bd5d69d122a16c735416039b4b2ca27897ad",
+   "ct": 1210483082,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Vincent Behar's second patch for LANG-419 - fixing a bug in abbreviate such that lower limits greater than the length of the string weren't working correctly",
+   "c_files": [
+    "src/java/org/apache/commons/lang/WordUtils.java",
+    "src/test/org/apache/commons/lang/WordUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0e42c3d9da6d3d0b6e6262223f29f5638a64d315",
+   "ct": 1210459029,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing the html fix from Benjamin Bentmann in LANG-431 - unclosed tag",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "dcf024f3aaf8ba051bfa5a1a2bb904051093452c",
+   "ct": 1205388690,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing a possible overflow in the >> 1 divide by two by using >>> 1 instead. Findbugs pointed this out>",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Entities.java"
+   ]
+  },
+  {
+   "sha": "52a903c6912787fb200722d8286fdabd047d8358",
+   "ct": 1204763184,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Restore JDK 1.3 compatibility (the MessageFormat(String, Locale) constructor was introduced in JDK 1.4)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java"
+   ]
+  },
+  {
+   "sha": "bee5b923c54e59f877d392e35cb04ab62484c723",
+   "ct": 1199663939,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying third patch from LANG-381. Fixes the minimum(float[]) type methods to correctly return NaN when it is in the array, and adds an IEEE754rUtils class that obeys the IEEE 754r update in which NaN in min/max methods should be ignored unless all values are NaN.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/IEEE754rUtils.java",
+    "src/java/org/apache/commons/lang/math/NumberUtils.java",
+    "src/test/org/apache/commons/lang/math/IEEE754rUtilsTest.java",
+    "src/test/org/apache/commons/lang/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "62a9fa68116f8b0bdcb632192aa6bcdd6c96e6aa",
+   "ct": 1194921193,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Attaching Johann's fix to LANG-322 (via Ben's patch)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java"
+   ]
+  },
+  {
+   "sha": "127e6e338f088b82eea1967d31c1abf8d51a364f",
+   "ct": 1193803132,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Sebb's test and fix from LANG-368 - fixing it so that FastDateFormat getDateInstance and getDateTimeInstance continue to work if Locale.getDefault() changes",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java",
+    "src/test/org/apache/commons/lang/time/FastDateFormatTest.java"
+   ]
+  },
+  {
+   "sha": "796b898281af571a510d96487dcd95699ac1e435",
+   "ct": 1193461665,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Sebb's test and fix for LANG-365",
+   "c_files": [
+    "src/java/org/apache/commons/lang/BooleanUtils.java",
+    "src/test/org/apache/commons/lang/BooleanUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "c22d9d59e5b86c33f91d7fa93d71cdc514c2edd9",
+   "ct": 1193378934,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Scott Bassin's fix and test from LANG-363",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringEscapeUtils.java",
+    "src/test/org/apache/commons/lang/StringEscapeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "16d447606804712462d41c364e73da7a8988685f",
+   "ct": 1192048721,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix source inconsistencies: Some methods used both \"foo\" and \"this.foo\" for ivar references; made it all \"this.foo\".",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/StopWatch.java"
+   ]
+  },
+  {
+   "sha": "050fe8e916507c9716983868284d64e58c1b56d2",
+   "ct": 1186619099,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying the fix and the test patches from LANG-346 - fixes bugs in DateUtils.round() for minutes and seconds. Patch from Dave Meikle",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/test/org/apache/commons/lang/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "75d931a3264b73caa9cdd7d3373375cc33008ddf",
+   "ct": 1178063401,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying unit test/fix for LANG-328",
+   "c_files": [
+    "src/java/org/apache/commons/lang/LocaleUtils.java",
+    "src/test/org/apache/commons/lang/LocaleUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "1138f35555d0d456380741ab32225a25c7386122",
+   "ct": 1172290564,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Intentionally breaking the build to test the nightly build. Will fix tomorrow.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ObjectUtils.java"
+   ]
+  },
+  {
+   "sha": "b16235ad108c4fcdb7117493394d26d2f0faeace",
+   "ct": 1170802190,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying test and fix for LANG-315",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/StopWatch.java",
+    "src/test/org/apache/commons/lang/time/StopWatchTest.java"
+   ]
+  },
+  {
+   "sha": "ab29453ec2f9ef30c5803a70cce051b70094a573",
+   "ct": 1167724212,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed incorrect JDK API link.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "15360774099b2a7230e020751acdf6979b6e3f58",
+   "ct": 1166565004,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing LANG-300 (reported by Jeremy Lemaire) - 1L to 9L incorrectly throw exceptions when passed into NumberUtils.createNumber. Fixed in both the math.NumbersUtils and the deprecated NumberUtils classes.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/NumberUtils.java",
+    "src/java/org/apache/commons/lang/math/NumberUtils.java",
+    "src/test/org/apache/commons/lang/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "5fb6521ab990c0c9ec655ca71d8c77060aedb0e5",
+   "ct": 1165807989,
+   "class": "other-fix",
+   "why": "",
+   "subject": "More tests added to DurationFormatUtilsTest and discovered bugs fixed in the DurationFormatUtils.formatPeriod method.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DurationFormatUtils.java",
+    "src/test/org/apache/commons/lang/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "1a158281aa058ee2dc9cfae3b56012a9f92f3b2b",
+   "ct": 1162335654,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixng LANG-295 - thisBuf.length calls. There were two of the calls, so I've committed a unit test showing things are broken and a fix in both cases.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "d8b6f5b5c6b92adff8965ab634b672e7b333f583",
+   "ct": 1162330443,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying unit test and fix for #LANG-292. Also fixes a couple of problems with the unescape(Writer..) overload that came up",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Entities.java",
+    "src/test/org/apache/commons/lang/EntitiesTest.java"
+   ]
+  },
+  {
+   "sha": "116463ba4f988ad7dda289bf6e2ff53c6570f0ef",
+   "ct": 1158700856,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying requested fix from Neil Redway in #LANG-262",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java",
+    "src/java/org/apache/commons/lang/enums/Enum.java"
+   ]
+  },
+  {
+   "sha": "07b7795b336b301def8a7dc6059c8e616ce5582e",
+   "ct": 1155939707,
+   "class": "other-fix",
+   "why": "",
+   "subject": "LANG-259 - Fix compareTo to check the type is the same",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enums/ValuedEnum.java",
+    "src/test/org/apache/commons/lang/enums/EnumEqualsTest.java",
+    "src/test/org/apache/commons/lang/enums/ValuedEnumTest.java",
+    "src/test/org/apache/commons/lang/enums/ValuedLanguageEnum.java"
+   ]
+  },
+  {
+   "sha": "9cbf70d82285d7ebdd190f7cd59f2a9d82a09c61",
+   "ct": 1153460827,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Adding Niall's fix for LANG-59 - an edge case in date truncation - and his enhancement for the unit test that was there.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/test/org/apache/commons/lang/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "00d021f30e0c2202c3a942b0f93cc9d9285010fc",
+   "ct": 1152142963,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix char/Character methods in ArrayUtils LANG-267",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "b7d3fd9e4d435eb155570f326e8c799ead6c1901",
+   "ct": 1150721288,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Committing fix for LANG-140. By reversing the order of field calculation, Yu Peng's bug goes away",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "2f4408d33c1de88bceff83d7ea03e47b3aadacaf",
+   "ct": 1146006905,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Applying Pete Gieser's enhancement for the CompareToBuilder - a clone of the EqualsBuilder and HashCodeBuilder fixes previously applied. Bugzilla issue #39398",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/CompareToBuilder.java",
+    "src/test/org/apache/commons/lang/builder/CompareToBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "fc9b4cc1d839079cd37380ea6566a7575d9f4900",
+   "ct": 1145428214,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added new method to allow work-arounds for Java bug 4071957; as specified in issue 34351",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0e85c6e6f1b1bea8725f46dce37825253e5f8aa5",
+   "ct": 1145254687,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[lang] Using ReflectionToStringBuilder and excluding secure fields. ASF Bugzilla Bug 36925. http://issues.apache.org/bugzilla/show_bug.cgi?id=36925",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ReflectionToStringBuilder.java"
+   ]
+  },
+  {
+   "sha": "a9f5a6b1886992b35795fe5a3388bcaa53a1df5a",
+   "ct": 1143670073,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix infinite loops leading to OutOfMemory with circular cause chain bug 37038",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java",
+    "src/test/org/apache/commons/lang/exception/ExceptionUtilsTestCase.java"
+   ]
+  },
+  {
+   "sha": "e905b7993bf3f61943e997fa00f3c12dcdb322f8",
+   "ct": 1141771419,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix code style",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "cf56a79ee7c50b7240cd272e547801fab92fe913",
+   "ct": 1141630197,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixing -1/1 bug as per #37661",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/Fraction.java",
+    "src/test/org/apache/commons/lang/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "f0f0bf81e7010b213be89b477eaaba339a3d9fbc",
+   "ct": 1132705184,
+   "class": "other-fix",
+   "why": "",
+   "subject": "http://issues.apache.org/bugzilla/show_bug.cgi?id=37596 The method DurationFormatUtils.formatDurationWords incorrectly outputs numbers ending in \"1\" without a plural \"s\" postfix for the time unit. Added a fix and tests that \"1 <unit>s\" gets converted to \"1 <unit>\" but that \"11 <unit>s\" is left alone.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DurationFormatUtils.java",
+    "src/test/org/apache/commons/lang/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "b0082bc60670ee42eaa135e8d89be2eb696103b2",
+   "ct": 1126346112,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Document and fix fraction reduction",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/Fraction.java",
+    "src/test/org/apache/commons/lang/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "7ea69942ef82e8ad565a4c68d5ac926a4385d7ef",
+   "ct": 1125150014,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix IndexOutOfBoundsException on padding bug 35756, from Reuben Sivan",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0d0b5165e966355e7fca976e7261456c8ec5e4fb",
+   "ct": 1124661421,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix clone() and add a unit test.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrTokenizer.java",
+    "src/test/org/apache/commons/lang/text/StrTokenizerTest.java"
+   ]
+  },
+  {
+   "sha": "554b667e9fb6a3f198cdbc9b497189c1570332c0",
+   "ct": 1124535406,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix null handling behaviour on char[] methods",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderAppendInsertTest.java"
+   ]
+  },
+  {
+   "sha": "810e69f7a470eb9dce71de314f0a98c0f7840a24",
+   "ct": 1124055947,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add StrMatcher and update StrBuilder and test cases to use it, plus fix other bugs",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/java/org/apache/commons/lang/text/StrMatcher.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderAppendInsertTest.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderTest.java",
+    "src/test/org/apache/commons/lang/text/StrMatcherTest.java",
+    "src/test/org/apache/commons/lang/text/TextTestSuite.java"
+   ]
+  },
+  {
+   "sha": "2f6b0b2c69b626d6a669aa8add3223417b3b274e",
+   "ct": 1123542904,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix indexOf and lastIndexOf with null input",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "e6f6b0dbfaf10ef4428f8277fe2d21558d1edd17",
+   "ct": 1123537857,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix setLength()",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "707e1a4a0b4b06ee89a7ec9e6b2154769e40b360",
+   "ct": 1123354437,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[Bug 36059] [lang] Wrong length check in StrTokenizer.StringMatcher. From Oliver Heger <oliver.heger@t-online.de>.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrTokenizer.java",
+    "src/test/org/apache/commons/lang/text/StrTokenizerTest.java"
+   ]
+  },
+  {
+   "sha": "93b5f2a7ace971ae12bb5f7726067272689e780a",
+   "ct": 1122944625,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[Bug 35966] - [lang] StrBuilderTest#testReplaceStringString fails. From Nathan Beyer nbeyer@kc.rr.com.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrBuilder.java",
+    "src/test/org/apache/commons/lang/text/StrBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "66f83099a50eef67909e4d371dc72d67590e7670",
+   "ct": 1121378888,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix ClassUtils.primitiveToWrapper() to handle Void.TYPE bug 34327, from Alban Peignier",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "421ba4c94c641efc0262099ced7b537e3f05e5da",
+   "ct": 1121368907,
+   "class": "other-fix",
+   "why": "",
+   "subject": "[Bug 35588] - [lang] New interpolation features. Retro-fits the VariableResolver interface into the VariableFormatter class and provides a Map-backed VariableResolver implementation.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/VariableFormatter.java",
+    "src/test/org/apache/commons/lang/text/VariableFormatterTest.java"
+   ]
+  },
+  {
+   "sha": "aef69406ea3a67bb89aa2fb96361c2a41d209781",
+   "ct": 1109277773,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixes http://issues.apache.org/bugzilla/show_bug.cgi?id=33737. [lang] ExceptionUtils.addCauseMethodName(String) does not check for duplicates. Fix adds:  ExceptionUtils.removeCauseMethodName(String)  ExceptionUtils.isCauseMethodName(String)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "cd9922ef8b2c57ed6aa1390f89f94c1c40cdc67c",
+   "ct": 1104275583,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ToStringStyle setArrayEnd handled null incorrectly bug 31933, fix from Masato Tezuka",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ToStringStyle.java",
+    "src/test/org/apache/commons/lang/builder/BuilderTestSuite.java",
+    "src/test/org/apache/commons/lang/builder/ToStringStyleTest.java"
+   ]
+  },
+  {
+   "sha": "57b94c34eaf9f0158679060c635188b44a27c5c3",
+   "ct": 1103828148,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added a trimmer matcher which is now used to determine which characters to trim off the left and right of tokens. the ignore matcher is now truly an ignore matcher, which will leave out any matching characters from all tokens. I also fixed a few minor bugs.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/text/StrTokenizer.java"
+   ]
+  },
+  {
+   "sha": "167c031371b4a0bcc6cf976492ba0b85ce20bc36",
+   "ct": 1100220521,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Handle Java version with text prefix, as found on HP-UX bug 32123, from Jason Gritman",
+   "c_files": [
+    "src/java/org/apache/commons/lang/SystemUtils.java",
+    "src/test/org/apache/commons/lang/SystemUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "ac517f7c0dcb2c597b48d613eeefe98781247ac0",
+   "ct": 1097960778,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add parse method that handles multiple patterns bug 30674",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/test/org/apache/commons/lang/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e08b9b890ff9ce8555589f927d05bf20ceb112b3",
+   "ct": 1097952741,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix unescape to handle invalid entities bug 29149, from Dan Goldberg",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Entities.java",
+    "src/test/org/apache/commons/lang/StringEscapeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d728e81d6921565e04ce4b3c19846f5ce38b7f4d",
+   "ct": 1097950846,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Document how to format a date from bug 21663",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ToStringStyle.java"
+   ]
+  },
+  {
+   "sha": "d19d4a852154ef1d38a842d88c34cac6505e5f01",
+   "ct": 1097948585,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix DateUtils.truncate oddity at the far end of the Date spectrum bug 31395, from Marc Portier",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/test/org/apache/commons/lang/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "61cccd3e0a4cc51c0956ca90310c8b76d4f6fdeb",
+   "ct": 1097946522,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add methods to compare dates and calendars in different ways based on bug 26922",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/test/org/apache/commons/lang/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "f4f34dc60ac7fb90d99da0b73285ecfdb76e3f37",
+   "ct": 1097322951,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix bug where add() didn't use array type Remove unecessary calls to lastIndex() for performance",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsAddTest.java"
+   ]
+  },
+  {
+   "sha": "fbaf1c371ad64089b31ec77e08f4a05fe3bcf097",
+   "ct": 1097316244,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add additional method to support subclass searching of exceptions in a chain bug 30929",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java",
+    "src/test/org/apache/commons/lang/exception/ExceptionUtilsTestCase.java"
+   ]
+  },
+  {
+   "sha": "5fdb8a39db7461d6e6a1d7517f2d537a3a690677",
+   "ct": 1096527805,
+   "class": "other-fix",
+   "why": "",
+   "subject": "rolled back BUG#30929 pending opinions",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java",
+    "src/java/org/apache/commons/lang/exception/NestableDelegate.java"
+   ]
+  },
+  {
+   "sha": "2a041e277885fec3729a1d382d23264cd866938a",
+   "ct": 1096525300,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug#30929. Shorn Tolley pointed out that using equals() means you can't pass SQLException in and expect to get back extensions of SQLException.  Switching to isAssignableFrom allows you to do this.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java",
+    "src/java/org/apache/commons/lang/exception/NestableDelegate.java"
+   ]
+  },
+  {
+   "sha": "3aab5ae02692d3ceac2618ec0b4514787f4b17d7",
+   "ct": 1094965406,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix for zero-padding of years.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java",
+    "src/test/org/apache/commons/lang/time/FastDateFormatTest.java"
+   ]
+  },
+  {
+   "sha": "067a1cabd30cb9392bd20fecedcc87c3b689adf8",
+   "ct": 1093750968,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix to handle the tiny difference between YEAR and 12*MONTH",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DurationFormatUtils.java"
+   ]
+  },
+  {
+   "sha": "a88c31825151f37d6627eacc3820679f2f0bf316",
+   "ct": 1093750908,
+   "class": "other-fix",
+   "why": "",
+   "subject": "bug in how the maths is being done creates a -ve number",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java"
+   ]
+  },
+  {
+   "sha": "b0213e869e39206ab0fdbe340479ddfb853542bc",
+   "ct": 1093499205,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bugzilla Bug 30855 [lang] Additional constructor for EqualsBuilder and isEquals member access. Addressing: \"Finally, can they change the member \"isEquals\" from private to protected?  At present, I cannot subclass EqualsBuilder and use this member.\"",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/EqualsBuilder.java",
+    "src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "ccf4e93bb7f7699d4a87db07a9822c05031af73e",
+   "ct": 1093468815,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bugzilla Bug 30815 ArrayUtils.isEquals() throws ClassCastException when array1 and array2 are different dimension http://issues.apache.org/bugzilla/show_bug.cgi?id=30815",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/EqualsBuilder.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java",
+    "src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "13ae992c23f9e693903f32c77e018de27f66442c",
+   "ct": 1089588017,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed numeric problems reported in PR #29294 Submitted by: C. Scott Ananian Reviewed by: Phil Steitz",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/Fraction.java",
+    "src/test/org/apache/commons/lang/math/FractionTest.java"
+   ]
+  },
+  {
+   "sha": "4301e384b8773c427609fdd2b38b8db2c78e10d6",
+   "ct": 1089067060,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add format(long) and format(long, StringBuffer) bug 29794",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java",
+    "src/test/org/apache/commons/lang/time/FastDateFormatTest.java"
+   ]
+  },
+  {
+   "sha": "c4df48e565253ed75b1a3070b1f01f1d58087a1f",
+   "ct": 1089050088,
+   "class": "other-fix",
+   "why": "",
+   "subject": "changed modify method to calculate the field offset and use the set method, rather than adding the offset and letting Calendar perform the calculation - this fixes http://issues.apache.org/bugzilla/show_bug.cgi?id=25560; updated javadocs on round method to explain how rounding across daylight saving time is handled",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/DateUtils.java"
+   ]
+  },
+  {
+   "sha": "14164d88eb1b96a8168daef59e9fcb2dbfc12cab",
+   "ct": 1088620438,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bugzilla Bug 27877 [lang][patch] Make ClassUtils methods null-safe and not throw an IAE. http://issues.apache.org/bugzilla/show_bug.cgi?id=27877",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "2b47976319955adcafcb9f2e117e97ed0aa3b526",
+   "ct": 1088313827,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fixed return type of getValue",
+   "c_files": [
+    "src/java/org/apache/commons/lang/mutable/MutableInteger.java"
+   ]
+  },
+  {
+   "sha": "2358ca2953b371aa011e7a2d06400a50858b6022",
+   "ct": 1086124527,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add more nested exception names bug 29082, from Lars Beuster",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "eaf7441da082e717f8c7bb69c14aaa1230de35bd",
+   "ct": 1086124128,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add ObjectUtils.hashCode() - a null safe hash code bug 28554, from Mario Winterer",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ObjectUtils.java",
+    "src/test/org/apache/commons/lang/ObjectUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "96e23c0fca8f2e6954eaefd6f7295dc14795d40b",
+   "ct": 1086123404,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix since tag",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enums/EnumUtils.java",
+    "src/java/org/apache/commons/lang/enums/ValuedEnum.java"
+   ]
+  },
+  {
+   "sha": "aa1e8866bb64e4b5f68fd0fcb0010c66745d849e",
+   "ct": 1086123297,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix Enum equals to work correctly by reflection bug 28180, from Matthias Eichel",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enums/Enum.java",
+    "src/test/org/apache/commons/lang/enums/EnumEqualsTest.java",
+    "src/test/org/apache/commons/lang/enums/EnumTestSuite.java"
+   ]
+  },
+  {
+   "sha": "d58c692b2071960a436898916eef30ffea91da48",
+   "ct": 1079401257,
+   "class": "other-fix",
+   "why": "",
+   "subject": "PR: Bugzilla Bug 27661 [lang] [patch] ArrayUtils.addAll doesn't always return new array Submitted by:\tMaarten Coene Reviewed by: Gary Gregory",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsAddTest.java"
+   ]
+  },
+  {
+   "sha": "694d1de4a912dcb1baade3edfecbe6e152c12e24",
+   "ct": 1078962888,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix replaceChars() to complete bug 25454",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "5e7cf0ed0e5a457e6e180e83ffbafa0b582e2759",
+   "ct": 1078359218,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Make exception implement Nestable interface and use NestableDelegate bug 26954 (alternate implementation)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/NotImplementedException.java",
+    "src/test/org/apache/commons/lang/NotImplementedExceptionTest.java"
+   ]
+  },
+  {
+   "sha": "0fcfcfdc655df66ff4a73984425c297de416bc79",
+   "ct": 1076806298,
+   "class": "other-fix",
+   "why": "",
+   "subject": "PR: Bugzilla Bug 26943 [patch] Class and Package Comparators for ClassUtils Submitted by:\talban.peignier Reviewed by:\tGary Gregory",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java",
+    "src/test/org/apache/commons/lang/enum/EnumTest.java"
+   ]
+  },
+  {
+   "sha": "20393e09aa9d55017b024151d744f0b306efb32e",
+   "ct": 1076721320,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add getLength method bug 26594, from Maarten Coene",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "7ba2d8aa0db459bd007dfdaf3d3900fbddc6885a",
+   "ct": 1076719700,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add validate methods for all elements same type bug 25683, from Norm Deane",
+   "c_files": [
+    "src/java/org/apache/commons/lang/Validate.java",
+    "src/test/org/apache/commons/lang/ValidateTest.java"
+   ]
+  },
+  {
+   "sha": "c8f42adee295e7305dc8f9ac090e505c36f2d6b7",
+   "ct": 1075920779,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed bug in getDateInstance(int, TimeZone, Locale). See bz #26646.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java"
+   ]
+  },
+  {
+   "sha": "11bd2237bf4e50799e091f3bfa9aba5e50c8de70",
+   "ct": 1075846464,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bugzilla Bug 26056 [lang] Add methods to ArrayUtils: add at end and insert-like ops Added methods: primitiveType[] add(primitiveType[], primitiveType)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsAddTest.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java",
+    "src/test/org/apache/commons/lang/LangTestSuite.java"
+   ]
+  },
+  {
+   "sha": "cd7aa49c161861fbf07f9006f1a01e25f9a1221f",
+   "ct": 1070118234,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add description and tests about the perils of nested enums bug 23374",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java",
+    "src/test/org/apache/commons/lang/enum/EnumTest.java",
+    "src/test/org/apache/commons/lang/enum/Nest.java",
+    "src/test/org/apache/commons/lang/enum/NestBroken.java",
+    "src/test/org/apache/commons/lang/enum/NestLinked.java",
+    "src/test/org/apache/commons/lang/enum/NestReferenced.java"
+   ]
+  },
+  {
+   "sha": "55a8a1e34c8e943b8c4d7fb7421820adc1cada7b",
+   "ct": 1070113954,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add extra factory methods for convenience bug 23590, from Nikolay Metchev",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java"
+   ]
+  },
+  {
+   "sha": "866d054e1def0bcb30e2595858036e8abdce4e55",
+   "ct": 1066943024,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add primitiveToWrapper() bug 23683, from Norm Deane",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "1a99abf1cfed6a6fff901d3b2e54068ce84192f6",
+   "ct": 1060818499,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added @since tags bug 22286, from Phil Steitz Changed from public to package scope",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringPrintWriter.java"
+   ]
+  },
+  {
+   "sha": "8766154678645c4b7f45cc51c94df042a6d02ec3",
+   "ct": 1060818459,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added @since tags bug 22286, from Phil Steitz",
+   "c_files": [
+    "src/java/org/apache/commons/lang/IntHashMap.java",
+    "src/java/org/apache/commons/lang/WordWrapUtils.java"
+   ]
+  },
+  {
+   "sha": "d35d966e65b1d81b7a9822432b0d12e10645743d",
+   "ct": 1059953359,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add tolerance checking to indexOf methods bug 22091, from Tim O'Brien",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "43db5237ab2a2dbc3a79daed10499bb4dbf92a4e",
+   "ct": 1059693875,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix RandomStringUtils to not throw NPE all the time",
+   "c_files": [
+    "src/java/org/apache/commons/lang/RandomStringUtils.java",
+    "src/test/org/apache/commons/lang/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "4926914ecbaec6a092f2398af3f5e8468f5f53b5",
+   "ct": 1059687167,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix CharSetUtils to not throw NPE all the time",
+   "c_files": [
+    "src/java/org/apache/commons/lang/CharSet.java",
+    "src/java/org/apache/commons/lang/CharSetUtils.java",
+    "src/test/org/apache/commons/lang/CharSetUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "35b8cc4ce3f71d4c130e2a9cf13d2b77ef73ff9e",
+   "ct": 1059603469,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixes arising from Clover report",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "3b19309d76817dfacb40299b474ecbc27a471e11",
+   "ct": 1059246750,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix http://nagoya.apache.org/bugzilla/show_bug.cgi?id=21904 as suggested (but with the guard clause factored in a method.)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/NumberUtils.java",
+    "src/test/org/apache/commons/lang/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "89e735ed4e6d76aa28209dd046d278a2291361c8",
+   "ct": 1059230089,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Handle JDK1.2/JDK1.3 bug in String.indexOf",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "9345b31d1511906438eeb796b26ee65dbe964561",
+   "ct": 1059229341,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix bug in isNestedThrowable, shown on JDK<1.4",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "6a0ce20988be77b95529476ce3265ceccc07e16a",
+   "ct": 1058828271,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix class so IS_JAVA_* and IS_OS_* constants work correctly. bug 21767, from Tetsuya Kaneuchi",
+   "c_files": [
+    "src/java/org/apache/commons/lang/SystemUtils.java",
+    "src/test/org/apache/commons/lang/SystemUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "59b77af292918b2f69a94afce014786c25228940",
+   "ct": 1058572663,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed leftPad() and rightPad() to correctly handle multi letter pad strings",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "0aa557cd562a946675824d588e0139a08fbb6712",
+   "ct": 1057998382,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to correctly identify the original author from Brian S O'Neill",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java"
+   ]
+  },
+  {
+   "sha": "55be165435e580d169f6b4e9bc54f3da9cfc4f64",
+   "ct": 1056825724,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add min/max by array functions bug 21068, from Matthew Hawthorne",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/NumberUtils.java",
+    "src/test/org/apache/commons/lang/math/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "9cfd4409f9231736b3db262fa11229ff1a77fc5d",
+   "ct": 1056824163,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add XOR methods bug 21068, from Matthew Hawthorne",
+   "c_files": [
+    "src/java/org/apache/commons/lang/BooleanUtils.java",
+    "src/test/org/apache/commons/lang/BooleanUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "48cea59f38754b3837c50f9b87e89bf6ead8dd53",
+   "ct": 1056823279,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add primitive/object conversions for all types bug 21068, from Matthew Hawthorne",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a5c0361ee5f851c59b152d90b31acabd7b4c28cb",
+   "ct": 1056584027,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add primitive boolean/object conversions Bug 21068, from Matthew Hawthorne",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "feac7d3bc7a3246bfa110fba17d1bf8830a629e5",
+   "ct": 1056234296,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug #20652 fixed.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "8f45918465c1c992d55fe08f2d7e49689b722b38",
+   "ct": 1055194563,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Ensure that RandomStringUtils returns all expected characters bug 20592, reported/patched by Phil Steitz",
+   "c_files": [
+    "src/java/org/apache/commons/lang/RandomStringUtils.java",
+    "src/test/org/apache/commons/lang/RandomStringUtilsTest.java",
+    "src/test/org/apache/commons/lang/math/RandomUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "4920a1da320677108c98bc191bdbffe7169983ba",
+   "ct": 1055081641,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix bug in NumberUtils where '12a' was treated as a number. bug 20538, reported/fix by Eric Pugh/Phil Steitz",
+   "c_files": [
+    "src/java/org/apache/commons/lang/NumberUtils.java",
+    "src/test/org/apache/commons/lang/NumberUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "82c5dada6f7b369b69c383aa995f45578325e139",
+   "ct": 1052881153,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug #14357 fixed. Mohan's patch makes removeCommonFrames public, and adds an isThrowableNested to ExceptionUtils.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java",
+    "src/java/org/apache/commons/lang/exception/NestableDelegate.java",
+    "src/java/org/apache/commons/lang/exception/NestableError.java",
+    "src/java/org/apache/commons/lang/exception/NestableException.java",
+    "src/java/org/apache/commons/lang/exception/NestableRuntimeException.java",
+    "src/test/org/apache/commons/lang/exception/AbstractNestableTestCase.java",
+    "src/test/org/apache/commons/lang/exception/NestableDelegateTestCase.java"
+   ]
+  },
+  {
+   "sha": "9d8cc76413c7d0463eccce41a46153aae4946710",
+   "ct": 1052880643,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug #19880 fixed. RandomStringUtils.random(int count, char[] set) doesn't include the last character in set.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/RandomStringUtils.java",
+    "src/test/org/apache/commons/lang/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "9f2efa84a2db851d30fe889fae85250742399ce2",
+   "ct": 1052880086,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug #19756 dealt with.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/JVMRandom.java",
+    "src/test/org/apache/commons/lang/math/MathTestSuite.java",
+    "src/test/org/apache/commons/lang/math/RandomUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "d129fa0e4a0ebfb2ce4cc5f11dfff471f7b7a8a5",
+   "ct": 1052713766,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed bug reported by Phil Steitz in which poorly placed casting was making all random methods return 0 :)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/math/JVMRandom.java"
+   ]
+  },
+  {
+   "sha": "5f0560cb6004e6b12599f10da6a77a2ce5724f89",
+   "ct": 1050510705,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed Antony's name. He wrote the original escape() method.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringEscapeUtils.java"
+   ]
+  },
+  {
+   "sha": "fb2548b304f9279ac2ff3df9620424adae91e065",
+   "ct": 1050416921,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Return of WordWrapUtils, fresh with bugs fixed in StringTaglib. Part of the reason for dropping it originally was that I knew my methods [wordWrap rather than wrapText or wrapLine] had nasty die-a-death bugs and hadn't had time to fix them. These got fixed as a part of String Taglib so I'm now personally happy with the code. As happy as you can ever be anyway without more tests to hurt it.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/WordWrapUtils.java",
+    "src/test/org/apache/commons/lang/WordWrapUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "3ac32dd142df1d1e0a5a36f224dcc73b1fa066e5",
+   "ct": 1049897583,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Patch for RandomString bug in which counts of 0 or negative counts would cause array exceptions.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/RandomStringUtils.java",
+    "src/test/org/apache/commons/lang/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "edb0e8d284c8f80f743c09d5e0b78d1fede26e6d",
+   "ct": 1048755322,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix bug 16676: StackOverflow due to ToStringBuilder (http://issues.apache.org/bugzilla/show_bug.cgi?id=16676)",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ToStringBuilder.java",
+    "src/java/org/apache/commons/lang/builder/ToStringStyle.java",
+    "src/test/org/apache/commons/lang/builder/ToStringBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "f64ecf1cd76a70dcb78b225e7db3913c9eca559c",
+   "ct": 1048398651,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added a CharSetUtils.keep method which is the reverse of the delete method. In part, it fulfills the StringUtils.getNumerics(String) method that Bug #13771 requests.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/CharSetUtils.java",
+    "src/test/org/apache/commons/lang/CharSetUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "8e54ccc4be5fe3c1c6739a7b670f5c9de24b606e",
+   "ct": 1048397183,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Bug 17882 submitted [by hand as the patch was out of date].",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "4ecadc12ba1ef7a91b8621c967c362bab495c202",
+   "ct": 1048138331,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Apply patch for bug 17250 (http://issues.apache.org/bugzilla/show_bug.cgi?id=17250) with some additional minor improvements.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ToStringBuilder.java"
+   ]
+  },
+  {
+   "sha": "ff33134d11ba92f32939a460d295be942e83dfc7",
+   "ct": 1047964248,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added getFullStackTrace and isNestedThrowable. Listed as Bug #16689",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "2023467c0595f2561be7e5874e2bcaae972c37bc",
+   "ct": 1044397173,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix licences, dates and since tags",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/CalendarUtils.java",
+    "src/java/org/apache/commons/lang/time/DateUtils.java",
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java",
+    "src/java/org/apache/commons/lang/time/StopWatch.java"
+   ]
+  },
+  {
+   "sha": "751c151c49a24cccf989ed6abd0eff0b3b915e03",
+   "ct": 1044396728,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Change scope of static constant for performance from Gary Gregory, bug ref 16622",
+   "c_files": [
+    "src/java/org/apache/commons/lang/time/FastDateFormat.java"
+   ]
+  },
+  {
+   "sha": "4c63a720535736560ec6ff4fe7a55f789dd15fc4",
+   "ct": 1044396384,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Add support for indexOf, lastIndexOf and contains for ArrayUtils from Nikolay Metchev, bug ref 15438",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ArrayUtils.java",
+    "src/test/org/apache/commons/lang/ArrayUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "bdbde6db66fe96223f7d4e5f3375def53a35793c",
+   "ct": 1044384170,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Update Enum initial sizes for JDK1.2 and JDK1.3 from Mike Bowler, bug fix 16690",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java"
+   ]
+  },
+  {
+   "sha": "c23e693049fb65e9c247c0094f85d8fce0e69886",
+   "ct": 1043499698,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Remove unused code from Gary Gregory, bug fix 16284",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/MethodUtils.java"
+   ]
+  },
+  {
+   "sha": "984bc76cd36138514e8c3c2cd494cd952d22dd13",
+   "ct": 1043002145,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix infinite recursion in inner classes reflection methods from Per Velschow",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/CompareToBuilder.java",
+    "src/java/org/apache/commons/lang/builder/EqualsBuilder.java",
+    "src/java/org/apache/commons/lang/builder/HashCodeBuilder.java",
+    "src/java/org/apache/commons/lang/builder/ToStringBuilder.java",
+    "src/test/org/apache/commons/lang/builder/ToStringBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "c2d07cc3f0eb7db5e45c21b1c698715e27fcb64e",
+   "ct": 1043000138,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix infinite recursion in replace() when blank string used from Holger Krauth",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "2f50297e5eb582ed50e87e6801917abe5a30b3c1",
+   "ct": 1041374379,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to enable anonymous inner classes as Enums for functionality",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java",
+    "src/java/org/apache/commons/lang/enum/ValuedEnum.java",
+    "src/test/org/apache/commons/lang/enum/EnumTest.java",
+    "src/test/org/apache/commons/lang/enum/OperationEnum.java"
+   ]
+  },
+  {
+   "sha": "6c4d516563eec37cfbf0e1cca768888c7188f2a9",
+   "ct": 1041373943,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to handle anonymous inner classes",
+   "c_files": [
+    "src/java/org/apache/commons/lang/ClassUtils.java",
+    "src/test/org/apache/commons/lang/ClassUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "891b71ff2c20e4846eb5569c3b1103f2243c831a",
+   "ct": 1041365873,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to include superclass fields in reflection toString",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/ToStringBuilder.java",
+    "src/test/org/apache/commons/lang/builder/ToStringBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "f682f4b0f04379e726f14d03e76605f7dda106b4",
+   "ct": 1038437669,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added a the fix for bug #14883.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "28f37f2b4d357656f16b1bf1b5ec36cb90d63d87",
+   "ct": 1038012864,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added the second fix from Mark McDowell [mcdoma@ncs.com] for bug #14062",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java"
+   ]
+  },
+  {
+   "sha": "dd1a5f5d69f4c2e820802094abc487191403d5fb",
+   "ct": 1038007965,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Surprisingly the isJavaVersionAtLeast was not static. I can't see any reason for this and have fixed it.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/SystemUtils.java"
+   ]
+  },
+  {
+   "sha": "b991b3f9738b6668c0a1697eb7b83ebb304f4773",
+   "ct": 1037660496,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed small bug and created test case",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/ReflectionUtils.java",
+    "src/test/org/apache/commons/lang/reflect/ReflectTestSuite.java",
+    "src/test/org/apache/commons/lang/reflect/ReflectionUtilsTestCase.java",
+    "src/test/org/apache/commons/lang/reflect/ScopeBean.java"
+   ]
+  },
+  {
+   "sha": "dd871131029c2bb22d14a37dccb6f49b716f9e7c",
+   "ct": 1037657924,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Remove invokeExactMethod. Going to consolidate on one inokeMethod that considers superclasses and doesn't break scope rules.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/reflect/MethodUtils.java",
+    "src/test/org/apache/commons/lang/reflect/MethodUtilsTestCase.java"
+   ]
+  },
+  {
+   "sha": "1cb025f0c01395fea1fb98e61dc7d683e8865457",
+   "ct": 1036688384,
+   "class": "other-fix",
+   "why": "",
+   "subject": "NumberRange.getMaximum returns the minimum, not the maximum. Test added to verify this, and then the bug fixed. SUBMITTED-BY:  Kasper R\ufffdnning",
+   "c_files": [
+    "src/java/org/apache/commons/lang/NumberRange.java",
+    "src/test/org/apache/commons/lang/NumberRangeTest.java"
+   ]
+  },
+  {
+   "sha": "f44c297fa295f4303c9aefd57e8eeb3c2c8a928a",
+   "ct": 1036242990,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Ensure that duplicate enums cannot be created Bug found by Howard Lewis Ship",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java"
+   ]
+  },
+  {
+   "sha": "778d8d5828dbd797fc68be5062a891843aa98cab",
+   "ct": 1036015098,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix to be JDK1.2 compliant",
+   "c_files": [
+    "src/java/org/apache/commons/lang/enum/Enum.java"
+   ]
+  },
+  {
+   "sha": "b759cf0bc6671d25008f7e375a308c2ad142c7f0",
+   "ct": 1034531830,
+   "class": "other-fix",
+   "why": "",
+   "subject": "made fix for bug id 13527 http://nagoya.apache.org/bugzilla/show_bug.cgi?id=13527",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/ExceptionUtils.java"
+   ]
+  },
+  {
+   "sha": "5d1ca3e44936f54752d4e281c8ed311ed021a9e8",
+   "ct": 1033283712,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fixed to allow a charset of \"-\" to work correctly. Submitted by:\tSteve Downey",
+   "c_files": [
+    "src/java/org/apache/commons/lang/CharSet.java"
+   ]
+  },
+  {
+   "sha": "8d12cf6b9cc902806bb10d1a1c2e1200851a0648",
+   "ct": 1031868000,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Added code from Steve Downey, with some formatting changes and minor bug fixes",
+   "c_files": [
+    "src/java/org/apache/commons/lang/builder/EqualsBuilder.java"
+   ]
+  },
+  {
+   "sha": "0b3f9dcadcdaf69530b76245d07cfd92bde67977",
+   "ct": 1029915114,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Broke long lines; no functional change.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/exception/NestableDelegate.java"
+   ]
+  },
+  {
+   "sha": "e950d9b37e97f8573f0655520b88900e8acb2869",
+   "ct": 1027647611,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Removed two broken methods from StringUtils.  Since a beta has gone out, this is not good practice.  However, since 1.0 final has not yet been released, it is out-weighed by the trade off of releasing code that just plain doesn't work.",
+   "c_files": [
+    "src/java/org/apache/commons/lang/StringUtils.java",
+    "src/test/org/apache/commons/lang/StringUtilsTest.java"
+   ]
+  }
+ ],
+ "v2_dropped": {
+  "extrinsic|A": 1,
+  "extrinsic|B2": 1,
+  "extrinsic|C": 3,
+  "other-fix|A": 199,
+  "other-fix|B": 357,
+  "other-fix|B2": 29,
+  "other-fix|B3": 7,
+  "other-fix|C": 55,
+  "regression|A": 8,
+  "regression|B": 1,
+  "regression|B2": 2,
+  "regression|C": 20
+ }
+}

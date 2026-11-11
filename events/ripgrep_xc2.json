@@ -1,0 +1,981 @@
+{
+ "repo": "ripgrep",
+ "head": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
+ "branch": "first-parent",
+ "since": 1506601944,
+ "rules": "docs/xc_hypotheses.md + FIXLIKE v3c (amendment 2, 2026-11-11); see docs/otherfix_audit.md",
+ "counts": {
+  "no C file": 814,
+  "not a fix": 448,
+  "other-fix": 285,
+  "regression": 28,
+  "extrinsic": 6,
+  "sweep (> 50 C files)": 2
+ },
+ "events": [
+  {
+   "sha": "0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+   "ct": 1784237586,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix deadlock when visitor panics",
+   "c_files": [
+    "crates/ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "f55548ba9f24dda192880d4a3da2b52e90f6e194",
+   "ct": 1783619372,
+   "class": "other-fix",
+   "why": "",
+   "subject": "globset: fix `matches_all` false positives",
+   "c_files": [
+    "crates/globset/src/lib.rs"
+   ]
+  },
+  {
+   "sha": "653d7f5bd13762b97cf0bd6b7c5890cf3f54db4d",
+   "ct": 1783619372,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ignore: add multi-root parent matcher regression tests",
+   "c_files": [
+    "crates/ignore/src/dir.rs",
+    "tests/misc.rs"
+   ]
+  },
+  {
+   "sha": "43e2f08edef8c00e5d7719212c3e6a869bca1151",
+   "ct": 1780657368,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ignore: fix parent gitignore matching across multiple roots",
+   "c_files": [
+    "crates/ignore/src/dir.rs"
+   ]
+  },
+  {
+   "sha": "cd1f981beafaeb9b61537e47e91314cea125400b",
+   "ct": 1764443498,
+   "class": "other-fix",
+   "why": "",
+   "subject": "fix: derive `Default` when possible",
+   "c_files": [
+    "crates/core/flags/lowargs.rs"
+   ]
+  },
+  {
+   "sha": "d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+   "ct": 1760886399,
+   "class": "regression",
+   "why": "revert",
+   "subject": "searcher: fix regression with `--line-buffered` flag",
+   "c_files": [
+    "crates/searcher/src/line_buffer.rs",
+    "crates/searcher/src/searcher/glue.rs"
+   ]
+  },
+  {
+   "sha": "63209ae0b95d31f28d14be5125fba3f61f5835e6",
+   "ct": 1760577680,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix `--stats` for `--json`",
+   "c_files": [
+    "crates/printer/src/json.rs"
+   ]
+  },
+  {
+   "sha": "b610d1cb1506feab33459c5853e4c0d0cb16a6e2",
+   "ct": 1760571863,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix global gitignore bug that arises with absolute paths",
+   "c_files": [
+    "crates/core/flags/hiargs.rs",
+    "crates/ignore/src/dir.rs",
+    "crates/ignore/src/gitignore.rs",
+    "crates/ignore/src/walk.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "d4b77a8d8967ce1bf701ec65ceb9a75e85e5f2e0",
+   "ct": 1760466463,
+   "class": "other-fix",
+   "why": "",
+   "subject": "searcher: fix a performance bug with `-A/--after-context`",
+   "c_files": [
+    "crates/searcher/src/searcher/core.rs"
+   ]
+  },
+  {
+   "sha": "8c6595c215d1e24bed5b7b86e2b18f3c871439ef",
+   "ct": 1760466463,
+   "class": "other-fix",
+   "why": "",
+   "subject": "searcher: fix performance bug with `-A/--after-context` when searching `stdin`",
+   "c_files": [
+    "crates/searcher/src/line_buffer.rs",
+    "crates/searcher/src/searcher/glue.rs"
+   ]
+  },
+  {
+   "sha": "de2567a4c76fa671005538d6cd841abc44932b9a",
+   "ct": 1760304319,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix panic in replacements in look-around corner case",
+   "c_files": [
+    "crates/printer/src/util.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "0407e104f611d623547897ca99d172673b31779f",
+   "ct": 1759972619,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix problem with searching whitelisted hidden files",
+   "c_files": [
+    "crates/ignore/src/dir.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "8b5d3d1c1e3b0e32f22aa634d000b314f6d4d465",
+   "ct": 1758546736,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: hack in a fix for `-l/--files-with-matches` when using `--pcre2 --multiline` with look-around",
+   "c_files": [
+    "crates/printer/src/summary.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "126bbeab8c1cbbc1d6cb36b4c2d560574233856d",
+   "ct": 1758330499,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix handling of `has_match` for summary printer",
+   "c_files": [
+    "crates/core/flags/hiargs.rs",
+    "crates/printer/src/summary.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "4df1298127695ed1e76937f16de1a0135677ccf5",
+   "ct": 1758330499,
+   "class": "other-fix",
+   "why": "",
+   "subject": "globset: fix bug where trailing `.` in file name was incorrectly handled",
+   "c_files": [
+    "crates/globset/src/pathutil.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "4ab1862dc04783b6615807d4b4511388c6b30364",
+   "ct": 1758330499,
+   "class": "other-fix",
+   "why": "",
+   "subject": "stats: fix case where \"bytes searched\" could be wrong",
+   "c_files": [
+    "crates/searcher/src/searcher/glue.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "14f4957b3d605f14ad58bc67e54197a3084fef5a",
+   "ct": 1758330499,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix filtering searching subdir or .ignore in parent dir",
+   "c_files": [
+    "crates/ignore/src/dir.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "5fbc4fee64131b5cd14675be71e43768a9763553",
+   "ct": 1744037612,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore/types: fix Seed7 file extension",
+   "c_files": [
+    "crates/ignore/src/default_types.rs"
+   ]
+  },
+  {
+   "sha": "9d738ad0c009e6632d75fa3d36051e5ae7f7cce6",
+   "ct": 1725847246,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix inner literal extraction that resulted in false negatives",
+   "c_files": [
+    "crates/regex/src/literal.rs",
+    "tests/util.rs"
+   ]
+  },
+  {
+   "sha": "b9c774937fc285e6668be9823c4bf231a61fc4a8",
+   "ct": 1704563442,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix reference cycle for compiled matchers",
+   "c_files": [
+    "crates/ignore/src/dir.rs"
+   ]
+  },
+  {
+   "sha": "805fa32d184f9b163e7355dd335abc96440f0d2b",
+   "ct": 1701137832,
+   "class": "other-fix",
+   "why": "",
+   "subject": "searcher: work around NUL line terminator bug",
+   "c_files": [
+    "crates/searcher/src/searcher/core.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "8575d261790fe393d1768d12b3336cbb4cf0a9fc",
+   "ct": 1701137832,
+   "class": "other-fix",
+   "why": "",
+   "subject": "complete/fish: Fix syntax for negated options",
+   "c_files": [
+    "crates/core/flags/complete/fish.rs"
+   ]
+  },
+  {
+   "sha": "c81caa673b743bdac04db75c32957200bf549695",
+   "ct": 1700609972,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "core: fix file separator bug",
+   "c_files": [
+    "crates/core/flags/hiargs.rs"
+   ]
+  },
+  {
+   "sha": "c3e85f2b44a05da44cea164adf14c3c39d769132",
+   "ct": 1696897792,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix a few issues in the hyperlink docs",
+   "c_files": [
+    "crates/core/app.rs",
+    "crates/printer/src/hyperlink.rs"
+   ]
+  },
+  {
+   "sha": "cad1f5fae2e4b48d8942add9dc4c950a170b5d2e",
+   "ct": 1695225162,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix filtering when searching subdirectories",
+   "c_files": [
+    "crates/ignore/src/dir.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "341a19e0d05bc6f0cabeb2dc756b37cfc047f8f0",
+   "ct": 1690807869,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix fast path for -w/--word-regexp flag (#2576)",
+   "c_files": [
+    "crates/regex/src/word.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "6abb962f0d655a186972462d88d2de4e5caf4a33",
+   "ct": 1688912043,
+   "class": "other-fix",
+   "why": "",
+   "subject": "cli: fix non-path sorting behavior",
+   "c_files": [
+    "crates/core/args.rs",
+    "crates/core/main.rs",
+    "tests/feature.rs",
+    "tests/misc.rs"
+   ]
+  },
+  {
+   "sha": "8e57989cd20379acfca28a341da61df177daca1c",
+   "ct": 1657893219,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix matching bug when text anchors are used",
+   "c_files": [
+    "crates/regex/src/config.rs",
+    "crates/regex/src/matcher.rs",
+    "crates/searcher/src/searcher/core.rs",
+    "crates/searcher/src/searcher/glue.rs"
+   ]
+  },
+  {
+   "sha": "9f0e88bcb14e02da1b88872435b17d74786640b5",
+   "ct": 1655217637,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix gitignore parsing bug for trailing \\/",
+   "c_files": [
+    "crates/ignore/src/gitignore.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "91afd4214a9ada15e475bba02694f4fb50079cbc",
+   "ct": 1652294698,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix duplicative replacement in multiline mode",
+   "c_files": [
+    "crates/printer/src/util.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "457f53b7ee70064075bd95dab163d6ac772ed03e",
+   "ct": 1634649319,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore/types: fix futhark type extension",
+   "c_files": [
+    "crates/ignore/src/default_types.rs"
+   ]
+  },
+  {
+   "sha": "07f97d42cf68f7f4b1a9fc42875605b446c640a4",
+   "ct": 1624037447,
+   "class": "other-fix",
+   "why": "",
+   "subject": "globset: fix compilation when serde is enabled",
+   "c_files": [
+    "crates/globset/src/serde_impl.rs"
+   ]
+  },
+  {
+   "sha": "bc76a30c23317526441a76f99ff397f65acea607",
+   "ct": 1623521933,
+   "class": "regression",
+   "why": "references efd9cfb2fc (11 d earlier)",
+   "subject": "regex: fix -w when regex can match empty string",
+   "c_files": [
+    "crates/matcher/src/lib.rs",
+    "crates/regex/src/word.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "af54069c51cc3656c9c343a7fb3c9360cfddf505",
+   "ct": 1622596057,
+   "class": "other-fix",
+   "why": "",
+   "subject": "edition: run 'cargo fix --edition --edition-idioms --all'",
+   "c_files": [
+    "crates/cli/src/human.rs",
+    "crates/cli/src/lib.rs",
+    "crates/cli/src/pattern.rs",
+    "crates/cli/src/process.rs",
+    "crates/core/args.rs",
+    "crates/core/logger.rs",
+    "crates/globset/benches/bench.rs",
+    "crates/globset/src/glob.rs",
+    "crates/globset/src/lib.rs",
+    "crates/globset/src/pathutil.rs",
+    "crates/grep/examples/simplegrep.rs",
+    "crates/ignore/examples/walk.rs",
+    "crates/ignore/src/dir.rs",
+    "crates/ignore/src/lib.rs",
+    "crates/ignore/src/walk.rs",
+    "crates/ignore/tests/gitignore_matched_path_or_any_parents_tests.rs",
+    "crates/matcher/src/interpolate.rs",
+    "crates/matcher/src/lib.rs",
+    "crates/matcher/tests/tests.rs",
+    "crates/pcre2/src/error.rs",
+    "crates/pcre2/src/lib.rs",
+    "crates/printer/src/color.rs",
+    "crates/printer/src/json.rs",
+    "crates/printer/src/jsont.rs",
+    "crates/printer/src/lib.rs",
+    "crates/printer/src/standard.rs",
+    "crates/printer/src/summary.rs",
+    "crates/printer/src/util.rs",
+    "crates/regex/src/error.rs",
+    "crates/regex/src/lib.rs",
+    "crates/searcher/examples/search-stdin.rs",
+    "crates/searcher/src/lib.rs",
+    "crates/searcher/src/searcher/glue.rs",
+    "crates/searcher/src/searcher/mod.rs",
+    "crates/searcher/src/sink.rs",
+    "crates/searcher/src/testutil.rs"
+   ]
+  },
+  {
+   "sha": "459a9c563706ef84b8710fab8727b770552ed29c",
+   "ct": 1622596057,
+   "class": "other-fix",
+   "why": "",
+   "subject": "edition: initial 'cargo fix --edition' run",
+   "c_files": [
+    "crates/cli/src/decompress.rs",
+    "crates/cli/src/lib.rs",
+    "crates/cli/src/pattern.rs",
+    "crates/cli/src/process.rs",
+    "crates/cli/src/wtr.rs",
+    "crates/globset/src/glob.rs",
+    "crates/globset/src/lib.rs",
+    "crates/ignore/src/dir.rs",
+    "crates/ignore/src/gitignore.rs",
+    "crates/ignore/src/lib.rs",
+    "crates/ignore/src/overrides.rs",
+    "crates/ignore/src/pathutil.rs",
+    "crates/ignore/src/types.rs",
+    "crates/ignore/src/walk.rs",
+    "crates/matcher/src/lib.rs",
+    "crates/matcher/tests/test_matcher.rs",
+    "crates/pcre2/src/lib.rs",
+    "crates/pcre2/src/matcher.rs",
+    "crates/printer/src/json.rs",
+    "crates/printer/src/jsont.rs",
+    "crates/printer/src/lib.rs",
+    "crates/printer/src/standard.rs",
+    "crates/printer/src/stats.rs",
+    "crates/printer/src/summary.rs",
+    "crates/printer/src/util.rs",
+    "crates/regex/src/config.rs",
+    "crates/regex/src/crlf.rs",
+    "crates/regex/src/error.rs",
+    "crates/regex/src/lib.rs",
+    "crates/regex/src/literal.rs",
+    "crates/regex/src/matcher.rs",
+    "crates/regex/src/multi.rs",
+    "crates/regex/src/strip.rs",
+    "crates/regex/src/word.rs",
+    "crates/searcher/src/lib.rs",
+    "crates/searcher/src/searcher/core.rs",
+    "crates/searcher/src/searcher/glue.rs",
+    "crates/searcher/src/searcher/mod.rs",
+    "crates/searcher/src/sink.rs",
+    "crates/searcher/src/testutil.rs"
+   ]
+  },
+  {
+   "sha": "efd9cfb2fc1f0233de9eda4c03416d32ef2c3ce8",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "grep: fix bugs in handling multi-line look-around",
+   "c_files": [
+    "crates/core/app.rs",
+    "crates/matcher/src/lib.rs",
+    "crates/printer/src/json.rs",
+    "crates/printer/src/lib.rs",
+    "crates/printer/src/standard.rs",
+    "crates/printer/src/summary.rs",
+    "crates/printer/src/util.rs",
+    "crates/regex/src/word.rs",
+    "crates/searcher/src/searcher/core.rs",
+    "crates/searcher/src/sink.rs",
+    "tests/json.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "656aa126492b04f1ac8b0406f589b6de4c4b7d60",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix multi-line replacement bug",
+   "c_files": [
+    "crates/printer/src/standard.rs",
+    "crates/searcher/src/searcher/glue.rs",
+    "tests/json.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "7534d5144f5c5e89d67c791e663cdc0bee069b0e",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "globset: fix recursive suffix over matching",
+   "c_files": [
+    "crates/globset/src/glob.rs"
+   ]
+  },
+  {
+   "sha": "0ca96e004c539e44242607fee5c4661edf27a5cd",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix context bug when --max-count is used",
+   "c_files": [
+    "crates/printer/src/json.rs",
+    "crates/printer/src/standard.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "12dd455ee9aa731acfeb0d2dfed568a0103cae73",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix \\r\\n line terminator handling",
+   "c_files": [
+    "crates/printer/src/standard.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "5af7707a350d96066c47965075b09050bc1cf33c",
+   "ct": 1622512278,
+   "class": "other-fix",
+   "why": "",
+   "subject": "cli: fix process leak",
+   "c_files": [
+    "crates/cli/src/decompress.rs",
+    "crates/cli/src/process.rs",
+    "crates/core/search.rs"
+   ]
+  },
+  {
+   "sha": "229d1a8d41b0023420e7815578fa0b39c0d5c2e4",
+   "ct": 1622295408,
+   "class": "other-fix",
+   "why": "",
+   "subject": "cli: fix arbitrary execution of program bug",
+   "c_files": [
+    "crates/cli/src/decompress.rs",
+    "crates/cli/src/lib.rs",
+    "crates/core/args.rs",
+    "crates/core/search.rs"
+   ]
+  },
+  {
+   "sha": "581a35e568c3acd32461d276a4cfe746524e17cd",
+   "ct": 1622288248,
+   "class": "other-fix",
+   "why": "",
+   "subject": "impl: fix --multiline anchored match bug",
+   "c_files": [
+    "crates/regex/src/non_matching.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "94e4b8e301302097dad48b292560ce135c4d4926",
+   "ct": 1621081679,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix --vimgrep for multi-line mode",
+   "c_files": [
+    "crates/printer/src/standard.rs",
+    "tests/multiline.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "020c5453a5880257c87949030550d24c596f5c8d",
+   "ct": 1606145014,
+   "class": "other-fix",
+   "why": "",
+   "subject": "cli: fix stdin detection for Powershell on Unix",
+   "c_files": [
+    "crates/cli/src/lib.rs"
+   ]
+  },
+  {
+   "sha": "7ed9a31819aa4f1c1b25f1fa95bdf602232ddbb0",
+   "ct": 1588994680,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix --count-matches output",
+   "c_files": [
+    "crates/printer/src/summary.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "1c4b5adb7b4a239e433d4a1dc2aa4b09ee30573d",
+   "ct": 1585787868,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix another inner literal bug",
+   "c_files": [
+    "crates/regex/src/literal.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "8ba6ccd159ba6bee6ad869a2a09565f3625febb7",
+   "ct": 1584400584,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix failing test",
+   "c_files": [
+    "crates/ignore/src/dir.rs"
+   ]
+  },
+  {
+   "sha": "f314b0d55f2fa7c9f19b677624a19a7ba24c7cf4",
+   "ct": 1582232871,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix parallel traversal",
+   "c_files": [
+    "crates/ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "b435eaafc805b1edb12b04d72de0e0ce113059f9",
+   "ct": 1581977788,
+   "class": "other-fix",
+   "why": "",
+   "subject": "grep-regex: fix inner literal extraction bug",
+   "c_files": [
+    "grep-regex/src/literal.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "46b07bb2ee0de2781a30e7e92a9491d58743bb89",
+   "ct": 1579524537,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore/types: fix postscript globs",
+   "c_files": [
+    "ignore/src/types.rs"
+   ]
+  },
+  {
+   "sha": "813c676ecac053559a3b1b72034e0c34c8ed7e06",
+   "ct": 1564745007,
+   "class": "other-fix",
+   "why": "",
+   "subject": "searcher: fix roll buffer bug",
+   "c_files": [
+    "grep-searcher/src/line_buffer.rs"
+   ]
+  },
+  {
+   "sha": "9268ff8e8db179a484810cfbc40f3a8dba74ccaf",
+   "ct": 1564694843,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ripgrep: fix bug when CWD has directory named `-`",
+   "c_files": [
+    "src/args.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "e7829c05d3b9234f053e7d480f7e75028831d772",
+   "ct": 1555672304,
+   "class": "other-fix",
+   "why": "",
+   "subject": "cli: fix bug where last byte was stripped",
+   "c_files": [
+    "grep-cli/src/pattern.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "bd222ae93fa0cabe7d51ba8db40ece99579bdaed",
+   "ct": 1555284567,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix HIR analysis bug",
+   "c_files": [
+    "grep-regex/src/multi.rs"
+   ]
+  },
+  {
+   "sha": "9f15e3b671d64efa261f6de0fd4c6c06e0caa21c",
+   "ct": 1554521048,
+   "class": "other-fix",
+   "why": "",
+   "subject": "regex: fix a perf bug when using -w flag",
+   "c_files": [
+    "grep-regex/src/config.rs",
+    "grep-regex/src/literal.rs"
+   ]
+  },
+  {
+   "sha": "0df71240ff19fe8fa278b64d8776725f0253bcf9",
+   "ct": 1548536512,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "search: fix -F and -f interaction bug",
+   "c_files": [
+    "src/args.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "aeaa5fc1b13bd5b903ef5660d3a6cb26b6745945",
+   "ct": 1548288902,
+   "class": "other-fix",
+   "why": "",
+   "subject": "globset: fix repeated use of **",
+   "c_files": [
+    "globset/src/glob.rs",
+    "ignore/src/gitignore.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "23be3cf850386ec0d4d8724fb9bf5ddeaab2c27d",
+   "ct": 1548285155,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix handling of **",
+   "c_files": [
+    "ignore/src/gitignore.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "a7f2d482342eb2250b5a32ee03a8fe16990228dc",
+   "ct": 1548211043,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix path handling in summarizer",
+   "c_files": [
+    "grep-printer/src/summary.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "ba503eb6775f0031c684a3bfeeb1c9cb07601dd6",
+   "ct": 1537908964,
+   "class": "other-fix",
+   "why": "",
+   "subject": "grep-regex: fix inner literal detection",
+   "c_files": [
+    "grep-regex/src/literal.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "fd22cd520bf7c76b53ec0001dff5bf898ce92c75",
+   "ct": 1536117535,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "windows: fix unused warnings on Windows",
+   "c_files": [
+    "grep-cli/src/pattern.rs",
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "2f3dbf5fee7a83a7d8e9bbeb48eebf79f9415c47",
+   "ct": 1534907152,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix false positive in path_is_symlink",
+   "c_files": [
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "74a89be64110a61972169c4a7f0e44ea2a43b4ec",
+   "ct": 1534907152,
+   "class": "other-fix",
+   "why": "",
+   "subject": "grep-printer: fix bug in printing truncated lines",
+   "c_files": [
+    "grep-printer/src/standard.rs"
+   ]
+  },
+  {
+   "sha": "1529ce33414f33eb432f9efadf3e38609ae89429",
+   "ct": 1534907152,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ripgrep: remove workaround for std bug",
+   "c_files": [
+    "ignore/src/walk.rs",
+    "src/subject.rs"
+   ]
+  },
+  {
+   "sha": "0863c75a5a819dc94754f3465246366ffd5d541f",
+   "ct": 1532867453,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix bug in matched_path_or_any_parents",
+   "c_files": [
+    "ignore/src/gitignore.rs"
+   ]
+  },
+  {
+   "sha": "aa2ce39d14e4493c2389ef0bc9f65597cb8b120c",
+   "ct": 1532194014,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix has_any_ignore_rules for explicit ignores",
+   "c_files": [
+    "ignore/src/dir.rs",
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "7e5a59027638952ae55a1cc3d9d3b2ce7d69be98",
+   "ct": 1531873624,
+   "class": "other-fix",
+   "why": "",
+   "subject": "grep: small literal detection fix",
+   "c_files": [
+    "grep/src/literals.rs"
+   ]
+  },
+  {
+   "sha": "ac90316e359d41520f4f0c445286f3abda59db80",
+   "ct": 1529960522,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ripgrep: add --fixed-strings flag",
+   "c_files": [
+    "src/app.rs"
+   ]
+  },
+  {
+   "sha": "004bb35694a564e3f677003dddc97e455bcd7922",
+   "ct": 1529801345,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ripgrep/printer: fix small performance regression",
+   "c_files": [
+    "src/printer.rs"
+   ]
+  },
+  {
+   "sha": "07713fb5c5563243566677fae21095e610d459f8",
+   "ct": 1522096968,
+   "class": "other-fix",
+   "why": "",
+   "subject": "termcolor: fix bold + intense colors in Win 10",
+   "c_files": [
+    "termcolor/src/lib.rs"
+   ]
+  },
+  {
+   "sha": "d65966efbca5cfe2afdc6930e868d02e53591a43",
+   "ct": 1519174252,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ignore: fix performance regression on Windows",
+   "c_files": [
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "18f549d289b95b0de9e0f7b6c7d880b7752ea04d",
+   "ct": 1519091557,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ignore: fix symlink following on Windows",
+   "c_files": [
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "361698b90a6b31feac78ac2f16082342f750a1e1",
+   "ct": 1518650198,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix improper hidden filtering",
+   "c_files": [
+    "ignore/src/gitignore.rs",
+    "tests/tests.rs"
+   ]
+  },
+  {
+   "sha": "b71a110ccf1c9cfe5f4c447cc3878a2e45ed7b8f",
+   "ct": 1518609206,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix custom ignore name bug",
+   "c_files": [
+    "ignore/src/dir.rs",
+    "ignore/src/walk.rs"
+   ]
+  },
+  {
+   "sha": "e36b65a11a7fa72e4b43f89c71441884269f0522",
+   "ct": 1517537462,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "windows: fix OneDrive traversals",
+   "c_files": [
+    "ignore/src/lib.rs",
+    "ignore/src/walk.rs",
+    "src/args.rs",
+    "src/main.rs"
+   ]
+  },
+  {
+   "sha": "51864c13fc329332b9ebcf2a7e45e7b6aadeedbd",
+   "ct": 1517253059,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ignore: fix handling of / in patterns",
+   "c_files": [
+    "ignore/src/gitignore.rs",
+    "ignore/src/overrides.rs",
+    "ignore/tests/gitignore_matched_path_or_any_parents_tests.rs"
+   ]
+  },
+  {
+   "sha": "14779ed0ea5d28aaa6c04dff3be77989f9fd2836",
+   "ct": 1514823886,
+   "class": "other-fix",
+   "why": "",
+   "subject": "ux: suggest --fixed-strings flag",
+   "c_files": [
+    "src/args.rs",
+    "tests/tests.rs"
+   ]
+  },
+  {
+   "sha": "2a14bf22491b01cabe882bfaa116a4aea048047f",
+   "ct": 1508640010,
+   "class": "other-fix",
+   "why": "",
+   "subject": "printer: fix colors on empty matches",
+   "c_files": [
+    "src/printer.rs",
+    "tests/tests.rs"
+   ]
+  },
+  {
+   "sha": "e7c06b92fb996adcbc40d1f025e29c44de5383e8",
+   "ct": 1507464635,
+   "class": "other-fix",
+   "why": "",
+   "subject": "Fix printing context after an early return from a search",
+   "c_files": [
+    "src/search_stream.rs"
+   ]
+  }
+ ],
+ "v2_dropped": {
+  "extrinsic|A": 2,
+  "extrinsic|C": 2,
+  "other-fix|A": 13,
+  "other-fix|B": 84,
+  "other-fix|B2": 10,
+  "other-fix|C": 109,
+  "regression|A": 8,
+  "regression|B": 1,
+  "regression|C": 10
+ }
+}

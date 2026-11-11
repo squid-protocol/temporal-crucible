@@ -36,7 +36,12 @@ def main():
     ap.add_argument("--repos", default=DEFAULT)
     ap.add_argument("--n", type=int, default=30)
     ap.add_argument("--seed", type=int, default=2982)
+    ap.add_argument("--suffix", default="_xc", help="_xc (v1 rules) or _xc2 (FIXLIKE v2)")
+    ap.add_argument("--exclude", type=Path, help="file of shas already judged, one per line, to skip")
     a = ap.parse_args()
+    skip = set()
+    if a.exclude and a.exclude.exists():
+        skip = {ln.strip()[:10] for ln in a.exclude.read_text().split() if ln.strip()}
 
     print("# `other-fix` precision audit — sample\n")
     print(f"Seeded random sample, seed {a.seed}, {a.n} per repo, drawn from `other-fix` events only.")
@@ -44,10 +49,11 @@ def main():
           "feature/refactor with a fix word in the message, a docs/tests/build-only change, or a "
           "cosmetic or warning-only change.\n")
     for r in a.repos.split(","):
-        p = REPO_ROOT / "events" / f"{r}_xc.json"
+        p = REPO_ROOT / "events" / f"{r}{a.suffix}.json"
         if not p.exists():
             continue
-        ev = [e for e in json.loads(p.read_text())["events"] if e.get("class") == "other-fix"]
+        ev = [e for e in json.loads(p.read_text())["events"]
+              if e.get("class") == "other-fix" and e["sha"][:10] not in skip]
         rng = random.Random(a.seed)
         rng.shuffle(ev)
         pick = ev[:a.n]
