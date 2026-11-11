@@ -29,6 +29,8 @@ Registered only: [`../dcs_hypotheses.md`](../dcs_hypotheses.md).
 - Exploratory discovery runs on the earlier-born half, per repo. The models are frozen and committed. Then the
   confirmation test runs on the later-born half: the AUC lift of each feature family over a loc + repo +
   prior-CVE baseline.
+- 2026-11-11, Stage 1 (exploratory) frozen: [`../dcs_discovery.md`](../dcs_discovery.md) and the fitted models
+  `docs/dcs_models.json` were committed before Stage 2 read any confirmation function (`tools/dcs_eval.py`).
 
 ## What we found
 
