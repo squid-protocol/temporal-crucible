@@ -6,7 +6,11 @@
 # ==============================================================================
 """LAWS defect panel (methods review M7): one row per (unit source file, yearly snapshot t). No model is fitted.
 
-    file_years(net_db, history_db, language)  ->  list of dict rows, and a summary
+    file_years(net_db, history_db, language, labels)  ->  list of dict rows, and a summary
+
+`labels` is optional and revises the fix label per commit sha: pass tools/laws_github.fix_labels(...) to compute
+the defect laws from the M6 workflow label (PR title and body, linked-issue labels) instead of the keyword label.
+The summary records how many labels it changed.
 
 A file-year is kept iff t >= first snapshot + 1 year, t + WINDOW days <= the last commit the history covers, and
 the file is a unit file at t.
@@ -53,12 +57,25 @@ def epoch(date: str) -> int:
 class History:
     """Read-only views of a tools/laws_history.py database."""
 
-    def __init__(self, db: Path):
+    def __init__(self, db: Path, labels: dict[str, bool] | None = None):
+        """`labels` revises the fix label per commit sha (tools/laws_github.py's `fix_labels`, the M6 workflow
+        rules: a merge unit labelled from its PR's title and body, and linked-issue labels). A sha the mapping
+        does not name keeps the database's own label, which is what a bot's commit, a commit touching no unit
+        source file, and every commit of a repo that is not on github.com all fall back to."""
         con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
         self.meta = dict(con.execute("SELECT key, value FROM meta"))
         self.last_ct = int(self.meta["last_ct"])
-        self.commits = {sha: (ct, author, bot, fix) for sha, ct, author, bot, fix in
-                        con.execute("SELECT sha, ct, author, bot, fix FROM commit_")}
+        raw = {sha: (ct, author, bot, fix) for sha, ct, author, bot, fix in
+               con.execute("SELECT sha, ct, author, bot, fix FROM commit_")}
+        self.labels_applied = {"given": len(labels or {}), "changed": 0, "made": 0, "unmade": 0}
+        if labels:
+            for sha, (ct, author, bot, fix) in list(raw.items()):
+                new_fix = int(bool(labels.get(sha, fix)))
+                if new_fix != fix:
+                    self.labels_applied["changed"] += 1
+                    self.labels_applied["made" if new_fix else "unmade"] += 1
+                    raw[sha] = (ct, author, bot, new_fix)
+        self.commits = raw
         self.by_file: dict[int, list] = collections.defaultdict(list)  # lineage -> [(ct, sha)] ascending
         self.files_of: dict[str, list] = collections.defaultdict(list)  # sha -> [lineage]
         for sha, fid in con.execute("SELECT DISTINCT sha, file FROM touch"):
@@ -109,9 +126,10 @@ def file_graph(net) -> dict:
                 "functions": len(ks[f])} for f in files}
 
 
-def file_years(net_db: Path, history_db: Path, language: str) -> tuple[list[dict], dict]:
+def file_years(net_db: Path, history_db: Path, language: str,
+               labels: dict[str, bool] | None = None) -> tuple[list[dict], dict]:
     con = sqlite3.connect(f"file:{net_db}?mode=ro", uri=True)
-    hist = History(history_db)
+    hist = History(history_db, labels)
     yearly = N.yearly(N.snapshots(con))
     rows: list[dict] = []
     summary = {"snapshots_yearly": len(yearly), "snapshots_used": 0, "unmatched_files": 0, "deleted_in_window": 0}
@@ -170,5 +188,5 @@ def file_years(net_db: Path, history_db: Path, language: str) -> tuple[list[dict
     summary.update(rows=len(rows), positives=sum(r["outcome"] for r in rows),
                    in_cycle_share=float(np.mean([r["in_cycle"] for r in rows])) if rows else None,
                    giant_share=float(np.mean([r["giant"] for r in rows])) if rows else None,
-                   history_unit=hist.meta.get("unit"))
+                   history_unit=hist.meta.get("unit"), fix_labels=hist.labels_applied)
     return rows, summary

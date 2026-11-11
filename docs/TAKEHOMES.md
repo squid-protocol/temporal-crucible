@@ -139,7 +139,9 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### What comments say
 
+- **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-dcs-danger-comment-signature.md)
 - **Comment prose is 14% of hunk-grain branch hits but does not drive the fix gradient; the new header-comment flag is about 95% precise on curl; but the commented-out-code signal is about 4% precise on curl (mostly "/* for foo() */" include notes), so no study should read it until the rule is fixed.** — exploratory, 2026-11-10 · [journal](journal/2026-11-10-comment-extraction-wave-a.md)
+- **Registered, not yet scored.** — pending, 2026-11-10 · [journal](journal/2026-11-10-com-h4-comment-drift.md)
 - **Functions born with danger-language comments get CVE fixes 1.45× as often [1.08, 1.89]; the replication on unseen repos was inconclusive (1.13), and CVE fixes themselves add such comments (1.61×).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-danger-comments.md)
 
 ### Engine findings (GitGalaxy itself)

@@ -95,6 +95,11 @@ function span, checked match by match. Before #8200, all of these columns were 0
 On curl the rule is about 4% precise. It fires on a keyword (`for`, `if`, `return`) followed by a call shape, and
 curl annotates every `#include` with `/* for foo() */`.
 
+**Fixed after this audit (gitgalaxy#8255, merged 2026-11-10).** The C-family keyword arm now needs code shape: `if`,
+`for` and `while` need `(`, and `return` needs a statement end. On the same curl scan the matches drop from 48 to 9:
+the 2 real commented-out statements and 7 commented-out prototypes. Prototype notes still count, by definition.
+COM-H3 needs this precision re-measured over the whole event panel before it registers.
+
 ## What this means for Wave B
 
 - **COM-H1 (comment co-change by fix class) can use the code/comment split.** The hunk-grain prose contamination is

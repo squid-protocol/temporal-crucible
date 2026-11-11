@@ -7,7 +7,7 @@ verdict: n/a
 theme: comments
 ids:
 docs: docs/comment_wave_a.md
-links: gitgalaxy#8200; gitgalaxy#8240; gitgalaxy#8244; gitgalaxy#8245; temporal-crucible#109; temporal-crucible#116
+links: gitgalaxy#8200; gitgalaxy#8240; gitgalaxy#8244; gitgalaxy#8245; gitgalaxy#8255; gitgalaxy#8256; temporal-crucible#109; temporal-crucible#116
 takehome: Comment prose is 14% of hunk-grain branch hits but does not drive the fix gradient; the new header-comment flag is about 95% precise on curl; but the commented-out-code signal is about 4% precise on curl (mostly "/* for foo() */" include notes), so no study should read it until the rule is fixed.
 ---
 
@@ -65,9 +65,10 @@ comment style until the rule is fixed.
 ## What it changed
 
 - **gitgalaxy follow-ups:**
-  - Fix the C-family `dead_code` keyword arm to need code shape, then re-audit here.
-  - Fix the two `has_header_comment` misses: a block must open with a comment marker, and the walk should step over
-    the unit's own prototype.
+  - Fix the C-family `dead_code` keyword arm to need code shape: **done in gitgalaxy#8255** (curl 48 → 9 matches,
+    2 real plus 7 prototype notes).
+  - Fix the two `has_header_comment` misses (trailing-comment tail; the unit's own prototype): **done in
+    gitgalaxy#8256** (curl 1,196 → 1,223).
 - **COM-H3 is on hold until the `dead_code` fix.**
 - **COM-H1, H2 and H4 can be registered.** H4 should use `has_header_comment`, not `is_documented`.
 - **`hunk_grammar.py`'s cache file name now carries a strip version.** `hunk_grammar.md` is to be regenerated on
