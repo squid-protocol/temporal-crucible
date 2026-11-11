@@ -70,14 +70,33 @@ What it does establish is that **the question is answerable** — 583 exposed co
 a matched design is a real study, not a fishing trip — and that the crude framing people usually quote
 (58% vs 46%) is worthless.
 
-## 5 · What a real version needs
+## 5 · Sibling studies in this program, and what they settle
+
+Three AI studies landed the same day from another lane, all on the same trailer-declared exposure:
+`docs/ai_comments_exploratory.md` (#153), `docs/ai_structure_exploratory.md` (#154) and the prospective
+registration `docs/aic_hypotheses.md` (#155). They measure **structure** — AI-declared commits add more new
+callees than the same author's other changes of the same size, median +0.28 per modified function, 11 of 13
+authors — not whether the code is later fixed. This study is the defect-outcome arm and does not duplicate
+them.
+
+Two things they do better, and that a real version of this study should adopt:
+
+- **A within-author contrast**, not a within-repo one. It compares an author's AI-marked commits against
+  *that same author's* unmarked commits. That absorbs the selection this study cannot touch — who reaches
+  for a tool, and how good they are — where matching on size and area absorbs only the commit's shape.
+- **Prospective scoring.** AIC scores only commits made after its registration date, so no commit that
+  suggested the pattern can confirm it. This study has the same hazard and no such protection, which is
+  another reason nothing here is a verdict.
+
+## 6 · What a real version needs
 
 1. **A better exposure than the trailer.** It is a floor and a convention. The cleanest design is
    **harfbuzz alone, before and after its adoption date** — one project, one convention, no cross-project
-   mixing, and the largest exposed set in the corpus by far.
+   mixing, and the largest exposed set in the corpus by far — combined with the within-author contrast above.
 2. **Confounding by indication is unfixed and unfixable here.** If people reach for a tool on code they
    already find hairy, matching on size does not help. A before/after design within one project narrows
    it; nothing in observational data closes it.
-3. **A prior-work check before any registration**, which this exploratory pass deliberately skips.
+3. **A prior-work check before any registration**, which this exploratory pass deliberately skips; AIC's
+   check is the place to start, since it covers the same exposure.
 4. **Pre-registration** of one outcome, one window and one stratification. Six cuts were taken to get here
    and that is exactly why none of these numbers is a result.
