@@ -100,14 +100,24 @@ four are computed.
 
 ## 5 · Power (measured before drafting, not assumed)
 
-curl, whole history: **extrinsic 681 events over 467 distinct files**; latent 185 over 180; regression 1,069
-over 588; other-fix 6,417 over 1,179. Extrinsic has been rising — 17–23 events a year through 2023, then 42,
-54 and 52 in 2024–26.
+curl, whole history, file grain: **extrinsic 681 events over 467 distinct files**; latent 185 over 180;
+regression 1,069 over 588; other-fix 6,417 over 1,179. Extrinsic has been rising — 17–23 events a year
+through 2023, then 42, 54 and 52 in 2024–26.
 
-Every class clears the program's ≥ 20-events-per-cell rule at file grain. **Function-grain counts must be
-confirmed with `chg_eval.map_fix` before this registration is final**, since hunk-to-function mapping drops
-events it cannot place; latent (185) is the class at risk and will be declared **direction-only** if it falls
-under 20 after mapping.
+### Function-grain confirmation (run 2026-11-11 with `chg_eval.map_fix`; see Amendment 1)
+
+The registration's own precondition, now met. Counts **rise** at function grain rather than falling, because a
+fix commit typically touches several functions:
+
+| class | curl: commit events | function-events | **distinct functions** | libarchive: distinct functions |
+|---|---|---|---|---|
+| extrinsic | 681 | 1,195 | **856** | **1,086** |
+| latent | 185 | 598 | **493** | **0** |
+| regression | 239 | 419 | **316** | 42 |
+| other-fix | 6,417 | 16,541 | **5,714** | 2,049 |
+
+Every curl class clears ≥ 20 comfortably, including latent — the class flagged as at risk, which is not at
+risk. **libarchive holds no latent events at all**, which changes the replication plan (Amendment 1 item 2).
 
 ## 6 · Guards
 
@@ -121,7 +131,9 @@ under 20 after mapping.
       which a rename reads as death and birth.
 - [ ] Temporal ablation (`GITGALAXY_DISABLE_GIT_HISTORY=1`) — **not applicable and stated so**: rewiring is a
       history measure by construction. The honest equivalent is the edit-count control above.
-- [x] Replication on **libarchive**, unseen for this question, before any claim is called supported.
+- [x] Replication **by claim** (Amendment 1 item 2): REW-H1 and REW-H2 on **libarchive** (1,086 extrinsic
+      functions, unseen for this question); REW-H3 on **openssl**, the only non-curl repo in the pool with
+      substantial latent events (235). libarchive and harfbuzz have **none**.
 
 ## 7 · What this cannot establish
 
@@ -130,3 +142,33 @@ possibly *because* they already suspected it. Confounding by indication is not c
 the same limit AIADOPT hit this morning. A positive REW-H1 says rewiring **marks** extrinsic risk, never that
 it causes it. And curl plus libarchive is two C projects, so a pass is a replicated development-set result,
 not a panel result.
+
+
+## Amendment 1 (2026-11-11, before any statistic; resolves the draft's own precondition)
+
+1. **Function-grain power confirmed, and it is better than the file-grain estimate.** Measured with the
+   program's own `chg_eval.map_fix`, not a new mapper. Mapping *raises* the counts — a fix commit touches
+   several functions — so curl gives 856 distinct extrinsic functions, 493 latent, 316 regression and 5,714
+   other-fix. **Latent, flagged in the draft as the class at risk, clears the bar by 25×.** The draft's
+   clause "must be confirmed before this registration is final" is hereby discharged.
+
+2. **The replication plan splits by claim, because libarchive has no latent events.** The draft named
+   libarchive for everything. It holds **zero** latent events (harfbuzz likewise). So:
+   - **REW-H1 / REW-H2** (extrinsic) replicate on **libarchive** — 1,086 distinct extrinsic functions, more
+     than curl's 856.
+   - **REW-H3** (nesting depth → latent) replicates on **openssl** (235 latent events), the only non-curl
+     pool repo with a substantial latent class. nDPI has 105 and is the fallback.
+   - If REW-H3 cannot be replicated, it is reported as **curl-only and unreplicated**, never as supported.
+
+3. **The regression class must be named precisely.** `chg_eval.fix_events` splits the xc file's 1,069 curl
+   `regression` events into `regression` (239, where `why == "regression word"`) and `regression-linked`
+   (the remainder, identified through a linked inducing commit). The draft's power table quoted the
+   undivided 1,069. **This study uses the union of both sub-classes as "regression"**, reports the split
+   beside the result, and treats a result that holds in only one sub-class as not supported.
+
+4. **Unchanged.** Every claim, direction, bar and α; the baselines, above all the edit-count control; the
+   measures; the guards.
+
+**Effect on what can be claimed: neutral to tightened.** No bar moved. One claim (REW-H3) lost its planned
+replication site and gained a named substitute plus an explicit failure mode; one class definition that was
+ambiguous is now pinned.
