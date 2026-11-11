@@ -117,10 +117,21 @@ before any scoring:
 - The whole universe costs **$7.86 (curl) + $5.27 (nDPI) = $13.13** through the Batches API — inside the §7 gate —
   so there is no reason to pay sampling error for a saving the budget does not need.
 
-**The AIAT-P1 gate is evaluated over three equal-count LOC bands, not ten deciles.** curl's 85 positives give ~28
-per band, which clears the ≥20 rule; deciles would give ~8. Deciles are still reported, descriptively, and any band
-holding fewer than 20 positives is printed as **UNDERPOWERED** rather than read as a result. nDPI's 35 positives
-give ~12 per band and clear the rule nowhere — exactly why it is direction-only.
+**The AIAT-P1 gate is evaluated over three EQUAL-POSITIVE LOC bands.** Two corrections, both made before any
+file was scored, both found by running the metric on random scores first:
+
+- **Equal-count bands do not work.** Positives concentrate in large files, so equal-count LOC bands hold
+  **1, 10 and 74** of curl's 85 positives — the gate would have been evaluable in one band. Cutting on LOC so each
+  band holds comparable positives gives **29 / 28 / 28**, all clearing the ≥20 rule. The cut points are fixed from
+  LOC and the outcome and **never from any score**, so they cannot favour the auditor over size.
+- **The baseline is the STRONGER of the two size orders.** At a line budget, big-files-first spends the budget on
+  few files and small-files-first reviews many; which wins depends on how positives are distributed. On curl, a
+  **random** ranking beat big-files-first (0.212 vs 0.129) — so naming one size order in advance would have handed
+  the instrument a baseline it beats for free. Both orders are reported and the auditor must beat the better one,
+  which is the program's own convention (ENV-H1..H3: "+0.17 / +0.12 over the stronger size order"). Under the
+  corrected baseline the random ranking beats size in **0 of 3** bands, which is what a null instrument should do.
+
+nDPI's 35 positives clear the rule in no band — exactly why it is direction-only.
 
 `--n` still subsamples, for a cheap smoke run; it is not the registered configuration.
 
@@ -151,6 +162,40 @@ It cannot measure the attention process; it can only say whether the instrument 
 It cannot test any LAW. It cannot support a claim about the ceiling gap: AIAT-P5 is descriptive and runs on two
 excluded C repos, which are development data by construction. A positive AIAT-P1 is a licence to design the real
 study, not a result about software.
+
+## 8b · AIAT-P7 — where attention should pay off, predicted before scoring
+
+**Registered 2026-11-11, before any file was scored.** If the auditor is measuring **attention** rather than
+code risk, its lift must not be spread evenly over the fix classes. It should be largest where finding the
+defect requires someone to go and look, and near zero where the defect announces itself:
+
+| class | how it is found | attention-dependence | predicted lift over LOC |
+|---|---|---|---|
+| **latent** | dormant; found by inspection, audit or a fuzzer | maximum | **largest** |
+| **extrinsic** | triggered by an outside change (platform, dependency) | partly scheduled | middling |
+| **regression** | something that worked just broke; a test or a user says so | minimum | **near zero** |
+
+**The registered comparison:** the auditor's recall@20%-of-lines lift over the LOC ordering, computed separately
+for curl's latent-fix files and its regression-fix files. **Prediction: lift(latent) > lift(regression).**
+
+- **Supports the attention reading:** latent lift exceeds regression lift.
+- **Undermines it:** the lift is flat across classes, or larger for regression. A uniform lift is what a second
+  size proxy looks like, which is AIAT-P1's failure mode arriving by another route.
+
+**Power, measured before registering.** Over curl's 988-file universe, file-grain positives by class are
+**latent 31, regression 33**, extrinsic 19, other-fix 284. Latent and regression clear the program's
+≥20-positives-per-cell rule; **extrinsic at 19 does not and is reported as underpowered**. nDPI contributes
+nothing here: its window holds only other-fix (36) and regression (6) at file grain, no latent or extrinsic.
+
+**Scope, stated so it cannot be stretched later.** Class labels come from `events/<repo>_xc.json`, whose harvest
+ends **2026-09-11**, so P7 runs on the sub-window 2026-06-01 → 2026-09-11 rather than the full window to the pool
+head. **The primary outcome in §3 is unchanged and stays frozen**; P7 is a secondary on a subset of it, and no
+AIAT-P1 number is recomputed on this sub-window.
+
+**Why this is worth registering rather than noticing afterwards.** A positive AIAT-P1 on its own is ambiguous —
+a ranking that beats LOC within size bands could be reading attention or could be reading some unmeasured
+property of the code. The class split separates those two readings, and it only separates them if it is written
+down first. It costs nothing: the scores are the same scores.
 
 ## 9 · Decision rule after the pilot
 
