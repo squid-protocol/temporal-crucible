@@ -123,17 +123,23 @@ def main():
     by_source = {label: {full(n) for n in names} for label, names in SOURCES}
     corpus = set()
     if a.corpus and a.corpus.exists():
-        try:
-            raw = json.loads(a.corpus.read_text())
-        except ValueError:
-            raw = None
-        if isinstance(raw, dict):
-            raw = raw.get("repos") or raw.get("entries") or list(raw)
-        for e in raw or []:
-            v = e.get("repo") or e.get("name") or e.get("slug") if isinstance(e, dict) else e
+        # Amendment 1 item 3 excludes the entries "scored for call graphs". The corpus file's own
+        # `about` text defines that set exactly: `"callgraph": false` KEEPS a repo OUT of
+        # call_graph_resolution.py's corpus. So an entry is scored for call graphs unless it carries
+        # callgraph == false - which is 35 of the 42 entries at engine b873edc5b.
+        raw = json.loads(a.corpus.read_text())
+        entries = raw.get("repos", []) if isinstance(raw, dict) else (raw or [])
+        for e in entries:
+            if not isinstance(e, dict):
+                continue
+            if e.get("callgraph") is False:
+                continue
+            v = e.get("repo")
             if isinstance(v, str) and "/" in v:
                 corpus.add(full(v))
         by_source["Amendment 1 item 3 (call-graph gate corpus)"] = corpus
+        print(f"call-graph gate corpus: {len(corpus)} of {len(entries)} entries scored for call "
+              f"graphs (the rest carry callgraph=false)")
     excluded = set().union(*by_source.values())
     pool = pool_names()
     warn_bare = EXCLUDED_BARE | pool
