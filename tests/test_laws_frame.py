@@ -155,3 +155,65 @@ def test_the_languages_call_is_cached_and_respects_the_core_floor(tmp_path: Path
     assert len([s for s in seen if s.startswith("repos/")]) == n     # cached
     assert F.language_share(b, "go") == pytest.approx(0.9)
     assert F.CORE_FLOOR == 1500                                      # churn and the shepherd share the pool
+
+
+def test_github_language_names_are_used_and_quoted():
+    """The `language:` filter needs GitHub's own names, and `C++`/`C#` do not survive unquoted."""
+    assert F.github_languages("go") == ("Go",)
+    assert F.github_languages("cpp") == ("C++",) and F.github_languages("csharp") == ("C#",)
+    assert 'language:"C++"' in F.query("C++", "2015-01-01", "2015-01-31")
+    assert 'language:"C#"' in F.query("C#", "2015-01-01", "2015-01-31")
+
+
+def test_jsts_is_two_searches_unioned_because_the_filter_is_primary_language_only():
+    assert F.github_languages("jsts") == ("JavaScript", "TypeScript")
+    seen = []
+
+    def fake(q):
+        seen.append(q)
+        lang = q.split('language:"')[1].split('"')[0]
+        return 1, [f"org/{lang.lower()}-repo"]
+
+    rec = F.frame("jsts", fake, start="2015-01", end="2015-01-31")
+    assert rec["github_languages"] == ["JavaScript", "TypeScript"]
+    assert any('language:"JavaScript"' in q for q in seen)
+    assert any('language:"TypeScript"' in q for q in seen)
+    assert rec["candidates"] == ["org/javascript-repo", "org/typescript-repo"]   # unioned
+    # every other language is a single search
+    one = F.frame("go", lambda q: (1, ["org/g"]), start="2015-01", end="2015-01-31")
+    assert one["github_languages"] == ["Go"] and one["search_calls"] == 1
+
+
+def test_the_shortlist_is_lazy_in_draw_order_and_stops(tmp_path: Path, monkeypatch):
+    """M9 evaluates eligibility in draw order and stops once enough pass. Checking the whole frame instead
+    would be 81,060 languages-API calls across the ten languages, for a list the draw never reaches the end of."""
+    names = [f"org/r{i:04d}" for i in range(2000)]
+    calls = []
+
+    def fake_bytes(full_name, cache):
+        calls.append(full_name)
+        n = int(full_name[-4:])
+        return {"Go": 900, "Shell": 100} if n % 3 == 0 else {"Go": 100, "Shell": 900}
+
+    monkeypatch.setattr(F, "language_bytes", fake_bytes)
+    monkeypatch.setattr(F, "quota", lambda: {"core": 5000, "search": 30})
+    r = F.shortlist("go", names, tmp_path, want=16, buffer=2.0)
+    assert r["passed_count"] == 32                       # 16 wanted x 2.0 buffer, then it stops
+    assert "32 candidates passed" in r["stopped"]
+    assert r["checked"] < 200 and r["checked"] == len(calls)   # nowhere near all 2,000
+    assert 0.20 < r["pass_rate"] < 0.45                  # ~one in three by construction, one permutation
+    assert r["order_len"] == 2000 and r["share_bar"] == F.SHARE
+    # the order is the draw permutation, not the sorted order
+    assert [p["repo"] for p in r["passed"]][:5] != sorted(p["repo"] for p in r["passed"])[:5]
+    assert all(p["share"] >= F.SHARE for p in r["passed"])
+
+
+def test_the_shortlist_stops_on_the_quota_floor_and_on_a_limit(tmp_path: Path, monkeypatch):
+    names = [f"org/r{i:04d}" for i in range(500)]
+    monkeypatch.setattr(F, "language_bytes", lambda n, c: {"Go": 100, "Shell": 900})   # nothing passes
+    monkeypatch.setattr(F, "quota", lambda: {"core": 5000, "search": 30})
+    r = F.shortlist("go", names, tmp_path, want=16, limit=25)
+    assert r["passed_count"] == 0 and r["checked"] == 25 and "--limit 25" in r["stopped"]
+    monkeypatch.setattr(F, "quota", lambda: {"core": F.CORE_FLOOR, "search": 30})
+    r2 = F.shortlist("go", names, tmp_path, want=16)
+    assert r2["checked"] == 0 and "core quota floor" in r2["stopped"]
