@@ -3,6 +3,36 @@
 **Programme steps 2 and 3** (`docs/PROGRAMME_call_networks.md`). The panel protocol (PANEL) and the law claims
 (LAW-1 … LAW-9) are registered together, so the sample cannot be chosen after seeing any network statistic.
 
+## Amendment log
+
+Every amendment below, in order, with the two facts that decide whether this registration can be trusted:
+**was it made before or after outcome data existed**, and **did it make any law easier to pass**. The full text
+of each is at the bottom of this file; this table is the audit trail, not a substitute for it.
+
+| # | date | what changed | before data? | effect on what can be claimed |
+|---|---|---|---|---|
+| 0 | 11-08 | after an independent methods review: panel 12 per confirmatory language; **LAW-5 and LAW-9 demoted to descriptive**; Claude label raters; the CGR set fixed as the required pilot and as development data; engine `8f96d76ba`; node identity via `parent_class_id` | yes | **weakened** — two laws demoted before any data |
+| 1 | 11-09 | ACC-P becomes the post-tuning validation (no separate ACC-4); engine pinned to the last merged PR of epic #8161; **20 engine-tuning repos, the call-graph gate corpus and the ACC repos excluded by name** | yes | **tightened** — adds a validation gate and more exclusions |
+| 2 | 11-09 | ACC-P extended to every candidate language; a secondary "universal (extended)" test fixed in advance, reported beside the primary one and never replacing it; admission survey for C#, Kotlin and PHP; development-set dry run; 3 survey repos excluded | yes | **neutral/tightened** — the primary test is explicitly unchanged |
+| 3 | 11-09 | **panel size 12 → 16 per confirmatory language**; thin-pool rule; power interpretation stated in advance | yes | **tightened** — more power, same bars |
+| 4 | 11-10 | Go's oracle is `callgraph -algo=vta`, not CHA; not-evaluable rules for Go snapshots; states in advance that **Go does not meet ACC-H3 on its development repo** | yes | **weakened** — Go expected to stay descriptive |
+| 5 | 11-10 | LAW-2's effect becomes the **excess over a fitness-only null**, not α against zero; LAW-2's fixed-effects sensitivity recorded as attempted and uninformative; LAW-9's effect becomes P(CVE smaller) against 0.5; coverage reported with every law and every law re-run at matched coverage; a two-instrument sensitivity registered; **law numbers may come only from `tools/laws_run.py`, invalidating earlier development-set figures**; item 8: **the scorer freeze** | yes | **tightened** — harder nulls, earlier figures invalidated, scorer frozen |
+| 6 | 11-11 | adopts **FIXLIKE v3c** as the `other-fix` class rule after `docs/otherfix_audit.md` measured the registered gate at 0.383 outside C; scoped to `other-fix` only; costs 43% of `other-fix` events | yes | **mixed** — label precision 0.38 → 0.77, at ~22% of real fixes in power |
+| 7 | 11-11 | **no per-repo class gate**; the M6 audit sized at ≈136 stratified judgments per language; per-repo precision reported, never used as a filter; a sub-0.70 sensitivity pre-registered; a CI-upper-bound floor as backstop | yes | **neutral** — declines a filter, adds a sensitivity and a backstop |
+| 8 | 11-11 | records that the CGR repos were **already** excluded; **requires the registered exclusion to be applied before the draw**, with logged removals and a post-exclusion fingerprint; states `docs/ceil.md` is development-set evidence; files a pre-draw prior that **LAW-6's in-cycle term is expected to fail outside C**; erratum on Amendment 6's author-count parenthetical | yes | **weakened** — enforces a guard and lowers expectations for LAW-6 |
+
+**Read across the last two columns.** All nine entries predate any panel outcome data: no panel repo has been
+selected, scanned or labelled. **Not one amendment loosened a bar, widened a direction, or made a law easier to
+pass.** Several did the opposite — Amendment 0 demoted two laws, Amendment 4 expects Go to stay descriptive,
+Amendment 5 invalidated earlier development-set figures and froze the scorer, Amendment 6 gave up about a fifth
+of the fix events for label precision, and Amendment 8 filed a prior that one registered law is expected to fail
+outside C.
+
+**Why there are nine of them.** The registration was filed on 11-08 and the pilot, the methods review, the
+engine-tuning work and the label audit all landed after it. That is the honest cost of registering before the
+design had settled, and the lesson for the next study is to pilot first and register second. It is not evidence
+of fitting the protocol to results, which is what this table exists to let a reader check.
+
 ## Prior work
 
 [v] = details confirmed by web search on 2026-11-08 (lit review, `gitgalaxy/cgt-study/lit_review.md`);
