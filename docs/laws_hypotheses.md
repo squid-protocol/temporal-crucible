@@ -342,3 +342,131 @@ pass exit 0; descriptive, not a gate):
 6. **If the engine is changed for Go before the draw** (typed receivers resolved confidently), the panel engine
    record is replaced by a dated entry and the development-set dry run is repeated with it. After the draw,
    Amendment 1 item 2 applies.
+
+## Amendment 5 (2026-11-10; before the sampling frame is built or any panel repo is selected)
+
+**Context.** The full scorer ran end to end on the development set for the first time (`tools/laws_run.py`,
+`docs/laws_driver_pilot.md`: five repos, all nine laws, 635 s, no failures), and the two checks `laws_attach.py`
+listed as owed were done (`docs/laws_law2_fitness.md`). Three things came out of it that change what is tested
+rather than how it is reported, so they are registered here, before the frame is built. Changes after the pilot
+are allowed only before the draw.
+
+1. **LAW-2's effect is the excess over a fitness-only null, not alpha against zero.**
+
+   The registered test cannot tell preferential attachment from fitness heterogeneity. On a generator where
+   attachment is switched off entirely and a target's chance depends only on a fixed intrinsic fitness, the
+   registered estimator reports alpha = +1.09 -- **larger than it reports for a true attachment exponent of
+   1.0**. alpha against a margin of 0 therefore tests whether calls concentrate at all, which is not LAW-2's
+   hypothesis. The estimator is not at fault: on the same generator it recovers a known exponent closely
+   (true 0.0 -> -0.03, 0.5 -> +0.44, 1.0 -> +0.93, 1.5 -> +1.46).
+
+   The null (`laws_attach.fitness_null`) keeps everything the observed history has except the timing. Each
+   target's propensity is fixed at its **observed total intake** of new edges over the whole history -- a fitness
+   that by construction reproduces who ends up popular -- and the same callers make the same number of choices in
+   the same quarters, with the target redrawn from that fitness; a target's chance never depends on its degree
+   now. alpha is re-estimated on each simulated history with the same estimator.
+
+   - **effect** = alpha_observed − mean(alpha_null); **margin 0**, positive direction.
+   - **v** = se_observed² + sd(alpha_null)², which is what the synthesis pools. The rank p is reported but is
+     **not** the test: with R simulated histories it cannot fall below 1/(R + 1), and at R = 50 four of the five
+     pilot repos were already at that floor.
+   - **R = 100** simulated histories per repo, enough for a stable sd and the reported rank p; seed 2982.
+   - The null is **conservative**: calibrating fitness to realised intake credits fitness with concentration that
+     attachment may itself have produced, so the excess is a lower bound.
+   - **Pilot values** (development data, descriptive): excess +0.431 sphinx, +0.221 prometheus, +0.220 libgit2,
+     +0.133 libxml2, +0.066 commons-lang, against observed alpha of 1.24 to 1.79 and null means of 1.09 to 1.36.
+     Fitness explains most of alpha and a real attachment component survives in all five, at 5% to 25% of the
+     headline number. Mean 0.214 with a between-repo SD of 0.138 across these five, a ratio of 1.56, so on this
+     spread the excess is still detectable at k = 16 under Amendment 3's power table (which needs about 1.15 to
+     1.25). That is indicative only: these five are five different languages, and the within-language spread is
+     not known.
+   - **alpha itself stays in the record**, descriptively, and must not be reported as "the preferential
+     attachment exponent".
+
+2. **LAW-2's function-fixed-effects sensitivity is recorded as attempted and uninformative.** It is implemented
+   (`laws_attach.fit_fixed_effects`) and does not work at this data size. Calibration on the same generator:
+   true 0.0 -> −0.84, 0.5 -> −0.21, 1.0 -> +0.25, 1.5 -> +0.86, and **pure fitness -> +0.23**, so pure fitness
+   and a true exponent of 1.0 are indistinguishable. The bias is near −0.8, larger than the effect under test,
+   and the reading holds at ridge 0.1, 1 and 10, so the penalty is not the cause. This is the
+   incidental-parameters problem: about 400 to 500 fixed effects against about 3,400 choices. **alpha_fe is never
+   read as an exponent and never enters a synthesis.** The null in item 1 replaces it as the "beyond fitness"
+   sensitivity. PAFit proper -- a joint Bayesian kernel-and-fitness estimate -- is still owed;
+   `laws_attach.kernel` covers the functional-form question only and is descriptive (pilot: slopes +1.19 to
+   +1.86, curvature −0.16 to +0.29, r² 0.87 to 0.96, so `(k + 1)^alpha` is not badly misspecified).
+
+3. **LAW-9's effect is P(cve smaller), against a null of 0.5.** The registered "median difference ... each < 0"
+   is read as the Hodges-Lehmann shift, and on these counts it is **exactly 0.00 with SE 0.00** for files touched
+   and functions changed (median 1 file, 2 functions; most pairwise differences are 0), while the rank test on
+   the same data is significant for files. Two consequences: a conjunction over an effect pinned at 0 can never
+   fire, and a variance-weighted pool cannot accept a zero variance, so two of the three legs could not enter the
+   synthesis at all. The effect per metric is therefore the rank test's own effect size, the probability that a
+   random CVE fix is the smaller of a CVE/other pair with ties counted half, against a null of 0.5 in the
+   direction "CVE smaller". The shift and the difference of medians stay in the record descriptively. The
+   three-metric conjunction remains an intersection-union test needing no correction. LAW-9 stays **descriptive**
+   (Amendment 0 item 2): 1 of 8 pilot repos clears 20 advisory-labelled fix commits, the bottom of the methods
+   review's expected 0 to 3.
+
+4. **Coverage is reported with every law, and every law is also run at matched coverage.**
+
+   `share_confident_of_repo_links` is 98.9% and 99.9% on the two C pilot repos and 55.6% to 59.6% on the Java, Go
+   and Python ones. Every law is computed on whatever network the engine produced, so this is a between-language
+   difference in measurement quality of the same order as the effects being compared, and it runs through the
+   universality test. ACC-P does not catch it: ACC-P validates the **precision** of confident links, this is
+   **coverage**.
+
+   - The figure is reported **per panel repo beside every law**, and described as a **floor, not a rate**: `conf`
+     and `amb` count only edges whose both endpoints are unit functions, while the `unresolved` table is
+     `(commit_hash, step, kind, n)` with no file column and so cannot be scoped the same way. Calls from test
+     files, generated files and other languages inflate the denominator for exactly the repos that have them. If
+     the scanner is changed to record the file with each unresolved call, the figure becomes a rate and that is a
+     dated entry here.
+   - Every law is additionally run with the network **thinned to the minimum per-language median coverage** among
+     the languages being compared, with an **edge-persistent mask** (`laws_run.thinned`): coverage failure is a
+     property of the call site, so the same edge is kept or dropped at every snapshot. A per-snapshot draw is
+     wrong and was the first implementation's error -- it made a persisting edge look new to LAW-2, inflating one
+     pilot repo's choice count from 16,593 to 121,112.
+   - **A universality claim is qualified** where the per-language median coverage of the languages compared spans
+     more than **20 percentage points**. On the pilot that span is about 40 points between C and the rest.
+   - **LAW-3's evaluable repo count is reported at matched coverage.** Its failure mode under coverage loss is
+     dropout, not bias: thinned libxml2 hits the estimator's documented dominant-hub ceiling and becomes not
+     evaluable. Low-coverage languages will lose LAW-3 repos non-randomly, which the not-evaluable-dropout item
+     of Amendment 0 covers in concept but not by this cause.
+   - **LAW-4's between-language comparison becomes descriptive.** Its effect is 0.004 to 0.026 on the pilot and
+     attenuates about 30% at matched coverage (libxml2 +0.026 -> +0.018, −2.4 SE). An effect that small cannot
+     carry a cross-language claim at these coverage differences. LAW-4 stays confirmatory **within** a language.
+   - Uniform thinning is a lower bound on the damage: real failures concentrate on dynamically dispatched calls
+     rather than falling evenly. A selective null is owed only if a between-language LAW-4 claim is reinstated.
+
+5. **A two-instrument sensitivity is registered now and run after the draw.** The laws are recomputed from the
+   language-specific ACC oracle rather than the panel engine, on the **first 2 repos of each confirmatory
+   language's draw order**, with the study's own definitions (overload identity, the exclusion rules, intra-repo
+   only, `MIN_LOC`, the same snapshot commits). Pre-committed criterion: the two instruments **agree** for a law
+   where the effects share a sign and their 95% intervals overlap. Disagreement is reported, not resolved --
+   neither instrument is ground truth.
+
+   - It is a measurement check, not a hypothesis change, so running it after the freeze is deliberate and does
+     not reopen any law.
+   - Go's comparison already exists and is not re-run: the dry run measured the panel engine's confident links
+     against `static` + `vta` at **precision 0.924, recall 0.841** on matched functions, with **no
+     interface-dispatch edges** in the engine's confident set (8,564 `receiver` links on prometheus, ambiguous
+     and unused). The engine is precise on the edges it claims and incomplete by declared scope.
+   - **Python has no working oracle** (PyCG crashes, `docs/laws_dryrun.md`), so no two-instrument check is
+     possible for one of the four primary languages. Registered as a stated limitation rather than left to be
+     discovered.
+
+6. **Law numbers come only from `tools/laws_run.py`.** The earlier development-set figures for LAW-1 to LAW-4
+   were produced by a script that was never committed and cannot be regenerated; they are superseded by the
+   driver's output and are not cited.
+
+7. **Label audit deviation (Amendment 0 item 3).** `temperature`, `top_p` and `top_k` are rejected by
+   `claude-opus-5-5`, so the registered "temperature" cannot be sent. `output_config.effort` is the only depth
+   control and **`effort: "low"`** is registered in its place. The prompts, the model id and the effort are
+   committed in `docs/laws_audit.md` before any audit label is produced, and each label records that document's
+   sha256. Whether the panel's LAW-6, LAW-7 and LAW-8 use the M6 workflow fix label or the keyword label is
+   **still open** and the audit decides it (`docs/laws_defect_labels.md`: the workflow label raises prometheus's
+   fix count 82% and libgit2's 32%, LAW-7 is unaffected either way, and the workflow label's precision is what
+   the audit measures).
+
+8. **Unchanged.** Every other law's effect, margin and direction; the synthesis (REML with HKSJ, the
+   partial-conjunction universal tests, Holm, the equivalence tests); the panel size and the draw; ACC-P's
+   design and every other language's oracle; the engine pin; the unit of labelling; and the guards.
