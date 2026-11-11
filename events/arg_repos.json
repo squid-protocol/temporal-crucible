@@ -1,0 +1,65 @@
+{
+ "registered": "2026-11-11",
+ "since": "2024-01-01",
+ "note": "frozen by the rule in docs/arg_hypotheses.md; new repos go to a separate replication claim",
+ "primary": [
+  {
+   "name": "linux",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/linux.git"
+  },
+  {
+   "name": "llvm-project",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/llvm-project.git"
+  },
+  {
+   "name": "mesa",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/mesa.git"
+  },
+  {
+   "name": "vscode",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/vscode.git"
+  },
+  {
+   "name": "ffmpeg",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/ffmpeg.git"
+  },
+  {
+   "name": "openssl",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/openssl.git"
+  }
+ ],
+ "secondary": [
+  {
+   "name": "home-assistant",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/home-assistant.git"
+  },
+  {
+   "name": "ruby",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/ruby.git"
+  },
+  {
+   "name": "harfbuzz",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/harfbuzz.git"
+  },
+  {
+   "name": "bun",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/bun.git"
+  },
+  {
+   "name": "node",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/node.git"
+  },
+  {
+   "name": "deno",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/deno.git"
+  },
+  {
+   "name": "cpython",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/cpython.git"
+  },
+  {
+   "name": "llama.cpp",
+   "path": "/srv/storage_16tb/projects/temporal-crucible-arg/llama.cpp.git"
+  }
+ ]
+}
