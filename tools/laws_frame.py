@@ -296,6 +296,9 @@ def main() -> int:
     ap.add_argument("--out", type=Path)
     ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--confirm", action="store_true", help="required for `search`: it spends GitHub search quota")
+    ap.add_argument("--eligible", type=Path, default=Path("docs/laws_panel"),
+                    help="draw only: the committed POST-EXCLUSION eligible list (Amendment 9 item 3)")
+    ap.add_argument("--record", type=Path, help="draw only: write the draw record here")
     ap.add_argument("--no-share", action="store_true",
                     help="search only: skip the per-candidate languages API, which is what spends core quota")
     a = ap.parse_args()
@@ -332,24 +335,47 @@ def main() -> int:
         print("the candidate file's SHA-256 must be committed and pushed BEFORE any draw:")
         print(f"  {fingerprint(f)}")
         return 0
-    f = (a.out / "frame" / f"{a.language}.json")
+    # The draw samples the POST-EXCLUSION eligible list, not the raw frame. Amendment 8 item 1 found
+    # that the registered PANEL exclusion was implemented nowhere, and that every excluded repo still
+    # sat in the raw search output; drawing "uniformly at random from the eligible list" against the
+    # unfiltered file would have selected excluded repos and the guard would have failed silently at
+    # the one step it exists to protect. tools/laws_exclude.py produces the eligible list and its
+    # fingerprint; both are committed under docs/laws_panel (Amendment 9 item 3).
+    f = a.eligible / f"{a.language}_eligible.json"
     if not f.exists():
-        print(f"{f} does not exist: build the frame first")
+        print(f"{f} does not exist: run tools/laws_exclude.py to apply the registered exclusion first")
         return 1
-    rec = json.loads(f.read_text())
-    recorded = (a.out / "frame" / f"{a.language}.sha256")
-    if not recorded.exists():
-        print(f"refusing to draw: {recorded} is missing. M9 requires the candidate file's SHA-256 to be "
+    sums = a.eligible / "SHA256SUMS"
+    if not sums.exists():
+        print(f"refusing to draw: {sums} is missing. M9 requires the candidate file's SHA-256 to be "
               "committed and pushed BEFORE the draw.")
         return 1
-    if fingerprint(f) != recorded.read_text().split()[0]:
-        print("refusing to draw: the candidate file does not match its recorded SHA-256.")
+    want = {ln.split()[1]: ln.split()[0] for ln in sums.read_text().split("\n") if ln.strip()}
+    if want.get(f.name) != fingerprint(f):
+        print(f"refusing to draw: {f.name} does not match its committed SHA-256 in SHA256SUMS.")
         return 1
-    order = permutation(rec["candidates"])
-    print(f"{a.language}: {len(order)} candidates, fingerprint {fingerprint(f)[:12]}; first {a.n} in draw order:")
+    rec = json.loads(f.read_text())
+    cands = rec["candidates"]
+    order = permutation(cands)
+    print(f"{a.language}: {len(order)} eligible candidates ({rec['n_removed']} removed by the registered "
+          f"exclusion), file sha {fingerprint(f)[:12]}, list sha {rec['fingerprint_sha256'][:12]}, "
+          f"seed {SEED}; first {a.n} in draw order:")
     for i, name in enumerate(order[:a.n], 1):
         print(f"  {i:3d} {name}")
     print("these are the repos to run the clone-time checks against, in this order")
+    if a.record:
+        a.record.parent.mkdir(parents=True, exist_ok=True)
+        a.record.write_text(json.dumps(
+            {"language": a.language, "seed": SEED, "n_printed": a.n,
+             "eligible_file": str(f.name), "eligible_file_sha256": fingerprint(f),
+             "eligible_list_sha256": rec["fingerprint_sha256"],
+             "n_eligible": len(cands), "n_removed_by_exclusion": rec["n_removed"],
+             "draw_order_head": order[:max(a.n, 40)],
+             "order_definition": "random.Random(2982).sample over the lower-cased, de-duplicated, "
+                                 "byte-sorted eligible candidates (M9)",
+             "note": "the clone-time checks are walked in this order; a candidate that fails one is "
+                     "replaced by the next in the order, never by a re-draw"}, indent=1) + "\n")
+        print(f"draw record -> {a.record}")
     return 0
 
 
