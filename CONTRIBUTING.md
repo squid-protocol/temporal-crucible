@@ -35,7 +35,13 @@ a p-value and a verdict, not a descriptive/exploratory table):
 2. **Prior work before registration.** The registration names the closest published results and says whether the
    claim replicates, extends or contradicts them (template section *Prior work*). See
    [`docs/PROGRAMME_call_networks.md`](docs/PROGRAMME_call_networks.md) for why (2026-11-08).
-3. **Verdicts get published either way.** A null or contradicted result is
+3. **An oracle or reference tool is chosen per language BEFORE that language's
+   sample is drawn** — see [`docs/oracle_criteria.md`](docs/oracle_criteria.md).
+   A language with no oracle is declared oracle-less by name at that point, not
+   left blank. ACC-P learned this the hard way: C++, Rust and JS/TS were found to
+   have no named oracle only after the panel was drawn and seated, which makes any
+   oracle adopted for them post-draw and permanently labelled as such.
+4. **Verdicts get published either way.** A null or contradicted result is
    not a reason to drop the table from the doc — it's the finding. Update
    the register's `verdict` column regardless of which way it went.
 4. **Exploratory stays labeled exploratory**, in the doc and in any generated
