@@ -141,9 +141,14 @@ EVENT_FILES = ["curl.json", "curl_wave1.json", "curl_bugs.json"]
 EXCLUDE_PREFIXES = ("tests/", "docs/", ".github/", "scripts/")
 KEEP_EXTENSIONS = (".c", ".h")
 
+# The cache is keyed by sha only, so its file name carries the text-preparation
+# version: a cache computed before #109 (raw diff text) or #116 (pointer-line
+# fix) must not be read back as current results. Bump STRIP_VERSION whenever
+# _strip_c_comments or the rules it feeds change what a sha scores.
+STRIP_VERSION = "prism-strip-v2"
 SCRATCH_CACHE = pathlib.Path(
     "/tmp/claude-1000/-home-joe-Projects/7026d7a1-a379-4dda-a4df-b5859b206664"
-    "/scratchpad/hunk_cache.json"
+    f"/scratchpad/hunk_cache.{STRIP_VERSION}.json"
 )
 OUT_PATH = DOCS_DIR / "hunk_grammar.md"
 FILE_GRAIN_PATH = DOCS_DIR / "keyword_pools_explore.md"
