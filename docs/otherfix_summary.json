@@ -1,0 +1,78 @@
+{
+ "rows": [
+  {
+   "repo": "libxml2",
+   "lang": "C",
+   "ok": 24,
+   "n": 30,
+   "precision": 0.8,
+   "other_fix_events": 2576,
+   "verdict": "PASS"
+  },
+  {
+   "repo": "postgres",
+   "lang": "C",
+   "ok": 23,
+   "n": 30,
+   "precision": 0.7666666666666667,
+   "other_fix_events": 13436,
+   "verdict": "PASS"
+  },
+  {
+   "repo": "redis",
+   "lang": "C",
+   "ok": 22,
+   "n": 30,
+   "precision": 0.7333333333333333,
+   "other_fix_events": 3165,
+   "verdict": "PASS"
+  },
+  {
+   "repo": "libgit2",
+   "lang": "C",
+   "ok": 19,
+   "n": 30,
+   "precision": 0.6333333333333333,
+   "other_fix_events": 2201,
+   "verdict": "FAIL"
+  },
+  {
+   "repo": "sphinx",
+   "lang": "non-C",
+   "ok": 18,
+   "n": 30,
+   "precision": 0.6,
+   "other_fix_events": 3507,
+   "verdict": "FAIL"
+  },
+  {
+   "repo": "prometheus",
+   "lang": "non-C",
+   "ok": 12,
+   "n": 30,
+   "precision": 0.4,
+   "other_fix_events": 2403,
+   "verdict": "FAIL"
+  },
+  {
+   "repo": "commons-lang",
+   "lang": "non-C",
+   "ok": 8,
+   "n": 30,
+   "precision": 0.26666666666666666,
+   "other_fix_events": 1028,
+   "verdict": "FAIL"
+  },
+  {
+   "repo": "ripgrep",
+   "lang": "non-C",
+   "ok": 8,
+   "n": 30,
+   "precision": 0.26666666666666666,
+   "other_fix_events": 285,
+   "verdict": "FAIL"
+  }
+ ],
+ "pooled": 0.5583333333333333,
+ "mass_weighted": 0.6815227905784181
+}
