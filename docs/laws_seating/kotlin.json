@@ -1,0 +1,109 @@
+{
+ "language": "kotlin",
+ "attempts": [
+  {
+   "repo": "sosauce/chocola",
+   "eligible": false,
+   "why": "pre-screen: 646 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mikepenz/aboutlibraries",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1665,
+   "why": "fewer than 2000 first-parent commits (1665)"
+  },
+  {
+   "repo": "iielse/learn-coordinatorlayout-behavior",
+   "eligible": false,
+   "why": "pre-screen: 2 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "dbaroncelli/d-kmp-sample",
+   "eligible": false,
+   "why": "pre-screen: 281 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "soupslurpr/appverifier",
+   "eligible": false,
+   "why": "pre-screen: 252 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "seedvault-app/seedvault",
+   "eligible": false,
+   "why": "pre-screen: 1474 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "austinried/subtracks",
+   "eligible": false,
+   "why": "pre-screen: 1339 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "komi-store/komi-store",
+   "eligible": false,
+   "why": "pre-screen: 1982 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "newo-ether/agora",
+   "eligible": false,
+   "why": "pre-screen: 1970 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "xxfast/kstore",
+   "eligible": false,
+   "why": "pre-screen: 241 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mapbox/mapbox-maps-android",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2538,
+   "snapshots_with_files": 23,
+   "quarters": 23,
+   "quarters_with_commit": 23,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "fossifyorg/phone",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1424,
+   "why": "fewer than 2000 first-parent commits (1424)"
+  },
+  {
+   "repo": "wuyr/googlelibraryversionquerier",
+   "eligible": false,
+   "why": "pre-screen: 34 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "huolalatech/hll-wp-therouter-android",
+   "eligible": false,
+   "why": "pre-screen: 447 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mollyim/mollyim-android",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 5140,
+   "snapshots_with_files": 22,
+   "quarters": 22,
+   "quarters_with_commit": 22,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "mapbox/mapbox-maps-android",
+  "mollyim/mollyim-android"
+ ]
+}

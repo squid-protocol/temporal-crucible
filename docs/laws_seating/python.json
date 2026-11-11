@@ -1,0 +1,286 @@
+{
+ "language": "python",
+ "attempts": [
+  {
+   "repo": "royalvane/clan",
+   "eligible": false,
+   "why": "pre-screen: 45 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "learncodebygaming/pydirectinput",
+   "eligible": false,
+   "why": "pre-screen: 13 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "evilsocket/audit",
+   "eligible": false,
+   "why": "pre-screen: 15 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "c0ny1/xxe-lab",
+   "eligible": false,
+   "why": "pre-screen: 8 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "nicedreamzapp/claude-code-local",
+   "eligible": false,
+   "why": "pre-screen: 206 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "splx-ai/agentic-radar",
+   "eligible": false,
+   "why": "pre-screen: 103 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "qlustered/deepdiff",
+   "eligible": false,
+   "why": "pre-screen: 1442 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "huyvnphan/pytorch_cifar10",
+   "eligible": false,
+   "why": "pre-screen: 62 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "kmno4-zx/huanhuan-chat",
+   "eligible": false,
+   "why": "pre-screen: 68 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "seratch/chatgpt-in-slack",
+   "eligible": false,
+   "why": "pre-screen: 186 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "marella/chatdocs",
+   "eligible": false,
+   "why": "pre-screen: 36 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pyvisa/pyvisa",
+   "eligible": false,
+   "why": "pre-screen: 1593 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pycco-docs/pycco",
+   "eligible": false,
+   "why": "pre-screen: 222 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jjang-ai/vmlx",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 5231,
+   "snapshots_with_files": 3,
+   "quarters": 3,
+   "quarters_with_commit": 3,
+   "why": "fewer than 20 quarters with 50 source files (3)"
+  },
+  {
+   "repo": "google-deepmind/pycolab",
+   "eligible": false,
+   "why": "pre-screen: 27 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "youchounobb/ijcai-18-top2-single-mole-solution",
+   "eligible": false,
+   "why": "pre-screen: 12 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "zrrskywalker/point-nn",
+   "eligible": false,
+   "why": "pre-screen: 33 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "danielyule/hearthbreaker",
+   "eligible": false,
+   "why": "pre-screen: 1171 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pyca/pyopenssl",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1008,
+   "why": "fewer than 2000 first-parent commits (1008)"
+  },
+  {
+   "repo": "mkdocstrings/mkdocstrings",
+   "eligible": false,
+   "why": "pre-screen: 835 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "flipperdevices/flipper-application-catalog",
+   "eligible": false,
+   "why": "pre-screen: 1275 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "chenwei-zhao/captcha-recognizer",
+   "eligible": false,
+   "why": "pre-screen: 59 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jakeret/tf_unet",
+   "eligible": false,
+   "why": "pre-screen: 209 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "quenhus/ublock-origin-dev-filter",
+   "eligible": false,
+   "why": "pre-screen: 520 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "samuelcolvin/python-devtools",
+   "eligible": false,
+   "why": "pre-screen: 144 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "tars-ai-community/tars-ai",
+   "eligible": false,
+   "why": "pre-screen: 1446 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "dask/dask-ml",
+   "eligible": false,
+   "why": "pre-screen: 825 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "gamenet/redis-memory-analyzer",
+   "eligible": false,
+   "why": "pre-screen: 108 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "open-wine-components/umu-launcher",
+   "eligible": false,
+   "why": "pre-screen: 1343 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ananto30/zero",
+   "eligible": false,
+   "why": "pre-screen: 180 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hello-diana/mascot",
+   "eligible": false,
+   "why": "pre-screen: 3 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "phantomcyber/playbooks",
+   "eligible": false,
+   "why": "pre-screen: 936 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "approximatelabs/sketch",
+   "eligible": false,
+   "why": "pre-screen: 145 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hkchengrex/xmem",
+   "eligible": false,
+   "why": "pre-screen: 102 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "alpacahq/example-hftish",
+   "eligible": false,
+   "why": "pre-screen: 16 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sbzhu/weworkapi_python",
+   "eligible": false,
+   "why": "pre-screen: 44 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "buckyroberts/source-code-from-tutorials",
+   "eligible": false,
+   "why": "pre-screen: 215 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "callous-youth/boat",
+   "eligible": false,
+   "why": "pre-screen: 244 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "qubvel-org/segmentation_models.pytorch",
+   "eligible": false,
+   "why": "pre-screen: 898 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "megvii-research/nafnet",
+   "eligible": false,
+   "why": "pre-screen: 73 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sfu-db/dataprep",
+   "eligible": false,
+   "why": "pre-screen: 1043 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "nerevu/riko",
+   "eligible": false,
+   "why": "pre-screen: 1748 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pylint-dev/pylint",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 8584,
+   "snapshots_with_files": 73,
+   "quarters": 73,
+   "quarters_with_commit": 73,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "sublimelsp/lsp",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2615,
+   "snapshots_with_files": 32,
+   "quarters": 32,
+   "quarters_with_commit": 32,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "pylint-dev/pylint",
+  "sublimelsp/lsp"
+ ]
+}

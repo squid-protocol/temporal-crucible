@@ -1,0 +1,53 @@
+{
+ "language": "csharp",
+ "attempts": [
+  {
+   "repo": "tastsong/crazycar",
+   "eligible": false,
+   "why": "pre-screen: 1614 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mixandjam/splatoon-ink",
+   "eligible": false,
+   "why": "pre-screen: 34 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hbons/sparkleshare",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 3236,
+   "snapshots_with_files": 59,
+   "quarters": 59,
+   "quarters_with_commit": 59,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "darktohka/flashpatch",
+   "eligible": false,
+   "why": "pre-screen: 153 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "teamsirenix/odin-serializer",
+   "eligible": false,
+   "why": "pre-screen: 313 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "servuo/servuo",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2112,
+   "snapshots_with_files": 52,
+   "quarters": 52,
+   "quarters_with_commit": 52,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "hbons/sparkleshare",
+  "servuo/servuo"
+ ]
+}
