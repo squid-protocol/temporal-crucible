@@ -485,14 +485,28 @@ pass), `docs/laws_law2_fitness.md`, `docs/laws_law9.md`, `docs/laws_defect_label
 | what | value |
 |---|---|
 | temporal-crucible commit | `bcd798d57f465c5a9ff7d80f34905c84b16017a0` |
-| scorer modules | the 23 `tools/laws_*.py` files at that commit |
-| content hash | `sha256` of those files concatenated in name order: `86e8070a95c6ee51a3cda74f39c952f1ef787e52f1a684844c19e114a2721034` |
+| scorer modules | the **14** files below, at that commit |
+| content hash | `sha256` of those 14 concatenated in name order: `87288570dc0cd43ebc48e272c01392d1618efa819a64cdf5b6ab5f8c2117997b` |
 | tests | 175 passing |
 | panel engine | unchanged: gitgalaxy `b873edc5b059` (Amendment 1 item 2) |
 
+**The frozen set**, which is the scorer proper -- what turns a measured network and history into a law statistic:
+`laws_units.py`, `laws_net.py`, `laws_panel.py`, `laws_logit.py`, `laws_tails.py`, `laws_attach.py`,
+`laws_hubs.py`, `laws_central.py`, `laws_decay.py`, `laws_defects.py`, `laws_predict.py`, `laws_security.py`,
+`laws_synth.py` and `laws_run.py`. `laws_run.py` is in the set because it holds `SPEC`: every law's margin,
+direction and effect key.
+
+**Outside the freeze, and why.** `laws_build.py`, `laws_history.py`, `laws_osv.py`, `laws_github.py` and
+`laws_imports.py` harvest inputs; `laws_frame.py` selects the sample; `laws_audit.py` runs the label audit;
+`laws_defect_run.py` and `laws_dryrun.py` are ad-hoc drivers. None of them computes a law statistic. What binds
+them is not this hash but the engine pin, the snapshot set, the M9 frame rules and the audit's own committed
+prompts -- and `laws_frame.py` in particular must still be finished, so freezing it would be a mistake. A change
+to one of these does not need an amendment; a change to its *output contract*, which the frozen scorer reads,
+does.
+
 **What the freeze covers.** Every estimator, every null model, the synthesis, and the margins and directions of
-all nine laws as Amendment 5 leaves them. A change to any of these after this entry needs its own dated
-amendment, and after the draw it needs a full rescan as well (Amendment 1 item 2).
+all nine laws as Amendment 5 leaves them. A change to any file in the frozen set after this entry needs its own
+dated amendment, and after the draw it needs a full rescan as well (Amendment 1 item 2).
 
 **What the freeze does NOT fix, deliberately.**
 
