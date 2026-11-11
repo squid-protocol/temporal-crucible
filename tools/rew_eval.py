@@ -27,6 +27,7 @@ import pathlib
 import sqlite3
 import subprocess
 import sys
+import threading
 import time
 from collections import Counter, defaultdict
 
@@ -93,8 +94,20 @@ def _depth_task(task):
         return r, sha, {}
     proc = subprocess.Popen(["git", "-C", str(repo), "cat-file", "--batch"],
                             stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    proc.stdin.write(("\n".join(want) + "\n").encode())
-    proc.stdin.close()
+
+    # The request list must be written from its own thread. Writing it inline deadlocks on any snapshot
+    # whose object list exceeds the 64 KiB pipe buffer: git stops reading our stdin once ITS stdout
+    # buffer is full, and we are not reading that yet. openssl's later snapshots (about 10k files, a
+    # ~420 KiB request) hang; curl's (about 2.3k) do not, which is why this only bit the bigger repo.
+    def _feed():
+        try:
+            proc.stdin.write(("\n".join(want) + "\n").encode())
+            proc.stdin.close()
+        except BrokenPipeError:
+            pass
+
+    feeder = threading.Thread(target=_feed, daemon=True)
+    feeder.start()
     out, fh = {}, proc.stdout
     while True:
         hdr = fh.readline()
@@ -116,6 +129,7 @@ def _depth_task(task):
         for name, node in fns.items():
             d = [dep for kw, dep in keyword_profile(node) if kw in CONTROL]
             out[f"{path}\t{name}"] = (max(d) if d else 0, (sum(d) / len(d)) if d else 0.0)
+    feeder.join(timeout=60)
     proc.wait()
     return r, sha, out
 
@@ -310,6 +324,7 @@ def cmd_score(a) -> int:
          f"Cells under {MIN_POS} positives are printed UNDERPOWERED and not read.", "",
          "Unit: a function at a quarterly snapshot **that was also present at the preceding snapshot** — "
          "rewiring is a between-snapshot measure, so a function's first appearance has none.", "",
+         "@@SUMMARY@@", "",
          "## Positives per cell (function-snapshots with a fix of the class in the window)", "",
          "| repo | scored snapshots | " + " | ".join(CLASSES) + " |", "|---|---:|" + "---:|" * len(CLASSES)]
     for r in repos:
@@ -402,10 +417,15 @@ def cmd_score(a) -> int:
         v = cells[(PRIMARY, "extrinsic")]
         mean, _, ci = boot([x["vs_edits"] for x in v], np.random.default_rng(next(rng_seq)), ALPHA)
         inside = -EQUIV < ci[0] and ci[1] < EQUIV
+        side = "above" if ci[0] > EQUIV else "below" if ci[1] < -EQUIV else "across"
         L += [f"REW-H1 did not pass, so the registered TOST applies. Rewiring **minus the churn baseline "
               f"(edit count)** on {PRIMARY} extrinsic: mean **{mean:+.3f}**, 90% CI "
               f"[{ci[0]:+.3f}, {ci[1]:+.3f}], δ = ±{EQUIV}.", "",
-              f"**{'Equivalent to churn within δ' if inside else 'Not equivalent within δ either — the CI leaves the margin'}.**"]
+              ("**Equivalent to churn within δ** — rewiring is the churn baseline in disguise." if inside else
+               f"**Not equivalent within δ: the interval lies entirely {side} the margin.** Rewiring is "
+               f"**{'better' if side == 'above' else 'worse'}** than the churn baseline by {mean:+.3f}, so it is "
+               "not churn in disguise — it is a better-than-churn predictor that still loses to size." if side != "across" else
+               "**Not equivalent within δ, and not separated from it either — the interval straddles the margin.**")]
 
     L += ["", "## What this cannot establish", "",
           "Carried from the registration §7, unchanged by the result: rewiring is chosen by developers, not "
@@ -423,6 +443,29 @@ def cmd_score(a) -> int:
           "- The walk is quarterly, so rewiring that happened and reverted inside a quarter is invisible, "
           "which pushes the measured rewiring rate **down**.",
           "", f"Runtime {time.time() - t0:.0f}s."]
+    h1v = {r: ("SUPPORTED" if (v[0] > 0 and v[1] > 0) else "not supported") for r, v in h1.items()}
+    h3v = {r: ("SUPPORTED" if (v[0] > 0 and v[1] > 0) else "not supported") for r, v in h3.items()}
+    summary = ["## Result", "",
+               "**All three substantive claims fail, in the same direction and in both repos: at function "
+               "grain, under a 20%-of-lines review budget, nothing here beats ranking by size.**", "",
+               "| claim | what was registered | verdict |", "|---|---|---|",
+               f"| REW-H1 | rewiring predicts extrinsic fixes beyond every baseline | **{h1v.get(PRIMARY, 'n/a')}** "
+               f"({PRIMARY}), **{h1v.get(H12_REP, 'n/a')}** ({H12_REP}) |",
+               "| REW-H2 | that lift is larger for extrinsic than for the other classes | **not larger** — "
+               "extrinsic is the *worst* of the four classes, so there is no class specificity to explain |",
+               f"| REW-H3 | nesting depth predicts latent fixes beyond size and branch count | **{h3v.get(PRIMARY, 'n/a')}** "
+               f"({PRIMARY}), **{h3v.get(H3_REP, 'n/a')}** ({H3_REP}) |",
+               "| REW-H4 | the guard: report an equivalence test rather than 'inconclusive' | fired; see below |", "",
+               "The guard earns its place. Rewiring is **not** churn in disguise — it beats the edit-count "
+               "baseline by a wide margin — but it loses to the stronger size order, and so does nesting "
+               "depth, and so does every other predictor tried here. The registration's reading that "
+               "'structure describes, history predicts' is not rescued by a class split: the class split was "
+               "measured and the predicted class came last.", "",
+               "A note on what the bar is. The baseline is `max(big-files-first, small-files-first)` and at "
+               "function grain small-first is strong, because a 20% line budget buys many small functions "
+               "and fixes are not rare enough to be concentrated in the big ones. That is the bar the "
+               "registration set, deliberately, before any of this was computed."]
+    L[L.index("@@SUMMARY@@")] = "\n".join(summary)
     (DOCS_DIR / "rew.md").write_text("\n".join(L) + "\n")
     print("\n".join(L))
     return 0

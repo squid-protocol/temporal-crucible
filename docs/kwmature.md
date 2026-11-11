@@ -72,6 +72,30 @@ A readable story — functions accumulate pointers and branches (edge cases, ind
 printing, allocation and cleanup (moved out, centralised) — and one that is **not tested here**. It is a
 direction in a descriptive table, offered for someone to register properly.
 
+### Replication, run 2026-11-11 after this note: only the branch half survives
+
+The same pass on the other four pool repos. **The pointer direction does not replicate — it flips sign.**
+
+| repo | `state_pointers` | `struct_branch` |
+|---|---:|---:|
+| curl | **+0.0037** (top gainer) | +0.0032 |
+| harfbuzz | +0.0020 | +0.0050 |
+| libarchive | **−0.0020** (largest loser) | +0.0030 |
+| openssl | **−0.0022** | +0.0032 |
+| nDPI | **−0.0209** (largest magnitude in the whole exercise) | +0.0056 |
+
+Two up, three down, and the largest movement anywhere in the set is a *decrease*. The shedding half fares no
+better: `state_memory_alloc` falls in curl (−0.0024) but rises in libarchive (+0.0007), and `def_cleanup`
+flips the same way. **Branch accumulation is the only part that holds** — all five repos, +0.0030 to +0.0056,
+a spread narrower than any other family's.
+
+So §4 should be read as: one project's history, not a law. What the family measures is worth stating too —
+in C the `pointers` pattern is dominated by `->`, one hit per struct-field access through a pointer, so it
+tracks *reaching through indirection*, not pointer arithmetic and not memory management (`malloc`/`free` are
+a separate family). The direction-free question — does it move at all? — is taken up in
+[`kwflux.md`](kwflux.md), where `state_pointers` turns out to be the **most volatile family in all five
+repos**. It moves the most and agrees about direction the least.
+
 ## 5 · Limits, and the two dimensions still unmeasured
 
 - **Identity is `(file_path, func_name)`.** A rename or a move reads as a death and a birth, so long lives are
