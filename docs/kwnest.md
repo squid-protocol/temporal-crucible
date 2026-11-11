@@ -69,6 +69,37 @@ are arguments and statements being added and removed *around* an unchanged skele
 **Functions mature by being rewired, not by being restructured.** They keep their control flow and change
 what they talk to.
 
+### Replication, run 2026-11-11: identifiers lead in all five repos
+
+The same `what` pass on the other four pool repos, 300 functions each (183 for harfbuzz, which is all that
+qualified). harfbuzz is C++ and needed its own parser and extensions; the rest are C.
+
+| token kind | curl | openssl | libarchive | nDPI | harfbuzz |
+|---|---:|---:|---:|---:|---:|
+| **identifier** | **39.8%** | **30.5%** | **32.5%** | **37.7%** | **28.4%** |
+| field_identifier | 6.6% | 2.1% | 1.3% | 6.4% | 9.8% |
+| type_identifier | — | 1.9% | — | 4.5% | 5.5% |
+| primitive_type | — | 2.1% | 1.7% | — | 2.6% |
+| naming + wiring, summed | ~53% | 36.6% | ≥35.5% | 48.6% | 46.3% |
+| token differences | 4,303 | 3,208 | 8,358 | 4,452 | 2,232 |
+
+**The ordering replicates: `identifier` is the single largest token kind in every repo, by a wide margin over
+the next entry**, which is punctuation everywhere. The *magnitude* is curl-high — "over half of all change is
+naming and wiring" holds for curl and nDPI and overstates openssl and libarchive, where the share is nearer
+36–40%. The claim that survives all five is the weaker and still interesting one: **when a function is edited
+without touching its keyword skeleton, what changes is more often a name than anything else.**
+
+What differs between projects is the *second* theme. libarchive spends 32% of its token differences on
+parentheses and commas and nDPI 14% on commas alone — argument lists and call shapes being rewritten — while
+harfbuzz leans on `field_identifier` (9.8%) and nDPI and harfbuzz both show `->` in the top twelve. Those are
+different flavours of rewiring, not different answers to whether rewiring dominates.
+
+**One reproducibility note.** Re-running curl under the tool as it now stands gives identifier 39.8% and
+field_identifier 6.6% against the 41.1% and 6.9% recorded above. The walkers were made iterative in this
+change (openssl holds expressions deep enough to exhaust Python's recursion limit), which alters which node
+wins for a duplicated function name in a handful of files and so shifts the sample slightly. The conclusion
+is unchanged; the exact shares in the table above are the ones this tool now produces.
+
 ## What this changes for the program
 
 1. **"Born in final form" survives its hardest test**, and can now be stated precisely: the control skeleton

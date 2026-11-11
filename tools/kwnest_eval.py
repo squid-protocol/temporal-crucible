@@ -43,7 +43,15 @@ from pathlib import Path
 WT = Path(os.environ.get("TC_WORKTREES", "/srv/storage_16tb/projects/temporal-crucible/.claude/worktrees"))
 POOL = Path(os.environ.get("TC_POOL", "/srv/storage_16tb/projects/temporal-crucible-pool"))
 DBS = {"curl": WT / "forward-asof/dbs/curl_out/curl_galaxy_master.db",
-       "ndpi": WT / "forward-asof/dbs/ndpi_out/ndpi_galaxy_master.db"}
+       "ndpi": WT / "forward-asof/dbs/ndpi_out/ndpi_galaxy_master.db",
+       "openssl": WT / "frec/dbs/openssl_out/openssl_galaxy_master.db",
+       "harfbuzz": WT / "sc-class/dbs/harfbuzz_out/harfbuzz_galaxy_master.db",
+       "libarchive": WT / "sc-class/dbs/libarchive_out/libarchive_galaxy_master.db"}
+
+# harfbuzz is C++; the others are C. The grammars differ enough that parsing .cc with the C parser
+# silently finds almost no functions, so language and file extensions are per repo, as in chg_eval.
+LANG = {"harfbuzz": "cpp"}
+EXTS = {"harfbuzz": ("%.cc", "%.hh")}
 
 # C reserved words. The control-flow subset is what carries structure; the rest are reported but do not
 # drive the headline, because a `const` moving is not a reorganisation.
@@ -55,18 +63,17 @@ OTHER = {"auto", "char", "const", "double", "enum", "extern", "float", "inline",
 KEYWORDS = CONTROL | OTHER
 SEED = 2982
 
-_PARSER = None
+_PARSERS: dict = {}
 
 
-def parser():
-    global _PARSER
-    if _PARSER is None:
+def parser(lang: str = "c"):
+    if lang not in _PARSERS:
         try:
             import tree_sitter_language_pack as tslp
         except ImportError:
             sys.exit("tree-sitter is not available: run with an engine venv (see the module docstring)")
-        _PARSER = tslp.get_parser("c")
-    return _PARSER
+        _PARSERS[lang] = tslp.get_parser(lang)
+    return _PARSERS[lang]
 
 
 def blob(repo: str, sha: str, path: str) -> bytes | None:
@@ -92,34 +99,33 @@ def func_name(node) -> str | None:
 def keyword_profile(fn_node) -> list[tuple[str, int]]:
     """[(keyword, nesting depth)] in source order, depth counted in enclosing blocks inside the function."""
     out = []
-
-    def walk(n, depth):
-        for c in n.children:
-            if c.type in KEYWORDS and not c.is_named:      # tree-sitter keeps keywords as anonymous tokens
-                out.append((c.type, depth))
-            deeper = depth + 1 if c.type == "compound_statement" else depth
-            walk(c, deeper)
-
     body = fn_node.child_by_field_name("body")
     if body is None:
         return out
-    walk(body, 0)
+    # Iterative: openssl holds expressions nested deeply enough to exceed Python's recursion limit.
+    # Children are pushed in reverse so pops come out in source order, which this profile depends on.
+    stack = [(body, 0)]
+    while stack:
+        n, depth = stack.pop()
+        for c in reversed(n.children):
+            deeper = depth + 1 if c.type == "compound_statement" else depth
+            stack.append((c, deeper))
+        if n is not body and n.type in KEYWORDS and not n.is_named:
+            out.append((n.type, depth))
     return out
 
 
-def functions_in(src: bytes) -> dict[str, object]:
-    tree = parser().parse(src)
+def functions_in(src: bytes, lang: str = "c") -> dict[str, object]:
+    tree = parser(lang).parse(src)
     found = {}
-
-    def walk(n):
+    stack = [tree.root_node]
+    while stack:
+        n = stack.pop()
         if n.type == "function_definition":
             nm = func_name(n)
             if nm and nm not in found:
                 found[nm] = n
-        for c in n.children:
-            walk(c)
-
-    walk(tree.root_node)
+        stack.extend(n.children)
     return found
 
 
@@ -129,7 +135,8 @@ def candidates(repo: str, limit: int, rng: random.Random):
     q = ("SELECT f.file_path, fn.func_name, f.commit_hash, f.commit_date, fn.loc, fn.complexity, "
          "fn.struct_linear, fn.state_pointers, fn.struct_args "
          "FROM function_data fn JOIN file_data f ON fn.file_id = f.id "
-         "WHERE f.file_path LIKE '%.c' ORDER BY f.file_path, fn.func_name, f.commit_date")
+         "WHERE (" + " OR ".join(f"f.file_path LIKE '{e}'" for e in EXTS.get(repo, ("%.c",))) + ") "
+         "ORDER BY f.file_path, fn.func_name, f.commit_date")
     cur, key, acc, out = con.execute(q), None, [], []
     for path, name, sha, date, loc, cx, sl, sp, sa in cur:
         k = (path, name)
@@ -153,7 +160,7 @@ def compare(repo: str, path: str, name: str, sha_a: str, sha_b: str, cache: dict
         ck = (sha, path)
         if ck not in cache:
             src = blob(repo, sha, path)
-            cache[ck] = functions_in(src) if src else {}
+            cache[ck] = functions_in(src, LANG.get(repo, "c")) if src else {}
         node = cache[ck].get(name)
         if node is None:
             return None
@@ -202,14 +209,13 @@ def cmd_probe(a) -> int:
 def leaves(node):
     """(type, text) for every leaf token under a node -- the material an edit can touch."""
     out = []
-
-    def walk(n):
+    stack = [node]
+    while stack:
+        n = stack.pop()
         if not n.children:
             out.append((n.type, n.text.decode("utf-8", "replace")))
-        for c in n.children:
-            walk(c)
-
-    walk(node)
+        else:
+            stack.extend(n.children)
     return out
 
 
@@ -228,7 +234,7 @@ def cmd_what(a) -> int:
             ck = (sha, path)
             if ck not in cache:
                 src = blob(a.repo, sha, path)
-                cache[ck] = functions_in(src) if src else {}
+                cache[ck] = functions_in(src, LANG.get(a.repo, 'c')) if src else {}
             node = cache[ck].get(name)
             if node is None:
                 ok = False
