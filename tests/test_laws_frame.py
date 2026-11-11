@@ -155,3 +155,30 @@ def test_the_languages_call_is_cached_and_respects_the_core_floor(tmp_path: Path
     assert len([s for s in seen if s.startswith("repos/")]) == n     # cached
     assert F.language_share(b, "go") == pytest.approx(0.9)
     assert F.CORE_FLOOR == 1500                                      # churn and the shepherd share the pool
+
+
+def test_github_language_names_are_used_and_quoted():
+    """The `language:` filter needs GitHub's own names, and `C++`/`C#` do not survive unquoted."""
+    assert F.github_languages("go") == ("Go",)
+    assert F.github_languages("cpp") == ("C++",) and F.github_languages("csharp") == ("C#",)
+    assert 'language:"C++"' in F.query("C++", "2015-01-01", "2015-01-31")
+    assert 'language:"C#"' in F.query("C#", "2015-01-01", "2015-01-31")
+
+
+def test_jsts_is_two_searches_unioned_because_the_filter_is_primary_language_only():
+    assert F.github_languages("jsts") == ("JavaScript", "TypeScript")
+    seen = []
+
+    def fake(q):
+        seen.append(q)
+        lang = q.split('language:"')[1].split('"')[0]
+        return 1, [f"org/{lang.lower()}-repo"]
+
+    rec = F.frame("jsts", fake, start="2015-01", end="2015-01-31")
+    assert rec["github_languages"] == ["JavaScript", "TypeScript"]
+    assert any('language:"JavaScript"' in q for q in seen)
+    assert any('language:"TypeScript"' in q for q in seen)
+    assert rec["candidates"] == ["org/javascript-repo", "org/typescript-repo"]   # unioned
+    # every other language is a single search
+    one = F.frame("go", lambda q: (1, ["org/g"]), start="2015-01", end="2015-01-31")
+    assert one["github_languages"] == ["Go"] and one["search_calls"] == 1

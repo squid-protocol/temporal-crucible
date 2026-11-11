@@ -85,33 +85,46 @@ def split_window(lo: str, hi: str) -> list[tuple[str, str]] | None:
     return [(a.isoformat(), mid.isoformat()), ((mid + dt.timedelta(days=1)).isoformat(), b.isoformat())]
 
 
-def query(language: str, lo: str, hi: str) -> str:
-    return f"stars:>=500 fork:false archived:false language:{language} created:{lo}..{hi}"
+def github_languages(language: str) -> tuple[str, ...]:
+    """GitHub's own `language:` values for a panel language. The filter is PRIMARY-language only, so JS/TS needs
+    two searches whose results are unioned; the >= 60% combined-bytes share is then checked per candidate."""
+    return JSTS if language == "jsts" else (LINGUIST[language],)
+
+
+def query(gh_language: str, lo: str, hi: str) -> str:
+    """One window's query. The language value is quoted because `C++` and `C#` do not survive unquoted."""
+    return f'stars:>=500 fork:false archived:false language:"{gh_language}" created:{lo}..{hi}'
+
 
 
 def frame(language: str, run_search, start: str = FRAME_START, end: str | None = None) -> dict:
     """Every candidate for one language. `run_search(q) -> (total_count, [full_name, ...])` is injected so the
     slicing logic is testable without the API. A window at the cap is split and re-queried; the frame is
-    complete only when no window is truncated."""
-    todo = list(month_slices(start, end))
+    complete only when no window is truncated. A language with several GitHub `language:` values (JS/TS) is the
+    union of their searches."""
+    ghls = github_languages(language)
+    todo = [(lo, hi, g) for g in ghls for lo, hi in month_slices(start, end)]
     names: set[str] = set()
     windows, truncated, calls = [], [], 0
     while todo:
-        lo, hi = todo.pop(0)
-        total, got = run_search(query(language, lo, hi))
+        lo, hi, ghl = todo.pop(0)
+        total, got = run_search(query(ghl, lo, hi))
         calls += 1
         if total > CAP:
             parts = split_window(lo, hi)
             if parts is None:
-                truncated.append({"from": lo, "to": hi, "total": total})  # a single day over the cap
+                truncated.append({"from": lo, "to": hi, "lang": ghl, "total": total})  # a single day over the cap
                 names.update(got)
-                windows.append({"from": lo, "to": hi, "total": total, "returned": len(got), "truncated": True})
+                windows.append({"from": lo, "to": hi, "lang": ghl, "total": total, "returned": len(got),
+                                "truncated": True})
                 continue
-            todo = parts + todo
+            todo = [(a, b, ghl) for a, b in parts] + todo
             continue
         names.update(got)
-        windows.append({"from": lo, "to": hi, "total": total, "returned": len(got), "truncated": False})
-    return {"language": language, "candidates": sorted(names), "frame_size": len(names),
+        windows.append({"from": lo, "to": hi, "lang": ghl, "total": total, "returned": len(got),
+                        "truncated": False})
+    return {"language": language, "github_languages": list(ghls),
+            "candidates": sorted(names), "frame_size": len(names),
             "windows": len(windows), "search_calls": calls, "truncated_windows": truncated,
             "complete": not truncated}
 
@@ -249,11 +262,14 @@ def main() -> int:
     ap.add_argument("--out", type=Path)
     ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--confirm", action="store_true", help="required for `search`: it spends GitHub search quota")
+    ap.add_argument("--no-share", action="store_true",
+                    help="search only: skip the per-candidate languages API, which is what spends core quota")
     a = ap.parse_args()
     if a.step == "slices":
         w = month_slices()
         print(f"{len(w)} monthly windows, {w[0][0]} to {w[-1][1]}; the query per window is:")
-        print(f"  {query(a.language or '<L>', w[0][0], w[0][1])}")
+        for g in (github_languages(a.language) if a.language else ("<L>",)):
+            print(f"  {query(g, w[0][0], w[0][1])}")
         print("no API call was made")
         return 0
     if a.step == "search":
@@ -269,7 +285,7 @@ def main() -> int:
         print(f"quota before: {quota()}")
         rec = frame(a.language, search_runner(d / "search_cache"))
         checked, eligible = 0, []
-        for name in rec["candidates"]:
+        for name in ([] if a.no_share else rec["candidates"]):
             if quota()["core"] <= CORE_FLOOR:
                 rec["share_check_incomplete"] = f"stopped at the {CORE_FLOOR}-call core floor after {checked}"
                 break
@@ -278,7 +294,9 @@ def main() -> int:
             if share >= SHARE:
                 eligible.append(name)
         rec.update(share_checked=checked, share_eligible=sorted(eligible),
-                   eligible_size=len(eligible), share=SHARE)
+                   eligible_size=len(eligible), share=SHARE,
+                   share_phase="skipped (--no-share): frame size is a CEILING on eligibility until it runs"
+                   if a.no_share else "done")
         f = d / f"{a.language}.json"
         f.write_text(json.dumps(rec, indent=2, sort_keys=True) + "\n")
         print(f"{a.language}: frame {rec['frame_size']} candidates from {rec['windows']} windows "
