@@ -65,6 +65,25 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 - **Next test:** fresh whole programs (round 3). Synthesis:
   [journal](journal/2026-11-07-model-handwriting-synthesis.md).
 
+**7. Declared AI assistance changes structure a little and defect outcomes not at all (so far).** *Exploratory,
+2026-11-11; plus prospective AIC and the living ARG.*
+- **Dependencies:** within the same author, AI-declared commits add more new callees than that author's own
+  changes of the same size (median +0.28 per modified function, 11 of 13 people). Function *shape* moves no more
+  often — structure stays put. Registered prospectively as AIC, scored only on commits made after 2026-11-11.
+- **Comments:** declared-AI commits do not change how much code is commented on average, because tools pull
+  opposite ways — Claude-assisted commits comment about twice as much as Codex-assisted ones.
+- **Defect outcome: nothing.** Code in a declared-AI commit is followed by a fix **no more often than the same
+  author's own code of the same size**: 0.984×, CI 0.87–1.11, on 339 events, stable under tighter strata and a
+  doubled window. The crude gap people would quote (58% vs 46%) is **composition** — one maintainer supplies 387
+  of 583 AI-marked commits in the corpus.
+- **And the obvious trend argument fails:** the regression-fix share nearly doubled since 2018 (9.98% → 19.90%),
+  but the rise was well under way in 2020–2024 when AI-marked commits were exactly zero.
+- **The method lesson, which outlives the result:** on this question the crude number, the per-repo number and the
+  within-repo number all disagree with the within-author number, and only the last one controls *who*. Quote the
+  within-author contrast or quote nothing.
+- **Limit:** the exposure is declared-only — a floor and a project convention (harfbuzz marks 11.6% of commits,
+  curl 0.3%) — and confounding by indication survives a within-author contrast. ARG carries the prospective looks.
+
 **Corrections to keep in mind when quoting older summaries:** see [`SYNTHESIS_2026-11-06.md`](SYNTHESIS_2026-11-06.md) § 3
 (LIB's outcome is library-named work, SRCH refuted the searcher-age story, CHG's 2.9× was mostly churn, and others).
 
@@ -101,6 +120,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 - **The never-audited other-fix class carries 85-97% of the outcome mass and was 0.73 precise on C but 0.38 outside it, because Go, Java, Python and Rust projects say "fix" for lint, mypy, javadoc and typos; requiring the fix word in the commit SUBJECT rather than the body, plus test/doc path and refactor/prose exclusions, lifts it to 0.76 pooled and 7 of 8 repos over the gate, and closes the language gap (C 0.75 vs non-C 0.77).** — exploratory, 2026-11-11 · [journal](journal/2026-11-11-otherfix-precision.md)
 - **A file-year fix model reaches recall@20%-of-lines 0.30 out of repo against an attainable 0.47 and a perfect-rate ceiling of 0.68; M1's three network terms all survive author and change-coupling controls with file-clustered SEs (1.29/1.49/1.31) and author count is the strongest term at 2.06; fixing the labels buys 3-4 points and closes the C/non-C gap but leaves the 22-point unmeasured-rate wall untouched, and raises dispersion rather than lowering it, so the headroom is real signal and not label noise.** — exploratory, 2026-11-11 · [journal](journal/2026-11-11-error-prediction-ceiling.md)
+- **Code in declared-AI commits is followed by a fix no more often than the same author's own code of the same size (0.984×, CI 0.87–1.11, 339 events); the striking crude gap (58% vs 46%) is composition — one maintainer supplies 387 of 583 AI-marked commits — and the regression-fix share nearly doubled since 2018 but the rise predates AI entirely.** — inconclusive, 2026-11-11 · [journal](journal/2026-11-11-ai-adoption-fixes.md)
 - **Of the engine's newer metrics, the screen's leads were almost all leftover size; the one survivor is amplified_cascading_flux (state writes inside branches), which beats size on nDPI and openssl but not curl, so it needs its own test on an unseen repo (AMP-H1).** — mixed, 2026-11-06 · [journal](journal/2026-11-06-untested-engine-metrics-screen.md)
 - **Of 225 GitGalaxy file-metric forms, only platform-conditional density per line finds one fix class (extrinsic) at equal size on unseen repos (+0.154 harfbuzz, +0.102 libarchive); no metric finds CVEs beyond size, and the churn candidates for regressions and other fixes failed holdout.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-the-225-metric-screen.md)
 - **To find unannounced security fixes, history (where past CVE fixes and fix activity were) beats the change signature: AUC 0.720, top-10% enrichment 2.93×.** — mixed, 2026-11-06 · [journal](journal/2026-11-06-silent-patches.md)
