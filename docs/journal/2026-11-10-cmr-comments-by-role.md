@@ -2,13 +2,13 @@
 date: 2026-11-10
 title: Do comments sit differently by call-graph role, and does that change what they predict? (CMR)
 type: confirmatory
-status: draft
+status: registered
 verdict: pending
 theme: comments
 ids: CMR-P1..P2, CMR-FD, CMR-FC
 docs: docs/cmr_hypotheses.md
-links:
-takehome: Draft registration, not yet scored.
+links: temporal-crucible#127
+takehome: Registered, not yet scored.
 ---
 
 ## Question
@@ -23,7 +23,7 @@ predict CVE fixes. No study has crossed the two.
 
 ## What we did
 
-Draft registration: [`../cmr_hypotheses.md`](../cmr_hypotheses.md). Owner OK pending.
+Registered: [`../cmr_hypotheses.md`](../cmr_hypotheses.md).
 
 ## What we found
 

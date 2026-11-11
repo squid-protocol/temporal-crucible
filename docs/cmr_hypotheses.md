@@ -1,4 +1,4 @@
-# CMR — do comments, and danger comments, sit differently by call-graph role, and does their link to each fix class change with role? — DRAFT registration 2026-11-10 (owner OK pending; no statistic computed)
+# CMR — do comments, and danger comments, sit differently by call-graph role, and does their link to each fix class change with role? — registered 2026-11-11 (owner OK), before any statistic
 
 **Why.**
 - CGK found strong role structure. Hubs (most-called) are public, branchy, pointer-handling workhorses.
