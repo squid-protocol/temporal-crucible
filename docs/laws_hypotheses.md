@@ -20,8 +20,9 @@ of each is at the bottom of this file; this table is the audit trail, not a subs
 | 6 | 11-11 | adopts **FIXLIKE v3c** as the `other-fix` class rule after `docs/otherfix_audit.md` measured the registered gate at 0.383 outside C; scoped to `other-fix` only; costs 43% of `other-fix` events | yes | **mixed** — label precision 0.38 → 0.77, at ~22% of real fixes in power |
 | 7 | 11-11 | **no per-repo class gate**; the M6 audit sized at ≈136 stratified judgments per language; per-repo precision reported, never used as a filter; a sub-0.70 sensitivity pre-registered; a CI-upper-bound floor as backstop | yes | **neutral** — declines a filter, adds a sensitivity and a backstop |
 | 8 | 11-11 | records that the CGR repos were **already** excluded; **requires the registered exclusion to be applied before the draw**, with logged removals and a post-exclusion fingerprint; states `docs/ceil.md` is development-set evidence; files a pre-draw prior that **LAW-6's in-cycle term is expected to fail outside C**; erratum on Amendment 6's author-count parenthetical | yes | **weakened** — enforces a guard and lowers expectations for LAW-6 |
+| 9 | 11-11 | resolves a contradiction between two stated orders of work in favour of Amendment 0 item 7 (**draw → scans → label audit**, not audit first), names the audit's repo set as the **drawn panel**, and commits the post-exclusion eligible list and its M9 fingerprint `12e03a14…` | yes | **neutral** — settles an ambiguity and fulfils a commitment; no bar, direction or size changes |
 
-**Read across the last two columns.** All nine entries predate any panel outcome data: no panel repo has been
+**Read across the last two columns.** All ten entries predate any panel outcome data: no panel repo has been
 selected, scanned or labelled. **Not one amendment loosened a bar, widened a direction, or made a law easier to
 pass.** Several did the opposite — Amendment 0 demoted two laws, Amendment 4 expects Go to stay descriptive,
 Amendment 5 invalidated earlier development-set figures and froze the scorer, Amendment 6 gave up about a fifth
@@ -760,3 +761,55 @@ amendment records the check, fixes the one gap it exposed, and files two items t
 **Evidence.** Registration PANEL section ("Excluded", "Development set");
 `laws-study/pilot/frame/<lang>.json` for the candidate lists; `docs/ceil_v3c.json` (`m1_refit`) for the
 re-fit figures in items 3 and 4; `docs/ceil.md` §5.
+
+## Amendment 9 (2026-11-11, owner OK; before the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** Two statements of the order of work disagree, and the disagreement decides whether the
+label audit precedes or follows the draw — exactly the question a referee asks. Amendment 0 item 7's
+numbered "Order of work" reads: frame build and hashed candidate list (pushed) → **the seeded draw** →
+scans → **label audit** → scorer freeze → one run. Amendment 5's closing "**Next, in order**" line
+reads: **the label audit** → the sampling frame with its fingerprint → the seeded draw → ACC-P → the
+panel scans → one run. Both cannot hold.
+
+1. **Amendment 0 item 7 governs the order of work.** Amendment 5's closing "Next, in order" line is
+   narrative summary, not a numbered amendment item, and is superseded on this point only. The order is:
+   frame and committed fingerprint → **seeded draw** → panel scans → **label audit** → one scorer run →
+   synthesis. (The scorer freeze is already done, Amendment 5 item 8.)
+
+   **Why that way round.** The label audit measures the precision of the labels the laws are actually
+   scored on, and those labels are harvested from the drawn panel's own history. Amendment 7 item 3
+   samples the audit "stratified by repo in proportion to that repo's `other-fix` event mass", which
+   presupposes a panel. An audit run before the draw would measure a different repo set from the one
+   the verdicts rest on, which is the wrong quantity however convenient the timing.
+
+   **What this does not license.** No law statistic is computed before the single scorer run
+   (Amendment 0 item 7's closing rule, unchanged). The class gate still decides descriptive vs
+   confirmatory status per language, and it is applied from the audit's result *before* any verdict is
+   read — the audit follows the scans but precedes every claim.
+
+2. **The audit's repo set, which Amendment 7 item 3 left unstated:** the **drawn panel repos** of that
+   language. Not the candidate frame, not the development set.
+
+3. **The post-exclusion eligible list and its fingerprint are committed**, satisfying M9's "the SHA-256
+   of the candidate file is committed and pushed before the draw" and Amendment 8 item 1's
+   post-exclusion requirement:
+
+   - `docs/laws_panel/<lang>_eligible.json` — the list the seeded draw samples from, each with every
+     removal by name **and the rule that removed it**;
+   - `docs/laws_panel/SHA256SUMS`, `docs/laws_panel/README.md`, and
+     `docs/laws_panel/name_collisions.json`;
+   - **81,060 candidates in, 81,006 eligible out, 54 removed**;
+   - **M9 combined fingerprint
+     `12e03a147f8b62b0c7a890aba5bd2c336f207c4e8145caff0cbec759ede56451`.**
+
+   The list is reproducible from committed inputs alone — the raw frame in `docs/laws_frame`, the
+   exclusion sources in `tools/laws_exclude.py` and this register, and
+   `docs/laws_collision_decisions.json` — so the commitment is checkable, not merely recorded.
+
+4. **With item 3 committed, the seeded draw may proceed.** Its remaining prerequisites are met: ACC-P
+   admission (Amendment 2 item 4), the pilot (Amendment 0 item 4), the development-set dry run
+   (Amendment 2 item 5), the engine pin (Amendment 1 item 2), the scorer freeze (Amendment 5 item 8)
+   and the exclusion (Amendment 8 item 1).
+
+5. **Unchanged.** Every law's direction, bar and verdict rule; the panel size and the draw seed; the
+   controls; the scorer freeze; the class gate and the audit size of Amendment 7 item 3.
