@@ -70,17 +70,23 @@ def fix_events(repo: str) -> list[tuple[int, set[str]]]:
 
 
 def commits(repo: str, since: str = SINCE):
-    """(ct, body, files, lines) per non-merge commit, from one git pass."""
+    """(ct, author, body, files, lines) per non-merge commit, from one git pass.
+
+    The author is the commit's `%ae`. An AI-assisted commit is still authored by the person who made
+    it -- the tool appears as a co-author trailer -- so `%ae` is exactly the identity a within-author
+    contrast needs.
+    """
     p = POOL / repo
     if not (p / ".git").exists():
         return
     out = subprocess.run(["git", "-C", str(p), "log", f"--since={since}", "--no-merges",
-                          "--format=%x00%H%x1f%ct%x1f%b%x1e", "--numstat"],
+                          "--format=%x00%H%x1f%ct%x1f%ae%x1f%b%x1e", "--numstat"],
                          capture_output=True).stdout.decode("utf-8", "replace")
     for chunk in out.split("\x00")[1:]:
         head, _, stat = chunk.partition("\x1e")
         sha, _, rest = head.partition("\x1f")
-        ct, _, body = rest.partition("\x1f")
+        ct, _, rest2 = rest.partition("\x1f")
+        author, _, body = rest2.partition("\x1f")
         if not ct.strip().isdigit():
             continue
         files, lines = set(), 0
@@ -92,7 +98,7 @@ def commits(repo: str, since: str = SINCE):
                     if v.isdigit():
                         lines += int(v)
         if files:
-            yield int(ct), body, files, lines
+            yield int(ct), author.strip().lower(), body, files, lines
 
 
 def build_cells(repos, window_days: int = WINDOW_DAYS) -> dict:
@@ -107,7 +113,7 @@ def build_cells(repos, window_days: int = WINDOW_DAYS) -> dict:
         if not rows:
             continue
         head_ct = max(r[0] for r in rows)
-        for ct, body, files, lines in rows:
+        for ct, _author, body, files, lines in rows:
             if ct > head_ct - win:        # not enough follow-up: excluded from BOTH arms
                 continue
             hit = any(fct > ct and fct <= ct + win and (ff & files) for fct, ff in fixes)
@@ -161,7 +167,7 @@ def cmd_trend(a) -> int:
     ai = collections.Counter()
     tot = collections.Counter()
     for repo in REPOS:
-        for ct, body, _f, _l in commits(repo, since=TREND_SINCE):
+        for ct, _author, body, _f, _l in commits(repo, since=TREND_SINCE):
             y = datetime.datetime.fromtimestamp(ct, datetime.UTC).year
             tot[y] += 1
             ai[y] += is_ai(body)
@@ -210,12 +216,88 @@ def cmd_pooled(a) -> int:
     return 0
 
 
+def within_author_cells(repos, window_days: int, use_area: bool) -> tuple[dict, dict]:
+    """Strata keyed by (repo, AUTHOR, size bin[, area]), plus each author's own two rates.
+
+    The within-author contrast is the point: it compares a person's AI-marked commits against *that
+    same person's* unmarked commits, so who reaches for a tool -- and how good they are -- cancels.
+    Matching on size and area, as `repos`/`pooled` do, controls the commit's shape but not the
+    person's. Only authors with commits in both arms can contribute to the ratio.
+    """
+    win = window_days * 86400
+    cells: dict = collections.defaultdict(lambda: [0, 0, 0, 0])
+    per_author: dict = collections.defaultdict(lambda: [0, 0, 0, 0])
+    for repo in repos:
+        fixes = fix_events(repo)
+        if not fixes:
+            continue
+        rows = list(commits(repo))
+        if not rows:
+            continue
+        head_ct = max(r[0] for r in rows)
+        for ct, author, body, files, lines in rows:
+            if ct > head_ct - win:
+                continue
+            hit = any(fct > ct and fct <= ct + win and (ff & files) for fct, ff in fixes)
+            key = [repo, author, size_bin(lines)]
+            if use_area:
+                key.append(sorted(files)[0].split("/")[0])
+            cell = cells[tuple(key)]
+            who = per_author[(repo, author)]
+            if is_ai(body):
+                cell[0] += 1
+                cell[1] += hit
+                who[0] += 1
+                who[1] += hit
+            else:
+                cell[2] += 1
+                cell[3] += hit
+                who[2] += 1
+                who[3] += hit
+    return cells, per_author
+
+
+def cmd_author(a) -> int:
+    cells, per_author = within_author_cells(REPOS, a.window, a.area)
+    m = mantel_haenszel(cells)
+    strata = "repo x author x size" + (" x area" if a.area else "")
+    print(f"WITHIN-AUTHOR, Mantel-Haenszel, strata = {strata}")
+    print(f"  AI-marked {m['ai']} commits ({m['ai_events']} followed by a fix); "
+          f"plain {m['plain']} ({m['plain_events']})")
+    print(f"  crude ratio   {m['crude']:.2f}x")
+    print(f"  matched RR    {m['rr']:.3f}x  95% CI [{m['lo']:.2f}, {m['hi']:.2f}]  z={m['z']:+.2f}  "
+          f"{m['cells']} contributing cells")
+    print(f"  reading: {'consistent with no effect' if m['lo'] <= 1 <= m['hi'] else 'EXCLUDES 1.0'}")
+
+    # the sign test the sibling structural study used: how many authors point which way
+    rows = []
+    for (repo, author), (an, ah, pn, ph) in per_author.items():
+        if an >= a.min_commits and pn >= a.min_commits:
+            rows.append((repo, author, an, ah / an, pn, ph / pn))
+    up = sum(1 for r in rows if r[3] > r[5])
+    print(f"\nauthors with >= {a.min_commits} commits in BOTH arms: {len(rows)}")
+    if rows:
+        print(f"  AI rate higher for {up} of {len(rows)}")
+        print(f"\n{'repo':11} {'author':34} {'AI n':>5} {'AI rate':>8} {'own n':>6} {'own rate':>9}  dir")
+        for repo, author, an, ar, pn, pr in sorted(rows, key=lambda r: -r[2]):
+            who = author if len(author) <= 34 else author[:31] + "..."
+            print(f"  {repo:11} {who:34} {an:5} {ar:8.1%} {pn:6} {pr:9.1%}  {'up' if ar > pr else 'down'}")
+    if m["ai_events"] < 20:
+        print("\nUNDERPOWERED: fewer than 20 events in the AI arm")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("step", choices=("trend", "repos", "pooled"))
+    ap.add_argument("step", choices=("trend", "repos", "pooled", "author"))
     ap.add_argument("--window", type=int, default=WINDOW_DAYS, help="follow-up days (default 90)")
+    ap.add_argument("--area", action="store_true",
+                    help="author: also stratify by top-level area (tighter, fewer usable cells)")
+    ap.add_argument("--min-commits", type=int, default=5,
+                    help="author: commits needed in EACH arm for an author to appear in the sign test")
     a = ap.parse_args()
-    return {"trend": cmd_trend, "repos": cmd_repos, "pooled": cmd_pooled}[a.step](a)
+    return {"trend": cmd_trend, "repos": cmd_repos, "pooled": cmd_pooled,
+            "author": cmd_author}[a.step](a)
 
 
 if __name__ == "__main__":
