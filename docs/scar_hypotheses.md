@@ -1,7 +1,7 @@
-# SCAR — what do the danger comments that fixes leave behind mean? — DRAFT 2026-11-11, awaiting owner OK; registered before any statistic
+# SCAR — what do the danger comments that fixes leave behind mean? — registered 2026-11-11 (owner OK), before any statistic
 
-**Status: draft registration.** Nothing below has been computed. It becomes binding when the owner OKs it and it is
-merged; the scorer is written after that.
+**Status: registered (owner OK 2026-11-11).** Nothing below had been computed when this was committed. The scorer
+is written after this commit and follows it as written.
 
 **Why.**
 - **CF-H1 (2026-11-06, supported):** CVE fixes add danger-worded comments 1.61× as often as ordinary fixes (8.8% vs

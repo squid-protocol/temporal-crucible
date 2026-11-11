@@ -2,13 +2,13 @@
 date: 2026-11-11
 title: Scars: what do the danger comments that fixes leave behind mean? (SCAR)
 type: confirmatory
-status: draft
+status: registered
 verdict: pending
 theme: comments
 ids: SCAR-R1, SCAR-R2, SCAR-I1, SCAR-I2
 docs: docs/scar_hypotheses.md
 links:
-takehome: Draft registration, not yet scored.
+takehome: Registered, not yet scored.
 ---
 
 ## Question
@@ -26,7 +26,7 @@ lesson stuck? And is DC-2's "danger comments at birth predict CVEs" partly inher
 
 ## What we did
 
-Draft registration only: [`../scar_hypotheses.md`](../scar_hypotheses.md). It is binding once the owner OKs it.
+Registered (owner OK 2026-11-11): [`../scar_hypotheses.md`](../scar_hypotheses.md).
 
 ## What we found
 
