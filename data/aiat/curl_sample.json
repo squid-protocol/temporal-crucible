@@ -1,0 +1,5952 @@
+{
+ "repo": "curl",
+ "snapshot": "032b15c4342e8eddb51fbe089a9d8ba3ee2070fb",
+ "pool_head": "a0c990c819",
+ "seed": 2982,
+ "universe": 988,
+ "sample_n": 988,
+ "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+ "outcome": {
+  "commits_in_window": 1391,
+  "dropped_by_rule": {
+   "C": 972,
+   "B2": 99,
+   "B": 116,
+   "A": 82,
+   "B3": 10
+  },
+  "rule": "fixlike_v2.drop_reason(rules='v3c')"
+ },
+ "universe_positives": 85,
+ "sample_positives": 85,
+ "files": [
+  {
+   "path": "CMake/CurlTests.c",
+   "loc": 401,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/10-at-a-time.c",
+   "loc": 159,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/address-scope.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/altsvc.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/anyauthput.c",
+   "loc": 173,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/block_ip.c",
+   "loc": 351,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/cacertinmem.c",
+   "loc": 192,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/certinfo.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/chkspeed.c",
+   "loc": 240,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/connect-to.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/cookie_interface.c",
+   "loc": 149,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/crawler.c",
+   "loc": 261,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/debug.c",
+   "loc": 156,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/default-scheme.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ephiperfifo.c",
+   "loc": 551,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/evhiperfifo.c",
+   "loc": 441,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/externalsocket.c",
+   "loc": 175,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/fileupload.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftp-delete.c",
+   "loc": 84,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftp-wildcard.c",
+   "loc": 152,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpget.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpgetinfo.c",
+   "loc": 103,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpgetresp.c",
+   "loc": 99,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpsget.c",
+   "loc": 105,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpupload.c",
+   "loc": 159,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpuploadfrommem.c",
+   "loc": 127,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ftpuploadresume.c",
+   "loc": 172,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/getinfo.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/getinmemory.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/getredirect.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/getreferrer.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ghiper.c",
+   "loc": 461,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/headerapi.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/hiperfifo.c",
+   "loc": 457,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/hsts-preload.c",
+   "loc": 132,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/htmltidy.c",
+   "loc": 138,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http-options.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http-post.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http2-download.c",
+   "loc": 264,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http2-pushinmemory.c",
+   "loc": 186,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http2-serverpush.c",
+   "loc": 294,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http2-upload.c",
+   "loc": 373,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http3-present.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/http3.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/httpcustomheader.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/httpput-postfields.c",
+   "loc": 107,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/httpput.c",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/https.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-append.c",
+   "loc": 134,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-authzid.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-copy.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-create.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-delete.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-examine.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-fetch.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-list.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-lsub.c",
+   "loc": 74,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-multi.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-noop.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-search.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-ssl.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-store.c",
+   "loc": 88,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/imap-tls.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/interface.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/ipv6.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/keepalive.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/localport.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/log_failed_transfers.c",
+   "loc": 337,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/maxconnects.c",
+   "loc": 74,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-app.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-debugcallback.c",
+   "loc": 165,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-double.c",
+   "loc": 105,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-event.c",
+   "loc": 252,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-formadd.c",
+   "loc": 129,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-legacy.c",
+   "loc": 199,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-post.c",
+   "loc": 113,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-single.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/multi-uv.c",
+   "loc": 266,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/netrc.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/parseurl.c",
+   "loc": 81,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/persistent.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-authzid.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-dele.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-list.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-multi.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-noop.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-retr.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-ssl.c",
+   "loc": 97,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-stat.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-tls.c",
+   "loc": 97,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-top.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/pop3-uidl.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/post-callback.c",
+   "loc": 158,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/postinmemory.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/postit2-formadd.c",
+   "loc": 121,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/postit2.c",
+   "loc": 107,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/progressfunc.c",
+   "loc": 108,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/protofeats.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/range.c",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/resolve.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/rtsp-options.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sendrecv.c",
+   "loc": 180,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sepheaders.c",
+   "loc": 109,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sessioninfo.c",
+   "loc": 118,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sftpget.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sftpuploadresume.c",
+   "loc": 149,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/shared-connection-cache.c",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/simple.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/simplepost.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/simplessl.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smooth-gtk-thread.c",
+   "loc": 223,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-authzid.c",
+   "loc": 164,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-expn.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-mail.c",
+   "loc": 152,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-mime.c",
+   "loc": 171,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-multi.c",
+   "loc": 153,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-ssl.c",
+   "loc": 172,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-tls.c",
+   "loc": 175,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/smtp-vrfy.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/sslbackend.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/synctime.c",
+   "loc": 350,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/threaded.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/unixsocket.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/url2file.c",
+   "loc": 101,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/urlapi.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/usercertinmem.c",
+   "loc": 195,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/websocket-cb.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/websocket-updown.c",
+   "loc": 128,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/websocket.c",
+   "loc": 170,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "docs/examples/xmlstream.c",
+   "loc": 177,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/curl.h",
+   "loc": 3347,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/curlver.h",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/easy.h",
+   "loc": 123,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/header.h",
+   "loc": 74,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/mprintf.h",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/multi.h",
+   "loc": 560,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/options.h",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/stdcheaders.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/system.h",
+   "loc": 399,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/typecheck-gcc.h",
+   "loc": 960,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/urlapi.h",
+   "loc": 155,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "include/curl/websockets.h",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/altsvc.c",
+   "loc": 684,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/altsvc.h",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/amigaos.c",
+   "loc": 239,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/amigaos.h",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/arpa_telnet.h",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/asyn-ares.c",
+   "loc": 828,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/asyn-base.c",
+   "loc": 265,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/asyn-thrdd.c",
+   "loc": 831,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/asyn.h",
+   "loc": 277,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/bufq.c",
+   "loc": 619,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/bufq.h",
+   "loc": 257,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/bufref.c",
+   "loc": 138,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/bufref.h",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/capsule.c",
+   "loc": 292,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/capsule.h",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-capsule.c",
+   "loc": 270,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-capsule.h",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-dns.c",
+   "loc": 584,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-dns.h",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h1-proxy.c",
+   "loc": 1013,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h1-proxy.h",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h2-proxy.c",
+   "loc": 1526,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h2-proxy.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h3-proxy.c",
+   "loc": 3500,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-h3-proxy.h",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-haproxy.c",
+   "loc": 259,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-haproxy.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-https-connect.c",
+   "loc": 835,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-https-connect.h",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-ip-happy.c",
+   "loc": 1056,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-ip-happy.h",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cf-socket.c",
+   "loc": 2306,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/cf-socket.h",
+   "loc": 164,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cfilters.c",
+   "loc": 1226,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/cfilters.h",
+   "loc": 701,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/config-mac.h",
+   "loc": 84,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/config-os400.h",
+   "loc": 297,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/config-riscos.h",
+   "loc": 141,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/config-win32.h",
+   "loc": 309,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/conncache.c",
+   "loc": 910,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/conncache.h",
+   "loc": 167,
+   "stratum": 6,
+   "fixed": 1
+  },
+  {
+   "path": "lib/connect.c",
+   "loc": 791,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/connect.h",
+   "loc": 142,
+   "stratum": 6,
+   "fixed": 1
+  },
+  {
+   "path": "lib/content_encoding.c",
+   "loc": 856,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/content_encoding.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cookie.c",
+   "loc": 1645,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cookie.h",
+   "loc": 144,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/creds.c",
+   "loc": 186,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/creds.h",
+   "loc": 89,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cshutdn.c",
+   "loc": 534,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/cshutdn.h",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_addrinfo.c",
+   "loc": 632,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_addrinfo.h",
+   "loc": 110,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_ctype.h",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_endian.c",
+   "loc": 83,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_endian.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_fnmatch.c",
+   "loc": 385,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_fnmatch.h",
+   "loc": 45,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_fopen.c",
+   "loc": 165,
+   "stratum": 6,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curl_fopen.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_get_line.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_get_line.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_gethostname.c",
+   "loc": 96,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_gethostname.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_gssapi.c",
+   "loc": 447,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_gssapi.h",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_hmac.h",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_ldap.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_md4.h",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_md5.h",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_memrchr.c",
+   "loc": 53,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_memrchr.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_ntlm_core.c",
+   "loc": 667,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_ntlm_core.h",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_printf.h",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_range.c",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_range.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_sasl.c",
+   "loc": 910,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curl_sasl.h",
+   "loc": 160,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_setup.h",
+   "loc": 1663,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curl_sha256.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_sha512_256.c",
+   "loc": 847,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_sha512_256.h",
+   "loc": 43,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_share.c",
+   "loc": 472,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_share.h",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_sspi.c",
+   "loc": 207,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_sspi.h",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_threads.c",
+   "loc": 214,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_threads.h",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curl_trc.c",
+   "loc": 777,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curl_trc.h",
+   "loc": 344,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curlx/base64.c",
+   "loc": 267,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/base64.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/basename.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/basename.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/dynbuf.c",
+   "loc": 292,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/dynbuf.h",
+   "loc": 83,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/fopen.c",
+   "loc": 508,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curlx/fopen.h",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/inet_ntop.c",
+   "loc": 222,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/inet_ntop.h",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/inet_pton.c",
+   "loc": 221,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/inet_pton.h",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/multibyte.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 1
+  },
+  {
+   "path": "lib/curlx/multibyte.h",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/nonblock.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/nonblock.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/snprintf.c",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/snprintf.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strcopy.c",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strcopy.h",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strdup.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strdup.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strerr.c",
+   "loc": 329,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strerr.h",
+   "loc": 29,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strparse.c",
+   "loc": 317,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/strparse.h",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/timediff.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/timediff.h",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/timeval.c",
+   "loc": 273,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/timeval.h",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/version_win32.c",
+   "loc": 238,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/version_win32.h",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/wait.c",
+   "loc": 94,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/wait.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/warnless.c",
+   "loc": 341,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/warnless.h",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/winapi.c",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/curlx/winapi.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cw-out.c",
+   "loc": 522,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/cw-out.h",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/cw-pause.c",
+   "loc": 225,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/cw-pause.h",
+   "loc": 38,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dict.c",
+   "loc": 297,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dict.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dllmain.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dnscache.c",
+   "loc": 859,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dnscache.h",
+   "loc": 138,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/doh.c",
+   "loc": 1362,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/doh.h",
+   "loc": 176,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dynhds.c",
+   "loc": 385,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/dynhds.h",
+   "loc": 141,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/easy.c",
+   "loc": 1401,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/easy_lock.h",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/easygetopt.c",
+   "loc": 97,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/easyif.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/easyoptions.c",
+   "loc": 390,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/easyoptions.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/escape.c",
+   "loc": 228,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/escape.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/fake_addrinfo.c",
+   "loc": 202,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/fake_addrinfo.h",
+   "loc": 53,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/file.c",
+   "loc": 623,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/file.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/fileinfo.c",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/fileinfo.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/formdata.c",
+   "loc": 866,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/formdata.h",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ftp-int.h",
+   "loc": 160,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ftp.c",
+   "loc": 4498,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/ftp.h",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ftplistparser.c",
+   "loc": 1089,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ftplistparser.h",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/functypes.h",
+   "loc": 108,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/getenv.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/getinfo.c",
+   "loc": 679,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/getinfo.h",
+   "loc": 29,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/gopher.c",
+   "loc": 217,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/gopher.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hash.c",
+   "loc": 388,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hash.h",
+   "loc": 105,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/headers.c",
+   "loc": 394,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/headers.h",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hmac.c",
+   "loc": 170,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hostip.c",
+   "loc": 1129,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hostip.h",
+   "loc": 187,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hostip4.c",
+   "loc": 283,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hostip6.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hsts.c",
+   "loc": 627,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/hsts.h",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http.c",
+   "loc": 5041,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/http.h",
+   "loc": 269,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http1.c",
+   "loc": 347,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http1.h",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http2.c",
+   "loc": 3023,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/http2.h",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_aws_sigv4.c",
+   "loc": 1135,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/http_aws_sigv4.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_chunks.c",
+   "loc": 669,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/http_chunks.h",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_digest.c",
+   "loc": 139,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_digest.h",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_negotiate.c",
+   "loc": 259,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_negotiate.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_ntlm.c",
+   "loc": 247,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_ntlm.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_proxy.c",
+   "loc": 783,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/http_proxy.h",
+   "loc": 88,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/httpsrr.c",
+   "loc": 311,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/httpsrr.h",
+   "loc": 102,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/idn.c",
+   "loc": 386,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/idn.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/if2ip.c",
+   "loc": 262,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/if2ip.h",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/imap.c",
+   "loc": 2325,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/imap.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ldap.c",
+   "loc": 981,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/llist.c",
+   "loc": 272,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/llist.h",
+   "loc": 82,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/macos.c",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/macos.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/md4.c",
+   "loc": 466,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/md5.c",
+   "loc": 612,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/memdebug.c",
+   "loc": 579,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/mime.c",
+   "loc": 2265,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/mime.h",
+   "loc": 173,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/mprintf.c",
+   "loc": 1256,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/mqtt.c",
+   "loc": 1027,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/mqtt.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/multi.c",
+   "loc": 4203,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/multi_ev.c",
+   "loc": 646,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/multi_ev.h",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/multi_ntfy.c",
+   "loc": 207,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/multi_ntfy.h",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/multihandle.h",
+   "loc": 199,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/multiif.h",
+   "loc": 167,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/netrc.c",
+   "loc": 683,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/netrc.h",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/noproxy.c",
+   "loc": 266,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/noproxy.h",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/openldap.c",
+   "loc": 1291,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/parsedate.c",
+   "loc": 609,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/parsedate.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/peer.c",
+   "loc": 733,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/peer.h",
+   "loc": 110,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/pingpong.c",
+   "loc": 405,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/pingpong.h",
+   "loc": 162,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/pop3.c",
+   "loc": 1716,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/pop3.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/progress.c",
+   "loc": 705,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/progress.h",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/protocol.c",
+   "loc": 536,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/protocol.h",
+   "loc": 296,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/psl.c",
+   "loc": 102,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/psl.h",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/rand.c",
+   "loc": 246,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/rand.h",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ratelimit.c",
+   "loc": 293,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ratelimit.h",
+   "loc": 108,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/request.c",
+   "loc": 502,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/request.h",
+   "loc": 251,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/rtsp.c",
+   "loc": 1057,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/rtsp.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/select.c",
+   "loc": 733,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/select.h",
+   "loc": 232,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/sendf.c",
+   "loc": 1477,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/sendf.h",
+   "loc": 423,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/setopt.c",
+   "loc": 2962,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/setopt.h",
+   "loc": 40,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/setup-os400.h",
+   "loc": 147,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/setup-vms.h",
+   "loc": 396,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/setup-win32.h",
+   "loc": 110,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/sha256.c",
+   "loc": 513,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/sigpipe.h",
+   "loc": 102,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/slist.c",
+   "loc": 139,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/slist.h",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/smb.c",
+   "loc": 1234,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/smb.h",
+   "loc": 31,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/smtp.c",
+   "loc": 2007,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/smtp.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/sockaddr.h",
+   "loc": 43,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/socketpair.c",
+   "loc": 376,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/socketpair.h",
+   "loc": 43,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/socks.c",
+   "loc": 1400,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/socks.h",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/socks_gssapi.c",
+   "loc": 600,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/socks_sspi.c",
+   "loc": 540,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/splay.c",
+   "loc": 291,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/splay.h",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/strcase.c",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/strcase.h",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/strequal.c",
+   "loc": 95,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/strerror.c",
+   "loc": 676,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/strerror.h",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/system_win32.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/system_win32.h",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/telnet.c",
+   "loc": 1593,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/telnet.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/tftp.c",
+   "loc": 1360,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/tftp.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/thrdpool.c",
+   "loc": 481,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/thrdpool.h",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/thrdqueue.c",
+   "loc": 416,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/thrdqueue.h",
+   "loc": 119,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/transfer.c",
+   "loc": 923,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/transfer.h",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-bset.c",
+   "loc": 233,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-bset.h",
+   "loc": 109,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-hash.c",
+   "loc": 235,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-hash.h",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-spbset.c",
+   "loc": 253,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-spbset.h",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-table.c",
+   "loc": 202,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/uint-table.h",
+   "loc": 96,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/url.c",
+   "loc": 3057,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/url.h",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/urlapi-int.h",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/urlapi.c",
+   "loc": 2059,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/urldata.h",
+   "loc": 1314,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vauth/cleartext.c",
+   "loc": 112,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/cram.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/digest.c",
+   "loc": 1050,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vauth/digest.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/digest_sspi.c",
+   "loc": 635,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/gsasl.c",
+   "loc": 121,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/krb5_gssapi.c",
+   "loc": 325,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/krb5_sspi.c",
+   "loc": 456,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vauth/ntlm.c",
+   "loc": 860,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/ntlm_sspi.c",
+   "loc": 353,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/oauth2.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/spnego_gssapi.c",
+   "loc": 295,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/spnego_sspi.c",
+   "loc": 351,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/vauth.c",
+   "loc": 252,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vauth/vauth.h",
+   "loc": 341,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/version.c",
+   "loc": 679,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/curl_ngtcp2.c",
+   "loc": 3167,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/curl_ngtcp2.h",
+   "loc": 61,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/curl_quiche.c",
+   "loc": 1681,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/curl_quiche.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/vquic-tls.c",
+   "loc": 239,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/vquic-tls.h",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/vquic.c",
+   "loc": 932,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vquic/vquic.h",
+   "loc": 61,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vquic/vquic_int.h",
+   "loc": 134,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vssh/libssh.c",
+   "loc": 3206,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vssh/libssh2.c",
+   "loc": 4025,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vssh/ssh.h",
+   "loc": 262,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vssh/vssh.c",
+   "loc": 333,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vssh/vssh.h",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/apple.c",
+   "loc": 291,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/apple.h",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/cipher_suite.c",
+   "loc": 702,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/cipher_suite.h",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/gtls.c",
+   "loc": 2345,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/gtls.h",
+   "loc": 124,
+   "stratum": 5,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/hostcheck.c",
+   "loc": 128,
+   "stratum": 5,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/hostcheck.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/keylog.c",
+   "loc": 161,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/keylog.h",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/mbedtls.c",
+   "loc": 1634,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/mbedtls.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/openssl.c",
+   "loc": 5548,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/openssl.h",
+   "loc": 198,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/rustls.c",
+   "loc": 1460,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/rustls.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/schannel.c",
+   "loc": 2908,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/schannel.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/schannel_int.h",
+   "loc": 169,
+   "stratum": 6,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/schannel_verify.c",
+   "loc": 860,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/vtls.c",
+   "loc": 1782,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/vtls.h",
+   "loc": 234,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/vtls_config.c",
+   "loc": 399,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/vtls_config.h",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/vtls_int.h",
+   "loc": 214,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/vtls_scache.c",
+   "loc": 1309,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/vtls_scache.h",
+   "loc": 232,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/vtls_spack.c",
+   "loc": 322,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/vtls_spack.h",
+   "loc": 43,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/wolfssl.c",
+   "loc": 2361,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/wolfssl.h",
+   "loc": 101,
+   "stratum": 4,
+   "fixed": 1
+  },
+  {
+   "path": "lib/vtls/x509asn1.c",
+   "loc": 1271,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "lib/vtls/x509asn1.h",
+   "loc": 119,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "lib/ws.c",
+   "loc": 1982,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "lib/ws.h",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "projects/OS400/ccsidcurl.c",
+   "loc": 1472,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "projects/OS400/ccsidcurl.h",
+   "loc": 112,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "projects/OS400/curlcl.c",
+   "loc": 173,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "projects/OS400/curlmain.c",
+   "loc": 119,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "projects/OS400/os400sys.c",
+   "loc": 1020,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "projects/OS400/os400sys.h",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "projects/vms/curl_crtl_init.c",
+   "loc": 323,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "projects/vms/curlmsg.h",
+   "loc": 143,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "projects/vms/curlmsg_vms.h",
+   "loc": 129,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "projects/vms/report_openssl_version.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "projects/vms/vms_eco_level.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "scripts/schemetable.c",
+   "loc": 186,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/config2setopts.c",
+   "loc": 1081,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/config2setopts.h",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/curlinfo.c",
+   "loc": 277,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/slist_wc.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/slist_wc.h",
+   "loc": 57,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/terminal.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/terminal.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_dbg.c",
+   "loc": 281,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_dbg.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_hdr.c",
+   "loc": 548,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_hdr.h",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_prg.c",
+   "loc": 238,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_prg.h",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_rea.c",
+   "loc": 188,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_rea.h",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_see.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_see.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_soc.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_soc.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_wrt.c",
+   "loc": 367,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cb_wrt.h",
+   "loc": 38,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cfgable.c",
+   "loc": 387,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_cfgable.h",
+   "loc": 368,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_dirhie.c",
+   "loc": 154,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_dirhie.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_doswin.c",
+   "loc": 918,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/tool_doswin.h",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_easysrc.c",
+   "loc": 234,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_easysrc.h",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_filetime.c",
+   "loc": 151,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_filetime.h",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_findfile.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_findfile.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_formparse.c",
+   "loc": 996,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_formparse.h",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_getparam.c",
+   "loc": 3213,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/tool_getparam.h",
+   "loc": 401,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_getpass.c",
+   "loc": 196,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_getpass.h",
+   "loc": 38,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_help.c",
+   "loc": 410,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_help.h",
+   "loc": 93,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_helpers.c",
+   "loc": 123,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_helpers.h",
+   "loc": 32,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_hugehelp.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_ipfs.c",
+   "loc": 239,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_ipfs.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_libinfo.c",
+   "loc": 205,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_libinfo.h",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_listhelp.c",
+   "loc": 867,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_main.c",
+   "loc": 213,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_main.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_msgs.c",
+   "loc": 137,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_msgs.h",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_operate.c",
+   "loc": 2527,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/tool_operate.h",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_operhlp.c",
+   "loc": 245,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_operhlp.h",
+   "loc": 37,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_paramhlp.c",
+   "loc": 732,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_paramhlp.h",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_parsecfg.c",
+   "loc": 348,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_parsecfg.h",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_progress.c",
+   "loc": 323,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_progress.h",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_sdecls.h",
+   "loc": 131,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_setopt.c",
+   "loc": 725,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_setopt.h",
+   "loc": 149,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_setup.h",
+   "loc": 113,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_ssls.c",
+   "loc": 213,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_ssls.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_stderr.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_stderr.h",
+   "loc": 33,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_urlglob.c",
+   "loc": 806,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_urlglob.h",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_util.c",
+   "loc": 138,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_util.h",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_version.h",
+   "loc": 36,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_vms.c",
+   "loc": 214,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_vms.h",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_writeout.c",
+   "loc": 873,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "src/tool_writeout.h",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_writeout_json.c",
+   "loc": 163,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_writeout_json.h",
+   "loc": 38,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_xattr.c",
+   "loc": 130,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "src/tool_xattr.h",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "src/toolx/tool_time.c",
+   "loc": 61,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "src/toolx/tool_time.h",
+   "loc": 30,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "src/var.c",
+   "loc": 493,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "src/var.h",
+   "loc": 41,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/cmake/test.c",
+   "loc": 35,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1400.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1401.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1402.c",
+   "loc": 48,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1403.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1404.c",
+   "loc": 83,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1405.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1406.c",
+   "loc": 56,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1407.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1420.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1465.c",
+   "loc": 48,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/data/data1481.c",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 1
+  },
+  {
+   "path": "tests/http/testenv/mod_curltest/mod_curltest.c",
+   "loc": 1002,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_ftp_upload.c",
+   "loc": 179,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_h2_pausing.c",
+   "loc": 316,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_h2_serverpush.c",
+   "loc": 192,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_h2_upgrade_extreme.c",
+   "loc": 171,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_hx_download.c",
+   "loc": 607,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_hx_upload.c",
+   "loc": 548,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_tls_session_reuse.c",
+   "loc": 266,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_upload_pausing.c",
+   "loc": 215,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_ws_data.c",
+   "loc": 484,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/cli_ws_pingpong.c",
+   "loc": 96,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/first.c",
+   "loc": 302,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/first.h",
+   "loc": 589,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1156.c",
+   "loc": 171,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1301.c",
+   "loc": 62,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1308.c",
+   "loc": 99,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1485.c",
+   "loc": 117,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1500.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1501.c",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1502.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1506.c",
+   "loc": 131,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1507.c",
+   "loc": 139,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1508.c",
+   "loc": 47,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1509.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1510.c",
+   "loc": 97,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1511.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1512.c",
+   "loc": 91,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1513.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1514.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1515.c",
+   "loc": 145,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1517.c",
+   "loc": 113,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1518.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1520.c",
+   "loc": 107,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1522.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1523.c",
+   "loc": 81,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1525.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1526.c",
+   "loc": 104,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1527.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1528.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1529.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1530.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1531.c",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1532.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1533.c",
+   "loc": 193,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1534.c",
+   "loc": 136,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1535.c",
+   "loc": 140,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1536.c",
+   "loc": 134,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1537.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1538.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1540.c",
+   "loc": 122,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1541.c",
+   "loc": 147,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1542.c",
+   "loc": 82,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1545.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1549.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1550.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1551.c",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1552.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1553.c",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1554.c",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1555.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1556.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1557.c",
+   "loc": 60,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1558.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1559.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1560.c",
+   "loc": 2298,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1564.c",
+   "loc": 130,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1565.c",
+   "loc": 205,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1567.c",
+   "loc": 57,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1568.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1569.c",
+   "loc": 48,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1571.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1576.c",
+   "loc": 94,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1582.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1587.c",
+   "loc": 103,
+   "stratum": 4,
+   "fixed": 1
+  },
+  {
+   "path": "tests/libtest/lib1588.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1589.c",
+   "loc": 132,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1591.c",
+   "loc": 118,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1592.c",
+   "loc": 121,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1593.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1594.c",
+   "loc": 60,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1597.c",
+   "loc": 110,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1598.c",
+   "loc": 104,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1599.c",
+   "loc": 44,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1647.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1648.c",
+   "loc": 135,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1649.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1662.c",
+   "loc": 88,
+   "stratum": 3,
+   "fixed": 1
+  },
+  {
+   "path": "tests/libtest/lib1900.c",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1901.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1902.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1903.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1905.c",
+   "loc": 95,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1906.c",
+   "loc": 81,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1907.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1908.c",
+   "loc": 60,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1910.c",
+   "loc": 45,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1911.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1912.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1913.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1915.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1916.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1918.c",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1919.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1920.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1921.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1933.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1934.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1935.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1936.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1937.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1938.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1939.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1940.c",
+   "loc": 121,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1945.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1947.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1948.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1955.c",
+   "loc": 88,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1956.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1957.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1958.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1959.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1960.c",
+   "loc": 153,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1964.c",
+   "loc": 66,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1965.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1967.c",
+   "loc": 42,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1970.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1971.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1972.c",
+   "loc": 82,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1973.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1974.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1975.c",
+   "loc": 82,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1977.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib1978.c",
+   "loc": 102,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2023.c",
+   "loc": 148,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2032.c",
+   "loc": 233,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2082.c",
+   "loc": 101,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2301.c",
+   "loc": 104,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2302.c",
+   "loc": 132,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2304.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2306.c",
+   "loc": 49,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2308.c",
+   "loc": 50,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2309.c",
+   "loc": 62,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2402.c",
+   "loc": 132,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2404.c",
+   "loc": 134,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2405.c",
+   "loc": 399,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2502.c",
+   "loc": 137,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2504.c",
+   "loc": 93,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2505.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2506.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib2700.c",
+   "loc": 256,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3010.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3025.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3026.c",
+   "loc": 159,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3027.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3033.c",
+   "loc": 127,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3034.c",
+   "loc": 77,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3100.c",
+   "loc": 67,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3101.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3102.c",
+   "loc": 140,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3103.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3104.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3105.c",
+   "loc": 62,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3207.c",
+   "loc": 214,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib3208.c",
+   "loc": 100,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib500.c",
+   "loc": 179,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib501.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib502.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib503.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib504.c",
+   "loc": 124,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib505.c",
+   "loc": 147,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib506.c",
+   "loc": 378,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib507.c",
+   "loc": 96,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib508.c",
+   "loc": 104,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib509.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib510.c",
+   "loc": 129,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib511.c",
+   "loc": 56,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib512.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib513.c",
+   "loc": 83,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib514.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib515.c",
+   "loc": 60,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib516.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib517.c",
+   "loc": 256,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib518.c",
+   "loc": 475,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib519.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib520.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib521.c",
+   "loc": 60,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib523.c",
+   "loc": 57,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib524.c",
+   "loc": 55,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib525.c",
+   "loc": 150,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib526.c",
+   "loc": 169,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib530.c",
+   "loc": 416,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib533.c",
+   "loc": 106,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib536.c",
+   "loc": 81,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib537.c",
+   "loc": 491,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib539.c",
+   "loc": 84,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib540.c",
+   "loc": 249,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib541.c",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib542.c",
+   "loc": 69,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib543.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib544.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib547.c",
+   "loc": 115,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib549.c",
+   "loc": 65,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib552.c",
+   "loc": 119,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib553.c",
+   "loc": 111,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib554.c",
+   "loc": 209,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib555.c",
+   "loc": 145,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib556.c",
+   "loc": 109,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib557.c",
+   "loc": 1275,
+   "stratum": 9,
+   "fixed": 1
+  },
+  {
+   "path": "tests/libtest/lib558.c",
+   "loc": 52,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib559.c",
+   "loc": 54,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib560.c",
+   "loc": 107,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib562.c",
+   "loc": 73,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib564.c",
+   "loc": 94,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib566.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib567.c",
+   "loc": 70,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib568.c",
+   "loc": 177,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib569.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib570.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib571.c",
+   "loc": 206,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib572.c",
+   "loc": 181,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib573.c",
+   "loc": 110,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib574.c",
+   "loc": 71,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib575.c",
+   "loc": 108,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib576.c",
+   "loc": 122,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib578.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib579.c",
+   "loc": 173,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib582.c",
+   "loc": 357,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib583.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib586.c",
+   "loc": 240,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib589.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib590.c",
+   "loc": 84,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib591.c",
+   "loc": 146,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib597.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib598.c",
+   "loc": 72,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib599.c",
+   "loc": 97,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib643.c",
+   "loc": 265,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib650.c",
+   "loc": 207,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "tests/libtest/lib651.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib652.c",
+   "loc": 131,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib653.c",
+   "loc": 60,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib654.c",
+   "loc": 163,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib655.c",
+   "loc": 127,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib658.c",
+   "loc": 76,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib659.c",
+   "loc": 74,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib661.c",
+   "loc": 166,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib666.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib667.c",
+   "loc": 109,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib668.c",
+   "loc": 115,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib670.c",
+   "loc": 244,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib674.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib676.c",
+   "loc": 68,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib677.c",
+   "loc": 132,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib678.c",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib694.c",
+   "loc": 75,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib695.c",
+   "loc": 112,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib751.c",
+   "loc": 86,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib753.c",
+   "loc": 183,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib757.c",
+   "loc": 133,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib758.c",
+   "loc": 505,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/lib766.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/memptr.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/testtrace.c",
+   "loc": 238,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/testtrace.h",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/testutil.c",
+   "loc": 46,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/testutil.h",
+   "loc": 39,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/libtest/unitcheck.h",
+   "loc": 124,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/dnsd.c",
+   "loc": 1065,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/first.c",
+   "loc": 59,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/first.h",
+   "loc": 179,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/getpart.c",
+   "loc": 447,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/mqttd.c",
+   "loc": 934,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/resolve.c",
+   "loc": 129,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/rtspd.c",
+   "loc": 1361,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/sockfilt.c",
+   "loc": 1411,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/socksd.c",
+   "loc": 947,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/sws.c",
+   "loc": 2483,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/tftpd.c",
+   "loc": 1345,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/server/util.c",
+   "loc": 898,
+   "stratum": 9,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1394.c",
+   "loc": 126,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1604.c",
+   "loc": 232,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1621.c",
+   "loc": 84,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1622.c",
+   "loc": 98,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1623.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/tunit/tool1720.c",
+   "loc": 79,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1300.c",
+   "loc": 268,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1302.c",
+   "loc": 200,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1303.c",
+   "loc": 157,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1304.c",
+   "loc": 166,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1305.c",
+   "loc": 121,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1307.c",
+   "loc": 321,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1309.c",
+   "loc": 133,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1323.c",
+   "loc": 61,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1330.c",
+   "loc": 34,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1395.c",
+   "loc": 175,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1396.c",
+   "loc": 117,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1397.c",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 1
+  },
+  {
+   "path": "tests/unit/unit1398.c",
+   "loc": 225,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1399.c",
+   "loc": 116,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1600.c",
+   "loc": 87,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1601.c",
+   "loc": 51,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1602.c",
+   "loc": 78,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1603.c",
+   "loc": 178,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1605.c",
+   "loc": 62,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1606.c",
+   "loc": 92,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1607.c",
+   "loc": 233,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1608.c",
+   "loc": 80,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1609.c",
+   "loc": 216,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1610.c",
+   "loc": 64,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1611.c",
+   "loc": 53,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1612.c",
+   "loc": 63,
+   "stratum": 2,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1614.c",
+   "loc": 191,
+   "stratum": 7,
+   "fixed": 1
+  },
+  {
+   "path": "tests/unit/unit1615.c",
+   "loc": 151,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1616.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1620.c",
+   "loc": 140,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1625.c",
+   "loc": 135,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1626.c",
+   "loc": 129,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1627.c",
+   "loc": 104,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1636.c",
+   "loc": 82,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1650.c",
+   "loc": 283,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1651.c",
+   "loc": 403,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1652.c",
+   "loc": 164,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1653.c",
+   "loc": 217,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1654.c",
+   "loc": 145,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1655.c",
+   "loc": 176,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1656.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1657.c",
+   "loc": 125,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1658.c",
+   "loc": 546,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1660.c",
+   "loc": 170,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1661.c",
+   "loc": 114,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1663.c",
+   "loc": 90,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1664.c",
+   "loc": 489,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1666.c",
+   "loc": 202,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1667.c",
+   "loc": 335,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1668.c",
+   "loc": 177,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1669.c",
+   "loc": 58,
+   "stratum": 1,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1674.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1675.c",
+   "loc": 387,
+   "stratum": 8,
+   "fixed": 1
+  },
+  {
+   "path": "tests/unit/unit1676.c",
+   "loc": 120,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1979.c",
+   "loc": 142,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit1980.c",
+   "loc": 117,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2600.c",
+   "loc": 434,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2601.c",
+   "loc": 239,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2602.c",
+   "loc": 127,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2603.c",
+   "loc": 192,
+   "stratum": 7,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2604.c",
+   "loc": 115,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit2605.c",
+   "loc": 112,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3200.c",
+   "loc": 169,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3205.c",
+   "loc": 614,
+   "stratum": 8,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3211.c",
+   "loc": 149,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3212.c",
+   "loc": 134,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3213.c",
+   "loc": 123,
+   "stratum": 5,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3214.c",
+   "loc": 85,
+   "stratum": 3,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3216.c",
+   "loc": 103,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3219.c",
+   "loc": 43,
+   "stratum": 0,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3300.c",
+   "loc": 162,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3301.c",
+   "loc": 142,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3302.c",
+   "loc": 89,
+   "stratum": 4,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3303.c",
+   "loc": 140,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3304.c",
+   "loc": 166,
+   "stratum": 6,
+   "fixed": 0
+  },
+  {
+   "path": "tests/unit/unit3400.c",
+   "loc": 265,
+   "stratum": 7,
+   "fixed": 0
+  }
+ ]
+}
