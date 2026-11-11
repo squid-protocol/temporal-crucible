@@ -8,7 +8,7 @@ theme: comments
 ids: ARG-1, ARG-2
 docs: docs/arg_hypotheses.md
 links:
-takehome: Registered as a living study with looks on 2026-11-11, 2027-05-11 and 2027-11-11.
+takehome: Look 1 (2026-11-11): within the same developers and at matched size, declared-AI commits are blamed for later fixes about as often as their other commits (0.96, CI 0.51–1.49); no verdict until a later look.
 ---
 
 ## Question
@@ -31,7 +31,12 @@ The owner asked for the question that matters most about AI-assisted code, built
 
 ## What we found
 
-Pending.
+**Look 1 (2026-11-11), [`../arg_look1.md`](../arg_look1.md): no verdict yet.**
+- **ARG-1 (primary):** 3,162 AI and 117,676 other eligible commits. Within author and size, RR 0.96, 99.8% CI
+  [0.51, 1.49].
+- **ARG-2 (secondary):** 1.25 [0.19, 12.3].
+- **Raw rates mislead.** AI 1.6% vs other 3.7% in the primary repos, which is author and size, not AI.
+- Next look: 2027-05-11.
 
 ## Take-home
 
