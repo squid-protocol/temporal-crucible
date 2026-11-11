@@ -232,6 +232,40 @@ def fingerprint(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def shortlist(language: str, candidates: list[str], cache: Path, want: int, buffer: float = 2.5,
+              limit: int | None = None) -> dict:
+    """Walk the draw permutation and keep candidates that pass the >= SHARE language check, stopping once
+    `want * buffer` have passed -- or at `limit` checks, or at the core-quota floor.
+
+    This is where M9 puts eligibility: "taking eligible repos in that order until N pass the clone-time checks".
+    Checking the whole frame instead would be 81,060 languages-API calls for a list the draw never reaches the
+    end of. The buffer exists because the history checks, which need a clone, will reject some of these too; the
+    order is the permutation's, so a later clone-time rejection is replaced by the next candidate in it and
+    never by a re-draw."""
+    order = permutation(candidates)
+    target = int(want * buffer)
+    passed, checked, rejected = [], 0, []
+    stopped = None
+    for name in order:
+        if len(passed) >= target:
+            stopped = f"{target} candidates passed the share check ({want} wanted x {buffer} buffer)"
+            break
+        if limit is not None and checked >= limit:
+            stopped = f"--limit {limit} checks reached"
+            break
+        if quota()["core"] <= CORE_FLOOR:
+            stopped = f"core quota floor ({CORE_FLOOR}) reached"
+            break
+        share = language_share(language_bytes(name, cache), language)
+        checked += 1
+        (passed if share >= SHARE else rejected).append({"repo": name, "share": round(share, 4)})
+    return {"language": language, "order_len": len(order), "checked": checked,
+            "passed": passed, "passed_count": len(passed),
+            "rejected_count": len(rejected), "rejected_sample": rejected[:10],
+            "pass_rate": round(len(passed) / checked, 4) if checked else None,
+            "want": want, "buffer": buffer, "stopped": stopped, "share_bar": SHARE}
+
+
 def eligible_history(repo: Path, language: str, snapshots_fn=None) -> dict:
     """The clone-time history checks. `snapshots_fn(repo, language) -> (quarters_with_files, quarters_total,
     quarters_with_commit)` is injected so the rules are testable without a clone."""
@@ -284,19 +318,11 @@ def main() -> int:
         d.mkdir(parents=True, exist_ok=True)
         print(f"quota before: {quota()}")
         rec = frame(a.language, search_runner(d / "search_cache"))
-        checked, eligible = 0, []
-        for name in ([] if a.no_share else rec["candidates"]):
-            if quota()["core"] <= CORE_FLOOR:
-                rec["share_check_incomplete"] = f"stopped at the {CORE_FLOOR}-call core floor after {checked}"
-                break
-            share = language_share(language_bytes(name, d / "lang_cache"), a.language)
-            checked += 1
-            if share >= SHARE:
-                eligible.append(name)
-        rec.update(share_checked=checked, share_eligible=sorted(eligible),
-                   eligible_size=len(eligible), share=SHARE,
-                   share_phase="skipped (--no-share): frame size is a CEILING on eligibility until it runs"
-                   if a.no_share else "done")
+        rec.update(share=SHARE, share_phase=(
+            "not run here, by design: M9 evaluates eligibility LAZILY in draw order, 'taking eligible repos in "
+            "that order until N pass the clone-time checks'. Walking all 81,060 candidates across the ten "
+            "languages would be about 16 hours of core quota for a list the draw never reaches the end of. The "
+            "frame size is a CEILING on eligibility; `shortlist` does the checking, in order, and stops."))
         f = d / f"{a.language}.json"
         f.write_text(json.dumps(rec, indent=2, sort_keys=True) + "\n")
         print(f"{a.language}: frame {rec['frame_size']} candidates from {rec['windows']} windows "
