@@ -113,6 +113,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--frame", required=True, type=Path, help="dir of <language>.json from the frame search")
     ap.add_argument("--out", required=True, type=Path, help="dir for the post-exclusion lists")
+    ap.add_argument("--decisions", type=Path, default=Path("docs/laws_collision_decisions.json"),
+                    help="operator resolutions of the bare-name collisions; these apply the "
+                         "registration's existing prose clause, they are not a new rule")
     ap.add_argument("--corpus", type=Path,
                     help="the ENGINE repo's tests/import_graph_corpus.json (Amendment 1 item 3). "
                          "It lives in gitgalaxy, not here; if omitted the tool says so and that "
@@ -140,6 +143,14 @@ def main():
         by_source["Amendment 1 item 3 (call-graph gate corpus)"] = corpus
         print(f"call-graph gate corpus: {len(corpus)} of {len(entries)} entries scored for call "
               f"graphs (the rest carry callgraph=false)")
+    if a.decisions and a.decisions.exists():
+        dec = json.loads(a.decisions.read_text())
+        drop = {full(d["repo"]) for d in dec["decisions"] if d["decision"] == "exclude"}
+        if drop:
+            by_source[f"operator decision {dec.get('decided', '')} "
+                      f"(PANEL prose clause, {a.decisions.name})"] = drop
+        print(f"collision decisions: {len(drop)} excluded, "
+              f"{sum(1 for d in dec['decisions'] if d['decision'] == 'keep')} kept")
     excluded = set().union(*by_source.values())
     pool = pool_names()
     warn_bare = EXCLUDED_BARE | pool
