@@ -1,0 +1,4226 @@
+{
+ "example/ndpiReader.c": {
+  "bytes": 217568,
+  "error": "oversized"
+ },
+ "example/ndpiSimpleIntegration.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 19766,
+   "out": 80
+  },
+  "why": "This is nDPI's example/simple-integration program, which changes mostly when the core API changes; it's peripheral but does get periodic updates and has latent bugs (IPv6 hashing, leaks)."
+ },
+ "example/reader_util.c": {
+  "model": "claude-opus-5",
+  "p": 0.88,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 51240,
+   "out": 84
+  },
+  "why": "This is nDPI's example/reader_util.c, a large, actively-maintained hub file touching every protocol's metadata extraction and packet parsing; such files get frequent fixes and fuzzer-driven patches."
+ },
+ "example/reader_util.h": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 8001,
+   "out": 66
+  },
+  "why": "This is nDPI's reader_util.h-style header, a central, frequently-extended structure definition in an actively developed project where new protocol fields and fixes land often."
+ },
+ "example/utests.c": {
+  "model": "claude-opus-5",
+  "p": 0.8,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 41164,
+   "out": 55
+  },
+  "why": "This is nDPI's active unit-test file, frequently extended and amended alongside API changes and fuzz/CI fixes."
+ },
+ "fuzz/fuzz_alg_crc32_md5.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1232,
+   "out": 68
+  },
+  "why": "This is an nDPI fuzz harness file; such files are occasionally extended or fixed when new API/fuzzing issues arise, but they are small and relatively stable."
+ },
+ "fuzz/fuzz_common_code.c": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1908,
+   "out": 48
+  },
+  "why": "nDPI fuzzing helper file that is actively updated as config/API and fuzz targets evolve."
+ },
+ "fuzz/fuzz_common_code.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 650,
+   "out": 66
+  },
+  "why": "Small stable header of fuzzing helper declarations; unlikely to need bug fixes, though nDPI fuzz harnesses do evolve occasionally."
+ },
+ "fuzz/fuzz_dga.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 910,
+   "out": 57
+  },
+  "why": "Small nDPI fuzz harness; such files change occasionally with API signature updates but rarely receive dedicated bug fixes."
+ },
+ "fuzz/fuzz_dns_parse.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1714,
+   "out": 65
+  },
+  "why": "Fuzz harness files in nDPI are relatively stable; changes mostly occur when APIs shift, though fuzz targets do get occasional fixes."
+ },
+ "fuzz/fuzz_filecfg_categories.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 691,
+   "out": 47
+  },
+  "why": "Small nDPI fuzz harness; stable boilerplate but may be touched when API/config names change."
+ },
+ "fuzz/fuzz_filecfg_category.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 710,
+   "out": 56
+  },
+  "why": "Small nDPI fuzz harness; stable boilerplate, though occasional API churn (config/init signatures) may require updates."
+ },
+ "fuzz/fuzz_filecfg_config.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 680,
+   "out": 54
+  },
+  "why": "Small nDPI fuzz harness; such files change occasionally with API/config updates but rarely need direct bug fixes."
+ },
+ "fuzz/fuzz_filecfg_malicious_ja4.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 686,
+   "out": 54
+  },
+  "why": "Small nDPI fuzz harness; stable boilerplate that changes mainly with API updates rather than bug fixes."
+ },
+ "fuzz/fuzz_filecfg_malicious_sha1.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1067,
+   "out": 61
+  },
+  "why": "Small, stable nDPI fuzz harness file; such fuzzer stubs rarely need bug fixes though occasional API churn touches them."
+ },
+ "fuzz/fuzz_filecfg_protocols.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 682,
+   "out": 55
+  },
+  "why": "Small nDPI fuzz harness; such files change occasionally with API/config churn but rarely need bug fixes themselves."
+ },
+ "fuzz/fuzz_filecfg_risk_domains.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 684,
+   "out": 50
+  },
+  "why": "Small nDPI fuzz harness; stable boilerplate, only occasionally updated when config/API changes."
+ },
+ "fuzz/fuzz_http_parse.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1445,
+   "out": 55
+  },
+  "why": "Fuzz harness files are small and stable, though nDPI fuzz targets occasionally get adjusted when APIs change."
+ },
+ "fuzz/fuzz_is_stun.c": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1279,
+   "out": 70
+  },
+  "why": "nDPI fuzz harness targeting the STUN dissector; such harnesses are frequently tweaked alongside dissector API changes, though the file itself is small and simple."
+ },
+ "fuzz/fuzz_is_stun_tcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 373,
+   "out": 36
+  },
+  "why": "Fuzz harness files are small and rarely need bug fixes."
+ },
+ "fuzz/fuzz_libinjection.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1016,
+   "out": 51
+  },
+  "why": "Small, stable fuzzer harness for nDPI's libinjection; rarely modified except occasional API updates."
+ },
+ "fuzz/fuzz_match_custom_category.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 690,
+   "out": 59
+  },
+  "why": "Small fuzzer harness file in nDPI; such files change occasionally with API updates but rarely receive dedicated bug fixes."
+ },
+ "fuzz/fuzz_ndpi_decode_tls_blocks.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 817,
+   "out": 74
+  },
+  "why": "Small, simple fuzz harness wrapper; bugs would typically be fixed in the library target rather than this file, though fuzz harnesses do get occasional API-sync tweaks."
+ },
+ "fuzz/fuzz_ndpi_reader.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5886,
+   "out": 74
+  },
+  "why": "This is nDPI's main fuzz harness, frequently updated alongside new config options and dissector changes, and commonly touched by fuzzing/OSS-Fuzz fixes."
+ },
+ "fuzz/fuzz_ndpi_reader_alloc_fail.c": {
+  "model": "claude-opus-5",
+  "p": 0.62,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 130
+  },
+  "why": "nDPI fuzzing harness files are actively maintained and frequently patched as the reader API and fuzz findings evolve."
+ },
+ "fuzz/fuzz_ndpi_reader_nalloc.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 96
+  },
+  "why": "nDPI's main fuzz reader harness is frequently touched and bug fixes land often from fuzzer findings."
+ },
+ "fuzz/fuzz_ndpi_reader_payload_analyzer.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 119
+  },
+  "why": "nDPI's main fuzzing harness is actively churned and frequently patched as fuzzers find crashes."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m.c": {
+  "model": "claude-opus-5",
+  "p": 0.65,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 125
+  },
+  "why": "nDPI's main fuzz reader harness is frequently touched and patched as fuzzing uncovers issues and API changes."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_64k.c": {
+  "model": "claude-opus-5",
+  "p": 0.62,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 130
+  },
+  "why": "A fuzzing harness for a protocol-analysis library's reader tends to be touched frequently as fuzzers surface crashes and APIs change."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_internal.c": {
+  "model": "claude-opus-5",
+  "p": 0.85,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 125
+  },
+  "why": "nDPI's main fuzzing harness is actively and frequently modified/fixed as fuzzers find issues, so a bug-fix commit within six months is very likely."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_only_subclassification.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 113
+  },
+  "why": "This appears to be nDPI's fuzz harness for the reader, a frequently touched file that often receives fixes as fuzzers uncover crashes and the reader API changes."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_randomize_ports.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 99
+  },
+  "why": "Fuzz harness files in actively fuzzed network DPI projects (nDPI) are frequently touched by crash/bug fixes."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_simplest.c": {
+  "model": "claude-opus-5",
+  "p": 0.65,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 138
+  },
+  "why": "A fuzzing harness for an nDPI-style packet reader is actively exercised and frequently patched as fuzzers find crashes, so a bug-fix commit within six months is likely."
+ },
+ "fuzz/fuzz_ndpi_reader_pl7m_simplest_internal.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 376,
+   "out": 126
+  },
+  "why": "Fuzzing harness for an nDPI reader is frequently touched by fuzzer-found crash fixes and API churn, though many commits may be features rather than bug fixes."
+ },
+ "fuzz/fuzz_process_packet.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1042,
+   "out": 59
+  },
+  "why": "nDPI fuzz harness files are frequently updated alongside API changes, though bug-fix commits specifically to a small harness are less common."
+ },
+ "fuzz/fuzz_quic_get_crypto_data.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1194,
+   "out": 54
+  },
+  "why": "Small nDPI fuzz harness; such files change occasionally with API refactors but rarely need bug fixes themselves."
+ },
+ "fuzz/fuzz_tls_certificate.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1127,
+   "out": 70
+  },
+  "why": "nDPI fuzz harness files are small and only change when the fuzzed API changes; moderate but not high churn, and bug-fix commits usually target the dissectors instead."
+ },
+ "fuzz/fuzz_tls_client_server_hello.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1726,
+   "out": 73
+  },
+  "why": "Fuzz harness files are typically stable once added; changes would come from API churn rather than bug fixes, though fuzzers targeting TLS parsing can need occasional adjustments."
+ },
+ "influxdb/metric_anomaly.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2416,
+   "out": 68
+  },
+  "why": "Standalone example/utility tool in nDPI rarely modified; only incidental churn likely, with unused variables (i, j) suggesting low maintenance attention."
+ },
+ "rrdtool/rrd_anomaly.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2573,
+   "out": 50
+  },
+  "why": "Small standalone utility/example tool in nDPI; rarely modified except for occasional API or build tweaks."
+ },
+ "rrdtool/rrd_similarity.c": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4083,
+   "out": 58
+  },
+  "why": "Peripheral optional nDPI example/utility tool requiring librrd; rarely touched except for sweeping API or copyright updates."
+ },
+ "src/include/ndpi_api.h": {
+  "model": "claude-opus-5",
+  "p": 0.9,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 48221,
+   "out": 56
+  },
+  "why": "This is nDPI's main public API header, a central and frequently modified file in a very active project; API additions and fixes touch it constantly."
+ },
+ "src/include/ndpi_classify.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2377,
+   "out": 46
+  },
+  "why": "Stable nDPI header of declarations/constants; rarely changed except occasional API tweaks."
+ },
+ "src/include/ndpi_encryption.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 14629,
+   "out": 60
+  },
+  "why": "Static header of TLS cipher-suite constants in nDPI; rarely modified except occasional additions, and bug fixes are unlikely."
+ },
+ "src/include/ndpi_includes.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1238,
+   "out": 43
+  },
+  "why": "Stable header of mostly standard includes; rarely modified except occasional portability fixes."
+ },
+ "src/include/ndpi_includes_OpenBSD.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 839,
+   "out": 45
+  },
+  "why": "Tiny platform-specific header with a single typedef; rarely changed except copyright bumps."
+ },
+ "src/include/ndpi_main.h": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2315,
+   "out": 52
+  },
+  "why": "Core nDPI header in a very actively developed project; it changes moderately often, though as a header it may go untouched for months."
+ },
+ "src/include/ndpi_patricia_typedefs.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2568,
+   "out": 55
+  },
+  "why": "Stable typedef-only header for a mature third-party patricia trie implementation; rarely changes beyond occasional field additions."
+ },
+ "src/include/ndpi_private.h": {
+  "model": "claude-opus-5",
+  "p": 0.9,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 28185,
+   "out": 55
+  },
+  "why": "This is nDPI's central private header, touched by nearly every protocol/config change and frequently amended during active development and bug fixes."
+ },
+ "src/include/ndpi_protocol_ids.h": {
+  "model": "claude-opus-5",
+  "p": 0.9,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 14518,
+   "out": 52
+  },
+  "why": "nDPI protocol ID header is edited constantly as new protocols are added, and often touched in bug-fix commits."
+ },
+ "src/include/ndpi_replace_printf.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1181,
+   "out": 39
+  },
+  "why": "Small stable header of macro definitions; unlikely to need bug fixes."
+ },
+ "src/include/ndpi_typedefs.h": {
+  "model": "claude-opus-5",
+  "p": 0.9,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 38036,
+   "out": 58
+  },
+  "why": "Central nDPI header defining all flow structs and enums; it changes with nearly every protocol/dissector fix in an actively developed project."
+ },
+ "src/include/ndpi_unix.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 955,
+   "out": 49
+  },
+  "why": "Small stable platform-include header in nDPI, rarely modified beyond occasional portability tweaks."
+ },
+ "src/include/ndpi_usdt.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1206,
+   "out": 37
+  },
+  "why": "Small stable macro-only header; unlikely to need bug fixes."
+ },
+ "src/include/ndpi_win32.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1596,
+   "out": 60
+  },
+  "why": "Small stable platform-compatibility header in nDPI; occasionally patched for MinGW/MSVC build issues but rarely changed."
+ },
+ "src/lib/ndpi_analyze.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 40193,
+   "out": 114
+  },
+  "why": "Large, actively evolving nDPI analytics file with several evident bugs (byte-offset vs double indexing in ndpi_train_anomaly_model, u_int64_t distance for normalized doubles, ndpi_calloc arg order, memory leaks on init failures), so fixes within six months are likely."
+ },
+ "src/lib/ndpi_binary_bitmap.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2923,
+   "out": 57
+  },
+  "why": "Small, stable self-contained utility in nDPI; rarely touched aside from occasional realloc/dup-handling fixes."
+ },
+ "src/lib/ndpi_bitmap.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4249,
+   "out": 65
+  },
+  "why": "Thin stable wrapper around roaring bitmap API in nDPI; rarely changes except for library upgrades or occasional memory/leak fixes."
+ },
+ "src/lib/ndpi_bitmap64_fuse.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3112,
+   "out": 55
+  },
+  "why": "Small, stable self-contained utility in nDPI; occasional memory-handling tweaks possible but unlikely within six months."
+ },
+ "src/lib/ndpi_cache.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 9395,
+   "out": 148
+  },
+  "why": "Active nDPI codebase cache module with visible logic flaws (inverted expiry check in flush_expired, bogus len recompute after colon truncation, num_entries accounting), making fixes likely."
+ },
+ "src/lib/ndpi_classify.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 18114,
+   "out": 70
+  },
+  "why": "Mostly static coefficient tables and stable helper math in nDPI's rarely-touched classification module; occasional fuzz/portability fixes possible but infrequent."
+ },
+ "src/lib/ndpi_community_id.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6212,
+   "out": 52
+  },
+  "why": "Small, stable utility file implementing a fixed spec; rarely modified beyond occasional edge-case fixes."
+ },
+ "src/lib/ndpi_config.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 20164,
+   "out": 77
+  },
+  "why": "nDPI's central config table is churned frequently as new protocol knobs and defaults are added/corrected, and it has fuzz-exposed string/bitmask parsing logic prone to fixes."
+ },
+ "src/lib/ndpi_domain_classify.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2868,
+   "out": 76
+  },
+  "why": "Active nDPI classification code with ENCODE_DATA experimental paths, fixed 256-byte buffers, and inconsistent fallback logic suggests likely upcoming fixes."
+ },
+ "src/lib/ndpi_domains.c": {
+  "model": "claude-opus-5",
+  "p": 0.45,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2485,
+   "out": 96
+  },
+  "why": "Small but tricky domain-suffix parsing logic with evident bugs (duplicate strchr for IPv6 check, pointer arithmetic edge cases) in an actively maintained library (nDPI), making follow-up fixes fairly likely."
+ },
+ "src/lib/ndpi_filter.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1546,
+   "out": 58
+  },
+  "why": "Small, stable thin-wrapper utility file with trivial logic and few failure modes, unlikely to need bug fixes soon."
+ },
+ "src/lib/ndpi_fingerprint.c": {
+  "model": "claude-opus-5",
+  "p": 0.76,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5677,
+   "out": 73
+  },
+  "why": "Active nDPI fingerprinting code with buffer-index arithmetic, hardcoded magic constants, and TODOs \u2014 such recently-evolving files typically get fixes within months."
+ },
+ "src/lib/ndpi_geoip.c": {
+  "model": "claude-opus-5",
+  "p": 0.17,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4265,
+   "out": 59
+  },
+  "why": "Small, rarely-touched optional GeoIP helper in nDPI; has latent off-by-one buffer issues but low change frequency."
+ },
+ "src/lib/ndpi_hash.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2108,
+   "out": 71
+  },
+  "why": "Small, stable utility hash functions with little complexity; only minor risk from unaligned 64-bit reads/UB in quick_16_byte_hash prompting a fix."
+ },
+ "src/lib/ndpi_main.c": {
+  "bytes": 501266,
+  "error": "oversized"
+ },
+ "src/lib/ndpi_memory.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2752,
+   "out": 53
+  },
+  "why": "Small, stable utility wrapper file in nDPI; rarely modified beyond occasional allocator tweaks."
+ },
+ "src/lib/ndpi_plugin.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2899,
+   "out": 77
+  },
+  "why": "New-ish nDPI plugin loader with leaks on error paths (dlclose missing) and resource handling issues, but small and peripheral, so fixes are plausible yet not certain within six months."
+ },
+ "src/lib/ndpi_serializer.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 49091,
+   "out": 103
+  },
+  "why": "Large, intricate buffer-arithmetic serializer in nDPI with known off-by-one risks (e.g., dst[j+1]='\\0' in json escape) and active fuzzing, so bug-fix commits are fairly likely though it's a relatively mature file."
+ },
+ "src/lib/ndpi_utils.c": {
+  "bytes": 225231,
+  "error": "oversized"
+ },
+ "src/lib/plugins/myproto_plugin.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2488,
+   "out": 69
+  },
+  "why": "This is a small example/demo plugin in nDPI; it changes only when plugin API signatures change, so bug-fix commits are unlikely though possible given the API is new."
+ },
+ "src/lib/protocols/activision.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1876,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; changes are usually sweeping API refactors rather than targeted bug fixes to this file."
+ },
+ "src/lib/protocols/afp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1696,
+   "out": 60
+  },
+  "why": "Small, stable nDPI dissector rarely touched except for sweeping API refactors; low chance of a targeted bug fix in six months."
+ },
+ "src/lib/protocols/ajp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2490,
+   "out": 62
+  },
+  "why": "Small, stable nDPI dissector; occasional API-wide refactors touch it but targeted bug fixes are unlikely in a six-month window."
+ },
+ "src/lib/protocols/alicloud.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1569,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; changes would mostly be sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/amazon_video.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1750,
+   "out": 52
+  },
+  "why": "Tiny, stable nDPI dissector; changes are usually sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/among_us.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1312,
+   "out": 55
+  },
+  "why": "Small, stable single-signature nDPI dissector; likely only touched by sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/amqp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1615,
+   "out": 65
+  },
+  "why": "Small, simple nDPI dissector that rarely changes; heuristic is loose and could attract false-positive fixes, but most churn is elsewhere."
+ },
+ "src/lib/protocols/armagetron.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1788,
+   "out": 46
+  },
+  "why": "Small, stable legacy nDPI dissector rarely modified except for sweeping API refactors."
+ },
+ "src/lib/protocols/atg.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1476,
+   "out": 46
+  },
+  "why": "Small, simple nDPI dissector; rarely modified except for occasional API-wide refactors."
+ },
+ "src/lib/protocols/avast.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1369,
+   "out": 75
+  },
+  "why": "Small, simple nDPI dissector that rarely changes except for API-wide refactors; unaligned 16-bit read is a minor risk but bug-fix commits here are infrequent."
+ },
+ "src/lib/protocols/avast_securedns.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1420,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/bacnet.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1740,
+   "out": 55
+  },
+  "why": "Small, simple, stable nDPI dissector; changes mostly come from API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/beckhoff_ads.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2236,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from API-wide refactors rather than per-file bug fixes."
+ },
+ "src/lib/protocols/bfcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1731,
+   "out": 64
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from API-wide refactors rather than bug fixes, though false-positive tuning is possible."
+ },
+ "src/lib/protocols/bfd.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1650,
+   "out": 52
+  },
+  "why": "Small, stable nDPI dissector; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/bgp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1468,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; changes would likely be API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/bitcoin.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1637,
+   "out": 48
+  },
+  "why": "Small, simple dissector; possible fixes for unaligned read/port-only heuristic but low churn."
+ },
+ "src/lib/protocols/bittorrent.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 12692,
+   "out": 77
+  },
+  "why": "nDPI's bittorrent dissector is a frequently-churned, heuristic-heavy file with known fuzzing/bounds edge cases, so bug-fix commits within six months are likely."
+ },
+ "src/lib/protocols/bjnp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1225,
+   "out": 50
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/blizzard.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3935,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; occasional pattern tweaks or unaligned-read fixes possible but infrequent."
+ },
+ "src/lib/protocols/btlib.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6946,
+   "out": 82
+  },
+  "why": "Stable, rarely-touched nDPI BitTorrent bencode parser; though it contains risky casts/strncpy patterns that could prompt a fuzz-driven fix, most such files go months without changes."
+ },
+ "src/lib/protocols/btlib.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2354,
+   "out": 66
+  },
+  "why": "Header file with only struct/typedef declarations for nDPI's BitTorrent parser; such headers rarely change except for occasional portability or field tweaks."
+ },
+ "src/lib/protocols/c1222.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1570,
+   "out": 67
+  },
+  "why": "Small, simple nDPI dissector that is mostly stable; occasional API-wide refactors or false-positive tweaks are possible but unlikely within six months."
+ },
+ "src/lib/protocols/can.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1629,
+   "out": 58
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/capwap.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2786,
+   "out": 101
+  },
+  "why": "Small nDPI dissector with some latent out-of-bounds reads (payload[0] without length check, payload[13] access) and a misplaced ntohl paren bug, but such minor dissectors are rarely touched; nDPI does periodically fuzz-fix these."
+ },
+ "src/lib/protocols/cassandra.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2009,
+   "out": 138
+  },
+  "why": "Small stable nDPI dissector, though its validator returning 1/-1 makes the exclusion check dead logic, a latent bug that may be fixed or swept up in nDPI's frequent dissector refactors."
+ },
+ "src/lib/protocols/ceph.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1420,
+   "out": 53
+  },
+  "why": "Tiny, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/checkmk.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1643,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/cip.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1530,
+   "out": 60
+  },
+  "why": "Small, stable nDPI dissector; minor churn possible from API-wide refactors but few bug-fix triggers in this simple logic."
+ },
+ "src/lib/protocols/ciscovpn.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1596,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/citrix.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1725,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/cloudflare_warp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2074,
+   "out": 64
+  },
+  "why": "Small, simple nDPI dissector with mostly static port/IP matching; unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/cnp-ip.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1534,
+   "out": 56
+  },
+  "why": "Small, simple nDPI dissector; such files rarely change except for occasional API-wide refactors or false-positive tweaks."
+ },
+ "src/lib/protocols/coap.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2596,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; such files change rarely except for API-wide refactors, with only occasional detection tweaks."
+ },
+ "src/lib/protocols/cod_mobile.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1719,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector; such niche protocol files rarely get bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/collectd.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3597,
+   "out": 74
+  },
+  "why": "Small, stable nDPI dissector; bounds checks look mostly fine, though sweeping API refactors in nDPI could touch it, individual dissector fixes are infrequent."
+ },
+ "src/lib/protocols/corba.c": {
+  "model": "claude-opus-5",
+  "p": 0.13,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1553,
+   "out": 62
+  },
+  "why": "Small, stable nDPI dissector with simple magic-byte matching; likely only touched by sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/cpha.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1380,
+   "out": 82
+  },
+  "why": "Small, simple nDPI dissector with narrow matching logic; unlikely to need fixes soon, though file header mismatch (qq.c) and IPv6 TODO hint at possible touch-ups."
+ },
+ "src/lib/protocols/crossfire.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1634,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/crynet.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1932,
+   "out": 61
+  },
+  "why": "Small, stable nDPI dissector for a niche protocol; most changes would be sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/dcerpc.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2081,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; such protocol files rarely get fixes, though occasional false-positive tuning occurs."
+ },
+ "src/lib/protocols/dhcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3889,
+   "out": 100
+  },
+  "why": "nDPI dissectors like DHCP are frequently touched for parsing/bounds fixes, and this file has suspicious logic (opt_len clamping, two-pass scan, option 53 handling, potential off-by-one/fuzzer-found overflows)."
+ },
+ "src/lib/protocols/dhcpv6.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1599,
+   "out": 58
+  },
+  "why": "Small, simple new nDPI dissector; such files occasionally get metadata/refactor fixes but logic is minimal and stable."
+ },
+ "src/lib/protocols/diameter.c": {
+  "model": "claude-opus-5",
+  "p": 0.18,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1928,
+   "out": 83
+  },
+  "why": "Small stable nDPI dissector; it has a latent bug (com_code shift should be 16) and may be touched by API-wide refactors, but such minor dissectors rarely get fixes in a given six-month window."
+ },
+ "src/lib/protocols/dicom.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1515,
+   "out": 73
+  },
+  "why": "Small, simple nDPI dissector that is rarely touched; most changes would be sweeping API refactors rather than bug fixes, though minor false-positive tweaks are possible."
+ },
+ "src/lib/protocols/dingtalk.c": {
+  "model": "claude-opus-5",
+  "p": 0.13,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1475,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with a fixed signature; likely only touched by broad API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/discord.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1654,
+   "out": 58
+  },
+  "why": "Small, stable nDPI dissector; occasional false-positive/refactor touches but unlikely to need a bug fix within six months."
+ },
+ "src/lib/protocols/dlep.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1730,
+   "out": 61
+  },
+  "why": "Small, stable, self-contained nDPI dissector; changes would mostly come from API-wide refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/dnp3.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1394,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector with simple signature logic; likely only touched by sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/dns.c": {
+  "model": "claude-opus-5",
+  "p": 0.9,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 15816,
+   "out": 65
+  },
+  "why": "nDPI's DNS dissector is a high-traffic, frequently fuzzed file with complex parsing offsets and known history of frequent bug fixes."
+ },
+ "src/lib/protocols/dnscrypt.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1705,
+   "out": 49
+  },
+  "why": "Small, stable nDPI dissector; changes likely only from broad API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/dofus.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1492,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with narrow heuristics; such files are rarely touched, though occasional false-positive tuning occurs."
+ },
+ "src/lib/protocols/drda.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1695,
+   "out": 57
+  },
+  "why": "Small stable nDPI dissector; occasional refactors/API churn but low chance of a specific bug-fix commit within six months."
+ },
+ "src/lib/protocols/dropbox.c": {
+  "model": "claude-opus-5",
+  "p": 0.18,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1729,
+   "out": 51
+  },
+  "why": "Small, simple nDPI dissector; such files change occasionally with API refactors but rarely need bug fixes."
+ },
+ "src/lib/protocols/eaq.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1739,
+   "out": 63
+  },
+  "why": "Small, stable nDPI dissector for an obscure protocol; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/easyweather.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1366,
+   "out": 58
+  },
+  "why": "Small, simple nDPI dissector with trivial signature check; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/edonkey.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1577,
+   "out": 66
+  },
+  "why": "Small, simple nDPI dissector; only likely touched by broad API refactors or false-positive tuning, which happen occasionally but not often for this specific file."
+ },
+ "src/lib/protocols/egd.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1441,
+   "out": 64
+  },
+  "why": "Small stable nDPI dissector, though packet->iph dereference without IPv6/NULL check is a latent crash bug that could prompt a fix."
+ },
+ "src/lib/protocols/elastic_search.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1577,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/epicgames.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1786,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except occasional API-wide refactors or false-positive tweaks."
+ },
+ "src/lib/protocols/ethereum.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3297,
+   "out": 48
+  },
+  "why": "Small, stable nDPI dissector; such protocol files are rarely touched except during broad API refactors."
+ },
+ "src/lib/protocols/ethernet_ip.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1565,
+   "out": 55
+  },
+  "why": "Small, simple nDPI dissector; such files change occasionally with API refactors or UDP/port additions but have few bugs."
+ },
+ "src/lib/protocols/ethersbus.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1581,
+   "out": 49
+  },
+  "why": "Small, stable nDPI dissector; changes usually only from broad API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/ethersio.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1390,
+   "out": 59
+  },
+  "why": "Small, simple, stable nDPI dissector; changes would mostly come from API-wide refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/fastcgi.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4155,
+   "out": 66
+  },
+  "why": "nDPI dissector with potential parsing edge cases (strncpy on possibly NULL ptrs), but such individual protocol files are modified only occasionally."
+ },
+ "src/lib/protocols/fins.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2237,
+   "out": 71
+  },
+  "why": "Small, stable nDPI protocol dissector; likely only touched by sweeping API refactors rather than targeted bug fixes, though false-positive tweaks are possible."
+ },
+ "src/lib/protocols/fix.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1571,
+   "out": 52
+  },
+  "why": "Small, simple nDPI dissector that rarely changes except for occasional false-positive tuning or API refactors."
+ },
+ "src/lib/protocols/flute.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1562,
+   "out": 62
+  },
+  "why": "Small, simple nDPI dissector with bounds checks already in place; such files rarely receive fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/ftp_control.c": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5443,
+   "out": 84
+  },
+  "why": "nDPI dissectors are frequently tweaked, and this rewritten FTP control logic (stage/direction handling, credential extraction, TLS upgrade) is a common source of fuzzer-driven fixes."
+ },
+ "src/lib/protocols/ftp_data.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4272,
+   "out": 61
+  },
+  "why": "nDPI dissector with heuristic magic-byte matching prone to false positives and periodic refactors, though this file is small and relatively stable."
+ },
+ "src/lib/protocols/gaijin_entertainment.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1714,
+   "out": 54
+  },
+  "why": "Small, simple nDPI dissector; mostly stable except occasional API-wide refactors or false-positive tweaks."
+ },
+ "src/lib/protocols/gearman.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1384,
+   "out": 55
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes, though API-wide refactors occasionally touch such files."
+ },
+ "src/lib/protocols/gearup_booster.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2353,
+   "out": 93
+  },
+  "why": "Small, recently-added nDPI dissector with a visible typo (\"GeaUP_Booster\") and potential out-of-bounds reads on short UDP/TCP payloads, but such individual dissectors usually see only occasional fixes."
+ },
+ "src/lib/protocols/genshin_impact.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1808,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by API-wide refactors rather than specific bug fixes."
+ },
+ "src/lib/protocols/git.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1568,
+   "out": 57
+  },
+  "why": "Small stable nDPI dissector; occasional API-wide refactors or parsing edge-case fixes possible but infrequent."
+ },
+ "src/lib/protocols/glbp.c": {
+  "model": "claude-opus-5",
+  "p": 0.14,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1569,
+   "out": 54
+  },
+  "why": "Small, simple, recently added nDPI dissector; unlikely to need fixes beyond possible API-wide refactors."
+ },
+ "src/lib/protocols/gnutella.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2084,
+   "out": 61
+  },
+  "why": "Small, stable nDPI dissector for a legacy protocol; changes would mostly be sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/gtp.c": {
+  "model": "claude-opus-5",
+  "p": 0.13,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2971,
+   "out": 69
+  },
+  "why": "Small, stable nDPI dissector with straightforward heuristics; such files rarely get fixes, though occasional dissector API refactors or detection tweaks occur."
+ },
+ "src/lib/protocols/guildwars2.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1484,
+   "out": 55
+  },
+  "why": "Small, simple, stable nDPI dissector; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/h323.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1796,
+   "out": 44
+  },
+  "why": "Small stable nDPI dissector; occasional false-positive fixes but rarely changed."
+ },
+ "src/lib/protocols/hamachi.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3190,
+   "out": 94
+  },
+  "why": "New heuristic nDPI dissector with potential out-of-bounds read risks (reads at offset 68 of 76-byte check is fine, but heuristics often get tuned); such new dissectors are occasionally fixed, though many stay untouched."
+ },
+ "src/lib/protocols/haproxy.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2016,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; such protocol files rarely get bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/hart-ip.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1999,
+   "out": 75
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes, though its loose heuristic could prompt false-positive fixes."
+ },
+ "src/lib/protocols/hcl_notes.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1572,
+   "out": 44
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except during API-wide refactors."
+ },
+ "src/lib/protocols/hislip.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1544,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/hl7.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1843,
+   "out": 54
+  },
+  "why": "Small, simple nDPI dissector; such files rarely change except for occasional API-wide refactors or detection tweaks."
+ },
+ "src/lib/protocols/hots.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1798,
+   "out": 62
+  },
+  "why": "Small, stable single-protocol nDPI dissector; likely only touched by occasional API-wide refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/hpvirtgrp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1437,
+   "out": 63
+  },
+  "why": "Small, simple nDPI dissector; mostly stable except for occasional API-wide refactors (e.g., unaligned read or signature changes)."
+ },
+ "src/lib/protocols/hsrp.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2061,
+   "out": 63
+  },
+  "why": "Small stable nDPI dissector, though the IPv6 branch reads payload[0] without a length check, a potential fuzzer-found bug fix."
+ },
+ "src/lib/protocols/http.c": {
+  "model": "claude-opus-5",
+  "p": 0.92,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 32733,
+   "out": 66
+  },
+  "why": "nDPI's HTTP dissector is a large, complex, frequently-modified hotspot with risk heuristics and parsing code that routinely receives fixes."
+ },
+ "src/lib/protocols/http2.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1449,
+   "out": 56
+  },
+  "why": "Small, simple nDPI dissector with minimal logic; likely only touched by broad API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/i3d.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1681,
+   "out": 47
+  },
+  "why": "Small, stable nDPI protocol dissector; such files rarely change except during API-wide refactors."
+ },
+ "src/lib/protocols/iax.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2060,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector rarely modified except during sweeping API refactors; logic is simple and bounded."
+ },
+ "src/lib/protocols/iec60870-5-104.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1539,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector; minor redundancies but low likelihood of bug-fix commits beyond broad API refactors."
+ },
+ "src/lib/protocols/iec62056.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1655,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector with simple logic; likely only touched by codebase-wide API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/ieee-c37118.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1717,
+   "out": 60
+  },
+  "why": "Small, stable nDPI dissector with simple heuristics; most changes would be codebase-wide API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/imo.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1769,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except during occasional API-wide refactors or false-positive fixes."
+ },
+ "src/lib/protocols/ipp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1468,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with minimal logic; unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/ipsec.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7470,
+   "out": 84
+  },
+  "why": "Recently extended nDPI dissector with new IKEv2 SA parsing containing potential overflow/bounds issues (attr_off loops, spi_size), likely to receive fuzz-driven fixes soon."
+ },
+ "src/lib/protocols/iqiyi.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1486,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes, though API-wide refactors or added signatures occasionally touch such files."
+ },
+ "src/lib/protocols/irc.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2454,
+   "out": 49
+  },
+  "why": "Small stable nDPI dissector; occasional refactors or false-positive fixes possible but low churn."
+ },
+ "src/lib/protocols/iris.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5073,
+   "out": 77
+  },
+  "why": "New, loosely-validated dissector with unaligned pointer casts and port-only heuristics is likely to see false-positive/alignment fixes, though many nDPI dissectors remain untouched."
+ },
+ "src/lib/protocols/iso9506-1-mms.c": {
+  "model": "claude-opus-5",
+  "p": 0.17,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1883,
+   "out": 64
+  },
+  "why": "Small, stable niche nDPI dissector; fragile magic-offset checks could need fixes, but such files rarely change beyond API-wide refactors."
+ },
+ "src/lib/protocols/jabber.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3232,
+   "out": 83
+  },
+  "why": "Small, stable nDPI dissector; occasional refactors but low likelihood of a targeted bug-fix within six months, though some bounds/offset logic (payload[13] start calc) could prompt a fix."
+ },
+ "src/lib/protocols/jrmi.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1393,
+   "out": 63
+  },
+  "why": "Small, simple nDPI dissector with a trivial magic-byte check; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/json-rpc.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1668,
+   "out": 45
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except for API-wide refactors."
+ },
+ "src/lib/protocols/json.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2267,
+   "out": 72
+  },
+  "why": "Heuristic nDPI dissector with fiddly offset/bounds logic prone to false-positive tuning and fuzzer-found fixes, though small and fairly simple."
+ },
+ "src/lib/protocols/kafka.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1970,
+   "out": 62
+  },
+  "why": "Small, stable nDPI dissector; only occasional heuristic/API refactor changes expected, though fuzzing could surface bounds issues."
+ },
+ "src/lib/protocols/kakaotalk_voice.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1583,
+   "out": 79
+  },
+  "why": "Small, rarely-touched nDPI dissector; though its sloppy OR-based heuristic could prompt a fix, such legacy dissectors usually only change during codebase-wide API refactors."
+ },
+ "src/lib/protocols/kcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1818,
+   "out": 55
+  },
+  "why": "Small, self-contained nDPI dissector; such files rarely change except for occasional false-positive tuning or API refactors."
+ },
+ "src/lib/protocols/kerberos.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 11269,
+   "out": 72
+  },
+  "why": "Heavily heuristic, offset-arithmetic-laden nDPI dissector with known fragile bounds checks and frequent fuzzing-driven fixes in this active project."
+ },
+ "src/lib/protocols/kismet.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1435,
+   "out": 59
+  },
+  "why": "Tiny, simple nDPI dissector with trivial logic; unlikely to need bug fixes beyond sweeping API refactors."
+ },
+ "src/lib/protocols/knxnet_ip.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2484,
+   "out": 65
+  },
+  "why": "Small, stable niche nDPI dissector; such files rarely get bug fixes, though occasional API-wide refactors or false-positive tweaks occur."
+ },
+ "src/lib/protocols/lagofast.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1595,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with narrow signature matching; such files rarely need fixes though occasional false-positive tuning occurs."
+ },
+ "src/lib/protocols/ldap.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1772,
+   "out": 48
+  },
+  "why": "Small, stable nDPI dissector; occasional tweaks possible but few bugs likely in six months."
+ },
+ "src/lib/protocols/ldp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2521,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector that is already complete and rarely touched except for occasional API-wide refactors or false-positive fixes."
+ },
+ "src/lib/protocols/line.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2929,
+   "out": 77
+  },
+  "why": "Small heuristic nDPI dissector; such files change occasionally but most churn is in core/other dissectors, though fragile byte-pattern heuristics and false positives can prompt fixes."
+ },
+ "src/lib/protocols/lisp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1926,
+   "out": 52
+  },
+  "why": "Small stable nDPI dissector; occasional API-wide refactors but low chance of a targeted bug fix."
+ },
+ "src/lib/protocols/lol_wild_rift.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1747,
+   "out": 49
+  },
+  "why": "Small, simple nDPI dissector with rare changes; mostly touched only during API-wide refactors."
+ },
+ "src/lib/protocols/lustre.c": {
+  "model": "claude-opus-5",
+  "p": 0.17,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1833,
+   "out": 71
+  },
+  "why": "Small, stable nDPI dissector; only risk is the unchecked packet->iph dereference (IPv6/null) prompting a fix, otherwise unlikely to change."
+ },
+ "src/lib/protocols/mail_imap.c": {
+  "model": "claude-opus-5",
+  "p": 0.63,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5515,
+   "out": 83
+  },
+  "why": "nDPI protocol dissectors like IMAP are frequently touched for detection fixes, credential/TLS handling, and bounds issues, and this rewritten parser has fragile offset logic likely to need correction."
+ },
+ "src/lib/protocols/mail_pop.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4528,
+   "out": 68
+  },
+  "why": "nDPI protocol dissectors like this are frequently touched by fuzzing-driven fixes and detection tweaks, though POP is a stable, simple dissector."
+ },
+ "src/lib/protocols/mail_smtp.c": {
+  "model": "claude-opus-5",
+  "p": 0.72,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 8211,
+   "out": 86
+  },
+  "why": "nDPI dissectors like this are actively maintained and this one has suspicious bounds handling (banner parsing reads ptr[i+1] past line, credential parsing) likely to draw fuzzer-driven fixes."
+ },
+ "src/lib/protocols/matter.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1813,
+   "out": 62
+  },
+  "why": "New nDPI dissector with self-admitted weak heuristics and an unaligned 16-bit read, likely to be refined/fixed soon."
+ },
+ "src/lib/protocols/megaco.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1491,
+   "out": 53
+  },
+  "why": "Small, simple nDPI dissector that is rarely modified except for sweeping API refactors; no evident bugs."
+ },
+ "src/lib/protocols/melsec.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1480,
+   "out": 54
+  },
+  "why": "Small, simple, recently added nDPI dissector; such files rarely need fixes though API refactors occasionally touch them."
+ },
+ "src/lib/protocols/memcached.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4632,
+   "out": 48
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except for occasional API-wide refactors."
+ },
+ "src/lib/protocols/merakicloud.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1403,
+   "out": 53
+  },
+  "why": "Small, simple nDPI dissector with a single signature check; such files rarely change except for occasional API-wide refactors."
+ },
+ "src/lib/protocols/mgcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2347,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; only occasional API-wide refactors or rare parsing fixes likely."
+ },
+ "src/lib/protocols/mikrotik.c": {
+  "model": "claude-opus-5",
+  "p": 0.7,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2347,
+   "out": 78
+  },
+  "why": "New-looking nDPI dissector with risky parsing (unaligned casts, possible null udp deref, loose bounds checks) in an actively fuzzed project, so fixes are likely soon."
+ },
+ "src/lib/protocols/mining.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2415,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; occasional signature/API refactor updates but low defect likelihood in a 6-month window."
+ },
+ "src/lib/protocols/modbus.c": {
+  "model": "claude-opus-5",
+  "p": 0.17,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1777,
+   "out": 48
+  },
+  "why": "Small stable nDPI dissector; only occasional API-wide refactors or length-check fixes likely."
+ },
+ "src/lib/protocols/monero.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1557,
+   "out": 57
+  },
+  "why": "Small, simple nDPI dissector with a single signature check; rarely needs fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/mongodb.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2567,
+   "out": 68
+  },
+  "why": "Small, stable nDPI dissector; occasional API-wide refactors or false-positive tweaks possible but targeted bug fixes to this file are uncommon."
+ },
+ "src/lib/protocols/mpegdash.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1868,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from API-wide refactors rather than bug fixes to this specific file."
+ },
+ "src/lib/protocols/mpegts.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1379,
+   "out": 51
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/mqtt.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5427,
+   "out": 67
+  },
+  "why": "Stable, small nDPI dissector; occasional refactors/fuzz fixes possible (note the mismatched printf format for rl) but file rarely changes."
+ },
+ "src/lib/protocols/msdo.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1578,
+   "out": 65
+  },
+  "why": "Small, simple, recently added nDPI dissector with trivial logic; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/msgpack.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4733,
+   "out": 91
+  },
+  "why": "Heuristic nDPI dissector with known minor bugs (duplicate 0xCE float32 case) and false-positive tuning tendencies, but newer dissectors in nDPI are only occasionally touched within a given six-month window."
+ },
+ "src/lib/protocols/mssql_tds.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1789,
+   "out": 52
+  },
+  "why": "Small, stable nDPI dissector; occasional false-positive tweaks or API refactors possible but infrequent."
+ },
+ "src/lib/protocols/mudfish.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1850,
+   "out": 89
+  },
+  "why": "Small stable nDPI dissector; it has an obvious copy-paste bug in the discovery-response check (same offset compared twice), but such minor dissectors rarely get touched, though nDPI-wide refactors are frequent."
+ },
+ "src/lib/protocols/mumble.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1542,
+   "out": 61
+  },
+  "why": "Small, simple nDPI dissector; such files occasionally get refactor/API-sweep or false-positive fixes but are mostly stable."
+ },
+ "src/lib/protocols/munin.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1765,
+   "out": 59
+  },
+  "why": "Small, simple, stable nDPI dissector; most changes would be project-wide API refactors rather than bug fixes specific to this file."
+ },
+ "src/lib/protocols/mysql.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1770,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; only occasional detection tweaks or API refactors are likely in a six-month window."
+ },
+ "src/lib/protocols/nano.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1851,
+   "out": 58
+  },
+  "why": "Small, simple nDPI dissector; only likely touched by broad API refactors or version-constant updates, not frequent bug fixes."
+ },
+ "src/lib/protocols/natpmp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3525,
+   "out": 52
+  },
+  "why": "Small, stable nDPI dissector; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/nats.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1550,
+   "out": 63
+  },
+  "why": "Small stable nDPI dissector; minor logic flaw (exclude without return, short-payload matching) could prompt a fix but such files rarely change."
+ },
+ "src/lib/protocols/nest_log_sink.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1703,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector; such minor protocol files rarely get bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/netbios.c": {
+  "model": "claude-opus-5",
+  "p": 0.26,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7474,
+   "out": 79
+  },
+  "why": "nDPI dissector with some risky buffer indexing (payload[12] accesses, name_length offsets) that fuzzers often flag, but netbios is a stable, rarely-touched protocol file."
+ },
+ "src/lib/protocols/netease_games.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1777,
+   "out": 60
+  },
+  "why": "Small, simple, self-contained nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/netflow.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3783,
+   "out": 53
+  },
+  "why": "Small stable nDPI dissector; occasional refactors or false-positive fixes possible but unlikely within six months."
+ },
+ "src/lib/protocols/nexon.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1584,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with minimal logic; unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/nfs.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1949,
+   "out": 48
+  },
+  "why": "Small, stable legacy nDPI dissector; rarely modified except for sweeping API refactors."
+ },
+ "src/lib/protocols/nintendo.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1443,
+   "out": 56
+  },
+  "why": "Small, simple, stable nDPI dissector unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/noe.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1749,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; only likely touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/nomachine.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1865,
+   "out": 57
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except for occasional heuristic tweaks or API-wide refactors."
+ },
+ "src/lib/protocols/non_tcp_udp.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3487,
+   "out": 63
+  },
+  "why": "nDPI dissector with suspicious ICMP type/code validation logic and checksum handling that historically gets tweaked, though the file is small and stable."
+ },
+ "src/lib/protocols/ntp.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3097,
+   "out": 82
+  },
+  "why": "Recently extended nDPI dissector with new metadata extraction (ref_id IPv6 handling looks buggy, stratum read before assignment ordering quirks), making follow-up fixes fairly likely."
+ },
+ "src/lib/protocols/oicq.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1688,
+   "out": 62
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except during API-wide refactors, though the odd command-range logic could prompt a fix."
+ },
+ "src/lib/protocols/ookla.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2386,
+   "out": 74
+  },
+  "why": "Small, simple nDPI dissector; nDPI changes frequently but this file is stable and minimal, so only occasional tweaks (API refactors or detection heuristics) are likely."
+ },
+ "src/lib/protocols/opc-ua.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1746,
+   "out": 56
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by occasional API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/openflow.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1484,
+   "out": 54
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes, though API-wide refactors occasionally touch such files."
+ },
+ "src/lib/protocols/openvpn.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 10040,
+   "out": 73
+  },
+  "why": "Actively evolving nDPI dissector with heuristics, TODOs, and false-positive-prone logic that is frequently tweaked, though individual dissectors may go months untouched."
+ },
+ "src/lib/protocols/openwire.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1416,
+   "out": 50
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/oracle.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1586,
+   "out": 64
+  },
+  "why": "Small, simple nDPI dissector that is already minimal and stable; changes would mostly come from API-wide refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/paltalk.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1596,
+   "out": 57
+  },
+  "why": "Small, stable niche nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/path_of_exile.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1865,
+   "out": 56
+  },
+  "why": "Small, self-contained nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/pfcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1538,
+   "out": 51
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/postgres.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2800,
+   "out": 45
+  },
+  "why": "Small, stable nDPI dissector that rarely changes except for library-wide API refactors."
+ },
+ "src/lib/protocols/pptp.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1552,
+   "out": 61
+  },
+  "why": "Small, stable nDPI dissector with simple fixed-signature logic; rarely needs fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/profinet_io.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1850,
+   "out": 54
+  },
+  "why": "Small, simple, stable nDPI dissector; changes would likely be API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/protobuf.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3942,
+   "out": 87
+  },
+  "why": "Heuristic nDPI dissector with suspicious varint shift logic, false-positive-prone thresholds, and unaligned reads\u2014such dissectors are frequently tweaked, though this one is relatively niche and stable."
+ },
+ "src/lib/protocols/ptpv2.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1692,
+   "out": 51
+  },
+  "why": "Small, simple nDPI dissector; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/qq.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1654,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; only likely touched by sweeping API refactors or rare false-positive fixes."
+ },
+ "src/lib/protocols/quic.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 37371,
+   "out": 70
+  },
+  "why": "Large, complex nDPI QUIC dissector with crypto, parsing and reassembly code that is frequently fuzzed and updated, making bug-fix commits likely."
+ },
+ "src/lib/protocols/radius_proto.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1771,
+   "out": 46
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except during codebase-wide refactors."
+ },
+ "src/lib/protocols/radmin.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2007,
+   "out": 89
+  },
+  "why": "Small stable nDPI dissector; it has an obvious parenthesis bug (ntohs(get_u_int16_t(...) == 0x808)) that may or may not get noticed, but such protocol files rarely change after addition."
+ },
+ "src/lib/protocols/raft.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1958,
+   "out": 58
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/raknet.c": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5582,
+   "out": 98
+  },
+  "why": "nDPI dissector with several unchecked buffer reads (e.g. memcmp at offsets without length guard, frame/record loops) and heuristic thresholds, making fuzz-driven out-of-bounds and false-positive fixes fairly likely."
+ },
+ "src/lib/protocols/rdp.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4071,
+   "out": 100
+  },
+  "why": "nDPI dissectors like RDP get periodic tweaks and heuristic fixes, and this file has suspicious logic (uninitialized rdp_from_srv compare, TLS-over-RDP heuristics), but single dissector files are only occasionally touched."
+ },
+ "src/lib/protocols/resp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1485,
+   "out": 59
+  },
+  "why": "Small, simple nDPI dissector; such files rarely change, though minor heuristic tweaks/false-positive fixes are possible."
+ },
+ "src/lib/protocols/riotgames.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1610,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/ripe_atlas.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1530,
+   "out": 54
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/rmcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1864,
+   "out": 54
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/roughtime.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2418,
+   "out": 70
+  },
+  "why": "Small, stable nDPI dissector; potential overflow in minimum_length arithmetic could trigger a fuzz-found fix, but such files rarely change within six months."
+ },
+ "src/lib/protocols/rsh.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2749,
+   "out": 87
+  },
+  "why": "Small nDPI dissector with risky pointer/strncpy buffer logic (potential out-of-bounds, e.g. payload_packet_len==0 access) that fuzzing often flags, though such files change infrequently."
+ },
+ "src/lib/protocols/rsync.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1569,
+   "out": 58
+  },
+  "why": "Small, stable nDPI dissector with simple signature matching; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/rtmp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2173,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector; such protocol files rarely get fixes, though occasional refactors or detection tweaks occur."
+ },
+ "src/lib/protocols/rtp.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 8795,
+   "out": 66
+  },
+  "why": "nDPI's RTP dissector is a heuristic-heavy, frequently-touched file prone to false positive/negative fixes and ongoing tweaks."
+ },
+ "src/lib/protocols/rtps.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1522,
+   "out": 56
+  },
+  "why": "Small, simple, stable nDPI dissector; only sweeping API refactors or rare false-positive fixes would touch it."
+ },
+ "src/lib/protocols/rtsp.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1732,
+   "out": 54
+  },
+  "why": "Small, simple nDPI dissector; such files change occasionally but rarely need bug fixes within a given six-month window."
+ },
+ "src/lib/protocols/rx.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3542,
+   "out": 58
+  },
+  "why": "Small, stable nDPI dissector; occasional refactors but low likelihood of a dedicated bug-fix commit in six months."
+ },
+ "src/lib/protocols/s7comm.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5106,
+   "out": 79
+  },
+  "why": "Recently extended nDPI dissector with monitoring/stat parsing (unchecked calloc, fixed offsets) that plausibly needs fixes, though such small protocol files often stay untouched."
+ },
+ "src/lib/protocols/samsung_sdp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1489,
+   "out": 60
+  },
+  "why": "Small, simple new nDPI dissector with minimal logic; unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/sbe.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2231,
+   "out": 66
+  },
+  "why": "New nDPI dissector (2026) with unaligned struct access, endianness guesswork, and loose heuristics likely to cause false positives needing fixes."
+ },
+ "src/lib/protocols/sd_rtn.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1727,
+   "out": 62
+  },
+  "why": "Small, simple nDPI dissector; such files rarely change except during broad API refactors, though the sni_len bounds check is slightly suspect."
+ },
+ "src/lib/protocols/sflow.c": {
+  "model": "claude-opus-5",
+  "p": 0.13,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1448,
+   "out": 55
+  },
+  "why": "Small, simple, stable nDPI dissector; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/sip.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4409,
+   "out": 91
+  },
+  "why": "nDPI dissectors like SIP are frequently tweaked/fuzz-fixed, and this file has suspicious spots (search_cmd without payload_len check for single-byte, imsi memcpy) likely to prompt fixes."
+ },
+ "src/lib/protocols/skinny.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1975,
+   "out": 67
+  },
+  "why": "Small, simple nDPI dissector with tight checks; such minor protocol files rarely get bug fixes, though occasional sweeping API refactors touch them."
+ },
+ "src/lib/protocols/slp.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5594,
+   "out": 94
+  },
+  "why": "nDPI dissector with risky unaligned pointer reads, signed/unsigned offset arithmetic and potential overflow in URL parsing, making fuzzer-driven bug-fix commits plausible, though this file is small and relatively stable."
+ },
+ "src/lib/protocols/smb.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2026,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector with simple logic; occasional refactors possible but bug fixes unlikely within six months."
+ },
+ "src/lib/protocols/smpp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5002,
+   "out": 68
+  },
+  "why": "Stable, self-contained nDPI dissector with overflow checks already added; occasional API-wide refactors possible but targeted bug fixes unlikely within six months."
+ },
+ "src/lib/protocols/snmp_proto.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2756,
+   "out": 72
+  },
+  "why": "nDPI dissector with fragile offset arithmetic (u_int8_t truncation, potential overread) that fuzzing commonly flags, though such files are often stable for months."
+ },
+ "src/lib/protocols/soap.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1617,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; such files rarely change except for occasional API-wide refactors or false-positive fixes."
+ },
+ "src/lib/protocols/socks45.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3033,
+   "out": 44
+  },
+  "why": "Small, stable nDPI dissector; such files change rarely except during API-wide refactors."
+ },
+ "src/lib/protocols/softether.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5133,
+   "out": 98
+  },
+  "why": "nDPI dissector with fuzz-prone pointer/length arithmetic (possible uninitialized fqdn_len, unchecked val1 pointer) that commonly attracts fuzzer-driven fixes, though this specific protocol file changes less often."
+ },
+ "src/lib/protocols/someip.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4385,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by occasional false-positive fixes or API-wide refactors."
+ },
+ "src/lib/protocols/sonos.c": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1629,
+   "out": 67
+  },
+  "why": "New, loosely-heuristic nDPI dissector that dereferences packet->iph without an IPv4 check, a likely crash/false-positive bug fix target."
+ },
+ "src/lib/protocols/source_engine.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1941,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/spotify.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1821,
+   "out": 52
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/ssdp.c": {
+  "model": "claude-opus-5",
+  "p": 0.35,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4434,
+   "out": 72
+  },
+  "why": "nDPI dissector with recently added, repetitive metadata-extraction code (possible leaks/overflows) that is frequently refactored, though SSDP detection itself is stable."
+ },
+ "src/lib/protocols/ssh.c": {
+  "model": "claude-opus-5",
+  "p": 0.72,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 11772,
+   "out": 83
+  },
+  "why": "Recently extended nDPI SSH dissector with many hand-rolled buffer/offset parsing paths, potential memory leaks and overflow risks, in an actively maintained project \u2014 likely to see fix commits."
+ },
+ "src/lib/protocols/steam.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1388,
+   "out": 61
+  },
+  "why": "Small, simple nDPI dissector with minimal logic; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/steam_datagram_relay.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1533,
+   "out": 50
+  },
+  "why": "Small, simple nDPI dissector with narrow heuristic; occasional refinement possible but low churn."
+ },
+ "src/lib/protocols/stomp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1614,
+   "out": 57
+  },
+  "why": "Small, simple nDPI dissector; changes mostly come from API-wide refactors rather than bug fixes specific to this file."
+ },
+ "src/lib/protocols/stun.c": {
+  "model": "claude-opus-5",
+  "p": 0.93,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 24634,
+   "out": 82
+  },
+  "why": "nDPI's stun.c is a large, heavily-maintained dissector with complex heuristics, recursion, and frequent fuzzing-driven fixes, so bug-fix commits within six months are very likely."
+ },
+ "src/lib/protocols/syncthing.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1441,
+   "out": 60
+  },
+  "why": "Small, simple nDPI dissector with a single magic-number check; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/syslog.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2267,
+   "out": 50
+  },
+  "why": "Small stable nDPI dissector; minor edge-case bugs possible but such files rarely change within six months."
+ },
+ "src/lib/protocols/tailscale.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1391,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/tcp_udp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1334,
+   "out": 63
+  },
+  "why": "Small, stable nDPI helper file with simple logic; unlikely to need bug fixes soon, though IPv6 TODO suggests possible change."
+ },
+ "src/lib/protocols/teamspeak.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2119,
+   "out": 99
+  },
+  "why": "Small, stable nDPI dissector; occasional refactors or heuristic tweaks possible but bug fixes are infrequent (note potential out-of-bounds read with get_u_int32_t at offset 11 in a 16-byte payload is actually safe)."
+ },
+ "src/lib/protocols/teamviewer.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1989,
+   "out": 51
+  },
+  "why": "Small stable nDPI dissector; occasional refactors/API churn but few bug fixes likely in six months."
+ },
+ "src/lib/protocols/telegram.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2259,
+   "out": 65
+  },
+  "why": "nDPI protocol dissectors like Telegram are heuristic and churn moderately, but this file is small and stable; moderate chance of a fix within six months."
+ },
+ "src/lib/protocols/telnet.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3735,
+   "out": 83
+  },
+  "why": "nDPI dissector with a fragile credential state machine (potential buffer index issues and prompt-matching bugs) in an actively maintained codebase, though telnet is a low-traffic protocol rarely touched."
+ },
+ "src/lib/protocols/tencent_games.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1991,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/teredo.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1350,
+   "out": 55
+  },
+  "why": "Tiny, stable nDPI dissector; changes would mostly come from API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/teso.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1782,
+   "out": 61
+  },
+  "why": "Small, self-contained nDPI dissector with simple heuristics; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/tftp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4182,
+   "out": 62
+  },
+  "why": "Mature, self-contained nDPI dissector with careful bounds checks; such protocol files see only occasional fixes or API-wide refactors."
+ },
+ "src/lib/protocols/threema.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1737,
+   "out": 66
+  },
+  "why": "Small, stable nDPI dissector; most likely only touched by sweeping API refactors rather than targeted bug fixes, though heuristics are fragile."
+ },
+ "src/lib/protocols/thrift.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4484,
+   "out": 60
+  },
+  "why": "Small stable nDPI dissector; potential strncpy/off-by-one issues could prompt a fix, but such files rarely change within six months."
+ },
+ "src/lib/protocols/tinc.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2889,
+   "out": 54
+  },
+  "why": "Small stable nDPI dissector; occasional refactors/IPv6 or cache fixes possible but rarely changed."
+ },
+ "src/lib/protocols/tivoconnect.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2759,
+   "out": 61
+  },
+  "why": "Small, stable nDPI dissector for a niche protocol; likely only touched by sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/tls.c": {
+  "model": "claude-opus-5",
+  "p": 0.95,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 68392,
+   "out": 71
+  },
+  "why": "nDPI's TLS dissector is one of the most complex and frequently modified files in the project, with constant fixes for parsing edge cases, fingerprints, and heuristics."
+ },
+ "src/lib/protocols/tocaboca.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1828,
+   "out": 69
+  },
+  "why": "Small, self-contained nDPI dissector with simple signature checks; such files rarely get fixes beyond occasional API-wide refactors or false-positive tweaks."
+ },
+ "src/lib/protocols/tplink_shp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1737,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; only minor risk from the unsigned length subtraction bug or API-wide refactors."
+ },
+ "src/lib/protocols/trdp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2072,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; only occasional API-wide refactors or rare false-positive fixes likely."
+ },
+ "src/lib/protocols/tristation.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1580,
+   "out": 65
+  },
+  "why": "Small, new nDPI dissector with weak heuristics prone to false positives, but such files typically see few follow-up fixes beyond API-wide refactors."
+ },
+ "src/lib/protocols/tuya_lp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1777,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector with simple logic; such files rarely need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/ubntac2.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1842,
+   "out": 65
+  },
+  "why": "Small, stable nDPI dissector; TLV loop has potential overflow/infinite-loop concerns but such minor files rarely get touched within six months."
+ },
+ "src/lib/protocols/uftp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1472,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; only likely touched by API-wide refactors or rare false-positive tuning."
+ },
+ "src/lib/protocols/ultrasurf.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1463,
+   "out": 63
+  },
+  "why": "Tiny, simple nDPI dissector with fixed signature match; unlikely to need bug fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/usenet.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2178,
+   "out": 47
+  },
+  "why": "Small, stable legacy nDPI dissector rarely modified except by sweeping API refactors."
+ },
+ "src/lib/protocols/viber.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2183,
+   "out": 59
+  },
+  "why": "Small, stable nDPI dissector; such protocol files get occasional heuristic tweaks but rarely bug fixes within six months."
+ },
+ "src/lib/protocols/vmware.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1275,
+   "out": 55
+  },
+  "why": "Small, stable nDPI dissector; changes likely only from sweeping API refactors rather than targeted bug fixes."
+ },
+ "src/lib/protocols/vnc.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1722,
+   "out": 56
+  },
+  "why": "Small, stable nDPI dissector; occasional refactors or detection tweaks possible but bug fixes are infrequent."
+ },
+ "src/lib/protocols/vxlan.c": {
+  "model": "claude-opus-5",
+  "p": 0.13,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1773,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; only occasional sweeping API refactors or rare detection tweaks likely."
+ },
+ "src/lib/protocols/websocket.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3154,
+   "out": 72
+  },
+  "why": "nDPI dissector with an obvious bug (websocket_masked==1 check) and frequent false-positive tuning in active project, but small file so moderate chance of a fix commit."
+ },
+ "src/lib/protocols/whatsapp.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2545,
+   "out": 52
+  },
+  "why": "Small, stable nDPI dissector; nDPI churns frequently but this specific file rarely needs fixes."
+ },
+ "src/lib/protocols/whoisdas.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1625,
+   "out": 53
+  },
+  "why": "Small, stable nDPI dissector; changes mostly come from sweeping API refactors rather than bug fixes."
+ },
+ "src/lib/protocols/wireguard.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4305,
+   "out": 84
+  },
+  "why": "Small, stable nDPI dissector; occasional tweaks (TunnelBear-like variants, subclassification options) happen but most changes are repo-wide, so moderate-low chance of a targeted bug fix."
+ },
+ "src/lib/protocols/wsd.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1417,
+   "out": 55
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes, though API-wide refactors occasionally touch such files."
+ },
+ "src/lib/protocols/xbox.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2451,
+   "out": 62
+  },
+  "why": "Small, stable nDPI dissector unlikely to need fixes; changes would mostly come from API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/xdmcp.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1792,
+   "out": 51
+  },
+  "why": "Small, stable nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/xiaomi.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2195,
+   "out": 54
+  },
+  "why": "Small, stable nDPI dissector; minor parsing edge cases exist but such files rarely get fixes within six months."
+ },
+ "src/lib/protocols/yojimbo.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1449,
+   "out": 54
+  },
+  "why": "Small, simple, stable nDPI dissector; likely only touched by API-wide refactors rather than bug fixes."
+ },
+ "src/lib/protocols/z3950.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2366,
+   "out": 60
+  },
+  "why": "Small, stable nDPI dissector for a niche protocol; such files rarely get fixes, though occasional false-positive tuning occurs."
+ },
+ "src/lib/protocols/zabbix.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1363,
+   "out": 53
+  },
+  "why": "Tiny, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/zeromq.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1332,
+   "out": 60
+  },
+  "why": "Tiny, stable nDPI dissector with simple signature match; unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/protocols/zoom.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4856,
+   "out": 66
+  },
+  "why": "nDPI dissectors are actively maintained and heuristic-based Zoom detection often gets tweaks/fixes, though this file is small and recently refactored."
+ },
+ "src/lib/protocols/zug.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1429,
+   "out": 51
+  },
+  "why": "Small, simple nDPI dissector unlikely to need fixes beyond occasional API-wide refactors."
+ },
+ "src/lib/third_party/include/MurmurHash3.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 445,
+   "out": 43
+  },
+  "why": "Tiny stable header declaring a single hash function; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/aes.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1768,
+   "out": 44
+  },
+  "why": "Stable third-party tiny-AES header with no logic; rarely needs bug fixes."
+ },
+ "src/lib/third_party/include/ahocorasick.h": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5169,
+   "out": 80
+  },
+  "why": "This is nDPI's bundled Aho-Corasick header, a fairly stable type/API declaration file, but it's part of an actively maintained project and occasionally modified alongside matching-engine fixes."
+ },
+ "src/lib/third_party/include/ball.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1404,
+   "out": 57
+  },
+  "why": "Small stable header of a ball-tree KNN module (likely nDPI vendored code); headers rarely receive bug fixes."
+ },
+ "src/lib/third_party/include/binaryfusefilter.h": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 12829,
+   "out": 62
+  },
+  "why": "Vendored third-party single-header filter (nDPI), mostly stable upstream code; occasional sync/fix commits possible but infrequent."
+ },
+ "src/lib/third_party/include/gcrypt/aes.h": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4365,
+   "out": 84
+  },
+  "why": "Stripped-down Mbed TLS aes.h header; headers change less often than .c files but this core crypto API in an actively developed/modified codebase (missing includes suggests a fork) may still see doc/API edits."
+ },
+ "src/lib/third_party/include/gcrypt/aesni.h": {
+  "model": "claude-opus-5",
+  "p": 0.5,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2089,
+   "out": 75
+  },
+  "why": "Mbed TLS aesni.h is an actively refactored header (AESNI intrinsics support, config includes), so changes within six months are fairly likely though it's a small declaration-only header."
+ },
+ "src/lib/third_party/include/gcrypt/cipher.h": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 18071,
+   "out": 70
+  },
+  "why": "Core Mbed TLS public header (cipher.h) under active refactoring (PSA migration, cipher_info accessors); such central headers are frequently touched and fixed."
+ },
+ "src/lib/third_party/include/gcrypt/cipher_wrap.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1420,
+   "out": 65
+  },
+  "why": "Stable mbedTLS header (trimmed variant) with mostly declarations; header files like this rarely need bug fixes, though occasional refactors occur."
+ },
+ "src/lib/third_party/include/gcrypt/common.h": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6941,
+   "out": 216
+  },
+  "why": "This heavily-modified common.h has clear defects (missing MBEDTLS_BYTE_4..7 and MBEDTLS_STATIC_TESTABLE definitions, unaligned pointer-cast endianness macros, fragile bswap/endian detection), and it is a central header touched by many changes, so fixes are very likely."
+ },
+ "src/lib/third_party/include/gcrypt/digest.h": {
+  "model": "claude-opus-5",
+  "p": 0.08,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 661,
+   "out": 43
+  },
+  "why": "Small stable crypto header with simple declarations; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/gcrypt/error.h": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3290,
+   "out": 77
+  },
+  "why": "Mbed TLS error.h is a central, frequently-edited header (error code registry updates, missing config/stddef includes), so changes within six months are plausible though not certain to be bug fixes."
+ },
+ "src/lib/third_party/include/gcrypt/gcm.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6258,
+   "out": 70
+  },
+  "why": "This is a stripped/vendored mbedtls gcm.h header (includes removed, init signature modified); headers change rarely and vendored crypto copies see few fixes."
+ },
+ "src/lib/third_party/include/gcrypt_light.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2160,
+   "out": 57
+  },
+  "why": "Small stable header of a libgcrypt shim API; headers rarely receive bug-fix commits unless the shim implementation expands."
+ },
+ "src/lib/third_party/include/hll.h": {
+  "model": "claude-opus-5",
+  "p": 0.04,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1059,
+   "out": 50
+  },
+  "why": "Tiny header of extern declarations for a stable vendored HLL library; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/isolation_forest.h": {
+  "model": "claude-opus-5",
+  "p": 0.32,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 712,
+   "out": 63
+  },
+  "why": "Small new-looking header (2026, ntop) for a fresh isolation forest feature; headers change less often but new experimental APIs often get tweaks."
+ },
+ "src/lib/third_party/include/kdtree.h": {
+  "model": "claude-opus-5",
+  "p": 0.07,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2539,
+   "out": 35
+  },
+  "why": "Stable third-party library header with only declarations; rarely modified."
+ },
+ "src/lib/third_party/include/libcache.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1894,
+   "out": 43
+  },
+  "why": "Stable third-party library public header with only declarations; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/libinjection.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1103,
+   "out": 44
+  },
+  "why": "Stable third-party library public header with only declarations; rarely changes or needs bug fixes."
+ },
+ "src/lib/third_party/include/libinjection_html5.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 876,
+   "out": 50
+  },
+  "why": "Small stable public header for libinjection's html5 tokenizer; headers rarely change compared to implementation files."
+ },
+ "src/lib/third_party/include/libinjection_sqli.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3331,
+   "out": 46
+  },
+  "why": "Stable third-party libinjection header (vendored); headers rarely receive bug-fix commits."
+ },
+ "src/lib/third_party/include/libinjection_sqli_data.h": {
+  "bytes": 206900,
+  "error": "oversized"
+ },
+ "src/lib/third_party/include/libinjection_xss.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 507,
+   "out": 53
+  },
+  "why": "Tiny stable header with a single declaration; unlikely to need bug fixes even though the feature is marked incomplete."
+ },
+ "src/lib/third_party/include/ndpi_md5.h": {
+  "model": "claude-opus-5",
+  "p": 0.07,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 604,
+   "out": 54
+  },
+  "why": "Small stable header declaring a self-contained MD5 API; such vendored crypto headers rarely need bug fixes."
+ },
+ "src/lib/third_party/include/ndpi_patricia.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4553,
+   "out": 51
+  },
+  "why": "Stable third-party patricia trie header in nDPI; rarely modified beyond occasional portability tweaks."
+ },
+ "src/lib/third_party/include/ndpi_sha1.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 593,
+   "out": 49
+  },
+  "why": "Small stable public-domain SHA-1 header with fixed API, unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/ndpi_sha256.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 847,
+   "out": 48
+  },
+  "why": "Stable third-party SHA256 header in nDPI; such headers rarely change or need bug fixes."
+ },
+ "src/lib/third_party/include/pl7m.h": {
+  "model": "claude-opus-5",
+  "p": 0.04,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1120,
+   "out": 40
+  },
+  "why": "Small stable public header with two function declarations; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/rce_injection.h": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 46859,
+   "out": 66
+  },
+  "why": "Static data/regex header (nDPI RCE detection) that rarely changes except for occasional false-positive tuning or build/PCRE2 guard fixes."
+ },
+ "src/lib/third_party/include/roaring.h": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 49176,
+   "out": 69
+  },
+  "why": "This is an auto-generated amalgamated third-party CRoaring header vendored into the project; such files are only touched on library version bumps, rarely bug-fixed locally."
+ },
+ "src/lib/third_party/include/roaring_v2.h": {
+  "model": "claude-opus-5",
+  "p": 0.14,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 17252,
+   "out": 82
+  },
+  "why": "Auto-generated amalgamated CRoaring public header vendored into a project (ndpi-style); it changes mainly on library version bumps rather than bug fixes, so low chance of a fix commit in six months."
+ },
+ "src/lib/third_party/include/secure_memzero.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3504,
+   "out": 60
+  },
+  "why": "Self-contained, stable public-domain utility header unlikely to need fixes, though portability macro edge cases could occasionally require tweaks."
+ },
+ "src/lib/third_party/include/shoco.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 590,
+   "out": 49
+  },
+  "why": "Tiny stable header declaring two functions for a third-party compression library; unlikely to need bug fixes."
+ },
+ "src/lib/third_party/include/shoco_domains_model.h": {
+  "model": "claude-opus-5",
+  "p": 0.04,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 11158,
+   "out": 37
+  },
+  "why": "Auto-generated static compression model table, essentially never edited after generation."
+ },
+ "src/lib/third_party/include/uthash.h": {
+  "model": "claude-opus-5",
+  "p": 0.08,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 25337,
+   "out": 64
+  },
+  "why": "This is a vendored third-party uthash header (lightly patched for ndpi allocators); such stable upstream headers rarely receive bug-fix commits."
+ },
+ "src/lib/third_party/include/windows/dirent.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 13970,
+   "out": 57
+  },
+  "why": "This is a stable vendored third-party single-header dirent.h compatibility shim, rarely modified except for occasional upstream sync."
+ },
+ "src/lib/third_party/include/windows/getopt.h": {
+  "model": "claude-opus-5",
+  "p": 0.04,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2967,
+   "out": 37
+  },
+  "why": "Stable third-party vendored getopt header, rarely modified after import."
+ },
+ "src/lib/third_party/src/aes.c": {
+  "model": "claude-opus-5",
+  "p": 0.03,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 11549,
+   "out": 49
+  },
+  "why": "Vendored, mature public-domain tiny-AES implementation that is stable and rarely needs fixes."
+ },
+ "src/lib/third_party/src/ahocorasick.c": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 19998,
+   "out": 89
+  },
+  "why": "This is nDPI's heavily-modified Aho-Corasick matcher, a hot, complex, fuzz-targeted core file with visible oddities (e.g., dot[1]=='0' check) that commonly receives fixes."
+ },
+ "src/lib/third_party/src/ball.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7471,
+   "out": 119
+  },
+  "why": "Third-party ball-tree code vendored into nDPI with unchecked mallocs and potential leak/edge-case issues (e.g., leaf_size<1 returning NULL after allocation), which fuzzing/static analysis in such projects often triggers fixes for, though the file is otherwise stable and rarely touched."
+ },
+ "src/lib/third_party/src/fuzz/nallocinc.c": {
+  "model": "claude-opus-5",
+  "p": 0.35,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7197,
+   "out": 66
+  },
+  "why": "Small self-contained fuzzing helper with tricky allocator interception and platform-specific symbol hacks; some churn likely but it's a niche standalone file."
+ },
+ "src/lib/third_party/src/fuzz/pl7m.c": {
+  "model": "claude-opus-5",
+  "p": 0.35,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 21367,
+   "out": 81
+  },
+  "why": "Complex packet-dissection fuzzer mutator with many TODOs and parsing edge cases likely to surface crashes, but it is an auxiliary fuzzing helper that may see infrequent updates."
+ },
+ "src/lib/third_party/src/gcrypt/aes.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 9391,
+   "out": 236
+  },
+  "why": "Vendored/modified mbedtls AES fork (fuzzing harness variant) with stable, well-tested algorithm code; despite suspicious RROUND indices and an uninitialized ret path, such copied crypto files rarely get touched."
+ },
+ "src/lib/third_party/src/gcrypt/aesni.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 10410,
+   "out": 68
+  },
+  "why": "Vendored mbedTLS AES-NI file with local nDPI patches; stable code rarely touched, though platform detection hacks occasionally get tweaked."
+ },
+ "src/lib/third_party/src/gcrypt/cipher.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 8670,
+   "out": 75
+  },
+  "why": "This is a heavily-maintained core Mbed TLS cipher wrapper (appears stripped/modified), a frequent target of fixes for AEAD/padding/edge-case handling."
+ },
+ "src/lib/third_party/src/gcrypt/cipher_wrap.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3266,
+   "out": 90
+  },
+  "why": "Heavily stripped/customized Mbed TLS cipher_wrap table file (missing includes, inconsistent base_info initializers) \u2014 table-driven boilerplate that changes occasionally with upstream merges or cipher additions."
+ },
+ "src/lib/third_party/src/gcrypt/digest.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5171,
+   "out": 52
+  },
+  "why": "Stable public-domain SHA-256/HMAC implementation; such crypto primitive files rarely change once working."
+ },
+ "src/lib/third_party/src/gcrypt/gcm.c": {
+  "model": "claude-opus-5",
+  "p": 0.25,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 9853,
+   "out": 166
+  },
+  "why": "Heavily modified mbedtls GCM fork with risky hand-rolled unaligned word-wise xor helpers and odd off-by-one loop conditions; plausible but not certain to attract a fix soon."
+ },
+ "src/lib/third_party/src/gcrypt_light.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7813,
+   "out": 95
+  },
+  "why": "This nDPI bundled gcrypt_light shim is relatively stable third-party-derived code, but it has occasional memory/leak and portability fixes (e.g., src leak paths, buffer bounds), so moderate chance of a fix commit."
+ },
+ "src/lib/third_party/src/hll/MurmurHash3.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1209,
+   "out": 55
+  },
+  "why": "Stable, self-contained public-domain hash implementation rarely needing changes beyond occasional sanitizer tweaks."
+ },
+ "src/lib/third_party/src/hll/hll.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2856,
+   "out": 72
+  },
+  "why": "Small, stable vendored HyperLogLog implementation (nDPI); occasional fixes like calloc NULL checks or bits range tweaks are possible but infrequent."
+ },
+ "src/lib/third_party/src/isolation_forest.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2725,
+   "out": 88
+  },
+  "why": "New, recently added nDPI feature file with several latent bugs (NULL child nodes dereferenced in path_length, unchecked allocations, zero-size mallocs, missing tot_memory init), likely to see fixes soon."
+ },
+ "src/lib/third_party/src/kdtree.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 8088,
+   "out": 59
+  },
+  "why": "Stable vendored third-party kd-tree library (nDPI), rarely touched except occasional null-check/memory hardening fixes."
+ },
+ "src/lib/third_party/src/libcache.c": {
+  "model": "claude-opus-5",
+  "p": 0.3,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4090,
+   "out": 84
+  },
+  "why": "This nDPI libcache helper has latent bugs (null-deref on tail->prev, eviction edge cases) but is a small, rarely-touched utility file; moderate chance of a fuzzer-driven fix."
+ },
+ "src/lib/third_party/src/libinjection_html5.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 10797,
+   "out": 52
+  },
+  "why": "Mature, stable libinjection html5 tokenizer; occasional edge-case/parser fixes but low churn."
+ },
+ "src/lib/third_party/src/libinjection_sqli.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 32154,
+   "out": 63
+  },
+  "why": "Vendored libinjection sqli parser, largely stable third-party code; occasional false-positive/parsing fixes possible but infrequent within six months."
+ },
+ "src/lib/third_party/src/libinjection_xss.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7048,
+   "out": 54
+  },
+  "why": "libinjection xss detector is mature and rarely changed; occasional false-positive/negative fixes possible but infrequent."
+ },
+ "src/lib/third_party/src/ndpi_md5.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4418,
+   "out": 54
+  },
+  "why": "Stable, self-contained MD5 implementation rarely changes; only minor alignment/endianness or style fixes possible."
+ },
+ "src/lib/third_party/src/ndpi_patricia.c": {
+  "model": "claude-opus-5",
+  "p": 0.2,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 15166,
+   "out": 72
+  },
+  "why": "Stable vendored third-party patricia trie library (nDPI); mostly unchanged over time, though occasional hardening/memory-fix commits occur in nDPI's tree."
+ },
+ "src/lib/third_party/src/ndpi_sha1.c": {
+  "model": "claude-opus-5",
+  "p": 0.07,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 5481,
+   "out": 58
+  },
+  "why": "Stable public-domain SHA-1 implementation vendored into nDPI; rarely changes except occasional build/portability tweaks."
+ },
+ "src/lib/third_party/src/ndpi_sha256.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3580,
+   "out": 53
+  },
+  "why": "Stable vendored third-party SHA-256 implementation rarely changes beyond occasional style/warning fixes."
+ },
+ "src/lib/third_party/src/roaring.c": {
+  "bytes": 1080100,
+  "error": "oversized"
+ },
+ "src/lib/third_party/src/roaring_v2.c": {
+  "bytes": 766408,
+  "error": "oversized"
+ },
+ "src/lib/third_party/src/sha1-fast.c": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3561,
+   "out": 58
+  },
+  "why": "Self-contained, stable third-party SHA-1 compression routine with no dependencies; such vendored crypto primitives rarely change."
+ },
+ "src/lib/third_party/src/shoco.c": {
+  "model": "claude-opus-5",
+  "p": 0.12,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3329,
+   "out": 62
+  },
+  "why": "This is a stable vendored third-party compression library (shoco) that rarely changes once imported; only occasional portability/edge-case fixes are likely."
+ },
+ "src/lib/third_party/src/strptime.c": {
+  "model": "claude-opus-5",
+  "p": 0.08,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6250,
+   "out": 52
+  },
+  "why": "Stable, self-contained Windows-only compatibility shim copied from NetBSD; rarely touched after import."
+ },
+ "src/lib/third_party/src/windows/getopt.c": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 13090,
+   "out": 41
+  },
+  "why": "Vendored third-party getopt compatibility shim, stable and rarely modified."
+ },
+ "src/lib/third_party/src/windows/gettimeofday.c": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1001,
+   "out": 50
+  },
+  "why": "Small, stable platform-compatibility shim (Windows gettimeofday) that rarely needs changes."
+ },
+ "tests/dga/dga_evaluate.c": {
+  "model": "claude-opus-5",
+  "p": 0.17,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1818,
+   "out": 64
+  },
+  "why": "Small standalone nDPI test utility; rarely changed except for API signature updates, though nDPI's frequent API churn gives moderate chance of edits."
+ },
+ "tests/performance/gcrypt.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7751,
+   "out": 60
+  },
+  "why": "This is a standalone benchmark/test harness for gcrypt_light in nDPI; such test files rarely need bug fixes after being added."
+ },
+ "tests/performance/geo.c": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 991,
+   "out": 46
+  },
+  "why": "Small standalone nDPI example/test utility; rarely changed except for occasional API signature updates."
+ },
+ "tests/performance/patriciasearch.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1756,
+   "out": 77
+  },
+  "why": "This is a small standalone benchmark/test utility in nDPI with bugs (unused node var, line[len] off-by-one) but such auxiliary files rarely receive bug-fix commits."
+ },
+ "tests/performance/substringsearch.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1548,
+   "out": 64
+  },
+  "why": "Small standalone benchmark/example utility in nDPI; such test harness files rarely need bug fixes beyond occasional API-rename sweeps."
+ },
+ "tests/unit/unit.c": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7192,
+   "out": 69
+  },
+  "why": "nDPI unit test file with hardcoded expected JSON/CSV strings including risk scores and protocol IDs, which frequently change and require test updates/fixes."
+ },
+ "utils/hosts2domains.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1106,
+   "out": 48
+  },
+  "why": "Tiny standalone utility tool in nDPI; rarely touched except for occasional API/style updates."
+ },
+ "utils/print_rank.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 868,
+   "out": 51
+  },
+  "why": "Tiny standalone utility main() with trivial logic; little surface for bug-fix commits beyond API renames."
+ },
+ "windows/WpdPack/Include/Win32-Extensions.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2472,
+   "out": 57
+  },
+  "why": "Stable header of declarations/macros (libpcap Win32 extensions) with little logic; rarely modified or bug-fixed."
+ },
+ "windows/WpdPack/Include/bittypes.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 2575,
+   "out": 64
+  },
+  "why": "Stable legacy compatibility header (libpcap/tcpdump bittypes.h) that rarely changes, though occasional portability tweaks occur."
+ },
+ "windows/WpdPack/Include/ip6_misc.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 3663,
+   "out": 54
+  },
+  "why": "Static Win32 IPv6 compatibility header of mostly constant macros, rarely changed or bug-fixed."
+ },
+ "windows/WpdPack/Include/pcap-bpf.h": {
+  "model": "claude-opus-5",
+  "p": 0.02,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1521,
+   "out": 54
+  },
+  "why": "This is a trivial backwards-compatibility header containing only a single include, so it is very unlikely to need bug fixes."
+ },
+ "windows/WpdPack/Include/pcap-namedb.h": {
+  "model": "claude-opus-5",
+  "p": 0.03,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1405,
+   "out": 41
+  },
+  "why": "Trivial backwards-compatibility header with a single include; essentially never changes."
+ },
+ "windows/WpdPack/Include/pcap-stdinc.h": {
+  "model": "claude-opus-5",
+  "p": 0.15,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1919,
+   "out": 66
+  },
+  "why": "Small Windows compatibility header (libpcap pcap-stdinc.h) that changes rarely, mostly only for new compiler/platform tweaks."
+ },
+ "windows/WpdPack/Include/pcap.h": {
+  "model": "claude-opus-5",
+  "p": 0.04,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 1486,
+   "out": 60
+  },
+  "why": "Trivial backwards-compatibility header that merely includes <pcap/pcap.h>; almost never changed except for header/comment updates."
+ },
+ "windows/WpdPack/Include/pcap/bpf.h": {
+  "model": "claude-opus-5",
+  "p": 0.75,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 14463,
+   "out": 66
+  },
+  "why": "This libpcap pcap/bpf.h is a frequently updated header where new DLT_ values and tweaks are added regularly, so changes within six months are likely."
+ },
+ "windows/WpdPack/Include/pcap/pcap.h": {
+  "model": "claude-opus-5",
+  "p": 0.4,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 7202,
+   "out": 68
+  },
+  "why": "This is libpcap's main public header, frequently updated with new API declarations and occasional fixes, though as a header it receives fewer direct bug-fix commits than source files."
+ },
+ "windows/WpdPack/Include/remote-ext.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 6229,
+   "out": 60
+  },
+  "why": "Stable public header of declarations/macros (WinPcap remote-ext.h), rarely modified except for occasional API/doc tweaks."
+ },
+ "windows/src/getopt.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 383,
+   "out": 93
+  },
+  "why": "A small vendored third-party getopt implementation for Windows rarely needs bug fixes."
+ },
+ "windows/src/getopt.h": {
+  "model": "claude-opus-5",
+  "p": 0.05,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 383,
+   "out": 40
+  },
+  "why": "Small third-party getopt header shim, rarely modified or bug-fixed."
+ },
+ "windows/src/ndpi_config.h": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 389,
+   "out": 124
+  },
+  "why": "Trivial auto-generated version header with a single macro; it may be regenerated but is unlikely to receive an actual bug-fix commit."
+ },
+ "windows/src/ndpi_define.h": {
+  "model": "claude-opus-5",
+  "p": 0.6,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 4993,
+   "out": 82
+  },
+  "why": "This is nDPI's central ndpi_define.h header, a frequently touched file (new constants, endianness/portability fixes) in an actively developed project, so a bug-fix commit within six months is fairly likely."
+ },
+ "windows/src/win-gettimeofday.c": {
+  "model": "claude-opus-5",
+  "p": 0.1,
+  "prompt_sha256": "f80fa47dadb7fdf0f9ed5448944f876c9d16f971b3e5a7293cc860e9c0fc16f2",
+  "usage": {
+   "in": 386,
+   "out": 118
+  },
+  "why": "A tiny third-party Windows compatibility shim for gettimeofday is stable and rarely needs bug fixes."
+ }
+}
