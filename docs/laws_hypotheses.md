@@ -618,3 +618,63 @@ changes.
 `docs/journal/2026-11-11-otherfix-precision.md`. Companion ceiling result, which measured the effect of
 this label change on a defect model (realized share of attainable signal 0.780 → 0.823; the C/non-C gap
 0.061 → 0.019): `docs/ceil.md` §5.
+
+## Amendment 7 (2026-11-11, owner OK; before the label audit, the candidate fingerprint and the seeded draw — no panel repo selected, scanned or labelled)
+
+**Context.** Amendment 6 item 8 left open whether the class gate (Fix labels, item 3) should apply per
+**repo** as well as per language, since libgit2 fails all three audit rounds (0.63 / 0.60 / 0.60) and
+could ride inside a passing C pool. It should not. The measurement does not support a per-repo binary
+decision, and making one would cost more than it buys.
+
+1. **No per-repo class gate. The gate stays per language.** Four reasons, in order of weight:
+   - **The measurement cannot resolve it.** On the v3c audit, the Wilson 95% interval of **every one of
+     the eight repos spans 0.70**: libxml2 0.86 [0.67, 0.95], prometheus 0.83 [0.55, 0.95], ripgrep
+     0.82 [0.52, 0.95], sphinx 0.78 [0.58, 0.90], redis 0.75 [0.51, 0.90], postgres 0.74 [0.51, 0.88],
+     commons-lang 0.70 [0.48, 0.85], libgit2 0.60 **[0.36, 0.80]**. The repo that prompted the question
+     cannot be told apart from 0.80.
+   - **Closing those intervals is prohibitive.** Telling a true 0.70 from a true 0.60 needs **136
+     commits per repo** (one-sided, α = 0.05, 80% power) — **21,760 judgments** for 16 repos × 10
+     languages, against 440 in the whole audit so far. At the language level the same 136 buys one
+     estimate per language, **1,360 judgments**, which is affordable. The binary decision therefore
+     belongs at the level where the data can support it.
+   - **It would be post-hoc exclusion after seeing the labels**, a researcher degree of freedom that
+     many-labs designs exist to remove. "We dropped the repos that did not work" is the most
+     attackable move available in a replication, and this study's whole guard structure is built to
+     avoid it.
+   - **The risk direction is already safe.** Every defect law here predicts an effect > 0, and label
+     noise attenuates toward the null, so a noisy repo makes the test harder, not easier. (The noise is
+     not perfectly random, but v3c's path rule removes the doc/test-path concentration that was the
+     specific worry.)
+
+2. **Per-repo precision is not a stable property of a repository.** Changing the rule reshuffled it
+   violently: prometheus 0.40 → 0.83, ripgrep 0.27 → 0.82, commons-lang 0.27 → 0.70, while libxml2
+   stayed top (0.80 → 0.86) and libgit2 stayed bottom (0.63 → 0.60). It is largely a property of the
+   rule interacting with that community's commit vocabulary, not of the project. A gate on it would be
+   a gate on rule artifact.
+
+3. **Audit size and sampling for the per-language gate (M6).** The label audit draws **≈ 136
+   `other-fix` commits per language, stratified by repo in proportion to that repo's `other-fix` event
+   mass** — about 1,360 judgments over 10 languages. 136 is the one-sided n above. One sample serves
+   both the gate decision and the per-repo sensitivity in item 5.
+
+4. **Per-repo precision is reported, never applied as a filter.** Every per-repo verdict is published
+   beside that repo's `other-fix` precision and the n behind it, so a reader can weigh a result against
+   its label quality instead of having repos silently removed.
+
+5. **A pre-registered sensitivity, not an exclusion.** The headline runs on the full drawn panel. A
+   second run, specified here before any label exists, repeats it dropping repos whose `other-fix`
+   precision **point estimate** is below 0.70. Both are reported. If the two disagree, that is a result
+   about label quality and is reported as one — it is not grounds for pruning the panel.
+
+6. **Backstop — a floor, not a gate.** A repo is excluded only when the Wilson 95% **upper** bound of
+   its `other-fix` precision falls below 0.70, i.e. when it is demonstrably broken rather than merely
+   measured low. On the current audit this fires on **nothing** under v3c (libgit2's upper bound is
+   0.80) and would have fired on ripgrep, commons-lang and prometheus under v1. It is a safety net
+   against a genuinely broken label set, not a pruning rule.
+
+7. **Unchanged.** The scorer freeze (Amendment 5 item 8), the controls, the panel size, the draw
+   procedure, and every law's direction and bar.
+
+**Evidence.** `docs/otherfix_audit.md` and `docs/otherfix_round3_summary.json` for the per-repo counts;
+intervals are Wilson 95%; the 136 figure is a one-sided normal-approximation sample size for
+p₀ = 0.70 vs p₁ = 0.60 at α = 0.05 and 80% power.
