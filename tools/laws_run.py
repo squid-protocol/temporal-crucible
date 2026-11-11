@@ -40,6 +40,7 @@ and LAW-9 are descriptive and are pooled for the record only, never tested for u
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sqlite3
 import sys
@@ -48,6 +49,7 @@ import traceback
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+import numpy as np  # noqa: E402
 from scipy import stats  # noqa: E402
 
 import laws_attach as A  # noqa: E402
@@ -79,6 +81,45 @@ SPEC: dict[str, dict] = {
 }
 
 
+def _edge_kept(edge, share: float, seed: int) -> bool:
+    """Whether one edge survives thinning. Keyed on the EDGE IDENTITY, not on the draw order, so the same edge
+    gets the same verdict in every snapshot it appears in."""
+    h = hashlib.blake2b(repr(edge).encode(), digest_size=8, key=str(seed).encode()).digest()
+    return int.from_bytes(h, "big") / 2 ** 64 < share
+
+
+def thinned(nets: list, share: float, seed: int) -> list:
+    """The same networks with a `share` of the edges kept, the SAME edges at every snapshot: the coverage
+    sensitivity.
+
+    The engine resolves ~99% of call sites in C and ~56-60% in Java, Go and Python
+    (docs/laws_driver_pilot.md). Thinning a C repo's edges to the others' share answers the question that
+    matters -- whether a law's reading survives being measured as badly as the Java networks are. A law that
+    holds under thinning is not an artefact of C's better coverage; one that does not cannot support a
+    between-language claim however much engine work is done.
+
+    **The mask must be persistent, and a per-snapshot draw is wrong.** Coverage failure is a property of the
+    call site: an `obj.method()` whose receiver type cannot be inferred is unresolved at every snapshot, not at a
+    random subset of them. Thinning each snapshot independently instead drops an edge at t and keeps it at t + 1,
+    which LAW-2 reads as a NEW edge -- the first run of this sensitivity inflated libgit2's choice count from
+    16,593 to 121,112 and libxml2's from 10,746 to 235,931, and corrupted LAW-3's persistence pairs and LAW-4's
+    replay the same way. Hashing the edge identity fixes it: the verdict is the same wherever the edge appears.
+    LAW-1 was unaffected either way, because it reads one snapshot.
+
+    Uniform thinning is still a LOWER BOUND on the damage. Real failures are selective -- the dominant
+    unresolved step is `receiver`, concentrating on dynamically dispatched calls rather than falling evenly -- so
+    a selective null would hurt more, and is not modelled here.
+    """
+    out = []
+    for n in nets:
+        m = N.Net(n.sha, n.date)
+        m.nodes = n.nodes  # read-only downstream; the node set is not what coverage loses
+        m.edges = {e for e in n.edges if _edge_kept(e, share, seed)}
+        m.profile = {**n.profile, "thinned_to": share, "edges": len(m.edges), "edges_before": len(n.edges)}
+        out.append(m)
+    return out
+
+
 def guarded(name: str, fn, failures: dict):
     t0 = time.time()
     try:
@@ -91,7 +132,8 @@ def guarded(name: str, fn, failures: dict):
         return {"evaluable": False, "why": f"the estimator raised {type(e).__name__}", "failed": True}
 
 
-def one_repo(out: Path, repo: str, language: str, labels: dict[str, bool], boot: int, sims: int | None) -> dict:
+def one_repo(out: Path, repo: str, language: str, labels: dict[str, bool], boot: int, sims: int | None,
+             thin: float | None = None, thin_seed: int = 2982) -> dict:
     t0 = time.time()
     failures: dict = {}
     rec: dict = {"repo": repo, "language": language, "failures": failures}
@@ -104,6 +146,12 @@ def one_repo(out: Path, repo: str, language: str, labels: dict[str, bool], boot:
     if not nets:
         return {**rec, "why": "no scanned snapshot", "seconds": round(time.time() - t0, 1)}
     rec["profile"] = nets[-1].profile
+    if thin is not None:
+        # the network laws see the thinned networks; the defect panel is not thinned in this pass (it builds its
+        # own networks inside laws_panel.file_years), which the record states rather than implies
+        nets, yearly = thinned(nets, thin, thin_seed), thinned(yearly, thin, thin_seed)
+        rec["thinned"] = {"share": thin, "seed": thin_seed, "applies_to": "LAW-1 to LAW-5",
+                          "edges_last": len(nets[-1].edges), "edges_last_before": rec["profile"]["edges"]}
     rec["nodes_last"] = len(nets[-1].nodes)
 
     degrees = [k for k in nets[-1].in_degree().values() if k >= 1]
@@ -243,6 +291,9 @@ def main() -> int:
     ap.add_argument("--boot", type=int, default=D.BOOT)
     ap.add_argument("--sims", type=int, default=None, help="LAW-4 replays (default: the registered SIMS)")
     ap.add_argument("--tag", default=None, help="names the output file")
+    ap.add_argument("--thin", type=float, default=None,
+                    help="keep this share of each network's edges (the coverage sensitivity; LAW-1 to LAW-5)")
+    ap.add_argument("--thin-seed", type=int, default=2982)
     a = ap.parse_args()
     t0 = time.time()
     repos = []
@@ -252,7 +303,7 @@ def main() -> int:
             print(f"{name}: no registered language; skipped")
             continue
         labels, note = ({}, "keyword label") if a.labels == "keyword" else labels_for(a.out, name)
-        rec = one_repo(a.out, name, language, labels, a.boot, a.sims)
+        rec = one_repo(a.out, name, language, labels, a.boot, a.sims, a.thin, a.thin_seed)
         rec["labels_note"] = note
         repos.append(rec)
         laws = " ".join(f"{k.split('-')[1]}{'+' if (rec.get(k) or {}).get('evaluable') else '-'}"
@@ -261,7 +312,7 @@ def main() -> int:
         for law, f in rec["failures"].items():
             print(f"    {law} FAILED: {f['error']}")
     rec = {"repos": repos, "synthesis": synthesise(repos) if repos else None,
-           "labels": a.labels, "boot": a.boot, "sims": a.sims,
+           "labels": a.labels, "boot": a.boot, "sims": a.sims, "thin": a.thin,
            "seconds": round(time.time() - t0, 1),
            "failures": {r["repo"]: list(r["failures"]) for r in repos if r["failures"]}}
     f = a.out / f"laws_run_{a.tag or a.labels}.json"

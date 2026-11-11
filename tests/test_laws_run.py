@@ -125,3 +125,31 @@ def test_a_metric_record_without_its_own_flag_falls_back_to_the_laws():
         "coupling": {"evaluable": True, "effect": 0.9, "se": 0.2},
         "k_mean": {"evaluable": False, "effect": 0.4, "se": 0.1}}}})]
     assert RUN._effects(mixed, "LAW-7", "coupling") and RUN._effects(mixed, "LAW-7", "k_mean") == []
+
+
+def test_thinning_keeps_roughly_the_share_and_is_persistent_across_snapshots():
+    """The mask must follow the edge, not the snapshot: a per-snapshot draw makes a persisting edge look new to
+    LAW-2 (it inflated libgit2's choice count 7x) and corrupts LAW-3's pairs and LAW-4's replay."""
+    import laws_net as N
+    nets = []
+    edges = {((f"f{a}.c", "", f"fn{a}"), (f"f{b}.c", "", f"fn{b}"))
+             for a in range(40) for b in range(40) if a != b and (a + b) % 3 == 0}
+    for i in range(3):
+        n = N.Net(f"s{i}", f"201{i}-10-01")
+        n.nodes = {(f"f{j}.c", "", f"fn{j}"): {"loc": 10, "n": 1, "file": f"f{j}.c", "test": False}
+                   for j in range(40)}
+        n.edges = set(edges)
+        n.profile = {"edges": len(n.edges)}
+        nets.append(n)
+    before = len(edges)
+    out = RUN.thinned(nets, 0.57, seed=2982)
+    assert 0.50 * before < len(out[0].edges) < 0.64 * before      # ~57% survive
+    assert out[0].edges < nets[0].edges                            # a strict subset
+    assert len(nets[0].edges) == before                            # the originals are untouched
+    assert out[0].nodes is nets[0].nodes                           # coverage loses edges, not functions
+    # the decisive property: an edge present in every snapshot is kept in every snapshot or in none
+    assert out[0].edges == out[1].edges == out[2].edges
+    assert RUN.thinned(nets, 0.57, seed=2982)[0].edges == out[0].edges     # deterministic
+    assert RUN.thinned(nets, 0.57, seed=7)[0].edges != out[0].edges        # the seed still moves the mask
+    assert RUN.thinned(nets, 1.0, seed=2982)[0].edges == edges             # share 1.0 keeps everything
+    assert RUN.thinned(nets, 0.0, seed=2982)[0].edges == set()
