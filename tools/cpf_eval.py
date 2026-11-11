@@ -31,7 +31,6 @@ from scipy.stats import rankdata
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from _engine import DOCS_DIR, POOL_DIR  # noqa: E402
-from chg2_eval import select  # noqa: E402
 from chg_eval import fix_events  # noqa: E402
 from comment_profiles import EXCL  # noqa: E402
 
@@ -130,6 +129,15 @@ def fit_model(X, y, groups):
 
 def predict(m, X):
     return ((X - m["mu"]) / m["sd"]) @ m["w"][1:] + m["w"][0]
+
+
+def select(score, loc, frac):
+    """chg2_eval.select, copied (importing chg2_eval needs the structural-fingerprint package)."""
+    order = np.argsort(-score / loc, kind="stable")
+    cum = np.cumsum(loc[order])
+    sel = np.zeros(len(score), bool)
+    sel[order[cum <= frac * loc.sum()]] = True
+    return sel
 
 
 def file_groups(cl):
