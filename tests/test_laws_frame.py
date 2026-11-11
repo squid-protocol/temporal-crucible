@@ -4,6 +4,7 @@ import datetime as dt
 import hashlib
 import json
 import random
+import re
 import sys
 from pathlib import Path
 
@@ -110,3 +111,47 @@ def test_each_history_rule_rejects_for_its_own_reason(tmp_path: Path, monkeypatc
     ok = F.eligible_history(repo, "go", lambda r, l: (30, 40, 38))
     assert ok["eligible"] is True and ok["quarter_coverage"] == 0.95
     assert (F.MIN_COMMITS, F.MIN_SNAPSHOTS, F.MIN_FILES, F.QUARTER_COVERAGE) == (2000, 20, 50, 0.75)
+
+
+def test_the_search_runner_caches_a_query_and_pages_it(tmp_path: Path, monkeypatch):
+    """Every page of a window is fetched, because the frame needs names and not just a count. Each query is
+    cached so a run stopped on quota resumes without re-spending it."""
+    calls = []
+
+    def fake_gh(path):
+        calls.append(path)
+        if path == "rate_limit":
+            return {"resources": {"core": {"remaining": 5000, "reset": 0},
+                                  "search": {"remaining": 30, "reset": 0}}}
+        page = int(re.search(r"[?&]page=(\d+)", path).group(1))   # not `per_page=`
+        items = [{"full_name": f"org/r{page}_{i}"} for i in range(100 if page < 3 else 50)]
+        return {"total_count": 250, "items": items}
+
+    monkeypatch.setattr(F, "_gh", fake_gh)
+    run = F.search_runner(tmp_path / "c")
+    total, names = run("stars:>=500 language:go created:2015-01-01..2015-01-31")
+    assert total == 250 and len(names) == 250                 # all three pages
+    assert sum(1 for c in calls if c.startswith("search/")) == 3
+    before = len(calls)
+    total2, names2 = run("stars:>=500 language:go created:2015-01-01..2015-01-31")
+    assert (total2, names2) == (total, names) and len(calls) == before   # served from cache, no new call
+
+
+def test_the_languages_call_is_cached_and_respects_the_core_floor(tmp_path: Path, monkeypatch):
+    seen = []
+
+    def fake_gh(path):
+        seen.append(path)
+        if path == "rate_limit":
+            return {"resources": {"core": {"remaining": 5000, "reset": 0},
+                                  "search": {"remaining": 30, "reset": 0}}}
+        return {"Go": 900, "Shell": 100}
+
+    monkeypatch.setattr(F, "_gh", fake_gh)
+    b = F.language_bytes("prometheus/prometheus", tmp_path / "l")
+    assert b == {"Go": 900, "Shell": 100}
+    n = len([s for s in seen if s.startswith("repos/")])
+    F.language_bytes("prometheus/prometheus", tmp_path / "l")
+    assert len([s for s in seen if s.startswith("repos/")]) == n     # cached
+    assert F.language_share(b, "go") == pytest.approx(0.9)
+    assert F.CORE_FLOOR == 1500                                      # churn and the shepherd share the pool

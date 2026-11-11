@@ -45,6 +45,8 @@ import json
 import random
 import subprocess
 import sys
+import time
+import urllib.parse
 from pathlib import Path
 
 SEED = 2982
@@ -112,6 +114,79 @@ def frame(language: str, run_search, start: str = FRAME_START, end: str | None =
     return {"language": language, "candidates": sorted(names), "frame_size": len(names),
             "windows": len(windows), "search_calls": calls, "truncated_windows": truncated,
             "complete": not truncated}
+
+
+CORE_FLOOR = 1500  # leave this much core quota for churn and the shepherd, which share the same 5,000/hour
+SEARCH_PER_PAGE = 100
+
+
+def _gh(path: str) -> dict:
+    """One authenticated GitHub REST call through the gh CLI."""
+    p = subprocess.run(["gh", "api", "-H", "Accept: application/vnd.github+json", path],
+                       capture_output=True, text=True)
+    if p.returncode or not p.stdout.strip():
+        raise RuntimeError(f"gh api {path[:80]} failed: {p.stderr[:200]}")
+    return json.loads(p.stdout)
+
+
+def quota() -> dict:
+    r = _gh("rate_limit")["resources"]
+    return {"core": r["core"]["remaining"], "core_reset": r["core"]["reset"],
+            "search": r["search"]["remaining"], "search_reset": r["search"]["reset"]}
+
+
+def _wait_for(kind: str, need: int = 1) -> None:
+    """Block until `kind` quota allows `need` more calls. Search is 30/minute, so this is usually seconds."""
+    while True:
+        q = quota()
+        if q[kind] >= need:
+            return
+        sleep = max(2, q[f"{kind}_reset"] - int(time.time()) + 2)
+        print(f"  {kind} quota exhausted; sleeping {sleep}s", flush=True)
+        time.sleep(min(sleep, 120))
+
+
+def search_runner(cache: Path):
+    """A `run_search(q) -> (total_count, [full_name, ...])` for `frame()`, cached per query and paced.
+
+    Every page of a window is fetched, because the frame needs the NAMES, not just the count -- a window with
+    400 results costs four search calls. Each query's result is cached on disk, so a run that stops on quota (or
+    on `--max-minutes`) resumes without re-spending it."""
+    cache.mkdir(parents=True, exist_ok=True)
+
+    def run(q: str):
+        key = cache / (hashlib.sha256(q.encode()).hexdigest()[:24] + ".json")
+        if key.exists():
+            rec = json.loads(key.read_text())
+            return rec["total"], rec["names"]
+        names: list[str] = []
+        total = None
+        page = 1
+        while True:
+            _wait_for("search")
+            enc = urllib.parse.quote(q)
+            rec = _gh(f"search/repositories?q={enc}&per_page={SEARCH_PER_PAGE}&page={page}")
+            total = rec["total_count"] if total is None else total
+            names.extend(i["full_name"] for i in rec.get("items", ()))
+            if len(names) >= min(total, CAP) or not rec.get("items"):
+                break
+            page += 1
+        key.write_text(json.dumps({"query": q, "total": total, "names": names}) + "\n")
+        return total, names
+
+    return run
+
+
+def language_bytes(full_name: str, cache: Path) -> dict[str, int]:
+    """The languages API for one repo, cached. This is the step that spends core quota in bulk."""
+    cache.mkdir(parents=True, exist_ok=True)
+    key = cache / (full_name.replace("/", "__") + ".json")
+    if key.exists():
+        return json.loads(key.read_text())
+    _wait_for("core", CORE_FLOOR + 1)
+    rec = _gh(f"repos/{full_name}/languages")
+    key.write_text(json.dumps(rec) + "\n")
+    return rec
 
 
 def language_share(bytes_by_language: dict[str, int], language: str) -> float:
@@ -186,9 +261,33 @@ def main() -> int:
             print("refusing to search without --confirm: this fixes the sample of a pre-registered study,\n"
                   "spends search quota, and a mistake afterwards needs a dated amendment. Re-run with --confirm.")
             return 1
-        print("not implemented in this change: the search runner is wired in the step that builds the real "
-              "frame, under the owner's eye. `frame()` takes the runner as an argument and is tested.")
-        return 1
+        if not (a.language and a.out):
+            print("--language and --out are required")
+            return 1
+        d = a.out / "frame"
+        d.mkdir(parents=True, exist_ok=True)
+        print(f"quota before: {quota()}")
+        rec = frame(a.language, search_runner(d / "search_cache"))
+        checked, eligible = 0, []
+        for name in rec["candidates"]:
+            if quota()["core"] <= CORE_FLOOR:
+                rec["share_check_incomplete"] = f"stopped at the {CORE_FLOOR}-call core floor after {checked}"
+                break
+            share = language_share(language_bytes(name, d / "lang_cache"), a.language)
+            checked += 1
+            if share >= SHARE:
+                eligible.append(name)
+        rec.update(share_checked=checked, share_eligible=sorted(eligible),
+                   eligible_size=len(eligible), share=SHARE)
+        f = d / f"{a.language}.json"
+        f.write_text(json.dumps(rec, indent=2, sort_keys=True) + "\n")
+        print(f"{a.language}: frame {rec['frame_size']} candidates from {rec['windows']} windows "
+              f"({rec['search_calls']} search calls); complete={rec['complete']}; "
+              f"share-checked {checked}, eligible {len(eligible)} -> {f}")
+        print(f"quota after: {quota()}")
+        print("the candidate file's SHA-256 must be committed and pushed BEFORE any draw:")
+        print(f"  {fingerprint(f)}")
+        return 0
     f = (a.out / "frame" / f"{a.language}.json")
     if not f.exists():
         print(f"{f} does not exist: build the frame first")
