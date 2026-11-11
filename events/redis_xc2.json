@@ -24,6 +24,43 @@
    ]
   },
   {
+   "sha": "283a563f9f74df6f5b734a174d959c37fe2d535b",
+   "ct": 1793949601,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Avoid unnecessary reinsertion when updating packed hash field expiries (#15901)",
+   "c_files": [
+    "src/t_hash.c"
+   ]
+  },
+  {
+   "sha": "46cf4a8f5a768282db4cc2b1859a1f37d333f401",
+   "ct": 1793868987,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add per-command CPU time to SLOWLOG  (#15907)",
+   "c_files": [
+    "src/blocked.c",
+    "src/config.c",
+    "src/module.c",
+    "src/networking.c",
+    "src/server.c",
+    "src/server.h",
+    "src/slowlog.c",
+    "src/slowlog.h"
+   ]
+  },
+  {
+   "sha": "8e2ba8c4ef6ccf76d327c689cddd5fbe64daa5e5",
+   "ct": 1793707811,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Bound redis-cli legacy help arity expansion (#16117)",
+   "c_files": [
+    "src/redis-cli.c"
+   ]
+  },
+  {
    "sha": "dc1e7e2e6b6b6c2e1a5b29a14b58062495bbb254",
    "ct": 1793695935,
    "class": "other-fix",
@@ -92,6 +129,17 @@
    "subject": "Fix slot memory accounting after IDMP expiry (#15887)",
    "c_files": [
     "src/t_stream.c"
+   ]
+  },
+  {
+   "sha": "c01d00bed720caf6796a6d25ca9e2b4208295055",
+   "ct": 1793177605,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Log replication EOF as a closed connection (#16036)",
+   "c_files": [
+    "src/cluster_asm.c",
+    "src/replication.c"
    ]
   },
   {
@@ -197,6 +245,36 @@
    ]
   },
   {
+   "sha": "559d143b4e0409c452f7d229ba420954b6b647a2",
+   "ct": 1792476396,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "RED-220725: Preserve BLESS across module value replacement (#15995)",
+   "c_files": [
+    "src/module.c"
+   ]
+  },
+  {
+   "sha": "d1a17fad7825545ce898242937036e8d5cf08ee6",
+   "ct": 1792370543,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ZSCAN: format skiplist scores with d2string(), consistent with ZSCORE (#15821)",
+   "c_files": [
+    "src/db.c"
+   ]
+  },
+  {
+   "sha": "5e332cabd547d272783cf233a34c81dcb9ea44b3",
+   "ct": 1792218993,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "deps/fpconv: remove every integer division from Grisu digit generation (#15787)",
+   "c_files": [
+    "deps/fpconv/fpconv_dtoa.c"
+   ]
+  },
+  {
    "sha": "e0bb9316848db7950c2b18cdc59c2058f62b8a3d",
    "ct": 1792142180,
    "class": "regression",
@@ -238,6 +316,19 @@
    ]
   },
   {
+   "sha": "81ebeccccd84ada1ac439fd643c562dfca3cdc9f",
+   "ct": 1791979246,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix blocked module auth cleanup on disconnect (#15818)",
+   "c_files": [
+    "src/module.c",
+    "src/networking.c",
+    "src/server.h",
+    "tests/modules/auth.c"
+   ]
+  },
+  {
    "sha": "0b1a456dfab726d34c0364dab8b1fa4515eb8fca",
    "ct": 1791972752,
    "class": "other-fix",
@@ -259,6 +350,16 @@
    "subject": "Fix bracketed IPv6 cluster CLI address parsing (#15890)",
    "c_files": [
     "src/redis-cli.c"
+   ]
+  },
+  {
+   "sha": "fcc9b536dde7de4be01f6f4904eafa6c194c15ae",
+   "ct": 1791896984,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "MOD-18223: Reject DEBUG RELOAD from loading a stale background snapshot (#15949)",
+   "c_files": [
+    "src/debug.c"
    ]
   },
   {
@@ -307,6 +408,16 @@
    ]
   },
   {
+   "sha": "38efc6b3ed95ffc4bdfe3cc196ec5faf5b5f9d22",
+   "ct": 1791463405,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Reject register of functions with same names (modulo case) in lua scripts (#15884)",
+   "c_files": [
+    "src/functions.c"
+   ]
+  },
+  {
    "sha": "e1d873123a15a37c65c876cdf7cb6450a0b5a58b",
    "ct": 1791369749,
    "class": "regression",
@@ -314,6 +425,16 @@
    "subject": "Fix replica node using compression close because of full input buffer (#15912)",
    "c_files": [
     "src/client_comp.c"
+   ]
+  },
+  {
+   "sha": "8bc1c4e147761e7c9d6ff1bb92248b9d4dda43ab",
+   "ct": 1790769396,
+   "class": "regression",
+   "why": "references d22066d098 (43 d earlier)",
+   "subject": "tls: replace deprecated X509_NAME_get_text_by_NID API (#15227)",
+   "c_files": [
+    "src/tls.c"
    ]
   },
   {
@@ -327,6 +448,16 @@
    ]
   },
   {
+   "sha": "a19458ddecf559bdc205901aac4fc41a8143c7a6",
+   "ct": 1790573977,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Preserve RESP3 protocol across reconnects/redirection (#15806)",
+   "c_files": [
+    "src/redis-cli.c"
+   ]
+  },
+  {
    "sha": "8623fade2008754962316cecdba1f71ee103bdd8",
    "ct": 1790566897,
    "class": "other-fix",
@@ -334,6 +465,16 @@
    "subject": "Fix spurious error log on graceful TLS client shutdown (#15758)",
    "c_files": [
     "src/tls.c"
+   ]
+  },
+  {
+   "sha": "09577d6bd79b8276ed6db4817d7f7c425c0b10b5",
+   "ct": 1790221400,
+   "class": "regression",
+   "why": "references 557a7f3bd8 (56 d earlier)",
+   "subject": "Restore unstable version and release notes placeholder (#15833)",
+   "c_files": [
+    "src/version.h"
    ]
   },
   {
@@ -408,6 +549,16 @@
    ]
   },
   {
+   "sha": "3d15ede58ad862996f9b23d3500cad2a5c7fb0f4",
+   "ct": 1788817111,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Align lzf_compress to a cache line to stabilize BGSAVE performance on x86-64 (#15741)",
+   "c_files": [
+    "src/lzf_c.c"
+   ]
+  },
+  {
    "sha": "60b4364fef859de5c639546bcdd08091876f502c",
    "ct": 1788766265,
    "class": "other-fix",
@@ -415,6 +566,26 @@
    "subject": "Fix invalid slot range merging into a valid one (#15733)",
    "c_files": [
     "src/cluster.c"
+   ]
+  },
+  {
+   "sha": "de9f40ad48475bc754ea4af6c177286d0b4d1587",
+   "ct": 1788505370,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Make LMOVEM notifications consistent with LMOVE (#15587)",
+   "c_files": [
+    "src/t_list.c"
+   ]
+  },
+  {
+   "sha": "ef412c201b1b78a0d002324388bf44863aef6920",
+   "ct": 1787782607,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Enforce the ASM write-pause timeout before handing off slot ownership (#15629)",
+   "c_files": [
+    "src/cluster_asm.c"
    ]
   },
   {
@@ -702,6 +873,21 @@
    ]
   },
   {
+   "sha": "6bf6224c3dad518329ddc893ef9c5d58dcbabdeb",
+   "ct": 1783417111,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Add FORK_CHILD_PRE/CANCELLED subevents for pre-fork module coordination (#15327)\" (#15432)",
+   "c_files": [
+    "src/debug.c",
+    "src/module.c",
+    "src/redismodule.h",
+    "src/server.c",
+    "src/server.h",
+    "tests/modules/hooks.c"
+   ]
+  },
+  {
    "sha": "57a00274b3ef67aa40857b80060cf931c1af3425",
    "ct": 1783388928,
    "class": "other-fix",
@@ -850,6 +1036,19 @@
    "subject": "Fix CROSSSLOT error in rebalance when --user is used without -a (#15262)",
    "c_files": [
     "src/redis-cli.c"
+   ]
+  },
+  {
+   "sha": "894a225ffa1b2eec4e14a0a2ab0ff1c36a7ae566",
+   "ct": 1780645963,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "Fix GCC warnings by using const pointers for strchr/memchr results (#15108)",
+   "c_files": [
+    "src/keymeta.c",
+    "src/module.c",
+    "src/networking.c",
+    "src/resp_parser.c"
    ]
   },
   {
@@ -1003,6 +1202,16 @@
    ]
   },
   {
+   "sha": "a38493a70e63086fc148c91785c45e8480b52071",
+   "ct": 1778593261,
+   "class": "regression",
+   "why": "references 9c1ecd044e (1 d earlier)",
+   "subject": "hyperloglog: 4-way histogram accumulators for hllRawRegHisto (#15049)",
+   "c_files": [
+    "src/hyperloglog.c"
+   ]
+  },
+  {
    "sha": "cf27a1abe430386fa393d40cbb7c8c443fb4516a",
    "ct": 1778576836,
    "class": "other-fix",
@@ -1021,6 +1230,21 @@
    "subject": "Fix MULTI queue memory accounting in multiStateMemOverhead (#15163)",
    "c_files": [
     "src/multi.c"
+   ]
+  },
+  {
+   "sha": "62551a7b12c33560227b2e40ab774a99660ab611",
+   "ct": 1778466145,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Batched MGET/MSET dict prefetch with dictType-driven payload hints (#15133)",
+   "c_files": [
+    "src/dict.h",
+    "src/memory_prefetch.c",
+    "src/memory_prefetch.h",
+    "src/server.c",
+    "src/server.h",
+    "src/t_string.c"
    ]
   },
   {
@@ -1100,6 +1324,28 @@
    "subject": "tracking: fix self-overlap returning non-zero loop index (#15073)",
    "c_files": [
     "src/tracking.c"
+   ]
+  },
+  {
+   "sha": "7a80aade964ad6a6fc841ec1d95dc74bce30814d",
+   "ct": 1777288596,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "perf: replace list with vec in scanGenericCommand key collection (#15065)",
+   "c_files": [
+    "src/db.c",
+    "src/vector.c",
+    "src/vector.h"
+   ]
+  },
+  {
+   "sha": "47c51369eeffd55e1baf20df7955a3dfbe842fc4",
+   "ct": 1776948408,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Reject corrupt stream RDB with shared NACK across consumers (#15081)",
+   "c_files": [
+    "src/rdb.c"
    ]
   },
   {
@@ -2400,6 +2646,21 @@
    ]
   },
   {
+   "sha": "645858d518e427b507d8d859ae6d81f3fe993f90",
+   "ct": 1747966211,
+   "class": "regression",
+   "why": "references 9a9aa921bc (2 d earlier)",
+   "subject": "Add size_t cast for RM_call() in module tests (#14061)",
+   "c_files": [
+    "tests/modules/aclcheck.c",
+    "tests/modules/blockedclient.c",
+    "tests/modules/commandfilter.c",
+    "tests/modules/internalsecret.c",
+    "tests/modules/misc.c",
+    "tests/modules/usercall.c"
+   ]
+  },
+  {
    "sha": "ba88a7fbb6ec7cb7aeda61e1981146e1a21dee43",
    "ct": 1747793080,
    "class": "other-fix",
@@ -2941,6 +3202,26 @@
    ]
   },
   {
+   "sha": "0aeb86d78d79810764af255721600a5cf13799f9",
+   "ct": 1738781382,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Improve GETRANGE command behavior (#12272)\"",
+   "c_files": [
+    "src/t_string.c"
+   ]
+  },
+  {
+   "sha": "8afb72a3263fbea0e229377e5450403f144e4d71",
+   "ct": 1738781382,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"improve performance for scan command when matching data type (#12395)\"",
+   "c_files": [
+    "src/db.c"
+   ]
+  },
+  {
    "sha": "31f2b27a05e6d283ada975ad212a3b2f4cf5989e",
    "ct": 1738351058,
    "class": "other-fix",
@@ -3226,6 +3507,18 @@
    ]
   },
   {
+   "sha": "3264deb24e3b01ad7b2777bc68b9d91f0f41aa3b",
+   "ct": 1724062936,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Avoid used_memory contention when update from multiple threads. (#13431)",
+   "c_files": [
+    "src/config.h",
+    "src/networking.c",
+    "src/zmalloc.c"
+   ]
+  },
+  {
    "sha": "6c6489280c0afd0d45dc01855e5f68052fb4cbd7",
    "ct": 1724033505,
    "class": "other-fix",
@@ -3263,6 +3556,16 @@
    "subject": "Fix some memory leaks in redis-cli (#13258)",
    "c_files": [
     "src/redis-cli.c"
+   ]
+  },
+  {
+   "sha": "bf643a63c8482aa00aa6792c2383f7a0499edc1f",
+   "ct": 1722948046,
+   "class": "regression",
+   "why": "references 82f00f5179 (13 d earlier)",
+   "subject": "Ensure validity of myself as master or replica when loading cluster config (#13443)",
+   "c_files": [
+    "src/cluster_legacy.c"
    ]
   },
   {
@@ -4399,6 +4702,43 @@
    ]
   },
   {
+   "sha": "fad6c713c26d6e4f2dd867db4d341c7abe0fcbda",
+   "ct": 1685474625,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Squashed 'deps/hiredis/' changes from f8de9a4bd..b6a052fe0",
+   "c_files": [
+    "adapters/libhv.h",
+    "adapters/libsdevent.h",
+    "adapters/libuv.h",
+    "adapters/poll.h",
+    "adapters/redismoduleapi.h",
+    "async.c",
+    "async.h",
+    "async_private.h",
+    "examples/example-libevent-ssl.c",
+    "examples/example-libhv.c",
+    "examples/example-libsdevent.c",
+    "examples/example-poll.c",
+    "examples/example-redismoduleapi.c",
+    "examples/example-ssl.c",
+    "examples/example.c",
+    "fuzzing/format_command_fuzzer.c",
+    "hiredis.c",
+    "hiredis.h",
+    "hiredis_ssl.h",
+    "net.c",
+    "net.h",
+    "read.c",
+    "sds.c",
+    "sds.h",
+    "sockcompat.c",
+    "sockcompat.h",
+    "ssl.c",
+    "test.c"
+   ]
+  },
+  {
    "sha": "0dfb0250e66e73e4988370e05dba66a801066f10",
    "ct": 1685363972,
    "class": "other-fix",
@@ -4499,6 +4839,24 @@
    "subject": "Fix defrag CI for 32bit after merge of jemalloc 5.3",
    "c_files": [
     "src/debug.c"
+   ]
+  },
+  {
+   "sha": "42c8c61813a8c3287b8acb3155473551a491aa2b",
+   "ct": 1681800831,
+   "class": "extrinsic",
+   "why": "env 'gcc-12'",
+   "subject": "Fix some compile warnings and errors when building with gcc-12 or clang (#12035)",
+   "c_files": [
+    "deps/jemalloc/src/jemalloc.c",
+    "src/config.h",
+    "src/fmacros.h",
+    "src/networking.c",
+    "src/redis-benchmark.c",
+    "src/redis-cli.c",
+    "src/server.c",
+    "src/sha1.h",
+    "src/zmalloc.h"
    ]
   },
   {
@@ -4722,6 +5080,19 @@
    ]
   },
   {
+   "sha": "fd82bccd0ee915909494c6b552dbcc02b9427993",
+   "ct": 1676360001,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "SCAN/RANDOMKEY and lazy-expire (#11788)",
+   "c_files": [
+    "src/commands.c",
+    "src/db.c",
+    "src/server.c",
+    "src/server.h"
+   ]
+  },
+  {
    "sha": "6444214ce4d032b75b0dac7d579f385ead58850c",
    "ct": 1675044024,
    "class": "other-fix",
@@ -4821,6 +5192,17 @@
    "subject": "Fix command line startup --sentinel problem (#11591)",
    "c_files": [
     "src/server.c"
+   ]
+  },
+  {
+   "sha": "a7cecf37133869d8de3bdcc54626e101989d1140",
+   "ct": 1669537128,
+   "class": "extrinsic",
+   "why": "env 'FreeBSD'",
+   "subject": "Add redis_ prefix for member2struct, avoid redefined warning in FreeBSD (#11549)",
+   "c_files": [
+    "src/multi.c",
+    "src/server.h"
    ]
   },
   {
@@ -5064,6 +5446,17 @@
    ]
   },
   {
+   "sha": "ff808090535a665ce3e376b88ff7e07818a2916b",
+   "ct": 1664717791,
+   "class": "extrinsic",
+   "why": "env 'illumos'",
+   "subject": "register debug support on illumos/solaris. (#11335)",
+   "c_files": [
+    "src/config.h",
+    "src/debug.c"
+   ]
+  },
+  {
    "sha": "2804eefc58be6bfe3657e64cf3bdadd59549464a",
    "ct": 1664697133,
    "class": "regression",
@@ -5102,6 +5495,16 @@
    "subject": "fix: redis-cli --memkeys-samples add check lastarg (#11269)",
    "c_files": [
     "src/redis-cli.c"
+   ]
+  },
+  {
+   "sha": "6aab4cb73662578174a14dc846fdc64e1dd71eb2",
+   "ct": 1664284813,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fixing compilation by removing flock() when compiling on Solaris (#11327)",
+   "c_files": [
+    "src/server.c"
    ]
   },
   {
@@ -5239,6 +5642,16 @@
    ]
   },
   {
+   "sha": "c5ff163d53f1e9c1b647c4bf413386015ac4be71",
+   "ct": 1660476545,
+   "class": "extrinsic",
+   "why": "env 'GCC 12'",
+   "subject": "Fix Lua compile warning on GCC 12.1 (#11115)",
+   "c_files": [
+    "deps/lua/src/ldump.c"
+   ]
+  },
+  {
    "sha": "44859a41ee63b52632f0726d7bf1e6ca1ce47f83",
    "ct": 1660121934,
    "class": "other-fix",
@@ -5370,6 +5783,16 @@
    ]
   },
   {
+   "sha": "9f3b410050d998110ae91c2ac49f832ce0ba2629",
+   "ct": 1655056391,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Correctly check for vm.overcommit_memory == 0 (#10841)",
+   "c_files": [
+    "src/syscheck.c"
+   ]
+  },
+  {
    "sha": "92fb4f4f61bc430aec30105e24d1dc148a4d6466",
    "ct": 1655011338,
    "class": "other-fix",
@@ -5411,6 +5834,16 @@
    "subject": "crash report instructions (#10816)",
    "c_files": [
     "src/debug.c"
+   ]
+  },
+  {
+   "sha": "cf3323dba473f3849200d294bb0349cd442f2006",
+   "ct": 1654148215,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix bugs in CONFIG REWRITE, omitting rename-command and include lines, and inserting comments around module and acl configs (#10761)",
+   "c_files": [
+    "src/config.c"
    ]
   },
   {
@@ -5543,6 +5976,16 @@
     "src/config.c",
     "src/module.c",
     "tests/modules/moduleconfigs.c"
+   ]
+  },
+  {
+   "sha": "ef68deb3c2a4d6205ddc84141d4d84b6e53cbc1b",
+   "ct": 1651473434,
+   "class": "extrinsic",
+   "why": "env 'macOs'",
+   "subject": "support tcp-keepalive config interval on macOs (#10667)",
+   "c_files": [
+    "src/anet.c"
    ]
   },
   {
@@ -5721,6 +6164,16 @@
    ]
   },
   {
+   "sha": "b53c7f2c0bb8692fd30c59348190c2bd897958a0",
+   "ct": 1648936687,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Turn into replica on SETSLOT (#10489)",
+   "c_files": [
+    "src/cluster.c"
+   ]
+  },
+  {
    "sha": "ae771ea77b1eb7b55444fd6189d9db77cb724990",
    "ct": 1648457674,
    "class": "other-fix",
@@ -5792,6 +6245,16 @@
    ]
   },
   {
+   "sha": "adc5a3217c48dbe882b19d619eabd9b34f58496d",
+   "ct": 1646825523,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Use dismissMemory to dismiss COW of client output buffer (#10403)",
+   "c_files": [
+    "src/server.c"
+   ]
+  },
+  {
    "sha": "21aabab4013a651420e954fe1ae6ad06cc6e5a15",
    "ct": 1646108818,
    "class": "other-fix",
@@ -5820,6 +6283,17 @@
    "c_files": [
     "src/cluster.c",
     "src/commands.c"
+   ]
+  },
+  {
+   "sha": "1dc89e2d0230f4bcadf21ee8185b79a12b001cf0",
+   "ct": 1645705200,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Optimization: Avoid deferred array reply on ZRANGE commands BYRANK (#10337)",
+   "c_files": [
+    "src/networking.c",
+    "src/t_zset.c"
    ]
   },
   {
@@ -6875,6 +7349,16 @@
    ]
   },
   {
+   "sha": "05e6b97bed17a5e5ba9864d4a08ef6bfa45ce222",
+   "ct": 1631217782,
+   "class": "extrinsic",
+   "why": "env '32bit'",
+   "subject": "Fix RedisModule_Call tests on 32bit (#9481)",
+   "c_files": [
+    "tests/modules/basics.c"
+   ]
+  },
+  {
    "sha": "f560531d5b8a6e6d810b62114e69a5ffda7730f7",
    "ct": 1631184288,
    "class": "other-fix",
@@ -7083,6 +7567,16 @@
    ]
   },
   {
+   "sha": "56eb7f7de407c66b479005d3179fb36002099f4d",
+   "ct": 1628102018,
+   "class": "extrinsic",
+   "why": "env '32bit'",
+   "subject": "Fix tests failure on 32bit build (#9318)",
+   "c_files": [
+    "tests/modules/basics.c"
+   ]
+  },
+  {
    "sha": "b4eda14257841f7fdda3b70a8d352c0100a988b7",
    "ct": 1628065188,
    "class": "other-fix",
@@ -7258,6 +7752,16 @@
    "subject": "fix ZRANGESTORE - should return 0 when src points to an empty key (#9089)",
    "c_files": [
     "src/t_zset.c"
+   ]
+  },
+  {
+   "sha": "5ffdbae1f64bb66b6e2470779540fb1051dcbff1",
+   "ct": 1624527853,
+   "class": "extrinsic",
+   "why": "env '32bit'",
+   "subject": "Fix failing basics moduleapi test on 32bit CI (#9140)",
+   "c_files": [
+    "tests/modules/basics.c"
    ]
   },
   {
@@ -7800,6 +8304,16 @@
    ]
   },
   {
+   "sha": "a4f03bd7eb44580b44f9499c53417df45e1edfb0",
+   "ct": 1615463413,
+   "class": "regression",
+   "why": "references 3d0b427c30 (0 d earlier)",
+   "subject": "Fix some memory leaks in propagagte.c (#8636)",
+   "c_files": [
+    "tests/modules/propagate.c"
+   ]
+  },
+  {
    "sha": "3d0b427c30610b45c00b2377ee28bb69974ccea2",
    "ct": 1615392137,
    "class": "other-fix",
@@ -8043,6 +8557,16 @@
    ]
   },
   {
+   "sha": "29ac9aea5de2f395960834b262b3d94f9efedbd8",
+   "ct": 1612975090,
+   "class": "regression",
+   "why": "references 1aad55b66f (15 d earlier)",
+   "subject": "Fix Sentinel configuration rewrite. (#8480)",
+   "c_files": [
+    "src/sentinel.c"
+   ]
+  },
+  {
    "sha": "b5ca1e9e53de93bb84e5b03de39cbaf8093fcd41",
    "ct": 1612940347,
    "class": "other-fix",
@@ -8106,6 +8630,18 @@
    ]
   },
   {
+   "sha": "b548ffabbecca073e241882c22192f682a086242",
+   "ct": 1611172644,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "CONFIG REWRITE should honor umask settings. (#8371)",
+   "c_files": [
+    "src/config.c",
+    "src/server.c",
+    "src/server.h"
+   ]
+  },
+  {
    "sha": "baf92f3f1c15cf188fafaf802202da1c54caa709",
    "ct": 1611143805,
    "class": "other-fix",
@@ -8143,6 +8679,17 @@
     "src/networking.c",
     "src/sentinel.c",
     "src/server.c"
+   ]
+  },
+  {
+   "sha": "4985c11bd6ef67a8eb58716f6c2b6b3d96e8538e",
+   "ct": 1611054933,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Bugfix: Make modules blocked on keys unblock on commands like LPUSH (#8356)",
+   "c_files": [
+    "src/blocked.c",
+    "tests/modules/blockonkeys.c"
    ]
   },
   {
@@ -8579,6 +9126,16 @@
    ]
   },
   {
+   "sha": "f16b52cb7deb1c5793243c11498623df75986e73",
+   "ct": 1606140873,
+   "class": "extrinsic",
+   "why": "env 'Haiku'",
+   "subject": "redis_set_thread_title support for Haiku. (#8060)",
+   "c_files": [
+    "src/config.h"
+   ]
+  },
+  {
    "sha": "f207e1682fadfe343c55102a1324b9b5c830e074",
    "ct": 1606047165,
    "class": "other-fix",
@@ -8717,6 +9274,28 @@
    ]
   },
   {
+   "sha": "27f4c212f377dfbe1a60fb96635ae16bc405b959",
+   "ct": 1603628045,
+   "class": "extrinsic",
+   "why": "env 'DragonFlyBSD'",
+   "subject": "cpu affinity: DragonFlyBSD support (#7956)",
+   "c_files": [
+    "src/config.h",
+    "src/setcpuaffinity.c"
+   ]
+  },
+  {
+   "sha": "a425e1d26df02ac5ce0fc9a0c679b99d72550009",
+   "ct": 1603174344,
+   "class": "extrinsic",
+   "why": "env '32bit'",
+   "subject": "fix 32bit build warnings (#7926)",
+   "c_files": [
+    "src/config.c",
+    "src/listpack.c"
+   ]
+  },
+  {
    "sha": "04a0af9085ed91eace8af94f71a07b651a1af454",
    "ct": 1603110738,
    "class": "other-fix",
@@ -8788,6 +9367,17 @@
     "deps/lua/src/lauxlib.c",
     "deps/lua/src/ldo.c",
     "deps/lua/src/ltablib.c"
+   ]
+  },
+  {
+   "sha": "f971a5d8ed58547f01325611c0189745a904c9cc",
+   "ct": 1601383933,
+   "class": "extrinsic",
+   "why": "env 'Haiku'",
+   "subject": "Add support for Haiku OS (#7435)",
+   "c_files": [
+    "src/config.h",
+    "src/memtest.c"
    ]
   },
   {
@@ -8874,6 +9464,16 @@
    "c_files": [
     "src/debug.c",
     "src/server.h"
+   ]
+  },
+  {
+   "sha": "eabe3eaec02e293d479c695bc973b8780c989da9",
+   "ct": 1600507480,
+   "class": "extrinsic",
+   "why": "env 'NetBSD'",
+   "subject": "debug.c: NetBSD build warning fix. (#7810)",
+   "c_files": [
+    "src/debug.c"
    ]
   },
   {
@@ -9350,6 +9950,27 @@
    ]
   },
   {
+   "sha": "61074b43a63feaa1655ef4e7d13808d315294443",
+   "ct": 1591436565,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Implements sendfile for redis.\"",
+   "c_files": [
+    "src/config.h",
+    "src/replication.c"
+   ]
+  },
+  {
+   "sha": "d1e23e04aadcb0053b280905862f43dd794ba29b",
+   "ct": 1591436561,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"avoid using sendfile if tls-replication is enabled\"",
+   "c_files": [
+    "src/replication.c"
+   ]
+  },
+  {
    "sha": "1f8ea99b4bc25083d909b3228601fb82efe1e67f",
    "ct": 1590743233,
    "class": "other-fix",
@@ -9443,6 +10064,17 @@
    ]
   },
   {
+   "sha": "624742d9b40d20afe8b694c2dc0b0349f8b7aaad",
+   "ct": 1589642135,
+   "class": "regression",
+   "why": "references 1a7cd2c0e2 (1 d earlier)",
+   "subject": "Remove the client from CLOSE_ASAP list before caching the master.",
+   "c_files": [
+    "src/networking.c",
+    "src/replication.c"
+   ]
+  },
+  {
    "sha": "f4d2abd3df760e370510c79d2d5e27c22aa1d1ce",
    "ct": 1589495346,
    "class": "other-fix",
@@ -9474,6 +10106,16 @@
    ]
   },
   {
+   "sha": "450f0d724834cf5d4d32d6d8caae7e4167c184b8",
+   "ct": 1589121631,
+   "class": "extrinsic",
+   "why": "env 'older OpenSSL'",
+   "subject": "TLS: Add crypto locks for older OpenSSL support.",
+   "c_files": [
+    "src/tls.c"
+   ]
+  },
+  {
    "sha": "1063f1d833754cd35e0180e129a0ae61028677d8",
    "ct": 1588666168,
    "class": "other-fix",
@@ -9491,6 +10133,26 @@
    "subject": "Fix NetBSD build by fixing redis_set_thread_title() support.",
    "c_files": [
     "src/config.h"
+   ]
+  },
+  {
+   "sha": "6726b3c2cb41e700c8cfd2f821df6c8c847a5ddc",
+   "ct": 1588395123,
+   "class": "regression",
+   "why": "references fb732f7a94 (7 d earlier)",
+   "subject": "optimize memory usage of deferred replies - fixed",
+   "c_files": [
+    "src/networking.c"
+   ]
+  },
+  {
+   "sha": "365316aa59545d90de4e105cec57f22aa5b52ff9",
+   "ct": 1588370231,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"optimize memory usage of deferred replies\"",
+   "c_files": [
+    "src/networking.c"
    ]
   },
   {
@@ -10203,6 +10865,16 @@
    ]
   },
   {
+   "sha": "e6e58e455c1adce82592a5dcf276dd8083088e2b",
+   "ct": 1576670086,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Geo: output 10 chars of geohash, not 11.\"",
+   "c_files": [
+    "src/geo.c"
+   ]
+  },
+  {
    "sha": "5b9d3ac6c6932b292c8895af8562c4df3c00464b",
    "ct": 1576666682,
    "class": "other-fix",
@@ -10246,6 +10918,17 @@
    "subject": "fix possible warning on incomplete struct init",
    "c_files": [
     "src/module.c"
+   ]
+  },
+  {
+   "sha": "4092a75d850ab5f9ec4bc8941f6d5c28f44422e7",
+   "ct": 1575274409,
+   "class": "extrinsic",
+   "why": "env 'MacOS'",
+   "subject": "Avoid collision with MacOS LIST_HEAD macro after #6384.",
+   "c_files": [
+    "src/zmalloc.c",
+    "src/zmalloc.h"
    ]
   },
   {
@@ -10646,6 +11329,16 @@
    ]
   },
   {
+   "sha": "66a5c1cd7e557187bf3a1913e836d0c9be8adbb7",
+   "ct": 1567599265,
+   "class": "extrinsic",
+   "why": "env 'aarch64'",
+   "subject": "The aarch64 architecture is support normal memory unaligned accesses,",
+   "c_files": [
+    "src/siphash.c"
+   ]
+  },
+  {
    "sha": "b2e10131c09bdb166fc5c1dd6f510042644a6adc",
    "ct": 1567594867,
    "class": "other-fix",
@@ -10668,6 +11361,16 @@
     "src/t_list.c",
     "src/t_set.c",
     "src/t_zset.c"
+   ]
+  },
+  {
+   "sha": "d7c25806c0b40c096bbb2ea3cc36d2e0491ec7a5",
+   "ct": 1567237631,
+   "class": "extrinsic",
+   "why": "env 'aarch64'",
+   "subject": "src/debug.c do not support aarch64 dump utcontext, so add the context of aarch64. The content comes from the definition of the sigcontext and tested on my aarch64 server.",
+   "c_files": [
+    "src/debug.c"
    ]
   },
   {
@@ -11634,6 +12337,17 @@
    ]
   },
   {
+   "sha": "ac086b1932eae5bc47c30c502c56e87b60525e10",
+   "ct": 1543133426,
+   "class": "extrinsic",
+   "why": "env 'OpenBSD'",
+   "subject": "OpenBSD support.",
+   "c_files": [
+    "src/config.h",
+    "src/debug.c"
+   ]
+  },
+  {
    "sha": "2961c891616a6d60e28aea748c3c2422cb4f90b6",
    "ct": 1542963535,
    "class": "other-fix",
@@ -11751,6 +12465,16 @@
    "subject": "fix short period of server.hz being uninitialized",
    "c_files": [
     "src/server.c"
+   ]
+  },
+  {
+   "sha": "0c875c7751e3672f20225ab3b20fdb0322a8e4ad",
+   "ct": 1540903121,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "asyncCloseClientOnOutputBufferLimitReached(): don't free fake clients.",
+   "c_files": [
+    "src/networking.c"
    ]
   },
   {
@@ -11877,6 +12601,16 @@
    "subject": "Fix invalid use of sdsZmallocSize on an embedded string",
    "c_files": [
     "src/scripting.c"
+   ]
+  },
+  {
+   "sha": "08c26591e38c8797e554ee209f7c2a718df302ab",
+   "ct": 1538132444,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "Try to avoid issues with GCC pragmas and older compilers.",
+   "c_files": [
+    "src/lzf_d.c"
    ]
   },
   {
@@ -15010,6 +15744,17 @@
    ]
   },
   {
+   "sha": "971e3c51b63e7a5ced6a953bdfd2d9bd53b25e52",
+   "ct": 1462440823,
+   "class": "regression",
+   "why": "references d827dbfda7 (0 d earlier)",
+   "subject": "Cluster: make getNodeByQuery() responsible of -CLUSTERDOWN errors.",
+   "c_files": [
+    "src/cluster.c",
+    "src/server.c"
+   ]
+  },
+  {
    "sha": "7ba90225a07192219d526b2a347735ccb7c7a3e1",
    "ct": 1461583168,
    "class": "other-fix",
@@ -15501,11 +16246,31 @@
    ]
   },
   {
+   "sha": "3c23b5ffd0d7dd01df79154c1701d4d3ded7bf66",
+   "ct": 1442265050,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "GEORADIUS: Don't report duplicates when radius is huge.",
+   "c_files": [
+    "src/geo.c"
+   ]
+  },
+  {
    "sha": "4fec5ee1650131eed40044a1614bd3d70ba1696c",
    "ct": 1442226857,
    "class": "other-fix",
    "why": "",
    "subject": "MOVE re-add TTL check fixed.",
+   "c_files": [
+    "src/db.c"
+   ]
+  },
+  {
+   "sha": "f529a01c1b52367b4337119ae8f86fd1d790a5ea",
+   "ct": 1442226600,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "MOVE now can move TTL metadata as well.",
    "c_files": [
     "src/db.c"
    ]
@@ -15843,6 +16608,26 @@
    ]
   },
   {
+   "sha": "92cfab44b240750d957ae226efac7235c7ef655b",
+   "ct": 1421848302,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "Fix gcc warning for lack of casting to char pointer.",
+   "c_files": [
+    "src/rdb.c"
+   ]
+  },
+  {
+   "sha": "f08586347d506dfec4ea74719d6bf637e88a3b1c",
+   "ct": 1421074703,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Use REDIS_SUPERVISED_NONE instead of 0.\"",
+   "c_files": [
+    "src/debug.c"
+   ]
+  },
+  {
    "sha": "d956d809acb848aec0f6524e1337d274a635980d",
    "ct": 1419345064,
    "class": "extrinsic",
@@ -15918,6 +16703,16 @@
    ]
   },
   {
+   "sha": "af453642e18cd158d3c057b9713fd4cf7968cc98",
+   "ct": 1417743719,
+   "class": "extrinsic",
+   "why": "env 'glibc'",
+   "subject": "Silence _BSD_SOURCE warnings in glibc 2.20 and forward",
+   "c_files": [
+    "src/fmacros.h"
+   ]
+  },
+  {
    "sha": "f3c1aac7e60f6b2978436fa75bcacd6c2e32cbb7",
    "ct": 1417472523,
    "class": "extrinsic",
@@ -15977,6 +16772,16 @@
    "c_files": [
     "src/latency.c",
     "src/zmalloc.c"
+   ]
+  },
+  {
+   "sha": "a9900ad38edbae0d26d51068888017e556cdc5b2",
+   "ct": 1415981319,
+   "class": "extrinsic",
+   "why": "env 'solaris'",
+   "subject": "Lua: Use Redis solaris compatability for cjson too",
+   "c_files": [
+    "deps/lua/src/lua_cjson.c"
    ]
   },
   {
@@ -16254,6 +17059,20 @@
    ]
   },
   {
+   "sha": "009cabf1031db42271a1e05980965a129cbbfe1d",
+   "ct": 1407406374,
+   "class": "extrinsic",
+   "why": "env 'AIX'",
+   "subject": "Add support for compiling on AIX",
+   "c_files": [
+    "deps/hiredis/fmacros.h",
+    "deps/hiredis/net.h",
+    "src/anet.h",
+    "src/fmacros.h",
+    "src/redis.h"
+   ]
+  },
+  {
    "sha": "7eb47ae290a05403972ebacffb173a67a6bafabe",
    "ct": 1406131322,
    "class": "other-fix",
@@ -16380,6 +17199,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix semantics of Lua calls to SELECT.",
+   "c_files": [
+    "src/scripting.c"
+   ]
+  },
+  {
+   "sha": "73fefd0bc05b7711d3710761b49197596ba39aa4",
+   "ct": 1402474258,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Scripting: Fix for a #1118 regression simplified.",
    "c_files": [
     "src/scripting.c"
    ]
@@ -16664,6 +17493,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "HLLMERGE fixed by adding a... missing loop!",
+   "c_files": [
+    "src/hyperloglog.c"
+   ]
+  },
+  {
+   "sha": "ec1ee66256a7fa05d6cd4ea0002c309b4fe238a9",
+   "ct": 1396273298,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "HyperLogLog apply bias correction using a polynomial.",
    "c_files": [
     "src/hyperloglog.c"
    ]
@@ -17083,6 +17922,18 @@
    ]
   },
   {
+   "sha": "11120689c4c59b0fdde5446ea40f6abdc215d7c9",
+   "ct": 1386697651,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Slaves heartbeats during sync improved.",
+   "c_files": [
+    "src/rdb.c",
+    "src/redis.h",
+    "src/replication.c"
+   ]
+  },
+  {
    "sha": "c590549e40e9a38bc052d68073d6ba9a995599b0",
    "ct": 1386330416,
    "class": "other-fix",
@@ -17244,6 +18095,16 @@
    ]
   },
   {
+   "sha": "df13adb037cfdd590ec5a833c1b22b043fe6affb",
+   "ct": 1382695213,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Fixed typo in SCAN comment. iff -> if.\"",
+   "c_files": [
+    "src/db.c"
+   ]
+  },
+  {
    "sha": "64722b0946716a524528462379416ed212c971f2",
    "ct": 1382694498,
    "class": "other-fix",
@@ -17384,6 +18245,16 @@
    ]
   },
   {
+   "sha": "00ddc3500c2679e473c3a7769470887a38489fb0",
+   "ct": 1376925948,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Fixed type in dict.c comment: 265 -> 256.\"",
+   "c_files": [
+    "src/dict.c"
+   ]
+  },
+  {
    "sha": "610224d0d0409b337ee3435ac77720dc59f5fd80",
    "ct": 1376300301,
    "class": "other-fix",
@@ -17392,6 +18263,16 @@
    "c_files": [
     "deps/hiredis/sds.h",
     "src/sds.h"
+   ]
+  },
+  {
+   "sha": "36a0947185973f7c90fa4c54d2747d220981d222",
+   "ct": 1375884018,
+   "class": "regression",
+   "why": "references 346256f933 (0 d earlier)",
+   "subject": "redis-benchmark: fix memory leak introduced by 346256f",
+   "c_files": [
+    "src/redis-benchmark.c"
    ]
   },
   {
@@ -17517,6 +18398,27 @@
    ]
   },
   {
+   "sha": "2160effc78463d6602082302486beb51eb6a999d",
+   "ct": 1373015324,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Cluster: use new anet.c listening socket creation API.\"",
+   "c_files": [
+    "src/cluster.c"
+   ]
+  },
+  {
+   "sha": "c978b864f74a86dcffc54d66873f7eae6c2c7121",
+   "ct": 1373015275,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"anet.c: Allow creation of TCP listening sockets bound to N addresses.\"",
+   "c_files": [
+    "src/anet.c",
+    "src/anet.h"
+   ]
+  },
+  {
    "sha": "338cd4835dd163c5f54f63db59e41ea1ebbc900f",
    "ct": 1371645880,
    "class": "other-fix",
@@ -17534,6 +18436,28 @@
    "subject": "Fixed a bug in no queueing replies to master.",
    "c_files": [
     "src/networking.c"
+   ]
+  },
+  {
+   "sha": "b2dd0849ce7f229ea5eb9fb88a112b7ad2c31642",
+   "ct": 1368778888,
+   "class": "extrinsic",
+   "why": "env 'NetBSD'",
+   "subject": "rename popcount to popcount_binary to avoid a conflict with NetBSD libc",
+   "c_files": [
+    "src/bitops.c",
+    "src/redis.h"
+   ]
+  },
+  {
+   "sha": "0ae1b5b0a197154167a895f1188f1822a78732e4",
+   "ct": 1368000087,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"use long long instead of size_t make it more safe\"",
+   "c_files": [
+    "src/bitops.c",
+    "src/redis.h"
    ]
   },
   {
@@ -17909,6 +18833,27 @@
    ]
   },
   {
+   "sha": "da920e75d4836897b9a7109b6d4743e201cd8a4f",
+   "ct": 1349428813,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Hash function switched to murmurhash2.",
+   "c_files": [
+    "src/dict.c",
+    "src/dict.h"
+   ]
+  },
+  {
+   "sha": "ece77037e9601f9f5d2321cc5a779aef10a4c563",
+   "ct": 1349079031,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Scripting: redis.NIL to return nil bulk replies.\"",
+   "c_files": [
+    "src/scripting.c"
+   ]
+  },
+  {
    "sha": "578c94597fda163eb6050ce5e0f832a6587a14b9",
    "ct": 1348221332,
    "class": "other-fix",
@@ -18032,6 +18977,16 @@
    ]
   },
   {
+   "sha": "fa4a5d59220b1c9e7833b563cb7e9e314747bdf7",
+   "ct": 1337865616,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "BITOP: handle integer encoded objects correctly.",
+   "c_files": [
+    "src/bitops.c"
+   ]
+  },
+  {
    "sha": "348ee1a40a4d8105dfaf6fa2ab2dffc15a47d86d",
    "ct": 1337764363,
    "class": "regression",
@@ -18059,6 +19014,16 @@
    "subject": "Set LUA_MASKCOUNT hook more selectively. Fixes issue #480.",
    "c_files": [
     "src/scripting.c"
+   ]
+  },
+  {
+   "sha": "3ada43e732678e1f1ed0830c7407eef99ad63c46",
+   "ct": 1335450079,
+   "class": "regression",
+   "why": "references c575766202 (22 d earlier)",
+   "subject": "Don't use an alternative stack for SIGSEGV & co.",
+   "c_files": [
+    "src/redis.c"
    ]
   },
   {
@@ -18270,6 +19235,16 @@
    ]
   },
   {
+   "sha": "bd376d13f820b168954ac6683b5197a4ed72f03b",
+   "ct": 1332502940,
+   "class": "extrinsic",
+   "why": "env 'Big endian'",
+   "subject": "Big endian fix. The bug was introduced because of a typo.",
+   "c_files": [
+    "src/ziplist.c"
+   ]
+  },
+  {
    "sha": "f3fd419fc95e78818f9eeef15eb2d2e5a60bfbbb",
    "ct": 1332261168,
    "class": "other-fix",
@@ -18281,6 +19256,16 @@
     "src/redis.c",
     "src/redis.h",
     "src/scripting.c"
+   ]
+  },
+  {
+   "sha": "0d44d507925a97e55ca2352544b1bf6a1b78fa81",
+   "ct": 1332181729,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "Suppress warnings compiling redis-cli with certain gcc versions.",
+   "c_files": [
+    "src/redis-cli.c"
    ]
   },
   {
@@ -19906,6 +20891,18 @@
    ]
   },
   {
+   "sha": "8ce39260a4acfedea5ee8f9143d2d2a9ce82b498",
+   "ct": 1293103571,
+   "class": "extrinsic",
+   "why": "env 'Solaris'",
+   "subject": "Fix compiler warnings on Solaris",
+   "c_files": [
+    "src/redis-cli.c",
+    "src/redis.c",
+    "src/ziplist.c"
+   ]
+  },
+  {
    "sha": "9d7165e885b3de44577dea2917bb4f3afa2ed335",
    "ct": 1292757732,
    "class": "other-fix",
@@ -19985,6 +20982,29 @@
    "why": "",
    "subject": "volatile-lru maxmemory policy segfault fixed, thanks to Anthony Lauzon for reporting the problem with the patch. Original patch modified a bit in order to avoid the double lookup if the policy is allkeys-lru",
    "c_files": [
+    "src/redis.c"
+   ]
+  },
+  {
+   "sha": "b5b22da8e68fef52cd9b535871584dd7afe95aef",
+   "ct": 1288696241,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Function to compute RSS memory usage in a fast way, suitable to be called inside keys eviction loops\"",
+   "c_files": [
+    "src/redis.c",
+    "src/redis.h"
+   ]
+  },
+  {
+   "sha": "ca734d17ad9b7ea97a87bd048ad1c1e253ef67a6",
+   "ct": 1288696199,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Now maxmemory, VM, and everything else uses the fast RSS memory used estimation instead of raw memory reported by zmalloc(). This means that setting maxmemory to 2GB will really have the effect of using up to 2GB of memory.\"",
+   "c_files": [
+    "src/aof.c",
+    "src/rdb.c",
     "src/redis.c"
    ]
   },
@@ -20749,6 +21769,16 @@
    ]
   },
   {
+   "sha": "9b8834158bb173bc7e28413f0d6883b089230b58",
+   "ct": 1274351613,
+   "class": "extrinsic",
+   "why": "env 'solaris'",
+   "subject": "fix compile error on solaris",
+   "c_files": [
+    "solarisfixes.h"
+   ]
+  },
+  {
    "sha": "b36d1c309136051587db90391876125fc95ea348",
    "ct": 1274346128,
    "class": "other-fix",
@@ -20907,6 +21937,37 @@
    "subject": "Fixed a redis-cli bug, was using free instead of zfree call",
    "c_files": [
     "redis-cli.c"
+   ]
+  },
+  {
+   "sha": "3bb225d66be633c88ba01c6e7a0cebf91837cd13",
+   "ct": 1271838676,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"fsync always now uses O_DIRECT on Linux\"",
+   "c_files": [
+    "config.h",
+    "redis.c"
+   ]
+  },
+  {
+   "sha": "d6fb4d5396a8822435e50843b4ddc4522cfec070",
+   "ct": 1271838668,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"define __USE_GNU to get O_DIRECT\"",
+   "c_files": [
+    "redis.c"
+   ]
+  },
+  {
+   "sha": "a08bb01d6740f0d4baf970ad9499859383219c22",
+   "ct": 1271838564,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"version 1.3.10\"",
+   "c_files": [
+    "redis.c"
    ]
   },
   {
@@ -21475,6 +22536,16 @@
    ]
   },
   {
+   "sha": "87eaf97f1452a31e847e1be0923479f41cdcd81d",
+   "ct": 1262897340,
+   "class": "extrinsic",
+   "why": "env '64bit'",
+   "subject": "added the fmacros to enable support for fseeko() lseeko() with 64bit off_t",
+   "c_files": [
+    "fmacros.h"
+   ]
+  },
+  {
    "sha": "38823f081799b5bcdbb07fd56478f07cb865640d",
    "ct": 1262739090,
    "class": "other-fix",
@@ -21622,6 +22693,16 @@
    "subject": "printf format warnings fixed by casting",
    "c_files": [
     "redis-cli.c",
+    "redis.c"
+   ]
+  },
+  {
+   "sha": "5acdc75d66b855cd621f324b1a15c48c8491366c",
+   "ct": 1260058572,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Regression tests for SETNX and MSETNX bugs added",
+   "c_files": [
     "redis.c"
    ]
   },
@@ -22094,6 +23175,17 @@
    ]
   },
   {
+   "sha": "fd8ccf4419ab94ab5a9250c0dc7a8d1761056b48",
+   "ct": 1256325841,
+   "class": "extrinsic",
+   "why": "env '32bit'",
+   "subject": "more work on ZSETs and a new make target called 32bit to build i386 binaries on mac os x leopard",
+   "c_files": [
+    "redis-cli.c",
+    "redis.c"
+   ]
+  },
+  {
    "sha": "cb7e07cc63f62012c953e528881367db587cb3cf",
    "ct": 1256254570,
    "class": "extrinsic",
@@ -22147,19 +23239,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 3,
-  "extrinsic|B": 9,
-  "extrinsic|B2": 3,
-  "extrinsic|C": 16,
   "other-fix|A": 24,
   "other-fix|B": 329,
   "other-fix|B2": 160,
   "other-fix|B3": 50,
-  "other-fix|C": 638,
-  "regression|A": 2,
-  "regression|B": 4,
-  "regression|B2": 9,
-  "regression|B3": 1,
-  "regression|C": 52
+  "other-fix|C": 638
  }
 }

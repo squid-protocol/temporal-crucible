@@ -35,6 +35,28 @@
    ]
   },
   {
+   "sha": "33fcd212a3a6e2d5ea93cc8fed888d5cc878c776",
+   "ct": 1790016819,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "clone: reject unknown URL schemes",
+   "c_files": [
+    "src/libgit2/transport.c",
+    "tests/libgit2/clone/nonetwork.c"
+   ]
+  },
+  {
+   "sha": "1ed9158f9543539d19a54705eb235168894483fa",
+   "ct": 1789970132,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "transports: free ref packet on capability parse error",
+   "c_files": [
+    "src/libgit2/transports/smart_pkt.c",
+    "tests/libgit2/transports/smart/packet.c"
+   ]
+  },
+  {
    "sha": "a64f4f5fe02d7f897fddbf6deed64a3fd6cae3e6",
    "ct": 1789684315,
    "class": "other-fix",
@@ -83,6 +105,16 @@
    "c_files": [
     "src/libgit2/config.c",
     "tests/libgit2/config/read.c"
+   ]
+  },
+  {
+   "sha": "dd783af831206a2e1dbf6d38a896325b3e9724cd",
+   "ct": 1786395617,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix test failure on MSVC",
+   "c_files": [
+    "tests/libgit2/bundle/parse.c"
    ]
   },
   {
@@ -153,6 +185,34 @@
    "c_files": [
     "src/libgit2/revwalk.c",
     "tests/libgit2/revwalk/pathspec.c"
+   ]
+  },
+  {
+   "sha": "cc477ee897bac9af697d642430130be6f912fab8",
+   "ct": 1780855517,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Support non-elevated admin user check on Windows",
+   "c_files": [
+    "src/util/fs_path.c"
+   ]
+  },
+  {
+   "sha": "64469259a51c44bb3516e1afe3c974ef214e9f00",
+   "ct": 1780304106,
+   "class": "extrinsic",
+   "why": "env 'c90'",
+   "subject": "deps: pcre2 updates with c90 compatible syntax",
+   "c_files": [
+    "deps/pcre2/pcre2_compile.c",
+    "deps/pcre2/pcre2_compile_class.c",
+    "deps/pcre2/pcre2_convert.c",
+    "deps/pcre2/pcre2_dfa_match.c",
+    "deps/pcre2/pcre2_ord2utf.c",
+    "deps/pcre2/pcre2_script_run.c",
+    "deps/pcre2/pcre2_study.c",
+    "deps/pcre2/pcre2_substitute.c",
+    "deps/pcre2/pcre2_util.h"
    ]
   },
   {
@@ -247,6 +307,16 @@
    "subject": "fix(refs): attach refdb owner to loose pseudorefs",
    "c_files": [
     "src/libgit2/refs.c",
+    "tests/libgit2/refs/pseudoref.c"
+   ]
+  },
+  {
+   "sha": "c0a5341635f3116e3bab2f3a8bee2bfd5608d7f9",
+   "ct": 1776894614,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "test(refs): cover pseudoref owner regression from b17ecb23e",
+   "c_files": [
     "tests/libgit2/refs/pseudoref.c"
    ]
   },
@@ -354,6 +424,26 @@
    "subject": "config: Fix potential null value passed to %s",
    "c_files": [
     "src/libgit2/config.c"
+   ]
+  },
+  {
+   "sha": "fadbef196e770804eead349e40d17d2fb7fcf4fa",
+   "ct": 1765058559,
+   "class": "extrinsic",
+   "why": "env 'gcc 15'",
+   "subject": "ci: Fix cases of -Werror=discarded-qualifiers raised by gcc 15.2",
+   "c_files": [
+    "src/cli/opt.c",
+    "src/libgit2/attr_file.c",
+    "src/libgit2/config_file.c",
+    "src/libgit2/config_parse.c",
+    "src/libgit2/message.c",
+    "src/libgit2/transports/git.c",
+    "src/util/unix/process.c",
+    "src/util/util.c",
+    "tests/clar/clar/print.h",
+    "tests/libgit2/diff/drivers.c",
+    "tests/libgit2/refs/reflog/reflog.c"
    ]
   },
   {
@@ -536,6 +626,16 @@
    ]
   },
   {
+   "sha": "d1f1e17404d4928004b4eb9a84e74da3404e45da",
+   "ct": 1730018851,
+   "class": "extrinsic",
+   "why": "env 'OpenBSD'",
+   "subject": "realpath: unbreak build on OpenBSD",
+   "c_files": [
+    "src/util/unix/realpath.c"
+   ]
+  },
+  {
    "sha": "e7db282676056fef5ec3a1dbe58e41dc80a015c2",
    "ct": 1728076569,
    "class": "other-fix",
@@ -545,6 +645,16 @@
     "src/libgit2/streams/openssl_dynamic.c",
     "src/libgit2/streams/openssl_dynamic.h",
     "tests/libgit2/online/customcert.c"
+   ]
+  },
+  {
+   "sha": "a8779b2b67a3c24ff39cc7cc5fc830e63be7c3d3",
+   "ct": 1727198817,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "diff: add a test for printing just the header",
+   "c_files": [
+    "tests/libgit2/diff/header.c"
    ]
   },
   {
@@ -702,6 +812,16 @@
    ]
   },
   {
+   "sha": "94125fb5c7241efb59bf4717561d7f18fd07ae87",
+   "ct": 1705230433,
+   "class": "extrinsic",
+   "why": "env 'clang '",
+   "subject": "Fix clang tests: uninitialized variable",
+   "c_files": [
+    "examples/init.c"
+   ]
+  },
+  {
    "sha": "47ec74b7c1caa840661e88550e9a909779e8aab6",
    "ct": 1705230433,
    "class": "other-fix",
@@ -829,6 +949,26 @@
    ]
   },
   {
+   "sha": "c28ebdf25649aeffdcb40bbb57ebc0ec42d07cc9",
+   "ct": 1677530282,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"tests: validate host and port for ssh tests when non-standard\"",
+   "c_files": [
+    "tests/libgit2/online/clone.c"
+   ]
+  },
+  {
+   "sha": "5adde383153af033d22bf25c443e6e7f6f08d0bd",
+   "ct": 1677530270,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Pass hostkey & port to host verify callback\"",
+   "c_files": [
+    "src/libgit2/transports/ssh.c"
+   ]
+  },
+  {
    "sha": "35580d88a834438275adea77785a5f356352ea21",
    "ct": 1676538717,
    "class": "other-fix",
@@ -851,6 +991,16 @@
    ]
   },
   {
+   "sha": "00893d2f4520416a0b3de5a5f42c2ae68b7fc873",
+   "ct": 1675944640,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "ssh: support windows `known_hosts` files",
+   "c_files": [
+    "src/libgit2/transports/ssh.c"
+   ]
+  },
+  {
    "sha": "be7356d0c6dca4154ae7b7f57c556d7b58b0d5f5",
    "ct": 1669399914,
    "class": "other-fix",
@@ -868,6 +1018,16 @@
    "subject": "Fix leak in git_tag_create_from_buffer",
    "c_files": [
     "src/libgit2/tag.c"
+   ]
+  },
+  {
+   "sha": "062f5697d1d8640911138cbe319ad29798b69240",
+   "ct": 1663835661,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Include <stdint.h>\"",
+   "c_files": [
+    "src/util/posix.h"
    ]
   },
   {
@@ -1009,6 +1169,17 @@
    ]
   },
   {
+   "sha": "af76267ad7a5fae5a8214ab587302dfc54c329d2",
+   "ct": 1657650466,
+   "class": "extrinsic",
+   "why": "env 'Visual Studio'",
+   "subject": "zlib: Silence some warnings from Visual Studio C.",
+   "c_files": [
+    "deps/zlib/deflate.h",
+    "deps/zlib/trees.c"
+   ]
+  },
+  {
    "sha": "7560ac4d2f19906729963cbdf7c8c7fb675b8f8a",
    "ct": 1657549551,
    "class": "other-fix",
@@ -1016,6 +1187,17 @@
    "subject": "branches: fix error message for invalid name",
    "c_files": [
     "src/branch.c"
+   ]
+  },
+  {
+   "sha": "f51f66468ae890dbd639242216977b300bd3b437",
+   "ct": 1657204612,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"repo: allow administrator to own the configuration\"",
+   "c_files": [
+    "src/libgit2/repository.c",
+    "tests/libgit2/repo/open.c"
    ]
   },
   {
@@ -1080,6 +1262,16 @@
    ]
   },
   {
+   "sha": "7f53d7b600a838c19276e835fd0188c361a63801",
+   "ct": 1652112548,
+   "class": "regression",
+   "why": "references bdab22384c (6 d earlier)",
+   "subject": "revparse: Remove error-prone, redundant test",
+   "c_files": [
+    "tests/libgit2/refs/revparse.c"
+   ]
+  },
+  {
    "sha": "33b1d3fd62c3702ff6cc85c95dc01f372253851e",
    "ct": 1649189966,
    "class": "other-fix",
@@ -1087,6 +1279,17 @@
    "subject": "[midx] Fix an undefined behavior (left-shift signed overflow)",
    "c_files": [
     "src/libgit2/midx.c"
+   ]
+  },
+  {
+   "sha": "6a7d5d23c73c4ce97b6e22a241750c9c0ea7c5fe",
+   "ct": 1648039159,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "sha: support Win32 for SHA256",
+   "c_files": [
+    "src/util/hash/win32.c",
+    "src/util/hash/win32.h"
    ]
   },
   {
@@ -1111,6 +1314,18 @@
    ]
   },
   {
+   "sha": "ecbb01f52ceddbbe7422aabcc3c5e1de96f6a1c9",
+   "ct": 1642474932,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: test system paths for gvfs compatibility",
+   "c_files": [
+    "src/win32/findfile.c",
+    "src/win32/findfile.h",
+    "tests/win32/systempath.c"
+   ]
+  },
+  {
    "sha": "7707caaf474eccc1112f62b9d86a6dd240917b58",
    "ct": 1642474932,
    "class": "other-fix",
@@ -1118,6 +1333,16 @@
    "subject": "Prevent possible buffer overflow",
    "c_files": [
     "src/win32/findfile.c"
+   ]
+  },
+  {
+   "sha": "0a72a3ada2dec5405e8e1e4449ed585c4497ffc7",
+   "ct": 1642118016,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix compiler warning on Windows.",
+   "c_files": [
+    "src/refdb_fs.c"
    ]
   },
   {
@@ -1212,6 +1437,16 @@
    ]
   },
   {
+   "sha": "6571ba7b3585a390b6de164aaa5eb93036ef295c",
+   "ct": 1631108702,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Only avoid `mmap(2)`/`ftruncate(2)` when in non-Windows",
+   "c_files": [
+    "src/indexer.c"
+   ]
+  },
+  {
    "sha": "1e49f12793c4d39fffb64a08db0d1fddafaf0338",
    "ct": 1630412600,
    "class": "other-fix",
@@ -1242,6 +1477,17 @@
     "src/libgit2.c",
     "src/streams/mbedtls.c",
     "src/streams/mbedtls.h"
+   ]
+  },
+  {
+   "sha": "8643b524522c67ea24848699be01ab0e49d4a4a0",
+   "ct": 1629972781,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Merge pull request #5775 from libgit2/ethomson/clone_branch\"",
+   "c_files": [
+    "src/clone.c",
+    "tests/clone/nonetwork.c"
    ]
   },
   {
@@ -1357,6 +1603,28 @@
    ]
   },
   {
+   "sha": "5368be3053d311cb7c65d44ce6643b5de32694ec",
+   "ct": 1620252712,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "clar: support long paths on Windows",
+   "c_files": [
+    "tests/clar/fs.h"
+   ]
+  },
+  {
+   "sha": "dbc03de479eec4f96ce3273bf76f49daccbeb496",
+   "ct": 1619611413,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "apply: ensure we validate paths",
+   "c_files": [
+    "src/path.c",
+    "tests/apply/apply_helpers.h",
+    "tests/apply/both.c"
+   ]
+  },
+  {
    "sha": "bc3d4065528004e0cd86c8b0ae79405196f86584",
    "ct": 1616273771,
    "class": "other-fix",
@@ -1411,11 +1679,33 @@
    ]
   },
   {
+   "sha": "212ae9a70eddf3a77783d5cdffd3418273bfedd7",
+   "ct": 1608562974,
+   "class": "extrinsic",
+   "why": "env 'gcc 10'",
+   "subject": "Fix the `-DENABLE_WERROR=ON` build for gcc 10.2",
+   "c_files": [
+    "tests/clar/fs.h",
+    "tests/clar/sandbox.h",
+    "tests/clar_libgit2.c"
+   ]
+  },
+  {
    "sha": "e9b98cd53089077cb3c547b6f3870c51e3b128cc",
    "ct": 1608349466,
    "class": "extrinsic",
    "why": "env '32-bit'",
    "subject": "Third attempt to fix the 32-bit version of `git__multiply_int64_overflow`",
+   "c_files": [
+    "src/integer.h"
+   ]
+  },
+  {
+   "sha": "7f8ae01913e408bf219ab41036bd68265596c917",
+   "ct": 1608304076,
+   "class": "extrinsic",
+   "why": "env 'clang'",
+   "subject": "Avoid using `__builtin_mul_overflow` with the clang+32-bit combo",
    "c_files": [
     "src/integer.h"
    ]
@@ -1497,6 +1787,16 @@
    ]
   },
   {
+   "sha": "e8ab3db99e13bcb330e91e0ca0265b60483a5e47",
+   "ct": 1601833596,
+   "class": "extrinsic",
+   "why": "env 'Android'",
+   "subject": "p_chmod: Android compatibility",
+   "c_files": [
+    "src/unix/posix.h"
+   ]
+  },
+  {
    "sha": "6ac18625869063a591828b33453148bf63e679e8",
    "ct": 1600420860,
    "class": "other-fix",
@@ -1529,6 +1829,16 @@
    ]
   },
   {
+   "sha": "e937a2aa6524ae38cb7d5847f0ad7d16ff558fbe",
+   "ct": 1599671300,
+   "class": "extrinsic",
+   "why": "env 'FreeBSD'",
+   "subject": "Fixed includes for FreeBSD.",
+   "c_files": [
+    "tests/clar/fs.h"
+   ]
+  },
+  {
    "sha": "86d04918c0a8f405ccb0b86b7ff8419dfb7a0bd7",
    "ct": 1599649145,
    "class": "other-fix",
@@ -1547,6 +1857,16 @@
    "subject": "Fix crash in git_describe_commit when opts are NULL.",
    "c_files": [
     "src/describe.c"
+   ]
+  },
+  {
+   "sha": "49ce5e295b9d95e6bc4084f91706309d1f1f0bb7",
+   "ct": 1598024097,
+   "class": "extrinsic",
+   "why": "env 'Haiku'",
+   "subject": "deps: ntlmclient: fix htonll for Haiku",
+   "c_files": [
+    "deps/ntlmclient/compat.h"
    ]
   },
   {
@@ -1645,6 +1965,26 @@
    ]
   },
   {
+   "sha": "43d7a42bdde3ed137997856c892bbc11abb79bda",
+   "ct": 1583871020,
+   "class": "regression",
+   "why": "references 7d55bee6d1 (60 d earlier)",
+   "subject": "win32: don't canonicalize symlink targets",
+   "c_files": [
+    "src/win32/posix_w32.c"
+   ]
+  },
+  {
+   "sha": "c690136c78075cc95ea4f1b9578f8133136299ee",
+   "ct": 1582742089,
+   "class": "regression",
+   "why": "references 3828ea67b9 (1 d earlier)",
+   "subject": "deps: ntlmclient: fix htonll on big endian FreeBSD",
+   "c_files": [
+    "deps/ntlmclient/compat.h"
+   ]
+  },
+  {
    "sha": "ebade23333d1f5c460aeb7f02473c96c95568a91",
    "ct": 1582577383,
    "class": "other-fix",
@@ -1652,6 +1992,26 @@
    "subject": "transports: auth_ntlm: fix use of strdup/strndup",
    "c_files": [
     "src/transports/auth_ntlm.c"
+   ]
+  },
+  {
+   "sha": "3828ea67b97fc56dead976f319792ead3aa7e623",
+   "ct": 1582577201,
+   "class": "extrinsic",
+   "why": "env 'FreeBSD'",
+   "subject": "deps: ntlmclient: fix missing htonll symbols on FreeBSD and SunOS",
+   "c_files": [
+    "deps/ntlmclient/compat.h"
+   ]
+  },
+  {
+   "sha": "26b71d605ca6bbc926b58992e20d75e589d9c4f7",
+   "ct": 1581082570,
+   "class": "regression",
+   "why": "references 852c83ee44 (22 d earlier)",
+   "subject": "tests: iterator: fix iterator expecting too few items",
+   "c_files": [
+    "tests/iterator/workdir.c"
    ]
   },
   {
@@ -1683,6 +2043,17 @@
    "subject": "gssapi: correct incorrect case in error message",
    "c_files": [
     "src/transports/auth_negotiate.c"
+   ]
+  },
+  {
+   "sha": "470a05d0d95ab8a840f1a851b1c498245ccfafaf",
+   "ct": 1579193630,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Do not return free'd git_repository object on error",
+   "c_files": [
+    "src/repository.c",
+    "tests/repo/open.c"
    ]
   },
   {
@@ -1757,6 +2128,17 @@
    ]
   },
   {
+   "sha": "e1832eb20a7089f6383cfce474f213157f5300cb",
+   "ct": 1575964866,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "path: also guard `.gitmodules` against NTFS Alternate Data Streams",
+   "c_files": [
+    "src/path.c",
+    "tests/path/dotgit.c"
+   ]
+  },
+  {
    "sha": "bdf965125c3abb468bea2d2a4d1d88ed4d8f1f92",
    "ct": 1575409248,
    "class": "extrinsic",
@@ -1788,6 +2170,17 @@
     "src/patch_parse.c",
     "tests/patch/parse.c",
     "tests/patch/patch_common.h"
+   ]
+  },
+  {
+   "sha": "146e5bf7b1740c0881057d1ca0233ca0852451ab",
+   "ct": 1573021753,
+   "class": "regression",
+   "why": "references dadbb33b60 (4 d earlier)",
+   "subject": "config_mem: implement support for snapshots",
+   "c_files": [
+    "src/config_mem.c",
+    "tests/config/snapshot.c"
    ]
   },
   {
@@ -2040,6 +2433,26 @@
    ]
   },
   {
+   "sha": "c87abeca9ee68a89fa3a6776aa7d44f9d14de6e7",
+   "ct": 1562233756,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: attr: add tests for system-level attributes",
+   "c_files": [
+    "tests/attr/repo.c"
+   ]
+  },
+  {
+   "sha": "18a6d9f3a82d2363ed45713a47f48ac8f383bb41",
+   "ct": 1562228913,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "attr: Don't fail in attr_setup if there exists a system attributes file",
+   "c_files": [
+    "src/attr.c"
+   ]
+  },
+  {
    "sha": "7fd3f32b49488cefae566ed99ab577ece5c3c89d",
    "ct": 1561636682,
    "class": "other-fix",
@@ -2145,6 +2558,16 @@
    ]
   },
   {
+   "sha": "37a7adb59c5075901bd64259e8a98ccef6f6f452",
+   "ct": 1557031749,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "Support symlinks for directories in win32",
+   "c_files": [
+    "src/win32/posix_w32.c"
+   ]
+  },
+  {
    "sha": "d55bb479ddad2e8feaed7bf3e1773cf344db108c",
    "ct": 1556883506,
    "class": "other-fix",
@@ -2164,6 +2587,18 @@
    "c_files": [
     "src/refspec.c",
     "tests/network/refspecs.c"
+   ]
+  },
+  {
+   "sha": "b106620d038bc764329a29c234ffad5903479634",
+   "ct": 1555408350,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "examples: move MSVC compatibility macros into common header",
+   "c_files": [
+    "examples/blame.c",
+    "examples/common.h",
+    "examples/merge.c"
    ]
   },
   {
@@ -2513,6 +2948,26 @@
    ]
   },
   {
+   "sha": "b433a22a979ae78c28c8b16f8c3487e2787cb73e",
+   "ct": 1540041214,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: emulate Git for Windows in symlink support",
+   "c_files": [
+    "src/repository.c"
+   ]
+  },
+  {
+   "sha": "204cce66bdd856d4be990cc27101a74131c72ec4",
+   "ct": 1540039906,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: add symbolic link support",
+   "c_files": [
+    "src/win32/posix_w32.c"
+   ]
+  },
+  {
    "sha": "8b6e28958c99b4f9effbbedb84ae779b3b1b9d98",
    "ct": 1539944908,
    "class": "other-fix",
@@ -2532,6 +2987,27 @@
    "c_files": [
     "src/util.c",
     "tests/core/strtol.c"
+   ]
+  },
+  {
+   "sha": "d06d4220eec035466d1a837972a40546b8904330",
+   "ct": 1538730232,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "config_file: properly ignore includes without \"path\" value",
+   "c_files": [
+    "src/config_file.c",
+    "tests/config/include.c"
+   ]
+  },
+  {
+   "sha": "dbb4a5866fcbb121000a705e074f679445d6916b",
+   "ct": 1538728053,
+   "class": "regression",
+   "why": "references fa48d2ea7d (8 d earlier)",
+   "subject": "tests: fix warning for implicit conversion of integer to pointer",
+   "c_files": [
+    "tests/core/vector.c"
    ]
   },
   {
@@ -2573,6 +3049,16 @@
    "subject": "smart_pkt: fix buffer overflow when parsing \"ACK\" packets",
    "c_files": [
     "src/transports/smart_pkt.c",
+    "tests/transports/smart/packet.c"
+   ]
+  },
+  {
+   "sha": "365d2720c1a5fc89f03fd85265c8b45195c7e4a8",
+   "ct": 1538575608,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: verify parsing logic for smart packets",
+   "c_files": [
     "tests/transports/smart/packet.c"
    ]
   },
@@ -2656,6 +3142,26 @@
    "subject": "config: Fix a leak parsing multi-line config entries",
    "c_files": [
     "src/config_parse.c"
+   ]
+  },
+  {
+   "sha": "1a9cc18260b68b149476adb6f39e37ab47d3d21f",
+   "ct": 1535140805,
+   "class": "extrinsic",
+   "why": "env 'macOS'",
+   "subject": "util: make the qsort_r check work on macOS",
+   "c_files": [
+    "src/util.c"
+   ]
+  },
+  {
+   "sha": "3a1f5df87b1be025b21972a592a6d0a75cfa2bb2",
+   "ct": 1535094929,
+   "class": "regression",
+   "why": "references 581d5492f6 (7 d earlier)",
+   "subject": "tests: verify adding index conflicts with invalid filemodes fails",
+   "c_files": [
+    "tests/index/conflicts.c"
    ]
   },
   {
@@ -2914,6 +3420,16 @@
    ]
   },
   {
+   "sha": "05e891f1f1bad3e2729a2e3800b314d5b63d43eb",
+   "ct": 1527853255,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "refdb_fs: test whether the base directory exists when globbing",
+   "c_files": [
+    "src/refdb_fs.c"
+   ]
+  },
+  {
    "sha": "93271f590710772a9f71448d67e818235d07219c",
    "ct": 1527851056,
    "class": "other-fix",
@@ -2924,6 +3440,26 @@
    ]
   },
   {
+   "sha": "1bf57b5a34ac535a94a55cdd40a6abb2f26c78a8",
+   "ct": 1525440445,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "tests: iterator::workdir: fix GCC warning",
+   "c_files": [
+    "tests/iterator/workdir.c"
+   ]
+  },
+  {
+   "sha": "0750d0cc5b449c5545fcc0099df6737f63e32a19",
+   "ct": 1525440322,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "tests: refs::normalize: simplify code to avoid GCC warning",
+   "c_files": [
+    "tests/refs/normalize.c"
+   ]
+  },
+  {
    "sha": "20a2b02d9a1bcb4825ec49605146223c565dcacf",
    "ct": 1524839427,
    "class": "other-fix",
@@ -2931,6 +3467,16 @@
    "subject": "refdb_fs: enable root arbitration for fixed portion of globs",
    "c_files": [
     "src/refdb_fs.c"
+   ]
+  },
+  {
+   "sha": "45a3b9cd6e5407a031f102b1ea987f150b06d059",
+   "ct": 1524670103,
+   "class": "extrinsic",
+   "why": "env 'macOS'",
+   "subject": "tests: fix issue with /tmp paths on macOS[1]",
+   "c_files": [
+    "tests/clar/sandbox.h"
    ]
   },
   {
@@ -3006,6 +3552,17 @@
    "c_files": [
     "src/transports/local.c",
     "tests/fetchhead/nonetwork.c"
+   ]
+  },
+  {
+   "sha": "7490d449b518115a1ae86b01397e95c38e39cff1",
+   "ct": 1522692007,
+   "class": "extrinsic",
+   "why": "env 'LibreSSL 2.7'",
+   "subject": "Fix build with LibreSSL 2.7",
+   "c_files": [
+    "src/streams/openssl.c",
+    "src/streams/openssl.h"
    ]
   },
   {
@@ -3123,6 +3680,27 @@
    ]
   },
   {
+   "sha": "848153f386b45363d033c72e155e4001d0217f96",
+   "ct": 1518110033,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "config_parse: handle empty lines with CRLF",
+   "c_files": [
+    "src/config_parse.c",
+    "tests/config/read.c"
+   ]
+  },
+  {
+   "sha": "6062032e452afea451901333089da834edbe2078",
+   "ct": 1516164845,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "try and fix windows build",
+   "c_files": [
+    "tests/message/trailer.c"
+   ]
+  },
+  {
    "sha": "90f81f9fdc6d87c4ca75e4f065e1eb4818c99674",
    "ct": 1515762757,
    "class": "other-fix",
@@ -3152,6 +3730,16 @@
     "src/indexer.c",
     "src/pack.c",
     "tests/pack/indexer.c"
+   ]
+  },
+  {
+   "sha": "a89560d5693a2f43cc852cb5806df837dc79b790",
+   "ct": 1513786084,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "hash: win32 hash mechanism should support large files",
+   "c_files": [
+    "src/hash/hash_win32.c"
    ]
   },
   {
@@ -3207,6 +3795,16 @@
    ]
   },
   {
+   "sha": "bf15dbf6cf19146082c1245e9db4016d773dbe7e",
+   "ct": 1509979730,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "examples: network: fix Win32 linking errors due to getline",
+   "c_files": [
+    "examples/network/common.c"
+   ]
+  },
+  {
    "sha": "f2f14724eb2192e9dd8374a4e341aa668b036b01",
    "ct": 1508514249,
    "class": "other-fix",
@@ -3224,6 +3822,17 @@
    "subject": "transports: smart: fix memory leak when skipping symbolic refs",
    "c_files": [
     "src/transports/smart_protocol.c"
+   ]
+  },
+  {
+   "sha": "26f531d3a3c00890348660f826df4fd21e53f9c9",
+   "ct": 1505216802,
+   "class": "regression",
+   "why": "references a390a8464e (27 d earlier)",
+   "subject": "features.h: allow building without CMake-generated feature header",
+   "c_files": [
+    "src/common.h",
+    "src/unix/posix.h"
    ]
   },
   {
@@ -3245,6 +3854,16 @@
    "subject": "fixed win32 p_unlink retry sleep issue",
    "c_files": [
     "src/win32/posix_w32.c"
+   ]
+  },
+  {
+   "sha": "1f7af277c773a516e4bea22f92b75a07ffc15734",
+   "ct": 1499248367,
+   "class": "regression",
+   "why": "references 56893bb9a1 (6 d earlier)",
+   "subject": "tests: config: fix missing declaration causing error",
+   "c_files": [
+    "tests/config/readonly.c"
    ]
   },
   {
@@ -3366,6 +3985,36 @@
    ]
   },
   {
+   "sha": "4dbcf0e673b1761e536b9a5f385a771287f06232",
+   "ct": 1493675712,
+   "class": "regression",
+   "why": "revert",
+   "subject": "remote: free the config snapshot",
+   "c_files": [
+    "src/remote.c"
+   ]
+  },
+  {
+   "sha": "5552237686dae90fb9c22f0088de488b48654828",
+   "ct": 1493483315,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Do not free config when creating remote",
+   "c_files": [
+    "src/remote.c"
+   ]
+  },
+  {
+   "sha": "1cb30b1bb45645a2f01ddc855a8644079215f931",
+   "ct": 1493106709,
+   "class": "regression",
+   "why": "references e7330016af (34 d earlier)",
+   "subject": "diff_parse: free object instead of its pointer",
+   "c_files": [
+    "src/diff_parse.c"
+   ]
+  },
+  {
    "sha": "38b6e700272b387aaa959a5d362467e8bcd836b4",
    "ct": 1491977348,
    "class": "other-fix",
@@ -3466,6 +4115,16 @@
    "subject": "Fix: make reflog include \"(merge)\" for merge commits",
    "c_files": [
     "src/refs.c"
+   ]
+  },
+  {
+   "sha": "4017017740d2f4ec9596fc3f79fc4b526f3bf06a",
+   "ct": 1488046919,
+   "class": "extrinsic",
+   "why": "env 'Haiku'",
+   "subject": "Fix inet_pton tests triggering an assert in Haiku",
+   "c_files": [
+    "tests/core/posix.c"
    ]
   },
   {
@@ -3600,6 +4259,16 @@
    "subject": "pack: fix race in pack_entry_find_offset",
    "c_files": [
     "src/pack.c"
+   ]
+  },
+  {
+   "sha": "feb330d50d0fc10aceec6309131e912e152a1027",
+   "ct": 1476268903,
+   "class": "extrinsic",
+   "why": "env 'OpenSSL 1.1.0'",
+   "subject": "add support for OpenSSL 1.1.0 for BIO filter",
+   "c_files": [
+    "src/openssl_stream.c"
    ]
   },
   {
@@ -3786,6 +4455,17 @@
    "c_files": [
     "src/fnmatch.c",
     "tests/attr/ignore.c"
+   ]
+  },
+  {
+   "sha": "b117721dd8aa039e074c6bd46b18a526ac9cb2f3",
+   "ct": 1461066859,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "proxy: use poxy to test our Windows proxy support",
+   "c_files": [
+    "src/transports/smart.c",
+    "tests/online/clone.c"
    ]
   },
   {
@@ -4001,6 +4681,16 @@
    ]
   },
   {
+   "sha": "494e61b8a39d88fa821eb752a77b7025d7703073",
+   "ct": 1455083124,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: drop xp support in WideCharToMultiByte",
+   "c_files": [
+    "src/win32/utf-conv.c"
+   ]
+  },
+  {
    "sha": "24b8ed2b3ae4519e9c56afcfdf1d0f00a2b95842",
    "ct": 1455012698,
    "class": "other-fix",
@@ -4038,6 +4728,16 @@
    "subject": "pack-objects: fix memory leak in compute_write_order",
    "c_files": [
     "src/pack-objects.c"
+   ]
+  },
+  {
+   "sha": "b00c959f45bfa8e2bb27bec0cfebc4bad5f70df2",
+   "ct": 1454983001,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Better document `git_merge_commits` redux",
+   "c_files": [
+    "include/git2/merge.h"
    ]
   },
   {
@@ -4154,6 +4854,20 @@
    ]
   },
   {
+   "sha": "360dd4dafd30bced1dab1d516765e347d09b91ba",
+   "ct": 1442644436,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: define our own POSIX struct stat, and support USE_NSEC",
+   "c_files": [
+    "src/common.h",
+    "src/win32/mingw-compat.h",
+    "src/win32/msvc-compat.h",
+    "src/win32/w32_util.h",
+    "src/win32/win32-compat.h"
+   ]
+  },
+  {
    "sha": "707f65372b4091ada386f2a04a05e94899e32bfc",
    "ct": 1442014514,
    "class": "other-fix",
@@ -4204,6 +4918,16 @@
     "src/util.c",
     "src/win32/w32_buffer.c",
     "src/win32/w32_buffer.h"
+   ]
+  },
+  {
+   "sha": "318bb763e9e896472e2aa16ebe8cbf2463804e19",
+   "ct": 1437562344,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Make libgit2 work on Windows Vista again",
+   "c_files": [
+    "src/path.c"
    ]
   },
   {
@@ -4267,6 +4991,16 @@
    ]
   },
   {
+   "sha": "69c8bf7e0dd7b2db5d659e6fd329f229b7197af2",
+   "ct": 1435674667,
+   "class": "extrinsic",
+   "why": "env 'mingw'",
+   "subject": "posix compat: include sys/stat.h for mingw",
+   "c_files": [
+    "src/unix/posix.h"
+   ]
+  },
+  {
    "sha": "64e6b5b0350f1c080a3c1e2753fa14a682270ed8",
    "ct": 1435671677,
    "class": "other-fix",
@@ -4316,6 +5050,26 @@
     "src/diff_patch.c",
     "src/diff_print.c",
     "tests/diff/binary.c"
+   ]
+  },
+  {
+   "sha": "a2f8d1ae2b07827843e1dfe827c524771a32a088",
+   "ct": 1435330138,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "revparse: Add test to make sure this doesn't regress",
+   "c_files": [
+    "tests/refs/revparse.c"
+   ]
+  },
+  {
+   "sha": "3d9ef2dc1befc9c63654633d3c714e11df85ddbc",
+   "ct": 1435329942,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"object: correct the expected ID size in prefix lookup\"",
+   "c_files": [
+    "src/object.c"
    ]
   },
   {
@@ -4457,6 +5211,16 @@
    ]
   },
   {
+   "sha": "adad518129818399f5d98676784ea8c9396ac30e",
+   "ct": 1431455801,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "attr: regression tests for ignore matching",
+   "c_files": [
+    "tests/attr/ignore.c"
+   ]
+  },
+  {
    "sha": "4beab1f8bbc29a0788ed7d5c1f6bc21741392565",
    "ct": 1430741908,
    "class": "other-fix",
@@ -4466,6 +5230,17 @@
     "include/git2/diff.h",
     "src/checkout.c",
     "src/diff.c"
+   ]
+  },
+  {
+   "sha": "3520c97057a2e4236779d24ec6fece0d11514319",
+   "ct": 1430741907,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Always checkout with case sensitive iterator\"",
+   "c_files": [
+    "src/checkout.c",
+    "tests/checkout/tree.c"
    ]
   },
   {
@@ -4589,6 +5364,16 @@
    ]
   },
   {
+   "sha": "3066026b0468730ac36850c276f6dab7140f2093",
+   "ct": 1426539569,
+   "class": "extrinsic",
+   "why": "env 'mingw'",
+   "subject": "Fix build on mingw-w64",
+   "c_files": [
+    "src/transports/winhttp.c"
+   ]
+  },
+  {
    "sha": "e6903ea278c43895cce234bb956b31570b4bbb07",
    "ct": 1426172707,
    "class": "other-fix",
@@ -4617,6 +5402,17 @@
    "subject": "Fixed update_tips callback called for failed pushed references",
    "c_files": [
     "src/push.c"
+   ]
+  },
+  {
+   "sha": "1a7ea63d228d42dc0ec1bed3a295d3dfe9392d74",
+   "ct": 1425672425,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "Move definitions of strcasecmp and strncasecmp to msvc-compat.h",
+   "c_files": [
+    "src/win32/msvc-compat.h",
+    "src/win32/posix.h"
    ]
   },
   {
@@ -4771,6 +5567,16 @@
    ]
   },
   {
+   "sha": "3556a82a2ab3280ef6282de5d7f97248929a517f",
+   "ct": 1423777135,
+   "class": "extrinsic",
+   "why": "env 'Android'",
+   "subject": "Fix build warning on Android",
+   "c_files": [
+    "src/fileops.c"
+   ]
+  },
+  {
    "sha": "a36486ef26dac5f4f359cc54c865b91bbc31767e",
    "ct": 1423693834,
    "class": "other-fix",
@@ -4864,6 +5670,16 @@
    ]
   },
   {
+   "sha": "d226fbf1aa1943c49b863736592be3c9b82cbee3",
+   "ct": 1417963326,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix broken test suite on Windows",
+   "c_files": [
+    "tests/network/remote/local.c"
+   ]
+  },
+  {
    "sha": "ec7e680c6c56897bc0881cbcd14c2f1e9ac624c5",
    "ct": 1416600334,
    "class": "other-fix",
@@ -4916,6 +5732,17 @@
    ]
   },
   {
+   "sha": "692c040843dee45287d87ed81d4a1bd3684f5c97",
+   "ct": 1415575128,
+   "class": "extrinsic",
+   "why": "env 'Clang '",
+   "subject": "Fixed a couple Clang warnings",
+   "c_files": [
+    "src/checkout.c",
+    "tests/status/worktree_init.c"
+   ]
+  },
+  {
    "sha": "6069042fcbf7a555c344fa1f020fac9b72d27aad",
    "ct": 1415265026,
    "class": "other-fix",
@@ -4934,6 +5761,16 @@
    "subject": "Fix segmentation fault observed on OpenBSD/sparc64",
    "c_files": [
     "src/unix/map.c"
+   ]
+  },
+  {
+   "sha": "bc48bcdcb35785e8a51071e464e434fe1723585c",
+   "ct": 1415017393,
+   "class": "extrinsic",
+   "why": "env 'Visual Studio'",
+   "subject": "Make the Visual Studio compiler happy",
+   "c_files": [
+    "src/global.c"
    ]
   },
   {
@@ -4988,6 +5825,26 @@
    ]
   },
   {
+   "sha": "7629ea5d8d3cf2278d89a41beba3caf0488f67b3",
+   "ct": 1411726328,
+   "class": "extrinsic",
+   "why": "env 'big-endian'",
+   "subject": "Fixed odb foreach test failure for big-endian 64-bit",
+   "c_files": [
+    "tests/odb/foreach.c"
+   ]
+  },
+  {
+   "sha": "d99e547173a73109520bc5d54333b12f0e8cf72e",
+   "ct": 1411726328,
+   "class": "extrinsic",
+   "why": "env 'big-endian'",
+   "subject": "Fixed merge REUC test for big-endian 64-bit",
+   "c_files": [
+    "tests/merge/merge_helpers.c"
+   ]
+  },
+  {
    "sha": "bbb988a5190be2a8763c60cb37c52466a39f6441",
    "ct": 1410958812,
    "class": "other-fix",
@@ -5038,6 +5895,16 @@
     "src/pack.c",
     "src/stash.c",
     "src/transports/smart_protocol.c"
+   ]
+  },
+  {
+   "sha": "aff700182518471941be2cfb0659a1c611a854ba",
+   "ct": 1409496233,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "MSVC does not support zero size array",
+   "c_files": [
+    "tests/online/push.c"
    ]
   },
   {
@@ -5150,6 +6017,26 @@
    ]
   },
   {
+   "sha": "daf2a648b1dcc02665dcf9c6f5317db61d84be89",
+   "ct": 1402157936,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "Win32: Fix diff::workdir::submodules test #2361",
+   "c_files": [
+    "tests/submodule/submodule_helpers.c"
+   ]
+  },
+  {
+   "sha": "6d1b04383ed0744b0346dc9834e34ef7b634a2e0",
+   "ct": 1402157904,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "Win32: Fix failing clone_mirror test",
+   "c_files": [
+    "tests/online/clone.c"
+   ]
+  },
+  {
    "sha": "11e2665e5040066cc251a45d017f37d2b0bd0617",
    "ct": 1401804335,
    "class": "other-fix",
@@ -5172,6 +6059,17 @@
    "c_files": [
     "src/refs.c",
     "src/refs.h"
+   ]
+  },
+  {
+   "sha": "3ac1ff42d7cfa8ac981a37712863419c071f2640",
+   "ct": 1401201367,
+   "class": "extrinsic",
+   "why": "env 'Visual Studio'",
+   "subject": "Fix compile error on Visual Studio",
+   "c_files": [
+    "tests/diff/workdir.c",
+    "tests/repo/pathspec.c"
    ]
   },
   {
@@ -5374,6 +6272,16 @@
    ]
   },
   {
+   "sha": "d0420fc681d32ba825efeeb08436c787ff7798ad",
+   "ct": 1398955175,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Make examples/status.c compile on Windows",
+   "c_files": [
+    "examples/status.c"
+   ]
+  },
+  {
    "sha": "17ef678ca543d8b56035e36039ee319c12d0d249",
    "ct": 1398106557,
    "class": "other-fix",
@@ -5517,6 +6425,18 @@
    "c_files": [
     "src/global.c",
     "tests/threads/diff.c"
+   ]
+  },
+  {
+   "sha": "fa13ee2d7cfadf0b1d425708657d93aeae728f46",
+   "ct": 1397667076,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add GIT_BRANCH_ALL to git_branch_t enum",
+   "c_files": [
+    "include/git2/branch.h",
+    "include/git2/types.h",
+    "tests/refs/branches/iterator.c"
    ]
   },
   {
@@ -5713,6 +6633,17 @@
    ]
   },
   {
+   "sha": "1392418ea800bbd05dd4b38c5d5995df5bd3e177",
+   "ct": 1395152663,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Seamless support for NTLM/Kerberos auth on Windows",
+   "c_files": [
+    "include/git2/transport.h",
+    "src/transports/winhttp.c"
+   ]
+  },
+  {
    "sha": "853b1407c0325f6690eab92746d1f53c78b0da49",
    "ct": 1395074866,
    "class": "other-fix",
@@ -5779,6 +6710,16 @@
    ]
   },
   {
+   "sha": "8e5247203720de7abd084996c00afd6fb6f6cc21",
+   "ct": 1394121406,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "tests: MSVC compat",
+   "c_files": [
+    "tests/structinit/structinit.c"
+   ]
+  },
+  {
    "sha": "06a8f5c3b26682cf80a672cbc5f75c09f336cafe",
    "ct": 1393995641,
    "class": "other-fix",
@@ -5796,6 +6737,23 @@
    "subject": "Fix the description for `GIT_FEATURE_SSH`.",
    "c_files": [
     "include/git2/common.h"
+   ]
+  },
+  {
+   "sha": "300f44125a5abb00f6185babc9bb828aec556015",
+   "ct": 1393325771,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "- BUGFIX #2133 (@fourplusone) in smart_protocol.c - added MSVC cmake definitions to disable warnings - general.c is rewritten so it is ansi-c compatible and compiles ok on microsoft windows - some MSVC reported warning fixes",
+   "c_files": [
+    "examples/add.c",
+    "examples/blame.c",
+    "examples/cat-file.c",
+    "examples/common.c",
+    "examples/general.c",
+    "examples/network/clone.c",
+    "src/transports/smart_protocol.c",
+    "src/transports/ssh.c"
    ]
   },
   {
@@ -5902,6 +6860,16 @@
    "subject": "Add PHP tests and fix bug in PHP builtin driver",
    "c_files": [
     "src/userdiff.h"
+   ]
+  },
+  {
+   "sha": "1664aaaa2678f7fe329ee046cfa0a5720f36c1be",
+   "ct": 1390833665,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Make blame example compile on MSVC",
+   "c_files": [
+    "examples/blame.c"
    ]
   },
   {
@@ -6016,6 +6984,16 @@
    ]
   },
   {
+   "sha": "b49985212a395b54dbaa50c7d39faaaf6f4c4f4b",
+   "ct": 1388777843,
+   "class": "extrinsic",
+   "why": "env 'MacOS'",
+   "subject": "Use our strnlen on MacOS for backward compat",
+   "c_files": [
+    "src/posix.h"
+   ]
+  },
+  {
    "sha": "9152417290e7e375552638c2b340e9163c80dd8d",
    "ct": 1388701824,
    "class": "other-fix",
@@ -6024,6 +7002,16 @@
    "c_files": [
     "include/git2/submodule.h",
     "src/submodule.c"
+   ]
+  },
+  {
+   "sha": "6014b7b59ce3320311d61b929e9567c0503b630b",
+   "ct": 1388671832,
+   "class": "extrinsic",
+   "why": "env 'VS2013'",
+   "subject": "Fixed a compile error in VS2013.",
+   "c_files": [
+    "src/config_file.c"
    ]
   },
   {
@@ -6680,6 +7668,18 @@
    ]
   },
   {
+   "sha": "27061b151a7e0225186365ee0b5ca802d68782a9",
+   "ct": 1378401916,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "Fix some newer GCC compiler warnings",
+   "c_files": [
+    "tests-clar/checkout/index.c",
+    "tests-clar/diff/rename.c",
+    "tests-clar/odb/backend/nonrefreshing.c"
+   ]
+  },
+  {
    "sha": "21753d48691c41fbedc0c074d8b0f278f3ba2f1d",
    "ct": 1378384967,
    "class": "extrinsic",
@@ -6732,6 +7732,16 @@
    ]
   },
   {
+   "sha": "9d85f00722c5161bda0727f5bb80d13d08ccb481",
+   "ct": 1377329955,
+   "class": "regression",
+   "why": "references 238b761491 (4 d earlier)",
+   "subject": "fix tests on FreeBSD",
+   "c_files": [
+    "tests-clar/core/posix.c"
+   ]
+  },
+  {
    "sha": "805755f49b0db5bc884f8929621ac61238b2c30e",
    "ct": 1377211474,
    "class": "other-fix",
@@ -6754,6 +7764,16 @@
     "src/sortedcache.c",
     "src/win32/pthread.h",
     "tests-clar/stress/diff.c"
+   ]
+  },
+  {
+   "sha": "eb868b1e98d7cea8796f9b92be04843a7f819e5e",
+   "ct": 1377207261,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Drop support for THREADSAFE on Windows XP",
+   "c_files": [
+    "src/thread-utils.h"
    ]
   },
   {
@@ -6780,6 +7800,16 @@
    ]
   },
   {
+   "sha": "9ccdb21155b3c9650acf58c55b2596c3503ea14d",
+   "ct": 1376416537,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fileops: stat() before open()ing in git_futils_readbuffer_updated()",
+   "c_files": [
+    "src/fileops.c"
+   ]
+  },
+  {
    "sha": "ee0656012c213a9589c7a0892f3e4a11caebc664",
    "ct": 1376412836,
    "class": "extrinsic",
@@ -6801,6 +7831,16 @@
    "subject": "Fix mingw cross-compile build",
    "c_files": [
     "src/win32/utf-conv.h"
+   ]
+  },
+  {
+   "sha": "aa0af72933424bcf778db29c63c3727b25052c27",
+   "ct": 1376171818,
+   "class": "extrinsic",
+   "why": "env '64-bit'",
+   "subject": "Fix 64-bit MSVC warnings",
+   "c_files": [
+    "src/win32/utf-conv.c"
    ]
   },
   {
@@ -6906,6 +7946,16 @@
    ]
   },
   {
+   "sha": "3a2d48d5ee48c520fdc6b0cd65e1982db7751352",
+   "ct": 1374758515,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Close p->mwf.fd only if necessary",
+   "c_files": [
+    "src/pack.c"
+   ]
+  },
+  {
    "sha": "effdbeb3239b777e2b19fc4944643fc7f2a768c3",
    "ct": 1374713317,
    "class": "other-fix",
@@ -7000,6 +8050,16 @@
    "subject": "Fix the initial line",
    "c_files": [
     "src/buf_text.c"
+   ]
+  },
+  {
+   "sha": "19bee769d49467704f4d8ee36965c548cb40e3c6",
+   "ct": 1373841556,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Replace Japanese characters with the encoded hexadecimal values\"",
+   "c_files": [
+    "tests-clar/object/blob/filter.c"
    ]
   },
   {
@@ -7136,6 +8196,16 @@
    ]
   },
   {
+   "sha": "022a45e0848d4cc517889aaf55573bf5f5004662",
+   "ct": 1372171395,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Work around reparse point stat issues\"",
+   "c_files": [
+    "src/fileops.c"
+   ]
+  },
+  {
    "sha": "9728cfde5f3685cb11302560a67754104d618ea2",
    "ct": 1372148275,
    "class": "other-fix",
@@ -7178,6 +8248,16 @@
     "tests-clar/checkout/checkout_helpers.c",
     "tests-clar/checkout/checkout_helpers.h",
     "tests-clar/checkout/tree.c"
+   ]
+  },
+  {
+   "sha": "94ef2a353cdf4c29323c9935026d8435e8f098bd",
+   "ct": 1371766510,
+   "class": "regression",
+   "why": "references 852ded9698 (0 d earlier)",
+   "subject": "Add test for fixed diff bug",
+   "c_files": [
+    "tests-clar/diff/workdir.c"
    ]
   },
   {
@@ -7319,6 +8399,16 @@
    "c_files": [
     "src/diff_driver.c",
     "tests-clar/diff/drivers.c"
+   ]
+  },
+  {
+   "sha": "76b893b65336722fdee27e1dc8a82eab7ef065ea",
+   "ct": 1370986622,
+   "class": "regression",
+   "why": "references 16adc9fade (18 d earlier)",
+   "subject": "Add high(est) config level for application specific config files",
+   "c_files": [
+    "include/git2/config.h"
    ]
   },
   {
@@ -7642,6 +8732,16 @@
    ]
   },
   {
+   "sha": "34bd59992e9e11107d16837b671f867e2a5e77ef",
+   "ct": 1367507645,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Protect sha1_entry_pos call with mutex\"",
+   "c_files": [
+    "src/pack.c"
+   ]
+  },
+  {
    "sha": "f470b00b037cfcd40e19e88913a9a8b64d98288f",
    "ct": 1367448520,
    "class": "other-fix",
@@ -7804,6 +8904,19 @@
    ]
   },
   {
+   "sha": "9da187e83d1b8ab513a43fd54a9fe2be11b1703f",
+   "ct": 1365532800,
+   "class": "extrinsic",
+   "why": "env 'clang '",
+   "subject": "Fix clang warnings and improve checks",
+   "c_files": [
+    "examples/network/fetch.c",
+    "examples/network/index-pack.c",
+    "examples/network/ls-remote.c",
+    "src/date.c"
+   ]
+  },
+  {
    "sha": "94750e8af246b2adf7bd5766e7e0da5fcf928d24",
    "ct": 1365529895,
    "class": "other-fix",
@@ -7811,6 +8924,26 @@
    "subject": "Fix submodule dirty states not showing if submodules comes before files, or there are only dirty submodules but no changed files",
    "c_files": [
     "src/diff_output.c"
+   ]
+  },
+  {
+   "sha": "b39f969732bbcdd30be5a43c72eb8b3e89696cd3",
+   "ct": 1364785454,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "Fix whitespace in src/win32/version.h",
+   "c_files": [
+    "src/win32/version.h"
+   ]
+  },
+  {
+   "sha": "8cc2f2d86fa8a54b1ba87564c046e2e431e4ced0",
+   "ct": 1364746227,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "Win32 error reporting: Support WinHTTP errors",
+   "c_files": [
+    "src/win32/error.c"
    ]
   },
   {
@@ -7953,6 +9086,18 @@
    ]
   },
   {
+   "sha": "62beacd300a6d3c62943723928f45ef852485e62",
+   "ct": 1363045438,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "Sorting function cleanup and MinGW fix",
+   "c_files": [
+    "src/tsort.c",
+    "src/util.c",
+    "src/util.h"
+   ]
+  },
+  {
    "sha": "aec4f6633ccdd359a39d712a27f87e613f788f6c",
    "ct": 1363023432,
    "class": "other-fix",
@@ -8012,6 +9157,19 @@
    ]
   },
   {
+   "sha": "0d1b094b07d836a657ad9e458e04490d1e72d365",
+   "ct": 1361913306,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix portability issues on Windows",
+   "c_files": [
+    "src/refs.c",
+    "src/repository.c",
+    "tests-clar/refs/branches/remote.c",
+    "tests-clar/repo/init.c"
+   ]
+  },
+  {
    "sha": "3c42e4ef7428de18784e04c9cac18de3613144cb",
    "ct": 1361907794,
    "class": "other-fix",
@@ -8022,6 +9180,31 @@
     "src/fileops.h",
     "src/repository.c",
     "tests-clar/repo/init.c"
+   ]
+  },
+  {
+   "sha": "8005c6d420a2d8f00d96c1c0a385db91c88613c0",
+   "ct": 1361837314,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"hash: remove git_hash_init from internal api\"",
+   "c_files": [
+    "src/hash.h",
+    "src/hash/hash_generic.c",
+    "src/hash/hash_generic.h",
+    "src/hash/hash_win32.c",
+    "tests-clar/object/raw/hash.c"
+   ]
+  },
+  {
+   "sha": "6c72035fbc9688d52ccee47f3efb24913fc20af9",
+   "ct": 1361553794,
+   "class": "extrinsic",
+   "why": "env 'Solaris'",
+   "subject": "Portability fixes for Solaris",
+   "c_files": [
+    "src/errors.c",
+    "src/fileops.c"
    ]
   },
   {
@@ -8228,6 +9411,16 @@
    ]
   },
   {
+   "sha": "2a707d0e24e206666626ae858e5ba618ffef0547",
+   "ct": 1358892530,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Handle packed peeled objects without trailing newlines\"",
+   "c_files": [
+    "src/refs.c"
+   ]
+  },
+  {
    "sha": "47fc264203b2bae9e8a674505ac3502c3e9e71e7",
    "ct": 1358864715,
    "class": "extrinsic",
@@ -8343,6 +9536,19 @@
    ]
   },
   {
+   "sha": "80d647adc31e3c8721dc578140494f916463f623",
+   "ct": 1357931841,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"pack: packfile_free -> git_packfile_free and use it in the indexers\"",
+   "c_files": [
+    "src/indexer.c",
+    "src/odb_pack.c",
+    "src/pack.c",
+    "src/pack.h"
+   ]
+  },
+  {
    "sha": "f3738eba56cd6bafe1befea90a35a0b26600491c",
    "ct": 1357929060,
    "class": "extrinsic",
@@ -8408,6 +9614,16 @@
     "src/diff_output.c",
     "src/fileops.c",
     "tests-clar/diff/workdir.c"
+   ]
+  },
+  {
+   "sha": "e5562e181cd76d3b0447011bc892c86b03ed2952",
+   "ct": 1357495925,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Tab align value of GIT_FILEMODE_BLOB_EXECUTABLE\"",
+   "c_files": [
+    "include/git2/types.h"
    ]
   },
   {
@@ -8664,6 +9880,16 @@
    ]
   },
   {
+   "sha": "592f466c48a45ee8b9ba1057294a9cb849c729fa",
+   "ct": 1356635513,
+   "class": "extrinsic",
+   "why": "env 'GCC '",
+   "subject": "Fix GCC static/non-static compile error",
+   "c_files": [
+    "src/remote.c"
+   ]
+  },
+  {
    "sha": "7d4b65f608ce814fc814e8c9832e610097658e84",
    "ct": 1356364467,
    "class": "other-fix",
@@ -8809,6 +10035,16 @@
    "subject": "Fix mark_parents() to account for bad luck traversals",
    "c_files": [
     "src/graph.c"
+   ]
+  },
+  {
+   "sha": "a9c07c47ea6efd95f6e26639d85bbd60aa407c42",
+   "ct": 1354738014,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "tests: MSVC fix",
+   "c_files": [
+    "tests-clar/network/fetch.c"
    ]
   },
   {
@@ -8982,6 +10218,16 @@
    ]
   },
   {
+   "sha": "9e9aee670591c54379005dbac322d7310e9ea4cf",
+   "ct": 1353936574,
+   "class": "extrinsic",
+   "why": "env 'FreeBSD'",
+   "subject": "fix build on FreeBSD",
+   "c_files": [
+    "src/netops.c"
+   ]
+  },
+  {
    "sha": "f2696fa412299cfe9c8db53779af62eb4ffacb02",
    "ct": 1353928361,
    "class": "other-fix",
@@ -9066,6 +10312,23 @@
    ]
   },
   {
+   "sha": "cccacac555ed3937204f8dfd397bc92e499d2c42",
+   "ct": 1352961711,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "Add POSIX compat lstat() variant for win32",
+   "c_files": [
+    "src/checkout.c",
+    "src/fileops.c",
+    "src/unix/posix.h",
+    "src/win32/posix.h",
+    "src/win32/posix_w32.c",
+    "src/win32/utf-conv.c",
+    "src/win32/utf-conv.h",
+    "tests-clar/core/stat.c"
+   ]
+  },
+  {
    "sha": "7e9f5e650016d7dce9d5cfd433e053c7126f7edf",
    "ct": 1352865975,
    "class": "other-fix",
@@ -9085,6 +10348,30 @@
     "src/config.c",
     "src/index.c",
     "src/transports/local.c"
+   ]
+  },
+  {
+   "sha": "d6fb09240913c9756de5f4a2462062008ebac252",
+   "ct": 1352823785,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "Win32 CryptoAPI and CNG support for SHA1",
+   "c_files": [
+    "src/filebuf.c",
+    "src/global.h",
+    "src/hash.c",
+    "src/hash.h",
+    "src/hash/hash_generic.c",
+    "src/hash/hash_generic.h",
+    "src/hash/hash_openssl.h",
+    "src/hash/hash_ppc.c",
+    "src/hash/hash_ppc.h",
+    "src/hash/hash_win32.c",
+    "src/hash/hash_win32.h",
+    "src/indexer.c",
+    "src/odb.c",
+    "src/pack-objects.c",
+    "tests-clar/object/raw/hash.c"
    ]
   },
   {
@@ -9244,6 +10531,16 @@
    ]
   },
   {
+   "sha": "6edefa149126955dbdf1c866ef5b2ec85be5031a",
+   "ct": 1352141893,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Don't expect the 'empty-remote-url' remote to be listed\"",
+   "c_files": [
+    "tests-clar/network/remotes.c"
+   ]
+  },
+  {
    "sha": "35d255fda66abffc58d2c7a847aa86840727b4a0",
    "ct": 1352052822,
    "class": "other-fix",
@@ -9387,6 +10684,17 @@
    ]
   },
   {
+   "sha": "5e4f2b5faaa86843befadcda2fb784301254e452",
+   "ct": 1350407925,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "Support pthread_cond_* on Win32",
+   "c_files": [
+    "src/win32/pthread.c",
+    "src/win32/pthread.h"
+   ]
+  },
+  {
    "sha": "52032ae53689ac37350f6af3bf1834122e4b3cf0",
    "ct": 1350330886,
    "class": "other-fix",
@@ -9443,6 +10751,16 @@
    "subject": "Fix buffer overrun in git_buf_put_base64",
    "c_files": [
     "src/buffer.c"
+   ]
+  },
+  {
+   "sha": "aeba5e175a58eebc5eae43adaa40955d2a9f55c3",
+   "ct": 1349906356,
+   "class": "regression",
+   "why": "references 22935b06d1 (3 d earlier)",
+   "subject": "http: don't discard the HEAD ref",
+   "c_files": [
+    "src/transports/http.c"
    ]
   },
   {
@@ -9536,6 +10854,16 @@
    ]
   },
   {
+   "sha": "7c411fd9b2aa63cdf6ace07640fdae91b695660b",
+   "ct": 1349119975,
+   "class": "extrinsic",
+   "why": "env 'Win64'",
+   "subject": "Fix up more Win64 compile warnings",
+   "c_files": [
+    "src/refs.c"
+   ]
+  },
+  {
    "sha": "9063be1f45287f945125315e7782745da8c1005d",
    "ct": 1349105585,
    "class": "other-fix",
@@ -9543,6 +10871,27 @@
    "subject": "remote: Fix mid-block declaration",
    "c_files": [
     "src/remote.c"
+   ]
+  },
+  {
+   "sha": "19aa8416e59e6c8f01c6b850ce6bb3e2f7457236",
+   "ct": 1348947079,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "Silence MinGW warnings",
+   "c_files": [
+    "src/config.h",
+    "src/fileops.c"
+   ]
+  },
+  {
+   "sha": "77ddd4ccc37bf124525236e5d7f30af34b9d8075",
+   "ct": 1348946647,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "Make it compile with MinGW on Windows",
+   "c_files": [
+    "src/fileops.c"
    ]
   },
   {
@@ -10066,6 +11415,16 @@
    "subject": "tree: fix ordering for git_tree_walk",
    "c_files": [
     "src/tree.c"
+   ]
+  },
+  {
+   "sha": "09a03995e00605c9b23f799673b7ccb304506e5b",
+   "ct": 1342581634,
+   "class": "extrinsic",
+   "why": "env 'OSX'",
+   "subject": "Checkout: make core.symlinks test work on OSX.",
+   "c_files": [
+    "tests-clar/checkout/checkout.c"
    ]
   },
   {
@@ -10658,6 +12017,16 @@
    ]
   },
   {
+   "sha": "79fdde494f26cda54e7ed285e7ad82eef51245e1",
+   "ct": 1337026553,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Specifiy dllimport to MSVC if we're not building libgit2.dll\"",
+   "c_files": [
+    "include/git2/common.h"
+   ]
+  },
+  {
    "sha": "6fb1c0b489c49b761eeddd655dd01e61d402722d",
    "ct": 1336841492,
    "class": "extrinsic",
@@ -10721,6 +12090,19 @@
    ]
   },
   {
+   "sha": "ec42eafd4adea021d86c6fa2cbde92b87177bf3d",
+   "ct": 1336668769,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Hook up Windows compat fnmatch() for Solaris",
+   "c_files": [
+    "src/compat/fnmatch.c",
+    "src/compat/fnmatch.h",
+    "src/unix/posix.h",
+    "src/win32/posix.h"
+   ]
+  },
+  {
    "sha": "1956693fa0b112daf07240b119190663e2987b3d",
    "ct": 1336590889,
    "class": "extrinsic",
@@ -10728,6 +12110,16 @@
    "subject": "Fix MSVC compilation issue",
    "c_files": [
     "tests-clar/diff/blob.c"
+   ]
+  },
+  {
+   "sha": "2aa1e94d3075426563303816dce596793756ea6c",
+   "ct": 1336584634,
+   "class": "extrinsic",
+   "why": "env '64-bit'",
+   "subject": "Fix 64-bit build warning",
+   "c_files": [
+    "src/attr_file.c"
    ]
   },
   {
@@ -10759,6 +12151,18 @@
    "c_files": [
     "src/netops.c",
     "src/pkt.c"
+   ]
+  },
+  {
+   "sha": "9abb5bca5d094f832d2c68342aefc8809ec8ca09",
+   "ct": 1336464318,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "compat: make p_realpath Windows implementation be a bit more POSIX compliant and fail if the provided path does not lead to an existing entry",
+   "c_files": [
+    "src/path.c",
+    "src/win32/posix_w32.c",
+    "tests-clar/core/path.c"
    ]
   },
   {
@@ -10856,6 +12260,16 @@
    ]
   },
   {
+   "sha": "1adf8c6a9c2c0d8b4936bfc35b84357b13f5a2b2",
+   "ct": 1336164758,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "compat: va_copy on Win32 systems",
+   "c_files": [
+    "src/cc-compat.h"
+   ]
+  },
+  {
    "sha": "b709e95146b9d56e2c009915ccea7a86c77d4202",
    "ct": 1336154772,
    "class": "other-fix",
@@ -10949,6 +12363,16 @@
     "src/repository.c",
     "tests-clar/repo/getters.c",
     "tests-clar/repo/setters.c"
+   ]
+  },
+  {
+   "sha": "8c327228fdb0bcf130961362b14fec0e9a63c89a",
+   "ct": 1335026732,
+   "class": "regression",
+   "why": "references 69a4bc1988 (0 d earlier)",
+   "subject": "Check for _WIN32 instead of GIT_WIN32 or WIN32 to detect windows build environments",
+   "c_files": [
+    "src/xdiff/xinclude.h"
    ]
   },
   {
@@ -11607,6 +13031,16 @@
    ]
   },
   {
+   "sha": "7b2b4adfb1cb71f085a88418d1d5b631bf26ebd8",
+   "ct": 1323995968,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"config: Return ENOTFOUND when a variable was deleted\"",
+   "c_files": [
+    "src/config_file.c"
+   ]
+  },
+  {
    "sha": "7af26f8f5816ba602a30bbc1c8eb8eced1247bd6",
    "ct": 1323829456,
    "class": "other-fix",
@@ -11695,6 +13129,22 @@
    "subject": "Fixed crash in config parser when empty value is encountered.",
    "c_files": [
     "src/config_file.c"
+   ]
+  },
+  {
+   "sha": "11d51ca63184b760e2537bbe08c5ca4c63bd4854",
+   "ct": 1319676224,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "windows: Add support for non-UTF codepages",
+   "c_files": [
+    "include/git2/windows.h",
+    "src/config.c",
+    "src/win32/dir.c",
+    "src/win32/posix.h",
+    "src/win32/posix_w32.c",
+    "src/win32/utf-conv.c",
+    "src/win32/utf-conv.h"
    ]
   },
   {
@@ -11836,6 +13286,21 @@
    ]
   },
   {
+   "sha": "01d7fded1b233b6a8fcfeec4eaf00b7dc9cc7316",
+   "ct": 1317126798,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Rewrite getenv to use Win32 version on Windows\"",
+   "c_files": [
+    "src/config.c",
+    "src/posix.c",
+    "src/posix.h",
+    "src/win32/posix_w32.c",
+    "tests/t15-config.c",
+    "tests/t16-remotes.c"
+   ]
+  },
+  {
    "sha": "a58881274d5682fd25fe40f2c644d30510d52d99",
    "ct": 1316556897,
    "class": "extrinsic",
@@ -11916,6 +13381,28 @@
     "tests-clay/clay_main.c",
     "tests-clay/status/single.c",
     "tests-clay/status/worktree.c"
+   ]
+  },
+  {
+   "sha": "784b3b494f057df1e854395f9e640bc25911e542",
+   "ct": 1316142938,
+   "class": "extrinsic",
+   "why": "env 'Solaris'",
+   "subject": "Fixed typo in example Makefile code and slimmed it down more. Reverted signature of git_signature_new. Removed error check wrappers (voted down). Made Makefile work out of the box on Linux and Solaris when standard cmake build instructions for the library are followed.",
+   "c_files": [
+    "examples/general.c",
+    "include/git2/signature.h",
+    "src/signature.c"
+   ]
+  },
+  {
+   "sha": "79a343968a4a91c98fae1afa61cdadc5b573c93d",
+   "ct": 1315858979,
+   "class": "regression",
+   "why": "references 932669b865 (18 d earlier)",
+   "subject": "Fix a bug and GCC warning introduced in 932669b",
+   "c_files": [
+    "src/config_file.c"
    ]
   },
   {
@@ -12438,6 +13925,16 @@
    ]
   },
   {
+   "sha": "26911cbd9263ef0a75f8e1ac01f695790b72b559",
+   "ct": 1309980471,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix MSVC compilation warnings",
+   "c_files": [
+    "tests/t00-core.c"
+   ]
+  },
+  {
    "sha": "39cdf2728052a0817c12ec4348eef2c5d0825661",
    "ct": 1309949303,
    "class": "extrinsic",
@@ -12666,6 +14163,17 @@
    ]
   },
   {
+   "sha": "63fadf99dccf51cf6f7912419690dd5af128a66a",
+   "ct": 1308159933,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Add mode_t definition in MSVC compat layer",
+   "c_files": [
+    "src/fileops.c",
+    "src/msvc-compat.h"
+   ]
+  },
+  {
    "sha": "737406b7ab95c4d789fbfaa4d0c957bdc95387da",
    "ct": 1308069079,
    "class": "other-fix",
@@ -12674,6 +14182,16 @@
    "c_files": [
     "include/git2/oid.h",
     "src/oid.c"
+   ]
+  },
+  {
+   "sha": "95818ff73aa8af414c4c893a5088656ac07a6de4",
+   "ct": 1307857076,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix filebuf0 test which was failing on Windows",
+   "c_files": [
+    "tests/t00-core.c"
    ]
   },
   {
@@ -12689,6 +14207,26 @@
    ]
   },
   {
+   "sha": "e6480970b400b38c041ffedd611632eea2d720ea",
+   "ct": 1307707254,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Add missing function declarations to avoid MSVC compiler warnings",
+   "c_files": [
+    "src/fileops.h"
+   ]
+  },
+  {
+   "sha": "732eb0a8d9b5d3a217421ec61e2b2335fc5a1e36",
+   "ct": 1307706865,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Add some missing MSVC compatibility defines",
+   "c_files": [
+    "src/msvc-compat.h"
+   ]
+  },
+  {
    "sha": "ae496955d23d8c323259c0e090911d6fa3e2c3dc",
    "ct": 1307545421,
    "class": "extrinsic",
@@ -12700,6 +14238,17 @@
     "src/fileops.h",
     "src/index.c",
     "src/msvc-compat.h"
+   ]
+  },
+  {
+   "sha": "ee4912bf795237cb235b3d6533e9046fcd7e12b7",
+   "ct": 1307444083,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"common: Include stat.h in include/git2/common.h instead of src/common.h\"",
+   "c_files": [
+    "include/git2/common.h",
+    "src/common.h"
    ]
   },
   {
@@ -12771,6 +14320,17 @@
    "why": "",
    "subject": "Repository: Fixed retrieve_device return type.",
    "c_files": [
+    "src/repository.c"
+   ]
+  },
+  {
+   "sha": "393a9f9ee12fa635656f43155df1f664dfbb7215",
+   "ct": 1307313203,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix build errors on MSVC",
+   "c_files": [
+    "src/odb_pack.c",
     "src/repository.c"
    ]
   },
@@ -13176,6 +14736,17 @@
    ]
   },
   {
+   "sha": "f3564e1e29c065f980e09d78349590ef2ab357b1",
+   "ct": 1301911943,
+   "class": "regression",
+   "why": "references 9282e921a3 (65 d earlier)",
+   "subject": "Fix tag reference name in testrepo.git",
+   "c_files": [
+    "tests/t08-tag.c",
+    "tests/t10-refs.c"
+   ]
+  },
+  {
    "sha": "29e1789b34d9aa5e486ca12937899a43f2e2407b",
    "ct": 1301908483,
    "class": "other-fix",
@@ -13194,6 +14765,16 @@
    "subject": "Don't leak if config parsing fails",
    "c_files": [
     "src/config.c"
+   ]
+  },
+  {
+   "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+   "ct": 1301340927,
+   "class": "regression",
+   "why": "references 72a3fe42fb (7 d earlier)",
+   "subject": "libgit2 version 0.11.0, \"McSwifty\"",
+   "c_files": [
+    "include/git2.h"
    ]
   },
   {
@@ -13246,6 +14827,28 @@
    "subject": "Fix gitfo_mv() behavior when running on Windows",
    "c_files": [
     "src/fileops.c"
+   ]
+  },
+  {
+   "sha": "b932ef5b3d77b26b8f558bafa3ee416595279dce",
+   "ct": 1300819110,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix MSVC warnings when building threads",
+   "c_files": [
+    "src/thread-utils.h"
+   ]
+  },
+  {
+   "sha": "99baacfb5687c266df78be4442d30f2f2dc19a28",
+   "ct": 1300728465,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix MSVC warnings",
+   "c_files": [
+    "src/cache.c",
+    "src/commit.c",
+    "tests/t13-threads.c"
    ]
   },
   {
@@ -13802,6 +15405,21 @@
    ]
   },
   {
+   "sha": "e035685f272579a8620741aaad521540712c0725",
+   "ct": 1293057881,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Properly export all external symbols in Win32\"",
+   "c_files": [
+    "src/delta-apply.h",
+    "src/dir.h",
+    "src/fileops.h",
+    "src/map.h",
+    "src/thread-utils.h",
+    "src/util.h"
+   ]
+  },
+  {
    "sha": "40c44d2fb63dbe484824c9dbc7c098c797ad10a1",
    "ct": 1292791820,
    "class": "other-fix",
@@ -13837,6 +15455,16 @@
    ]
   },
   {
+   "sha": "5b8bb8e7c66fa4477301da8ce99499c2ff60e168",
+   "ct": 1292106031,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "Minor modifications for MinGW/Cygwin compatibility.",
+   "c_files": [
+    "tests/test_main.c"
+   ]
+  },
+  {
    "sha": "6c14d641234d74dcc8a9e09ce1a6d461b3c193e9",
    "ct": 1291949120,
    "class": "other-fix",
@@ -13860,6 +15488,16 @@
    ]
   },
   {
+   "sha": "599955586da1c3ad514f3e65f1081d2012ec862d",
+   "ct": 1291319283,
+   "class": "extrinsic",
+   "why": "env 'Mac OS X'",
+   "subject": "Fix segfault handler in Mac OS X",
+   "c_files": [
+    "tests/test_main.c"
+   ]
+  },
+  {
    "sha": "824f4acde208670490eab77b24cb58a0216ba1df",
    "ct": 1290550995,
    "class": "extrinsic",
@@ -13878,6 +15516,18 @@
    "subject": "Fix gitfo_isdir() in Win32 systems",
    "c_files": [
     "src/fileops.c"
+   ]
+  },
+  {
+   "sha": "6b1eab3976b5b7cf4e65b9d12e5e25a98411c4da",
+   "ct": 1290550995,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Fix MSVC warnings and errors",
+   "c_files": [
+    "src/repository.c",
+    "src/tag.c",
+    "tests/t0501-walk.c"
    ]
   },
   {
@@ -13975,6 +15625,16 @@
     "tests/t0402-details.c",
     "tests/t0403-write.c",
     "tests/t0902-modify.c"
+   ]
+  },
+  {
+   "sha": "2d16373cb8d8c22b3ec99a6936b82821e99e64a5",
+   "ct": 1288130349,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "msvc: Fix an \"conversion, possible loss of data\" warning",
+   "c_files": [
+    "tests/t0603-sort.c"
    ]
   },
   {
@@ -14086,6 +15746,36 @@
    "subject": "Fix sparse warnings: \"Using plain integer as NULL pointer\"",
    "c_files": [
     "src/commit.c"
+   ]
+  },
+  {
+   "sha": "468b12adb15f5546e7c5536f72204605fbd83f6d",
+   "ct": 1275470335,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "msvc: tests/t0403-lists.c: Fix a compiler warning",
+   "c_files": [
+    "tests/t0403-lists.c"
+   ]
+  },
+  {
+   "sha": "4e0d6d864d3632a820d8bf3dd89ff333b9bbd34d",
+   "ct": 1275470335,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "msvc: Fix an \"conversion, loss of data\" compiler warning",
+   "c_files": [
+    "src/revwalk.h"
+   ]
+  },
+  {
+   "sha": "5440906feb5e41241a699ee413475b7911284c41",
+   "ct": 1275470335,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "msvc: Fix some compiler warnings",
+   "c_files": [
+    "src/revobject.c"
    ]
   },
   {
@@ -14208,6 +15898,16 @@
    ]
   },
   {
+   "sha": "e272b10388ebc4b7ed9fe2b42dd46e367193c218",
+   "ct": 1272484556,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "MSVC: Fix some compiler warnings",
+   "c_files": [
+    "src/block-sha1/sha1.c"
+   ]
+  },
+  {
    "sha": "e2337f39c3a4ab046b7a572fce89df27451fd2bb",
    "ct": 1272484504,
    "class": "regression",
@@ -14215,6 +15915,18 @@
    "subject": "MSVC: Fix a syntax error caused by an inline function definition",
    "c_files": [
     "src/bswap.h"
+   ]
+  },
+  {
+   "sha": "e8cc449fe9c99f9ca35088e3247ab9c0088081fe",
+   "ct": 1267387856,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: Add separate MinGW and MSVC compatability header files",
+   "c_files": [
+    "src/common.h",
+    "src/mingw-compat.h",
+    "src/msvc-compat.h"
    ]
   },
   {
@@ -14277,6 +15989,52 @@
    ]
   },
   {
+   "sha": "a1c0728d12b170e1e643f219fab53b03cd4e1b09",
+   "ct": 1264018507,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "Add support for the MinGW platform",
+   "c_files": [
+    "src/cc-compat.h",
+    "src/common.h"
+   ]
+  },
+  {
+   "sha": "73c4dd9253f8d43c436fc88e64096910f4f1b8ee",
+   "ct": 1245145214,
+   "class": "extrinsic",
+   "why": "env 'MSVC'",
+   "subject": "Add noreturn declaration compatible with the MSVC compiler.",
+   "c_files": [
+    "tests/t0020-dirent.c",
+    "tests/test_lib.h"
+   ]
+  },
+  {
+   "sha": "8a086f872a3bb2cf8e437f0e374ea18e5cbaa899",
+   "ct": 1245044068,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: Add support for the MS Visual C/C++ compiler",
+   "c_files": [
+    "src/cc-compat.h",
+    "src/common.h",
+    "src/git/common.h",
+    "src/odb.c"
+   ]
+  },
+  {
+   "sha": "10aa3fa72afab7ee31e116ae06442fe0f7b79df2",
+   "ct": 1244196864,
+   "class": "extrinsic",
+   "why": "env 'msvc'",
+   "subject": "Fix some \"signed/unsigned mismatch\" (msvc) compiler warnings",
+   "c_files": [
+    "src/util.c",
+    "src/win32/dir.c"
+   ]
+  },
+  {
    "sha": "ac04bdf6e0ee6bb4286343bc70d745146eb1e506",
    "ct": 1244190071,
    "class": "other-fix",
@@ -14284,6 +16042,16 @@
    "subject": "Fix a usage error in a call to the object_file_name() function",
    "c_files": [
     "src/odb.c"
+   ]
+  },
+  {
+   "sha": "fc3c3a2083e9f6f89e6bd53e9420e70d1e357c9b",
+   "ct": 1237341510,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "Avoid using a gcc compiler language extension",
+   "c_files": [
+    "src/fileops.c"
    ]
   },
   {
@@ -14307,6 +16075,17 @@
    ]
   },
   {
+   "sha": "3a33c7b37f55d5bd30ff944625499e64919b9a9d",
+   "ct": 1230962027,
+   "class": "extrinsic",
+   "why": "env 'cygwin'",
+   "subject": "Fix snprintf compiler warning on cygwin",
+   "c_files": [
+    "src/common.h",
+    "src/odb.c"
+   ]
+  },
+  {
    "sha": "11bb049bdddf1d203dfe8fd6031c4dba328a7525",
    "ct": 1230961312,
    "class": "other-fix",
@@ -14325,6 +16104,20 @@
    "c_files": [
     "src/common.h",
     "src/odb.c"
+   ]
+  },
+  {
+   "sha": "a1d34bc000cee6d72c3b5e329faa58424641611f",
+   "ct": 1230702971,
+   "class": "extrinsic",
+   "why": "env 'Mac OS X'",
+   "subject": "Support building on Mac OS X by using pthread_getspecific for TLS",
+   "c_files": [
+    "src/common.h",
+    "src/errors.c",
+    "src/git/errors.h",
+    "src/git/thread-utils.h",
+    "tests/t0000-errno.c"
    ]
   },
   {
@@ -14369,18 +16162,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 29,
-  "extrinsic|B": 26,
-  "extrinsic|B2": 10,
-  "extrinsic|C": 41,
   "other-fix|A": 261,
   "other-fix|B": 197,
   "other-fix|B2": 102,
   "other-fix|B3": 19,
-  "other-fix|C": 538,
-  "regression|A": 13,
-  "regression|B": 3,
-  "regression|B2": 2,
-  "regression|C": 41
+  "other-fix|C": 538
  }
 }

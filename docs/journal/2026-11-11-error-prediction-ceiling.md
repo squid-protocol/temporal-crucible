@@ -8,7 +8,7 @@ theme: defect-prediction
 ids:
 docs: docs/ceil.md
 links: temporal-crucible#92; temporal-crucible#96
-takehome: With a measured ceiling, a file-year fix model reaches recall@20%-of-lines 0.37 in sample and 0.27 out of repo against an attainable 0.45 and a perfect-rate ceiling of 0.66; CGR-M1's three network terms all survive author and change-coupling controls and file-clustered SEs (1.29/1.49/1.31), author count is the strongest term in the model at 2.06, and label quality does not look like the binding constraint.
+takehome: A file-year fix model reaches recall@20%-of-lines 0.30 out of repo against an attainable 0.47 and a perfect-rate ceiling of 0.68; M1's three network terms all survive author and change-coupling controls with file-clustered SEs (1.29/1.49/1.31) and author count is the strongest term at 2.06; fixing the labels buys 3-4 points and closes the C/non-C gap but leaves the 22-point unmeasured-rate wall untouched, and raises dispersion rather than lowering it, so the headroom is real signal and not label noise.
 ---
 
 # How good could error prediction get, and does M1 survive its missing controls? (CEIL)
@@ -63,6 +63,24 @@ and raw ceilings are not comparable.
   it drops prior fix 2.10→1.65 and churn 1.22→1.10.
 - Network's contribution is statistically solid but practically small: chi2 575 on 3 df, +0.008
   pseudo-R².
+
+## Re-run on v3c labels (same day)
+
+Re-ran the whole ladder on the FIXLIKE v3c event sets (`other-fix` precision 0.558 → 0.761; see
+`docs/otherfix_audit.md`), changing nothing else. The frame is identical at 57,057 file-years, and the
+two `regression` arms are unchanged as a built-in control, since amendment 2 is scoped to `other-fix`.
+
+- **Labels cost 3-4 points; the wall is worth 22.** Realized share of attainable AUC 0.780 → 0.823,
+  out-of-repo recall@20% 0.273 → 0.299. But the `oracle-mu` → `oracle-lam` headroom on recall@20% was
+  +0.210 on v1 labels and +0.218 on v3c — unchanged. "Labels are a tax, not the wall" is now measured.
+- **The language gap closed as the audit predicted.** Realized AUC gap C vs non-C: 0.061 → 0.019.
+- **The registered prediction was wrong: `alpha` rose** (1.281 → 1.378; 1.556 → 1.871 outside C). The
+  commits rule C removed — lint, javadoc, formatting, dependency bumps — spread far more evenly across
+  a codebase than real fixes do, so mixing them in *diluted* the concentration. Label noise was
+  **masking** rate heterogeneity, not manufacturing it, and the perfect-knowledge ceiling rose with the
+  cleanup (recall@20% 0.661 → 0.684; 0.736 → 0.817 outside C).
+- So the headroom is real unexplained signal, not measurement error — leaving unused covariates or the
+  discovery/attention process as the only live explanations, neither testable on this panel.
 
 ## Take-home
 

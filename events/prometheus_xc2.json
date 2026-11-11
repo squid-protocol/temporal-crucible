@@ -55,6 +55,31 @@
    ]
   },
   {
+   "sha": "f0bf974a66a488b25b937f011f17bb0b4024b168",
+   "ct": 1793795254,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb/chunks: close head chunk file after repair read error (#20002)",
+   "c_files": [
+    "tsdb/chunks/head_chunks.go",
+    "tsdb/chunks/head_chunks_test.go"
+   ]
+  },
+  {
+   "sha": "4a933f89fa96c56ad69e7c02dc5f40e06d93440e",
+   "ct": 1793722899,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb: keep head chunk file numbering monotonic across truncation (#20149)",
+   "c_files": [
+    "tsdb/chunks/chunks.go",
+    "tsdb/chunks/head_chunks.go",
+    "tsdb/chunks/head_chunks_test.go",
+    "tsdb/head_test.go",
+    "tsdb/ooo_samples_lost_after_restart_test.go"
+   ]
+  },
+  {
    "sha": "ef78ff64267724c8ecd1a1283cad49b365a8b67f",
    "ct": 1793473274,
    "class": "other-fix",
@@ -86,6 +111,49 @@
    "c_files": [
     "discovery/linode/linode.go",
     "discovery/linode/linode_test.go"
+   ]
+  },
+  {
+   "sha": "aead8aa3de89dd85c46e85699c7a75c6d26f7ae7",
+   "ct": 1793175731,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb/index: preserve wide postings seek targets (#19917)",
+   "c_files": [
+    "tsdb/index/postings.go",
+    "tsdb/index/postings_test.go"
+   ]
+  },
+  {
+   "sha": "ddc5f5d62de59f8b1cdf48dd5ab130422b241f6e",
+   "ct": 1793175581,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb/tombstones: merge intervals ending at maximum timestamp (#19919)",
+   "c_files": [
+    "tsdb/tombstones/tombstones.go",
+    "tsdb/tombstones/tombstones_test.go"
+   ]
+  },
+  {
+   "sha": "db1d03d69e19248a47bbf6c703f2d3631c7e41d2",
+   "ct": 1793004631,
+   "class": "regression",
+   "why": "references 039cb358a7 (89 d earlier)",
+   "subject": "tsdb: fix Windows test flake and timeout in WBL tests",
+   "c_files": [
+    "tsdb/db_append_v2_test.go",
+    "tsdb/db_test.go"
+   ]
+  },
+  {
+   "sha": "1de3487e05ddf216e87c5163ce49385b2da71d13",
+   "ct": 1792746359,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb: add persistent ticker regression tests",
+   "c_files": [
+    "tsdb/db_test.go"
    ]
   },
   {
@@ -139,6 +207,16 @@
    ]
   },
   {
+   "sha": "2bdfa2bbceb864117fdaa297aba2248fc30f377b",
+   "ct": 1792159438,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "storage/remote: add NHCB conversion regression tests",
+   "c_files": [
+    "storage/remote/queue_manager_test.go"
+   ]
+  },
+  {
    "sha": "80a3b6290064fbac73fd031ff163771ce019b8a5",
    "ct": 1792054600,
    "class": "other-fix",
@@ -159,6 +237,30 @@
    ]
   },
   {
+   "sha": "91be14c0c20a7ae4f1a6a1971b39e2712e3eb76c",
+   "ct": 1792054506,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: bound query cost enforcement and estimation",
+   "c_files": [
+    "promql/engine.go",
+    "promql/engine_test.go",
+    "promql/estimate.go",
+    "promql/estimate_resource_test.go",
+    "promql/estimate_test.go",
+    "promql/matrix_budget.go",
+    "promql/matrix_budget_test.go",
+    "promql/query_cost_duration_test.go",
+    "storage/fanout.go",
+    "storage/fanout_test.go",
+    "storage/interface.go",
+    "storage/remote/read_test.go",
+    "storage/remote/storage.go",
+    "tsdb/query_cost.go",
+    "tsdb/query_cost_test.go"
+   ]
+  },
+  {
    "sha": "e9130e06cf3f4b514c5e31cdb38ba34cadd06d2e",
    "ct": 1791907790,
    "class": "other-fix",
@@ -176,6 +278,28 @@
    "subject": "promql: avoid overflow in rad and deg (#19901)",
    "c_files": [
     "promql/functions.go"
+   ]
+  },
+  {
+   "sha": "d5b1febeb1ee3e804fec82af8281a3e96f613f1c",
+   "ct": 1791258074,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: handle empty input in BucketQuantile",
+   "c_files": [
+    "promql/quantile.go",
+    "promql/quantile_test.go"
+   ]
+  },
+  {
+   "sha": "7d608c8ad8aaf46148fcb419d7228e67123f230e",
+   "ct": 1791258073,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "model/histogram: preserve counter reset hints in CopyToSchema",
+   "c_files": [
+    "model/histogram/float_histogram.go",
+    "model/histogram/float_histogram_test.go"
    ]
   },
   {
@@ -250,6 +374,16 @@
    ]
   },
   {
+   "sha": "a5bdcc1a5ff54078e13625e3ada2abc08dfa0bbf",
+   "ct": 1790524180,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "web: upgrade exporter-toolkit to v0.20.0 to fix HTTP/2 ALPN under Go 1.27",
+   "c_files": [
+    "web/web_test.go"
+   ]
+  },
+  {
    "sha": "92125dc3e4b572d8436727c2402e78d599b163ec",
    "ct": 1790326444,
    "class": "other-fix",
@@ -302,6 +436,19 @@
    "subject": "promql: fix integral overflow and absence example",
    "c_files": [
     "promql/functions.go"
+   ]
+  },
+  {
+   "sha": "b42062c8799f3313fb8ebcf2122ae2ef02ae60fd",
+   "ct": 1790143790,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "perf(search): reduce allocations in Jaro-Winkler matching",
+   "c_files": [
+    "util/strutil/jarowinkler.go",
+    "util/strutil/jarowinkler_bench_test.go",
+    "util/strutil/jarowinkler_test.go",
+    "web/api/v1/search_filters_test.go"
    ]
   },
   {
@@ -421,6 +568,17 @@
    "c_files": [
     "web/api/v1/api.go",
     "web/api/v1/api_test.go"
+   ]
+  },
+  {
+   "sha": "56ed1f1249c1bf2abcc8b85cbe0cb34dba899efe",
+   "ct": 1789048027,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "cmd/prometheus: wire metadata-wal-records feature flag to TSDB Head option",
+   "c_files": [
+    "cmd/prometheus/features_test.go",
+    "cmd/prometheus/main.go"
    ]
   },
   {
@@ -721,6 +879,36 @@
    ]
   },
   {
+   "sha": "245e16d700888be167e4ab8bc486d0936ab9272e",
+   "ct": 1786193023,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "add missing filepath.FromSlash where required - fix windows tests",
+   "c_files": [
+    "config/config_test.go"
+   ]
+  },
+  {
+   "sha": "87288db87a4641ba5843b71f18e48ff8a63f6029",
+   "ct": 1786187127,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "config: A missing OTLPConfig to windows expected config - fixes failing test on windows",
+   "c_files": [
+    "config/config_windows_test.go"
+   ]
+  },
+  {
+   "sha": "e3702fe86c13c96ab35aa340fff9aece8e0a959c",
+   "ct": 1786185712,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "web/api/v1: Fix tests that will always fail on windows - no guard/handling",
+   "c_files": [
+    "web/api/v1/openapi_golden_test.go"
+   ]
+  },
+  {
    "sha": "6ac4326f8fe09424a8297cb3ba9c60d0bb2f9275",
    "ct": 1786178963,
    "class": "other-fix",
@@ -778,6 +966,16 @@
    ]
   },
   {
+   "sha": "039cb358a7d9445115bf9dc99a44df3808154be3",
+   "ct": 1785309118,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "tsdb: fix flaky TestWBLCorruption on Windows",
+   "c_files": [
+    "tsdb/db_test.go"
+   ]
+  },
+  {
    "sha": "4c4adeb8a6524e8897a56a1e5fa59fd4febbb0d9",
    "ct": 1785225701,
    "class": "other-fix",
@@ -809,6 +1007,17 @@
     "tsdb/head_append.go",
     "tsdb/head_test.go",
     "tsdb/head_wal.go"
+   ]
+  },
+  {
+   "sha": "73bf5ad2c829e9b3d159c77fcd07d77857f98863",
+   "ct": 1784100286,
+   "class": "regression",
+   "why": "references 59c42d4731 (8 d earlier)",
+   "subject": "tsdb: fix hang in TestQuerierShouldNotFailIfOOOCompactionOccursAfterRetrievingQuerier",
+   "c_files": [
+    "tsdb/db_append_v2_test.go",
+    "tsdb/db_test.go"
    ]
   },
   {
@@ -903,6 +1112,27 @@
    ]
   },
   {
+   "sha": "fd62cdb87ddab65bd18c52a5f550861a0ea75600",
+   "ct": 1783424110,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "web/api: fix TestStats failing on Windows (timer granularity)",
+   "c_files": [
+    "web/api/v1/api_test.go"
+   ]
+  },
+  {
+   "sha": "ad59b2f54278616fcef781d85c4f9e647a210938",
+   "ct": 1783227447,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "discovery/moby: guard nil ContainerSpec for non-container swarm services",
+   "c_files": [
+    "discovery/moby/services.go",
+    "discovery/moby/services_test.go"
+   ]
+  },
+  {
    "sha": "fab4cd204dc74b4f1a64570077a2977c08c284dd",
    "ct": 1782823997,
    "class": "other-fix",
@@ -987,6 +1217,17 @@
     "config/config_test.go",
     "discovery/oci/oci.go",
     "discovery/oci/oci_test.go"
+   ]
+  },
+  {
+   "sha": "8892ec8112c7eec6a1341029f9594a2316fa6394",
+   "ct": 1782468042,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb: add regression tests for stale-block compaction segregation",
+   "c_files": [
+    "tsdb/compact_test.go",
+    "tsdb/db_test.go"
    ]
   },
   {
@@ -1131,6 +1372,17 @@
    ]
   },
   {
+   "sha": "c2b77f753bcea1dcec0e8285da5654bf3c7c3cf0",
+   "ct": 1780385620,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb: add regression tests for histogram pendingCommit on append error",
+   "c_files": [
+    "tsdb/head_append_v2_test.go",
+    "tsdb/head_test.go"
+   ]
+  },
+  {
    "sha": "56918ba0346d842ef93d4d97c38c07e7a6947ad4",
    "ct": 1780384505,
    "class": "other-fix",
@@ -1138,6 +1390,28 @@
    "subject": "tsdb: fix pendingCommit condition for classic histogram append",
    "c_files": [
     "tsdb/head_append.go"
+   ]
+  },
+  {
+   "sha": "95dfc47abce6616f55367f72e9ee683d2bc5ce94",
+   "ct": 1780337100,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: reduce per-step samples-read counting overhead",
+   "c_files": [
+    "promql/engine.go",
+    "promql/value.go"
+   ]
+  },
+  {
+   "sha": "daf64790da3d19c92b1fcb6f7bbf112b7377d34a",
+   "ct": 1780337100,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: count full window per step for @-modifier range-vector functions",
+   "c_files": [
+    "promql/engine.go",
+    "promql/engine_test.go"
    ]
   },
   {
@@ -1185,6 +1459,16 @@
    ]
   },
   {
+   "sha": "ef264fdf971da5ed5674c66ec2f2b130a48c1195",
+   "ct": 1779094857,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: merge innerHistogramBounds into correctForCounterResetsHistogram",
+   "c_files": [
+    "promql/functions.go"
+   ]
+  },
+  {
    "sha": "8a9f4ff4404e4e7e6c29616ce269633fd7ff2253",
    "ct": 1778790172,
    "class": "other-fix",
@@ -1227,6 +1511,26 @@
    "c_files": [
     "scrape/scrape_append_v2.go",
     "scrape/scrape_test.go"
+   ]
+  },
+  {
+   "sha": "7b29b912e3712cb06e93d3c2db7f77cc2b4fee96",
+   "ct": 1778659190,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"PromQL: Promote duration expressions as stable\"",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "cmd/promtool/main.go",
+    "promql/durations_test.go",
+    "promql/parser/features.go",
+    "promql/parser/generated_parser.y.go",
+    "promql/parser/parse.go",
+    "promql/parser/parse_test.go",
+    "promql/parser/prettier_test.go",
+    "promql/parser/printer_test.go",
+    "promql/promqltest/test.go",
+    "util/fuzzing/fuzz_test.go"
    ]
   },
   {
@@ -1350,6 +1654,16 @@
    ]
   },
   {
+   "sha": "027b76396d376bcc26be6a578b0e51078e39589c",
+   "ct": 1775556719,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tracing: add regression test for HTTP insecure mode",
+   "c_files": [
+    "tracing/tracing_test.go"
+   ]
+  },
+  {
    "sha": "b997a29e24d97d92bb3e57f4842184cff4e4b8fc",
    "ct": 1775556330,
    "class": "other-fix",
@@ -1468,6 +1782,18 @@
    ]
   },
   {
+   "sha": "9670de1c35d768ee8691a729d9f779566ba81ac6",
+   "ct": 1774366418,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"annotations: add warning for ineffective sort in range queries (#16628)\" (#18357)",
+   "c_files": [
+    "promql/engine.go",
+    "promql/engine_test.go",
+    "util/annotations/annotations.go"
+   ]
+  },
+  {
    "sha": "7bbff490a3bd72054c153940512b25d65b8bf514",
    "ct": 1773917357,
    "class": "other-fix",
@@ -1476,6 +1802,16 @@
    "c_files": [
     "discovery/azure/azure.go",
     "discovery/azure/azure_test.go"
+   ]
+  },
+  {
+   "sha": "d7bc621514f54c3dce2af2dfbbc81d6e6b79345d",
+   "ct": 1773878864,
+   "class": "extrinsic",
+   "why": "env 'aix'",
+   "subject": "Support the aix/ppc64 compilation target",
+   "c_files": [
+    "tsdb/fileutil/flock_aix.go"
    ]
   },
   {
@@ -1544,6 +1880,16 @@
    "c_files": [
     "storage/remote/queue_manager.go",
     "storage/remote/queue_manager_test.go"
+   ]
+  },
+  {
+   "sha": "264be9aa742e18ca218a8c65eb581394421b3420",
+   "ct": 1772538230,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix(discovery/file): Fix flaky test on Windows by replacing os.rename with os.WriteFile (#17269)",
+   "c_files": [
+    "discovery/file/file_test.go"
    ]
   },
   {
@@ -1646,6 +1992,16 @@
     "cmd/promtool/main.go",
     "cmd/promtool/main_test.go",
     "cmd/promtool/unittest.go"
+   ]
+  },
+  {
+   "sha": "3d2647dc6f5d1816fdc1f19b35d73dc5d0b1002e",
+   "ct": 1771234246,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "rules: fix flaky TestAsyncRuleEvaluation on Windows (#17965)",
+   "c_files": [
+    "rules/manager_test.go"
    ]
   },
   {
@@ -1783,6 +2139,16 @@
     "tsdb/head_append.go",
     "tsdb/head_append_v2_test.go",
     "tsdb/head_test.go"
+   ]
+  },
+  {
+   "sha": "6c18bba5c697c2b7febbaf863927a849c3f19fdc",
+   "ct": 1769788492,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"storage: add BenchmarkFanoutAppenderV2\"",
+   "c_files": [
+    "storage/fanout_test.go"
    ]
   },
   {
@@ -2064,6 +2430,18 @@
    "subject": "Fix(discovery/aws): Added SetDirectory method to EC2SDConfig.",
    "c_files": [
     "discovery/aws/ec2.go"
+   ]
+  },
+  {
+   "sha": "cd98ded6ea2b821c8b14c53372e73a8f3f42b1d2",
+   "ct": 1765579431,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "test: add regression test against remote write handler bad response stats",
+   "c_files": [
+    "storage/remote/client.go",
+    "storage/remote/write_handler.go",
+    "storage/remote/write_handler_test.go"
    ]
   },
   {
@@ -2592,6 +2970,56 @@
    ]
   },
   {
+   "sha": "172cde8af12a573b2143dd921fa195d5cf1511a0",
+   "ct": 1756451799,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"feat(storage): add new CombinedAppender interface and compatibility layer\"",
+   "c_files": [
+    "model/metadata/metadata.go",
+    "storage/compatibility.go",
+    "storage/interface.go"
+   ]
+  },
+  {
+   "sha": "794bf774c2d547f963b9c34ccdbcd26af59fc6ae",
+   "ct": 1756451797,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Reapply \"prw: use Unit and Type labels for metadata when feature flag is enabled (#17033)\"",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "storage/remote/queue_manager.go",
+    "storage/remote/queue_manager_test.go",
+    "storage/remote/read_test.go",
+    "storage/remote/storage.go",
+    "storage/remote/storage_test.go",
+    "storage/remote/write.go",
+    "storage/remote/write_test.go",
+    "tsdb/agent/db_test.go",
+    "web/api/v1/api_test.go"
+   ]
+  },
+  {
+   "sha": "f5fab4757733746a708e7b80324b8929c1b84856",
+   "ct": 1756451728,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"prw: use Unit and Type labels for metadata when feature flag is enabled (#17033)\"",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "storage/remote/queue_manager.go",
+    "storage/remote/queue_manager_test.go",
+    "storage/remote/read_test.go",
+    "storage/remote/storage.go",
+    "storage/remote/storage_test.go",
+    "storage/remote/write.go",
+    "storage/remote/write_test.go",
+    "tsdb/agent/db_test.go",
+    "web/api/v1/api_test.go"
+   ]
+  },
+  {
    "sha": "b98cc631a28adfa465798a9c10ce17145d97685e",
    "ct": 1756215953,
    "class": "other-fix",
@@ -2942,6 +3370,18 @@
    ]
   },
   {
+   "sha": "091e662f4d2e7b0e0310844fe49d7297d17f1bc4",
+   "ct": 1747766005,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "refactor(endpointslice): use service cache.Indexer to achieve better iteration performance (#16365)",
+   "c_files": [
+    "discovery/kubernetes/endpointslice.go",
+    "discovery/kubernetes/endpointslice_test.go",
+    "discovery/kubernetes/kubernetes.go"
+   ]
+  },
+  {
    "sha": "33578fedb3b4fac62ca167b4481b27aba0ea09d9",
    "ct": 1747049840,
    "class": "other-fix",
@@ -2949,6 +3389,17 @@
    "subject": "fix(config): respect GOGC environment variable if no \"runtime\" block exists",
    "c_files": [
     "config/config.go"
+   ]
+  },
+  {
+   "sha": "8b0d33e5b20475318a1a72857ed8a9947b13e1aa",
+   "ct": 1746970831,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "promql: support variable scalar parameter in aggregations in range queries (#16404)",
+   "c_files": [
+    "promql/engine.go",
+    "promql/value.go"
    ]
   },
   {
@@ -3027,6 +3478,17 @@
    "c_files": [
     "scrape/scrape.go",
     "scrape/scrape_test.go"
+   ]
+  },
+  {
+   "sha": "d085f7da9b36511b7c0a83972f2db1f7b6db5f69",
+   "ct": 1742913394,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"ruler: correct logging of alert name & template data\"",
+   "c_files": [
+    "rules/manager.go",
+    "template/template.go"
    ]
   },
   {
@@ -3318,6 +3780,16 @@
    ]
   },
   {
+   "sha": "c8c128b0f1c264455c2f7bc048c2492a54665bf5",
+   "ct": 1734363907,
+   "class": "extrinsic",
+   "why": "env '32-bit'",
+   "subject": "fix TestDropOldTimeSeries on 32-bit",
+   "c_files": [
+    "storage/remote/queue_manager_test.go"
+   ]
+  },
+  {
    "sha": "39f5a07236914ad0cf6c09d934f37ea7deda9886",
    "ct": 1734363907,
    "class": "extrinsic",
@@ -3332,6 +3804,16 @@
     "tsdb/querier_test.go",
     "tsdb/testutil.go",
     "tsdb/tsdbutil/histogram.go"
+   ]
+  },
+  {
+   "sha": "bdace977445a004862b0b82c5d15992703fd16ab",
+   "ct": 1734363901,
+   "class": "extrinsic",
+   "why": "env '32-bit'",
+   "subject": "fix TestCuttingNewHeadChunks/really_large_histograms on 32-bit",
+   "c_files": [
+    "model/histogram/test_utils.go"
    ]
   },
   {
@@ -3674,6 +4156,17 @@
    ]
   },
   {
+   "sha": "ba11a55df4a8fd4db4150444296cc411566cfd5a",
+   "ct": 1730218420,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Process `MemPostings.Delete()` with `GOMAXPROCS` workers\"",
+   "c_files": [
+    "tsdb/index/postings.go",
+    "tsdb/index/postings_test.go"
+   ]
+  },
+  {
    "sha": "eb3b349024de77bb57499fddf3a7f55b449f95cf",
    "ct": 1730100703,
    "class": "other-fix",
@@ -3905,6 +4398,18 @@
    ]
   },
   {
+   "sha": "b5479831b8a5e2723759c93bf1fa305d96ed53de",
+   "ct": 1727870193,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Unit test for regression in rate vs float and histogram mixup",
+   "c_files": [
+    "promql/engine_test.go",
+    "storage/buffer_test.go",
+    "storage/series.go"
+   ]
+  },
+  {
    "sha": "f1c57a95ed7df70176934a38799354f692ac8963",
    "ct": 1727866323,
    "class": "other-fix",
@@ -3919,6 +4424,18 @@
     "scrape/manager_test.go",
     "scrape/scrape.go",
     "scrape/scrape_test.go"
+   ]
+  },
+  {
+   "sha": "6b247c50d236c936e3499ccbb164749268537030",
+   "ct": 1727730632,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Merge pull request #14769 from roidelapluie/autoreload\"",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "config/reload.go",
+    "config/reload_test.go"
    ]
   },
   {
@@ -3993,6 +4510,18 @@
    "c_files": [
     "scrape/scrape.go",
     "scrape/scrape_test.go"
+   ]
+  },
+  {
+   "sha": "536d9f9ce989b670974e94b5db12f7bee0276e8e",
+   "ct": 1725553062,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "BUGFIX: TSDB: panic in query during truncation with OOO head (#14831)",
+   "c_files": [
+    "tsdb/head.go",
+    "tsdb/head_test.go",
+    "tsdb/ooo_head_read.go"
    ]
   },
   {
@@ -4090,6 +4619,19 @@
    ]
   },
   {
+   "sha": "ef649d59688f71fbd624e849c8e20c6f4b8c98c4",
+   "ct": 1724655376,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \" Store `mmMaxTime` in same field as `seriesShard`\"",
+   "c_files": [
+    "tsdb/head.go",
+    "tsdb/head_read.go",
+    "tsdb/head_test.go",
+    "tsdb/head_wal.go"
+   ]
+  },
+  {
    "sha": "d4994e5bc44490441a6a6ac05331cc6fbabae0f5",
    "ct": 1724451327,
    "class": "other-fix",
@@ -4109,6 +4651,16 @@
    "c_files": [
     "config/config.go",
     "config/config_test.go"
+   ]
+  },
+  {
+   "sha": "41c076196ef6626585cac34ec758e6582019c010",
+   "ct": 1724421047,
+   "class": "regression",
+   "why": "references a36d1a8a92 (1 d earlier)",
+   "subject": "New cases in Test_ChunkQuerier_OOOQuery and Test_Querier_OOOQuery",
+   "c_files": [
+    "tsdb/db_test.go"
    ]
   },
   {
@@ -4154,6 +4706,16 @@
    "c_files": [
     "tsdb/ooo_head_read.go",
     "tsdb/ooo_head_read_test.go"
+   ]
+  },
+  {
+   "sha": "82f38d3e9a6b4eaa7a1ea804762c7da8ae44e930",
+   "ct": 1723208037,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix(tsdb/db_test.go): close the corrupted chunk after creating it to satisfy Windows FS",
+   "c_files": [
+    "tsdb/db_test.go"
    ]
   },
   {
@@ -4306,6 +4868,16 @@
    ]
   },
   {
+   "sha": "6e89250a5d937485a140c6ba6dcdb35d2db51cd0",
+   "ct": 1721984198,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Chunked remote read: close the querier earlier\"",
+   "c_files": [
+    "storage/remote/read_handler.go"
+   ]
+  },
+  {
    "sha": "fb2ebe1c3d615a7e2926b8fadf515853a59fdc7c",
    "ct": 1721152403,
    "class": "other-fix",
@@ -4346,6 +4918,17 @@
    ]
   },
   {
+   "sha": "7083ae8267ceead89b27621c165230cb0fd239ec",
+   "ct": 1720602031,
+   "class": "regression",
+   "why": "revert",
+   "subject": "[release 2.53] Revert 13583 to stop dropping samples in remote-write catch-up (#14446)",
+   "c_files": [
+    "tsdb/wlog/watcher.go",
+    "tsdb/wlog/watcher_test.go"
+   ]
+  },
+  {
    "sha": "e5c69685b5bb1a9cd19bac4a79470dbc766d509d",
    "ct": 1720409436,
    "class": "other-fix",
@@ -4353,6 +4936,73 @@
    "subject": "Fix web.cors.origin in command-line/prometheus.md",
    "c_files": [
     "cmd/prometheus/main.go"
+   ]
+  },
+  {
+   "sha": "9198952f7c6eddb6c2cd64eb5cb488599a5a9f23",
+   "ct": 1720128560,
+   "class": "regression",
+   "why": "revert",
+   "subject": "[PRW 2.0] Merging `remote-write-2.0` feature branch to main (PRW 2.0 support + metadata in WAL) (#14395)",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "cmd/prometheus/main_test.go",
+    "config/config.go",
+    "config/config_test.go",
+    "documentation/examples/remote_storage/example_write_adapter/server.go",
+    "prompb/codec.go",
+    "prompb/custom.go",
+    "prompb/io/prometheus/write/v2/codec.go",
+    "prompb/io/prometheus/write/v2/custom.go",
+    "prompb/io/prometheus/write/v2/custom_test.go",
+    "prompb/io/prometheus/write/v2/symbols.go",
+    "prompb/io/prometheus/write/v2/symbols_test.go",
+    "prompb/io/prometheus/write/v2/types.pb.go",
+    "prompb/io/prometheus/write/v2/types_test.go",
+    "prompb/rwcommon/codec_test.go",
+    "scrape/manager.go",
+    "scrape/scrape.go",
+    "storage/remote/client.go",
+    "storage/remote/codec.go",
+    "storage/remote/codec_test.go",
+    "storage/remote/metadata_watcher.go",
+    "storage/remote/metadata_watcher_test.go",
+    "storage/remote/otlptranslator/prometheus/normalize_name.go",
+    "storage/remote/otlptranslator/prometheus/unit_to_ucum.go",
+    "storage/remote/queue_manager.go",
+    "storage/remote/queue_manager_test.go",
+    "storage/remote/read_handler_test.go",
+    "storage/remote/read_test.go",
+    "storage/remote/storage.go",
+    "storage/remote/storage_test.go",
+    "storage/remote/write.go",
+    "storage/remote/write_handler.go",
+    "storage/remote/write_handler_test.go",
+    "storage/remote/write_test.go",
+    "tsdb/agent/db_test.go",
+    "tsdb/wlog/watcher.go",
+    "tsdb/wlog/watcher_test.go",
+    "web/api/v1/api.go",
+    "web/api/v1/api_test.go",
+    "web/api/v1/errors_test.go",
+    "web/web.go"
+   ]
+  },
+  {
+   "sha": "c94c5b64c35b20e7b9062ae325f91a169ddf8ffc",
+   "ct": 1720037937,
+   "class": "regression",
+   "why": "revert",
+   "subject": "feat: add limitk() and limit_ratio() operators (#12503)",
+   "c_files": [
+    "promql/bench_test.go",
+    "promql/engine.go",
+    "promql/engine_test.go",
+    "promql/parser/generated_parser.y.go",
+    "promql/parser/lex.go",
+    "promql/parser/parse.go",
+    "promql/promql_test.go",
+    "util/annotations/annotations.go"
    ]
   },
   {
@@ -4520,6 +5170,16 @@
    "c_files": [
     "rules/group.go",
     "rules/group_test.go"
+   ]
+  },
+  {
+   "sha": "180059e6fa07caecf978dc244ff5aa44aebddee0",
+   "ct": 1717598278,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Update scaleway-sdk-go and silence deprecation warnings",
+   "c_files": [
+    "discovery/scaleway/instance.go"
    ]
   },
   {
@@ -4892,6 +5552,31 @@
    ]
   },
   {
+   "sha": "78c5ce3196e729ded7dbe13cc5c92eb4196c2d19",
+   "ct": 1704480030,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Drop old inmemory samples (#13002)",
+   "c_files": [
+    "config/config.go",
+    "storage/remote/codec_test.go",
+    "storage/remote/queue_manager.go",
+    "storage/remote/queue_manager_test.go",
+    "storage/remote/write_handler_test.go"
+   ]
+  },
+  {
+   "sha": "252031c86f5c6fe7acad504bc6f3162175f347b2",
+   "ct": 1703963850,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Adding small test update for temp dir using t.TempDir (#13293)\"",
+   "c_files": [
+    "promql/engine_test.go",
+    "tsdb/tsdbutil/dir_locker_testutil.go"
+   ]
+  },
+  {
    "sha": "b012366c33cb673110421b9e20e35fde99c992db",
    "ct": 1703134985,
    "class": "other-fix",
@@ -4964,6 +5649,17 @@
    "class": "regression",
    "why": "regression word",
    "subject": "Fix tsdb.stripeSeries.gc so it handles conflicts properly (#13195)",
+   "c_files": [
+    "tsdb/head.go",
+    "tsdb/head_test.go"
+   ]
+  },
+  {
+   "sha": "ecc37588b00c5ec1d4f2349266a23b01f6c91743",
+   "ct": 1701099630,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tsdb: seriesHashmap.set by making receiver a pointer (#13193)",
    "c_files": [
     "tsdb/head.go",
     "tsdb/head_test.go"
@@ -5168,6 +5864,16 @@
    ]
   },
   {
+   "sha": "56b3a015b6864af3d9b4063f0807ddbc06fa46fc",
+   "ct": 1695213140,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression test for duplicate detection at chunk size limit",
+   "c_files": [
+    "tsdb/head_test.go"
+   ]
+  },
+  {
    "sha": "b2fa4d910a86b4093afc44b95d15907e553eeef4",
    "ct": 1694611120,
    "class": "other-fix",
@@ -5220,6 +5926,19 @@
    "subject": "textparse: Fix endless loop #12731",
    "c_files": [
     "model/textparse/protobufparse.go"
+   ]
+  },
+  {
+   "sha": "009017a3fb0219b0da7e4e2823bee772de306ffc",
+   "ct": 1692048579,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Remove deleted target from discovery manager\"",
+   "c_files": [
+    "discovery/legacymanager/manager.go",
+    "discovery/legacymanager/manager_test.go",
+    "discovery/manager.go",
+    "discovery/manager_test.go"
    ]
   },
   {
@@ -5316,6 +6035,17 @@
    "subject": "Fix path handling in File-SD watcher to allow directory monitoring on Windows",
    "c_files": [
     "discovery/file/file.go"
+   ]
+  },
+  {
+   "sha": "d19fa62476ada4ec6eb4399c93d0e11cca2aece9",
+   "ct": 1687261172,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Improving Performance on the API Gzip Handler (#12363)\"",
+   "c_files": [
+    "util/httputil/compression.go",
+    "util/httputil/compression_test.go"
    ]
   },
   {
@@ -5438,6 +6168,16 @@
    "subject": "fix: apply suggested changes",
    "c_files": [
     "cmd/promtool/main.go"
+   ]
+  },
+  {
+   "sha": "3ded84e649179b6b830b8aa29d980af04cef8bb7",
+   "ct": 1680176323,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "Fix TestCancelCompactions on windows",
+   "c_files": [
+    "tsdb/compact_test.go"
    ]
   },
   {
@@ -5779,6 +6519,16 @@
     "tsdb/compact.go",
     "tsdb/head_append.go",
     "tsdb/querier.go"
+   ]
+  },
+  {
+   "sha": "7a2d24b76af486dc8719faf2da5d138a10093f4f",
+   "ct": 1657096394,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "Fix flakiness in windows tests (#10983)",
+   "c_files": [
+    "cmd/prometheus/main_test.go"
    ]
   },
   {
@@ -6194,6 +6944,27 @@
    ]
   },
   {
+   "sha": "b48a1e9e9bc3575e2f6ef3e7ea8573434288e0bb",
+   "ct": 1637917886,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Replace vfsgen with embed for static web assets (#9719)\" (#9870)",
+   "c_files": [
+    "util/modtimevfs/modtimevfs.go",
+    "web/ui/doc.go"
+   ]
+  },
+  {
+   "sha": "2a3d62ac845689f1cd949cd50b99f43ed090f442",
+   "ct": 1637840275,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"promql: Remove unused Point.MarshalJSON method (#9860)\" (#9864)",
+   "c_files": [
+    "promql/value.go"
+   ]
+  },
+  {
    "sha": "1b74a3812e4fcf1e395fb12c443f8b573a08f15f",
    "ct": 1637827574,
    "class": "other-fix",
@@ -6252,6 +7023,16 @@
    "subject": "fix error message",
    "c_files": [
     "tsdb/chunks/head_chunks.go"
+   ]
+  },
+  {
+   "sha": "a0d31c28fc8981f5b05a006640b8a68fb90edc75",
+   "ct": 1636452447,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "tsdb: Add windows arm64 support.",
+   "c_files": [
+    "tsdb/fileutil/mmap_arm64.go"
    ]
   },
   {
@@ -6833,6 +7614,30 @@
    ]
   },
   {
+   "sha": "93dcc3c7be310be52d87113cdce4d9ac8297c7fb",
+   "ct": 1613169526,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Consider status code 429 as recoverable errors to avoid resharding (#8237)",
+   "c_files": [
+    "storage/remote/client.go",
+    "storage/remote/client_test.go",
+    "storage/remote/queue_manager.go"
+   ]
+  },
+  {
+   "sha": "49a8ce5239d5b05bfb6051301e7bfff6569ce2d9",
+   "ct": 1613119446,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Consider status code 429 as recoverable errors to avoid resharding (#8237)\"",
+   "c_files": [
+    "storage/remote/client.go",
+    "storage/remote/client_test.go",
+    "storage/remote/queue_manager.go"
+   ]
+  },
+  {
    "sha": "829b93989124c1087de96c6e03c119986bc4ae45",
    "ct": 1612959424,
    "class": "other-fix",
@@ -6997,6 +7802,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix metric description of prometheus_tsdb_symbol_table_size_bytes. (#8080)",
+   "c_files": [
+    "tsdb/db.go"
+   ]
+  },
+  {
+   "sha": "73e2ce1bd6436e6818389d4ca87a554e64b980b0",
+   "ct": 1602668124,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Do not ignore reload errors in compactHead (#8051)",
    "c_files": [
     "tsdb/db.go"
    ]
@@ -7199,6 +8014,25 @@
    "subject": "Fix golint issue in labels.go (#7730)",
    "c_files": [
     "pkg/labels/labels.go"
+   ]
+  },
+  {
+   "sha": "b58a61344334651f0000f9d467e76066a9ea998f",
+   "ct": 1596095142,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Replace sync/atomic with uber-go/atomic (#7683)",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "notifier/notifier.go",
+    "notifier/notifier_test.go",
+    "storage/remote/ewma.go",
+    "storage/remote/intern.go",
+    "storage/remote/intern_test.go",
+    "storage/remote/queue_manager.go",
+    "storage/remote/queue_manager_test.go",
+    "tsdb/head_bench_test.go",
+    "web/web.go"
    ]
   },
   {
@@ -7481,6 +8315,27 @@
    ]
   },
   {
+   "sha": "653f3435470407d973f342fbecccb826ea767264",
+   "ct": 1585163973,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert head posting optimization",
+   "c_files": [
+    "tsdb/block.go",
+    "tsdb/cmd/tsdb/main.go",
+    "tsdb/compact.go",
+    "tsdb/compact_test.go",
+    "tsdb/db_test.go",
+    "tsdb/head.go",
+    "tsdb/head_test.go",
+    "tsdb/mocks_test.go",
+    "tsdb/querier.go",
+    "tsdb/querier_bench_test.go",
+    "tsdb/querier_test.go",
+    "tsdb/wal/wal_test.go"
+   ]
+  },
+  {
    "sha": "269e7c8091e1dfcff05d3b4275c8c6b5a2c7d1fd",
    "ct": 1584992323,
    "class": "other-fix",
@@ -7605,6 +8460,16 @@
    "subject": "Fix panic when parsing varags (#6940)",
    "c_files": [
     "promql/parser/parse.go",
+    "promql/parser/parse_test.go"
+   ]
+  },
+  {
+   "sha": "1dbd799354504d3b943ba3e68e70822c9cbb4e35",
+   "ct": 1583482621,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "PromQL: Fix regression tests (#6935)",
+   "c_files": [
     "promql/parser/parse_test.go"
    ]
   },
@@ -7841,6 +8706,36 @@
    ]
   },
   {
+   "sha": "9adad8ad3045a93fff03400970f1aa77cc034cb0",
+   "ct": 1580243929,
+   "class": "regression",
+   "why": "references d992c36b3a (0 d earlier)",
+   "subject": "Remove MaxConcurrent from the PromQL engine opts (#6712)",
+   "c_files": [
+    "cmd/prometheus/main.go",
+    "promql/bench_test.go",
+    "promql/engine.go",
+    "promql/engine_test.go",
+    "promql/functions_test.go",
+    "promql/query_logger.go",
+    "promql/test.go",
+    "rules/alerting_test.go",
+    "rules/manager_test.go",
+    "rules/recording_test.go",
+    "web/api/v1/api_test.go"
+   ]
+  },
+  {
+   "sha": "3fbeee07fa79a80b4f4b6e8adc376da9cb8ac99a",
+   "ct": 1579687771,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "Fix flaky windows test (#6677)",
+   "c_files": [
+    "promql/engine_test.go"
+   ]
+  },
+  {
    "sha": "17683d074cc3f802fcc3842748131473ce89a20e",
    "ct": 1579687057,
    "class": "other-fix",
@@ -8068,6 +8963,17 @@
    ]
   },
   {
+   "sha": "6d931a219506f75bc88583ddcf47be1d52409550",
+   "ct": 1572342091,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix Windows support for custom-sd adapter (#6217)",
+   "c_files": [
+    "documentation/examples/custom-sd/adapter/adapter.go",
+    "documentation/examples/custom-sd/adapter/adapter_test.go"
+   ]
+  },
+  {
    "sha": "1afa476b8a87d918036c86092c55842a5eae1664",
    "ct": 1572055560,
    "class": "other-fix",
@@ -8100,6 +9006,19 @@
     "pkg/runtime/statfs.go",
     "pkg/runtime/statfs_default.go",
     "pkg/runtime/statfs_linux_386.go"
+   ]
+  },
+  {
+   "sha": "bca6e90ea6788100a56809e73f9eeaaa11480036",
+   "ct": 1571315889,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Integrate beginning of React UI (#5694)",
+   "c_files": [
+    "web/ui/assets_generate.go",
+    "web/ui/assets_vfsdata.go",
+    "web/ui/doc.go",
+    "web/ui/ui.go"
    ]
   },
   {
@@ -8521,6 +9440,28 @@
    ]
   },
   {
+   "sha": "8eeb70fee1fcee33c8821502c09ddb5ed3e450c0",
+   "ct": 1554279414,
+   "class": "extrinsic",
+   "why": "env 'macos'",
+   "subject": "remove Fsync workaround for macos. (#574)",
+   "c_files": [
+    "chunks/chunks.go",
+    "compact.go",
+    "db.go",
+    "fileutil/fileutil.go",
+    "fileutil/sync.go",
+    "fileutil/sync_darwin.go",
+    "fileutil/sync_linux.go",
+    "goversion/goversio_test.go",
+    "goversion/goversion.go",
+    "goversion/init.go",
+    "index/index.go",
+    "repair.go",
+    "wal/wal.go"
+   ]
+  },
+  {
    "sha": "b7e978d25577692b78b0f939233b192cb381e8b6",
    "ct": 1552947469,
    "class": "other-fix",
@@ -8651,6 +9592,17 @@
    ]
   },
   {
+   "sha": "b41d6d54f2262f089ff1b7151f67a00fcdfb8e0f",
+   "ct": 1550245661,
+   "class": "regression",
+   "why": "revert",
+   "subject": "storage/remote: increase timeouts for Travis CI (#5224)",
+   "c_files": [
+    "storage/remote/wal_watcher.go",
+    "storage/remote/wal_watcher_test.go"
+   ]
+  },
+  {
    "sha": "b93bafeee1c954c89fa5276e349de1ea45834794",
    "ct": 1549971553,
    "class": "other-fix",
@@ -8778,6 +9730,16 @@
    ]
   },
   {
+   "sha": "6d489a1004dc3f7fa1ebffb66f6cebc2a0278fe7",
+   "ct": 1545212447,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "fix TestWALSegmentSizeOption for  windows. (#482)",
+   "c_files": [
+    "db_test.go"
+   ]
+  },
+  {
    "sha": "1b166d7174e6cf05a0012f43053b3598b6c72eff",
    "ct": 1545131598,
    "class": "other-fix",
@@ -8809,6 +9771,17 @@
     "wal/wal.go",
     "wal/wal_test.go",
     "wal_test.go"
+   ]
+  },
+  {
+   "sha": "e3bdc463fa7f8d8b5dffe02f35a03012d4213fb5",
+   "ct": 1544603232,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"add logic to check if an azure VM is deallocated or not (#4908)\" (#4980)",
+   "c_files": [
+    "discovery/azure/azure.go",
+    "discovery/azure/azure_test.go"
    ]
   },
   {
@@ -8970,6 +9943,16 @@
    ]
   },
   {
+   "sha": "66b6b87cd4ce563d711da437734353c8320f0f60",
+   "ct": 1540235992,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "fix windows tests (#421)",
+   "c_files": [
+    "repair_test.go"
+   ]
+  },
+  {
    "sha": "5824d6902d09a6e44c9b7cd17e9a0e52f6be8fe3",
    "ct": 1539785047,
    "class": "other-fix",
@@ -9052,6 +10035,20 @@
    ]
   },
   {
+   "sha": "3bc6c670fa0dc41e540f3cb238e37e8fd0dcddab",
+   "ct": 1537291159,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Remove `prometheus_` prefix from metrics\"",
+   "c_files": [
+    "compact.go",
+    "db.go",
+    "head.go",
+    "wal.go",
+    "wal/wal.go"
+   ]
+  },
+  {
    "sha": "a8966cb53d39747c5d7b7ba787873b52899881d0",
    "ct": 1537203522,
    "class": "other-fix",
@@ -9125,6 +10122,18 @@
    ]
   },
   {
+   "sha": "a94450c2889d209dccb73e699870c7832188343c",
+   "ct": 1533040890,
+   "class": "extrinsic",
+   "why": "env 'openbsd'",
+   "subject": "Fix build for openbsd",
+   "c_files": [
+    "cmd/prometheus/limits_default.go",
+    "cmd/prometheus/vmlimits_default.go",
+    "cmd/prometheus/vmlimits_openbsd.go"
+   ]
+  },
+  {
    "sha": "8763dedb9d248d9db5317e6651a78ead47fedcea",
    "ct": 1532535943,
    "class": "other-fix",
@@ -9142,6 +10151,17 @@
    "subject": "Fix close handling",
    "c_files": [
     "wal.go"
+   ]
+  },
+  {
+   "sha": "7841d417b36464a3fccc57164b7637d7465d989c",
+   "ct": 1531999530,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Ensure blocks are time-ordered in memory",
+   "c_files": [
+    "db.go",
+    "db_test.go"
    ]
   },
   {
@@ -9287,6 +10307,18 @@
     "promql/engine.go",
     "promql/functions.go",
     "promql/quantile.go"
+   ]
+  },
+  {
+   "sha": "76c1b2cdb6c4616c24c367e78da5d127aa9a1afa",
+   "ct": 1527537636,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Ensure correct block order on reload",
+   "c_files": [
+    "block_test.go",
+    "db.go",
+    "db_test.go"
    ]
   },
   {
@@ -9464,6 +10496,16 @@
     "vendor/gopkg.in/fsnotify/fsnotify.v1/open_mode_bsd.go",
     "vendor/gopkg.in/fsnotify/fsnotify.v1/open_mode_darwin.go",
     "vendor/gopkg.in/fsnotify/fsnotify.v1/windows.go"
+   ]
+  },
+  {
+   "sha": "5b962c57489f6995f24c56fc4ac8b97faec753fd",
+   "ct": 1521549294,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Feature: Allow getting credentials via EC2 role (#3343)\" (#3985)",
+   "c_files": [
+    "discovery/ec2/ec2.go"
    ]
   },
   {
@@ -9834,6 +10876,27 @@
     "tombstones.go",
     "wal.go",
     "wal_test.go"
+   ]
+  },
+  {
+   "sha": "0e572686db7d7a46ecf184f87fec4f0a13c98547",
+   "ct": 1509030579,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Bypass the fanout storage merging if no remote storage is configured.\"",
+   "c_files": [
+    "storage/fanout.go"
+   ]
+  },
+  {
+   "sha": "9c3c98e8de5bd1ef5e9e3aa76d4510a767f02a25",
+   "ct": 1509021828,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Port 'Don't disable HTTP keep-alives for remote storage connections.' to 2.0 (see #3173)\"",
+   "c_files": [
+    "storage/remote/client.go",
+    "util/httputil/client.go"
    ]
   },
   {
@@ -10280,6 +11343,16 @@
    ]
   },
   {
+   "sha": "a280169427e6f4326e480d319b42ffbfc1f87b14",
+   "ct": 1497340282,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression test",
+   "c_files": [
+    "querier_test.go"
+   ]
+  },
+  {
    "sha": "baf5b0f0fccb0f597385f4a48986255d112901b8",
    "ct": 1497331347,
    "class": "other-fix",
@@ -10455,6 +11528,31 @@
    "subject": "Fixed fixed yaxis of stacked graph being cut off",
    "c_files": [
     "web/ui/bindata.go"
+   ]
+  },
+  {
+   "sha": "0e05cccfbd58cb753099782841e1a9f226a26307",
+   "ct": 1495054243,
+   "class": "extrinsic",
+   "why": "env 'Solaris'",
+   "subject": "updated logrus so Prometheus can build on Solaris/Illumos (#2733)",
+   "c_files": [
+    "vendor/github.com/Sirupsen/logrus/alt_exit.go",
+    "vendor/github.com/Sirupsen/logrus/doc.go",
+    "vendor/github.com/Sirupsen/logrus/entry.go",
+    "vendor/github.com/Sirupsen/logrus/exported.go",
+    "vendor/github.com/Sirupsen/logrus/formatter.go",
+    "vendor/github.com/Sirupsen/logrus/json_formatter.go",
+    "vendor/github.com/Sirupsen/logrus/logger.go",
+    "vendor/github.com/Sirupsen/logrus/logrus.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_appengine.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_bsd.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_linux.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_notwindows.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_solaris.go",
+    "vendor/github.com/Sirupsen/logrus/terminal_windows.go",
+    "vendor/github.com/Sirupsen/logrus/text_formatter.go",
+    "vendor/github.com/Sirupsen/logrus/writer.go"
    ]
   },
   {
@@ -10693,6 +11791,17 @@
    "c_files": [
     "web/federate.go",
     "web/federate_test.go"
+   ]
+  },
+  {
+   "sha": "47b0b9f7b0aeb9e1b566f4eddc877528b2a38a68",
+   "ct": 1491317730,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "vendor: add tsdb support for windows",
+   "c_files": [
+    "vendor/github.com/prometheus/tsdb/db_unix.go",
+    "vendor/github.com/prometheus/tsdb/db_windows.go"
    ]
   },
   {
@@ -11571,6 +12680,28 @@
    ]
   },
   {
+   "sha": "3f02e33e34e2c312db7bbe5ab7b991046f452c23",
+   "ct": 1476111831,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Re-add counting of evict chunk ops and decrementing NumMemChunks",
+   "c_files": [
+    "storage/local/chunk/chunk.go",
+    "storage/local/storage_test.go"
+   ]
+  },
+  {
+   "sha": "719508752b190a7c08da29b63e90fbb2fd4fde4a",
+   "ct": 1476109810,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Re-add counting of evict chunk ops and decrementing NumMemChunks",
+   "c_files": [
+    "storage/local/chunk/chunk.go",
+    "storage/local/storage_test.go"
+   ]
+  },
+  {
    "sha": "72cbf8af6fe480cd69765b08c49458bb2d02ce3f",
    "ct": 1475909340,
    "class": "other-fix",
@@ -11627,6 +12758,43 @@
     "promql/lex.go",
     "promql/parse.go",
     "promql/parse_test.go"
+   ]
+  },
+  {
+   "sha": "75bae065fdf1ff9b60508e12e24d650fd559abc2",
+   "ct": 1472929713,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Modify tests to adjust to reverting the /graph changes\"",
+   "c_files": [
+    "rules/alerting_test.go",
+    "rules/recording_test.go"
+   ]
+  },
+  {
+   "sha": "094a098ce6ded95fa4cebe12aaf6c30c5e2884be",
+   "ct": 1472929523,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Revert the /graph changes.\"",
+   "c_files": [
+    "template/template_test.go",
+    "util/strutil/strconv.go",
+    "util/strutil/strconv_test.go",
+    "web/ui/bindata.go"
+   ]
+  },
+  {
+   "sha": "aa43d34a86cf0124a1a8cecc92c544f7f4793d91",
+   "ct": 1472817549,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert the /graph changes.",
+   "c_files": [
+    "template/template_test.go",
+    "util/strutil/strconv.go",
+    "util/strutil/strconv_test.go",
+    "web/ui/bindata.go"
    ]
   },
   {
@@ -11764,6 +12932,16 @@
    "c_files": [
     "promql/printer.go",
     "promql/printer_test.go"
+   ]
+  },
+  {
+   "sha": "77f5b9d268abb4dbb933352c9169ad157cd0c08e",
+   "ct": 1459924791,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Simplify runtime version code more\"",
+   "c_files": [
+    "version/info.go"
    ]
   },
   {
@@ -12415,6 +13593,16 @@
    ]
   },
   {
+   "sha": "9d98910fca035a8573b43c0654248dffafd16170",
+   "ct": 1437563069,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Use Consul ServiceAddress instead of Address when set\"",
+   "c_files": [
+    "retrieval/discovery/consul.go"
+   ]
+  },
+  {
    "sha": "c5c7f9296016deedc5fef69858973040d4b10c47",
    "ct": 1437560926,
    "class": "regression",
@@ -12575,6 +13763,19 @@
    ]
   },
   {
+   "sha": "58ceae82bc06217895e13f0a150e7fae67932168",
+   "ct": 1434143546,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Allow ingested metrics to be relabeled.\"",
+   "c_files": [
+    "config/config.go",
+    "config/config_test.go",
+    "retrieval/target.go",
+    "retrieval/target_test.go"
+   ]
+  },
+  {
    "sha": "c716d8a47b35786077d508ba6abb741458671963",
    "ct": 1434095281,
    "class": "other-fix",
@@ -12730,6 +13931,17 @@
    "subject": "Fix Error() methods.",
    "c_files": [
     "promql/engine.go"
+   ]
+  },
+  {
+   "sha": "e5f92d35fec1ad8702becd2a8dd2dae5a479c709",
+   "ct": 1430428788,
+   "class": "extrinsic",
+   "why": "env '32-bit'",
+   "subject": "Fix storage/local tests for 32-bit systems",
+   "c_files": [
+    "storage/local/codable/codable_test.go",
+    "storage/local/storage_test.go"
    ]
   },
   {
@@ -12927,6 +14139,18 @@
    "subject": "Fix embarrassing bug in crash recovery.",
    "c_files": [
     "storage/local/persistence.go"
+   ]
+  },
+  {
+   "sha": "00a2a93a0539927dbc5b12e6899f3584e93cb15e",
+   "ct": 1418412895,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression tests for metrics mutations in AST.",
+   "c_files": [
+    "rules/ast/ast.go",
+    "rules/ast/printer.go",
+    "rules/rules_test.go"
    ]
   },
   {
@@ -13316,6 +14540,21 @@
    ]
   },
   {
+   "sha": "c3b282bd14df140e07bd129ea338880cd194b6dd",
+   "ct": 1394646024,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression tests for 'loop until op is consumed' bug.",
+   "c_files": [
+    "storage/metric/freelist.go",
+    "storage/metric/freelist_test.go",
+    "storage/metric/operation.go",
+    "storage/metric/operation_test.go",
+    "storage/metric/tiered.go",
+    "storage/metric/tiered_test.go"
+   ]
+  },
+  {
    "sha": "d6827b689818bcc99586a310afa8b4096e18ee84",
    "ct": 1394065402,
    "class": "other-fix",
@@ -13356,6 +14595,16 @@
     "storage/interface.go",
     "storage/metric/curator.go",
     "tools/dumper/main.go"
+   ]
+  },
+  {
+   "sha": "6ea22f2bf909796e69a77f2ae6ff97e52540ab99",
+   "ct": 1382483188,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add compaction regression tests.",
+   "c_files": [
+    "storage/metric/compaction_regression_test.go"
    ]
   },
   {
@@ -13416,6 +14665,18 @@
    "subject": "Hot Fix: Use extracted time.",
    "c_files": [
     "storage/metric/tiered.go"
+   ]
+  },
+  {
+   "sha": "331be19af6c71e6da476128cf4f3a22df5708dfd",
+   "ct": 1374747300,
+   "class": "regression",
+   "why": "references 06b4a40661 (9 d earlier)",
+   "subject": "Fix broken retrieval tests.",
+   "c_files": [
+    "retrieval/interface_test.go",
+    "retrieval/scheduler_test.go",
+    "retrieval/targetmanager_test.go"
    ]
   },
   {
@@ -13524,6 +14785,30 @@
    ]
   },
   {
+   "sha": "eb1f9569093884f46fb1612c360ef0953e129e1d",
+   "ct": 1369744563,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Revert \"Ensure that all extracted samples are added to view.\"\"",
+   "c_files": [
+    "storage/metric/memory.go",
+    "storage/metric/tiered.go",
+    "storage/metric/view.go"
+   ]
+  },
+  {
+   "sha": "4b30fb86b41729e0a3c2b289534fb007abf57b33",
+   "ct": 1369308982,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Ensure that all extracted samples are added to view.\"",
+   "c_files": [
+    "storage/metric/memory.go",
+    "storage/metric/tiered.go",
+    "storage/metric/view.go"
+   ]
+  },
+  {
    "sha": "b586801830fa8537f035b570ec71911115bbe326",
    "ct": 1369238393,
    "class": "other-fix",
@@ -13546,6 +14831,21 @@
     "storage/metric/leveldb.go",
     "storage/metric/memory.go",
     "storage/metric/tiered.go"
+   ]
+  },
+  {
+   "sha": "0877680761b87f60158efd6dffb30965674c0b13",
+   "ct": 1368023716,
+   "class": "regression",
+   "why": "references 2202cd71c9 (12 d earlier)",
+   "subject": "Implement a COUNT ... BY aggregation operator.",
+   "c_files": [
+    "rules/ast/ast.go",
+    "rules/ast/functions.go",
+    "rules/ast/printer.go",
+    "rules/helpers.go",
+    "rules/lexer.l.go",
+    "rules/rules_test.go"
    ]
   },
   {
@@ -13743,6 +15043,19 @@
    ]
   },
   {
+   "sha": "d5380897c333c98d6426e60d649bec7b061988bc",
+   "ct": 1363885611,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Cleanups and adds performance regression.",
+   "c_files": [
+    "main.go",
+    "storage/metric/leveldb.go",
+    "storage/metric/operation.go",
+    "storage/raw/leveldb/leveldb.go"
+   ]
+  },
+  {
    "sha": "047eb219e4b97f53dd0c608b8753776074060391",
    "ct": 1361757172,
    "class": "other-fix",
@@ -13841,17 +15154,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 17,
-  "extrinsic|B2": 1,
-  "extrinsic|C": 5,
   "other-fix|A": 323,
   "other-fix|B": 227,
   "other-fix|B2": 97,
   "other-fix|B3": 28,
-  "other-fix|C": 579,
-  "regression|A": 16,
-  "regression|B": 3,
-  "regression|B2": 7,
-  "regression|C": 57
+  "other-fix|C": 579
  }
 }

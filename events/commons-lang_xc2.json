@@ -14,6 +14,101 @@
  },
  "events": [
   {
+   "sha": "ebe58c633749184ab2c6256a1091e70ca0fde5bc",
+   "ct": 1793658047,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Keep FastDateFormat able to parse the '+hh:mm' offsets its own 'Z' patterns format (#1857)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDateFormat.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateFormat_ZRoundTripTest.java"
+   ]
+  },
+  {
+   "sha": "d8470d57fda340864acf5194bb56305a133fba0e",
+   "ct": 1793620383,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-980] Use enum constants for duration format units (#1856)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/DurationFormatUtils.java",
+    "src/test/java/org/apache/commons/lang3/time/DurationFormatUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "f004a9cb42be7d35f66b73faa96616ce482e531b",
+   "ct": 1793546192,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1839] Fix recursive toString traversal cleanup (#1855)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/RecursiveToStringStyle.java",
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionToStringBuilder.java",
+    "src/main/java/org/apache/commons/lang3/builder/ToStringBuilder.java",
+    "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+    "src/test/java/org/apache/commons/lang3/builder/ReflectionToStringBuilderTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/ToStringBuilderCycleTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/ToStringBuilderTraversalConcurrencyTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/ToStringBuilderTraversalMemoryTest.java",
+    "src/test/java/org/apache/commons/lang3/builder/ToStringBuilderTraversalTest.java"
+   ]
+  },
+  {
+   "sha": "c833cc1ef672052597f8e7246fbb7db9e1f2d059",
+   "ct": 1793537874,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression tests for nested reflection traversal cleanup",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/builder/ReflectionToStringBuilderNestedTraversalTest.java"
+   ]
+  },
+  {
+   "sha": "5ebe419f3bffd4e451bcdf737dfe3d56871af821",
+   "ct": 1793186133,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Keep RandomStringUtils.random rejection cap from failing valid ranges (#1843)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a5d6c5ed8847b2b14dacf062b646f94d6cc61a10",
+   "ct": 1793104199,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Keep DateUtils.ceiling and round inside a DST overlap hour (#1842)",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e5f7f1b56776fb2f6a77fc3a64bc47f7e849a425",
+   "ct": 1792951056,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add optional FIFO fairness to TimedSemaphore (LANG-1790) (#1840)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/TimedSemaphore.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/TimedSemaphoreTest.java"
+   ]
+  },
+  {
+   "sha": "48532a6ed0e5995673a3181a8eb558058d027242",
+   "ct": 1792935936,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Clarify LocaleUtils ASCII validation following #1838",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/LocaleUtils.java",
+    "src/test/java/org/apache/commons/lang3/LocaleUtilsTest.java"
+   ]
+  },
+  {
    "sha": "0f76857f50615046721a883b5c2062a4e0030859",
    "ct": 1792933356,
    "class": "regression",
@@ -33,6 +128,16 @@
    "c_files": [
     "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
     "src/test/java/org/apache/commons/lang3/time/FastDateParserTest.java"
+   ]
+  },
+  {
+   "sha": "2341c9cd7ed4b7f2e841e165b6077d1aa7a61b17",
+   "ct": 1792450838,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Strengthen TypeUtils hash code regression coverage",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
    ]
   },
   {
@@ -80,6 +185,17 @@
    ]
   },
   {
+   "sha": "9c86ffe308e7c682df3b1cf76f27dfc5bb6a2243",
+   "ct": 1792185563,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Clarify StringUtils.normalizeSpace contract and preserve NBSP handling",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
    "sha": "5b3a81dcd5e4c8bcee87b5bb07f4c0672be48545",
    "ct": 1792160992,
    "class": "regression",
@@ -110,6 +226,91 @@
    "c_files": [
     "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
     "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "66f93099008bfe6485164166e4c0d70e5dade96a",
+   "ct": 1792090301,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Use standalone month names for month-only patterns in FastDatePrinter (#1815)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java"
+   ]
+  },
+  {
+   "sha": "65f00d83ca2d1ad5743f838a58eab01a3630e498",
+   "ct": 1792089037,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Keep RandomUtils's randomDouble() and randomFloat() below the exclusive upper bound (#1817)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/RandomUtils.java",
+    "src/test/java/org/apache/commons/lang3/RandomUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "baa862fd56639d834705c19aa7c62d2d1126a799",
+   "ct": 1792020743,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression test for dollar signs in local-class member names",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/ClassUtilsShortClassNameTest.java"
+   ]
+  },
+  {
+   "sha": "64375a58ee3ec6af67f318f389d3eeb8279db64e",
+   "ct": 1791829518,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Expand AnnotationUtils nested annotation array hash tests",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/AnnotationUtils.java",
+    "src/test/java/org/apache/commons/lang3/AnnotationUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "dd2c9e85784b288c7507c3736818040b3b457842",
+   "ct": 1791660640,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1836] Make TypeUtils.containsTypeVariables and unrollVariables honor the owner type of a ParameterizedType (#1812)",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "48bf95fb1326a0fb36254028095bab822dc054af",
+   "ct": 1791660184,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1836] Make TypeUtils.containsTypeVariables and unrollVariables honour the owner type of a ParameterizedType (#1812)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java",
+    "src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "e588cc629f4b046cdf0ab2fe4d8ab8e297d8a484",
+   "ct": 1791653507,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1835] Ignore synthetic methods in AnnotationUtils (#1810)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/AnnotationUtils.java",
+    "src/test/java/org/apache/commons/lang3/AnnotationUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "a9104066058a3f98b25266d66df45f9b10b9eaee",
+   "ct": 1791402443,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[LANG-1655] Preserve Korean text in stripAccents (#1799)",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/StringUtilsStripTest.java"
    ]
   },
   {
@@ -777,6 +978,17 @@
    ]
   },
   {
+   "sha": "67f50236bf337e20c6daa987d4d42c4fedb482ce",
+   "ct": 1768594538,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"'abbreviate' contract violations (#1490)\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java",
+    "src/test/java/org/apache/commons/lang3/StringUtilsAbbreviateTest.java"
+   ]
+  },
+  {
    "sha": "b8d382039a850dff10a90c9abfbbf62228fd8fd1",
    "ct": 1766064002,
    "class": "other-fix",
@@ -837,6 +1049,16 @@
    "c_files": [
     "src/main/java/org/apache/commons/lang3/builder/ReflectionDiffBuilder.java",
     "src/test/java/org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.java"
+   ]
+  },
+  {
+   "sha": "1c93abfd5bb615c610247fa11dba03c75dfcf3b6",
+   "ct": 1760093963,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Fix typo in StringUtils.trunctate() IllegalArgumentException message (#1463)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/StringUtils.java"
    ]
   },
   {
@@ -934,6 +1156,24 @@
    ]
   },
   {
+   "sha": "e25640fcc3f9ab42302986eb1e9189c563677c61",
+   "ct": 1749477329,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Normalize test class names to *Test\"",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/time/CalendarUtilsTest.java",
+    "src/test/java/org/apache/commons/lang3/time/DateFormatUtilsTest.java",
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsFragmentTest.java",
+    "src/test/java/org/apache/commons/lang3/time/DateUtilsRoundingTest.java",
+    "src/test/java/org/apache/commons/lang3/time/DurationFormatUtilsTest.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDateParser_MoreOrLessTest.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java",
+    "src/test/java/org/apache/commons/lang3/time/FastDatePrinterTimeZonesTest.java",
+    "src/test/java/org/apache/commons/lang3/time/Java15BugFastDateParserTest.java"
+   ]
+  },
+  {
    "sha": "c2260f094d78c236bb8a2e3e153d422c7d7ad6bf",
    "ct": 1748123617,
    "class": "other-fix",
@@ -943,6 +1183,16 @@
     "src/main/java/org/apache/commons/lang3/CachedRandomBits.java",
     "src/main/java/org/apache/commons/lang3/RandomStringUtils.java",
     "src/test/java/org/apache/commons/lang3/RandomStringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "39aa8a57d25ff43598dc912bf899ea89a3036457",
+   "ct": 1747051085,
+   "class": "extrinsic",
+   "why": "env 'Android'",
+   "subject": "[LANG-1773] Apache Commons Lang no longer builds on Android (#1381)",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java"
    ]
   },
   {
@@ -1029,6 +1279,16 @@
    ]
   },
   {
+   "sha": "5f6a0650844f392cbf5624ea0b83eab00f5efa8d",
+   "ct": 1706194035,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Depreacte MemberUtils 0-argument contructor\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/reflect/MemberUtils.java"
+   ]
+  },
+  {
    "sha": "6f2c93ceeecc48f4eca2c52345a7bf33329211c1",
    "ct": 1701873880,
    "class": "other-fix",
@@ -1102,6 +1362,16 @@
    ]
   },
   {
+   "sha": "4dd0a6b4a67ee66ec754ca2a64200bc73fbd09bf",
+   "ct": 1661094950,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"ThreadGroupPredicate extends Predicate<ThreadGroup>\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ThreadUtils.java"
+   ]
+  },
+  {
    "sha": "c18803a47f4a4e51f08c1cb1ef9b84b21e106e6f",
    "ct": 1655210651,
    "class": "other-fix",
@@ -1160,6 +1430,18 @@
    "subject": "Fix unintended commit.",
    "c_files": [
     "src/main/java/org/apache/commons/lang3/concurrent/Memoizer.java"
+   ]
+  },
+  {
+   "sha": "16d587d73c51c772495d95f9aa3aa14782eff355",
+   "ct": 1640703515,
+   "class": "extrinsic",
+   "why": "env 'Aarch64'",
+   "subject": "Add support for detection of Aarch64.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ArchUtils.java",
+    "src/main/java/org/apache/commons/lang3/arch/Processor.java",
+    "src/test/java/org/apache/commons/lang3/ArchUtilsTest.java"
    ]
   },
   {
@@ -1285,6 +1567,16 @@
    ]
   },
   {
+   "sha": "6d9102ab92fe95c837b20e50534352145f680d55",
+   "ct": 1594990315,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Format tweak.\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/ClassUtils.java"
+   ]
+  },
+  {
    "sha": "ff4ef533a558a7a176e4649ce5c6d54fb2383217",
    "ct": 1594499954,
    "class": "other-fix",
@@ -1293,6 +1585,16 @@
    "c_files": [
     "src/main/java/org/apache/commons/lang3/concurrent/locks/LockingVisitors.java",
     "src/test/java/org/apache/commons/lang3/concurrent/locks/LockingVisitorsTest.java"
+   ]
+  },
+  {
+   "sha": "68cb8af7e402041e33e931f33bc60a32d7b9ce95",
+   "ct": 1593165168,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"performance improve.\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/CharSequenceUtils.java"
    ]
   },
   {
@@ -1409,6 +1711,17 @@
    "c_files": [
     "src/main/java/org/apache/commons/lang3/StringUtils.java",
     "src/test/java/org/apache/commons/lang3/StringUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "4b77d24042a411204c25f81bf4e5f38e43ab94a1",
+   "ct": 1556750619,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"[LANG-1455] Add a DaemonThreadFactory.</action>\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/concurrent/DaemonThreadFactory.java",
+    "src/test/java/org/apache/commons/lang3/concurrent/DaemonThreadFactoryTest.java"
    ]
   },
   {
@@ -1658,6 +1971,39 @@
    ]
   },
   {
+   "sha": "4388ded2d1a9a4907e9f7d23a74e416b54a28c85",
+   "ct": 1473601653,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"[LANG-1201] Add a TimeUnit-like classes for base 2 and base 10 digital\"",
+   "c_files": [
+    "src/test/java/org/apache/commons/lang3/DigitalBase10SizeUnitTest.java",
+    "src/test/java/org/apache/commons/lang3/DigitalBase2SizeUnitTest.java"
+   ]
+  },
+  {
+   "sha": "f83e93685baf911d8fce96485e0d5ed8d783eedb",
+   "ct": 1473597554,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"[LANG-1227] Add XMLCharacter class.\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/XMLCharacter.java",
+    "src/test/java/org/apache/commons/lang3/XMLCharacterTest.java"
+   ]
+  },
+  {
+   "sha": "8d682a6aa32964811e971f58e36b418605ba4233",
+   "ct": 1473596905,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"[LANG-1201] Add a TimeUnit-like classes for base 2 and base 10 digital\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/DigitalBase10SizeUnit.java",
+    "src/main/java/org/apache/commons/lang3/DigitalBase2SizeUnit.java"
+   ]
+  },
+  {
    "sha": "bd9adbb637a8a4aa5eb61c6fde2c576d0ab3c4fa",
    "ct": 1468722457,
    "class": "regression",
@@ -1719,6 +2065,26 @@
    "subject": "Formatting fixes per https://patch-diff.githubusercontent.com/raw/apache/commons-lang/pull/128.diff",
    "c_files": [
     "src/main/java/org/apache/commons/lang3/ArrayUtils.java"
+   ]
+  },
+  {
+   "sha": "8bb3526317408fba3ae351719feb68703aa5fdbb",
+   "ct": 1453187271,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Allocate array of the correct size\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/builder/ReflectionToStringBuilder.java"
+   ]
+  },
+  {
+   "sha": "bb76a6848b37cc3f418a370c56f597486618197b",
+   "ct": 1452983810,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Simplify, less clutter.\"",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/BooleanUtils.java"
    ]
   },
   {
@@ -2374,6 +2740,16 @@
    ]
   },
   {
+   "sha": "16c3a3297597214f7b1478db5799325ea114df88",
+   "ct": 1318018368,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "[LANG-759] Add Support in SystemUtils for Windows Server 2003 and Windows Server 2008.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java"
+   ]
+  },
+  {
    "sha": "1db449142ae9b9e1a8b40429edc904ff0f4b6a59",
    "ct": 1315503004,
    "class": "other-fix",
@@ -2546,6 +2922,17 @@
    "class": "extrinsic",
    "why": "env 'Android'",
    "subject": "(LANG-624) SystemUtils.getJavaVersionAsFloat throws StringIndexOutOfBoundsException on Android runtime/Dalvik VM. Oops, fix return type.",
+   "c_files": [
+    "src/main/java/org/apache/commons/lang3/SystemUtils.java",
+    "src/test/java/org/apache/commons/lang3/SystemUtilsTest.java"
+   ]
+  },
+  {
+   "sha": "b24ecd60fe9517bef1d6342e479e9bc3d85ef692",
+   "ct": 1275041524,
+   "class": "extrinsic",
+   "why": "env 'Android'",
+   "subject": "- Fix (LANG-624) SystemUtils.getJavaVersionAsFloat throws StringIndexOutOfBoundsException on Android runtime/Dalvik VM - Refactor for unit testing. - Remove odd test code which is copy and pasted from SystemUtils, which therefore does not test anything.",
    "c_files": [
     "src/main/java/org/apache/commons/lang3/SystemUtils.java",
     "src/test/java/org/apache/commons/lang3/SystemUtilsTest.java"
@@ -3130,6 +3517,16 @@
     "src/test/org/apache/commons/lang/enums/EnumEqualsTest.java",
     "src/test/org/apache/commons/lang/enums/ValuedEnumTest.java",
     "src/test/org/apache/commons/lang/enums/ValuedLanguageEnum.java"
+   ]
+  },
+  {
+   "sha": "eb68acff59a08143767dc2e6659bb9ce344f2f0f",
+   "ct": 1155760441,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Make sure this exception code does not depend on Java 1.4 nested exceptions. SVN revision 38990 does not compile with Java 1.3.1. Compiled with Sun Java 1.3.1_15 Tested with Sun Java 1.3.1_15 Tested with Sun Java 1.4.2_12 Tested with Sun Java 1.5.0_08 All of the above on Windows XP SP2 + patches.",
+   "c_files": [
+    "src/test/org/apache/commons/lang/exception/ExceptionUtilsTestCase.java"
    ]
   },
   {
@@ -4374,17 +4771,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 1,
-  "extrinsic|B2": 1,
-  "extrinsic|C": 3,
   "other-fix|A": 199,
   "other-fix|B": 357,
   "other-fix|B2": 29,
   "other-fix|B3": 7,
-  "other-fix|C": 55,
-  "regression|A": 8,
-  "regression|B": 1,
-  "regression|B2": 2,
-  "regression|C": 20
+  "other-fix|C": 55
  }
 }

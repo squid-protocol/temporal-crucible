@@ -64,7 +64,10 @@ set, then on a fresh confirmatory sample (seed 2984, 25 per repo, all 480 seen c
   kept. That one change (v3c) took pooled precision to **0.761** and put **7 of 8 repos over the gate**.
 - **The language gap closed**: C 0.750 vs non-C 0.773, against 0.733 vs 0.383 under v1. Rule C was
   designed on round 1 and tested on a later sample, so this is out-of-sample.
-- Cost: 44.6% of events dropped, which is about **22% of real fixes for about 69% of the noise**.
+- Cost: 43.0% of `other-fix` dropped (35.7% of all events), which is about **22% of real fixes for
+  about 69% of the noise**. Amendment 2 is scoped to `other-fix` only — the class it was audited on;
+  rule C would otherwise throw away `Revert "..."` regressions and environment-named extrinsic fixes,
+  neither of which came through the fix-like gate.
 - **The development estimate was optimistic by ~0.17** (0.932 dev vs 0.761 confirmatory) — the rule is
   tuned, so quote 0.761.
 - **libgit2 fails all three rounds** (0.63 / 0.60 / 0.60) on build and warning churn that reads like a

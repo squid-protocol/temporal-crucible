@@ -220,3 +220,76 @@ Network beyond baseline: chi2 = 161.2, df 3, p = 9.9e-35; pseudo-R² 0.2154 → 
 - Exposure is function loc, not whole-file LOC (the CGR DBs carry no file LOC), so headers, globals and
   out-of-function comments are outside the offset.
 - Repo-clustered SEs rest on 8 clusters and should be read as a direction, not an interval.
+
+---
+
+## 5 · Re-run on v3c labels — does label quality move the ceiling?
+
+**2026-11-11.** The sections above used the v1 keyword gate, whose `other-fix` precision
+`docs/otherfix_audit.md` measured at 0.558 pooled (0.383 outside C). This section re-runs the whole
+ladder on the **FIXLIKE v3c** event sets (0.761 pooled, 0.773 outside C) and changes nothing else.
+Results: `docs/ceil_v3c.json` · regenerate with `--events _xc2`.
+
+The frame is identical — **57,057 file-years in both runs**, because snapshots and files come from the
+call networks, not from the labels. Only the outcome counts and the prior-fix counts change, so this
+is a clean apples-to-apples comparison.
+
+### The ladder, v1 → v3c
+
+| config | fix events | alpha | obs R20 | oracle-mu R20 | oracle-lam R20 | obs AUC |
+|---|---|---|---|---|---|---|
+| all repos · all | 56,766 → 32,796 | 1.281 → **1.378** | 0.366 → 0.383 | 0.451 → 0.466 | 0.661 → **0.684** | 0.805 → 0.821 |
+| all repos · other-fix | 46,570 → 22,600 | 1.217 → **1.436** | 0.405 → 0.463 | 0.474 → 0.532 | 0.665 → **0.718** | 0.807 → 0.830 |
+| C only · all | 45,070 → 26,750 | 1.182 → 1.250 | 0.302 → 0.331 | 0.387 → 0.410 | 0.622 → 0.642 | 0.810 → 0.820 |
+| non-C · all | 11,696 → 6,046 | 1.556 → **1.871** | 0.432 → 0.554 | 0.478 → 0.605 | 0.736 → **0.817** | 0.789 → 0.822 |
+| all repos · regression | 8,332 → 8,332 | 1.589 → 1.589 | 0.371 → 0.371 | 0.434 → 0.434 | 0.711 → 0.711 | 0.841 → 0.841 |
+| C only · regression | 7,966 → 7,966 | 1.572 → 1.572 | 0.351 → 0.351 | 0.414 → 0.414 | 0.695 → 0.695 | 0.825 → 0.825 |
+
+The two `regression` arms are **identical in both runs**, which is the built-in control: amendment 2
+is scoped to `other-fix`, so a class the rule does not touch did not move. The pipeline is doing what
+it claims.
+
+### Realized share of attainable signal, v1 → v3c
+
+| config | AUC | recall@20% lines |
+|---|---|---|
+| all repos · all | 0.780 → **0.823** | 0.663 → 0.689 |
+| all repos · other-fix | 0.793 → **0.847** | 0.748 → 0.792 |
+| C only · all | 0.797 → 0.827 | 0.548 → 0.627 |
+| non-C · all | 0.736 → **0.808** | 0.837 → 0.873 |
+
+Leave-one-repo-out, primary config: recall@20% **0.273 → 0.299**.
+
+### What it shows
+
+1. **Cleaner labels help, and the effect is small.** Every arm the rule touched improved, in the
+   expected direction: the realized share of attainable AUC rose 0.780 → 0.823 and out-of-repo
+   recall@20% rose 0.273 → 0.299. **About three to four points of realized performance** was being
+   eaten by label noise.
+2. **The wall did not move.** The headroom from rate variation no covariate sees — `oracle-mu` to
+   `oracle-lam` on recall@20% — was **+0.210 on v1 labels and +0.218 on v3c**. Essentially unchanged.
+   So the earlier conclusion now has numbers behind it rather than an inconsistent-signs argument:
+   **labels cost about 3-4 points; the unmeasured-rate wall is worth about 22.** A tax, not the wall.
+3. **The language gap closed, as the label audit predicted it would.** Realized AUC was 0.797 (C) vs
+   0.736 (non-C) on v1 labels, a gap of 0.061; on v3c it is 0.827 vs 0.808, a gap of 0.019. The label
+   fix closed exactly the gap the label *precision* predicted — which is the strongest confirmation in
+   this document that the audit was measuring something real.
+4. **`alpha` went UP, not down — the prediction registered before the run was wrong.** The
+   expectation on record was that cleaning the labels would *lower* dispersion, on the reasoning that
+   some of `alpha` was label noise. It rose instead: 1.281 → 1.378 overall, 1.217 → 1.436 on
+   `other-fix`, 1.556 → 1.871 outside C.
+
+   The reason is worth keeping. The commits rule C removed — lint sweeps, javadoc passes, formatting,
+   dependency bumps — are spread **broadly and evenly** across a codebase, far more evenly than real
+   bug fixes, which concentrate. Mixing them into the outcome therefore *diluted* the concentration
+   and made file-year risk look more uniform than it is. **Label noise was masking rate heterogeneity,
+   not manufacturing it.**
+
+   This cuts against the convenient reading. One might have hoped most of the ceiling gap was
+   measurement error that better labels would dissolve; instead, better labels reveal *more* genuine
+   rate variation to explain, and raise the perfect-knowledge ceiling with it (recall@20% 0.661 →
+   0.684, and 0.736 → 0.817 outside C). The headroom is real signal nobody is capturing, not noise.
+5. **Consequence for what comes next.** Since the dispersion is not label noise, the remaining
+   headroom is either covariates that exist and are unused, or the discovery/attention process. That
+   is now the only live explanation, and it is the one this panel cannot test — it needs a measurement
+   of attention, or an intervention that holds attention constant across files.

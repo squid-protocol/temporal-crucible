@@ -195,6 +195,16 @@
    ]
   },
   {
+   "sha": "4ea0d9fef464390694cc600fda89a924c2336b69",
+   "ct": 1764280179,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Isolate a pair of HTML build 'numfig' test cases (#14100)\" (#14106)",
+   "c_files": [
+    "tests/test_builders/test_build_html_numfig.py"
+   ]
+  },
+  {
    "sha": "4ba30e2835fc4c94555aab406fe096064a37b5cf",
    "ct": 1764054254,
    "class": "other-fix",
@@ -389,6 +399,16 @@
    "subject": "Fix viewcode extension importing modules more than once (#13380)",
    "c_files": [
     "sphinx/ext/viewcode.py"
+   ]
+  },
+  {
+   "sha": "d0991618788e51c2f8cf3544fa7b42fe54cf0f74",
+   "ct": 1740172350,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Mark autodoc singledispatchmethod tests as expected failures\" (#13381)",
+   "c_files": [
+    "tests/test_extensions/test_ext_autodoc.py"
    ]
   },
   {
@@ -625,6 +645,16 @@
    ]
   },
   {
+   "sha": "586c0cd178f1d36692717dff0707078bb8f899ae",
+   "ct": 1723043047,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Mark ``test_build_manpage`` as XFAIL following changes in Docutils master\" (#12734)",
+   "c_files": [
+    "tests/test_builders/test_build_manpage.py"
+   ]
+  },
+  {
    "sha": "34bc4e69bb68f735dfeaeb73e45627f91782bada",
    "ct": 1721772134,
    "class": "other-fix",
@@ -806,6 +836,16 @@
    ]
   },
   {
+   "sha": "ac3f74a3e0fbb326f73989a16dfa369e072064ca",
+   "ct": 1716113653,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "[tests] Add intl regression test for term not found warning (#12388)",
+   "c_files": [
+    "tests/test_intl/test_intl.py"
+   ]
+  },
+  {
    "sha": "18d30343f28680be642f5d319290cca9035dc2d7",
    "ct": 1715749881,
    "class": "other-fix",
@@ -864,6 +904,18 @@
    "subject": "Partially revert Docutils' [r9562] to fix epubcheck (#12271)",
    "c_files": [
     "sphinx/writers/html5.py"
+   ]
+  },
+  {
+   "sha": "8ee9c536b79f8853c54914da52c98c036fb53e87",
+   "ct": 1712860853,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix mypy errors on Windows (#12266)",
+   "c_files": [
+    "sphinx/locale/__init__.py",
+    "sphinx/registry.py",
+    "sphinx/theming.py"
    ]
   },
   {
@@ -929,6 +981,16 @@
    ]
   },
   {
+   "sha": "c6bd97ceaedf51d23cebc0fc13975ca3ffebe299",
+   "ct": 1710403277,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"tests: implement readiness check before yielding local-http(s) test servers\" (#12078)",
+   "c_files": [
+    "tests/utils.py"
+   ]
+  },
+  {
    "sha": "7f582a56bac343328ce22a78893254f047e01b54",
    "ct": 1709464482,
    "class": "other-fix",
@@ -936,6 +998,16 @@
    "subject": "[doctest] fix a resources leak for the ``doctest`` builder (#12044)",
    "c_files": [
     "sphinx/ext/doctest.py"
+   ]
+  },
+  {
+   "sha": "707bfbd6695958853610bdaf10886f8c6b88e149",
+   "ct": 1708778092,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "[gettext] fix flaky test on windows (#11940)",
+   "c_files": [
+    "tests/test_intl/test_intl.py"
    ]
   },
   {
@@ -1461,6 +1533,26 @@
    ]
   },
   {
+   "sha": "8111a3a21176aeb11d2385adeb5575b2e9bf75f2",
+   "ct": 1691810613,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix ``test_html_inventory`` on Windows",
+   "c_files": [
+    "tests/test_build_html.py"
+   ]
+  },
+  {
+   "sha": "a392f4d5f43b80f70031faa6461ae2a7c0961949",
+   "ct": 1691805475,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix ``test_graphviz_svg_html`` on Windows",
+   "c_files": [
+    "tests/test_ext_graphviz.py"
+   ]
+  },
+  {
    "sha": "b91d763db8cfb28fb6aace9a10ea19995f9fc148",
    "ct": 1691669485,
    "class": "other-fix",
@@ -1532,6 +1624,31 @@
    "c_files": [
     "sphinx/builders/linkcheck.py",
     "tests/test_build_linkcheck.py"
+   ]
+  },
+  {
+   "sha": "59de8d52029deca803d38b5d084a3a32c7b7f994",
+   "ct": 1682273204,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Support and prefer ``.jinja`` to ``_t`` for static templates (#11165)\" (#11329)",
+   "c_files": [
+    "sphinx/builders/_epub_base.py",
+    "sphinx/builders/changes.py",
+    "sphinx/builders/epub3.py",
+    "sphinx/builders/gettext.py",
+    "sphinx/builders/latex/__init__.py",
+    "sphinx/cmd/quickstart.py",
+    "sphinx/deprecation.py",
+    "sphinx/ext/apidoc.py",
+    "sphinx/ext/imgmath.py",
+    "sphinx/util/fileutil.py",
+    "sphinx/writers/latex.py",
+    "tests/test_build_html.py",
+    "tests/test_build_latex.py",
+    "tests/test_deprecation.py",
+    "tests/test_util_fileutil.py",
+    "utils/babel_runner.py"
    ]
   },
   {
@@ -1637,6 +1754,16 @@
     "tests/test_build_html.py",
     "tests/test_build_latex.py",
     "tests/test_build_texinfo.py"
+   ]
+  },
+  {
+   "sha": "7945aeb22d21aed44c03eb42c2a64e75c5e8166c",
+   "ct": 1673045539,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "LaTeX: fix 5.1.0 bugs related to topic and contents boxes (#11102)",
+   "c_files": [
+    "tests/roots/test-root/conf.py"
    ]
   },
   {
@@ -2292,6 +2419,17 @@
    "subject": "Fix #9971: autodoc: TypeError for annotation with unhashable object",
    "c_files": [
     "sphinx/util/typing.py"
+   ]
+  },
+  {
+   "sha": "105c583f0605d336c9fc981e49e7a4ed4ef25f30",
+   "ct": 1644336001,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Close #9993: std domain: Allow to refer an inline target via ref role\"",
+   "c_files": [
+    "sphinx/domains/std.py",
+    "tests/test_domain_std.py"
    ]
   },
   {
@@ -3825,6 +3963,16 @@
    "subject": "Fix desc_sig_space",
    "c_files": [
     "sphinx/addnodes.py"
+   ]
+  },
+  {
+   "sha": "9238dd89acb9a66fa3b708c645d9586a1e618235",
+   "ct": 1618146622,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Merge pull request #8898 from merrybass/feature-extlinks-pattern\"",
+   "c_files": [
+    "sphinx/ext/extlinks.py"
    ]
   },
   {
@@ -5403,6 +5551,16 @@
    ]
   },
   {
+   "sha": "6b87b8030c16e195ccd8b2246fe8d5f6d24e893b",
+   "ct": 1598167796,
+   "class": "regression",
+   "why": "references 5f82825e27 (13 d earlier)",
+   "subject": "Fix comment end string in LaTeXRenderer",
+   "c_files": [
+    "sphinx/util/template.py"
+   ]
+  },
+  {
    "sha": "4313060c8a7fe0aa60bdf1d370453fbd350de9fd",
    "ct": 1598106641,
    "class": "other-fix",
@@ -6008,6 +6166,18 @@
    "subject": "Fix autodoc: Show detailed warning when type_comment is mismatched (refs: #7807)",
    "c_files": [
     "sphinx/ext/autodoc/type_comment.py"
+   ]
+  },
+  {
+   "sha": "eb8f3b539a8be5a97eca02b1a8c5b51ca8a74463",
+   "ct": 1592033338,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"ext.napoleon: Emit type annotations at the start of `.. attribute::`\"",
+   "c_files": [
+    "sphinx/ext/napoleon/__init__.py",
+    "sphinx/ext/napoleon/docstring.py",
+    "tests/test_ext_napoleon_docstring.py"
    ]
   },
   {
@@ -8441,6 +8611,16 @@
    ]
   },
   {
+   "sha": "65122ad1cb9702b9dac220513b12c3cb222f8d94",
+   "ct": 1559918101,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "apidoc: Insert newlines between submodules",
+   "c_files": [
+    "tests/test_ext_apidoc.py"
+   ]
+  },
+  {
    "sha": "bc5e18af92d17ddf34defa3403756dddaeb4b930",
    "ct": 1559841819,
    "class": "other-fix",
@@ -9083,6 +9263,16 @@
    ]
   },
   {
+   "sha": "ec307996172bfe23d46dfacdb0bbaf1caf7412c5",
+   "ct": 1551277757,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"C++, conditionally disable test on sys.maxunicode\"",
+   "c_files": [
+    "tests/test_domain_cpp.py"
+   ]
+  },
+  {
    "sha": "49bd372142899093e2340556ffbe1f927127cafb",
    "ct": 1551277240,
    "class": "other-fix",
@@ -9265,6 +9455,19 @@
    ]
   },
   {
+   "sha": "795b51846484a5465c821873a19d32567e1d4e32",
+   "ct": 1547372435,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Add PathComparer for testing and fix 2 test failure on Windows. (#5943)",
+   "c_files": [
+    "sphinx/testing/comparer.py",
+    "tests/conftest.py",
+    "tests/test_environment.py",
+    "tests/test_project.py"
+   ]
+  },
+  {
    "sha": "949f66144ddf78b7a3d1cba9483a077cdb027239",
    "ct": 1547370976,
    "class": "other-fix",
@@ -9272,6 +9475,16 @@
    "subject": "Fix #5231: \"make html\" does not read and build \"po\" files in \"locale\" dir",
    "c_files": [
     "sphinx/util/matching.py"
+   ]
+  },
+  {
+   "sha": "01ccbbcccf125143ef0ffe4d7cfea71328d0a70c",
+   "ct": 1547368991,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix test: NamedTemporaryFile causes errors on Windows",
+   "c_files": [
+    "tests/test_util_pycompat.py"
    ]
   },
   {
@@ -9658,6 +9871,16 @@
    ]
   },
   {
+   "sha": "8196fe544a598bd96bdc65966cd53daa669fafd3",
+   "ct": 1541635246,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"More simplified\"",
+   "c_files": [
+    "sphinx/roles.py"
+   ]
+  },
+  {
    "sha": "4da03dc54133021b763e825134cabfd16df7a457",
    "ct": 1541431589,
    "class": "other-fix",
@@ -9862,6 +10085,16 @@
    ]
   },
   {
+   "sha": "7249df80a3da8e3aa141c77e7ad48c6a9c9e95e7",
+   "ct": 1539489633,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Improve warning messages during including (refs: #4818)\"",
+   "c_files": [
+    "sphinx/directives/other.py"
+   ]
+  },
+  {
    "sha": "051ba1b4c59eda267c740f86f2876dae65b29c05",
    "ct": 1539290371,
    "class": "other-fix",
@@ -9869,6 +10102,16 @@
    "subject": "C++, fix assertion on multiple duplicate symbols",
    "c_files": [
     "sphinx/domains/cpp.py"
+   ]
+  },
+  {
+   "sha": "d15d11df702d18074738825a5b6b74d1e141aafd",
+   "ct": 1539271676,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Builder.build: save env also with only new documents\"",
+   "c_files": [
+    "sphinx/builders/__init__.py"
    ]
   },
   {
@@ -11655,6 +11898,16 @@
    ]
   },
   {
+   "sha": "2fd24f9129800c4970f973188484f5af3e4fa2a1",
+   "ct": 1520950994,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Use typing.TYPE_CHECKING\"",
+   "c_files": [
+    "sphinx/util/compat.py"
+   ]
+  },
+  {
    "sha": "711b8ecf70b613c8decabc9ab0d1895169f4b89c",
    "ct": 1520764576,
    "class": "other-fix",
@@ -11789,6 +12042,16 @@
    "c_files": [
     "sphinx/ext/intersphinx.py",
     "tests/test_ext_intersphinx.py"
+   ]
+  },
+  {
+   "sha": "7999aca6068957f915640d0f91e2d4ba09419b8a",
+   "ct": 1519314265,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Update CHANGES for PR #4653\"",
+   "c_files": [
+    "sphinx/ext/intersphinx.py"
    ]
   },
   {
@@ -12664,6 +12927,16 @@
    ]
   },
   {
+   "sha": "1b664248f4ed5e00f89574bd6568e86b29a9df0f",
+   "ct": 1511758472,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "update todo extension test to test multiple todolists",
+   "c_files": [
+    "tests/test_ext_todo.py"
+   ]
+  },
+  {
    "sha": "fd94702eedca9ce443f96fda1a9969ed54e81c54",
    "ct": 1511758471,
    "class": "other-fix",
@@ -12679,6 +12952,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix type annotation error",
+   "c_files": [
+    "sphinx/domains/cpp.py"
+   ]
+  },
+  {
+   "sha": "94934b2bdfd6fca9d505577aa6314f522be148f6",
+   "ct": 1511706995,
+   "class": "regression",
+   "why": "revert",
+   "subject": "C++, reintroduce expression fallback parser",
    "c_files": [
     "sphinx/domains/cpp.py"
    ]
@@ -12725,6 +13008,17 @@
    "subject": "Fix #4221: napoleon depends on autodoc, but users need to load it manually",
    "c_files": [
     "sphinx/ext/napoleon/__init__.py"
+   ]
+  },
+  {
+   "sha": "79df05b36d941f31a8abef3c609693c0d02f6743",
+   "ct": 1509543820,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Add :confval:`smart_quotes` to disable smart quotes through ``conf.py`` (refs: #4142)\"",
+   "c_files": [
+    "sphinx/config.py",
+    "sphinx/environment/__init__.py"
    ]
   },
   {
@@ -14031,6 +14325,27 @@
    ]
   },
   {
+   "sha": "89431bf833df28bb871aee529fb12a533c26b07f",
+   "ct": 1490263418,
+   "class": "regression",
+   "why": "references 41bb38877f (2 d earlier)",
+   "subject": "Fix accidental use of ``language='ja'`` in docs (at 41bb388)",
+   "c_files": [
+    "doc/conf.py"
+   ]
+  },
+  {
+   "sha": "61df39f5354f30b98aceb665d5a1c6dbde93019f",
+   "ct": 1490145714,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Drop unused codes\"",
+   "c_files": [
+    "sphinx/application.py",
+    "sphinx/util/pycompat.py"
+   ]
+  },
+  {
    "sha": "331779673922e48019c3ba83c0400ab29b249b8d",
    "ct": 1490122832,
    "class": "other-fix",
@@ -14047,6 +14362,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix TeX coding bug in latex writer (closes #3575)",
+   "c_files": [
+    "sphinx/writers/latex.py"
+   ]
+  },
+  {
+   "sha": "00ac58ff1e110736f0671ed44d96f8d4e8cb68a4",
+   "ct": 1489873080,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Remove parskip space above logo image on PDF title page\"",
    "c_files": [
     "sphinx/writers/latex.py"
    ]
@@ -14339,6 +14664,17 @@
    "subject": "fix #3450: &nbsp is appeared in EPUB docs",
    "c_files": [
     "sphinx/writers/html.py"
+   ]
+  },
+  {
+   "sha": "b56d93158a1db32a057cad8f43d06c0252b3372a",
+   "ct": 1487902711,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "On Py3, use inspect.signature for more accurate signature calculation",
+   "c_files": [
+    "sphinx/util/inspect.py",
+    "tests/test_util_inspect.py"
    ]
   },
   {
@@ -15072,6 +15408,16 @@
    ]
   },
   {
+   "sha": "76f2ed9215ecd8022f8d63ff1c5f455b0bb23354",
+   "ct": 1479914796,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix #3015: fix a broken test on Windows.",
+   "c_files": [
+    "tests/test_build.py"
+   ]
+  },
+  {
    "sha": "e4adcdff622c9660d9667d9b96baf5fd2902e9fe",
    "ct": 1479910058,
    "class": "other-fix",
@@ -15158,6 +15504,22 @@
    "c_files": [
     "sphinx/transforms.py",
     "sphinx/util/nodes.py"
+   ]
+  },
+  {
+   "sha": "b84035416f2e5baeeabcb28cd594ae5f09ed6f0c",
+   "ct": 1479613590,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Add ``config-inited`` event\"",
+   "c_files": [
+    "sphinx/application.py",
+    "sphinx/config.py",
+    "sphinx/domains/std.py",
+    "sphinx/util/texescape.py",
+    "sphinx/writers/html.py",
+    "sphinx/writers/latex.py",
+    "tests/test_build_html.py"
    ]
   },
   {
@@ -15355,6 +15717,16 @@
    "class": "regression",
    "why": "references b8e0e935e4 (0 d earlier)",
    "subject": "Fix #2461: re-allow footnotes in topics for latex PDF",
+   "c_files": [
+    "sphinx/writers/latex.py"
+   ]
+  },
+  {
+   "sha": "536d52063f33a4c90860e7a6d26a9059a90363e6",
+   "ct": 1476428685,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"new ``'packages'`` key to ``latex_elements``\"",
    "c_files": [
     "sphinx/writers/latex.py"
    ]
@@ -16259,6 +16631,16 @@
    ]
   },
   {
+   "sha": "0753a4a378638acf4816236828f332b7dcda831e",
+   "ct": 1465058365,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Update documentation for 'amsmath' key in latex_elements\"",
+   "c_files": [
+    "sphinx/writers/latex.py"
+   ]
+  },
+  {
    "sha": "6af14bf6d85f466105735d21a57963692145dda8",
    "ct": 1464746092,
    "class": "other-fix",
@@ -17118,6 +17500,18 @@
    ]
   },
   {
+   "sha": "2b93e09c0ad80b3748bfe1f8f4023662eb0bbf66",
+   "ct": 1455896668,
+   "class": "regression",
+   "why": "references 423bf7b5e3 (2 d earlier)",
+   "subject": "Highlighting fallbacks by default",
+   "c_files": [
+    "sphinx/config.py",
+    "sphinx/highlighting.py",
+    "tests/test_highlighting.py"
+   ]
+  },
+  {
    "sha": "ae8cbec29a8f55b5c13e2ab59b0f9c4636eb6b77",
    "ct": 1455677899,
    "class": "other-fix",
@@ -17534,6 +17928,16 @@
    ]
   },
   {
+   "sha": "f44fd9f9949f1d324dd32ef4d757db0fc20d5d03",
+   "ct": 1453027085,
+   "class": "regression",
+   "why": "references 14f58e6619 (0 d earlier)",
+   "subject": "Fix broken test by 14f58e66199393a2fb4903dc807c82ca56951340",
+   "c_files": [
+    "tests/roots/test-ext-graphviz/conf.py"
+   ]
+  },
+  {
    "sha": "121fc4a32685f6276bfbe728d0318bc83259456e",
    "ct": 1452956353,
    "class": "other-fix",
@@ -17637,6 +18041,16 @@
     "sphinx/domains/std.py",
     "tests/test_build_html.py",
     "tests/test_build_latex.py",
+    "tests/test_build_texinfo.py"
+   ]
+  },
+  {
+   "sha": "b1715eb0b5018e082c675aef9f00a5c0f70734ff",
+   "ct": 1452528563,
+   "class": "regression",
+   "why": "references bba3f388e9 (0 d earlier)",
+   "subject": "Fix broken test by bba3f388e96bac2b106d89d51367d2974f70f49c",
+   "c_files": [
     "tests/test_build_texinfo.py"
    ]
   },
@@ -17845,6 +18259,17 @@
     "tests/roots/test-add_source_parser/conf.py",
     "tests/roots/test-add_source_parser/test_source_parser.py",
     "tests/test_application.py"
+   ]
+  },
+  {
+   "sha": "26c43643d349553c1acb45884ac5f73a359f16db",
+   "ct": 1451821959,
+   "class": "regression",
+   "why": "references 7bb685bbe9 (0 d earlier)",
+   "subject": "Fix broken tests by 7bb685bbe97824bc2c65bf8cb1d7ac38e5f91cd4",
+   "c_files": [
+    "tests/roots/test-doctest/conf.py",
+    "tests/test_build.py"
    ]
   },
   {
@@ -18100,6 +18525,17 @@
    "subject": "Fix #2168: raw directive does not work for text writer",
    "c_files": [
     "sphinx/writers/text.py"
+   ]
+  },
+  {
+   "sha": "0b0f6d66cb03faa8e9e442556d58e63a7e8cf8d6",
+   "ct": 1450519239,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix #2158: test_latex_build.test_footnote and some tests fail on Windows environment with py3",
+   "c_files": [
+    "tests/path.py",
+    "tests/test_build.py"
    ]
   },
   {
@@ -18407,6 +18843,16 @@
    "subject": "Fix \"make blahblah\" on Windows indicate help messages for sphinx-build every time. Closes #1989",
    "c_files": [
     "sphinx/quickstart.py"
+   ]
+  },
+  {
+   "sha": "6bce0a1c10f7ebeda7b54afed88c27dca185f1ee",
+   "ct": 1442104814,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Avoid \"2.0\" version of Babel because it doesn't work with Windows environment. Closes #1976. see also: * https://github.com/mitsuhiko/babel/issues/174 * https://github.com/mitsuhiko/babel/pull/188",
+   "c_files": [
+    "setup.py"
    ]
   },
   {
@@ -19306,6 +19752,16 @@
    ]
   },
   {
+   "sha": "297e436aace12714b5377dc597c9b7c9b3d9707e",
+   "ct": 1425819583,
+   "class": "regression",
+   "why": "references 3d62e353a5 (0 d earlier)",
+   "subject": "fix testcases for windows that introduced at 3d62e353a5",
+   "c_files": [
+    "tests/test_build_latex.py"
+   ]
+  },
+  {
    "sha": "996b872875ebc4666fe23f9cdf0723f628f973d3",
    "ct": 1425819582,
    "class": "other-fix",
@@ -20040,6 +20496,16 @@
    ]
   },
   {
+   "sha": "39c843106f034a747c97a9ddb08ee099047a7840",
+   "ct": 1411905651,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix testing on Windows.",
+   "c_files": [
+    "tests/test_build_latex.py"
+   ]
+  },
+  {
    "sha": "e3826ba2c40b851ef12d7a02f75e25a3a3bcfff9",
    "ct": 1411747010,
    "class": "other-fix",
@@ -20097,6 +20563,16 @@
    "subject": "Fix: special toctree entry \"self\" located after another entry that also has a toctree was replaced with wrong title and link. Closes #1576",
    "c_files": [
     "sphinx/environment.py"
+   ]
+  },
+  {
+   "sha": "88540e9a3b7d3a9f323b83b2c5cd6342ee037572",
+   "ct": 1411490461,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "workaround for testing: `\\xbb` will be replaced with `/xbb` by `replace(os.sep, '/')` process on Windows environment.",
+   "c_files": [
+    "tests/test_build_html.py"
    ]
   },
   {
@@ -20495,6 +20971,29 @@
    ]
   },
   {
+   "sha": "c8e0a8759d8ea6584910cac0cddb30e04467e394",
+   "ct": 1404491953,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "Update documentation and `sphinx-build -N` option behavior for windows color console support. closes #1291.",
+   "c_files": [
+    "sphinx/cmdline.py",
+    "sphinx/setup_command.py",
+    "sphinx/util/console.py"
+   ]
+  },
+  {
+   "sha": "6ab7a2cbec495f21d2da0d8b2777e03509b90ac2",
+   "ct": 1404490593,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Windows color console support. update for pull request #252.",
+   "c_files": [
+    "setup.py",
+    "sphinx/util/console.py"
+   ]
+  },
+  {
    "sha": "4d69072f44352795573ca276a6aa6a4379bd9228",
    "ct": 1404486719,
    "class": "other-fix",
@@ -20503,6 +21002,16 @@
    "c_files": [
     "sphinx/ext/autodoc.py",
     "sphinx/ext/autosummary/generate.py"
+   ]
+  },
+  {
+   "sha": "0058b4d4bb0450e53f5daa9423942a40b3f70f1e",
+   "ct": 1404418980,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Added support for Windows color output using colorama (if installed)",
+   "c_files": [
+    "sphinx/util/console.py"
    ]
   },
   {
@@ -20715,6 +21224,17 @@
    "subject": "Closes #1375: fix ResourceWarnings with unclosed PIL images.",
    "c_files": [
     "sphinx/writers/html.py"
+   ]
+  },
+  {
+   "sha": "55e2f29170ba5ec3f4f6b9ac810d84317dfeb89c",
+   "ct": 1393659755,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "fix windows newlines",
+   "c_files": [
+    "tests/roots/test-autosummary/conf.py",
+    "tests/roots/test-autosummary/dummy_module.py"
    ]
   },
   {
@@ -20996,6 +21516,16 @@
    "subject": "Fix: 97d5dd1 drop config.templates_path for loader path",
    "c_files": [
     "sphinx/jinja2glue.py"
+   ]
+  },
+  {
+   "sha": "6432f6534797fa2b06ab6c8c9a089d1a4d23cf99",
+   "ct": 1386489514,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix test error; can't remove empty directory problem on Windows.",
+   "c_files": [
+    "tests/test_setup_command.py"
    ]
   },
   {
@@ -21469,6 +21999,16 @@
    ]
   },
   {
+   "sha": "e2087189ead6c44093be7e6c3de1dfb52624867f",
+   "ct": 1362838471,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression test for #1109. Issue was corrected at previous commit 62b0a5f17f62. Closes #1109",
+   "c_files": [
+    "tests/test_build_text.py"
+   ]
+  },
+  {
    "sha": "f6fca7a8ac75e3fa2d2456646fe7c6c310547cba",
    "ct": 1362837527,
    "class": "other-fix",
@@ -21824,6 +22364,16 @@
    ]
   },
   {
+   "sha": "7022b6f2519030d0928690b5fd61fd78c0974f12",
+   "ct": 1357017473,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add regression test for gettext does not extract definition terms. Closes #975",
+   "c_files": [
+    "tests/test_intl.py"
+   ]
+  },
+  {
    "sha": "ebc953d15cf1ea583e1b79399fb074ad26f7c6ce",
    "ct": 1356281441,
    "class": "other-fix",
@@ -22015,6 +22565,16 @@
    ]
   },
   {
+   "sha": "f9b1f7d2f2eeb9db4de03084ce315233e5863d78",
+   "ct": 1351989019,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix: ziptheme.zip block removing test temporary directory on Windows.",
+   "c_files": [
+    "tests/util.py"
+   ]
+  },
+  {
    "sha": "1f905f121ad7131678c5b0b571ecf10e189a9676",
    "ct": 1351789127,
    "class": "other-fix",
@@ -22185,6 +22745,18 @@
    "c_files": [
     "sphinx/util/osutil.py",
     "sphinx/util/pycompat.py"
+   ]
+  },
+  {
+   "sha": "48128c7b9b8eff5de97c1be61d071fef3a2bb1ea",
+   "ct": 1335927941,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "* fix test for Windows: test failed by test-code problem depends on os.sep.",
+   "c_files": [
+    "tests/test_build_html.py",
+    "tests/test_build_latex.py",
+    "tests/test_build_texinfo.py"
    ]
   },
   {
@@ -24086,6 +24658,16 @@
    "c_files": [
     "sphinx/quickstart.py",
     "tests/test_quickstart.py"
+   ]
+  },
+  {
+   "sha": "0039b09a36b0d7e4e787185eff4499b33b237990",
+   "ct": 1280283367,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fix regression that caused error when replying to a comment",
+   "c_files": [
+    "sphinx/websupport/__init__.py"
    ]
   },
   {
@@ -27466,19 +28048,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 13,
-  "extrinsic|B": 1,
-  "extrinsic|B2": 1,
-  "extrinsic|C": 3,
   "other-fix|A": 338,
   "other-fix|B": 504,
   "other-fix|B2": 38,
   "other-fix|B3": 7,
-  "other-fix|C": 160,
-  "regression|A": 16,
-  "regression|B": 1,
-  "regression|B2": 2,
-  "regression|B3": 1,
-  "regression|C": 16
+  "other-fix|C": 160
  }
 }

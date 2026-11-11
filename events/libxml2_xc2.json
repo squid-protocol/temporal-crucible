@@ -107,6 +107,16 @@
    ]
   },
   {
+   "sha": "13a3df99ffe2521a903f270abb33aa7092b34147",
+   "ct": 1781005516,
+   "class": "extrinsic",
+   "why": "env 'gcc'",
+   "subject": "HTMLparser: fix build in ubuntu:26.04 with gcc",
+   "c_files": [
+    "HTMLparser.c"
+   ]
+  },
+  {
    "sha": "7e64e231e309db978c8c5e73ab3009ef35ec676a",
    "ct": 1780292673,
    "class": "other-fix",
@@ -259,6 +269,16 @@
    ]
   },
   {
+   "sha": "7cea3fd1557437b88f2c7b5e1b71a2d5fb152b55",
+   "ct": 1776203839,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "testparser: Add regression test for entity expansion under XSD validation",
+   "c_files": [
+    "testparser.c"
+   ]
+  },
+  {
    "sha": "310564cc6b2c5766bbf053bc29353df6e6a655b6",
    "ct": 1776073670,
    "class": "other-fix",
@@ -346,6 +366,17 @@
    "why": "",
    "subject": "uri: fix signed integer overflow in xmlBuildRelativeURISafe",
    "c_files": [
+    "uri.c"
+   ]
+  },
+  {
+   "sha": "ab7693ab4a24480e0f3a4c7ed1fcbf490a36c38c",
+   "ct": 1771327044,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"uri: Handle \\'s in path for xmlParseURI\"",
+   "c_files": [
+    "testparser.c",
     "uri.c"
    ]
   },
@@ -452,6 +483,36 @@
    ]
   },
   {
+   "sha": "22f9d730898d2dfcc03a484e65e1f8fc3675225f",
+   "ct": 1760535732,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "io: Handle clashing error codes on AIX",
+   "c_files": [
+    "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "d87d94773e0ea963465ec0fb3b1d1b9831760d25",
+   "ct": 1759135800,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"globals: Don't export DllMain on Windows\"",
+   "c_files": [
+    "globals.c"
+   ]
+  },
+  {
+   "sha": "bd2072f8d025e7a37d527b23b84698460c5798bf",
+   "ct": 1758993076,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "globals: Don't export DllMain on Windows",
+   "c_files": [
+    "globals.c"
+   ]
+  },
+  {
    "sha": "c537ccf0aea640e625abce653d5890afc934b340",
    "ct": 1758792545,
    "class": "extrinsic",
@@ -472,12 +533,37 @@
    ]
   },
   {
+   "sha": "8c107b690bde35010c8984cf85541924f25f0306",
+   "ct": 1757336364,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"dict: Rework reference counting\"",
+   "c_files": [
+    "dict.c",
+    "include/private/dict.h",
+    "include/private/threads.h",
+    "threads.c"
+   ]
+  },
+  {
    "sha": "13962f820ebd37b93700252a5b7dcec1acbf62f6",
    "ct": 1756117795,
    "class": "regression",
    "why": "regression word",
    "subject": "valid: Fix null deref in xmlValidateOneAttribute",
    "c_files": [
+    "valid.c"
+   ]
+  },
+  {
+   "sha": "d53ba0588ef03c910d8956cbfec8a640e528059d",
+   "ct": 1755953995,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "valid: Don't add ids when validating entity content",
+   "c_files": [
+    "SAX2.c",
+    "include/private/parser.h",
     "valid.c"
    ]
   },
@@ -499,6 +585,36 @@
    "subject": "regexp: Avoid integer overflow and OOB array access",
    "c_files": [
     "xmlregexp.c"
+   ]
+  },
+  {
+   "sha": "152fbb60a9e16cce502ce541f0fa63b2097d9a12",
+   "ct": 1754238389,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Make sure to stop parser before checking max errors",
+   "c_files": [
+    "parserInternals.c"
+   ]
+  },
+  {
+   "sha": "37bd4b284a343a18be3bc49c0f53cec5d4d1b5f9",
+   "ct": 1754055046,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "globals: Include HTMLparser.h, fixing Windows build",
+   "c_files": [
+    "globals.c"
+   ]
+  },
+  {
+   "sha": "d1c3391eafd98d890475fd0c5f89c77934ac81e2",
+   "ct": 1753968020,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: Silence testparser",
+   "c_files": [
+    "testparser.c"
    ]
   },
   {
@@ -529,6 +645,16 @@
    "subject": "io: Fix reading from pipes like stdin on Windows",
    "c_files": [
     "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "bc0bb67b57e0c10fa804e225d2e7a5b31e2fcb9f",
+   "ct": 1752144382,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "html: Don't abort on encoding errors",
+   "c_files": [
+    "HTMLparser.c"
    ]
   },
   {
@@ -695,6 +821,18 @@
    ]
   },
   {
+   "sha": "2b6b3945f2df548b56f2c73c490dda9781f92eb2",
+   "ct": 1748960516,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"SAX1: Align handling of default attributes with SAX2\"",
+   "c_files": [
+    "SAX2.c",
+    "include/private/parser.h",
+    "parser.c"
+   ]
+  },
+  {
    "sha": "30375877d981be8ede8620b13c6928342d929b58",
    "ct": 1748960508,
    "class": "regression",
@@ -827,6 +965,16 @@
    ]
   },
   {
+   "sha": "39ae5d126598b14f9fcb3da5e2e76acc378ea307",
+   "ct": 1747076681,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "save: Add NULL check in xmlBufDumpEntityContent",
+   "c_files": [
+    "xmlsave.c"
+   ]
+  },
+  {
    "sha": "4df8d55742718420f64dffb54f96f785b4244866",
    "ct": 1747063874,
    "class": "regression",
@@ -930,6 +1078,16 @@
    ]
   },
   {
+   "sha": "6896f478d42b17b7eb46605206841a6d7821140d",
+   "ct": 1744989885,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"valid: Remove duplicate error messages when streaming\"",
+   "c_files": [
+    "valid.c"
+   ]
+  },
+  {
    "sha": "d8193b7af1aaedc2cfa052249f645a6fc71bb8de",
    "ct": 1744917240,
    "class": "other-fix",
@@ -997,6 +1155,17 @@
    "subject": "xmllint: Fix --html --sax element callbacks",
    "c_files": [
     "xmllint.c"
+   ]
+  },
+  {
+   "sha": "a5c4a6efe77f6dd6e0a092db9357b21602eedd31",
+   "ct": 1743177154,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Fix XML_PARSE_NOBLANKS dropping non-whitespace text",
+   "c_files": [
+    "parser.c",
+    "testparser.c"
    ]
   },
   {
@@ -1104,6 +1273,30 @@
    ]
   },
   {
+   "sha": "552864f109df055d476e392d31d2757bd3ee6b18",
+   "ct": 1740838700,
+   "class": "extrinsic",
+   "why": "env 'os400'",
+   "subject": "Remove os400 port",
+   "c_files": [
+    "os400/dlfcn/dlfcn.c",
+    "os400/dlfcn/dlfcn.h",
+    "os400/iconv/bldcsndfa/bldcsndfa.c",
+    "os400/iconv/ianatables.c",
+    "os400/iconv/iconv.c",
+    "os400/iconv/iconv.h",
+    "os400/libxmlmain.c",
+    "os400/rpgsupport.c",
+    "os400/rpgsupport.h",
+    "os400/transcode.c",
+    "os400/transcode.h",
+    "os400/wrappers.c",
+    "os400/wrappers.h",
+    "os400/xmlcatlgcl.c",
+    "os400/xmllintcl.c"
+   ]
+  },
+  {
    "sha": "6dfa68ac7f3f55109e3cf6be78461a81333f445f",
    "ct": 1740232367,
    "class": "other-fix",
@@ -1186,6 +1379,41 @@
    ]
   },
   {
+   "sha": "69b91da3a88e4032ff4fe3a44f750685704114c1",
+   "ct": 1739474417,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"xpath: Make contextSize and proximityPosition default to 1\"",
+   "c_files": [
+    "xpath.c"
+   ]
+  },
+  {
+   "sha": "9c16a153d8bbd6a662ffcdc819d1457c3c9b4358",
+   "ct": 1739474417,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"include: Make most IS_* macros private\"",
+   "c_files": [
+    "HTMLtree.c",
+    "catalog.c",
+    "debugXML.c",
+    "encoding.c",
+    "entities.c",
+    "include/libxml/parserInternals.h",
+    "include/private/parser.h",
+    "pattern.c",
+    "relaxng.c",
+    "tree.c",
+    "xmlregexp.c",
+    "xmlsave.c",
+    "xmlschemas.c",
+    "xmlschemastypes.c",
+    "xpath.c",
+    "xpointer.c"
+   ]
+  },
+  {
    "sha": "6c716d491dd2e67f08066f4dc0619efeb49e43e6",
    "ct": 1739474417,
    "class": "other-fix",
@@ -1203,6 +1431,26 @@
    "subject": "fuzz: Work around glibc iconv() bug",
    "c_files": [
     "encoding.c"
+   ]
+  },
+  {
+   "sha": "3a1526a5f7e32eafa8945c407cd9fadace9d35b5",
+   "ct": 1739212352,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "xpath: Don't raise OOM error on long names",
+   "c_files": [
+    "xpath.c"
+   ]
+  },
+  {
+   "sha": "35d8a230a8e99facff8afb6214c60d3609cd11f3",
+   "ct": 1738833296,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: Fix expected errors in runxmlconf",
+   "c_files": [
+    "runxmlconf.c"
    ]
   },
   {
@@ -1287,6 +1535,17 @@
    ]
   },
   {
+   "sha": "53a48468aeb257223e5e261e9e3f71a168c286e9",
+   "ct": 1738335000,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "xmllint: Make --push report parse errors",
+   "c_files": [
+    "parser.c",
+    "xmllint.c"
+   ]
+  },
+  {
    "sha": "3eced32ea3633b6f2077a4a98e08b5ba7a6ecf99",
    "ct": 1738191754,
    "class": "regression",
@@ -1295,6 +1554,20 @@
    "c_files": [
     "parserInternals.c",
     "testparser.c"
+   ]
+  },
+  {
+   "sha": "a78843be5eddba84c4af1d525726aa80f4de9d94",
+   "ct": 1738102837,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "xmllint: Support compressed input from stdin",
+   "c_files": [
+    "include/private/io.h",
+    "parser.c",
+    "parserInternals.c",
+    "xmlIO.c",
+    "xmllint.c"
    ]
   },
   {
@@ -1597,6 +1870,17 @@
    ]
   },
   {
+   "sha": "764b8086d1ee8c105460fcc59173f9daf423838f",
+   "ct": 1731525752,
+   "class": "extrinsic",
+   "why": "env 'clang'",
+   "subject": "tests: Fix sanitizer version check on old Apple clang",
+   "c_files": [
+    "libxml.h",
+    "testdict.c"
+   ]
+  },
+  {
    "sha": "1e4d8c55f0b02de9755d0f4b5d97dd55eed7c50b",
    "ct": 1730908193,
    "class": "other-fix",
@@ -1810,6 +2094,16 @@
    ]
   },
   {
+   "sha": "4b0078781b9ec04cd681fc62788f4ce25b10c3b1",
+   "ct": 1724094844,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"catalog: Fetch XML catalog before dumping\"",
+   "c_files": [
+    "catalog.c"
+   ]
+  },
+  {
    "sha": "57b92cabd2f3018212ddc1475df66e9f9cf643c3",
    "ct": 1724094844,
    "class": "regression",
@@ -1817,6 +2111,16 @@
    "subject": "catalog: Fix regression in xmlCatalogAdd",
    "c_files": [
     "catalog.c"
+   ]
+  },
+  {
+   "sha": "f59da1a3644d85782cb913b2ab0096fc7dfc0e3a",
+   "ct": 1723836367,
+   "class": "extrinsic",
+   "why": "env 'GCC 7'",
+   "subject": "hash: Suppress GCC 7.3 and MINGW maybe-uninitialized warning",
+   "c_files": [
+    "hash.c"
    ]
   },
   {
@@ -1860,6 +2164,16 @@
    "subject": "malloc-fail: Fix memory leak in xmlOutputBufferCreateFilename",
    "c_files": [
     "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "02fcb1effbd97cdb8aead18690a2d880f66ff312",
+   "ct": 1721920038,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Make xmlParseChunk return an error if parser was stopped",
+   "c_files": [
+    "parser.c"
    ]
   },
   {
@@ -1920,6 +2234,17 @@
    "subject": "buf: Fix xmlBufBackToBuffer",
    "c_files": [
     "buf.c"
+   ]
+  },
+  {
+   "sha": "5862e9dd37959ac0215b812685e115348274e73e",
+   "ct": 1721261416,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add NULL checks",
+   "c_files": [
+    "buf.c",
+    "xmlsave.c"
    ]
   },
   {
@@ -2100,6 +2425,27 @@
    ]
   },
   {
+   "sha": "c4d8343b7c56a5fd00fcd7edb8e2ceb786081570",
+   "ct": 1719252507,
+   "class": "regression",
+   "why": "references 5b893fa999 (1 d earlier)",
+   "subject": "encoding: Make xmlFindCharEncodingHandler return UTF-8 handler",
+   "c_files": [
+    "encoding.c"
+   ]
+  },
+  {
+   "sha": "54c6c7e4169a1d5caa9ab5f13842f47bec6a50d3",
+   "ct": 1719252507,
+   "class": "regression",
+   "why": "references 2ce70cde46 (0 d earlier)",
+   "subject": "uri: Only set file scheme for special Windows paths",
+   "c_files": [
+    "testparser.c",
+    "uri.c"
+   ]
+  },
+  {
    "sha": "5b893fa9994295c6e2ced909d84c7f562f861c0e",
    "ct": 1719086343,
    "class": "other-fix",
@@ -2142,6 +2488,16 @@
    ]
   },
   {
+   "sha": "3c7c831c7c10ee3b68a039da138abf38ec4ab994",
+   "ct": 1718632063,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "xinclude: Set XPath context doc",
+   "c_files": [
+    "xinclude.c"
+   ]
+  },
+  {
    "sha": "d2fd9d37b00c46b115505c338f3868e2d9c5bed8",
    "ct": 1718632063,
    "class": "other-fix",
@@ -2149,6 +2505,16 @@
    "subject": "parser: Fix swapped arguments",
    "c_files": [
     "parserInternals.c"
+   ]
+  },
+  {
+   "sha": "1ff484339e98b9adc992478f2786c3db174c8a32",
+   "ct": 1718632063,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "xinclude: Load included documents with XML_PARSE_DTDLOAD",
+   "c_files": [
+    "xinclude.c"
    ]
   },
   {
@@ -2252,6 +2618,16 @@
    "subject": "parser: Fix performance regression when parsing namespaces",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "f0d891585d63e380bf45044d4b5e535dc610871a",
+   "ct": 1717249303,
+   "class": "regression",
+   "why": "references 63ce5f9aed (33 d earlier)",
+   "subject": "entities: Unconst predefined entities",
+   "c_files": [
+    "entities.c"
    ]
   },
   {
@@ -2425,6 +2801,38 @@
    ]
   },
   {
+   "sha": "5c55332591d9ac5f5434fca7b6bb45d0612fc6d5",
+   "ct": 1711722593,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"tree: Only allow elements in xmlDocSetRootElement\"",
+   "c_files": [
+    "testapi.c",
+    "tree.c"
+   ]
+  },
+  {
+   "sha": "7c5daa376343738a4bd85474386c976d3839f114",
+   "ct": 1711722527,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tree: Ignore namespace with NULL href in xmlSearchNs",
+   "c_files": [
+    "tree.c"
+   ]
+  },
+  {
+   "sha": "f43197fca7e0f6fc2c63d7fd1dd2a4230540bfc6",
+   "ct": 1711718471,
+   "class": "regression",
+   "why": "references 4ccd3eb80f (13 d earlier)",
+   "subject": "tree: Don't coalesce text nodes in xmlAdd{Prev,Next}Sibling",
+   "c_files": [
+    "tree.c",
+    "xinclude.c"
+   ]
+  },
+  {
    "sha": "2cc7f71016bda7da99019db024c280bb6ee12e95",
    "ct": 1711716268,
    "class": "regression",
@@ -2472,6 +2880,21 @@
    "subject": "tree: Fix uninitialized value in xmlSearchNsByHrefSafe",
    "c_files": [
     "tree.c"
+   ]
+  },
+  {
+   "sha": "047ea3ecb31cadad15b65f8f5057a4c3a9d5f7b2",
+   "ct": 1710705880,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"tree: Allocate XML namespace statically\"",
+   "c_files": [
+    "SAX2.c",
+    "debugXML.c",
+    "include/private/tree.h",
+    "testparser.c",
+    "tree.c",
+    "xpath.c"
    ]
   },
   {
@@ -2679,6 +3102,16 @@
    ]
   },
   {
+   "sha": "b55ee729dea1122a1f2942b83f7f3b21116f873b",
+   "ct": 1708950128,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "html: Regression test for #696",
+   "c_files": [
+    "testparser.c"
+   ]
+  },
+  {
    "sha": "a581f65194212f183dcbe77da44657d477a4758d",
    "ct": 1708513950,
    "class": "other-fix",
@@ -2797,6 +3230,16 @@
    "subject": "xpath: Fix return of empty node-set in xmlXPathNodeCollectAndTest",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "02a2038de469bace0595dd764205c853f3fa526d",
+   "ct": 1704892669,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Handle NOCDATA properly when expanding entities",
+   "c_files": [
+    "parser.c"
    ]
   },
   {
@@ -2991,6 +3434,16 @@
    ]
   },
   {
+   "sha": "79a9938d843d38a64d7a17006cf5ad4335aa5b51",
+   "ct": 1702493924,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Don't grow or shrink pull parser memory buffers",
+   "c_files": [
+    "parserInternals.c"
+   ]
+  },
+  {
    "sha": "0e201722e497f278f028c5c3916e293e2f77b5a4",
    "ct": 1702479149,
    "class": "other-fix",
@@ -3116,6 +3569,39 @@
    ]
   },
   {
+   "sha": "43b511fa714df875dc4f40d108061eede0d4d76b",
+   "ct": 1701008289,
+   "class": "regression",
+   "why": "references cb927e8519 (58 d earlier)",
+   "subject": "parser: Make CRLF increment line number",
+   "c_files": [
+    "parser.c",
+    "parserInternals.c"
+   ]
+  },
+  {
+   "sha": "455c61d635d217d6b80fe6d1a979afe692d30168",
+   "ct": 1700751581,
+   "class": "extrinsic",
+   "why": "env 'VMS'",
+   "subject": "Remove VMS support",
+   "c_files": [
+    "runtest.c",
+    "testrecurse.c",
+    "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "f8394adf1483e4c5b1a24ccaa2f568cfccab32db",
+   "ct": 1700631296,
+   "class": "extrinsic",
+   "why": "env 'GCC'",
+   "subject": "Avoid using no_sanitize attribute on EDG even if compiler shows as GCC",
+   "c_files": [
+    "libxml.h"
+   ]
+  },
+  {
    "sha": "a2b5c90a442295d2b75ae60af854b3c4a43aa0ff",
    "ct": 1700576939,
    "class": "regression",
@@ -3154,6 +3640,20 @@
    "c_files": [
     "globals.c",
     "threads.c"
+   ]
+  },
+  {
+   "sha": "f92ea2ccecdb94cabd40c4df1a2e7f35dd7bd4cb",
+   "ct": 1700314601,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: Fix build with older MSVC",
+   "c_files": [
+    "runsuite.c",
+    "runtest.c",
+    "runxmlconf.c",
+    "testapi.c",
+    "testrecurse.c"
    ]
   },
   {
@@ -3856,6 +4356,16 @@
    ]
   },
   {
+   "sha": "921796b06bde4927ddf142797848065bf427cc6a",
+   "ct": 1681300593,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "parser: Don't grow push parser buffers",
+   "c_files": [
+    "parserInternals.c"
+   ]
+  },
+  {
    "sha": "e4f85f1bd2eb34d9b49da9154a4cc3a1bc284f68",
    "ct": 1681216190,
    "class": "other-fix",
@@ -4366,6 +4876,17 @@
    "why": "",
    "subject": "malloc-fail: Fix memory leak in xmlXPathEqualNodeSetFloat",
    "c_files": [
+    "xpath.c"
+   ]
+  },
+  {
+   "sha": "b51478dc9538ccc3badc22904104d78b75434806",
+   "ct": 1677414227,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"malloc-fail: Avoid use-after-free after unsuccessful valuePush\"",
+   "c_files": [
+    "include/libxml/xpathInternals.h",
     "xpath.c"
    ]
   },
@@ -4954,6 +5475,16 @@
    ]
   },
   {
+   "sha": "8ed40c621b33b44c26e90505b9de1c92080c4a8e",
+   "ct": 1670889093,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"uri: Allow port without host\"",
+   "c_files": [
+    "uri.c"
+   ]
+  },
+  {
    "sha": "eaebf37fb6ee3341ccd716e3456900398433f209",
    "ct": 1670523490,
    "class": "regression",
@@ -4991,6 +5522,19 @@
    "subject": "warnings: Work around MSVC bug",
    "c_files": [
     "testdict.c"
+   ]
+  },
+  {
+   "sha": "cfbe68e46877cb0ff3f3da775b709c48513565c8",
+   "ct": 1669101653,
+   "class": "extrinsic",
+   "why": "env 'Visual Studio'",
+   "subject": "sources: Silence C4013 warnings on Visual Studio",
+   "c_files": [
+    "catalog.c",
+    "nanoftp.c",
+    "nanohttp.c",
+    "xzlib.c"
    ]
   },
   {
@@ -5316,6 +5860,16 @@
    ]
   },
   {
+   "sha": "5bfaf2305997a6d1c49a6b23c2cc9c8c32d8c17c",
+   "ct": 1665486033,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "win32: Fix build with VS2013",
+   "c_files": [
+    "include/win32config.h"
+   ]
+  },
+  {
    "sha": "1d4f5d24ac3976012ab1f5b811385e7b00caaecf",
    "ct": 1663081019,
    "class": "other-fix",
@@ -5333,6 +5887,20 @@
    "subject": "autotools: Fix network checks on Windows",
    "c_files": [
     "include/wsockcompat.h"
+   ]
+  },
+  {
+   "sha": "0d9012585926d6dc0f9bf563b8302c0f2e54876c",
+   "ct": 1662309364,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix Windows compiler warnings in python/types.c",
+   "c_files": [
+    "libxml.h",
+    "python/libxml_wrap.h",
+    "python/types.c",
+    "xmlmodule.c",
+    "xpath.c"
    ]
   },
   {
@@ -5468,6 +6036,17 @@
    ]
   },
   {
+   "sha": "6ef16dee7ac8af32b8a0dd793445b1148e240364",
+   "ct": 1655380887,
+   "class": "regression",
+   "why": "references 6c283d83ec (44 d earlier)",
+   "subject": "Reserve byte for NUL terminator and report errors consistently in xmlBuf and xmlBuffer",
+   "c_files": [
+    "buf.c",
+    "tree.c"
+   ]
+  },
+  {
    "sha": "4ce2abf6f656b3e78ad40e33191a8b42561c10b0",
    "ct": 1655378586,
    "class": "other-fix",
@@ -5504,6 +6083,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix integer overflow in xmlBufferDump()",
+   "c_files": [
+    "tree.c"
+   ]
+  },
+  {
+   "sha": "461ef8ac77d898653799fcdbf471bfd04c173a6f",
+   "ct": 1653513550,
+   "class": "regression",
+   "why": "references 6c283d83ec (23 d earlier)",
+   "subject": "Fix double colon typos in xmlBufferResize()",
    "c_files": [
     "tree.c"
    ]
@@ -5557,6 +6146,16 @@
    "subject": "Fix parsing of subtracted regex character classes",
    "c_files": [
     "xmlregexp.c"
+   ]
+  },
+  {
+   "sha": "d314046f897fbb0e3141108012b668374e665020",
+   "ct": 1650728735,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Don't try to copy children of entity references",
+   "c_files": [
+    "tree.c"
    ]
   },
   {
@@ -5626,6 +6225,16 @@
    ]
   },
   {
+   "sha": "b7b29df9c29a2c18e91173ec1c3447b88f771e89",
+   "ct": 1648689066,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Add windows includes to xmlIO.c",
+   "c_files": [
+    "xmlIO.c"
+   ]
+  },
+  {
    "sha": "74263eff5f6212afa2196022ecd2fbc39c6d3c36",
    "ct": 1648620151,
    "class": "other-fix",
@@ -5633,6 +6242,26 @@
    "subject": "fix: xmlXPathParserContext could be double-delete in  OOM case.",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "968495442964f3ea72499dfbdba9e2fa9d77f9b7",
+   "ct": 1647972665,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Continue to parse entity refs in recovery mode\"",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
+   "sha": "83d5a87e372c9688d6dbacade2a4959ead8d38c8",
+   "ct": 1647615044,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Simplify recursive pthread mutex\"",
+   "c_files": [
+    "threads.c"
    ]
   },
   {
@@ -5937,6 +6566,16 @@
    ]
   },
   {
+   "sha": "87a99270423967eb49a865ca78bc31c01050ce2f",
+   "ct": 1642343565,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Added regression tests for xmlReadFd() and htmlReadFd()",
+   "c_files": [
+    "runtest.c"
+   ]
+  },
+  {
    "sha": "fe6890e292c3d23c6196be10887c0aaaedd3ef47",
    "ct": 1642343514,
    "class": "other-fix",
@@ -5954,6 +6593,16 @@
    "subject": "Fix memory leak in xmlXPathCompNodeTest",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "6e169c1490a113cdf309f2ac9c70772db0df033a",
+   "ct": 1642342686,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "python: Port python 3.x module to Windows",
+   "c_files": [
+    "python/types.c"
    ]
   },
   {
@@ -6094,6 +6743,16 @@
    "subject": "Fix parse failure when 4-byte character in UTF-16 BE is split across a chunk",
    "c_files": [
     "encoding.c"
+   ]
+  },
+  {
+   "sha": "c35628a24c33c6c3d2d9a9998bcc90e54b1757ea",
+   "ct": 1642267102,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Make schema validation fail with multiple top-level elements\"",
+   "c_files": [
+    "xmlschemas.c"
    ]
   },
   {
@@ -6294,6 +6953,17 @@
    "subject": "Fix quadratic behavior when looking up xml:* attributes",
    "c_files": [
     "tree.c"
+   ]
+  },
+  {
+   "sha": "0fb3ae584085ce56bedbe2c5e7359f1ed9da238e",
+   "ct": 1614011465,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Improve HTML fuzzer stability\"",
+   "c_files": [
+    "HTMLparser.c",
+    "fuzz/html.c"
    ]
   },
   {
@@ -6607,6 +7277,16 @@
    "subject": "Fix memory leak in runtest.c",
    "c_files": [
     "runtest.c"
+   ]
+  },
+  {
+   "sha": "c1ba6f54d32b707ca6d91cb3257ce9de82876b6f",
+   "ct": 1597509149,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Do not URI escape in server side includes\"",
+   "c_files": [
+    "HTMLtree.c"
    ]
   },
   {
@@ -6943,6 +7623,16 @@
    ]
   },
   {
+   "sha": "eddfbc38fa7e84ccd480eab3738e40d1b2c83979",
+   "ct": 1581438942,
+   "class": "regression",
+   "why": "references f9ea1a24ed (0 d earlier)",
+   "subject": "Don't load external entity from xmlSAX2GetEntity",
+   "c_files": [
+    "SAX2.c"
+   ]
+  },
+  {
    "sha": "f9ea1a24ed0fd2fd051bb01b0d08cdff60887938",
    "ct": 1581435472,
    "class": "other-fix",
@@ -7153,6 +7843,17 @@
    ]
   },
   {
+   "sha": "b88ae6d2e1c9f22931f59ff1ec490befe201fb26",
+   "ct": 1571060432,
+   "class": "extrinsic",
+   "why": "env 'GCC'",
+   "subject": "Avoid ignored attribute warnings under GCC",
+   "c_files": [
+    "dict.c",
+    "hash.c"
+   ]
+  },
+  {
    "sha": "664f881008f40356c0502c8cc154e17e3c80e353",
    "ct": 1569488957,
    "class": "regression",
@@ -7314,6 +8015,16 @@
    ]
   },
   {
+   "sha": "b17e3d1c2b6a6d4f3d365faa9908d2c91ca32420",
+   "ct": 1564744693,
+   "class": "extrinsic",
+   "why": "env 'AIX'",
+   "subject": "Work around buggy ceil() function on AIX",
+   "c_files": [
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "4f67dbb0a1314326caac5e2780046c56210af2b1",
    "ct": 1564483406,
    "class": "other-fix",
@@ -7341,6 +8052,16 @@
    "subject": "Fix another code path in xmlParseQName",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "f209e55107697159b49460f43ef74c735c4bfd5b",
+   "ct": 1561455916,
+   "class": "regression",
+   "why": "references dbc6b55b59 (39 d earlier)",
+   "subject": "Fix build without reader but with pattern",
+   "c_files": [
+    "xmllint.c"
    ]
   },
   {
@@ -7537,6 +8258,16 @@
    ]
   },
   {
+   "sha": "619534ef2ed501e5206915064a5bc36153a897f7",
+   "ct": 1546781548,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix Windows compiler warning in testC14N.c",
+   "c_files": [
+    "testC14N.c"
+   ]
+  },
+  {
    "sha": "19f0950d30208c4a37fe90b25ed82c5bdc44287a",
    "ct": 1546781112,
    "class": "extrinsic",
@@ -7603,6 +8334,16 @@
    ]
   },
   {
+   "sha": "6fc04d714a019cb3be351bc472f7a64a08f51008",
+   "ct": 1543671178,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Support xmlTextReaderNextSibling w/o preparsed doc\"",
+   "c_files": [
+    "xmlreader.c"
+   ]
+  },
+  {
    "sha": "b1f87c0e4376a993e682f59471e2c455a9179e22",
    "ct": 1543526384,
    "class": "other-fix",
@@ -7623,6 +8364,16 @@
    ]
   },
   {
+   "sha": "1567b55b72b8366ce120ed042e03ed5b50d191d7",
+   "ct": 1542900526,
+   "class": "regression",
+   "why": "references 8c9daf790a (71 d earlier)",
+   "subject": "Set doc on element obtained from freeElems",
+   "c_files": [
+    "SAX2.c"
+   ]
+  },
+  {
    "sha": "d459831c1b308c2095a1b73800e0238269d4106a",
    "ct": 1539442033,
    "class": "other-fix",
@@ -7630,6 +8381,16 @@
    "subject": "Fix HTML serialization with UTF-8 encoding",
    "c_files": [
     "HTMLtree.c"
+   ]
+  },
+  {
+   "sha": "73b2417c5148af1f89708031b4bf96f40d1195e0",
+   "ct": 1537623902,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Variables need 'extern' in static lib on Cygwin",
+   "c_files": [
+    "include/libxml/xmlexports.h"
    ]
   },
   {
@@ -7680,6 +8441,18 @@
    "subject": "Fix inconsistency in xmlXPathIsInf",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "7a1bd7f6497ac33a9023d556f6f47a48f01deac0",
+   "ct": 1521241404,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Change calls to xmlCharEncInput to set flush false\"",
+   "c_files": [
+    "HTMLparser.c",
+    "parserInternals.c",
+    "xmlIO.c"
    ]
   },
   {
@@ -7980,6 +8753,16 @@
    ]
   },
   {
+   "sha": "41c0a13fe7455bbdd3aa785a67ded91058f81333",
+   "ct": 1507549604,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix Windows compiler warnings in xmlCanonicPath",
+   "c_files": [
+    "uri.c"
+   ]
+  },
+  {
    "sha": "5af594d8bc55121ae454cba4d05793d1db7ff612",
    "ct": 1507382577,
    "class": "other-fix",
@@ -8057,6 +8840,17 @@
    "subject": "Fix memory leaks in SAX1 parser",
    "c_files": [
     "SAX2.c"
+   ]
+  },
+  {
+   "sha": "69936b129fedcda3514fee1a0d6b39521923cbac",
+   "ct": 1504095546,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Print error messages for truncated UTF-8 sequences\"",
+   "c_files": [
+    "parser.c",
+    "parserInternals.c"
    ]
   },
   {
@@ -8273,6 +9067,22 @@
    ]
   },
   {
+   "sha": "030b1f7a27c22f9237eddca49ec5e620b6258d7d",
+   "ct": 1496757222,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Add an XML_PARSE_NOXXE flag to block all entities loading even local\"",
+   "c_files": [
+    "elfgcchack.h",
+    "include/libxml/parser.h",
+    "include/libxml/xmlIO.h",
+    "include/libxml/xmlerror.h",
+    "parser.c",
+    "xmlIO.c",
+    "xmllint.c"
+   ]
+  },
+  {
    "sha": "897dffbae322b46b83f99a607d527058a72c51ed",
    "ct": 1496748074,
    "class": "other-fix",
@@ -8311,6 +9121,16 @@
    "subject": "Check for integer overflow in xmlXPathFormatNumber",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "855c19efb7cd30d927d673b3658563c4959ca6f0",
+   "ct": 1496320288,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Avoid reparsing in xmlParseStartTag2",
+   "c_files": [
+    "parser.c"
    ]
   },
   {
@@ -8508,6 +9328,17 @@
    ]
   },
   {
+   "sha": "d77e5fc4bcdb7da748c9cca116a601ae4df60d21",
+   "ct": 1466679746,
+   "class": "extrinsic",
+   "why": "env 'C99'",
+   "subject": "relaxng.c, xmlschemas.c: Fix build on pre-C99 compilers",
+   "c_files": [
+    "relaxng.c",
+    "xmlschemas.c"
+   ]
+  },
+  {
    "sha": "4472c3a5a5b516aaf59b89be602fbce52756c3e9",
    "ct": 1463986867,
    "class": "other-fix",
@@ -8540,6 +9371,16 @@
     "xmlwriter.c",
     "xpath.c",
     "xpointer.c"
+   ]
+  },
+  {
+   "sha": "beca86e8c86984b967a6efa05a9653470253edda",
+   "ct": 1463986867,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Detect change of encoding when parsing HTML names",
+   "c_files": [
+    "HTMLparser.c"
    ]
   },
   {
@@ -8954,6 +9795,16 @@
    ]
   },
   {
+   "sha": "f65128f38289d77ff322d63aef2858cc0a819c34",
+   "ct": 1413537221,
+   "class": "regression",
+   "why": "revert",
+   "subject": "Revert \"Missing initialization for the catalog module\"",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "be2a7edaf289c5da74a4f9ed3a0b6c733e775230",
    "ct": 1413439187,
    "class": "other-fix",
@@ -9057,6 +9908,62 @@
    "subject": "Fix Enum check and missing break",
    "c_files": [
     "xmlreader.c"
+   ]
+  },
+  {
+   "sha": "bce6a61e68eca99575d4720a9b524ecbc30b04b1",
+   "ct": 1412428428,
+   "class": "extrinsic",
+   "why": "env 'OS400'",
+   "subject": "OS400: use C macros to implement equivalent RPG support procedures.",
+   "c_files": [
+    "os400/rpgsupport.c"
+   ]
+  },
+  {
+   "sha": "02fd12987418007568cd9bad12eef08a75fb134b",
+   "ct": 1412428428,
+   "class": "extrinsic",
+   "why": "env 'OS400'",
+   "subject": "OS400: implement XPath macros as procedures for ILE/RPG support.",
+   "c_files": [
+    "os400/rpgsupport.c",
+    "os400/rpgsupport.h"
+   ]
+  },
+  {
+   "sha": "7d888f07d86454025e4629ee36fdb5b3876f62ea",
+   "ct": 1412428427,
+   "class": "extrinsic",
+   "why": "env 'OS400'",
+   "subject": "OS400: implement some macros as functions for ILE/RPG language support (that as no macros).",
+   "c_files": [
+    "os400/rpgsupport.c",
+    "os400/rpgsupport.h"
+   ]
+  },
+  {
+   "sha": "5621c81b49cf2c2eb7b110d862f4b52b916f82b2",
+   "ct": 1412428427,
+   "class": "extrinsic",
+   "why": "env 'OS400'",
+   "subject": "OS400: Easy character transcoding support",
+   "c_files": [
+    "os400/transcode.c",
+    "os400/transcode.h"
+   ]
+  },
+  {
+   "sha": "17951ea28989d6ca70697cef7bfeeceebf4d94c5",
+   "ct": 1412428427,
+   "class": "extrinsic",
+   "why": "env 'OS400'",
+   "subject": "OS400: iconv functions compatibility wrappers and table builder.",
+   "c_files": [
+    "os400/iconv/bldcsndfa/bldcsndfa.c",
+    "os400/iconv/ianatables.c",
+    "os400/iconv/iconv.c",
+    "os400/iconv/iconv.h"
    ]
   },
   {
@@ -9233,6 +10140,16 @@
    ]
   },
   {
+   "sha": "190a0b89395f397b40aea02de6f362290ad6cc3d",
+   "ct": 1391680697,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "Fix a portability issue on Windows",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "15d12040ff48c5190addd315092c9262fbe54e91",
    "ct": 1391679480,
    "class": "other-fix",
@@ -9329,6 +10246,16 @@
    "class": "other-fix",
    "why": "",
    "subject": "Fix XPath expressions of the form '@ns:*'",
+   "c_files": [
+    "xpath.c"
+   ]
+  },
+  {
+   "sha": "b4bcba23f64b71105514875f165a63d4cc720609",
+   "ct": 1375654511,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Fix XPath '//' optimization with predicates",
    "c_files": [
     "xpath.c"
    ]
@@ -9526,6 +10453,16 @@
    ]
   },
   {
+   "sha": "9c8eaabe83b9973ec97acecb5e499335397c523c",
+   "ct": 1357300135,
+   "class": "regression",
+   "why": "references 153cf15905 (70 d earlier)",
+   "subject": "Fix compiler warning after 153cf15905cf4ec080612ada6703757d10caba1e",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "cf8f0424db45c43ecda812b7c238ece5e2398107",
    "ct": 1356059611,
    "class": "other-fix",
@@ -9543,6 +10480,16 @@
    "subject": "Fix potential out of bound access",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "4ea74a440d6f7ff0f6e2d25a780aee21f86762a8",
+   "ct": 1351477638,
+   "class": "extrinsic",
+   "why": "env 'GCC'",
+   "subject": "Fix a portability issue for GCC < 3.4.0",
+   "c_files": [
+    "timsort.h"
    ]
   },
   {
@@ -9576,6 +10523,16 @@
    "c_files": [
     "SAX2.c",
     "parser.c"
+   ]
+  },
+  {
+   "sha": "713434d2309da469d64b35e163ea6556dadccada",
+   "ct": 1348626066,
+   "class": "extrinsic",
+   "why": "env 'clang '",
+   "subject": "Silence a clang warning",
+   "c_files": [
+    "xpath.c"
    ]
   },
   {
@@ -9726,6 +10683,16 @@
    ]
   },
   {
+   "sha": "4629ee02ac649c27f9c0cf98ba017c6b5526070f",
+   "ct": 1343024140,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Do not fetch external parsed entities",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "baaf03f80f817bb34c421421e6cb4d68c353ac9a",
    "ct": 1342770094,
    "class": "other-fix",
@@ -9801,6 +10768,20 @@
    ]
   },
   {
+   "sha": "978ff224b2284f50bfb59c70b92a4b77bd4a7388",
+   "ct": 1337566809,
+   "class": "extrinsic",
+   "why": "env 'mingw'",
+   "subject": "use mingw C99 compatible functions {v}snprintf instead those from MSVC runtime",
+   "c_files": [
+    "python/libxml.c",
+    "runsuite.c",
+    "runtest.c",
+    "runxmlconf.c",
+    "testrecurse.c"
+   ]
+  },
+  {
    "sha": "0d51cfebc9eecf311e50eabdf1c2412211220e6d",
    "ct": 1337051920,
    "class": "other-fix",
@@ -9851,6 +10832,16 @@
    "subject": "Fix a memory leak in the xzlib code",
    "c_files": [
     "xzlib.c"
+   ]
+  },
+  {
+   "sha": "a0cd075d94518cd254d5fe122cc6825a1dfc6093",
+   "ct": 1336735872,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "HTML parser error with <noscript> in the <head>",
+   "c_files": [
+    "HTMLparser.c"
    ]
   },
   {
@@ -9944,6 +10935,18 @@
    "subject": "fix windows build. ifdef addition from bug 666491 makes no sense",
    "c_files": [
     "dict.c"
+   ]
+  },
+  {
+   "sha": "066c69777207436e3517d1b930a97f0e0a8aa060",
+   "ct": 1336559224,
+   "class": "extrinsic",
+   "why": "env 'Visual Studio'",
+   "subject": "Allow to compile with Visual Studio 2010",
+   "c_files": [
+    "dict.c",
+    "include/wsockcompat.h",
+    "win32/VC10/config.h"
    ]
   },
   {
@@ -10413,6 +11416,17 @@
    ]
   },
   {
+   "sha": "3c080d6d723b5cee379804cfa6bf394df6057f67",
+   "ct": 1268664470,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Don't give default HTML boolean attribute values in parser",
+   "c_files": [
+    "HTMLparser.c",
+    "SAX2.c"
+   ]
+  },
+  {
    "sha": "9543aee99b39f4de58641a66a5747cadd279d0b0",
    "ct": 1268648019,
    "class": "other-fix",
@@ -10440,6 +11454,17 @@
    "subject": "Fix a missing #ifdef",
    "c_files": [
     "xmllint.c"
+   ]
+  },
+  {
+   "sha": "120a269976f4198e54cc7b848dd78fca81bb9179",
+   "ct": 1268212069,
+   "class": "extrinsic",
+   "why": "env 'mingw'",
+   "subject": "Fix build with mingw",
+   "c_files": [
+    "include/libxml/xmlexports.h",
+    "libxml.h"
    ]
   },
   {
@@ -10575,6 +11600,16 @@
    ]
   },
   {
+   "sha": "d87c5d1c4fcd21641c66d93392d1761c2350f93b",
+   "ct": 1252597567,
+   "class": "extrinsic",
+   "why": "env 'MinGW'",
+   "subject": "593857 try to work around thread pbm MinGW 4.4",
+   "c_files": [
+    "threads.c"
+   ]
+  },
+  {
    "sha": "848e5cf3ab1166f242dca3a10012aa7bb07ad65d",
    "ct": 1252512838,
    "class": "extrinsic",
@@ -10613,6 +11648,17 @@
    "c_files": [
     "relaxng.c",
     "xmlregexp.c"
+   ]
+  },
+  {
+   "sha": "ec18c96008cf8f3b6b0b81ed8bfc2ccfe51d26e7",
+   "ct": 1251304663,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "558452 fight with reg test and error report",
+   "c_files": [
+    "relaxng.c",
+    "runtest.c"
    ]
   },
   {
@@ -10775,6 +11821,16 @@
    "subject": "Fix a couple of problems in the parser",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "a194ccb8d19ddde94c2c04ddf197e6a629f7cc9b",
+   "ct": 1249891721,
+   "class": "extrinsic",
+   "why": "env 'msys'",
+   "subject": "Try to avoid __imp__xmlFree link trouble on msys",
+   "c_files": [
+    "include/libxml/xmlexports.h"
    ]
   },
   {
@@ -10942,6 +11998,24 @@
    ]
   },
   {
+   "sha": "f63085de5e33a95e326d1d810fb18d979359012b",
+   "ct": 1232312039,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "port patch from Marcus Meissner to add gcc checking for printf like",
+   "c_files": [
+    "include/libxml/parser.h",
+    "include/libxml/relaxng.h",
+    "include/libxml/valid.h",
+    "include/libxml/xmlerror.h",
+    "include/libxml/xmlschemas.h",
+    "include/libxml/xmlwriter.h",
+    "threads.c",
+    "xmlmemory.c",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "bf2ebff0f11e4a3fbf2176c3deb00b8c7cecc5e4",
    "ct": 1232290624,
    "class": "other-fix",
@@ -10984,6 +12058,18 @@
    ]
   },
   {
+   "sha": "7f4547cdbd76a2931553759fb433df88b8b99452",
+   "ct": 1223020703,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "preparing the release of 2.7.2 fix the Solaris portability issue",
+   "c_files": [
+    "HTMLparser.c",
+    "dict.c",
+    "parser.c"
+   ]
+  },
+  {
    "sha": "a57ba4ce96ecba2a98694dfa3a18dbdea0c4163c",
    "ct": 1222358778,
    "class": "other-fix",
@@ -11012,6 +12098,17 @@
    "c_files": [
     "include/libxml/xmlsave.h",
     "xmlsave.c"
+   ]
+  },
+  {
+   "sha": "074f37e7ebd5e76ceb584a89745a9e84df5b3be2",
+   "ct": 1220276302,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied a couple of patches from Martin avoiding some leaks, fixinq QName",
+   "c_files": [
+    "schematron.c",
+    "xpath.c"
    ]
   },
   {
@@ -11054,6 +12151,17 @@
     "include/libxml/parser.h",
     "parser.c",
     "testrecurse.c"
+   ]
+  },
+  {
+   "sha": "49d4405a6d76a91d61dbbd9e228bf31034c8da29",
+   "ct": 1219867026,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "a bit of cleanup and added checks based on the regression tests of the",
+   "c_files": [
+    "include/libxml/xmlerror.h",
+    "parser.c"
    ]
   },
   {
@@ -11135,6 +12243,35 @@
    ]
   },
   {
+   "sha": "ae0765b6819c77aae2638b40735f354b05b9c150",
+   "ct": 1217534099,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more progresses against the official regression tests small cleanup for",
+   "c_files": [
+    "HTMLparser.c",
+    "SAX2.c",
+    "include/libxml/tree.h",
+    "parser.c",
+    "runsuite.c",
+    "runxmlconf.c",
+    "tree.c",
+    "valid.c"
+   ]
+  },
+  {
+   "sha": "09459bf1078992a5dea8c1bbef4919b90bc25218",
+   "ct": 1217422691,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "add xmlMemDisplayLast to help debug incremental memory leaks, and some",
+   "c_files": [
+    "include/libxml/xmlmemory.h",
+    "runxmlconf.c",
+    "xmlmemory.c"
+   ]
+  },
+  {
    "sha": "abade013348670c6a03fb9574c7979ba65a1b081",
    "ct": 1216911938,
    "class": "regression",
@@ -11208,6 +12345,16 @@
     "runtest.c",
     "testapi.c",
     "xmlschemas.c"
+   ]
+  },
+  {
+   "sha": "c3e2435a9defd90c6abdac75404291f757725d1a",
+   "ct": 1207763349,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "support older win32 platforms when building with newer versions of VS",
+   "c_files": [
+    "include/wsockcompat.h"
    ]
   },
   {
@@ -11353,6 +12500,16 @@
    "c_files": [
     "parser.c",
     "xmlsave.c"
+   ]
+  },
+  {
+   "sha": "57c9db0725d63b27709a9f040888b160f29573a3",
+   "ct": 1204814230,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "poblem with encoding detection for UTF-16 reported by Ashwin and found by",
+   "c_files": [
+    "encoding.c"
    ]
   },
   {
@@ -11629,6 +12786,16 @@
    ]
   },
   {
+   "sha": "dfac946c3da3ffdc03d80658d6950dfd80da907a",
+   "ct": 1181659472,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fixed the push mode when a big comment occurs before an internal subset,",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "b9e5acc490bb9b7bdea7fd6c382b02e60047135b",
    "ct": 1181655780,
    "class": "regression",
@@ -11696,6 +12863,17 @@
    "subject": "fixed bug #366161, trivially added the check in xmlCtxtReset() Daniel",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "e967f0bda305607a5c81ed18c950d8e7182a3381",
+   "ct": 1181331364,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "*use specified calling convention   for xmlDllMain. Old SDKs (VC6) only support InterlockedCompareExchange.   add xmlDllMain to header for win32 when building for static dll",
+   "c_files": [
+    "include/libxml/threads.h",
+    "threads.c"
    ]
   },
   {
@@ -11778,6 +12956,17 @@
    "subject": "tried to fix an error problem on entity content failure reported by",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "509ed2aa1a8461d4f09f5efcf82e23b4eac02ac2",
+   "ct": 1176882710,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "new patch from Andreas Stricke to better integrate support for Windows CE",
+   "c_files": [
+    "include/win32config.h",
+    "libxml.h"
    ]
   },
   {
@@ -12213,6 +13402,16 @@
    ]
   },
   {
+   "sha": "7b4e2e20fdf70a61985cdf088a599e15fdc2c4ff",
+   "ct": 1152796031,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Removed the automatic generation of CDATA sections for the content of the",
+   "c_files": [
+    "xmlsave.c"
+   ]
+  },
+  {
    "sha": "f896d44aac4e8a8e1bb60a0bbe8e8107ae2ba72c",
    "ct": 1152717488,
    "class": "other-fix",
@@ -12577,6 +13776,26 @@
    ]
   },
   {
+   "sha": "73dd71ecdde271105c42e76357cbb063545d8817",
+   "ct": 1139476126,
+   "class": "extrinsic",
+   "why": "env 'Borland'",
+   "subject": "patch from Eric Zurcher to compile with Borland C++ 6 Daniel",
+   "c_files": [
+    "include/wsockcompat.h"
+   ]
+  },
+  {
+   "sha": "6974feb0cf30d4201140ae2cf9c311bfdd87a4ff",
+   "ct": 1139107416,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fixed the comment streaming bug raised by Graham Bennett added to the",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "8f3392ef69ec36d34a389336c4df66bcce26969b",
    "ct": 1138959910,
    "class": "other-fix",
@@ -12863,6 +14082,16 @@
    "subject": "fix a problem in some error case on Solaris when passed a NULL filename,",
    "c_files": [
     "parserInternals.c"
+   ]
+  },
+  {
+   "sha": "b990008f05f7cba8f0dc0731a0af44e6cc8e8aed",
+   "ct": 1130243789,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "script HTML parser error fix, corrects bug #319715 added test from Michael",
+   "c_files": [
+    "HTMLparser.c"
    ]
   },
   {
@@ -13316,6 +14545,21 @@
    ]
   },
   {
+   "sha": "336a8e13bf013d6cf260c8b78a1129cef1e3662c",
+   "ct": 1123411579,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "get rid of the dependancy on a locally installed DTD try to cleanup the",
+   "c_files": [
+    "include/libxml/uri.h",
+    "nanoftp.c",
+    "nanohttp.c",
+    "runtest.c",
+    "uri.c",
+    "xmlIO.c"
+   ]
+  },
+  {
    "sha": "22eda2bc82acd047247df3f88aa9a5ab08d6a434",
    "ct": 1122873616,
    "class": "other-fix",
@@ -13610,6 +14854,17 @@
    ]
   },
   {
+   "sha": "4ac5f9af14c5887b0b0e57da415574a550a464bc",
+   "ct": 1120490427,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fix on schemas error portability glob() on Windows Daniel",
+   "c_files": [
+    "runsuite.c",
+    "runtest.c"
+   ]
+  },
+  {
    "sha": "3fa5e7e44c30093aee705ea4bcd48fc803f5bb7a",
    "ct": 1120475545,
    "class": "other-fix",
@@ -13736,6 +14991,18 @@
    ]
   },
   {
+   "sha": "1b75c3bd69e93cdb2d6cbddfe34db28130157daf",
+   "ct": 1119822548,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "avoid name glob in agruments as it matches the glob() routine. first steps",
+   "c_files": [
+    "include/libxml/valid.h",
+    "runtest.c",
+    "valid.c"
+   ]
+  },
+  {
    "sha": "9c215eb3841ce9fc1c153f6d1833070da018d574",
    "ct": 1119343129,
    "class": "other-fix",
@@ -13787,6 +15054,19 @@
    ]
   },
   {
+   "sha": "ea152c05b3f3d9e47b282b88ffdb16fcb8c779c1",
+   "ct": 1118340748,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Further enhancement for XPath streaming, consolidated with schemas usage",
+   "c_files": [
+    "include/libxml/pattern.h",
+    "pattern.c",
+    "testapi.c",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "8dd1e1bcad796ea4cc9ad8a76eb44868e6e0d329",
    "ct": 1118322878,
    "class": "other-fix",
@@ -13804,6 +15084,16 @@
    "subject": "Fixed an attribute fixed/default value constraint error.",
    "c_files": [
     "xmlschemas.c"
+   ]
+  },
+  {
+   "sha": "365cf67ff812caf2f3edc7c52955c4ffa8fb2597",
+   "ct": 1118305104,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied patch from Malcolm Rowe to avoid namespace troubles on rollback",
+   "c_files": [
+    "parser.c"
    ]
   },
   {
@@ -13902,6 +15192,17 @@
    ]
   },
   {
+   "sha": "dbfe05aff4d242e31fcd7621a4901a6fa10b988e",
+   "ct": 1115198280,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "on linux/gcc use weak definitions to avoid linking with pthread library on",
+   "c_files": [
+    "threads.c",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "64dc4d2c5bda20b97856850e2488b8b591df7509",
    "ct": 1113926311,
    "class": "other-fix",
@@ -13964,6 +15265,16 @@
    ]
   },
   {
+   "sha": "f9cf6f5a01527406ed0bcbcf5a180d85b5e771de",
+   "ct": 1113267749,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied patch from Brent Hendricks adding namespace removal at the python",
+   "c_files": [
+    "python/libxml.c"
+   ]
+  },
+  {
    "sha": "f52de60f11e362392dd18ed23b4584bb6bb2a02e",
    "ct": 1112820155,
    "class": "extrinsic",
@@ -13991,6 +15302,17 @@
    "subject": "applied fix from Rob Richards to compile on Windows. Daniel",
    "c_files": [
     "nanoftp.c"
+   ]
+  },
+  {
+   "sha": "aba15f7670990df4aeedf9b8301c0f43fade5f58",
+   "ct": 1112368647,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Corrected 'length' facet validation for QNames and notations. Corrected",
+   "c_files": [
+    "xmlschemas.c",
+    "xmlschemastypes.c"
    ]
   },
   {
@@ -14053,6 +15375,17 @@
    "subject": "fix unitinialized variable in not frequently used code bug #172182 Daniel",
    "c_files": [
     "encoding.c"
+   ]
+  },
+  {
+   "sha": "0e460da346bfb2cc9d5d6cb4be8f851c18bfb81e",
+   "ct": 1112222830,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "another patch from Brent Hendricks to add new handlers with the various",
+   "c_files": [
+    "pattern.c",
+    "xmlschemas.c"
    ]
   },
   {
@@ -14143,6 +15476,18 @@
    "subject": "applied fix for xmlTextReaderNext() bug from Rob Richards Daniel",
    "c_files": [
     "xmlreader.c"
+   ]
+  },
+  {
+   "sha": "ff4c1852e9066cf1014784560b04fca18f8fb624",
+   "ct": 1110451048,
+   "class": "extrinsic",
+   "why": "env 'HP-UX'",
+   "subject": "second patch from Rick Jones, portability fix for HP-UX first fix from",
+   "c_files": [
+    "doc/examples/xpath1.c",
+    "doc/examples/xpath2.c",
+    "xmlmodule.c"
    ]
   },
   {
@@ -14384,6 +15729,16 @@
    ]
   },
   {
+   "sha": "4c778d8b96478bcb3da14ffaffb75332bbaa88ef",
+   "ct": 1106501864,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "boosting common commnent parsing code, it was really slow. added sprecific",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "1bb16a188852d9cdca9ac99ee41c2ccc84cf0fd0",
    "ct": 1106326541,
    "class": "other-fix",
@@ -14437,6 +15792,28 @@
    ]
   },
   {
+   "sha": "9186a1fdb637c71a7fbeb76e0bbe6104ee345de3",
+   "ct": 1105792690,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fixed bug #157633 in relaxng choice optimization added regression tests",
+   "c_files": [
+    "relaxng.c",
+    "testdso.c"
+   ]
+  },
+  {
+   "sha": "31113c7e86e39f3f5f0a84c235f2346f64746001",
+   "ct": 1105635440,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Exposed targetNamespace for simple/complex types, model groups, attribute",
+   "c_files": [
+    "include/libxml/schemasInternals.h",
+    "xmlschemas.c"
+   ]
+  },
+  {
    "sha": "de938cd4d70e95803fb37ec27a114f1f7c177ec5",
    "ct": 1105619157,
    "class": "other-fix",
@@ -14444,6 +15821,26 @@
    "subject": "Put the fix of Daniel (from Tue Jan 11 14:41:47 CET) back in, since I",
    "c_files": [
     "xmlschemas.c"
+   ]
+  },
+  {
+   "sha": "c3af19d1f70e0fd5a6b03106113fa104f012751a",
+   "ct": 1105618211,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Integrated xmlRegExecErrInfo and xmlRegExecNextValues from xmlregexp.c to",
+   "c_files": [
+    "xmlschemas.c"
+   ]
+  },
+  {
+   "sha": "dcd939032fded15d17da1a283088004dab0f4070",
+   "ct": 1105615515,
+   "class": "extrinsic",
+   "why": "env 'HP-UX'",
+   "subject": "trying to work around the compilation problem on HP-UX Daniel",
+   "c_files": [
+    "xmlmodule.c"
    ]
   },
   {
@@ -14524,6 +15921,18 @@
    ]
   },
   {
+   "sha": "ad0e67c57f26f691fc120d5c5336cee9885cf324",
+   "ct": 1101911710,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "fixed up some gcc warnings, no change to logic. New macro XML_CAST_FPTR to",
+   "c_files": [
+    "dict.c",
+    "include/libxml/hash.h",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "7eca35fbaef6bd06074c4b978d381303609fcb0b",
    "ct": 1101733683,
    "class": "other-fix",
@@ -14562,6 +15971,18 @@
    "subject": "forgot a $(srcdir) stupid error wrong name #157976 Daniel",
    "c_files": [
     "encoding.c"
+   ]
+  },
+  {
+   "sha": "850ce9b6584ecc2893632392f1d3ba46fefc13ac",
+   "ct": 1100087747,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Applied patch from Brent Hendricks adding support for late DTD validation.",
+   "c_files": [
+    "python/libxml.c",
+    "python/libxml_wrap.h",
+    "python/types.c"
    ]
   },
   {
@@ -14726,6 +16147,22 @@
    ]
   },
   {
+   "sha": "dd6d300896cfeacbacf7c5bceb5bec2f36790efe",
+   "ct": 1099491629,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more fixes and extending the tests coverage adding a type init interface",
+   "c_files": [
+    "include/libxml/relaxng.h",
+    "include/libxml/xmlerror.h",
+    "parser.c",
+    "relaxng.c",
+    "testapi.c",
+    "xmlreader.c",
+    "xmlwriter.c"
+   ]
+  },
+  {
    "sha": "d93f625ae90cafbd91b55b04408854a9b4b75192",
    "ct": 1099410831,
    "class": "other-fix",
@@ -14817,6 +16254,25 @@
     "tree.c",
     "valid.c",
     "xmllint.c"
+   ]
+  },
+  {
+   "sha": "03a53c34db279cbe4a305d58969beb1f26ff3d19",
+   "ct": 1098806811,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "added checking for names values and dictionnaries generates a tons of",
+   "c_files": [
+    "SAX2.c",
+    "catalog.c",
+    "debugXML.c",
+    "include/libxml/tree.h",
+    "include/libxml/xmlerror.h",
+    "parser.c",
+    "relaxng.c",
+    "tree.c",
+    "xinclude.c",
+    "xmlwriter.c"
    ]
   },
   {
@@ -15009,6 +16465,16 @@
    ]
   },
   {
+   "sha": "f34a20e69dc675cd23d3eb558cad135ea280f472",
+   "ct": 1093941737,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "\"\" is a valid hexbinary string dixit xmlschema-dev update the test. added",
+   "c_files": [
+    "xmlschemastypes.c"
+   ]
+  },
+  {
    "sha": "bf5cf2196c619c6ec2fec5fdf31cd6b040df508d",
    "ct": 1093934837,
    "class": "other-fix",
@@ -15052,6 +16518,18 @@
    ]
   },
   {
+   "sha": "bea2354a33de9fe90e801234506a4e549e44e528",
+   "ct": 1093466145,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Added missing test file. Substituted the obsolete xmlSchemaValidError(s)",
+   "c_files": [
+    "include/libxml/xmlerror.h",
+    "include/libxml/xmlschemas.h",
+    "xmlschemas.c"
+   ]
+  },
+  {
    "sha": "07d5976bf4576aae439bb9db9b19a0cfe616ab4c",
    "ct": 1093374771,
    "class": "other-fix",
@@ -15079,6 +16557,40 @@
    "subject": "fixed missing line numbers on entity as reported on the list by Steve",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "c14c3892a2b39b4684a1f69b8465a38556604caf",
+   "ct": 1092659690,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "added help for new set shell command added parser option to not generate",
+   "c_files": [
+    "debugXML.c",
+    "include/libxml/parser.h",
+    "xinclude.c",
+    "xmllint.c",
+    "xmlreader.c"
+   ]
+  },
+  {
+   "sha": "29b1748205897f727696b62fdba333efc9671440",
+   "ct": 1092616743,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "small typo pointed out by Mike Hommey slightly improved the --c14n",
+   "c_files": [
+    "SAX2.c",
+    "debugXML.c",
+    "include/libxml/parser.h",
+    "include/libxml/parserInternals.h",
+    "include/libxml/xmlerror.h",
+    "nanoftp.c",
+    "nanohttp.c",
+    "parser.c",
+    "parserInternals.c",
+    "valid.c",
+    "xmlIO.c"
    ]
   },
   {
@@ -15298,6 +16810,16 @@
    ]
   },
   {
+   "sha": "4119d1c61dda92e3f96d67c7d87d0cb693acabae",
+   "ct": 1088043884,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "implemented bugfix from Massimo Morara for DTD dumping problem. added",
+   "c_files": [
+    "valid.c"
+   ]
+  },
+  {
    "sha": "5ab479b0e4e1ea8dd2be3f9fe4e5c4eac8fa7773",
    "ct": 1086872415,
    "class": "other-fix",
@@ -15306,6 +16828,17 @@
    "c_files": [
     "globals.c",
     "xmlmemory.c"
+   ]
+  },
+  {
+   "sha": "50355f00411e8e8ba5c547c674470b2cdf2e8da3",
+   "ct": 1086717136,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied another patch from Kasimier Buchcik for Schema Component",
+   "c_files": [
+    "include/libxml/xmlerror.h",
+    "xmlschemas.c"
    ]
   },
   {
@@ -15328,6 +16861,16 @@
     "include/libxml/parser.h",
     "parser.c",
     "xmlreader.c"
+   ]
+  },
+  {
+   "sha": "8acdfbf53c8550405d8e56b379c3c278ca00c0e8",
+   "ct": 1086278459,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "new patch from Kasimier Buchcik for processContents of wildcards attribute",
+   "c_files": [
+    "xmlschemas.c"
    ]
   },
   {
@@ -15575,6 +17118,18 @@
    ]
   },
   {
+   "sha": "c85d0fec52dff78cdbf09d9ba26e00986d7e1e0e",
+   "ct": 1082134011,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied patches from Kasimier Buchcik for the attribute use support added",
+   "c_files": [
+    "include/libxml/schemasInternals.h",
+    "include/libxml/xmlerror.h",
+    "xmlschemas.c"
+   ]
+  },
+  {
    "sha": "a0c48addfc8aaba3394fb7e06a4b3039214d48d1",
    "ct": 1082131109,
    "class": "other-fix",
@@ -15736,6 +17291,16 @@
    ]
   },
   {
+   "sha": "d3999c7ac62b1036e635f9258d423448f0e41421",
+   "ct": 1078936023,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fix bug reported by Holger Rauch added the test to th regression suite",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "ebcdebd638b59d6dfc3f4b15ee29dc67d6b3a9ee",
    "ct": 1078445750,
    "class": "regression",
@@ -15818,6 +17383,16 @@
    ]
   },
   {
+   "sha": "522bc60ea9232d42e978c651a7f7f9e76e969fe6",
+   "ct": 1077364389,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "added \"relaxng\" option to the debugging shell some regression tests for",
+   "c_files": [
+    "debugXML.c"
+   ]
+  },
+  {
    "sha": "cb35f01d948e8d8ef8d25a85181a148a75130887",
    "ct": 1077265138,
    "class": "regression",
@@ -15875,6 +17450,23 @@
    "subject": "fixed bug #132575 about finding the end of the internal subset in push",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "3671190b546760a9e10d2e683257c3a86c680816",
+   "ct": 1076505926,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "added xmlByteConsumed() interface updated the benchmark rebuilt the docs",
+   "c_files": [
+    "encoding.c",
+    "include/libxml/encoding.h",
+    "include/libxml/parser.h",
+    "include/libxml/xmlIO.h",
+    "parserInternals.c",
+    "rngparser.c",
+    "tree.c",
+    "xmlIO.c"
    ]
   },
   {
@@ -16395,6 +17987,27 @@
    ]
   },
   {
+   "sha": "0622fe8b03bfd7cf1cd497a88deff2db7af4914c",
+   "ct": 1070102876,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "enhanced by adding mutex to protect global structures in a multi-threading",
+   "c_files": [
+    "xmlmemory.c"
+   ]
+  },
+  {
+   "sha": "f9415e4989914e24188e4644f39bdc41bf25f7f3",
+   "ct": 1070012350,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Enhanced the handling of UTF-16, UTF-16LE and UTF-16BE encodings. Now",
+   "c_files": [
+    "encoding.c",
+    "include/libxml/encoding.h"
+   ]
+  },
+  {
    "sha": "c76440fcf8ccc826df1792a093cf66b099881418",
    "ct": 1069879187,
    "class": "other-fix",
@@ -16428,6 +18041,16 @@
    ]
   },
   {
+   "sha": "e70c877c835da1ca10ce28059c8a251c394c8d57",
+   "ct": 1069744878,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "swapped the attribute defaulting and attribute checking parts of parsing a",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
    "sha": "74c0e594e06c430521f7b7035dc60c2576acc851",
    "ct": 1069743698,
    "class": "other-fix",
@@ -16446,6 +18069,30 @@
    "c_files": [
     "xmlregexp.c",
     "xmlschemas.c"
+   ]
+  },
+  {
+   "sha": "be9c6320d4ed8d5622322014310555bb88b02a85",
+   "ct": 1069533471,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "lot of bug fixes, cleanup, starting to add proper namespace support too.",
+   "c_files": [
+    "include/libxml/schemasInternals.h",
+    "include/libxml/xmlerror.h",
+    "xmlschemas.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
+   "sha": "1d913863130a17a638db69c2c50f89e5b0d4aae4",
+   "ct": 1069374519,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied patch from Robert Stepanek to start import os schemas support,",
+   "c_files": [
+    "xmlschemas.c",
+    "xmlwriter.c"
    ]
   },
   {
@@ -16508,6 +18155,19 @@
    "subject": "fixed bug #125811 related to DTD post validation where the DTD doesn't",
    "c_files": [
     "valid.c"
+   ]
+  },
+  {
+   "sha": "7899c5c5d67055e6a4c6b3d4be74fa72a6145e27",
+   "ct": 1067862698,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "adding XInclude support to the reader interface. Lot of testing of the",
+   "c_files": [
+    "include/libxml/xinclude.h",
+    "xinclude.c",
+    "xmllint.c",
+    "xmlreader.c"
    ]
   },
   {
@@ -16638,6 +18298,21 @@
    ]
   },
   {
+   "sha": "198c1bfc1cd2cc031410e4be4e5faebed45c557c",
+   "ct": 1066669661,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "removing xmldwalk module since it got merged with the xmlreader. cleanup",
+   "c_files": [
+    "include/libxml/xmldwalk.h",
+    "include/libxml/xmlreader.h",
+    "parser.c",
+    "xmldwalk.c",
+    "xmllint.c",
+    "xmlreader.c"
+   ]
+  },
+  {
    "sha": "9e66059f08301b933a74bd78f09bdf80ada9d4c4",
    "ct": 1066661766,
    "class": "other-fix",
@@ -16657,6 +18332,26 @@
    "c_files": [
     "valid.c",
     "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "c469692e5d7828d3890de4a721fe4db3f4a4e6ea",
+   "ct": 1066600034,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "cleanup xmlNodeGetContent() reusing xmlNodeBufGetContent(), tested it",
+   "c_files": [
+    "tree.c"
+   ]
+  },
+  {
+   "sha": "05bcb7ed305d8c4cdd6dc16a28e69ed39e394040",
+   "ct": 1066573594,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fixed to not send NULL to %s printing cleaning up some of the regression",
+   "c_files": [
+    "HTMLparser.c"
    ]
   },
   {
@@ -16695,6 +18390,20 @@
     "include/libxml/nanohttp.h",
     "nanohttp.c",
     "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "4aede2e66b88ad782b506341c6ea40554456a8b4",
+   "ct": 1066394639,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "remove the warning for startDocument(), as it is used by glade (or",
+   "c_files": [
+    "include/libxml/parserInternals.h",
+    "legacy.c",
+    "parser.c",
+    "relaxng.c",
+    "xmlschemastypes.c"
    ]
   },
   {
@@ -16785,6 +18494,20 @@
    "subject": "fixed bug 124061 (problem with namespace eval)",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "d0c9c32f64c09c699c54dc9ffb8558c297f9e08e",
+   "ct": 1065746982,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "cleanup fix a funny typo converted the Schemas code to the new error",
+   "c_files": [
+    "encoding.c",
+    "error.c",
+    "include/libxml/xmlerror.h",
+    "xmlschemas.c",
+    "xmlschemastypes.c"
    ]
   },
   {
@@ -16881,6 +18604,28 @@
    "subject": "William's change allowed to spot a nasty bug in xmlDoRead if the result is",
    "c_files": [
     "parser.c"
+   ]
+  },
+  {
+   "sha": "7d515754a397af39988e6ffd7ccc48b236c12632",
+   "ct": 1064603557,
+   "class": "extrinsic",
+   "why": "env 'AIX'",
+   "subject": "other patches from William Brack to avoid compilation warnings on AIX.",
+   "c_files": [
+    "parser.c"
+   ]
+  },
+  {
+   "sha": "899e64aa2fa3b7796cff6901ef9aafe84215f8b2",
+   "ct": 1064599422,
+   "class": "extrinsic",
+   "why": "env 'AIX'",
+   "subject": "minor change to avoid compilation warnings on some (e.g. AIX) systems",
+   "c_files": [
+    "HTMLparser.c",
+    "entities.c",
+    "xmlreader.c"
    ]
   },
   {
@@ -16982,6 +18727,29 @@
    ]
   },
   {
+   "sha": "8a44e59d67bdff87e3e28851ce780f33425407f8",
+   "ct": 1063637406,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "starting work on reusing the parser dictionary for the element and",
+   "c_files": [
+    "SAX2.c",
+    "include/libxml/parser.h"
+   ]
+  },
+  {
+   "sha": "62998c0ec7b01c5988b0409043b6b3cfe907baba",
+   "ct": 1063630596,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "starting to cleanup some of the problems exposed by the W3C/NIST",
+   "c_files": [
+    "SAX2.c",
+    "parser.c",
+    "valid.c"
+   ]
+  },
+  {
    "sha": "3a6da760c573fcce54dbed98f6ce4772e2fbcb65",
    "ct": 1063601894,
    "class": "other-fix",
@@ -17023,6 +18791,20 @@
    "subject": "fix a problem with strcpy() in xmlXPathFormatNumber() valgrind pointed out",
    "c_files": [
     "xpath.c"
+   ]
+  },
+  {
+   "sha": "3b7840cd6c714dbe444726625c27f03c4770b4be",
+   "ct": 1063323721,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "adding namespace checkings while making sure they still parse as",
+   "c_files": [
+    "include/libxml/parser.h",
+    "include/libxml/xmlerror.h",
+    "parser.c",
+    "parserInternals.c",
+    "tree.c"
    ]
   },
   {
@@ -17173,6 +18955,19 @@
    ]
   },
   {
+   "sha": "70bcb0ea2464e1619f54dc56334b043767d793dc",
+   "ct": 1060351228,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "hum try to avoid some troubles when the library is not initialized and one",
+   "c_files": [
+    "HTMLtree.c",
+    "threads.c",
+    "tree.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
    "sha": "20aa0fb47849fc956d256350fc6c71a655ccb016",
    "ct": 1060026195,
    "class": "other-fix",
@@ -17318,6 +19113,16 @@
    "subject": "Applied fix for \"wb\" open flag, Daniel",
    "c_files": [
     "xmlIO.c"
+   ]
+  },
+  {
+   "sha": "2dcb937a9ae59e9865a6957d40974db7a9033534",
+   "ct": 1058390299,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "patch from Dodji Seketeli about UTF16 BOM when using the push XML parser.",
+   "c_files": [
+    "parserInternals.c"
    ]
   },
   {
@@ -17574,6 +19379,27 @@
    "subject": "tried to fix #98879 again in a more solid way. Daniel",
    "c_files": [
     "HTMLparser.c"
+   ]
+  },
+  {
+   "sha": "ac297930c24964cfa1bde996d837081a74f57eea",
+   "ct": 1050584135,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "some cleanups extended the document to cover RelaxNG and tree operations",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "c58f4efbd44a4b155e5399cbe97525570ebc8385",
+   "ct": 1050336686,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "integrated the regexp based validity checking of fragments of the document",
+   "c_files": [
+    "include/libxml/relaxng.h",
+    "relaxng.c"
    ]
   },
   {
@@ -17842,6 +19668,29 @@
    ]
   },
   {
+   "sha": "249d7bbee28570177a8573a99eab4aa9e27384d9",
+   "ct": 1048107749,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "attempt to cope with ID/IDREF(S) declared both in the DTD and in the",
+   "c_files": [
+    "relaxng.c",
+    "valid.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
+   "sha": "a1a9d0410000cc69874e53e438b250037d3e14cd",
+   "ct": 1048006397,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "removed a warning more cleanup, added ENTITY and ENTITIES support",
+   "c_files": [
+    "tree.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
    "sha": "952379b780ff6071f8276b02f776ac1db3721b58",
    "ct": 1047915432,
    "class": "other-fix",
@@ -18101,6 +19950,20 @@
    ]
   },
   {
+   "sha": "d2298791af5f9104e5cbd9f58c731f2116195bcd",
+   "ct": 1045241651,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more testing on the Relax-NG front, cleaning up the regression tests",
+   "c_files": [
+    "include/libxml/tree.h",
+    "relaxng.c",
+    "tree.c",
+    "uri.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
    "sha": "9a237c9d2663e3bc5278c948aae3e6fdb59f80e0",
    "ct": 1045151578,
    "class": "regression",
@@ -18118,6 +19981,16 @@
    "subject": "added TODO for the DTD compatibility spec more bug fixes driven by the",
    "c_files": [
     "relaxng.c",
+    "xinclude.c"
+   ]
+  },
+  {
+   "sha": "d581b7edd4c98008bf6f0dfdac1b5311aabc9eec",
+   "ct": 1044986585,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Work on the W3C/NIST regression tests for XInclude, improved the script,",
+   "c_files": [
     "xinclude.c"
    ]
   },
@@ -18259,6 +20132,17 @@
    ]
   },
   {
+   "sha": "1ed7f364bdb278e583b8d7663d7cc0f90307b6bb",
+   "ct": 1044269865,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more work on name classes, the \"validate all\" schemas seems to work now.",
+   "c_files": [
+    "relaxng.c",
+    "testRelax.c"
+   ]
+  },
+  {
    "sha": "e2a5a08b0f09bac1d60b49875dced3c636060a88",
    "ct": 1044196517,
    "class": "regression",
@@ -18284,6 +20168,36 @@
    "class": "regression",
    "why": "regression word",
    "subject": "debugging of externalRef augmented/updated the regression tests Daniel",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "d41f4f488864d962a42239eb4526729a2dadc685",
+   "ct": 1043874472,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more work on Relax-NG, implementing externalRef augmented/updated the",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "b08c9815d249ece389abbb8340f9b8a405e565d8",
+   "ct": 1043795389,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more work on Relax-NG, implementing interleave augmented/updated the",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "76fc5edab66ac2069a0dab6ee3d4d844c958ea10",
+   "ct": 1043787495,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more work on Relax-NG, implementing interleave augmented/updated the",
    "c_files": [
     "relaxng.c"
    ]
@@ -18317,6 +20231,49 @@
    "subject": "more work on Relax-NG augmented/updated the regression tests Daniel",
    "c_files": [
     "relaxng.c"
+   ]
+  },
+  {
+   "sha": "dd1655c5798045a3580ca1187b8fdc4b25c31293",
+   "ct": 1043517692,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "updated the policy on private mail answers more work on Relax-NG",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "276be4a6e5aa2de82cafe8eeb524fb62cc7638f2",
+   "ct": 1043370214,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "more work on Relax-NG regenerated the docs updated and augmented the",
+   "c_files": [
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "6eadf63ca646866fde6e4df8720e4bdced351a42",
+   "ct": 1043346556,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "First commit of the new Relax-NG validation code, not generally useful",
+   "c_files": [
+    "include/libxml/relaxng.h",
+    "relaxng.c"
+   ]
+  },
+  {
+   "sha": "26f70269c80140a7fb8a7aae9ef09c95efa98e70",
+   "ct": 1042757108,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "applied a patch from St\ufffdphane Bidoul to allow per XMLtextReader error and",
+   "c_files": [
+    "include/libxml/xmlreader.h",
+    "python/libxml.c",
+    "xmlreader.c"
    ]
   },
   {
@@ -18897,6 +20854,17 @@
    ]
   },
   {
+   "sha": "4320d87d4a7bb65011ac9a2eb039bba232431ec7",
+   "ct": 1033322203,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "PocketPC with Windows CE support",
+   "c_files": [
+    "win32/wince/wincecompat.c",
+    "win32/wince/wincecompat.h"
+   ]
+  },
+  {
    "sha": "90d68fbb35f94a60853d9b20029645b98b949233",
    "ct": 1033056621,
    "class": "other-fix",
@@ -18916,6 +20884,19 @@
    "subject": "fixing bug #94241 on HTML boolean attributes Daniel",
    "c_files": [
     "HTMLtree.c"
+   ]
+  },
+  {
+   "sha": "bd9afb529069415baf1f32d907f035de19dae788",
+   "ct": 1032992735,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "improving some documentation comments found and fixed a mem leak with",
+   "c_files": [
+    "python/libxml_wrap.h",
+    "python/types.c",
+    "tree.c",
+    "xmlregexp.c"
    ]
   },
   {
@@ -18985,6 +20966,20 @@
    ]
   },
   {
+   "sha": "f4862f0f3626786512ae1cc891aa70dc0116d28b",
+   "ct": 1031656423,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "messing around with support for Windows path, cleanups, trying to identify",
+   "c_files": [
+    "DOCBparser.c",
+    "HTMLparser.c",
+    "include/libxml/xmlIO.h",
+    "parser.c",
+    "xmlIO.c"
+   ]
+  },
+  {
    "sha": "19aa70245a694b3e8ae39da27a8c3deb8d32f405",
    "ct": 1031224459,
    "class": "other-fix",
@@ -19035,6 +21030,19 @@
    "subject": "fixed memory leak in c14n code",
    "c_files": [
     "c14n.c"
+   ]
+  },
+  {
+   "sha": "58e44c9daf5a9de8cfe10cbd3555c27d1ccdad2c",
+   "ct": 1028326789,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "adding a new API for Christian Glahn: xmlParseBalancedChunkMemoryRecover",
+   "c_files": [
+    "include/libxml/parser.h",
+    "parser.c",
+    "valid.c",
+    "xinclude.c"
    ]
   },
   {
@@ -19309,6 +21317,41 @@
    ]
   },
   {
+   "sha": "8651f5365c182ce5c52fe1cdc2b9d72b2ecc34e2",
+   "ct": 1019034387,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "a bit of work on Schemas try to make it more useful changed the Schemas",
+   "c_files": [
+    "include/libxml/xmlschemas.h",
+    "testSchemas.c",
+    "xmlschemas.c",
+    "xmlschemastypes.c"
+   ]
+  },
+  {
+   "sha": "4255d504151db75c17f85192ce74f45dd2d65533",
+   "ct": 1018972210,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "merged the current state of XML Schemas implementation, it is not",
+   "c_files": [
+    "include/libxml/schemasInternals.h",
+    "include/libxml/xmlautomata.h",
+    "include/libxml/xmlregexp.h",
+    "include/libxml/xmlschemas.h",
+    "include/libxml/xmlschemastypes.h",
+    "include/libxml/xmlunicode.h",
+    "testAutomata.c",
+    "testRegexp.c",
+    "testSchemas.c",
+    "xmlregexp.c",
+    "xmlschemas.c",
+    "xmlschemastypes.c",
+    "xmlunicode.c"
+   ]
+  },
+  {
    "sha": "bc6f759ac9b41773e3643ad288b5214732051c98",
    "ct": 1018943399,
    "class": "other-fix",
@@ -19433,6 +21476,16 @@
    "subject": "fixed a bug in the ISO-Latin 1 to UTF8 encoder raised by Morus Walter",
    "c_files": [
     "encoding.c"
+   ]
+  },
+  {
+   "sha": "c62a147963b5839fc815267706eaec381f90ca16",
+   "ct": 1016562912,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "valgrind spotted another error that time when running on libxslt",
+   "c_files": [
+    "xpath.c"
    ]
   },
   {
@@ -19623,6 +21676,28 @@
    ]
   },
   {
+   "sha": "bb7ddb342917c61f9c95e97b9a0f16ada6d3cdc9",
+   "ct": 1013981193,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "python script to run regression tests against the XML Test suite of",
+   "c_files": [
+    "SAX.c",
+    "parser.c"
+   ]
+  },
+  {
+   "sha": "e4301c8bdf9a878266ab1a3a373e8cbe48962869",
+   "ct": 1013607155,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "fixing a comment fixing some troubles with validity check on namespaces",
+   "c_files": [
+    "include/libxml/entities.h",
+    "valid.c"
+   ]
+  },
+  {
    "sha": "797a565a2f6a2c0a8480670174e9eaef30d271a4",
    "ct": 1013521581,
    "class": "other-fix",
@@ -19736,6 +21811,16 @@
    ]
   },
   {
+   "sha": "8de85c6c000bb207651e4340822075af0efd0e3c",
+   "ct": 1011114615,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "try to avoid problems when compiling on Windows Daniel",
+   "c_files": [
+    "libxml.h"
+   ]
+  },
+  {
    "sha": "fb25a51418b4e4b1a677771b2bc62bacd780f5dc",
    "ct": 1010953928,
    "class": "other-fix",
@@ -19766,6 +21851,19 @@
     "include/libxml/parserInternals.h",
     "parser.c",
     "tree.c"
+   ]
+  },
+  {
+   "sha": "db0eb8df5a13ef5dcf228519682d41cfe5f8700b",
+   "ct": 1010928900,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "applied Serguei Narojnyi's patch to add native thread support on the Win32",
+   "c_files": [
+    "include/libxml/xmlwin32version.h",
+    "include/win32config.h",
+    "testThreadsWin32.c",
+    "threads.c"
    ]
   },
   {
@@ -20276,6 +22374,17 @@
    ]
   },
   {
+   "sha": "268fd1bc97f79b43290041cfda2287fb0b0ef2d6",
+   "ct": 998851596,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "fixed a Windows compiler warning (Chris Poblete) fix for mod when dividend",
+   "c_files": [
+    "valid.c",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "6990bf3c080529493a865a851b753a27d58014ea",
    "ct": 998601468,
    "class": "other-fix",
@@ -20718,6 +22827,19 @@
    ]
   },
   {
+   "sha": "d79bcd1b36412a7996ace1900ab613e38a609b60",
+   "ct": 993161262,
+   "class": "extrinsic",
+   "why": "env 'gcc '",
+   "subject": "attempt to work around what seemed a gcc optimizer bug when handling",
+   "c_files": [
+    "encoding.c",
+    "entities.c",
+    "tree.c",
+    "xpath.c"
+   ]
+  },
+  {
    "sha": "10ea86cba4b8bc812223e526cf2bc171464e494d",
    "ct": 993045333,
    "class": "other-fix",
@@ -21107,6 +23229,20 @@
    "c_files": [
     "DOCBparser.h",
     "include/libxml/DOCBparser.h"
+   ]
+  },
+  {
+   "sha": "61d80a2822b2678dee885ac2850295cc96277c63",
+   "ct": 988391581,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "- parserInternals.c xpath.[ch]: some UTF8 cleanup on   xmlXPathParseName - xpath.c: Igor Zlatkovic suggested a change for NAN and MSC - debugXML.c: avoid compilation problems if compiling without   HTML support, Igor Zlatkovic - win32/libxml2/libxml2.def.src: being able to compile without   XPath on Windows Daniel",
+   "c_files": [
+    "debugXML.c",
+    "include/libxml/xpath.h",
+    "parserInternals.c",
+    "xpath.c",
+    "xpath.h"
    ]
   },
   {
@@ -21778,6 +23914,20 @@
    ]
   },
   {
+   "sha": "bf43275dd1e31ee7542c37f1f7ce21e0ee9218ee",
+   "ct": 974044616,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Bug fixes new Xinclude tests: - nanoftp.c: fixed gcc 2.95 new warnings - SAX.c: fixed a stupid bug - tree.c: fixed a formatting problem when round-tripping   from/to memory - xinclude.c: chased memleak, fixed a base problem - xpointer.c: added xmlXPtrBuildRangeNodeList(), finished ?   xmlXPtrBuildNodeList() - TODO: updated - Makefile.am test/XInclude/docs test/XInclude/ents result/XInclude:   adding a first small set of regression tests for XInclude Daniel",
+   "c_files": [
+    "SAX.c",
+    "nanoftp.c",
+    "tree.c",
+    "xinclude.c",
+    "xpointer.c"
+   ]
+  },
+  {
    "sha": "c2def84b484f6706c2ad7d076a2f3e1c56f76b9f",
    "ct": 973606861,
    "class": "other-fix",
@@ -21804,6 +23954,32 @@
     "xmlerror.h",
     "xpointer.c",
     "xpointer.h"
+   ]
+  },
+  {
+   "sha": "9e8bfae59a087a938a810a5527023b1e7b0e15b3",
+   "ct": 973528991,
+   "class": "extrinsic",
+   "why": "env 'gcc'",
+   "subject": "XInclude and other stuff while travelling. Contributed patches: - tree.[ch] xinclude.[ch] xmllint.c configure.in valid.c   debugXML.c xmlversion.h.in: Started adding XInclude support,   this is a new xmllint option - tree.c xpath.c: applied TOM patches for XPath - xpointer.c: fixed a couple of errors. - uri.c: added an escaping function needed for xinclude - testXPath.c hash.c HTMLtree.c: minor cleanups raised by   new warning from RH70 gcc's version Daniel",
+   "c_files": [
+    "HTMLtree.c",
+    "debugXML.c",
+    "hash.c",
+    "include/libxml/tree.h",
+    "include/libxml/uri.h",
+    "include/libxml/xinclude.h",
+    "testXPath.c",
+    "tree.c",
+    "tree.h",
+    "uri.c",
+    "uri.h",
+    "valid.c",
+    "xinclude.c",
+    "xinclude.h",
+    "xmllint.c",
+    "xpath.c",
+    "xpointer.c"
    ]
   },
   {
@@ -21970,6 +24146,20 @@
    ]
   },
   {
+   "sha": "e8282edd458d59aa20d48db57ec0025f0db34079",
+   "ct": 971218891,
+   "class": "extrinsic",
+   "why": "env 'win32'",
+   "subject": "More work toward 2.2.5, integrated a number of patches - configure.in Makefile.am win32config.h.in: trying to cleanup   make distcheck .... huh ... - include/Makefile.am include/win32config.h: new directory   for includes - win32/Makefile.mingw win32/README.MSDev win32/libxml2/libxml2.dsp   updated teh makefiles and instructions for WIN32 - xpath.c: small fixes - test/XPath/ results/XPath: updated the testcases and results - HTMLparser.c nanohttp.c testXPath.c: incorporated provided or   suggested patches - valid.c: fixed an ID bug Daniel",
+   "c_files": [
+    "HTMLparser.c",
+    "include/win32config.h",
+    "nanohttp.c",
+    "testXPath.c",
+    "valid.c"
+   ]
+  },
+  {
    "sha": "b71379b796214f382b025ccf63cefe0419cd4e9d",
    "ct": 971094639,
    "class": "other-fix",
@@ -22044,6 +24234,20 @@
    ]
   },
   {
+   "sha": "f09e7e35de098cc017eaeabc5d7127fba6057445",
+   "ct": 970415610,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "XPath fixes and cleanup, 2 general bug fixes: - xpath.[ch] : fixed some serious XPath Predicate evaluation   problems - Makefile.am : added XPath regression tests to normal tests - uri.c: fixed a problem with local paths, cleanup - parser.c: fixed a problem with large CData sections Daniel",
+   "c_files": [
+    "include/libxml/xpath.h",
+    "parser.c",
+    "uri.c",
+    "xpath.c",
+    "xpath.h"
+   ]
+  },
+  {
    "sha": "281f8ff4315aa0a15251dfeb15d0963596ec46bf",
    "ct": 969783134,
    "class": "other-fix",
@@ -22052,6 +24256,16 @@
    "c_files": [
     "debugXML.c",
     "nanoftp.c",
+    "nanohttp.c"
+   ]
+  },
+  {
+   "sha": "20cdd5e4842dc16ee804a18d5a990548f303bac3",
+   "ct": 969648153,
+   "class": "extrinsic",
+   "why": "env 'Win32'",
+   "subject": "avoid possible future probs on Win32, daniel.",
+   "c_files": [
     "nanohttp.c"
    ]
   },
@@ -22149,6 +24363,28 @@
    ]
   },
   {
+   "sha": "87b953957305fc1ece066efa60df5c7844183439",
+   "ct": 966114724,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Large sync between my W3C base and Gnome's one:",
+   "c_files": [
+    "HTMLparser.c",
+    "SAX.c",
+    "encoding.c",
+    "include/libxml/parser.h",
+    "include/libxml/tree.h",
+    "parser.c",
+    "parser.h",
+    "testHTML.c",
+    "testSAX.c",
+    "tree.c",
+    "tree.h",
+    "valid.c",
+    "xmllint.c"
+   ]
+  },
+  {
    "sha": "7ebb1eebdac0740d9ad703bd8dabbcb8a79cf679",
    "ct": 965413485,
    "class": "other-fix",
@@ -22169,6 +24405,47 @@
     "nanohttp.c",
     "parser.c",
     "xmlmemory.c"
+   ]
+  },
+  {
+   "sha": "32bc74ef98c7bd6172327fb03f68766f6ee4b6a2",
+   "ct": 963586165,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "- doc/encoding.html doc/xml.html: added I18N doc - encoding.[ch] HTMLtree.[ch] parser.c HTMLparser.c: I18N encoding   improvements, both parser and filters, added ASCII & HTML,   fixed the ISO-Latin-1 one - xmllint.c testHTML.c: added/made visible --encode - debugXML.c : cleanup - most .c files: applied patches due to warning on Windows and   when using Sun Pro cc compiler - xpath.c : cleanup memleaks - nanoftp.c : added a TESTING preprocessor flag for standalong   compile so that people can report bugs more easilly - nanohttp.c : ditched socklen_t which was a portability mess   and replaced it with unsigned int. - tree.[ch]: added xmlHasProp() - TODO: updated - test/ : added more test for entities, NS, encoding, HTML, wap - configure.in: preparing for 2.2.0 release Daniel",
+   "c_files": [
+    "HTMLparser.c",
+    "HTMLparser.h",
+    "HTMLtree.c",
+    "HTMLtree.h",
+    "SAX.c",
+    "SAX.h",
+    "debugXML.c",
+    "encoding.c",
+    "encoding.h",
+    "entities.c",
+    "include/libxml/HTMLparser.h",
+    "include/libxml/HTMLtree.h",
+    "include/libxml/SAX.h",
+    "include/libxml/encoding.h",
+    "include/libxml/parserInternals.h",
+    "include/libxml/tree.h",
+    "include/libxml/xlink.h",
+    "nanoftp.c",
+    "nanohttp.c",
+    "parser.c",
+    "parserInternals.h",
+    "testHTML.c",
+    "testSAX.c",
+    "tree.c",
+    "tree.h",
+    "uri.c",
+    "valid.c",
+    "xlink.h",
+    "xmlIO.c",
+    "xmllint.c",
+    "xmlmemory.c",
+    "xpath.c"
    ]
   },
   {
@@ -22903,17 +25180,10 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|B": 7,
-  "extrinsic|B2": 18,
-  "extrinsic|C": 26,
   "other-fix|A": 13,
   "other-fix|B": 154,
   "other-fix|B2": 150,
   "other-fix|B3": 29,
-  "other-fix|C": 477,
-  "regression|B": 13,
-  "regression|B2": 26,
-  "regression|B3": 2,
-  "regression|C": 102
+  "other-fix|C": 477
  }
 }

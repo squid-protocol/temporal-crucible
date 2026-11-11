@@ -399,8 +399,16 @@ Rule C retains **69%** of v3's surviving events.
   against 0.733 vs 0.383 under v1. This was the whole problem, and it is gone.
 - Rule C was designed on the round-1 development set and tested here on a sample drawn after it was
   written, so this is an out-of-sample estimate, not a tuned one.
-- **Cost, stated precisely.** v3c drops **44.6% of all events** (34,423 → 19,082) and **43.0% of
-  `other-fix`** (28,601 → 16,296). That headline overstates the signal lost, because most of what goes
+- **Scope.** Amendment 2 was developed and audited on `other-fix` **only**, so it is applied to
+  `other-fix` only. The other classes keep their own measured precision from `xc_label_audit.md`
+  (regression 0.73–0.87, extrinsic v2 0.90–1.00, latent a curated list). Two of them must not be
+  touched by these rules in any case: `regression` via revert reaches its class *before* the fix-like
+  gate, so rule C would throw away `Revert "..."` commits — the cleanest regression signal there is —
+  and `extrinsic` is already gated on a subject-matched environment *and* action, so rule C would drop
+  legitimate entries like "port to AIX" that carry no fix word. Extending amendment 2 to those classes
+  would need an audit of those classes.
+- **Cost, stated precisely.** v3c drops **43.0% of `other-fix`** (28,601 → 16,296) and **35.7% of all
+  events** (34,423 → 22,118). That headline overstates the signal lost, because most of what goes
   is noise: at v1's 0.558 precision the 28,601 `other-fix` events held roughly 16,000 real fixes; at
   v3c's 0.761 the surviving 16,296 hold roughly 12,400. So the trade is **about 22% of real fixes given
   up to remove about 69% of the noise** — consistent with the development set's 0.813 fixes-kept. For a

@@ -8,24 +8,24 @@ result stays reproducible.
 
 | repo | events v1 → v2 | `other-fix` v1 → v2 | `regression` | `extrinsic` |
 |---|---|---|---|---|
-| libgit2 | 2,562 → 1,280 (50% cut) | 2,201 → 1,084 (51% cut) | 83 → 24 | 278 → 172 |
-| postgres | 17,690 → 9,331 (47% cut) | 13,436 → 7,436 (45% cut) | 3,499 → 1,547 | 755 → 348 |
-| libxml2 | 3,160 → 2,143 (32% cut) | 2,576 → 1,753 (32% cut) | 405 → 262 | 138 → 87 |
-| redis | 3,409 → 2,109 (38% cut) | 3,165 → 1,964 (38% cut) | 140 → 72 | 104 → 73 |
-| prometheus | 2,576 → 1,216 (53% cut) | 2,403 → 1,149 (52% cut) | 131 → 48 | 42 → 19 |
-| commons-lang | 1,083 → 400 (63% cut) | 1,028 → 381 (63% cut) | 48 → 17 | 7 → 2 |
-| sphinx | 3,624 → 2,523 (30% cut) | 3,507 → 2,460 (30% cut) | 69 → 33 | 48 → 30 |
-| ripgrep | 319 → 80 (75% cut) | 285 → 69 (76% cut) | 28 → 9 | 6 → 2 |
+| libgit2 | 2,562 → 1,445 (44% cut) | 2,201 → 1,084 (51% cut) | 83 → 83 | 278 → 278 |
+| postgres | 17,690 → 11,690 (34% cut) | 13,436 → 7,436 (45% cut) | 3,499 → 3,499 | 755 → 755 |
+| libxml2 | 3,160 → 2,337 (26% cut) | 2,576 → 1,753 (32% cut) | 405 → 405 | 138 → 138 |
+| redis | 3,409 → 2,208 (35% cut) | 3,165 → 1,964 (38% cut) | 140 → 140 | 104 → 104 |
+| prometheus | 2,576 → 1,322 (49% cut) | 2,403 → 1,149 (52% cut) | 131 → 131 | 42 → 42 |
+| commons-lang | 1,083 → 436 (60% cut) | 1,028 → 381 (63% cut) | 48 → 48 | 7 → 7 |
+| sphinx | 3,624 → 2,577 (29% cut) | 3,507 → 2,460 (30% cut) | 69 → 69 | 48 → 48 |
+| ripgrep | 319 → 103 (68% cut) | 285 → 69 (76% cut) | 28 → 28 | 6 → 6 |
 
-**Total events 34,423 → 19,082** (44.6% dropped) · **`other-fix` 28,601 → 16,296** (43.0% dropped)
+**Total events 34,423 → 22,118** (35.7% dropped) · **`other-fix` 28,601 → 16,296** (43.0% dropped)
 
 ## Why each commit was dropped
 
-- **libgit2**: other-fix via rule C ×538, other-fix via rule A ×261, other-fix via rule B ×197, other-fix via rule B2 ×102, regression via rule C ×41, extrinsic via rule C ×41, extrinsic via rule A ×29, extrinsic via rule B ×26, other-fix via rule B3 ×19, regression via rule A ×13, extrinsic via rule B2 ×10, regression via rule B ×3, regression via rule B2 ×2
-- **postgres**: other-fix via rule C ×3393, regression via rule C ×1310, other-fix via rule B ×1144, other-fix via rule B2 ×886, other-fix via rule B3 ×438, regression via rule B2 ×277, extrinsic via rule C ×210, regression via rule B ×174, other-fix via rule A ×139, regression via rule A ×123, extrinsic via rule B ×94, extrinsic via rule B2 ×76, regression via rule B3 ×68, extrinsic via rule A ×21, extrinsic via rule B3 ×6
-- **libxml2**: other-fix via rule C ×477, other-fix via rule B ×154, other-fix via rule B2 ×150, regression via rule C ×102, other-fix via rule B3 ×29, regression via rule B2 ×26, extrinsic via rule C ×26, extrinsic via rule B2 ×18, regression via rule B ×13, other-fix via rule A ×13, extrinsic via rule B ×7, regression via rule B3 ×2
-- **redis**: other-fix via rule C ×638, other-fix via rule B ×329, other-fix via rule B2 ×160, regression via rule C ×52, other-fix via rule B3 ×50, other-fix via rule A ×24, extrinsic via rule C ×16, regression via rule B2 ×9, extrinsic via rule B ×9, regression via rule B ×4, extrinsic via rule B2 ×3, extrinsic via rule A ×3, regression via rule A ×2, regression via rule B3 ×1
-- **prometheus**: other-fix via rule C ×579, other-fix via rule A ×323, other-fix via rule B ×227, other-fix via rule B2 ×97, regression via rule C ×57, other-fix via rule B3 ×28, extrinsic via rule A ×17, regression via rule A ×16, regression via rule B2 ×7, extrinsic via rule C ×5, regression via rule B ×3, extrinsic via rule B2 ×1
-- **commons-lang**: other-fix via rule B ×357, other-fix via rule A ×199, other-fix via rule C ×55, other-fix via rule B2 ×29, regression via rule C ×20, regression via rule A ×8, other-fix via rule B3 ×7, extrinsic via rule C ×3, regression via rule B2 ×2, regression via rule B ×1, extrinsic via rule B2 ×1, extrinsic via rule A ×1
-- **sphinx**: other-fix via rule B ×504, other-fix via rule A ×338, other-fix via rule C ×160, other-fix via rule B2 ×38, regression via rule A ×16, regression via rule C ×16, extrinsic via rule A ×13, other-fix via rule B3 ×7, extrinsic via rule C ×3, regression via rule B2 ×2, extrinsic via rule B ×1, regression via rule B ×1, extrinsic via rule B2 ×1, regression via rule B3 ×1
-- **ripgrep**: other-fix via rule C ×109, other-fix via rule B ×84, other-fix via rule A ×13, other-fix via rule B2 ×10, regression via rule C ×10, regression via rule A ×8, extrinsic via rule A ×2, extrinsic via rule C ×2, regression via rule B ×1
+- **libgit2**: other-fix via rule C ×538, other-fix via rule A ×261, other-fix via rule B ×197, other-fix via rule B2 ×102, other-fix via rule B3 ×19
+- **postgres**: other-fix via rule C ×3393, other-fix via rule B ×1144, other-fix via rule B2 ×886, other-fix via rule B3 ×438, other-fix via rule A ×139
+- **libxml2**: other-fix via rule C ×477, other-fix via rule B ×154, other-fix via rule B2 ×150, other-fix via rule B3 ×29, other-fix via rule A ×13
+- **redis**: other-fix via rule C ×638, other-fix via rule B ×329, other-fix via rule B2 ×160, other-fix via rule B3 ×50, other-fix via rule A ×24
+- **prometheus**: other-fix via rule C ×579, other-fix via rule A ×323, other-fix via rule B ×227, other-fix via rule B2 ×97, other-fix via rule B3 ×28
+- **commons-lang**: other-fix via rule B ×357, other-fix via rule A ×199, other-fix via rule C ×55, other-fix via rule B2 ×29, other-fix via rule B3 ×7
+- **sphinx**: other-fix via rule B ×504, other-fix via rule A ×338, other-fix via rule C ×160, other-fix via rule B2 ×38, other-fix via rule B3 ×7
+- **ripgrep**: other-fix via rule C ×109, other-fix via rule B ×84, other-fix via rule A ×13, other-fix via rule B2 ×10

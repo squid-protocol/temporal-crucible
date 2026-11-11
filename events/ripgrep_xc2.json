@@ -55,6 +55,17 @@
    ]
   },
   {
+   "sha": "0a88cccd5188074de96f54a4b6b44a63971ac157",
+   "ct": 1765989492,
+   "class": "extrinsic",
+   "why": "env 'cross-compilation'",
+   "subject": "Fix compression tests in QEMU cross-compilation environments (#3248)",
+   "c_files": [
+    "tests/misc.rs",
+    "tests/util.rs"
+   ]
+  },
+  {
    "sha": "cd1f981beafaeb9b61537e47e91314cea125400b",
    "ct": 1764443498,
    "class": "other-fix",
@@ -132,6 +143,36 @@
    ]
   },
   {
+   "sha": "5c42c8c48f4163ba7c0662cb70dbf61f9d670d9a",
+   "ct": 1760287534,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "test: add regression test for fixed bug",
+   "c_files": [
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "293ef80eaf0641bcfa0206e1fc142017296bac8c",
+   "ct": 1760148419,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "test: add another regression test for gitignore matching bug",
+   "c_files": [
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "fa80aab6b0f854f7a88e7d982d27aec0a9402002",
+   "ct": 1760148419,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "test: add regression test for fixed gitignore bug",
+   "c_files": [
+    "tests/regression.rs"
+   ]
+  },
+  {
    "sha": "0407e104f611d623547897ca99d172673b31779f",
    "ct": 1759972619,
    "class": "other-fix",
@@ -140,6 +181,18 @@
    "c_files": [
     "crates/ignore/src/dir.rs",
     "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "9d8016d10c94a5af2768eb6dd0440386a7d317a0",
+   "ct": 1759583993,
+   "class": "regression",
+   "why": "references a6e0be3c90 (14 d earlier)",
+   "subject": "printer: finish removal of `max_matches`",
+   "c_files": [
+    "crates/core/flags/hiargs.rs",
+    "crates/printer/src/json.rs",
+    "crates/printer/src/summary.rs"
    ]
   },
   {
@@ -184,6 +237,16 @@
    "subject": "stats: fix case where \"bytes searched\" could be wrong",
    "c_files": [
     "crates/searcher/src/searcher/glue.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "bfe2def12183f66689f23f52d85100fbc4b42d1a",
+   "ct": 1758330499,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: add test for filtering hidden files",
+   "c_files": [
     "tests/regression.rs"
    ]
   },
@@ -307,6 +370,26 @@
    ]
   },
   {
+   "sha": "db6bb21a629d5b1ec1bfe89c693b280497c9eedc",
+   "ct": 1688856762,
+   "class": "extrinsic",
+   "why": "env 'windows'",
+   "subject": "windows: attempt to enable long path support for MSVC targets",
+   "c_files": [
+    "build.rs"
+   ]
+  },
+  {
+   "sha": "803c44784509d31a8abb4297acda19bd680f667a",
+   "ct": 1684499033,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "searcher: re-enable mmap on 32-bit architectures",
+   "c_files": [
+    "crates/searcher/src/searcher/mmap.rs"
+   ]
+  },
+  {
    "sha": "8e57989cd20379acfca28a341da61df177daca1c",
    "ct": 1657893219,
    "class": "other-fix",
@@ -359,6 +442,16 @@
    "subject": "globset: fix compilation when serde is enabled",
    "c_files": [
     "crates/globset/src/serde_impl.rs"
+   ]
+  },
+  {
+   "sha": "7ce66f73cf7e76e9f2557922ac8e650eb02cf4ed",
+   "ct": 1623529350,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "regex: update regression test",
+   "c_files": [
+    "tests/regression.rs"
    ]
   },
   {
@@ -583,6 +676,16 @@
    ]
   },
   {
+   "sha": "46fb77c20cc46e61117d68a68bb306cc665c6da6",
+   "ct": 1616535902,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "searcher: bump buffer size",
+   "c_files": [
+    "crates/searcher/src/line_buffer.rs"
+   ]
+  },
+  {
    "sha": "020c5453a5880257c87949030550d24c596f5c8d",
    "ct": 1606145014,
    "class": "other-fix",
@@ -604,6 +707,16 @@
    ]
   },
   {
+   "sha": "a2e6aec7a4d9382941932245e8854f0ae5703a5e",
+   "ct": 1587645424,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "tests: add new regression test for fixed inner literal bug",
+   "c_files": [
+    "tests/regression.rs"
+   ]
+  },
+  {
    "sha": "1c4b5adb7b4a239e433d4a1dc2aa4b09ee30573d",
    "ct": 1585787868,
    "class": "other-fix",
@@ -615,11 +728,31 @@
    ]
   },
   {
+   "sha": "0ea65efd6d7a98b721fcf5f62a6e549204ee01b2",
+   "ct": 1584925371,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "regex: special case literal extraction",
+   "c_files": [
+    "crates/regex/src/literal.rs"
+   ]
+  },
+  {
    "sha": "8ba6ccd159ba6bee6ad869a2a09565f3625febb7",
    "ct": 1584400584,
    "class": "other-fix",
    "why": "",
    "subject": "ignore: fix failing test",
+   "c_files": [
+    "crates/ignore/src/dir.rs"
+   ]
+  },
+  {
+   "sha": "34edb8123a0b7bd69a61cd237fec8c1b26a3f786",
+   "ct": 1584399002,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ignore: squash noisy error message",
    "c_files": [
     "crates/ignore/src/dir.rs"
    ]
@@ -677,6 +810,26 @@
    ]
   },
   {
+   "sha": "5ce2d7351dba9c113318f4e43c041be7c25eaee4",
+   "ct": 1556205134,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ci: use cross for musl x86_64 builds",
+   "c_files": [
+    "src/main.rs"
+   ]
+  },
+  {
+   "sha": "03bf37ff4a29361c47843369f7d3dc5689b8fdac",
+   "ct": 1556140898,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "alloc: use jemalloc when building with musl",
+   "c_files": [
+    "src/main.rs"
+   ]
+  },
+  {
    "sha": "e7829c05d3b9234f053e7d480f7e75028831d772",
    "ct": 1555672304,
    "class": "other-fix",
@@ -706,6 +859,16 @@
    "c_files": [
     "grep-regex/src/config.rs",
     "grep-regex/src/literal.rs"
+   ]
+  },
+  {
+   "sha": "626ed00c196d54411ed2793b1568b1c48ccc95a0",
+   "ct": 1549802432,
+   "class": "regression",
+   "why": "revert",
+   "subject": "searcher: revert big-endian patch",
+   "c_files": [
+    "grep-searcher/src/lines.rs"
    ]
   },
   {
@@ -750,6 +913,22 @@
    "subject": "printer: fix path handling in summarizer",
    "c_files": [
     "grep-printer/src/summary.rs",
+    "tests/regression.rs"
+   ]
+  },
+  {
+   "sha": "718a00f6f2f88238546f7d33c1ea52217002495e",
+   "ct": 1548205439,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ripgrep: add --ignore-file-case-insensitive",
+   "c_files": [
+    "ignore/src/dir.rs",
+    "ignore/src/gitignore.rs",
+    "ignore/src/overrides.rs",
+    "ignore/src/walk.rs",
+    "src/app.rs",
+    "src/args.rs",
     "tests/regression.rs"
    ]
   },
@@ -858,6 +1037,27 @@
    ]
   },
   {
+   "sha": "cd6c1909674648f13d9de16aa7413ea7ed240e49",
+   "ct": 1529801345,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "ripgrep: use new BufferedStandardStream from termcolor",
+   "c_files": [
+    "src/args.rs",
+    "src/main.rs"
+   ]
+  },
+  {
+   "sha": "bf51058eb27458c4f01d4cbf8bf4ee0d80fac61e",
+   "ct": 1524530279,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "tests: fix tests on Windows",
+   "c_files": [
+    "tests/tests.rs"
+   ]
+  },
+  {
    "sha": "07713fb5c5563243566677fae21095e610d459f8",
    "ct": 1522096968,
    "class": "other-fix",
@@ -910,6 +1110,29 @@
    ]
   },
   {
+   "sha": "2d68054b1da6ba7515118bbe98c80e4c5330cad5",
+   "ct": 1518319692,
+   "class": "extrinsic",
+   "why": "env 'Windows'",
+   "subject": "termcolor: support ANSI in Windows terminals",
+   "c_files": [
+    "termcolor/src/lib.rs",
+    "wincolor/src/win.rs"
+   ]
+  },
+  {
+   "sha": "8cb5833ef9fd6c4c351d10a3e950339fa89adf49",
+   "ct": 1517936879,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "argv: update clap to 2.29.4",
+   "c_files": [
+    "src/app.rs",
+    "src/args.rs",
+    "tests/tests.rs"
+   ]
+  },
+  {
    "sha": "e36b65a11a7fa72e4b43f89c71441884269f0522",
    "ct": 1517537462,
    "class": "extrinsic",
@@ -957,6 +1180,27 @@
    ]
   },
   {
+   "sha": "712311fdc6f569960ad80716e1b3071886df1821",
+   "ct": 1508547072,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Don't create command until we know we can test it",
+   "c_files": [
+    "tests/tests.rs"
+   ]
+  },
+  {
+   "sha": "8dc513b5d2fad3bfc820c60724575c02b0c259ae",
+   "ct": 1508547072,
+   "class": "regression",
+   "why": "regression word",
+   "subject": "Skip regression 210 test on APFS",
+   "c_files": [
+    "tests/tests.rs",
+    "tests/workdir.rs"
+   ]
+  },
+  {
    "sha": "e7c06b92fb996adcbc40d1f025e29c44de5383e8",
    "ct": 1507464635,
    "class": "other-fix",
@@ -968,14 +1212,9 @@
   }
  ],
  "v2_dropped": {
-  "extrinsic|A": 2,
-  "extrinsic|C": 2,
   "other-fix|A": 13,
   "other-fix|B": 84,
   "other-fix|B2": 10,
-  "other-fix|C": 109,
-  "regression|A": 8,
-  "regression|B": 1,
-  "regression|C": 10
+  "other-fix|C": 109
  }
 }

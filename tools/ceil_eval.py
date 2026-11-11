@@ -56,6 +56,9 @@ YEAR = G.YEAR
 BIG_COMMIT = 50          # chronometer prototype's co-change gate (mass reformats)
 SAMPLE_EVERY = 4         # M1's sampling: every 4th quarterly snapshot ~ yearly
 MIN_EXPOSURE = 1.0
+# Which event set the outcome comes from: "_xc" = v1 keyword gate, "_xc2" = FIXLIKE v3c
+# (docs/otherfix_audit.md round 2). Set from --events in main().
+SUFFIX = "_xc"
 
 
 # --------------------------------------------------------------------------------- history walk
@@ -155,7 +158,7 @@ def build_panel(data: Path, cache: Path):
     for ri, r in enumerate(REPOS):
         nets = G.snapshot_networks(r, scratch)
         prs = pickle.loads((scratch / f"pairs_{r}.pkl").read_bytes())
-        xc = json.loads((REPO_ROOT / "events" / f"{r}_xc.json").read_text())["events"]
+        xc = json.loads((REPO_ROOT / "events" / f"{r}{SUFFIX}.json").read_text())["events"]
         if not xc:
             continue
         fixes = collections.defaultdict(list)
@@ -503,7 +506,11 @@ def main():
     ap.add_argument("--cache", type=Path, default=Path("/home/joe/.claude/jobs/9045a6ea/tmp/ceil_cache"))
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--draws", type=int, default=200)
+    ap.add_argument("--events", default="_xc", choices=("_xc", "_xc2"),
+                    help="_xc = v1 keyword gate; _xc2 = FIXLIKE v3c labels")
     a = ap.parse_args()
+    global SUFFIX
+    SUFFIX = a.events
     a.cache.mkdir(parents=True, exist_ok=True)
 
     # the same global extension patch CGR used, so the file set matches M1's exactly
@@ -512,7 +519,7 @@ def main():
     for r in REPOS:
         SDBS[r] = a.data / "dbs" / f"{r}.db"
 
-    pcache = a.cache / "panel.npz"
+    pcache = a.cache / f"panel{a.events}.npz"
     if pcache.exists():
         z = np.load(pcache, allow_pickle=True)
         A, meta = z["A"], json.loads(str(z["meta"]))
@@ -525,6 +532,8 @@ def main():
           f"{len(set(A[:, ci['fileid']].astype(int)))} files", file=sys.stderr)
 
     res = {"frame": {"repos": list(REPOS), "c_repos": list(C_REPOS), "per_repo": meta,
+                     "event_set": a.events,
+                     "label_rule": "FIXLIKE v3c (amendment 2)" if a.events == "_xc2" else "v1 keyword gate",
                      "sample_every": SAMPLE_EVERY, "outcome": "fix events in (t, t+1y]",
                      "covariate_window": "(t-1y, t]", "draws": a.draws,
                      "exploratory": "not registered; does not touch the LAWS confirmatory frame"},

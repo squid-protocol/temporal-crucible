@@ -101,7 +101,16 @@ COMMENT_EDIT = re.compile(r"\bcomments?\b", re.I)
 COMMENT_OP = re.compile(r"\b(?:handl\w+|pars\w+|process\w+|strip\w*|output\w*|serializ\w+"
                         r"|incomplete|nested|unclosed|escap\w+)\b", re.I)
 
-EXEMPT_CLASS = "latent"
+# Amendment 2 was developed and audited on `other-fix` ONLY, so it is applied to `other-fix` only.
+# The other classes keep their own measured precision from docs/xc_label_audit.md (regression
+# 0.73-0.87; extrinsic v2 0.90-1.00; latent is a curated list). Two of them must not be touched by
+# these rules in any case:
+#   - `regression` via revert reaches its class BEFORE the fix-like gate, so rule C would throw away
+#     `Revert "..."` commits - the cleanest regression signal there is.
+#   - `extrinsic` is already gated on a subject-matched environment AND action, so rule C would drop
+#     legitimate entries like "port to AIX" that carry no fix word.
+# Extending amendment 2 to those classes would need its own audit of those classes.
+AUDITED_CLASS = "other-fix"
 
 
 # v1's gate matched the fix word anywhere in subject OR body, which keeps plain feature commits
@@ -112,7 +121,7 @@ FIXWORD = re.compile(r"\b(fix(es|ed)?|bug|broke(n)?|break(s|age)?|regress\w*|cra
 
 
 def drop_reason(ev, rules="v3c") -> str | None:
-    if ev.get("class") == EXEMPT_CLASS:
+    if ev.get("class") != AUDITED_CLASS:
         return None
     subj = ev.get("subject", "")
     files = ev.get("c_files") or []
