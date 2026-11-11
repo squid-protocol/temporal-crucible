@@ -470,3 +470,53 @@ are allowed only before the draw.
 8. **Unchanged.** Every other law's effect, margin and direction; the synthesis (REML with HKSJ, the
    partial-conjunction universal tests, Holm, the equivalence tests); the panel size and the draw; ACC-P's
    design and every other language's oracle; the engine pin; the unit of labelling; and the guards.
+
+### Amendment 5, item 8: the scorer freeze (2026-11-11; before the sampling frame is built or any panel repo is selected)
+
+Owner OK, 2026-11-11. The methods review (should-fix 9) requires the full scorer to run end to end on the
+development set, with its run time, failure modes and resolution profile published, before its hash is frozen.
+That is done: `docs/laws_driver_pilot.md` (five repos — commons-lang, prometheus, sphinx, libgit2, libxml2 — all
+nine laws and the synthesis, 0 failures), `docs/laws_coverage.md` (the resolution profile and the matched-coverage
+pass), `docs/laws_law2_fitness.md`, `docs/laws_law9.md`, `docs/laws_defect_labels.md`,
+`docs/laws_github_labels.md` and `docs/laws_imports.md`.
+
+**The frozen scorer.**
+
+| what | value |
+|---|---|
+| temporal-crucible commit | `bcd798d57f465c5a9ff7d80f34905c84b16017a0` |
+| scorer modules | the 23 `tools/laws_*.py` files at that commit |
+| content hash | `sha256` of those files concatenated in name order: `86e8070a95c6ee51a3cda74f39c952f1ef787e52f1a684844c19e114a2721034` |
+| tests | 175 passing |
+| panel engine | unchanged: gitgalaxy `b873edc5b059` (Amendment 1 item 2) |
+
+**What the freeze covers.** Every estimator, every null model, the synthesis, and the margins and directions of
+all nine laws as Amendment 5 leaves them. A change to any of these after this entry needs its own dated
+amendment, and after the draw it needs a full rescan as well (Amendment 1 item 2).
+
+**What the freeze does NOT fix, deliberately.**
+
+1. **The fix label for LAW-6, LAW-7 and LAW-8.** `laws_run.py --labels keyword|workflow` is a runtime input and
+   both paths are implemented and tested, so the frozen scorer computes either. M6 requires the label audit
+   "before any network statistic", which binds the **panel run**, not this hash. The audit therefore still has to
+   complete before any panel law statistic is computed, and its result selects the label. The registered default
+   stays `keyword` until it does.
+2. **Descriptive extras still owed**, none of which any confirmatory law depends on: PAFit proper (a joint
+   Bayesian kernel-and-fitness estimate; `laws_attach.kernel` covers the functional form only), LAW-5 on the
+   import graph (`docs/laws_imports.md`), and a selective rather than uniform thinning null — the last needed
+   only if LAW-4's between-language comparison is ever reinstated as confirmatory, which Amendment 5 made
+   descriptive. Adding any of them is a dated amendment.
+3. **The `unresolved` table's missing file column**, which would turn the coverage figure from a floor into a
+   rate. It is a scanner change, so it would replace the engine pin and require a full rescan; it is not taken
+   before the draw.
+
+**Known at the freeze, so that no later reading is a surprise.** LAW-2's attachment component is established in 3
+of the 5 development repos under its registered variance, not 5 (the rank p is floored and more generous — see
+`docs/laws_driver_pilot.md`). LAW-3 is expected to lose repos non-randomly in the worse-measured languages.
+LAW-4's attenuation under coverage loss is repo-specific, not a constant. LAW-5's predicted direction holds in
+none of the five. LAW-6 points against its prediction in every evaluable development repo. LAW-8 is ~0 as
+predicted. LAW-9 is descriptive and evaluable in 1 of 8. Go is expected to stay descriptive (Amendment 4 item 5),
+and Python has no working oracle for the two-instrument check.
+
+**Next, in order:** the label audit; the sampling frame under M9 with its candidate fingerprint committed and
+pushed; the seeded draw; ACC-P on draws 1 and 2 per language; the panel scans; one scorer run and the synthesis.
