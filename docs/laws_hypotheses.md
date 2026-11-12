@@ -1,5 +1,15 @@
 # LAWS — a many-labs replication of the classic software-network laws across languages and decades — registered 2026-11-08, before any panel repository is selected, scanned or labelled
 
+> **CLOSED AS A FAILURE, 2026-11-12 (owner ruling).** No law verdict is claimed and no result is
+> published. The oracles cannot run on historical snapshots of real repositories: engine scans
+> succeeded 18/18, while oracle evaluability was C 6/6, Go 1/4, Java 0/4, Python 0/4, so the primary
+> 3-of-4 test could reach at most 1 of 4. **No statistic of any of the nine laws was ever computed on
+> a panel repository.** The cause, the surviving data and the lessons are in
+> [`laws_postmortem.md`](laws_postmortem.md). This document is kept unedited apart from this notice
+> and the renumbering of one colliding amendment; a second attempt starts from a fresh random batch
+> and inherits nothing here.
+
+
 **Programme steps 2 and 3** (`docs/PROGRAMME_call_networks.md`). The panel protocol (PANEL) and the law claims
 (LAW-1 … LAW-9) are registered together, so the sample cannot be chosen after seeing any network statistic.
 
