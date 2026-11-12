@@ -64,6 +64,22 @@ jobs:
           echo "--- report head ---"
           head -n 20 /tmp/fixture_report.md
 
+      # tc#171. Stdlib unittest only (the laws_* tests need pytest + numpy and
+      # are not run here). The fixture DB predates edge_data (gitgalaxy#2992),
+      # so the end-to-end run exercises the node-metrics-only path; the unit
+      # tests cover the edge path on a synthetic DB.
+      - name: Unit-test graph_roles.py
+        run: python -m unittest tests.test_graph_roles -v
+
+      - name: Run graph_roles.py end-to-end against the fixture
+        env:
+          EXPOSURE_POOL: /tmp/pool
+        run: |
+          python tools/graph_roles.py \
+            --events tests/fixtures/fixture_events.json \
+            --out /tmp/fixture_graph_roles.jsonl
+          test "$(wc -l < /tmp/fixture_graph_roles.jsonl)" -eq 3
+
       - name: Run signal_anatomy.py end-to-end against the fixture
         env:
           EXPOSURE_POOL: /tmp/pool
