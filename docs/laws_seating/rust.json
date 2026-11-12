@@ -172,16 +172,60 @@
   {
    "repo": "lightningdevkit/rust-lightning",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 3059,
    "snapshots_with_files": 33,
    "quarters": 33,
    "quarters_with_commit": 33,
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
+  },
+  {
+   "repo": "tjdevries/vim9jit",
+   "eligible": false,
+   "why": "pre-screen: 183 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "andrewchambers/bupstash",
+   "eligible": false,
+   "why": "pre-screen: 770 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "specta-rs/specta",
+   "eligible": false,
+   "why": "pre-screen: 1057 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "elliegoldstein/quicksilver",
+   "eligible": false,
+   "why": "pre-screen: 778 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "rizriyz/luvus",
+   "eligible": false,
+   "why": "pre-screen: 598 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "aleo-labs-protocol/snarkos",
+   "cloned": true,
+   "eligible": true,
+   "licence": "Apache-2.0",
+   "first_parent_commits": 2481,
+   "snapshots_with_files": 28,
+   "quarters": 29,
+   "quarters_with_commit": 29,
    "quarter_coverage": 1.0
   }
  ],
  "seated": [
   "devolutions/ironrdp",
-  "lightningdevkit/rust-lightning"
+  "aleo-labs-protocol/snarkos"
  ]
 }

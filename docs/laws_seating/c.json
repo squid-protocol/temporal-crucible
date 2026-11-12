@@ -28,12 +28,15 @@
   {
    "repo": "pure-data/pure-data",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 2044,
    "snapshots_with_files": 77,
    "quarters": 77,
    "quarters_with_commit": 77,
-   "quarter_coverage": 1.0
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
   },
   {
    "repo": "xiph/lpcnet",
@@ -50,16 +53,95 @@
   {
    "repo": "khronosgroup/vulkan-loader",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 4899,
    "snapshots_with_files": 20,
    "quarters": 21,
    "quarters_with_commit": 21,
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
+  },
+  {
+   "repo": "medusalix/xone",
+   "eligible": false,
+   "why": "pre-screen: 178 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "vmatare/thinkfan",
+   "eligible": false,
+   "why": "pre-screen: 507 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "novicelive/research-rootkit",
+   "eligible": false,
+   "why": "pre-screen: 68 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "swaywm/swaylock",
+   "eligible": false,
+   "why": "pre-screen: 362 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sqliteai/warp",
+   "eligible": false,
+   "why": "pre-screen: 343 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "llnl/rose",
+   "cloned": true,
+   "eligible": true,
+   "licence": "BSD-3-Clause",
+   "first_parent_commits": 8219,
+   "snapshots_with_files": 75,
+   "quarters": 75,
+   "quarters_with_commit": 75,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "inclavare-containers/inclavare-containers",
+   "eligible": false,
+   "why": "pre-screen: 1390 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "eafer/rdrview",
+   "eligible": false,
+   "why": "pre-screen: 81 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sqliteai/sqlite-vector",
+   "eligible": false,
+   "why": "pre-screen: 255 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pa3gsb/radioberry-2.x",
+   "eligible": false,
+   "why": "pre-screen: 297 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hannorein/rebound",
+   "cloned": true,
+   "eligible": true,
+   "licence": "GPL-3.0",
+   "first_parent_commits": 2207,
+   "snapshots_with_files": 61,
+   "quarters": 61,
+   "quarters_with_commit": 61,
    "quarter_coverage": 1.0
   }
  ],
  "seated": [
-  "pure-data/pure-data",
-  "khronosgroup/vulkan-loader"
+  "llnl/rose",
+  "hannorein/rebound"
  ]
 }

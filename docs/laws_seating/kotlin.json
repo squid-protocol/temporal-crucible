@@ -65,12 +65,15 @@
   {
    "repo": "mapbox/mapbox-maps-android",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 2538,
    "snapshots_with_files": 23,
    "quarters": 23,
    "quarters_with_commit": 23,
-   "quarter_coverage": 1.0
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
   },
   {
    "repo": "fossifyorg/phone",
@@ -100,10 +103,21 @@
    "quarters": 22,
    "quarters_with_commit": 22,
    "quarter_coverage": 1.0
+  },
+  {
+   "repo": "yuzono/anime-extensions",
+   "cloned": true,
+   "eligible": true,
+   "licence": "Apache-2.0",
+   "first_parent_commits": 5014,
+   "snapshots_with_files": 32,
+   "quarters": 35,
+   "quarters_with_commit": 35,
+   "quarter_coverage": 1.0
   }
  ],
  "seated": [
-  "mapbox/mapbox-maps-android",
-  "mollyim/mollyim-android"
+  "mollyim/mollyim-android",
+  "yuzono/anime-extensions"
  ]
 }
