@@ -73,15 +73,45 @@ deviation `docs/oracle_criteria.md` §3 permits. Until then C has no gate verdic
   fails under `./gradlew --no-daemon -x test jar`, `openaev` under the recorded Maven command (`rc=1`). Java is
   **not evaluable by build failure**, which is a statement about the oracle's prerequisites — java-callgraph
   reads a compiled jar — and is reported as such.
-- **D3.** Excluding the 4 packages `go list` marks as cgo leaves 239; excluding every package holding an
-  `import "C"` in any file (the general rule, since build tags hide them from `go list`) leaves 238. Both still
-  give 0 edges: `callgraph` refuses to emit anything when **any** loaded package has errors, and syzkaller
-  carries cgo tooling needing LLVM headers it does not vendor. **syzkaller is not evaluable with this oracle.**
-  No further pruning was attempted — pruning a package list until the tool succeeds is fishing, and the rule
-  would stop being a language-level one.
+- **D3, corrected 2026-11-11.** The first pass concluded "`callgraph` refuses to emit anything when any
+  loaded package has errors, so syzkaller is not evaluable". **The mechanism was right and the attribution was
+  wrong, and it was my own exclusion that was broken.** Dropping the 4 packages `go list` marks as cgo, or the
+  5 directories holding an `import "C"`, is not enough: `pkg/clangtool/tooltest` and `pkg/ifuzz/x86` remained in
+  the list and **depend** on cgo packages, so the loader pulled those in regardless.
+
+  Excluding packages whose dependency closure reaches a cgo package — the same rule applied transitively, which
+  is what "cannot be loaded without C" actually means — **callgraph runs and emits 1,175 in-repo edges.** The
+  oracle works.
+
+  But the closure is enormous: **209 of syzkaller's 243 own packages are transitively cgo-tainted, leaving 34
+  — 14%.** syzkaller is a kernel fuzzer and cgo is load-bearing throughout it. So syzkaller is **not evaluable,
+  for the same reason C's vulkan-loader nearly was not: coverage.** 14% of a repository is a small and
+  non-random slice, and that is exactly what the coverage bar exists to reject. The verdict is unchanged; the
+  reason for it is now the right one.
 
 Go therefore has at most **one** evaluable repo, and Amendment 2 requires both. Go cannot be confirmatory in
 this run however its snapshots are chosen.
+
+### The primary universality test cannot pass, and that is now arithmetic
+
+The primary test (Amendment 2 item 1, M2) is a partial conjunction over **C, Java, Go and Python**: at least
+**3 of those 4**. After this run:
+
+| language | can it still become confirmatory in this run? |
+|---|---|
+| C | **yes** — clears ACC-P's agreement bars (§8) |
+| Python | **no** — PyCG fails on every snapshot and Amendment 2 item 4 forbids a substitute oracle |
+| Go | **no** — syzkaller is not evaluable at 14% package coverage, and Amendment 2 requires both repos |
+| Java | unknown — blocked on a build, not yet ruled out |
+
+**The maximum reachable is 2 of 4, so the primary test cannot pass whatever happens to Java.** This is not a
+result about software laws; it is a consequence of two of the four named languages having oracles that cannot
+be run on their drawn repositories.
+
+The **extended** universality test — Amendment 2 item 3, fixed in advance, `r = ⌈2n/3⌉` of the `n` languages
+entering ACC-P — is therefore the operative headline for every law, and it was pre-registered for exactly this
+kind of shortfall. With three of ten candidate languages lacking an oracle entirely, `n ≤ 7` and `r = 5`, so
+the path runs through C#, Kotlin and PHP, whose references are pinned but not installed here.
 
 ## 5 · Where that leaves the gate
 

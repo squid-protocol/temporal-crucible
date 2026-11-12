@@ -125,5 +125,12 @@
   "result": "callgraph still exits 1 with 0 in-repo edges: tools/clang/declextract/build.go:39 'could not import C'",
   "cause": "callgraph refuses to emit any edge when ANY loaded package has errors, and syzkaller's tree carries cgo-dependent tooling that needs LLVM headers the repo does not vendor.",
   "verdict": "syzkaller is NOT EVALUABLE with this oracle. No further package pruning was attempted: pruning a package list until the tool succeeds is fishing, and the rule would no longer be a language-level one."
+ },
+ "D3_corrected": {
+  "diagnostic": "D3 corrected: transitive cgo exclusion",
+  "finding": "callgraph RUNS and emits 1,175 in-repo edges once packages whose dependency closure reaches a cgo package are excluded. The earlier 'the tool refuses' attribution was wrong; the exclusion was.",
+  "coverage": "209 of 243 own packages transitively cgo-tainted; 34 loadable = 14%",
+  "verdict": "syzkaller NOT EVALUABLE on coverage, not on tool behaviour. 14% of a repo is a non-random slice.",
+  "consequence": "Go cannot be confirmatory (Amendment 2 needs both repos). With Python also out, the primary universality test's maximum is 2 of 4 and it cannot pass."
  }
 }
