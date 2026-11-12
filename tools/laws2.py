@@ -78,6 +78,21 @@ CONTROLS = {
         how="node-merge rate carried as a per-snapshot covariate and reported with LAW-1/3/4",
         expect="effects stable across the observed merge range, or the law is descriptive",
         laws="LAW-1, LAW-3, LAW-4", why_laws1_needed_it="merge rate ran 0-19.2% per snapshot and was never used"),
+    "spec-curve": dict(
+        question="Is the result a property of the data, or of one defensible choice among many?",
+        how="every research parameter in docs/laws2/params.json carries a `grid`; each law is re-estimated "
+            "across the grid and the DISTRIBUTION of effects is reported, not one point",
+        expect="the sign is stable across the grid; a law that changes sign inside it is descriptive",
+        laws="LAW-1..LAW-5",
+        why_laws1_needed_it="research choices (5-year hub window, top-1%, x_min rule) sat as bare module "
+                            "constants, indistinguishable in the code from a bootstrap count"),
+    "as-published": dict(
+        question="Does the ORIGINAL claim reproduce under the ORIGINAL method?",
+        how="each law run twice: the source paper's estimator, null and figure, beside our registered one",
+        expect="both published; the GAP between them is the finding, not a footnote",
+        laws="LAW-1..LAW-9",
+        why_laws1_needed_it="only the strengthened method was registered, so a null result could always be "
+                            "answered with 'you did not do what we did'"),
     "oracle-calibrate": dict(
         question="How far is the compile-free graph from a compiler-grade one, where we can check?",
         how="agreement on languages whose oracle actually runs; carried as stated uncertainty elsewhere",
@@ -174,11 +189,23 @@ STAGES = [
       needs=["scan"], outputs=["docs/laws2/arms/time_split.json"], controls=["time-split"],
       todo="tools/laws2_arms.py time-split"),
 
+    S("ctrl-speccurve", 4, "Specification curve over every research parameter",
+      CONTROLS["spec-curve"]["question"],
+      needs=["scan"], outputs=["docs/laws2/arms/spec_curve.json"], controls=["spec-curve"],
+      todo="tools/laws2_arms.py spec-curve: walk params.json grids, re-estimate, keep the effect distribution"),
+
     # ---- Phase 5: the laws themselves. ----
     S("laws-main", 5, "Every law on the main arm",
       "Unchanged estimators: 182 tests, never the weak link in LAWS 1.",
       needs=["scan", "profile"], outputs=["docs/laws2/laws_main.json"], controls=["size-adjust"],
       cmd="python tools/laws_run.py --out {study} --repos {panel_repos} --matched-coverage --tag laws2_main"),
+
+    S("arm-as-published", 5, "Every law ALSO under its source paper's own method",
+      "A replication that only uses a modernised method can be answered with 'you did not do what we did'. "
+      "The gap between the two arms is the most valuable thing this study can report.",
+      needs=["scan"], outputs=["docs/laws2/arms/as_published.json"], controls=["as-published"],
+      todo="tools/laws2_as_published.py: per law, the source estimator + null + original figure form, "
+           "each citing the paper and equation it reproduces"),
 
     # ---- Phase 6: synthesis, figures, report. ----
     S("synthesis", 6, "Pool per language, refusing to pool below the sized k",
@@ -192,7 +219,8 @@ STAGES = [
           "--md docs/laws2/tables.md"),
     S("report", 6, "The write-up, with every arm beside the main number",
       "A result is the main number AND what the controls did to it.",
-      needs=["synthesis", "figures", "ctrl-negative", "ctrl-coverage"], outputs=["docs/laws2/report.md"],
+      needs=["synthesis", "figures", "ctrl-negative", "ctrl-coverage", "arm-as-published"],
+      outputs=["docs/laws2/report.md"],
       todo="assembled from the arms; no number is published without its control row"),
 ]
 
@@ -210,6 +238,12 @@ FIGURES = [
     dict(id="f10_time_split", needs="ctrl-timesplit", shows="first half vs second half, per law"),
     dict(id="f11_test_split", needs="ctrl-testsplit", shows="with and without test code"),
     dict(id="f12_oracle_agreement", needs="oracle-agree", shows="compile-free vs oracle, where it runs"),
+    dict(id="f13_as_published_vs_strengthened", needs="arm-as-published",
+         shows="per law, the source paper's own estimate beside ours - the gap IS the result"),
+    dict(id="f14_original_figure_form", needs="arm-as-published",
+         shows="each paper's own figure redrawn on our data (log-log CCDF, modularity-over-time)"),
+    dict(id="f15_specification_curve", needs="ctrl-speccurve",
+         shows="every law's effect across all defensible parameter choices, sorted"),
 ]
 
 
@@ -265,6 +299,33 @@ def cmd_status(a) -> int:
     return 0
 
 
+def params() -> dict:
+    p = DOCS / "laws2" / "params.json"
+    return json.loads(p.read_text()) if p.exists() else {}
+
+
+def cmd_params(a) -> int:
+    d = params()
+    if not d:
+        raise SystemExit("docs/laws2/params.json is missing")
+    r = d.get("research", {})
+    print(f"RESEARCH parameters ({len(r)}) — each changes the CLAIM, so each is registered and each is walked\n"
+          f"by the specification-curve arm. {sum(len(v['grid']) for v in r.values())} grid cells in total.\n")
+    for k, v in r.items():
+        print(f"  {k}")
+        print(f"    value : {v['value']}")
+        print(f"    grid  : {v['grid']}")
+        print(f"    laws  : {', '.join(v['laws'])}   ({v['module']})")
+        print(f"    why   : {v['why']}\n")
+    print(f"PRECISION knobs ({len(d.get('precision', {}))}) — move the error bars, not the claim:")
+    for k, v in d.get("precision", {}).items():
+        print(f"  {k:14} {str(v['value']):28} {v['why']}")
+    print(f"\nGUARDS ({len(d.get('guard', {}))}) — implementation floors; every one that BINDS is counted and published:")
+    for k, v in d.get("guard", {}).items():
+        print(f"  {k:16} {str(v['value']):12} {v.get('note', '')}")
+    return 0
+
+
 def cmd_controls(a) -> int:
     print("LAWS2 controls — each answers a question LAWS 1 could not answer about its own numbers.\n")
     for k, c in CONTROLS.items():
@@ -304,6 +365,14 @@ def cmd_checklist(a) -> int:
           "| control | asks | covers | LAWS 1 |", "|---|---|---|---|"]
     for k, c in CONTROLS.items():
         L.append(f"| `{k}` | {c['question']} | {c['laws']} | {c['why_laws1_needed_it']} |")
+    d = params()
+    if d:
+        L += ["", "## Registered research parameters", "",
+              "Each changes the claim, so each is registered with a grid of defensible alternatives that the",
+              "`ctrl-speccurve` arm walks. Precision knobs and guards are in `docs/laws2/params.json`.", "",
+              "| parameter | value | grid | laws | why it is a research choice |", "|---|---|---|---|---|"]
+        for k, v in d.get("research", {}).items():
+            L.append(f"| `{k}` | `{v['value']}` | `{v['grid']}` | {', '.join(v['laws'])} | {v['why']} |")
     L += ["", "## Figures declared in advance", "",
           "Each renders as soon as its stage lands, so no figure is invented after seeing the numbers.", "",
           "| figure | needs | shows |", "|---|---|---|"]
@@ -384,6 +453,7 @@ def main() -> int:
     p = sub.add_parser("status"); p.add_argument("--verbose", action="store_true"); p.set_defaults(f=cmd_status)
     p = sub.add_parser("checklist"); p.add_argument("--write", action="store_true"); p.set_defaults(f=cmd_checklist)
     p = sub.add_parser("controls"); p.set_defaults(f=cmd_controls)
+    p = sub.add_parser("params"); p.set_defaults(f=cmd_params)
     p = sub.add_parser("figures"); p.set_defaults(f=cmd_figures)
     p = sub.add_parser("verify"); p.set_defaults(f=cmd_verify)
     p = sub.add_parser("run")

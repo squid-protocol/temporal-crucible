@@ -1,0 +1,101 @@
+{
+  "_README": [
+    "LAWS2 parameters. JSON, not YAML, so the frame needs nothing outside the standard library.",
+    "",
+    "THREE CLASSES, and the distinction is the point:",
+    "  research  - changes the CLAIM. Must be in the registration. Every one carries a `grid` of",
+    "              defensible alternatives, and the specification-curve arm runs the law across that",
+    "              grid and reports the DISTRIBUTION of effects instead of one point.",
+    "  precision - changes the error bars, not the claim. Set by budget; the value is reported.",
+    "  guard     - an implementation floor. Never silently binding: when one excludes a repo or a",
+    "              snapshot, the exclusion is counted and published.",
+    "",
+    "LAWS 1 had all of these as bare module constants, so a research choice and a bootstrap count",
+    "looked alike in the code and neither appeared in the registration."
+  ],
+
+  "research": {
+    "hub_years_apart": {
+      "value": 5, "grid": [3, 5, 7, 10], "laws": ["LAW-3"], "module": "laws_hubs.YEARS_APART",
+      "why": "'still a hub five years later' - five is arbitrary, and LAW-3 is already the most fragile law"
+    },
+    "hub_top_share": {
+      "value": 0.01, "grid": [0.005, 0.01, 0.05, 0.10], "laws": ["LAW-3"], "module": "laws_hubs top-1%",
+      "why": "who counts as a hub; a narrow cut puts the test on a handful of nodes"
+    },
+    "hub_still_share": {
+      "value": 0.05, "grid": [0.01, 0.05, 0.10, 0.25], "laws": ["LAW-3"], "module": "laws_hubs top-5%",
+      "why": "how far a hub may fall and still 'persist'. With 0.05 the observed and null both sit near 0.95"
+    },
+    "hub_ceiling_sd": {
+      "value": 0.005, "grid": [0.0, 0.005, 0.02], "laws": ["LAW-3"], "module": "laws_hubs.CEILING_SD",
+      "why": "declares a repo 'not evaluable (ceiling)'. It silently decides WHICH repos the law is tested on"
+    },
+    "tail_min_fraction": {
+      "value": 0.05, "grid": [0.0, 0.05, 0.10, 0.25], "laws": ["LAW-1"], "module": "laws_tails.MIN_TAIL_FRACTION",
+      "why": "the floor under 'the tail'. Observed tails ran 8% to 100% of nodes between repos"
+    },
+    "tail_min_nodes": {
+      "value": 50, "grid": [30, 50, 100], "laws": ["LAW-1"], "module": "laws_tails.MIN_TAIL",
+      "why": "a 30-node tail is too easy; the registration says so and then fixes one value"
+    },
+    "tail_xmin_rule": {
+      "value": "ks", "grid": ["ks", "fixed_1", "fixed_2", "fixed_5"], "laws": ["LAW-1"],
+      "module": "laws_tails x_min selection",
+      "why": "KS-chosen x_min is per-repo, so 'the tail' is not the same object across repos. A fixed x_min is comparable but less favourable"
+    },
+    "attach_features": {
+      "value": ["log_k", "same_file", "same_dir", "log_loc", "log_age"],
+      "grid": [["log_k"], ["log_k", "log_loc"], ["log_k", "same_file", "same_dir", "log_loc", "log_age"]],
+      "laws": ["LAW-2"], "module": "laws_attach.FEATURES",
+      "why": "a modelling choice written as a constant. Dropping log_loc tests whether attachment is size in disguise"
+    },
+    "snapshot_granularity": {
+      "value": "quarterly", "grid": ["monthly", "quarterly", "yearly"], "laws": ["LAW-1", "LAW-2", "LAW-4", "LAW-5"],
+      "module": "laws_net snapshots",
+      "why": "LAW-2 counts 'new edges per step'; the step length sets how many edges are new"
+    },
+    "frame_min_commits": {
+      "value": 2000, "grid": [500, 1000, 2000], "laws": ["sampling"], "module": "laws_frame.MIN_COMMITS",
+      "why": "did 95% of all rejection work in LAWS 1 - this parameter, not the research question, defined the population"
+    },
+    "frame_min_files": {
+      "value": 50, "grid": [20, 50, 100], "laws": ["sampling"], "module": "laws_frame.MIN_FILES",
+      "why": "sets when a repo's history is judged to have started"
+    },
+    "frame_quarter_coverage": {
+      "value": 0.75, "grid": [0.5, 0.75, 0.9], "laws": ["sampling"], "module": "laws_frame.QUARTER_COVERAGE",
+      "why": "how gappy a history may be and still count"
+    },
+    "frame_language_share": {
+      "value": 0.60, "grid": [0.5, 0.6, 0.8], "laws": ["sampling"], "module": "laws_frame.SHARE",
+      "why": "how monolingual a repo must be to represent its language"
+    },
+    "coverage_ladder": {
+      "value": [1.0, 0.75, 0.5, 0.25], "grid": [[1.0, 0.75, 0.5, 0.25]], "laws": ["all"], "module": "laws_run --thin",
+      "why": "the instrument control. 44% removal already moved LAW-3 by 157% and LAW-2 by 10%"
+    }
+  },
+
+  "precision": {
+    "boot": {"value": 1000, "module": "BOOT", "why": "bootstrap replicates; error bars only"},
+    "sims": {"value": 200, "module": "laws_central.SIMS", "why": "LAW-4 replays"},
+    "null_reps": {"value": 200, "module": "laws_hubs.NULL_REPS", "why": "LAW-3 null draws"},
+    "rewires": {"value": 20, "module": "laws_decay.REWIRES", "why": "LAW-5 rewired nulls"},
+    "n_alt": {"value": 50, "module": "laws_attach.N_ALT", "why": "sampled alternatives per choice"},
+    "fitness_reps": {"value": 100, "module": "laws_attach.FITNESS_REPS", "why": "fitness-only null draws"},
+    "pc_sources": {"value": 200, "module": "laws_decay.PC_SOURCES", "why": "propagation-cost sources"},
+    "seed": {"value": 2982, "module": "SEED", "why": "one seed everywhere; changing it is a re-draw, not a knob"}
+  },
+
+  "guard": {
+    "min_quarters": {"value": 8, "module": "MIN_QUARTERS", "report_when_binding": true},
+    "min_choices": {"value": 200, "module": "laws_attach.MIN_CHOICES", "report_when_binding": true},
+    "min_hubs": {"value": 10, "module": "laws_hubs.MIN_HUBS", "report_when_binding": true},
+    "min_pairs": {"value": 3, "module": "laws_hubs.MIN_PAIRS", "report_when_binding": true},
+    "min_fe_appear": {"value": 2, "module": "laws_attach.MIN_FE_APPEAR", "report_when_binding": true},
+    "incycle_gate": {"value": [0.05, 0.8], "module": "laws_defects in-cycle share",
+                     "report_when_binding": true,
+                     "note": "removed libxml2 from LAW-6 in LAWS 1 at an in-cycle share of 0.001"}
+  }
+}

@@ -31,7 +31,7 @@ the single rule LAWS 1 most needed, because its irreversible steps ran before it
   - why: One uniform panel size is wrong: the pilot puts LAW-2 at ~2 repos per language and LAW-3 at ~30.
   - needs: pilot-e2e
   - outputs: docs/laws2/panel_sizes.json
-  - command: `python tools/laws2_size.py --run {study}/laws_run_laws2_pilot.json --out docs/laws2/panel_sizes.json`
+  - command: `python tools/laws2_size.py --run {run} --out docs/laws2/panel_sizes.json --md docs/laws2/panel_sizes.md`
 - [ ] **sesoi** — A smallest effect size worth caring about, per law
   - why: Margin 0 plus 100 snapshots makes everything significant: LAW-4 was 'detected' at a Gini gap of 0.026.
   - needs: pilot-e2e
@@ -118,6 +118,12 @@ the single rule LAWS 1 most needed, because its irreversible steps ran before it
   - controls: time-split
   - outputs: docs/laws2/arms/time_split.json
   - TO BUILD: tools/laws2_arms.py time-split
+- [ ] **ctrl-speccurve** — Specification curve over every research parameter
+  - why: Is the result a property of the data, or of one defensible choice among many?
+  - needs: scan
+  - controls: spec-curve
+  - outputs: docs/laws2/arms/spec_curve.json
+  - TO BUILD: tools/laws2_arms.py spec-curve: walk params.json grids, re-estimate, keep the effect distribution
 
 ## Phase 5
 
@@ -127,6 +133,12 @@ the single rule LAWS 1 most needed, because its irreversible steps ran before it
   - controls: size-adjust
   - outputs: docs/laws2/laws_main.json
   - command: `python tools/laws_run.py --out {study} --repos {panel_repos} --matched-coverage --tag laws2_main`
+- [ ] **arm-as-published** — Every law ALSO under its source paper's own method
+  - why: A replication that only uses a modernised method can be answered with 'you did not do what we did'. The gap between the two arms is the most valuable thing this study can report.
+  - needs: scan
+  - controls: as-published
+  - outputs: docs/laws2/arms/as_published.json
+  - TO BUILD: tools/laws2_as_published.py: per law, the source estimator + null + original figure form, each citing the paper and equation it reproduces
 
 ## Phase 6
 
@@ -142,7 +154,7 @@ the single rule LAWS 1 most needed, because its irreversible steps ran before it
   - command: `python tools/laws_explore.py --run docs/laws2/laws_main.json --figs docs/laws2/figs --md docs/laws2/tables.md`
 - [ ] **report** — The write-up, with every arm beside the main number
   - why: A result is the main number AND what the controls did to it.
-  - needs: synthesis, figures, ctrl-negative, ctrl-coverage
+  - needs: synthesis, figures, ctrl-negative, ctrl-coverage, arm-as-published
   - outputs: docs/laws2/report.md
   - TO BUILD: assembled from the arms; no number is published without its control row
 
@@ -157,7 +169,31 @@ the single rule LAWS 1 most needed, because its irreversible steps ran before it
 | `test-split` | Is the law about the code or about testing conventions? | LAW-1..LAW-8 | never run; commons-lang has 363 test files against 264 unit files |
 | `time-split` | Does the law hold in both halves of history, or only across the whole span? | LAW-1..LAW-5 | never run |
 | `merge-rate` | Is the in-degree tail an artefact of collapsed identities? | LAW-1, LAW-3, LAW-4 | merge rate ran 0-19.2% per snapshot and was never used |
+| `spec-curve` | Is the result a property of the data, or of one defensible choice among many? | LAW-1..LAW-5 | research choices (5-year hub window, top-1%, x_min rule) sat as bare module constants, indistinguishable in the code from a bootstrap count |
+| `as-published` | Does the ORIGINAL claim reproduce under the ORIGINAL method? | LAW-1..LAW-9 | only the strengthened method was registered, so a null result could always be answered with 'you did not do what we did' |
 | `oracle-calibrate` | How far is the compile-free graph from a compiler-grade one, where we can check? | all | the oracle was a gate, so 3 of 4 confirmatory languages were removed |
+
+## Registered research parameters
+
+Each changes the claim, so each is registered with a grid of defensible alternatives that the
+`ctrl-speccurve` arm walks. Precision knobs and guards are in `docs/laws2/params.json`.
+
+| parameter | value | grid | laws | why it is a research choice |
+|---|---|---|---|---|
+| `hub_years_apart` | `5` | `[3, 5, 7, 10]` | LAW-3 | 'still a hub five years later' - five is arbitrary, and LAW-3 is already the most fragile law |
+| `hub_top_share` | `0.01` | `[0.005, 0.01, 0.05, 0.1]` | LAW-3 | who counts as a hub; a narrow cut puts the test on a handful of nodes |
+| `hub_still_share` | `0.05` | `[0.01, 0.05, 0.1, 0.25]` | LAW-3 | how far a hub may fall and still 'persist'. With 0.05 the observed and null both sit near 0.95 |
+| `hub_ceiling_sd` | `0.005` | `[0.0, 0.005, 0.02]` | LAW-3 | declares a repo 'not evaluable (ceiling)'. It silently decides WHICH repos the law is tested on |
+| `tail_min_fraction` | `0.05` | `[0.0, 0.05, 0.1, 0.25]` | LAW-1 | the floor under 'the tail'. Observed tails ran 8% to 100% of nodes between repos |
+| `tail_min_nodes` | `50` | `[30, 50, 100]` | LAW-1 | a 30-node tail is too easy; the registration says so and then fixes one value |
+| `tail_xmin_rule` | `ks` | `['ks', 'fixed_1', 'fixed_2', 'fixed_5']` | LAW-1 | KS-chosen x_min is per-repo, so 'the tail' is not the same object across repos. A fixed x_min is comparable but less favourable |
+| `attach_features` | `['log_k', 'same_file', 'same_dir', 'log_loc', 'log_age']` | `[['log_k'], ['log_k', 'log_loc'], ['log_k', 'same_file', 'same_dir', 'log_loc', 'log_age']]` | LAW-2 | a modelling choice written as a constant. Dropping log_loc tests whether attachment is size in disguise |
+| `snapshot_granularity` | `quarterly` | `['monthly', 'quarterly', 'yearly']` | LAW-1, LAW-2, LAW-4, LAW-5 | LAW-2 counts 'new edges per step'; the step length sets how many edges are new |
+| `frame_min_commits` | `2000` | `[500, 1000, 2000]` | sampling | did 95% of all rejection work in LAWS 1 - this parameter, not the research question, defined the population |
+| `frame_min_files` | `50` | `[20, 50, 100]` | sampling | sets when a repo's history is judged to have started |
+| `frame_quarter_coverage` | `0.75` | `[0.5, 0.75, 0.9]` | sampling | how gappy a history may be and still count |
+| `frame_language_share` | `0.6` | `[0.5, 0.6, 0.8]` | sampling | how monolingual a repo must be to represent its language |
+| `coverage_ladder` | `[1.0, 0.75, 0.5, 0.25]` | `[[1.0, 0.75, 0.5, 0.25]]` | all | the instrument control. 44% removal already moved LAW-3 by 157% and LAW-2 by 10% |
 
 ## Figures declared in advance
 
@@ -177,3 +213,6 @@ Each renders as soon as its stage lands, so no figure is invented after seeing t
 | `f10_time_split` | ctrl-timesplit | first half vs second half, per law |
 | `f11_test_split` | ctrl-testsplit | with and without test code |
 | `f12_oracle_agreement` | oracle-agree | compile-free vs oracle, where it runs |
+| `f13_as_published_vs_strengthened` | arm-as-published | per law, the source paper's own estimate beside ours - the gap IS the result |
+| `f14_original_figure_form` | arm-as-published | each paper's own figure redrawn on our data (log-log CCDF, modularity-over-time) |
+| `f15_specification_curve` | ctrl-speccurve | every law's effect across all defensible parameter choices, sorted |

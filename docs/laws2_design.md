@@ -113,3 +113,54 @@ until an earlier gate passes — attempting to seat before the oracle screen is 
   the pass rate at 20% when it is 5.8%, and mis-ranked the languages.
 - **Enforce eligibility rules from the first walk.** The licence rule, applied four days late, cost 30% of the
   seats already taken.
+
+## 8. Parameters, not constants — and a specification curve over them
+
+LAWS 1 carried about thirty bare module constants. A research choice and a bootstrap count looked identical in
+the code, and neither reached the registration. `docs/laws2/params.json` splits them into three classes
+(`laws2.py params` prints it):
+
+- **research (14)** — these change the *claim*. Each is registered and each carries a `grid` of defensible
+  alternatives: 45 grid cells in all. Examples, with why each is a choice and not a fact:
+  - `hub_years_apart = 5` — why five? Grid 3/5/7/10.
+  - `hub_top_share = 0.01` and `hub_still_share = 0.05` — who is a hub, and how far may one fall and still
+    "persist"? At 0.05 both the observation and its null sit near 0.95, which is most of why LAW-3 is empty.
+  - `hub_ceiling_sd = 0.005` — silently decides *which repos the law is tested on*.
+  - `tail_xmin_rule = "ks"` — a per-repo x_min means "the tail" is not the same object across repos. The grid
+    includes fixed values, which are comparable but less favourable.
+  - `attach_features` — dropping `log_loc` asks whether preferential attachment is size in disguise.
+  - `snapshot_granularity = "quarterly"` — LAW-2 counts new edges per step, so the step length sets its input.
+  - `frame_min_commits = 2000` — did 95% of all rejection work; this parameter, not the research question,
+    defined the population.
+- **precision (8)** — bootstrap counts, replay counts, sampled alternatives. They move error bars, not claims.
+  Set by budget, report the value.
+- **guard (6)** — implementation floors. None may bind silently: every exclusion is counted and published.
+  LAWS 1's in-cycle gate removed libxml2 from LAW-6 at a share of 0.001 and said so only in a field.
+
+The `ctrl-speccurve` arm walks the grid and reports the **distribution** of each law's effect rather than one
+point. For a law already known to swing 157% with coverage, "does the sign survive 3/5/7/10-year windows and
+1%/5%/10% hub cuts?" is a more honest question than any single setting.
+
+## 9. Replicate the originals — as a second arm, never as the method
+
+Every law runs **twice**:
+
+- **`arm-as-published`** — the source paper's own estimator, its own null, and its own figure form, each citing
+  the paper and equation it reproduces.
+- **the registered arm** — our estimator against the hard null.
+
+**Why the as-published arm is necessary.** A replication that uses only a modernised method can always be
+answered with "you didn't do what we did." Without this arm we cannot separate *the claim was wrong* from *we
+measured differently*.
+
+**Why it must never be the headline.** The original methods are weak in known ways — the registration itself
+records that "heavy-tailed versus exponential" is near-certain and uninformative, and cites Broido & Clauset. A
+straight-looking log-log plot is not evidence; it is how these claims were overstated in the first place.
+
+**The gap between the arms is the finding.** "The claim reproduces under its own method and disappears under a
+proper null" is the most valuable result a many-labs replication can report — and it is already visible in the
+development data, where LAW-1's effect against an exponential runs roughly double its effect against the
+negative binomial.
+
+Three figures carry this: `f13_as_published_vs_strengthened` (the two estimates side by side, per law),
+`f14_original_figure_form` (each paper's own figure redrawn on our data), and `f15_specification_curve`.
