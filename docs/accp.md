@@ -4,14 +4,14 @@
 `b873edc5b`. Repos are draws 1 and 2 of each language's seeded order. Run 2026-11-11.
 Raw: `docs/accp_result.json`, `docs/accp_diagnostics.json`. Tool: `tools/accp_eval.py`.
 
-**Read this first: no language is gated by this run**, but C is now one snapshot short rather than
-unmeasurable. After D1 showed the C oracle was never running as its own registration specifies, the oracle was
-fixed (§7) and C re-run: **pure-data @2026Q4 is a valid pass on every statistic** — precision 0.971, recall
-0.889, ρ 0.955, hub Jaccard 0.763, κ 0.923, with parse coverage 102% of the engine's `.c` files. Its 2007
-snapshot lands at **79.5%** against the 80% coverage bar, half a point short, and the bar is not moved. Go has
-one scored snapshot and one repo that cannot be oracled at all; Java and Python cannot run their oracles.
-Amendment 11 (made **after** this run, marked post-result in the register) moved the early-snapshot rule, and
-§7 shows why that was necessary but **not sufficient**.
+**Read this first.** ACC-P run 1 is reported as **a pilot** (LAWS Amendment 12 item 3), not as a clean
+pre-registered gate: two post-result amendments were needed, the C oracle was found never to have run as its
+own registration specified, and three of ten candidate languages have no oracle at all.
+
+Within that, the pilot now has a result. **C clears ACC-P's agreement bars on both repos at both snapshots,
+with valid parse coverage everywhere** (§8). Go has one scored snapshot and one repo that cannot be oracled;
+Java and Python cannot run their oracles at all. Every non-C failure is a property of an oracle's
+prerequisites, each now measured and named.
 
 ## 1 · What ran
 
@@ -87,7 +87,7 @@ this run however its snapshots are chosen.
 
 | language | status after this run |
 |---|---|
-| C | **one valid snapshot short of a verdict** — pure-data @2026Q4 is a clean pass (§7); its 2007 snapshot is at 79.5% coverage and vulkan-loader cannot be parsed from its own tree |
+| C | **clears the agreement bars** on both repos at both snapshots with valid coverage (§8). Outstanding before confirmatory status: Amendment 2's resolution-profile condition (\|Kendall τ\| < 0.3 in ≥ 6 of 8 repos), which needs the panel scan, not ACC-P |
 | Go | **cannot be confirmatory** — syzkaller not evaluable (D3); the one scored snapshot fails H3 |
 | Java | **not evaluable** — build failure both repos (D2) |
 | Python | **descriptive** — PyCG fails; Amendment 2 item 4 forbids a substitute oracle |
@@ -151,3 +151,41 @@ statistic. That is an owner decision and a further post-result amendment, so it 
 **Not done, deliberately:** pure-data @2007Q4 is 0.5 points under the bar. Hand-tuning its flags to cross that
 gap is exactly the fishing this threshold exists to prevent. The threshold stands and the snapshot stays
 invalid.
+
+## 8 · C clears the gate's agreement bars
+
+Two changes, both made under rules fixed before they were applied:
+
+- **Amendment 12 item 1** replaced "the oracle runs" with "the oracle parses ≥ 80%" as the early-snapshot
+  test, and the search (`tools/accp_eval.py feasible`, `docs/accp_feasibility.json`) is blind to the engine by
+  construction: it never opens a scan database. pure-data's earliest qualifying boundary is **2018Q4** (123/149
+  = 82.6%) after 45 boundaries tried; vulkan-loader's is **2023Q1** (17/21 = 81.0%) after 5.
+- **Amendment 12 item 2** supplied vulkan-loader's external headers (KhronosGroup/Vulkan-Headers,
+  date-matched to each boundary by one recorded rule, not a version picked by trying several). Its coverage
+  went from ~10% to 75–85%, and **its H1/H3 failures disappeared entirely**: they were the missing headers.
+
+| gate snapshot | coverage | precision | recall | ρ | hub J | κ | H1 | H3 |
+|---|---:|---:|---:|---:|---:|---:|---|---|
+| pure-data @2018Q4 (early) | 109.8% | 0.995 | 0.946 | 0.974 | 0.867 | 1.000 | pass | pass |
+| pure-data @2026Q4 (late) | 102.3% | 0.971 | 0.889 | 0.955 | 0.763 | 0.923 | pass | pass |
+| vulkan-loader @2023Q1 (early) | 85.0% | 0.999 | 0.964 | 0.983 | 1.000 | 1.000 | pass | pass |
+| vulkan-loader @2026Q4 (late) | 81.0% | 0.993 | 0.973 | 0.985 | 0.714 | 1.000 | pass | pass |
+
+Coverage is engine-relative here (clean parses over the `.c` files the engine scanned), which is D1's validity
+ratio and the one that governs whether a comparison may be read; it exceeds 100% where the oracle sees more
+`.c` files than the engine kept. **The two denominators disagree in one place and it is close:** pure-data
+@2026Q4 is 102.3% engine-relative and **79.8%** over the oracle's own file list. The feasibility search uses
+the stricter oracle-relative figure, the validity report uses the engine-relative one, and this snapshot
+passes on the rule that governs it while missing the other by 0.2 points. A reader who prefers the stricter
+denominator throughout should treat that snapshot as unproven.
+
+**What this does and does not establish.** It establishes that on two C repositories, at four snapshots, the
+engine's confident-link call graph agrees with libclang on direct calls at precision 0.971–0.999 and recall
+0.889–0.973, and that its in-degree ordering, hub set and file coupling track the oracle's closely. It does
+**not** make C confirmatory on its own: Amendment 2 also requires the resolution-profile condition over the
+panel, which this run does not compute. And both early snapshots were selected by a post-result amendment,
+which a reader is entitled to discount.
+
+**Still owed:** registered output (a), the oracle-vs-engine difference in each law statistic's year-on-year
+change. It needs two valid snapshots of one repo — which now exist, twice over, so this is no longer blocked
+by data. It is simply not done.

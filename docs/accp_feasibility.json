@@ -1,0 +1,442 @@
+{
+ "pure-data/pure-data": {
+  "language": "c",
+  "bar": 0.8,
+  "denominator": "the oracle's own .c file list",
+  "blind_to_engine": true,
+  "chosen": {
+   "boundary": "2018-10-01",
+   "sha": "fd9a0ae86387c7682ecdafe8c03edd5432cb40fa",
+   "clean": 123,
+   "total": 149,
+   "coverage": 0.8255,
+   "makefile": "src/makefile.gnu"
+  },
+  "boundaries_tried": 45,
+  "attempts": [
+   {
+    "boundary": "2007-10-01",
+    "sha": "b58d85e2e1d2a23de8e14f95877beb6df32c86b3",
+    "clean": 101,
+    "total": 144,
+    "coverage": 0.7014,
+    "makefile": null
+   },
+   {
+    "boundary": "2008-01-01",
+    "sha": "aaaf124a8ffd5ac1e5ce6900a7f20c58bcfdaf22",
+    "clean": 102,
+    "total": 144,
+    "coverage": 0.7083,
+    "makefile": null
+   },
+   {
+    "boundary": "2008-04-01",
+    "sha": "22ffb53116a2585af1a287433e8e983dce1ede0d",
+    "clean": 102,
+    "total": 144,
+    "coverage": 0.7083,
+    "makefile": null
+   },
+   {
+    "boundary": "2008-07-01",
+    "sha": "e609134dfd0815333475c0b517ad5fa9cec1b5f0",
+    "clean": 104,
+    "total": 147,
+    "coverage": 0.7075,
+    "makefile": null
+   },
+   {
+    "boundary": "2008-10-01",
+    "sha": "8e4feb49760931a913928e8e7956c00d0188e792",
+    "clean": 104,
+    "total": 147,
+    "coverage": 0.7075,
+    "makefile": null
+   },
+   {
+    "boundary": "2009-01-01",
+    "sha": "b2a27d7665bb98cc8aa7f31eb0afe5fb2dea9ab3",
+    "clean": 104,
+    "total": 147,
+    "coverage": 0.7075,
+    "makefile": null
+   },
+   {
+    "boundary": "2009-04-01",
+    "sha": "2736926f3048add43f21158c5e5602ba806845d4",
+    "clean": 104,
+    "total": 147,
+    "coverage": 0.7075,
+    "makefile": null
+   },
+   {
+    "boundary": "2009-07-01",
+    "sha": "63190043203d3d3380431cdee3c0763222675b66",
+    "clean": 104,
+    "total": 147,
+    "coverage": 0.7075,
+    "makefile": null
+   },
+   {
+    "boundary": "2009-10-01",
+    "sha": "beffbc990b473a4104284ac8b2069a56974b4f3c",
+    "clean": 104,
+    "total": 145,
+    "coverage": 0.7172,
+    "makefile": null
+   },
+   {
+    "boundary": "2010-01-01",
+    "sha": "bca161355ba727740ecb0ea905195088e51aab72",
+    "clean": 104,
+    "total": 145,
+    "coverage": 0.7172,
+    "makefile": null
+   },
+   {
+    "boundary": "2010-04-01",
+    "sha": "7c755cb6c1d8ba059f9efd5676de18a26ece436c",
+    "clean": 105,
+    "total": 146,
+    "coverage": 0.7192,
+    "makefile": null
+   },
+   {
+    "boundary": "2010-07-01",
+    "sha": "1dff6561627342a2d633905d049799c1e0879ad5",
+    "clean": 105,
+    "total": 148,
+    "coverage": 0.7095,
+    "makefile": null
+   },
+   {
+    "boundary": "2010-10-01",
+    "sha": "c5c710ceb61e191e1f95b856d548b70d20b4ae44",
+    "clean": 109,
+    "total": 152,
+    "coverage": 0.7171,
+    "makefile": null
+   },
+   {
+    "boundary": "2011-01-01",
+    "sha": "44edfc8d8f3decddf65c0a08c0b6a28d98df9149",
+    "clean": 109,
+    "total": 152,
+    "coverage": 0.7171,
+    "makefile": null
+   },
+   {
+    "boundary": "2011-04-01",
+    "sha": "f35d4b5d1a5f360b39289910a7c8d23df4c36b6e",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2011-07-01",
+    "sha": "2965d5508d35a5e1b0c9c43dc71ec5ebd44b50e9",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2011-10-01",
+    "sha": "c7fb8e4a06d6253890ca2f73dfe4980c8c88fce9",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2012-01-01",
+    "sha": "8c729d0db7483de275179df59eedf5705e1e28dc",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2012-04-01",
+    "sha": "f24b62367300bac7345651da50d991b88af1dfae",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2012-07-01",
+    "sha": "2907b657f19a8638950f8db53a61a4b92217becc",
+    "clean": 107,
+    "total": 151,
+    "coverage": 0.7086,
+    "makefile": null
+   },
+   {
+    "boundary": "2012-10-01",
+    "sha": "29e9e85fb3f3a74431271b1c24f9198d0af8cf0e",
+    "clean": 108,
+    "total": 151,
+    "coverage": 0.7152,
+    "makefile": null
+   },
+   {
+    "boundary": "2013-01-01",
+    "sha": "ee1cad7ff4062e151bd8d37ea917cbf7060e10c7",
+    "clean": 120,
+    "total": 151,
+    "coverage": 0.7947,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2013-04-01",
+    "sha": "a24e54a3c1a7e3d3299c79d705a990a9f231f452",
+    "clean": 120,
+    "total": 151,
+    "coverage": 0.7947,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2013-07-01",
+    "sha": "e0bf78c163cd40984dfb18a59072b198dc343492",
+    "clean": 122,
+    "total": 156,
+    "coverage": 0.7821,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2013-10-01",
+    "sha": "f0f8ffec469521ae0ca84d3d5e379925f1697d06",
+    "clean": 122,
+    "total": 156,
+    "coverage": 0.7821,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2014-01-01",
+    "sha": "61ad17a4637c2a6d98516ffaf0f6865703c41650",
+    "clean": 122,
+    "total": 156,
+    "coverage": 0.7821,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2014-04-01",
+    "sha": "97aa262808d5ce9573dd890ea315561d244d47de",
+    "clean": 122,
+    "total": 156,
+    "coverage": 0.7821,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2014-07-01",
+    "sha": "ff5b66600c62d8249cdaf86e2311e928230d6571",
+    "clean": 122,
+    "total": 156,
+    "coverage": 0.7821,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2014-10-01",
+    "sha": "6aa452f320393d4d65e2574e755b013860f0f00b",
+    "clean": 119,
+    "total": 153,
+    "coverage": 0.7778,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2015-01-01",
+    "sha": "c6566f6a7590da5149ae0fea5169698c47f0a9b3",
+    "clean": 119,
+    "total": 153,
+    "coverage": 0.7778,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2015-04-01",
+    "sha": "6185d1fbb4ef9fa933d2efae6e54385a8954937b",
+    "clean": 120,
+    "total": 154,
+    "coverage": 0.7792,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2015-07-01",
+    "sha": "f03a1d8c6a0b3b170ad8825e2fbaaedfbfe0de75",
+    "clean": 120,
+    "total": 154,
+    "coverage": 0.7792,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2015-10-01",
+    "sha": "17aeb59582a149157147d02686b1a8cc04bdc1e4",
+    "clean": 120,
+    "total": 154,
+    "coverage": 0.7792,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2016-01-01",
+    "sha": "559150a740473b8c489685fe97af56e445a94aa7",
+    "clean": 120,
+    "total": 153,
+    "coverage": 0.7843,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2016-04-01",
+    "sha": "45c6d0b0acd9d22ad842b9924e2cb52573b3dab5",
+    "clean": 120,
+    "total": 153,
+    "coverage": 0.7843,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2016-07-01",
+    "sha": "a02bdc4118b625d82ceecb21a305602fef944184",
+    "clean": 121,
+    "total": 153,
+    "coverage": 0.7908,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2016-10-01",
+    "sha": "3e1a3f2e4b83c224fc988239d8af272e3e27bd87",
+    "clean": 121,
+    "total": 153,
+    "coverage": 0.7908,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2017-01-01",
+    "sha": "7f8e1177863bd84a7902d619debacb4d2f632508",
+    "clean": 121,
+    "total": 153,
+    "coverage": 0.7908,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2017-04-01",
+    "sha": "7f8e1177863bd84a7902d619debacb4d2f632508",
+    "clean": 121,
+    "total": 153,
+    "coverage": 0.7908,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2017-07-01",
+    "sha": "c6d25c5fbfeebfda3829797f752b9d48cb9b2db2",
+    "clean": 121,
+    "total": 154,
+    "coverage": 0.7857,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2017-10-01",
+    "sha": "e0d34afbbb41258e2731ffaf1baf51617156077b",
+    "clean": 122,
+    "total": 155,
+    "coverage": 0.7871,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2018-01-01",
+    "sha": "2f9c0beeb1f3ab17476f456d02cc765efc91bf09",
+    "clean": 122,
+    "total": 155,
+    "coverage": 0.7871,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2018-04-01",
+    "sha": "be0ff030b62d7cff833702c9f539a8eb44c888f2",
+    "clean": 122,
+    "total": 155,
+    "coverage": 0.7871,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2018-07-01",
+    "sha": "be0ff030b62d7cff833702c9f539a8eb44c888f2",
+    "clean": 122,
+    "total": 155,
+    "coverage": 0.7871,
+    "makefile": "src/makefile.gnu"
+   },
+   {
+    "boundary": "2018-10-01",
+    "sha": "fd9a0ae86387c7682ecdafe8c03edd5432cb40fa",
+    "clean": 123,
+    "total": 149,
+    "coverage": 0.8255,
+    "makefile": "src/makefile.gnu"
+   }
+  ]
+ },
+ "khronosgroup/vulkan-loader": {
+  "language": "c",
+  "bar": 0.8,
+  "denominator": "the oracle's own .c file list",
+  "blind_to_engine": true,
+  "chosen": {
+   "boundary": "2023-01-01",
+   "sha": "431f1af98a7ccfc03e98979629b55f50e18d6a10",
+   "clean": 17,
+   "total": 21,
+   "coverage": 0.8095,
+   "makefile": null,
+   "deviation": "Vulkan-Headers b232cb2bee65 (<= 2023-01-01)"
+  },
+  "boundaries_tried": 5,
+  "attempts": [
+   {
+    "boundary": "2021-10-01",
+    "sha": "edccdb34443928031b7f22657f6736fd4fe5d2c4",
+    "clean": 15,
+    "total": 20,
+    "coverage": 0.75,
+    "makefile": null,
+    "deviation": "Vulkan-Headers e500c7c809f9 (<= 2021-10-01)"
+   },
+   {
+    "boundary": "2022-04-01",
+    "sha": "f8c97eea2faf43cac6d8b396d0ed3a88ae753490",
+    "clean": 16,
+    "total": 21,
+    "coverage": 0.7619,
+    "makefile": null,
+    "deviation": "Vulkan-Headers 0c5928795a66 (<= 2022-04-01)"
+   },
+   {
+    "boundary": "2022-07-01",
+    "sha": "68e5bdc58ff44efc03d30ad2ac62cf2ad41e8a8b",
+    "clean": 16,
+    "total": 21,
+    "coverage": 0.7619,
+    "makefile": null,
+    "deviation": "Vulkan-Headers 2c823b7f2759 (<= 2022-07-01)"
+   },
+   {
+    "boundary": "2022-10-01",
+    "sha": "c71f94d8a86b22fd26a6a351fc682ae344d2b993",
+    "clean": 16,
+    "total": 21,
+    "coverage": 0.7619,
+    "makefile": null,
+    "deviation": "Vulkan-Headers 0df989960235 (<= 2022-10-01)"
+   },
+   {
+    "boundary": "2023-01-01",
+    "sha": "431f1af98a7ccfc03e98979629b55f50e18d6a10",
+    "clean": 17,
+    "total": 21,
+    "coverage": 0.8095,
+    "makefile": null,
+    "deviation": "Vulkan-Headers b232cb2bee65 (<= 2023-01-01)"
+   }
+  ]
+ }
+}

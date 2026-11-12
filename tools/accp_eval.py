@@ -309,7 +309,8 @@ def cmd_score(a) -> int:
         cmp_ = A.compare(nodes, edges, {}, {k: {(x, y) for x, y in mapped[k] if x and y} for k in mapped},
                          use_line=False)
         cov = ({"parse_clean": orc["parse_clean"], "parse_total": orc["parse_total"],
-                "makefile": orc.get("makefile"), "build_flags": orc.get("build_flags")}
+                "makefile": orc.get("makefile"), "build_flags": orc.get("build_flags"),
+                "oracle_coverage": orc.get("coverage"), "deviation": orc.get("deviation")}
                if "parse_clean" in orc else {})
         res[key] = {**rec, "evaluable": True, **cmp_, **cov, "engine_funcs": len(rows), "engine_edges": len(edges),
                     "oracle_direct": len(orc["direct"]), "oracle_dynamic": len(orc["dynamic"]),
@@ -460,6 +461,12 @@ def cmd_diag(a) -> int:
 # supplies the system include dirs, because the pip libclang wheel carries no clang resource headers at all
 # (D1's root cause) -- without them even a correct flag set fails on <stddef.h>.
 MAKEFILES = ("src/makefile.gnu", "Makefile", "makefile", "src/Makefile", "src/makefile")
+
+# Recorded per-repo deviations (docs/oracle_criteria.md section 3, LAWS Amendment 12 item 2). vulkan-loader's
+# headers live in KhronosGroup/Vulkan-Headers, fetched by its CMake, so it cannot be parsed from its own tree.
+# The header commit is the last one on first-parent HEAD before the snapshot's boundary -- a date-match rule,
+# recorded with the result, not a version picked by trying several.
+DEPS = {"khronosgroup__vulkan-loader": "KhronosGroup/Vulkan-Headers"}
 SYSINC = ["-isystem", "/usr/lib/gcc/x86_64-linux-gnu/13/include",
           "-isystem", "/usr/include/x86_64-linux-gnu", "-isystem", "/usr/include"]
 
@@ -502,7 +509,15 @@ def c_oracle(study, key):
     root = (study / "repos" / key).resolve()
     built, mk = c_flags(root)
     incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
-    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *SYSINC]
+    dep_args, dev = [], None
+    repo_part, _, snap_part = key.partition("@")
+    if repo_part in DEPS and len(snap_part) == 6 and snap_part[4] == "Q":
+        # one rule, not a per-snapshot table: the dependency is date-matched to this boundary
+        b = dt.datetime(int(snap_part[:4]), (int(snap_part[5]) - 1) * 3 + 1, 1, tzinfo=dt.timezone.utc)
+        rel, dev = vh_worktree(b)
+        if rel:
+            dep_args = [f"-I{study / rel}"]
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *dep_args, *SYSINC]
     idx = ci.Index.create()
     defs, calls, indirect, direct_sites, clean, tot = {}, [], 0, 0, 0, 0
     for f in sorted(root.rglob("*.c")):
@@ -539,7 +554,104 @@ def c_oracle(study, key):
         walk(tu.cursor, None)
     edges = {(defs[a], defs[b]) for a, b in calls if a in defs and b in defs and a != b}
     return {"direct": edges, "dynamic": set(), "indirect_sites": indirect, "direct_sites": direct_sites,
-            "parse_clean": clean, "parse_total": tot, "makefile": mk, "build_flags": built}
+            "parse_clean": clean, "parse_total": tot, "makefile": mk, "build_flags": built,
+            "coverage": (clean / tot if tot else None), "deviation": dev}
+
+
+# ==================================================== feasibility search (Amendment 12 item 1)
+# Coverage over THE ORACLE'S OWN file list, so this search never opens a scan database and cannot be
+# steered by what the engine found. It computes no agreement statistic; the engine side is not loaded.
+COVERAGE_BAR = 0.80
+
+
+def parse_coverage_only(root: pathlib.Path, dep_rel=None):
+    """(clean, total, which makefile supplied flags) — parses only, extracts no edges."""
+    sys.path.insert(0, str(next((STUDY / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    built, mk = c_flags(root)
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    dep = [f"-I{STUDY / dep_rel}"] if dep_rel else []
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *dep, *SYSINC]
+    idx = ci.Index.create()
+    clean = tot = 0
+    for f in sorted(root.rglob("*.c")):
+        tot += 1
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            continue
+        if not [d for d in tu.diagnostics if d.severity >= 3]:
+            clean += 1
+    return clean, tot, mk
+
+
+def vh_worktree(boundary: dt.datetime):
+    """A Vulkan-Headers checkout at the last first-parent commit before `boundary` (the recorded date-match
+    rule of Amendment 12 item 2). Returns (path relative to STUDY, the pin string)."""
+    base = STUDY / "deps" / "Vulkan-Headers"
+    if not base.exists():
+        return None, None
+    sha = git(base, "rev-list", "-1", "--first-parent", f"--before={boundary.isoformat()}", "HEAD").strip()
+    if not sha:
+        return None, None
+    wt = STUDY / "deps" / f"vh-{sha[:12]}"
+    if not wt.exists():
+        subprocess.run(["git", "-C", str(base), "worktree", "add", "-q", "--detach", str(wt), sha],
+                       capture_output=True, text=True)
+    inc = wt / "include"
+    return (str(inc.relative_to(STUDY)) if inc.exists() else None,
+            f"Vulkan-Headers {sha[:12]} (<= {boundary.date().isoformat()})")
+
+
+def cmd_feasible(a) -> int:
+    """Earliest quarterly boundary whose oracle parse coverage clears the bar. C only: coverage is undefined
+    for the oracles with no parse step, where Amendment 11's run/no-run test stands."""
+    full = a.repo
+    name = full.replace("/", "__")
+    repo = POOL / a.lang / name
+    head = git(repo, "rev-parse", "HEAD").strip()
+    log = git(repo, "log", "--reverse", "--format=%ct").split()
+    first = dt.datetime.fromtimestamp(int(log[0]), dt.timezone.utc)
+    y, m = first.year, ((first.month - 1) // 3 + 1) * 3 + 1
+    if m > 12:
+        y, m = y + 1, 1
+    attempts, chosen = [], None
+    while chosen is None:
+        b = dt.datetime(y, m, 1, tzinfo=dt.timezone.utc)
+        if b > LATE:
+            break
+        sha = git(repo, "rev-list", "--first-parent", "-1", f"--before={b.isoformat()}", head).strip()
+        if sha:
+            nfiles = sum(1 for f in git(repo, "ls-tree", "-r", "--name-only", sha).splitlines()
+                         if f.endswith(EXT["c"]))
+            if nfiles >= MIN_FILES:
+                dep_rel, dep_pin = (vh_worktree(b) if name in DEPS else (None, None))
+                with tempfile.TemporaryDirectory(dir=str(STUDY / "repos")) as tmp:
+                    src = pathlib.Path(tmp) / "src"
+                    src.mkdir()
+                    arch = subprocess.run(["git", "-C", str(repo), "archive", sha], capture_output=True)
+                    subprocess.run(["tar", "-x", "-C", str(src)], input=arch.stdout, capture_output=True)
+                    clean, tot, mk = parse_coverage_only(src, dep_rel)
+                cov = clean / tot if tot else 0.0
+                rec = {"boundary": b.date().isoformat(), "sha": sha, "clean": clean, "total": tot,
+                       "coverage": round(cov, 4), "makefile": mk, "deviation": dep_pin}
+                attempts.append(rec)
+                print(f"  {label(b)} {sha[:10]}: {clean}/{tot} = {cov:.1%}"
+                      f"{' <- CHOSEN' if cov >= COVERAGE_BAR else ''}", flush=True)
+                if cov >= COVERAGE_BAR:
+                    chosen = rec
+        m += 3
+        if m > 12:
+            y, m = y + 1, 1
+    out = DOCS_DIR / "accp_feasibility.json"
+    prev = json.loads(out.read_text()) if out.exists() else {}
+    prev[full] = {"language": "c", "bar": COVERAGE_BAR, "denominator": "the oracle's own .c file list",
+                  "blind_to_engine": True, "chosen": chosen, "boundaries_tried": len(attempts),
+                  "attempts": attempts}
+    out.write_text(json.dumps(prev, indent=1, default=str))
+    print(f"-> {out}: {'chosen ' + chosen['boundary'] if chosen else 'NO boundary clears the bar'}"
+          f" after {len(attempts)} boundaries", flush=True)
+    return 0
 
 
 def main() -> int:
@@ -554,8 +666,14 @@ def main() -> int:
     d = sub.add_parser("diag")
     d.add_argument("--only", nargs="+", default=["D1", "D2", "D3"])
     d.set_defaults(fn=cmd_diag)
+    fe = sub.add_parser("feasible")
+    fe.add_argument("--repo", required=True)
+    fe.add_argument("--lang", default="c")
+    fe.set_defaults(fn=cmd_feasible)
     a = ap.parse_args()
     return a.fn(a)
+
+
 
 
 if __name__ == "__main__":
