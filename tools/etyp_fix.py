@@ -141,8 +141,9 @@ def commit_matrix(rows: list[dict]):
     return shas, X, n, ct, mag
 
 
-def std_lift(X, bins, g: np.ndarray, ref: np.ndarray, rng) -> dict:
+def std_lift(X, bins, g: np.ndarray, ref: np.ndarray, rng, cols=None) -> dict:
     """Mean fraction in group g over the reference re-weighted to g's commit-size mix, with a CI."""
+    cols = COLS if cols is None else cols
     def one(gi, ri):
         w = np.bincount(bins[gi], minlength=16) / len(gi)
         exp = np.zeros(X.shape[1])
@@ -161,18 +162,23 @@ def std_lift(X, bins, g: np.ndarray, ref: np.ndarray, rng) -> dict:
     lo, hi = np.nanpercentile(np.array(boots), [2.5, 97.5], axis=0)
     return {c: {"share": float(obs[j]), "expected": float(exp[j]),
                 "lift": float(obs[j] / exp[j]) if exp[j] > 0 else None,
-                "lo": float(lo[j]), "hi": float(hi[j])} for j, c in enumerate(COLS)}
+                "lo": float(lo[j]), "hi": float(hi[j])} for j, c in enumerate(cols)}
 
 
-def follow_up(rows: list[dict], evs: dict, fix_shas: set, rng) -> dict:
+def row_cols(r: dict) -> list[str]:
+    return list(r["labels"]) + ["P:" + r["primary"]]
+
+
+def follow_up(rows: list[dict], evs: dict, fix_shas: set, rng, cols=None, feats=row_cols) -> dict:
     """C: P(function fixed within a year | a non-fix edit of type X), standardised on size and history."""
     by_fn: dict = defaultdict(list)
     for r in rows:
         by_fn[(r["path"], r["func"])].append(r)
+    cols = COLS if cols is None else cols
     S = 20 * 4 * 4
-    fn_n = np.zeros((len(by_fn), len(COLS) + 1, S))       # last column: every eligible edit (the base)
+    fn_n = np.zeros((len(by_fn), len(cols) + 1, S))       # last column: every eligible edit (the base)
     fn_y = np.zeros_like(fn_n)
-    idx = {c: i for i, c in enumerate(COLS)}
+    idx = {c: i for i, c in enumerate(cols)}
     for f, edits in enumerate(by_fn.values()):
         fix_ct = [e["ct"] for e in edits if e["sha"] in fix_shas]
         for k, e in enumerate(edits):
@@ -182,7 +188,7 @@ def follow_up(rows: list[dict], evs: dict, fix_shas: set, rng) -> dict:
                 continue
             y = any(e["ct"] < t <= e["ct"] + YEAR for t in fix_ct)
             s = (min(int(math.log2(max(e["ntok"], 1))), 19) * 4 + hist_bin(k)) * 4 + mag_bin(e["tadd"] + e["tdel"])
-            for c in [idx[l] for l in e["labels"]] + [idx["P:" + e["primary"]], len(COLS)]:
+            for c in [idx[l] for l in feats(e)] + [len(cols)]:
                 fn_n[f, c, s] += 1
                 fn_y[f, c, s] += y
 
@@ -202,7 +208,7 @@ def follow_up(rows: list[dict], evs: dict, fix_shas: set, rng) -> dict:
     return {"eligible_edits": int(total), "base_rate": float(base_rate),
             "by": {c: {"n": int(cnt[j]), "rate": float(obs[j]), "expected": float(exp[j]),
                        "rel": float(obs[j] / exp[j]) if exp[j] > 0 else None,
-                       "lo": float(lo[j]), "hi": float(hi[j])} for j, c in enumerate(COLS)}}
+                       "lo": float(lo[j]), "hi": float(hi[j])} for j, c in enumerate(cols)}}
 
 
 def table(title: str, res: dict, groups: list[str], cols: list[str], key: str = "lift") -> None:
