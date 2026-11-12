@@ -321,6 +321,135 @@ def cmd_score(a) -> int:
     return 0
 
 
+# ============================================================================ diagnostics (Amendment 11)
+# None of these is part of the gate. Each has a verdict independent of agreement, and each is reported
+# whichever way it goes. Thresholds were fixed in the amendment text before any of this ran.
+
+def d1_parse_coverage(key="khronosgroup__vulkan-loader@2021Q4"):
+    """D1: did libclang actually parse vulkan-loader? Threshold: fatal-diagnostic-free parses on < 80% of the
+    .c files the engine scanned means the comparison was invalid rather than unfavourable."""
+    import sqlite3
+    sys.path.insert(0, str(next((STUDY / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    root = STUDY / "repos" / key
+    db = sorted((STUDY / "engine" / key).glob("*_galaxy_master.db"))[0]
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    engine_c = {r[0] for r in con.execute("SELECT file_path FROM file_data WHERE file_path LIKE '%.c'")}
+    engine_funcs = con.execute("SELECT COUNT(*) FROM function_data").fetchone()[0]
+    con.close()
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs]]
+    idx = ci.Index.create()
+    files = sorted(root.rglob("*.c"))
+    clean, fatal, defs, errs = 0, 0, 0, {}
+    for f in files:
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            fatal += 1
+            errs["TranslationUnitLoadError"] = errs.get("TranslationUnitLoadError", 0) + 1
+            continue
+        bad = [d for d in tu.diagnostics if d.severity >= 3]
+        if bad:
+            fatal += 1
+            k = bad[0].spelling[:70]
+            errs[k] = errs.get(k, 0) + 1
+        else:
+            clean += 1
+        defs += sum(1 for c in tu.cursor.get_children()
+                    if c.kind == ci.CursorKind.FUNCTION_DECL and c.is_definition())
+    cov = clean / len(engine_c) if engine_c else None
+    return {"diagnostic": "D1 libclang parse coverage", "repo": key, "oracle_c_files": len(files),
+            "engine_c_files": len(engine_c), "parsed_clean": clean, "parsed_with_errors": fatal,
+            "oracle_functions_defined": defs, "engine_functions": engine_funcs,
+            "clean_share_of_engine_c_files": round(cov, 4) if cov is not None else None,
+            "threshold": 0.80, "verdict": ("COMPARISON INVALID (coverage below the 80% threshold)"
+                                           if cov is not None and cov < 0.80 else
+                                           "coverage adequate — the failure stands as measured"),
+            "top_errors": dict(sorted(errs.items(), key=lambda x: -x[1])[:5])}
+
+
+def d2_java_build():
+    """D2: can either Java repo's late snapshot be built to a jar with a fixed, recorded invocation?"""
+    out = []
+    for key in [k for k, v in json.loads(STATE.read_text()).items()
+                if v.get("language") == "java" and v.get("which") == "late"]:
+        root = STUDY / "repos" / key
+        rec = {"repo": key, "has_pom": (root / "pom.xml").exists(),
+               "has_gradle": any((root / f).exists() for f in ("gradlew", "build.gradle", "build.gradle.kts"))}
+        cmd = None
+        if rec["has_pom"]:
+            cmd = ["mvn", "-B", "-DskipTests", "-Drat.skip=true", "-Djacoco.skip=true",
+                   "-Dmaven.javadoc.skip=true", "-Dcheckstyle.skip", "-Dspotbugs.skip", "-Dpmd.skip", "package"]
+        elif (root / "gradlew").exists():
+            cmd = ["./gradlew", "--no-daemon", "-x", "test", "jar"]
+        if cmd is None:
+            rec["verdict"] = "no build file at this snapshot — not evaluable by build failure"
+            out.append(rec)
+            continue
+        rec["command"] = " ".join(cmd)
+        try:
+            p = subprocess.run(cmd, cwd=root, capture_output=True, text=True, timeout=2700)
+            rec["rc"] = p.returncode
+            rec["tail"] = (p.stdout + p.stderr)[-400:]
+        except subprocess.TimeoutExpired:
+            rec["rc"] = "timeout(45m)"
+        jars = [str(j.relative_to(root)) for j in list(root.rglob("target/*.jar")) + list(root.rglob("build/libs/*.jar"))
+                if "sources" not in j.name and "javadoc" not in j.name and "tests" not in j.name]
+        rec["jars"] = jars[:5]
+        rec["verdict"] = "BUILDABLE" if jars else "not evaluable by build failure"
+        out.append(rec)
+    return {"diagnostic": "D2 offline-safe Java build", "repos": out}
+
+
+def d3_syzkaller_cgo(key="google__syzkaller@2026Q4"):
+    """D3: does ./... minus the packages that import C yield a callgraph?"""
+    root = (STUDY / "repos" / key).resolve()
+    env = {**{k: v for k, v in os.environ.items() if k != "GOFLAGS"},
+           "GOPATH": str(STUDY / "gopath"), "GOMODCACHE": str(STUDY / "gopath/pkg/mod"),
+           "GOTOOLCHAIN": "auto", "PATH": f"{STUDY}/go/bin:{STUDY}/gopath/bin:{os.environ['PATH']}"}
+    subprocess.run(["go", "mod", "download"], cwd=root, env=env, capture_output=True, text=True, timeout=3600)
+    lst = subprocess.run(["go", "list", "-e", "-f", "{{.ImportPath}}\t{{len .CgoFiles}}", "./..."],
+                         cwd=root, env=env, capture_output=True, text=True, timeout=1800)
+    keep, cgo = [], []
+    for line in lst.stdout.splitlines():
+        parts = line.split("\t")
+        if len(parts) != 2:
+            continue
+        (cgo if parts[1].strip() not in ("0", "") else keep).append(parts[0])
+    if not keep:
+        return {"diagnostic": "D3 syzkaller minus cgo", "repo": key, "packages_kept": 0,
+                "cgo_packages": len(cgo), "verdict": "go list produced no packages",
+                "stderr": lst.stderr[-300:]}
+    fmt = "{{posn .Caller}}\t{{posn .Callee}}\t{{.Caller.Name}}\t{{.Callee.Name}}"
+    p = subprocess.run(["callgraph", "-algo=static", f"-format={fmt}", *keep], cwd=root, env=env,
+                       capture_output=True, text=True, timeout=7200)
+    rs = str(root)
+    edges = sum(1 for ln in p.stdout.splitlines() if ln.count(rs) >= 2)
+    return {"diagnostic": "D3 syzkaller minus cgo", "repo": key, "packages_kept": len(keep),
+            "cgo_packages": len(cgo), "in_repo_edges": edges, "rc": p.returncode,
+            "verdict": ("SCOPING WORKS — record as a per-repo deviation" if edges > 0 else
+                        "still no callgraph"), "stderr": p.stderr[-300:]}
+
+
+def cmd_diag(a) -> int:
+    res = {}
+    for name, fn in (("D1", d1_parse_coverage), ("D2", d2_java_build), ("D3", d3_syzkaller_cgo)):
+        if name not in a.only:
+            continue
+        print(f"== {name}", flush=True)
+        try:
+            res[name] = fn()
+        except Exception as e:
+            res[name] = {"diagnostic": name, "error": f"{type(e).__name__}: {e}"[:400]}
+        print(json.dumps(res[name], indent=1)[:1200], flush=True)
+    out = DOCS_DIR / "accp_diagnostics.json"
+    prev = json.loads(out.read_text()) if out.exists() else {}
+    prev.update(res)
+    out.write_text(json.dumps(prev, indent=1, default=str))
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -330,6 +459,9 @@ def main() -> int:
     s = sub.add_parser("score")
     s.add_argument("--langs", nargs="+", default=list(RUNNABLE))
     s.set_defaults(fn=cmd_score)
+    d = sub.add_parser("diag")
+    d.add_argument("--only", nargs="+", default=["D1", "D2", "D3"])
+    d.set_defaults(fn=cmd_diag)
     a = ap.parse_args()
     return a.fn(a)
 
