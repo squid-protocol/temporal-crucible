@@ -190,5 +190,27 @@
   "scan": "ok",
   "db": "openaev-platform__openaev@2026Q4_galaxy_master.db",
   "scan_secs": 35.0
+ },
+ "pure-data__pure-data@2018Q4": {
+  "repo": "pure-data/pure-data",
+  "language": "c",
+  "which": "early",
+  "boundary": "2018-10-01",
+  "sha": "fd9a0ae86387c7682ecdafe8c03edd5432cb40fa",
+  "key": "pure-data__pure-data@2018Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "chosen_by": "Amendment 12 coverage feasibility (82.6%)"
+ },
+ "khronosgroup__vulkan-loader@2023Q1": {
+  "repo": "khronosgroup/vulkan-loader",
+  "language": "c",
+  "which": "early",
+  "boundary": "2023-01-01",
+  "sha": "431f1af98a7ccfc03e98979629b55f50e18d6a10",
+  "key": "khronosgroup__vulkan-loader@2023Q1",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "chosen_by": "Amendment 12 coverage feasibility (81.0%)"
  }
 }

@@ -1,0 +1,136 @@
+{
+ "D1": {
+  "diagnostic": "D1 libclang parse coverage",
+  "repo": "khronosgroup__vulkan-loader@2021Q4",
+  "oracle_c_files": 20,
+  "engine_c_files": 19,
+  "parsed_clean": 1,
+  "parsed_with_errors": 19,
+  "oracle_functions_defined": 745,
+  "engine_functions": 1527,
+  "clean_share_of_engine_c_files": 0.0526,
+  "threshold": 0.8,
+  "verdict": "COMPARISON INVALID (coverage below the 80% threshold)",
+  "top_errors": {
+   "'stddef.h' file not found": 16,
+   "'zircon/compiler.h' file not found": 1,
+   "'float.h' file not found": 1,
+   "'vulkan/vulkan.h' file not found": 1
+  }
+ },
+ "D1_pure_data": {
+  "diagnostic": "D1 libclang parse coverage",
+  "repo": "pure-data__pure-data@2026Q4",
+  "oracle_c_files": 168,
+  "engine_c_files": 131,
+  "parsed_clean": 17,
+  "parsed_with_errors": 151,
+  "oracle_functions_defined": 5408,
+  "engine_functions": 4876,
+  "clean_share_of_engine_c_files": 0.1298,
+  "threshold": 0.8,
+  "verdict": "COMPARISON INVALID (coverage below the 80% threshold)",
+  "top_errors": {
+   "'stddef.h' file not found": 135,
+   "'windows.h' file not found": 6,
+   "'alsa/asoundlib.h' file not found": 3,
+   "'gtk/gtk.h' file not found": 2,
+   "m_private_utils.h is a PRIVATE header. do *not* use it in your externa": 2
+  }
+ },
+ "D1_pure_data_early": {
+  "diagnostic": "D1 libclang parse coverage",
+  "repo": "pure-data__pure-data@2007Q4",
+  "oracle_c_files": 144,
+  "engine_c_files": 127,
+  "parsed_clean": 13,
+  "parsed_with_errors": 131,
+  "oracle_functions_defined": 3777,
+  "engine_functions": 3345,
+  "clean_share_of_engine_c_files": 0.1024,
+  "threshold": 0.8,
+  "verdict": "COMPARISON INVALID (coverage below the 80% threshold)",
+  "top_errors": {
+   "'stddef.h' file not found": 118,
+   "'windows.h' file not found": 4,
+   "'alsa/asoundlib.h' file not found": 3,
+   "'tk.h' file not found": 2,
+   "call to undeclared function 'post'; ISO C99 and later do not support i": 1
+  }
+ },
+ "D2": {
+  "diagnostic": "D2 offline-safe Java build",
+  "repos": [
+   {
+    "repo": "intellectualsites__fastasyncworldedit@2026Q4",
+    "has_pom": false,
+    "has_gradle": true,
+    "command": "./gradlew --no-daemon -x test jar",
+    "rc": 1,
+    "tail": "AILURE: Build failed with an exception.\n\n* What went wrong:\nGradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to get full insights from a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n",
+    "jars": [],
+    "verdict": "not evaluable by build failure"
+   },
+   {
+    "repo": "openaev-platform__openaev@2026Q4",
+    "has_pom": true,
+    "has_gradle": false,
+    "command": "mvn -B -DskipTests -Drat.skip=true -Djacoco.skip=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip -Dspotbugs.skip -Dpmd.skip package",
+    "rc": 1,
+    "tail": " Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException\n[ERROR] \n[ERROR] After correcting the problems, you can resume the build with the command\n[ERROR]   mvn <args> -rf :openaev-build-services\n",
+    "jars": [],
+    "verdict": "not evaluable by build failure"
+   }
+  ]
+ },
+ "D3": {
+  "diagnostic": "D3 syzkaller minus cgo",
+  "repo": "google__syzkaller@2026Q4",
+  "packages_kept": 239,
+  "cgo_packages": 4,
+  "in_repo_edges": 0,
+  "rc": 1,
+  "verdict": "still no callgraph",
+  "stderr": "ectory\n    9 | #include \"clang/AST/APValue.h\"\n      |          ^~~~~~~~~~~~~~~~~~~~~\ncompilation terminated.\n/srv/storage_16tb/projects/gitgalaxy/acc-study/repos/google__syzkaller@2026Q4/tools/clang/declextract/build.go:39:8: could not import C (no metadata for C)\ncallgraph: packages contain errors\n"
+ },
+ "D1_remediation_test": {
+  "diagnostic": "D1 remediation: supply libclang's missing builtin headers",
+  "cause": "the pip libclang wheel ships libclang.so but no clang resource headers, so 'stddef.h' was not found in 16/20 vulkan-loader and 135/168 pure-data translation units. This defect is in acc_eval.oracle_c and predates ACC-P: ACC's own published C numbers were produced by the same code path.",
+  "fix_tested": "-isystem /usr/lib/gcc/x86_64-linux-gnu/13/include -isystem /usr/include/x86_64-linux-gnu -isystem /usr/include",
+  "pure-data@2026Q4": {
+   "clean_before": "17/168 (13.0% of the engine's 131 .c files)",
+   "clean_after": "93/168 (71.0%)",
+   "still_below_threshold": true,
+   "remaining": {
+    "a deliberate #error in a PRIVATE header": 31,
+    "'windows.h' (platform files)": 10,
+    "call to undeclared 'lseek'": 5,
+    "'ext.h'": 4
+   }
+  },
+  "vulkan-loader@2021Q4": {
+   "clean_before": "1/20 (5.3%)",
+   "clean_after": "2/20",
+   "still_below_threshold": true,
+   "remaining": {
+    "'vulkan/vk_platform.h' not found": 14
+   },
+   "note": "vulkan-loader's headers live in a SEPARATE repository (Vulkan-Headers), fetched by CMake. It cannot be parsed from its own tree alone."
+  },
+  "verdict": "The fix is real and large (13% -> 71% on pure-data) but still short of the 80% threshold fixed in Amendment 11 before measuring. The threshold is not moved. C's comparison stays INVALID until the oracle runs from a compile database (compile_commands.json), the per-repo deviation docs/oracle_criteria.md section 3 permits."
+ },
+ "D3_followup": {
+  "diagnostic": "D3 follow-up: exclude every package holding an import \"C\" in any file, not only CgoFiles",
+  "packages": "239 type-checking -> 238 after excluding cgo dirs (pkg/clangtool, pkg/ifuzz/x86, tools/clang, tools/clang/codesearch, tools/clang/declextract)",
+  "result": "callgraph still exits 1 with 0 in-repo edges: tools/clang/declextract/build.go:39 'could not import C'",
+  "cause": "callgraph refuses to emit any edge when ANY loaded package has errors, and syzkaller's tree carries cgo-dependent tooling that needs LLVM headers the repo does not vendor.",
+  "verdict": "syzkaller is NOT EVALUABLE with this oracle. No further package pruning was attempted: pruning a package list until the tool succeeds is fishing, and the rule would no longer be a language-level one."
+ },
+ "D3_corrected": {
+  "diagnostic": "D3 corrected: transitive cgo exclusion",
+  "finding": "callgraph RUNS and emits 1,175 in-repo edges once packages whose dependency closure reaches a cgo package are excluded. The earlier 'the tool refuses' attribution was wrong; the exclusion was.",
+  "coverage": "209 of 243 own packages transitively cgo-tainted; 34 loadable = 14%",
+  "verdict": "syzkaller NOT EVALUABLE on coverage, not on tool behaviour. 14% of a repo is a non-random slice.",
+  "consequence": "Go cannot be confirmatory (Amendment 2 needs both repos). With Python also out, the primary universality test's maximum is 2 of 4 and it cannot pass."
+ }
+}

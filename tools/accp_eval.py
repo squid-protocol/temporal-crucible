@@ -292,7 +292,7 @@ def cmd_score(a) -> int:
         rows, edges, kinds = A2.resolved(STUDY, key, lang)
         try:
             orc = {"python": _py_oracle, "go": _go_oracle, "java": _java_oracle,
-                   "c": lambda s, k: A.oracle_c(s, k)}[lang](STUDY, key)
+                   "c": c_oracle}[lang](STUDY, key)
         except Exception as e:
             res[key] = {**rec, "evaluable": False, "error": f"{type(e).__name__}: {e}"[:300],
                         "profile": _profile(STUDY, key, lang)}
@@ -308,7 +308,11 @@ def cmd_score(a) -> int:
         nodes = {(r["file"], fid) for fid, r in rows.items()}
         cmp_ = A.compare(nodes, edges, {}, {k: {(x, y) for x, y in mapped[k] if x and y} for k in mapped},
                          use_line=False)
-        res[key] = {**rec, "evaluable": True, **cmp_, "engine_funcs": len(rows), "engine_edges": len(edges),
+        cov = ({"parse_clean": orc["parse_clean"], "parse_total": orc["parse_total"],
+                "makefile": orc.get("makefile"), "build_flags": orc.get("build_flags"),
+                "oracle_coverage": orc.get("coverage"), "deviation": orc.get("deviation")}
+               if "parse_clean" in orc else {})
+        res[key] = {**rec, "evaluable": True, **cmp_, **cov, "engine_funcs": len(rows), "engine_edges": len(edges),
                     "oracle_direct": len(orc["direct"]), "oracle_dynamic": len(orc["dynamic"]),
                     "profile": _profile(STUDY, key, lang), "secs": round(time.time() - t0, 1)}
         print(f"{key}: scored in {res[key]['secs']}s", flush=True)
@@ -321,6 +325,335 @@ def cmd_score(a) -> int:
     return 0
 
 
+# ============================================================================ diagnostics (Amendment 11)
+# None of these is part of the gate. Each has a verdict independent of agreement, and each is reported
+# whichever way it goes. Thresholds were fixed in the amendment text before any of this ran.
+
+def d1_parse_coverage(key="khronosgroup__vulkan-loader@2021Q4"):
+    """D1: did libclang actually parse vulkan-loader? Threshold: fatal-diagnostic-free parses on < 80% of the
+    .c files the engine scanned means the comparison was invalid rather than unfavourable."""
+    import sqlite3
+    sys.path.insert(0, str(next((STUDY / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    root = STUDY / "repos" / key
+    db = sorted((STUDY / "engine" / key).glob("*_galaxy_master.db"))[0]
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    engine_c = {r[0] for r in con.execute("SELECT file_path FROM file_data WHERE file_path LIKE '%.c'")}
+    engine_funcs = con.execute("SELECT COUNT(*) FROM function_data").fetchone()[0]
+    con.close()
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs]]
+    idx = ci.Index.create()
+    files = sorted(root.rglob("*.c"))
+    clean, fatal, defs, errs = 0, 0, 0, {}
+    for f in files:
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            fatal += 1
+            errs["TranslationUnitLoadError"] = errs.get("TranslationUnitLoadError", 0) + 1
+            continue
+        bad = [d for d in tu.diagnostics if d.severity >= 3]
+        if bad:
+            fatal += 1
+            k = bad[0].spelling[:70]
+            errs[k] = errs.get(k, 0) + 1
+        else:
+            clean += 1
+        defs += sum(1 for c in tu.cursor.get_children()
+                    if c.kind == ci.CursorKind.FUNCTION_DECL and c.is_definition())
+    cov = clean / len(engine_c) if engine_c else None
+    return {"diagnostic": "D1 libclang parse coverage", "repo": key, "oracle_c_files": len(files),
+            "engine_c_files": len(engine_c), "parsed_clean": clean, "parsed_with_errors": fatal,
+            "oracle_functions_defined": defs, "engine_functions": engine_funcs,
+            "clean_share_of_engine_c_files": round(cov, 4) if cov is not None else None,
+            "threshold": 0.80, "verdict": ("COMPARISON INVALID (coverage below the 80% threshold)"
+                                           if cov is not None and cov < 0.80 else
+                                           "coverage adequate — the failure stands as measured"),
+            "top_errors": dict(sorted(errs.items(), key=lambda x: -x[1])[:5])}
+
+
+def d2_java_build():
+    """D2: can either Java repo's late snapshot be built to a jar with a fixed, recorded invocation?"""
+    out = []
+    for key in [k for k, v in json.loads(STATE.read_text()).items()
+                if v.get("language") == "java" and v.get("which") == "late"]:
+        root = STUDY / "repos" / key
+        rec = {"repo": key, "has_pom": (root / "pom.xml").exists(),
+               "has_gradle": any((root / f).exists() for f in ("gradlew", "build.gradle", "build.gradle.kts"))}
+        cmd = None
+        if rec["has_pom"]:
+            cmd = ["mvn", "-B", "-DskipTests", "-Drat.skip=true", "-Djacoco.skip=true",
+                   "-Dmaven.javadoc.skip=true", "-Dcheckstyle.skip", "-Dspotbugs.skip", "-Dpmd.skip", "package"]
+        elif (root / "gradlew").exists():
+            cmd = ["./gradlew", "--no-daemon", "-x", "test", "jar"]
+        if cmd is None:
+            rec["verdict"] = "no build file at this snapshot — not evaluable by build failure"
+            out.append(rec)
+            continue
+        rec["command"] = " ".join(cmd)
+        try:
+            p = subprocess.run(cmd, cwd=root, capture_output=True, text=True, timeout=2700)
+            rec["rc"] = p.returncode
+            rec["tail"] = (p.stdout + p.stderr)[-400:]
+        except subprocess.TimeoutExpired:
+            rec["rc"] = "timeout(45m)"
+        jars = [str(j.relative_to(root)) for j in list(root.rglob("target/*.jar")) + list(root.rglob("build/libs/*.jar"))
+                if "sources" not in j.name and "javadoc" not in j.name and "tests" not in j.name]
+        rec["jars"] = jars[:5]
+        rec["verdict"] = "BUILDABLE" if jars else "not evaluable by build failure"
+        out.append(rec)
+    return {"diagnostic": "D2 offline-safe Java build", "repos": out}
+
+
+def d3_syzkaller_cgo(key="google__syzkaller@2026Q4"):
+    """D3: does ./... minus the packages that import C yield a callgraph?"""
+    root = (STUDY / "repos" / key).resolve()
+    env = {**{k: v for k, v in os.environ.items() if k != "GOFLAGS"},
+           "GOPATH": str(STUDY / "gopath"), "GOMODCACHE": str(STUDY / "gopath/pkg/mod"),
+           "GOTOOLCHAIN": "auto", "PATH": f"{STUDY}/go/bin:{STUDY}/gopath/bin:{os.environ['PATH']}"}
+    subprocess.run(["go", "mod", "download"], cwd=root, env=env, capture_output=True, text=True, timeout=3600)
+    lst = subprocess.run(["go", "list", "-e", "-f", "{{.ImportPath}}\t{{len .CgoFiles}}", "./..."],
+                         cwd=root, env=env, capture_output=True, text=True, timeout=1800)
+    keep, cgo = [], []
+    for line in lst.stdout.splitlines():
+        parts = line.split("\t")
+        if len(parts) != 2:
+            continue
+        (cgo if parts[1].strip() not in ("0", "") else keep).append(parts[0])
+    if not keep:
+        return {"diagnostic": "D3 syzkaller minus cgo", "repo": key, "packages_kept": 0,
+                "cgo_packages": len(cgo), "verdict": "go list produced no packages",
+                "stderr": lst.stderr[-300:]}
+    fmt = "{{posn .Caller}}\t{{posn .Callee}}\t{{.Caller.Name}}\t{{.Callee.Name}}"
+    p = subprocess.run(["callgraph", "-algo=static", f"-format={fmt}", *keep], cwd=root, env=env,
+                       capture_output=True, text=True, timeout=7200)
+    rs = str(root)
+    edges = sum(1 for ln in p.stdout.splitlines() if ln.count(rs) >= 2)
+    return {"diagnostic": "D3 syzkaller minus cgo", "repo": key, "packages_kept": len(keep),
+            "cgo_packages": len(cgo), "in_repo_edges": edges, "rc": p.returncode,
+            "verdict": ("SCOPING WORKS — record as a per-repo deviation" if edges > 0 else
+                        "still no callgraph"), "stderr": p.stderr[-300:]}
+
+
+def cmd_diag(a) -> int:
+    res = {}
+    for name, fn in (("D1", d1_parse_coverage), ("D2", d2_java_build), ("D3", d3_syzkaller_cgo)):
+        if name not in a.only:
+            continue
+        print(f"== {name}", flush=True)
+        try:
+            res[name] = fn()
+        except Exception as e:
+            res[name] = {"diagnostic": name, "error": f"{type(e).__name__}: {e}"[:400]}
+        print(json.dumps(res[name], indent=1)[:1200], flush=True)
+    out = DOCS_DIR / "accp_diagnostics.json"
+    prev = json.loads(out.read_text()) if out.exists() else {}
+    prev.update(res)
+    out.write_text(json.dumps(prev, indent=1, default=str))
+    return 0
+
+
+# ============================================================================ C oracle, per the registration
+# ACC's Data table specifies: "compile flags from the repo's build where it can generate them without cmake
+# (redis `make` dry-run), else -I heuristics". acc_eval.oracle_c implements only the fallback, which is why
+# D1 found 0 cleanly parsed translation units in ACC's own repos. This implements the primary path. It also
+# supplies the system include dirs, because the pip libclang wheel carries no clang resource headers at all
+# (D1's root cause) -- without them even a correct flag set fails on <stddef.h>.
+MAKEFILES = ("src/makefile.gnu", "Makefile", "makefile", "src/Makefile", "src/makefile")
+
+# Recorded per-repo deviations (docs/oracle_criteria.md section 3, LAWS Amendment 12 item 2). vulkan-loader's
+# headers live in KhronosGroup/Vulkan-Headers, fetched by its CMake, so it cannot be parsed from its own tree.
+# The header commit is the last one on first-parent HEAD before the snapshot's boundary -- a date-match rule,
+# recorded with the result, not a version picked by trying several.
+DEPS = {"khronosgroup__vulkan-loader": "KhronosGroup/Vulkan-Headers"}
+SYSINC = ["-isystem", "/usr/lib/gcc/x86_64-linux-gnu/13/include",
+          "-isystem", "/usr/include/x86_64-linux-gnu", "-isystem", "/usr/include"]
+
+
+def c_flags(root: pathlib.Path):
+    """(-I/-D/-std flags from a `make -n` dry run, which makefile supplied them)."""
+    import re as _re
+    for rel in MAKEFILES:
+        mk = root / rel
+        if not mk.exists():
+            continue
+        try:
+            dry = subprocess.run(["make", "-n", "-f", mk.name], cwd=mk.parent, capture_output=True,
+                                 text=True, timeout=300).stdout
+        except subprocess.TimeoutExpired:
+            continue
+        flags = set()
+        for ln in dry.splitlines():
+            if " -c " in ln or _re.search(r"\b(gcc|cc|clang)\b", ln):
+                for tok in ln.split():
+                    if tok.startswith(("-I", "-D", "-std=")):
+                        flags.add(tok)
+        if not flags:
+            continue
+        out = []
+        for f in sorted(flags):
+            if f.startswith("-I") and not f[2:].startswith("/"):
+                out.append("-I" + str((mk.parent / f[2:]).resolve()))
+            else:
+                out.append(f)
+        return out, rel
+    return [], None
+
+
+def c_oracle(study, key):
+    """libclang with build-derived flags. Same edge rule as acc_eval.oracle_c: a CallExpr whose referenced
+    decl is a FunctionDecl defined in the repo; call sites with no referenced decl counted as indirect."""
+    sys.path.insert(0, str(next((study / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    root = (study / "repos" / key).resolve()
+    built, mk = c_flags(root)
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    dep_args, dev = [], None
+    repo_part, _, snap_part = key.partition("@")
+    if repo_part in DEPS and len(snap_part) == 6 and snap_part[4] == "Q":
+        # one rule, not a per-snapshot table: the dependency is date-matched to this boundary
+        b = dt.datetime(int(snap_part[:4]), (int(snap_part[5]) - 1) * 3 + 1, 1, tzinfo=dt.timezone.utc)
+        rel, dev = vh_worktree(b)
+        if rel:
+            dep_args = [f"-I{study / rel}"]
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *dep_args, *SYSINC]
+    idx = ci.Index.create()
+    defs, calls, indirect, direct_sites, clean, tot = {}, [], 0, 0, 0, 0
+    for f in sorted(root.rglob("*.c")):
+        tot += 1
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            continue
+        if not [d for d in tu.diagnostics if d.severity >= 3]:
+            clean += 1
+
+        def walk(cur, fn):
+            nonlocal indirect, direct_sites
+            for c in cur.get_children():
+                if (c.location.file and pathlib.Path(str(c.location.file.name)).resolve() != f
+                        and c.kind != ci.CursorKind.CALL_EXPR):
+                    continue
+                if c.kind == ci.CursorKind.FUNCTION_DECL and c.is_definition():
+                    try:
+                        rel = str(pathlib.Path(str(c.location.file.name)).resolve().relative_to(root))
+                    except ValueError:
+                        continue
+                    defs[c.get_usr()] = (rel, c.spelling, c.extent.start.line)
+                    walk(c, c.get_usr())
+                    continue
+                if c.kind == ci.CursorKind.CALL_EXPR and fn:
+                    ref = c.referenced
+                    if ref is not None and ref.kind == ci.CursorKind.FUNCTION_DECL:
+                        calls.append((fn, ref.get_usr()))
+                        direct_sites += 1
+                    else:
+                        indirect += 1
+                walk(c, fn)
+        walk(tu.cursor, None)
+    edges = {(defs[a], defs[b]) for a, b in calls if a in defs and b in defs and a != b}
+    return {"direct": edges, "dynamic": set(), "indirect_sites": indirect, "direct_sites": direct_sites,
+            "parse_clean": clean, "parse_total": tot, "makefile": mk, "build_flags": built,
+            "coverage": (clean / tot if tot else None), "deviation": dev}
+
+
+# ==================================================== feasibility search (Amendment 12 item 1)
+# Coverage over THE ORACLE'S OWN file list, so this search never opens a scan database and cannot be
+# steered by what the engine found. It computes no agreement statistic; the engine side is not loaded.
+COVERAGE_BAR = 0.80
+
+
+def parse_coverage_only(root: pathlib.Path, dep_rel=None):
+    """(clean, total, which makefile supplied flags) — parses only, extracts no edges."""
+    sys.path.insert(0, str(next((STUDY / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    built, mk = c_flags(root)
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    dep = [f"-I{STUDY / dep_rel}"] if dep_rel else []
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *dep, *SYSINC]
+    idx = ci.Index.create()
+    clean = tot = 0
+    for f in sorted(root.rglob("*.c")):
+        tot += 1
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            continue
+        if not [d for d in tu.diagnostics if d.severity >= 3]:
+            clean += 1
+    return clean, tot, mk
+
+
+def vh_worktree(boundary: dt.datetime):
+    """A Vulkan-Headers checkout at the last first-parent commit before `boundary` (the recorded date-match
+    rule of Amendment 12 item 2). Returns (path relative to STUDY, the pin string)."""
+    base = STUDY / "deps" / "Vulkan-Headers"
+    if not base.exists():
+        return None, None
+    sha = git(base, "rev-list", "-1", "--first-parent", f"--before={boundary.isoformat()}", "HEAD").strip()
+    if not sha:
+        return None, None
+    wt = STUDY / "deps" / f"vh-{sha[:12]}"
+    if not wt.exists():
+        subprocess.run(["git", "-C", str(base), "worktree", "add", "-q", "--detach", str(wt), sha],
+                       capture_output=True, text=True)
+    inc = wt / "include"
+    return (str(inc.relative_to(STUDY)) if inc.exists() else None,
+            f"Vulkan-Headers {sha[:12]} (<= {boundary.date().isoformat()})")
+
+
+def cmd_feasible(a) -> int:
+    """Earliest quarterly boundary whose oracle parse coverage clears the bar. C only: coverage is undefined
+    for the oracles with no parse step, where Amendment 11's run/no-run test stands."""
+    full = a.repo
+    name = full.replace("/", "__")
+    repo = POOL / a.lang / name
+    head = git(repo, "rev-parse", "HEAD").strip()
+    log = git(repo, "log", "--reverse", "--format=%ct").split()
+    first = dt.datetime.fromtimestamp(int(log[0]), dt.timezone.utc)
+    y, m = first.year, ((first.month - 1) // 3 + 1) * 3 + 1
+    if m > 12:
+        y, m = y + 1, 1
+    attempts, chosen = [], None
+    while chosen is None:
+        b = dt.datetime(y, m, 1, tzinfo=dt.timezone.utc)
+        if b > LATE:
+            break
+        sha = git(repo, "rev-list", "--first-parent", "-1", f"--before={b.isoformat()}", head).strip()
+        if sha:
+            nfiles = sum(1 for f in git(repo, "ls-tree", "-r", "--name-only", sha).splitlines()
+                         if f.endswith(EXT["c"]))
+            if nfiles >= MIN_FILES:
+                dep_rel, dep_pin = (vh_worktree(b) if name in DEPS else (None, None))
+                with tempfile.TemporaryDirectory(dir=str(STUDY / "repos")) as tmp:
+                    src = pathlib.Path(tmp) / "src"
+                    src.mkdir()
+                    arch = subprocess.run(["git", "-C", str(repo), "archive", sha], capture_output=True)
+                    subprocess.run(["tar", "-x", "-C", str(src)], input=arch.stdout, capture_output=True)
+                    clean, tot, mk = parse_coverage_only(src, dep_rel)
+                cov = clean / tot if tot else 0.0
+                rec = {"boundary": b.date().isoformat(), "sha": sha, "clean": clean, "total": tot,
+                       "coverage": round(cov, 4), "makefile": mk, "deviation": dep_pin}
+                attempts.append(rec)
+                print(f"  {label(b)} {sha[:10]}: {clean}/{tot} = {cov:.1%}"
+                      f"{' <- CHOSEN' if cov >= COVERAGE_BAR else ''}", flush=True)
+                if cov >= COVERAGE_BAR:
+                    chosen = rec
+        m += 3
+        if m > 12:
+            y, m = y + 1, 1
+    out = DOCS_DIR / "accp_feasibility.json"
+    prev = json.loads(out.read_text()) if out.exists() else {}
+    prev[full] = {"language": "c", "bar": COVERAGE_BAR, "denominator": "the oracle's own .c file list",
+                  "blind_to_engine": True, "chosen": chosen, "boundaries_tried": len(attempts),
+                  "attempts": attempts}
+    out.write_text(json.dumps(prev, indent=1, default=str))
+    print(f"-> {out}: {'chosen ' + chosen['boundary'] if chosen else 'NO boundary clears the bar'}"
+          f" after {len(attempts)} boundaries", flush=True)
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -330,8 +663,21 @@ def main() -> int:
     s = sub.add_parser("score")
     s.add_argument("--langs", nargs="+", default=list(RUNNABLE))
     s.set_defaults(fn=cmd_score)
+    d = sub.add_parser("diag")
+    d.add_argument("--only", nargs="+", default=["D1", "D2", "D3"])
+    d.set_defaults(fn=cmd_diag)
+    fe = sub.add_parser("feasible")
+    fe.add_argument("--repo", required=True)
+    fe.add_argument("--lang", default="c")
+    fe.set_defaults(fn=cmd_feasible)
     a = ap.parse_args()
     return a.fn(a)
+
+
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
 
 
 if __name__ == "__main__":
