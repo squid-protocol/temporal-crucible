@@ -97,9 +97,9 @@ size-matched stranger's edit (same log2 token-count bin, 20 draws, seed 2982):
 
 | | curl (48,613 pairs) | libarchive (13,083 pairs) |
 |---|---:|---:|
-| atomic label-set Jaccard, observed / null | 0.148 / 0.087 = **1.70x** | 0.198 / 0.102 = **1.95x** |
-| family-set Jaccard, observed / null | 0.364 / 0.303 = 1.20x | 0.438 / 0.341 = 1.28x |
-| same primary family, observed / null | 0.298 / 0.231 = 1.29x | 0.368 / 0.249 = 1.48x |
+| atomic label-set Jaccard, observed / null | 0.148 / 0.087 = **1.70x** | 0.198 / 0.101 = **1.96x** |
+| family-set Jaccard, observed / null | 0.364 / 0.303 = 1.20x | 0.438 / 0.342 = 1.28x |
+| same primary family, observed / null | 0.298 / 0.231 = 1.29x | 0.368 / 0.251 = 1.47x |
 
 KWFLUX measured 1.45-1.66x on keyword families; edit types repeat at least as strongly.
 

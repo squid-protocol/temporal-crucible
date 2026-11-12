@@ -17,7 +17,7 @@ approval.
 - `docs/kwnest.md`, `docs/rew.md`: structure is near-constant over a function's life, and rewiring beats
   edit count (+0.115) but loses to size.
 - `docs/etyp.md`: 99% of function edits take one of 26 named types, and a function's next edit resembles
-  its last at 1.70x (curl) and 1.95x (libarchive) a size-matched null.
+  its last at 1.70x (curl) and 1.96x (libarchive) a size-matched null.
 
 Edit count treats every edit alike. If the kind of edit a function attracts is a stable property, the
 count of *behaviour-changing* edits may carry rate information that the raw count dilutes with comments,
@@ -75,3 +75,17 @@ run.
   (which atoms carry it) becomes the next exploratory study, on data this one has not seen.
 - H1 holds, H2 fails: type sharpens history but size still wins; record it beside REW.
 - H1 fails: the kind of edit adds nothing to the count of edits, and the unmeasured rate lies elsewhere.
+
+## 8. Note added 2026-11-12, after the exploratory join (`etyp_fix.md`)
+
+The join was run on curl and libarchive only, which were already ineligible here. It bears on this draft:
+
+- LOGIC edits carry no forward signal (0.99 and 1.00 relative fix rate within a year); STRUCTURE carries a
+  small one (1.05 and 1.14). The "behavioural edit" predictor in section 3 mixes the two and would be
+  diluted. **DECIDE:** redefine the predictor as growth edits (BRANCH_ADD or STMT_ADD) before approval,
+  or drop H1/H2 in favour of the labelling question below.
+- The effect size seen is about 1.1x. A registration should state the power to detect that on openssl and
+  nDPI before it is approved.
+- A different claim looks better supported: that the type vector recognises fix class (extrinsic by TYPE
+  and PREPROC) and separates fixes from non-fixes without reading the message. That would be registered
+  against a hand-labelled sample, as `docs/otherfix_audit.md` was, not against a ranking metric.

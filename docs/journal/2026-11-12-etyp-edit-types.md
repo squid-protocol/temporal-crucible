@@ -8,7 +8,7 @@ theme: keyword-grammar
 ids:
 docs: docs/etyp.md; docs/etyp_hypotheses.md
 links:
-takehome: A closed set of 26 named edit types covers 99% of function edits in curl (54,890 edits) and libarchive (16,746), about 15 family combinations cover 80%, and a function's next edit resembles its last at 1.70x and 1.95x a size-matched null; outcome-blind, so nothing here is about defects yet.
+takehome: A closed set of 26 named edit types covers 99% of function edits in curl (54,890 edits) and libarchive (16,746), about 15 family combinations cover 80%, and a function's next edit resembles its last at 1.70x and 1.96x a size-matched null; outcome-blind, so nothing here is about defects yet.
 ---
 
 # Can every function edit be reduced to a discrete type? (ETYP)
@@ -38,7 +38,7 @@ in-place edits), decided from label counts alone and recorded in the doc.
 Exploratory. UNCLASSIFIED is 0.8% (curl) and 0.7% (libarchive). Edits are compounds (2.61 and 2.74 atomic
 labels each), but 14 and 15 family combinations cover 80% of edits. Primary-family shares agree across the
 repos (WIRING 32-35%, STRUCTURE 25-27%, LOGIC 19-20%). Consecutive edits to one function share labels at
-1.70x and 1.95x a size-matched null; RETURN_VALUE, LOOP_CHANGE, PREPROC, STRING_LITERAL and ARG_ARITY are
+1.70x and 1.96x a size-matched null; RETURN_VALUE, LOOP_CHANGE, PREPROC, STRING_LITERAL and ARG_ARITY are
 the stickiest named types in both.
 
 ## Take-home

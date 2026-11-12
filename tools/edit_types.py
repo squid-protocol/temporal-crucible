@@ -418,15 +418,17 @@ def _work(args) -> tuple[list, Counter]:
         fb, db = parsed(new)
         stats["files"] += 1
         stats["ambiguous_names"] += len(da | db)
-        for name in fa.keys() & fb.keys():
+        for name in sorted(fa.keys() & fb.keys()):      # sorted: row order feeds the seeded null
             na, nb = fa[name], fb[name]
             if na.text == nb.text:
                 continue
             A, B = features(na), features(nb)
             labs = classify(A, B)
+            ta, tb = Counter(A["tokens"]), Counter(B["tokens"])
             rows.append({"sha": sha, "ct": ct, "path": path, "func": name,
                          "labels": sorted(labs), "primary": primary(labs),
-                         "ntok": len(B["tokens"]), "err": bool(A["has_error"] or B["has_error"])})
+                         "ntok": len(B["tokens"]),
+                         "tadd": sum((tb - ta).values()), "tdel": sum((ta - tb).values()), "err": bool(A["has_error"] or B["has_error"])})
     return rows, stats
 
 
