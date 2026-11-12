@@ -6,12 +6,15 @@ status: scored
 verdict: n/a
 theme: keyword-grammar
 ids:
-docs: docs/etyp.md; docs/etyp_hypotheses.md
-links:
-takehome: A closed set of 26 named edit types covers 99% of function edits in curl (54,890 edits) and libarchive (16,746), about 15 family combinations cover 80%, and a function's next edit resembles its last at 1.70x and 1.96x a size-matched null; outcome-blind, so nothing here is about defects yet.
+docs: docs/etyp.md; docs/etyp_hypotheses.md; docs/etyp_review.md
+links: temporal-crucible#175
+takehome: A closed set of 26 named edit types covers 99% of function edits in curl (54,890) and libarchive (11,541 without test code), about 15 family combinations cover 80%, and once patch series, shared authors and shared files are removed a function's next edit resembles its last at only about 1.3x on labels and 1.1x on families; outcome-blind, and the first version's 1.70x / 1.96x is withdrawn.
 ---
 
 # Can every function edit be reduced to a discrete type? (ETYP)
+
+**Superseded in part by an independent review: the numbers and claims in the sections below are the first
+version; the corrections are in the last section and in `docs/etyp_review.md`.**
 
 ## Question
 
@@ -50,3 +53,12 @@ Whether it predicts fixes is not known.
 
 A draft registration (`docs/etyp_hypotheses.md`, unapproved) asks whether the count of behaviour-changing
 edits beats the raw edit count and the size order, on repos the taxonomy has not seen.
+
+## Revised after independent review (2026-11-12)
+
+The first version of this entry reported 1.70x and 1.96x against a size-matched stranger. An independent
+review (`docs/etyp_review.md`) showed about half of that is patch series, one author and one file: against
+another function in the same file, with a different author and at least 30 days between edits, it is 1.34x
+and 1.26x on atomic labels and 1.09x and 1.10x on families. libarchive's test code (31% of its edits) was
+removed. The taxonomy was corrected after outcomes had been seen (1.2% of label sets changed), so it is no
+longer outcome-blind in the strict sense. The draft registration is withdrawn.

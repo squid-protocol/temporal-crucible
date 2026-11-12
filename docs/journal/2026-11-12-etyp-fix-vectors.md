@@ -6,12 +6,15 @@ status: scored
 verdict: n/a
 theme: defect-prediction
 ids:
-docs: docs/etyp_fix.md
-links:
-takehome: Against non-fix commits of the same size and magnitude, a fix edits conditions and operators in place or adds a branch and does not rewire (LOGIC 1.18 and 1.28, WIRING 0.81 and 0.67 in curl and libarchive), and extrinsic fixes are marked by TYPE and PREPROC edits in both repos; as a forward signal the type of an edit moves the one-year fix rate only about 1.1x after size, history and magnitude; exploratory and uncorrected.
+docs: docs/etyp_fix.md; docs/etyp_review.md
+links: temporal-crucible#175
+takehome: Against non-fix commits of the same size, magnitude and subject filter, a fix is in-place logic and not rewiring or deletion in both curl and libarchive (LOGIC 1.15 and 1.18, WIRING 0.78 and 0.69), which is the one description that survived independent review; the extrinsic signature is partly the label rule, CVE fixes are not distinguishable from their controls, and the forward association with a later fix is small and shared with an inert label and a negative-control outcome; exploratory and uncorrected.
 ---
 
 # Every fix as a vector of edit types: class, impact, cause, follow-up (ETYP-FIX)
+
+**Superseded in part by an independent review: the numbers and claims in the sections below are the first
+version; the corrections are in the last section and in `docs/etyp_review.md`.**
 
 ## Question
 
@@ -51,3 +54,12 @@ fix lands.
 The draft ETYP registration carries a note: its predictor mixes a family with no forward signal, and a
 labelling claim (recognising fixes and fix class from the type vector) looks better supported than a
 ranking claim.
+
+## Revised after independent review (2026-11-12)
+
+An independent review (`docs/etyp_review.md`) found that libarchive included test code, the follow-up
+analysis kept sweep commits and used a base that contained the group, zero-count cells were marked, and the
+defect-introducing groups contained fixes. Corrected, the fix description above holds; these claims from the
+first version are withdrawn: a fix adds a branch, fixes are pure, extrinsic fixes have an independent
+signature, CVE fixes differ from controls, LOGIC predicts nothing while STRUCTURE does, and the labelling
+recommendation.

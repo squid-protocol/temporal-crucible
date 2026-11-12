@@ -56,6 +56,33 @@ class Kinds(unittest.TestCase):
         got = cols(BASE.replace("int r = 0;", 'int r = 0; if (strcmp(p, "x") == 0) goto out;'))
         self.assertEqual(got, ["CALL", "G:CALL", "G:ZERO_CMP", "GUARD_ADD", "ZERO_CMP"])
 
+    def test_an_edited_guard_beside_an_added_action_is_not_an_added_guard(self):
+        """Review finding 6: both labels used to fire once the total if count grew."""
+        w = lambda body: "int f(int a,int b){ %s return 0; }" % body
+        fn = lambda src: et.functions_in(src.encode())[0]["f"]
+        got = cc.cond_features(fn(w("if (a) return 1;")), fn(w("if (a > 2) return 1; if (b) g();")))
+        self.assertIn("ACTION_IF_ADD", got)
+        self.assertNotIn("GUARD_ADD", got)
+        got = cc.cond_features(fn(w("if (a) g();")), fn(w("if (!b) return 1; g();")))
+        self.assertEqual(got, ["G:NEGATED", "GUARD_ADD", "NEGATED"])
+
+    def test_narrowing_needs_an_old_condition_that_went_away(self):
+        w = lambda body: "int f(int a,int b,int n){ %s return 0; }" % body
+        fn = lambda src: et.functions_in(src.encode())[0]["f"]
+        self.assertIn("COND_NARROW", cc.cond_features(fn(w("if (a && b) g();")), fn(w("if (a && b && n) g();"))))
+        self.assertNotIn("COND_NARROW", cc.cond_features(fn(w("if (a) g();")),
+                                                         fn(w("if (a) g(); while (a && b) h();"))))
+
+    def test_constant_expressions_null_casts_and_masked_zero_tests(self):
+        self.assertEqual(cols(BASE.replace("return r;", "if (n > MAX_N - 1) n = 0; return r;")),
+                         ["ACTION_IF_ADD", "REL_CONST"])
+        self.assertEqual(cols(BASE.replace("return r;", "if (p == (char *)0) n = 0; return r;")),
+                         ["ACTION_IF_ADD", "NULL_CMP"])
+        self.assertEqual(cols(BASE.replace("return r;", "if ((n & FLAG) == 0) n = 0; return r;")),
+                         ["ACTION_IF_ADD", "BITTEST"])
+        self.assertEqual(cols(BASE.replace("return r;", "if (n == r) n = 0; return r;")),
+                         ["ACTION_IF_ADD", "VAR_CMP"])
+
     def test_an_untouched_condition_yields_nothing(self):
         self.assertEqual(cols(BASE.replace("return r;", "r++; return r;")), [])
 

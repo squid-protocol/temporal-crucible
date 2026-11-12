@@ -1,61 +1,61 @@
-# Can the edit-type vector label fixes? Mostly no (ETYP-LABEL, EXPLORATORY, development)
+# Can the edit-type vector label fixes? No (ETYP-LABEL, EXPLORATORY, development)
 
 **Type: exploratory.** No registration, **no p-value claimed**. Tool: `tools/etyp_label.py`. Repos: curl,
-libarchive (both already burned). Run 2026-11-12. Numbers: [`etyp_label.json`](etyp_label.json).
-Continues [`etyp_fix.md`](etyp_fix.md).
+libarchive (both already burned). Numbers: [`etyp_label.json`](etyp_label.json). Continues
+[`etyp_fix.md`](etyp_fix.md).
 
-**This tests a recommendation made in `etyp_fix.md` and does not support most of it.** That note said the
-likelier use of the edit types was labelling rather than ranking. Measured out of repo, the type vector is
-a weak fix detector, useless for regressions, and moderate only for the extrinsic class.
+**Revised 2026-11-12 after an independent review ([`etyp_review.md`](etyp_review.md)).** The conclusion is the
+same and stronger: with the corrected groups the type vector adds nothing detectable over commit size.
+
+**This tests a recommendation made in the first version of `etyp_fix.md`** (use the type vector to improve
+fix labels) **and does not support it.**
 
 ## What was done
 
-One commit is one row: the fraction of its function edits carrying each of the 26 named atomic labels. An
-L2 logistic regression is fitted on one repo and scored on the other, in both directions. Three variants,
-so the type signal cannot hide behind size: `size` (log2 function edits, log2 tokens changed), `type` (the
-label fractions), `both`. Intervals are 95% bootstraps over commits, 200 draws.
+One commit is one row: the fraction of its function edits carrying each of the 26 named atomic labels. An L2
+logistic regression is fitted on one repo and scored on the other, in both directions. Three variants: `size`
+(log2 function edits, log2 tokens changed), `type` (the label fractions), `both`. Intervals are 95%
+bootstraps over commits, 200 draws. Groups are the ones `etyp_fix.py` uses: fixes against the filtered
+non-fix reference, inside the labelled window.
 
-**The target is the message label, not ground truth.** v3c is about 0.76 precise on `other-fix`, and the
-"not a fix" group contains fixes the message did not announce. That pulls every AUC toward 0.5. It does
-not rescue the result: a filter this weak could not raise a 0.76-precise label by much even against a
-perfect reference.
+**The target is the message label, not ground truth.**
 
 ## Result: AUC out of repo
 
 | target | direction | n (positives) | size | type | both | both − size |
 |---|---|---:|---:|---:|---:|---:|
-| fix vs not a fix | curl → libarchive | 4,179 (1,088) | 0.542 | 0.587 | 0.573 | +0.032 [+0.017, +0.045] |
-| fix vs not a fix | libarchive → curl | 12,119 (3,688) | 0.553 | 0.571 | 0.569 | +0.016 [+0.006, +0.028] |
-| **extrinsic vs other fixes** | curl → libarchive | 1,088 (347) | 0.588 | **0.668** | 0.682 | +0.094 [+0.049, +0.136] |
-| **extrinsic vs other fixes** | libarchive → curl | 3,688 (358) | 0.527 | **0.705** | 0.702 | +0.175 [+0.135, +0.216] |
-| regression vs other fixes | curl → libarchive | 1,088 (60) | 0.526 | 0.468 | 0.503 | −0.022 [−0.106, +0.062] |
-| regression vs other fixes | libarchive → curl | 3,688 (798) | 0.498 | 0.482 | 0.493 | −0.004 [−0.026, +0.015] |
+| fix | curl → libarchive | 3,183 (1,005) | 0.577 | 0.590 | 0.594 | +0.016 [-0.002, +0.032] |
+| fix | libarchive → curl | 10,902 (3,688) | 0.583 | 0.570 | 0.585 | +0.002 [-0.008, +0.012] |
+| extrinsic | curl → libarchive | 1,005 (275) | 0.585 | 0.648 | 0.663 | +0.078 [+0.037, +0.127] |
+| extrinsic | libarchive → curl | 3,688 (358) | 0.527 | 0.690 | 0.684 | +0.157 [+0.119, +0.196] |
+| regression | curl → libarchive | 1,005 (52) | 0.501 | 0.489 | 0.503 | +0.002 [-0.087, +0.098] |
+| regression | libarchive → curl | 3,688 (798) | 0.498 | 0.491 | 0.498 | +0.000 [-0.024, +0.019] |
 
-- **Fix vs not a fix: 0.57-0.59.** Better than size by two or three points, and far too weak to relabel
-  anything. The lifts in `etyp_fix.md` (LOGIC 1.18-1.28) are real averages over thousands of commits; they
-  do not make an individual commit recognisable.
-- **Extrinsic: 0.67-0.71, with PREPROC and TYPE the two largest weights in both directions.** This is the
-  one signature that carries to an unseen repo. It is a usable cross-check on the extrinsic label, which
-  otherwise rests on environment words in the subject. It is not a labeller on its own.
-- **Regression: 0.47-0.50.** A regression fix has no type signature. The curl-only BUILD and
-  SKELETON_MOVE lifts in `etyp_fix.md` do not transfer.
+- **Fix vs not a fix: no detectable gain over size.** The edit types add +0.016 and
+  +0.002 AUC to commit size, and both intervals include zero. The first version reported
+  "+0.016 to +0.032, better than size by two or three points"; that margin came from cosmetic-subject commits
+  sitting in the negatives, which made size look worse than it is.
+- **Extrinsic vs other fixes: 0.65 and 0.69, above size.** But
+  `etyp_fix.md` shows why this is not independent evidence for the label: extrinsic is assigned from platform
+  words in the subject, and platform-named commits edit preprocessor conditions regardless. The model largely
+  recovers the subject rule through its code correlate. The first version called this "a usable cross-check on
+  the extrinsic label"; that is withdrawn.
+- **Regression vs other fixes: at chance** in both directions.
 
-At the fixed operating point (the training repo's top third of `both` scores), 41-46% of `other-fix`
-commits score above it against 28-33% of non-fixes, and v3c-dropped commits sit in between (32-39%).
+At the fixed operating point (the training repo's top third of `both` scores), 44% and 41%
+of `other-fix` commits score above it, against 29% and 28% of the reference and
+35% and 37% of v3c-dropped commits. Extrinsic fixes score above it 32%
+and 39% of the time: the fix model does not rank them above non-fixes.
 
 ## What this changes
 
-1. **The labelling claim is withdrawn before registration.** The hand-judged samples in
-   `docs/otherfix_audit.md` (libgit2, postgres, libxml2, redis) were **not** scored and remain unseen by
-   ETYP. They should not be spent on a 0.58 instrument.
-2. **`etyp_fix.md` section "What this says", item 3 is superseded by this note** for fix-vs-non-fix. Its
-   extrinsic half stands at the moderate level measured here.
-3. **Where the type vector stops.** The type of an edit says how the code changed, not whether the old
-   code was wrong. "Added a branch" is a fix and a feature alike. Whatever separates the two is likely in
-   what the branch tests (a null, a bound, an error code), which the taxonomy deliberately abstracts away.
+1. **The labelling claim is withdrawn.** The hand-judged samples in `docs/otherfix_audit.md` (libgit2,
+   postgres, libxml2, redis) were **not** scored and remain unseen by ETYP.
+2. **Where the type vector stops.** The type of an edit says how the code changed, not whether the old code
+   was wrong. "Added a branch" is a fix and a feature alike.
 
 ## Limits
 
-- Two C repos, message labels as the reference, one linear model. A richer model was not tried; fitting
-  until the number improves on two burned repos would not be evidence.
+- Two C repos, message labels as the reference, one linear model. A richer model was not tried; fitting until
+  the number improves on two burned repos would not be evidence.
 - Commit grain. A fix that edits one function among several unrelated ones is diluted in the fractions.

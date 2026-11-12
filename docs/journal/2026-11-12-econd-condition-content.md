@@ -6,12 +6,15 @@ status: scored
 verdict: n/a
 theme: defect-prediction
 ids:
-docs: docs/econd.md
+docs: docs/econd.md; docs/etyp_review.md
 links: temporal-crucible#175
-takehome: Classifying what each new condition tests covers every case but adds nothing to recognising a fix (AUC gain +0.000 and +0.005 across curl and libarchive); the one clean replication is that fixes add variable-to-variable relational conditions at 1.8x the rate of size-matched non-fix commits, and the null-check kinds turn out to be house style rather than meaning; the stop rule set in advance was met and the line is closed.
+takehome: Classifying what each new condition tests covers every case but gives no detectable gain in recognising a fix (at most +0.011 AUC across curl and libarchive); the one cell marked in both repos is that fixes add relational comparisons between two variables (1.80 and 1.67), and the null-check kinds turn out to be house style rather than meaning; a second look at burned data, with three labels corrected after review.
 ---
 
 # What a new condition tests, and whether the new branch is a guard (ECOND)
+
+**Superseded in part by an independent review: the numbers and claims in the sections below are the first
+version; the corrections are in the last section and in `docs/etyp_review.md`.**
 
 ## Question
 
@@ -47,3 +50,11 @@ attempts now agree.
 
 The ETYP line is closed at exploratory. One narrow descriptive claim (relational variable comparisons in
 fixes) is recorded as registrable on unseen repos and not registered.
+
+## Revised after independent review (2026-11-12)
+
+An independent review (`docs/etyp_review.md`) found GUARD_ADD, COND_NARROW and the constant test wrong in
+8%, 33-42% and 15% of cases; all three are fixed. The first version's claims that the taxonomy was fixed
+before any outcome and that the stop rule preceded the join are withdrawn as unprovable (same commit as the
+results), and its reading of REL_VAR as a missing bounds check is withdrawn (not marked on new guards in
+curl).
