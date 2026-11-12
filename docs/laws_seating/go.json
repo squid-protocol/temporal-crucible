@@ -114,7 +114,7 @@
   {
    "repo": "fastclaw-ai/fastclaw",
    "eligible": false,
-   "why": "pre-screen: 633 commits < 2000 (upper bound)",
+   "why": "pre-screen: 649 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
@@ -174,7 +174,7 @@
   {
    "repo": "multigres/multigres",
    "eligible": false,
-   "why": "pre-screen: 1372 commits < 2000 (upper bound)",
+   "why": "pre-screen: 1373 commits < 2000 (upper bound)",
    "cloned": false
   },
   {

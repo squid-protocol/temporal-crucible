@@ -102,15 +102,44 @@ def test_each_history_rule_rejects_for_its_own_reason(tmp_path: Path, monkeypatc
         monkeypatch.setattr(F.subprocess, "run",
                             lambda *a, **k: sp.CompletedProcess(a, 0, f"{n}\n", ""))
 
+    MIT = "MIT"
     commits(1500)
-    assert "fewer than 2000 first-parent commits" in F.eligible_history(repo, "go")["why"]
+    assert "fewer than 2000 first-parent commits" in F.eligible_history(repo, "go", licence=MIT)["why"]
     commits(5000)
-    assert "needs a scan" in F.eligible_history(repo, "go")["why"]        # no snapshot function given
-    assert "fewer than 20 quarters" in F.eligible_history(repo, "go", lambda r, l: (10, 40, 38))["why"]
-    assert "only 50%" in F.eligible_history(repo, "go", lambda r, l: (30, 40, 20))["why"]
-    ok = F.eligible_history(repo, "go", lambda r, l: (30, 40, 38))
-    assert ok["eligible"] is True and ok["quarter_coverage"] == 0.95
+    assert "needs a scan" in F.eligible_history(repo, "go", licence=MIT)["why"]   # no snapshot function given
+    assert "fewer than 20 quarters" in F.eligible_history(
+        repo, "go", lambda r, l: (10, 40, 38), licence=MIT)["why"]
+    assert "only 50%" in F.eligible_history(repo, "go", lambda r, l: (30, 40, 20), licence=MIT)["why"]
+    ok = F.eligible_history(repo, "go", lambda r, l: (30, 40, 38), licence=MIT)
+    assert ok["eligible"] is True and ok["quarter_coverage"] == 0.95 and ok["licence"] == MIT
     assert (F.MIN_COMMITS, F.MIN_SNAPSHOTS, F.MIN_FILES, F.QUARTER_COVERAGE) == (2000, 20, 50, 0.75)
+
+
+def test_the_osi_licence_rule_rejects_before_any_history_is_read(tmp_path: Path, monkeypatch):
+    """PANEL's "OSI licence read from the repo", enforced since Amendment 11 (tc#148 item 4). The licence is
+    metadata, so it is decided before the clone is touched -- a repo that fails it is never asked for its
+    commits. Omitting the licence is NOT a pass: a rule that is silently skipped is how it went unenforced
+    from 11-08 to 11-12."""
+    import subprocess as sp
+    repo = tmp_path / "r"
+    repo.mkdir()
+    calls = []
+    monkeypatch.setattr(F.subprocess, "run",
+                        lambda *a, **k: (calls.append(a), sp.CompletedProcess(a, 0, "9000\n", ""))[1])
+
+    for spdx in (None, "NOASSERTION", "other", "", "CC-BY-NC-4.0", "WTFPL", "Elastic-2.0", "BUSL-1.1"):
+        r = F.eligible_history(repo, "go", lambda r_, l: (30, 40, 38), licence=spdx)
+        assert r["eligible"] is False, spdx
+        assert "OSI" in r["why"] or "not OSI-approved" in r["why"], (spdx, r["why"])
+    assert calls == [], "a licence failure must not spend a git call"
+
+    assert F.eligible_history(repo, "go", lambda r_, l: (30, 40, 38))["why"].startswith(
+        "the OSI-licence rule needs repo metadata")
+
+    for spdx in ("MIT", "Apache-2.0", "GPL-3.0", "BSD-3-Clause", "MPL-2.0", "ISC", "Unlicense", "EPL-2.0"):
+        assert F.eligible_history(repo, "go", lambda r_, l: (30, 40, 38), licence=spdx)["eligible"], spdx
+    assert F.osi_licence("MIT") == (True, "")
+    assert "GPL-2.0" in F.OSI_SPDX and "LGPL-2.1" in F.OSI_SPDX and "AGPL-3.0" in F.OSI_SPDX
 
 
 def test_the_search_runner_caches_a_query_and_pages_it(tmp_path: Path, monkeypatch):

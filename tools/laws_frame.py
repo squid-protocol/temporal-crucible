@@ -26,6 +26,9 @@ size per language is reported.
 filter (which is primary-language only). **JS/TS is JavaScript + TypeScript bytes combined.** C++ counts
 linguist "C++" only.
 
+**Licence** (`eligible_history`, Amendment 11): the repository's SPDX id must be OSI-approved (`OSI_SPDX`).
+It is metadata, so it is checked before any clone and can only reject.
+
 **History** (clone-time checks, `eligible_history`): at least MIN_COMMITS commits on
 `git rev-list --first-parent --count` of the default branch; the quarterly rule giving at least MIN_SNAPSHOTS
 quarters with at least MIN_FILES source files; and at least one commit in at least QUARTER_COVERAGE of the
@@ -56,6 +59,33 @@ MIN_COMMITS = 2000
 MIN_SNAPSHOTS = 20
 MIN_FILES = 50
 QUARTER_COVERAGE = 0.75
+# PANEL's "OSI licence read from the repo", implemented 2026-11-12 (Amendment 11; tc#148 item 4).
+# GitHub's License object carries no OSI flag, so the approved SPDX ids are listed here. The list is
+# the OSI-approved set as published at https://opensource.org/licenses, restricted to ids GitHub's
+# licence detector actually emits; anything else -- including None, "NOASSERTION" and GitHub's
+# pseudo-licence "other" -- fails the rule. A licence is METADATA, not history: it is read once, from
+# the repository, and never inferred from a file's contents.
+OSI_SPDX = frozenset("""
+AFL-3.0 AGPL-3.0 AGPL-3.0-only AGPL-3.0-or-later Apache-2.0 APSL-2.0 Artistic-2.0
+BSD-2-Clause BSD-3-Clause BSD-3-Clause-Clear BSL-1.0 CDDL-1.0 CECILL-2.1 CERN-OHL-P-2.0
+CERN-OHL-S-2.0 CERN-OHL-W-2.0 ECL-2.0 EFL-2.0 EPL-1.0 EPL-2.0 EUPL-1.1 EUPL-1.2
+GPL-2.0 GPL-2.0-only GPL-2.0-or-later GPL-3.0 GPL-3.0-only GPL-3.0-or-later ISC
+LGPL-2.1 LGPL-2.1-only LGPL-2.1-or-later LGPL-3.0 LGPL-3.0-only LGPL-3.0-or-later
+LPPL-1.3c MIT MIT-0 MPL-2.0 MS-PL MS-RL NCSA OFL-1.1 OSL-3.0 PostgreSQL Unlicense
+UPL-1.0 Zlib ZPL-2.0
+""".split())
+NO_LICENCE = object()  # eligible_history's default: the rule was not fed, which is not a pass
+
+
+def osi_licence(spdx) -> tuple[bool, str]:
+    """(passes, why). The licence rule, in one place so the seat walk and the tests share it."""
+    if spdx is NO_LICENCE:
+        return False, "the OSI-licence rule needs repo metadata; pass licence= from the API"
+    if not spdx or str(spdx).upper() in ("NOASSERTION", "OTHER", "NONE"):
+        return False, f"no OSI-identified licence ({spdx!r})"
+    if str(spdx) not in OSI_SPDX:
+        return False, f"licence {spdx} is not OSI-approved"
+    return True, ""
 PANEL_END = "2026-10-01"
 FRAME_START = "2008-01"  # GitHub's own beginning; no repo was created before it
 JSTS = ("JavaScript", "TypeScript")
@@ -266,10 +296,16 @@ def shortlist(language: str, candidates: list[str], cache: Path, want: int, buff
             "want": want, "buffer": buffer, "stopped": stopped, "share_bar": SHARE}
 
 
-def eligible_history(repo: Path, language: str, snapshots_fn=None) -> dict:
-    """The clone-time history checks. `snapshots_fn(repo, language) -> (quarters_with_files, quarters_total,
-    quarters_with_commit)` is injected so the rules are testable without a clone."""
+def eligible_history(repo: Path, language: str, snapshots_fn=None, licence=NO_LICENCE) -> dict:
+    """The clone-time checks. `snapshots_fn(repo, language) -> (quarters_with_files, quarters_total,
+    quarters_with_commit)` is injected so the rules are testable without a clone. `licence` is the SPDX id
+    from the repository's metadata: PANEL's OSI rule, enforced here since Amendment 11 (tc#148 item 4).
+    It is checked FIRST because it costs nothing and does not depend on the clone."""
     out: dict = {"eligible": False}
+    ok, why = osi_licence(licence)
+    out["licence"] = None if licence is NO_LICENCE else licence
+    if not ok:
+        return {**out, "why": why}
     p = subprocess.run(["git", "-C", str(repo), "rev-list", "--first-parent", "--count", "HEAD"],
                        capture_output=True, text=True)
     commits = int(p.stdout.strip() or 0)

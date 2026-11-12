@@ -95,7 +95,7 @@
   {
    "repo": "zelon88/hrconvert2",
    "eligible": false,
-   "why": "pre-screen: 996 commits < 2000 (upper bound)",
+   "why": "pre-screen: 998 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
@@ -189,7 +189,7 @@
   {
    "repo": "ramsey/uuid",
    "eligible": false,
-   "why": "pre-screen: 1423 commits < 2000 (upper bound)",
+   "why": "pre-screen: 1427 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
