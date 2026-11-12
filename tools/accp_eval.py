@@ -292,7 +292,7 @@ def cmd_score(a) -> int:
         rows, edges, kinds = A2.resolved(STUDY, key, lang)
         try:
             orc = {"python": _py_oracle, "go": _go_oracle, "java": _java_oracle,
-                   "c": lambda s, k: A.oracle_c(s, k)}[lang](STUDY, key)
+                   "c": c_oracle}[lang](STUDY, key)
         except Exception as e:
             res[key] = {**rec, "evaluable": False, "error": f"{type(e).__name__}: {e}"[:300],
                         "profile": _profile(STUDY, key, lang)}
@@ -308,7 +308,10 @@ def cmd_score(a) -> int:
         nodes = {(r["file"], fid) for fid, r in rows.items()}
         cmp_ = A.compare(nodes, edges, {}, {k: {(x, y) for x, y in mapped[k] if x and y} for k in mapped},
                          use_line=False)
-        res[key] = {**rec, "evaluable": True, **cmp_, "engine_funcs": len(rows), "engine_edges": len(edges),
+        cov = ({"parse_clean": orc["parse_clean"], "parse_total": orc["parse_total"],
+                "makefile": orc.get("makefile"), "build_flags": orc.get("build_flags")}
+               if "parse_clean" in orc else {})
+        res[key] = {**rec, "evaluable": True, **cmp_, **cov, "engine_funcs": len(rows), "engine_edges": len(edges),
                     "oracle_direct": len(orc["direct"]), "oracle_dynamic": len(orc["dynamic"]),
                     "profile": _profile(STUDY, key, lang), "secs": round(time.time() - t0, 1)}
         print(f"{key}: scored in {res[key]['secs']}s", flush=True)
@@ -450,6 +453,95 @@ def cmd_diag(a) -> int:
     return 0
 
 
+# ============================================================================ C oracle, per the registration
+# ACC's Data table specifies: "compile flags from the repo's build where it can generate them without cmake
+# (redis `make` dry-run), else -I heuristics". acc_eval.oracle_c implements only the fallback, which is why
+# D1 found 0 cleanly parsed translation units in ACC's own repos. This implements the primary path. It also
+# supplies the system include dirs, because the pip libclang wheel carries no clang resource headers at all
+# (D1's root cause) -- without them even a correct flag set fails on <stddef.h>.
+MAKEFILES = ("src/makefile.gnu", "Makefile", "makefile", "src/Makefile", "src/makefile")
+SYSINC = ["-isystem", "/usr/lib/gcc/x86_64-linux-gnu/13/include",
+          "-isystem", "/usr/include/x86_64-linux-gnu", "-isystem", "/usr/include"]
+
+
+def c_flags(root: pathlib.Path):
+    """(-I/-D/-std flags from a `make -n` dry run, which makefile supplied them)."""
+    import re as _re
+    for rel in MAKEFILES:
+        mk = root / rel
+        if not mk.exists():
+            continue
+        try:
+            dry = subprocess.run(["make", "-n", "-f", mk.name], cwd=mk.parent, capture_output=True,
+                                 text=True, timeout=300).stdout
+        except subprocess.TimeoutExpired:
+            continue
+        flags = set()
+        for ln in dry.splitlines():
+            if " -c " in ln or _re.search(r"\b(gcc|cc|clang)\b", ln):
+                for tok in ln.split():
+                    if tok.startswith(("-I", "-D", "-std=")):
+                        flags.add(tok)
+        if not flags:
+            continue
+        out = []
+        for f in sorted(flags):
+            if f.startswith("-I") and not f[2:].startswith("/"):
+                out.append("-I" + str((mk.parent / f[2:]).resolve()))
+            else:
+                out.append(f)
+        return out, rel
+    return [], None
+
+
+def c_oracle(study, key):
+    """libclang with build-derived flags. Same edge rule as acc_eval.oracle_c: a CallExpr whose referenced
+    decl is a FunctionDecl defined in the repo; call sites with no referenced decl counted as indirect."""
+    sys.path.insert(0, str(next((study / "venv" / "lib").glob("python3*/site-packages"))))
+    import clang.cindex as ci
+    root = (study / "repos" / key).resolve()
+    built, mk = c_flags(root)
+    incs = sorted({str(p.parent) for p in root.rglob("*.h")})[:300]
+    args = ["-x", "c", "-std=gnu11", f"-I{root}", *[f"-I{d}" for d in incs], *built, *SYSINC]
+    idx = ci.Index.create()
+    defs, calls, indirect, direct_sites, clean, tot = {}, [], 0, 0, 0, 0
+    for f in sorted(root.rglob("*.c")):
+        tot += 1
+        try:
+            tu = idx.parse(str(f), args=args)
+        except ci.TranslationUnitLoadError:
+            continue
+        if not [d for d in tu.diagnostics if d.severity >= 3]:
+            clean += 1
+
+        def walk(cur, fn):
+            nonlocal indirect, direct_sites
+            for c in cur.get_children():
+                if (c.location.file and pathlib.Path(str(c.location.file.name)).resolve() != f
+                        and c.kind != ci.CursorKind.CALL_EXPR):
+                    continue
+                if c.kind == ci.CursorKind.FUNCTION_DECL and c.is_definition():
+                    try:
+                        rel = str(pathlib.Path(str(c.location.file.name)).resolve().relative_to(root))
+                    except ValueError:
+                        continue
+                    defs[c.get_usr()] = (rel, c.spelling, c.extent.start.line)
+                    walk(c, c.get_usr())
+                    continue
+                if c.kind == ci.CursorKind.CALL_EXPR and fn:
+                    ref = c.referenced
+                    if ref is not None and ref.kind == ci.CursorKind.FUNCTION_DECL:
+                        calls.append((fn, ref.get_usr()))
+                        direct_sites += 1
+                    else:
+                        indirect += 1
+                walk(c, fn)
+        walk(tu.cursor, None)
+    edges = {(defs[a], defs[b]) for a, b in calls if a in defs and b in defs and a != b}
+    return {"direct": edges, "dynamic": set(), "indirect_sites": indirect, "direct_sites": direct_sites,
+            "parse_clean": clean, "parse_total": tot, "makefile": mk, "build_flags": built}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -464,6 +556,10 @@ def main() -> int:
     d.set_defaults(fn=cmd_diag)
     a = ap.parse_args()
     return a.fn(a)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
 
 
 if __name__ == "__main__":

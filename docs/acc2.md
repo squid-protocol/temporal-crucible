@@ -3,6 +3,35 @@
 **Registered:** 2026-11-08 23:38 (eb3c20c); scorer committed 23:39 (72a682f) before its one run. Raw output:
 `gitgalaxy/acc-study/acc2_result.json` (outside the repo).
 
+> ## ⚠ Correction notice, 2026-11-11: the C rows below are not trustworthy as measured
+>
+> ACC-P's D1 diagnostic (`docs/accp.md` §3, `docs/accp_diagnostics.json`) re-ran this study's own C oracle and
+> counted how many translation units libclang parsed **without fatal diagnostics**:
+>
+> | repo | parsed clean | of the engine's .c files |
+> |---|---|---:|
+> | redis | **0 / 476** | 193 |
+> | libgit2 | **0 / 792** | 684 |
+>
+> **Not one file in either repo parsed cleanly.** The dominant error is `'stddef.h' file not found` (247 in redis,
+> 121 in libgit2): the pip `libclang` wheel ships `libclang.so` but **no clang resource headers**, and
+> `acc_eval.oracle_c` never supplied them. libclang still returns an AST when a header is missing, so edges were
+> extracted and the numbers below are not noise — but they were produced from source the compiler front end could
+> not fully resolve, and the error rate was never measured at the time.
+>
+> **It is also a conformance failure against this registration.** The Data table above specifies "compile flags
+> from the repo's build where it can generate them without cmake (**redis `make` dry-run**), else `-I` heuristics".
+> `oracle_c` implements only the fallback: the build-derived path was never written, for redis least of all, the
+> repo named for it.
+>
+> **Status of the C claims:** the precision, recall, ρ, hub Jaccard and κ figures in the C rows **stand as the
+> record of what was computed** and are not edited or withdrawn here. They should not be cited as the engine's C
+> accuracy until the oracle is run per the registration — build-derived flags — and the parse coverage is reported
+> beside the result. ACC-H1 and ACC-H3's C verdicts inherit that caveat.
+>
+> Nothing in this notice affects the Java, Go or Python rows.
+
+
 | repo | language | precision | recall (direct) | in-degree ρ | hub Jaccard | coupling κ | H1 | H3 |
 |---|---|---:|---:|---:|---:|---:|---|---|
 | libgit2 | C | 0.76 | 0.81 | 0.83 | 0.69 | 0.87 | ✗ | ✓ |
