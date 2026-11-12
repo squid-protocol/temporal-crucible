@@ -1,0 +1,187 @@
+{
+ "language": "rust",
+ "attempts": [
+  {
+   "repo": "zhuowei/nft_ptr",
+   "eligible": false,
+   "why": "pre-screen: 45 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "pcwalton/rust-media",
+   "eligible": false,
+   "why": "pre-screen: 37 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "huacnlee/autocorrect",
+   "eligible": false,
+   "why": "pre-screen: 947 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "crmne/zapfast",
+   "eligible": false,
+   "why": "pre-screen: 948 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "silasmarvin/lsp-ai",
+   "eligible": false,
+   "why": "pre-screen: 219 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "warycat/rustgym",
+   "eligible": false,
+   "why": "pre-screen: 740 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "malbiruk/driftwm",
+   "eligible": false,
+   "why": "pre-screen: 1488 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "openzeppelin/cairo-contracts",
+   "eligible": false,
+   "why": "pre-screen: 1031 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "release-plz/release-plz",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 2600,
+   "snapshots_with_files": 15,
+   "quarters": 15,
+   "quarters_with_commit": 15,
+   "why": "fewer than 20 quarters with 50 source files (15)"
+  },
+  {
+   "repo": "vosen/zluda",
+   "eligible": false,
+   "why": "pre-screen: 579 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "unknownue/vulkan-tutorial-rust",
+   "eligible": false,
+   "why": "pre-screen: 120 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mxsm/rocketmq-rust",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 6561,
+   "snapshots_with_files": 11,
+   "quarters": 11,
+   "quarters_with_commit": 11,
+   "why": "fewer than 20 quarters with 50 source files (11)"
+  },
+  {
+   "repo": "kevinmehall/rust-peg",
+   "eligible": false,
+   "why": "pre-screen: 627 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "eval-exec/neomacs",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 26093,
+   "snapshots_with_files": 3,
+   "quarters": 3,
+   "quarters_with_commit": 3,
+   "why": "fewer than 20 quarters with 50 source files (3)"
+  },
+  {
+   "repo": "unixzii/ibackupextractor",
+   "eligible": false,
+   "why": "pre-screen: 14 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "rust-unofficial/awesome-rust",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 3105,
+   "snapshots_with_files": 0,
+   "quarters": 0,
+   "quarters_with_commit": 0,
+   "why": "fewer than 20 quarters with 50 source files (0)"
+  },
+  {
+   "repo": "j-f-liu/pom",
+   "eligible": false,
+   "why": "pre-screen: 133 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "devolutions/ironrdp",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2161,
+   "snapshots_with_files": 29,
+   "quarters": 29,
+   "quarters_with_commit": 29,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "mirrorx-desktop/mirrorx",
+   "eligible": false,
+   "why": "pre-screen: 981 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "wayland-transpositor/wprs",
+   "eligible": false,
+   "why": "pre-screen: 160 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "extenddb/extenddb",
+   "eligible": false,
+   "why": "pre-screen: 831 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "johnnymorganz/stylua",
+   "eligible": false,
+   "why": "pre-screen: 929 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "substantic/rain",
+   "eligible": false,
+   "why": "pre-screen: 738 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "atuinsh/atuin",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 2559,
+   "snapshots_with_files": 15,
+   "quarters": 15,
+   "quarters_with_commit": 15,
+   "why": "fewer than 20 quarters with 50 source files (15)"
+  },
+  {
+   "repo": "lightningdevkit/rust-lightning",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 3059,
+   "snapshots_with_files": 33,
+   "quarters": 33,
+   "quarters_with_commit": 33,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "devolutions/ironrdp",
+  "lightningdevkit/rust-lightning"
+ ]
+}

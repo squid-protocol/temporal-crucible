@@ -1,0 +1,210 @@
+{
+ "language": "php",
+ "attempts": [
+  {
+   "repo": "spatie/crawler",
+   "eligible": false,
+   "why": "pre-screen: 559 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "marcoarment/secondcrack",
+   "eligible": false,
+   "why": "pre-screen: 54 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "fruitcake/laravel-debugbar",
+   "eligible": false,
+   "why": "pre-screen: 1573 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "citelao/spotify-for-alfred",
+   "eligible": false,
+   "why": "pre-screen: 277 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "phalcon/cphalcon",
+   "cloned": true,
+   "eligible": false,
+   "first_parent_commits": 1656,
+   "why": "fewer than 2000 first-parent commits (1656)"
+  },
+  {
+   "repo": "symfony/event-dispatcher",
+   "eligible": false,
+   "why": "pre-screen: 1240 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sebastianbergmann/object-enumerator",
+   "eligible": false,
+   "why": "pre-screen: 544 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jorge07/ddd-playground",
+   "eligible": false,
+   "why": "pre-screen: 251 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "lorisleiva/laravel-deployer",
+   "eligible": false,
+   "why": "pre-screen: 343 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "spatie/once",
+   "eligible": false,
+   "why": "pre-screen: 220 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "myintervals/php-css-parser",
+   "eligible": false,
+   "why": "pre-screen: 1723 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sebastianbergmann/code-unit",
+   "eligible": false,
+   "why": "pre-screen: 452 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "run-as-root/awesome-magento2",
+   "eligible": false,
+   "why": "pre-screen: 557 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "laravel/installer",
+   "eligible": false,
+   "why": "pre-screen: 702 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hybridly/hybridly",
+   "eligible": false,
+   "why": "pre-screen: 1408 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "zelon88/hrconvert2",
+   "eligible": false,
+   "why": "pre-screen: 998 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "dnoegel/php-xdg-base-dir",
+   "eligible": false,
+   "why": "pre-screen: 48 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "zizaco/entrust",
+   "eligible": false,
+   "why": "pre-screen: 457 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "opencats/opencats",
+   "eligible": false,
+   "why": "pre-screen: 1033 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "googleinurl/scanner-inurlbr",
+   "eligible": false,
+   "why": "pre-screen: 34 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "container-interop/container-interop",
+   "eligible": false,
+   "why": "pre-screen: 152 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "kristijanhusak/laravel-form-builder",
+   "eligible": false,
+   "why": "pre-screen: 708 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "sebastianbergmann/php-timer",
+   "eligible": false,
+   "why": "pre-screen: 645 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "spatie/laravel-json-api-paginate",
+   "eligible": false,
+   "why": "pre-screen: 203 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "symplify/monorepo-builder",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 2194,
+   "snapshots_with_files": 24,
+   "quarters": 24,
+   "quarters_with_commit": 24,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "doctrine/data-fixtures",
+   "eligible": false,
+   "why": "pre-screen: 853 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hasinhayder/hydra",
+   "eligible": false,
+   "why": "pre-screen: 172 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "phpro/soap-client",
+   "eligible": false,
+   "why": "pre-screen: 866 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "asantibanez/livewire-calendar",
+   "eligible": false,
+   "why": "pre-screen: 44 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "jakubonderka/php-console-color",
+   "eligible": false,
+   "why": "pre-screen: 32 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "ramsey/uuid",
+   "eligible": false,
+   "why": "pre-screen: 1427 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "azuracast/azuracast",
+   "cloned": true,
+   "eligible": true,
+   "first_parent_commits": 6764,
+   "snapshots_with_files": 51,
+   "quarters": 51,
+   "quarters_with_commit": 51,
+   "quarter_coverage": 1.0
+  }
+ ],
+ "seated": [
+  "symplify/monorepo-builder",
+  "azuracast/azuracast"
+ ]
+}
