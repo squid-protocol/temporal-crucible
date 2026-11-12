@@ -89,3 +89,10 @@ The join was run on curl and libarchive only, which were already ineligible here
 - A different claim looks better supported: that the type vector recognises fix class (extrinsic by TYPE
   and PREPROC) and separates fixes from non-fixes without reading the message. That would be registered
   against a hand-labelled sample, as `docs/otherfix_audit.md` was, not against a ranking metric.
+
+## 9. Note added 2026-11-12, after the labelling check (`etyp_label.md`)
+
+The third bullet of section 8 is withdrawn for fix-vs-non-fix: fitted on one burned repo and scored on the
+other, the type vector reaches AUC 0.57-0.59 against the message label (size alone 0.54-0.55). Only the
+extrinsic class is recognisable (0.67-0.71). No labelling claim should be registered on that basis, and
+the hand-judged samples in `docs/otherfix_audit.md` were not scored.

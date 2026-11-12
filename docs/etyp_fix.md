@@ -127,7 +127,9 @@ repos and are not findings.
 2. **As a forward predictor the types are weak.** About 1.1x after the controls. This will not close the
    22-point gap in `ceil.md` on its own, and it lowers the odds for the draft ETYP-H1 as written
    (STRUCTURE-or-LOGIC edit count): LOGIC carries no forward signal here.
-3. **The likelier use is labelling, not ranking.** `other-fix` is 85-97% of outcome mass and its label is
+3. **Superseded for fix-vs-non-fix by [`etyp_label.md`](etyp_label.md): out of repo the vector reaches
+   AUC 0.57-0.59, too weak to relabel. The extrinsic half stands at AUC 0.67-0.71.** As first written:
+   **The likelier use is labelling, not ranking.** `other-fix` is 85-97% of outcome mass and its label is
    0.76 precise from message text alone. A commit's type vector is independent of its message. A fix that
    is LOGIC-heavy and carries no rename, format or type change looks like a fix; the extrinsic class can
    be recognised by TYPE and PREPROC.
