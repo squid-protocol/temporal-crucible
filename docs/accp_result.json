@@ -271,5 +271,232 @@
    "node_merge_rate": 0.0787
   },
   "secs": 3.6
+ },
+ "google__syzkaller@2016Q1": {
+  "repo": "google/syzkaller",
+  "language": "go",
+  "which": "early",
+  "boundary": "2016-01-01",
+  "sha": "33950d306aa9f1bfb0f8cf2e2254882b865e60b9",
+  "key": "google__syzkaller@2016Q1",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "google__syzkaller@2016Q1_galaxy_master.db",
+  "scan_secs": 2.4,
+  "evaluable": false,
+  "error": "mod download: go: no modules specified (see 'go help mod download')\n -: pattern ./...: directory prefix . does not contain main module or its selected dependencies\ncallgraph: packages contain errors\n",
+  "profile": {
+   "call_rows": 599,
+   "resolved_share": 0.985,
+   "unresolved_by_step": {
+    "receiver": 9
+   },
+   "functions": 385,
+   "node_merge_rate": 0.1065
+  }
+ },
+ "google__syzkaller@2026Q4": {
+  "repo": "google/syzkaller",
+  "language": "go",
+  "which": "late",
+  "boundary": "2026-10-01",
+  "sha": "38f7f0d1b72602afb2b8328c83c6eed1f20a5336",
+  "key": "google__syzkaller@2026Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "google__syzkaller@2026Q4_galaxy_master.db",
+  "scan_secs": 17.9,
+  "evaluable": false,
+  "error": "minated.\n/srv/storage_16tb/projects/gitgalaxy/acc-study/repos/google__syzkaller@2026Q4/tools/clang/declextract/build.go:39:8: could not import C (no metadata for C)\ncallgraph: packages contain errors\n",
+  "profile": {
+   "call_rows": 22085,
+   "resolved_share": 0.9476,
+   "unresolved_by_step": {
+    "receiver": 1028,
+    "tie": 96,
+    "file": 15,
+    "unseen": 9,
+    "import": 9
+   },
+   "functions": 9942,
+   "node_merge_rate": 0.0849
+  }
+ },
+ "botlabs-gg__yagpdb@2016Q4": {
+  "repo": "botlabs-gg/yagpdb",
+  "language": "go",
+  "which": "early",
+  "boundary": "2016-10-01",
+  "sha": "ddfea6cfef2d9f4bc090cec01ef00f1747f9a7c7",
+  "key": "botlabs-gg__yagpdb@2016Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "botlabs-gg__yagpdb@2016Q4_galaxy_master.db",
+  "scan_secs": 2.0,
+  "evaluable": false,
+  "error": "mod download: go: no modules specified (see 'go help mod download')\n -: pattern ./...: directory prefix . does not contain main module or its selected dependencies\ncallgraph: packages contain errors\n",
+  "profile": {
+   "call_rows": 165,
+   "resolved_share": 0.9697,
+   "unresolved_by_step": {
+    "receiver": 5
+   },
+   "functions": 270,
+   "node_merge_rate": 0.0
+  }
+ },
+ "botlabs-gg__yagpdb@2026Q4": {
+  "repo": "botlabs-gg/yagpdb",
+  "language": "go",
+  "which": "late",
+  "boundary": "2026-10-01",
+  "sha": "adac4c3bb38199f8da2a83a58d8c52a8c9844b26",
+  "key": "botlabs-gg__yagpdb@2026Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "botlabs-gg__yagpdb@2026Q4_galaxy_master.db",
+  "scan_secs": 11.6,
+  "evaluable": true,
+  "matched_functions": 4078,
+  "engine_nodes": 5248,
+  "oracle_direct_edges": 6622,
+  "oracle_dynamic_edges": 3962,
+  "engine_edges_on_matched": 8311,
+  "precision": 0.843460474070509,
+  "recall_direct": 0.9806704922983993,
+  "oracle_only_dynamic_share": 0.9641857862339116,
+  "indegree_spearman": 0.6363924880849829,
+  "hub_jaccard": 0.25,
+  "coupling_kappa": 0.46926105667979134,
+  "H1": true,
+  "H2": true,
+  "H3": false,
+  "engine_funcs": 5248,
+  "engine_edges": 10327,
+  "oracle_direct": 10521,
+  "oracle_dynamic": 7819,
+  "profile": {
+   "call_rows": 20087,
+   "resolved_share": 0.9435,
+   "unresolved_by_step": {
+    "receiver": 1090,
+    "tie": 33,
+    "unseen": 7,
+    "file": 3,
+    "import": 2
+   },
+   "functions": 13095,
+   "node_merge_rate": 0.1478
+  },
+  "secs": 39.3
+ },
+ "intellectualsites__fastasyncworldedit@2011Q1": {
+  "repo": "intellectualsites/fastasyncworldedit",
+  "language": "java",
+  "which": "early",
+  "boundary": "2011-01-01",
+  "sha": "162fd3148d7a6971abed0570a186446704803523",
+  "key": "intellectualsites__fastasyncworldedit@2011Q1",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "intellectualsites__fastasyncworldedit@2011Q1_galaxy_master.db",
+  "scan_secs": 2.0,
+  "evaluable": false,
+  "error": "no jar: no recognised build file",
+  "profile": {
+   "call_rows": 1140,
+   "resolved_share": 0.9447,
+   "unresolved_by_step": {
+    "receiver": 42,
+    "unique": 12,
+    "unseen": 7,
+    "import": 2
+   },
+   "functions": 503,
+   "node_merge_rate": 0.1531
+  }
+ },
+ "intellectualsites__fastasyncworldedit@2026Q4": {
+  "repo": "intellectualsites/fastasyncworldedit",
+  "language": "java",
+  "which": "late",
+  "boundary": "2026-10-01",
+  "sha": "8256013919890ae1fbbda49de792aa12e5ad4ce2",
+  "key": "intellectualsites__fastasyncworldedit@2026Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "intellectualsites__fastasyncworldedit@2026Q4_galaxy_master.db",
+  "scan_secs": 14.9,
+  "evaluable": false,
+  "error": "no jar: gradle build not attempted (no offline-safe invocation registered)",
+  "profile": {
+   "call_rows": 45892,
+   "resolved_share": 0.8673,
+   "unresolved_by_step": {
+    "receiver": 5549,
+    "file": 259,
+    "import": 193,
+    "unique": 71,
+    "nearest": 18
+   },
+   "functions": 20366,
+   "node_merge_rate": 0.1924
+  }
+ },
+ "openaev-platform__openaev@2022Q1": {
+  "repo": "openaev-platform/openaev",
+  "language": "java",
+  "which": "early",
+  "boundary": "2022-01-01",
+  "sha": "ab57f2ea1c8ea5ea67d11f4f1bbb498478207295",
+  "key": "openaev-platform__openaev@2022Q1",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "openaev-platform__openaev@2022Q1_galaxy_master.db",
+  "scan_secs": 3.3,
+  "evaluable": false,
+  "error": "no jar: no recognised build file",
+  "profile": {
+   "call_rows": 983,
+   "resolved_share": 0.8616,
+   "unresolved_by_step": {
+    "receiver": 56,
+    "file": 52,
+    "import": 16,
+    "unseen": 6,
+    "unique": 5,
+    "tie": 1
+   },
+   "functions": 2245,
+   "node_merge_rate": 0.041
+  }
+ },
+ "openaev-platform__openaev@2026Q4": {
+  "repo": "openaev-platform/openaev",
+  "language": "java",
+  "which": "late",
+  "boundary": "2026-10-01",
+  "sha": "ab2bdc4d4436cab15966b4e0537509fbf8fcce00",
+  "key": "openaev-platform__openaev@2026Q4",
+  "engine": "b873edc5b",
+  "scan": "ok",
+  "db": "openaev-platform__openaev@2026Q4_galaxy_master.db",
+  "scan_secs": 35.0,
+  "evaluable": false,
+  "error": "no jar: mvn rc=1 ",
+  "profile": {
+   "call_rows": 86172,
+   "resolved_share": 0.8596,
+   "unresolved_by_step": {
+    "receiver": 9027,
+    "import": 1797,
+    "unseen": 496,
+    "nearest": 323,
+    "unique": 173,
+    "tie": 151
+   },
+   "functions": 27493,
+   "node_merge_rate": 0.0431
+  }
  }
 }

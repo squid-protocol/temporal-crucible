@@ -312,7 +312,11 @@ def cmd_score(a) -> int:
                     "oracle_direct": len(orc["direct"]), "oracle_dynamic": len(orc["dynamic"]),
                     "profile": _profile(STUDY, key, lang), "secs": round(time.time() - t0, 1)}
         print(f"{key}: scored in {res[key]['secs']}s", flush=True)
-    (DOCS_DIR / "accp_result.json").write_text(json.dumps(res, indent=1, default=str))
+    out = DOCS_DIR / "accp_result.json"
+    prev = json.loads(out.read_text()) if out.exists() else {}   # merge: a per-language run must not
+    prev.update(res)                                             # discard the languages scored before it
+    res = prev
+    out.write_text(json.dumps(res, indent=1, default=str))
     print(f"-> {DOCS_DIR / 'accp_result.json'}: {sum(1 for v in res.values() if v.get('evaluable'))}/{len(res)} evaluable")
     return 0
 
