@@ -28,7 +28,7 @@
   {
    "repo": "nicedreamzapp/claude-code-local",
    "eligible": false,
-   "why": "pre-screen: 206 commits < 2000 (upper bound)",
+   "why": "pre-screen: 207 commits < 2000 (upper bound)",
    "cloned": false
   },
   {

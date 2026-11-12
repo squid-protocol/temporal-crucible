@@ -1,5 +1,15 @@
 # LAWS — a many-labs replication of the classic software-network laws across languages and decades — registered 2026-11-08, before any panel repository is selected, scanned or labelled
 
+> **CLOSED AS A FAILURE, 2026-11-12 (owner ruling).** No law verdict is claimed and no result is
+> published. The oracles cannot run on historical snapshots of real repositories: engine scans
+> succeeded 18/18, while oracle evaluability was C 6/6, Go 1/4, Java 0/4, Python 0/4, so the primary
+> 3-of-4 test could reach at most 1 of 4. **No statistic of any of the nine laws was ever computed on
+> a panel repository.** The cause, the surviving data and the lessons are in
+> [`laws_postmortem.md`](laws_postmortem.md). This document is kept unedited apart from this notice
+> and the renumbering of one colliding amendment; a second attempt starts from a fresh random batch
+> and inherits nothing here.
+
+
 **Programme steps 2 and 3** (`docs/PROGRAMME_call_networks.md`). The panel protocol (PANEL) and the law claims
 (LAW-1 … LAW-9) are registered together, so the sample cannot be chosen after seeing any network statistic.
 
@@ -24,6 +34,7 @@ of each is at the bottom of this file; this table is the audit trail, not a subs
 | 10 | 11-11 | records the **measured 20% clone-time pass rate** and extends the committed draw order from depth 40 to 400 **in the same seeded permutation** (no re-draw; every committed head reproduces byte for byte); allows a reject-only API pre-screen; notes the OSI-licence rule is enforced nowhere | yes | **neutral** — no bar, direction, seed or panel size changes; the sample is not re-drawn |
 | 11 | 11-11 | **ACC-P's early snapshot becomes the earliest boundary at which the language's oracle RUNS**, decided on the oracle's exit status alone; the three oracle-feasibility diagnostics; output (a) owed | **no — after ACC-P's first run** | **weakened** — a bar that every language failed is replaced by one that can be met, so this is recorded as post-result |
 | 12 | 11-11 | ACC-P feasibility becomes **parse coverage ≥ 80%**, not a zero exit code; vulkan-loader's external headers fetched as a recorded per-repo deviation; **ACC-P run 1 declared a pilot** | **no — after ACC-P's first run** | **weakened** — a second post-result amendment; it makes the gate attemptable where the oracle could run but not parse |
+| 13 | 11-12 | **implements PANEL's OSI-licence rule** in `eligible_history` (fails closed; metadata, so it rejects before any clone), **vacating and refilling 6 of 20 already-taken seats** from the same draw order; **extends the committed draw order 400 → 2,000 in the same seeded permutation** (every old head reproduces byte for byte; kotlin stops at its frame, 1,839); labels the 2-per-language run a **descriptive sizing pilot**, leaving the registered ACC-P draw untouched | yes | **tightened** — an unenforced rule is enforced, costing ~30% of pass rates and 6 seats; no bar, direction, seed or panel size changes; the sample is not re-drawn |
 
 **Read across the last two columns.** Entries 0–10 predate any panel outcome data: when each was made, no
 panel repo had been selected, scanned or labelled. **Entries 11 and 12 do not** — both were made after ACC-P's
@@ -33,6 +44,8 @@ made a law easier to pass.** Several did the opposite — Amendment 0 demoted tw
 Amendment 5 invalidated earlier development-set figures and froze the scorer, Amendment 6 gave up about a fifth
 of the fix events for label precision, and Amendment 8 filed a prior that one registered law is expected to fail
 outside C.
+
+**Entry 13** was made the next day, before any scan or label, and tightened: it enforced PANEL's OSI-licence rule, which had been listed since 11-08 and enforced nowhere, and it cost six of the twenty seats already taken rather than being applied only going forward.
 
 **Why there are nine of them.** The registration was filed on 11-08 and the pilot, the methods review, the
 engine-tuning work and the label audit all landed after it. That is the honest cost of registering before the
@@ -1013,3 +1026,67 @@ both-repos-both-snapshots rule. Python is not rescued and no substitute oracle i
 
 **Effect on what can be claimed: the gate becomes attemptable where an oracle could run but not parse, at the
 cost of a second post-result amendment and of ACC-P run 1 being reported as a pilot rather than a verdict.**
+
+## Amendment 13 (2026-11-12, owner OK; after the first 2 seats per language, before any panel repo is scanned or labelled)
+
+*Numbered 13, not 11: this was written on a branch while Amendments 11 and 12 were being written on `main`, and two different Amendment 11s existed for several hours. Only the number changed.*
+
+Three owner rulings on tc#148, taken together because the first changes what the second has to walk.
+
+1. **The OSI-licence rule is implemented, not dropped.** PANEL has always listed "OSI licence read from the
+   repo"; Amendment 10 item 5 recorded that nothing enforced it. It is now enforced in
+   `laws_frame.eligible_history`, which takes the repository's SPDX id and rejects anything outside
+   `laws_frame.OSI_SPDX` — the OSI-approved set, restricted to ids GitHub's licence detector emits. A licence is
+   **metadata, not history**: it is checked before the clone and can only reject, so it never admits a candidate
+   the registered rules would have refused. Omitting it is not a pass: `eligible_history` called without a
+   licence fails closed, which is the failure mode that let the rule go unenforced from 11-08 to 11-12.
+
+   **Measured cost, applied retroactively to the 2 seats per language already taken: 6 of 20 seats fail the
+   rule** (c both, java both, kotlin 1, rust 1) — 30%, matching the "26 of the first 120 candidates" figure in
+   Amendment 10. Those six seats were **vacated and refilled from the next candidates in the same draw order**
+   (M9), never by a re-draw. Each vacated seat keeps its full attempt record, with the history checks it passed
+   left intact and a `seat_revoked` note saying why the verdict changed. The replacements are
+   `llnl/rose`, `hannorein/rebound` (c), `jetbrains/jetbrainsruntime`, `erudika/scoold` (java),
+   `yuzono/anime-extensions` (kotlin) and `aleo-labs-protocol/snarkos` (rust). All 20 current seats pass.
+
+   **A consequence to state plainly, because it cuts against the rule's intent.** GitHub returns `NOASSERTION`
+   both for a repo with no licence and for one whose licence its detector cannot classify — including
+   **dual-licensed** repos, which are *more* permissively licensed, not less. `lightningdevkit/rust-lightning`
+   (MIT **or** Apache-2.0) is removed by a rule meant to exclude unlicensed code. This amendment keeps the
+   detector as the instrument, because PANEL's eligibility block reads "GitHub metadata and git" and choosing a
+   per-repo fallback after seeing which repos it would readmit is exactly the move the registration exists to
+   prevent. The cost is recorded here rather than worked around.
+
+2. **The committed draw order is extended from depth 400 to 2,000, in the same seeded permutation** — the
+   mechanism Amendment 10 used for 40 → 400 and the owner ruling on #149 ("walk deeper in the same seeded
+   order"). Every previously committed head reproduces **byte for byte**; this was verified for all ten
+   languages before the records were rewritten, and `docs/laws_draw/SHA256SUMS` is refreshed. No re-draw, no
+   seed change, no reordering.
+
+   **Why now.** The measured pass rates say 400 is not deep enough. jsts seats 2 in 127 attempts, so 8 seats
+   projects to ~508 — past the old record before the licence rule, which lowers every rate by about 30%. go
+   (~263 for 8) and python (~250) clear 400 for 8 but not for the 16 a confirmatory language takes under
+   Amendment 3. Extending every language rather than jsts alone is this amendment's own choice, not the owner's
+   ruling, which named jsts; the mechanism and the guarantee are identical and the ceiling is an artifact of
+   record depth, not a property of any language. **kotlin stops at 1,839**, which is its entire eligible frame,
+   not a chosen depth.
+
+   The pre-screen's own estimate in tc#148 is now known to **mis-rank the languages in both directions** — it
+   tests total commits with no quarterly rule, and put python at depth 178 where the full rule seats 2 at 44.
+   Projections in this item carry that same weakness: they come from a head-of-order rate over 2 seats and are
+   stated as projections, not measurements.
+
+3. **The 2-per-language run is a sizing pilot, and is descriptive.** Its only output is the 8-vs-16 panel-size
+   verdict. It is **not** ACC-P: the ACC-P amendment text draws 2 repos at random (seed 2982) *from the 8*, and
+   that draw is unchanged and still to come once the panel is seated. Labelling the pilot this way keeps the
+   registered ACC-P intact rather than replacing a random draw with first-in-order, which would have weakened
+   the blinding argument for a day's convenience. No law statistic is computed on either set — Amendment 0
+   item 7's closing rule is unchanged.
+
+4. **Unchanged.** Every law's direction, bar and verdict rule; the seed; the panel sizes; the other eligibility
+   rules; the engine pin; the scorer freeze; the class gate and audit size; the order of work; ACC-P itself.
+
+**Effect on what can be claimed: tightened.** A registered rule that was going unenforced is now enforced, at
+the cost of 30% of pass rates and six already-taken seats. The sample was not re-drawn: the draw order was
+extended in its own permutation, with the existing head proved identical. No outcome data exists yet — no panel
+repo has been scanned or labelled.

@@ -16,12 +16,15 @@
   {
    "repo": "intellectualsites/fastasyncworldedit",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 5180,
    "snapshots_with_files": 64,
    "quarters": 64,
    "quarters_with_commit": 64,
-   "quarter_coverage": 1.0
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
   },
   {
    "repo": "devunwired/recyclerview-playground",
@@ -81,16 +84,59 @@
   {
    "repo": "openaev-platform/openaev",
    "cloned": true,
-   "eligible": true,
+   "eligible": false,
    "first_parent_commits": 5045,
    "snapshots_with_files": 20,
    "quarters": 20,
    "quarters_with_commit": 20,
+   "quarter_coverage": 1.0,
+   "licence": "NOASSERTION",
+   "why": "no OSI-identified licence ('NOASSERTION')",
+   "seat_revoked": "seated 2026-11-12 while PANEL's OSI rule was unenforced; revoked the same day when Amendment 11 implemented it. The history checks it passed are left above, unchanged."
+  },
+  {
+   "repo": "jetbrains/jetbrainsruntime",
+   "cloned": true,
+   "eligible": true,
+   "licence": "GPL-2.0",
+   "first_parent_commits": 34432,
+   "snapshots_with_files": 76,
+   "quarters": 76,
+   "quarters_with_commit": 76,
+   "quarter_coverage": 1.0
+  },
+  {
+   "repo": "mohamed-taman/springy-store-microservices",
+   "eligible": false,
+   "why": "pre-screen: 221 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "mikehodz/horizontalwheelview",
+   "eligible": false,
+   "why": "pre-screen: 38 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "hamvocke/spring-testing",
+   "eligible": false,
+   "why": "pre-screen: 145 commits < 2000 (upper bound)",
+   "cloned": false
+  },
+  {
+   "repo": "erudika/scoold",
+   "cloned": true,
+   "eligible": true,
+   "licence": "Apache-2.0",
+   "first_parent_commits": 2084,
+   "snapshots_with_files": 42,
+   "quarters": 61,
+   "quarters_with_commit": 61,
    "quarter_coverage": 1.0
   }
  ],
  "seated": [
-  "intellectualsites/fastasyncworldedit",
-  "openaev-platform/openaev"
+  "jetbrains/jetbrainsruntime",
+  "erudika/scoold"
  ]
 }

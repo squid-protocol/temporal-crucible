@@ -84,7 +84,7 @@
   {
    "repo": "ooples/token-optimizer-mcp",
    "eligible": false,
-   "why": "pre-screen: 693 commits < 2000 (upper bound)",
+   "why": "pre-screen: 694 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
@@ -264,7 +264,7 @@
    "repo": "lidge-jun/opencodex",
    "cloned": true,
    "eligible": false,
-   "first_parent_commits": 5487,
+   "first_parent_commits": 5497,
    "snapshots_with_files": 2,
    "quarters": 2,
    "quarters_with_commit": 2,
@@ -463,7 +463,7 @@
   {
    "repo": "cosmicstack-labs/mercury-agent",
    "eligible": false,
-   "why": "pre-screen: 1061 commits < 2000 (upper bound)",
+   "why": "pre-screen: 1064 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
@@ -677,7 +677,7 @@
   {
    "repo": "aeonfun/aeon",
    "eligible": false,
-   "why": "pre-screen: 1555 commits < 2000 (upper bound)",
+   "why": "pre-screen: 1556 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
@@ -727,7 +727,7 @@
    "repo": "code-yeongyu/senpi",
    "cloned": true,
    "eligible": false,
-   "first_parent_commits": 7164,
+   "first_parent_commits": 7169,
    "snapshots_with_files": 5,
    "quarters": 5,
    "quarters_with_commit": 5,

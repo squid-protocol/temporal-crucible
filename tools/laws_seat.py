@@ -13,10 +13,12 @@ logged with its reason (M9; Amendment 10 item 3).
 **Two passes, because cloning is the expensive part.**
 
 1. **API pre-screen (Amendment 10 item 4), reject-only.** One GraphQL query per 40 candidates reads the
-   default branch's total commit count. That count is an **upper bound** on the first-parent count the rule
-   actually tests, so a candidate under MIN_COMMITS is a *certain* fail and is never cloned. It can only
-   reject: anything that clears the pre-screen still takes the full clone-time check. Measured 2026-11-11:
-   this removes about 80% of candidates.
+   default branch's total commit count and the repository's SPDX licence id. The commit count is an **upper
+   bound** on the first-parent count the rule actually tests, so a candidate under MIN_COMMITS is a *certain*
+   fail and is never cloned; the licence (PANEL's OSI rule, enforced since Amendment 11) is metadata and is
+   final, not a bound. It can only reject: anything that clears the pre-screen still takes the full
+   clone-time check. Measured 2026-11-11: the commit bar alone removes about 80% of candidates.
+   Candidates past the pre-screened window are screened one at a time, as the walk reaches them.
 2. **Clone and check.** Blobless (`--filter=blob:none --no-checkout`): seating reads trees, never file
    contents, so blobs are not fetched. The checks are `laws_frame.eligible_history` -- imported, not
    restated -- fed a quarterly snapshot function built here.
@@ -65,7 +67,7 @@ def git(repo: Path, *args: str, timeout: int = 900) -> str:
 def prescreen(names: list[str], batch: int = 40) -> dict[str, dict]:
     """owner/name -> {commits, archived, resolvable}. Reject-only; see the module docstring."""
     out: dict[str, dict] = {}
-    fields = ("nameWithOwner isArchived isFork "
+    fields = ("nameWithOwner isArchived isFork licenseInfo{spdxId} "
               "defaultBranchRef{target{... on Commit{history(first:1){totalCount}}}}")
     for i in range(0, len(names), batch):
         part = names[i:i + batch]
@@ -82,9 +84,10 @@ def prescreen(names: list[str], batch: int = 40) -> dict[str, dict]:
         for j, n in enumerate(part):
             g = data.get(f"r{j}")
             if not g or not g.get("defaultBranchRef"):
-                out[n] = {"resolvable": False, "commits": 0, "archived": False}
+                out[n] = {"resolvable": False, "commits": 0, "archived": False, "licence": None}
                 continue
             out[n] = {"resolvable": True, "archived": bool(g["isArchived"] or g["isFork"]),
+                      "licence": (g.get("licenseInfo") or {}).get("spdxId"),
                       "commits": g["defaultBranchRef"]["target"]["history"]["totalCount"]}
     return out
 
@@ -180,9 +183,17 @@ def seat_language(language: str, want: int, budget_s: int | None) -> dict:
             log(f"{language}: budget reached; {len(rec['seated'])} seated, the rest stays for next run")
             break
         s = screen.get(name)
-        if s and (not s["resolvable"] or s["archived"] or s["commits"] < lf.MIN_COMMITS):
+        if s is None:
+            # Past the pre-screened window. The licence rule (Amendment 11) is metadata, so a
+            # candidate with no screen record has no licence to check and would be rejected for a
+            # missing read rather than on its merits. Screen it on demand instead.
+            screen.update(prescreen([name]))
+            s = screen.get(name)
+        lic_ok = lf.osi_licence(s["licence"])[0] if s else False
+        if s and (not s["resolvable"] or s["archived"] or s["commits"] < lf.MIN_COMMITS or not lic_ok):
             why = ("unresolvable" if not s["resolvable"] else "archived/fork" if s["archived"]
-                   else f"pre-screen: {s['commits']} commits < {lf.MIN_COMMITS} (upper bound)")
+                   else f"pre-screen: {s['commits']} commits < {lf.MIN_COMMITS} (upper bound)"
+                   if s["commits"] < lf.MIN_COMMITS else lf.osi_licence(s["licence"])[1])
             rec["attempts"].append({"repo": name, "eligible": False, "why": why, "cloned": False})
             save(language, rec)
             continue
@@ -191,7 +202,8 @@ def seat_language(language: str, want: int, budget_s: int | None) -> dict:
             rec["attempts"].append({"repo": name, "eligible": False, "why": "clone failed", "cloned": False})
             save(language, rec)
             continue
-        res = lf.eligible_history(dest, language, snapshots_fn=lambda r, l: quarterly(r, l))
+        res = lf.eligible_history(dest, language, snapshots_fn=lambda r, l: quarterly(r, l),
+                                  licence=(s or {}).get("licence", lf.NO_LICENCE))
         rec["attempts"].append({"repo": name, "cloned": True, **res})
         if res.get("eligible"):
             rec["seated"].append(name)

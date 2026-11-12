@@ -27,7 +27,7 @@
   {
    "repo": "edge0-ai/edge0",
    "eligible": false,
-   "why": "pre-screen: 186 commits < 2000 (upper bound)",
+   "why": "pre-screen: 187 commits < 2000 (upper bound)",
    "cloned": false
   },
   {
