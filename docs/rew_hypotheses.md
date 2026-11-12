@@ -1,7 +1,9 @@
 # REW — does rewiring predict fixes, and does it predict the *right kind*? — drafted 2026-11-11
 
-**Status: DRAFT registration. Owner OK not given.** Nothing below has been computed. No scorer exists yet;
-it is written after this text is approved and follows it as written.
+**Status: APPROVED by the owner 2026-11-11, after Amendment 1 and before any statistic.** Nothing below had
+been computed when approval was given. `tools/rew_eval.py` is written against this text and follows it as
+written; the only quantity it adds is the equivalence margin for REW-H4, fixed at the program's standing
+**δ = 0.02** (the value used by LIB-H1..H3), likewise before any statistic.
 
 **Unit:** a function at a quarterly snapshot. **Repos:** curl (primary), libarchive (replication, unseen for
 this question). **Tool:** `tools/rew_eval.py` (to be written). **Data:** the walk databases

@@ -6,3 +6,4 @@ dbs/
 __pycache__/
 *.pyc
 dataset/*.jsonl.gz
+cache/
