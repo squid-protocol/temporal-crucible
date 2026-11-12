@@ -22,10 +22,13 @@ of each is at the bottom of this file; this table is the audit trail, not a subs
 | 8 | 11-11 | records that the CGR repos were **already** excluded; **requires the registered exclusion to be applied before the draw**, with logged removals and a post-exclusion fingerprint; states `docs/ceil.md` is development-set evidence; files a pre-draw prior that **LAW-6's in-cycle term is expected to fail outside C**; erratum on Amendment 6's author-count parenthetical | yes | **weakened** — enforces a guard and lowers expectations for LAW-6 |
 | 9 | 11-11 | resolves a contradiction between two stated orders of work in favour of Amendment 0 item 7 (**draw → scans → label audit**, not audit first), names the audit's repo set as the **drawn panel**, and commits the post-exclusion eligible list and its M9 fingerprint `12e03a14…` | yes | **neutral** — settles an ambiguity and fulfils a commitment; no bar, direction or size changes |
 | 10 | 11-11 | records the **measured 20% clone-time pass rate** and extends the committed draw order from depth 40 to 400 **in the same seeded permutation** (no re-draw; every committed head reproduces byte for byte); allows a reject-only API pre-screen; notes the OSI-licence rule is enforced nowhere | yes | **neutral** — no bar, direction, seed or panel size changes; the sample is not re-drawn |
+| 11 | 11-11 | **ACC-P's early snapshot becomes the earliest boundary at which the language's oracle RUNS**, decided on the oracle's exit status alone; the three oracle-feasibility diagnostics; output (a) owed | **no — after ACC-P's first run** | **weakened** — a bar that every language failed is replaced by one that can be met, so this is recorded as post-result |
 
-**Read across the last two columns.** All ten entries predate any panel outcome data: no panel repo has been
-selected, scanned or labelled. **Not one amendment loosened a bar, widened a direction, or made a law easier to
-pass.** Several did the opposite — Amendment 0 demoted two laws, Amendment 4 expects Go to stay descriptive,
+**Read across the last two columns.** Entries 0–10 predate any panel outcome data: when each was made, no
+panel repo had been selected, scanned or labelled. **Entry 11 does not** — it was made after ACC-P's first run,
+is marked "no" in the before-data column, and is the one amendment here that weakened a bar. It is called out
+rather than averaged into the row above. For entries 0–10: **not one loosened a bar, widened a direction, or
+made a law easier to pass.** Several did the opposite — Amendment 0 demoted two laws, Amendment 4 expects Go to stay descriptive,
 Amendment 5 invalidated earlier development-set figures and froze the scorer, Amendment 6 gave up about a fifth
 of the fix events for label precision, and Amendment 8 filed a prior that one registered law is expected to fail
 outside C.
@@ -866,3 +869,78 @@ php 5 of 8. Recorded with the measurements in tc#148.
 
 **Effect on what can be claimed: neutral.** No bar moved, no direction widened, no law became easier to pass. The
 sample was not re-drawn and no candidate was selected after seeing an outcome — no outcome data exists yet.
+
+## Amendment 11 (2026-11-11, owner OK; **after ACC-P's first run** — see the honesty note)
+
+**This is the first amendment in this registration made after outcome data existed.** ACC-P had already run on
+the four languages whose oracles are installed. It is recorded as post-result, and it **weakens** the
+registration: a bar that every language failed is replaced by one that can be met. Nothing below is presented
+as pre-registered.
+
+### Context: two registered requirements collide
+
+ACC-P (Amendment 0 item M4) runs each language's oracle at **the panel's first quarter** and at 2026-10-01.
+Amendment 2 makes a language confirmatory only if it passes on both repos at both snapshots. The first run
+(`docs/accp.md`, `docs/accp_result.json`) produced:
+
+| language | evaluable snapshots | why the rest failed |
+|---|---|---|
+| C | 4 / 4 | — |
+| Go | 1 / 4 | 2016 snapshots: `no modules specified` (Go modules did not exist); syzkaller 2026: cgo, `could not import C` |
+| Java | 0 / 4 | 2011 and 2022: `no recognised build file`; 2026: gradle has no offline-safe invocation registered, `mvn rc=1` |
+| Python | 0 / 4 | PyCG `ImportManagerError` on every snapshot |
+
+The early boundary for these repos falls in 2007–2022. **A compiler-grade oracle needs build metadata that the
+ecosystem had not invented yet**: Go modules arrived in 2018, and a 2011 Java tree predates its own build file.
+C is unaffected only because libclang needs no build. Read literally the gate is failed by every language,
+LAWS has no confirmatory language, and every law contributes p = 1 — which measures the oracles' prerequisites,
+not the engine.
+
+### The change
+
+**The early ACC-P snapshot is the earliest quarterly boundary of that repo's walk at which the language's
+oracle runs.** "Runs" means exactly one thing, fixed here: **the oracle process exits zero and emits at least
+one in-repo edge.** Nothing else enters the choice.
+
+1. **The search is blind to agreement, and the tool enforces it.** The feasibility pass runs the oracle alone.
+   It does not read the engine's graph, does not compute precision, recall, ρ, hub Jaccard or κ, and cannot:
+   the engine side is not loaded in that code path. The chosen boundary is recorded per repo with the oracle's
+   exit status and edge count **before** any agreement statistic is computed on it.
+2. **The late snapshot is unchanged**: 2026-10-01.
+3. **Both-and still holds.** A language is confirmatory only if it passes ACC-H3 on both repos at both its
+   snapshots. This amendment moves *which* early snapshot, never *how many* must pass.
+4. **The gap is reported, not hidden.** Each repo's early boundary is published with the number of boundaries
+   skipped and the reason the oracle failed at the earliest one. A language whose early snapshot ends up within
+   two years of its late snapshot is reported as **a weak across-time comparison**, because the two snapshots
+   no longer straddle much history.
+5. **An oracle that never runs on a repo leaves that repo not evaluable**, and the language descriptive, as
+   before. Python is already in that position and this amendment does not rescue it: no substitute oracle is
+   chosen, per Amendment 2 item 4's rule.
+6. **The three diagnostics below are not part of the gate.** Each has a verdict independent of agreement, and
+   each is reported whichever way it goes.
+
+### The diagnostics (agreement-independent, run after this text)
+
+- **D1, libclang parse coverage on vulkan-loader.** C's only failing repo returned 178 and 183 oracle edges
+  against the engine's 239 and 255. Coverage is measured as translation units parsed without fatal
+  diagnostics, and functions the oracle defined, against the file and function counts the engine saw. **If
+  coverage is materially short, the comparison was invalid rather than unfavourable**, and the repo is re-run
+  with a compile database as the per-repo deviation `docs/oracle_criteria.md` §3 already permits. This is a
+  coverage verdict, not a retune: the threshold is stated before it is measured — fatal-diagnostic-free parses
+  on **< 80%** of the .c files the engine scanned.
+- **D2, offline-safe Java build.** Whether either Java repo's late snapshot can be built to a jar with a fixed,
+  recorded invocation. If neither can, Java is **not evaluable by build failure** and stays descriptive — which
+  is a statement about the oracle's prerequisites and is reported as such.
+- **D3, syzkaller cgo.** Whether `./...` minus the packages that import C yields a callgraph. Scoping is
+  recorded as a per-repo deviation under `oracle_criteria.md` §3 if it works.
+
+### What does not change
+
+Every law's direction, bar, α and verdict rule; the seed; the panel sizes; the primary universality test; the
+engine pin `b873edc5b`; the scorer freeze; node identity; the oracle for each language and its pin; the
+exclusions; Amendment 2's confirmatory rule. No law became easier to pass. What became easier to *attempt* is
+ACC-P itself, and only by moving an early snapshot to where its oracle can run.
+
+**Effect on what can be claimed: the gate is reachable where it was previously unreachable for reasons
+unrelated to the engine, at the cost of this being a post-result amendment — stated plainly wherever ACC-P's
+result is reported.**
