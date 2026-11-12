@@ -145,6 +145,7 @@ The register of record is [`HYPOTHESES.md`](HYPOTHESES.md). If anything here dis
 
 ### The keyword grammar of functions
 
+- **A closed set of 26 named edit types covers 99% of function edits in curl (54,890 edits) and libarchive (16,746), about 15 family combinations cover 80%, and a function's next edit resembles its last at 1.70x and 1.95x a size-matched null; outcome-blind, so nothing here is about defects yet.** — exploratory, 2026-11-12 · [journal](journal/2026-11-12-etyp-edit-types.md)
 - **The crucible's keyword grammar holds across 2.9M functions in 22 languages and inside 97% of individual repos, well beyond size (r 0.235 vs size placebo −0.006).** — replicated, 2026-11-07 · [journal](journal/2026-11-07-keyword-grammar-at-population-scale.md)
 - **Functions that break the grammar are mostly ordinary code (55% vs 64% for controls). They concentrate in test directories, but a "weirdness detector" would not find interesting code.** — mixed, 2026-11-07 · [journal](journal/2026-11-07-grammar-outliers.md)
 - **The rules code follows are pairwise. Of 2,791 three-signal combinations, only one is avoided beyond what its pairs explain, and it is not universal; the lattice's missing middle is pair constraints (role conflicts, paired constructs) multiplied out.** — exploratory, 2026-11-07 · [journal](journal/2026-11-07-constrained-middle.md)

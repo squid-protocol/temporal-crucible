@@ -1,0 +1,585 @@
+{
+ "_meta": {
+  "heads": {
+   "curl": "f16e78e6f3f75125744caec465c0a19a9944c822",
+   "libarchive": "d0bf2da07ebaa3964090ee936edea538d1602449"
+  },
+  "run": "2026-11-12",
+  "seed": 2982,
+  "tool": "tools/edit_types.py",
+  "tree_sitter_language_pack": "1.25.0",
+  "type": "exploratory, outcome-blind"
+ },
+ "curl": {
+  "atomic_share": {
+   "ARG_ARITY": 0.06613226452905811,
+   "ARG_VALUE": 0.1879941701584988,
+   "BRANCH_ADD": 0.14654764073601748,
+   "BRANCH_DEL": 0.06813627254509018,
+   "CALL_ADD": 0.2187648023319366,
+   "CALL_DEL": 0.11049371470213154,
+   "CALL_RETARGET": 0.12007651666970304,
+   "COMMENT": 0.23649116414647478,
+   "COND_EDIT": 0.1341956640553835,
+   "EXIT_CHANGE": 0.12696301694297688,
+   "EXPR_EDIT": 0.0022955000910912736,
+   "FIELD": 0.08139916196028421,
+   "FORMAT": 0.0719803242849335,
+   "LOCAL_DECL": 0.14232100564765895,
+   "LOOP_CHANGE": 0.018855893605392603,
+   "NUM_LITERAL": 0.03087994170158499,
+   "OPERATOR": 0.08841319001639643,
+   "PREPROC": 0.08595372563308436,
+   "REF_SWAP": 0.028967024959008925,
+   "RENAME_LOCAL": 0.0076698852249954454,
+   "RETURN_VALUE": 0.04080889050828931,
+   "SIGNATURE": 0.10194935325195846,
+   "SKELETON_MOVE": 0.013062488613590818,
+   "STMT_ADD": 0.20162142466751684,
+   "STMT_DEL": 0.10719621060302423,
+   "STRING_LITERAL": 0.05053743851339042,
+   "TYPE": 0.11045727819274913,
+   "UNCLASSIFIED": 0.007870286026598651
+  },
+  "atomic_signatures_for_80pct": 274,
+  "consecutive_pairs": 48613,
+  "distinct_atomic_signatures": 3869,
+  "distinct_family_signatures": 67,
+  "edits": 54890,
+  "family_signatures_for_80pct": 14,
+  "family_signatures_for_95pct": 31,
+  "functions": 6277,
+  "mean_labels_per_edit": 2.6080342503188194,
+  "parse_error_share": 0.16926580433594463,
+  "primary_share": {
+   "BUILD": 0.010839861541264347,
+   "COSMETIC": 0.11798141738021498,
+   "DATA": 0.09759519038076152,
+   "LOGIC": 0.1902714519948989,
+   "NAMING": 0.0076698852249954454,
+   "RESIDUAL": 0.008580797959555474,
+   "STRUCTURE": 0.24574603752960467,
+   "WIRING": 0.3213153579887047
+  },
+  "repo": "curl",
+  "residual_share": 0.010165786117689925,
+  "single_label_share": 0.31719803242849337,
+  "stability": {
+   "atomic": {
+    "null_max": 0.08885873918272655,
+    "null_mean": 0.08733106290278041,
+    "null_min": 0.08613817533705218,
+    "observed_jaccard": 0.14826818454757484,
+    "ratio": 1.6977714414472602
+   },
+   "family": {
+    "null_max": 0.3046625290315488,
+    "null_mean": 0.3028940108123373,
+    "null_min": 0.30008659255365,
+    "observed_jaccard": 0.3637664528300778,
+    "ratio": 1.2009694475453163
+   },
+   "primary_repeat": {
+    "null_mean": 0.23077160430337562,
+    "observed": 0.2979244235081151,
+    "ratio": 1.290992556937202
+   }
+  },
+  "sticky": {
+   "ARG_ARITY": {
+    "base": 0.06747166395820048,
+    "lift": 2.4112315485953126,
+    "n_prev": 3227,
+    "p_next_given_prev": 0.16268980477223427
+   },
+   "ARG_VALUE": {
+    "base": 0.19140970522288278,
+    "lift": 1.456025096299431,
+    "n_prev": 9304,
+    "p_next_given_prev": 0.2786973344797936
+   },
+   "BRANCH_ADD": {
+    "base": 0.14821138378623003,
+    "lift": 1.4085295102420263,
+    "n_prev": 7420,
+    "p_next_given_prev": 0.2087601078167116
+   },
+   "BRANCH_DEL": {
+    "base": 0.07035155205397733,
+    "lift": 1.2501340971621586,
+    "n_prev": 3286,
+    "p_next_given_prev": 0.08794887401095557
+   },
+   "CALL_ADD": {
+    "base": 0.2205171456194845,
+    "lift": 1.2647386258363356,
+    "n_prev": 10875,
+    "p_next_given_prev": 0.2788965517241379
+   },
+   "CALL_DEL": {
+    "base": 0.1129738958714747,
+    "lift": 1.3589803241234752,
+    "n_prev": 5341,
+    "p_next_given_prev": 0.15352930162890843
+   },
+   "CALL_RETARGET": {
+    "base": 0.12027646925719458,
+    "lift": 1.607730212853886,
+    "n_prev": 5673,
+    "p_next_given_prev": 0.19337211352018333
+   },
+   "COMMENT": {
+    "base": 0.24390595108304364,
+    "lift": 1.437641636427164,
+    "n_prev": 11935,
+    "p_next_given_prev": 0.35064935064935066
+   },
+   "COND_EDIT": {
+    "base": 0.13625984818875608,
+    "lift": 1.6799261925730709,
+    "n_prev": 6566,
+    "p_next_given_prev": 0.22890648796832166
+   },
+   "EXIT_CHANGE": {
+    "base": 0.12815502026206982,
+    "lift": 1.713440385028269,
+    "n_prev": 6280,
+    "p_next_given_prev": 0.2195859872611465
+   },
+   "EXPR_EDIT": {
+    "base": 0.002262769218110382,
+    "lift": 13.392011019283746,
+    "n_prev": 99,
+    "p_next_given_prev": 0.030303030303030304
+   },
+   "FIELD": {
+    "base": 0.08187110443708473,
+    "lift": 2.178291972619476,
+    "n_prev": 3998,
+    "p_next_given_prev": 0.1783391695847924
+   },
+   "FORMAT": {
+    "base": 0.06870590171353341,
+    "lift": 1.6870719526382276,
+    "n_prev": 3356,
+    "p_next_given_prev": 0.11591179976162097
+   },
+   "LOCAL_DECL": {
+    "base": 0.14263674325797626,
+    "lift": 1.3264520609549613,
+    "n_prev": 6982,
+    "p_next_given_prev": 0.1892008020624463
+   },
+   "LOOP_CHANGE": {
+    "base": 0.018780984510316172,
+    "lift": 3.811488905731385,
+    "n_prev": 922,
+    "p_next_given_prev": 0.07158351409978309
+   },
+   "NUM_LITERAL": {
+    "base": 0.030938226400345586,
+    "lift": 2.8422200618632725,
+    "n_prev": 1558,
+    "p_next_given_prev": 0.08793324775353016
+   },
+   "OPERATOR": {
+    "base": 0.0881245757307716,
+    "lift": 1.3770560254362667,
+    "n_prev": 4318,
+    "p_next_given_prev": 0.12135247799907364
+   },
+   "PREPROC": {
+    "base": 0.0881245757307716,
+    "lift": 3.122609218843103,
+    "n_prev": 4339,
+    "p_next_given_prev": 0.2751786125835446
+   },
+   "REF_SWAP": {
+    "base": 0.029457141093946065,
+    "lift": 2.725207322495215,
+    "n_prev": 1445,
+    "p_next_given_prev": 0.08027681660899653
+   },
+   "RENAME_LOCAL": {
+    "base": 0.007528850307530907,
+    "lift": 2.2576046068824596,
+    "n_prev": 353,
+    "p_next_given_prev": 0.0169971671388102
+   },
+   "RETURN_VALUE": {
+    "base": 0.03523748791475531,
+    "lift": 5.829954101116301,
+    "n_prev": 1767,
+    "p_next_given_prev": 0.20543293718166383
+   },
+   "SIGNATURE": {
+    "base": 0.09260897290848127,
+    "lift": 2.016270075106264,
+    "n_prev": 4595,
+    "p_next_given_prev": 0.1867247007616975
+   },
+   "SKELETON_MOVE": {
+    "base": 0.013144632094295764,
+    "lift": 3.883794592714781,
+    "n_prev": 666,
+    "p_next_given_prev": 0.05105105105105105
+   },
+   "STMT_ADD": {
+    "base": 0.20204472054800157,
+    "lift": 1.3640956294411002,
+    "n_prev": 10192,
+    "p_next_given_prev": 0.2756083202511774
+   },
+   "STMT_DEL": {
+    "base": 0.10916832945919816,
+    "lift": 1.2529422211826065,
+    "n_prev": 5220,
+    "p_next_given_prev": 0.1367816091954023
+   },
+   "STRING_LITERAL": {
+    "base": 0.052475675230905315,
+    "lift": 3.5916359231185373,
+    "n_prev": 2568,
+    "p_next_given_prev": 0.18847352024922118
+   },
+   "TYPE": {
+    "base": 0.10542447493468825,
+    "lift": 1.531965004256629,
+    "n_prev": 5071,
+    "p_next_given_prev": 0.16150660619207258
+   },
+   "UNCLASSIFIED": {
+    "base": 0.008001974780408533,
+    "lift": 2.1599606461645875,
+    "n_prev": 405,
+    "p_next_given_prev": 0.01728395061728395
+   }
+  },
+  "top_family_signatures": [
+   [
+    "LOGIC+DATA",
+    0.13922390235015486
+   ],
+   [
+    "COSMETIC",
+    0.11639642922208053
+   ],
+   [
+    "WIRING+DATA",
+    0.09566405538349426
+   ],
+   [
+    "WIRING",
+    0.08722900346146839
+   ],
+   [
+    "DATA",
+    0.07316451083986154
+   ],
+   [
+    "WIRING+LOGIC+DATA",
+    0.05350701402805611
+   ],
+   [
+    "STRUCTURE+WIRING+DATA+COSMETIC",
+    0.05285115685917289
+   ],
+   [
+    "STRUCTURE+WIRING+DATA",
+    0.04723993441428311
+   ],
+   [
+    "WIRING+LOGIC",
+    0.04093641829112771
+   ],
+   [
+    "LOGIC",
+    0.027546001093095282
+   ]
+  ],
+  "unclassified_share": 0.007870286026598651
+ },
+ "libarchive": {
+  "atomic_share": {
+   "ARG_ARITY": 0.04245790039412397,
+   "ARG_VALUE": 0.2042278753135077,
+   "BRANCH_ADD": 0.17108563238982444,
+   "BRANCH_DEL": 0.06317926669055297,
+   "CALL_ADD": 0.2800668816433775,
+   "CALL_DEL": 0.12635853338110595,
+   "CALL_RETARGET": 0.13925713603248538,
+   "COMMENT": 0.20494446434969546,
+   "COND_EDIT": 0.1273737011823719,
+   "EXIT_CHANGE": 0.14857279350292607,
+   "EXPR_EDIT": 0.002030335602531948,
+   "FIELD": 0.039949838767466855,
+   "FORMAT": 0.024125164218320793,
+   "LOCAL_DECL": 0.1340618655201242,
+   "LOOP_CHANGE": 0.02991759226083841,
+   "NUM_LITERAL": 0.07195748238385286,
+   "OPERATOR": 0.0981129822047056,
+   "PREPROC": 0.09100680759584379,
+   "REF_SWAP": 0.025319479278633705,
+   "RENAME_LOCAL": 0.01242087662725427,
+   "RETURN_VALUE": 0.03654604084557506,
+   "SIGNATURE": 0.07112146184163383,
+   "SKELETON_MOVE": 0.012361160874238624,
+   "STMT_ADD": 0.2764839364624388,
+   "STMT_DEL": 0.13035948883315418,
+   "STRING_LITERAL": 0.048787770213782396,
+   "TYPE": 0.12020781082049445,
+   "UNCLASSIFIED": 0.007464469126955691
+  },
+  "atomic_signatures_for_80pct": 218,
+  "consecutive_pairs": 13083,
+  "distinct_atomic_signatures": 1722,
+  "distinct_family_signatures": 66,
+  "edits": 16746,
+  "family_signatures_for_80pct": 15,
+  "family_signatures_for_95pct": 30,
+  "functions": 3663,
+  "mean_labels_per_edit": 2.7397587483578167,
+  "parse_error_share": 0.058700585214379555,
+  "primary_share": {
+   "BUILD": 0.006747880090767945,
+   "COSMETIC": 0.05768541741311358,
+   "DATA": 0.1028305266929416,
+   "LOGIC": 0.19598710139734862,
+   "NAMING": 0.01242087662725427,
+   "RESIDUAL": 0.008778215693299892,
+   "STRUCTURE": 0.26752657351009196,
+   "WIRING": 0.34802340857518216
+  },
+  "repo": "libarchive",
+  "residual_share": 0.00949480472948764,
+  "single_label_share": 0.2391018750746447,
+  "stability": {
+   "atomic": {
+    "null_max": 0.10399791529692917,
+    "null_mean": 0.10162460081257389,
+    "null_min": 0.09840606029553535,
+    "observed_jaccard": 0.19833871488308544,
+    "ratio": 1.9516801374588546
+   },
+   "family": {
+    "null_max": 0.34500879003286505,
+    "null_mean": 0.340968213930835,
+    "null_min": 0.3363779968916395,
+    "observed_jaccard": 0.4376442711916227,
+    "ratio": 1.283533928709256
+   },
+   "primary_repeat": {
+    "null_mean": 0.2486547427959948,
+    "observed": 0.36772911411755715,
+    "ratio": 1.4788743218111677
+   }
+  },
+  "sticky": {
+   "ARG_ARITY": {
+    "base": 0.04226859283039058,
+    "lift": 3.7647812850504727,
+    "n_prev": 553,
+    "p_next_given_prev": 0.15913200723327306
+   },
+   "ARG_VALUE": {
+    "base": 0.2098142627837652,
+    "lift": 1.5987937664440397,
+    "n_prev": 2835,
+    "p_next_given_prev": 0.33544973544973544
+   },
+   "BRANCH_ADD": {
+    "base": 0.1759535274784071,
+    "lift": 1.5382726879733923,
+    "n_prev": 2468,
+    "p_next_given_prev": 0.2706645056726094
+   },
+   "BRANCH_DEL": {
+    "base": 0.06443476266911259,
+    "lift": 2.080729953207005,
+    "n_prev": 813,
+    "p_next_given_prev": 0.13407134071340712
+   },
+   "CALL_ADD": {
+    "base": 0.2802109607888099,
+    "lift": 1.2949167718211083,
+    "n_prev": 3930,
+    "p_next_given_prev": 0.3628498727735369
+   },
+   "CALL_DEL": {
+    "base": 0.13024535656959413,
+    "lift": 1.5444138896781265,
+    "n_prev": 1735,
+    "p_next_given_prev": 0.2011527377521614
+   },
+   "CALL_RETARGET": {
+    "base": 0.13918825957349232,
+    "lift": 2.0527182866556837,
+    "n_prev": 1617,
+    "p_next_given_prev": 0.2857142857142857
+   },
+   "COMMENT": {
+    "base": 0.2108843537414966,
+    "lift": 1.7753935924254098,
+    "n_prev": 2930,
+    "p_next_given_prev": 0.3744027303754266
+   },
+   "COND_EDIT": {
+    "base": 0.13292058396392264,
+    "lift": 1.9925317580636728,
+    "n_prev": 1650,
+    "p_next_given_prev": 0.26484848484848483
+   },
+   "EXIT_CHANGE": {
+    "base": 0.14744324696170602,
+    "lift": 1.6176676715481715,
+    "n_prev": 2046,
+    "p_next_given_prev": 0.23851417399804498
+   },
+   "FIELD": {
+    "base": 0.04043415118856531,
+    "lift": 3.107860882948292,
+    "n_prev": 565,
+    "p_next_given_prev": 0.1256637168141593
+   },
+   "FORMAT": {
+    "base": 0.019949552854849804,
+    "lift": 5.688106301459199,
+    "n_prev": 282,
+    "p_next_given_prev": 0.11347517730496454
+   },
+   "LOCAL_DECL": {
+    "base": 0.13360849957960713,
+    "lift": 1.5427099569970926,
+    "n_prev": 1863,
+    "p_next_given_prev": 0.20611916264090177
+   },
+   "LOOP_CHANGE": {
+    "base": 0.029886111748070016,
+    "lift": 3.762289063742826,
+    "n_prev": 418,
+    "p_next_given_prev": 0.11244019138755981
+   },
+   "NUM_LITERAL": {
+    "base": 0.07299549033096385,
+    "lift": 1.666745265887007,
+    "n_prev": 937,
+    "p_next_given_prev": 0.12166488794023479
+   },
+   "OPERATOR": {
+    "base": 0.10005350454788657,
+    "lift": 1.4435843649363311,
+    "n_prev": 1267,
+    "p_next_given_prev": 0.14443567482241515
+   },
+   "PREPROC": {
+    "base": 0.09248643277535733,
+    "lift": 3.953359275780307,
+    "n_prev": 1321,
+    "p_next_given_prev": 0.36563209689629067
+   },
+   "REF_SWAP": {
+    "base": 0.02736375449056027,
+    "lift": 2.6595868029935703,
+    "n_prev": 371,
+    "p_next_given_prev": 0.07277628032345014
+   },
+   "RENAME_LOCAL": {
+    "base": 0.014216922724145839,
+    "lift": 12.127363737486096,
+    "n_prev": 87,
+    "p_next_given_prev": 0.1724137931034483
+   },
+   "RETURN_VALUE": {
+    "base": 0.03080333256898265,
+    "lift": 6.737815440797791,
+    "n_prev": 424,
+    "p_next_given_prev": 0.20754716981132076
+   },
+   "SIGNATURE": {
+    "base": 0.0571734311702209,
+    "lift": 3.8535073537593516,
+    "n_prev": 817,
+    "p_next_given_prev": 0.22031823745410037
+   },
+   "SKELETON_MOVE": {
+    "base": 0.013605442176870748,
+    "lift": 6.0911602209944755,
+    "n_prev": 181,
+    "p_next_given_prev": 0.08287292817679558
+   },
+   "STMT_ADD": {
+    "base": 0.2746312007949247,
+    "lift": 1.2345700786623166,
+    "n_prev": 3964,
+    "p_next_given_prev": 0.33905146316851664
+   },
+   "STMT_DEL": {
+    "base": 0.13475502560574792,
+    "lift": 1.4082742091230396,
+    "n_prev": 1623,
+    "p_next_given_prev": 0.1897720271102896
+   },
+   "STRING_LITERAL": {
+    "base": 0.05029427501337614,
+    "lift": 2.760611921927202,
+    "n_prev": 605,
+    "p_next_given_prev": 0.13884297520661157
+   },
+   "TYPE": {
+    "base": 0.11625773905067645,
+    "lift": 2.247862782238463,
+    "n_prev": 1412,
+    "p_next_given_prev": 0.2613314447592068
+   },
+   "UNCLASSIFIED": {
+    "base": 0.00749063670411985,
+    "lift": 12.836538461538462,
+    "n_prev": 104,
+    "p_next_given_prev": 0.09615384615384616
+   }
+  },
+  "top_family_signatures": [
+   [
+    "LOGIC+DATA",
+    0.1474381941956288
+   ],
+   [
+    "WIRING+DATA",
+    0.11787889645288427
+   ],
+   [
+    "DATA",
+    0.08246745491460647
+   ],
+   [
+    "STRUCTURE+WIRING+DATA",
+    0.0695091365102114
+   ],
+   [
+    "WIRING+LOGIC+DATA",
+    0.06640391735339783
+   ],
+   [
+    "WIRING",
+    0.06455272900991281
+   ],
+   [
+    "COSMETIC",
+    0.05696882837692583
+   ],
+   [
+    "STRUCTURE+WIRING+DATA+COSMETIC",
+    0.047294876388391256
+   ],
+   [
+    "WIRING+LOGIC",
+    0.04645885584617222
+   ],
+   [
+    "STRUCTURE",
+    0.02352800668816434
+   ]
+  ],
+  "unclassified_share": 0.007464469126955691
+ }
+}
