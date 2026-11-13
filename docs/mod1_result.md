@@ -45,3 +45,10 @@ first — not a property of repositories.
   10% of its files having any caller.
 - 1st-percentile dating moved go to young as expected; wrf-fortran would have moved to old but is excluded.
 - A hand-collected pool of well-known survivors. No claim beyond it.
+
+## Follow-up, exploratory: tree-wide commits (see `docs/mod1_wide.md`)
+
+Run after this result. Seven of 40 repos have a fix-labelled commit touching ≥ 10% of their unit files (a
+licence change in ndpi and bugzilla, a lint rule in sphinx). With those removed, ndpi goes +0.178 → −0.070 and
+sphinx +0.100 → −0.027 (both CIs then include zero), leaving cpython as the only solidly positive repo of 38.
+The registered result above is unchanged; the verdict is "not detected" either way.

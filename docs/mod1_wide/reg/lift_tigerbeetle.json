@@ -1,0 +1,37 @@
+{
+ "repo": "tigerbeetle",
+ "status": "under_floor",
+ "language": "zig",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 3180,
+ "cut": 1742940651,
+ "end": 1806012651,
+ "window_days": 367.0,
+ "start_year": 2020,
+ "age_at_cut": 4.69,
+ "snapshot": "8fad09894231721713873d334c2f6a5e5efa6051",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 177,
+ "tree_unit_files": 177,
+ "inbound_edges": 5345,
+ "complete": 1.0,
+ "call_coverage": 0.847,
+ "wide": {
+  "fix_commits": 18,
+  "wide_commits": 0,
+  "positives_all": 17,
+  "positives_without_wide": 17,
+  "positive_share_all": 0.096,
+  "largest": {
+   "sha": "b6b4a0f8c0",
+   "files": 2,
+   "share_of_unit_files": 0.011,
+   "subject": "Merge pull request #2860 from tigerbeetle/batiati-filter-fix"
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 17,
+ "why": "17 positives, floor 30"
+}

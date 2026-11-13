@@ -1,0 +1,43 @@
+{
+ "repo": "redis",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 11956,
+ "cut": 1646040762,
+ "end": 1709112762,
+ "window_days": 730.0,
+ "start_year": 2009,
+ "age_at_cut": 12.78,
+ "snapshot": "b8eb2a73408fa3b8845760857dd6fcccb62107fe",
+ "snapshot_offset_days": 31.1,
+ "unit_files": 165,
+ "tree_unit_files": 168,
+ "inbound_edges": 12660,
+ "complete": 0.982,
+ "call_coverage": 0.624,
+ "wide": {
+  "fix_commits": 210,
+  "wide_commits": 0,
+  "positives_all": 66,
+  "positives_without_wide": 66,
+  "positive_share_all": 0.4,
+  "largest": {
+   "sha": "35b3fbd90c",
+   "files": 12,
+   "share_of_unit_files": 0.073,
+   "subject": "Freeze time sampling during command execution, and scripts (#10300)"
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 66,
+ "auc_loc": 0.8614937251300888,
+ "auc_in_degree": 0.7835169880624426,
+ "lift": -0.07797673706764618,
+ "ci95": [
+  -0.1316522277227723,
+  -0.029444444444444495
+ ]
+}

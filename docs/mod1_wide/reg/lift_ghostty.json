@@ -1,0 +1,43 @@
+{
+ "repo": "ghostty",
+ "status": "ok",
+ "language": "zig",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 5253,
+ "cut": 1757736731,
+ "end": 1820808731,
+ "window_days": 196.9,
+ "start_year": 2022,
+ "age_at_cut": 3.44,
+ "snapshot": "a387d6cc08d599bc3b342b742ed7c0dc6d2bb201",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 485,
+ "tree_unit_files": 533,
+ "inbound_edges": 5724,
+ "complete": 0.91,
+ "call_coverage": 0.6,
+ "wide": {
+  "fix_commits": 149,
+  "wide_commits": 0,
+  "positives_all": 124,
+  "positives_without_wide": 124,
+  "positive_share_all": 0.256,
+  "largest": {
+   "sha": "bc0f5e4d57",
+   "files": 11,
+   "share_of_unit_files": 0.023,
+   "subject": "Copy formatted text to clipboard with plain, make it configurable  (#9418)"
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 124,
+ "auc_loc": 0.7505584844964703,
+ "auc_in_degree": 0.6770842641408275,
+ "lift": -0.07347422035564288,
+ "ci95": [
+  -0.11951187160100807,
+  -0.027740691292093222
+ ]
+}

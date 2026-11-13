@@ -1,0 +1,43 @@
+{
+ "repo": "racket",
+ "status": "ok",
+ "language": "racket",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 45548,
+ "cut": 1448736943,
+ "end": 1511808943,
+ "window_days": 730.0,
+ "start_year": 2005,
+ "age_at_cut": 10.35,
+ "snapshot": "c9e9b4e400543cc4ae476bef30989d749e32fe00",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 667,
+ "tree_unit_files": 674,
+ "inbound_edges": 8053,
+ "complete": 0.99,
+ "call_coverage": 0.48,
+ "wide": {
+  "fix_commits": 131,
+  "wide_commits": 0,
+  "positives_all": 109,
+  "positives_without_wide": 109,
+  "positive_share_all": 0.163,
+  "largest": {
+   "sha": "169472487e",
+   "files": 5,
+   "share_of_unit_files": 0.007,
+   "subject": "Wrap various syntax/parse forms in with-disappeared-uses (#1397)"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 109,
+ "auc_loc": 0.8197116175068232,
+ "auc_in_degree": 0.6295008385123804,
+ "lift": -0.19021077899444283,
+ "ci95": [
+  -0.24310282463582256,
+  -0.13843045843045843
+ ]
+}

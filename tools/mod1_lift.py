@@ -39,6 +39,7 @@ META = STUDY / "meta_mod1"
 FIX_TIERS = ("T1_revert", "T2_fixref", "T3_cve", "T4_keyword")
 MIN_COMPLETE = 0.90   # unit files in the scan / unit files in the git tree at the snapshot
 C_FAMILY = ("c", "cpp", "zig", "fortran")
+WIDE_SHARE, WIDE_MIN_FILES = 0.10, 20   # a "tree-wide" fix commit: >= 10% of the unit files and >= 20 of them
 
 
 def ro(p: Path):
@@ -66,7 +67,7 @@ def frame(repo: str) -> dict:
             "age_at_cut": round((cut - p1) / 31557600, 2)}
 
 
-def measure(repo: str) -> dict:
+def measure(repo: str, drop_wide: bool = False) -> dict:
     out = {"repo": repo, "status": "ok"}
     if not (STUDY / "history" / f"{repo}.db").exists():
         return {**out, "status": "unprepared", "why": "no history"}
@@ -130,10 +131,31 @@ def measure(repo: str) -> dict:
     tier, _ = tiers_for(repo, f["merge_units"], META)
     keep = {s for s, t in tier.items() if t in FIX_TIERS}
     h = ro(STUDY / "history" / f"{repo}.db")
-    post = {p for p, s in h.execute(
-        f"select t.path, t.sha from touch t join commit_ c on c.sha=t.sha where c.{f['where'].replace(' and ', ' and c.')} "
-        "and c.ct>? and c.ct<=?", (f["cut"], f["end"])) if s in keep}
+    by_sha: dict[str, set[str]] = {}
+    for p, s in h.execute(
+            f"select t.path, t.sha from touch t join commit_ c on c.sha=t.sha where c.{f['where'].replace(' and ', ' and c.')} "
+            "and c.ct>? and c.ct<=?", (f["cut"], f["end"])):
+        if s in keep and p in loc:
+            by_sha.setdefault(s, set()).add(p)
+    subj = dict(h.execute("select sha, subject from commit_"))
     h.close()
+    # tree-wide commits (docs/STUDY_CHECKLIST.md item 8): a fix commit touching a large share of the unit files
+    # is a reformat, licence header or mass rename wearing a fix word. Always REPORTED; removed from the outcome
+    # only when the caller asks (exploratory -- not part of the registered MOD-1 measurement).
+    wide = {s for s, ps in by_sha.items() if len(ps) >= WIDE_MIN_FILES and len(ps) >= WIDE_SHARE * len(loc)}
+    everything = set().union(*by_sha.values()) if by_sha else set()
+    narrow = set().union(*(ps for s, ps in by_sha.items() if s not in wide)) if by_sha else set()
+    top = max(by_sha.items(), key=lambda kv: len(kv[1]), default=None)
+    out["wide"] = {"fix_commits": len(by_sha), "wide_commits": len(wide),
+                   "positives_all": len(everything), "positives_without_wide": len(narrow),
+                   "positive_share_all": round(len(everything) / len(loc), 3),
+                   "largest": {"sha": top[0][:10], "files": len(top[1]),
+                               "share_of_unit_files": round(len(top[1]) / len(loc), 3),
+                               "subject": subj.get(top[0], "")[:120]} if top else None,
+                   "wide_list": [{"sha": s[:10], "files": len(by_sha[s]), "subject": subj.get(s, "")[:120]}
+                                 for s in sorted(wide, key=lambda s: -len(by_sha[s]))[:8]]}
+    post = narrow if drop_wide else everything
+    out["outcome"] = "wide fix commits removed" if drop_wide else "registered"
     paths = sorted(loc)
     y = [1 if p in post else 0 for p in paths]
     out["positives"] = sum(y)
@@ -154,8 +176,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
     ap.add_argument("--out", type=Path)
+    ap.add_argument("--drop-wide", action="store_true", help="exploratory: remove tree-wide fix commits from the outcome")
     a = ap.parse_args()
-    r = measure(a.repo)
+    r = measure(a.repo, a.drop_wide)
     print(json.dumps(r, indent=1))
     if a.out:
         a.out.parent.mkdir(parents=True, exist_ok=True)

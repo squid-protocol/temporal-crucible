@@ -1,0 +1,21 @@
+{
+ "repo": "macports-base",
+ "status": "scan_incomplete",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 8910,
+ "cut": 1488102502,
+ "end": 1551174502,
+ "window_days": 730.0,
+ "start_year": 2002,
+ "age_at_cut": 14.56,
+ "snapshot": "64e6b92b8e750057354f84281cb822b8d8067586",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 0,
+ "tree_unit_files": 128,
+ "inbound_edges": 0,
+ "complete": 0.0,
+ "call_coverage": 0.0,
+ "why": "scan holds 0 of 128 unit files in the tree"
+}

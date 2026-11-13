@@ -93,12 +93,15 @@ def test(rows, title, cols=("old", "C_family"), key="old"):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("docs/mod1_result.json"))
+    ap.add_argument("--lifts", type=Path, default=LIFTS,
+                    help="per-repo measurements to read (default: the registered ones). The exploratory "
+                         "tree-wide-commit re-measure lives in docs/mod1_wide/drop")
     a = ap.parse_args()
     drawn = [d["repo"] for d in json.loads(DRAW.read_text())["draw"]]
-    LIFTS.mkdir(exist_ok=True)
+    a.lifts.mkdir(exist_ok=True)
     rows, excluded = [], []
     for repo in sorted(set(drawn) | set(PRIOR)):
-        f = LIFTS / f"lift_{repo}.json"
+        f = a.lifts / f"lift_{repo}.json"
         try:
             m = json.loads(f.read_text()) if f.exists() else measure(repo)
         except Exception as e:  # a failure is its own reason, never folded into the floor

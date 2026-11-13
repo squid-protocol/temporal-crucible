@@ -1,0 +1,43 @@
+{
+ "repo": "libxml2",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 7831,
+ "cut": 1703169264,
+ "end": 1766241264,
+ "window_days": 730.0,
+ "start_year": 1999,
+ "age_at_cut": 24.83,
+ "snapshot": "e45a4d711500298dfc7ee8f630acc18c71f14795",
+ "snapshot_offset_days": 7.4,
+ "unit_files": 153,
+ "tree_unit_files": 159,
+ "inbound_edges": 10625,
+ "complete": 0.962,
+ "call_coverage": 0.425,
+ "wide": {
+  "fix_commits": 306,
+  "wide_commits": 0,
+  "positives_all": 67,
+  "positives_without_wide": 67,
+  "positive_share_all": 0.438,
+  "largest": {
+   "sha": "9c16a153d8",
+   "files": 16,
+   "share_of_unit_files": 0.105,
+   "subject": "Revert \"include: Make most IS_* macros private\""
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 67,
+ "auc_loc": 0.7812391530718501,
+ "auc_in_degree": 0.7522561610551892,
+ "lift": -0.02898299201666088,
+ "ci95": [
+  -0.08645870897944463,
+  0.019982698961937717
+ ]
+}

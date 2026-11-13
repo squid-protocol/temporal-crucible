@@ -1,0 +1,43 @@
+{
+ "repo": "runtime",
+ "status": "ok",
+ "language": "csharp",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 121194,
+ "cut": 1645830550,
+ "end": 1708902550,
+ "window_days": 730.0,
+ "start_year": 2002,
+ "age_at_cut": 19.89,
+ "snapshot": "97fb19508f6168577fed58c6d46db573db1c5bcb",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 257,
+ "tree_unit_files": 263,
+ "inbound_edges": 3157,
+ "complete": 0.977,
+ "call_coverage": 0.673,
+ "wide": {
+  "fix_commits": 40,
+  "wide_commits": 0,
+  "positives_all": 50,
+  "positives_without_wide": 50,
+  "positive_share_all": 0.195,
+  "largest": {
+   "sha": "485c0d86a7",
+   "files": 11,
+   "share_of_unit_files": 0.043,
+   "subject": "Share GetConstructor intrinsic a lot of small fixes (dotnet/linker#2725)"
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 50,
+ "auc_loc": 0.7642512077294686,
+ "auc_in_degree": 0.6656038647342996,
+ "lift": -0.09864734299516909,
+ "ci95": [
+  -0.15430622009569372,
+  -0.030268418046830337
+ ]
+}

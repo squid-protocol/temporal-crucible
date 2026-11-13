@@ -1,0 +1,43 @@
+{
+ "repo": "commons-lang",
+ "status": "ok",
+ "language": "java",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 9564,
+ "cut": 1727098502,
+ "end": 1790170502,
+ "window_days": 730.0,
+ "start_year": 2002,
+ "age_at_cut": 22.02,
+ "snapshot": "d4bdfbea00f161448fd89fd184211936c6fb6c1d",
+ "snapshot_offset_days": 5.5,
+ "unit_files": 250,
+ "tree_unit_files": 250,
+ "inbound_edges": 14392,
+ "complete": 1.0,
+ "call_coverage": 0.808,
+ "wide": {
+  "fix_commits": 80,
+  "wide_commits": 0,
+  "positives_all": 36,
+  "positives_without_wide": 36,
+  "positive_share_all": 0.144,
+  "largest": {
+   "sha": "c2260f094d",
+   "files": 2,
+   "share_of_unit_files": 0.008,
+   "subject": "[LANG-1772] Restrict size of cache to prevent overflow errors (#1379)"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 36,
+ "auc_loc": 0.8892133956386293,
+ "auc_in_degree": 0.8571521287642783,
+ "lift": -0.03206126687435107,
+ "ci95": [
+  -0.06978643949118923,
+  0.0010922140739584307
+ ]
+}
