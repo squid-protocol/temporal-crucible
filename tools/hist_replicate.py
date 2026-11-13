@@ -85,11 +85,30 @@ def boot_ci(f, n, reps=2000, seed=2982):
     return out[int(0.025 * len(out))], out[int(0.975 * len(out))]
 
 
-def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
+def corrected(h: sqlite3.Connection, units_only: bool, merge_aware: bool):
+    """The two corrections of docs/STUDY_CHECKLIST.md (found by the MOD-1 review, 2026-11-13), both opt-in so
+    the registered run stays reproducible. Returns (is this path a unit file, merge clause, merges are units).
+
+    units_only   rank only files that CAN be positive: the history records a touch only for a unit file (the
+                 repo's language, not test / vendored / doc / example), so every other scanned file is a
+                 guaranteed negative with no history and a small LOC -- free AUC for any history predictor.
+    merge_aware  keep merges where the history made the merge the labelled unit (first-parent walk)."""
+    import laws_units as U
+    meta = dict(h.execute("select key, value from meta"))
+    langs = ("c", "cpp") if meta.get("units") == "c+cpp" else (meta.get("language"),)
+    ex = U.Excluder()
+    unit = (lambda p: U.language_of(p) in langs and ex.why(p) is None) if units_only else (lambda p: True)
+    mu = merge_aware and meta.get("unit", "").startswith("first-parent")
+    return unit, ("" if mu else " and merge=0"), mu
+
+
+def one_repo(study: Path, repo: str, rules: str = "raw", units_only: bool = False,
+             merge_aware: bool = False) -> dict:
     h = sqlite3.connect(f"file:{study/'history'/f'{repo}.db'}?mode=ro", uri=True)
     w = sqlite3.connect(f"file:{study/'dbs'/f'{repo}.db'}?mode=ro", uri=True)
     rec: dict = {"repo": repo}
-    cts = [r[0] for r in h.execute("select ct from commit_ where merge=0 and bot=0 order by ct")]
+    unit, mg, mu = corrected(h, units_only, merge_aware)
+    cts = [r[0] for r in h.execute(f"select ct from commit_ where bot=0{mg} order by ct")]
     if len(cts) < 200:
         return {**rec, "evaluable": False, "why": f"only {len(cts)} usable commits"}
     cut = cts[int(len(cts) * CUT_Q)]
@@ -99,7 +118,7 @@ def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     # prior fix touches per file identity, and post-cut fix touches
     prior: dict[int, list[int]] = {}
     post: dict[int, int] = {}
-    keep = fix_shas(h, rules)          # None = the raw flag, a set = the cleaned label
+    keep = fix_shas(h, rules, mu)      # None = the raw flag, a set = the cleaned label
     rec["fix_label"] = rules
     # The LABEL CARD is binding (docs/LABEL_CARD.md): a repo whose label precision is unpublished or under
     # the gate is still COMPUTED -- so the published raw column stays reproducible -- but it is marked unfit
@@ -108,7 +127,7 @@ def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     rec["label_precision"] = round(lp[0], 3) if lp else None
     rec["label_fit"] = bool(lp and lp[0] >= GATE)
     q = ("select t.file, c.ct, c.sha from touch t join commit_ c on c.sha=t.sha "
-         "where c.merge=0 and c.bot=0 and c.fix=1")
+         f"where c.bot=0{mg.replace('merge', 'c.merge')} and c.fix=1")
     for fid, ct, sha in h.execute(q):
         if keep is not None and sha not in keep:
             continue
@@ -143,8 +162,8 @@ def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     rows = []
     for fid, path in alive.items():
         loc = loc_by_path.get(path)
-        if not loc:
-            continue                      # not in the structural snapshot (not a source file we scan)
+        if not loc or not unit(path):
+            continue                      # not in the structural snapshot, or (units_only) can never be positive
         times = prior.get(fid, [])
         raw = len(times)
         decay = sum(0.5 ** ((cut - t) / 86400.0 / HALF_LIFE_DAYS) for t in times)
@@ -196,12 +215,14 @@ def main() -> int:
     ap.add_argument("--md", type=Path)
     ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
     ap.add_argument("--repos", help="comma-separated subset; default all eight")
+    ap.add_argument("--units-only", action="store_true", help="rank only files that can be positive")
+    ap.add_argument("--merge-aware", action="store_true", help="keep merges where they are the labelled unit")
     ap.add_argument("--allow-unfit", action="store_true",
                     help="pool repos whose label is under the LABEL CARD gate (reproducing an old run)")
     a = ap.parse_args()
     res = []
     for r in (a.repos.split(",") if a.repos else REPOS):
-        rec = one_repo(a.study, r, a.fix_label)
+        rec = one_repo(a.study, r, a.fix_label, a.units_only, a.merge_aware)
         res.append(rec)
         print(f"  {r:14} " + ("not evaluable: " + rec.get("why", "")
                               if not rec.get("evaluable") else
