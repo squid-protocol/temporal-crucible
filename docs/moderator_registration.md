@@ -63,3 +63,43 @@ This study is about the *sign* across repos, not the accuracy of any single repo
 
 Only `in_degree` is tested. Out-degree and function count lost to LOC in all eight earlier repos under every
 label and are not promoted here.
+
+## Amendment 1 — 2026-11-13, ~2:50 PM Eastern, before any drawn repository was scored
+
+**State when written:** 5 of 38 repos prepared (history + one snapshot), **zero lifts computed** for any drawn
+repo — no `docs/struct_null_<repo>.json` exists for any of the 38. Nothing below was chosen with a result in
+view.
+
+**The problem.** `draw40.py` calls a repo's language by counting file extensions over the languages the
+instrument measures (c, cpp, csharp, go, java, jsts, kotlin, php, python, rust). A repo written mainly in a
+language the instrument does **not** measure is therefore called by whichever measured language has the most
+files — usually bundled or peripheral code. Recounted with the instrument's own unit rule
+(`laws_units.language_of` + `Excluder().why`, HEAD tree), **10 of the 38** have more first-party files in one
+unmeasured language than unit files in any measured language:
+
+| repo | cell as drawn | called | unit files in called language | main language (files) |
+|---|---|---|---|---|
+| racket | old/C | c | 685 | Racket (1,560) |
+| ghostty | young/C | c | 55 | Zig (650) |
+| swift | young/C | c | 1,468 | Swift (9,283) |
+| wrf-fortran | young/C | c | 179 | Fortran (1,039) |
+| fieldtrip | young/C | c | 197 | MATLAB (1,860) |
+| rails | old/managed | jsts | 43 | Ruby (1,487) |
+| bugzilla | old/managed | jsts | 15 | Perl (205) |
+| discourse | young/managed | jsts | 2,146 | Ruby (5,792) |
+| tigerbeetle | young/managed | java | 36 | Zig (204) |
+| bun | young/managed | jsts | 470 | Zig (1,089) |
+
+**What does not change.** The draw, the language calls, the cells, the outcome, the floor and the primary test
+all stand exactly as registered. The primary result is the registered one, on every drawn repo that clears the
+floor. Nothing is re-drawn or back-filled.
+
+**What is added — sensitivity S1, declared now.** The registered test is repeated with the ten repos above
+removed (rule: *first-party files in a single unmeasured language outnumber unit files in every measured
+language*). Cells for S1 are at most old/C 7, young/C 6, old/managed 8, young/managed 7 — 28 drawn plus the 8
+previously assessed. **Both are reported side by side.** If the primary and S1 disagree on whether the `old`
+CI excludes zero, MOD-H1 is reported as **not robust to the language call**, not as supported.
+
+**Noted, not acted on.** Under the same unit rule cpython has slightly more C unit files (1,108) than Python
+(937) because its Python tests are excluded; it stays `python`, old/managed, as drawn. `root` and `godot` are
+called `c` though most of their code is C++; both languages are in the same family, so the cell is unaffected.
