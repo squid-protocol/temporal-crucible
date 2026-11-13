@@ -149,3 +149,87 @@ any lift.
 `*Test.swift`); the directory rules (`test/`, `tests/`, `spec/` …) already apply to every language.
 
 **Not changed.** Outcome, label, floor, cut, window, age cut, hypotheses, and the falsification statement.
+
+## Amendment 3 — 2026-11-13, ~3:25 PM Eastern, before any drawn repository was scored
+
+**State when written:** preparation in progress; **zero lifts computed for any of the 38 drawn repos** by any
+tool. An independent reviewer, given read-only access and forbidden to compute any drawn-repo outcome, checked
+the code against this registration and returned six blockers. The owner agreed to all six. The earlier eight
+repos were re-measured under the new rules (their results were already known); the drawn 38 were not touched.
+
+### What the review found, and the rule that replaces each
+
+1. **Universe.** `struct_null.py` ranked every scanned file (docs, tests, YAML, other languages) while only
+   non-test files of the repo's one language could ever be positive. Those other files mostly have no callers,
+   so in-degree was credited for telling source from non-source. **Now:** the universe is the repo's unit files
+   only — `laws_units.language_of(path)` in the repo's language and `Excluder().why(path) is None` — the same
+   rule the history uses to record a touch.
+2. **Label.** The cascade's revert, fix-reference and CVE tiers read a commit-body harvest that existed only
+   for the 11 earlier repos, so the 38 would have been labelled by keyword alone. **Now:** every repo, drawn
+   and earlier, gets a body harvest (`pilot/meta_mod1`, merges included); a repo without one is excluded and
+   listed, never scored on a thinner label.
+3. **Merges.** Where the merge share is ≥ 0.30 the history walks first-parent and makes the merge the labelled
+   unit — and the scorer then filtered merges out (ghostty: 3,550 of 5,400 commits). **Now:** merges are kept
+   wherever the history's unit is "first-parent commit, merges included", for the cut, the label and the
+   outcome alike. Known weakness, stated now: a GitHub merge commit's subject is "Merge pull request …", so the
+   keyword tier sees little of it; sensitivity S5 removes these repos.
+4. **Scan completeness.** A repo whose source the scan never read (macports-base: 0 of 128 C files) passed the
+   Amendment 2 check because zero files skipped it. **Now:** unit files in the scan must be ≥ 90% of unit files
+   in `git ls-tree` at the snapshot, and zero files fails; such a repo is listed as "scan incomplete".
+5. **C and C++.** A bare `.h` is called C, so a repo harvested as `cpp` never saw a header fixed and one
+   harvested as `c` saw only headers and `.c`. **Now:** a drawn repo called `c` or `cpp` is harvested with C and
+   C++ files together as its units. (The earlier C repos are pure C and keep their existing histories.)
+6. **Direction.** The scorer accepted a CI excluding zero on either side. **Now:** MOD-H1 is supported only if
+   the `old` coefficient's 95% CI lies wholly **below** zero; wholly above is "contradicted"; including zero is
+   "**not detected**" — never "age is not the moderator".
+
+Implemented in `tools/mod1_lift.py` (new; `struct_null.py` is left as it was, as the record of the old rule),
+`tools/mod1_run.py`, `tools/mod1_score.py`, with opt-in switches in `laws_history.py`, `hist_meta.py`,
+`hist_fixlabel.py` and `label_cascade.py` so no other study's behaviour changes.
+
+### The premise changes, and is stated before the result
+
+Under these rules the earlier eight are no longer "four up, four down, all solid":
+
+| repo | old rule | Amendment 3 | 95% CI |
+|---|---|---|---|
+| commons-lang | +0.052 | −0.032 | [−0.070, +0.001] |
+| curl | −0.036 | −0.147 | [−0.181, −0.112] |
+| libxml2 | −0.084 | −0.029 | [−0.086, +0.020] |
+| ndpi | +0.119 | +0.179 | [+0.069, +0.306] |
+| postgres | −0.039 | −0.099 | [−0.116, −0.083] |
+| prometheus | +0.060 | −0.066 | [−0.100, −0.027] |
+| redis | −0.063 | −0.078 | [−0.132, −0.029] |
+| sphinx | +0.037 | +0.100 | [+0.018, +0.189] |
+
+Two positive, four negative, two including zero. **MOD-1 therefore asks whether there is an age or family
+pattern at all, not what explains a solid split.** The sentence "all four anti-predictive repos are old C" in
+the original registration was also wrong on its own terms: redis starts in 2009.
+
+### Also fixed now (the review's "should" items)
+
+- **Age.** Every repo, drawn or earlier, is dated by its **1st-percentile commit time** (immune to one imported
+  or joke commit); `old` = that year before 2006. Expected moves: go → young, wrf-fortran → old. This replaces
+  the unimplemented "re-date if implausible" rule. Language family comes from the history's language.
+- **Reading rule.** The verdict is "supported" only if the primary, **S1** (ten new-language repos removed) and
+  **S2** (drawn repos only — the earlier eight generated the hypothesis) all read "supported". Any
+  disagreement among those three is reported as **not robust**.
+- **Further sensitivities, reported, not gating:** **S3** repos with fewer than 30% of unit files having any
+  caller removed; **S4** repos with less than the full 730-day window after the cut removed; **S5**
+  merge-workflow repos removed.
+- **Secondary, not confirmatory:** lift on continuous age at the cut (years since the 1st-percentile commit);
+  the age × family interaction; `C_family` itself.
+- **Power, from the reviewer's simulation at the earlier repos' spread (SD 0.071):** with 46 repos about 33%
+  for a difference of 0.03, 70% for 0.05, 86% for 0.065; with 26 repos 21%, 50%, 64%. A null is "not detected
+  at this power".
+- **Exclusion reasons are separate and listed:** unprepared, scan incomplete, engine does not resolve calls,
+  no body harvest, under the positives floor, failed.
+
+### What a result will and will not license
+
+- CI below zero and robust: "in this pool, repos that began before 2006 show a lower in-degree lift, by about
+  X". **Not** "age is the moderator", not a per-repo prediction, not the battle-tested-hub mechanism — a binary
+  cohort is also an era of tooling and commit-message habits.
+- Includes zero: not detected; effects under roughly 0.05 could not have been seen.
+- Many exclusions: read which repos first. If they cluster in one cell the contrast is no longer the drawn one.
+- The pool is a hand-collected set of well-known survivors; old/C is a census of 7. No claim beyond it.

@@ -45,15 +45,17 @@ REPOS = ("commons-lang", "curl", "libgit2", "libxml2", "ndpi", "openssl",
 TIERS = ("T1_revert", "T2_fixref", "T3_cve", "T4_keyword", "T5_bareref")
 
 
-def tiers_for(repo: str) -> tuple[dict[str, str], dict]:
-    """sha -> tier, plus the pools needed to talk about recall."""
+def tiers_for(repo: str, merge_units: bool = False, meta_dir: Path | None = None) -> tuple[dict[str, str], dict]:
+    """sha -> tier, plus the pools needed to talk about recall. merge_units / meta_dir are MOD-1 Amendment 3's:
+    keep merges where the history made them the unit, and read links from a meta harvest that saw them."""
     h = sqlite3.connect(f"file:{STUDY/'history'/f'{repo}.db'}?mode=ro", uri=True)
-    allc = {s for s, in h.execute("select sha from commit_ where merge=0 and bot=0")}
-    kw_raw = {s for s, in h.execute("select sha from commit_ where fix=1 and merge=0 and bot=0")}
-    kw = fix_shas(h, "v3c") or set()
+    mg = "" if merge_units else " and merge=0"
+    allc = {s for s, in h.execute("select sha from commit_ where bot=0" + mg)}
+    kw_raw = {s for s, in h.execute("select sha from commit_ where fix=1 and bot=0" + mg)}
+    kw = fix_shas(h, "v3c", merge_units) or set()
     h.close()
     link: dict[str, set[str]] = {k: set() for k in ("revert", "issue_fix", "issue", "cve", "trailer")}
-    m = STUDY / "meta" / f"{repo}.db"
+    m = (meta_dir or STUDY / "meta") / f"{repo}.db"
     if m.exists():
         c = sqlite3.connect(f"file:{m}?mode=ro", uri=True)
         for sha, kind in c.execute("select sha, kind from link"):

@@ -57,8 +57,8 @@ def schema(con):
     """)
 
 
-def harvest(repo: Path, con) -> tuple[int, int]:
-    p = subprocess.Popen(["git", "-C", str(repo), "log", "--no-merges",
+def harvest(repo: Path, con, with_merges: bool = False) -> tuple[int, int]:
+    p = subprocess.Popen(["git", "-C", str(repo), "log", *([] if with_merges else ["--no-merges"]),
                           f"--format={SEP}%H%n%s%n%b{EOR}"],
                          stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
                          errors="replace", bufsize=1 << 20)
@@ -127,6 +127,8 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--repos")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--with-merges", action="store_true",
+                    help="read merge commits too (MOD-1 Amendment 3: where a merge is the labelled unit)")
     a = ap.parse_args()
     if a.report:
         return report(a.out)
@@ -140,7 +142,7 @@ def main() -> int:
         if not src.is_dir():
             print(f"  {r}: no clone at {src}"); con.close(); continue
         t0 = time.time()
-        nb, nl = harvest(src, con)
+        nb, nl = harvest(src, con, a.with_merges)
         con.executemany("INSERT OR REPLACE INTO meta VALUES (?,?)",
                         [("bodies", str(nb)), ("links", str(nl)),
                          ("seconds", str(round(time.time() - t0, 1))), ("done", "1")])

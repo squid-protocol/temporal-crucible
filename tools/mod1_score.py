@@ -4,63 +4,34 @@
 # Copyright (c) 2026 Joe Esquibel
 # Licensed under the PolyForm Noncommercial License 1.0.0 (see LICENSE).
 # ==============================================================================
-"""MOD-1 scorer: is the sign of the structural effect moderated by repo AGE or LANGUAGE?
+"""MOD-1 scorer: is the in-degree lift over LOC lower in older repositories?
 
     python tools/mod1_score.py [--out docs/mod1_result.json]
 
-Runs exactly the test registered in docs/moderator_registration.md, written before any drawn repo was
-scanned: OLS of the in-degree lift over LOC on `old` + `C_family`, bootstrap CI over repos, MOD-H1
-(age) primary and supported iff the `old` coefficient's 95% CI excludes zero.
+Runs the test of docs/moderator_registration.md as amended (Amendments 1-3, all written before any drawn
+repo was scored): OLS of the lift on `old` + `C_family`, percentile bootstrap over repos.
 
-Repos under the positives floor are EXCLUDED AND LISTED, never rescued with a different label.
+MOD-H1 is DIRECTIONAL. It is supported only if the `old` coefficient's 95% CI lies wholly BELOW zero. A CI
+wholly above zero contradicts it. A CI that includes zero is "not detected" -- this design cannot show that
+age does not matter (power is about 70% for a difference of 0.05, a third for 0.03).
+
+Every repo that is left out is listed with its own reason, read from structure before any outcome.
 """
 from __future__ import annotations
 
-import argparse, json, random, statistics as st, subprocess, sys
+import argparse, json, random, statistics as st, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mod1_lift import measure  # noqa: E402
 
-PREP = Path("docs/mod1_prep.json")
 DRAW = Path("docs/draw40.json")
-PRIOR = {  # the eight already assessed, cascade label, from docs/struct_null_*.json
-    "commons-lang": None, "curl": None, "libxml2": None, "ndpi": None,
-    "postgres": None, "prometheus": None, "redis": None, "sphinx": None}
-
-
-AMEND = Path("docs/mod1_language_amend.json")
-STUDY = Path("/srv/storage_16tb/projects/gitgalaxy/laws-study/pilot")
-
-
-def call_coverage(repo: str, lang: str) -> tuple[int, int]:
-    """(files of `lang` at the snapshot, call edges landing in them) -- Amendment 2's instrument check"""
-    import sqlite3
-    import laws_units as U
-    db = STUDY / "dbs" / f"{repo}.db"
-    if not db.exists():
-        return 0, 0
-    w = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
-    ex = U.Excluder()
-    mine = {fid for fid, path in w.execute("select id, path from file where generated=0")
-            if U.language_of(path) in ({"c", "cpp"} if lang in ("c", "cpp") else {lang}) and ex.why(path) is None}
-    f2 = dict(w.execute("select id, file_id from func"))
-    edges = sum(1 for (dst,) in w.execute("select dst from edge") if f2.get(dst) in mine)
-    w.close()
-    return len(mine), edges
-
-
-def lift_for(repo: str) -> float | None:
-    f = Path(f"docs/struct_null_{repo}.json")
-    if not f.exists():
-        p = subprocess.run([sys.executable, "tools/struct_null.py", "--repo", repo, "--out", str(f)],
-                           capture_output=True, text=True, timeout=2400)
-        if not f.exists():
-            return None
-    try:
-        d = json.loads(f.read_text())
-        return d["results"]["cascade"]["metrics"]["in_degree"]["lift"]
-    except Exception:
-        return None
+LIFTS = Path("docs/mod1")
+PRIOR = ("commons-lang", "curl", "libxml2", "ndpi", "postgres", "prometheus", "redis", "sphinx")
+S1_UNMEASURED = {"racket", "ghostty", "swift", "wrf-fortran", "fieldtrip", "rails", "bugzilla", "discourse",
+                 "tigerbeetle", "bun"}  # Amendment 1: main language first measured on 2026-11-13
+OLD_BEFORE = 2006
+MIN_COVERAGE, MIN_WINDOW = 0.30, 730
 
 
 def ols(rows, cols):
@@ -92,79 +63,91 @@ def boot(rows, cols, reps=4000, seed=917):
         if b:
             for j, c in enumerate(cols):
                 out[c].append(b[j + 1])
-    return {c: (sorted(v)[int(.025 * len(v))], sorted(v)[int(.975 * len(v))]) if v else (float('nan'),) * 2
+    return {c: (sorted(v)[int(.025 * len(v))], sorted(v)[int(.975 * len(v))]) if v else (float("nan"),) * 2
             for c, v in out.items()}
 
 
-S1_UNMEASURED = {"racket", "ghostty", "swift", "wrf-fortran", "fieldtrip", "rails", "bugzilla", "discourse",
-                 "tigerbeetle", "bun"}  # docs/moderator_registration.md, Amendment 1
+def reading(lo, hi):
+    return "supported" if hi < 0 else "contradicted" if lo > 0 else "not detected"
 
 
-def test(rows, title):
-    """the registered OLS + bootstrap on `rows`; {} when there are too few repos to fit"""
+def test(rows, title, cols=("old", "C_family"), key="old"):
+    """the registered OLS + bootstrap on `rows`; a stub when there are too few repos to fit"""
     if len(rows) < 8:
-        return {}
-    b = ols(rows, ["old", "C_family"])
-    ci = boot(rows, ["old", "C_family"])
-    print(f"\n  {title}")
-    for j, c in enumerate(["old", "C_family"]):
-        lo, hi = ci[c]
-        sig = "SUPPORTED" if (lo > 0 or hi < 0) else "not supported"
-        print(f"    {c:<10} coef {b[j+1]:+.4f}   CI [{lo:+.4f}, {hi:+.4f}]   {sig}")
-    primary = "MOD-H1 supported" if (ci["old"][0] > 0 or ci["old"][1] < 0) else \
-              "MOD-H1 not supported -- age is not the moderator"
-    print(f"  -> {primary}")
-    return {"coef": {"intercept": b[0], "old": b[1], "C_family": b[2]},
-            "ci95": {c: list(v) for c, v in ci.items()}, "primary": primary}
+        print(f"\n  {title}: only {len(rows)} repos -- not fitted")
+        return {"n": len(rows), "reading": "not fitted"}
+    cols = list(cols)
+    b, ci = ols(rows, cols), boot(rows, cols)
+    if not b:
+        print(f"\n  {title}: singular -- not fitted")
+        return {"n": len(rows), "reading": "not fitted"}
+    print(f"\n  {title}   n={len(rows)}")
+    for j, c in enumerate(cols):
+        print(f"    {c:<14} coef {b[j+1]:+.4f}   CI [{ci[c][0]:+.4f}, {ci[c][1]:+.4f}]")
+    r = reading(*ci[key])
+    print(f"    MOD-H1 ({key} lowers the lift): {r}")
+    return {"n": len(rows), "coef": dict(zip(["intercept"] + cols, b)),
+            "ci95": {c: list(v) for c, v in ci.items()}, "reading": r}
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("docs/mod1_result.json"))
     a = ap.parse_args()
-    amend = json.loads(AMEND.read_text())["repos"] if AMEND.exists() else {}
-    meta = {d["repo"]: {**d, **amend.get(d["repo"], {})} for d in json.loads(DRAW.read_text())["draw"]}
-    for r in PRIOR:  # the prior eight, re-dated from their own history DBs by struct_null's frame
-        meta.setdefault(r, {"repo": r})
+    drawn = [d["repo"] for d in json.loads(DRAW.read_text())["draw"]]
+    LIFTS.mkdir(exist_ok=True)
     rows, excluded = [], []
-    for repo, m in sorted(meta.items()):
-        if "lang" in m:  # Amendment 2 instrument check, drawn repos only, decided before the lift is read
-            fl, ed = call_coverage(repo, m["lang"])
-            if fl and ed * 10 < fl:
-                excluded.append({"repo": repo, "why": f"engine does not resolve {m['lang']} calls: "
-                                                      f"{ed} inbound edges over {fl} {m['lang']} files"})
-                continue
-        lf = lift_for(repo)
-        if lf is None:
-            excluded.append({"repo": repo, "why": "under the positives floor or unscanned"})
+    for repo in sorted(set(drawn) | set(PRIOR)):
+        f = LIFTS / f"lift_{repo}.json"
+        try:
+            m = json.loads(f.read_text()) if f.exists() else measure(repo)
+        except Exception as e:  # a failure is its own reason, never folded into the floor
+            m = {"repo": repo, "status": "failed", "why": f"{type(e).__name__}: {e}"}
+        if m["status"] not in ("unprepared", "failed"):
+            f.write_text(json.dumps(m, indent=1) + "\n")
+        if m["status"] != "ok":
+            excluded.append({"repo": repo, "status": m["status"], "why": m.get("why")})
             continue
-        if "age" not in m:   # the prior eight: ages recorded in docs/WHERE_WE_STAND
-            known = {"commons-lang": (2002, "managed"), "curl": (1999, "C"), "libxml2": (1998, "C"),
-                     "ndpi": (2015, "C"), "postgres": (1996, "C"), "prometheus": (2012, "managed"),
-                     "redis": (2009, "C"), "sphinx": (2007, "managed")}
-            y, fam = known[repo]
-            m = {"repo": repo, "year": y, "family": fam, "age": "old" if y < 2006 else "young"}
-        rows.append({"repo": repo, "lift": lf, "old": 1 if m["age"] == "old" else 0,
-                     "C_family": 1 if m["family"] == "C" else 0, "year": m["year"]})
-    print(f"analysis set: {len(rows)} repos   excluded: {len(excluded)}\n")
-    print(f"  {'cell':<18}{'n':>4}{'mean lift':>12}{'positive':>10}")
-    for age in ("old", "young"):
-        for fam in ("C", "managed"):
-            g = [r for r in rows if r["old"] == (age == "old") and r["C_family"] == (fam == "C")]
+        rows.append({"repo": repo, "lift": m["lift"], "ci95": m["ci95"], "positives": m["positives"],
+                     "old": int(m["start_year"] < OLD_BEFORE), "C_family": int(m["family"] == "C"),
+                     "start_year": m["start_year"], "age_at_cut": m["age_at_cut"], "language": m["language"],
+                     "drawn": repo in drawn, "merge_units": m["merge_units"],
+                     "call_coverage": m["call_coverage"], "window_days": m["window_days"]})
+    print(f"analysis set: {len(rows)} repos   excluded: {len(excluded)}")
+    for e in excluded:
+        print(f"    out  {e['repo']:<18}{e['status']:<16}{e['why']}")
+    print(f"\n  {'cell':<18}{'n':>4}{'mean lift':>12}{'lift > 0':>10}{'CI excl. 0':>12}")
+    for old in (1, 0):
+        for fam in (1, 0):
+            g = [r for r in rows if r["old"] == old and r["C_family"] == fam]
             if g:
-                print(f"  {age+'/'+fam:<18}{len(g):>4}{st.mean(r['lift'] for r in g):>+12.4f}"
-                      f"{sum(1 for r in g if r['lift'] > 0):>7}/{len(g)}")
+                solid = sum(1 for r in g if r["ci95"][0] is not None and (r["ci95"][0] > 0 or r["ci95"][1] < 0))
+                print(f"  {('old' if old else 'young')+'/'+('C' if fam else 'managed'):<18}{len(g):>4}"
+                      f"{st.mean(r['lift'] for r in g):>+12.4f}{sum(1 for r in g if r['lift'] > 0):>7}/{len(g)}"
+                      f"{solid:>9}/{len(g)}")
     res = {"n": len(rows), "excluded": excluded, "rows": rows}
-    res.update(test(rows, "REGISTERED TEST (OLS, bootstrap CI over repos)"))
-    # Amendment 1 (declared before any drawn repo was scored): the same test without the repos whose main
-    # language the instrument does not measure. Reported beside the primary, never instead of it.
-    s1 = [r for r in rows if r["repo"] not in S1_UNMEASURED]
-    res["s1"] = {"n": len(s1), "dropped": sorted(r["repo"] for r in rows if r["repo"] in S1_UNMEASURED),
-                 **test(s1, f"SENSITIVITY S1 (unmeasured-language repos removed, n={len(s1)})")}
-    if "primary" in res and "primary" in res["s1"]:
-        agree = res["primary"].startswith("MOD-H1 supported") == res["s1"]["primary"].startswith("MOD-H1 supported")
-        res["robust_to_language_call"] = agree
-        print(f"\n  primary and S1 {'agree' if agree else 'DISAGREE -- MOD-H1 is not robust to the language call'}")
+    res["primary"] = test(rows, "PRIMARY (all repos that pass the checks)")
+    sens = {
+        "S1_new_languages_removed": [r for r in rows if r["repo"] not in S1_UNMEASURED],
+        "S2_drawn_only": [r for r in rows if r["drawn"]],
+        "S3_call_coverage": [r for r in rows if r["call_coverage"] >= MIN_COVERAGE],
+        "S4_full_window": [r for r in rows if r["window_days"] >= MIN_WINDOW],
+        "S5_merge_workflow_removed": [r for r in rows if not r["merge_units"]],
+    }
+    res["sensitivity"] = {k: test(v, k) for k, v in sens.items()}
+    gate = [res["primary"]["reading"], res["sensitivity"]["S1_new_languages_removed"]["reading"],
+            res["sensitivity"]["S2_drawn_only"]["reading"]]
+    res["verdict"] = ("MOD-H1 supported" if all(g == "supported" for g in gate) else
+                      "MOD-H1 contradicted" if all(g == "contradicted" for g in gate) else
+                      "MOD-H1 not detected" if gate[0] == "not detected" else
+                      f"MOD-H1 {gate[0]} in the primary but NOT ROBUST (S1 {gate[1]}, drawn-only {gate[2]})")
+    res["secondary"] = {
+        "continuous_age": test(rows, "SECONDARY continuous age at the cut (years)", ("age_at_cut", "C_family"),
+                               "age_at_cut"),
+        "interaction": test([{**r, "old_x_C": r["old"] * r["C_family"]} for r in rows],
+                            "SECONDARY with the age x family interaction", ("old", "C_family", "old_x_C")),
+    }
+    print(f"\n  VERDICT: {res['verdict']}")
     a.out.write_text(json.dumps(res, indent=1) + "\n")
     print(f"\n-> {a.out}")
     return 0

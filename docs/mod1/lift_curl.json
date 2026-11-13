@@ -1,0 +1,28 @@
+{
+ "repo": "curl",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 39874,
+ "cut": 1711521975,
+ "end": 1774593975,
+ "window_days": 730.0,
+ "start_year": 2000,
+ "age_at_cut": 23.5,
+ "snapshot": "5a50cb5a18a141a463148562dab83fa3be1a3b90",
+ "snapshot_offset_days": 4.6,
+ "unit_files": 450,
+ "tree_unit_files": 451,
+ "inbound_edges": 9134,
+ "complete": 0.998,
+ "call_coverage": 0.464,
+ "positives": 280,
+ "auc_loc": 0.8637184873949579,
+ "auc_in_degree": 0.7171848739495799,
+ "lift": -0.14653361344537807,
+ "ci95": [
+  -0.18109001171156103,
+  -0.11167229039953575
+ ]
+}

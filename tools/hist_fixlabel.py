@@ -23,12 +23,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fixlike_v2 as F  # noqa: E402
 
 
-def fix_shas(h: sqlite3.Connection, rules: str = "raw") -> set[str] | None:
+def fix_shas(h: sqlite3.Connection, rules: str = "raw", merge_units: bool = False) -> set[str] | None:
     """The shas to treat as fixes. None means 'no filtering' -- the caller keeps its own `fix=1` test."""
     if rules == "raw":
         return None
     raw = {s: (subj or "") for s, subj in
-           h.execute("select sha, subject from commit_ where fix=1 and merge=0 and bot=0")}
+           h.execute("select sha, subject from commit_ where fix=1 and bot=0"
+                     + ("" if merge_units else " and merge=0"))}  # merge_units: the merge IS the labelled commit
     touched: dict[str, list[str]] = {}
     for sha, path in h.execute("select sha, path from touch"):
         if sha in raw:

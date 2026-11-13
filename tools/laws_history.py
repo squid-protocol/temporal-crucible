@@ -107,7 +107,7 @@ def walk(repo: Path, first_parent: bool):
         yield sha, int(ct), author, committer, len(parents.split()), subject, body, changes
 
 
-def harvest(repo: Path, language: str, db: Path) -> dict:
+def harvest(repo: Path, language: str, db: Path, c_family: bool = False) -> dict:
     """Write the history database of `repo`; returns its meta."""
     if db.exists():
         db.unlink()
@@ -125,7 +125,10 @@ def harvest(repo: Path, language: str, db: Path) -> dict:
 
     def unit(path: str) -> bool:
         if path not in unit_cache:
-            unit_cache[path] = U.language_of(path) == language and ex.why(path) is None
+            # c_family (MOD-1 Amendment 3, opt-in): a C or C++ repo's units are its C AND C++ files, because a
+            # bare `.h` is called C and a C++ repo would otherwise never see a header fixed
+            langs = ("c", "cpp") if c_family and language in ("c", "cpp") else (language,)
+            unit_cache[path] = U.language_of(path) in langs and ex.why(path) is None
         return unit_cache[path]
 
     n_fix = n_kw = 0
@@ -158,7 +161,8 @@ def harvest(repo: Path, language: str, db: Path) -> dict:
         con.execute("INSERT INTO commit_ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     (sha, ct, author, int(bot), int(n_par > 1), fix, int(kw), len(touched), subject[:300]))
         con.executemany("INSERT INTO touch VALUES (?, ?, ?, ?)", touched)
-    meta = {"language": language, "commits": len(commits), "first_parent_commits": chain, "merges": merges,
+    meta = {"language": language, "units": "c+cpp" if c_family and language in ("c", "cpp") else language,
+            "commits": len(commits), "first_parent_commits": chain, "merges": merges,
             "merge_share": round(merges / chain, 4) if chain else 0, "unit": "first-parent commit, merges included"
             if merge_units else "non-merge commit", "fixes": n_fix, "keyword_commits": n_kw,
             "bots": int(con.execute("SELECT COUNT(*) FROM commit_ WHERE bot = 1").fetchone()[0]),
@@ -175,9 +179,10 @@ def main() -> int:
     ap.add_argument("--repo", required=True, help="a clone under the pool, or a path")
     ap.add_argument("--language", required=True, choices=sorted(U.EXTS))
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--c-family", action="store_true", help="a c/cpp repo's units are its C and C++ files together")
     a = ap.parse_args()
     repo = Path(a.repo) if Path(a.repo).is_dir() else POOL_DIR / a.repo
-    meta = harvest(repo, a.language, a.out / "history" / f"{repo.name}.db")
+    meta = harvest(repo, a.language, a.out / "history" / f"{repo.name}.db", c_family=a.c_family)
     print(f"{repo.name}: " + ", ".join(f"{k} {v}" for k, v in meta.items() if k not in ("head", "linguist", "first_ct", "last_ct")))
     return 0
 
