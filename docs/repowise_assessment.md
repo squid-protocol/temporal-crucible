@@ -87,3 +87,84 @@ trust the finding.
    alone, let `fix:` adoption vary by author, and see what lift the pipeline manufactures.
 3. **Report the CCS selection effect** against the 3.8% adoption figure — it bounds external validity and
    costs a sentence.
+
+---
+
+# Is it a good system? Is the equation actually good?
+
+## As an engineering artefact: yes, and better practice than most published defect prediction
+
+Leakage-free T0, cross-validated calibration, trivial baselines with bootstrap CIs over repos, within-stratum
+analysis, a mixed-effects model separating repo from file, an explicitly published failure mode, and a
+validated micro-fix with a null-result CI. Very little in this literature is held to that standard.
+
+**They also found our hierarchical result independently.** A mixed-effects logistic gives a **repo
+random-intercept SD ≈ 1.19 and language SD ≈ 1.02 on the odds scale** — baseline defect rates vary between
+repos as much as a standardised feature moves within one. Their own words: *"A flat model conflates 'this
+repo is buggy' with 'this file is risky.'"* That is the same thing our per-repo nulls said (τ 0.58–1.29), from
+a different direction.
+
+## As a predictor: the honest reading of their own numbers
+
+| | AUC |
+|---|---|
+| LOC-only | **0.742** |
+| health (calibrated) | 0.734 |
+| health within Q1 (≤28 LOC) | 0.600 |
+| health within **Q2 (29–68 LOC)** | **0.488 — inverted, below random** |
+| health within Q3 | 0.670 |
+| health within Q4 (>162 LOC) | 0.675 |
+
+**The headline 0.73 is mostly the between-band size contrast**, which they say themselves. Within any band
+it runs 0.49–0.68. So as a *risk ranker* it is not better than counting lines.
+
+**But on the effort-aware metric it genuinely wins**: health − LOC Popt **+0.109 [+0.039, +0.204]**, CI
+excludes zero. That is a different and more useful question — *given a fixed budget of lines to review, how
+many defects do you catch?* Ordering by LOC finds defects but makes you read enormous files. Their score
+finds smaller risky files, so it is more efficient per line read. **For the actual product use case —
+allocating review effort — the score beats the baseline. For "rank files by risk", it does not.**
+
+## Compared to ours
+
+Not the same kind of artefact. They have a calibrated product score; we have law estimators and a label
+audit. On the dimensions that overlap:
+
+| | repowise | us |
+|---|---|---|
+| trivial baselines | **yes, with CIs over repos** | added only today, after being burned |
+| label robustness | **yes (SZZ, ≤0.01 AUC move)** | yes (raw vs v3c, and it reversed our result) |
+| within-stratum analysis | **yes, published** | no |
+| hierarchical repo effect | **yes, measured (SD 1.19)** | yes, as per-repo nulls (τ 0.58–1.29) |
+| label **precision** measured | **no** | **yes, 0.27–0.86 per repo** |
+| label **recall** measured | no | **yes, 0.26–0.57, three instruments** |
+| external benchmark | no | **yes, 35k validated commits** |
+| null | `random` (0.49) | label-noise simulation (null medians up to +0.157) |
+
+They are ahead on study design; we are ahead on knowing what the outcome variable actually is.
+
+## Is there a better equation, given what we learned?
+
+**Not a different feature set — a different shape.** Three changes their own data already supports:
+
+1. **Score per repo, not pooled.** They measured repo SD ≈ 1.19 on the odds scale and then shipped a flat
+   model anyway. Partial pooling is the standard fix and it is the single largest available improvement.
+2. **Ship two scores, which they already concluded.** Size-relative reshaping lifts small bands and Popt
+   ≈ +0.05 but costs −0.07 to −0.12 AUC, because big files genuinely carry more defects (42% defect rate in
+   the top NLOC quartile vs 12% in the bottom). Removing size discards real signal. So: a discrimination
+   score that keeps size, and a cost-effectiveness score that removes it — their conclusion, and the data
+   supports it.
+3. **Measure the label's precision.** Every coefficient — `co_change_scatter` +0.34, `nested_complexity`
+   +0.33, `ownership_risk` +0.29, `change_entropy` +0.18 — is estimated against an outcome of unknown
+   quality. Label noise attenuates coefficients **non-uniformly**, so the *ranking* of those features is not
+   safe either. Thirty commits per repo judged from the diff would settle it.
+
+**One caution against over-reading the Popt win**: Popt is computed against the same unvalidated label, so it
+inherits the same noise. It survives better than AUC because it is a *within-label* comparison against LOC,
+where shared error partly cancels — the same reason our HR-2 relative comparison kept moderate standing while
+HR-1's absolute one did not.
+
+## Bottom line
+
+**Their system is good at the thing it ships for — ordering review effort — and not better than a line count
+at ranking risk.** They know this and publish it. The equation's weakness is not its features; it is that it
+is flat where the data says hierarchical, and calibrated against an outcome nobody has validated.
