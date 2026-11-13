@@ -83,12 +83,16 @@ def hr2_repo(repo: str) -> dict:
         if t is None or t >= cut:
             continue
         i = int((cut - t) // (PERIOD_DAYS * 86400))      # 0 = most recent period
-        per.setdefault(i, {})[path] = per[i].get(path, 0) + a + dl
+        bucket = per.setdefault(i, {})   # the RHS is evaluated first, so per[i] must exist before the get
+        bucket[path] = bucket.get(path, 0) + a + dl
     if not per:
         return {**rec, "evaluable": False, "why": "no pre-cut line deltas"}
     K = max(per) + 1
     hcm: dict[str, float] = {}
     for i, files in per.items():
+        # a rename or mode change lands in the harvest with 0 added and 0 deleted; it is not a change in
+        # lines, carries no probability mass, and log(0) is undefined -- so it is dropped before the entropy
+        files = {p_: v for p_, v in files.items() if v > 0}
         tot = sum(files.values())
         if tot <= 0 or len(files) < 2:
             continue                                     # H = 0 by definition for a single changed file
