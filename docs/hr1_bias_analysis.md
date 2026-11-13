@@ -118,3 +118,71 @@ error model the null was built with.
 - **The claim narrows to one repository.** "Recidivism beats size" is defended on curl and nowhere else in
   this bank. That is a much smaller claim than the programme has been carrying, and it is the first one
   standing on an audited label, an external benchmark and a bias analysis at once.
+
+---
+
+# Author-level spread, and what it does to the curl margin (2026-11-13)
+
+The analysis above recorded a limitation: τ was estimated at the **file** level only, and author-level
+variation would add to it. `tools/author_model.py` measures that addition.
+
+| component | τ | units |
+|---|---|---|
+| between **authors** | **0.83** | 70 curl authors with ≥15 commits |
+| between **files** | 0.36 | 529 curl files with ≥15 commits |
+| **combined** | **0.91** | — a 10.2× spread between a 90th- and 10th-percentile unit |
+
+**Author variation is more than double the file variation**, which is what Bird et al. predicted and what the
+earlier figure missed. Some curl contributors with 15–22 commits have an announcement rate of **0.00** — they
+never write "fix" — while others sit near 0.50–0.67.
+
+## Re-running curl's null at the honest τ
+
+| τ | null median | null 95th | null max |
+|---|---|---|---|
+| 0.36 (file only, what was reported before) | −0.086 | −0.053 | −0.012 |
+| **0.91 (combined, correct)** | **+0.001** | **+0.036** | **+0.061** |
+| 1.00 | +0.020 | +0.062 | +0.098 |
+| 1.10 | +0.034 | +0.077 | +0.113 |
+
+**Observed curl lift: +0.071.**
+
+**The result still survives** — at τ = 0.91 the observed lift exceeds even the maximum of 400 null replicates.
+But the margin is much smaller than reported earlier. The tipping point moves from τ ≈ 1.25 to **τ ≈ 1.05–1.10**,
+so the heterogeneity needed to explain curl's effect away is now only about **1.2× the measured value**, not
+the ~3.5× stated above. **That earlier margin was wrong because it used the file-level τ, and this paragraph
+supersedes it.**
+
+The honest standing: curl's effect clears its null, and clears it at a realistic τ, but it is no longer a
+comfortable margin. A modest further source of announcement heterogeneity — era effects, subsystem effects,
+anything not captured by author and file — would close it.
+
+## The audit queue: where to spend expensive reading
+
+The same model says which commits to look at. Rank by **uncertainty**, not size: an unlabelled, small,
+non-feature change by an author who never announces is where the cheap label is most likely wrong.
+
+The first cut of this ranking sorted by *most files touched* and surfaced `HTTP/3: add proxy CONNECT`, a
+REUSE-compliance sweep and a ternary-spacing pass — large commits that are confidently **not** fixes, from
+which a reader learns nothing. Re-ranked to prefer 1–4 files and to push feature verbs down, it surfaces:
+
+```
+[0.00 announce, 1 file] ares__send_query() now varies the retry timeout pseudo-randomly to avoid packet loss
+[0.00 announce, 1 file] If the server returns garbage or nothing at all ...
+[0.00 announce, 1 file] multi: unmark handle as used when no longer head of pipeline
+[0.00 announce, 1 file] SNI: set name to custom Host header
+```
+
+That is the right population — terse, unannounced, plausibly real repairs — and it is the queue a diff-reading
+model or a human reviewer should work, because it is where each judgement buys the most information.
+
+## What is deliberately NOT modelled
+
+**Defect-proneness by author.** "Who writes buggy code" is not identifiable here: author assignment is
+confounded with subsystem, seniority, era, review intensity and task difficulty, and the only bug signal
+available is the same label whose reliability varies *by author*. Any such number would measure the labelling
+process and report it as a property of a person — the exact error this programme spent the day correcting,
+with the added problem that it is about people rather than files.
+
+What **is** identifiable, and is what this model provides: announcement behaviour, label reliability
+conditioned on author, and a ranked queue for where to spend validation effort.
