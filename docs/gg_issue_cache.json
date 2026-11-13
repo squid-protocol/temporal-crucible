@@ -1,0 +1,360 @@
+{
+ "7965": {
+  "labels": [
+   "scope:sweep",
+   "claim:melek"
+  ]
+ },
+ "7954": {
+  "labels": [
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8009": {
+  "labels": [
+   "enhancement",
+   "schema",
+   "core-engine",
+   "priority: medium",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "7955": {
+  "labels": [
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "7998": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "7828": {
+  "labels": [
+   "bug",
+   "claim:melek"
+  ]
+ },
+ "8373": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "7993": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "6454": {
+  "labels": [
+   "bug",
+   "priority: medium",
+   "scope:sweep",
+   "claim:melek",
+   "call-graph"
+  ]
+ },
+ "7996": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "7999": {
+  "labels": [
+   "documentation"
+  ]
+ },
+ "6572": {
+  "labels": [
+   "bug",
+   "priority: medium",
+   "scope:sweep",
+   "claim:melek",
+   "call-graph"
+  ]
+ },
+ "7995": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "7827": {
+  "labels": [
+   "bug",
+   "claim:melek"
+  ]
+ },
+ "7994": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "8002": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "8000": {
+  "labels": [
+   "documentation",
+   "claim:melek"
+  ]
+ },
+ "8322": {
+  "labels": [
+   "priority: high"
+  ]
+ },
+ "4175": {
+  "labels": [
+   "enhancement",
+   "testing",
+   "legacy-modernization",
+   "priority: low",
+   "scope:frontier",
+   "era:2",
+   "claim:melek",
+   "needs:corpus",
+   "needs:docker"
+  ]
+ },
+ "8328": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "7956": {
+  "labels": [
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8325": {
+  "labels": [
+   "claim:melek"
+  ]
+ },
+ "8073": {
+  "labels": [
+   "priority: high",
+   "scope:core"
+  ]
+ },
+ "8121": {
+  "labels": [
+   "priority: high",
+   "scope:core"
+  ]
+ },
+ "4108": {
+  "labels": [
+   "testing",
+   "core-engine",
+   "priority: high",
+   "security",
+   "scope:infra",
+   "needs:crucible"
+  ]
+ },
+ "8298": {
+  "labels": [
+   "ci-red-main"
+  ]
+ },
+ "4052": {
+  "labels": [
+   "enhancement",
+   "testing",
+   "legacy-modernization",
+   "priority: low",
+   "scope:frontier",
+   "needs:docker"
+  ]
+ },
+ "8230": {
+  "labels": [
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8010": {
+  "labels": [
+   "bug",
+   "core-engine",
+   "data-quality",
+   "priority: medium",
+   "scope:sweep",
+   "claim:melek"
+  ]
+ },
+ "8161": {
+  "labels": [
+   "enhancement",
+   "priority: medium",
+   "scope:frontier"
+  ]
+ },
+ "8218": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8215": {
+  "labels": [
+   "scope:infra"
+  ]
+ },
+ "8196": {
+  "labels": [
+   "claim:melek"
+  ]
+ },
+ "8185": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8210": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8208": {
+  "labels": [
+   "ci-red-main"
+  ]
+ },
+ "8058": {
+  "labels": [
+   "priority: high",
+   "scope:sweep",
+   "claim:melek"
+  ]
+ },
+ "7524": {
+  "labels": [
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8181": {
+  "labels": [
+   "ci-red-main"
+  ]
+ },
+ "7963": {
+  "labels": [
+   "scope:infra"
+  ]
+ },
+ "8111": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8163": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8165": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8120": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8158": {
+  "labels": [
+   "claim:melek"
+  ]
+ },
+ "8119": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8075": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8113": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8076": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ },
+ "8016": {
+  "labels": [
+   "bug",
+   "core-engine",
+   "priority: medium",
+   "scope:sweep",
+   "claim:melek"
+  ]
+ },
+ "7646": {
+  "labels": [
+   "enhancement",
+   "legacy-modernization",
+   "priority: medium",
+   "scope:frontier",
+   "claim:nyx"
+  ]
+ },
+ "8132": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8096": {
+  "labels": [
+   "ci-red-main",
+   "claim:melek"
+  ]
+ },
+ "8112": {
+  "labels": [
+   "priority: high",
+   "scope:core",
+   "claim:melek"
+  ]
+ }
+}
