@@ -34,17 +34,46 @@ each repo independently.
   too few post-cut positives. A repo with **< 30 positives** is reported `not evaluable` and pooled over, not
   counted as a failure.
 
-## HR-2 — change entropy `HCM1_LD_30` (tc#24) — BLOCKED, data missing
+## HR-2 — change entropy `HCM1_LD_30` (tc#24), operational definition fixed 2026-11-13 before any run
 
-The registered metric is share-weighted, linearly decayed, over **line deltas** in 30-day periods. The history
-databases record which files a commit touched (`touch.status`), **not how many lines**. HR-2 cannot run until a
-line-delta harvest exists (`git log --numstat` per repo). Recorded here so the gap is visible rather than
-silently substituted: **a commit-count entropy is NOT `HCM1_LD_30` and will not be reported as it.**
+Hassan's History Complexity Metric, the variant the program selected on CVE labels and then validated frozen on
+fresh bug labels (pooled AUC 0.868 vs LOC 0.830 on one repo). Unblocked by the line-delta harvest
+(`tools/hist_deltas.py`), which supplies the per-file line counts the history DBs lack.
 
-## HR-3 — function-grain recidivism (tc#28) — BLOCKED, data missing
+- **Period**: 30 days, tiled backwards from the cut.
+- **Change amount** for file *j* in period *i*: `added + deleted` lines, from the harvest, non-merge non-bot
+  commits only.
+- **Entropy** of period *i*: `H_i = -sum_j p_ij ln p_ij / ln(n_i)`, `p_ij` the file's share of the period's
+  changed lines and `n_i` the number of files changed in it. Normalised so a period is comparable to another
+  with a different file count; a period with one changed file has `H_i = 0` by definition.
+- **HCM1 attribution**: share-weighted, `p_ij * H_i` — the registered variant, not the uniform one.
+- **LD, linear decay**: period *i* of *K* (1 = oldest, K = newest, all strictly before the cut) carries weight
+  `i / K`, so the most recent period weighs 1 and the oldest ~0.
+- **Predictor**: `HCM1_LD_30(j) = sum_i (i/K) * p_ij * H_i`.
+- Cut, outcome window, baseline, exclusions, floors and metrics are **HR-1's, unchanged**, so the two are
+  directly comparable on the same files.
+- **Pass**: AUC lift over LOC > 0 in >= 6 of 8 repos and a pooled 95% interval excluding 0.
+- **Also reported, not a bar**: lift over *recidivism*, since the live question is whether entropy adds
+  anything to the predictor the program already has.
 
-Needs changed **line ranges** per commit, mapped onto the function spans the walks carry (`func.start_line`,
-`func.loc`). The harvest for HR-2 supplies the same input, so HR-2 and HR-3 unblock together.
+## HR-3 — function-grain recidivism (tc#28), operational definition fixed 2026-11-13 before any run
+
+Does recidivism sharpen when the unit is a function rather than a file? Unblocked by the harvest's hunk ranges.
+
+- **Unit**: a function identified by `(path, name)` — the LAWS node identity. Overloads and same-named methods
+  of different classes in one file merge, and the **merge rate is reported with the result**, because it hits
+  exactly the hot functions this test is about.
+- **A fix hits a function** when a fix commit's hunk range in the new file overlaps `[start_line,
+  start_line + loc)` of a function in that file, taken from the **quarterly snapshot nearest the commit**.
+- **Candidates**: functions present in the snapshot nearest the cut.
+- **Predictor**: count of prior fix hits. **Baseline**: the function's `loc`.
+- **Outcome**: >= 1 fix hit in the 24 months after the cut. Floors, cut and metrics are HR-1's.
+- **Pass**: AUC lift over function LOC > 0 in >= 6 of 8 repos, pooled interval excluding 0.
+- **The question behind the bar**: file-grain lift is already known (HR-1). HR-3 is worth running only if the
+  function-grain lift is **larger**, so that is reported beside it and is the real reading.
+- **Stated in advance**: hunk-to-function mapping is approximate — the snapshot is quarterly, the commit is not,
+  so a function that moved within a quarter can take a neighbour's hit. This biases toward noise, which makes a
+  positive result conservative and a null uninformative.
 
 ## What is NOT claimed here
 
