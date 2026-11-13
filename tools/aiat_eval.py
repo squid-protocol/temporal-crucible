@@ -174,7 +174,8 @@ def scores_path(repo: str, model: str) -> Path:
 
 def tag(a) -> str:
     """The score-file key: an anonymised run must never share a file with a plain one."""
-    return a.model + ("-anon" if getattr(a, "anon", False) else "")
+    v = getattr(a, "anon_version", 0) or (1 if getattr(a, "anon", False) else 0)
+    return a.model + ("" if not v else "-anon" if v == 1 else f"-anon{v}")
 
 
 def cmd_sample(a) -> int:
@@ -255,6 +256,35 @@ STDLIB = {
     "errno", "stdin", "stdout", "stderr", "toupper", "tolower", "isdigit", "isalpha", "isspace",
     "atoi", "strtol", "strtoul", "qsort", "abs", "min", "max",
 }
+# Version 2 (2026-11-13) closes the two leaks version 1 left, measured on the 988 curl files: 155 files kept
+# `#include <curl/curl.h>` (tree-sitter reads a <...> path as a system_lib_string, which v1 never touched),
+# and 109 files kept project names inside #define / #error bodies (a preproc_arg is raw text to tree-sitter,
+# so v1's identifier walk never reached inside it). v1 is kept exactly as it was, so its scores reproduce.
+#   - <...> include paths are kept only for C standard, POSIX and OS system headers (STD_HEADERS,
+#     SYS_HEADER_DIRS); every other one becomes <hN.h>, numbered consistently within the file.
+#   - preproc_arg text is rewritten with the same rules as code: comments dropped, string and char contents
+#     replaced, identifiers renamed through the same table, C keywords and STDLIB names kept.
+STD_HEADERS = {
+    "assert.h", "complex.h", "ctype.h", "errno.h", "fenv.h", "float.h", "inttypes.h", "iso646.h", "limits.h",
+    "locale.h", "math.h", "setjmp.h", "signal.h", "stdalign.h", "stdarg.h", "stdatomic.h", "stdbool.h",
+    "stddef.h", "stdint.h", "stdio.h", "stdlib.h", "stdnoreturn.h", "string.h", "tgmath.h", "threads.h",
+    "time.h", "uchar.h", "wchar.h", "wctype.h",
+    "aio.h", "arpa/inet.h", "dirent.h", "dlfcn.h", "fcntl.h", "fnmatch.h", "glob.h", "grp.h", "iconv.h",
+    "langinfo.h", "libgen.h", "netdb.h", "nl_types.h", "poll.h", "pthread.h", "pwd.h", "regex.h", "sched.h",
+    "search.h", "semaphore.h", "spawn.h", "strings.h", "syslog.h", "termios.h", "unistd.h", "utime.h",
+    "wordexp.h", "ifaddrs.h", "malloc.h", "memory.h", "alloca.h", "endian.h", "err.h", "getopt.h",
+    "windows.h", "winsock.h", "winsock2.h", "ws2tcpip.h", "wincrypt.h", "winerror.h", "winbase.h",
+    "io.h", "direct.h", "process.h", "conio.h", "tchar.h", "shlobj.h", "iphlpapi.h", "mswsock.h",
+}
+SYS_HEADER_DIRS = ("sys/", "netinet/", "arpa/", "net/", "linux/", "mach/", "machine/", "bits/")
+C_KEYWORDS = {
+    "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern",
+    "float", "for", "goto", "if", "inline", "int", "long", "register", "restrict", "return", "short", "signed",
+    "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while",
+    "_Bool", "_Alignas", "_Alignof", "_Atomic", "_Generic", "_Noreturn", "_Static_assert", "_Thread_local",
+    "defined",
+}
+_PP_TOKENS = None
 _ANON_PARSER = None
 
 
@@ -266,20 +296,72 @@ def _anon_parser():
     return _ANON_PARSER
 
 
-def anonymise(src: str) -> str:
-    """Project identity removed, control structure preserved. Deterministic for a given file."""
+def _compiler_name(txt: str) -> bool:
+    """v2: a reserved name the compiler or platform defines. v1 kept every `__` name, which let a project's
+    own `__CurlISocket` through; v2 keeps only the `__x__` form and the known compiler prefixes."""
+    return txt.startswith("__") and (txt.endswith("__") or txt.startswith((
+        "__builtin", "__declspec", "__cdecl", "__stdcall", "__fastcall", "__inline", "__restrict",
+        "__int", "__typeof", "__asm", "__volatile", "__extension", "__thread", "__forceinline")))
+
+
+def _system_header(path: str) -> bool:
+    return path in STD_HEADERS or path.startswith(SYS_HEADER_DIRS)
+
+
+def _anon_pp_text(text: str, rename) -> str:
+    """A preproc_arg body (raw text to tree-sitter) under the same rules as parsed code."""
+    import re
+    global _PP_TOKENS
+    if _PP_TOKENS is None:
+        _PP_TOKENS = re.compile(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'|[A-Za-z_]\w*',
+                                re.S)
+
+    def sub(m):
+        tok = m.group(0)
+        if tok.startswith(("/*", "//")):
+            return " "
+        if tok.startswith('"'):
+            return '"s"'
+        if tok.startswith("'"):
+            return "'x'"
+        if tok in C_KEYWORDS or tok in STDLIB or _compiler_name(tok):
+            return tok
+        return rename(tok, "identifier")
+    return _PP_TOKENS.sub(sub, text)
+
+
+def anonymise(src: str, version: int = 1) -> str:
+    """Project identity removed, control structure preserved. Deterministic for a given file.
+
+    version 1 is the arm scored on 2026-11-11 and is kept byte-for-byte; version 2 also rewrites
+    non-system <...> include paths and the bodies of #define / #error / #pragma lines.
+    """
     data = src.encode("utf-8", "replace")
     tree = _anon_parser().parse(data)
-    edits, names = [], {}
+    edits, names, headers = [], {}, {}
+
+    def rename(txt: str, t: str) -> str:
+        if txt not in names:
+            names[txt] = f"{'fn' if t == 'identifier' else 'm' if t == 'field_identifier' else 'T'}{len(names)}"
+        return names[txt]
 
     def walk(n):
         t = n.type
         if t in ("identifier", "field_identifier", "type_identifier", "statement_identifier"):
             txt = n.text.decode("utf-8", "replace")
-            if txt not in STDLIB and not txt.startswith("__"):
-                if txt not in names:
-                    names[txt] = f"{'fn' if t == 'identifier' else 'm' if t == 'field_identifier' else 'T'}{len(names)}"
-                edits.append((n.start_byte, n.end_byte, names[txt].encode()))
+            keep = _compiler_name(txt) if version >= 2 else txt.startswith("__")
+            if txt not in STDLIB and not keep:
+                edits.append((n.start_byte, n.end_byte, rename(txt, t).encode()))
+            return
+        if version >= 2 and t == "system_lib_string":
+            path = n.text.decode("utf-8", "replace")[1:-1].strip()
+            if not _system_header(path):
+                headers.setdefault(path, f"h{len(headers)}.h")
+                edits.append((n.start_byte, n.end_byte, f"<{headers[path]}>".encode()))
+            return
+        if version >= 2 and t == "preproc_arg":
+            txt = n.text.decode("utf-8", "replace")
+            edits.append((n.start_byte, n.end_byte, _anon_pp_text(txt, rename).encode()))
             return
         if t in ("comment",):
             edits.append((n.start_byte, n.end_byte, b""))
@@ -341,8 +423,13 @@ def cmd_score(a) -> int:
     if rec["prompt_sha256"] != prompt_sha():
         return _die("the prompt changed since the sample was built: rebuild the sample or restore it")
     scores = load_scores(a.repo, tag(a))
-    todo = [f for f in rec["files"] if f["path"] not in scores][: a.limit] if a.limit \
-        else [f for f in rec["files"] if f["path"] not in scores]
+    files = rec["files"]
+    if a.paths_from:
+        # Only files an earlier arm scored: every arm of a comparison faces the same files and positives.
+        keep = {p for p, v in load_scores(a.repo, a.paths_from).items() if "p" in v}
+        files = [f for f in files if f["path"] in keep]
+    todo = [f for f in files if f["path"] not in scores][: a.limit] if a.limit \
+        else [f for f in files if f["path"] not in scores]
     if not todo:
         print(f"{a.repo}: nothing to do, {len(scores)} already scored")
         return 0
@@ -354,8 +441,8 @@ def cmd_score(a) -> int:
     bodies = {}
     for f in todo:
         body = git(a.repo, "show", f"{SNAPSHOT[a.repo]}:{f['path']}")
-        if a.anon:
-            body = anonymise(body)
+        if a.anon or a.anon_version:
+            body = anonymise(body, a.anon_version or 1)
         if len(body.encode()) > MAX_FILE_BYTES:
             scores[f["path"]] = {"error": "oversized", "bytes": len(body.encode())}
             continue
@@ -416,7 +503,9 @@ def _score_batch(client, a, bodies: dict, scores: dict) -> int:
             continue
         msg = res.result.message
         got = _parse(next((bl.text for bl in msg.content if bl.type == "text"), ""))
-        scores[path] = {**(got or {"error": "unparseable"}), "model": a.model,
+        if got is None and msg.stop_reason == "refusal":
+            got = {"error": "refusal"}                       # v1 recorded these as "unparseable"
+        scores[path] = {**(got or {"error": "unparseable"}), "model": a.model, "stop_reason": msg.stop_reason,
                         "prompt_sha256": prompt_sha(),
                         "usage": {"in": msg.usage.input_tokens, "out": msg.usage.output_tokens}}
         done += 1
@@ -628,6 +717,9 @@ def main() -> int:
     ap.add_argument("--live", dest="batch", action="store_false", help="score with live calls instead")
     ap.add_argument("--budget-s", type=int, help="score --live: stop after this many seconds")
     ap.add_argument("--confirm", action="store_true", help="score: required, because it spends money")
+    ap.add_argument("--anon-version", type=int, choices=(1, 2), default=0,
+                    help="score: anonymiser version (2 also rewrites include paths and macro bodies)")
+    ap.add_argument("--paths-from", help="score: only files that this score tag (e.g. claude-opus-5-anon) parsed")
     ap.add_argument("--anon", action="store_true",
                     help="score/metrics: the recognition check -- rewrite project identity out of the source")
     a = ap.parse_args()

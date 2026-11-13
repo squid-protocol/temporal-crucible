@@ -125,3 +125,54 @@ instrument did not collapse — which was the live alternative and the reason fo
 Nothing about the ceiling. AIAT-P5 was not run, and would be descriptive on two excluded development repos
 anyway. A passed gate is a licence to design the attention study, not a result about software — and with
 recognition at 96.7%, not yet even that.
+
+## Arm 3: include paths and macro bodies anonymised — prepared 2026-11-13, NOT YET RUN
+
+**Status: code ready, not scored.** Blocked on an Anthropic API key for this environment. Nothing below is a
+result about the auditor.
+
+**Why.** The anonymisation check above left recognition at 44.5% of reasons. Measuring the anonymiser itself
+(no API, free) found two leaks, not one:
+
+| where the project name survived anonymiser v1 | curl files (of 988) |
+|---|---:|
+| a `<...>` include path (`#include <curl/curl.h>`) | 155 |
+| the body of a `#define`, `#error` or `#pragma` line | 109 |
+| **any** | **274** |
+
+tree-sitter reads a `<...>` path as one `system_lib_string` token and a macro body as raw `preproc_arg` text,
+and v1 rewrote neither. 175 of the 571 files the comparison rests on leaked.
+
+**Anonymiser v2** (`anonymise(src, 2)`, `score --anon-version 2`) keeps `<...>` paths only for C standard, POSIX
+and OS system headers and replaces every other one with `<hN.h>`; rewrites macro bodies with the same rules as
+code; and keeps a `__` name only in the compiler's `__x__` form or a known compiler prefix (v1 kept every `__`
+name, which let a project's own `__CurlISocket` through). Measured on the 988 curl files:
+
+| | v1 | v2 |
+|---|---:|---:|
+| files naming the project (`curl`, `libcurl`, `haxx`, `stenberg`, `daniel`, any case) | 274 | **0** |
+| files whose anonymised text has a parse error (original source: 265) | 307 | 307 |
+
+v1 is kept byte-for-byte (its output over all 988 files hashes the same before and after this change), so the
+11-12 November arm still reproduces. v2 scores go to their own file (`curl_scores_claude-opus-5-anon2.json`).
+A refusal is now recorded as `refusal`, not `unparseable`.
+
+**What will be run.** The **same 571 files** both earlier arms scored (`--paths-from claude-opus-5-anon`), the
+same frozen prompt (sha unchanged) and model, so the three arms face the same files and positives:
+
+    python tools/aiat_eval.py score --repo curl --anon-version 2 --paths-from claude-opus-5-anon --confirm
+    python tools/aiat_eval.py metrics --repo curl --anon-version 2 --replicate-model claude-opus-5-anon
+
+The prompt is deliberately **not** reworded to avoid the `cyber` refusals: a new prompt is a new instrument and
+would break the comparison. Refusals among the 571 are reported, not filtered.
+
+**What it can show.** If the within-band lift holds with recognition at or near zero, the "it only recalls curl"
+reading loses its last support on this sample. If the lift collapses toward the size order, recognition was
+carrying it. It still cannot separate recognition from the loss of comments (AIAT-P4).
+
+**Cost.** v1 on these 571 files used 2.78M input and 34k output tokens: **$7.36** batched. v2 text is the same
+length (4.43M against 4.46M characters over all 988 files), so about **$7.40**. Spend so far is $17.07 for the
+plain arms plus $7.36 recorded for the v1 anonymised arm; v1's 417 refusals returned zero output and their input
+tokens were not recorded, so up to about $5 more may have been billed. **Running arm 3 brings the total to about
+$32-37 against the $40 cap, which leaves too little for AIAT-P2 ($5.50).** P2 should be weighed against this
+arm before it runs.
