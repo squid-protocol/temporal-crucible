@@ -1,0 +1,28 @@
+{
+ "repo": "effect",
+ "status": "ok",
+ "language": "jsts",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 6303,
+ "cut": 1726441549,
+ "end": 1789513549,
+ "window_days": 585.0,
+ "start_year": 2020,
+ "age_at_cut": 4.27,
+ "snapshot": "007289a52d5877f8e90e2dacf38171ff9bf603fd",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 899,
+ "tree_unit_files": 903,
+ "inbound_edges": 10811,
+ "complete": 0.996,
+ "call_coverage": 0.438,
+ "positives": 131,
+ "auc_loc": 0.7796497296437659,
+ "auc_in_degree": 0.689030693384224,
+ "lift": -0.09061903625954193,
+ "ci95": [
+  -0.14199570856562638,
+  -0.04772134645016002
+ ]
+}

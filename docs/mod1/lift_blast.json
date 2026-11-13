@@ -1,0 +1,28 @@
+{
+ "repo": "blast",
+ "status": "ok",
+ "language": "cpp",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 104999,
+ "cut": 1545328894,
+ "end": 1608400894,
+ "window_days": 730.0,
+ "start_year": 1999,
+ "age_at_cut": 19.09,
+ "snapshot": "a13cda9e045d89ec5d32c7caf402ac95539b6774",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 6425,
+ "tree_unit_files": 6498,
+ "inbound_edges": 309852,
+ "complete": 0.989,
+ "call_coverage": 0.667,
+ "positives": 780,
+ "auc_loc": 0.6520309554631963,
+ "auc_in_degree": 0.6504400308873294,
+ "lift": -0.0015909245758669588,
+ "ci95": [
+  -0.01678756253632252,
+  0.01441661891345003
+ ]
+}

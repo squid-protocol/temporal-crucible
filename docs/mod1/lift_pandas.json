@@ -1,0 +1,28 @@
+{
+ "repo": "pandas",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 34019,
+ "cut": 1666376871,
+ "end": 1729448871,
+ "window_days": 730.0,
+ "start_year": 2011,
+ "age_at_cut": 11.43,
+ "snapshot": "0cf87d2ff2e686d24c376099cb6ef151812fc913",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 317,
+ "tree_unit_files": 317,
+ "inbound_edges": 55331,
+ "complete": 1.0,
+ "call_coverage": 0.76,
+ "positives": 193,
+ "auc_loc": 0.8527912418519138,
+ "auc_in_degree": 0.8565101119839545,
+ "lift": 0.0037188701320407525,
+ "ci95": [
+  -0.025611272275176122,
+  0.03345342254246009
+ ]
+}

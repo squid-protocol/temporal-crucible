@@ -139,6 +139,8 @@ def measure(repo: str) -> dict:
     out["positives"] = sum(y)
     if out["positives"] < MIN_POSITIVES:
         return {**out, "status": "under_floor", "why": f"{out['positives']} positives, floor {MIN_POSITIVES}"}
+    if out["positives"] == len(paths):
+        return {**out, "status": "no_negatives", "why": f"all {len(paths)} unit files are positive: nothing to rank"}
     L = [loc[p] for p in paths]
     D = [float(indeg.get(p, 0)) for p in paths]
     a_loc, a_deg = auc(L, y), auc(D, y)

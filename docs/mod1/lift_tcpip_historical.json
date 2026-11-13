@@ -1,0 +1,28 @@
+{
+ "repo": "tcpip_historical",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 69979,
+ "cut": 714580734,
+ "end": 777652734,
+ "window_days": 730.0,
+ "start_year": 1980,
+ "age_at_cut": 12.01,
+ "snapshot": "feb2ad4f5533204fc6ba0536b694d78ba3eee974",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 6559,
+ "tree_unit_files": 6587,
+ "inbound_edges": 29545,
+ "complete": 0.996,
+ "call_coverage": 0.24,
+ "positives": 394,
+ "auc_loc": 0.7661277639861508,
+ "auc_in_degree": 0.6571827617012692,
+ "lift": -0.10894500228488158,
+ "ci95": [
+  -0.13299338036507247,
+  -0.0834689449416871
+ ]
+}
