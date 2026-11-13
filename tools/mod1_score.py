@@ -75,6 +75,28 @@ def boot(rows, cols, reps=4000, seed=917):
             for c, v in out.items()}
 
 
+S1_UNMEASURED = {"racket", "ghostty", "swift", "wrf-fortran", "fieldtrip", "rails", "bugzilla", "discourse",
+                 "tigerbeetle", "bun"}  # docs/moderator_registration.md, Amendment 1
+
+
+def test(rows, title):
+    """the registered OLS + bootstrap on `rows`; {} when there are too few repos to fit"""
+    if len(rows) < 8:
+        return {}
+    b = ols(rows, ["old", "C_family"])
+    ci = boot(rows, ["old", "C_family"])
+    print(f"\n  {title}")
+    for j, c in enumerate(["old", "C_family"]):
+        lo, hi = ci[c]
+        sig = "SUPPORTED" if (lo > 0 or hi < 0) else "not supported"
+        print(f"    {c:<10} coef {b[j+1]:+.4f}   CI [{lo:+.4f}, {hi:+.4f}]   {sig}")
+    primary = "MOD-H1 supported" if (ci["old"][0] > 0 or ci["old"][1] < 0) else \
+              "MOD-H1 not supported -- age is not the moderator"
+    print(f"  -> {primary}")
+    return {"coef": {"intercept": b[0], "old": b[1], "C_family": b[2]},
+            "ci95": {c: list(v) for c, v in ci.items()}, "primary": primary}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("docs/mod1_result.json"))
@@ -105,19 +127,16 @@ def main() -> int:
                 print(f"  {age+'/'+fam:<18}{len(g):>4}{st.mean(r['lift'] for r in g):>+12.4f}"
                       f"{sum(1 for r in g if r['lift'] > 0):>7}/{len(g)}")
     res = {"n": len(rows), "excluded": excluded, "rows": rows}
-    if len(rows) >= 8:
-        b = ols(rows, ["old", "C_family"])
-        ci = boot(rows, ["old", "C_family"])
-        print(f"\n  REGISTERED TEST (OLS, bootstrap CI over repos)")
-        for j, c in enumerate(["old", "C_family"]):
-            lo, hi = ci[c]
-            sig = "SUPPORTED" if (lo > 0 or hi < 0) else "not supported"
-            print(f"    {c:<10} coef {b[j+1]:+.4f}   CI [{lo:+.4f}, {hi:+.4f}]   {sig}")
-        res["coef"] = {"intercept": b[0], "old": b[1], "C_family": b[2]}
-        res["ci95"] = {c: list(v) for c, v in ci.items()}
-        res["primary"] = "MOD-H1 supported" if (ci["old"][0] > 0 or ci["old"][1] < 0) else \
-                         "MOD-H1 not supported -- age is not the moderator"
-        print(f"\n  PRIMARY: {res['primary']}")
+    res.update(test(rows, "REGISTERED TEST (OLS, bootstrap CI over repos)"))
+    # Amendment 1 (declared before any drawn repo was scored): the same test without the repos whose main
+    # language the instrument does not measure. Reported beside the primary, never instead of it.
+    s1 = [r for r in rows if r["repo"] not in S1_UNMEASURED]
+    res["s1"] = {"n": len(s1), "dropped": sorted(r["repo"] for r in rows if r["repo"] in S1_UNMEASURED),
+                 **test(s1, f"SENSITIVITY S1 (unmeasured-language repos removed, n={len(s1)})")}
+    if "primary" in res and "primary" in res["s1"]:
+        agree = res["primary"].startswith("MOD-H1 supported") == res["s1"]["primary"].startswith("MOD-H1 supported")
+        res["robust_to_language_call"] = agree
+        print(f"\n  primary and S1 {'agree' if agree else 'DISAGREE -- MOD-H1 is not robust to the language call'}")
     a.out.write_text(json.dumps(res, indent=1) + "\n")
     print(f"\n-> {a.out}")
     return 0
