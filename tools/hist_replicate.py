@@ -195,11 +195,12 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--md", type=Path)
     ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
+    ap.add_argument("--repos", help="comma-separated subset; default all eight")
     ap.add_argument("--allow-unfit", action="store_true",
                     help="pool repos whose label is under the LABEL CARD gate (reproducing an old run)")
     a = ap.parse_args()
     res = []
-    for r in REPOS:
+    for r in (a.repos.split(",") if a.repos else REPOS):
         rec = one_repo(a.study, r, a.fix_label)
         res.append(rec)
         print(f"  {r:14} " + ("not evaluable: " + rec.get("why", "")
