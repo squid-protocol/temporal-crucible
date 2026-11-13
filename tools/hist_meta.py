@@ -36,7 +36,11 @@ SEP, EOR = "\x01", "\x02"
 RX = {
     "revert_sha": re.compile(r"This reverts commit ([0-9a-f]{7,40})", re.I),
     "revert_sub": re.compile(r'^Revert\s+"', re.I | re.M),
-    "issue":      re.compile(r"(?:\b(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+)?(?:#|\bGH-|\bbug\s*#?)(\d{1,7})\b", re.I),
+    # A BARE reference and a FIX-SEMANTIC reference are different evidence and must not share a tier.
+    # curl writes `Closes #N` on every merged PR -- that is a workflow artefact, not a bug signal; audited
+    # at roughly 2 of 9 on the commits the keyword gate misses. `Fixes #N` / `Resolves #N` claims a defect.
+    "issue_fix":  re.compile(r"\b(?:fix(?:es|ed)?|resolve[sd]?)\s+(?:#|\bGH-|\bbug\s*#?)(\d{1,7})\b", re.I),
+    "issue":      re.compile(r"(?:#|\bGH-|\bbug\s*#?)(\d{1,7})\b", re.I),
     "cve":        re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.I),
     "trailer":    re.compile(r"^(Co-authored-by|Reported-by|Reviewed-by|Signed-off-by|Tested-by|Closes|Fixes|Bug):\s*(.+)$",
                              re.I | re.M),
@@ -76,8 +80,12 @@ def harvest(repo: Path, con) -> tuple[int, int]:
                 links.append((sha, "revert", m.group(1)))
             if RX["revert_sub"].search(text):
                 links.append((sha, "revert", ""))
+            fixref = {m.group(1) for m in RX["issue_fix"].finditer(text)}
+            for v in fixref:
+                links.append((sha, "issue_fix", v))
             for m in RX["issue"].finditer(text):
-                links.append((sha, "issue", m.group(1)))
+                if m.group(1) not in fixref:
+                    links.append((sha, "issue", m.group(1)))
             for m in RX["cve"].finditer(text):
                 links.append((sha, "cve", m.group(0).upper()))
             for m in RX["trailer"].finditer(body):
@@ -95,7 +103,7 @@ def harvest(repo: Path, con) -> tuple[int, int]:
 
 
 def report(out: Path) -> int:
-    print(f"{'repo':14}{'commits':>9}{'with body':>11}{'revert':>8}{'issue':>8}{'cve':>7}{'trailers':>10}")
+    print(f"{'repo':14}{'commits':>9}{'with body':>11}{'revert':>8}{'fix-ref':>9}{'bare-ref':>10}{'cve':>7}{'trailers':>10}")
     for r in REPOS:
         db = out / f"{r}.db"
         if not db.exists():
@@ -104,11 +112,12 @@ def report(out: Path) -> int:
         n = c.execute("select count(*) from body").fetchone()[0]
         nb = c.execute("select count(*) from body where body != ''").fetchone()[0]
         k = {x: c.execute("select count(distinct sha) from link where kind=?", (x,)).fetchone()[0]
-             for x in ("revert", "issue", "cve")}
+             for x in ("revert", "issue_fix", "issue", "cve")}
         tr = c.execute("select count(distinct sha) from link where kind like 'trailer:%'").fetchone()[0]
         c.close()
         pc = lambda v: f"{v/n:.0%}" if n else "—"
-        print(f"{r:14}{n:>9,}{pc(nb):>11}{pc(k['revert']):>8}{pc(k['issue']):>8}{pc(k['cve']):>7}{pc(tr):>10}")
+        print(f"{r:14}{n:>9,}{pc(nb):>11}{pc(k['revert']):>8}{pc(k['issue_fix']):>9}{pc(k['issue']):>10}"
+              f"{pc(k['cve']):>7}{pc(tr):>10}")
     return 0
 
 
