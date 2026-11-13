@@ -26,6 +26,7 @@ from _engine import POOL_DIR, REPO_ROOT, GITGALAXY_PATH  # noqa: E402
 from hist_replicate import CUT_Q  # noqa: E402
 
 SRC = Path("/nvme-data/gitgalaxy-data")
+AMEND = Path("docs/mod1_language_amend.json")  # Amendment 2: the corrected language + family of ten repos
 STUDY = Path("/srv/storage_16tb/projects/gitgalaxy/laws-study/pilot")
 PY = sys.executable
 HIST_TIMEOUT, SCAN_TIMEOUT = 5400, 7200
@@ -42,6 +43,15 @@ def one(rec: dict) -> dict:
     if not link.exists():
         link.symlink_to(SRC / r)
     hist = STUDY / "history" / f"{r}.db"
+    if hist.exists():  # a history harvested in another language (before Amendment 2) is not this repo's history
+        try:
+            got = sqlite3.connect(f"file:{hist}?mode=ro", uri=True).execute(
+                "select value from meta where key='language'").fetchone()
+        except Exception:
+            got = None
+        if not got or got[0] != lang:
+            log(f"{r}: history is {got[0] if got else 'unreadable'}, want {lang} -- re-harvesting")
+            hist.unlink()
     if not hist.exists():
         log(f"{r}: harvesting history ({lang})")
         p = subprocess.run([PY, "tools/laws_history.py", "--repo", r, "--language", lang,
@@ -94,11 +104,15 @@ def main() -> int:
     if a.only:
         keep = set(a.only.split(","))
         draw = [d for d in draw if d["repo"] in keep]
+    amend = json.loads(AMEND.read_text())["repos"] if AMEND.exists() else {}
+    draw = [{**d, **amend.get(d["repo"], {})} for d in draw]
     res = []
     if a.out.exists():
         res = json.loads(a.out.read_text())
-        have = {x["repo"] for x in res if not x.get("error")}
-        draw = [d for d in draw if d["repo"] not in have]
+        have = {(x["repo"], x.get("lang")) for x in res if not x.get("error")}
+        draw = [d for d in draw if (d["repo"], d["lang"]) not in have]
+        redo = {d["repo"] for d in draw}
+        res = [x for x in res if x["repo"] not in redo]  # one record per repo: the retry replaces it
     log(f"{len(draw)} repos to prepare")
     for i, rec in enumerate(draw, 1):
         try:

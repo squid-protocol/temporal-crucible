@@ -38,10 +38,15 @@ LINGUIST_SHA256 = {"vendor.yml": "1ae9980298c7c4b89fa663f1efbab3c977818a0fcb59dd
 
 EXTS = {"c": (".c", ".h"), "cpp": (".cc", ".cpp", ".cxx", ".hh", ".hpp", ".h"), "java": (".java",), "go": (".go",),
         "python": (".py",), "jsts": (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"), "csharp": (".cs",),
-        "rust": (".rs",), "kotlin": (".kt", ".kts"), "php": (".php",)}
+        "rust": (".rs",), "kotlin": (".kt", ".kts"), "php": (".php",),
+        # MOD-1 Amendment 2 (docs/moderator_registration.md): the main languages of ten drawn repos. No LAWS panel
+        # language is touched -- a repo is harvested in ONE language, so these only widen what can be asked for.
+        "ruby": (".rb", ".rake"), "zig": (".zig",), "swift": (".swift",), "perl": (".pl", ".pm", ".cgi"),
+        "racket": (".rkt", ".rktl", ".scm", ".ss", ".sls"), "fortran": (".f", ".for", ".f90", ".f95", ".f03", ".f08"),
+        "matlab": (".m",)}
 TEST_PARTS = {"test", "tests", "testing", "__tests__", "spec", "testdata"}
 TEST_NAMES = ("*_test.go", "test_*.py", "*_test.py", "*Test.java", "*Tests.java", "*.test.js", "*.test.ts",
-              "*.spec.js", "*.spec.ts")
+              "*.spec.js", "*.spec.ts", "*_test.rb", "*_spec.rb", "*.t", "*Tests.swift", "*Test.swift")
 EXAMPLE_PARTS = {"examples", "example", "samples", "benchmarks", "bench", "docs"}
 GENERATED_NAMES = ("*.pb.go", "*.pb.cc", "*.pb.h", "*_pb2.py", "*_pb2_grpc.py", "*.min.js", "*.designer.cs", "*.g.cs",
                    "*.generated.cs", "*.generated.go", "zz_generated.*", "*.pb.swift", "*_generated.go", "*.g.dart")

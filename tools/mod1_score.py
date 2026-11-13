@@ -28,6 +28,27 @@ PRIOR = {  # the eight already assessed, cascade label, from docs/struct_null_*.
     "postgres": None, "prometheus": None, "redis": None, "sphinx": None}
 
 
+AMEND = Path("docs/mod1_language_amend.json")
+STUDY = Path("/srv/storage_16tb/projects/gitgalaxy/laws-study/pilot")
+
+
+def call_coverage(repo: str, lang: str) -> tuple[int, int]:
+    """(files of `lang` at the snapshot, call edges landing in them) -- Amendment 2's instrument check"""
+    import sqlite3
+    import laws_units as U
+    db = STUDY / "dbs" / f"{repo}.db"
+    if not db.exists():
+        return 0, 0
+    w = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    ex = U.Excluder()
+    mine = {fid for fid, path in w.execute("select id, path from file where generated=0")
+            if U.language_of(path) in ({"c", "cpp"} if lang in ("c", "cpp") else {lang}) and ex.why(path) is None}
+    f2 = dict(w.execute("select id, file_id from func"))
+    edges = sum(1 for (dst,) in w.execute("select dst from edge") if f2.get(dst) in mine)
+    w.close()
+    return len(mine), edges
+
+
 def lift_for(repo: str) -> float | None:
     f = Path(f"docs/struct_null_{repo}.json")
     if not f.exists():
@@ -101,11 +122,18 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("docs/mod1_result.json"))
     a = ap.parse_args()
-    meta = {d["repo"]: d for d in json.loads(DRAW.read_text())["draw"]}
+    amend = json.loads(AMEND.read_text())["repos"] if AMEND.exists() else {}
+    meta = {d["repo"]: {**d, **amend.get(d["repo"], {})} for d in json.loads(DRAW.read_text())["draw"]}
     for r in PRIOR:  # the prior eight, re-dated from their own history DBs by struct_null's frame
         meta.setdefault(r, {"repo": r})
     rows, excluded = [], []
     for repo, m in sorted(meta.items()):
+        if "lang" in m:  # Amendment 2 instrument check, drawn repos only, decided before the lift is read
+            fl, ed = call_coverage(repo, m["lang"])
+            if fl and ed * 10 < fl:
+                excluded.append({"repo": repo, "why": f"engine does not resolve {m['lang']} calls: "
+                                                      f"{ed} inbound edges over {fl} {m['lang']} files"})
+                continue
         lf = lift_for(repo)
         if lf is None:
             excluded.append({"repo": repo, "why": "under the positives floor or unscanned"})

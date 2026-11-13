@@ -103,3 +103,49 @@ CI excludes zero, MOD-H1 is reported as **not robust to the language call**, not
 **Noted, not acted on.** Under the same unit rule cpython has slightly more C unit files (1,108) than Python
 (937) because its Python tests are excluded; it stays `python`, old/managed, as drawn. `root` and `godot` are
 called `c` though most of their code is C++; both languages are in the same family, so the cell is unaffected.
+
+## Amendment 2 — 2026-11-13, ~3:15 PM Eastern, before any drawn repository was scored
+
+**State when written:** 6 of 38 repos prepared, **zero lifts computed** for any drawn repo (no
+`docs/struct_null_<repo>.json` for any of the 38; `mod1_score.py` has never been run). Owner decision.
+
+**What changes.** The ten repos of Amendment 1 are no longer measured on a minority slice. The history step
+(`laws_units.EXTS`) gains their main languages — ruby, zig, swift, perl, racket (with Scheme), fortran, matlab
+— and each of the ten is harvested and scored in that language (`docs/mod1_language_amend.json`):
+
+| repo | language now | family | cell as drawn → cell now |
+|---|---|---|---|
+| racket | racket | managed | old/C → **old/managed** |
+| ghostty | zig | C | young/C |
+| swift | swift | managed | young/C → **young/managed** |
+| wrf-fortran | fortran | C | young/C |
+| fieldtrip | matlab | managed | young/C → **young/managed** |
+| rails | ruby | managed | old/managed |
+| bugzilla | perl | managed | old/managed |
+| discourse | ruby | managed | young/managed |
+| tigerbeetle | zig | C | young/managed → **young/C** |
+| bun | zig | C | young/managed → **young/C** |
+
+**Family rule, fixed now:** `C_family` = a language with no managed runtime or garbage collector — c, cpp, zig,
+fortran. Everything else is managed (Swift's reference counting counts as managed). Cells become old/C 7,
+young/C 10, old/managed 11, young/managed 10. The draw itself is unchanged: same 38 repos, none added or
+removed. The other 28 keep their language and cell exactly as drawn.
+
+**The primary test is now the registered OLS on the corrected languages.** The as-drawn language for these
+ten is not computed at all, so there is no second set of numbers to choose between.
+
+**Sensitivity S1 stays**, with the same list and the same reading rule (Amendment 1): the test is repeated
+without these ten. It now asks a sharper question — does the answer depend on languages the instrument had
+never been used on before today?
+
+**Instrument check, fixed now, drawn repos only.** The engine's call resolution in the seven new languages is
+unverified (spot-checked only: ghostty Zig 3,230 edges over 378 files, racket Scheme 10,904 over 1,264). An
+in-degree of zero everywhere would score as a spurious negative lift. So a drawn repo is **excluded and listed
+as "engine does not resolve calls"** if, at its snapshot, the call edges landing in files of its language
+number fewer than one per ten such files. This is read from the scan database, before and independently of
+any lift.
+
+**Test-file patterns added** for the new languages (`*_test.rb`, `*_spec.rb`, `*.t`, `*Tests.swift`,
+`*Test.swift`); the directory rules (`test/`, `tests/`, `spec/` …) already apply to every language.
+
+**Not changed.** Outcome, label, floor, cut, window, age cut, hypotheses, and the falsification statement.
