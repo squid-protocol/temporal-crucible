@@ -1,99 +1,109 @@
 # What a new condition tests, and whether the new branch is a guard (ECOND, EXPLORATORY)
 
 **Type: exploratory.** No registration, **no p-value claimed**, no multiplicity correction. Tool:
-`tools/cond_content.py` (`walk` / `report` are outcome-blind; `join` reads outcomes). Repos: curl,
-libarchive (both already burned). Run 2026-11-12. Numbers: [`econd.json`](econd.json). Continues
-[`etyp_label.md`](etyp_label.md).
+`tools/cond_content.py` (`walk` / `report` read no outcome; `join` does). Repos: curl, libarchive (both
+already burned). Numbers: [`econd.json`](econd.json). Continues [`etyp_label.md`](etyp_label.md).
 
-**A stop rule was set before the join: one session, and stop if condition content made a fix no more
-recognisable than the edit types did. It did not, and this line stops here.**
+**Revised 2026-11-12 after an independent review ([`etyp_review.md`](etyp_review.md)).** Three of the labels
+were wrong in a measurable share of cases and have been fixed; the conclusion did not change.
 
-## Why
+## What this is, and what it is not
 
-`etyp_label.md` ended on a lead: the type of an edit ("a branch was added") does not say whether the old
-code was wrong, but what the branch tests might. ETYP abstracts that away on purpose. ECOND puts it back
-as a second closed taxonomy.
+`etyp_label.md` ended on a lead: the type of an edit does not say whether the old code was wrong, but what an
+added branch tests might. ECOND classifies that.
 
-## Taxonomy (fixed before any outcome was read)
+**Two things the first version claimed about its own process cannot be shown and are withdrawn.**
+
+- It said the taxonomy was "fixed before any outcome was read". The taxonomy was designed after the same
+  commits' outcomes had been seen in `etyp_fix` and `etyp_label`, and it was then corrected after its own
+  join. It is a second look at burned data.
+- It said a stop rule was "set before the join". The rule was stated in the working session before the join
+  ran, but the tool, the results and the rule were committed together, so the record does not prove the
+  order. By this repo's own standard that is not demonstrably prior.
+
+## Taxonomy
 
 For every condition in the new function whose text is not in the old one: split at `&&` / `||`, peel
 parentheses and `!`, and give each leaf one kind from syntax alone (NULL_CMP, ZERO_CMP, CONST_CMP, VAR_CMP,
-REL_CONST, REL_VAR, BITTEST, NEGATED, TRUTHY, OTHER), plus a CALL flag. For a new `if`: GUARD_ADD when its
-consequence leaves (return, goto, break, continue, alone or last in the block), otherwise ACTION_IF_ADD.
-COND_NARROW marks an old condition that survives as one side of a new `&&` or `||`.
+REL_CONST, REL_VAR, BITTEST, NEGATED, TRUTHY, OTHER), plus a CALL flag. GUARD_ADD: the number of exiting
+`if`s grew and one of them has a new condition. ACTION_IF_ADD: the same for non-exiting `if`s. COND_NARROW: an
+old condition that disappeared has all its leaves inside a new condition with more.
+
+Corrected after review: GUARD_ADD and ACTION_IF_ADD used to key on the total `if` count (an edited guard
+beside an added action was called an added guard, in about 8% of GUARD_ADD edits); COND_NARROW missed
+three-conjunct narrowing and fired on unrelated conditions (33-42% of its flags); constant expressions such as
+`MAX_N - 1` were read as variables (15% of REL_VAR leaves).
 
 ## Outcome-blind result
 
 | | curl | libarchive |
 |---|---:|---:|
-| edits carrying a new condition | 30.4% | 32.0% |
-| adds a guard | 6.6% | 9.3% |
-| adds a non-exiting `if` | 9.1% | 10.0% |
-| narrows an existing condition | 3.4% | 2.4% |
+| edits carrying a new condition | 30.4% | 37.9% |
+| adds a guard | 6.5% | 10.8% |
+| adds a non-exiting `if` | 9.1% | 11.9% |
+| narrows an existing condition | 2.7% | 2.9% |
 | new condition is only OTHER (residual) | 0.4% | 0.1% |
 
-Coverage is complete. **But the kinds are house style, not meaning.** Among edits with a new condition:
+**The null-ish kinds are house style, not meaning.** Among edits with a new condition:
 
 | kind | curl | libarchive |
 |---|---:|---:|
-| NEGATED (`if(!p)`) | 36.0% | 12.0% |
-| TRUTHY (`if(p)`) | 59.0% | 21.6% |
-| NULL_CMP (`if (p == NULL)`) | 1.5% | 25.9% |
-| ZERO_CMP (`if (n != 0)`) | 3.3% | 22.0% |
+| NEGATED | 36.0% | 8.6% |
+| TRUTHY | 59.0% | 20.2% |
+| NULL_CMP | 1.5% | 26.5% |
+| ZERO_CMP | 3.2% | 21.5% |
 
 curl writes `if(!p)` where libarchive writes `if (p == NULL)`. Without type information a syntactic kind
-cannot tell a null check from a flag test, so the null-ish kinds do not mean the same thing in two repos.
-The comparison kinds (REL_*, VAR_CMP, CONST_CMP) are less affected.
+cannot tell a null check from a flag test.
 
 ## Join
 
-Lifts over non-fix commits of the same size and magnitude; `*` = 95% interval excludes 1.
+Same groups, reference and marking rule as [`etyp_fix.md`](etyp_fix.md).
 
-| new condition in a fix | curl | libarchive | |
-|---|---:|---:|---|
-| **REL_VAR** (`i < n`) | **1.83*** | **1.84*** | replicates |
-| VAR_CMP (`a == b`) | 1.49* | 1.37* | replicates |
-| COND_NARROW | 1.31* | 1.39* | replicates |
-| GUARD_ADD | 1.07 | 1.36* | libarchive only |
-| ACTION_IF_ADD | 1.24* | 1.01 | curl only |
-| REL_CONST (`len > MAX`) | 1.01 | 1.38* | libarchive only |
+All fixes against the reference. Marked in both repos, same direction:
 
-- **One thing replicates cleanly: a fix adds a comparison between two variables**, most of all a relational
-  one, at 1.8x in both repos. That is what a missing bounds check against a runtime length looks like.
-- **"A fix adds a guard" does not replicate.** It holds in libarchive and not in curl.
-- **CVE fixes (curl):** GUARD_ADD 1.57* against 1.88* for their matched controls, so guards again belong to
-  that kind of commit and not to security. REL_VAR is 2.78* [1.61, 4.31] against 1.43 [0.41, 2.86] for
-  controls: suggestive, 172 commits, one repo.
+| new condition in a fix | curl | libarchive |
+|---|---:|---:|
+| REL_VAR | 1.80* [1.43, 2.22] | 1.67* [1.33, 2.10] |
 
-**Forward** (function fixed within 365 days of a non-fix edit, relative to size, history and magnitude):
-REL_CONST 1.12* / 1.36*, COND_NARROW 1.12* / 1.34*, CONST_CMP 1.11* / 1.23*, ACTION_IF_ADD 1.13* / 1.21*.
-Somewhat above BRANCH_ADD alone (1.09 / 1.14 in `etyp_fix.md`) in libarchive, the same in curl.
+Marked in one repo only: GUARD_ADD (1.02 / 1.26*), ACTION_IF_ADD (1.16* / 0.98), COND_NARROW (1.24* / 1.12), CONST_CMP (1.20* / 1.06), VAR_CMP (1.45* / 1.39), REL_CONST (1.05 / 1.22*), NEGATED (1.15* / 1.16), G:REL_VAR (0.95 / 1.75*), G:CALL (0.80* / 0.93).
 
-**The test the stop rule named.** Fix vs not a fix, fitted on one repo and scored on the other:
+- **One cell is marked in both repos: a fix adds a relational comparison between two variables (`i < n`).**
+  The reviewer checked it is not a for-loop artefact and that it survives log2 size bins. On a new guard
+  specifically (G:REL_VAR) it is 0.95 [0.47, 1.67] in curl and 1.75* [1.02, 2.86] in libarchive,
+  so the first version's reading of it as "a missing bounds check" is not supported and is withdrawn. It is
+  also the largest of about two dozen cells on the data that suggested it, so its size should be expected to
+  shrink elsewhere.
+- **"A fix adds a guard" differs between the repos**: 1.02 [0.91, 1.13] in curl,
+  1.26* [1.08, 1.49] in libarchive.
+- **CVE fixes against their matched controls** (curl, direct): nothing is marked. REL_VAR is
+  5.36 [1.62, 174.65] on 11 commits; not distinguishable.
+
+**Forward** (function fixed within 365 days of a non-fix edit; strata as in `etyp_fix.md`): marked in both
+repos are REL_CONST (1.09* / 1.19*), TRUTHY (1.09* / 1.18*).
+REL_VAR is 1.05 / 1.07. Nothing here is larger than what the edit types alone show.
+
+**Does condition content help recognise a fix?** Fitted on one repo and scored on the other:
 
 | | scored on curl | scored on libarchive |
 |---|---:|---:|
-| size | 0.553 | 0.542 |
-| edit types + size | 0.569 | 0.573 |
-| edit types + condition content + size | 0.569 | 0.579 |
-| gain from condition content | +0.000 [−0.004, +0.005] | +0.005 [−0.001, +0.012] |
+| size | 0.583 | 0.577 |
+| edit types + size | 0.585 | 0.594 |
+| edit types + condition content + size | 0.587 | 0.595 |
+| gain from condition content | +0.002 [-0.003, +0.007] | +0.001 [-0.007, +0.011] |
 
-Condition content adds nothing to recognising an individual fix.
+**No detectable gain; at most +0.011 AUC.**
 
-## What this closes
+## Where this line stands
 
-Three attempts now agree: edit types (`etyp_fix.md`), a model over them (`etyp_label.md`) and condition
-content (this note) all find real, replicating **average** differences between fixes and other commits,
-and none makes a single fix or a single future fix recognisable beyond about 1.1-1.3x. The syntactic
-shape of a change, at the resolution an unpreprocessed parse allows, is not where the unmeasured rate in
-`ceil.md` lives. A further syntactic refinement is unlikely to change that.
-
-What is left over as a narrow, registrable claim, on repos this has not seen: **fix commits add
-variable-to-variable relational conditions at a higher rate than size-matched non-fix commits** (1.8x in
-two repos). It is a description of fixes, not a predictor, and is recorded here rather than registered.
+Edit types, a model over them, and condition content each find average differences between fixes and other
+commits, a few of which appear in both repos. None of them separates fixes from non-fixes better than commit
+size does (AUC about 0.58 for all three). The forward associations are small and shared with a negative
+control. The syntactic shape of a change, at the resolution an unpreprocessed parse allows, has not shown
+itself to be where the unmeasured rate in `ceil.md` lives.
 
 ## Limits
 
-- Syntax only: no types, no macros expanded, so null checks and flag tests are not separable.
-- Two C repos, message labels as the reference, uncorrected. The CVE rows are curl only.
+- Syntax only: no types, no macros expanded.
+- Two C repos, message labels as the reference, uncorrected, a second look at burned data.
 - "New" is by condition text: a condition whose operand was renamed counts as new.

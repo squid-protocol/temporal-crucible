@@ -55,12 +55,12 @@ L2 = 1.0
 
 
 def design(rows: list[dict]):
-    """(shas, {feature: column}) for every commit with 1-50 function edits."""
-    shas, X, n, _ct, mag = ef.commit_matrix(rows)
+    """(shas, {feature: column}, commit times) for every commit with 1-50 function edits."""
+    shas, X, n, ct, mag = ef.commit_matrix(rows)
     cols = {a: X[:, ef.COLS.index(a)] for a in ATOMS}
     cols["log2_edits"] = np.log2(n)
     cols["log2_tokens"] = np.log2(mag + 1)
-    return shas, cols
+    return shas, cols, ct
 
 
 def matrix(cols: dict, feats: list[str], mu=None, sd=None):
@@ -101,18 +101,18 @@ def auc(score: np.ndarray, y: np.ndarray) -> float:
     return float((ranks[y == 1].sum() - pos * (pos + 1) / 2) / (pos * (len(y) - pos)))
 
 
-def labelled(repo: str, shas: list[str], target: str = "fix"):
-    """(y, keep, dropped, events) from the message label.
+def labelled(repo: str, shas: list[str], ct, target: str = "fix"):
+    """(y, keep, dropped, masks) from the message label, on the same groups etyp_fix.py uses.
 
-    target "fix": 1 = v3c-kept fix of any class, 0 = not a fix; v3c-dropped commits are kept out.
+    target "fix": 1 = v3c-kept fix of any class, 0 = the non-fix reference (inside the labelled window,
+    not v3c-dropped, subject not cosmetic). Commits after the event harvest are in neither: the first
+    run counted 308 of them as "not a fix" (docs/etyp_review.md).
     target "extrinsic" / "regression": 1 = that class, 0 = every other fix; non-fixes are kept out.
     """
-    evs = ef.load_events(repo)
-    cls = np.array([evs["class"].get(s, "") for s in shas])
-    dropped = np.array([s in evs["dropped"] for s in shas])
+    m = ef.masks(repo, shas, ct)
     if target == "fix":
-        return (cls != "").astype(float), ~dropped, dropped, evs
-    return (cls == target).astype(float), cls != "", dropped, evs
+        return m["fix"].astype(float), m["fix"] | m["nonfix"], m["dropped"] & m["window"], m
+    return ((m["cls"] == target) & m["window"]).astype(float), m["fix"], m["dropped"] & m["window"], m
 
 
 def predict(model: dict, variant: str, cols: dict) -> np.ndarray:
@@ -122,8 +122,8 @@ def predict(model: dict, variant: str, cols: dict) -> np.ndarray:
 
 
 def cmd_fit(a) -> int:
-    shas, cols = design(et.load(a.inp))
-    y, keep, _dropped, _evs = labelled(a.repo, shas, a.target)
+    shas, cols, ct = design(et.load(a.inp))
+    y, keep, _dropped, _m = labelled(a.repo, shas, ct, a.target)
     model = {"trained_on": a.repo, "l2": L2, "commits": int(keep.sum()), "positives": int(y[keep].sum()),
              "target": a.target, "variants": {}}
     print(f"fit on {a.repo}, target {a.target}: {int(keep.sum()):,} commits, {int(y[keep].sum()):,} "
@@ -147,8 +147,8 @@ def cmd_fit(a) -> int:
 
 def cmd_eval(a) -> int:
     model = json.loads(Path(a.model).read_text())
-    shas, cols = design(et.load(a.inp))
-    y, keep, dropped, evs = labelled(a.repo, shas, model["target"])
+    shas, cols, ct = design(et.load(a.inp))
+    y, keep, dropped, m = labelled(a.repo, shas, ct, model["target"])
     rng = np.random.default_rng(ef.SEED)
     print(f"eval on {a.repo} with a model fitted on {model['trained_on']}, target {model['target']}: "
           f"{int(keep.sum()):,} commits, {int(y[keep].sum()):,} positives "
@@ -173,7 +173,7 @@ def cmd_eval(a) -> int:
             Path(a.json).write_text(json.dumps(out, indent=1, sort_keys=True) + "\n")
         return 0
     thr, s = model["threshold_both"], scores["both"]
-    cls = np.array([evs["class"].get(x, "") for x in shas])
+    cls = np.where(m["window"], m["cls"], "")
     print(f"\n  share scoring above the fixed threshold ({thr:.3f}, the training repo's top third):")
     out["above"] = {}
     for name, mask in (("not a fix", keep & (y == 0)), ("dropped by v3c", dropped),
@@ -190,7 +190,7 @@ def cmd_eval(a) -> int:
 def cmd_score(a) -> int:
     """No label is read here: a score per commit, for a repo the model has not seen."""
     model = json.loads(Path(a.model).read_text())
-    shas, cols = design(et.load(a.inp))
+    shas, cols, _ct = design(et.load(a.inp))
     out = {v: predict(model, v, cols) for v in VARIANTS}
     Path(a.out).write_text(json.dumps(
         {"repo": a.pool_repo, "trained_on": model["trained_on"], "threshold_both": model["threshold_both"],

@@ -1,98 +1,48 @@
-# ETYP: does a function's edit-type history predict fixes? (DRAFT, drafted 2026-11-12)
+# ETYP: does a function's edit-type history predict fixes? (WITHDRAWN DRAFT, 2026-11-12)
 
-**Status: DRAFT. Not approved by the owner. Nothing below has been computed.** No scorer exists. The
-taxonomy and its exploratory, outcome-blind measurement are in [`etyp.md`](etyp.md); the tool
-`tools/edit_types.py` reads no outcome and a test pins that.
+**Status: WITHDRAWN before approval. This is not a registration, nothing in it was ever run on an eligible
+repo, and it has no entry in `docs/HYPOTHESES.md`.** It is kept so the reasons are on record. The exploratory
+work it would have followed is in [`etyp.md`](etyp.md), [`etyp_fix.md`](etyp_fix.md),
+[`etyp_label.md`](etyp_label.md) and [`econd.md`](econd.md); the review that led to the withdrawal is in
+[`etyp_review.md`](etyp_review.md).
 
-Open items for the owner are marked **DECIDE**.
+## What the draft proposed
 
-**Unit:** a function at a quarterly snapshot. **Tool:** `tools/etyp_eval.py` (to be written against the
-approved text). **Taxonomy:** `tools/edit_types.py` as committed with this draft, frozen by file hash at
-approval.
+At function-snapshot grain, on openssl (primary) and nDPI (replication): that the count of "behavioural"
+edits in the trailing 8 quarters (primary family STRUCTURE or LOGIC) ranks functions for a fix in the next
+year better than the raw edit count (H1) and better than the stronger size order (H2), with a negative
+control on inert edits (H3) and an ERROR-node guard (H4).
 
-## 1. Why
+## Why it is withdrawn
 
-- `docs/ceil.md`: recall at a 20%-of-lines budget is 0.30 achieved, 0.47 attainable with current
-  covariates, 0.68 with perfect rate knowledge. The gap is rate heterogeneity we do not measure.
-- `docs/kwnest.md`, `docs/rew.md`: structure is near-constant over a function's life, and rewiring beats
-  edit count (+0.115) but loses to size.
-- `docs/etyp.md`: 99% of function edits take one of 26 named types, and a function's next edit resembles
-  its last at 1.70x (curl) and 1.96x (libarchive) a size-matched null.
+**The exploratory evidence does not support the bet.**
 
-Edit count treats every edit alike. If the kind of edit a function attracts is a stable property, the
-count of *behaviour-changing* edits may carry rate information that the raw count dilutes with comments,
-renames and message strings.
+- After a non-fix edit, the relative one-year fix rate is 1.06 (curl) and 1.10 (libarchive, not marked) for
+  STRUCTURE and 0.98 and 1.07 for LOGIC. The largest association belongs to COMMENT, and a negative-control
+  outcome (any later edit) moves with the same labels.
+- The type vector adds no detectable AUC to commit size for telling a fix from a non-fix.
 
-## 2. Prior work (**DECIDE: to be checked against the sources before approval; listed from memory**)
+**The draft was not sound as a registration**, as the review set out:
 
-- Fluri, Wursch, Pinzger, Gall, "Change Distilling", IEEE TSE 2007: a tree-differencing taxonomy of
-  fine-grained source changes.
-- Giger, Pinzger, Gall, "Comparing fine-grained source code changes and code churn for bug prediction",
-  MSR 2011: reported that fine-grained change counts outperform line churn. This is the closest prior
-  result; ETYP-H1 would be a replication at function grain under a line budget.
-- Falleri et al., GumTree, ASE 2014: the standard AST differ.
-- Pan, Kim, Whitehead, "Toward an understanding of bug fix patterns", ESE 2009: fix patterns by syntax.
-- Hassan, "Predicting faults using the complexity of code changes", ICSE 2009: change entropy.
+- no alpha, no sidedness, no bootstrap unit, and no statement of which fix classes count as the outcome;
+- replication defined as "same sign" only;
+- H3 passed on a point estimate, so an underpowered run would pass it automatically; it needs an equivalence
+  test, as REW used;
+- "power stated" was only an under-20-positives flag, with no power for an effect near 1.1x;
+- the predictor depended on the primary-family priority order (an edit with CALL_ADD and COND_EDIT is WIRING,
+  so not "behavioural"), and it is a 44-46% subset of the count it was to be compared with;
+- its motivation quoted `ceil.md` figures from mixed rows and a `rew.md` figure that holds for curl extrinsic
+  fixes only;
+- its prior-work list was written from memory and never checked against the sources.
 
-## 3. Definitions
+## What a sound registration from this line would look like
 
-- **Behavioural edit:** an edit whose primary family is STRUCTURE or LOGIC.
-- **Inert edit:** an edit whose primary family is COSMETIC or NAMING.
-- **Predictors at snapshot t**, each over the function's edits in the trailing 8 quarters:
-  `beh` = behavioural edits; `inert` = inert edits; `edits` = all edits.
-- **Outcome:** a `fixlike_v2` v3c fix commit edits the function in (t, t+4 quarters].
-- **Metric:** recall of outcome functions at a 20%-of-lines review budget, as in REW and CEIL.
-- **Baselines:** the stronger of the two size orders; `edits`; REW's rewiring measure.
-- **Margin:** the programme's standing delta = 0.02.
+One narrow, descriptive claim survived review in both repos: **fix commits add relational comparisons between
+two variables at a higher rate than size-matched non-fix commits** (1.80 and 1.67 on the discovery data, the
+largest of about two dozen cells, so expect shrinkage). Registering it would need: the tool frozen by hash at
+the commit that follows the review; openssl and nDPI as the only eligible repos; one two-sided test at a
+stated alpha on the lift with a commit bootstrap; a stated minimum effect; the same subject filter on fixes
+and reference; and a prior-work section checked against the sources. It describes fixes and predicts nothing,
+so it is worth registering only if a confirmed description is wanted on the record.
 
-## 4. Claims
-
-| id | claim | supported if |
-|---|---|---|
-| ETYP-H1 | `beh` ranks better than `edits` | lift over `edits` > 0.02, 90% CI excluding 0.02, in the primary repo and the same sign in the replication |
-| ETYP-H2 | `beh` ranks better than the stronger size order | lift over size > 0.02, same rule |
-| ETYP-H3 | negative control: `inert` does **not** rank better than `edits` | lift of `inert` over `edits` <= 0.02 |
-| ETYP-H4 | guard: results are reported with and without edits flagged `err` (ERROR-node parses) | a verdict that flips between the two is recorded as inconclusive |
-
-H2 is the bar nothing in this programme has cleared at function grain. H1 passing with H2 failing would
-repeat REW's result with a different measure and is still worth knowing.
-
-## 5. Repos
-
-curl and libarchive were used to develop the taxonomy and are **not** eligible. **DECIDE:** primary
-openssl, replication nDPI (both C, both with walk databases and v3c labels). harfbuzz is excluded until
-the tool has a C++ lane.
-
-## 6. Guards
-
-Size control in every table; power stated before scoring (cells under 20 positives print UNDERPOWERED);
-rename tracking as in the tool; no outcome joined before approval; the scorer is committed before it is
-run.
-
-## 7. What would change
-
-- H1 and H2 hold: edit type is the first function-grain measure to beat size, and the per-type split
-  (which atoms carry it) becomes the next exploratory study, on data this one has not seen.
-- H1 holds, H2 fails: type sharpens history but size still wins; record it beside REW.
-- H1 fails: the kind of edit adds nothing to the count of edits, and the unmeasured rate lies elsewhere.
-
-## 8. Note added 2026-11-12, after the exploratory join (`etyp_fix.md`)
-
-The join was run on curl and libarchive only, which were already ineligible here. It bears on this draft:
-
-- LOGIC edits carry no forward signal (0.99 and 1.00 relative fix rate within a year); STRUCTURE carries a
-  small one (1.05 and 1.14). The "behavioural edit" predictor in section 3 mixes the two and would be
-  diluted. **DECIDE:** redefine the predictor as growth edits (BRANCH_ADD or STMT_ADD) before approval,
-  or drop H1/H2 in favour of the labelling question below.
-- The effect size seen is about 1.1x. A registration should state the power to detect that on openssl and
-  nDPI before it is approved.
-- A different claim looks better supported: that the type vector recognises fix class (extrinsic by TYPE
-  and PREPROC) and separates fixes from non-fixes without reading the message. That would be registered
-  against a hand-labelled sample, as `docs/otherfix_audit.md` was, not against a ranking metric.
-
-## 9. Note added 2026-11-12, after the labelling check (`etyp_label.md`)
-
-The third bullet of section 8 is withdrawn for fix-vs-non-fix: fitted on one burned repo and scored on the
-other, the type vector reaches AUC 0.57-0.59 against the message label (size alone 0.54-0.55). Only the
-extrinsic class is recognisable (0.67-0.71). No labelling claim should be registered on that basis, and
-the hand-judged samples in `docs/otherfix_audit.md` were not scored.
+openssl and nDPI remain unwalked and unscored by any ETYP or ECOND tool.

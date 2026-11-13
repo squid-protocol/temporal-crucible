@@ -52,6 +52,7 @@ Needs tree-sitter-language-pack.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -63,8 +64,12 @@ from pathlib import Path
 
 POOL = Path(os.environ.get("TC_POOL", "/srv/storage_16tb/projects/temporal-crucible-pool"))
 SEED = 2982
+SWEEP = 50          # a commit editing more functions than this is a sweep, in every tool of this study
 
 # Source roots per repo: implementation only. Tests, docs and examples are bystanders (hunk_grammar.py).
+# A root can hold its own test tree (libarchive/test/, tar/test/): EXCLUDE drops those. The first run of
+# this study missed that and 31% of its libarchive edits were test code (docs/etyp_review.md, finding 1).
+EXCLUDE = ("/test/", "/tests/")
 REPOS = {
     "curl": {"lang": "c", "exts": (".c",), "roots": ("lib/", "src/")},
     "libarchive": {"lang": "c", "exts": (".c",), "roots": ("libarchive/", "tar/", "cpio/", "cat/")},
@@ -239,8 +244,10 @@ def features(fn) -> dict:
     return f
 
 
-def _kw(skel, group) -> int:
-    return sum(1 for k, _d in skel if k in group)
+def _kw(skel, group) -> Counter:
+    """Count of each control keyword of a group. Compared per keyword, not as a group total: a `return`
+    swapped for a `goto` is an EXIT_CHANGE although the number of exits is the same (review finding 9)."""
+    return Counter(k for k, _d in skel if k in group)
 
 
 def classify(a: dict, b: dict) -> set[str]:
@@ -269,10 +276,10 @@ def classify(a: dict, b: dict) -> set[str]:
             swapped_nonlocal = True
 
     sa, sb = a["skeleton"], b["skeleton"]
-    d_branch = _kw(sb, BRANCH) - _kw(sa, BRANCH)
-    if d_branch > 0:
+    branch_same = _kw(sb, BRANCH) == _kw(sa, BRANCH)
+    if _kw(sb, BRANCH) - _kw(sa, BRANCH):
         labels.add("BRANCH_ADD")
-    elif d_branch < 0:
+    if _kw(sa, BRANCH) - _kw(sb, BRANCH):
         labels.add("BRANCH_DEL")
     if _kw(sb, LOOP) != _kw(sa, LOOP):
         labels.add("LOOP_CHANGE")
@@ -299,7 +306,7 @@ def classify(a: dict, b: dict) -> set[str]:
         elif sorted(a["args"][name]) != sorted(b["args"][name]):
             labels.add("ARG_VALUE")
 
-    if d_branch == 0 and _kw(sb, LOOP) == _kw(sa, LOOP) and a["conds"] != b["conds"]:
+    if branch_same and _kw(sb, LOOP) == _kw(sa, LOOP) and a["conds"] != b["conds"]:
         labels.add("COND_EDIT")
     if sum(a["returns"].values()) == sum(b["returns"].values()) and a["returns"] != b["returns"]:
         labels.add("RETURN_VALUE")
@@ -368,16 +375,18 @@ class Blobs:
 
 
 def jobs(repo: str) -> list[tuple]:
-    """(sha, commit_time, canonical_path, old_blob, new_blob), oldest first, renames followed."""
+    """(sha, commit_time, canonical_path, old_blob, new_blob, author_hash), oldest first, renames followed."""
     cfg = REPOS[repo]
     out = subprocess.run(
         ["git", "-C", str(POOL / repo), "log", "--no-merges", "--reverse", "--raw", "--no-abbrev",
-         "-M", "--format=C %H %ct"], capture_output=True, text=True, check=True).stdout
+         "-M", "--format=C %H %ct %ae"], capture_output=True, check=True).stdout.decode("utf-8", "replace")
     alias: dict[str, str] = {}
-    res, sha, ct = [], None, 0
+    res, sha, ct, au = [], None, 0, ""
     for line in out.splitlines():
         if line.startswith("C "):
-            _c, sha, ct = line.split()
+            _c, sha, ct, *mail = line.split()
+            # A short hash, never the address: enough to say "same author" and nothing else.
+            au = hashlib.sha1(" ".join(mail).encode()).hexdigest()[:8]
             continue
         if not line.startswith(":"):
             continue
@@ -387,11 +396,17 @@ def jobs(repo: str) -> list[tuple]:
         path = parts[-1]
         if status[0] == "R":
             alias[path] = alias.get(parts[0], parts[0])
+        elif status[0] == "A" and (path in alias or path in alias.values()):
+            # A path recreated after a rename is a NEW file. Without this it shares a canonical path
+            # with the file that was renamed away from it, and their same-named functions merge.
+            alias[path] = f"{path}#{sha[:8]}"
         if status[0] not in "MR" or old == new:
             continue
         if not path.endswith(cfg["exts"]) or not path.startswith(cfg["roots"]):
             continue
-        res.append((sha, int(ct), alias.get(path, path), old, new))
+        if any(x in "/" + path for x in EXCLUDE):
+            continue
+        res.append((sha, int(ct), alias.get(path, path), old, new, au))
     return res
 
 
@@ -413,7 +428,7 @@ def _work(args) -> tuple[list, Counter]:
         return val
 
     rows, stats = [], Counter()
-    for sha, ct, path, old, new in chunk:
+    for sha, ct, path, old, new, au in chunk:
         fa, da = parsed(old)
         fb, db = parsed(new)
         stats["files"] += 1
@@ -425,7 +440,7 @@ def _work(args) -> tuple[list, Counter]:
             A, B = features(na), features(nb)
             labs = classify(A, B)
             ta, tb = Counter(A["tokens"]), Counter(B["tokens"])
-            rows.append({"sha": sha, "ct": ct, "path": path, "func": name,
+            rows.append({"sha": sha, "ct": ct, "au": au, "path": path, "func": name,
                          "labels": sorted(labs), "primary": primary(labs),
                          "ntok": len(B["tokens"]),
                          "tadd": sum((tb - ta).values()), "tdel": sum((ta - tb).values()), "err": bool(A["has_error"] or B["has_error"])})
@@ -481,42 +496,80 @@ def summarise(rows: list[dict], draws: int = 20) -> dict:
     resid = sum(1 for r in rows if {"EXPR_EDIT", "UNCLASSIFIED"} & set(r["labels"]))
     hard = sum(1 for r in rows if "UNCLASSIFIED" in r["labels"])
 
-    # Stability: is a function's NEXT edit more like its LAST than like a size-matched stranger's?
+    # Stability: is a function's NEXT edit more like its LAST than like a stranger's? Two readings.
+    #   loose   every consecutive pair; null = any edit to a function of the same size. This is what the
+    #           first run reported, and it is inflated: a patch series, one author's habits and a file's
+    #           content all make consecutive edits alike without the FUNCTION having a type.
+    #   strict  no sweep commit on either side, a different author, at least 30 days apart; null = an
+    #           edit to ANOTHER function in the SAME file. What is left is closer to the function itself.
+    per_commit = Counter(r["sha"] for r in rows)
     by_fn: dict = defaultdict(list)
     for r in rows:
         by_fn[(r["path"], r["func"])].append(r)
     pairs = [(e[i], e[i + 1]) for e in by_fn.values() for i in range(len(e) - 1)]
+    strict_pairs = [(p, q) for p, q in pairs
+                    if per_commit[p["sha"]] <= SWEEP and per_commit[q["sha"]] <= SWEEP
+                    and p["au"] != q["au"] and q["ct"] - p["ct"] >= 30 * 86400]
     bins: dict = defaultdict(list)
+    by_file: dict = defaultdict(list)
     for r in rows:
         bins[int(math.log2(max(r["ntok"], 1)))].append(r)
-    rng = random.Random(SEED)
-    stab = {}
-    for key, name in ((lambda r: frozenset(r["labels"]), "atomic"),
-                      (lambda r: frozenset(families(r["labels"])), "family")):
-        obs = sum(_jacc(key(p), key(q)) for p, q in pairs) / len(pairs) if pairs else 0.0
-        same = sum(1 for p, q in pairs if p["primary"] == q["primary"]) / len(pairs) if pairs else 0.0
-        nulls, nsame = [], []
-        for _ in range(draws):
-            tot = hit = 0.0
-            for p, q in pairs:
-                pool = bins[int(math.log2(max(q["ntok"], 1)))]
-                s = pool[rng.randrange(len(pool))]
-                tot += _jacc(key(p), key(s))
-                hit += p["primary"] == s["primary"]
-            nulls.append(tot / len(pairs))
-            nsame.append(hit / len(pairs))
-        stab[name] = {"observed_jaccard": obs, "null_mean": sum(nulls) / draws,
-                      "null_min": min(nulls), "null_max": max(nulls),
-                      "ratio": obs / (sum(nulls) / draws) if sum(nulls) else None}
-        stab["primary_repeat"] = {"observed": same, "null_mean": sum(nsame) / draws,
-                                  "ratio": same / (sum(nsame) / draws) if sum(nsame) else None}
+        if per_commit[r["sha"]] <= SWEEP:
+            by_file[r["path"]].append(r)
+
+    def size_stranger(_p, q, rng):
+        pool = bins[int(math.log2(max(q["ntok"], 1)))]
+        return pool[rng.randrange(len(pool))]
+
+    def file_stranger(p, _q, rng):
+        pool = by_file[p["path"]]
+        for _ in range(20):
+            s = pool[rng.randrange(len(pool))]
+            if s["func"] != p["func"]:
+                return s
+        return None                                   # a one-function file has no stranger: pair skipped
+
+    def stability(prs, stranger):
+        rng = random.Random(SEED)
+        out = {"pairs": len(prs)}
+        keys = {"atomic": lambda r: frozenset(r["labels"]), "family": lambda r: frozenset(families(r["labels"])),
+                "primary": lambda r: r["primary"]}
+        obs = {k: 0.0 for k in keys}
+        nul = {k: [0.0] * draws for k in keys}
+        used = [0] * draws
+        for p, q in prs:
+            strangers = [stranger(p, q, rng) for _ in range(draws)]
+            if all(s is None for s in strangers):
+                continue
+            out["used"] = out.get("used", 0) + 1
+            for k, f in keys.items():
+                obs[k] += (f(p) == f(q)) if k == "primary" else _jacc(f(p), f(q))
+            for d, s in enumerate(strangers):
+                if s is None:
+                    continue
+                used[d] += 1
+                for k, f in keys.items():
+                    nul[k][d] += (f(p) == f(s)) if k == "primary" else _jacc(f(p), f(s))
+        m = max(out.get("used", 0), 1)
+        for k in keys:
+            ns = [nul[k][d] / max(used[d], 1) for d in range(draws)]
+            mean = sum(ns) / draws
+            out[k] = {"observed": obs[k] / m, "null_mean": mean, "null_min": min(ns), "null_max": max(ns),
+                      "ratio": (obs[k] / m) / mean if mean else None}
+        return out
+
+    stab = {"loose": stability(pairs, size_stranger), "strict": stability(strict_pairs, file_stranger),
+            "share_of_pairs_with_a_sweep": sum(1 for p, q in pairs if per_commit[p["sha"]] > SWEEP
+                                               or per_commit[q["sha"]] > SWEEP) / max(len(pairs), 1),
+            "share_of_pairs_same_author": sum(1 for p, q in pairs if p["au"] == q["au"]) / max(len(pairs), 1),
+            "share_of_pairs_under_a_day": sum(1 for p, q in pairs if q["ct"] - p["ct"] < 86400) / max(len(pairs), 1)}
     sticky = {}
     for l in LABELS:
-        prev = [q for p, q in pairs if l in p["labels"]]
+        prev = [q for p, q in strict_pairs if l in p["labels"]]
         if len(prev) >= 50 and lab[l]:
-            base = sum(1 for _p, q in pairs if l in q["labels"]) / len(pairs)
-            sticky[l] = {"n_prev": len(prev), "p_next_given_prev": sum(l in q["labels"] for q in prev) / len(prev),
-                         "base": base}
+            base = sum(1 for _p, q in strict_pairs if l in q["labels"]) / len(strict_pairs)
+            hits = sum(l in q["labels"] for q in prev)
+            sticky[l] = {"n_prev": len(prev), "hits": hits, "p_next_given_prev": hits / len(prev), "base": base}
             sticky[l]["lift"] = sticky[l]["p_next_given_prev"] / base if base else None
     return {
         "edits": n, "functions": len(by_fn), "consecutive_pairs": len(pairs),
@@ -556,20 +609,22 @@ def cmd_report(a) -> int:
         left = f"{PRIORITY[i]:12} {s['primary_share'][PRIORITY[i]]:7.1%}" if i < len(PRIORITY) else " " * 20
         right = f"{lab_rows[i][0]:14} {lab_rows[i][1]:14.1%}" if i < len(lab_rows) else ""
         print(f"  {left}      {right}")
-    print("\n  Does a function's next edit resemble its last? "
-          f"({s['consecutive_pairs']:,} consecutive pairs; null = a size-matched stranger's edit)")
-    for name in ("atomic", "family"):
-        st = s["stability"][name]
-        print(f"    {name:7} label-set Jaccard  observed {st['observed_jaccard']:.3f}  "
-              f"null {st['null_mean']:.3f} [{st['null_min']:.3f}, {st['null_max']:.3f}]  "
-              f"ratio {st['ratio']:.2f}x")
-    pr = s["stability"]["primary_repeat"]
-    print(f"    same PRIMARY family          observed {pr['observed']:.3f}  null {pr['null_mean']:.3f}"
-          f"                  ratio {pr['ratio']:.2f}x")
-    print("\n  Stickiest atomic labels: P(next edit has it | last edit had it) over its base rate")
-    for l, v in sorted(s["sticky"].items(), key=lambda kv: -(kv[1]["lift"] or 0))[:10]:
+    st = s["stability"]
+    print(f"\n  Does a function's next edit resemble its last?  {st['share_of_pairs_with_a_sweep']:.0%} of "
+          f"pairs touch a sweep, {st['share_of_pairs_same_author']:.0%} are by one author, "
+          f"{st['share_of_pairs_under_a_day']:.0%} are under a day apart")
+    for name, what in (("loose", "all pairs; null = a size-matched edit anywhere"),
+                       ("strict", "no sweep, other author, >= 30 days; null = another function, same file")):
+        v = st[name]
+        print(f"    {name:6} ({v.get('used', 0):,} pairs: {what})")
+        for k in ("atomic", "family", "primary"):
+            x = v[k]
+            print(f"      {k:8} observed {x['observed']:.3f}  null {x['null_mean']:.3f} "
+                  f"[{x['null_min']:.3f}, {x['null_max']:.3f}]  ratio {x['ratio']:.2f}x")
+    print("\n  Labels by repeat lift on the STRICT pairs: P(next has it | last had it) over its base rate")
+    for l, v in sorted(s["sticky"].items(), key=lambda kv: -(kv[1]["lift"] or 0)):
         print(f"    {l:14} {v['p_next_given_prev']:6.1%} vs {v['base']:6.1%}   lift {v['lift']:.2f}x"
-              f"   (n={v['n_prev']:,})")
+              f"   ({v['hits']:,} of {v['n_prev']:,})")
     return 0
 
 
