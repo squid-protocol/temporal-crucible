@@ -53,7 +53,7 @@ predictor × outcome matrix, plus the hypothesis → `tc#` → doc crosswalk and
 index — start at [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md). New confirmatory experiments
 start from [`docs/_experiment_template.md`](docs/_experiment_template.md).
 
-## The four guards (pre-registered in the epic before any batch ran)
+## The five guards (1-4 pre-registered in the epic before any batch ran; 5 added 2026-11-13)
 
 1. **Temporal ablation** — scans run with `GITGALAXY_DISABLE_GIT_HISTORY=1`, so churn and
    stability are neutral constants in every snapshot and provably contribute **zero** to any
@@ -65,6 +65,18 @@ start from [`docs/_experiment_template.md`](docs/_experiment_template.md).
 4. **Pre-registered criteria** — H1/H2/H3 in the epic, evaluated verbatim in the report
    whatever they say. A null result is a finding about the formulas, and routes into the
    engine's score-contract program.
+5. **Know your label** ([`docs/LABEL_CARD.md`](docs/LABEL_CARD.md)) — no study uses a fix label
+   whose precision **on that repo** is unpublished, and a label under the 0.70 gate is descriptive
+   or unused. Added after a replication reported a +0.082 lift on a label already measured at
+   **0.27** on the repo carrying its largest effect; cleaning the label reversed that repo and the
+   result fell below its own bar. `tools/label_card.py --assert <repo> <label>` is the check.
+
+## The repo bank
+
+The measurement layer is shared, not rebuilt per study: quarterly structural walks, commit history,
+line deltas and a carded label. [`docs/PROPOSAL_instrument.md`](docs/PROPOSAL_instrument.md) states the
+two tiers — a **development** tier that is deliberately spent, and a **confirmatory** tier where each repo
+is used once per registered hypothesis family. A repo moves development → spent, never back.
 
 ## Layout
 

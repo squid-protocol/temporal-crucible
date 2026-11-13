@@ -4,7 +4,7 @@
 below the **0.70** gate is reported as descriptive, or not used as an outcome at all.
 `tools/label_card.py --assert <repo> <label>` is how a tool checks before it runs.
 
-**Source.** docs/otherfix_audit.md (round 1 2026-11-11; confirmatory round, fresh sample, same doc)
+**Source.** docs/otherfix_audit.md (CGR eight: round 1 2026-11-11, confirmatory round same doc); docs/otherfix_audit_pilot.md (curl, nDPI, openssl, 2026-11-13)
 
 **Transfer.** docs/fixlabel_transfer.md: 98-100% of the LAWS history-DB `fix` set appears in xc's events for seven of eight repos (ripgrep 72%), so the precision measured on xc's pipeline carries to the LAWS flag with a stated basis rather than an assumption.
 
@@ -13,13 +13,16 @@ below the **0.70** gate is reported as descriptive, or not used as an outcome at
 | libxml2 | c | **0.80** | 30 | ✓ | **0.86** | 22 | ✓ |
 | postgres | c | **0.77** | 30 | ✓ | **0.74** | 19 | ✓ |
 | redis | c | **0.73** | 30 | ✓ | **0.75** | 16 | ✓ |
+| ndpi | c | **0.67** | 30 | ✗ | *not run* | — | — |
 | libgit2 | c | **0.63** | 30 | ✗ | **0.60** | 15 | ✗ |
+| curl | c | **0.63** | 30 | ✗ | *not run* | — | — |
 | sphinx | python | **0.60** | 30 | ✗ | **0.78** | 23 | ✓ |
+| openssl | c | **0.50** | 30 | ✗ | *not run* | — | — |
 | prometheus | go | **0.40** | 30 | ✗ | **0.83** | 12 | ✓ |
 | commons-lang | java | **0.27** | 30 | ✗ | **0.70** | 20 | ✓ |
 | ripgrep | rust | **0.27** | 30 | ✗ | **0.82** | 11 | ✓ |
 
-**3 of 8 repos** clear the gate on the raw label; **7 of 8** on v3c.
+**3 of 11 repos** clear the gate on the raw label; **7 of 11** on v3c.
 
 ## What this card already changed
 

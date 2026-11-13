@@ -39,8 +39,14 @@ CARD = {
     "prometheus":   {"lang": "go",     "raw": (12, 30), "v3c": (10, 12)},
     "commons-lang": {"lang": "java",   "raw": (8, 30),  "v3c": (14, 20)},
     "ripgrep":      {"lang": "rust",   "raw": (8, 30),  "v3c": (9, 11)},
+    # The three PILOT repos, audited 2026-11-13 (docs/otherfix_audit_pilot.md). `other-fix` is 77-86% of
+    # their outcome mass and had never been measured. v3c has NOT been run on them: unpublished, not assumed.
+    "curl":         {"lang": "c",      "raw": (19, 30)},
+    "ndpi":         {"lang": "c",      "raw": (20, 30)},
+    "openssl":      {"lang": "c",      "raw": (15, 30)},
 }
-SOURCE = "docs/otherfix_audit.md (round 1 2026-11-11; confirmatory round, fresh sample, same doc)"
+SOURCE = ("docs/otherfix_audit.md (CGR eight: round 1 2026-11-11, confirmatory round same doc); "
+          "docs/otherfix_audit_pilot.md (curl, nDPI, openssl, 2026-11-13)")
 TRANSFER = ("docs/fixlabel_transfer.md: 98-100% of the LAWS history-DB `fix` set appears in xc's events for "
             "seven of eight repos (ripgrep 72%), so the precision measured on xc's pipeline carries to the "
             "LAWS flag with a stated basis rather than an assumption.")
@@ -59,8 +65,8 @@ def card_rows():
         r = precision(repo, "raw"); v = precision(repo, "v3c")
         yield {"repo": repo, "language": rec["lang"],
                "raw_precision": round(r[0], 3), "raw_n": r[2],
-               "v3c_precision": round(v[0], 3), "v3c_n": v[2],
-               "raw_fit": r[0] >= GATE, "v3c_fit": v[0] >= GATE}
+               "v3c_precision": round(v[0], 3) if v else None, "v3c_n": v[2] if v else None,
+               "raw_fit": r[0] >= GATE, "v3c_fit": bool(v and v[0] >= GATE)}
 
 
 def cmd_write(a) -> int:
@@ -75,9 +81,10 @@ def cmd_write(a) -> int:
          "| repo | lang | raw precision | n | fit? | v3c precision | n | fit? |",
          "|---|---|---|---|---|---|---|---|"]
     for x in rows:
+        v = (f"**{x['v3c_precision']:.2f}** | {x['v3c_n']} | {'✓' if x['v3c_fit'] else '✗'}"
+             if x["v3c_precision"] is not None else "*not run* | — | —")
         L.append(f"| {x['repo']} | {x['language']} | **{x['raw_precision']:.2f}** | {x['raw_n']} | "
-                 f"{'✓' if x['raw_fit'] else '✗'} | **{x['v3c_precision']:.2f}** | {x['v3c_n']} | "
-                 f"{'✓' if x['v3c_fit'] else '✗'} |")
+                 f"{'✓' if x['raw_fit'] else '✗'} | {v} |")
     nraw = sum(1 for x in rows if x["raw_fit"]); nv3 = sum(1 for x in rows if x["v3c_fit"])
     L += ["", f"**{nraw} of {len(rows)} repos** clear the gate on the raw label; **{nv3} of {len(rows)}** on v3c.", "",
           "## What this card already changed", "",
