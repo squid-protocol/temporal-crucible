@@ -64,7 +64,7 @@ This study is about the *sign* across repos, not the accuracy of any single repo
 Only `in_degree` is tested. Out-degree and function count lost to LOC in all eight earlier repos under every
 label and are not promoted here.
 
-## Amendment 1 — 2026-11-13, ~2:50 PM Eastern, before any drawn repository was scored
+## Amendment 1 — 2026-11-13, 2:40 PM Eastern, before any drawn repository was scored
 
 **State when written:** 5 of 38 repos prepared (history + one snapshot), **zero lifts computed** for any drawn
 repo — no `docs/struct_null_<repo>.json` exists for any of the 38. Nothing below was chosen with a result in
@@ -104,7 +104,7 @@ CI excludes zero, MOD-H1 is reported as **not robust to the language call**, not
 (937) because its Python tests are excluded; it stays `python`, old/managed, as drawn. `root` and `godot` are
 called `c` though most of their code is C++; both languages are in the same family, so the cell is unaffected.
 
-## Amendment 2 — 2026-11-13, ~3:15 PM Eastern, before any drawn repository was scored
+## Amendment 2 — 2026-11-13, 2:47 PM Eastern, before any drawn repository was scored
 
 **State when written:** 6 of 38 repos prepared, **zero lifts computed** for any drawn repo (no
 `docs/struct_null_<repo>.json` for any of the 38; `mod1_score.py` has never been run). Owner decision.
@@ -150,7 +150,7 @@ any lift.
 
 **Not changed.** Outcome, label, floor, cut, window, age cut, hypotheses, and the falsification statement.
 
-## Amendment 3 — 2026-11-13, ~3:25 PM Eastern, before any drawn repository was scored
+## Amendment 3 — 2026-11-13, 3:04 PM Eastern, before any drawn repository was scored
 
 **State when written:** preparation in progress; **zero lifts computed for any of the 38 drawn repos** by any
 tool. An independent reviewer, given read-only access and forbidden to compute any drawn-repo outcome, checked

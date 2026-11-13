@@ -1,6 +1,6 @@
 # Registration: do structural instruments say where fixes land, beyond size? (SA3)
 
-**Registered 2026-11-13, ~6:15 PM Eastern; pre-implementation design review completed 2026-11-13 before any SA3
+**Registered 2026-11-13, 5:06 PM Eastern; pre-implementation design review completed 2026-11-13 before any SA3
 tool exists and before any predictor named here has been scored against any outcome defined here.** Owner
 decisions recorded: the instruments below; the high-precision label tiers are the primary outcome.
 
@@ -231,7 +231,7 @@ was known · 17 exclusions listed by reason · 18 all changes to shared tools op
 - Not detected: no effect larger than the stated detectable size; nothing about smaller ones.
 - The pool is hand-collected, well-known survivors. No claim beyond it.
 
-## Amendment 1 — 2026-11-13, ~8:15 PM Eastern: two independent reviews reconciled, before any tool exists
+## Amendment 1 — 2026-11-13, 6:00 PM Eastern: two independent reviews reconciled, before any tool exists
 
 **State when written:** no SA3 tool exists; no SA3 predictor has been put against any outcome on any repo.
 Two reviewers worked independently on the text of `3ead6bd`:
@@ -295,7 +295,7 @@ snapshot; the snapshot's code had no defect in those cases, and reverts supply m
 16 floor-clearing repos. **T1 counts toward HP only when it names a sha that resolves to a commit at or before
 the cut.** Sha-less and unresolvable reverts are not HP. `HP-allreverts` (every revert, as first registered)
 is reported as a secondary; a hypothesis supported only there reads **"tracks reverted changes, not fixes"**.
-*Owner confirmed this rule, and Instrument D as a third confirmatory test, on 2026-11-13 (~8:40 PM Eastern),
+*Owner confirmed this rule, and Instrument D as a third confirmatory test, on 2026-11-13 (~6:02 PM Eastern),
 before any tool existed.*
 
 ### 4. Merge inheritance, pinned
@@ -388,3 +388,7 @@ freebsd-src, so **SA3 makes no claim about C**.
 engine SHA with full output kept; recompute completeness. 3. Outcome marginals under the final rules, floors
 applied, list frozen. 4. Scorer with the three placebos and the assertion; power amendment. 5. Independent
 code review. 6. Score.
+
+*Timestamp correction (2026-11-13, 6:10 PM Eastern): the clock times first written in this file and in
+`docs/moderator_registration.md` were estimates and ran up to two hours ahead. They now match the commit times
+(`git log`), which are the authoritative record of what was written before what.*
