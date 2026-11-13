@@ -6,6 +6,10 @@ decisions recorded: the instruments below; the high-precision label tiers are th
 
 Written under `docs/STUDY_CHECKLIST.md`; every item is answered in the last section.
 
+> **Read Amendment 1 at the end first.** It reconciles two independent reviews and **governs wherever it differs
+> from the text below** (the control outcome, the revert tier, merge inheritance, floors, gates, power). The text
+> as first registered is commit `3ead6bd`; the second reviewer edited it in place at `7204100`.
+
 ## Pre-implementation design review (2026-11-13, before any tool or scoring)
 
 An independent review (Gemini 4 Argon) of the initial draft before code was written identified five design bugs
@@ -226,3 +230,161 @@ was known · 17 exclusions listed by reason · 18 all changes to shared tools op
   is invalid; direction is regime-dependent.
 - Not detected: no effect larger than the stated detectable size; nothing about smaller ones.
 - The pool is hand-collected, well-known survivors. No claim beyond it.
+
+## Amendment 1 — 2026-11-13, ~8:15 PM Eastern: two independent reviews reconciled, before any tool exists
+
+**State when written:** no SA3 tool exists; no SA3 predictor has been put against any outcome on any repo.
+Two reviewers worked independently on the text of `3ead6bd`:
+
+- **Reviewer 1** (a separate Claude session, read-only, forbidden to compute any predictor–outcome
+  association): a report with five blockers, backed by simulations on synthetic data and by outcome marginals
+  and path-hash placebos on the study repos.
+- **Reviewer 2** (Gemini 4 Argon, PR #183): edited the registration in place (`7204100`), added Instrument D,
+  and added opt-in label and unit switches to the tools.
+
+**Where they agree, independently:** the registered statistic `sAUC(x) − sAUC(LOC)` is biased negative for any
+predictor not perfectly rank-tied to LOC inside a band, so the placebo gate would have failed on a correct
+pipeline and a real size-independent effect would have read "contradicted"; and `Fixes:` trailers were sitting
+in the negative control. Both are fixed in the text above.
+
+**Where they differ or one saw what the other did not, the rule below governs.** Three were settled by a
+synthetic simulation run for this amendment (`recon_sim.py`; 16 repos with the real size and positive-count
+mix; no real predictor involved).
+
+### 1. Statistic — both proposals are valid; one is primary, the other must agree
+
+| predictor with no real effect | residualised rank (reviewer 1) | caliper bAUC (reviewer 2) |
+|---|---|---|
+| noise | +0.000, supported 5% | +0.000, supported 4% |
+| noisy copy of size | +0.000, 3% | +0.002, 1% |
+| count | +0.001, 1% | +0.002, 5% |
+| sparse count | −0.003, 0% | +0.002, 3% |
+| 0–100 score, zero in small files | −0.002, 3% | −0.001, 3% |
+
+With a real effect both detect a count and a score about equally (modest effect: 99% / 86% against
+96% / 89%). **Primary: `bAUC(x) − 0.5` as written above.** **Co-reported, with a reading rule:** the
+residualised statistic — bands as above; within a band u = average rank of x ÷ band size, fitted on ln(LOC)
+by least squares, r = the residual (r = u − mean u if x or LOC is constant in the band);
+effect = sAUC(r) − 0.5. If the two give different readings for a hypothesis, it is reported as **"not robust
+to the statistic"**, never as supported. A third, reported only: logistic y ~ band dummies + ln LOC +
+standardised x (log1p for counts).
+
+### 2. Negative control — the exclusive CHURN in the text above is withdrawn as the gate
+
+The text defines CHURN as files touched by non-fix commits **and not touched by HP or KW**. That conditions the
+control on the outcome: the busiest files are HP-positive and so become CHURN-negative. Simulated with a
+predictor that tracks only how busy a file is, where fixes are a constant share of all commits:
+
+| control | mean of effect(HP) − effect(control) | read "defect-specific" |
+|---|---|---|
+| CHURN_any (touched by any non-fix commit) | −0.015 | 0% of studies |
+| **exclusive CHURN (text above)** | **+0.084** | **100% of studies** |
+| matched control (below) | +0.003 | 10% of studies (40 simulated; nominal 2.5%) |
+
+**The gate uses the matched control:** per repo, K commits drawn at random from non-bot commits in the window
+that are in no fix tier, not tree-wide, and carry no `Fixes:`/`Bug:` trailer, with K = the number of HP commits
+(if the pool is smaller, HP is subsampled to the pool size); a file is control-positive if a drawn commit
+touches it; 200 draws, seed 2982; the control effect is the mean over draws. **Specificity = the mean over
+repos of the paired difference effect(HP) − effect(control), t-interval over repos, on repos scored on both.**
+`CHURN_any` is reported beside it. The exclusive CHURN is not computed.
+
+### 3. Reverts — only a revert of code that existed at the snapshot is a primary positive
+
+Reviewer 1: of in-window reverts whose target resolves, 187 of 201 (93%) undo a commit made **after** the
+snapshot; the snapshot's code had no defect in those cases, and reverts supply most HP positives in 7 of the
+16 floor-clearing repos. **T1 counts toward HP only when it names a sha that resolves to a commit at or before
+the cut.** Sha-less and unresolvable reverts are not HP. `HP-allreverts` (every revert, as first registered)
+is reported as a secondary; a hypothesis supported only there reads **"tracks reverted changes, not fixes"**.
+*This is the one choice in this amendment the owner was asked about and has not yet answered; it is the
+recommendation that was put to them, and reversing it is another dated amendment before scoring.*
+
+### 4. Merge inheritance, pinned
+
+- brought(M) = commits reachable from parents 2..k of M and not from parent 1; each off-chain commit belongs
+  to the earliest first-parent merge that reaches it; octopus merges use all non-first parents.
+- **No inheritance when brought(M) > 50 commits** (upstream imports; circuitpython has one of 1,185). Such
+  merges are listed.
+- Inherited kinds: revert (under rule 3, and never when the target is itself in brought(M)), fix-reference,
+  CVE. **The keyword tier does not inherit.** Bot-authored brought-in commits are ignored.
+- Positive files = the merge's first-parent diff ∩ the files the linking commit touched — the same depth as a
+  non-merge repo, where only the linked commit's files are positive.
+- Windowing uses the merge's time; the tree-wide rule applies to the merge's diff.
+- Squash and fast-forward commits on the chain are labelled by their own message only.
+- "Merge-workflow" (S2, exclusions) is the history's unit; the in-window merge share is reported per repo.
+
+### 5. Gates — two more placebos and a hard assertion
+
+The path hash is independent of file type, commit and directory, so it cannot see a universe mismatch or
+directory clustering. Added, all run before any real predictor is read:
+
+- **Block-permutation placebo:** the real predictor's values permuted within blocks of 4 LOC-adjacent unit
+  files (keeps its zeros, ties and size relation). Only permuted values are ever scored at this stage.
+- **Directory-hash placebo:** SHA-1 of the file's directory + salt.
+- **Assertion:** the scorer aborts if any ranked file is not a unit file.
+
+Validity requires the path-hash and block-permutation means to be centred on zero. Per-repo "above / below /
+across zero" counts are taken from the block-permutation null, not from a file bootstrap (reviewer 1: 30
+positive files in scapy come from 18 commits; a file bootstrap treats them as independent).
+
+### 6. Floors
+
+A repo is scored on an outcome only with **≥ 30 positive files from ≥ 20 qualifying commits, no single commit
+supplying > 25% of the positives**, ≥ 30 negatives, and the pair floor above.
+
+### 7. Power, and what a null on HP means
+
+The detectable mean effect is stated from **both** the path-hash and the directory-hash spread (reviewer 1,
+current tools: 0.0091 and 0.0179 across salts, i.e. roughly 0.028 and 0.055 at 80% power on the Holm-first
+interval), and for a between-repo SD of true effects of 0, 0.02 and 0.04. With three confirmatory tests the
+Holm-first interval is 98.33%. HP is not exempt from attenuation: its recall is low, so real fixes sit among
+its negatives. A null is read against the larger number.
+
+### 8. Estimand and intervals
+
+The **unweighted mean over repos** is the primary ("a typical repo"), with a **t-interval over repos** (a
+percentile bootstrap under-covers at ~16 repos). Reported beside it: the precision-weighted random-effects
+mean, τ², and the result with **go and django removed** (they hold 52% of HP-positive files, and django's fix
+references cover most of its ordinary work). No file-pooled number, ever. The `C_family` / `managed` sub-pools
+are descriptive and are not fitted with fewer than five repos; on today's marginals C_family is godot and
+freebsd-src, so **SA3 makes no claim about C**.
+
+### 9. Instruments
+
+- **D stays, as reviewer 2 added it** — a fourth instrument beyond the owner's three, and a third confirmatory
+  test. `amplified_cascading_flux` is **not a `file_data` column**: it is read from the engine's
+  `mitigation_telemetry` JSON, key `amplified_cascading_flux`, per file. Its prior evidence is C-only (nDPI,
+  openssl; not curl) on security-fix outcomes, and SA3's scored set is mostly not C.
+- **C, `risk_safety_score`:** it is exactly 0 when a file has no "attack" keyword and near 50 otherwise, and
+  its inputs are near-absent in Python, Java and C#. Two decomposition secondaries are declared (zero vs
+  non-zero; the score among non-zero files), and the per-repo non-zero share of each input is reported.
+  "Instrument silent" becomes: non-zero in < 10% of unit files **or** fewer than 20 distinct values.
+- **Why these primaries:** `safety_score` passed one earlier test on curl and failed on nDPI; `struct_branch`
+  comes from curl's fix-grammar result; "structure adds over size" failed on curl. Different questions, on
+  repos outside the draw — so the drawn-repo test is unbiased, and the prior is weak.
+- SA3-A is exploratory and is never described as "supported"; only "positive / negative / not detected".
+
+### 10. Smaller rules
+
+- Per-tier rows use the cascade's exclusive tier, in its order: revert, CVE, fix-reference.
+- **One engine SHA for all 46 rescans**, named in the scorer's output; completeness is recomputed on the
+  rescans; a NULL predictor value drops that file for that predictor and is counted.
+- The eight earlier repos were scanned 4.6 to 42 days after their cut: their window starts at the snapshot.
+- Added sensitivities: **S8** positives followed through renames by the history's lineage id, files deleted
+  inside the window flagged · **S9** the logistic model of rule 1.
+
+### 11. Corrections to the record
+
+- `docs/sa3_marginals.json` "other" counts commits with no tier only; the control pool also includes bare
+  references (kubernetes: 0 in the JSON, 2,646 files under the earlier CHURN definition). No predictor was
+  involved; nothing is compromised.
+- "Nothing … on the 38" has one exception: **micropython** was in the engine's outcome-label pilot (#2720),
+  where a keyword signal was put against later fixes. It has 11 HP positives and will not be scored on HP.
+- Checklist answers 2, 4, 5, 10, 12 and 13 in the text above were labels rather than answers; rules 1–8 here
+  are the answers.
+
+### Order of work
+
+1. Merge inheritance and the revert-target resolver in the body harvest. 2. Rescan the 46 snapshots at one
+engine SHA with full output kept; recompute completeness. 3. Outcome marginals under the final rules, floors
+applied, list frozen. 4. Scorer with the three placebos and the assertion; power amendment. 5. Independent
+code review. 6. Score.
