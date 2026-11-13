@@ -6,12 +6,15 @@ status: scored
 verdict: n/a
 theme: defect-prediction
 ids:
-docs: docs/etyp_label.md
-links:
-takehome: Fitted on one repo and scored on the other, a commit's edit-type vector separates message-labelled fixes from non-fixes at AUC only 0.57-0.59 (size alone 0.54-0.55) and regressions not at all, but recognises extrinsic fixes at 0.67-0.71 through preprocessor and type edits; the labelling claim was withdrawn before registration and the hand-judged samples were not spent.
+docs: docs/etyp_label.md; docs/etyp_review.md
+links: temporal-crucible#175
+takehome: Fitted on one repo and scored on the other, a commit's edit-type vector adds no detectable AUC to commit size for telling message-labelled fixes from non-fixes (+0.016 and +0.002, both intervals including zero) and is at chance for regressions; extrinsic fixes score 0.65-0.69 but that largely recovers the subject rule that assigns the label; the labelling claim was withdrawn and the hand-judged samples were not spent.
 ---
 
 # Can the edit-type vector label fixes? Mostly no (ETYP-LABEL)
+
+**Superseded in part by an independent review: the numbers and claims in the sections below are the first
+version; the corrections are in the last section and in `docs/etyp_review.md`.**
 
 ## Question
 
@@ -45,3 +48,10 @@ extrinsic class carries to an unseen repo.
 
 The labelling recommendation in `etyp_fix.md` is marked superseded and the draft registration carries a
 note withdrawing it. The open lead is what an added branch tests, not that a branch was added.
+
+## Revised after independent review (2026-11-12)
+
+With the corrected groups (`docs/etyp_review.md`) commit size alone reaches 0.58, and the types add nothing
+detectable to it. The first version's "better than size by two or three points" came from cosmetic-subject
+commits in the negatives. Its "usable cross-check on the extrinsic label" is withdrawn: the label is assigned
+from platform words in the subject and platform-named commits edit preprocessor conditions regardless.
