@@ -1,61 +1,382 @@
 [
  {
-  "repo": "ghostty",
-  "lang": "c",
-  "age": "young",
-  "family": "C",
-  "year": 2022,
-  "cut_sha": "389cc9539455b5f4e16f980a5a530957e9149e27",
-  "cut_ct": 1722964928,
-  "scanned": "ok",
-  "build_out": "engine f71181aae765eeeb250109d32464d3063332870e\nghostty: 1 snapshots in the walk, 1 scanned now, 0 failed"
- },
- {
   "repo": "racket",
-  "lang": "c",
-  "age": "old",
-  "family": "C",
-  "year": 1997,
+  "lang": "racket",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 45548,
   "cut_sha": "c9e9b4e400543cc4ae476bef30989d749e32fe00",
   "cut_ct": 1448736943,
-  "scanned": "ok",
-  "build_out": "engine f71181aae765eeeb250109d32464d3063332870e\nracket: 1 snapshots in the walk, 1 scanned now, 0 failed"
+  "scanned": "already"
  },
  {
   "repo": "macports-base",
   "lang": "c",
-  "age": "old",
-  "family": "C",
-  "year": 2002,
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 8910,
   "cut_sha": "64e6b92b8e750057354f84281cb822b8d8067586",
   "cut_ct": 1488102502,
-  "scanned": "ok",
-  "build_out": "engine f71181aae765eeeb250109d32464d3063332870e\nmacports-base: 1 snapshots in the walk, 1 scanned now, 0 failed"
+  "scanned": "already"
  },
  {
   "repo": "root",
-  "error": "OperationalError: database is locked"
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 95218,
+  "cut_sha": "546ea95c32031d3693feddb2f247391ada2f3ef8",
+  "cut_ct": 1616002819,
+  "scanned": "already"
  },
  {
   "repo": "sqlite",
   "lang": "c",
-  "age": "old",
-  "family": "C",
-  "year": 2000,
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 29116,
   "cut_sha": "49507d2af6648f1c548cdc2175ac74ae0331973c",
   "cut_ct": 1667841713,
-  "scanned": "ok",
-  "build_out": "engine f71181aae765eeeb250109d32464d3063332870e\nsqlite: 1 snapshots in the walk, 1 scanned now, 0 failed"
+  "scanned": "already"
  },
  {
   "repo": "tcpip_historical",
   "lang": "c",
-  "age": "old",
-  "family": "C",
-  "year": 1979,
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 69979,
   "cut_sha": "feb2ad4f5533204fc6ba0536b694d78ba3eee974",
   "cut_ct": 714580734,
-  "scanned": "ok",
-  "build_out": "engine f71181aae765eeeb250109d32464d3063332870e\ntcpip_historical: 1 snapshots in the walk, 1 scanned now, 0 failed"
+  "scanned": "already"
+ },
+ {
+  "repo": "freebsd-src",
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 302381,
+  "cut_sha": "cef2742e201bd57eca86bef0033b52110924af40",
+  "cut_ct": 1554637721,
+  "scanned": "ok"
+ },
+ {
+  "repo": "blast",
+  "lang": "cpp",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 104999,
+  "cut_sha": "a13cda9e045d89ec5d32c7caf402ac95539b6774",
+  "cut_ct": 1545328894,
+  "scanned": "already"
+ },
+ {
+  "repo": "gnupg",
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 11033,
+  "cut_sha": "2bc1ec294422504e2d2e5d20716aba68f1c2b0d7",
+  "cut_ct": 1599546882,
+  "scanned": "already"
+ },
+ {
+  "repo": "ghostty",
+  "lang": "zig",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 5253,
+  "cut_sha": "a387d6cc08d599bc3b342b742ed7c0dc6d2bb201",
+  "cut_ct": 1757736731,
+  "scanned": "already"
+ },
+ {
+  "repo": "swift",
+  "lang": "swift",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 73713,
+  "cut_sha": "1f3397ac116fada9884b2cfe49f99727788800f7",
+  "cut_ct": 1670693664,
+  "scanned": "already"
+ },
+ {
+  "repo": "livecode",
+  "lang": "cpp",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 4436,
+  "cut_sha": "ff2eb3f00f2feea9392dd9f53e0b9857d55afe87",
+  "cut_ct": 1494694686,
+  "scanned": "already"
+ },
+ {
+  "repo": "tensorflow",
+  "lang": "cpp",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 177077,
+  "cut_sha": "1da10a44fa27c1d89bb74147b36a560766f3212f",
+  "cut_ct": 1696422498,
+  "scanned": "already"
+ },
+ {
+  "repo": "opencv",
+  "lang": "cpp",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 13472,
+  "cut_sha": "f4d6a3ec4e1ccb823eed9554d322054106373986",
+  "cut_ct": 1627140898,
+  "scanned": "already"
+ },
+ {
+  "repo": "godot",
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 40799,
+  "cut_sha": "e52cf866611afd8a8d66ec1ba8866efd26813bbf",
+  "cut_ct": 1723797256,
+  "scanned": "already"
+ },
+ {
+  "repo": "wrf-fortran",
+  "lang": "fortran",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 6664,
+  "cut_sha": "1133f9411a0d901f76eee0977e1c20587d7a5d57",
+  "cut_ct": 1486160998,
+  "scanned": "already"
+ },
+ {
+  "repo": "micropython",
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 17743,
+  "cut_sha": "4ce360fa831a35d7bc0e194f11d74632a0fba60b",
+  "cut_ct": 1684378296,
+  "scanned": "already"
+ },
+ {
+  "repo": "circuitpython",
+  "lang": "c",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 10993,
+  "cut_sha": "1a329cfd1109a230f909849aa162d8db76b95b33",
+  "cut_ct": 1649260502,
+  "scanned": "already"
+ },
+ {
+  "repo": "fieldtrip",
+  "lang": "matlab",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 18276,
+  "cut_sha": "40352a8a57dc1ac4c6958751293b3bc1495d0635",
+  "cut_ct": 1554188328,
+  "scanned": "already"
+ },
+ {
+  "repo": "rails",
+  "lang": "ruby",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 45114,
+  "cut_sha": "daaa3b58688d092b4fc3505cf74fece034f61dbf",
+  "cut_ct": 1620115833,
+  "scanned": "already"
+ },
+ {
+  "repo": "cpython",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 118251,
+  "cut_sha": "0169d3003be3d072751dd14a5c84748ab63a249f",
+  "cut_ct": 1587990139,
+  "scanned": "already"
+ },
+ {
+  "repo": "scapy",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 4115,
+  "cut_sha": "e6b91cf71f1b39f558b8630260d11ff71b88eb18",
+  "cut_ct": 1655125979,
+  "scanned": "already"
+ },
+ {
+  "repo": "django",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 33792,
+  "cut_sha": "69dbb6b7086699bea27609845b1cd89fd2f85e0b",
+  "cut_ct": 1574861786,
+  "scanned": "already"
+ },
+ {
+  "repo": "go",
+  "lang": "go",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 65483,
+  "cut_sha": "aedf298daf508b564e4dddc7687fff8822315a5e",
+  "cut_ct": 1652752234,
+  "scanned": "already"
+ },
+ {
+  "repo": "mediawiki",
+  "lang": "php",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 52546,
+  "cut_sha": "0a5c71d4dd6405502b1d1d0a02b5d0927d519986",
+  "cut_ct": 1344290553,
+  "scanned": "already"
+ },
+ {
+  "repo": "wordpress",
+  "lang": "php",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 52180,
+  "cut_sha": "083134f694bb89789960321625a5b7e12af635ea",
+  "cut_ct": 1593577443,
+  "scanned": "already"
+ },
+ {
+  "repo": "impacket",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 3598,
+  "cut_sha": "63eb977dc9c817216d82a48adceaff07d12fb83f",
+  "cut_ct": 1600977554,
+  "scanned": "already"
+ },
+ {
+  "repo": "bugzilla",
+  "lang": "perl",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 9536,
+  "cut_sha": "374ee5c8a6ad04213de38be4557398bb458219a9",
+  "cut_ct": 1292527579,
+  "scanned": "already"
+ },
+ {
+  "repo": "runtime",
+  "lang": "csharp",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 121194,
+  "cut_sha": "97fb19508f6168577fed58c6d46db573db1c5bcb",
+  "cut_ct": 1645830550,
+  "scanned": "already"
+ },
+ {
+  "repo": "kubernetes",
+  "lang": "go",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 57095,
+  "cut_sha": "b456e70fe939271ebda96c03cdf4094ab0bdc4e9",
+  "cut_ct": 1648129145,
+  "scanned": "already"
+ },
+ {
+  "repo": "discourse",
+  "lang": "ruby",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 56540,
+  "cut_sha": "243793ec6ea41a9bf53dc6b9585ba9239dfc4c85",
+  "cut_ct": 1694069849,
+  "scanned": "already"
+ },
+ {
+  "repo": "tigerbeetle",
+  "lang": "zig",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 3180,
+  "cut_sha": "8fad09894231721713873d334c2f6a5e5efa6051",
+  "cut_ct": 1742940651,
+  "scanned": "already"
+ },
+ {
+  "repo": "bun",
+  "lang": "zig",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 14723,
+  "cut_sha": "106055845635e1547c018f54fc3b294497c90648",
+  "cut_ct": 1740614535,
+  "scanned": "already"
+ },
+ {
+  "repo": "sqlmap",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 10339,
+  "cut_sha": "590e8ed5aef8cb0b47ef85ebc3819be6c7f282bc",
+  "cut_ct": 1546720732,
+  "scanned": "already"
+ },
+ {
+  "repo": "spock",
+  "lang": "java",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 2696,
+  "cut_sha": "aa5d487a4c7ada64ebf8e917ff6c30ba8164c85f",
+  "cut_ct": 1613603490,
+  "scanned": "already"
+ },
+ {
+  "repo": "moby",
+  "lang": "go",
+  "rules": "A3",
+  "merge_units": true,
+  "usable_commits": 19971,
+  "cut_sha": "888c618c15c6a3c5f85c2cbe7e561e0401dc66a3",
+  "cut_ct": 1652381285,
+  "scanned": "already"
+ },
+ {
+  "repo": "effect",
+  "lang": "jsts",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 6303,
+  "cut_sha": "007289a52d5877f8e90e2dacf38171ff9bf603fd",
+  "cut_ct": 1726441549,
+  "scanned": "already"
+ },
+ {
+  "repo": "pandas",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 34019,
+  "cut_sha": "0cf87d2ff2e686d24c376099cb6ef151812fc913",
+  "cut_ct": 1666376871,
+  "scanned": "already"
+ },
+ {
+  "repo": "pwntools",
+  "lang": "python",
+  "rules": "A3",
+  "merge_units": false,
+  "usable_commits": 3724,
+  "cut_sha": "2c0d63b569e6e86324ca9ad9dbdd4da65b0cae85",
+  "cut_ct": 1591339295,
+  "scanned": "already"
  }
 ]
