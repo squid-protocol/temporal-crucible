@@ -74,6 +74,35 @@ def repo_frame(repo: str):
     return [(p, float(loc[p]), before.get(p, 0), after.get(p, 0)) for p in files]
 
 
+def estimate_tau(repo: str, min_commits: int = 15) -> tuple[float, int]:
+    """Between-file spread of the labelled-fix RATE, with the binomial sampling part removed (delta method).
+
+    Circular in the obvious way -- it is estimated from the same label whose error is being modelled -- and it
+    sees FILE-level heterogeneity only. Author- and era-level variation adds to it, and that is where Bird et
+    al. locate the bias, so the true spread is ABOVE this. Treat it as a lower bound."""
+    import statistics as st
+    h = sqlite3.connect(f"file:{STUDY/'history'/f'{repo}.db'}?mode=ro", uri=True)
+    fix = {s for s, in h.execute("select sha from commit_ where fix=1 and merge=0 and bot=0")}
+    tot: dict[str, int] = {}
+    hit: dict[str, int] = {}
+    for path, sha in h.execute("select t.path, t.sha from touch t join commit_ c on c.sha=t.sha "
+                               "where c.merge=0 and c.bot=0"):
+        tot[path] = tot.get(path, 0) + 1
+        if sha in fix:
+            hit[path] = hit.get(path, 0) + 1
+    h.close()
+    files = [p_ for p_ in tot if tot[p_] >= min_commits]
+    if len(files) < 20:
+        return float("nan"), len(files)
+    denom = sum(tot[p_] for p_ in files)
+    pbar = sum(hit.get(p_, 0) for p_ in files) / denom if denom else 0
+    if not 0 < pbar < 1:
+        return float("nan"), len(files)
+    logs = [math.log((hit.get(p_, 0) + 0.5) / (tot[p_] + 1.0)) for p_ in files]
+    samp = st.mean([(1 - pbar) / (pbar * tot[p_]) for p_ in files])
+    return math.sqrt(max(0.0, st.pstdev(logs) ** 2 - samp)), len(files)
+
+
 def simulate(frame, sens, spec, tau, alpha, rnd) -> float | None:
     """one replicate under the null; returns the lift HR-1 would report"""
     locs = [f[1] for f in frame]
@@ -104,6 +133,50 @@ def simulate(frame, sens, spec, tau, alpha, rnd) -> float | None:
     return None if (a1 is None or a2 is None) else a1 - a2
 
 
+def cmd_sweep(a) -> int:
+    """Per repo: estimate tau from its own data, simulate the null there, compare to the observed lifts."""
+    obs = {}
+    for tag, f in (("raw", "docs/hr1.json"), ("v3c", "docs/hr1b.json")):
+        p = Path(f)
+        if p.exists():
+            for r in json.loads(p.read_text())["repos"]:
+                if r.get("evaluable") and r.get("lift") is not None:
+                    obs.setdefault(r["repo"], {})[tag] = r["lift"]
+    print(f"{'repo':14}{'tau':>7}{'files':>7}{'null med':>10}{'null p95':>10}"
+          f"{'raw lift':>10}{'v3c lift':>10}  verdict (vs the null at its own tau)")
+    for repo in a.sweep.split(","):
+        try:
+            tau, nf = estimate_tau(repo)
+            frame = repo_frame(repo)
+        except Exception as e:
+            print(f"{repo:14} error: {e}"); continue
+        if not frame or tau != tau:
+            print(f"{repo:14} no usable frame"); continue
+        rnd = random.Random(2982)
+        vals = sorted(v for v in (simulate(frame, a.sens, a.spec, tau, a.alpha, rnd)
+                                  for _ in range(a.reps)) if v is not None)
+        if not vals:
+            print(f"{repo:14}{tau:>7.2f}{nf:>7}  (no replicate reached the positives floor)"); continue
+        med, p95 = vals[len(vals) // 2], vals[int(0.95 * len(vals)) - 1]
+        o = obs.get(repo, {})
+        fmt = lambda v: f"{v:+.4f}" if v is not None else "   --   "
+        best = o.get("v3c", o.get("raw"))
+        # A lift at or below zero is not evidence of a positive effect, whatever the null does -- the null
+        # can sit well below zero (non-differential noise attenuates the predictor BELOW size), and "beats a
+        # more-negative null" is not a finding.
+        if best is None:
+            verd = "-"
+        elif best <= 0:
+            verd = "no positive effect"
+        elif best > p95:
+            verd = "EXCEEDS null"
+        else:
+            verd = "inside null"
+        print(f"{repo:14}{tau:>7.2f}{nf:>7}{med:>10.4f}{p95:>10.4f}"
+              f"{fmt(o.get('raw')):>10}{fmt(o.get('v3c')):>10}  {verd}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", default="curl")
@@ -113,8 +186,11 @@ def main() -> int:
     ap.add_argument("--alpha", type=float, default=1.0)
     ap.add_argument("--observed", type=float, help="the lift actually reported, for comparison")
     ap.add_argument("--taus", type=lambda s: tuple(float(x) for x in s.split(",")))
+    ap.add_argument("--sweep", help="comma-separated repos: estimate tau per repo and test its observed lifts")
     ap.add_argument("--out", type=Path)
     a = ap.parse_args()
+    if a.sweep:
+        return cmd_sweep(a)
     frame = repo_frame(a.repo)
     print(f"{a.repo}: {len(frame):,} files at the cut; null = fixes land by size alone (alpha={a.alpha}), "
           f"label sensitivity {a.sens}, specificity {a.spec}\n")
