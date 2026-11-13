@@ -74,9 +74,19 @@ The worked example throughout is MOD-1: `docs/moderator_registration.md` (Amendm
 
 ## Process
 
-15. **Independent review before scoring.** A reviewer with read-only access, forbidden to compute any outcome
-    for the study's repos, checks the *code* against the registration and returns blockers. Blockers become a
-    dated amendment before the scorer runs. Its claims are spot-checked before being acted on.
+15. **Two independent reviews, at two points.** (a) **Design review, before any tool is written:** two
+    reviewers who do not see each other's work, on different models where possible, read the registration and
+    return blockers. (b) **Code review, before the scorer runs:** a reviewer with read-only access checks the
+    *code* against the registration. Every reviewer is forbidden to compute any predictor–outcome association
+    for the study; simulations on synthetic data and the registered placebos are allowed. The two design
+    reviews are **reconciled in one dated amendment** that says where they agree, where they differ, and which
+    rule governs — settled by simulation where a simulation can settle it, not by preference. A reviewer's
+    claims are spot-checked before being acted on, and a reviewer does not rewrite the registration in place:
+    changes go in the amendment.
+    *What it did (SA3, 2026-11-13):* both reviewers independently caught that the registered statistic read a
+    meaningless predictor as "contradicted". One reviewer's replacement control then passed a pure activity
+    predictor 100% of the time in simulation; only the other reviewer's check, and the reconciliation, caught
+    it. Neither review alone would have been enough.
 
 16. **Amend in the open.** Every change after registration is a dated amendment stating what was known when
     it was written (how many repos prepared, how many scored). The old tool is kept as the record of the old

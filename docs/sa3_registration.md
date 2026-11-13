@@ -295,8 +295,8 @@ snapshot; the snapshot's code had no defect in those cases, and reverts supply m
 16 floor-clearing repos. **T1 counts toward HP only when it names a sha that resolves to a commit at or before
 the cut.** Sha-less and unresolvable reverts are not HP. `HP-allreverts` (every revert, as first registered)
 is reported as a secondary; a hypothesis supported only there reads **"tracks reverted changes, not fixes"**.
-*This is the one choice in this amendment the owner was asked about and has not yet answered; it is the
-recommendation that was put to them, and reversing it is another dated amendment before scoring.*
+*Owner confirmed this rule, and Instrument D as a third confirmatory test, on 2026-11-13 (~8:40 PM Eastern),
+before any tool existed.*
 
 ### 4. Merge inheritance, pinned
 
