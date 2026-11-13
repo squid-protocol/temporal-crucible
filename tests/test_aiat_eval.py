@@ -91,3 +91,61 @@ def test_oversized_files_are_recorded_not_truncated():
     # fixed, so the tool records them as oversized and leaves them unscored.
     assert ae.MAX_FILE_BYTES >= 100_000
     assert "never truncated" in Path(ae.__file__).read_text()
+
+
+# ---------------------------------------------------------------- anonymiser v2 (2026-11-13)
+import importlib.util  # noqa: E402
+
+import pytest  # noqa: E402
+
+# Only the anonymiser needs tree-sitter; a module-level importorskip would skip the tests above too.
+needs_ts = pytest.mark.skipif(importlib.util.find_spec("tree_sitter_language_pack") is None,
+                              reason="tree-sitter-language-pack not installed")
+
+SRC = """#include <stdio.h>
+#include <sys/socket.h>
+#include <curl/curl.h>
+#include "urldata.h"
+#define CURL_MAX_LEN (CURLMAX - 1)
+#error "upgrade your libcurl"
+static struct sockaddr *__CurlISocket = NULL;
+int __attribute__((unused)) Curl_go(struct Curl_easy *data) { /* curl */ return strlen(data->name); }
+"""
+
+
+@needs_ts
+def test_v1_is_unchanged_and_still_leaks_what_it_leaked():
+    out = ae.anonymise(SRC)
+    assert out == ae.anonymise(SRC, 1)
+    # the leaks v2 closes: <...> includes, #define / #error bodies, and project names starting with __
+    assert "<curl/curl.h>" in out and "libcurl" in out and "CURLMAX" in out and "__CurlISocket" in out
+
+
+@needs_ts
+def test_v2_rewrites_project_includes_and_keeps_system_ones():
+    out = ae.anonymise(SRC, 2)
+    assert "<stdio.h>" in out and "<sys/socket.h>" in out
+    assert "<curl/curl.h>" not in out and "<h0.h>" in out
+    assert '#include "s"' in out
+
+
+@needs_ts
+def test_v2_reaches_into_macro_bodies_and_project_reserved_names():
+    out = ae.anonymise(SRC, 2)
+    assert "curl" not in out.lower()
+    assert "__attribute__" in out and "strlen" in out and "return" in out
+    # one table for code and macro bodies: the same name gets the same token everywhere
+    name = ae.anonymise("#define A (CURLMAX - 1)\nint f(void) { return CURLMAX; }\n", 2)
+    tokens = [t for t in name.replace("(", " ").replace(")", " ").replace(";", " ").split() if t.startswith("fn")]
+    assert len(set(tokens) - {"fn0", "fn1"}) <= 1 and name.count(tokens[-1]) >= 2
+
+
+def test_score_tags_never_share_a_file():
+    class A:
+        model, anon, anon_version = "claude-opus-5", False, 0
+    a = A()
+    assert ae.tag(a) == "claude-opus-5"
+    a.anon = True
+    assert ae.tag(a) == "claude-opus-5-anon"
+    a.anon_version = 2
+    assert ae.tag(a) == "claude-opus-5-anon2"
