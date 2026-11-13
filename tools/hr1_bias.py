@@ -147,6 +147,19 @@ def cmd_sweep(a) -> int:
     for repo in a.sweep.split(","):
         try:
             tau, nf = estimate_tau(repo)
+            if a.combined_tau:
+                # add the AUTHOR component; the file-level figure alone understates the spread and that is
+                # what made curl's margin look 3x safer than it is (see docs/hr1_bias_analysis.md)
+                import importlib
+                am = importlib.import_module("author_model")
+                rows, _t, _s = am.load(repo)
+                by_a = {}
+                for sha, author, subj, fix, ct in rows:
+                    k, n = by_a.get(author, (0, 0))
+                    by_a[author] = (k + (1 if fix else 0), n + 1)
+                ta, _na = am.spread(by_a, 15)
+                if ta == ta:
+                    tau = math.sqrt(tau ** 2 + ta ** 2)
             frame = repo_frame(repo)
         except Exception as e:
             print(f"{repo:14} error: {e}"); continue
@@ -187,6 +200,7 @@ def main() -> int:
     ap.add_argument("--observed", type=float, help="the lift actually reported, for comparison")
     ap.add_argument("--taus", type=lambda s: tuple(float(x) for x in s.split(",")))
     ap.add_argument("--sweep", help="comma-separated repos: estimate tau per repo and test its observed lifts")
+    ap.add_argument("--combined-tau", action="store_true", help="add the author-level spread to the file-level one")
     ap.add_argument("--out", type=Path)
     a = ap.parse_args()
     if a.sweep:

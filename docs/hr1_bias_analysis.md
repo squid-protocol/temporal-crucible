@@ -186,3 +186,51 @@ with the added problem that it is about people rather than files.
 
 What **is** identifiable, and is what this model provides: announcement behaviour, label reliability
 conditioned on author, and a ranked queue for where to spend validation effort.
+
+---
+
+# The CGR cohort at the honest (combined) τ
+
+Author spread measured for every repo, added to the file spread, and the nulls re-run there.
+
+| repo | τ_author | τ_file | **τ combined** | null median | null 95th | raw lift | **v3c lift** | verdict |
+|---|---|---|---|---|---|---|---|---|
+| libxml2 | 1.26 | 0.30 | **1.29** | +0.157 | +0.219 | +0.025 | −0.010 | no positive effect |
+| postgres | 1.18 | 0.50 | **1.28** | +0.166 | +0.186 | +0.110 | +0.026 | inside null |
+| **curl** | 0.83 | 0.36 | **0.91** | +0.001 | +0.036 | +0.333 | **+0.071** | **exceeds null** |
+| sphinx | 0.71 | 0.43 | **0.82** | +0.142 | +0.235 | +0.117 | +0.046 | inside null |
+| prometheus | 0.73 | 0.28 | **0.78** | +0.003 | +0.043 | +0.009 | −0.013 | no positive effect |
+| commons-lang | 0.62 | 0.40 | **0.74** | +0.054 | +0.106 | +0.143 | −0.015 | no positive effect |
+| redis | 0.48 | 0.32 | **0.58** | +0.016 | +0.056 | +0.091 | +0.020 | inside null |
+| ripgrep | — | 0.50 | 0.50 | — | — | — | — | too few authors ≥15 commits (2) |
+| libgit2 | — | 0.37 | 0.37 | — | — | — | — | too few authors ≥15 commits (9) |
+
+**In every repo, author spread exceeds file spread** — by 1.5× to 4×. The earlier file-only figures were
+understating the noise everywhere, not just on curl.
+
+## What changes at the honest τ
+
+**Several of the ORIGINAL raw lifts are now below their own nulls.** libxml2's +0.025 against a null *median*
+of +0.157; postgres's +0.110 against +0.166; sphinx's +0.117 against +0.142. On these repos the effect that
+was originally reported as replication is **smaller than what label noise alone manufactures**. That is a
+stronger statement than "inflated": at the measured heterogeneity, those numbers are not evidence of anything.
+
+**curl remains the single exception.** At τ = 0.91 its null has a maximum of +0.061 over 400 replicates and
+curl observes +0.071. It is the only repo in the bank whose lift exceeds its own null.
+
+**And curl's τ is unremarkable** — 0.91 sits mid-range against 0.58 (redis) to 1.29 (libxml2). So curl does
+not win by having tidier labelling. It wins by having a larger effect.
+
+## Standing, restated
+
+| claim | status |
+|---|---|
+| "recidivism beats size" on curl | **holds**, at a ~1.2× margin on τ — real but not comfortable |
+| the same on the CGR eight | **does not hold**; several raw lifts sit below their own nulls |
+| "replicated on curl + nDPI, p<1e-4" | curl half defended; nDPI half **still unrun** (no walk, label 0.68) |
+| any pooled cross-repo statement | **not supported** — the nulls differ per repo by an order of magnitude |
+
+The last row is the one with the most consequence for study design: because τ varies from 0.58 to 1.29 across
+repos, **a pooled estimate averages over nulls that are not the same shape**. Pooling lifts across repos
+without conditioning on each repo's labelling heterogeneity is not a valid operation, and that is what HR-1's
+pooled +0.082 did.
