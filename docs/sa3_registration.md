@@ -392,3 +392,26 @@ code review. 6. Score.
 *Timestamp correction (2026-11-13, 6:10 PM Eastern): the clock times first written in this file and in
 `docs/moderator_registration.md` were estimates and ran up to two hours ahead. They now match the commit times
 (`git log`), which are the authoritative record of what was written before what.*
+
+## Amendment 2 — 2026-11-13, 6:24 PM Eastern: nesting depth added as an exploratory secondary, before any scorer exists
+
+**State when written:** rescans and the outcome builder exist; no scorer exists; no SA3 predictor has been put
+against any outcome. Owner decision.
+
+The engine has no nesting measure (its `complexity` column equals the branch-keyword count), so Instrument B
+cannot tell flat branching from deep branching. Added under **Instrument B, as exploratory secondaries only**
+(no confirmatory claim, no change to the Holm family, never promoted):
+
+- `nest_max` — the deepest control-flow node in the file; `nest_mean` — the mean depth over its control nodes.
+- Measured by tree-sitter on the snapshot's source (`tools/sa3_nesting.py`). A control node is a conditional,
+  a loop, a multi-way branch (the statement, not its arms) or a try block; **the node kinds per language are
+  the `CONTROL` table in that file at this commit, with `tree_sitter_language_pack` 1.20.0**, and are part of
+  this registration. Depth = 1 + the number of control nodes among a node's ancestors.
+- Validated on structure only: a self-test of hand-written code with a known depth passes in all 17 grammars.
+- **Not measured:** Racket (S-expressions have no control node kinds). Ruby blocks (`each do … end`) are not
+  counted as loops, so Ruby depth is understated. A file with a parse error is kept and counted.
+- Predicted direction: deeper, more fixes. Same bands, statistics, placebos and control as every other
+  predictor. Depth rises with size, so only the within-band result is reported as a result.
+
+The change study (SA3-CH) does **not** get a nesting change: on curl, among 375 edited functions with an
+identical keyword set, nesting changed in 1.3% and order in 0%.
