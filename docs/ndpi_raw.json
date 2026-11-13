@@ -1,0 +1,34 @@
+{
+ "registration": "docs/hist_replication.md",
+ "hypothesis": "HR-1",
+ "repos": [
+  {
+   "repo": "ndpi",
+   "commits": 5428,
+   "cut_epoch": 1727290163,
+   "window_days": 730,
+   "fix_label": "raw",
+   "label_precision": 0.667,
+   "label_fit": false,
+   "loc_snapshot": "26b1899d9",
+   "files": 669,
+   "positives": 268,
+   "evaluable": true,
+   "auc_loc": 0.7730766367662932,
+   "auc_recidivism": 0.8375376856366546,
+   "auc_recidivism_decay": 0.8435348196672497,
+   "lift": 0.06446104887036141,
+   "lift_decay": 0.07045818290095651,
+   "lift_ci95": [
+    0.02423950712360412,
+    0.10598691933590476
+   ],
+   "recall20_loc": 0.007462686567164179,
+   "recall20_recidivism": 0.018656716417910446
+  }
+ ],
+ "pooled": {
+  "poolable": false,
+  "why": "1 evaluable repos"
+ }
+}
