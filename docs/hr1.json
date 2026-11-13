@@ -1,0 +1,166 @@
+{
+ "registration": "docs/hist_replication.md",
+ "hypothesis": "HR-1",
+ "repos": [
+  {
+   "repo": "commons-lang",
+   "commits": 9564,
+   "cut_epoch": 1727098502,
+   "window_days": 730,
+   "loc_snapshot": "d4bdfbea0",
+   "files": 520,
+   "positives": 108,
+   "evaluable": true,
+   "auc_loc": 0.7404935275080906,
+   "auc_recidivism": 0.8837086479683567,
+   "auc_recidivism_decay": 0.8491886911183028,
+   "lift": 0.14321512046026608,
+   "lift_decay": 0.10869516361021214,
+   "lift_ci95": [
+    0.0947102253328781,
+    0.1905432029271038
+   ],
+   "recall20_loc": 0.037037037037037035,
+   "recall20_recidivism": 0.12962962962962962
+  },
+  {
+   "repo": "libgit2",
+   "commits": 1308,
+   "cut_epoch": 1333393545,
+   "window_days": 730,
+   "loc_snapshot": "5b9fac39d",
+   "files": 207,
+   "positives": 0,
+   "evaluable": false,
+   "why": "0 post-cut positives, under the registered floor of 30"
+  },
+  {
+   "repo": "libxml2",
+   "commits": 7831,
+   "cut_epoch": 1703169264,
+   "window_days": 730,
+   "loc_snapshot": "e45a4d711",
+   "files": 1686,
+   "positives": 104,
+   "evaluable": true,
+   "auc_loc": 0.9461125158027813,
+   "auc_recidivism": 0.9709411164057182,
+   "auc_recidivism_decay": 0.9717555674414081,
+   "lift": 0.0248286006029369,
+   "lift_decay": 0.02564305163862679,
+   "lift_ci95": [
+    0.004394445950423154,
+    0.04324025129383113
+   ],
+   "recall20_loc": 0.028846153846153848,
+   "recall20_recidivism": 0.028846153846153848
+  },
+  {
+   "repo": "postgres",
+   "commits": 65885,
+   "cut_epoch": 1640009249,
+   "window_days": 730,
+   "loc_snapshot": "3e6e86abc",
+   "files": 4358,
+   "positives": 963,
+   "evaluable": true,
+   "auc_loc": 0.8028542065250804,
+   "auc_recidivism": 0.9128871332070099,
+   "auc_recidivism_decay": 0.9209891156899539,
+   "lift": 0.11003292668192943,
+   "lift_decay": 0.11813490916487346,
+   "lift_ci95": [
+    0.09649433274533503,
+    0.12438228650727079
+   ],
+   "recall20_loc": 0.037383177570093455,
+   "recall20_recidivism": 0.09034267912772585
+  },
+  {
+   "repo": "prometheus",
+   "commits": 3946,
+   "cut_epoch": 1729603476,
+   "window_days": 730,
+   "loc_snapshot": "d4423b192",
+   "files": 1179,
+   "positives": 128,
+   "evaluable": true,
+   "auc_loc": 0.8746023132730733,
+   "auc_recidivism": 0.883347704567079,
+   "auc_recidivism_decay": 0.8855702901998097,
+   "lift": 0.008745391294005755,
+   "lift_decay": 0.010967976926736456,
+   "lift_ci95": [
+    -0.02672968412171073,
+    0.04281038603946319
+   ],
+   "recall20_loc": 0.0078125,
+   "recall20_recidivism": 0.3984375
+  },
+  {
+   "repo": "redis",
+   "commits": 11956,
+   "cut_epoch": 1646040762,
+   "window_days": 730,
+   "loc_snapshot": "b8eb2a734",
+   "files": 954,
+   "positives": 91,
+   "evaluable": true,
+   "auc_loc": 0.8790699451186126,
+   "auc_recidivism": 0.9700762736683942,
+   "auc_recidivism_decay": 0.9711331542154253,
+   "lift": 0.09100632854978163,
+   "lift_decay": 0.09206320909681276,
+   "lift_ci95": [
+    0.06159992975061468,
+    0.1231355843673465
+   ],
+   "recall20_loc": 0.054945054945054944,
+   "recall20_recidivism": 0.0989010989010989
+  },
+  {
+   "repo": "ripgrep",
+   "commits": 2238,
+   "cut_epoch": 1696897792,
+   "window_days": 730,
+   "loc_snapshot": "f608d4d9b",
+   "files": 150,
+   "positives": 29,
+   "evaluable": false,
+   "why": "29 post-cut positives, under the registered floor of 30"
+  },
+  {
+   "repo": "sphinx",
+   "commits": 16513,
+   "cut_epoch": 1641798536,
+   "window_days": 730,
+   "loc_snapshot": "d62220676",
+   "files": 685,
+   "positives": 174,
+   "evaluable": true,
+   "auc_loc": 0.8647513327484986,
+   "auc_recidivism": 0.9812402996153586,
+   "auc_recidivism_decay": 0.9826911397530198,
+   "lift": 0.11648896686686006,
+   "lift_decay": 0.11793980700452122,
+   "lift_ci95": [
+    0.08739348015957316,
+    0.14694768508327827
+   ],
+   "recall20_loc": 0.017241379310344827,
+   "recall20_recidivism": 0.07471264367816093
+  }
+ ],
+ "pooled": {
+  "poolable": true,
+  "k": 6,
+  "mean_lift": 0.08238622240929665,
+  "se": 0.021937525187069665,
+  "ci95": [
+   0.039388673042640106,
+   0.1253837717759532
+  ],
+  "positive": 6,
+  "verdict": "breadth shown"
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "registration": "docs/hist_replication.md",
+ "hypothesis": "HR-3",
+ "repos": [
+  {
+   "repo": "commons-lang",
+   "functions": 7577,
+   "positives": 335,
+   "node_merge_rate": 0.2181,
+   "evaluable": true,
+   "auc_loc": 0.6814300494214923,
+   "auc_recidivism": 0.5917694048399263,
+   "lift": -0.08966064458156597,
+   "lift_ci95": [
+    -0.1259599343137231,
+    -0.05425598115230068
+   ],
+   "recall20_loc": 0.11641791044776119,
+   "recall20_recidivism": 0.373134328358209
+  },
+  {
+   "repo": "libgit2",
+   "functions": 1942,
+   "positives": 0,
+   "node_merge_rate": 0.7515,
+   "evaluable": false,
+   "why": "0 positives under the floor of 30"
+  },
+  {
+   "repo": "libxml2",
+   "functions": 4197,
+   "positives": 860,
+   "node_merge_rate": 0.0185,
+   "evaluable": true,
+   "auc_loc": 0.7054919820755309,
+   "auc_recidivism": 0.7016943571373815,
+   "lift": -0.003797624938149391,
+   "lift_ci95": [
+    -0.023862925765851695,
+    0.015612400842652696
+   ],
+   "recall20_loc": 0.056976744186046514,
+   "recall20_recidivism": 0.1058139534883721
+  },
+  {
+   "repo": "postgres",
+   "functions": 26766,
+   "positives": 3386,
+   "node_merge_rate": 0.0168,
+   "evaluable": true,
+   "auc_loc": 0.767746607451707,
+   "auc_recidivism": 0.6741046448997204,
+   "lift": -0.09364196255198654,
+   "lift_ci95": [
+    -0.10228089225258863,
+    -0.08471898890443486
+   ],
+   "recall20_loc": 0.09450679267572357,
+   "recall20_recidivism": 0.12728883638511518
+  },
+  {
+   "repo": "prometheus",
+   "functions": 6347,
+   "positives": 742,
+   "node_merge_rate": 0.0893,
+   "evaluable": true,
+   "auc_loc": 0.7262037408840297,
+   "auc_recidivism": 0.6268928637551666,
+   "lift": -0.0993108771288631,
+   "lift_ci95": [
+    -0.12418570717846489,
+    -0.0756356451252117
+   ],
+   "recall20_loc": 0.03773584905660377,
+   "recall20_recidivism": 0.21293800539083557
+  },
+  {
+   "repo": "redis",
+   "functions": 8097,
+   "positives": 771,
+   "node_merge_rate": 0.0409,
+   "evaluable": true,
+   "auc_loc": 0.7016945314610684,
+   "auc_recidivism": 0.7245159025314667,
+   "lift": 0.022821371070398278,
+   "lift_ci95": [
+    0.0010534977561889036,
+    0.044993818470242974
+   ],
+   "recall20_loc": 0.09857328145265888,
+   "recall20_recidivism": 0.18028534370946822
+  },
+  {
+   "repo": "ripgrep",
+   "functions": 1822,
+   "positives": 56,
+   "node_merge_rate": 0.1393,
+   "evaluable": true,
+   "auc_loc": 0.7501365070376962,
+   "auc_recidivism": 0.5034177317586152,
+   "lift": -0.24671877527908104,
+   "lift_ci95": [
+    -0.31944230076657926,
+    -0.16774865614604562
+   ],
+   "recall20_loc": 0.19642857142857142,
+   "recall20_recidivism": 0.16071428571428573
+  },
+  {
+   "repo": "sphinx",
+   "functions": 5196,
+   "positives": 755,
+   "node_merge_rate": 0.1755,
+   "evaluable": true,
+   "auc_loc": 0.7577496566461525,
+   "auc_recidivism": 0.6824814231029047,
+   "lift": -0.07526823354324774,
+   "lift_ci95": [
+    -0.09620326836571202,
+    -0.05233340645115869
+   ],
+   "recall20_loc": 0.09668874172185431,
+   "recall20_recidivism": 0.23178807947019867
+  }
+ ],
+ "pooled": {
+  "poolable": true,
+  "k": 7,
+  "mean": -0.08365382099321364,
+  "se": 0.03264362559912859,
+  "ci95": [
+   -0.14763532716750566,
+   -0.019672314818921607
+  ],
+  "positive": 1
+ }
+}
