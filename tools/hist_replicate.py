@@ -24,6 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from hist_fixlabel import fix_shas  # noqa: E402
+from label_card import precision as label_precision, GATE  # noqa: E402
 
 REPOS = ("commons-lang", "libgit2", "libxml2", "postgres", "prometheus", "redis", "ripgrep", "sphinx")
 WINDOW_DAYS = 730          # 24 months after the cut
@@ -100,6 +101,12 @@ def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     post: dict[int, int] = {}
     keep = fix_shas(h, rules)          # None = the raw flag, a set = the cleaned label
     rec["fix_label"] = rules
+    # The LABEL CARD is binding (docs/LABEL_CARD.md): a repo whose label precision is unpublished or under
+    # the gate is still COMPUTED -- so the published raw column stays reproducible -- but it is marked unfit
+    # and left out of the pool unless the caller asks for it. HR-1 shipped +0.082 because nothing did this.
+    lp = label_precision(repo, "raw" if rules == "raw" else "v3c")
+    rec["label_precision"] = round(lp[0], 3) if lp else None
+    rec["label_fit"] = bool(lp and lp[0] >= GATE)
     q = ("select t.file, c.ct, c.sha from touch t join commit_ c on c.sha=t.sha "
          "where c.merge=0 and c.bot=0 and c.fix=1")
     for fid, ct, sha in h.execute(q):
@@ -164,8 +171,10 @@ def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     return rec
 
 
-def pooled(res: list[dict]) -> dict:
-    ev = [r for r in res if r.get("evaluable") and r.get("lift") is not None]
+def pooled(res: list[dict], allow_unfit: bool = False) -> dict:
+    ev = [r for r in res if r.get("evaluable") and r.get("lift") is not None
+          and (allow_unfit or r.get("label_fit"))]
+    unfit = [r["repo"] for r in res if r.get("evaluable") and not r.get("label_fit")]
     if len(ev) < 2:
         return {"poolable": False, "why": f"{len(ev)} evaluable repos"}
     xs = [r["lift"] for r in ev]
@@ -173,6 +182,7 @@ def pooled(res: list[dict]) -> dict:
     sd = (sum((x - m) ** 2 for x in xs) / (len(xs) - 1)) ** 0.5
     se = sd / math.sqrt(len(xs))
     return {"poolable": True, "k": len(ev), "mean_lift": m, "se": se,
+            "excluded_unfit_label": unfit if not allow_unfit else [],
             "ci95": [m - 1.96 * se, m + 1.96 * se],
             "positive": sum(1 for x in xs if x > 0),
             "verdict": ("breadth shown" if sum(1 for x in xs if x > 0) >= 6 and m - 1.96 * se > 0
@@ -185,6 +195,8 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--md", type=Path)
     ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
+    ap.add_argument("--allow-unfit", action="store_true",
+                    help="pool repos whose label is under the LABEL CARD gate (reproducing an old run)")
     a = ap.parse_args()
     res = []
     for r in REPOS:
@@ -195,7 +207,7 @@ def main() -> int:
                               f"files {rec['files']:5} pos {rec['positives']:4}  "
                               f"AUC loc {rec['auc_loc']:.3f} -> recidivism {rec['auc_recidivism']:.3f}  "
                               f"lift {rec['lift']:+.4f}"), flush=True)
-    p = pooled(res)
+    p = pooled(res, a.allow_unfit)
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps({"registration": "docs/hist_replication.md", "hypothesis": "HR-1",
                                  "repos": res, "pooled": p}, indent=1) + "\n")

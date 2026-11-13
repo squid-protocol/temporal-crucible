@@ -1,0 +1,87 @@
+{
+ "gate": 0.7,
+ "source": "docs/otherfix_audit.md (round 1 2026-11-11; confirmatory round, fresh sample, same doc)",
+ "transfer": "docs/fixlabel_transfer.md: 98-100% of the LAWS history-DB `fix` set appears in xc's events for seven of eight repos (ripgrep 72%), so the precision measured on xc's pipeline carries to the LAWS flag with a stated basis rather than an assumption.",
+ "repos": [
+  {
+   "repo": "libxml2",
+   "language": "c",
+   "raw_precision": 0.8,
+   "raw_n": 30,
+   "v3c_precision": 0.864,
+   "v3c_n": 22,
+   "raw_fit": true,
+   "v3c_fit": true
+  },
+  {
+   "repo": "postgres",
+   "language": "c",
+   "raw_precision": 0.767,
+   "raw_n": 30,
+   "v3c_precision": 0.737,
+   "v3c_n": 19,
+   "raw_fit": true,
+   "v3c_fit": true
+  },
+  {
+   "repo": "redis",
+   "language": "c",
+   "raw_precision": 0.733,
+   "raw_n": 30,
+   "v3c_precision": 0.75,
+   "v3c_n": 16,
+   "raw_fit": true,
+   "v3c_fit": true
+  },
+  {
+   "repo": "libgit2",
+   "language": "c",
+   "raw_precision": 0.633,
+   "raw_n": 30,
+   "v3c_precision": 0.6,
+   "v3c_n": 15,
+   "raw_fit": false,
+   "v3c_fit": false
+  },
+  {
+   "repo": "sphinx",
+   "language": "python",
+   "raw_precision": 0.6,
+   "raw_n": 30,
+   "v3c_precision": 0.783,
+   "v3c_n": 23,
+   "raw_fit": false,
+   "v3c_fit": true
+  },
+  {
+   "repo": "prometheus",
+   "language": "go",
+   "raw_precision": 0.4,
+   "raw_n": 30,
+   "v3c_precision": 0.833,
+   "v3c_n": 12,
+   "raw_fit": false,
+   "v3c_fit": true
+  },
+  {
+   "repo": "commons-lang",
+   "language": "java",
+   "raw_precision": 0.267,
+   "raw_n": 30,
+   "v3c_precision": 0.7,
+   "v3c_n": 20,
+   "raw_fit": false,
+   "v3c_fit": true
+  },
+  {
+   "repo": "ripgrep",
+   "language": "rust",
+   "raw_precision": 0.267,
+   "raw_n": 30,
+   "v3c_precision": 0.818,
+   "v3c_n": 11,
+   "raw_fit": false,
+   "v3c_fit": true
+  }
+ ]
+}
