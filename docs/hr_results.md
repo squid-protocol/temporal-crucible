@@ -76,3 +76,81 @@ not supply. Until then the honest status is "not answered", not "falsified".
 The program's one-sentence standing was *history predicts, structure describes*. These runs tighten the first
 half and narrow it: **prior fixes predict; the elaborated history metric does not add; and the file is the unit
 where it works.** The simplest history predictor in the program beat the sophisticated one in every repo tested.
+
+---
+
+# HR-1b / HR-2b / HR-3b — the same three with a cleaned fix label
+
+Registered in `hist_replication.md` **before** the re-run. Only the label changed. The raw-label results above
+stay published; neither label is chosen afterwards for being more flattering.
+
+FIXLIKE v3c drops **28–54%** of each repo's keyword fix commits.
+
+## HR-1b — recidivism's advantage over size does **not** survive the cleaning
+
+| repo | raw positives | raw lift | cleaned positives | cleaned lift |
+|---|---|---|---|---|
+| commons-lang | 108 | **+0.143** | 36 | **−0.015** |
+| sphinx | 174 | +0.117 | 125 | +0.046 |
+| postgres | 963 | +0.110 | 488 | +0.026 |
+| redis | 91 | +0.091 | 64 | +0.020 |
+| libxml2 | 104 | +0.025 | 48 | −0.010 |
+| prometheus | 128 | +0.009 | 80 | −0.013 |
+
+| | pooled lift | 95% CI | positive | verdict |
+|---|---|---|---|---|
+| raw label | **+0.082** | [+0.039, +0.125] | 6/6 | breadth shown |
+| cleaned | **+0.009** | [−0.011, +0.029] | 3/6 | **not shown** |
+
+**commons-lang reverses sign.** `AUC(LOC)` *rises* under cleaning in every repo (postgres 0.803→0.850, redis
+0.879→0.920, libxml2 0.946→0.974): size predicts real fixes better than it predicts housekeeping, and a large
+part of recidivism's measured edge was predicting repeat housekeeping — files that keep getting Javadoc and
+lint touched are, unsurprisingly, repeatedly touched.
+
+## HR-2b — entropy's inferiority was also a label artefact
+
+| | pooled vs LOC | pooled vs recidivism |
+|---|---|---|
+| raw label | +0.002 [−0.023, +0.026], 4/6 | **−0.073 [−0.111, −0.034], 0/6** |
+| cleaned | +0.000 [−0.016, +0.016], 3/6 | **+0.009 [−0.015, +0.033], 4/6** |
+
+Under the raw label entropy lost to recidivism in six of six repos. Under the cleaned label the two are
+statistically indistinguishable. **Neither beats LOC.**
+
+## HR-3b — unchanged, and still uninformative
+
+Pooled **−0.103** [−0.135, −0.070], 0 of 6 positive. The pre-registered caveat stands: the quarterly-snapshot
+mapping makes a null uninformative, so tc#28 is still *not answered*.
+
+## Which rule did the cutting — and why it matters
+
+| rule | what it drops | count (4 repos) |
+|---|---|---|
+| **C** | no fix word in the subject | 5,673 |
+| **B** | non-behavioural subject (lint, javadoc, typo, style) | 2,532 |
+| **B2** | refactor / prose / build subject | 1,336 |
+| **B3** | edits a code comment | 567 |
+| **A** | test/doc paths only | 13 |
+
+This decomposition changes the reading, and the two big repos differ:
+
+- **commons-lang**, where the effect reverses, is cut mostly by **rule B** (357 of 460) — *genuinely cosmetic*
+  commits. Its +0.143 really was substantially housekeeping.
+- **postgres** is cut mostly by **rule C** (4,851), the rule with a real recall cost: a genuine fix whose
+  subject never says "fix" is discarded. Postgres nonetheless stays positive (+0.026).
+
+So the collapse is strongest exactly where the cleaning is most defensible, and weakest where the cleaning is
+most aggressive. That is the opposite of what a cleaning artefact would look like.
+
+## What this does and does not establish
+
+**It does not refute recidivism.** v3c was audited on a different label family and inherits no precision here;
+rule C certainly discards real fixes. A validated label could land anywhere between the two columns.
+
+**What it does establish is sharper, and it is methodological:** the program's one cross-repo replicated
+predictor rests on a keyword label whose precision was never audited on these repos, and its measured advantage
+**does not survive a plausible cleaning of that label**. Until the label is audited here, the honest statement
+is *recidivism's advantage over size is label-dependent on this cohort*, not *history predicts*.
+
+**The cheapest next step** is the one the program already has machinery for: audit the fix label on a stratified
+sample of these repos (the `otherfix_audit.md` pattern), and re-run both columns against the audited label.

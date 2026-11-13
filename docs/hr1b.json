@@ -1,0 +1,174 @@
+{
+ "registration": "docs/hist_replication.md",
+ "hypothesis": "HR-1",
+ "repos": [
+  {
+   "repo": "commons-lang",
+   "commits": 9564,
+   "cut_epoch": 1727098502,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "d4bdfbea0",
+   "files": 520,
+   "positives": 36,
+   "evaluable": true,
+   "auc_loc": 0.8646981175390266,
+   "auc_recidivism": 0.8501779155188246,
+   "auc_recidivism_decay": 0.8430899908172635,
+   "lift": -0.014520202020201989,
+   "lift_decay": -0.021608126721763043,
+   "lift_ci95": [
+    -0.0792952716029639,
+    0.045798898071625405
+   ],
+   "recall20_loc": 0.08333333333333333,
+   "recall20_recidivism": 0.25
+  },
+  {
+   "repo": "libgit2",
+   "commits": 1308,
+   "cut_epoch": 1333393545,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "5b9fac39d",
+   "files": 207,
+   "positives": 0,
+   "evaluable": false,
+   "why": "0 post-cut positives, under the registered floor of 30"
+  },
+  {
+   "repo": "libxml2",
+   "commits": 7831,
+   "cut_epoch": 1703169264,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "e45a4d711",
+   "files": 1686,
+   "positives": 48,
+   "evaluable": true,
+   "auc_loc": 0.9738820207570208,
+   "auc_recidivism": 0.9636752136752137,
+   "auc_recidivism_decay": 0.963548026048026,
+   "lift": -0.010206807081807101,
+   "lift_decay": -0.010333994708994765,
+   "lift_ci95": [
+    -0.0410019082730777,
+    0.014041514041514103
+   ],
+   "recall20_loc": 0.0625,
+   "recall20_recidivism": 0.0625
+  },
+  {
+   "repo": "postgres",
+   "commits": 65885,
+   "cut_epoch": 1640009249,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "3e6e86abc",
+   "files": 4358,
+   "positives": 488,
+   "evaluable": true,
+   "auc_loc": 0.8499756428178082,
+   "auc_recidivism": 0.8760378277629517,
+   "auc_recidivism_decay": 0.8860375100605753,
+   "lift": 0.026062184945143452,
+   "lift_decay": 0.036061867242767054,
+   "lift_ci95": [
+    0.009719406461631386,
+    0.04272021180761543
+   ],
+   "recall20_loc": 0.07172131147540983,
+   "recall20_recidivism": 0.1598360655737705
+  },
+  {
+   "repo": "prometheus",
+   "commits": 3946,
+   "cut_epoch": 1729603476,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "d4423b192",
+   "files": 1179,
+   "positives": 80,
+   "evaluable": true,
+   "auc_loc": 0.8888591901728844,
+   "auc_recidivism": 0.8760009099181074,
+   "auc_recidivism_decay": 0.877286169244768,
+   "lift": -0.012858280254776977,
+   "lift_decay": -0.011573020928116406,
+   "lift_ci95": [
+    -0.05637514384349829,
+    0.026871040481048047
+   ],
+   "recall20_loc": 0.0125,
+   "recall20_recidivism": 0.45
+  },
+  {
+   "repo": "redis",
+   "commits": 11956,
+   "cut_epoch": 1646040762,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "b8eb2a734",
+   "files": 954,
+   "positives": 64,
+   "evaluable": true,
+   "auc_loc": 0.9196892556179775,
+   "auc_recidivism": 0.9400456460674157,
+   "auc_recidivism_decay": 0.9409410112359551,
+   "lift": 0.020356390449438155,
+   "lift_decay": 0.02125175561797754,
+   "lift_ci95": [
+    -0.017777601018135525,
+    0.05668096916721166
+   ],
+   "recall20_loc": 0.078125,
+   "recall20_recidivism": 0.140625
+  },
+  {
+   "repo": "ripgrep",
+   "commits": 2238,
+   "cut_epoch": 1696897792,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "f608d4d9b",
+   "files": 150,
+   "positives": 9,
+   "evaluable": false,
+   "why": "9 post-cut positives, under the registered floor of 30"
+  },
+  {
+   "repo": "sphinx",
+   "commits": 16513,
+   "cut_epoch": 1641798536,
+   "window_days": 730,
+   "fix_label": "v3c",
+   "loc_snapshot": "d62220676",
+   "files": 685,
+   "positives": 125,
+   "evaluable": true,
+   "auc_loc": 0.8838071428571429,
+   "auc_recidivism": 0.9297071428571428,
+   "auc_recidivism_decay": 0.9324714285714286,
+   "lift": 0.04589999999999994,
+   "lift_decay": 0.048664285714285715,
+   "lift_ci95": [
+    0.012085399530837093,
+    0.07796428571428571
+   ],
+   "recall20_loc": 0.024,
+   "recall20_recidivism": 0.136
+  }
+ ],
+ "pooled": {
+  "poolable": true,
+  "k": 6,
+  "mean_lift": 0.00912221433963258,
+  "se": 0.010298044957043605,
+  "ci95": [
+   -0.011061953776172884,
+   0.029306382455438047
+  ],
+  "positive": 3,
+  "verdict": "NOT shown at the registered bar"
+ }
+}

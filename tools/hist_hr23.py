@@ -21,6 +21,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from hist_replicate import (REPOS, WINDOW_DAYS, CUT_Q, MIN_POSITIVES, BUDGET,  # noqa: E402
                             auc, recall_at_budget, boot_ci)
+from hist_fixlabel import fix_shas  # noqa: E402
+
+RULES = "raw"  # set from the CLI
 
 PERIOD_DAYS = 30
 STUDY = Path("/srv/storage_16tb/projects/gitgalaxy/laws-study/pilot")
@@ -52,10 +55,12 @@ def nearest_snapshot(w: sqlite3.Connection, when: int) -> str | None:
 
 
 def outcomes(h: sqlite3.Connection, cut: int, end: int) -> set[str]:
-    """paths touched by a fix commit in the outcome window"""
-    return {r[0] for r in h.execute(
-        "select t.path from touch t join commit_ c on c.sha=t.sha "
-        "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct>? and c.ct<=?", (cut, end))}
+    """paths touched by a fix commit in the outcome window, under the active label"""
+    keep = fix_shas(h, RULES)
+    return {p for p, sha in h.execute(
+        "select t.path, t.sha from touch t join commit_ c on c.sha=t.sha "
+        "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct>? and c.ct<=?", (cut, end))
+        if keep is None or sha in keep}
 
 
 def hr2_repo(repo: str) -> dict:
@@ -104,9 +109,11 @@ def hr2_repo(repo: str) -> dict:
     post = outcomes(h, cut, end)
     # recidivism on the same files, so "does entropy ADD" can be read off directly
     prior: dict[str, int] = {}
-    for path, in h.execute("select t.path from touch t join commit_ c on c.sha=t.sha "
-                           "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct<?", (cut,)):
-        prior[path] = prior.get(path, 0) + 1
+    keepf = fix_shas(h, RULES)
+    for path, sha in h.execute("select t.path, t.sha from touch t join commit_ c on c.sha=t.sha "
+                               "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct<?", (cut,)):
+        if keepf is None or sha in keepf:
+            prior[path] = prior.get(path, 0) + 1
     rows = [(hcm.get(p, 0.0), float(l), prior.get(p, 0), 1 if p in post else 0)
             for p, l in loc.items()]
     pos = sum(r[3] for r in rows)
@@ -134,7 +141,9 @@ def hr3_repo(repo: str) -> dict:
     if not c:
         return {**rec, "evaluable": False, "why": "too few usable commits"}
     cut, end = c
-    ct_of = dict(h.execute("select sha, ct from commit_ where merge=0 and bot=0 and fix=1"))
+    keepf = fix_shas(h, RULES)
+    ct_of = {s: c for s, c in h.execute("select sha, ct from commit_ where merge=0 and bot=0 and fix=1")
+             if keepf is None or s in keepf}
     snaps = []
     import datetime as dt
     for ch, dstr in w.execute("select commit_hash, date from snap where rc=0"):
@@ -221,7 +230,10 @@ def main() -> int:
     ap.add_argument("which", choices=("hr2", "hr3"))
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--md", type=Path)
+    ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
     a = ap.parse_args()
+    global RULES
+    RULES = a.fix_label
     fn = hr2_repo if a.which == "hr2" else hr3_repo
     res = []
     for r in REPOS:
@@ -242,7 +254,7 @@ def main() -> int:
     extra = pool(res, "lift_over_recidivism") if a.which == "hr2" else None
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps({"registration": "docs/hist_replication.md",
-                                 "hypothesis": a.which.upper().replace("HR", "HR-"),
+                                 "hypothesis": a.which.upper().replace("HR", "HR-"), "fix_label": a.fix_label,
                                  "repos": res, "pooled": p,
                                  **({"pooled_over_recidivism": extra} if extra else {})}, indent=1) + "\n")
     print(f"\npooled {key}: {json.dumps(p)}")

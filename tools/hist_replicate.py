@@ -19,8 +19,11 @@ excluded, a repo with fewer than 30 post-cut positives is `not evaluable`.
 """
 from __future__ import annotations
 
-import argparse, json, math, sqlite3
+import argparse, json, math, sqlite3, sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from hist_fixlabel import fix_shas  # noqa: E402
 
 REPOS = ("commons-lang", "libgit2", "libxml2", "postgres", "prometheus", "redis", "ripgrep", "sphinx")
 WINDOW_DAYS = 730          # 24 months after the cut
@@ -81,7 +84,7 @@ def boot_ci(f, n, reps=2000, seed=2982):
     return out[int(0.025 * len(out))], out[int(0.975 * len(out))]
 
 
-def one_repo(study: Path, repo: str) -> dict:
+def one_repo(study: Path, repo: str, rules: str = "raw") -> dict:
     h = sqlite3.connect(f"file:{study/'history'/f'{repo}.db'}?mode=ro", uri=True)
     w = sqlite3.connect(f"file:{study/'dbs'/f'{repo}.db'}?mode=ro", uri=True)
     rec: dict = {"repo": repo}
@@ -95,9 +98,13 @@ def one_repo(study: Path, repo: str) -> dict:
     # prior fix touches per file identity, and post-cut fix touches
     prior: dict[int, list[int]] = {}
     post: dict[int, int] = {}
-    q = ("select t.file, c.ct, c.fix from touch t join commit_ c on c.sha=t.sha "
+    keep = fix_shas(h, rules)          # None = the raw flag, a set = the cleaned label
+    rec["fix_label"] = rules
+    q = ("select t.file, c.ct, c.sha from touch t join commit_ c on c.sha=t.sha "
          "where c.merge=0 and c.bot=0 and c.fix=1")
-    for fid, ct, _ in h.execute(q):
+    for fid, ct, sha in h.execute(q):
+        if keep is not None and sha not in keep:
+            continue
         if ct < cut:
             prior.setdefault(fid, []).append(ct)
         elif ct <= end:
@@ -177,10 +184,11 @@ def main() -> int:
     ap.add_argument("--study", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--md", type=Path)
+    ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
     a = ap.parse_args()
     res = []
     for r in REPOS:
-        rec = one_repo(a.study, r)
+        rec = one_repo(a.study, r, a.fix_label)
         res.append(rec)
         print(f"  {r:14} " + ("not evaluable: " + rec.get("why", "")
                               if not rec.get("evaluable") else
