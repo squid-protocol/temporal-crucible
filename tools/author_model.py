@@ -27,6 +27,12 @@ Three outputs, all about evidence quality:
    curl bias analysis used a file-level tau of 0.36 and recorded that the true spread must be higher because
    author variation adds to it. This measures that addition, and the combined figure is what the null should
    be run at.
+**Ethics.** Author identities are never printed. Gold & Krinke (EMSE 27:17, 2022) document that repository
+*metadata* about named people is the part of MSR work that raises ethics issues most sharply, and that the
+community practice is to anonymise and to publish aggregates. In a small project a pseudonymous index is still
+re-identifiable from a commit count, so this tool reports the DISTRIBUTION of announcement rates and the
+variance components, and nothing that points at a person.
+
 3. **An audit queue** -- commits where the cheap label is least trustworthy, ranked. This is where an
    expensive reader (a human, or a diff-reading model) buys the most information per unit of effort: a
    substantial change by an author who never announces is where our label is most likely wrong.
@@ -105,14 +111,17 @@ def main() -> int:
     print(f"  combined (independent components)     tau        = {combined:.2f}")
     print(f"  spread between a 90th- and 10th-percentile unit: {math.exp(2*1.2816*combined):.1f}x\n")
 
-    ranked = sorted(((k / n, n, au) for au, (k, n) in by_author.items() if n >= a.min_commits),
-                    key=lambda x: x[0])
-    print(f"  {'lowest announcement rate':34}{'rate':>7}{'commits':>9}")
-    for r, n, au in ranked[:5]:
-        print(f"    {au[:32]:32}{r:>7.2f}{n:>9,}")
-    print(f"  {'highest announcement rate':34}{'rate':>7}{'commits':>9}")
-    for r, n, au in ranked[-5:]:
-        print(f"    {au[:32]:32}{r:>7.2f}{n:>9,}")
+    # ETHICS (Gold & Krinke, EMSE 27:17, 2022): this is repository METADATA about named people, and the
+    # community standard is to publish aggregate variance components, never author identifiers. A per-repo
+    # pseudonymous index is NOT enough on its own -- in a small project, "author with 17 commits who never
+    # says fix" is a very short list -- so identities are never printed and only the DISTRIBUTION is shown.
+    rates = sorted(k / n for au, (k, n) in by_author.items() if n >= a.min_commits)
+    if rates:
+        q = lambda f: rates[min(len(rates) - 1, int(f * len(rates)))]
+        print(f"  announcement-rate distribution over {len(rates)} authors (no identities, by design):")
+        print(f"    min {rates[0]:.2f}   p25 {q(.25):.2f}   median {q(.5):.2f}   p75 {q(.75):.2f}   "
+              f"max {rates[-1]:.2f}")
+        print(f"    authors who never announce a fix: {sum(1 for r in rates if r == 0)} of {len(rates)}")
 
     if a.audit_queue:
         rate = {au: (k / n if n else 0) for au, (k, n) in by_author.items()}
@@ -140,6 +149,7 @@ def main() -> int:
         print(f"\n  AUDIT QUEUE -- {a.audit_queue} commits where the cheap label is least trustworthy")
         print(f"  (unlabelled, no structured evidence, by authors who seldom announce)\n")
         for r, nf, sha, subj in cand[:a.audit_queue]:
+            # the author's rate is shown as context for the ranking; the author is not named
             print(f"    [{r:.2f} announce, {nf:2} files] {sha[:10]} {subj[:82]}")
     return 0
 

@@ -127,3 +127,52 @@ day; without it the +0.082 would have been published.
    because it is the only one that reads the repair rather than the prose.
 4. **Condition any cross-repo statement on announcement spread**, or do not make it.
 5. **nDPI**: label 0.68 and no structural walk. The founding claim's second half is still unrun.
+
+## Digest of lit review #2 — author effects (full report: `author_effects_literature.md`)
+
+**Our measurement appears to be novel.** Per-developer *linking* propensity has been measured exactly once:
+Bachmann et al. (FSE 2010) had an Apache httpd core developer hand-annotate all 493 commits in a six-week
+window. Result: developers differ significantly in linking behaviour (**p ≈ 0.002**), and **9 of 17 developers
+linked zero times**. Per-developer *keyword/announcement* propensity — what we measured — the review could
+not find measured anywhere. Our seven-repo figure is the scaled-up version of the one hypothesis they got
+significance on.
+
+**Three findings that change what we should do:**
+
+1. **Announcement propensity may be an author × file INTERACTION, not two separable components.** Bachmann
+   found (anecdotally, not significant) that **file owners are *less* likely to link their own fixes**. If
+   that holds, our `τ_combined = √(τ_author² + τ_file²)` is wrong — the components are not independent, and
+   the combined figure could be over- or under-stated. **This is a real objection to the number we just
+   published**, and the test is cheap: does an author's announcement rate differ between files they own and
+   files they do not?
+2. **Our recall is inside the published band, not below it.** König's per-repository SD is ±0.11–0.14, so
+   ±1 SD spans roughly **0.26–0.54** recall. Our 0.41 (curl) and 0.26 (commons-lang) sit inside it.
+   Separately, Eyolfson et al. measured keyword recall at **71–73%** on Linux and PostgreSQL. That is not a
+   better pipeline — it is a different **announcement regime**. Projects with strong "fix" conventions are
+   simply more legible to this method, which is our variance component showing up across projects.
+3. **The "never announces" authors need shrinkage before they are claims.** With 15–22 commits, a 0.00 rate
+   is a binomial-tail statement before it is a behavioural one. We removed the sampling component from the
+   *variance*, but the per-author extremes should be reported under partial pooling.
+
+**Ethics, acted on immediately.** Gold & Krinke (EMSE 27:17, 2022) document that repository *metadata* about
+named people is where MSR ethics bite hardest, and that the norm is to publish aggregates and never author
+identifiers — noting that across 141 MSR Mining Challenge papers, exactly one discussed ethics. Earlier today
+`author_model.py` printed contributor names and email addresses. **It no longer does**: it reports the
+distribution of announcement rates and the variance components only. A pseudonymous per-repo index is not
+sufficient either, because "the author with 17 commits who never says fix" is a very short list in a small
+project.
+
+**Where the literature is thin — worth knowing before we build more:**
+- **No study controls for what work a developer was assigned.** Every "experienced developers introduce fewer
+  defects" result is an uncontrolled or exposure-controlled marginal association. Dieste et al. (EMSE 2017)
+  found industrial experience had *no* detectable effect on quality in 10 quasi-experiments.
+- **Ownership → defects is contested, and fails in our regime.** Confirmed inside Microsoft (Bird FSE'11,
+  Greiler MSR'15); **Foucault et al. (EASE'14) failed to replicate it on Java OSS at file granularity** —
+  fewer than half the systems significant at best, none at worst, with size dominating. Files in C/Java OSS
+  is exactly our setting.
+- **No defect-label study uses a per-author random intercept with a reported variance component.** That is
+  the gap our measurement sits in.
+- **Bias directions oppose each other and nobody has netted them out**: linked data over-represents
+  *experienced* developers (Bird 2009), while the experience literature claims experienced developers produce
+  *fewer* defects. If announcement propensity correlates with experience, the two biases partly cancel —
+  quantifying that would be a result in itself.
