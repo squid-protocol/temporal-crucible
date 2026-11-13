@@ -79,23 +79,42 @@ def _op(n) -> str:
 
 
 def _is_const(n) -> bool:
+    """A constant expression: a literal, an ALL_CAPS name, sizeof, or arithmetic / a cast over those.
+    `MAX_N - 1` and `sizeof(buf) - 1` are constants (the first run called them variables)."""
     n = _peel(n)
-    if n.type in ("number_literal", "char_literal", "sizeof_expression", "true", "false"):
+    if n is None:
+        return False
+    if n.type in ("number_literal", "char_literal", "sizeof_expression", "true", "false", "null"):
         return True
     if n.type == "identifier":
         t = et._txt(n)
         return len(t) > 1 and t.upper() == t and any(c.isalpha() for c in t)
+    if n.type == "binary_expression":
+        return _is_const(n.child_by_field_name("left")) and _is_const(n.child_by_field_name("right"))
+    if n.type == "unary_expression":
+        return _is_const(n.child_by_field_name("argument"))
+    if n.type == "cast_expression":
+        return _is_const(n.child_by_field_name("value"))
     return False
 
 
-def _is_null(n) -> bool:
+def _uncast(n):
     n = _peel(n)
-    return n.type == "null" or (n.type == "identifier" and et._txt(n) == "NULL")
+    while n is not None and n.type == "cast_expression":
+        n = _peel(n.child_by_field_name("value"))
+    return n
 
 
 def _is_zero(n) -> bool:
-    n = _peel(n)
-    return n.type == "number_literal" and et._txt(n).rstrip("uUlL") in ("0", "0x0", "0.0")
+    n = _uncast(n)
+    return n is not None and n.type == "number_literal" and et._txt(n).rstrip("uUlL") in ("0", "0x0", "0.0")
+
+
+def _is_null(n) -> bool:
+    c = _peel(n)
+    if c.type == "null" or (c.type == "identifier" and et._txt(c) == "NULL"):
+        return True
+    return c.type == "cast_expression" and "*" in et._txt(c.child_by_field_name("type")) and _is_zero(c)
 
 
 def _has_call(n) -> bool:
@@ -122,6 +141,9 @@ def leaf_kind(n) -> str:
             if _is_null(left) or _is_null(right):
                 return "NULL_CMP"
             if _is_zero(left) or _is_zero(right):
+                other = _peel(right if _is_zero(left) else left)
+                if other.type == "binary_expression" and _op(other) == "&":
+                    return "BITTEST"                      # (flags & F) == 0 is a bit test, not a zero test
                 return "ZERO_CMP"
             return "CONST_CMP" if (_is_const(left) or _is_const(right)) else "VAR_CMP"
         if op in ("<", ">", "<=", ">="):
@@ -142,6 +164,11 @@ def leaves(cond) -> list:
         n = _peel(stack.pop())
         if n is None:
             continue
+        inner = n
+        while inner.type == "unary_expression" and _op(inner) == "!":
+            inner = _peel(inner.child_by_field_name("argument"))
+        if inner is not n and inner.type == "binary_expression" and _op(inner) in ("&&", "||"):
+            n = inner                                     # !(a && b): split it; polarity is not a kind
         if n.type == "binary_expression" and _op(n) in ("&&", "||"):
             stack.append(n.child_by_field_name("right"))
             stack.append(n.child_by_field_name("left"))
@@ -188,28 +215,37 @@ def conditions(fn) -> list[dict]:
 
 
 def cond_features(fa, fb) -> list[str]:
-    """ECOND columns for one edit, from the function node before (fa) and after (fb)."""
-    old = conditions(fa)
+    """ECOND columns for one edit, from the function node before (fa) and after (fb).
+
+    A condition is NEW when its text is not in the old function. A new condition alone does not make a
+    new branch: GUARD_ADD needs the number of exiting ifs to have grown AND a new guard condition;
+    ACTION_IF_ADD the same for non-exiting ifs. (The first run keyed both on the total if count, so an
+    edited guard beside an added action was called an added guard: docs/etyp_review.md, finding 6.)
+    COND_NARROW: an old condition that DISAPPEARED has all its leaves inside a new condition with more.
+    """
+    old, new = conditions(fa), conditions(fb)
     left = Counter(c["text"] for c in old)
-    old_texts = set(left)
-    cols: set[str] = set()
-    for c in conditions(fb):
+    fresh = []
+    for c in new:
         if left[c["text"]] > 0:
             left[c["text"]] -= 1
-            continue                                   # this condition existed before: not new
+        else:
+            fresh.append(c)
+    gone = [set(c["parts"]) for c in old if left[c["text"]] > 0]       # old conditions with no survivor
+    cols: set[str] = set()
+    more_guards = sum(c["guard"] for c in new) > sum(c["guard"] for c in old)
+    more_actions = (sum(c["is_if"] and not c["guard"] for c in new)
+                    > sum(c["is_if"] and not c["guard"] for c in old))
+    for c in fresh:
         cols.update(c["kinds"])
-        if len(c["parts"]) > 1 and any(p in old_texts or "(" + p + ")" in old_texts for p in c["parts"]):
+        parts = set(c["parts"])
+        if any(g < parts for g in gone):
             cols.add("COND_NARROW")
-        if c["is_if"]:
-            if c["guard"]:
-                cols.add("GUARD_ADD")
-                cols.update("G:" + k for k in c["kinds"])
-            else:
-                cols.add("ACTION_IF_ADD")
-    # GUARD_ADD / ACTION_IF_ADD mean a NEW branch, not an edited one: require the if count to have grown.
-    n_if = lambda cs: sum(1 for c in cs if c["is_if"])
-    if n_if(conditions(fb)) <= n_if(old):
-        cols -= {"GUARD_ADD", "ACTION_IF_ADD"} | {"G:" + k for k in KINDS}
+        if c["is_if"] and c["guard"] and more_guards:
+            cols.add("GUARD_ADD")
+            cols.update("G:" + k for k in c["kinds"])
+        elif c["is_if"] and not c["guard"] and more_actions:
+            cols.add("ACTION_IF_ADD")
     return sorted(cols)
 
 
@@ -233,7 +269,7 @@ def _work(args):
         return val
 
     rows = []
-    for sha, ct, path, old, new in chunk:
+    for sha, ct, path, old, new, au in chunk:
         fa, _da = parsed(old)
         fb, _db = parsed(new)
         for name in sorted(fa.keys() & fb.keys()):
@@ -243,7 +279,7 @@ def _work(args):
             A, B = et.features(na), et.features(nb)
             labs = et.classify(A, B)
             ta, tb = Counter(A["tokens"]), Counter(B["tokens"])
-            rows.append({"sha": sha, "ct": ct, "path": path, "func": name, "labels": sorted(labs),
+            rows.append({"sha": sha, "ct": ct, "au": au, "path": path, "func": name, "labels": sorted(labs),
                          "primary": et.primary(labs), "ntok": len(B["tokens"]),
                          "tadd": sum((tb - ta).values()), "tdel": sum((ta - tb).values()),
                          "err": bool(A["has_error"] or B["has_error"]), "cond": cond_features(na, nb)})
@@ -305,71 +341,28 @@ def cmd_join(a) -> int:
     import etyp_label as el
     rng = np.random.default_rng(ef.SEED)
     rows = et.load(a.inp)
-    evs = ef.load_events(a.repo)
-    by: dict = {}
-    for r in rows:
-        by.setdefault(r["sha"], []).append(r)
-    shas = [s for s, rs in by.items() if len(rs) <= 50]
-    idx = {c: i for i, c in enumerate(COLS)}
-    X = np.zeros((len(shas), len(COLS)))
-    n = np.zeros(len(shas), dtype=int)
-    mag = np.zeros(len(shas), dtype=int)
-    ct = np.zeros(len(shas), dtype=np.int64)
-    for i, s in enumerate(shas):
-        rs = by[s]
-        n[i], ct[i], mag[i] = len(rs), rs[0]["ct"], sum(r["tadd"] + r["tdel"] for r in rs)
-        for r in rs:
-            for c in r["cond"]:
-                X[i, idx[c]] += 1
-        X[i] /= len(rs)
-    bins = np.array([ef.size_bin(k) * 4 + ef.mag_bin(m) for k, m in zip(n, mag)])
-    window = (ct >= evs["since"]) & (ct <= evs["head_ct"])
-    cls = np.array([evs["class"].get(s, "") for s in shas])
-    anyfix = (cls != "") & window
-    amb = np.array([s in evs["dropped"] for s in shas])
-    nonfix = window & ~anyfix & ~amb
-    groups = {"all fixes": anyfix}
-    for c in ef.FIX_CLASSES:
-        groups[c] = (cls == c) & window
-    groups["CVE (all)"] = np.array([s in evs["sev"] for s in shas])
-    groups["CVE control"] = np.array([s in evs["control"] for s in shas])
-    groups["CVE-introducing"] = np.array([s in evs["cve_intro"] for s in shas])
-    groups["regr-inducing"] = np.array([s in evs["reg_inducing"] for s in shas]) & ~anyfix
-    res = {g: {"commits": int(m.sum()), "by": ef.std_lift(X, bins, m, nonfix & ~m, rng, COLS)}
-           for g, m in groups.items() if m.sum() >= 20}
-    fu = ef.follow_up(rows, evs, set(evs["class"]), rng, COLS, lambda r: r["cond"])
-
-    print(f"{a.repo}: {int(anyfix.sum()):,} fix, {int(nonfix.sum()):,} non-fix commits "
-          f"(EXPLORATORY; lift over non-fix commits of the same size and magnitude; "
-          f"* = 95% interval excludes 1; no multiplicity correction)")
-    order = [g for g in ("all fixes", "other-fix", "regression", "extrinsic", "latent", "CVE (all)",
-                         "CVE control", "CVE-introducing", "regr-inducing") if g in res]
-    print("  commits: " + ", ".join(f"{g} {res[g]['commits']:,}" for g in order))
-    ef.table("Shape and kind of new conditions", res, order[:5], list(SHAPES) + list(KINDS))
-    ef.table("Kind of the condition on a NEW GUARD", res, order[:5], ["G:" + k for k in KINDS])
-    if len(order) > 5:
-        ef.table("CVE and defect-introducing commits", res, order[5:], list(SHAPES) + list(KINDS))
-        ef.table("Same: kind on a new guard", res, order[5:], ["G:" + k for k in KINDS])
-    print(f"\n  After a NON-fix edit, is the function fixed within 365 days?  "
-          f"{fu['eligible_edits']:,} eligible edits, base rate {fu['base_rate']:.1%}")
-    for c in COLS:
-        v = fu["by"][c]
-        if v["n"] >= 100 and v["rel"] is not None:
-            star = "*" if (v["lo"] > 1 or v["hi"] < 1) else " "
-            print(f"    {c:14} {v['n']:7,} {v['rate']:7.1%} {v['expected']:9.1%} {v['rel']:8.2f}{star}   "
-                  f"[{v['lo']:.2f}, {v['hi']:.2f}]")
+    res, fu, m, shas, X = ef.analyse(a.repo, rows, rng, COLS, lambda r: r["cond"])
+    print(f"{a.repo}: {int(m['fix'].sum()):,} fix, {int(m['nonfix'].sum()):,} reference commits "
+          f"(EXPLORATORY; * = 95% interval excludes 1 and >= {ef.MIN_K} commits carry it on both sides; "
+          f"no multiplicity correction)")
+    print("  " + "; ".join(f"{g}: {v['commits']:,} vs {v['reference_commits']:,}" for g, v in res.items()))
+    for sec, title in (("A", "Fix classes"), ("A2", "Direct contrasts (group | reference)"),
+                       ("B", "Defect-introducing commits (non-fix members only)")):
+        gs = [g for g, v in res.items() if v["section"] == sec]
+        if gs:
+            ef.table(title + ": shape and kind of new conditions", res, gs, list(SHAPES) + list(KINDS))
+            ef.table(title + ": kind of the condition on a NEW GUARD", res, gs, ["G:" + k for k in KINDS])
+    ef.follow_table(fu, COLS)
+    out = {"repo": a.repo, "type": "exploratory", "contrasts": res, "follow_up": fu}
 
     # Does condition content make a single fix more recognisable than the edit types alone (etyp_label.md)?
-    _s, base = el.design(rows)
-    assert _s == shas
-    cols = dict(base)
-    for c in COLS:
-        cols["E:" + c] = X[:, idx[c]]
-    out = {"repo": a.repo, "type": "exploratory", "groups": res, "follow_up": fu,
-           "design": {"shas": len(shas)}}
     if a.model_out or a.model_in:
-        y = (cls != "").astype(float)
-        keep = ~amb
+        s2, base, _ct = el.design(rows)
+        assert s2 == shas
+        cols = dict(base)
+        for j, c in enumerate(COLS):
+            cols["E:" + c] = X[:, j]
+        y, keep = m["fix"].astype(float), m["fix"] | m["nonfix"]
         variants = {"size": el.SIZE, "type+size": el.ATOMS + el.SIZE,
                     "type+cond+size": el.ATOMS + ["E:" + c for c in COLS] + el.SIZE}
         if a.model_out:
@@ -385,11 +378,11 @@ def cmd_join(a) -> int:
             keep_i = np.flatnonzero(keep)
             draws = [rng.choice(keep_i, len(keep_i)) for _ in range(200)]
             print(f"\n  Fix vs not a fix, model fitted on {model['trained_on']}, scored here (AUC):")
-            out["label_auc"] = {"trained_on": model["trained_on"]}
+            out["label_auc"] = {"trained_on": model["trained_on"], "commits": int(keep.sum())}
             sc = {}
-            for name, m in model["variants"].items():
-                Z, _mu, _sd = el.matrix(cols, m["features"], np.array(m["mu"]), np.array(m["sd"]))
-                sc[name] = Z @ np.array(m["weights"])
+            for name, mv in model["variants"].items():
+                Z, _mu, _sd = el.matrix(cols, mv["features"], np.array(mv["mu"]), np.array(mv["sd"]))
+                sc[name] = Z @ np.array(mv["weights"])
                 b = [el.auc(sc[name][d], y[d]) for d in draws]
                 out["label_auc"][name] = {"auc": el.auc(sc[name][keep], y[keep]),
                                           "lo": float(np.percentile(b, 2.5)), "hi": float(np.percentile(b, 97.5))}
