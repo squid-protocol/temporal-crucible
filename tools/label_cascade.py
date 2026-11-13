@@ -45,9 +45,12 @@ REPOS = ("commons-lang", "curl", "libgit2", "libxml2", "ndpi", "openssl",
 TIERS = ("T1_revert", "T2_fixref", "T3_cve", "T4_keyword", "T5_bareref")
 
 
-def tiers_for(repo: str, merge_units: bool = False, meta_dir: Path | None = None) -> tuple[dict[str, str], dict]:
+def tiers_for(repo: str, merge_units: bool = False, meta_dir: Path | None = None,
+              sa3_tiers: bool = False) -> tuple[dict[str, str], dict]:
     """sha -> tier, plus the pools needed to talk about recall. merge_units / meta_dir are MOD-1 Amendment 3's:
-    keep merges where the history made them the unit, and read links from a meta harvest that saw them."""
+    keep merges where the history made them the unit, and read links from a meta harvest that saw them.
+    sa3_tiers (opt-in, checklist item 18): route fix-semantic trailers (Fixes:, Bug:, Reported-by:) to T2_fixref
+    rather than T5_bareref so explicit bug trailers do not contaminate SA3's CHURN negative control."""
     h = sqlite3.connect(f"file:{STUDY/'history'/f'{repo}.db'}?mode=ro", uri=True)
     mg = "" if merge_units else " and merge=0"
     allc = {s for s, in h.execute("select sha from commit_ where bot=0" + mg)}
@@ -63,7 +66,9 @@ def tiers_for(repo: str, merge_units: bool = False, meta_dir: Path | None = None
                 continue
             if kind.startswith("trailer:"):
                 k = kind.split(":", 1)[1]
-                if k in ("reported-by", "closes", "fixes", "bug"):
+                if sa3_tiers and k in ("reported-by", "fixes", "bug"):
+                    link["issue_fix"].add(sha)
+                elif k in ("reported-by", "closes", "fixes", "bug"):
                     link["trailer"].add(sha)
             elif kind in link:
                 link[kind].add(sha)
@@ -88,7 +93,7 @@ def cmd_report(a) -> int:
           + f"{'cascade':>9}{'kw v3c':>8}{'new vs kw':>11}")
     for r in (a.repos.split(",") if a.repos else REPOS):
         try:
-            tier, pool = tiers_for(r)
+            tier, pool = tiers_for(r, sa3_tiers=a.sa3_tiers)
         except Exception as e:
             print(f"{r:13} error: {e}"); continue
         counts = {t: sum(1 for v in tier.values() if v == t) for t in TIERS}
@@ -103,7 +108,7 @@ def cmd_report(a) -> int:
 
 
 def cmd_sample(a) -> int:
-    tier, pool = tiers_for(a.repo)
+    tier, pool = tiers_for(a.repo, sa3_tiers=a.sa3_tiers)
     want = [s for s, t in tier.items() if t.startswith(a.sample)]
     only_new = [s for s in want if s not in pool["kw_v3c"]]
     use = only_new if a.new_only else want
@@ -132,7 +137,7 @@ def cmd_sample(a) -> int:
 def cmd_emit(a) -> int:
     a.emit.mkdir(parents=True, exist_ok=True)
     for r in (a.repos.split(",") if a.repos else REPOS):
-        tier, _ = tiers_for(r)
+        tier, _ = tiers_for(r, sa3_tiers=a.sa3_tiers)
         db = a.emit / f"{r}.db"
         con = sqlite3.connect(db)
         con.executescript("CREATE TABLE IF NOT EXISTS cascade (sha TEXT PRIMARY KEY, tier TEXT);"
@@ -152,6 +157,8 @@ def main() -> int:
     ap.add_argument("--n", type=int, default=25)
     ap.add_argument("--seed", type=int, default=2988)
     ap.add_argument("--new-only", action="store_true", help="only commits the keyword gate misses")
+    ap.add_argument("--sa3-tiers", action="store_true",
+                    help="opt-in (SA3): route Fixes:/Bug:/Reported-by: trailers to T2_fixref instead of T5_bareref")
     ap.add_argument("--emit", type=Path)
     a = ap.parse_args()
     if a.sample:

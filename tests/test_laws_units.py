@@ -66,3 +66,61 @@ def test_the_linguist_lists_are_the_pinned_ones(tmp_path, monkeypatch):
     (tmp_path / "vendor.yml").write_text("- (^|/)vendor/\n")
     with pytest.raises(RuntimeError, match="sha256 differs"):
         U.linguist_patterns("vendor.yml")
+
+
+def test_sa3_opt_in_tutorial_exclusions_preserve_default_units():
+    try:
+        ex_default = U.Excluder()
+        ex_sa3 = U.Excluder(include_tutorials=True)
+    except OSError as e:
+        pytest.skip(f"linguist lists not available: {e}")
+    assert ex_default.why("tutorials/hist/fillrandom.C") is None
+    assert ex_sa3.why("tutorials/hist/fillrandom.C") == "example"
+    assert ex_sa3.why("sub/tutorial/demo.py") == "example"
+
+
+def test_sa3_opt_in_link_extraction_and_cascade_trailer_tiers(tmp_path, monkeypatch):
+    import sqlite3
+    import hist_meta as HM
+    import label_cascade as LC
+
+    msg_jira = ("LANG-1234: Fix NumberUtils overflow", "Fixes LANG-1234 when parsing hex.")
+    msg_bpo = ("bpo-41234: fix crash", "Resolves bpo-41234\n\nFixes: 1a2b3c4d5e\nReported-by: Alice <a@b.c>")
+    assert [k for _, k, _ in HM.extract_links("s1", *msg_jira, sa3_links=False)] == []
+    links_jira = HM.extract_links("s1", *msg_jira, sa3_links=True)
+    assert ("s1", "issue_fix", "LANG-1234") in links_jira
+
+    links_bpo_default = HM.extract_links("s2", *msg_bpo, sa3_links=False)
+    assert ("s2", "issue_fix", "41234") not in links_bpo_default
+    assert ("s2", "trailer:fixes", "1a2b3c4d5e") in links_bpo_default
+    links_bpo_sa3 = HM.extract_links("s2", *msg_bpo, sa3_links=True)
+    assert ("s2", "issue_fix", "41234") in links_bpo_sa3
+    assert ("s2", "issue_fix", "1a2b3c4d5e") in links_bpo_sa3
+
+    # Verify tiers_for routes Fixes:/Bug:/Reported-by: trailers to T5 by default, and T2 under sa3_tiers=True
+    (tmp_path / "history").mkdir()
+    (tmp_path / "meta").mkdir()
+    hdb = sqlite3.connect(tmp_path / "history" / "demo.db")
+    hdb.executescript("""
+        CREATE TABLE commit_ (sha TEXT, ct INT, author TEXT, bot INT, merge INT, fix INT, subject TEXT);
+        CREATE TABLE touch (sha TEXT, path TEXT);
+        INSERT INTO commit_ VALUES ('c_fix_trailer', 100, 'a', 0, 0, 0, ' silence warning ');
+        INSERT INTO commit_ VALUES ('c_closes_trailer', 101, 'a', 0, 0, 0, ' merge pr ');
+    """)
+    hdb.commit(); hdb.close()
+    mdb = sqlite3.connect(tmp_path / "meta" / "demo.db")
+    mdb.executescript("""
+        CREATE TABLE link (sha TEXT, kind TEXT, value TEXT);
+        INSERT INTO link VALUES ('c_fix_trailer', 'trailer:fixes', 'deadbeef');
+        INSERT INTO link VALUES ('c_closes_trailer', 'trailer:closes', '#42');
+    """)
+    mdb.commit(); mdb.close()
+    monkeypatch.setattr(LC, "STUDY", tmp_path)
+
+    tiers_def, _ = LC.tiers_for("demo", sa3_tiers=False)
+    assert tiers_def["c_fix_trailer"] == "T5_bareref"
+    assert tiers_def["c_closes_trailer"] == "T5_bareref"
+
+    tiers_sa3, _ = LC.tiers_for("demo", sa3_tiers=True)
+    assert tiers_sa3["c_fix_trailer"] == "T2_fixref"
+    assert tiers_sa3["c_closes_trailer"] == "T5_bareref"

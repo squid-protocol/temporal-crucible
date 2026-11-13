@@ -40,11 +40,47 @@ RX = {
     # curl writes `Closes #N` on every merged PR -- that is a workflow artefact, not a bug signal; audited
     # at roughly 2 of 9 on the commits the keyword gate misses. `Fixes #N` / `Resolves #N` claims a defect.
     "issue_fix":  re.compile(r"\b(?:fix(?:es|ed)?|resolve[sd]?)\s+(?:#|\bGH-|\bbug\s*#?)(\d{1,7})\b", re.I),
+    # SA3 opt-in (checklist item 18): non-GitHub trackers (Jira PROJ-123, Python bpo-123, BSD PR 123, GnuPG-bug-id)
+    # and kernel/C `Fixes: <sha>` references, only matched when --sa3-links is passed.
+    "issue_fix_sa3": re.compile(
+        r"\b(?:fix(?:es|ed)?|resolve[sd]?)\s+(?:#|\bGH-|\bbug\s*#?|\bbpo-|\bPR\s*#?)(\d{1,7})\b"
+        r"|\b(?:fix(?:es|ed)?|resolve[sd]?)\s*:?\s+([A-Z][A-Z0-9_]{1,15}-\d{1,7})\b"
+        r"|^GnuPG-bug-id:\s*(\d+)\b"
+        r"|^Fixes:\s*([0-9a-f]{7,40})\b",
+        re.I | re.M,
+    ),
     "issue":      re.compile(r"(?:#|\bGH-|\bbug\s*#?)(\d{1,7})\b", re.I),
     "cve":        re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.I),
     "trailer":    re.compile(r"^(Co-authored-by|Reported-by|Reviewed-by|Signed-off-by|Tested-by|Closes|Fixes|Bug):\s*(.+)$",
                              re.I | re.M),
 }
+
+
+def extract_links(sha: str, subject: str, body: str, sa3_links: bool = False) -> list[tuple[str, str, str]]:
+    """Extract structured links from (subject, body). When `sa3_links` is False (default), behaviour is identical to
+    the original harvest used by LAWS and MOD-1."""
+    links: list[tuple[str, str, str]] = []
+    text = subject + "\n" + body
+    for m in RX["revert_sha"].finditer(text):
+        links.append((sha, "revert", m.group(1)))
+    if RX["revert_sub"].search(text):
+        links.append((sha, "revert", ""))
+    fixref = {m.group(1) for m in RX["issue_fix"].finditer(text)}
+    if sa3_links:
+        for m in RX["issue_fix_sa3"].finditer(text):
+            val = next((g for g in m.groups() if g is not None), None)
+            if val:
+                fixref.add(val)
+    for v in sorted(fixref):
+        links.append((sha, "issue_fix", v))
+    for m in RX["issue"].finditer(text):
+        if m.group(1) not in fixref:
+            links.append((sha, "issue", m.group(1)))
+    for m in RX["cve"].finditer(text):
+        links.append((sha, "cve", m.group(0).upper()))
+    for m in RX["trailer"].finditer(body):
+        links.append((sha, f"trailer:{m.group(1).lower()}", m.group(2).strip()[:200]))
+    return links
 
 
 def schema(con):
@@ -57,7 +93,7 @@ def schema(con):
     """)
 
 
-def harvest(repo: Path, con, with_merges: bool = False) -> tuple[int, int]:
+def harvest(repo: Path, con, with_merges: bool = False, sa3_links: bool = False) -> tuple[int, int]:
     p = subprocess.Popen(["git", "-C", str(repo), "log", *([] if with_merges else ["--no-merges"]),
                           f"--format={SEP}%H%n%s%n%b{EOR}"],
                          stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
@@ -75,21 +111,7 @@ def harvest(repo: Path, con, with_merges: bool = False) -> tuple[int, int]:
             sha, subject = lines[0].strip(), (lines[1] if len(lines) > 1 else "")
             body = "\n".join(lines[2:]).strip()
             bodies.append((sha, subject, body))
-            text = subject + "\n" + body
-            for m in RX["revert_sha"].finditer(text):
-                links.append((sha, "revert", m.group(1)))
-            if RX["revert_sub"].search(text):
-                links.append((sha, "revert", ""))
-            fixref = {m.group(1) for m in RX["issue_fix"].finditer(text)}
-            for v in fixref:
-                links.append((sha, "issue_fix", v))
-            for m in RX["issue"].finditer(text):
-                if m.group(1) not in fixref:
-                    links.append((sha, "issue", m.group(1)))
-            for m in RX["cve"].finditer(text):
-                links.append((sha, "cve", m.group(0).upper()))
-            for m in RX["trailer"].finditer(body):
-                links.append((sha, f"trailer:{m.group(1).lower()}", m.group(2).strip()[:200]))
+            links.extend(extract_links(sha, subject, body, sa3_links=sa3_links))
             if len(bodies) >= 5000:
                 con.executemany("INSERT OR REPLACE INTO body VALUES (?,?,?)", bodies)
                 con.executemany("INSERT INTO link VALUES (?,?,?)", links)
@@ -129,6 +151,8 @@ def main() -> int:
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--with-merges", action="store_true",
                     help="read merge commits too (MOD-1 Amendment 3: where a merge is the labelled unit)")
+    ap.add_argument("--sa3-links", action="store_true",
+                    help="opt-in (SA3): match Jira, bpo-, PR, GnuPG-bug-id and Fixes: <sha> in issue_fix")
     a = ap.parse_args()
     if a.report:
         return report(a.out)
@@ -142,7 +166,7 @@ def main() -> int:
         if not src.is_dir():
             print(f"  {r}: no clone at {src}"); con.close(); continue
         t0 = time.time()
-        nb, nl = harvest(src, con, a.with_merges)
+        nb, nl = harvest(src, con, a.with_merges, sa3_links=a.sa3_links)
         con.executemany("INSERT OR REPLACE INTO meta VALUES (?,?)",
                         [("bodies", str(nb)), ("links", str(nl)),
                          ("seconds", str(round(time.time() - t0, 1))), ("done", "1")])

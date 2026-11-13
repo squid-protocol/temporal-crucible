@@ -1,5 +1,23 @@
 # Where we stand, in plain terms (2026-11-13)
 
+> **Correction & follow-up note (later on 2026-11-13 — see [`docs/mod1_result.md`](mod1_result.md),
+> [`docs/mod1_wide.md`](mod1_wide.md), and [`docs/hr_units.md`](hr_units.md)):**
+> 1. **Unit-file denominator bug in the "4 up, 4 down" split:** The eight-repo `in_degree` split described below
+>    (`struct_null.py`) ranked **every scanned file** (including tests, docs, and other languages that have
+>    zero callers and can never receive a unit-file fix touch). Restricting the denominator to **unit files
+>    only** ([`docs/mod1_result.md`](mod1_result.md)) collapses three of the four positive repos (commons-lang
+>    `+0.130 → −0.036`, prometheus `+0.074 → −0.024`, sphinx `+0.068 → −0.008`), leaving **1 positive (ndpi)
+>    and 7 negative** on the earlier eight.
+> 2. **MOD-1 on the 25-repo drawn panel ([`docs/mod1_result.md`](mod1_result.md)):** Neither age (`r = −0.25`,
+>    `p = 0.23`) nor language family (`−0.021`, CI `[−0.093, +0.050]`) moderates `AUC(in_degree) − AUC(LOC)`;
+>    the pooled lift is **−0.069 `[−0.102, −0.036]`** (2 positive, 11 negative, 12 across zero), which says
+>    `in_degree` does not *replace* `LOC`.
+> 3. **Tree-wide commits ([`docs/mod1_wide.md`](mod1_wide.md)) and "adds to size" ([`docs/sa3_registration.md`](sa3_registration.md)):**
+>    Single reformat/header commits wearing a fix keyword flip individual repo signs (e.g. openssl has a
+>    992-file header commit), and `AUC(x) − AUC(LOC)` tests whether `x` *replaces* size rather than *adds to*
+>    size. SA3 ([`docs/sa3_registration.md`](sa3_registration.md)) tests within-size lift (`bAUC(x) − 0.5`) with
+>    tree-wide commits removed. The original text below is preserved as written.
+
 ## What "centrality beats size in half the repos" actually means
 
 `in_degree` = how many calls come **into** a file's functions. A high-in-degree file is a **hub**: lots of

@@ -1,5 +1,15 @@
 # HR-1 / HR-2 / HR-3 — results on the CGR cohort
 
+> **Correction note (2026-11-13, [`docs/hr_units.md`](hr_units.md)):** An independent audit (checklist item 1)
+> found that HR-1 below ranked **every scanned file** (`SELECT path, total_loc FROM file`), including docs,
+> tests, vendored code, and non-panel languages, while the outcome table only recorded touches on unit files.
+> Non-unit files had `prior_fixes = 0` and `outcome = 0` by definition. Re-running on **unit files only**
+> ([`docs/hr_units.md`](hr_units.md)) leaves HR-2 and HR-3 unchanged (their hunk table already filtered to unit
+> files), and lowers HR-1's pooled lift from **+0.082** to **+0.056**, 95% CI **[+0.015, +0.097]** (5 of 6
+> positive; prometheus moves from +0.009 to −0.002 because 242 non-Go files in its scan were non-units).
+> Removing tree-wide fix commits moves HR-1 on unit files to **+0.070 [+0.025, +0.119]** (6 of 6 positive).
+> The original text below is preserved as written.
+
 Registered in `hist_replication.md` **before** each was run. **Replication on seen repos**: breadth or
 falsification, never fresh confirmation. The eight are the CGR cohort and have already carried CGT/CGN/CGK,
 LIB, CPF, DRP and CGN-CR. openssl stays the untouched holdout. Same cut, window, baseline and floors

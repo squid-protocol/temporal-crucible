@@ -48,6 +48,7 @@ TEST_PARTS = {"test", "tests", "testing", "__tests__", "spec", "testdata"}
 TEST_NAMES = ("*_test.go", "test_*.py", "*_test.py", "*Test.java", "*Tests.java", "*.test.js", "*.test.ts",
               "*.spec.js", "*.spec.ts", "*_test.rb", "*_spec.rb", "*.t", "*Tests.swift", "*Test.swift")
 EXAMPLE_PARTS = {"examples", "example", "samples", "benchmarks", "bench", "docs"}
+TUTORIAL_PARTS = {"tutorials", "tutorial"}
 GENERATED_NAMES = ("*.pb.go", "*.pb.cc", "*.pb.h", "*_pb2.py", "*_pb2_grpc.py", "*.min.js", "*.designer.cs", "*.g.cs",
                    "*.generated.cs", "*.generated.go", "zz_generated.*", "*.pb.swift", "*_generated.go", "*.g.dart")
 
@@ -119,12 +120,15 @@ def _attr_match(base: str, pat: str, path: str) -> bool:
 
 
 class Excluder:
-    """The M3 exclusions for one snapshot. `attrs`: {path of a .gitattributes: its text} at that snapshot."""
+    """The M3 exclusions for one snapshot. `attrs`: {path of a .gitattributes: its text} at that snapshot.
+    `include_tutorials`: opt-in (SA3, checklist item 18) to also exclude tutorial/tutorials directories, matching the
+    scanner's aperture rule without changing any earlier study's unit set."""
 
-    def __init__(self, attrs: dict[str, str] | None = None):
+    def __init__(self, attrs: dict[str, str] | None = None, include_tutorials: bool = False):
         self.vendor = linguist_patterns("vendor.yml")
         self.docs = linguist_patterns("documentation.yml")
         self.rules = _attr_rules(attrs or {})
+        self.example_parts = EXAMPLE_PARTS | TUTORIAL_PARTS if include_tutorials else EXAMPLE_PARTS
 
     def _attr(self, path: str, kind: str) -> bool | None:
         got = None
@@ -144,6 +148,6 @@ class Excluder:
             return "generated"
         if is_test(path):
             return "test"
-        if EXAMPLE_PARTS & {x.lower() for x in PurePosixPath(path).parts[:-1]}:
+        if self.example_parts & {x.lower() for x in PurePosixPath(path).parts[:-1]}:
             return "example"
         return None
