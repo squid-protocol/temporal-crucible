@@ -13,16 +13,16 @@ below the **0.70** gate is reported as descriptive, or not used as an outcome at
 | libxml2 | c | **0.80** | 30 | ✓ | **0.86** | 22 | ✓ |
 | postgres | c | **0.77** | 30 | ✓ | **0.74** | 19 | ✓ |
 | redis | c | **0.73** | 30 | ✓ | **0.75** | 16 | ✓ |
-| ndpi | c | **0.67** | 30 | ✗ | *not run* | — | — |
+| ndpi | c | **0.67** | 30 | ✗ | **0.68** | 25 | ✗ |
 | libgit2 | c | **0.63** | 30 | ✗ | **0.60** | 15 | ✗ |
-| curl | c | **0.63** | 30 | ✗ | *not run* | — | — |
+| curl | c | **0.63** | 30 | ✗ | **0.80** | 25 | ✓ |
 | sphinx | python | **0.60** | 30 | ✗ | **0.78** | 23 | ✓ |
-| openssl | c | **0.50** | 30 | ✗ | *not run* | — | — |
+| openssl | c | **0.50** | 30 | ✗ | **0.80** | 25 | ✓ |
 | prometheus | go | **0.40** | 30 | ✗ | **0.83** | 12 | ✓ |
 | commons-lang | java | **0.27** | 30 | ✗ | **0.70** | 20 | ✓ |
 | ripgrep | rust | **0.27** | 30 | ✗ | **0.82** | 11 | ✓ |
 
-**3 of 11 repos** clear the gate on the raw label; **7 of 11** on v3c.
+**3 of 11 repos** clear the gate on the raw label; **9 of 11** on v3c.
 
 ## What this card already changed
 

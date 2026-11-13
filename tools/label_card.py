@@ -41,9 +41,9 @@ CARD = {
     "ripgrep":      {"lang": "rust",   "raw": (8, 30),  "v3c": (9, 11)},
     # The three PILOT repos, audited 2026-11-13 (docs/otherfix_audit_pilot.md). `other-fix` is 77-86% of
     # their outcome mass and had never been measured. v3c has NOT been run on them: unpublished, not assumed.
-    "curl":         {"lang": "c",      "raw": (19, 30)},
-    "ndpi":         {"lang": "c",      "raw": (20, 30)},
-    "openssl":      {"lang": "c",      "raw": (15, 30)},
+    "curl":         {"lang": "c",      "raw": (19, 30), "v3c": (20, 25)},
+    "ndpi":         {"lang": "c",      "raw": (20, 30), "v3c": (17, 25)},
+    "openssl":      {"lang": "c",      "raw": (15, 30), "v3c": (20, 25)},
 }
 SOURCE = ("docs/otherfix_audit.md (CGR eight: round 1 2026-11-11, confirmatory round same doc); "
           "docs/otherfix_audit_pilot.md (curl, nDPI, openssl, 2026-11-13)")

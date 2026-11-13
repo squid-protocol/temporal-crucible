@@ -38,8 +38,8 @@
    "language": "c",
    "raw_precision": 0.667,
    "raw_n": 30,
-   "v3c_precision": null,
-   "v3c_n": null,
+   "v3c_precision": 0.68,
+   "v3c_n": 25,
    "raw_fit": false,
    "v3c_fit": false
   },
@@ -58,10 +58,10 @@
    "language": "c",
    "raw_precision": 0.633,
    "raw_n": 30,
-   "v3c_precision": null,
-   "v3c_n": null,
+   "v3c_precision": 0.8,
+   "v3c_n": 25,
    "raw_fit": false,
-   "v3c_fit": false
+   "v3c_fit": true
   },
   {
    "repo": "sphinx",
@@ -78,10 +78,10 @@
    "language": "c",
    "raw_precision": 0.5,
    "raw_n": 30,
-   "v3c_precision": null,
-   "v3c_n": null,
+   "v3c_precision": 0.8,
+   "v3c_n": 25,
    "raw_fit": false,
-   "v3c_fit": false
+   "v3c_fit": true
   },
   {
    "repo": "prometheus",
