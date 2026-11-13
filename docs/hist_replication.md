@@ -79,3 +79,28 @@ Does recidivism sharpen when the unit is a function rather than a file? Unblocke
 
 No causal claim; no claim about any language; no promotion of a predictor's confirmatory status. The cohort is
 seen, the repos were chosen long ago for convenience, and the bar is replication breadth only.
+
+## HR-1b / HR-2b / HR-3b — the same three with a cleaned fix label, registered 2026-11-13 before the re-run
+
+**Why.** HR-1/2/3 used the history DB's keyword `fix` flag as both predictor and outcome. Measured afterwards,
+that label is contaminated and **unevenly so**: commits matching cosmetic markers (javadoc, checkstyle,
+formatting, typo, lint) are **41.7% of commons-lang's fix commits**, 19.7% of ripgrep's, and 4-10% elsewhere.
+commons-lang carries HR-1's largest lift, so the contamination is concentrated exactly where the effect is
+biggest. "Files that keep getting Javadoc touched" is a real thing to predict, but it is not a defect.
+
+**The change, and only this.** Outcome and predictor both become the fix set that survives
+`tools/fixlike_v2.drop_reason(..., rules="v3c")`: test/doc-only paths dropped, non-behavioural subjects
+dropped (conventional-commit chore/style/docs types, named linters, javadoc/docstring, typo, whitespace,
+build-warning, changelog), comment-edit subjects dropped unless the subject is about operating on comments as
+content, and a fix word required in the subject. Cut, window, baseline, floors, metrics and repos are
+**unchanged**, so b-runs are directly comparable to their originals.
+
+**Honesty note, stated before the run.** FIXLIKE v3c was developed and audited on xc_harvest's `other-fix`
+class, where it moved precision 0.38 -> 0.77 outside C. Applying it to the LAWS keyword `fix` flag is an
+**adaptation to a different label family and inherits no audited precision**. It is a sharper label than the
+raw flag, not a validated one, and results are reported as such.
+
+**What would change the reading.** If a lift survives the cleaning, the original was not an artefact of
+cosmetic commits. If it collapses, the predictor was partly predicting housekeeping. Both outcomes are
+reported; neither is a reason to pick the more flattering label afterwards. **The raw-label results stay
+published beside the cleaned ones.**
