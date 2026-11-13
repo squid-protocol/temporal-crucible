@@ -1,0 +1,119 @@
+{
+ "source": "laws_run_all8.json",
+ "repos": 8,
+ "sesoi": null,
+ "laws": {
+  "LAW-1": {
+   "reading": "heavy tails",
+   "repos_used": 8,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python",
+    "rust"
+   ],
+   "mean_effect": 0.12853,
+   "between_repo_sd": 0.07197,
+   "tau": 0.06426,
+   "median_se": 0.02478,
+   "target_half_width": 0.06426,
+   "repos_per_language": 5,
+   "capped_at": null,
+   "note": null
+  },
+  "LAW-2": {
+   "reading": "preferential attachment",
+   "repos_used": 8,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python",
+    "rust"
+   ],
+   "mean_effect": 1.38351,
+   "between_repo_sd": 0.19534,
+   "tau": 0.1732,
+   "median_se": 0.05183,
+   "target_half_width": 0.69175,
+   "repos_per_language": 2,
+   "capped_at": null,
+   "note": null
+  },
+  "LAW-3": {
+   "reading": "hub persistence",
+   "repos_used": 6,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python"
+   ],
+   "mean_effect": 0.03095,
+   "between_repo_sd": 0.04893,
+   "tau": 0.04344,
+   "median_se": 0.00824,
+   "target_half_width": 0.01547,
+   "repos_per_language": 32,
+   "capped_at": null,
+   "note": null
+  },
+  "LAW-4": {
+   "reading": "centralisation",
+   "repos_used": 8,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python",
+    "rust"
+   ],
+   "mean_effect": 0.01168,
+   "between_repo_sd": 0.01372,
+   "tau": 0.0134,
+   "median_se": 0.00281,
+   "target_half_width": 0.00584,
+   "repos_per_language": 22,
+   "capped_at": null,
+   "note": null
+  },
+  "LAW-6": {
+   "reading": "in-cycle defects",
+   "repos_used": 6,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python",
+    "rust"
+   ],
+   "mean_effect": -0.04659,
+   "between_repo_sd": 0.29205,
+   "tau": 0.19829,
+   "median_se": 0.19487,
+   "target_half_width": 0.02329,
+   "repos_per_language": null,
+   "capped_at": 400,
+   "note": null
+  },
+  "LAW-8": {
+   "reading": "network metrics in prediction",
+   "repos_used": 7,
+   "languages": [
+    "c",
+    "go",
+    "java",
+    "python"
+   ],
+   "mean_effect": 0.00409,
+   "between_repo_sd": 0.009,
+   "tau": 0.0,
+   "median_se": 0.0081,
+   "target_half_width": 0.00205,
+   "repos_per_language": 61,
+   "capped_at": null,
+   "note": "tau is 0: the spread is within estimator noise at this k"
+  }
+ }
+}

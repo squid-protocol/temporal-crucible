@@ -291,8 +291,14 @@ def sensitivity(repos, thinned, share, figdir: Path, md: Path):
     ax.axvline(0, color=MUTED, lw=1.2, zorder=2)
     ax.set_yticks(range(len(rows)))
     ax.set_yticklabels([f"{r} · {l}" for r, l, _, _, _ in rows], fontsize=7.5, color=INK)
-    ax.set_xlabel(f"% change in the law's effect when {(1-(share or 0))*100:.0f}% of resolved edges are removed",
-                  fontsize=8, color=MUTED)
+    # symlog: one repo's LAW-4 moves by ~1000% while most cells sit under 30%. On a linear axis that single
+    # outlier flattens every other mark into the spine, which hides the comparison the figure exists to make.
+    ax.set_xscale("symlog", linthresh=20)
+    ax.set_xticks([-1000, -100, -20, 0, 20, 100, 1000])
+    ax.set_xticklabels(["-1000%", "-100%", "-20%", "0", "+20%", "+100%", "+1000%"])
+    ax.axvspan(-20, 20, color=GRID, alpha=0.45, zorder=0)  # the linear band, so the scale change is visible
+    ax.set_xlabel(f"% change in the law's effect when {(1-(share or 0))*100:.0f}% of resolved edges are removed"
+                  f"  —  shaded band is +/-20%, axis is symlog beyond it", fontsize=8, color=MUTED)
     ax.set_facecolor(SURFACE)
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
@@ -300,7 +306,9 @@ def sensitivity(repos, thinned, share, figdir: Path, md: Path):
         ax.spines[sp].set_color(GRID)
     ax.tick_params(colors=MUTED, labelsize=8, length=0)
     ax.grid(axis="x", color=GRID, lw=0.8); ax.set_axisbelow(True); ax.invert_yaxis()
-    ax.set_title("Which laws survive a worse call graph? LAW-2 barely moves; LAW-3 swings by half",
+    worst = max(rows, key=lambda r: abs(r[4]))
+    ax.set_title(f"Which laws survive a worse call graph? LAW-2 barely moves; "
+                 f"{worst[0]} {worst[1]} moves {worst[4]*100:+.0f}%",
                  fontsize=11, color=INK, loc="left", pad=8)
     fig.tight_layout(); q = figdir / "f7_coverage_sensitivity.png"
     fig.savefig(q, dpi=150, facecolor=SURFACE); plt.close(fig)
