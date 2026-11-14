@@ -141,6 +141,43 @@ tests/test_blind.py   round-trip with a throwaway key; scramble preserves the st
 Tested end to end on the control repository, where the true labels are known: the unblinded result must equal
 the result computed directly from the manifest.
 
+## Build phase A (what is built now) [r2]
+
+The study scorer these jobs will wrap does not exist yet (`research_codebase_spec.md`, steps 3 to 5). Phase A
+builds everything that does not depend on it, against the control repository, where the truth is known.
+
+**Inputs, as plain data** (the stored tables will supply the same shapes later):
+
+- a *file table*: one row per ranked file — `path`, `loc`;
+- a *label table*: one row per (outcome, positive file path), plus per outcome the number of qualifying
+  commits and the largest commit's share;
+- for tests, both are derived from a control repository's `manifest.json`: the snapshot's unit files, and the
+  expected labels with `counted: true` (ambiguous cases left out and counted in the marginals as ambiguous).
+
+**Built in phase A:**
+
+- `crypt.py` — encrypt a label table to `keys/blind_pub.pem`; decrypt with a private key into memory only.
+  The file format is versioned and records the public key's fingerprint; decryption refuses a file made for
+  another key.
+- `scramble.py` — the cells and the five rules of layer 2, the k copies, the per-repo report, the 2% rule.
+- `build_labels.py` — label table in, `labels/<repo>.enc` + `labels/<repo>.scrambled.json` + marginals out.
+  No option writes plaintext. Refuses to run if a plaintext label file for the same repo sits in the output
+  directory.
+- `score.py` and `gates.py` — the two owner-run jobs, complete except for the scorer: they take the scorer as
+  a named function from a registry, verify a seal, decrypt in memory, run once, write only declared outputs,
+  refuse a second run without `--rerun REASON`. The registry holds one **reference scorer** for tests: the
+  within-size-decile rank correlation between a measure and the positive flag.
+- `tests/test_blind.py` as listed above, all with a **throwaway key pair generated inside the test**.
+
+**Rules for the builder.** Never read, copy, stat or name in a command the owner's private key
+(`~/.blind/blind_key.pem`) or anything else under `~/.blind/`; never prompt for or handle a real passphrase;
+the committed public key may be read. Tests use an unencrypted or fixed-passphrase throwaway key created in
+pytest's temporary directory. Write only `tools/blind/` and `tests/test_blind.py`. Generated control
+repositories go under pytest's temporary directory or the session's scratch directory. No study data.
+Standard library, `openssl` on the command line, and what the test environment already has.
+
+**Waits for the stored tables:** wiring SA3's scorer and gates into the registry; `labels.open`.
+
 ## Open
 
 - A session that can run arbitrary code as the owner's user could read the decrypted labels out of the
