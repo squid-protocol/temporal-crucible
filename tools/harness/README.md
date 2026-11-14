@@ -11,10 +11,18 @@ that could not run is in `DECISIONS.md`.
 ```
 python3 tools/control_repo/generate.py --out DIR --seed 11 --years 10 [--language c] [--effect branches=0.5] [--mutation NAME]
 python3 tools/harness/run.py --control DIR --work WORK [--name NAME] [--routes own,manifest] [--no-shim-lock]
+python3 tools/harness/run.py --suite NAME --seeds 21-40 --work WORK -- --years 10 [--effect branches=0.5] [...]
 python3 tools/harness/compare.py --work WORK --name NAME --control DIR      # re-make the table from a finished run
 python3 tools/harness/sandbox.py shell --work WORK -- CMD...                 # run anything inside the sandbox
-python3 -m pytest -p no:cacheprovider tests/test_harness.py                  # 5 tests, about 20 s
+python3 -m pytest -p no:cacheprovider tests/test_harness.py                  # 6 tests, about 40 s
 ```
+
+**Effects need many seeds.** A single-repository table prints every effect row with a predictor as "one seed:
+not comparable" (the numbers are kept). Suite mode generates one control per seed (the generator arguments after
+`--`, plus `--seed`), runs route `manifest` on each, one at a time, and writes one table: effect rows as mean and
+standard error over seeds of five stages (true fixes, expected labels, expected labels on the shared units, plus
+the pipeline's instrument, the pipeline), compared paired by seed within three standard errors; other rows as
+"agrees in k of N seeds" with per-seed counts and summed causes. About 8 s per seed.
 
 `WORK` must be under `/tmp` or `~/.claude/jobs/` (the sandbox refuses anything inside this repository or a data
 root). The report is `WORK/report/NAME.md` and `NAME.json`; the raw run record (every stage's argv, return
@@ -63,4 +71,5 @@ interface but `lo`. Every stage is started through it.
 - `run.py`: the two routes, the marginals file, the run record.
 - `probe.py`: runs inside the sandbox; reads what the pipeline produced through the tools' own functions
   (`frame`, `universe`, `sa3_score.load`, `design_for`, `silent`, `Design.effect`) into `WORK/<route>/probe.json`.
-- `compare.py`: the three-way table (JSON and Markdown). Imports only `tools/sa3_stats.py` (pure functions).
+- `compare.py`: the three-way table (JSON and Markdown) and the table over seeds (`suite`). Imports only
+  `tools/sa3_stats.py` (pure functions). Control pool and keyword rows follow the registration's words (DECISIONS 22).

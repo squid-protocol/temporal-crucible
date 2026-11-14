@@ -106,3 +106,58 @@ The builder's single-repository reading ("most of the planted effect is lost at 
   and label rows differ for a known reason.
 - Effect rows need many seeds. The suite of `research_codebase_spec.md` section 7 is affordable: 20 seeds of
   one configuration take about five minutes.
+
+## Second run: twenty seeds each, on the corrected control repository (generator 1.3.0)
+
+Later on 2026-11-14 the control repository was corrected (no base file under a name GitHub's lists match; the
+Jira convention split), the harness gained a suite mode, and five suites of 20 repositories were run (seeds
+21–40, default size, ten-year span). No stage failed in any seed. The reviewer reproduced the C result on
+twelve other seeds (51–62): −0.019, standard error 0.005.
+
+### Effect on the planted property (`branches`), mean over 20 seeds, standard error in brackets
+
+| suite | true fixes | labels the written rule gives | + the pipeline's instrument | the pipeline | pipeline − labels, paired |
+|---|---|---|---|---|---|
+| Python, no effect | +0.013 (0.009) | +0.004 (0.008) | +0.004 | +0.005 (0.009) | +0.001 (0.002) |
+| Python, effect planted | +0.138 (0.006) | +0.077 (0.009) | +0.075 | +0.075 (0.010) | −0.002 (0.002) |
+| C, effect planted | +0.127 (0.007) | +0.081 (0.007) | +0.063 (0.009) | +0.062 (0.009) | **−0.019 (0.004)** |
+| Python, effect planted, files under `cache/`-style names | +0.138 | +0.077 (0.009) | +0.067 | +0.067 (0.012) | −0.010 (0.005) |
+
+What this says, replacing the ten-seed reading above:
+
+- **With the control repository corrected, the Python pipeline reproduces the written label rule's effect
+  exactly** (−0.002 ± 0.002). The earlier "about 20% lost in the pipeline" was the `cache/` directories and
+  the bare Jira keys, both now accounted for in the manifest.
+- **The label rule is where a true effect is lost: +0.138 becomes +0.077, about 45%.** This is before any code
+  runs, and it depends on the generator's assumed mix of commit conventions.
+- **In C the instrument loses a further quarter** (+0.081 to +0.062). `struct_branch` also counts `else`,
+  `case`, `default`, `&&` and `||`, which in the generated C dilutes the planted keyword count; in the
+  generated Python it does not. Whether real C behaves like the generated C is unknown.
+- **The no-effect controls read zero** in both languages and for every predictor.
+- Directory names that GitHub's list matches cost a further 12% here, through the universe.
+
+### The other rules, seeds agreeing out of 20
+
+| rule | Python | C | with `cache/`-style names |
+|---|---|---|---|
+| universe | 20 | 20 | 0 |
+| scan completeness, nesting, pointer and allocation counts, bots | 20 | 20 | 20 |
+| tree-wide commits | 20 | 20 | 19 |
+| floors | 19–20 | 19–20 | 9 |
+| keyword outcome | 14 | 14 | 0 |
+| HP qualifying commits | 6 | 6–7 | 0 |
+| control pool | 1 | 0 | 0 |
+| window | 2 | 2 | 2 |
+| line count, branch keywords, calls in | 0 | 0 | 0 |
+
+The rows that still differ in most seeds have three causes, none of them a new fault: the pipeline's window
+follows its own cut (offset 0 to 22 days from the manifest's); a file renamed after the snapshot is no longer
+matched; and the instrument counts differently, as tabled above. Over 20 Python seeds the label row's misses
+total 10 renamed files, 7 window-edge commits, 4 commits with no file at the snapshot, and 1 revert.
+
+### Mutations on the corrected generator (seed 11)
+
+Unchanged from the first run, plus: **`generic_dir_names`** — the pipeline drops the 59 files under `cache/`,
+`dist/`, `extern/` and `env/` as vendored, loses 14 qualifying commits and 18 positive files with them, fails
+its keyword floor, and reports nothing. Under `merge_workflow` the keyword outcome now agrees (0 = 0): by the
+registration's words a merge subject carries no keyword.

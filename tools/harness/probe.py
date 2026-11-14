@@ -31,6 +31,8 @@ import mod1_lift as L  # noqa: E402
 import sa3_outcomes as O  # noqa: E402
 import sa3_score as SC  # noqa: E402
 from _engine import POOL_DIR  # noqa: E402
+from hist_fixlabel import fix_shas  # noqa: E402
+from laws_history import is_fix_message  # noqa: E402
 
 SCAN_COLS = ("total_loc", "coding_loc", "language", "struct_branch", "state_pointers", "state_memory_alloc",
              "state_danger", "function_count")
@@ -97,10 +99,22 @@ def main() -> int:
                       for x in h.execute("select sha, ct, author, bot, merge, fix, keyword, n_units, subject "
                                          "from commit_ order by rowid")]
     h.close()
+    # the code's two keyword rules, applied by the code's own functions: the cleaned (v3c) gate that decides KW
+    # and keeps a commit out of the control pool, and FIXLIKE (laws_history.is_fix_message), which taints a merge
+    # that brings in a fix-worded commit (sa3_outcomes.py:265-271)
+    h = L.ro(L.STUDY / "history" / f"{r}.db")
+    out["kw_gate"] = sorted(fix_shas(h, "v3c", f["merge_units"]) or ())
+    touch: dict = {}
+    for sha, path in h.execute("select sha, path from touch"):
+        touch.setdefault(sha, []).append(path)
+    out["touch"] = touch                      # the history's own record: what each unit touched, by path at the time
+    h.close()
     meta_db = O.META / f"{r}.db"
     if meta_db.exists():
         m = sqlite3.connect(f"file:{meta_db}?mode=ro", uri=True)
         out["links"] = [list(x) for x in m.execute("select sha, kind, value from link")]
+        out["fix_worded"] = sorted(s for s, subj, body in m.execute("select sha, subject, body from body")
+                                   if is_fix_message((subj or "") + "\n" + (body or "")))
         m.close()
     a.out.write_text(json.dumps(out) + "\n")
     print(f"{r}: probe written, {len(files)} universe files, {len(rows)} scanned files")

@@ -62,14 +62,31 @@ calling the tools' functions unchanged (`mod1_lift.frame`, `sa3_outcomes.univers
     branches → `struct_branch`, max_nesting → `nest_max`, calls_in → `in_degree`, calls_out → `out_degree`,
     pointer_ops + alloc_ops → `state_pointers_alloc` (the scorer sums the two families, so one row);
     `state_writes_in_branches` and `d_branches` have no predictor and are *undecided in the manifest* (the
-    manifest names no instrument for them). **Agree = within 0.01**: the spec gives no tolerance; with equal
-    universe, labels and counts the two numbers are identical, so any gap is a disagreement upstream.
+    manifest names no instrument for them). **(Revised after review, finding 1.)** One repository's effect is
+    noise (ten positive controls ranged -0.002 to +0.135), so a single-repository table prints every effect row
+    with a predictor as *one seed: not comparable* and keeps the numbers; the first build's 0.01 tolerance is
+    gone. Effects are compared only in suite mode (item 30).
 21. **Manifest side of "bots"**: units in the walk that are bot-authored, or direct/squash units made only of bot
     commits. A human merge that brings in one bot commit is not a bot unit (first run counted them; corrected).
-22. **Manifest side of "control pool"** is the spec's: units in the window, not fixes, not tree-wide, not bots,
-    touching a snapshot unit file. It therefore includes ticket features and qualifying reverts, which HP counts
-    and the code removes from the pool; the row lists the differences by type so these are visible as such.
-    **"Keyword outcome"** likewise: fixes in the keyword convention with no reference.
+22. **Manifest side of "control pool" and "keyword outcome" (revised after review, finding 2)**, from the
+    registration's words (`docs/sa3_registration_consolidated.md` section 4), over **first-parent units only**
+    (a merge's branch commits carry labels in the manifest but are never units):
+    - control pool, "non-bot commits in the window in no fix tier, not tree-wide, not tainted": in the window
+      (the manifest's window, touching a snapshot unit file); not a bot unit (item 21); not tree-wide (the
+      label's clause); in no fix tier = not counted for HP, not ambiguous, contains no revert (HP_allreverts
+      counts every revert), not KW (below); not tainted = for a merge, not over the 50-commit cap and bringing
+      in no linked commit (conventions `issue`, `trailer`, `cve`, `ticket_feature`, `jira_fixword`, or a revert)
+      and no fix-worded commit (conventions written with a fix word: `keyword`, `issue`, `jira_fixword`,
+      `ticket_feature`, and a sweep whose message starts "Fix").
+    - KW, "the cleaned keyword rule, and no HP link": in the window, not tree-wide, not tainted, no HP link of any
+      kind (counted, ambiguous, a revert, or a link convention), not a merge (a merge's own subject carries no
+      keyword), and written with a fix keyword (convention `keyword`).
+    - The generator cannot know the code's two keyword rules, the cleaned v3c gate (`hist_fixlabel.fix_shas`)
+      and FIXLIKE (`laws_history.is_fix_message`, which taints merges). The probe now records the code's own
+      verdicts (`kw_gate`, `fix_worded`, computed by those functions inside the sandbox) and the history's
+      `touch` table, and each difference is attributed to the registration word that decided it, quoting the
+      code's verdict where a keyword gate decides ("the generator cannot know this gate"). These verdicts are
+      never used to build the manifest side.
 23. **Diagnostics** (in the row's detail, never in a verdict): causes of each HP commit difference (positive
     outside the pipeline's universe; touched under a later path; before the pipeline's window start; the
     commit's message convention; for pipeline-only reverts, the target's time against the pipeline's cut); for
@@ -92,8 +109,41 @@ calling the tools' functions unchanged (`mod1_lift.frame`, `sa3_outcomes.univers
     (`IndexError: arrays used as indices must be of integer (or boolean) type`): no repo clears the HP floor, so
     `drawn` is an empty float array. Then `lock` stops (missing `docs/sa3_placebo.json`).
 
+## Schema 4 (generator 1.3.0)
+
+30. **Suite mode** (review finding 1): `run.py --suite NAME --seeds 21-40 --work WORK -- <generator arguments>`
+    generates one control per seed under `WORK/controls/seed-N`, runs route `manifest` on each (one at a time,
+    no placeholder review), keeps each seed's own table under `WORK/seeds/seed-N/report/`, and writes ONE table,
+    `WORK/report/NAME.{json,md}`. Effect rows: mean and standard error (ddof 1) over seeds of the five stages of
+    the decomposition (true fixes / expected labels / expected labels on shared units / + the pipeline's
+    instrument and LOC / the pipeline), the paired-by-seed difference pipeline - expected labels, **agree when
+    |mean| <= 3 standard errors of that difference**, and every adjacent step's paired difference. Other rows:
+    in how many seeds they agree, the per-seed numbers (pipeline / manifest, min / median / max) and the causes
+    summed over seeds. A seed whose generator or harness fails is kept as a missing table and listed.
+31. **Dependence on the manifest's schema**, checked against schema 4: `compare.py` reads conventions by name only
+    in item 22's two lists (now with `jira_fixword` linked and `jira_bare` not), in the HP-difference causes
+    (labels only), and reads `realised[].kind` (`direct`, `merge`, `side`, `squash`), `expected_labels[]` and
+    `ambiguous[]` as in schemas 3 and 4. Tree-wide is still read from the label's clause ("Tree-wide").
+    `unruled_readings` are not used for any verdict (the ruled label decides); `jira_bare` labels are "not
+    counted" there, as the code reads them.
+
+32. **Causes named per difference** (diagnostic, never a verdict). HP commits the code misses: positive outside
+    its universe; no snapshot positive (a counted commit that touches no snapshot unit file cannot be positive in
+    the code); before the code's window start / after its end (its cut + 730 days); touched under a later path
+    (the history's own `touch` record, rename after the snapshot); a revert whose target lies between the code's
+    cut and the manifest's snapshot. Commits only the code counts: after the manifest's window end; a revert of
+    code made between the manifest's snapshot and the code's cut. Control pool: the registration word that keeps
+    a unit out, on the side that keeps it out; for the code's side "not tree-wide" is inferred from its touch
+    record against its own universe (10% and 20). A commit's `files` and `file_ids` in the manifest are not
+    aligned by position; paths at a commit are read from `path_history` (`M.path_at`).
+33. **What changed in the reading of `merge_workflow`**: the first build read the empty KW outcome as a fault. By
+    the registration's words a merge's own subject carries no keyword and a merge bringing in a keyword fix is
+    tainted, so the manifest's KW is empty too: the row agrees (0 = 0).
+
 ## Timing
 
 29. One engine scan of a default-profile Python control repository (404 files in the archive): **2.4 s** wall
     (sa3_scan, first scan, load average 1.5 on 12 cores). Whole harness, both routes, three engine scans: 15-23 s
-    per control repository. `tests/test_harness.py`: 5 passed in about 21 s.
+    per control repository; route `manifest` alone about 8 s.
+    A 20-seed suite (route `manifest` only): 158-167 s on a load average of 4-5. `tests/test_harness.py`: 6 passed
+    in about 38 s.

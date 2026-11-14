@@ -32,3 +32,12 @@ The table's facts reproduce. One conclusion drawn from a single repository did n
 
 The builder's ten notes on the specification are accepted; the route order and the second-snapshot point are
 corrected in `harness_report.md`.
+
+## Re-review after the builder's changes (same day)
+
+Both changes made: a suite mode (effect rows as mean and standard error over seeds, compared pairwise within
+three standard errors; a single run prints "one seed: not comparable"), and the control-pool and keyword rows
+derived from the registration's wording. 6 tests pass (38 s). The reviewer ran its own suite, C with a planted
+effect on seeds 51–62 (98 s): pipeline − expected labels = −0.0192 (0.0052), the builder's figure on seeds
+21–40 to the fourth decimal; universe agrees in 12 of 12. **Accepted.** The suite results are in
+`docs/process/harness_report.md`.

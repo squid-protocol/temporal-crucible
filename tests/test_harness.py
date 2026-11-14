@@ -203,7 +203,7 @@ def test_5_end_to_end_small(tmp_path):
     table = json.loads((out / "report" / "e2e.json").read_text())
     rows = {r["rule"]: r for r in table["rows"]}
     for r in table["rows"]:                                   # a row is never empty
-        assert r["verdict"] in ("agree", "differ", "undecided in the manifest", "not run"), r
+        assert r["verdict"] in ("agree", "differ", "undecided in the manifest", "not run", "one seed: not comparable"), r
         assert r["pipeline"] not in (None, "") and r["manifest"] not in (None, ""), r
     assert table["summary"]["not_run"] == 0, table["summary"]   # both routes ran to the probe
     manifest = json.loads((ctrl / "manifest.json").read_text())
@@ -215,5 +215,40 @@ def test_5_end_to_end_small(tmp_path):
     nest = json.loads((out / "manifest" / "study" / "sa3_nesting" / f"{table['repo']}.json").read_text())
     assert nest["measured"] == len(probe["universe"]) and nest["not_measured"] == 0   # the grammar cache is reachable
     assert len(table["rows"]) == 22                             # Python: 16 rules, the effect row per property
+    for r in table["rows"]:                                     # one repository's effect is never read as agree/differ
+        if r["rule"].startswith("planted effect"):
+            want = "one seed: not comparable" if r["data"].get("predictor") else "undecided in the manifest"
+            assert r["verdict"] == want, r
+            assert r["data"]["manifest_expected_labels"] is not None   # the numbers are kept
+    assert table["summary"]["not_comparable"] == 4
+
+
+# ---------------------------------------------- 6. suite mode: two seeds, one table of means (~20 s)
+def test_6_suite_two_seeds(tmp_path):
+    why = _e2e_skip_reason()
+    if why:
+        pytest.skip(why)
+    w = SB.prepare(tmp_path / "probe")
+    (w / "tree/tools/harness").mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(HARNESS / "sandbox.py", w / "tree/tools/harness/sandbox.py")
+    if inside_py(w, f"import os; print(os.path.isdir({str(SB.ENGINE / 'gitgalaxy')!r}))").stdout.strip() != "True":
+        pytest.skip("engine export not present")
+    out = tmp_path / "suite"
+    p = subprocess.run([sys.executable, "-B", str(HARNESS / "run.py"), "--suite", "t", "--seeds", "5-6", "--work", str(out),
+                        "--", "--years", "10", "--effect", "branches=0.5"], capture_output=True, text=True, timeout=1800)
+    assert p.returncode == 0, p.stdout[-3000:] + p.stderr[-3000:]
+    t = json.loads((out / "report" / "t.json").read_text())
+    assert t["suite"] and t["seeds"] == [5, 6] and not t["stopped"]
+    rows = {r["rule"]: r for r in t["rows"]}
+    eff = rows["planted effect: branches"]
+    st = eff["data"]["stages"]
+    assert [st[k]["n"] for k in st] == [2, 2, 2, 2, 2]          # five stages, each over both seeds
+    assert all(st[k]["se"] is not None for k in st)
+    assert eff["verdict"] in ("agree", "differ")                 # paired over seeds, within 3 standard errors
+    assert eff["data"]["paired_pipeline_minus_labels"]["n"] == 2
+    for rule in ("universe", "HP qualifying commits", "control pool", "keyword outcome"):
+        assert rows[rule]["data"]["seeds"] == 2 and "agrees in" in rows[rule]["detail"]
+    for sd in (5, 6):                                          # each seed also has its own single-seed table
+        assert (out / "seeds" / f"seed-{sd}" / "report" / f"t-s{sd}.json").exists()
     assert rows["window"]["verdict"] in ("agree", "differ")
     assert "universe" in rows and "HP qualifying commits" in rows

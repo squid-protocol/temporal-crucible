@@ -189,24 +189,14 @@ def route_manifest(ctx: Ctx, lang: str, sha: str, out: dict, placeholder_review:
     tail(ctx, out, placeholder_review)
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--control", type=Path, required=True)
-    ap.add_argument("--work", type=Path, required=True)
-    ap.add_argument("--name", help="report name (default: the control directory's name)")
-    ap.add_argument("--routes", default="own,manifest")
-    ap.add_argument("--no-shim-lock", action="store_true", help="do not try lock/score with a placeholder review")
-    a = ap.parse_args()
-    control = a.control.resolve()
-    top = SB.check_work(a.work)
-    top.mkdir(parents=True, exist_ok=True)
-    name = a.name or control.name
+def run_one(control: Path, top: Path, name: str, routes: list[str], shim_lock: bool) -> dict:
+    """Both (or the named) routes on one control repository; writes WORK/report/NAME.{run.json,json,md}."""
     manifest = json.loads((control / "manifest.json").read_text())
     lang = manifest["arguments"]["language"]
     repo = f"ctrl-{name}"                               # never the name of a real study repo
     results = {"control": str(control), "name": name, "repo": repo, "language": lang,
                "arguments": manifest["arguments"], "routes": {}}
-    for route in a.routes.split(","):
+    for route in routes:
         print(f"{name}: route {route}", flush=True)
         ctx = setup(top / route, repo, control)
         out: dict = {"work": str(ctx.work)}
@@ -214,8 +204,7 @@ def main() -> int:
         if route == "own":
             route_own(ctx, lang, out, placeholder_review=False)
         elif route == "manifest":
-            route_manifest(ctx, lang, manifest["points"]["snapshot"]["hash"], out,
-                           placeholder_review=not a.no_shim_lock)
+            route_manifest(ctx, lang, manifest["points"]["snapshot"]["hash"], out, placeholder_review=shim_lock)
         else:
             raise SystemExit(f"unknown route {route}")
         out["seconds"] = round(time.time() - t0, 1)
@@ -228,8 +217,78 @@ def main() -> int:
     (top / "report" / f"{name}.json").write_text(json.dumps(table, indent=1) + "\n")
     (top / "report" / f"{name}.md").write_text(C.markdown(table))
     s = table["summary"]
-    print(f"{name}: {s['agree']} agree, {s['differ']} differ, {s['undecided']} undecided, {s['not_run']} not run "
-          f"-> {top / 'report' / (name + '.md')}")
+    print(f"{name}: {s['agree']} agree, {s['differ']} differ, {s['undecided']} undecided, {s['not_run']} not run, "
+          f"{s['not_comparable']} effect rows not comparable -> {top / 'report' / (name + '.md')}", flush=True)
+    return table
+
+
+def parse_seeds(text: str) -> list[int]:
+    out = []
+    for part in text.split(","):
+        a, _, b = part.partition("-")
+        out += list(range(int(a), int(b) + 1)) if b else [int(a)]
+    return out
+
+
+def run_suite(name: str, seeds: list[int], top: Path, gen_args: list[str]) -> dict:
+    """Generate one control repository per seed (generator arguments as given, plus --seed), run route
+    `manifest` on each, one at a time, and write ONE table over the seeds: WORK/report/NAME.{json,md}."""
+    import compare as C
+    gen = WORKTREE / "tools" / "control_repo" / "generate.py"
+    tables: dict[int, dict | None] = {}
+    t0 = time.time()
+    for sd in seeds:
+        cdir = top / "controls" / f"seed-{sd}"
+        if cdir.exists():
+            shutil.rmtree(cdir)
+        cdir.parent.mkdir(parents=True, exist_ok=True)
+        p = subprocess.run([sys.executable, "-B", str(gen), "--out", str(cdir), "--seed", str(sd), *gen_args],
+                           capture_output=True, text=True, cwd=str(top))
+        if p.returncode:
+            print(f"{name} seed {sd}: generator failed: {p.stderr[-500:]}", flush=True)
+            tables[sd] = None
+            continue
+        try:
+            tables[sd] = run_one(cdir, top / "seeds" / f"seed-{sd}", f"{name}-s{sd}", ["manifest"], shim_lock=False)
+        except Exception as e:                            # a crash of the harness itself is recorded, not hidden
+            print(f"{name} seed {sd}: harness error {type(e).__name__}: {e}", flush=True)
+            tables[sd] = None
+    t = C.suite(name, seeds, tables, gen_args)
+    t["seconds"] = round(time.time() - t0, 1)
+    (top / "report").mkdir(parents=True, exist_ok=True)
+    (top / "report" / f"{name}.json").write_text(json.dumps(t, indent=1) + "\n")
+    (top / "report" / f"{name}.md").write_text(C.suite_markdown(t))
+    s = t["summary"]
+    print(f"suite {name}: {s['seeds']} seeds, {s['agree']} agree, {s['differ']} differ, {s['undecided']} undecided, "
+          f"{s['not_run']} not run; {t['seconds']} s -> {top / 'report' / (name + '.md')}", flush=True)
+    return t
+
+
+def main() -> int:
+    argv = sys.argv[1:]
+    cut = argv.index("--") if "--" in argv else len(argv)
+    ap = argparse.ArgumentParser(description="one control: --control DIR --work WORK; a suite: --suite NAME "
+                                 "--seeds 21-40 --work WORK -- <generator arguments>")
+    ap.add_argument("--control", type=Path)
+    ap.add_argument("--suite")
+    ap.add_argument("--seeds", default="21-40")
+    ap.add_argument("--work", type=Path, required=True)
+    ap.add_argument("--name", help="report name (default: the control directory's name)")
+    ap.add_argument("--routes", default="own,manifest")
+    ap.add_argument("--no-shim-lock", action="store_true", help="do not try lock/score with a placeholder review")
+    a = ap.parse_args(argv[:cut])
+    gen_args = argv[cut + 1:]
+    top = SB.check_work(a.work)
+    top.mkdir(parents=True, exist_ok=True)
+    if a.suite:
+        if "--seed" in gen_args or "--out" in gen_args:
+            ap.error("the suite sets --seed and --out itself")
+        run_suite(a.suite, parse_seeds(a.seeds), top, gen_args)
+        return 0
+    if not a.control:
+        ap.error("--control or --suite is required")
+    control = a.control.resolve()
+    run_one(control, top, a.name or control.name, a.routes.split(","), shim_lock=not a.no_shim_lock)
     return 0
 
 
