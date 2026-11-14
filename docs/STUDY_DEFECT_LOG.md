@@ -70,6 +70,12 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 52 | WCC draft | power / feasibility | 9 of 40 development repos clear the draft's floor; the proposed confirmation set would yield about 5 to 8 usable repos; two of its "C" repos are Dart and one is the engine's own repo | R5 | 0 | count what clears the floor before writing the design around it |
 | 53 | WCC draft | matching | Ordinary commits matched only on files touched; unmatched directory and timing give 21–48% false readings in simulation | R5 | 0 | — |
 | 54 | SA3 | spec vs code | The consolidated text says tainted merges are "in no outcome and no control"; `sa3_outcomes.py` counts a merge that inherits a fix reference as a positive and uses the tainted set only for the keyword outcome and the control pool. Read literally the text also contradicts its own inheritance rule | the control repository's builder (the contradiction) and its reviewer (what the code does) | 4 | a generated repo with merges and a known answer |
+| 55 | SA3 | universe | GitHub's vendored list matches any directory named `cache/`; first-party code there is unranked (54 of 306 unit files in a control repository). Size on SA3's repos unknown | the harness, on a control repository | 4 | run the universe rule on a repository whose true unit files are known |
+| 56 | SA3 | check | The scan-completeness check uses the pipeline's own unit rule above and below the line; it read 100% with 54 unit files missing | the harness | 4 | a check must not share the rule it checks |
+| 57 | SA3 | seal | `lock` treats an empty `git status` as clean without checking git succeeded; outside a checkout it seals at commit '' | the harness | 4 | run the seal where it should refuse |
+| 58 | SA3 | instrument / code | The nesting scan swallows every per-file error; without its grammar cache it measured 0 of 252 files and exited 0 | the harness | 4 | fail when the share measured is below a floor |
+| 59 | SA3 | code | With a supplied snapshot, a repo whose merges are all bot-authored gets a window that ends before it starts and an outcome file marked "ok" with no positives | the harness, `bot_merges` mutation | 4 | assert window end > start; assert usable commits on every route |
+| 60 | SA3 | code | The placebo stage crashes when no repository clears the floor | the harness | 4 | run each stage on an empty study |
 
 ## What the log says
 
@@ -104,6 +110,9 @@ fault here has been found: by running the whole thing on synthetic data with a k
 
 **Entry 54 ruled by the owner, 2026-11-14:** the code governs (a tainted merge that inherits a fix reference is
 a positive); the text is corrected in SA3's next amendment.
+
+**Entries 55–60 came from the first run of SA3's unmodified pipeline on control repositories** (`docs/process/harness_report.md`),
+in one afternoon, after four reviews of the same code.
 
 **First fault found by the control repository (entry 54),** before any pipeline had been run on it: writing
 down the expected label for a generated merge forced a choice the text does not make.
