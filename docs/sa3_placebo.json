@@ -1,0 +1,394 @@
+{
+ "repos": {
+  "bun": {
+   "n": 451,
+   "positives": 170,
+   "pairs": 3304,
+   "pairs_gt": 1677,
+   "pairs_lt": 1600,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "circuitpython": {
+   "n": 3130,
+   "positives": 393,
+   "pairs": 89312,
+   "pairs_gt": 41543,
+   "pairs_lt": 41380,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "curl": {
+   "n": 450,
+   "positives": 264,
+   "pairs": 3264,
+   "pairs_gt": 1703,
+   "pairs_lt": 1436,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": false,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "django": {
+   "n": 807,
+   "positives": 379,
+   "pairs": 9488,
+   "pairs_gt": 4907,
+   "pairs_lt": 4155,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "freebsd-src": {
+   "n": 37159,
+   "positives": 121,
+   "pairs": 314850,
+   "pairs_gt": 151202,
+   "pairs_lt": 160709,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "ghostty": {
+   "n": 485,
+   "positives": 80,
+   "pairs": 2082,
+   "pairs_gt": 1128,
+   "pairs_lt": 900,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "gnupg": {
+   "n": 466,
+   "positives": 171,
+   "pairs": 3405,
+   "pairs_gt": 1955,
+   "pairs_lt": 1425,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "go": {
+   "n": 2419,
+   "positives": 910,
+   "pairs": 105249,
+   "pairs_gt": 52040,
+   "pairs_lt": 49855,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "godot": {
+   "n": 2758,
+   "positives": 166,
+   "pairs": 27008,
+   "pairs_gt": 15673,
+   "pairs_lt": 11080,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "libxml2": {
+   "n": 153,
+   "positives": 49,
+   "pairs": 393,
+   "pairs_gt": 216,
+   "pairs_lt": 172,
+   "clears_pair_floor": true,
+   "bands": 5,
+   "drawn": false,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "mediawiki": {
+   "n": 1058,
+   "positives": 223,
+   "pairs": 15884,
+   "pairs_gt": 8500,
+   "pairs_lt": 7287,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "moby": {
+   "n": 1213,
+   "positives": 43,
+   "pairs": 3932,
+   "pairs_gt": 1842,
+   "pairs_lt": 1954,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "pandas": {
+   "n": 317,
+   "positives": 68,
+   "pairs": 971,
+   "pairs_gt": 552,
+   "pairs_lt": 414,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "postgres": {
+   "n": 2063,
+   "positives": 382,
+   "pairs": 42212,
+   "pairs_gt": 22849,
+   "pairs_lt": 18982,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": false,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "prometheus": {
+   "n": 332,
+   "positives": 51,
+   "pairs": 849,
+   "pairs_gt": 497,
+   "pairs_lt": 339,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": false,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "rails": {
+   "n": 1316,
+   "positives": 139,
+   "pairs": 11287,
+   "pairs_gt": 5864,
+   "pairs_lt": 5042,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "scapy": {
+   "n": 319,
+   "positives": 32,
+   "pairs": 742,
+   "pairs_gt": 391,
+   "pairs_lt": 347,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "sphinx": {
+   "n": 175,
+   "positives": 31,
+   "pairs": 457,
+   "pairs_gt": 227,
+   "pairs_lt": 225,
+   "clears_pair_floor": true,
+   "bands": 5,
+   "drawn": false,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "spock": {
+   "n": 523,
+   "positives": 40,
+   "pairs": 1396,
+   "pairs_gt": 652,
+   "pairs_lt": 655,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  },
+  "sqlmap": {
+   "n": 352,
+   "positives": 77,
+   "pairs": 929,
+   "pairs_gt": 558,
+   "pairs_lt": 331,
+   "clears_pair_floor": true,
+   "bands": 10,
+   "drawn": true,
+   "silent": {
+    "in_degree": false,
+    "struct_branch": false,
+    "risk_safety_score": false,
+    "amplified_cascading_flux": false
+   }
+  }
+ },
+ "n_drawn": 15,
+ "placebos": {
+  "path_hash": {
+   "mean": 0.00029371678500089634,
+   "sd_of_study_mean": 0.009010239966535421,
+   "range95": [
+    -0.018555107796873107,
+    0.01694388624986221
+   ],
+   "centred": true
+  },
+  "dir_hash": {
+   "mean": 0.00047513289609438724,
+   "sd_of_study_mean": 0.015634380707629705,
+   "range95": [
+    -0.033245701009488086,
+    0.029414358433203433
+   ],
+   "centred": true
+  },
+  "block_perm:in_degree": {
+   "mean": 0.01496783182784025,
+   "sd_of_study_mean": 0.008248261848618309,
+   "range95": [
+    -0.002107772388900961,
+    0.029220672408908552
+   ],
+   "centred": false
+  },
+  "block_perm:struct_branch": {
+   "mean": 0.018141176490962804,
+   "sd_of_study_mean": 0.008267870407439076,
+   "range95": [
+    0.0038379819151309644,
+    0.03477585004692517
+   ],
+   "centred": false
+  },
+  "block_perm:risk_safety_score": {
+   "mean": 0.0035459057375016,
+   "sd_of_study_mean": 0.00830706420926856,
+   "range95": [
+    -0.00982883819479226,
+    0.02228145598443163
+   ],
+   "centred": false
+  },
+  "block_perm:amplified_cascading_flux": {
+   "mean": 0.01217560643853207,
+   "sd_of_study_mean": 0.008401633113136084,
+   "range95": [
+    -0.004985123185656008,
+    0.030001844466961088
+   ],
+   "centred": false
+  }
+ },
+ "valid": false,
+ "power": {
+  "path_hash": {
+   "tau=0.0": 0.0321,
+   "tau=0.02": 0.037,
+   "tau=0.04": 0.0488
+  },
+  "dir_hash": {
+   "tau=0.0": 0.0556,
+   "tau=0.02": 0.0586,
+   "tau=0.04": 0.0667
+  }
+ }
+}
