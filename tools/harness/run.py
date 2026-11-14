@@ -47,6 +47,7 @@ class Ctx:
     work: Path                      # this route's sandbox WORK
     name: str                       # the repo name the tools see (a clone under WORK/pool)
     log: list = field(default_factory=list)
+    tables: bool = False            # --tables: run tools/tables/build.py after the probe
 
     @property
     def tree(self) -> Path:
@@ -150,6 +151,9 @@ def tail(ctx: Ctx, out: dict, placeholder_review: bool) -> None:
     out["probe_rc"] = r["rc"]
     if r["rc"]:
         out["stopped_at"] = "probe"
+    if ctx.tables:                  # the stored tables (tools/tables/, tables_spec.md), after the probe
+        r = stage(ctx, "tables", [PY, "-B", "tools/tables/build.py", "--repo", n])
+        out["tables_rc"] = r["rc"]
 
 
 def route_own(ctx: Ctx, lang: str, out: dict, placeholder_review: bool) -> None:
@@ -189,7 +193,7 @@ def route_manifest(ctx: Ctx, lang: str, sha: str, out: dict, placeholder_review:
     tail(ctx, out, placeholder_review)
 
 
-def run_one(control: Path, top: Path, name: str, routes: list[str], shim_lock: bool) -> dict:
+def run_one(control: Path, top: Path, name: str, routes: list[str], shim_lock: bool, tables: bool = False) -> dict:
     """Both (or the named) routes on one control repository; writes WORK/report/NAME.{run.json,json,md}."""
     manifest = json.loads((control / "manifest.json").read_text())
     lang = manifest["arguments"]["language"]
@@ -199,6 +203,7 @@ def run_one(control: Path, top: Path, name: str, routes: list[str], shim_lock: b
     for route in routes:
         print(f"{name}: route {route}", flush=True)
         ctx = setup(top / route, repo, control)
+        ctx.tables = tables and route == "manifest"
         out: dict = {"work": str(ctx.work)}
         t0 = time.time()
         if route == "own":
@@ -276,6 +281,7 @@ def main() -> int:
     ap.add_argument("--name", help="report name (default: the control directory's name)")
     ap.add_argument("--routes", default="own,manifest")
     ap.add_argument("--no-shim-lock", action="store_true", help="do not try lock/score with a placeholder review")
+    ap.add_argument("--tables", action="store_true", help="route manifest: build the stored tables after the probe")
     a = ap.parse_args(argv[:cut])
     gen_args = argv[cut + 1:]
     top = SB.check_work(a.work)
@@ -288,7 +294,7 @@ def main() -> int:
     if not a.control:
         ap.error("--control or --suite is required")
     control = a.control.resolve()
-    run_one(control, top, a.name or control.name, a.routes.split(","), shim_lock=not a.no_shim_lock)
+    run_one(control, top, a.name or control.name, a.routes.split(","), shim_lock=not a.no_shim_lock, tables=a.tables)
     return 0
 
 

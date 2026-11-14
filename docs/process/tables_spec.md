@@ -3,6 +3,18 @@
 **Status: specification, 2026-11-14. Nothing built.** Step 3 of `research_codebase_spec.md`. Built by one
 session from this document; reviewed by a different model.
 
+**Revision 2, 2026-11-14, as built** (review: `reviews/tables_review_fable.md`). The builder found nine places
+where this document asked for something the tools cannot give without a rule being written twice, or was
+loose. All are accepted; `tools/tables/DECISIONS.md` entries 24–31 give each in full. In short: the reason order
+is language first, then the Excluder's own order (vendored, documentation, generated, test, example), then
+not-in-archive, not-scanned, zero-LOC; `event.how` is inferred (a non-merge is "own", a merge with no link of
+its own is "inherited") because the outcome file does not say; `marginal` is recounted for the HP tiers and
+the pool only, not for the keyword outcome or the floor verdict; `link` has no resolved target; the
+branch-state value is `amplified_cascading_flux`; the data-card leak test means "no commit hash, path or link
+value from a protected table", not "no string"; the largest-directory share is reported with the share of its
+files untouched in the window, which is what shows imported code; and the manifest comparison needs two more
+named causes (ambiguous in the manifest; a revert whose target lies between the two snapshots).
+
 **Phase A is control repositories only.** It builds the tables, their invariants, their hashes and the data
 card, and proves them against manifests, inside the harness sandbox. Building the same tables from SA3's real
 data is phase B: a separate specification and a separate, deliberate job. Nothing in phase A opens the real
