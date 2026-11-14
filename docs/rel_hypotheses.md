@@ -74,12 +74,17 @@ Compromised releases of previously legitimate packages from DataDog's `malicious
 
 Needed because ranking within a package always crowns one "most unusual" release, so a within-package rule alarms on
 about 1 in 21 ordinary releases. D3 sets an absolute alarm threshold.
-- The top 300 npm packages and top 200 PyPI packages by downloads at registration time (lists frozen in
-  `docs/rel_inputs.json`), minus any package that appears in the DataDog manifests or in OSV malicious-package reports.
-- For each, the last 29 releases: the last 20 transitions are scored exactly as D2, each standardized against its own
-  predecessors (see "Absolute score"). Packages with fewer releases score the transitions that have at least 8
-  predecessors. Pre-assessment counts below were taken for 21 releases and will be recounted for 29 before
-  registration.
+- The top **450 npm** and top **300 PyPI** packages by downloads (lists frozen in `docs/rel_inputs.json`), minus any
+  package that appears in the DataDog manifests, a fixed list of publicly known compromises, or OSV malicious-package
+  reports. Sources: npm, `wooorm/npm-high-impact` (MIT, commit 9e29478); PyPI, downloads from **2026-10-01 to
+  2026-10-30** from ClickHouse's public mirror of PyPI's download logs (`pypi.pypi_downloads_per_day`), counted per
+  project with explicit name filters, and cross-checked against pypistats.org (boto3 and requests within 5%). The
+  set was enlarged from 300 + 200 after the recount so the 1-in-1,000 threshold rests on about 11 exceedances.
+- For each, the last 29 releases: of the transitions in that window, those with at least 8 earlier transitions are
+  scored (at most 20 per package) exactly as D2, each standardized against its own predecessors (see "Absolute
+  score").
+- Any single artifact over 250 MB is skipped and its transitions counted as unscored (none is expected: no D3
+  package averages over 100 MB per release).
 - D3 is never used to choose or weight components; it only sets the threshold in H-REL-3.
 
 ### D4. Prospective confirmation: attacks found after registration
@@ -121,12 +126,20 @@ downloaded or opened.
   packages. The real campaign assignment (shared payload) may merge or split these.
 - **Primary sample after the cap of 10 per campaign:** 158 positives (147 npm, 11 PyPI) in about **33 campaigns**.
   PyPI results will be anecdotal and are reported but not judged separately.
-- **D3 calibration:** npm top-download list from `wooorm/npm-high-impact` (MIT, commit 9e29478); PyPI from
-  `hugovk/top-pypi-packages` (2026-11-01 snapshot; no licence file, so its use needs owner approval or another
-  source such as PyPI's BigQuery download data). 25 names that appear in the DataDog manifests were excluded. The
-  last 21 releases of each give about **4,681 npm and 3,788 PyPI transitions, ≈ 8,500 in all**.
-- **Volume:** about 3,070 artifacts for the positives and their histories, 158 compromised zips (≈ 355 MB), and
-  about 9,000 calibration artifacts: roughly 11,000 artifacts and 5 to 6 GB compressed.
+- **D3 calibration (recounted 2026-11-14 for the reviewed design):** 450 npm packages (17 excluded on the way) and 300
+  PyPI packages (13 excluded). With the last 29 releases and at least 8 predecessors per scored transition: npm 359
+  packages contribute **5,576** scored transitions, PyPI 290 contribute **5,205**, **≈ 10,800 in all**.
+  - PyPI ranking note: a single large `GROUP BY` on the public ClickHouse account silently dropped projects
+    (numpy, packaging and others were missing from a "top 400"), so the ranking was rebuilt from 1,500 candidates with
+    exact per-project October counts. Top ten: boto3, packaging, typing-extensions, certifi, idna, urllib3,
+    charset-normalizer, requests, cryptography, cffi.
+  - The earlier `hugovk/top-pypi-packages` list (no licence file) is no longer used.
+- **Volume:**
+  - Calibration: about 16,600 artifacts, about 22 GB (PyPI about 17.7 GB, led by pymupdf, pillow, scipy, playwright and
+    matplotlib sdists).
+  - Positives: about 158 × 26 ≈ 4,100 registry artifacts with the 5 extra baseline releases, plus 158 compromised zips
+    (≈ 355 MB).
+  - In all, roughly 21,000 artifacts and 25 GB.
 
 ### Selection bias and limits, stated
 
@@ -298,9 +311,9 @@ descriptive only.
   grouping leaves fewer than 15 campaigns.
 - **Alarm rate.** At 1 in 1,000, a registry with 50,000 new releases a day would raise about 50 alarms a day before
   any other filter. That is the order of magnitude a triage team can review; 1 in 21 is not.
-- **D3 size.** About 8,500 transitions (pre-assessment), so the 1-in-1,000 threshold rests on about 8 to 9
-  exceedances (Poisson 95% range $\approx [3.5, 16.3]$, i.e. true FPR $\approx 0.04\%$ to $0.19\%$, plus within-package
-  clustering across the 475 D3 packages). The joint D3 + D1 cluster bootstrap folds this threshold variance directly
+- **D3 size.** About 10,800 transitions (recount), so the 1-in-1,000 threshold rests on about 11 exceedances (Poisson
+  95% range $\approx [5.5, 19.7]$, i.e. true FPR $\approx 0.05\%$ to $0.18\%$, plus within-package clustering across
+  the 649 contributing D3 packages). The joint D3 + D1 cluster bootstrap folds this threshold variance directly
   into the H-REL-3 lower bound, and recall is also reported at 1 in 100, 1 in 500, and 1 in 2,000.
 
 ## Exploratory: does the whole fingerprint add anything? (labelled, never a verdict)

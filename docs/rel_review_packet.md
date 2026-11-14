@@ -58,7 +58,7 @@ packages, and scores attacks found after registration with the frozen method.
   npm and PyPI; the clean previous versions remain downloadable.
 - **Pre-assessment counts** (metadata only; in the draft's "Pre-assessment" section): 666 eligible packages; 158
   positives after a cap of 10 per campaign, in about 33 date-proxy campaigns, five of which hold 83% of all
-  packages; about 8,500 calibration transitions; PyPI has only 11 capped positives. Say how your review would change
+  packages; about 10,800 calibration transitions; PyPI has only 11 capped positives. Say how your review would change
   if real payload grouping left 15 or fewer campaigns.
 
 ## What to review
@@ -76,7 +76,7 @@ Answer each. Cite the draft's section names.
      cluster bootstrap, exact permutation over campaigns, a different interval)?
    - the robust z-score D with a MAD floor taken from the calibration set: is it well defined, and does averaging
      z-scores across components with very different distributions behave?
-   - setting a 1-in-1,000 threshold from about 8,500 calibration transitions (about 8 to 9 exceedances): how uncertain is
+   - setting a 1-in-1,000 threshold from about 10,800 calibration transitions (about 11 exceedances): how uncertain is
      that threshold, and what does that uncertainty do to the recall estimate?
 3. **The bars.** Are the pass rules for H-REL-1, H-REL-2 and H-REL-3 too strict, too lenient, or mis-specified?
    Propose alternatives with numbers.
