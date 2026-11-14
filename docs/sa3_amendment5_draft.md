@@ -104,7 +104,11 @@ SA3's functions, not rewriting them. Before any real label is read:
 2. the control suite passes;
 3. the frozen run and each sensitivity are named in the seal.
 
-## Open, for the owner
+## Owner decisions, 2026-11-14 (evening)
+
+The owner accepted both recommendations: the unreachable-file removal runs beside the frozen run as
+`PU_reachable_universe`, and the confirmatory run keeps the registered random streams. Still required before
+this is in force: two independent reviews (checklist item 15). The two questions as put:
 
 1. Accept section 4's handling of the unreachable-files ruling (beside the frozen run), or move it into the
    confirmatory run and accept the changed label.

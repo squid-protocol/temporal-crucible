@@ -63,7 +63,7 @@ reproducibility and plumbing.
 | **1. Three-way table** | For each rule and each control-repository case: what the existing code gives, what the manifest says, and whether they agree. | Every row is one of: code = manifest; code ≠ manifest (an existing fault, listed, ruled); undecided in the manifest (listed). No row is empty. A rule difference seeded into a copy of the code shows up in the table. |
 | **2. Amendment** | SA3 Amendment 5: scoring moves from "exactly as frozen at `edc5c53`" to the stored tables. It lists every item of section 6 with its ruling and which of text or code governs. | The owner accepts it. |
 | **3. Stored tables** | `file`, `touch`, `event`, `link`, `pool`, `marginal` (section 4), built by the existing functions, **moved** behind one builder each, with hashes. Later stages read the tables. | Built on the control repository: equal to the manifest except rows listed in step 1. Built for SA3's repos: every public count equal to today's, or the difference explained without opening labels. |
-| **4. Seal and streams** | A generated seal (section 5). Named random streams. | A stage that reads an undeclared file fails. Permuting the repo order and the set of predictors scored gives identical numbers. The gate of section 8 of the registration is re-run under the new streams and reported as a deviation. |
+| **4. Seal and streams** | A generated seal (section 5). Named random streams, **beside** the registered ones (owner, 2026-11-14: the confirmatory run keeps seed 2982 and the streams of `edc5c53`; named streams are the sensitivity `PU_named_streams`). | A stage that reads an undeclared file fails. Under named streams, permuting the repo order and the set of predictors scored gives identical numbers. Under the registered streams the frozen numbers are reproduced exactly. |
 | **5. Reading rule** | One function for the reading of the three confirmatory tests together, Holm step included, with "an earlier test failed" defined; a separate vocabulary for everything else. | Defect-log entries 42, 43, 47 and 48 are each a named test case. Every combination of inputs has an expected word. |
 | **6. Control suite** | Section 7. | All rows pass, at the sizes and pass rules stated there. |
 | **7. Seal and score** | The owner authorises. | — |
@@ -119,8 +119,9 @@ reproduced.
 Git runs only through one wrapper: `GIT_NO_LAZY_FETCH=1`, `gc.auto=0`, no writing command on a clone. A
 blobless clone that cannot serve a command is a repo status with a reason, not a crash.
 
-Random streams are named for study, repo and purpose. The registered "200 draws, seed 2982" becomes one stream
-per repo and purpose seeded from 2982; this changes the drawn numbers and is a listed deviation.
+Random streams are named for study, repo and purpose, one per repo and purpose seeded from 2982. That changes
+the drawn numbers, so for SA3 it runs as a sensitivity beside the registered streams, which the confirmatory
+run keeps (Amendment 5).
 
 Mechanical checks, run with the tests:
 
@@ -138,9 +139,9 @@ The default for each is **what the registered code does**. Each goes in Amendmen
 |---|---|---|---|
 | a | Matching later commits to snapshot files | equal path; no rename following | code |
 | b | A missing predictor value | per measure, as today: the branch-state primary and `in_degree` read absent as 0 | code |
-| c | Random streams | named streams; the gate is re-run and reported | deviation |
+| c | Random streams | **ruled 2026-11-14:** the registered streams for the confirmatory run; named streams as `PU_named_streams` | registration |
 | d | The snapshot | the scanned commit, an input; the cut is stored beside it | code |
-| e | Universe files the history cannot touch | **ruled 2026-11-14:** counted per repo, then removed from the universe; a deviation, reported with the counts | owner |
+| e | Universe files the history cannot touch | **ruled 2026-11-14:** counted per repo; removed in the sensitivity `PU_reachable_universe`, beside the frozen confirmatory run (Amendment 4 freezes the universe) | owner |
 | f | The list of scored repos | the frozen list | registration |
 | g | The universe variant | with `.gitattributes`, tutorial exclusions and the scan's generated list | code |
 | h | Tree-wide denominator | the universe | code |
