@@ -1,0 +1,28 @@
+{
+ "repo": "kubernetes",
+ "status": "ok",
+ "language": "go",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 57095,
+ "cut": 1648129145,
+ "end": 1711201145,
+ "window_days": 730.0,
+ "start_year": 2014,
+ "age_at_cut": 7.61,
+ "snapshot": "b456e70fe939271ebda96c03cdf4094ab0bdc4e9",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 5734,
+ "tree_unit_files": 5763,
+ "inbound_edges": 113478,
+ "complete": 0.995,
+ "call_coverage": 0.572,
+ "positives": 576,
+ "auc_loc": 0.7969017585950627,
+ "auc_in_degree": 0.7242557071539356,
+ "lift": -0.07264605144112712,
+ "ci95": [
+  -0.09010137253476391,
+  -0.05328423311809183
+ ]
+}

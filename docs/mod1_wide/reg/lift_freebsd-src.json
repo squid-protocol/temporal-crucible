@@ -1,0 +1,43 @@
+{
+ "repo": "freebsd-src",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 302381,
+ "cut": 1554637721,
+ "end": 1617709721,
+ "window_days": 730.0,
+ "start_year": 1994,
+ "age_at_cut": 24.52,
+ "snapshot": "cef2742e201bd57eca86bef0033b52110924af40",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 37159,
+ "tree_unit_files": 39291,
+ "inbound_edges": 1364038,
+ "complete": 0.946,
+ "call_coverage": 0.559,
+ "wide": {
+  "fix_commits": 1761,
+  "wide_commits": 0,
+  "positives_all": 1589,
+  "positives_without_wide": 1589,
+  "positive_share_all": 0.043,
+  "largest": {
+   "sha": "483d953a86",
+   "files": 55,
+   "share_of_unit_files": 0.001,
+   "subject": "Initial support for bhyve save and restore."
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 1589,
+ "auc_loc": 0.7565941115764074,
+ "auc_in_degree": 0.6661851766599618,
+ "lift": -0.09040893491644564,
+ "ci95": [
+  -0.09986907567426029,
+  -0.08104291657541673
+ ]
+}

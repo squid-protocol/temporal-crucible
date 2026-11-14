@@ -1,0 +1,28 @@
+{
+ "repo": "mediawiki",
+ "status": "ok",
+ "language": "php",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 52546,
+ "cut": 1344290553,
+ "end": 1407362553,
+ "window_days": 730.0,
+ "start_year": 2004,
+ "age_at_cut": 8.44,
+ "snapshot": "0a5c71d4dd6405502b1d1d0a02b5d0927d519986",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1058,
+ "tree_unit_files": 1176,
+ "inbound_edges": 24696,
+ "complete": 0.9,
+ "call_coverage": 0.477,
+ "positives": 427,
+ "auc_loc": 0.67234084405631,
+ "auc_in_degree": 0.6689244610057268,
+ "lift": -0.003416383050583227,
+ "ci95": [
+  -0.04602836616797512,
+  0.04293128970001314
+ ]
+}

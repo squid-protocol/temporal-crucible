@@ -1,0 +1,69 @@
+{
+ "repo": "sphinx",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 16513,
+ "cut": 1641798536,
+ "end": 1704870536,
+ "window_days": 730.0,
+ "start_year": 2007,
+ "age_at_cut": 14.07,
+ "snapshot": "d62220676d38f8d588fb59f92c3169385e94ad00",
+ "snapshot_offset_days": 17.5,
+ "unit_files": 175,
+ "tree_unit_files": 177,
+ "inbound_edges": 8417,
+ "complete": 0.989,
+ "call_coverage": 0.783,
+ "wide": {
+  "fix_commits": 128,
+  "wide_commits": 5,
+  "positives_all": 125,
+  "positives_without_wide": 82,
+  "positive_share_all": 0.714,
+  "largest": {
+   "sha": "9bcf1d8bb3",
+   "files": 84,
+   "share_of_unit_files": 0.48,
+   "subject": "Fix TCH001 (move application import into a type-checking block)"
+  },
+  "wide_list": [
+   {
+    "sha": "9bcf1d8bb3",
+    "files": 84,
+    "subject": "Fix TCH001 (move application import into a type-checking block)"
+   },
+   {
+    "sha": "c8f4a03dac",
+    "files": 75,
+    "subject": "Fix COM812"
+   },
+   {
+    "sha": "36012b7d96",
+    "files": 66,
+    "subject": "Fix TCH002 (move third-party import into a type-checking block)"
+   },
+   {
+    "sha": "d80eab689d",
+    "files": 34,
+    "subject": "Fix EM10{1,2} (exception must not use a string)"
+   },
+   {
+    "sha": "5e9550c78e",
+    "files": 20,
+    "subject": "Fix more strict static typing errors (#10681)"
+   }
+  ]
+ },
+ "outcome": "registered",
+ "positives": 125,
+ "auc_loc": 0.75752,
+ "auc_in_degree": 0.8576,
+ "lift": 0.10008000000000006,
+ "ci95": [
+  0.01823229291716677,
+  0.18939393939393934
+ ]
+}

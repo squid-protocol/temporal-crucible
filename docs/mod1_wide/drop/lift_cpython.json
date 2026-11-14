@@ -1,0 +1,43 @@
+{
+ "repo": "cpython",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 118251,
+ "cut": 1587990139,
+ "end": 1651062139,
+ "window_days": 730.0,
+ "start_year": 1993,
+ "age_at_cut": 27.29,
+ "snapshot": "0169d3003be3d072751dd14a5c84748ab63a249f",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 903,
+ "tree_unit_files": 934,
+ "inbound_edges": 101893,
+ "complete": 0.967,
+ "call_coverage": 0.715,
+ "wide": {
+  "fix_commits": 306,
+  "wide_commits": 0,
+  "positives_all": 210,
+  "positives_without_wide": 210,
+  "positive_share_all": 0.233,
+  "largest": {
+   "sha": "345cd37abe",
+   "files": 26,
+   "share_of_unit_files": 0.029,
+   "subject": "bpo-36876: Fix the C analyzer tool. (GH-22841)"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 210,
+ "auc_loc": 0.7583144368858654,
+ "auc_in_degree": 0.7907716622002336,
+ "lift": 0.03245722531436823,
+ "ci95": [
+  0.006036556036555951,
+  0.053879800853485094
+ ]
+}

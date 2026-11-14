@@ -1,0 +1,22 @@
+{
+ "repo": "tigerbeetle",
+ "status": "under_floor",
+ "language": "zig",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 3180,
+ "cut": 1742940651,
+ "end": 1806012651,
+ "window_days": 367.0,
+ "start_year": 2020,
+ "age_at_cut": 4.69,
+ "snapshot": "8fad09894231721713873d334c2f6a5e5efa6051",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 177,
+ "tree_unit_files": 177,
+ "inbound_edges": 5345,
+ "complete": 1.0,
+ "call_coverage": 0.847,
+ "positives": 17,
+ "why": "17 positives, floor 30"
+}

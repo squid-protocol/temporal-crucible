@@ -1,0 +1,28 @@
+{
+ "repo": "tensorflow",
+ "status": "ok",
+ "language": "cpp",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 177077,
+ "cut": 1696422498,
+ "end": 1759494498,
+ "window_days": 730.0,
+ "start_year": 2016,
+ "age_at_cut": 7.58,
+ "snapshot": "1da10a44fa27c1d89bb74147b36a560766f3212f",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 9770,
+ "tree_unit_files": 9820,
+ "inbound_edges": 287711,
+ "complete": 0.995,
+ "call_coverage": 0.552,
+ "positives": 387,
+ "auc_loc": 0.7863870031595434,
+ "auc_in_degree": 0.73340165745902,
+ "lift": -0.05298534570052338,
+ "ci95": [
+  -0.07530890062921936,
+  -0.030727040145793527
+ ]
+}

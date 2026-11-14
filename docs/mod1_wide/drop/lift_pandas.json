@@ -1,0 +1,49 @@
+{
+ "repo": "pandas",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 34019,
+ "cut": 1666376871,
+ "end": 1729448871,
+ "window_days": 730.0,
+ "start_year": 2011,
+ "age_at_cut": 11.43,
+ "snapshot": "0cf87d2ff2e686d24c376099cb6ef151812fc913",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 317,
+ "tree_unit_files": 317,
+ "inbound_edges": 55331,
+ "complete": 1.0,
+ "call_coverage": 0.76,
+ "wide": {
+  "fix_commits": 752,
+  "wide_commits": 1,
+  "positives_all": 193,
+  "positives_without_wide": 178,
+  "positive_share_all": 0.609,
+  "largest": {
+   "sha": "4d3964edd1",
+   "files": 92,
+   "share_of_unit_files": 0.29,
+   "subject": "STY: Use ruff to format docstrings (#56863)"
+  },
+  "wide_list": [
+   {
+    "sha": "4d3964edd1",
+    "files": 92,
+    "subject": "STY: Use ruff to format docstrings (#56863)"
+   }
+  ]
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 178,
+ "auc_loc": 0.8368361490582815,
+ "auc_in_degree": 0.8337038234580875,
+ "lift": -0.0031323256001940525,
+ "ci95": [
+  -0.031386260798025534,
+  0.02561483617720106
+ ]
+}

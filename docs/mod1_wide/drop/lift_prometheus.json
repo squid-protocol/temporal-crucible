@@ -1,0 +1,43 @@
+{
+ "repo": "prometheus",
+ "status": "ok",
+ "language": "go",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 7926,
+ "cut": 1739792897,
+ "end": 1802864897,
+ "window_days": 628.9,
+ "start_year": 2013,
+ "age_at_cut": 12.03,
+ "snapshot": "26857cf5000f08dacc04f420c11e6633999ff92e",
+ "snapshot_offset_days": 42.2,
+ "unit_files": 332,
+ "tree_unit_files": 337,
+ "inbound_edges": 14987,
+ "complete": 0.985,
+ "call_coverage": 0.825,
+ "wide": {
+  "fix_commits": 188,
+  "wide_commits": 0,
+  "positives_all": 101,
+  "positives_without_wide": 101,
+  "positive_share_all": 0.304,
+  "largest": {
+   "sha": "44df626620",
+   "files": 6,
+   "share_of_unit_files": 0.018,
+   "subject": "promql (histograms): reconcile mismatched NHCB bounds (#17278)"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 101,
+ "auc_loc": 0.8831597445458832,
+ "auc_in_degree": 0.8174317431743174,
+ "lift": -0.06572800137156576,
+ "ci95": [
+  -0.10003391698817143,
+  -0.026596436467681173
+ ]
+}

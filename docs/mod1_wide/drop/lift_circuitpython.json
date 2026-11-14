@@ -1,0 +1,43 @@
+{
+ "repo": "circuitpython",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 10993,
+ "cut": 1649260502,
+ "end": 1712332502,
+ "window_days": 730.0,
+ "start_year": 2013,
+ "age_at_cut": 8.42,
+ "snapshot": "1a329cfd1109a230f909849aa162d8db76b95b33",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 3130,
+ "tree_unit_files": 3192,
+ "inbound_edges": 16754,
+ "complete": 0.981,
+ "call_coverage": 0.233,
+ "wide": {
+  "fix_commits": 73,
+  "wide_commits": 0,
+  "positives_all": 138,
+  "positives_without_wide": 138,
+  "positive_share_all": 0.044,
+  "largest": {
+   "sha": "ab22d5a8cd",
+   "files": 17,
+   "share_of_unit_files": 0.005,
+   "subject": "Merge pull request #7024 from flom84/stm-include-headers-fixes"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 138,
+ "auc_loc": 0.7975555587847787,
+ "auc_in_degree": 0.7152588060916066,
+ "lift": -0.08229675269317205,
+ "ci95": [
+  -0.11986185983827502,
+  -0.04547272100668054
+ ]
+}

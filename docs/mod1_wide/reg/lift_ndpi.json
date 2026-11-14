@@ -1,0 +1,54 @@
+{
+ "repo": "ndpi",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 5428,
+ "cut": 1727290163,
+ "end": 1790362163,
+ "window_days": 730.0,
+ "start_year": 2015,
+ "age_at_cut": 9.31,
+ "snapshot": "26b1899d9274b07b04032468e33a14a36756a63f",
+ "snapshot_offset_days": 5.1,
+ "unit_files": 312,
+ "tree_unit_files": 312,
+ "inbound_edges": 3782,
+ "complete": 1.0,
+ "call_coverage": 0.859,
+ "wide": {
+  "fix_commits": 162,
+  "wide_commits": 2,
+  "positives_all": 263,
+  "positives_without_wide": 58,
+  "positive_share_all": 0.843,
+  "largest": {
+   "sha": "1f2606902c",
+   "files": 244,
+   "share_of_unit_files": 0.782,
+   "subject": "License: non-commercial vs commercial applications (#3220)"
+  },
+  "wide_list": [
+   {
+    "sha": "1f2606902c",
+    "files": 244,
+    "subject": "License: non-commercial vs commercial applications (#3220)"
+   },
+   {
+    "sha": "78f4b60efe",
+    "files": 241,
+    "subject": "A new interface for dissectors registration (#2843)"
+   }
+  ]
+ },
+ "outcome": "registered",
+ "positives": 263,
+ "auc_loc": 0.4871188018933809,
+ "auc_in_degree": 0.6655932334911151,
+ "lift": 0.17847443159773418,
+ "ci95": [
+  0.06865079365079368,
+  0.3057330573305733
+ ]
+}

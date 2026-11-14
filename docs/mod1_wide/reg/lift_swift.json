@@ -1,0 +1,43 @@
+{
+ "repo": "swift",
+ "status": "ok",
+ "language": "swift",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 73713,
+ "cut": 1670693664,
+ "end": 1733765664,
+ "window_days": 730.0,
+ "start_year": 2011,
+ "age_at_cut": 11.11,
+ "snapshot": "1f3397ac116fada9884b2cfe49f99727788800f7",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 7435,
+ "tree_unit_files": 7644,
+ "inbound_edges": 12119,
+ "complete": 0.973,
+ "call_coverage": 0.102,
+ "wide": {
+  "fix_commits": 138,
+  "wide_commits": 0,
+  "positives_all": 145,
+  "positives_without_wide": 145,
+  "positive_share_all": 0.02,
+  "largest": {
+   "sha": "c6ab10c870",
+   "files": 22,
+   "share_of_unit_files": 0.003,
+   "subject": "Merge pull request #69039 from eeckstein/fix-bridging"
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 145,
+ "auc_loc": 0.9156837424908945,
+ "auc_in_degree": 0.7867063998864765,
+ "lift": -0.12897734260441795,
+ "ci95": [
+  -0.16996040181734817,
+  -0.09494859978730952
+ ]
+}

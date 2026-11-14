@@ -1,0 +1,21 @@
+{
+ "repo": "wordpress",
+ "status": "scan_incomplete",
+ "language": "php",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 52180,
+ "cut": 1593577443,
+ "end": 1656649443,
+ "window_days": 730.0,
+ "start_year": 2003,
+ "age_at_cut": 16.66,
+ "snapshot": "083134f694bb89789960321625a5b7e12af635ea",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 907,
+ "tree_unit_files": 1082,
+ "inbound_edges": 22478,
+ "complete": 0.838,
+ "call_coverage": 0.424,
+ "why": "scan holds 907 of 1082 unit files in the tree"
+}

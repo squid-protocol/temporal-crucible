@@ -1,0 +1,22 @@
+{
+ "repo": "impacket",
+ "status": "under_floor",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 3598,
+ "cut": 1600977554,
+ "end": 1664049554,
+ "window_days": 730.0,
+ "start_year": 2003,
+ "age_at_cut": 16.79,
+ "snapshot": "63eb977dc9c817216d82a48adceaff07d12fb83f",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 89,
+ "tree_unit_files": 93,
+ "inbound_edges": 9044,
+ "complete": 0.957,
+ "call_coverage": 0.809,
+ "positives": 25,
+ "why": "25 positives, floor 30"
+}

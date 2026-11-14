@@ -1,0 +1,28 @@
+{
+ "repo": "postgres",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 65885,
+ "cut": 1640009249,
+ "end": 1703081249,
+ "window_days": 730.0,
+ "start_year": 1996,
+ "age_at_cut": 25.1,
+ "snapshot": "3e6e86abca0138abd7265306beb6346dc2d9e221",
+ "snapshot_offset_days": 11.2,
+ "unit_files": 2065,
+ "tree_unit_files": 2090,
+ "inbound_edges": 90572,
+ "complete": 0.989,
+ "call_coverage": 0.539,
+ "positives": 561,
+ "auc_loc": 0.803071784806766,
+ "auc_in_degree": 0.7040334509045397,
+ "lift": -0.09903833390222627,
+ "ci95": [
+  -0.11561963172594714,
+  -0.08296340499027266
+ ]
+}
