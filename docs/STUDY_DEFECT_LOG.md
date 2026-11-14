@@ -69,6 +69,7 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 51 | WCC draft | gate | The activity-benchmark gate fails a correct study when the hypothesis is true (the study reports nothing in 59% of simulated cases) | R5 | 0 | simulate every gate under an effect as well as under a null — the draft said it would, and had not yet |
 | 52 | WCC draft | power / feasibility | 9 of 40 development repos clear the draft's floor; the proposed confirmation set would yield about 5 to 8 usable repos; two of its "C" repos are Dart and one is the engine's own repo | R5 | 0 | count what clears the floor before writing the design around it |
 | 53 | WCC draft | matching | Ordinary commits matched only on files touched; unmatched directory and timing give 21–48% false readings in simulation | R5 | 0 | — |
+| 54 | SA3 | spec vs code | The consolidated text says tainted merges are "in no outcome and no control"; `sa3_outcomes.py` counts a merge that inherits a fix reference as a positive and uses the tainted set only for the keyword outcome and the control pool. Read literally the text also contradicts its own inheritance rule | the control repository's builder (the contradiction) and its reviewer (what the code does) | 4 | a generated repo with merges and a known answer |
 
 ## What the log says
 
@@ -100,6 +101,9 @@ produced published results.
 **Fourth review, same artefact (entries 42–48).** R4 reviewed SA3's code after three reviews and a round of
 fixes, and still found one blocker and six lesser faults. Its blocker was found the way every statistic and gate
 fault here has been found: by running the whole thing on synthetic data with a known answer.
+
+**First fault found by the control repository (entry 54),** before any pipeline had been run on it: writing
+down the expected label for a generated merge forced a choice the text does not make.
 
 ## Still open
 

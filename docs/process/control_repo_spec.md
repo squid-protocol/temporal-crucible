@@ -5,6 +5,11 @@ with a known answer. It is the positive and negative control the SA3 studies nev
 generator, its ground-truth manifest, its mutations and its own tests. Phase 2 (a separate spec, after review)
 runs the SA3 pipeline on it and scores the pipeline against the manifest.
 
+**Revision 2, 2026-11-14, after the first review** (`docs/process/reviews/control_repo_review_fable.md`). Changed:
+expected positives are given for the snapshot's unit files only; two more cases go under `ambiguous`; the
+change effect must rest on at least 40% of files; inserted renames do not rewrite callers; test 5 states its
+file count and tolerance; `reverts_of_new_code` is worded as it can be built. Each change is marked **[r2]**.
+
 **Who builds, who reviews.** Built from this document alone by one session; reviewed by a different model.
 Where this document is silent, the builder writes the choice into `DECISIONS.md` rather than guessing silently.
 
@@ -38,6 +43,9 @@ python tools/control_repo/generate.py --list-mutations
   private `HOME`); no dependence on the machine's git identity or time.
 - No network. No reading of any other repository. Run git with `gc.auto=0`.
 - `--profile small` (about 60 files, 300 commits) generates in under ten seconds for tests.
+- **[r2]** For phase 2: `--years 4` leaves about 270 days after the snapshot, less than SA3's 730-day window,
+  and `--profile small` is below SA3's floors. A pipeline run needs the default profile or larger and a span
+  that leaves 730 days after the snapshot (`--years 10`).
 
 ## What the repository contains
 
@@ -99,7 +107,9 @@ busyness only. With `--effect branches=0.5` it is a **positive control** for tha
 **A planted change effect, separately.** `--effect d_branches=β` makes fix probability depend on the *change*
 in a file's branch density over the year before the snapshot. To support it, the history must really change
 those files' structure during that year (ordinary commits that add or remove branches), and the manifest
-records each unit file's planted properties **at both points**.
+records each unit file's planted properties **at both points**. **[r2]** At least 40% of the unit files change
+their branch density in that year, with the sign of the change independent of everything else; the manifest
+records the share.
 
 **Ordinary selection must not depend on the planted properties.** Only fixes do. State the mechanism in
 `README.md` so a reviewer can check the negative control is truly null.
@@ -113,6 +123,20 @@ files touched, and for fixes which defect; and **the expected labels**: for each
 whether SA3's primary outcome rule should count it, derived from the written rule in
 `docs/sa3_registration_consolidated.md` section 4, with the clause that decides it. Where the rule is
 ambiguous for a generated case, do not decide: list the case under `ambiguous` with both readings.
+
+**[r2]** Positive files are given as file ids with their **path at the snapshot**, and only for unit files
+that exist at the snapshot: that is the set SA3 ranks. Unit files a commit touches that are not in that set
+(created later) are listed separately, not as positives. The tree-wide rule is applied to the snapshot's unit
+files. Two cases are ambiguous by ruling of the first review and are listed, not decided:
+
+- a revert whose target was made after the snapshot but whose message quotes a ticket from the target's
+  subject (readings: counted through the reference; not counted, it is a non-qualifying revert);
+- every merge that brings in a linked commit. Four readings: the three in the first build, plus **"taint
+  governs the control pool only"** — the merge is counted when it shares a file with the linked commit, even
+  if it also brings in a fix-worded commit; that is what `tools/sa3_outcomes.py` does.
+
+For C, the manifest also records the count of pointer declarations per file beside `pointer_ops`, and says
+which of the two a keyword-family instrument is expected to see.
 
 Also record the realised truth: for each unit file, the number of true fixes after the snapshot. That, not the
 label, is what an ideal study would have as its outcome.
@@ -129,15 +153,19 @@ fault can be measured. Each is small, named, and tied to a real past fault in `d
 | `squash_merges` | the same work squashed, references kept in the squash message | 17 |
 | `sweep_labelled_fix` | the licence sweep's message says "Fix" and names a ticket | 11 |
 | `tickets_for_everything` | 60% of ordinary commits become `feature_with_ticket` | 30 |
-| `reverts_of_new_code` | every revert targets a commit made after the snapshot | 16 |
+| `reverts_of_new_code` | **[r2]** every revert in the outcome window targets a commit made after the snapshot, where one exists; the exceptions are listed | 16 |
 | `vendored_half` | half the unit-looking files sit under an imported third-party directory | 29 |
 | `test_fixtures` | a large directory of tiny generated test inputs in the main language | 29 |
 | `mixed_language` | a second language holds 40% of the files | 1, 6 |
-| `renames_after_snapshot` | 20% of files are renamed in the outcome window | 39 |
+| `renames_after_snapshot` | 20% of files are renamed in the outcome window. **[r2]** These renames edit no other file: callers are not rewritten, and the manifest says their imports go stale | 39 |
 | `no_references` | fixes carry keywords only | 3 |
 | `huge_import_merge` | one merge brings in 500 commits | 17 |
 
 Mutations compose. The manifest lists which were applied and what each changed in the truth.
+
+**[r2]** Where a commit of the base history edits a file only because it calls a renamed or deleted file, the
+manifest marks that edit as a caller edit, so "which files does non-fix work touch" can be checked against
+the planted properties.
 
 ## Tests (part of the deliverable)
 
@@ -152,9 +180,12 @@ Mutations compose. The manifest lists which were applied and what each changed i
    Python named in its docstring; skip the test with a clear reason if that interpreter is absent).
 5. The negative control is null **in the truth**: over 20 seeds, the rank correlation between a planted
    property's density and the count of true fixes, within size deciles, averages within ±0.03 of zero.
+   **[r2]** Run at `--files 800` (60 files cannot resolve ±0.03); every planted property is tested; a mean
+   passes if it is within three of its own standard errors of zero and within ±0.03.
 6. The positive control is real: with `--effect branches=0.5` the same statistic is clearly positive, and the
    stronger the β the larger it is (three strengths).
-7. Each mutation changes what it says and nothing else: diff the two manifests.
+7. Each mutation changes what it says and nothing else: diff the two manifests. **[r2]** Also compare which
+   unit files each commit touches: `renames_after_snapshot` may add the renamed files and nothing else.
 8. `sweep` commits touch at least half the unit files; `feature_with_ticket` commits never fix a defect.
 
 ## Rules for the builder

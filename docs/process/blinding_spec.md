@@ -2,6 +2,9 @@
 
 **Status: specification, nothing built.** It goes to the same build-and-review as everything else.
 
+**Revision 2, 2026-11-14.** The scramble's cells are changed (marked **[r2]**): the first version leaked. Found
+by the design review of the research-codebase specification and reproduced on the control repository.
+
 ## What it protects against, and what it cannot
 
 **Protects against the failure that actually happened** (defect log 26): an analysis or review session joining
@@ -38,9 +41,24 @@ Both statements go in every study's `seen.md`.
 - Alongside each encrypted file the builder writes `labels/<repo>.scrambled.json`: the same structure, with
   the positive labels **re-assigned among files**. The permutation uses fresh operating-system randomness that
   is never stored, so it cannot be inverted by anyone.
-- **What the scramble preserves:** the number of positives, and their distribution over LOC band × directory
-  (labels are permuted within those cells), so size and directory behave as in the real data. **What it
-  destroys:** any link between a file's own structure and its outcome.
+- **What the scramble preserves:** the number of positives, and their distribution over the scramble's cells
+  (labels are permuted within a cell), so size and, where the repo is large enough, directory behave as in the
+  real data. **What it destroys:** any link between a file's own structure and its outcome.
+- **[r2] The cells, and why they are not simply LOC band × directory.** A file alone in its cell keeps its
+  label, and a positive that is positive in every copy is a known positive. Measured on the default control
+  repository (306 unit files, 33 directories, 10 bands): with band × full directory, **25% of files are alone
+  in a cell and 36–38% of the true positives are positive in all 20 copies**; with band × top-level directory,
+  6% and 12–16%; with band alone, 0%. So:
+  1. Cells start as LOC band × full directory.
+  2. Any cell with fewer than **8** files is merged with its siblings by shortening the directory one level at
+     a time, down to the band alone. This uses the file table only; no label is read.
+  3. The builder writes, per repo, the share of files in each cell-size class and the depth each cell ended at.
+  4. Inside the builder (which sees true labels), any cell that is still more than 80% positive is merged up
+     one more level, and only the count of such merges is written.
+  5. The builder reports one number per repo: the share of true positives that are positive in all copies. It
+     must be under **2%**; if it is not, the repo's scrambles are not released and the reason is written.
+- The price: in a small repo the scramble no longer preserves directory, so its null is the null of size
+  alone. The per-repo report of step 3 says which repos that is.
 - So the whole pipeline — statistic, controls, gates, scorer — runs end to end on real measurements, and **any
   structural effect it reports on scrambled labels is false by construction.** That is a real-data negative
   control, run on every repo, for free. It is recorded in the study's `controls.md` with its result.
@@ -114,6 +132,10 @@ tools/blind/
 tests/test_blind.py   round-trip with a throwaway key; scramble preserves the stated margins and breaks a
                       planted association; the scorer refuses scrambled input; the job refuses a broken seal
                       and a second run
+                      [r2] on a control repository with a planted effect: the share of true positives positive
+                      in all copies is under 2%, the effect on scrambled labels is under 10% of the true one,
+                      and the first version's cells (band x full directory) FAIL both -- the test must be able
+                      to see the leak
 ```
 
 Tested end to end on the control repository, where the true labels are known: the unblinded result must equal
