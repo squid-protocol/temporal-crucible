@@ -76,8 +76,43 @@ an attack nobody had seen when the method was fixed". Reported as its own result
 
 ### Pre-assessment (metadata only)
 
-_Filled in from the metadata scout before review: eligible positives per ecosystem, campaigns and their sizes,
-eligible after the cap, history-length distribution, D3 size, and download volume._
+Counted on 2026-11-13 from the DataDog repository file listing and npm/PyPI registry metadata. No sample was
+downloaded or opened.
+
+- **Samples:** 1,477 `compromised_lib` zips (npm 1,448, PyPI 29) across 1,004 npm and 17 PyPI packages, dated
+  2024-12-03 to 2026-10-08. No two zips are byte-identical, so payload grouping needs file hashes from inside them.
+- **Registry:** the compromised version is gone from registry metadata for 952 of 977 npm packages found and for all
+  16 PyPI packages found; 27 npm packages and 1 PyPI package are gone entirely. Positive artifacts therefore come from
+  the DataDog zips; their history comes from the registry. For npm the cutoff is the registry publish time of the
+  earliest compromised version (still in the `time` map for all 977); for PyPI it is the zip date.
+- **History before the compromise** (release transitions):
+
+  | | packages | min | median | max | ≥ 8 (eligible) | ≥ 20 |
+  |---|---:|---:|---:|---:|---:|---:|
+  | npm | 977 | 0 | 20 | 2,907 | 652 | 495 |
+  | PyPI | 16 | 1 | 108 | 726 | 14 | 13 |
+
+- **Campaigns (date proxy, 3-day windows):** 35 groups, 33 with an eligible package. Five groups hold 83% of
+  packages:
+
+  | first compromise | packages | eligible |
+  |---|---:|---:|
+  | 2025-11-24 (Shai-Hulud 2) | 349 | 147 |
+  | 2025-09-14 (Shai-Hulud 1) | 178 | 115 |
+  | 2026-05-11 | 123 | 82 |
+  | 2026-06-17 | 119 | 115 |
+  | 2026-03-20 | 60 | 42 |
+
+  chalk/debug (2025-09-08) is 18 packages, 14 eligible; nx (2025-08-26) is 7. 20 of the 35 groups have 2 or fewer
+  packages. The real campaign assignment (shared payload) may merge or split these.
+- **Primary sample after the cap of 10 per campaign:** 158 positives (147 npm, 11 PyPI) in about **33 campaigns**.
+  PyPI results will be anecdotal and are reported but not judged separately.
+- **D3 calibration:** npm top-download list from `wooorm/npm-high-impact` (MIT, commit 9e29478); PyPI from
+  `hugovk/top-pypi-packages` (2026-11-01 snapshot; no licence file, so its use needs owner approval or another
+  source such as PyPI's BigQuery download data). 25 names that appear in the DataDog manifests were excluded. The
+  last 21 releases of each give about **4,681 npm and 3,788 PyPI transitions, ≈ 8,500 in all**.
+- **Volume:** about 3,070 artifacts for the positives and their histories, 158 compromised zips (≈ 355 MB), and
+  about 9,000 calibration artifacts: roughly 11,000 artifacts and 5 to 6 GB compressed.
 
 ### Selection bias and limits, stated
 
@@ -175,13 +210,15 @@ descriptive only.
 - **Chance level.** Under the null (the malicious transition is exchangeable with the package's others), the
   chance of ranking first is 1/21 ≈ 0.048. For n = 20 independent packages, the chance that at least 10 rank first
   is about C(20,10)·(1/21)^10 ≈ 1e-8. Significance is not the hard part; the bar is set on effect size.
-- **Precision.** Campaigns are the units. With about 10 campaigns, the standard error of a share near 0.5 is about
-  √(0.25/10) ≈ 0.16, so a 95% interval is about ±0.3. The lower-bound clause (≥ 0.35) needs a point estimate near
-  0.65 or higher at that sample size. The pre-assessment section turns this into the real campaign count.
+- **Precision.** Campaigns are the units. With about 33 campaigns, the standard error of a share near 0.5 is about
+  √(0.25/33) ≈ 0.087, so a 95% interval is about ±0.17, wider in practice because five campaigns hold most packages
+  (the cap of 10 limits this). The lower-bound clause (≥ 0.35) then needs a point estimate of about 0.52 or higher.
+  If real payload grouping leaves fewer than 15 campaigns, the interval is reported with a campaign-level exact
+  permutation as well as the bootstrap.
 - **Alarm rate.** At 1 in 1,000, a registry with 50,000 new releases a day would raise about 50 alarms a day before
   any other filter. That is the order of magnitude a triage team can review; 1 in 21 is not.
-- **D3 size.** About 500 packages × 20 transitions ≈ 10,000 transitions, so the 1-in-1,000 threshold rests on about
-  10 exceedances. Its sampling error is reported (bootstrap over D3 packages), and recall is also reported at 1 in
+- **D3 size.** About 8,500 transitions (pre-assessment), so the 1-in-1,000 threshold rests on about 8 to 9
+  exceedances. Its sampling error is reported (bootstrap over D3 packages), and recall is also reported at 1 in
   500 and 1 in 2,000.
 
 ## Exploratory: does the whole fingerprint add anything? (labelled, never a verdict)
@@ -221,7 +258,11 @@ functions), complexity, nesting, size, comment and naming features, and dependen
 4. Campaign assignment by shared payload plus a date window: is that robust enough when attackers vary payloads?
 5. With about 10 effective campaigns, is the study worth running as confirmatory, or should it be exploratory now
    and confirmatory on D4?
-6. Are there better sources for the older attacks (event-stream, ua-parser-js, xz) whose licences allow
+6. The positive artifact is DataDog's zip of the compromised release, while history artifacts are registry
+   tarballs. Could layout differences between the two (wrapping folder, missing files) inflate every component for the
+   positive alone? Proposed control: compare the zip's file list with the registry tarball of the *previous* clean
+   version and normalize to the package root before scanning; report any positive whose layout cannot be matched.
+7. Are there better sources for the older attacks (event-stream, ua-parser-js, xz) whose licences allow
    commercial research use?
 
 ## Order of work

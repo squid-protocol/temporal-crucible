@@ -55,9 +55,10 @@ packages, and scores attacks found after registration with the frozen method.
   Ultralytics). The dataset says its samples are mostly GuardDog detections. Older classics (event-stream,
   ua-parser-js, coa, rc, eslint-scope, ctx, xz) have no malicious artifact in it. Malicious versions are deleted from
   npm and PyPI; the clean previous versions remain downloadable.
-- **Pre-assessment counts** (eligible packages, campaigns, history lengths, calibration size) are in the draft's
-  "Pre-assessment" section. If that section still says "filled in", the counts were not yet available; say how your
-  review would change at 10, 30 and 100 effective campaigns.
+- **Pre-assessment counts** (metadata only; in the draft's "Pre-assessment" section): 666 eligible packages; 158
+  positives after a cap of 10 per campaign, in about 33 date-proxy campaigns, five of which hold 83% of all
+  packages; about 8,500 calibration transitions; PyPI has only 11 capped positives. Say how your review would change
+  if real payload grouping left 15 or fewer campaigns.
 
 ## What to review
 
@@ -70,11 +71,11 @@ Answer each. Cite the draft's section names.
 2. **The maths.** Check:
    - the percentile definition with ties, and its behaviour for packages with 8 to 19 benign transitions;
    - the binomial chance figure (about 1e-8 for 10 of 20 packages ranking first at p = 1/21);
-   - the campaign-clustered bootstrap with perhaps 10 clusters: is it reliable, and what should replace it (wild
+   - the campaign-clustered bootstrap with about 33 unequal clusters (five dominant): is it reliable, and what should replace it (wild
      cluster bootstrap, exact permutation over campaigns, a different interval)?
    - the robust z-score D with a MAD floor taken from the calibration set: is it well defined, and does averaging
      z-scores across components with very different distributions behave?
-   - setting a 1-in-1,000 threshold from about 10,000 calibration transitions (about 10 exceedances): how uncertain is
+   - setting a 1-in-1,000 threshold from about 8,500 calibration transitions (about 8 to 9 exceedances): how uncertain is
      that threshold, and what does that uncertainty do to the recall estimate?
 3. **The bars.** Are the pass rules for H-REL-1, H-REL-2 and H-REL-3 too strict, too lenient, or mis-specified?
    Propose alternatives with numbers.
