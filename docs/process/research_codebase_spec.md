@@ -1,218 +1,232 @@
 # A codebase built for research — architecture specification (for SA3 only)
 
-**Status: Revision 2, 2026-11-14, after one independent design review. Nothing is built.** Owner-approved as a
-thing to draft. Route: specification → design reviews → build by a different model, in steps → code review →
-the control repository run through it.
+**Status: Revision 3, 2026-11-14, after two independent design reviews.** Steps 0 and 1 are built and
+committed; step 2 is drafted (`docs/sa3_amendment5_draft.md`, Revision 2); step 3's first phase is being built.
 
-**What Revision 2 changed.** The first draft was reviewed by an independent session
-(`docs/process/reviews/research_codebase_review_claude.md`: 5 blockers, 9 major, 6 minor; verdict "ready after
-changes"). Its three heaviest findings were reproduced before anything here was changed (section 12). The
-result is a **smaller thing built sooner**:
+**What Revision 3 changed.** It reconciles the second design review (Gemini, on PR #185:
+`reviews/research_codebase_review_gemini.md`, 3 blockers and 7 further points) with the first (Claude:
+`reviews/research_codebase_review_claude.md`) and with Amendment 5, Revision 2. The reconciliation table is
+section 12. The change that matters:
 
-- **Step one is now a harness**, not a rewrite: the *existing* SA3 code run on control repositories with every
-  path redirected. The first draft's "new code equals old code" test could not be run safely without it.
-- **Existing rule code is moved, not rewritten.** The first draft would have changed SA3's numbers in six ways
-  it did not list (section 6).
-- **The general machinery is deferred** until a second study needs it: the configuration language, plug-ins,
-  the generated rule-to-code table, rename following, the change effect.
-- **Blinding is its own project**, built and tested on the control repository (`blinding_spec.md`, also
-  revised today). SA3 is not a blinded study and gains nothing from it.
-- Table design, invariants, storage, provenance and the lint are corrected where the review found them wrong.
+- **The stored tables are not SA3's confirmatory engine.** SA3's confirmatory run is the existing scorer, run
+  once, unchanged (Amendment 5). The tables, the corrected reading rule and the named random streams are the
+  **verification and sensitivity path** beside it. For the next study they are the engine.
 
-It builds on `STUDY_SCAFFOLD.md`, `blinding_spec.md` and `control_repo_spec.md` and does not repeat them.
+It builds on `STUDY_SCAFFOLD.md`, `blinding_spec.md`, `control_repo_spec.md`, `harness_spec.md` and
+`tables_spec.md` and does not repeat them.
 
 ## 1. What is wrong today, measured
 
-Read-only inventory of `tools/`, 2026-11-14, counts as corrected by the review. No study data was opened.
+Read-only inventory of `tools/`, 2026-11-14, counts as corrected by the first review, plus what the harness
+found the same day. No study data was opened.
 
 | what a database gives | what the code does today |
 |---|---|
 | One definition of each thing | The file-universe rule is written **5** ways that do not agree. The snapshot cut is recomputed in **6** places over different commit sets. The tree-wide rule is written **3** times with three denominators. SA3's keyword outcome and its tainted-merge test use two different keyword rules. |
-| A schema with constraints | "Positives are ranked" is one `assert`. Nothing checks the reverse, that every ranked file can be positive. The universe is never stored: three tools recompute it. |
-| Provenance | The seal lists 9 files by hand. It omits every data input and **13** code files that define rules, among them the universe rule. The result records no hash of any scan, label or history file. |
-| Reproducibility | One random stream is shared across repos, so a result depends on the order of repos in a file; the placebo restarts the same stream for every repo. |
-| Stages with inputs and outputs | Building outcomes deletes and rebuilds one of its own inputs. SA3's snapshot is whatever a MOD-1 tool last wrote to a JSON file. The file that decides which repos are scored is written by no tool. |
-| Configuration | **56** of **225** tool files hold a hard-coded absolute path; the study directory is assigned in 14. Per-repo exceptions are lists inside code. |
-| Access control | None. |
-| Migrations | Four amendments on an edited document; the scorer disagreed with the text in nine places. The control repository found one more today (defect log 54). |
-| Tests | None for the outcome builder or the scorer. |
+| A schema with constraints | "Positives are ranked" is one `assert`. Nothing checks the reverse. The universe is never stored: three tools recompute it. The completeness check shares the rule it checks (defect log 56). |
+| Provenance | The seal lists 9 files by hand, omits every data input and 13 rule-defining code files, and seals outside a git checkout without complaint (57). |
+| Reproducibility | One random stream is shared across repos; a result depends on repo order and on which secondary measures are scored. |
+| Stages with inputs and outputs | Building outcomes deletes and rebuilds one of its own inputs. SA3's snapshot is whatever a MOD-1 tool last wrote. The file that decides which repos are scored is written by no tool. |
+| Configuration | 56 of 225 tool files hold a hard-coded absolute path. Per-repo exceptions are lists inside code. |
+| Migrations | Five amendments. The text and the code disagree on tainted merges (54), on what a fix reference is (61), and on which commit is frozen (62). |
+| Tests | None for the outcome builder or the scorer. Run on repositories with a known answer, the unmodified pipeline showed six faults in an afternoon (55–60). |
 
-**What this architecture does not touch.** The review walked 20 defect-log entries: the design catches 5
-mechanically, makes 8 less likely and does nothing for 7. Statistic and gate design, power, instruments, label
-validity and repo-level data faults — about half the log — are found by simulation, label audits and data
-cards, which the scaffold covers. This document is about the universe, text-versus-code, the seal,
-reproducibility and plumbing.
+**What this architecture does not touch.** Of 20 defect-log entries walked by the first review, the design
+catches 5 mechanically, makes 8 less likely and does nothing for 7. Statistic and gate design, power,
+instruments, label validity and repo-level data faults are found by simulation, label audits and data cards.
 
 ## 2. Principles
 
 1. **A rule exists once**, and later stages import it.
-2. **Derived facts are stored, not recomputed.** Later stages read tables and never call git.
-3. **A stage reads its inputs and writes its outputs, and nothing else.**
+2. **Derived facts are stored, not recomputed.**
+3. **A stage reads its declared inputs and writes its outputs, and nothing else** — enforced by what the stage
+   can see, not by what it promises (section 5).
 4. **A constraint fails at build time.**
 5. **A result names everything it depended on,** computed, not typed.
 6. **Every part runs on the control repository before it is trusted.**
-7. **For each rule, the specification says whether the text or the code governs.** SA3 is registered and its
-   registration governs; where the code is kept against the text, that is a ruling, written down.
-8. **Move before rewriting.** A rewritten rule is a new chance for a fault; a moved one is not.
+7. **For each rule, the specification says whether the text or the code governs.**
+8. **Move before rewriting.**
+9. **After estimates have been seen, nothing replaces the frozen run; everything else runs beside it.**
 
-## 3. The steps, in order, each with its exit test
+## 3. The steps
 
-| step | what | exit test |
+| step | what | state / exit test |
 |---|---|---|
-| **0. Harness** | Run the **existing** SA3 pipeline (history walk, body harvest, scan, outcome builder, nesting, scorer) on a generated repository, with every path under a temporary directory. This is also phase 2 of the control repository. | The run completes on a negative and a positive control. A wrapper that fails on any write outside the temporary directory, and on any open of the study directory, reports none. One engine scan of a generated repository is timed. |
-| **1. Three-way table** | For each rule and each control-repository case: what the existing code gives, what the manifest says, and whether they agree. | Every row is one of: code = manifest; code ≠ manifest (an existing fault, listed, ruled); undecided in the manifest (listed). No row is empty. A rule difference seeded into a copy of the code shows up in the table. |
-| **2. Amendment** | SA3 Amendment 5: scoring moves from "exactly as frozen at `edc5c53`" to the stored tables. It lists every item of section 6 with its ruling and which of text or code governs. | The owner accepts it. |
-| **3. Stored tables** | `file`, `touch`, `event`, `link`, `pool`, `marginal` (section 4), built by the existing functions, **moved** behind one builder each, with hashes. Later stages read the tables. | Built on the control repository: equal to the manifest except rows listed in step 1. Built for SA3's repos: every public count equal to today's, or the difference explained without opening labels. |
-| **4. Seal and streams** | A generated seal (section 5). Named random streams, **beside** the registered ones (owner, 2026-11-14: the confirmatory run keeps seed 2982 and the streams of `edc5c53`; named streams are the sensitivity `PU_named_streams`). | A stage that reads an undeclared file fails. Under named streams, permuting the repo order and the set of predictors scored gives identical numbers. Under the registered streams the frozen numbers are reproduced exactly. |
-| **5. Reading rule** | One function for the reading of the three confirmatory tests together, Holm step included, with "an earlier test failed" defined; a separate vocabulary for everything else. | Defect-log entries 42, 43, 47 and 48 are each a named test case. Every combination of inputs has an expected word. |
-| **6. Control suite** | Section 7. | All rows pass, at the sizes and pass rules stated there. |
-| **7. Seal and score** | The owner authorises. | — |
+| **0. Harness** | The existing SA3 pipeline run on generated repositories inside a sandbox | **Done** (`tools/harness/`). One engine scan 2.4 s; a repository 16 s |
+| **1. Three-way table** | Pipeline against manifest, rule by rule | **Done** (`harness_report.md`): six faults, four unstated behaviours, effect recovery over 20 seeds |
+| **2. Amendment 5** | Says what is frozen and what runs beside it | Drafted, Revision 2; one review done, the owner's decisions recorded; its second review is owed |
+| **3. Stored tables** | `tables_spec.md`. Phase A: control repositories. Phase B: SA3's real data, a separate specification and a deliberate job whose outputs are the public counts of Amendment 5 section 7 | Phase A in build. **Phase B does not start until the points of section 12 marked "before phase B" are closed** |
+| **4. Seal and named streams** | A generated seal (section 5). Named random streams, used by the sensitivity `PU_named_streams` | A stage that reads an undeclared input cannot (it is not visible). Under named streams, permuting repo order and the set of predictors gives identical numbers. Under the registered stream the reference numbers are untouched, because the reference scorer is not edited |
+| **5. Reading rule** | One function for the family of three tests, the Holm step included, "an earlier test failed" defined; a separate vocabulary for everything else | Used for the **corrected** readings printed beside the coded ones. Defect-log entries 42, 43, 47 and 48 are each a named test case; every combination of inputs has an expected word; ties and empty pools have a stated answer |
+| **6. Control suite** | Section 7 | All rows pass at the stated sizes and bounds |
+| **7. The run** | The owner runs the sealed **reference scorer** once: that is the confirmatory run. The stored-tables scorer runs beside it; a per-cell equal / not-equal map is printed; the sensitivities run | Amendment 5 section 9: input hashes equal, the placebo output regenerated byte for byte, five seeded faults each reported by the check on control repositories |
 
-Each step is built by Opus from this document with the SA3 code open, and reviewed before the next begins.
-The builder may read `tools/` and `docs/`. It may not open the study directory; steps 3 and 4 run against
-SA3's real data only as a job whose outputs are the public counts.
+**The reference code** is the file contents at `8fb7fe0` for `tools/sa3_score.py` and `tools/sa3_outcomes.py`
+and at `edc5c53` for `tools/sa3_stats.py` and `tools/mod1_lift.py` (Amendment 5 section 1).
+
+Each step is built by Opus from its specification with the SA3 code open, and reviewed before the next begins.
 
 ## 4. The tables
 
-One file per table build, named by its content hash, never written over. The hash is SHA-256 over rows in
-byte order of the key, with fixed column types, floats written as IEEE hex, paths as UTF-8 bytes with a stated
-escape, and nulls marked. **Test:** the same table built in reverse insertion order, and with whole numbers
-written as reals, has the same hash.
+As `tables_spec.md`, which governs where the two differ. In summary:
 
-| table | one row per | columns beyond the key | notes |
+| table | key | notes |
+|---|---|---|
+| `repo` | repo | language, unit rule, cohort, status and reason, the clone's tip, engine id; **and how each prebuilt input was made** (below) |
+| `snapshot` | repo | `cut_ct`, `sha`, `ct`, `window_start`, `window_end`. The hash is an input from the scan |
+| `file` | repo, path | every path of the snapshot's tree once; `in_universe`, an ordered closed reason, the GitHub pattern that matched, `loc`, `history_can_touch` |
+| `measure` | repo, path, name | raw measures with `absent_means`; derived predictors only once each one's null rule is written down (below) |
+| `touch` | repo, sha, path | equal-path matching, as the code does |
+| `link`, `event`, `pool` | protected | `event` is keyed **(repo, unit commit, path)**: the outcome files do not record which brought-in commit gave a merge its positives. The key with a linking commit belongs to the second, independent derivation (section 9) and is never reconstructed in the moved tables |
+| `marginal` | repo, outcome | public. The frozen, registered list governs; a regenerated value that differs is reported |
+
+**Invariants that fail the build:** every tree path once; `in_universe = 1` implies no reason; every protected
+path is in the universe; `marginal` equals a recount from `event`; the window ends after it starts.
+
+**Reported in the data card, never failing, on the frozen universe:** universe files with
+`history_can_touch = 0`. That column audits **every** static way the universe and the history walk can
+disagree, each counted apart: the `.gitattributes` re-inclusion; a path in the archive listing spelled
+differently from the history's; symbolic links and submodule entries; commits off the first-parent chain in a
+repo walked first-parent. The same condition **is** a failing invariant on the `PU_reachable_universe` view,
+where those files have been removed by rule.
+
+**How prebuilt inputs were made is recorded, not only their hashes:** the SHA-256 of GitHub's two lists; the
+history walk's parameters (unit rule, C-family flag); the body harvest's flags (`--with-merges`,
+`--sa3-links`); the engine id and the hash seed; the grammar pack's version. Two builds over the same clone
+can otherwise differ silently.
+
+**Canonical bytes:** as `tables_spec.md`, and: negative zero is written as zero; a not-a-number is never
+written — it is `null` with a reason; whether a column is whole or real comes from the schema, not the value.
+
+**Derived predictors and missing values.** The scorer's derived predictors each treat missing differently: one
+reads absent as 0, one propagates it through a sum, one maps it to missing, and one turns non-positive values
+into missing — after which the scorer drops those files **and recomputes the size bands**. Before any derived
+predictor is stored (phase B), each one's rule for missing is written out beside its formula and tested on a
+control repository, including the band recomputation.
+
+## 5. The seal
+
+**Isolation is structural.** A stage runs in a sandbox of the kind `tools/harness/sandbox.py` already builds:
+the root is read-only, and **only the stage's declared inputs are bound in**. An undeclared input is not
+refused; it is absent. This covers what wrapping Python's `open` cannot: SQLite's side files, `os.open` and
+memory maps, libraries and their caches, git's own configuration and attribute reads, and anything a
+subprocess does.
+
+The ledger records, per stage: every declared input and its hash; the hash of every code file bound in,
+including code run as a subprocess; interpreter, package and git versions; the hash seed; each clone's tip.
+The seal is the closure of the ledger for a result. A result carries its seal's hash. The seal refuses when
+git fails (defect 57).
+
+What it cannot do: SA3's scans were made without a fixed hash seed, so they can be hashed and not reproduced.
+
+Mechanical checks, run with the tests: functions in moved code take every registered parameter as a required
+argument and no module assigns a numeric constant at module level except the one parameter file; no absolute
+path outside one `paths` module; no import of the protected tables' reader outside the scoring job.
+
+## 6. Where text, code and tables differ — every item, with its ruling
+
+Under Amendment 5 the confirmatory run is the reference code, so "frozen" below means "as the reference code
+does". The right-hand column is what runs **beside** it.
+
+| # | item | frozen run | beside it |
 |---|---|---|---|
-| `repo` | repo | language, unit rule, **cohort** (drawn / earlier eight), **status and reason** (scored; scan incomplete; no harvest; …), the clone's tip hash | a build stops if the clone's tip differs from the one the scans and history were made at |
-| `snapshot` | repo | `cut_ct`, `sha`, `ct`, `window_start`, `window_end` | four different things, all stored. The hash is an **input**, taken from the scan; it is not recomputed |
-| `file` | path in the snapshot's tree | `in_universe`, `reason`, `loc`, language | built **after** the scan (LOC comes from it). Reasons are a closed, ordered list: not the repo's language · test · vendored · documentation · example · tutorial · generated · excluded by `.gitattributes` · not in the archive · not scanned by the engine · zero LOC |
-| `measure` | (file, measure) | value, instrument, version, **absent-means** (`zero` or `missing`, per measure, copied from today's code) | derived predictors (ratios to LOC, sums, non-zero yes/no, score among non-zero) are rows built by named functions |
-| `touch` | (commit in the window, snapshot unit path) | — | a later commit is matched to a snapshot file by **equal path**, as today. Rename following stays sensitivity S8, not run |
-| `link` | (commit, link) | kind (issue, CVE, revert, trailer), value, resolved target | **protected** |
-| `event` | (unit commit, linking commit, path) | kinds counted strictly, kinds counted when every revert counts, tier, own or inherited | **protected**. This is what holds a merge's positives: its first-parent diff ∩ the linking commit's files |
-| `pool` | (control commit, path) | — | **protected**: the labelled commits follow from it by subtraction |
-| `marginal` | (repo, outcome) | positive files, qualifying commits, largest share, clears-floor | public. The **frozen, registered list governs**; a regenerated value that differs is reported, not used |
-
-Invariants, failing the build:
-
-- every tree path appears in `file` exactly once; `in_universe = 1` implies no reason;
-- every `event` and `pool` path is in `file` with `in_universe = 1`;
-- **every universe file is one the history could record a touch for** — the reverse check that is missing
-  today. A `.gitattributes` line that switches vendoring *off* currently puts a file in the universe that can
-  never be positive; the count of such files per repo is reported for a ruling (section 6, item e).
-
-Reported, not failing: commits out of time order; a snapshot that is not on the first-parent chain (both occur
-in correct data when the repo is not merge-workflow).
-
-"Protected" for SA3 means stored apart with their own hashes; SA3's labels already exist in plaintext and were
-used. For a blinded study it means `blinding_spec.md`.
-
-## 5. The seal and the random streams
-
-The runner wraps `open`, `sqlite3.connect` and `subprocess` for each stage and records in a ledger: every file
-opened and its hash; every Python module loaded and its hash; code run as a subprocess (the engine,
-`hist_meta.py`) by path and hash; interpreter, package (numpy, scipy, `tree_sitter_language_pack`, SQLite) and
-git versions; `PYTHONHASHSEED`; each clone's tip. The seal is the closure of the ledger for a result. The
-scoring job recomputes it and stops on any difference. A result carries its seal's hash.
-
-What it cannot do, stated: SA3's scans were made without a fixed hash seed, so they can be hashed but not
-reproduced.
-
-Git runs only through one wrapper: `GIT_NO_LAZY_FETCH=1`, `gc.auto=0`, no writing command on a clone. A
-blobless clone that cannot serve a command is a repo status with a reason, not a crash.
-
-Random streams are named for study, repo and purpose, one per repo and purpose seeded from 2982. That changes
-the drawn numbers, so for SA3 it runs as a sensitivity beside the registered streams, which the confirmatory
-run keeps (Amendment 5).
-
-Mechanical checks, run with the tests:
-
-- functions in the moved code take every registered parameter as a **required argument**; no module assigns a
-  numeric constant at module level except the one parameter file. (A lint on literal *values* was tried by the
-  reviewer on the existing code: about half its alarms were not parameters.)
-- no absolute path outside one `paths` module;
-- no import of the label tables' reader outside the scoring job.
-
-## 6. Where the stored tables could change SA3's numbers
-
-The default for each is **what the registered code does**. Each goes in Amendment 5 with its ruling.
-
-| # | item | default | governed by |
-|---|---|---|---|
-| a | Matching later commits to snapshot files | equal path; no rename following | code |
-| b | A missing predictor value | per measure, as today: the branch-state primary and `in_degree` read absent as 0 | code |
-| c | Random streams | **ruled 2026-11-14:** the registered streams for the confirmatory run; named streams as `PU_named_streams` | registration |
-| d | The snapshot | the scanned commit, an input; the cut is stored beside it | code |
-| e | Universe files the history cannot touch | **ruled 2026-11-14:** counted per repo; removed in the sensitivity `PU_reachable_universe`, beside the frozen confirmatory run (Amendment 4 freezes the universe) | owner |
-| f | The list of scored repos | the frozen list | registration |
-| g | The universe variant | with `.gitattributes`, tutorial exclusions and the scan's generated list | code |
-| h | Tree-wide denominator | the universe | code |
-| i | Keyword rule for the keyword outcome vs for tainting a merge | **ruled 2026-11-14:** two rules, as today, for SA3; one rule in the next study | code |
-| j | Tainted merges | **ruled 2026-11-14:** counted when they inherit; taint governs the keyword outcome and the control pool | code; **the text is corrected** in Amendment 5 (defect log 54) |
-| k | Holm step, "not robust", the vocabulary outside the confirmatory tests | as the registration says; the code is fixed (defect log 42, 43, 47) | text |
-| l | Stored `.gitattributes` cut at 200,000 characters | report whether any repo reaches it | — |
+| a | Matching later commits to snapshot files | equal path | S8, rename following |
+| b | A missing predictor value | as coded, per measure | — |
+| c | Random streams | the registered shared stream | `PU_named_streams` |
+| d | The snapshot | the scanned commit; the window from the code's own cut | — |
+| e | Universe files the history cannot touch | ranked | `PU_reachable_universe`, `PU_unreachable_made_reachable` |
+| f | The list of scored repos | the frozen list | — |
+| g | The universe variant | with `.gitattributes`, tutorial exclusions, the scan's generated list, GitHub's lists | `PU_generic_dirs_restored` |
+| h | Tree-wide denominator | the universe | — |
+| i | Two keyword rules | both, as coded (owner) | — |
+| j | Tainted merges | counted when they inherit (owner) | — |
+| k | Holm step, "not robust", vocabulary | **as coded** | the corrected readings, printed beside; a hypothesis whose reading differs is not called confirmatory |
+| l | Stored `.gitattributes` cut at 200,000 characters | as stored | reported per repo |
+| m | Tracker keys matched without regard to case | as coded | `PU_tracker_keys_case_sensitive` |
+| n | Completeness | the registered measure | `PU_new_completeness` |
+| o | Nesting coverage | the existing files | `PU_nesting_floor` |
 
 ## 7. The control suite
 
-Sizes come from the first control-repository review: 800 files and 20 seeds resolve ±0.03 on a truth
-statistic. Before the suite's size is fixed, step 0 measures the time of one engine scan of a generated
-repository; the numbers below are then confirmed or cut, and each pass rule is simulated for its
-false-failure rate before it is used.
+Scan time is known (2.4 s; a repository through the pipeline in 8 to 16 s), so the sizes below are affordable:
+a 20-seed row takes about three minutes.
 
 | run | size | must hold |
 |---|---|---|
-| negative control | 800 files, 20 seeds, a span leaving 730 days after the snapshot | the universe equals the manifest's unit files on every path; decided labels equal the manifest's; each property's effect, **against the expected labels**, is within three standard errors of the same statistic computed from the manifest's expected labels |
-| positive control, three strengths | 800 files, 10 seeds each | the planted property is recovered and grows with strength; the others stay within the negative control's spread |
-| each mutation | default profile, 3 seeds | a recorded expectation: universe and labels still match, **or** the pipeline reports the repository unusable for a stated reason. A mutation the pipeline gets silently wrong fails |
-| quick set, with the ordinary tests | one negative and one positive repository, default profile, 1 seed | universe and labels only (exact comparisons; no statistic at one seed) |
+| negative control, Python and C | 20 seeds, default size, a span leaving 730 days | universe equals the manifest's unit files in every seed; for each planted property the pipeline's effect minus the expected-label effect, paired by seed, is within three standard errors of zero **and** within ±0.01; the pipeline's effect itself is within ±0.03 of zero |
+| positive control, three strengths | 20 seeds each | the planted property is recovered, grows with strength, and the paired difference from the expected-label effect is within the bound measured for that language (Python: within ±0.01; C: reported, see below); the others stay within the negative control's spread |
+| **placebo gates** | the same 20 seeds | path hash, directory hash and each size surrogate: the **mean over the 20 repositories** is within 0.005 of zero |
+| **label-convention mix** | 20 seeds each | the positive control repeated under `tickets_for_everything` and under `no_references`; the pipeline's effect against the expected-label effect, as above. Reported: how the recovered share of a true effect moves with the mix |
+| each mutation | 3 seeds | a recorded expectation: universe and labels match, or the pipeline reports the repository unusable for a stated reason. A mutation the pipeline gets silently wrong fails |
+| quick set, with the ordinary tests | one negative and one positive repository | universe and labels only |
 
-Two truths exist by design: true fixes, and the labels the written rule should give (silent fixes differ).
-Universe and label rows are judged against the expected labels; a separate, reported row gives the statistic
-against true fixes, which is what the label costs.
+Measured so far (`harness_report.md`, and the placebo outputs of the same runs):
+
+- Paired pipeline − expected labels: Python −0.002 (standard error 0.002); C **−0.019 (0.004)** from the
+  engine's branch count. The C bound is therefore not ±0.01; the row reports the number and fails only if it
+  moves by more than three standard errors from −0.019.
+- Placebo gates, mean over 20 repositories: every one within 0.005 in the four standard suites (largest
+  +0.0020). **A single repository of 300 files exceeds 0.005 in 5% to 50% of cases**, so the gate is a suite
+  mean, never a per-repository test. With files under `cache/`-style names dropped, the `in_degree` surrogate
+  reads +0.0045 (standard error 0.0013): inside the tolerance and not by much.
+
+**Each bound's false-failure rate and the smallest bias it would catch are computed by simulation and written
+beside it before the suite is used as a gate.** Not yet done.
+
+Two truths exist by design: true fixes, and the labels the written rule should give. Universe and label rows
+are judged against the expected labels; a reported row gives the statistic against true fixes.
 
 ## 8. Blinding
 
-Not on SA3's route. `tools/blind/` is built from `blinding_spec.md` (Revision 2) and tested on the control
-repository, where the truth is known. It reads labels through the `event` and `pool` tables of section 4, so
-the first blinded study plugs into the same tables.
+Not on SA3's route. `tools/blind/` is built (phase A) and tested on the control repository. Scrambles released
+to sessions permute within the size band only (`blinding_spec.md`, Revision 3).
 
-What it buys, stated: `touch`, the commit messages and the label rules are all readable, so true labels are a
-short join for any session. Blinding here stops the accidental join, gives scrambles to develop on, and leaves
-an audit trail. Real blinding is data that is not on the machine.
+## 9. The second, independent build — protocol
 
-## 9. Deferred until a second study needs it
+Owner-approved as an experiment. Scope: the `event` derivation from the written rule (with the linking
+commit), and the reading rule.
 
-A full `defs` package rewritten from the rules; `study.toml` beyond a flat parameter file; plug-ins; a
-generated rule-to-code table (it proves a mapping, not behaviour — the weight belongs on a control-repository
-case per rule); rename following; the `prior` point and the change effect. The first draft's design for these
-was not committed; the design review quotes the parts it examined.
+1. A different model builds each from the specification text alone, without sight of the first build.
+2. Outputs are compared on control repositories under **every mutation**, not one base repository.
+3. **Blind seeding:** copies of the first build each carry **one** known fault; clean copies are mixed in; the
+   comparison is scored without knowing which is which. Both the detection rate and the false-alarm rate are
+   recorded, beside what a review of the same copies finds.
+4. **Adjudication is fixed beforehand:** where two clean builds differ, the specification text decides; where
+   the text is silent (ties in a Holm step, an empty pool, the case of a tracker key), the case is logged as a
+   specification fault and neither build is called wrong.
 
-## 10. What this does not do
+## 10. Deferred, and what this does not do
 
-- It does not make the other 220 tools consistent, and does not delete them.
-- It does not change SA3's registered statistic or hypotheses.
-- It does not make labels unknowable on this machine.
+Deferred until a second study needs it: a rewritten `defs` package; a study configuration language; plug-ins;
+a generated rule-to-code table; the `prior` point and the change effect.
+
+It does not make the other 220 tools consistent, does not change SA3's registered statistic or hypotheses, and
+does not make labels unknowable on this machine.
 
 ## 11. Owner rulings, 2026-11-14
 
-The owner accepted all three recommendations below. Nothing here is open.
+1. Tainted merges follow the code. 2. Two keyword rules stay for SA3. 3. Files the history cannot touch stay
+in the frozen run; their removal is a sensitivity. 4. The confirmatory run keeps the registered random
+streams. 5. The confirmatory run is the reference scorer, run once, unchanged, with every correction beside
+it. 6. The result's label is Amendment 5 section 8's. 7. The second independent build goes ahead as an
+experiment (section 9).
 
-1. **Item e:** files that are ranked but can never be positive because `.gitattributes` switches an exclusion
-   off. Rule after the count: remove them from the universe (my recommendation: a ranked file that cannot be
-   positive is defect 2 again) or keep the registered universe and report them.
-2. **Item i:** keep two keyword rules (my recommendation: yes for SA3, corrected in the next study).
-3. **A second, independent build:** yes, as an experiment, for the core where an error changes the answer:
-   the reading rule (step 5) and the `event` table builder (step 3). Built by a different model from the same
-   text without sight of the first build; outputs compared number for number on the control repository; known
-   faults seeded into one copy, and the count caught by the comparison recorded beside the count a review
-   catches.
+## 12. Review record and reconciliation
 
-Item e is applied in step 3, after the count; all three go into Amendment 5 (step 2).
-
-## 12. Review record
-
-| review | by | result |
+| point | raised by | disposition |
 |---|---|---|
-| Design review 1 | Claude Fable 5.2, independent session, 2026-11-14 | 5 blockers, 9 major, 6 minor. `reviews/research_codebase_review_claude.md` |
-| Reproduced by the author before acting | equal-path matching (`sa3_outcomes.py:168-171`) · missing read as zero (`sa3_score.py:103`) · scramble leak, measured on control repositories: 25% of files alone in a cell, 36–38% of true positives positive in all 20 copies; the reviewer's own remedy (top-level directory) still leaves 12–16% at 300 files, so `blinding_spec.md` now sets a minimum cell size instead | adopted, the last with a change |
-| Adopted without separate reproduction (cited to code by the reviewer) | invariants that fail on correct data; the `label` table's missing path; the unsafe exit test; the Holm dimension; provenance gaps; the lint's false alarms; the smaller route | — |
-| Not adopted | — | — |
-| Still owed | a second design review by a different model (checklist item 15: Gemini, on the pull request) | — |
+| The spine would change SA3's numbers in unlisted ways | Claude, B1 | adopted in Revision 2; superseded by Amendment 5: nothing replaces the frozen run |
+| Invariants that fail on correct data; `label` had no path | Claude, B2–B3 | adopted in Revision 2 |
+| Scrambled labels leak | Claude, B4 | adopted; `blinding_spec.md` Revisions 2 and 3 |
+| "Equal to old code" needs a safe harness | Claude, B5 | adopted; the harness is step 0 |
+| This document contradicts Amendment 5 Revision 2 | Gemini, 1 | adopted: sections 3, 6 (item k), status; reference commit corrected |
+| Reachability: failing invariant in one section, report in another | Gemini, 2 | adopted: reported on the frozen universe, failing on the sensitivity's view |
+| `event` key | Gemini, 3 | adopted: (repo, unit commit, path); the linking commit only in the independent build |
+| Suite needs an absolute bound and the placebo gates | Gemini, 4 | adopted **with a change**: tested first on the 100 control runs already made — the gates hold as a mean over 20 repositories and fail often on one, so they are a suite mean. **Before phase B:** the false-failure simulation |
+| Convention-mix circularity | Gemini, 5 | adopted: a suite row; the two mutations already exist |
+| Reachability by rule must cover every static divergence | Gemini, 6 | adopted in section 4. **Before phase B** |
+| Dual-build protocol | Gemini, 7 | adopted: section 9 |
+| Isolation by Python hooks is not enough | Gemini, 8 | adopted: declared inputs bound into a sandbox |
+| Negative zero, not-a-number, derived-predictor missingness | Gemini, 9 | adopted. Canonical bytes: sent to the tables builder. Derived predictors: **before phase B** |
+| How prebuilt inputs were made | Gemini, 10 | adopted in section 4. **Before phase B** |
+| Not adopted | — | none |

@@ -168,7 +168,11 @@ repositories, and all three layers must report each. **None of this is built yet
 | Not adopted | — |
 | Still owed | the second independent review (a different model, on the pull request); the count of section 7 item 1 |
 
-## Open, for the owner
+## Owner decisions on the two questions below, 2026-11-14 (late evening)
+
+Both accepted as recommended: the label of section 8, and the confirmatory run as the reference scorer run
+once, unchanged, with every correction beside it. Still owed before this is in force: the second independent
+review. The questions as put:
 
 1. **The label.** Section 8's wording is longer and less flattering than Amendment 4's. The reviewer's view,
    which the author shares: "pre-registered" is still true of the hypotheses, the statistic and the family,
