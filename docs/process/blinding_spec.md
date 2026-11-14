@@ -2,6 +2,10 @@
 
 **Status: specification, nothing built.** It goes to the same build-and-review as everything else.
 
+**Revision 3, 2026-11-14, after the review of the first build** (`reviews/blinding_review_fable.md`), marked
+**[r3]**: scrambles released to sessions are permuted within the size band only. Revision 2's cells are kept
+below for the record and are no longer released.
+
 **Revision 2, 2026-11-14.** The scramble's cells are changed (marked **[r2]**): the first version leaked. Found
 by the design review of the research-codebase specification and reproduced on the control repository.
 
@@ -59,6 +63,20 @@ Both statements go in every study's `seen.md`.
      must be under **2%**; if it is not, the repo's scrambles are not released and the reason is written.
 - The price: in a small repo the scramble no longer preserves directory, so its null is the null of size
   alone. The per-repo report of step 3 says which repos that is.
+- **[r3] Released scrambles use the size band alone.** Permuting inside any finer cell keeps that cell's count
+  of positives, so one copy shows each cell's fix rate, a cell with no positives is a list of known negatives,
+  and the between-cell part of a structural effect survives. Measured on 16 control repositories with a strong
+  planted effect: with cells of at least 8 files, 2–4% of the effect survives on average (up to 16% in one
+  repository) and 2–5% of files sit in cells with no positives; with the band alone, about 0% and 0–1%. Real
+  repositories differ far more by directory than the control repository does. Therefore:
+  1. `labels/<repo>.scrambled.json` holds k copies permuted **within the LOC band only**. Rules 2 and 4 above
+     do not apply to them. Rule 5 (under 2% of true positives positive in all copies) is still checked.
+  2. What a session can learn from them: the number of positives in each size band. That is the relation of
+     fixes to size, which no hypothesis is about.
+  3. A **directory-preserving** scramble (the Revision 2 cells with a minimum of 20 files) is built only inside
+     the owner-run gates job, in memory, to report how much a null statistic varies when files cluster. Its
+     copies are never written; the job writes the declared summary only.
+  4. The released null is therefore the null of size alone, in every repo. `controls.md` says so.
 - So the whole pipeline — statistic, controls, gates, scorer — runs end to end on real measurements, and **any
   structural effect it reports on scrambled labels is false by construction.** That is a real-data negative
   control, run on every repo, for free. It is recorded in the study's `controls.md` with its result.
@@ -136,6 +154,12 @@ tests/test_blind.py   round-trip with a throwaway key; scramble preserves the st
                       in all copies is under 2%, the effect on scrambled labels is under 10% of the true one,
                       and the first version's cells (band x full directory) FAIL both -- the test must be able
                       to see the leak
+                      [r3] for the released (band-only) copies, over at least 8 control repositories with a
+                      planted effect: the exact expected effect on scrambled labels is under 5% of the true
+                      one in every repository, and the mean over repositories is within three standard errors
+                      of zero; no file is in a cell with no positives unless its whole band has none; the
+                      Revision 2 cells are shown to fail the 5% rule in at least one repository. No expected
+                      failures remain
 ```
 
 Tested end to end on the control repository, where the true labels are known: the unblinded result must equal
