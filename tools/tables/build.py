@@ -18,6 +18,11 @@ No rule is re-implemented here. Every fact is a tool's output or the return valu
 unchanged: mod1_lift.frame, sa3_outcomes.universe, laws_units.Excluder.why / language_of, and
 laws_history.harvest (for history_can_touch, run on a one-commit repository holding the snapshot's tree).
 Every gap is in DECISIONS.md.
+
+The `file`, `measure`, `repo` and `snapshot` builders are module functions (file_table, measure_table, repo_row,
+snapshot_row, read_scan), so phase B (tools/tables/phase_b.py) can import them. Imported, this module guards
+first too: inside phase B's read-only sandbox (PHASEB_SANDBOX=1) by sandbox_ro's guard, anywhere else by the
+harness guard; both before any SA3 import.
 """
 from __future__ import annotations
 
@@ -40,7 +45,11 @@ TOOLS = HERE.parent
 sys.path.insert(0, str(TOOLS / "harness"))
 import sandbox as SB  # noqa: E402
 
-SB.assert_inside(Path(os.environ.get("HARNESS_WORK", "/nonexistent")))    # before any SA3 import
+if os.environ.get("PHASEB_SANDBOX") == "1":       # phase B's read-only, declared-inputs sandbox
+    import sandbox_ro as SR  # noqa: E402
+    SR.assert_inside_ro()                         # before any SA3 import
+else:
+    SB.assert_inside(Path(os.environ.get("HARNESS_WORK", "/nonexistent")))    # before any SA3 import
 sys.path.insert(0, str(HERE))
 sys.path.insert(1, str(TOOLS))
 import canon as C  # noqa: E402
@@ -125,6 +134,118 @@ def history_touchable(repo: Path, sha: str, language: str, c_family: bool, tmp: 
     return got
 
 
+def read_scan(r: str, scan_db: Path, side: dict) -> dict[str, tuple]:
+    """the scan's file_data rows by path, src_root removed exactly as universe() removes it: (SCAN_COLS...,
+    mitigation_telemetry)"""
+    root = side["src_root"].rstrip("/") + "/"
+    cols = ", ".join(S.SCAN_COLS)
+    w = L.ro(scan_db)
+    scan: dict[str, tuple] = {}
+    for row in w.execute(f"select file_path, {cols}, mitigation_telemetry from file_data"):
+        p = row[0][len(root):] if row[0].startswith(root) else row[0].lstrip("/")
+        if p in scan:
+            raise SystemExit(f"{r}: the scan holds {p!r} twice")
+        scan[p] = row[1:]
+    w.close()
+    return scan
+
+
+def file_table(r: str, langs, files: set[str], side: dict, scan: dict, tree: list[str], arch: set[str] | None,
+               touchable: set[str] | None) -> list[dict]:
+    """The `file` table. arch None (phase B: `git archive` unavailable, a tree-only clone): in_archive is null and
+    the archive test is skipped, so a unit file the scan lacks is `not_scanned`. touchable None: the history walk
+    could not be run on the snapshot's tree; history_can_touch is null. Phase A always passes both."""
+    gen = set(side["generated"])
+    ex = U.Excluder(side["attrs"], include_tutorials=True)        # exactly as sa3_outcomes.universe builds it
+    ex_no_tut = U.Excluder(side["attrs"], include_tutorials=False)
+    ex_no_attr = U.Excluder({}, include_tutorials=True)
+    loc_i = S.SCAN_COLS.index("total_loc")
+
+    def reason(p: str) -> tuple[str | None, str | None]:
+        if U.language_of(p) not in langs:
+            return "language", None
+        g = p in gen
+        why = ex.why(p, g)
+        if why is not None:
+            if why in ("vendored", "generated") and ex_no_attr.why(p, g) != why:
+                return "gitattributes", None
+            if why == "example" and ex_no_tut.why(p, g) != "example":
+                return "tutorial", None
+            pats = {"vendored": ex.vendor, "documentation": ex.docs}.get(why)
+            pat = next((x.pattern for x in pats if x.search(p)), None) if pats else None
+            return why, pat
+        if arch is not None and p not in arch:
+            return "not_in_archive", None
+        if p not in scan:
+            return "not_scanned", None
+        if not scan[p][loc_i]:
+            return "zero_loc", None
+        return None, None
+
+    file_rows = []
+    for p in dict.fromkeys(tree):                     # duplicates (impossible in git) are left to invariant 1
+        why, pat = reason(p)
+        sc = scan.get(p)
+        file_rows.append({"repo": r, "path": p, "in_universe": p in files, "reason": why, "pattern": pat,
+                          "loc": sc[loc_i] if sc else None, "language": U.language_of(p), "scanned": sc is not None,
+                          "in_archive": None if arch is None else p in arch,
+                          "history_can_touch": None if touchable is None else p in touchable})
+    return file_rows
+
+
+def measure_table(r: str, side: dict, scan: dict, in_tree: set[str], files: set[str], nest: dict) -> list[dict]:
+    """The `measure` table: the scan's columns for every scanned path of the tree, nesting for every universe file.
+    nest: the nesting file's content ({} when there is none)."""
+    measure_rows = []
+    eng = side.get("engine")
+    for p in sorted(in_tree & set(scan)):
+        vals = scan[p]
+        for c, v in zip(S.SCAN_COLS, vals[:-1]):
+            measure_rows.append({"repo": r, "path": p, "name": c, "value": None if v is None else float(v),
+                                 "absent_means": S.ABSENT_MEANS[c], "instrument": "engine", "version": eng})
+        tel, am = None, S.ABSENT_MEANS["amplified_cascading_flux"]
+        try:
+            v = (json.loads(vals[-1]) if vals[-1] else {}).get("amplified_cascading_flux")
+            tel = None if v is None else float(v)
+        except (ValueError, TypeError, AttributeError):
+            am = "missing"                            # sa3_score.load leaves NaN when the JSON does not parse
+        measure_rows.append({"repo": r, "path": p, "name": "amplified_cascading_flux", "value": tel,
+                             "absent_means": am, "instrument": "engine mitigation_telemetry", "version": eng})
+    nf = nest.get("files", {})
+    for p in sorted(files):
+        got = nf.get(p)
+        for i, c in enumerate(S.NEST_COLS):
+            measure_rows.append({"repo": r, "path": p, "name": c, "value": None if not got else float(got[i]),
+                                 "absent_means": S.ABSENT_MEANS[c], "instrument": "sa3_nest_scan",
+                                 "version": nest.get("pack")})
+    return measure_rows
+
+
+def repo_row(r: str, hmeta: dict, f: dict, side: dict, oc: dict, pool_tip: str | None, walk: list,
+             scan: dict, in_tree: set[str]) -> dict:
+    """The `repo` row. oc supplies status, why, complete, unit_files, tree_unit_files: phase A passes the outcome
+    file; phase B passes the same keys from public sources (phase_b.py)."""
+    cts = [ct for _, ct, _ in walk]
+    return {"repo": r, "language": hmeta.get("language"), "langs": ",".join(f["langs"]),
+            "units": hmeta.get("units"), "unit_rule": hmeta.get("unit"), "first_parent": f["merge_units"],
+            "status": oc.get("status"), "why": oc.get("why"),
+            "pool_tip": pool_tip, "history_head": hmeta.get("head"),
+            "engine": side.get("engine"),
+            "hashseed": None if side.get("hashseed") is None else str(side["hashseed"]),
+            "commits": int(hmeta["commits"]), "bots": int(hmeta["bots"]), "merges": int(hmeta["merges"]),
+            "first_parent_commits": int(hmeta["first_parent_commits"]),
+            "merge_share": float(hmeta["merge_share"]),
+            "walk_out_of_time_order": sum(1 for x, y in zip(cts, cts[1:]) if y < x),
+            "pipeline_complete": oc.get("complete"), "pipeline_unit_files": oc.get("unit_files"),
+            "pipeline_tree_unit_files": oc.get("tree_unit_files"),
+            "scanned_not_in_tree": len(set(scan) - in_tree)}
+
+
+def snapshot_row(r: str, snap: str, snap_ct: int | None, f: dict, window_start: int | None) -> dict:
+    return {"repo": r, "sha": snap, "ct": snap_ct, "cut_ct": f["cut"], "window_start": window_start,
+            "window_end": f["end"], "usable_commits": f["usable_commits"]}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
@@ -156,97 +277,21 @@ def main() -> int:
     # ------------------------------------------------------------------------------------------------ file
     tree = tree_paths(repo_git, snap)
     arch = archive_paths(repo_git, snap)
-    root = side["src_root"].rstrip("/") + "/"
-    cols = ", ".join(S.SCAN_COLS)
-    w = L.ro(inputs["scan_db"])
-    scan: dict[str, tuple] = {}
-    for row in w.execute(f"select file_path, {cols}, mitigation_telemetry from file_data"):
-        p = row[0][len(root):] if row[0].startswith(root) else row[0].lstrip("/")
-        if p in scan:
-            raise SystemExit(f"{r}: the scan holds {p!r} twice")
-        scan[p] = row[1:]
-    w.close()
-    gen = set(side["generated"])
-    ex = U.Excluder(side["attrs"], include_tutorials=True)        # exactly as sa3_outcomes.universe builds it
-    ex_no_tut = U.Excluder(side["attrs"], include_tutorials=False)
-    ex_no_attr = U.Excluder({}, include_tutorials=True)
+    scan = read_scan(r, inputs["scan_db"], side)
     with tempfile.TemporaryDirectory(dir=os.environ.get("TMPDIR")) as tmp:
         touchable = history_touchable(repo_git, snap, hmeta["language"], hmeta.get("units") == "c+cpp", Path(tmp))
-    loc_i = S.SCAN_COLS.index("total_loc")
-
-    def reason(p: str) -> tuple[str | None, str | None]:
-        if U.language_of(p) not in f["langs"]:
-            return "language", None
-        g = p in gen
-        why = ex.why(p, g)
-        if why is not None:
-            if why in ("vendored", "generated") and ex_no_attr.why(p, g) != why:
-                return "gitattributes", None
-            if why == "example" and ex_no_tut.why(p, g) != "example":
-                return "tutorial", None
-            pats = {"vendored": ex.vendor, "documentation": ex.docs}.get(why)
-            pat = next((x.pattern for x in pats if x.search(p)), None) if pats else None
-            return why, pat
-        if p not in arch:
-            return "not_in_archive", None
-        if p not in scan:
-            return "not_scanned", None
-        if not scan[p][loc_i]:
-            return "zero_loc", None
-        return None, None
-
-    file_rows = []
-    for p in dict.fromkeys(tree):                     # duplicates (impossible in git) are left to invariant 1
-        why, pat = reason(p)
-        sc = scan.get(p)
-        file_rows.append({"repo": r, "path": p, "in_universe": p in files, "reason": why, "pattern": pat,
-                          "loc": sc[loc_i] if sc else None, "language": U.language_of(p), "scanned": sc is not None,
-                          "in_archive": p in arch, "history_can_touch": p in touchable})
+    file_rows = file_table(r, f["langs"], files, side, scan, tree, arch, touchable)
     in_tree = set(tree)
 
     # --------------------------------------------------------------------------------------------- measure
-    measure_rows = []
-    eng = side.get("engine")
-    for p in sorted(in_tree & set(scan)):
-        vals = scan[p]
-        for c, v in zip(S.SCAN_COLS, vals[:-1]):
-            measure_rows.append({"repo": r, "path": p, "name": c, "value": None if v is None else float(v),
-                                 "absent_means": S.ABSENT_MEANS[c], "instrument": "engine", "version": eng})
-        tel, am = None, S.ABSENT_MEANS["amplified_cascading_flux"]
-        try:
-            v = (json.loads(vals[-1]) if vals[-1] else {}).get("amplified_cascading_flux")
-            tel = None if v is None else float(v)
-        except (ValueError, TypeError, AttributeError):
-            am = "missing"                            # sa3_score.load leaves NaN when the JSON does not parse
-        measure_rows.append({"repo": r, "path": p, "name": "amplified_cascading_flux", "value": tel,
-                             "absent_means": am, "instrument": "engine mitigation_telemetry", "version": eng})
     nest = json.loads(inputs["nesting"].read_text()) if inputs["nesting"].exists() else {}
-    nf = nest.get("files", {})
-    for p in sorted(files):
-        got = nf.get(p)
-        for i, c in enumerate(S.NEST_COLS):
-            measure_rows.append({"repo": r, "path": p, "name": c, "value": None if not got else float(got[i]),
-                                 "absent_means": S.ABSENT_MEANS[c], "instrument": "sa3_nest_scan",
-                                 "version": nest.get("pack")})
+    measure_rows = measure_table(r, side, scan, in_tree, files, nest)
 
     # ------------------------------------------------------------------------------------- repo, snapshot
     snap_ct = int(git(repo_git, "show", "-s", "--format=%ct", snap).decode().strip())
-    cts = [ct for _, ct, _ in walk]
-    repo_row = {"repo": r, "language": hmeta.get("language"), "langs": ",".join(f["langs"]),
-                "units": hmeta.get("units"), "unit_rule": hmeta.get("unit"), "first_parent": f["merge_units"],
-                "status": oc.get("status"), "why": oc.get("why"),
-                "pool_tip": git(repo_git, "rev-parse", "HEAD").decode().strip(), "history_head": hmeta.get("head"),
-                "engine": side.get("engine"),
-                "hashseed": None if side.get("hashseed") is None else str(side["hashseed"]),
-                "commits": int(hmeta["commits"]), "bots": int(hmeta["bots"]), "merges": int(hmeta["merges"]),
-                "first_parent_commits": int(hmeta["first_parent_commits"]),
-                "merge_share": float(hmeta["merge_share"]),
-                "walk_out_of_time_order": sum(1 for x, y in zip(cts, cts[1:]) if y < x),
-                "pipeline_complete": oc.get("complete"), "pipeline_unit_files": oc.get("unit_files"),
-                "pipeline_tree_unit_files": oc.get("tree_unit_files"),
-                "scanned_not_in_tree": len(set(scan) - in_tree)}
-    snap_row = {"repo": r, "sha": snap, "ct": snap_ct, "cut_ct": f["cut"], "window_start": oc.get("window_start"),
-                "window_end": f["end"], "usable_commits": f["usable_commits"]}
+    repo_row_ = repo_row(r, hmeta, f, side, oc, git(repo_git, "rev-parse", "HEAD").decode().strip(), walk, scan,
+                         in_tree)
+    snap_row = snapshot_row(r, snap, snap_ct, f, oc.get("window_start"))
 
     # ------------------------------------------------------------------------------------------------ touch
     touch_rows = []
@@ -282,7 +327,8 @@ def main() -> int:
             for p in ps:
                 e = pairs.setdefault((s, p), {"hp": False, "hp_allreverts": False, "tier": None})
                 if e["tier"] not in (None, tier):
-                    raise SystemExit(f"{r}: {s} {p} is in two exclusive tiers")
+                    raise SystemExit(f"{r}: an event row is in two exclusive tiers "
+                                     "(protected: commit and path not named)")
                 e["tier"] = tier
 
     def how(s: str) -> str | None:
@@ -306,7 +352,7 @@ def main() -> int:
                                   "n_commits": v.get("n_commits"), "largest_commit_share": v.get("largest_commit_share"),
                                   "clears_floor": v.get("clears_floor")})
 
-    tables = {"repo": [repo_row], "snapshot": [snap_row], "file": file_rows, "measure": measure_rows,
+    tables = {"repo": [repo_row_], "snapshot": [snap_row], "file": file_rows, "measure": measure_rows,
               "touch": touch_rows, "link": link_rows, "event": event_rows, "pool": pool_rows,
               "marginal": marginal_rows}
     fails = I.check(tables, tree)
@@ -321,7 +367,7 @@ def main() -> int:
              "inputs": {k: ({"sha256": sha256_file(p), **({"wal_sha256": sha256_file(Path(str(p) + "-wal"))}
                                                          if Path(str(p) + "-wal").exists() else {})}
                             if p.exists() else None) for k, p in inputs.items()},
-             "pool_clone_tip": repo_row["pool_tip"], "snapshot": snap, "linguist_commit": U.LINGUIST,
+             "pool_clone_tip": repo_row_["pool_tip"], "snapshot": snap, "linguist_commit": U.LINGUIST,
              "known_gaps": KNOWN_GAPS, "tables": {}}
     for name in S.TABLES:
         index["tables"][name] = C.write_table(out_dir, name, tables[name])

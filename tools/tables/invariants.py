@@ -5,7 +5,10 @@
 # Licensed under the PolyForm Noncommercial License 1.0.0 (see LICENSE).
 # ==============================================================================
 """The eight invariants of tables_spec.md. Pure: tables in, failures out; each failure names its invariant and
-the row(s) by key. The build fails when `check` returns anything.
+the row(s) by key -- except a row of a protected table (`event`, `pool`, `link`: schema.PROTECTED), which is
+never named: its failure is reported as the invariant's number, the table and the count of failing rows only
+(tables_phase_b_spec.md: on real data the key of an event or pool row is a positive file and its commit).
+The build fails when `check` returns anything.
 
     check(tables, tree_paths) -> [str]     tables: {name: [row dict]}; tree_paths: every path of the snapshot's
                                            tree as `git ls-tree -r` lists it (duplicates kept, to be caught)
@@ -28,6 +31,14 @@ def _cap(num: int, bad: list[str]) -> list[str]:
     if len(bad) > MAX_NAMED:
         out.append(f"invariant {num}: ... and {len(bad) - MAX_NAMED} more rows")
     return out
+
+
+def _protected(num: int, table: str, n: int) -> list[str]:
+    """a protected table's failing rows: number, table and count; no key, no path, no commit"""
+    if not n:
+        return []
+    rows = "row" if n == 1 else "rows"
+    return [f"invariant {num}: {n} {rows} of protected table {table} fail (rows not named)"]
 
 
 def recount(event: list[dict], pool: list[dict]) -> dict[str, dict]:
@@ -82,15 +93,15 @@ def check(t: dict[str, list[dict]], tree_paths: list[str]) -> list[str]:
 
     # 4. every touch, event and pool path is in `file` with in_universe = 1
     uni = {p for p, rs in by_path.items() if any(r["in_universe"] for r in rs)}
-    bad = [f"{_key(tn, r)}: path not a universe file" for tn in ("touch", "event", "pool") for r in t.get(tn, [])
-           if r["path"] not in uni]
+    bad = [f"{_key('touch', r)}: path not a universe file" for r in t.get("touch", []) if r["path"] not in uni]
     fail += _cap(4, bad)
+    for tn in ("event", "pool"):
+        fail += _protected(4, tn, sum(1 for r in t.get(tn, []) if r["path"] not in uni))
 
     # 5. every event and pool commit has a touch row for each of its paths
     touched = {(r["sha"], r["path"]) for r in t.get("touch", [])}
-    bad = [f"{_key(tn, r)}: no touch row" for tn in ("event", "pool") for r in t.get(tn, [])
-           if (r["sha"], r["path"]) not in touched]
-    fail += _cap(5, bad)
+    for tn in ("event", "pool"):
+        fail += _protected(5, tn, sum(1 for r in t.get(tn, []) if (r["sha"], r["path"]) not in touched))
 
     # 6. marginal equals the recount from event (and pool), for every outcome with a commit list
     rc = recount(t.get("event", []), t.get("pool", []))

@@ -364,7 +364,8 @@ def _plant(num):
         return t, tree, f"touch('r', '{'3' * 40}', 'README.md')"
     if num == 5:
         t["touch"] = [x for x in t["touch"] if x["sha"] != "2" * 40]          # the pool commit's touch row
-        return t, tree, f"pool('r', '{'2' * 40}', 'src/a.py')"
+        # a protected table's row is never named: number, table and count only (tables_phase_b_spec.md)
+        return t, tree, "invariant 5: 1 row of protected table pool fail (rows not named)"
     if num == 6:
         t["marginal"][0]["n_files"] = 2
         return t, tree, "marginal('r', 'HP')"
@@ -386,6 +387,16 @@ def test_4_invariants_bite():
         assert fails, f"invariant {num} did not fail"
         assert all(f.startswith(f"invariant {num}:") for f in fails), (num, fails)
         assert any(names in f for f in fails), (num, names, fails)
+        if num == 5:                                 # the planted pool row's commit and path are not named
+            assert not any("2" * 40 in f or "src/a.py" in f for f in fails), fails
+    # a protected row failing invariants 4 and 5 (an event outside the universe, with no touch row): not named
+    t, tree = valid_tables()
+    t["event"].append({"repo": "r", "sha": "4" * 40, "path": "secret/positive.py", "hp": 1, "hp_allreverts": 1,
+                       "tier": "issue_fix", "how": "own"})
+    fails = I.check(t, tree)
+    assert "invariant 4: 1 row of protected table event fail (rows not named)" in fails, fails
+    assert "invariant 5: 1 row of protected table event fail (rows not named)" in fails, fails
+    assert not any("4" * 40 in f or "secret/positive.py" in f for f in fails), fails
     # more plants on single invariants
     t, tree = valid_tables()
     t["file"].append(dict(t["file"][0]))                                     # a path twice

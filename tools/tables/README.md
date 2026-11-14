@@ -36,7 +36,8 @@ build_failed.json          instead of all the above, when an invariant fails (ex
 - `build.py`: the stage. Reads `history/`, `sa3_scans/`, `sa3_outcomes/`, `meta_sa3/`, `sa3_nesting/` and the pool
   clone; calls `mod1_lift.frame`, `sa3_outcomes.universe`, `laws_units.Excluder.why` / `language_of` and
   `laws_history.harvest` unchanged.
-- `invariants.py`: the eight invariants; each failure names its invariant and the row by key.
+- `invariants.py`: the eight invariants; each failure names its invariant and the row by key, except a row of a
+  protected table (`event`, `pool`, `link`), reported as the invariant's number and a count only.
 - `datacard.py`: the data card from the finished tables.
 
 ## The tables (key columns first)
@@ -56,3 +57,40 @@ build_failed.json          instead of all the above, when an invariant fails (ex
 `file.reason` (closed, in the order decided): `language`, `vendored`, `documentation`, `generated`, `test`,
 `example`, `tutorial`, `gitattributes`, `not_in_archive`, `not_scanned`, `zero_loc`; `pattern` is the GitHub
 linguist pattern for `vendored` and `documentation`.
+
+## Phase B: SA3's data, predictor side only (`docs/process/tables_phase_b_spec.md`)
+
+```
+python3 tools/tables/phase_b.py --decoy DIR --out OUT [--scratch S] [--repos a,b] [--preflight-only]
+python3 tools/tables/phase_b.py --real --i-am-the-reviewer-session --out OUT [...]     # never run by the builder
+python3 -m pytest -p no:cacheprovider tests/test_tables_phase_b.py                     # 26 tests, about 4 min
+```
+
+No target: refused (exit 2). A decoy DIR holds `study/` (laid out like the study directory), `pool/<repo>` and
+`docs/sa3_outcome_marginals.json` (optionally `docs/sa3_placebo.json`). `--real` needs the second flag; its
+locations are parameters (`--real-study`, `--real-pool`, `--real-docs`) defaulting to the production paths.
+OUT and the scratch directory must be new and under `~/.claude/jobs` or `/tmp`.
+
+Each repo runs in its own sandboxes (`tools/harness/sandbox_ro.py`): `preflight` (all repos first), `copy`
+(hashes; each database copied with its side files and the copy opened, never the original), `tables` (`repo`,
+`snapshot`, `file`, `measure` with phase A's builders, and the repo's counts), `silence` (count 1, once per scorer
+version). Only that repo's declared inputs are bound, read-only; nothing from `sa3_outcomes/`, `meta_sa3/`,
+`meta_mod1/`, `dbs/` or another repo. A stat manifest of every declared input and every clone's `.git` is taken
+before and after, from outside the job (`manifest_stat.py`).
+
+```
+OUT/<repo>/<table>.<hash16>.jsonl   repo, snapshot, file, measure (no touch, link, event, pool, marginal)
+OUT/<repo>/index.json               table hashes, input SHA-256, code hash, archive and history-walk status
+OUT/<repo>/datacard.json            that repo's counts 2-6, 8-10, and nothing else
+OUT/study_card.json, .md            every repo's counts and count 1
+OUT/preflight.json                  per repo: inputs present, SQLite mode and side files, the clone's state
+OUT/run_log.json                    stages, return codes, invariant numbers and counts, the manifest's verdict
+```
+
+- `phase_b.py`: the launcher and the in-sandbox stages (`stage preflight|copy|tables|listing`).
+- `study_card.py`: the counts (pure).
+- `silence.py`: count 1: each commit's `tools/*.py` extracted into scratch, a stub outcome file, the scorer's own
+  `load()` and `silent()` called.
+- `manifest_stat.py`: the before / after manifest.
+- `build.py`'s builders are importable functions (`read_scan`, `file_table`, `measure_table`, `repo_row`,
+  `snapshot_row`); `invariants.py` never names a row of a protected table.
