@@ -17,11 +17,11 @@ import history as hi
 
 REGISTRY = {
     "merge_workflow": {
-        "truth": "planted properties and true fixes unchanged; the same logical commits reach main on branches joined by merge commits, so the units SA3 labels are the merges (labels: see `ambiguous`)",
+        "truth": "planted properties and true fixes unchanged; the same logical commits reach main on branches joined by merge commits, so the units SA3 labels are the merges; their labels are decided by the owner ruling of 2026-11-14 (tainted merges follow the code: a merge counts when its diff shares a file with a non-bot linked brought-in commit), the other readings kept as `unruled_readings`",
         "change": "work arrives through merge commits; the fix reference is in the brought-in commit, not the merge",
         "log": [4, 17]},
     "bot_merges": {
-        "truth": "as merge_workflow, and every merge is authored by a [bot] account; the expected labels are merge_workflow's (section 4 bars inheritance from a bot's commit, not by a bot-authored merge)",
+        "truth": "as merge_workflow, and every merge is authored by a [bot] account; the expected labels are merge_workflow's (section 4 bars inheritance from a bot's commit, not by a bot-authored merge; the ruling of 2026-11-14 applies alike)",
         "change": "every merge is authored by an account matching the bot pattern (implies merge_workflow)",
         "log": [29], "implies": ["merge_workflow"]},
     "squash_merges": {

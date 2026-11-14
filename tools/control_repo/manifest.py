@@ -14,7 +14,7 @@ import re
 
 import history as hi
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 TREE_WIDE_SHARE, TREE_WIDE_MIN = 0.10, 20     # section 4: >= 10% of the unit files and >= 20 of them
 MAX_BROUGHT = 50                              # section 4: no inheritance past 50 brought-in commits
 WINDOW_DAYS = 730                             # section 2: the outcome window
@@ -64,6 +64,15 @@ READINGS = {
                                        "(a same-merge revert's revert link excluded); the taint only keeps merges "
                                        "out of the keyword outcome and the control pool",
 }
+RULED_MERGE_READING = "taint_governs_control_pool_only"
+RULING = {"date": "2026-11-14", "by": "owner",
+          "ruling": "tainted merges follow SA3's code (tools/sa3_outcomes.py): a merge's expected label is decided "
+                    "by the reading `taint_governs_control_pool_only`; the other merge readings are kept on the "
+                    "label under `unruled_readings`, marked not ruled",
+          "applies_to": "first-parent merges (merge_workflow, bot_merges, huge_import_merge)",
+          "not_ruled": "a revert of a commit made after the cut that quotes a ticket from its target's subject "
+                       "stays ambiguous, in merges and in direct and squash commits"}
+RULING_TAG = "[decided by the owner ruling of 2026-11-14: tainted merges follow the code] "
 REVERT_READINGS = {
     "reference_counts": "a revert of a commit made after the cut that quotes a ticket from its target's subject "
                         "carries a fix reference, and HP counts it through that reference",
@@ -180,19 +189,24 @@ def _merge_label(L, r):
             clause = CLAUSES["nothing_to_inherit"]
         return counted, clause, (L.positives(shared) if counted else [])
 
-    combos = [(m, rr) for m in READINGS for rr in (REVERT_READINGS if has_contested else [None])]
-    results = {combo: one(*combo) for combo in combos}
-    outcomes = {(c, json.dumps(p)) for c, _cl, p in results.values()}
-    if len(outcomes) == 1:                             # every reading agrees
-        counted, clause, pos = results[("inherit", combos[0][1])]
-        return counted, clause, pos, None
-    readings = []
-    for (m, rr), (counted, clause, pos) in results.items():
-        name = m if rr is None else f"{m} + {rr}"
-        meaning = READINGS[m] + ("" if rr is None else "; and " + REVERT_READINGS[rr])
-        readings.append({"reading": name, "meaning": meaning, "counted": counted, "clause": clause,
-                         "positives": pos})
-    return None, "ambiguous: see `ambiguous`", [], readings
+    revert_readings = list(REVERT_READINGS) if has_contested else [None]
+    results = {(m, rr): one(m, rr) for m in READINGS for rr in revert_readings}
+
+    def entry(m, rr):
+        counted, clause, pos = results[(m, rr)]
+        return {"reading": m if rr is None else f"{m} + {rr}",
+                "meaning": READINGS[m] + ("" if rr is None else "; and " + REVERT_READINGS[rr]),
+                "ruled": m == RULED_MERGE_READING, "counted": counted, "clause": clause, "positives": pos}
+
+    # The owner's ruling decides the merge reading; the others are kept for the record when they differ.
+    unruled = [entry(m, rr) for m in READINGS if m != RULED_MERGE_READING for rr in revert_readings
+               if results[(m, rr)][::2] != results[(RULED_MERGE_READING, rr)][::2]]
+    ruled = {rr: results[(RULED_MERGE_READING, rr)] for rr in revert_readings}
+    if len({(c, json.dumps(p)) for c, _cl, p in ruled.values()}) == 1:
+        counted, clause, pos = ruled[revert_readings[0]]
+        return counted, RULING_TAG + clause, pos, None, unruled
+    # still open: a brought-in revert of post-cut code that quotes a ticket (not ruled)
+    return None, "ambiguous: see `ambiguous`", [], [entry(RULED_MERGE_READING, rr) for rr in revert_readings], unruled
 
 
 def expected_labels(plan, realised, snap_hash):
@@ -226,7 +240,8 @@ def expected_labels(plan, realised, snap_hash):
             if r["kind"] == "merge" and len(r["brought"]) > MAX_BROUGHT:
                 excluded.append(CLAUSES["over_cap"] + f" [{len(r['brought'])} brought in]")
         if excluded:
-            lab["clause"] = "; ".join(excluded)
+            lab["clause"] = ("; ".join(excluded) if r["kind"] != "merge"
+                             else RULING_TAG + "; ".join(excluded))
         elif r["kind"] in ("direct", "squash"):
             tiers, contested, nonqual, keyword = [], [], [], False
             for lid in r["lids"]:
@@ -255,10 +270,13 @@ def expected_labels(plan, realised, snap_hash):
             else:
                 lab["clause"] = CLAUSES["none"]
         else:
-            counted, clause, pos, readings = _merge_label(L, r)
+            counted, clause, pos, readings, unruled = _merge_label(L, r)
             lab["counted"], lab["clause"], lab["positives"] = counted, clause, pos
+            if unruled:
+                lab["unruled_readings"] = unruled
             if readings:
-                ambiguous.append({"hash": r["hash"], "commits": r["lids"], "readings": readings})
+                ambiguous.append({"hash": r["hash"], "commits": r["lids"], "readings": readings,
+                                  "unruled_readings": unruled})
         labels.append(lab)
     return labels, ambiguous
 
@@ -373,6 +391,7 @@ def build(plan, realised, snap_hash, prior_hash) -> dict:
                              "clamped_to_first_commit": by_hash[prior_hash]["time"] > snap_time - 365 * hi.DAY}},
         "mutations": plan.mutation_set.summary() | {"notes": plan.mutation_notes},
         "change_in_prior_year": change,
+        "rulings": [RULING],
         "counts": {"unit_files_at_snapshot": sum(1 for f in plan.points["snapshot"] if files[f].is_unit),
                    "logical_commits": len(plan.entries), "realised_commits": len(realised),
                    "true_fixes_after_snapshot": sum(1 for e in plan.entries if e.type == "fix" and e.time > snap_time)},

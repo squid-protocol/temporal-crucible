@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 
 import codegen as cg
 
-GENERATOR_VERSION = "1.1.0"
+GENERATOR_VERSION = "1.2.0"
 T0 = 1577836800                       # 2020-01-01T00:00:00Z
 DAY = 86400
 A_SIZE, B_BUSY = 0.6, 1.0             # fix weight: loc^a * exp(b * busyness)

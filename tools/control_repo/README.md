@@ -66,8 +66,11 @@ for branch density.
   `positives`: the snapshot's unit files it touches, as ids with their **path at the snapshot** (the set SA3
   ranks). Unit files created after the snapshot are listed apart (`touched_unit_files_not_at_snapshot`). Where
   the written rule can be read more than one way, `counted` is `null` and the case is listed under `ambiguous`
-  with every reading: merges that bring in a linked commit (four readings, DECISIONS.md 29 and 46) and reverts
-  of post-snapshot code that quote a ticket (two readings, 45).
+  with every reading. **Merges are decided** by the owner ruling of 2026-11-14 (top-level `rulings`): tainted
+  merges follow SA3's code, so a merge counts when its first-parent diff shares a file with a brought-in, non-bot
+  linked commit, a fix-worded companion notwithstanding; over the 50-commit cap or tree-wide it does not. The
+  other merge readings stay on the label as `unruled_readings`. What is still open is a revert of post-snapshot
+  code that quotes a ticket (two readings, DECISIONS.md 45), in a merge or not.
 - `mutations`: which were applied, what each changes in the truth, and counts of what it changed.
 
 ## Why the negative control is null (the mechanism to check)

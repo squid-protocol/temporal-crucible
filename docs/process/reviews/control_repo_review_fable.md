@@ -202,3 +202,12 @@ same independent scripts on freshly generated repositories; nothing taken from t
 **Accepted.** Open for phase 2, unchanged: merge-workflow repositories have no decided positive label until
 defect-log entry 54 is ruled on; density is related to size inside size bands, so a pipeline is scored against
 the truth pushed through the same statistic.
+
+## Third pass: the owner's ruling on tainted merges (same day)
+
+Generator 1.2.0, manifest schema 3: a merge's label is decided by the reading SA3's code implements; the other
+readings are kept beside it, marked as not ruled. Re-checked independently on seed 11 with `merge_workflow`:
+my own re-derivation of every merge label from the commit messages and the first-parent diffs agrees with the
+manifest on all 285 merges after the snapshot (**88 counted, 196 not, 1 ambiguous** — a brought-in revert of
+new code that quotes a ticket, which is not ruled). Planted counts still equal the text (771 file-points), the
+manifest is byte-identical under a different environment, 40 tests pass. **Accepted.**

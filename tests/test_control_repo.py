@@ -818,31 +818,107 @@ def test_expected_labels_follow_the_written_rule(tmp_path_factory):
         assert all(by_id[x]["type"] == "revert" for x in case["commits"])
 
 
-def test_merge_labels_list_every_reading(tmp_path_factory):
+def test_merge_labels_are_decided_by_the_ruling(tmp_path_factory):
+    """[r3] owner ruling 2026-11-14: a merge's label is decided by `taint_governs_control_pool_only`. Checked
+    against an independent reading of the manifest's commits: a merge counts iff its first-parent diff shares a
+    file with a brought-in, non-bot commit that carries a link (a ticket, Jira key, trailer, CVE, or a revert of
+    pre-snapshot code), fix-worded companions notwithstanding. Only a brought-in revert of post-cut code that
+    quotes a ticket can leave it open."""
     m, _ = generated(tmp_path_factory, "--seed", "3", "--mutation", "merge_workflow")
-    labs = {lab["hash"]: lab for lab in m["expected_labels"]}
+    assert m["rulings"] == [m["rulings"][0]] and m["rulings"][0]["date"] == "2026-11-14"
     by_id = {c["id"]: c for c in m["commits"]}
-    linked = ("issue", "trailer", "cve", "jira", "ticket_feature")
-    assert m["ambiguous"]
-    for case in m["ambiguous"]:
-        assert labs[case["hash"]]["counted"] is None
-        outcomes = {r["reading"]: r["counted"] for r in case["readings"]}
-        merge_readings = {n.split(" + ")[0] for n in outcomes}
-        assert merge_readings == {"inherit", "nonqualifying_revert_taints", "literal_taint",
-                                  "taint_governs_control_pool_only"}
-        assert not any(v for n, v in outcomes.items() if n.startswith("literal_taint"))
-        assert any(outcomes.values())
-        for r in case["readings"]:
-            assert r["clause"] and r["meaning"]
-            assert r["counted"] or not r["positives"]
-    # spec [r2]: a merge that brings in a linked commit and a fix-worded one is open, not decided
-    both = [lab for lab in labs.values() if lab["kind"] == "merge" and len(lab["commits"]) <= 50
-            and "Tree-wide" not in (lab["clause"] or "")
-            and any(by_id[x]["convention"] in linked for x in lab["commits"])
-            and any(by_id[x]["convention"] == "keyword" for x in lab["commits"])]
-    for lab in both:
-        if lab["counted"] is not None:              # decided only if no reading counts it (no shared file)
-            assert "shares no file" in lab["clause"] or "bot" in lab["clause"], lab
-    for lab in labs.values():
-        if lab["kind"] == "side":
+    realised = {r["hash"]: r for r in m["realised"]}
+    snap_path = {f["id"]: f["path_at_snapshot"] for f in m["files"] if f["is_unit"] and f["path_at_snapshot"]}
+    n_units = len(snap_path)
+    linked_conv = ("issue", "trailer", "cve", "jira", "ticket_feature")
+    amb = {a["hash"] for a in m["ambiguous"]}
+    seen = {"counted": 0, "with_fix_worded": 0, "not_counted_linked": 0}
+    for lab in m["expected_labels"]:
+        if lab["kind"] != "merge":
+            assert lab["kind"] == "side" and lab["counted"] is False
+            continue
+        assert lab["clause"].startswith("[decided by the owner ruling of 2026-11-14") or lab["counted"] is None
+        r = realised[lab["hash"]]
+        tree_wide = sum(f in snap_path for f in r["file_ids"])
+        if len(r["brought"]) > 50 or (tree_wide >= 0.1 * n_units and tree_wide >= 20):
             assert lab["counted"] is False
+            continue
+
+        def counts(quote_counts):
+            for lid in r["brought"]:
+                c = by_id[lid]
+                late_quote = c["type"] == "revert" and not c["revert_target"]["before_snapshot"] and "#" in c["message"]
+                link = c["convention"] in linked_conv or (c["type"] == "revert" and c["revert_target"]["before_snapshot"]) \
+                    or (late_quote and quote_counts)
+                if link and "[bot]" not in c["author"] and set(c["file_ids"]) & set(r["file_ids"]):
+                    return True
+            return False
+        want = {counts(True), counts(False)}
+        if len(want) == 2:
+            assert lab["counted"] is None and lab["hash"] in amb
+            continue
+        assert lab["counted"] is want.pop(), lab
+        assert lab["hash"] not in amb
+        kinds = {by_id[x]["convention"] for x in r["brought"]}
+        if lab["counted"]:
+            seen["counted"] += 1
+            seen["with_fix_worded"] += "keyword" in kinds
+            link_files = set()
+            for lid in r["brought"]:
+                c = by_id[lid]
+                if "[bot]" not in c["author"] and (c["convention"] in linked_conv or (
+                        c["type"] == "revert" and c["revert_target"]["before_snapshot"])):
+                    link_files |= set(c["file_ids"])
+            want_pos = sorted((f for f in set(r["file_ids"]) & link_files if f in snap_path), key=snap_path.get)
+            assert [p["id"] for p in lab["positives"]] == want_pos
+            assert all(p["path_at_snapshot"] == snap_path[p["id"]] for p in lab["positives"])
+        elif kinds & set(linked_conv):
+            seen["not_counted_linked"] += 1
+        for alt in lab.get("unruled_readings", []):
+            assert alt["ruled"] is False and alt["reading"].split(" + ")[0] != "taint_governs_control_pool_only"
+    assert seen["counted"] > 0
+    for case in m["ambiguous"]:                       # what is left open is the unruled revert question only
+        assert {x["reading"] for x in case["readings"]} == {
+            "taint_governs_control_pool_only + reference_counts", "taint_governs_control_pool_only + nonqualifying_revert"}
+
+
+def _synthetic_merge(kids, merge_files):
+    """A first-parent merge bringing in `kids` [(lid, author, signals, touched)] over a snapshot of units u1-u4."""
+    import types
+    import history as H
+    import manifest as M
+    entries = {lid: H.Entry(lid, "ordinary", 1, author, 0, signals=sig, touched=list(t))
+               for lid, author, sig, t in kids}
+    L = types.SimpleNamespace(entries=entries, hash_of={"PRE": "h0"}, cut_set={"h0"},
+                              snap_path={f"u{i}": f"src/a/u{i}.py" for i in range(1, 5)})
+    L.positives = lambda fids: M._Labeller.positives(L, fids)
+    r = {"brought": [k[0] for k in kids], "file_ids": list(merge_files)}
+    return M._merge_label(L, r)
+
+
+DEV, BOT = "Ada <a@example.invalid>", "x[bot] <b@example.invalid>"
+
+
+def test_merge_ruling_cases():
+    # a linked commit sharing a file counts, even beside a fix-worded commit
+    c, clause, pos, amb, unruled = _synthetic_merge(
+        [("A", DEV, {"fixref": "issue"}, ["u1"]), ("B", DEV, {"keyword": True}, ["u2"])], ["u1", "u2"])
+    assert c is True and amb is None and [p["id"] for p in pos] == ["u1"] and "owner ruling" in clause
+    assert {u["reading"]: u["counted"] for u in unruled}["inherit"] is False      # the unruled reading, kept
+    # a bot's linked commit is never inherited
+    c, _cl, pos, amb, _u = _synthetic_merge([("A", BOT, {"fixref": "issue"}, ["u1"])], ["u1"])
+    assert c is False and not pos and amb is None
+    # a link whose files the merge diff does not share: not counted
+    c, _cl, _p, amb, _u = _synthetic_merge([("A", DEV, {"cve": True}, ["u3"])], ["u1"])
+    assert c is False and amb is None
+    # a revert of pre-cut code is a link; a revert of a commit in the same merge is not (decision 45/46)
+    c, *_ = _synthetic_merge([("A", DEV, {"revert": "PRE"}, ["u1"])], ["u1"])
+    assert c is True
+    c, *_ = _synthetic_merge([("T", DEV, {}, ["u1"]), ("A", DEV, {"revert": "T"}, ["u1"])], ["u1"])
+    assert c is False
+    # ...unless it quotes a ticket: then it is the unruled revert question, still open
+    c, clause, _p, amb, _u = _synthetic_merge(
+        [("T", DEV, {}, ["u1"]), ("A", DEV, {"revert": "T", "quoted_fixref": "issue"}, ["u1"])], ["u1"])
+    assert c is None and {x["reading"]: x["counted"] for x in amb} == {
+        "taint_governs_control_pool_only + reference_counts": True,
+        "taint_governs_control_pool_only + nonqualifying_revert": False}

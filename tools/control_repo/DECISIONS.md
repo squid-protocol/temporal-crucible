@@ -156,7 +156,7 @@ are the code's constants; where a choice has a measured consequence, the measure
     ticket (45); branch commits of a merge are not units; a bot-authored merge is treated like any other merge
     (section 4 bars inheritance *from* a bot's commit, not *by* a bot-authored merge), so `bot_merges` has
     exactly `merge_workflow`'s labels.
-29. **Merge readings** (listed under `ambiguous`, `counted: null`; revised in r2, see 46). Section 4 says a merge
+29. **Merge readings** (revised in r2, see 46; since r3 the ruled one decides, see 52). Section 4 says a merge
     inherits a link from a commit it brings in, and also that a merge "bringing in a linked or fix-worded commit"
     is tainted and in no outcome. Four readings are computed for every first-parent merge: `inherit` (taint =
     bringing in a fix-worded commit or a link the merge may not inherit: a bot's, or a revert of a commit brought
@@ -263,6 +263,25 @@ are the code's constants; where a choice has a measured consequence, the measure
     Python -0.04 to -0.08, C -0.03 to -0.10), while the planted densities show none (within +-0.03). Fixes rise
     with loc (loc^a), so the band statistic inherits a small negative push. Not removed: a count that is a whole
     number of lines cannot avoid it, and the size term is the spec's. Stated in README.md for phase 2.
-51. **Versions and runtime.** Manifest schema 2, generator 1.1.0. The whole test file, wall
+51. **Versions and runtime.** (r2) Manifest schema 2, generator 1.1.0; (r3) schema 3, generator 1.2.0. The whole test file, wall
     clock on the development machine: 39 passed in 128 s (the statistics tests take about 115 s of it, in two
     worker processes; about 4 CPU-minutes in all).
+
+## Revision 3 (owner ruling, 2026-11-14)
+
+52. **Tainted merges follow the code.** Every first-parent merge's `counted` and `positives` are decided by the
+    reading `taint_governs_control_pool_only` (46). The manifest states the ruling once, at top level
+    (`rulings`: date, text, what it covers, what it does not), and the clause of every merge label begins
+    "[decided by the owner ruling of 2026-11-14: tainted merges follow the code]" (over-cap and tree-wide merges
+    included: the code does not count them either). The other three merge readings are kept on the label as
+    `unruled_readings` (each marked `ruled: false`) whenever they would give a different count or positives.
+53. **Still open:** a brought-in revert of post-cut code that quotes a ticket (45) is not ruled. Such a merge is
+    listed under `ambiguous` with the ruled merge reading crossed with the two revert readings
+    (`taint_governs_control_pool_only + reference_counts` / `+ nonqualifying_revert`), plus its unruled
+    readings; direct and squash commits are unchanged. Under the ruled reading a same-merge revert's revert link
+    is not inherited, but a ticket it quotes is (as in the code, where only the revert kind is excluded); that
+    is why a quoting same-merge revert is also left open.
+54. Measured, seed 11, default profile, `merge_workflow`, 285 first-parent commits after the snapshot (all
+    merges): before r3, 0 counted / 196 not counted / 89 ambiguous; after, 88 counted / 196 not counted / 1
+    ambiguous (a merge bringing in a late revert that quotes a ticket). The 6 merges that bring in a linked and a
+    fix-worded commit are all counted.
