@@ -64,6 +64,11 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 46 | SA3 | disclosure | The amendment said a rule change affected two measures; it also un-silenced three count measures in 14 repo cells | R4 | 0 | diff the scored-cell table before and after any rule change |
 | 47 | SA3 | output | Outside the three confirmatory tests the output still says "supported" at an unadjusted 95%, including for the exploratory measure and when the gate has failed | R4 | 1 | one vocabulary for confirmatory readings, another for everything else |
 | 48 | SA3 | code | The "tracks reverted changes" reading compares 18 repos against 15 | R4 | 1 | every comparison names its repo set |
+| 49 | all | process / safety | A read-only reviewer changed a corpus clone: `git ls-tree -l` on a blobless partial clone (`blast`) fetched missing blobs from upstream and triggered an automatic gc; 39 packs added, HEAD reflog emptied; HEAD, branches, tags and working tree unchanged | the reviewer, self-reported | — | every agent runs git with `GIT_NO_LAZY_FETCH=1` and `gc.auto=0`; partial clones listed in the brief |
+| 50 | WCC draft | estimand | "Fix sets minus ordinary sets = 0" is not the null: on the real sets a file's byte count reads −0.020 (interval excludes zero); in simulation a null predictor is "contradicted" in 90% or "supported" in 99% of studies depending on which kind of commit is more selective | R5 (WCC design review), real non-structural attributes + simulation | 0 | run non-structural attributes through the design before registering it |
+| 51 | WCC draft | gate | The activity-benchmark gate fails a correct study when the hypothesis is true (the study reports nothing in 59% of simulated cases) | R5 | 0 | simulate every gate under an effect as well as under a null — the draft said it would, and had not yet |
+| 52 | WCC draft | power / feasibility | 9 of 40 development repos clear the draft's floor; the proposed confirmation set would yield about 5 to 8 usable repos; two of its "C" repos are Dart and one is the engine's own repo | R5 | 0 | count what clears the floor before writing the design around it |
+| 53 | WCC draft | matching | Ordinary commits matched only on files touched; unmatched directory and timing give 21–48% false readings in simulation | R5 | 0 | — |
 
 ## What the log says
 
