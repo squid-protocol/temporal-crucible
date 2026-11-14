@@ -1,117 +1,178 @@
-# SA3 — Amendment 5, DRAFT for the owner (not in force, not in the registration)
+# SA3 — Amendment 5, DRAFT (Revision 2; not in force, not in the registration)
 
-**Status: draft, 2026-11-14.** Step 2 of `docs/process/research_codebase_spec.md`. It becomes an amendment
-only when the owner accepts it and it has had its two independent reviews (checklist item 15). Nothing here
-has been applied to `docs/sa3_registration.md` or to any SA3 tool. SA3 is still unscored.
+**Status: draft, 2026-11-14, revised after one independent review.** Step 2 of
+`docs/process/research_codebase_spec.md`. It becomes an amendment only when it has had its second independent
+review (checklist item 15) and the owner accepts it. Nothing here has been applied to
+`docs/sa3_registration.md` or to any SA3 tool. SA3 is unscored.
 
-## Why an amendment is needed
+**What Revision 2 changed.** The first draft was reviewed by an independent session
+(`docs/process/reviews/sa3_amendment5_review_claude.md`: 3 blockers, 7 major, 9 minor). The author reproduced
+the blockers before changing anything (section 9). The main corrections:
 
-Amendment 4 says the three confirmatory tests are reported as "pre-registered; point estimates partly seen
-before scoring" **only if** everything it lists as frozen runs exactly as at commit `edc5c53`, and that
-anything changed afterwards that could move a result is a post-unblinding sensitivity.
+- the first draft named the wrong reference commit and so understated what has already changed;
+- it moved two reading-rule fixes into the confirmatory run that Amendment 4 had frozen by name;
+- it proposed matching public counts as the proof that new code gives the old numbers, which proves nothing
+  about the scorer;
+- its sentence defining a fix reference was not what the code does, and the review found a new fault there.
 
-Since then SA3's unmodified code has been run on repositories with a known answer
-(`docs/process/harness_report.md`). That found six faults (defect log 55–60) and four behaviours the text does
-not state, on top of the seven from the pre-scoring code review (42–48) and the text-against-code fault (54).
-The owner has also ruled on four points. This amendment says, for each, which side of Amendment 4's line it
-falls on.
+## 1. What has already changed since the estimates were seen — a disclosure
 
-**The rule this draft applies.** A change is made to the confirmatory run only if it cannot move a
-confirmatory number, or if it makes the code do what the registered text already says. Everything else is run
-beside it as a named post-unblinding sensitivity (`PU_…`), never in place of it.
+Amendment 4 says the confirmatory tests keep the label "pre-registered; point estimates partly seen before
+scoring" only if the frozen items run "exactly as at `edc5c53`". **That is not true of the code today, and was
+not true from the moment Amendment 4 was committed.** Its own commit, `8fb7fe0`, made after the leak, changed
+the scorer (222 lines) and the outcome builder (8 lines). Amendment 4 listed those changes under "scorer faults
+fixed — none depends on an outcome". One of them matters to the confirmatory tests:
 
-## 1. The confirmatory run stays as frozen
+- the "instrument silent" rule was narrowed so that count predictors are exempt from the "fewer than 20
+  distinct values" clause. Two of the three confirmatory primaries are counts. Defect log 46 records that this
+  un-silenced three count measures in 14 repo cells. **How many of the 14 are confirmatory cells is not yet
+  counted.** It is counted from the scans alone, with no outcome, and published before scoring.
+- the same change alters how many random draws earlier cells consume, so the shared stream of `8fb7fe0` is not
+  the stream of `edc5c53`.
 
-| item | what the confirmatory run does | why |
+So the reference for "as frozen" is **the file contents at `8fb7fe0`** for `tools/sa3_score.py` and
+`tools/sa3_outcomes.py`, and at `edc5c53` for `tools/sa3_stats.py` and `tools/mod1_lift.py` (unchanged since).
+This amendment says so in place of Amendment 4's shorter wording, and lists every difference between the two
+commits in a deviation table (section 8).
+
+## 2. The rule this amendment applies
+
+**The confirmatory run is the reference code, run once, unchanged.** Not a rewrite, not the stored tables.
+Every correction and every new rule runs **beside** it and is printed beside it. Where a correction changes a
+reading, both readings are printed, and a hypothesis whose reading differs between the two is not called
+confirmatory.
+
+## 3. The confirmatory run
+
+| item | what it does |
+|---|---|
+| Code | the reference contents of section 1, sealed by hash |
+| Universe | the registered rule as coded, including GitHub's vendored list |
+| Completeness | the registered measure (unit files in the scan over unit files in the archive, both under the registered unit rule) decides exclusion, as now |
+| Matching later commits to files | equal path |
+| Missing predictor values | as the code reads them |
+| Snapshot and window | the scanned snapshot; the window from the code's own cut |
+| Fix references | exactly as coded (section 5) |
+| Tainted merges | counted when they inherit; owner ruling of 2026-11-14 |
+| Keyword rules | two, as coded; owner ruling |
+| List of scored repos | the frozen list |
+| Random draws | seed 2982, the shared stream and the repo order of the reference code |
+| Nesting inputs | the existing nesting files, sealed as they are |
+| Holm step and "not robust" | as coded in the reference (see section 4) |
+
+## 4. Corrections, each printed beside the confirmatory reading
+
+| defect | the correction | where it shows |
 |---|---|---|
-| Universe | the registered rule as the code applies it, including GitHub's vendored list | frozen |
-| Matching later commits to files | equal path | frozen; rename following is sensitivity S8 |
-| Missing predictor values | as the code reads them (the branch-state primary and `in_degree` read absent as 0) | frozen |
-| Snapshot and window | the scanned snapshot; the window from the code's own cut | frozen |
-| Fix references | a tracker key counts only after a fix word; a revert quoting a ticket counts through it | frozen; the text is made exact (section 3) |
-| Tainted merges | counted when they inherit a fix reference | owner ruling of 2026-11-14; the text is corrected |
-| Keyword rules | two, as the code has them | owner ruling |
-| List of scored repos | the frozen list | registered |
-| Random draws | seed 2982, the streams and the repo order of `edc5c53` | frozen: named streams would change the drawn numbers |
+| 42 | Holm step-down: a primary whose interval lies wholly below zero does not stop the step-down for the others | **both readings printed** for B, C and D. On the reviewer's truth table of 729 input combinations (not re-run by the author) the corrected rule reads "supported" more often than the reference in 51. Where the two differ for a hypothesis, that hypothesis is reported as "reading depends on a rule corrected after the estimates were partly seen" |
+| 43 | "Not robust to the statistic" whenever the two statistics differ | both readings printed, same treatment |
+| 47 | "Supported" is printed only for the three confirmatory tests | output wording; the numbers are unchanged |
+| 48 | The all-reverts comparison uses one named repo set on both sides | a secondary reading, printed as coded and as corrected |
 
-## 2. Changes to the confirmatory run that cannot move a number, or that make the code match the text
+The registration gives the Holm levels and no stopping rule; the consolidated text's "stopping at the first
+that fails" was written from the code. So this is a correction of a rule the registration left open, made after
+the estimates were seen, and it is presented as that.
 
-| defect | change | kind |
-|---|---|---|
-| 42 | Holm step-down stops only at a test that fails to be supported, as the registration says | code to text |
-| 43 | "Not robust to the statistic" whenever the two statistics differ | code to text |
-| 47 | One vocabulary for the three confirmatory tests; "supported" is never printed for anything else | output only |
-| 48 | The all-reverts comparison uses one named repo set on both sides | a secondary reading; reported as corrected |
-| 44, 57 | The seal covers every input (scans, labels, history, all rule code) and refuses when git fails | no number |
-| 45 | — | see section 4: reported beside, not in place |
-| 56 | Completeness is measured against the snapshot's tree with the exclusion reasons stored, not against the pipeline's own unit rule | a check, no number |
-| 58 | The nesting scan fails when it measures under 95% of the files it should | exploratory secondary; no confirmatory number |
-| 59 | A window that ends before it starts, or a repo with no usable commits, is an exclusion with a reason on every route | none of the scored repos is affected; verified by a public count before scoring |
-| 60 | The placebo stage reports "no repository clears the floor" instead of crashing | no number |
-| 46 | The scored-cell table is diffed before and after any rule change and the diff is published | disclosure |
+## 5. What the code counts as a fix reference, stated exactly
 
-## 3. The text is made exact where the code was already doing something specific
+This does not change what runs. It replaces a loose sentence in the consolidated text. Where it differs from
+what a reader would expect, that is said.
 
-These do not change what runs. They change the consolidated text so that a second builder would write the same
-code.
-
-- A fix reference is an issue, pull-request or tracker key **preceded by a fix word** ("fixes", "fixed",
-  "resolves" …), or a `Fixes:` trailer naming a hash, or the GnuPG bug trailer, or a CVE id.
-- A revert whose target was made after the cut does not qualify as a revert. If its message quotes a fix
-  reference from its target's subject, it qualifies through that reference.
-- A tainted merge is kept out of the keyword outcome and the control pool. It is a positive if it inherits a
+- After one of the words fix, fixes, fixed, resolve, resolves, resolved: `#N`, `GH-N`, `bug N`, `bpo-N`,
+  `PR N` (the BSD problem report), or a tracker key.
+- **A tracker key is matched without regard to case**: a letter, then 1 to 15 letters, digits or underscores,
+  a hyphen, digits. So "Fix UTF-8 decoding", "fix x86-64 build" and "Fixed sha-1 fallback" are fix references.
+  The registration writes the key in capitals. **This is a fault (defect log 61), found by the review of this
+  draft.** Under section 2 it stays in the confirmatory run; its size is counted and a sensitivity removes it.
+- Any `Fixes:`, `Bug:` or `Reported-by:` trailer, whatever follows the colon.
+- A `Fixes:` line naming a hash; the GnuPG bug trailer; a CVE id.
+- A revert whose target existed at the cut. A revert of later code does not qualify as a revert; if its message
+  quotes a fix reference from its target's subject, it qualifies through that.
+- A tainted merge is kept out of the keyword outcome and the control pool, and is a positive if it inherits a
   fix reference and its first-parent diff shares a file with the linking commit.
 - The window starts at the later of the cut and the scanned snapshot and ends at the cut plus 730 days.
 
-## 4. Post-unblinding sensitivities added
+The registration's body already says tracker patterns follow a fix verb; only its outcome table and the
+consolidated text left that out.
 
-Each is run beside the confirmatory result and reported with it. None can turn a reading into "supported".
+## 6. Sensitivities — the list is closed by this amendment
 
-| name | what | from |
+Every one is run and reported whatever it shows. None uses the words of the confirmatory tests or a Holm
+level. Any added later is dated and labelled as later. Each is first run on a control repository with a known
+answer.
+
+| name | definition | from |
 |---|---|---|
-| `PU_reachable_universe` | files that are ranked but can never be positive (a `.gitattributes` line switches an exclusion off) removed | owner ruling of 2026-11-14; the per-repo count is published first |
-| `PU_generic_dirs_restored` | first-party files under directories GitHub's list matches by name alone (`cache/`, `dist/`, …) ranked again | defect 55; the per-repo count is published first |
+| `PU_reachable_universe` | remove files that are in the universe **and** that the history walk's own unit rule excludes (the walk applies the unit rule without the snapshot's `.gitattributes`). Defined by rule, never by "has no touch" | owner ruling of 2026-11-14 |
+| `PU_unreachable_made_reachable` | the other repair: rebuild the touches with the snapshot's attributes so those files can be positive | the review; the registered universe includes them |
+| `PU_generic_dirs_restored` | files excluded only by one of these GitHub patterns are ranked again: `(^|/)cache/`, `(^|/)dist/`, `(^|/)extern(al)?/`, `(^|/)env/`. The list is fixed here, before any per-repo count is seen | defect 55 |
+| `PU_tracker_keys_case_sensitive` | a tracker key must be in capitals, as the registration writes it | defect 61 |
 | `PU_named_streams` | one random stream per repo and purpose, seeded from 2982 | defect 45 |
-| `PU_bare_tracker_keys` | a tracker key without a fix word counted | harness report |
 | `PU_late_revert_ticket_dropped` | a late revert that quotes a ticket not counted | harness report |
+| `PU_new_completeness` | completeness measured against the snapshot's tree with stored reasons; repos under 90% dropped | defect 56 |
+| `PU_nesting_floor` | a repo whose nesting file covers under 95% of its files has its nesting cells dropped | defect 58 |
+| `PU_window_assertion` | a repo whose window ends before it starts, or with no usable commits, dropped | defect 59 |
 | S8 | rename following | registered, not yet run |
 
-**On the owner's ruling about unreachable files.** The ruling was to remove them from the universe after
-counting. Under Amendment 4 that removal can move a confirmatory number, so this draft carries it out as
-`PU_reachable_universe`, beside the frozen run. If the count is zero in every scored repo, the two are the
-same run. If the owner wants the removal in the confirmatory run itself, the confirmatory label changes from
-"pre-registered; point estimates partly seen" to a post-unblinding analysis. That is the owner's choice and
-this draft does not make it.
+Dropped from the first draft: counting bare tracker keys. A bare key matches "UTF-8" and "SHA-1" in every repo
+and would mostly add noise.
 
-## 5. What is reported with the result that was not planned before
+## 7. Counts published before scoring — none reads an outcome against a predictor
 
-- Per repo: files excluded as vendored by pattern, with the five patterns that excluded most; files ranked
-  that the history cannot touch; fixes lost to renames after the snapshot.
-- From the control repositories: how much of a planted effect the pipeline recovers. Ten positive controls
-  gave +0.066 against +0.133 on true fixes; about 40% is lost in the label rule and about 20% of the rest in
-  the pipeline. The share lost in the label rule depends on the mix of commit conventions the generator
-  assumes, which was not measured from real repositories. This goes in the power statement as a caution: the
-  smallest detectable effect of 0.05 to 0.08 is on the **label**, and a true effect has to be larger than that
-  to show.
+1. Of defect 46's 14 cells, how many are confirmatory, and which repos.
+2. Per repo: window start, window end, usable commits (defect 59). **To be made.** If a scored repo fails, it
+   stays in the confirmatory run and its removal is `PU_window_assertion`.
+3. Per repo: completeness on the registered measure and on the new one.
+4. Per repo: files excluded by each pattern of `PU_generic_dirs_restored`; universe files the history cannot
+   touch; qualifying commits that qualify only through a lower-case tracker key.
+5. Per repo: the share of files with a nesting value.
 
-## 6. How the run is made
+## 8. What a reader is told with the result
 
-Through the stored tables and generated seal of `research_codebase_spec.md` (steps 3 to 7), built by moving
-SA3's functions, not rewriting them. Before any real label is read:
+- **The label:** "pre-registered design; point estimates partly seen before scoring; scoring code corrected
+  afterwards in N listed places; readings given as coded and as corrected."
+- **A deviation table:** every difference between the registration and the reference code, and between the
+  reference code and each correction: what, when, who decided it, whether it can move a confirmatory number.
+- **What was seen and when** (Amendment 4), unchanged.
+- **How much of a planted effect the pipeline recovers on generated repositories** (`docs/process/harness_report.md`,
+  20 seeds per case): with an effect planted on true fixes of +0.138, the labels the written rule gives carry
+  +0.077 and the Python pipeline reports +0.075; in generated C the pipeline reports +0.062 against +0.081.
+  With no effect planted every predictor reads zero. **These are properties of generated repositories.** The
+  share lost in the label rule depends on the mix of commit conventions the generator was given; it has not
+  been measured on real repositories and is not a correction factor.
 
-1. the stored tables reproduce every public count of the existing outcome files, or each difference is
-   explained;
-2. the control suite passes;
-3. the frozen run and each sensitivity are named in the seal.
+## 9. How the run is shown to be the frozen run
 
-## Owner decisions, 2026-11-14 (evening)
+Matching public counts would not show it: counts say nothing about which files are positive, or about the
+scorer. Three layers, none of which shows an outcome to a session:
 
-The owner accepted both recommendations: the unreachable-file removal runs beside the frozen run as
-`PU_reachable_universe`, and the confirmatory run keeps the registered random streams. Still required before
-this is in force: two independent reviews (checklist item 15). The two questions as put:
+1. **Inputs.** The label and universe tables rebuilt from the stored tables are hashed and compared with the
+   hashes of what the reference code reads. Printed as equal or not equal, per repo.
+2. **A known output.** The existing placebo output is regenerated by the reference code and compared byte for
+   byte.
+3. **The run itself.** The sealed reference scorer is run once, by the owner, as the confirmatory run. The
+   stored-tables scorer is run beside it and a per-cell map of equal / not equal is printed. Any "not equal"
+   is investigated on control repositories, never on the real cells.
 
-1. Accept section 4's handling of the unreachable-files ruling (beside the frozen run), or move it into the
-   confirmatory run and accept the changed label.
-2. Accept keeping the registered random streams for the confirmatory run, with named streams as a sensitivity.
-   The architecture specification's step 4 said the opposite; this draft is the more conservative reading of
-   Amendment 4 and the specification will be changed to match if accepted.
+The check is itself tested first: five one-line faults are seeded into copies of the code on control
+repositories, and all three layers must report each. **None of this is built yet.**
+
+## 10. Review record and owner decisions
+
+| | |
+|---|---|
+| Owner, 2026-11-14 | tainted merges follow the code; two keyword rules stay; unreachable-file removal runs beside the frozen run; the confirmatory run keeps the registered random streams |
+| Review 1 | Claude Fable 5.2, independent session: 3 blockers, 7 major, 9 minor |
+| Reproduced by the author | the scorer and outcome builder changed in `8fb7fe0` (`git diff --stat edc5c53`: 222 and 8 lines); Amendment 4's "Frozen" paragraph names the Holm family and the reading words; the tracker-key pattern matches "Fix UTF-8 decoding", "fix x86-64 build", "Fixed sha-1 fallback" and "Resolve http-2 stream reset" |
+| Adopted on the reviewer's citations | the nesting floor shifts the shared stream; the registered text defines the completeness measure; the count for defect 59 was claimed and not made; trailers with any content qualify; sensitivities defined by rule and closed; the label wording |
+| Not adopted | — |
+| Still owed | the second independent review (a different model, on the pull request); the count of section 7 item 1 |
+
+## Open, for the owner
+
+1. **The label.** Section 8's wording is longer and less flattering than Amendment 4's. The reviewer's view,
+   which the author shares: "pre-registered" is still true of the hypotheses, the statistic and the family,
+   and no longer true, unqualified, of the scoring code.
+2. **The confirmatory run is the old scorer, run once, as it stands** (section 2). That means SA3's
+   confirmatory numbers come from code with known faults, each of them shown beside it. The alternative —
+   fixing first — makes the whole analysis post-unblinding.

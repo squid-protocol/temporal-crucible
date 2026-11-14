@@ -76,6 +76,8 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 58 | SA3 | instrument / code | The nesting scan swallows every per-file error; without its grammar cache it measured 0 of 252 files and exited 0 | the harness | 4 | fail when the share measured is below a floor |
 | 59 | SA3 | code | With a supplied snapshot, a repo whose merges are all bot-authored gets a window that ends before it starts and an outcome file marked "ok" with no positives | the harness, `bot_merges` mutation | 4 | assert window end > start; assert usable commits on every route |
 | 60 | SA3 | code | The placebo stage crashes when no repository clears the floor | the harness | 4 | run each stage on an empty study |
+| 61 | SA3 | label | The tracker-key pattern is compiled case-insensitively: after a fix word, "UTF-8", "x86-64", "sha-1" count as fix references, moving fix-worded commits from the keyword outcome into the primary one. Size on SA3's repos unknown | R6 (review of the Amendment 5 draft), by trying made-up subjects | 5 | one commit per pattern form in a repository with known labels |
+| 62 | SA3 | record | Amendment 4 says the confirmatory run is frozen "as at `edc5c53`"; its own commit changed the scorer and narrowed the instrument-silent rule for two of the three confirmatory primaries. The first draft of Amendment 5 repeated the wrong reference | R6 | 1 | diff the frozen files against the named commit before writing "frozen" |
 
 ## What the log says
 
