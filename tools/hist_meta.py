@@ -169,7 +169,10 @@ def main() -> int:
         nb, nl = harvest(src, con, a.with_merges, sa3_links=a.sa3_links)
         con.executemany("INSERT OR REPLACE INTO meta VALUES (?,?)",
                         [("bodies", str(nb)), ("links", str(nl)),
-                         ("seconds", str(round(time.time() - t0, 1))), ("done", "1")])
+                         ("seconds", str(round(time.time() - t0, 1))), ("done", "1")]
+                        # recorded only when a switch is on, so a harvest cannot be reused under other rules
+                        + ([("with_merges", "1")] if a.with_merges else [])
+                        + ([("sa3_links", "1")] if a.sa3_links else []))
         con.commit(); con.close()
         print(f"  {r}: {nb:,} bodies, {nl:,} links, {time.time()-t0:.0f}s", flush=True)
     return 0

@@ -35,7 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import laws_units as U  # noqa: E402
 from _engine import POOL_DIR, REPO_ROOT  # noqa: E402
 from hist_fixlabel import fix_shas  # noqa: E402
-from laws_history import BOT  # noqa: E402
+from laws_history import BOT, is_fix_message  # noqa: E402
 from mod1_lift import frame, ro, STUDY, WIDE_SHARE, WIDE_MIN_FILES, MIN_COMPLETE  # noqa: E402
 
 META = STUDY / "meta_sa3"
@@ -50,10 +50,12 @@ def harvest_bodies(repo: str) -> None:
     db = META / f"{repo}.db"
     if db.exists():
         try:
-            if ro(db).execute("select value from meta where key='done'").fetchone():
+            got = dict(ro(db).execute("select key, value from meta"))
+            if got.get("done") and got.get("with_merges") == "1" and got.get("sa3_links") == "1":
                 return
         except sqlite3.Error:
             pass
+        db.unlink()                                     # a harvest made without both switches is not reused
     subprocess.run([PY, "tools/hist_meta.py", "--pool", str(POOL_DIR), "--out", str(META), "--repos", repo,
                     "--with-merges", "--sa3-links"], capture_output=True, text=True, cwd=REPO_ROOT, timeout=7200)
 
@@ -76,9 +78,12 @@ def universe(repo: str, langs: tuple[str, ...]) -> tuple[set[str], dict]:
             if loc:
                 files.add(p)
     w.close()
-    tree = subprocess.run(["git", "-C", str(POOL_DIR / repo), "ls-tree", "-r", "--name-only", side["snapshot"]],
-                          capture_output=True, text=True, timeout=900).stdout.splitlines()
-    tree_units = sum(1 for p in tree if unit(p))
+    # the scan reads a `git archive`, which honours .gitattributes export-ignore; so must the denominator
+    arch = subprocess.Popen(["git", "-C", str(POOL_DIR / repo), "archive", side["snapshot"]], stdout=subprocess.PIPE)
+    tree = subprocess.run(["tar", "-t"], stdin=arch.stdout, capture_output=True, text=True, errors="replace",
+                          timeout=3600).stdout.splitlines()
+    arch.wait()
+    tree_units = sum(1 for p in tree if not p.endswith("/") and unit(p))
     return files, {"snapshot": side["snapshot"], "engine": side["engine"], "unit_files": len(files),
                    "tree_unit_files": tree_units,
                    "complete": round(scanned / tree_units, 3) if tree_units else 0.0}
@@ -149,7 +154,9 @@ def build(repo: str) -> dict:
 
     h = ro(STUDY / "history" / f"{repo}.db")
     where_c = "c." + f["where"].replace(" and ", " and c.")
-    chain = [s for s, in h.execute(f"select sha from commit_ where {f['where']} order by ct")]
+    # every commit of the walk, bots included, in walk order: a bot commit left out of the chain would let a
+    # later merge's second-parent search run straight down the trunk and claim it as "brought in"
+    chain = [s for s, in h.execute("select sha from commit_ order by rowid")]
     ct_of = dict(h.execute("select sha, ct from commit_"))
     touch: dict[str, set[str]] = defaultdict(set)
     for p, s in h.execute(f"select t.path, t.sha from touch t join commit_ c on c.sha=t.sha where {where_c} "
@@ -205,6 +212,8 @@ def build(repo: str) -> dict:
 
     # --- qualifying events: (unit commit, kinds strict, kinds loose, positive files)
     events = []
+    tainted: set[str] = set()                           # merges that may carry a fix and so cannot be a control
+    need_text: dict[str, str] = {}                      # brought-in commit -> its merge, to test for fix wording
     stats = {"merges_in_window": 0, "merges_over_cap": 0, "inherited_events": 0, "reverts_seen": 0,
              "reverts_of_pre_cut_code": 0, "reverts_unresolved": 0}
     over_cap = []
@@ -219,8 +228,13 @@ def build(repo: str) -> dict:
         if len(kids) > MAX_BROUGHT:
             stats["merges_over_cap"] += 1
             over_cap.append({"sha": u_sha[:10], "brought": len(kids)})
+            tainted.add(u_sha)                          # unknown content: neither a positive nor a control
             continue
+        for k in kids:
+            need_text[k] = u_sha
         linking = [k for k in kids if k in links and not topo[k][2]]
+        if any(k in links for k in kids):
+            tainted.add(u_sha)                          # carries a link even if no file is shared
         if not linking:
             continue
         kid_files = files_of(repo, linking)
@@ -242,10 +256,26 @@ def build(repo: str) -> dict:
                     elif at_or_before_cut(tgt):
                         stats["reverts_of_pre_cut_code"] += 1
 
+    if need_text:                                       # a brought-in commit worded as a fix taints its merge
+        m = ro(META / f"{repo}.db")
+        for sha, subject, body in m.execute("select sha, subject, body from body"):
+            mg = need_text.get(sha)
+            if mg and mg not in tainted and is_fix_message((subject or "") + "\n" + (body or "")):
+                tainted.add(mg)
+        m.close()
+    stats["merges_tainted"] = len(tainted)
+
+    # the cascade's exclusive tier is a property of the UNIT COMMIT: unite the kinds of all its events first
+    order = ("revert", "cve", "issue_fix")
+    kinds_of: dict[str, set[str]] = defaultdict(set)
+    for u_sha, strict, _loose, _pos, _how in events:
+        kinds_of[u_sha] |= strict
+    tier_of = {u: next((k for k in order if k in ks), None) for u, ks in kinds_of.items()}
+
     def outcome(pick) -> dict:
         per_commit: dict[str, set[str]] = defaultdict(set)
         for u_sha, strict, loose, pos, _ in events:
-            if pick(strict, loose):
+            if pick(strict, loose, u_sha):
                 per_commit[u_sha] |= pos
         allf = set().union(*per_commit.values()) if per_commit else set()
         big = max((len(v) for v in per_commit.values()), default=0)
@@ -255,17 +285,15 @@ def build(repo: str) -> dict:
                 "largest_commit_share": round(big / len(allf), 3) if allf else None, "clears_floor": ok,
                 "commits": {s: sorted(v) for s, v in per_commit.items()}}
 
-    order = ("revert", "cve", "issue_fix")                 # the cascade's exclusive-tier order
-    first = lambda kinds: next((k for k in order if k in kinds), None)  # noqa: E731
     res = {
-        "HP": outcome(lambda s, l: bool(s)),
-        "HP_allreverts": outcome(lambda s, l: bool(l)),
-        "HP_revert": outcome(lambda s, l: first(s) == "revert"),
-        "HP_cve": outcome(lambda s, l: first(s) == "cve"),
-        "HP_fixref": outcome(lambda s, l: first(s) == "issue_fix"),
+        "HP": outcome(lambda s, l, u: bool(s)),
+        "HP_allreverts": outcome(lambda s, l, u: bool(l)),
+        "HP_revert": outcome(lambda s, l, u: bool(s) and tier_of.get(u) == "revert"),
+        "HP_cve": outcome(lambda s, l, u: bool(s) and tier_of.get(u) == "cve"),
+        "HP_fixref": outcome(lambda s, l, u: bool(s) and tier_of.get(u) == "issue_fix"),
     }
     hp_any = {e[0] for e in events}                        # any HP link at all, strict or not, own or inherited
-    kw_commits = {s: touch[s] for s in window - wide if s in kw and s not in hp_any}
+    kw_commits = {s: touch[s] for s in window - wide if s in kw and s not in hp_any and s not in tainted}
     kwf = set().union(*kw_commits.values()) if kw_commits else set()
     big = max((len(v) for v in kw_commits.values()), default=0)
     res["KW"] = {"files": sorted(kwf), "n_files": len(kwf), "n_commits": len(kw_commits),
@@ -273,7 +301,7 @@ def build(repo: str) -> dict:
                  "clears_floor": len(kwf) >= FLOOR_FILES and len(files) - len(kwf) >= FLOOR_FILES
                  and len(kw_commits) >= FLOOR_COMMITS and (big / len(kwf) if kwf else 1) <= MAX_COMMIT_SHARE}
     pool = {s: sorted(touch[s]) for s in window - wide
-            if s not in hp_any and s not in kw and not topo.get(s, ([], 0, False))[2]}
+            if s not in hp_any and s not in kw and s not in tainted and not topo.get(s, ([], 0, False))[2]}
     anyf = set().union(*map(set, pool.values())) if pool else set()
     res["control_pool"] = {"n_commits": len(pool), "n_files_any": len(anyf), "commits": pool}
     out.update({"wide_commits": len(wide), "inheritance": {**stats, "over_cap": over_cap[:20]}, "outcomes": res,

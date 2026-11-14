@@ -64,6 +64,37 @@ def grammar_for(unit_lang: str, path: str) -> str | None:
     return GRAMMAR.get(unit_lang)
 
 
+_BLOCKISH = ("block", "compound", "statements", "statement_list", "body_statement")
+
+
+def _else_if(node, kinds) -> bool:
+    """True when `node` is an `if` hanging directly off the ELSE of an enclosing `if` -- an `else if` chain.
+    C-family grammars parse `else if` as an if inside the parent's else, so a flat 50-way chain would read as
+    depth 50, while Python / Ruby / Fortran / MATLAB (elif clauses) read the same chain as depth 1. A chain
+    link sits at its parent's depth. `else { if ... }` -- an if inside a braced else block -- is real nesting
+    and is not flattened."""
+    if not node.type.lower().startswith("if"):
+        return False
+    path, anc = [], node.parent
+    while anc is not None and not (anc.is_named and anc.type in kinds):
+        if any(b in anc.type.lower() for b in _BLOCKISH):
+            return False                                # a block lies between: this is nesting, not a chain
+        path.append(anc)
+        anc = anc.parent
+    if anc is None or not anc.type.lower().startswith("if"):
+        return False
+    via = path[-1] if path else node                    # the direct child of the enclosing if, on the way down
+    if "else" in via.type.lower():
+        return True
+    for i in range(anc.child_count):
+        c = anc.child(i)
+        if c.id == via.id:
+            return False
+        if c.type.lower() == "else":                    # an `else` token before it: we are in the else part
+            return True
+    return False
+
+
 def nesting(src: bytes, grammar: str) -> dict:
     import tree_sitter_language_pack as tslp
     if grammar not in _PARSERS:
@@ -75,7 +106,8 @@ def nesting(src: bytes, grammar: str) -> dict:
     while stack:
         node, d = stack.pop()
         if node.is_named and node.type in kinds:   # Ruby names its keyword tokens like its nodes
-            d += 1
+            if not _else_if(node, kinds):
+                d += 1
             n += 1; total += d
             best = max(best, d)
         stack.extend((c, d) for c in node.children)
@@ -104,6 +136,39 @@ SELFTEST = {  # grammar -> (source, expected nest_max)
 }
 
 
+CHAINS = {  # grammar -> source of a 4-link `else if` chain: nest_max must be 1
+    "c": b"void f(int x){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} }",
+    "cpp": b"void f(int x){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} }",
+    "java": b"class A{ void f(int x){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} } }",
+    "go": b"package p\nfunc f(x int){ if x==1 {} else if x==2 {} else if x==3 {} else if x==4 {} }",
+    "rust": b"fn f(x:i32){ if x==1 {} else if x==2 {} else if x==3 {} else if x==4 {} }",
+    "javascript": b"function f(x){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} }",
+    "typescript": b"function f(x:number){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} }",
+    "csharp": b"class A{ void f(int x){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} } }",
+    "php": b"<?php function f($x){ if($x==1){} else if($x==2){} else if($x==3){} else if($x==4){} }",
+    "kotlin": b"fun f(x:Int){ if(x==1){} else if(x==2){} else if(x==3){} else if(x==4){} }",
+    "swift": b"func f(x:Int){ if x==1 {} else if x==2 {} else if x==3 {} else if x==4 {} }",
+    "zig": b"fn f(x: i32) void { if (x == 1) {} else if (x == 2) {} else if (x == 3) {} else if (x == 4) {} }",
+    "perl": b"sub f { my $x=shift; if($x==1){} elsif($x==2){} elsif($x==3){} else { } }",
+    "python": b"def f(x):\n  if x==1:\n    pass\n  elif x==2:\n    pass\n  elif x==3:\n    pass\n",
+    "ruby": b"def f(x)\n if x==1\n elsif x==2\n elsif x==3\n end\nend",
+    "fortran": b"subroutine f(x)\n integer x\n if (x==1) then\n else if (x==2) then\n else if (x==3) then\n end if\nend subroutine",
+    "matlab": b"function f(x)\n if x==1\n elseif x==2\n elseif x==3\n end\nend",
+}
+NESTED_ELSE = {  # an if inside a BRACED else is real nesting: nest_max must be 2
+    "c": b"void f(int x){ if(x==1){} else { g(); if(x==2){} } }",
+    "java": b"class A{ void f(int x){ if(x==1){} else { g(); if(x==2){} } } }",
+    "go": b"package p\nfunc f(x int){ if x==1 {} else { g(); if x==2 {} } }",
+    "rust": b"fn f(x:i32){ if x==1 {} else { g(); if x==2 {} } }",
+    "javascript": b"function f(x){ if(x==1){} else { g(); if(x==2){} } }",
+    "csharp": b"class A{ void f(int x){ if(x==1){} else { g(); if(x==2){} } } }",
+    "kotlin": b"fun f(x:Int){ if(x==1){} else { g(); if(x==2){} } }",
+    "swift": b"func f(x:Int){ if x==1 {} else { g(); if x==2 {} } }",
+    "zig": b"fn f(x: i32) void { if (x == 1) {} else { g(); if (x == 2) {} } }",
+    "php": b"<?php function f($x){ if($x==1){} else { g(); if($x==2){} } }",
+}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("file", nargs="?")
@@ -118,6 +183,14 @@ def main() -> int:
             bad += not ok
             print(f"{'ok  ' if ok else 'FAIL'} {g:<11} nest_max {got['nest_max']} (want {want})  nodes {got['control_nodes']}"
                   f"  mean {got['nest_mean']}  parse_error {got['parse_error']}")
+        for name, cases, want in (("else-if chain", CHAINS, 1), ("if in braced else", NESTED_ELSE, 2)):
+            for g, src in cases.items():
+                got = nesting(src, g)
+                ok = got["nest_max"] == want and not got["parse_error"]
+                bad += not ok
+                if not ok:
+                    print(f"FAIL {g:<11} {name}: nest_max {got['nest_max']} (want {want}) parse_error {got['parse_error']}")
+            print(f"{name}: {len(cases)} grammars checked")
         return 1 if bad else 0
     print(nesting(open(a.file, "rb").read(), a.lang))
     return 0

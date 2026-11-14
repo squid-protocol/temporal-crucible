@@ -415,3 +415,24 @@ cannot tell flat branching from deep branching. Added under **Instrument B, as e
 
 The change study (SA3-CH) does **not** get a nesting change: on curl, among 375 edited functions with an
 identical keyword set, nesting changed in 1.3% and order in 0%.
+
+## Amendment 3 — 2026-11-13, 9:15 PM Eastern: four tool defects found by the second reviewer, fixed before any scorer exists
+
+**State when written:** rescans done; outcome builder and nesting tool exist; no scorer; no SA3 predictor has
+been put against any outcome. The second reviewer (Gemini 4 Argon, PR #183) read the three new tools against
+this registration and reported four defects. Each was reproduced before being fixed.
+
+1. **Merge inheritance walked through bot commits.** The chain handed to the "what does this merge bring in"
+   search left out bot-authored commits, so a merge branched from one could claim the trunk behind it. The
+   chain is now every commit of the walk, in walk order.
+2. **The control pool could hold fixes.** A merge over the 50-commit cap, a merge bringing in a linked commit
+   with no shared file, or a merge bringing in a commit worded as a fix was in neither HP nor KW and so fell
+   into the matched control's pool. Such merges are now **tainted: in no outcome and in no control.** The
+   per-tier rows now take the cascade's exclusive tier per commit, after uniting the kinds of all its events.
+3. **Nesting depth (Amendment 2) counted an `else if` chain as depth N in C-family grammars and depth 1 in
+   Python, Ruby, Fortran and MATLAB.** Rule added to Amendment 2's definition: **an `if` hanging directly off
+   the else of an enclosing `if` sits at that `if`'s depth**; an `if` inside a braced else block is still
+   nesting. The self-test now checks a four-link chain in 17 grammars and a braced else in 10.
+4. **Completeness was measured against the wrong denominator.** The scan reads a `git archive`, which honours
+   `export-ignore`; the denominator was the raw tree. It is now the archive's file list. A body harvest is
+   reused only if it records both the merges and the wider-tracker switches.
