@@ -76,7 +76,10 @@ Needed because ranking within a package always crowns one "most unusual" release
 about 1 in 21 ordinary releases. D3 sets an absolute alarm threshold.
 - The top 300 npm packages and top 200 PyPI packages by downloads at registration time (lists frozen in
   `docs/rel_inputs.json`), minus any package that appears in the DataDog manifests or in OSV malicious-package reports.
-- For each, the last 21 releases (20 transitions), scored exactly as D2.
+- For each, the last 29 releases: the last 20 transitions are scored exactly as D2, each standardized against its own
+  predecessors (see "Absolute score"). Packages with fewer releases score the transitions that have at least 8
+  predecessors. Pre-assessment counts below were taken for 21 releases and will be recounted for 29 before
+  registration.
 - D3 is never used to choose or weight components; it only sets the threshold in H-REL-3.
 
 ### D4. Prospective confirmation: attacks found after registration
@@ -174,20 +177,24 @@ For a transition $t_k = (B \to A)$ of package $p$:
   jumping to $1.0$ ahead of a multi-function implant; unsmoothed $/ \max(1, |F(A)|)$ is reported in sensitivity).
 - **C2, grammar breaks** $= |\{f \in F(A) : \text{gfit\_pct}(f) \le 0.10\}| / (\max(1, |F(A)|) + 2)$, the smoothed share
   of $F(A)$ (with $\text{loc} \ge 3$ and $\ge 2$ present signals) in the bottom 10% of population grammar fit for their
-  `(language, floor(log10(loc) / 0.1), n_present_signals)` stratum (`tools/gr_eval.py` consensus weights $w$ and
+  language, size and signal-count stratum, exactly as computed by the existing grammar-fit code
+  (`agents_lattice.gfit` / `tools/gr_eval.py`; if a formula written here disagrees with that code, the code is the
+  definition) (`tools/gr_eval.py` consensus weights $w$ and
   stratum deciles frozen on the population + D3 calibration corpus, never D1).
 - **C3, new security hits** $= \sum_{f \in \text{files}(A)} \sum_{s \in S_{\text{sec}}} \max(0, \text{count}_{A,f,s} - \text{count}_{B,f,s})$
   (summed per file $f$ with $\text{count}_{B,f,s} = 0$ for new files, so deleting a test file in $A$ cannot mask a new
   hit in another file). The pinned `file_data` columns $S_{\text{sec}}$ are:
   `sec_reflection_metaprogramming`, `sec_high_risk_execution`, `sec_safety_bypasses`, `sec_self_propagation`,
   `sec_hardcoded_secrets`, `sec_unicode_steganography`, `sec_homoglyphs`, `sec_entropy`, `sec_io`,
-  `sec_shadow_imports`, and `sec_extension_mismatch` (plus structural `reflection_metaprogramming`,
-  `high_risk_execution`, `safety_bypasses` where not already counted by their `sec_*` lens pair).
+  `sec_shadow_imports`, and `sec_extension_mismatch`. The `sec_*` columns only: the structural columns of the same
+  names count the keyword family, not the security rule, and are not added (author decision; avoids double counting).
+  A renamed file counts all its hits as new; renames are reported.
 - **C4, new refused or opaque files** = the number of files in $A$ at a normalized relative path not refused/opaque in
   $H_L(t_k)$ that either (a) appear in `excluded_artifacts` with content-gate `exclusion_reason LIKE 'Blocked (%'`
   (which is how `record_keeper.py` persists `aperture.py`'s `oversized_minified`, `binary_payload`, and
-  `generated_noise` gates) or (b) appear in `file_data` with `file_archetype = 'Static: Minified & Vendor Opaque Mass'`,
-  `binary_anomaly = 1`, or `obfuscation_flag = 1`.
+  `generated_noise` gates) or (b) appear in `file_data` with `file_archetype LIKE 'Static: Minified & Vendor Opaque%'`
+  (prefix match: the engine has both a "Mass" and a "Footprint" label), `binary_anomaly = 1`, or
+  `obfuscation_flag = 1`.
 - **C5, new imports** = the number of distinct imported module names in $A$ (`file_data.raw_imports`, excluding
   relative imports starting with `.` and internal module stems of $p$, normalized to the top-level package/module
   identifier) that appear in no release in $H_L(t_k)$.
@@ -212,9 +219,12 @@ included), average ranks for ties, scaled to $[0, 1]$: $r_c(t) = (\text{rank} - 
 **Absolute score for an alarm (H-REL-3).** Ranks cannot set a cross-package threshold, so count components
 ($C3, C4, C5$, and $Z$) are first log-stabilized as $\tilde{c}(t) = \ln(1 + c(t))$ (while $C1, C2 \in [0, 1]$ stay as
 $\tilde{c}(t) = c(t)$), and each component is standardized out-of-sample against the package's clean history
-$H_{\text{clean}}(p, t)$ (for a D1 positive $m$, all $K_p$ benign transitions of $p$; for a D3 calibration transition
-$t$, the **leave-one-out** set of the other $K_p - 1$ benign transitions of $p$ so D3 and D1 share the same
-out-of-sample distribution):
+$H_{\text{clean}}(p, t)$, which is always the transitions **before** $t$ in the package's window (at least 8, at most
+20). For a D1 positive $m$ that is its $K_p$ benign predecessors. For a D3 calibration transition it is its own
+predecessors, never later releases: a leave-one-out baseline would standardize D3 against neighbours on both sides
+in time, shrink D3's tail, lower the threshold and flatter recall. D3 therefore fetches each package's last 29
+releases and scores the last 20 transitions, each against its predecessors (packages with fewer releases score the
+transitions that have at least 8 predecessors):
 $$z_c^+(t) = \max\!\left(0,\; \frac{\tilde{c}(t) - \text{median}_{H_{\text{clean}}}(\tilde{c})}{\max(\text{MAD}_{H_{\text{clean}}}(\tilde{c}),\, \delta_c)}\right)$$
 Because sparse components ($C3, C4, C5$) have $\text{MAD} = 0$ in $>50\%$ of packages (making the naive D3 median of
 MAD equal to $0$), the scale floor $\delta_c$ is defined strictly positively as
@@ -241,17 +251,18 @@ For each campaign $g \in \{1, \dots, G\}$ with $n_g \le 10$ eligible packages, l
 $\overline{\text{Top1}}_X(g)$ denote the campaign mean of $P_X(p)$ and $\text{Top1}_X(p)$.
 
 **H-REL-1 and H-REL-2 pass** only if all three hold:
-1. **Rank:** the campaign-weighted median of $P_X(p)$ is $\ge 0.95$, and the campaign-clustered bootstrap 95% interval
-   (2,000 draws over the $G$ campaigns, seed 2026) of the campaign-equal Top-1 share
-   $\frac{1}{G}\sum_{g=1}^G \overline{\text{Top1}}_X(g)$ (and of the package-level share with $P_X(p) \ge 0.95$) has a
-   lower bound $\ge 0.35$.
+1. **Rank:** the campaign-equal Top-1 share $T_X = \frac{1}{G}\sum_{g=1}^G \overline{\text{Top1}}_X(g)$ is $\ge 0.50$
+   (at least half of the hacked releases rank first in their package), and its campaign-clustered bootstrap 95%
+   interval (2,000 draws over the $G$ campaigns, seed 2026) has a lower bound $\ge 0.35$. The campaign-weighted median
+   of $P_X(p)$ and the share with $P_X(p) \ge 0.95$ are reported alongside but are not the bar: a 0.95 cutoff admits
+   rank 2 at $K_p = 20$ and is inconsistent across $K_p$.
 2. **Beats size:** the campaign-equal mean paired difference $\frac{1}{G}\sum_{g=1}^G (\bar{P}_X(g) - \bar{P}_Z(g))$ is
    $> 0$, with **both** the campaign-clustered bootstrap 95% interval excluding $0$ **and** the exact campaign-level
    sign-flip randomization test (2,000 draws flipping the sign of $\Delta_g = \bar{P}_X(g) - \bar{P}_Z(g)$ per campaign)
    giving one-sided $p < 0.025$.
 3. **Beats chance:** a within-package permutation control (the malicious label moved to a random transition within each
-   package, shared within each campaign draw, 2,000 draws) puts the observed statistic above the permutation's 99th
-   percentile.
+   package, shared within each campaign draw, 2,000 draws) puts the observed $T_X$ above the permutation
+   distribution's 99th percentile.
 
 **H-REL-3 passes** if campaign-equal recall at the D3 1-in-1,000 threshold is $\ge 0.50$ with a **joint (D3 + D1)
 cluster-bootstrap** 95% lower bound $\ge 0.30$ (in each of the 2,000 draws, D3 packages are resampled by package cluster
@@ -278,8 +289,8 @@ descriptive only.
 - **Chance level.** Under the null (the malicious transition is exchangeable with the package's others and no ties),
   the chance of ranking strictly first at $K_p = 20$ is $1/21 \approx 0.0476$ (and of $P_X(p) \ge 0.95$, i.e. rank 1 or
   2, is $2/21 \approx 0.0952$). For $n = 20$ independent campaigns, the upper-tail binomial probability that at least
-  10 rank strictly first is $\sum_{k=10}^{20} \binom{20}{k}(1/21)^k(20/21)^{20-k} = 7.16 \times 10^{-9}$ (and for rank
-  1 or 2 at $p = 2/21$, $5.07 \times 10^{-6}$). Significance is not the hard part; the bar is set on effect size.
+  10 rank strictly first is $\sum_{k=10}^{20} \binom{20}{k}(1/21)^k(20/21)^{20-k} = 7.12 \times 10^{-9}$ (and for rank
+  1 or 2 at $p = 2/21$, $4.60 \times 10^{-6}$; recomputed by the author, the review gave 7.16e-9 and 5.07e-6). Significance is not the hard part; the bar is set on effect size.
 - **Precision.** Campaigns are the units. With about 33 campaigns, the standard error of a campaign-equal share near
   $0.5$ is $\sqrt{0.25/33} \approx 0.087$ (95% interval $\approx \pm 0.17$). Weighting campaigns equally prevents the
   five large campaigns (capped at 10 packages each, 50 of 158 packages) from getting $10\times$ the influence of
@@ -302,7 +313,7 @@ functions), complexity, nesting, size, comment and naming features, and dependen
   campaign's payload appears on both sides. D3 calibration packages are split into two halves by package-name sha256
   in the same way so the learned model's 1-in-1,000 threshold is set on the training half's D3 packages and evaluated
   on the test half's D3 packages.
-- **Model:** L2-regularized logistic regression on within-package leave-one-out z-scores (positive class = D1
+- **Model:** L2-regularized logistic regression on within-package z-scores against predecessors only (as for D) (positive class = D1
   compromised transitions in the training half; negative class = benign history transitions and training-half D3
   transitions). The regularization strength and top-$k$ variance/prevalence feature filter are chosen by
   campaign-grouped inner cross-validation on the training half only.
@@ -330,6 +341,16 @@ functions), complexity, nesting, size, comment and naming features, and dependen
 - Windows of 10 and of all available history.
 - npm and PyPI separately.
 
+## Required slices (reported with the verdicts, so a pass cannot hide where it comes from)
+
+- **Quiet compromises:** positives with C3 = 0 and C4 = 0 (no new security hit and no new refused file). Top-1 share of
+  S and S_culture on this slice is the closest this sample comes to "attacks a pattern scanner would miss".
+- **Manifest-only compromises:** positives whose only change is in `package.json` / `setup.cfg` / `pyproject.toml`.
+  The engine treats JSON, YAML and plain text as inert (no security rules, no functions, no imports), so S scores these
+  near zero by design. Their count and the install-hook rule's result on them are reported.
+- **By component:** for each positive, which components put it in the top rank, so the share carried by C3/C4 versus
+  C1/C2/C5 is visible.
+
 ## Review log (incorporated into draft, 2026-11-13)
 
 Reviewed by **Gemini 4 Argon** (full review packet response posted on PR #184):
@@ -355,6 +376,39 @@ Reviewed by **Gemini 4 Argon** (full review packet response posted on PR #184):
    (D3 + D1) cluster bootstrap for `H-REL-3` threshold uncertainty.
 6. **Archive root & completeness gate (`D1`):** Promoted Open Question 6 into a mandatory pre-scan package-root
    canonicalization and 50% path-overlap completeness gate.
+
+Gemini's forecasts before data (recorded so they can be scored later): H-REL-1 72%, H-REL-2 28% (48% for
+S_culture_imports), H-REL-3 18%, exploratory model beating the fixed score on both halves 35%; median within-package
+percentile 0.96 for S and 0.82 for S_culture.
+
+### Author response (2026-11-14)
+
+Gemini edited this draft directly (commit 98f945c) rather than only commenting. The author checked every factual claim
+against gitgalaxy `origin/main` and recomputed the maths before accepting anything:
+
+- **Verified and accepted:** the `sec_*` column names; `excluded_artifacts` stores `exclusion_reason` ("Blocked (…"
+  for content gates), not the aperture classification; top-level code has no `function_data` row (gitgalaxy#2691);
+  JSON/YAML/plain text are inert (`galaxyscope.py:910`); `P ≥ 0.95` admits rank 2 at K = 20; the MAD floor was zero
+  for sparse components; the expanding novelty horizon; campaign-equal weighting; the joint threshold bootstrap;
+  GuardDog on deltas; the D3 split in the exploratory model.
+- **Changed by the author after review:**
+  1. The rank bar now uses the Top-1 share (≥ 0.50, lower bound ≥ 0.35) instead of a median P ≥ 0.95. The reviewed
+     text fixed Top-1 but kept the 0.95 median as the bar, which still admits rank 2.
+  2. "Beats chance" now names its statistic (T_X).
+  3. D's baseline is predecessors only, for D1 and D3 alike. The reviewed leave-one-out baseline would let a D3
+     transition be standardized against later releases, shrinking D3's tail and flattering recall. D3 now fetches 29
+     releases per package.
+  4. C3 uses the `sec_*` columns only; the reviewed text also added structural columns "where not already counted",
+     which was ambiguous.
+  5. C4's archetype match is a prefix: the engine has both "…Opaque Mass" and "…Opaque Footprint" labels.
+  6. The binomial figures are 7.12e-9 and 4.60e-6 (review: 7.16e-9 and 5.07e-6; same order, slips in the digits).
+  7. C2's strata are whatever the existing grammar-fit code computes; the written formula is descriptive.
+  8. Added required slices: quiet compromises (C3 = 0 and C4 = 0), manifest-only compromises (invisible to the
+     engine by design), and which component carried each positive.
+- **Not adopted without checking:** the review says OSV `MAL-*` advisories distinguish compromised versions from
+  typosquats. That is unverified and is not used.
+- **Independence:** the second reviewer (a different Claude model) will see this post-review draft, not Gemini's
+  comment.
 
 ## Order of work
 
