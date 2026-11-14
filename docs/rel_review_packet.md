@@ -5,7 +5,7 @@ file into the reviewer, followed by the full text of the draft:
 [`docs/rel_hypotheses.md`](rel_hypotheses.md) (raw, public:
 `https://raw.githubusercontent.com/squid-protocol/temporal-crucible/rel-registration/docs/rel_hypotheses.md`).
 
-Reviewers so far: (fill in) — e.g. Gemini, a second Claude model. Each reviewer works without seeing the other
+Reviewers so far: Gemini 4 Argon (2026-11-13, PR #184) — e.g. Gemini, a second Claude model. Each reviewer works without seeing the other
 reviews.
 
 ---
