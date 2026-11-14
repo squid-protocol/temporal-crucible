@@ -153,8 +153,8 @@ a 20-seed row takes about three minutes.
 
 | run | size | must hold |
 |---|---|---|
-| negative control, Python and C | 20 seeds, default size, a span leaving 730 days | universe equals the manifest's unit files in every seed; for each planted property the pipeline's effect minus the expected-label effect, paired by seed, is within three standard errors of zero **and** within ±0.01; the pipeline's effect itself is within ±0.03 of zero |
-| positive control, three strengths | 20 seeds each | the planted property is recovered, grows with strength, and the paired difference from the expected-label effect is within the bound measured for that language (Python: within ±0.01; C: reported, see below); the others stay within the negative control's spread |
+| negative control, Python and C | 20 seeds, default size, a span leaving 730 days | universe equals the manifest's unit files in every seed; for each planted property the pipeline's effect minus the expected-label effect, paired by seed, **does not differ from zero by more than 3.5 standard errors and by more than 0.005 at once** (both, not either: see the simulation below); the pipeline's effect itself is within ±0.03 of zero |
+| positive control, three strengths | 20 seeds each | the planted property is recovered, grows with strength, and the paired difference from the expected-label effect passes the same rule (C: against its measured reference value, see below); the others stay within the negative control's spread |
 | **placebo gates** | the same 20 seeds | path hash, directory hash and each size surrogate: the **mean over the 20 repositories** is within 0.005 of zero |
 | **label-convention mix** | 20 seeds each | the positive control repeated under `tickets_for_everything` and under `no_references`; the pipeline's effect against the expected-label effect, as above. Reported: how the recovered share of a true effect moves with the mix |
 | each mutation | 3 seeds | a recorded expectation: universe and labels match, or the pipeline reports the repository unusable for a stated reason. A mutation the pipeline gets silently wrong fails |
@@ -170,8 +170,21 @@ Measured so far (`harness_report.md`, and the placebo outputs of the same runs):
   mean, never a per-repository test. With files under `cache/`-style names dropped, the `in_degree` surrogate
   reads +0.0045 (standard error 0.0013): inside the tolerance and not by much.
 
-**Each bound's false-failure rate and the smallest bias it would catch are computed by simulation and written
-beside it before the suite is used as a gate.** Not yet done.
+**Each bound's false-failure rate and the smallest bias it catches, by simulation** (2026-11-14; normal draws
+with the per-seed spreads measured in the five suites: paired difference 0.003 to 0.038, median 0.022;
+pipeline effect 0.026 to 0.054, median 0.037; 100,000 to 200,000 simulated suites per cell).
+
+| rule | fails a correct pipeline | bias it catches 80% of the time |
+|---|---|---|
+| **Rejected:** paired difference within 3 standard errors **and** within ±0.01 (Revision 3's first wording) | 0.8% for the quietest row, **4.6% for a typical row, 24% for the noisiest; at least one of 22 rows in 65% of correct runs** | — |
+| **Adopted:** fail only if the paired difference is beyond 3.5 standard errors **and** beyond 0.005, 20 seeds | 0.2% per row; at least one of 22 rows in 5.5% of correct runs | 0.006 for the quietest row, 0.022 typical, 0.038 for the noisiest |
+| the same at 40 seeds | 0.13% per row; 2.4% for 22 rows | 0.005, 0.016, 0.026 |
+| negative control: the pipeline's mean effect within ±0.03 | 0.03% typical, 1.3% for the noisiest row | 0.037 to 0.040 |
+| placebo gates: the mean over 20 repositories within 0.005 | under 0.2% at a true leak of zero; 1% to 6% when the true leak is 0.0025, as SA3's own surrogates measure | a leak of 0.0055 to 0.0064 |
+
+The first wording was the second design review's proposal with the author's numbers, adopted without
+simulation; it would have failed a correct pipeline most of the time. The suite is used as a gate at **40
+seeds** with the adopted rule. What it cannot see is stated: a bias under about 0.02 in a typical row.
 
 Two truths exist by design: true fixes, and the labels the written rule should give. Universe and label rows
 are judged against the expected labels; a reported row gives the statistic against true fixes.
@@ -222,7 +235,7 @@ experiment (section 9).
 | This document contradicts Amendment 5 Revision 2 | Gemini, 1 | adopted: sections 3, 6 (item k), status; reference commit corrected |
 | Reachability: failing invariant in one section, report in another | Gemini, 2 | adopted: reported on the frozen universe, failing on the sensitivity's view |
 | `event` key | Gemini, 3 | adopted: (repo, unit commit, path); the linking commit only in the independent build |
-| Suite needs an absolute bound and the placebo gates | Gemini, 4 | adopted **with a change**: tested first on the 100 control runs already made — the gates hold as a mean over 20 repositories and fail often on one, so they are a suite mean. **Before phase B:** the false-failure simulation |
+| Suite needs an absolute bound and the placebo gates | Gemini, 4 | adopted **with two changes**: the placebo gates hold as a mean over 20 repositories and fail often on one, so they are a suite mean; and the absolute bound as first written (±0.01) failed a correct pipeline in 65% of simulated runs, so the rule is now "beyond 3.5 standard errors and beyond 0.005" (section 7) |
 | Convention-mix circularity | Gemini, 5 | adopted: a suite row; the two mutations already exist |
 | Reachability by rule must cover every static divergence | Gemini, 6 | adopted in section 4. **Before phase B** |
 | Dual-build protocol | Gemini, 7 | adopted: section 9 |
