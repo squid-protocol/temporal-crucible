@@ -10,6 +10,10 @@ expected positives are given for the snapshot's unit files only; two more cases 
 change effect must rest on at least 40% of files; inserted renames do not rewrite callers; test 5 states its
 file count and tolerance; `reverts_of_new_code` is worded as it can be built. Each change is marked **[r2]**.
 
+**Revision 4, 2026-11-14, after the first harness run** (`docs/process/harness_report.md`), marked **[r4]**:
+base files avoid directory names that GitHub's lists treat as vendored or documentation, and such names become
+a mutation; the Jira convention is split in two.
+
 **Who builds, who reviews.** Built from this document alone by one session; reviewed by a different model.
 Where this document is silent, the builder writes the choice into `DECISIONS.md` rather than guessing silently.
 
@@ -166,7 +170,20 @@ fault can be measured. Each is small, named, and tied to a real past fault in `d
 | `no_references` | fixes carry keywords only | 3 |
 | `huge_import_merge` | one merge brings in 500 commits | 17 |
 
+| `generic_dir_names` | **[r4]** a share of first-party unit files sit under directories that GitHub's vendored list matches by name alone (`cache/`, and at least two other such names taken from the list). They are first-party code: `is_unit` stays true, with a note that a rule using that list will not rank them | 55 |
+
 Mutations compose. The manifest lists which were applied and what each changed in the truth.
+
+**[r4] The base repository uses no directory or file name that GitHub's `vendor.yml` or `documentation.yml`
+matches**, other than the planted `vendor/thirdparty/` and `docs/`. The generator may not read those lists at
+run time (they are not in this repository and there is no network): the names to avoid are written into the
+generator as a fixed list with the pattern each one matches, and a test, skipped with a reason when the cached
+lists are absent, checks every base unit path against the cached lists.
+
+**[r4] The Jira convention is two conventions:** `jira_fixword` ("Fixes PROJ-12: …"), which SA3's rule counts,
+and `jira_bare` ("PROJ-12: …"), a true fix that carries a key and no fix word. For `jira_bare` the expected
+label is **not counted**, decided by the code's reading (a reference counts only after a fix word), and the
+manifest records the registration's looser wording as an unruled alternative.
 
 **[r2]** Where a commit of the base history edits a file only because it calls a renamed or deleted file, the
 manifest marks that edit as a caller edit, so "which files does non-fix work touch" can be checked against
