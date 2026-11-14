@@ -17,23 +17,34 @@ a p-value.
 (nearest-rank over every file in it), so the definitions stay scale-free
 across curl's 39 -> 1,144-file growth:
 
-    hub           popularity (in-degree)   >= p<pct> and > 0
-    orchestrator  import_count (out-degree) >= p<pct> and > 0
+    hub           in-degree                >= p<pct> and > 0
+    orchestrator  out-degree               >= p<pct> and > 0
     bridge        betweenness_score         >= p<pct> and > 0 (None -> not a bridge)
     isolate       in-degree 0 and out-degree 0
     spoke         in-degree <= 1, none of the above
     other         everything else
 
-Betweenness is sparse in C include graphs: in the curl fixture only 4-6% of
-files have betweenness > 0, so the p90 cutoff is 0 and "bridge" reduces to
-"any positive betweenness" (still the top ~5%). `thresholds_*` in the output
-records every cutoff so this is visible per pair.
+**Degrees come from the declared import edges when they exist.** With
+`edge_data` present, in/out-degree are counted from its `import` rows, so roles
+and edge diffs describe the same graph. Without it they fall back to
+file_data's `popularity` / `import_count`, which are NOT the same graph: the
+engine's popularity is a stem-resolved tally (e.g. curl 95c1e8915 at engine
+2e7a87765: lib/mprintf.c popularity 458, import in-degree 0, because
+`#include "mprintf.h"` resolves to the .c by stem). `degree_source` in the
+summary records which was used; never pool rows across the two.
+`betweenness_score` is the engine's, over its own dependency graph, in both
+modes. Betweenness can be sparse (the pre-#2992 curl fixture: 4-6% of files
+> 0, p90 cutoff 0, so "bridge" = any positive betweenness); `thresholds_*`
+records every cutoff per pair.
 
 hub / orchestrator / bridge are not exclusive; a file holding several gets a
 '+'-joined role in sorted order (e.g. "bridge+hub"). `universal` flags
 near-universal includes (in-degree >= --universal-frac of the snapshot's
-importing files, e.g. curl_setup.h) so every downstream table can be reported
-with and without them. `normalized_blast_radius` is not used: it is exactly
+importing files, default 0.25) so every downstream table can be reported with
+and without them. 0.25, not 0.5: the near-universal headers are universal
+within their own subtree, and curl's importers span lib/, src/, tests/ and
+docs/examples -- at 95c1e8915, lib/curl_setup.h has 325 of 893 importers (36%)
+and tests/libtest/first.h 275 (31%); the next is lib/urldata.h at 19%. `normalized_blast_radius` is not used: it is exactly
 pagerank_score * 1000 (verified in tools/centrality_bands.py).
 
 **Edges.** When the DB has an `edge_data` table holding rows for both commits
@@ -65,8 +76,8 @@ from dataclasses import dataclass, field
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 DEFAULT_PCT = 0.90
-DEFAULT_UNIVERSAL_FRAC = 0.5
-SCHEMA_VERSION = 1
+DEFAULT_UNIVERSAL_FRAC = 0.25
+SCHEMA_VERSION = 2
 
 
 @dataclass
@@ -77,6 +88,7 @@ class Snapshot:
     roles: dict[str, str] = field(default_factory=dict)
     universal: set[str] = field(default_factory=set)
     thresholds: dict[str, float] = field(default_factory=dict)
+    degree_source: str = "file_data"
 
 
 # ---------------------------------------------------------------- loading
@@ -128,7 +140,15 @@ def load_snapshot(con: sqlite3.Connection, sha: str, repo_name: str | None = Non
                 sp, dp = id_to_path.get(s), id_to_path.get(d)
                 if sp is not None and dp is not None and sp != dp:
                     edges.add((sp, dp))
-    return Snapshot(sha=sha, nodes=nodes, edges=edges)
+    source = "file_data"
+    if edges is not None:
+        source = "edge_data"
+        for n in nodes.values():
+            n["in"] = n["out"] = 0
+        for sp, dp in edges:
+            nodes[sp]["out"] += 1
+            nodes[dp]["in"] += 1
+    return Snapshot(sha=sha, nodes=nodes, edges=edges, degree_source=source)
 
 
 # ------------------------------------------------------------------ roles
@@ -259,6 +279,7 @@ def role_deltas(before: Snapshot, after: Snapshot,
         "n_role_changed": len(changed),
         "transitions": dict(Counter(r["transition"] for r in changed).most_common()),
         "edges_available": edges_ok,
+        "degree_source": [before.degree_source, after.degree_source],
         "edges_before": len(before.edges) if before.edges is not None else None,
         "edges_after": len(after.edges) if after.edges is not None else None,
         "edges_added": len(added) if edges_ok else None,

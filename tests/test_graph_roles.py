@@ -94,7 +94,7 @@ class Roles(unittest.TestCase):
         # in-degrees: setup.h 6, core.c 3, a/b/old_util 1, others 0 -> p75 cutoff = 1
         self.assertEqual(self.snap.thresholds["in"], 1)
         self.assertEqual(r["setup.h"], "hub")
-        # out-degrees 0,0,1,1,1,2,2,4 -> p75 cutoff 2: core.c (out 1) is not an orchestrator
+        # out-degrees 0,0,1,1,1,2,2,5 -> p75 cutoff 2: core.c (out 1) is not an orchestrator
         self.assertEqual(self.snap.thresholds["out"], 2)
         self.assertEqual(r["core.c"], "bridge+hub")
         self.assertIn("orchestrator", r["main.c"].split("+"))
@@ -110,7 +110,7 @@ class Roles(unittest.TestCase):
         self.assertEqual(snap.roles["gone.c"], "spoke")  # in 0, out 1
 
     def test_universal(self):
-        # 6 files import something: at frac 0.5 the bar is 3 (setup.h 6, core.c 3); at 0.75 it is 4.5
+        # 6 files import something: default frac 0.25 -> bar 1.5 (setup.h 6, core.c 3); at 0.75 the bar is 4.5
         self.assertEqual(self.snap.universal, {"setup.h", "core.c"})
         strict = gr.assign_roles(gr.load_snapshot(self.con, P), pct=0.75, universal_frac=0.75)
         self.assertEqual(strict.universal, {"setup.h"})
@@ -165,6 +165,37 @@ class Deltas(unittest.TestCase):
         self.assertEqual(u["transition"], "spoke->other")
         self.assertEqual(s["transitions"].get("spoke->other"), 1)
         self.assertFalse(rows["new.c"]["role_changed"])  # added files never "change"
+
+
+class DegreeSource(unittest.TestCase):
+    """popularity is the engine's stem-resolved tally, not the import graph's in-degree."""
+
+    def skew_popularity(self, con):
+        con.execute("UPDATE file_data SET popularity = 99 WHERE file_path = 'a.c'")
+
+    def test_edges_override_columns(self):
+        con = make_db({P: PARENT, C: CHILD})
+        self.skew_popularity(con)
+        snap = gr.load_snapshot(con, P)
+        self.assertEqual(snap.degree_source, "edge_data")
+        self.assertEqual(snap.nodes["a.c"]["in"], 1)  # main.c -> a.c only
+        self.assertEqual(snap.nodes["main.c"]["out"], 5)
+        res = gr.compare(con, P, C, renames=RENAMES)
+        self.assertEqual(res["summary"]["degree_source"], ["edge_data", "edge_data"])
+
+    def test_columns_without_edges(self):
+        con = make_db({P: PARENT, C: CHILD}, with_edge_table=False)
+        self.skew_popularity(con)
+        snap = gr.load_snapshot(con, P)
+        self.assertEqual(snap.degree_source, "file_data")
+        self.assertEqual(snap.nodes["a.c"]["in"], 99)
+
+    def test_d_in_matches_edge_diff(self):
+        res = gr.compare(make_db({P: PARENT, C: CHILD}), P, C, renames=RENAMES)
+        for r in res["files"]:
+            if r["status"] == "persisted":
+                self.assertEqual(r["d_in"], r["in_edges_added"] - r["in_edges_removed"], r["path"])
+                self.assertEqual(r["d_out"], r["out_edges_added"] - r["out_edges_removed"], r["path"])
 
 
 class NoEdges(unittest.TestCase):
