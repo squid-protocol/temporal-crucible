@@ -49,8 +49,8 @@ frozen run.
 **4. Completeness.** The registered measure is under 90% in the six repos already excluded (livecode 0.308,
 macports-base 0.0, pwntools 0.795, root 0.473, wordpress 0.838, wrf-fortran 0.786) and in no other.
 mediawiki reads 0.9004 and ghostty 0.912. Measured against the tree the numbers are the same to three
-places in every repo: on real data the two measures differ only where a repo uses `export-ignore`, and none
-does to any extent. `PU_new_completeness` therefore drops the same six repos.
+places in every repo. On control repositories the two differed only through `export-ignore` paths, which
+suggests no real repo uses it to any extent; that reading was not checked further. `PU_new_completeness` therefore drops the same six repos.
 
 **5. First-party files under `cache/`, `dist/`, `extern/`, `env/`** (defect log 55). In the 20 repos scored on
 the primary outcome: go 19 (3 with scan rows), freebsd-src 15, postgres 14, mediawiki 13, django 9, rails 7,
