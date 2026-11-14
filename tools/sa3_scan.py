@@ -34,20 +34,29 @@ OUT = STUDY / "sa3_scans"
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
+    ap.add_argument("--sha", help="scan this commit instead of the SA3 snapshot (SA3-CH: the earlier snapshot)")
+    ap.add_argument("--out", type=Path, default=OUT, help="where the master DB and sidecar go")
+    ap.add_argument("--hashseed", default=None, help="fix PYTHONHASHSEED for the engine (SA3-CH Amendment 1 rule 5)")
     a = ap.parse_args()
     r = a.repo
-    OUT.mkdir(parents=True, exist_ok=True)
-    side, keep = OUT / f"{r}.json", OUT / f"{r}_master.db"
+    out_dir = a.out
+    out_dir.mkdir(parents=True, exist_ok=True)
+    side, keep = out_dir / f"{r}.json", out_dir / f"{r}_master.db"
     if side.exists() and keep.exists():
         print(f"{r}: already scanned"); return 0
-    lift = json.loads(Path(f"docs/mod1/lift_{r}.json").read_text())
-    sha = lift.get("snapshot")
-    if not sha:
-        print(f"{r}: no MOD-1 snapshot ({lift.get('status')})"); return 1
+    if a.sha:
+        sha = a.sha
+    else:
+        lift = json.loads(Path(f"docs/mod1/lift_{r}.json").read_text())
+        sha = lift.get("snapshot")
+        if not sha:
+            print(f"{r}: no MOD-1 snapshot ({lift.get('status')})"); return 1
     t0 = time.time()
     env = {**os.environ, "PYTHONPATH": str(ENGINE), "GITGALAXY_LICENSE_KEY": "COMMUNITY_FREE_TIER",
            "GITGALAXY_DISABLE_GIT_HISTORY": "1"}
-    with tempfile.TemporaryDirectory(dir=OUT) as tmp:
+    if a.hashseed is not None:
+        env["PYTHONHASHSEED"] = str(a.hashseed)
+    with tempfile.TemporaryDirectory(dir=out_dir) as tmp:
         src, res = Path(tmp) / "src", Path(tmp) / "out"
         src.mkdir(); res.mkdir()
         arch = subprocess.run(["git", "-C", str(POOL_DIR / r), "archive", sha], capture_output=True)
@@ -56,7 +65,7 @@ def main() -> int:
                            env=env, capture_output=True, text=True, errors="replace")
         dbs = sorted(res.glob("*_galaxy_master.db"))
         if p.returncode or not dbs:
-            (OUT / f"{r}.err").write_text((p.stdout + p.stderr)[-6000:])
+            (out_dir / f"{r}.err").write_text((p.stdout + p.stderr)[-6000:])
             print(f"{r}: scan FAILED rc={p.returncode}"); return 1
         # what laws_build recorded beside the scan, so the unit rule can be applied identically later
         files = [str(f.relative_to(src)) for f in src.rglob("*") if f.is_file()]
@@ -64,7 +73,7 @@ def main() -> int:
         attrs = {str(g.relative_to(src)): g.read_text(encoding="utf-8", errors="replace")[:200000]
                  for g in src.rglob(".gitattributes") if g.is_file()}
         shutil.move(str(dbs[0]), keep)
-        side.write_text(json.dumps({"repo": r, "snapshot": sha, "engine": ENGINE_SHA, "src_root": str(src),
+        side.write_text(json.dumps({"repo": r, "snapshot": sha, "engine": ENGINE_SHA, "hashseed": a.hashseed, "src_root": str(src),
                                     "archive_files": len(files), "generated": gen, "attrs": attrs,
                                     "seconds": round(time.time() - t0, 1)}, indent=1) + "\n")
     print(f"{r}: ok, {len(files)} files in the archive, {time.time()-t0:.0f}s -> {keep.name}", flush=True)
