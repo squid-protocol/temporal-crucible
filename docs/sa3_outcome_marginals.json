@@ -1,0 +1,2406 @@
+[
+ {
+  "repo": "blast",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "cpp",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 6425,
+  "complete": 0.99,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 780,
+   "n_commits": 579,
+   "largest_commit_share": 0.327,
+   "clears_floor": false
+  },
+  "control_pool_commits": 3714,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "bugzilla",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "perl",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 198,
+  "complete": 1.0,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 29,
+   "n_commits": 21,
+   "largest_commit_share": 0.172,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 29,
+   "n_commits": 21,
+   "largest_commit_share": 0.172,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 29,
+   "n_commits": 21,
+   "largest_commit_share": 0.172,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 141,
+   "n_commits": 481,
+   "largest_commit_share": 0.121,
+   "clears_floor": true
+  },
+  "control_pool_commits": 82,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "bun",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "zig",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 451,
+  "complete": 0.991,
+  "window_days": 395.0,
+  "HP": {
+   "n_files": 170,
+   "n_commits": 156,
+   "largest_commit_share": 0.176,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 176,
+   "n_commits": 175,
+   "largest_commit_share": 0.17,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 170,
+   "n_commits": 156,
+   "largest_commit_share": 0.176,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 201,
+   "n_commits": 352,
+   "largest_commit_share": 0.194,
+   "clears_floor": true
+  },
+  "control_pool_commits": 488,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 34,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 20,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "circuitpython",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 3130,
+  "complete": 0.981,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 393,
+   "n_commits": 69,
+   "largest_commit_share": 0.14,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 396,
+   "n_commits": 74,
+   "largest_commit_share": 0.139,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 393,
+   "n_commits": 69,
+   "largest_commit_share": 0.14,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 57,
+   "n_commits": 20,
+   "largest_commit_share": 0.298,
+   "clears_floor": false
+  },
+  "control_pool_commits": 262,
+  "inheritance": {
+   "merges_in_window": 583,
+   "merges_over_cap": 3,
+   "inherited_events": 77,
+   "reverts_seen": 32,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 18,
+   "merges_tainted": 298
+  }
+ },
+ {
+  "repo": "commons-lang",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "java",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 250,
+  "complete": 1.0,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 3,
+   "n_commits": 3,
+   "largest_commit_share": 0.333,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 4,
+   "n_commits": 5,
+   "largest_commit_share": 0.25,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 3,
+   "n_commits": 3,
+   "largest_commit_share": 0.333,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 36,
+   "n_commits": 76,
+   "largest_commit_share": 0.056,
+   "clears_floor": true
+  },
+  "control_pool_commits": 827,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 3,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 2,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "cpython",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 903,
+  "complete": 0.97,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 12,
+   "n_commits": 10,
+   "largest_commit_share": 0.167,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 56,
+   "n_commits": 35,
+   "largest_commit_share": 0.143,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 2,
+   "n_commits": 2,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 2,
+   "n_commits": 2,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 8,
+   "n_commits": 6,
+   "largest_commit_share": 0.25,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 188,
+   "n_commits": 274,
+   "largest_commit_share": 0.138,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1359,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 46,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 21,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "curl",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 450,
+  "complete": 0.998,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 264,
+   "n_commits": 571,
+   "largest_commit_share": 0.159,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 270,
+   "n_commits": 577,
+   "largest_commit_share": 0.156,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 3,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 264,
+   "n_commits": 570,
+   "largest_commit_share": 0.159,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 165,
+   "n_commits": 269,
+   "largest_commit_share": 0.224,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1948,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 18,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 7,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "discourse",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "ruby",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 3386,
+  "complete": 0.999,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 3,
+   "n_commits": 3,
+   "largest_commit_share": 0.333,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 113,
+   "n_commits": 56,
+   "largest_commit_share": 0.186,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 430,
+   "n_commits": 716,
+   "largest_commit_share": 0.04,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1587,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 101,
+   "reverts_of_pre_cut_code": 1,
+   "reverts_unresolved": 47,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "django",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 807,
+  "complete": 0.99,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 379,
+   "n_commits": 743,
+   "largest_commit_share": 0.103,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 379,
+   "n_commits": 743,
+   "largest_commit_share": 0.103,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 5,
+   "n_commits": 5,
+   "largest_commit_share": 0.2,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 16,
+   "n_commits": 12,
+   "largest_commit_share": 0.375,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 375,
+   "n_commits": 726,
+   "largest_commit_share": 0.104,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 31,
+   "n_commits": 31,
+   "largest_commit_share": 0.129,
+   "clears_floor": true
+  },
+  "control_pool_commits": 442,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 9,
+   "reverts_of_pre_cut_code": 5,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "effect",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "jsts",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 899,
+  "complete": 0.996,
+  "window_days": 585.0,
+  "HP": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 130,
+   "n_commits": 144,
+   "largest_commit_share": 0.115,
+   "clears_floor": true
+  },
+  "control_pool_commits": 593,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 1,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "fieldtrip",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "matlab",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 1676,
+  "complete": 0.986,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 154,
+   "n_commits": 49,
+   "largest_commit_share": 0.292,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 155,
+   "n_commits": 50,
+   "largest_commit_share": 0.29,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 154,
+   "n_commits": 49,
+   "largest_commit_share": 0.292,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 160,
+   "n_commits": 191,
+   "largest_commit_share": 0.094,
+   "clears_floor": true
+  },
+  "control_pool_commits": 916,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 4,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 3,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "freebsd-src",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 37159,
+  "complete": 0.95,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 121,
+   "n_commits": 83,
+   "largest_commit_share": 0.14,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 161,
+   "n_commits": 95,
+   "largest_commit_share": 0.124,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 56,
+   "n_commits": 24,
+   "largest_commit_share": 0.304,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 66,
+   "n_commits": 59,
+   "largest_commit_share": 0.091,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 1525,
+   "n_commits": 1705,
+   "largest_commit_share": 0.036,
+   "clears_floor": true
+  },
+  "control_pool_commits": 9351,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 24,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 12,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "ghostty",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "zig",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 485,
+  "complete": 0.912,
+  "window_days": 196.9,
+  "HP": {
+   "n_files": 80,
+   "n_commits": 91,
+   "largest_commit_share": 0.138,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 80,
+   "n_commits": 92,
+   "largest_commit_share": 0.138,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 80,
+   "n_commits": 91,
+   "largest_commit_share": 0.138,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 14,
+   "n_commits": 7,
+   "largest_commit_share": 0.429,
+   "clears_floor": false
+  },
+  "control_pool_commits": 199,
+  "inheritance": {
+   "merges_in_window": 386,
+   "merges_over_cap": 1,
+   "inherited_events": 55,
+   "reverts_seen": 6,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 4,
+   "merges_tainted": 214
+  }
+ },
+ {
+  "repo": "gnupg",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 466,
+  "complete": 0.991,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 171,
+   "n_commits": 245,
+   "largest_commit_share": 0.164,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 171,
+   "n_commits": 245,
+   "largest_commit_share": 0.164,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 171,
+   "n_commits": 245,
+   "largest_commit_share": 0.164,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 89,
+   "n_commits": 107,
+   "largest_commit_share": 0.169,
+   "clears_floor": true
+  },
+  "control_pool_commits": 357,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "go",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "go",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 2419,
+  "complete": 0.949,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 910,
+   "n_commits": 1279,
+   "largest_commit_share": 0.036,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 963,
+   "n_commits": 1362,
+   "largest_commit_share": 0.034,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 69,
+   "n_commits": 42,
+   "largest_commit_share": 0.217,
+   "clears_floor": true
+  },
+  "HP_fixref": {
+   "n_files": 898,
+   "n_commits": 1236,
+   "largest_commit_share": 0.037,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 213,
+   "n_commits": 147,
+   "largest_commit_share": 0.122,
+   "clears_floor": true
+  },
+  "control_pool_commits": 2983,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 123,
+   "reverts_of_pre_cut_code": 1,
+   "reverts_unresolved": 94,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "godot",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 2758,
+  "complete": 0.999,
+  "window_days": 592.3,
+  "HP": {
+   "n_files": 166,
+   "n_commits": 100,
+   "largest_commit_share": 0.072,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 222,
+   "n_commits": 133,
+   "largest_commit_share": 0.054,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 4,
+   "n_commits": 2,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 164,
+   "n_commits": 98,
+   "largest_commit_share": 0.073,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 336,
+   "n_commits": 195,
+   "largest_commit_share": 0.452,
+   "clears_floor": false
+  },
+  "control_pool_commits": 3309,
+  "inheritance": {
+   "merges_in_window": 5604,
+   "merges_over_cap": 0,
+   "inherited_events": 135,
+   "reverts_seen": 119,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 76,
+   "merges_tainted": 2103
+  }
+ },
+ {
+  "repo": "impacket",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 89,
+  "complete": 0.957,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 5,
+   "n_commits": 8,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 6,
+   "n_commits": 9,
+   "largest_commit_share": 0.333,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 5,
+   "n_commits": 7,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 22,
+   "n_commits": 23,
+   "largest_commit_share": 0.364,
+   "clears_floor": false
+  },
+  "control_pool_commits": 80,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 2,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "kubernetes",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "go",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 5734,
+  "complete": 0.995,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 16,
+   "n_commits": 9,
+   "largest_commit_share": 0.25,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 201,
+   "n_commits": 64,
+   "largest_commit_share": 0.289,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 4,
+   "n_commits": 3,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 5,
+   "n_commits": 2,
+   "largest_commit_share": 0.8,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 7,
+   "n_commits": 4,
+   "largest_commit_share": 0.429,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 255,
+   "n_commits": 184,
+   "largest_commit_share": 0.063,
+   "clears_floor": true
+  },
+  "control_pool_commits": 2215,
+  "inheritance": {
+   "merges_in_window": 3026,
+   "merges_over_cap": 1,
+   "inherited_events": 65,
+   "reverts_seen": 154,
+   "reverts_of_pre_cut_code": 4,
+   "reverts_unresolved": 111,
+   "merges_tainted": 737
+  }
+ },
+ {
+  "repo": "libxml2",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 153,
+  "complete": 0.968,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 49,
+   "n_commits": 116,
+   "largest_commit_share": 0.143,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 57,
+   "n_commits": 125,
+   "largest_commit_share": 0.281,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 9,
+   "n_commits": 11,
+   "largest_commit_share": 0.222,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 47,
+   "n_commits": 105,
+   "largest_commit_share": 0.149,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 46,
+   "n_commits": 181,
+   "largest_commit_share": 0.13,
+   "clears_floor": true
+  },
+  "control_pool_commits": 815,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 18,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 9,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "livecode",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 31% of 1049 unit files in the tree",
+  "language": "cpp",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 323,
+  "complete": 0.308,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ },
+ {
+  "repo": "macports-base",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 0% of 128 unit files in the tree",
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 0,
+  "complete": 0.0,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ },
+ {
+  "repo": "mediawiki",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "php",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 1058,
+  "complete": 0.9,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 223,
+   "n_commits": 297,
+   "largest_commit_share": 0.13,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 227,
+   "n_commits": 315,
+   "largest_commit_share": 0.128,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 222,
+   "n_commits": 296,
+   "largest_commit_share": 0.131,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 406,
+   "n_commits": 206,
+   "largest_commit_share": 0.217,
+   "clears_floor": true
+  },
+  "control_pool_commits": 806,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 41,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 20,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "micropython",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 1833,
+  "complete": 0.988,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 10,
+   "n_commits": 6,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 11,
+   "n_commits": 7,
+   "largest_commit_share": 0.455,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 10,
+   "n_commits": 6,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 178,
+   "n_commits": 173,
+   "largest_commit_share": 0.124,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1006,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 2,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "moby",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "go",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 1213,
+  "complete": 0.977,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 43,
+   "n_commits": 22,
+   "largest_commit_share": 0.233,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 46,
+   "n_commits": 27,
+   "largest_commit_share": 0.217,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 4,
+   "n_commits": 3,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 6,
+   "n_commits": 3,
+   "largest_commit_share": 0.667,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 34,
+   "n_commits": 16,
+   "largest_commit_share": 0.294,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 57,
+   "n_commits": 32,
+   "largest_commit_share": 0.193,
+   "clears_floor": true
+  },
+  "control_pool_commits": 575,
+  "inheritance": {
+   "merges_in_window": 856,
+   "merges_over_cap": 1,
+   "inherited_events": 28,
+   "reverts_seen": 23,
+   "reverts_of_pre_cut_code": 5,
+   "reverts_unresolved": 13,
+   "merges_tainted": 249
+  }
+ },
+ {
+  "repo": "ndpi",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 312,
+  "complete": 1.0,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 8,
+   "n_commits": 6,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 10,
+   "n_commits": 9,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 8,
+   "n_commits": 6,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 57,
+   "n_commits": 151,
+   "largest_commit_share": 0.316,
+   "clears_floor": false
+  },
+  "control_pool_commits": 500,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 7,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 3,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "opencv",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "cpp",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 1574,
+  "complete": 0.999,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 61,
+   "n_commits": 17,
+   "largest_commit_share": 0.672,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 61,
+   "n_commits": 17,
+   "largest_commit_share": 0.672,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 3,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 58,
+   "n_commits": 16,
+   "largest_commit_share": 0.707,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 39,
+   "n_commits": 19,
+   "largest_commit_share": 0.308,
+   "clears_floor": false
+  },
+  "control_pool_commits": 424,
+  "inheritance": {
+   "merges_in_window": 387,
+   "merges_over_cap": 2,
+   "inherited_events": 12,
+   "reverts_seen": 3,
+   "reverts_of_pre_cut_code": 1,
+   "reverts_unresolved": 1,
+   "merges_tainted": 147
+  }
+ },
+ {
+  "repo": "pandas",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 317,
+  "complete": 1.0,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 68,
+   "n_commits": 80,
+   "largest_commit_share": 0.206,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 102,
+   "n_commits": 128,
+   "largest_commit_share": 0.137,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 15,
+   "n_commits": 2,
+   "largest_commit_share": 0.933,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 58,
+   "n_commits": 78,
+   "largest_commit_share": 0.086,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 158,
+   "n_commits": 674,
+   "largest_commit_share": 0.101,
+   "clears_floor": true
+  },
+  "control_pool_commits": 2651,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 77,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 54,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "postgres",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 2063,
+  "complete": 0.989,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 382,
+   "n_commits": 359,
+   "largest_commit_share": 0.063,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 459,
+   "n_commits": 381,
+   "largest_commit_share": 0.07,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 2,
+   "n_commits": 2,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 30,
+   "n_commits": 11,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 366,
+   "n_commits": 346,
+   "largest_commit_share": 0.066,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 427,
+   "n_commits": 433,
+   "largest_commit_share": 0.052,
+   "clears_floor": true
+  },
+  "control_pool_commits": 2136,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 45,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 22,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "prometheus",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "go",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 332,
+  "complete": 0.994,
+  "window_days": 628.9,
+  "HP": {
+   "n_files": 51,
+   "n_commits": 54,
+   "largest_commit_share": 0.118,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 58,
+   "n_commits": 62,
+   "largest_commit_share": 0.103,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 51,
+   "n_commits": 54,
+   "largest_commit_share": 0.118,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 80,
+   "n_commits": 85,
+   "largest_commit_share": 0.075,
+   "clears_floor": true
+  },
+  "control_pool_commits": 550,
+  "inheritance": {
+   "merges_in_window": 486,
+   "merges_over_cap": 1,
+   "inherited_events": 37,
+   "reverts_seen": 17,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 9,
+   "merges_tainted": 224
+  }
+ },
+ {
+  "repo": "pwntools",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 80% of 176 unit files in the tree",
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 140,
+  "complete": 0.795,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ },
+ {
+  "repo": "racket",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "racket",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 667,
+  "complete": 0.99,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 18,
+   "n_commits": 10,
+   "largest_commit_share": 0.278,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 30,
+   "n_commits": 16,
+   "largest_commit_share": 0.167,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 18,
+   "n_commits": 10,
+   "largest_commit_share": 0.278,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 94,
+   "n_commits": 115,
+   "largest_commit_share": 0.043,
+   "clears_floor": true
+  },
+  "control_pool_commits": 508,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 11,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 7,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "rails",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "ruby",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 1316,
+  "complete": 0.992,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 139,
+   "n_commits": 105,
+   "largest_commit_share": 0.05,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 189,
+   "n_commits": 149,
+   "largest_commit_share": 0.042,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 5,
+   "n_commits": 3,
+   "largest_commit_share": 0.6,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 22,
+   "n_commits": 15,
+   "largest_commit_share": 0.182,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 119,
+   "n_commits": 87,
+   "largest_commit_share": 0.059,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 129,
+   "n_commits": 113,
+   "largest_commit_share": 0.07,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1636,
+  "inheritance": {
+   "merges_in_window": 1829,
+   "merges_over_cap": 0,
+   "inherited_events": 108,
+   "reverts_seen": 106,
+   "reverts_of_pre_cut_code": 3,
+   "reverts_unresolved": 72,
+   "merges_tainted": 549
+  }
+ },
+ {
+  "repo": "redis",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 165,
+  "complete": 0.994,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 35,
+   "n_commits": 35,
+   "largest_commit_share": 0.343,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 35,
+   "n_commits": 36,
+   "largest_commit_share": 0.343,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 9,
+   "n_commits": 9,
+   "largest_commit_share": 0.333,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 30,
+   "n_commits": 26,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 62,
+   "n_commits": 174,
+   "largest_commit_share": 0.161,
+   "clears_floor": true
+  },
+  "control_pool_commits": 569,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 1,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "root",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 47% of 12225 unit files in the tree",
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 5779,
+  "complete": 0.473,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ },
+ {
+  "repo": "runtime",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "csharp",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 257,
+  "complete": 0.977,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 4,
+   "n_commits": 3,
+   "largest_commit_share": 0.75,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 7,
+   "n_commits": 4,
+   "largest_commit_share": 0.571,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 4,
+   "n_commits": 3,
+   "largest_commit_share": 0.75,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 49,
+   "n_commits": 37,
+   "largest_commit_share": 0.224,
+   "clears_floor": true
+  },
+  "control_pool_commits": 172,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 1,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "scapy",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 319,
+  "complete": 0.988,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 32,
+   "n_commits": 30,
+   "largest_commit_share": 0.188,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 39,
+   "n_commits": 31,
+   "largest_commit_share": 0.205,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 32,
+   "n_commits": 30,
+   "largest_commit_share": 0.188,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 68,
+   "n_commits": 88,
+   "largest_commit_share": 0.118,
+   "clears_floor": true
+  },
+  "control_pool_commits": 277,
+  "inheritance": {
+   "merges_in_window": 3,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 1,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 1
+  }
+ },
+ {
+  "repo": "sphinx",
+  "drawn": false,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 175,
+  "complete": 0.989,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 31,
+   "n_commits": 42,
+   "largest_commit_share": 0.065,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 38,
+   "n_commits": 44,
+   "largest_commit_share": 0.289,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 1,
+   "n_commits": 1,
+   "largest_commit_share": 1.0,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 31,
+   "n_commits": 41,
+   "largest_commit_share": 0.065,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 70,
+   "n_commits": 79,
+   "largest_commit_share": 0.243,
+   "clears_floor": true
+  },
+  "control_pool_commits": 601,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 6,
+   "reverts_of_pre_cut_code": 1,
+   "reverts_unresolved": 3,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "spock",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "java",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 523,
+  "complete": 0.996,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 40,
+   "n_commits": 21,
+   "largest_commit_share": 0.175,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 40,
+   "n_commits": 21,
+   "largest_commit_share": 0.175,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 40,
+   "n_commits": 21,
+   "largest_commit_share": 0.175,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 8,
+   "n_commits": 9,
+   "largest_commit_share": 0.125,
+   "clears_floor": false
+  },
+  "control_pool_commits": 41,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "sqlite",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 376,
+  "complete": 0.989,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 99,
+   "n_commits": 445,
+   "largest_commit_share": 0.071,
+   "clears_floor": true
+  },
+  "control_pool_commits": 1391,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "sqlmap",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "python",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 352,
+  "complete": 0.997,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 77,
+   "n_commits": 253,
+   "largest_commit_share": 0.156,
+   "clears_floor": true
+  },
+  "HP_allreverts": {
+   "n_files": 77,
+   "n_commits": 253,
+   "largest_commit_share": 0.156,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 77,
+   "n_commits": 253,
+   "largest_commit_share": 0.156,
+   "clears_floor": true
+  },
+  "KW": {
+   "n_files": 30,
+   "n_commits": 47,
+   "largest_commit_share": 0.167,
+   "clears_floor": true
+  },
+  "control_pool_commits": 848,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "swift",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "swift",
+  "family": "managed",
+  "merge_units": true,
+  "unit_files": 7435,
+  "complete": 0.999,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 19,
+   "n_commits": 10,
+   "largest_commit_share": 0.368,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 49,
+   "n_commits": 43,
+   "largest_commit_share": 0.143,
+   "clears_floor": true
+  },
+  "HP_revert": {
+   "n_files": 5,
+   "n_commits": 3,
+   "largest_commit_share": 0.4,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 14,
+   "n_commits": 7,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 63,
+   "n_commits": 40,
+   "largest_commit_share": 0.238,
+   "clears_floor": true
+  },
+  "control_pool_commits": 625,
+  "inheritance": {
+   "merges_in_window": 907,
+   "merges_over_cap": 2,
+   "inherited_events": 38,
+   "reverts_seen": 94,
+   "reverts_of_pre_cut_code": 3,
+   "reverts_unresolved": 63,
+   "merges_tainted": 365
+  }
+ },
+ {
+  "repo": "tcpip_historical",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "c",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 6559,
+  "complete": 0.996,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 394,
+   "n_commits": 632,
+   "largest_commit_share": 0.071,
+   "clears_floor": true
+  },
+  "control_pool_commits": 5354,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 0,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 0,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "tensorflow",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "cpp",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 9770,
+  "complete": 0.995,
+  "window_days": 730.0,
+  "HP": {
+   "n_files": 18,
+   "n_commits": 14,
+   "largest_commit_share": 0.167,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 28,
+   "n_commits": 15,
+   "largest_commit_share": 0.357,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 18,
+   "n_commits": 14,
+   "largest_commit_share": 0.167,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 365,
+   "n_commits": 289,
+   "largest_commit_share": 0.033,
+   "clears_floor": true
+  },
+  "control_pool_commits": 6235,
+  "inheritance": {
+   "merges_in_window": 0,
+   "merges_over_cap": 0,
+   "inherited_events": 0,
+   "reverts_seen": 2,
+   "reverts_of_pre_cut_code": 0,
+   "reverts_unresolved": 1,
+   "merges_tainted": 0
+  }
+ },
+ {
+  "repo": "tigerbeetle",
+  "drawn": true,
+  "status": "ok",
+  "why": null,
+  "language": "zig",
+  "family": "C",
+  "merge_units": true,
+  "unit_files": 177,
+  "complete": 1.0,
+  "window_days": 367.0,
+  "HP": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_allreverts": {
+   "n_files": 2,
+   "n_commits": 2,
+   "largest_commit_share": 0.5,
+   "clears_floor": false
+  },
+  "HP_revert": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_cve": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "HP_fixref": {
+   "n_files": 0,
+   "n_commits": 0,
+   "largest_commit_share": null,
+   "clears_floor": false
+  },
+  "KW": {
+   "n_files": 4,
+   "n_commits": 4,
+   "largest_commit_share": 0.25,
+   "clears_floor": false
+  },
+  "control_pool_commits": 286,
+  "inheritance": {
+   "merges_in_window": 404,
+   "merges_over_cap": 0,
+   "inherited_events": 2,
+   "reverts_seen": 11,
+   "reverts_of_pre_cut_code": 2,
+   "reverts_unresolved": 7,
+   "merges_tainted": 114
+  }
+ },
+ {
+  "repo": "wordpress",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 84% of 1082 unit files in the tree",
+  "language": "php",
+  "family": "managed",
+  "merge_units": false,
+  "unit_files": 907,
+  "complete": 0.838,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ },
+ {
+  "repo": "wrf-fortran",
+  "drawn": true,
+  "status": "scan_incomplete",
+  "why": "rescan holds 79% of 950 unit files in the tree",
+  "language": "fortran",
+  "family": "C",
+  "merge_units": false,
+  "unit_files": 747,
+  "complete": 0.786,
+  "window_days": 730.0,
+  "control_pool_commits": null,
+  "inheritance": {}
+ }
+]
