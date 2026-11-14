@@ -180,3 +180,25 @@ repository with merges and a known answer — which is what found it.
 - It did not check the engine's branch-keyword mapping, only that the manifest states one.
 - It read `codegen.py` for structure but verified it by counting its output, not line by line.
 - Hash stability across Python versions or C libraries was not tested (the builder's decision 1 says so).
+
+## Re-review after the builder's fixes (same day)
+
+The builder made all nine changes (generator 1.1.0, manifest schema 2) and disputed none. Re-checked with the
+same independent scripts on freshly generated repositories; nothing taken from the builder's report.
+
+| check | result |
+|---|---|
+| Tests | 39 passed, 0 skipped, 144 s |
+| Determinism | byte-identical manifest under a different directory, `TZ` and hash seed |
+| Planted counts = text, both languages, both points | 0 mismatches (771 file-points each); `sa3_nesting.py` agrees on all |
+| Git matches the manifest, baseline and 7 mutations | 0 mismatches; `fsck` clean |
+| Finding 1 | 0 expected positives outside the snapshot's unit files in the baseline and in `renames_after_snapshot`, `squash_merges`, `tickets_for_everything`, `reverts_of_new_code`; later files are listed apart |
+| Finding 2 | late reverts quoting a ticket are `counted: null` and listed under `ambiguous` with two readings (baseline 1, `tickets_for_everything` 4). In `squash_merges`, two such reverts share a squash commit with another link and are counted through that link — correct |
+| Finding 3 | the 61 inserted renames touch 61 of 306 snapshot unit files and nothing else; every commit shared with the baseline touches the same files. Non-fix activity against calls-out density, 16 fresh seeds: +0.031 (standard error 0.010), down from +0.143; the builder's 20 seeds read +0.008. What remains comes from the base history's own renames and deletes, whose caller edits are now marked per commit |
+| Finding 4 | four readings; `merge_workflow` has 89 ambiguous merges, 88 of them counted under "taint governs the control pool only" |
+| Finding 7 | branch density changes in the prior year for 66% of unit files (Python) and 56% (C), 30 fresh seeds each. Change-effect null: +0.017 in both languages, 1.3 and 1.8 standard errors from zero; the builder's 40 seeds read +0.002 and −0.007 |
+| Null on fresh seeds (700–729), all other properties | Python and C: every property within 1.9 standard errors of zero |
+
+**Accepted.** Open for phase 2, unchanged: merge-workflow repositories have no decided positive label until
+defect-log entry 54 is ruled on; density is related to size inside size bands, so a pipeline is scored against
+the truth pushed through the same statistic.
