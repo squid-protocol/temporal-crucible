@@ -140,12 +140,12 @@ The default for each is **what the registered code does**. Each goes in Amendmen
 | b | A missing predictor value | per measure, as today: the branch-state primary and `in_degree` read absent as 0 | code |
 | c | Random streams | named streams; the gate is re-run and reported | deviation |
 | d | The snapshot | the scanned commit, an input; the cut is stored beside it | code |
-| e | Universe files the history cannot touch | **needs a ruling**, after a count per repo | owner |
+| e | Universe files the history cannot touch | **ruled 2026-11-14:** counted per repo, then removed from the universe; a deviation, reported with the counts | owner |
 | f | The list of scored repos | the frozen list | registration |
 | g | The universe variant | with `.gitattributes`, tutorial exclusions and the scan's generated list | code |
 | h | Tree-wide denominator | the universe | code |
-| i | Keyword rule for the keyword outcome vs for tainting a merge | two rules, as today | **needs a ruling** |
-| j | Tainted merges | counted when they inherit; taint governs the keyword outcome and the control pool | code; **the text is corrected** (defect log 54) |
+| i | Keyword rule for the keyword outcome vs for tainting a merge | **ruled 2026-11-14:** two rules, as today, for SA3; one rule in the next study | code |
+| j | Tainted merges | **ruled 2026-11-14:** counted when they inherit; taint governs the keyword outcome and the control pool | code; **the text is corrected** in Amendment 5 (defect log 54) |
 | k | Holm step, "not robust", the vocabulary outside the confirmatory tests | as the registration says; the code is fixed (defect log 42, 43, 47) | text |
 | l | Stored `.gitattributes` cut at 200,000 characters | report whether any repo reaches it | — |
 
@@ -190,17 +190,21 @@ was not committed; the design review quotes the parts it examined.
 - It does not change SA3's registered statistic or hypotheses.
 - It does not make labels unknowable on this machine.
 
-## 11. Open, for the owner
+## 11. Owner rulings, 2026-11-14
+
+The owner accepted all three recommendations below. Nothing here is open.
 
 1. **Item e:** files that are ranked but can never be positive because `.gitattributes` switches an exclusion
    off. Rule after the count: remove them from the universe (my recommendation: a ranked file that cannot be
    positive is defect 2 again) or keep the registered universe and report them.
 2. **Item i:** keep two keyword rules (my recommendation: yes for SA3, corrected in the next study).
-3. **A second, independent build:** on this route the core where an error changes the answer is the reading
-   rule and the `event` table builder. If wanted, those two, by a different model, compared on the control
-   repository.
+3. **A second, independent build:** yes, as an experiment, for the core where an error changes the answer:
+   the reading rule (step 5) and the `event` table builder (step 3). Built by a different model from the same
+   text without sight of the first build; outputs compared number for number on the control repository; known
+   faults seeded into one copy, and the count caught by the comparison recorded beside the count a review
+   catches.
 
-Work proceeds on steps 0 and 1 without these; they are needed for step 2.
+Item e is applied in step 3, after the count; all three go into Amendment 5 (step 2).
 
 ## 12. Review record
 

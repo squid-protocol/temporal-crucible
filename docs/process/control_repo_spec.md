@@ -135,6 +135,11 @@ files. Two cases are ambiguous by ruling of the first review and are listed, not
   governs the control pool only"** — the merge is counted when it shares a file with the linked commit, even
   if it also brings in a fix-worded commit; that is what `tools/sa3_outcomes.py` does.
 
+**[r3] Owner ruling, 2026-11-14:** tainted merges follow the code. A merge's `counted` is therefore **decided**
+by the reading "taint governs the control pool only"; the other readings stay listed for the record, marked as
+not the ruled one. A merge is listed under `ambiguous` only if it is ambiguous for another reason (a brought-in
+late revert quoting a ticket). The manifest names the ruling and its date.
+
 For C, the manifest also records the count of pointer declarations per file beside `pointer_ops`, and says
 which of the two a keyword-family instrument is expected to see.
 

@@ -102,6 +102,9 @@ produced published results.
 fixes, and still found one blocker and six lesser faults. Its blocker was found the way every statistic and gate
 fault here has been found: by running the whole thing on synthetic data with a known answer.
 
+**Entry 54 ruled by the owner, 2026-11-14:** the code governs (a tainted merge that inherits a fix reference is
+a positive); the text is corrected in SA3's next amendment.
+
 **First fault found by the control repository (entry 54),** before any pipeline had been run on it: writing
 down the expected label for a generated merge forced a choice the text does not make.
 
