@@ -253,18 +253,32 @@ it hashes every `.py` here. `crypt.py` is loaded by file path under the module n
 to the committed `keys/blind_pub.pem`, checks its fingerprint prefix and size, and checks that a throwaway key
 cannot open the result. That public key is the only real key material any test reads.
 
-**22. Runtime.** `python3 -m pytest tests/test_blind.py`: 62 passed, no xfail, in about 31 s (30.7 s on the
+**22. Runtime.** `python3 -m pytest tests/test_blind.py`: 71 passed, no xfail, in about 29 s (29.1 s on the
 development machine, one process). Most of that is generating eight default-profile control repositories
 with `--years 10`, about 3.3 s each, plus a few subprocess runs.
 
-**23. Manifest schema.** The brief names manifest schema 2. While this was being built, someone else changed
-`tools/control_repo/` in this worktree (uncommitted; generator 1.2.0, schema 3: an owner ruling of
-2026-11-14 decides tainted merges, and the other readings move to `unruled_readings`). Those edits are not
-mine and I did not touch them. The fields `table_from_manifest` reads are the same in both schemas: `files[]`
-with `is_unit`, `path_at_snapshot` and `properties.snapshot.loc`, and `expected_labels[]` with `counted` and
-`positives[].path_at_snapshot`. So it accepts 2 and 3 and refuses anything else. The measurements below were
-taken on schema-2 manifests (generator 1.1.0). In those default repositories there are no merges, so the
-ruling does not change them.
+**23. Manifest schema: validate fields, not the version number.** `table_from_manifest` accepts any
+`schema_version` that is an integer of at least 2, and then checks the fields it reads. Those fields are:
+- `files[].is_unit` and `files[].path_at_snapshot`;
+- `files[].properties.snapshot.loc`, for unit files present at the snapshot;
+- `expected_labels[].counted`;
+- `expected_labels[].positives[].path_at_snapshot`, on counted labels.
+
+A missing field is refused with a message that names it, for example `files[12].properties.snapshot.loc`.
+The message gives an index, never a path. The manifest's schema number is carried as the label table's
+`source_schema` and written to the marginals as `source_manifest_schema`.
+
+Meaning checked against the generator's README and DECISIONS (51, 52, 57) for schemas 3 and 4. Schema 3 adds
+the owner ruling on tainted merges. Schema 4 adds the `jira_fixword` and `jira_bare` fix conventions and
+`unruled_readings`. A `jira_bare` label, and a merge whose unruled readings differ, is **decided**: `counted`
+is true or false by the ruled reading, and the alternatives sit beside it marked `ruled: false`. Only
+`counted: null` means ambiguous, so `ambiguous_commits` counts only those. A test adds an unruled alternative
+to a `counted: false` label and checks that the count does not change.
+
+Seed 1, `--years 10`, schema 4: 103 counted, 495 not counted (5 of them with `unruled_readings`),
+2 ambiguous. None of the fields read changed meaning between schemas 2 and 4. The Revision 2 measurements
+were taken on schema 2, and the [r3] table on schema 3; the schema 4 labels can differ for `jira_bare`
+commits.
 
 ## Revision 3
 

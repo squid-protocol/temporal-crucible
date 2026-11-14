@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 
 import codegen as cg
 
-GENERATOR_VERSION = "1.2.0"
+GENERATOR_VERSION = "1.3.0"
 T0 = 1577836800                       # 2020-01-01T00:00:00Z
 DAY = 86400
 A_SIZE, B_BUSY = 0.6, 1.0             # fix weight: loc^a * exp(b * busyness)
@@ -102,6 +102,7 @@ class FileRec:
     history: list = field(default_factory=list)   # [(path, commit id)]
     text: str = ""
     loc: int = 0              # line count of `text`
+    generic_dir: str | None = None   # generic_dir_names: the Linguist-matched directory the file sits in
     ord_weight: float = 0.0   # ordinary-selection weight (constant: planned size and busyness)
     planned_dir: str = ""
     stem: str = ""
@@ -689,8 +690,9 @@ class Simulator:
                 sid, old, new = cg.tweak(rng, t.model, self.next_lit())
                 self.commit_files(e, [t.fid])
         lab = stream(self.cfg.seed, "label", e.lid)
-        conv = ["issue", "trailer", "cve", "jira", "keyword", "silent"][
-            _weighted_index(lab, [0.30, 0.10, 0.08, 0.12, 0.25, 0.15])]
+        # r4: the 12% Jira share is split evenly; the cumulative bounds of every other convention are unchanged
+        conv = ["issue", "trailer", "cve", "jira_fixword", "jira_bare", "keyword", "silent"][
+            _weighted_index(lab, [0.30, 0.10, 0.08, 0.06, 0.06, 0.25, 0.15])]
         e.notes["base_convention"] = conv
         if self.mut.active("no_references"):
             self.mut.record("no_references", "fixes_rewritten", add=1)
@@ -713,9 +715,12 @@ class Simulator:
         elif conv == "cve":
             e.message = f"Guard against {what} in {stem} (CVE-{lab.randint(2021, 2026)}-{lab.randint(10000, 49999)})"
             e.signals = {"cve": True}
-        elif conv == "jira":
+        elif conv == "jira_fixword":                  # matches hist_meta.py issue_fix_sa3: fix word, then the key
+            e.message = f"Fixes PROJ-{num}: handle {what} in {stem}"
+            e.signals = {"fixref": "jira (after a fix word)"}
+        elif conv == "jira_bare":                     # a key with no fix word: SA3's code does not count it
             e.message = f"PROJ-{num}: handle {what} in {stem}"
-            e.signals = {"fixref": "jira"}
+            e.signals = {"bare_key": f"PROJ-{num}"}
         elif conv == "keyword":
             word = lab.choice(["fix crash in", "fix bug in", "fix wrong total in", "fix error in"])
             e.message = f"{word} {stem} on {what}"
@@ -853,18 +858,32 @@ class Simulator:
     def _taken(self):
         return {r.path for r in self.files.values() if r.alive}
 
+    @staticmethod
+    def split_dir(rec):
+        """(the file's unit directory, its name), with a generic_dir_names segment taken out."""
+        d, name = rec.path.rsplit("/", 1)
+        if rec.generic_dir:
+            d = d[:-(len(rec.generic_dir) + 1)]
+        return d, name
+
+    @staticmethod
+    def join_dir(rec, d, name):
+        """The path of `name` in unit directory `d`; a generic_dir_names file keeps its generic segment, so a move
+        draws exactly as it would without the mutation."""
+        return f"{d}/{rec.generic_dir}/{name}" if rec.generic_dir else f"{d}/{name}"
+
     def do_rename(self, e: Entry):
         rng = stream(self.cfg.seed, "rename", e.lid)
         units = sorted(self.alive_units(), key=lambda r: r.fid)
         rec = units[rng.randrange(len(units))]
         taken = self._taken()
-        cur_dir, name = rec.path.rsplit("/", 1)
+        cur_dir, name = self.split_dir(rec)
         for _ in range(100):
             if rng.random() < 0.7:
                 d = rng.choice([x for x in self.plan.layout.unit_dirs if x != cur_dir])
-                new = f"{d}/{name}"
+                new = self.join_dir(rec, d, name)
             else:
-                new = f"{cur_dir}/{rng.choice(cg.FILE_NOUNS)}_{name}"
+                new = self.join_dir(rec, cur_dir, f"{rng.choice(cg.FILE_NOUNS)}_{name}")
             if new not in taken:
                 break
         self._move(e, rec, new)
@@ -881,9 +900,9 @@ class Simulator:
             return
         rec = cands[rng.randrange(len(cands))]
         taken = self._taken()
-        cur_dir, name = rec.path.rsplit("/", 1)
-        dirs = [x for x in self.plan.layout.unit_dirs if x != cur_dir and f"{x}/{name}" not in taken]
-        self._move(e, rec, f"{rng.choice(dirs)}/{name}", rewrite_callers=False)
+        cur_dir, name = self.split_dir(rec)
+        dirs = [x for x in self.plan.layout.unit_dirs if x != cur_dir and self.join_dir(rec, x, name) not in taken]
+        self._move(e, rec, self.join_dir(rec, rng.choice(dirs), name), rewrite_callers=False)
         if rec.lang == "python":
             callers = sorted(c.fid for c in self.callers_of(rec.fid))
             if callers:
@@ -946,6 +965,21 @@ class Simulator:
         e.notes["huge_import_filler"] = True
 
 
+PLANTED_LINGUIST = {"vendor": "vendor/thirdparty/", "docs": "docs/", "readme": "README.md", "licence": "LICENSE",
+                    "attributes": ".gitattributes"}
+
+
+def check_linguist_names(layout):
+    """r4: no base path may be one GitHub Linguist's lists treat as vendored or documentation (codegen.LINGUIST_AVOID),
+    except the planted non-unit places. Runs on the base layout, before any mutation adds or moves files."""
+    for r in layout.files:
+        hit = cg.linguist_clash(r.path)
+        if hit and r.kind not in PLANTED_LINGUIST:
+            raise RuntimeError(f"{r.path}: the base layout uses {hit}, which Linguist matches")
+        if r.kind in PLANTED_LINGUIST and not hit:
+            raise RuntimeError(f"{r.path}: a planted {r.kind} path that Linguist does not match")
+
+
 def plan(cfg: Config, mut=None) -> Plan:
     """Build the whole history in memory."""
     import mutations as mm
@@ -954,6 +988,7 @@ def plan(cfg: Config, mut=None) -> Plan:
     snap_lid, prior_lid = entries[snap].lid, entries[prior].lid
     counts = type_counts(cfg.commits)
     layout = Layout(cfg, counts["add"])
+    check_linguist_names(layout)
     mut.extend_layout(cfg, layout)
     entries = mut.adjust_timeline(cfg, entries, snap_lid, prior_lid)
     sim = Simulator(cfg, mut)

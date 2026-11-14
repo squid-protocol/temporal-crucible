@@ -62,10 +62,33 @@ class BuildError(Exception):
 
 
 # ------------------------------------------------------------------------------------------------- inputs
+def _require(obj, key, where):
+    if not isinstance(obj, dict) or key not in obj:
+        raise BuildError(f"manifest lacks the field {where}{key}; refusing to build labels from it")
+    return obj[key]
+
+
 def table_from_manifest(manifest):
-    """(file_table, label_table) from a control repository's manifest (schema 2). In memory only."""
-    if manifest.get("schema_version") not in (2, 3):      # the fields read here are the same in both (DECISIONS 23)
-        raise BuildError(f"manifest schema {manifest.get('schema_version')!r}; this reads schemas 2 and 3")
+    """(file_table, label_table) from a control repository's manifest, any schema >= 2 that carries the fields
+    read here (DECISIONS.md 23): files[].is_unit, files[].path_at_snapshot, files[].properties.snapshot.loc
+    (for unit files present at the snapshot), expected_labels[].counted and expected_labels[].positives[]
+    .path_at_snapshot. A missing field is refused by name. In memory only. The schema number is carried in
+    the label table as `source_schema` and written to the marginals."""
+    schema = manifest.get("schema_version") if isinstance(manifest, dict) else None
+    if not isinstance(schema, int) or schema < 2:
+        raise BuildError(f"manifest schema {schema!r}; this reads schema 2 or later")
+    for i, f in enumerate(_require(manifest, "files", "")):
+        _require(f, "is_unit", f"files[{i}].")
+        _require(f, "path_at_snapshot", f"files[{i}].")
+        if f["is_unit"] and f["path_at_snapshot"]:
+            snap = _require(_require(f, "properties", f"files[{i}]."), "snapshot", f"files[{i}].properties.")
+            if snap is not None:
+                _require(snap, "loc", f"files[{i}].properties.snapshot.")
+    for i, e in enumerate(_require(manifest, "expected_labels", "")):
+        _require(e, "counted", f"expected_labels[{i}].")
+        if e["counted"] is True:
+            for j, p in enumerate(_require(e, "positives", f"expected_labels[{i}].")):
+                _require(p, "path_at_snapshot", f"expected_labels[{i}].positives[{j}].")
     file_table = []
     for f in manifest["files"]:
         snap = (f.get("properties") or {}).get("snapshot")
@@ -78,6 +101,7 @@ def table_from_manifest(manifest):
     largest = max((len({p["path_at_snapshot"] for p in e["positives"]}) for e in counted), default=0)
     label_table = {
         "schema": LABEL_SCHEMA,
+        "source_schema": schema,
         "rows": [{"outcome": "HP", "path": p} for p in positives],
         "outcomes": {"HP": {"qualifying_commits": len(counted),
                             "largest_commit_share": (largest / len(positives)) if positives else 0.0,
@@ -152,7 +176,8 @@ def build(repo, file_table, label_table, labels_dir, public_key_path=crypt.DEFAU
 
     report = {"repo": repo, "cell_rule": scramble.CELL_RULE, "k": k,
               "cells": scramble.cell_report(scramble.released_cells(file_table)), "outcomes": {}}
-    marginals = {"repo": repo, "n_files": len(file_table), "outcomes": {}}
+    marginals = {"repo": repo, "n_files": len(file_table), "outcomes": {},
+                 "source_manifest_schema": label_table.get("source_schema")}
     copies_by_outcome = {}
     released = True
     for name in sorted(label_table["outcomes"]):

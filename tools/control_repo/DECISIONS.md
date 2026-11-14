@@ -129,7 +129,8 @@ are the code's constants; where a choice has a measured consequence, the measure
     test file. Each fix has its own defect id.
 23. **Fix conventions** (per commit, recorded as `convention`): `issue` "Fixes #N" in the body 30%; `trailer`
     "Fixes: <12-hex hash> ("subject")" naming the last commit that edited the first defect file 10%; `cve` 8%;
-    `jira` "PROJ-N: ..." 12%; `keyword` "fix crash in ..." 25%; `silent` 15%.
+    `jira_fixword` "Fixes PROJ-N: ..." 6% and `jira_bare` "PROJ-N: ..." 6% (r4, see 57); `keyword`
+    "fix crash in ..." 25%; `silent` 15%.
 24. **Reverts** target an earlier ordinary or feature_with_ticket commit that changed no structure and is not yet
     reverted (70%: one of the 30 most recent; otherwise any), and put back the literal values it changed that
     still differ. The message is git's: `Revert "<subject>"` + "This reverts commit <hash>." A revert of a ticket
@@ -263,8 +264,9 @@ are the code's constants; where a choice has a measured consequence, the measure
     Python -0.04 to -0.08, C -0.03 to -0.10), while the planted densities show none (within +-0.03). Fixes rise
     with loc (loc^a), so the band statistic inherits a small negative push. Not removed: a count that is a whole
     number of lines cannot avoid it, and the size term is the spec's. Stated in README.md for phase 2.
-51. **Versions and runtime.** (r2) Manifest schema 2, generator 1.1.0; (r3) schema 3, generator 1.2.0. The whole test file, wall
-    clock on the development machine: 39 passed in 128 s (the statistics tests take about 115 s of it, in two
+51. **Versions and runtime.** (r2) Manifest schema 2, generator 1.1.0; (r3) schema 3, generator 1.2.0; (r4) schema 4,
+    generator 1.3.0. The whole test file, wall
+    clock on the development machine: 45 passed in 131 s (r4; 39 in 128 s at r2) (the statistics tests take about 115 s of it, in two
     worker processes; about 4 CPU-minutes in all).
 
 ## Revision 3 (owner ruling, 2026-11-14)
@@ -285,3 +287,51 @@ are the code's constants; where a choice has a measured consequence, the measure
     merges): before r3, 0 counted / 196 not counted / 89 ambiguous; after, 88 counted / 196 not counted / 1
     ambiguous (a merge bringing in a late revert that quotes a ticket). The 6 merges that bring in a linked and a
     fix-worded commit are all counted.
+
+## Revision 4 (after the first harness run, `docs/process/harness_report.md`)
+
+55. **Linguist names.** Every name the generator can produce was checked against the cached `vendor.yml` and
+    `documentation.yml` (Linguist e0c78d62c42a), as a directory at each depth and as file names (all noun x role
+    stems, with the `test_` and `mini_` prefixes), plus every fixed or mutation-added path. Collisions found:
+    - the directory word `cache` (`(^|/)cache/`): a base collision; replaced by `memo` in `codegen.DIR_WORDS`.
+      Nothing else in the word lists (directories, file nouns, roles, verbs, doc nouns) matches;
+    - planted on purpose, non-units, matching as intended: `vendor/thirdparty/` (three vendor patterns),
+      `docs/` (`^[Dd]ocs?/`), `LICENSE`, `README.md`, `.gitattributes`;
+    - mutation-added: `tests/fixtures/generated/` (`test_fixtures`) matches `(^|/)[Tt]ests?/fixtures/`, intended
+      (they are test inputs, `is_unit` false); `docs/imported/` (`huge_import_merge` notes) matches
+      `^[Dd]ocs?/`, intended (documentation); `src/contrib/<lib>/` (`vendored_half`) matches nothing, intended
+      (that is the fault it plants); `native/`, `scripts/` (`mixed_language`), `experimental/`
+      (export-ignored), `libmini`, `generated/` alone, `requirements.txt`, `deps.txt`, `gen_tables.*`: no match.
+    The avoid-list `codegen.LINGUIST_AVOID` holds the names a generator could plausibly pick, each with its
+    pattern; `history.check_linguist_names` refuses a base layout that uses one outside the planted places. The
+    test `test_base_paths_avoid_linguist_lists` checks every unit path, at both points and at the end, against
+    the cached lists, and that each avoid-list pattern is in them.
+56. **`generic_dir_names`** (log entry 55): 20% of all unit files (base and later-added), drawn from the
+    mutation's own stream, move one level down into `cache/`, `dist/`, `extern/` or `env/` in turn (each matched
+    anywhere by `vendor.yml`). They keep `is_unit: true`; `unit_reason` adds the note and `generic_dir` names
+    the directory. Nothing else changes: a rename draws its destination from the file's unit directory with the
+    generic segment taken out and puts it back, so every random draw is the base history's; only these files'
+    paths, the commits' path lists, the rename and delete messages that name them, and Python callers' import
+    lines differ. Test 7 checks this, and that every moved file is matched by the cached vendored list.
+57. **Jira split.** The 12% Jira share is split 6% / 6% between `jira_fixword` ("Fixes PROJ-N: ...", which
+    matches `issue_fix_sa3` in `tools/hist_meta.py`) and `jira_bare` ("PROJ-N: ..."). The convention draw keeps
+    every other convention's interval, so no other fix changes. A `jira_bare` commit's label is not counted,
+    decided by the code's reading (clause names `issue_fix_sa3`), and carries `unruled_readings` with
+    `registration_wording` (counted). Inside a merge the bare key is not a link under the ruled reading; when
+    reading it as one would change the merge's label, that alternative is listed as `registration_wording`
+    among the merge's `unruled_readings`. The manifest records this decision under `rulings` (second entry, by
+    spec revision 4).
+58. **Conventions against SA3's patterns** (`tools/hist_meta.py` lines 37-55, and the link kinds
+    `tools/sa3_outcomes.py` counts: `issue_fix`, `cve`, `revert`, `trailer:fixes|bug|reported-by`). Matching:
+    "Fixes #N" (issue_fix), the `Fixes: <12-hex>` trailer (`^Fixes:` in issue_fix_sa3, and trailer:fixes), CVE
+    ids, "Fixed #N -- Added ..." (issue_fix), a revert quoting it (issue_fix), "Fixes PROJ-N". **Not matching,
+    left unchanged and reported:** the `sweep_labelled_fix` message "Fix licence headers (#N)" yields only a bare
+    `issue` link, which SA3 does not count; the manifest labels it counted-through-reference only in principle,
+    but the sweep is tree-wide, so the label is "not counted" in every repository of 24 or more unit files.
+    Keyword fixes ("fix bug in ...") and silent fixes match no link, as intended.
+59. Measured, seed 11, default profile (Python): unit files at the snapshot 306 before and after; of them,
+    matched by the Linguist lists: 54 before (all under `cache/`), 0 after; with `generic_dir_names`, 59.
+    Expected counted commits by convention, before -> after: issue 34 -> 34, trailer 11 -> 11, cve 9 -> 9,
+    ticket_feature 28 -> 28, revert 4 -> 4, jira 17 -> jira_fixword 9 (and 8 jira_bare commits not counted,
+    each with the unruled alternative).
+

@@ -3,7 +3,7 @@
 A mutation changes one thing. It acts at one of four hooks, and draws only from its own random streams, so
 everything it does not name stays as it was:
 
-  layout     extra files                         vendored_half, test_fixtures, mixed_language
+  layout     extra or moved files                vendored_half, test_fixtures, mixed_language, generic_dir_names
   timeline   commit types / extra commits        tickets_for_everything, renames_after_snapshot, huge_import_merge
   content    targets and wording of commits      reverts_of_new_code, sweep_labelled_fix, no_references
              (applied inside history.Simulator, which asks `active(name)`)
@@ -62,7 +62,16 @@ REGISTRY = {
     "huge_import_merge": {
         "truth": "planted properties and true fixes unchanged (when the window holds fewer than 500 commits, filler note commits are added); the merge is over the 50-commit cap, so nothing it brings in is counted",
         "change": "one merge brings in 500 commits", "log": [17]},
+    "generic_dir_names": {
+        "truth": ("planted properties, true fixes and every commit's files unchanged; a share of unit files sit one "
+                  "level deeper, in a directory GitHub Linguist's vendored list matches by name alone; they stay "
+                  "units (is_unit true), with a note that a rule applying that list will not rank them"),
+        "change": ("20% of the unit files sit under cache/, dist/, extern/ or env/ (Linguist vendor.yml: (^|/)cache/, "
+                   "(^|/)dist/, (^|/)[Ee]xtern(als?)?/, (^|/)env/)"), "log": [55]},
 }
+GENERIC_DIRS = {"cache": r"(^|/)cache/", "dist": r"(^|/)dist/", "extern": r"(^|/)[Ee]xtern(als?)?/",
+                "env": r"(^|/)env/"}
+GENERIC_SHARE = 0.2
 
 GROUP_SIZES = [1, 2, 3, 4]
 GROUP_WEIGHTS = [0.35, 0.30, 0.20, 0.15]
@@ -130,6 +139,21 @@ class MutationSet:
                                                f"tests/fixtures/generated/case_{i:04d}{cfg.ext}", False,
                                                hi.UNIT_REASONS["fixture"], model=text))
             self.changed["test_fixtures"] = {"files_added": n}
+        if self.active("generic_dir_names"):
+            rng = hi.stream(cfg.seed, "mutation", "generic_dir_names")
+            all_units = sorted((r for r in layout.files if r.kind == "unit"), key=lambda r: r.fid)
+            picked = sorted(rng.sample(all_units, int(round(GENERIC_SHARE * len(all_units)))), key=lambda r: r.fid)
+            names = list(GENERIC_DIRS)
+            for i, r in enumerate(picked):
+                g = names[i % len(names)]
+                d, name = r.path.rsplit("/", 1)
+                r.path, r.generic_dir = f"{d}/{g}/{name}", g
+                r.reason = (hi.UNIT_REASONS["unit"] + f"; first-party code under `{g}/`, which GitHub Linguist's "
+                            f"vendored list matches by name ({GENERIC_DIRS[g]}): a rule applying that list will "
+                            f"not rank it")
+            self.changed["generic_dir_names"] = {"files_moved": len(picked), "of_unit_files": len(all_units),
+                                                 "by_dir": {g: sum(1 for r in picked if r.generic_dir == g)
+                                                            for g in names}}
         if self.active("mixed_language"):
             rng = hi.stream(cfg.seed, "mutation", "mixed_language")
             base = sum(1 for r in layout.files if r.kind != "unit" or r.initial)   # files of the initial import

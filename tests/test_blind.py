@@ -16,6 +16,7 @@ import collections
 import getpass
 import hashlib
 import math
+import re
 import inspect
 import json
 import os
@@ -416,6 +417,45 @@ def test_builder_ignores_other_repos_files_and_has_no_plaintext_option(tmp_path,
     p = subprocess.run([sys.executable, "-B", str(BLIND / "build_labels.py"), "--manifest", str(labels / "manifest.json"),
                         "--repo", "zz", "--labels-dir", str(labels), "--pub", str(pub)], capture_output=True, text=True)
     assert p.returncode == 2 and "inside the labels directory" in p.stderr
+
+
+@pytest.mark.parametrize("cut", ["files", "is_unit", "path_at_snapshot", "loc", "expected_labels", "counted",
+                                 "positives", "positive_path"])
+def test_manifest_missing_a_required_field_is_refused(planted, cut):
+    m = json.loads(json.dumps(planted))
+    unit = next(f for f in m["files"] if f["is_unit"] and f["path_at_snapshot"] and f["properties"]["snapshot"])
+    lab = next(e for e in m["expected_labels"] if e["counted"] is True and e["positives"])
+    target, key, name = {"files": (m, "files", "files"), "is_unit": (unit, "is_unit", "is_unit"),
+                         "path_at_snapshot": (unit, "path_at_snapshot", "path_at_snapshot"),
+                         "loc": (unit["properties"]["snapshot"], "loc", "snapshot.loc"),
+                         "expected_labels": (m, "expected_labels", "expected_labels"),
+                         "counted": (lab, "counted", "counted"), "positives": (lab, "positives", "positives"),
+                         "positive_path": (lab["positives"][0], "path_at_snapshot", "path_at_snapshot")}[cut]
+    del target[key]
+    with pytest.raises(build_labels.BuildError, match=re.escape(name)) as ei:
+        build_labels.table_from_manifest(m)
+    leaked = "src/" in str(ei.value)
+    assert not leaked
+    with pytest.raises(build_labels.BuildError, match="schema"):
+        build_labels.table_from_manifest(dict(planted, schema_version=1))
+
+
+def test_manifest_schema_recorded_and_decided_labels_not_ambiguous(tmp_path, planted, key):
+    """Any schema >= 2 with the fields is read; its number goes into the marginals. A label with
+    counted: false and an unruled alternative (schema 4's jira_bare) is decided, not ambiguous: only
+    counted: null counts as ambiguous."""
+    pub = write_public(key, tmp_path / "pub.pem")
+    ft, lt = build_labels.table_from_manifest(planted)
+    build_labels.build("ctl", ft, lt, str(tmp_path / "labels"), str(pub))
+    marg = json.loads((tmp_path / "labels" / "ctl.marginals.json").read_text())
+    assert marg["source_manifest_schema"] == planted["schema_version"] >= 2
+    nulls = sum(1 for e in planted["expected_labels"] if e["counted"] is None)
+    assert marg["outcomes"]["HP"]["ambiguous_commits"] == nulls
+    m = json.loads(json.dumps(planted))
+    lab = next(e for e in m["expected_labels"] if e["counted"] is False)
+    lab["unruled_readings"] = [{"reading": "registration_wording", "ruled": False, "counted": True,
+                                "positives": []}]
+    assert build_labels.table_from_manifest(m)[1]["outcomes"]["HP"]["ambiguous_commits"] == nulls
 
 
 def test_withheld_when_2pct_rule_fails(tmp_path, key):

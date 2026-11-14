@@ -211,3 +211,20 @@ my own re-derivation of every merge label from the commit messages and the first
 manifest on all 285 merges after the snapshot (**88 counted, 196 not, 1 ambiguous** — a brought-in revert of
 new code that quotes a ticket, which is not ruled). Planted counts still equal the text (771 file-points), the
 manifest is byte-identical under a different environment, 40 tests pass. **Accepted.**
+
+## Fourth pass: Revision 4, after the first harness run (same day)
+
+Generator 1.3.0, manifest schema 4. Re-checked independently on seed 11:
+
+- no base unit file matches GitHub's `vendor.yml` (the reviewer's own match against the cached list: 0 of 306;
+  it was 54, all under `cache/`); under the new `generic_dir_names` mutation 59 of 306 do, in `cache/`, `dist/`,
+  `env/`, `extern/`, and they stay unit files;
+- the Jira convention is split: 9 `jira_fixword` fixes counted, 8 `jira_bare` fixes not counted, each with the
+  registration's looser wording kept as an unruled alternative;
+- planted counts equal the text (771 file-points per language), git matches the manifest, the manifest is
+  byte-identical under a different environment; 45 tests pass;
+- run through the harness, the Python negative control goes from 7 agree / 13 differ to 11 agree / 8 differ;
+  the universe row agrees at 306 files.
+
+The schema change broke the blinding tools' manifest reader (36 tests); it now validates the fields it reads
+instead of the version number (71 tests pass). **Accepted.**

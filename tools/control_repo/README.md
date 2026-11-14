@@ -105,6 +105,25 @@ Everything else is blind to the planted properties by construction:
 
 So with every beta at 0, the number of true fixes a file receives depends on its size and busyness only.
 
+## GitHub Linguist's lists
+
+SA3's universe rule (`tools/laws_units.py`) drops any path GitHub Linguist's `vendor.yml` or
+`documentation.yml` matches. The base repository therefore uses no such name except where it plants a non-unit
+on purpose (`vendor/thirdparty/`, `docs/`, `LICENSE`, `README.md`, `.gitattributes`). The names to avoid, with the
+pattern each matches, are a fixed list in `codegen.LINGUIST_AVOID`; the generator checks the base layout against
+it and never reads the lists. A test checks every unit path against the cached lists themselves
+(`~/.cache/temporal-crucible/linguist-e0c78d62c42a/`) and skips, saying so, if they are absent. Two mutations
+match the lists on purpose: `test_fixtures` (`tests/fixtures/`, test inputs) and `generic_dir_names`
+(first-party code a Linguist-based rule wrongly drops).
+
+## Fix conventions and SA3's link patterns
+
+Fixes are written in seven conventions: "Fixes #N" (issue), a `Fixes: <hash>` trailer, a CVE id, "Fixes PROJ-N:
+..." (`jira_fixword`), "PROJ-N: ..." (`jira_bare`), a bare keyword, and none (silent). The test file checks that
+exactly the counted ones (and "Fixed #N -- Added ...") match the patterns of `tools/hist_meta.py` under
+`--sa3-links`. A bare key is not counted, as SA3's code reads it; the registration's looser wording is kept on
+the label as an unruled alternative (`unruled_readings`, reading `registration_wording`).
+
 ## For phase 2
 
 - `--years 4` leaves about 270 days after the snapshot, less than SA3's 730-day window, and `--profile small`
@@ -117,6 +136,10 @@ So with every beta at 0, the number of true fixes a file receives depends on its
   reads slightly negative even on the negative control (in C about -0.01 to -0.02 in some seed sets). Score a
   pipeline against the manifest's truth pushed through the same statistic, not against exactly zero.
 - Imported code (`vendored_half`, `mixed_language`) receives no commits after the initial import.
+- The licence sweep of `sweep_labelled_fix` says "Fix licence headers (#N)": a ticket with no fix word right
+  before it, which SA3's code does not count (only "fix #N" is a fix reference there). The manifest's label is
+  "not counted" anyway, because the sweep is tree-wide; it would differ only in a repository with under 20 unit
+  files.
 
 ## Mutations
 
@@ -137,6 +160,7 @@ a fault in `docs/STUDY_DEFECT_LOG.md`. `--list-mutations` prints them:
 | `renames_after_snapshot` | 20% of the snapshot's unit files are renamed in the outcome window; the renames edit no other file, so callers' imports go stale (listed) | 39 |
 | `no_references` | fixes carry keywords only | 3 |
 | `huge_import_merge` | one merge brings in 500 commits | 17 |
+| `generic_dir_names` | 20% of the unit files sit under `cache/`, `dist/`, `extern/` or `env/`, names GitHub Linguist's vendored list matches by name alone; they stay units, with a note | 55 |
 
 ## Files
 

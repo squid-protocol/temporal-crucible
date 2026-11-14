@@ -700,6 +700,28 @@ def test_mutation_changes_what_it_says_and_nothing_else(tmp_path_factory, name):
         assert len(huge) == 1 and len(huge[0]["brought"]) == 500
         lab = next(x for x in mut["expected_labels"] if x["hash"] == huge[0]["hash"])
         assert lab["counted"] is False and "over the cap" in lab["clause"]
+    elif name == "generic_dir_names":
+        assert not f_add and not c_add
+        moved = [f for f in mut["files"] if f.get("generic_dir")]
+        n_units = sum(1 for f in mut["files"] if f["is_unit"])
+        assert abs(len(moved) / n_units - 0.2) < 0.02 and {f["generic_dir"] for f in moved} == {
+            "cache", "dist", "extern", "env"}
+        for f in moved:                               # first-party code: still a unit, with the note
+            assert f["is_unit"] and "Linguist" in f["unit_reason"]
+            for p in (f["path_at_snapshot"], f["path_final"]):
+                if p:
+                    assert f"/{f['generic_dir']}/" in p
+        for i, fields in f_chg.items():
+            assert i in {f["id"] for f in moved}, (i, fields)
+            assert set(fields) <= {"path_at_snapshot", "path_at_prior", "path_final", "path_history", "unit_reason",
+                                   "generic_dir"}, (i, fields)
+        for i, fields in c_chg.items():               # only the paths these commits name
+            assert set(fields) <= {"files", "unit_files", "message", "notes"}, (i, fields)
+            if "message" in fields or "notes" in fields:
+                assert mut_commits[i]["type"] in ("delete", "rename")
+            if "notes" in fields:                     # a rename's note holds its two paths
+                bn, mn = base_commits[i]["notes"], mut_commits[i]["notes"]
+                assert {k for k in set(bn) | set(mn) if bn.get(k) != mn.get(k)} == {"rename"}
     else:
         raise AssertionError(f"no check written for mutation {name}")
     assert mut["points"]["snapshot"]["commit"] == base["points"]["snapshot"]["commit"]
@@ -724,7 +746,7 @@ def test_list_mutations():
     for name, d in MM.REGISTRY.items():
         assert name in out
         assert d["log"]
-    assert len(MM.REGISTRY) == 12
+    assert len(MM.REGISTRY) == 13
 
 
 # ------------------------------------------------------------------------------- test 8: commit types
@@ -756,7 +778,66 @@ def test_sweeps_are_wide_and_ticket_features_fix_nothing(tmp_path_factory, args)
         if c["type"] == "revert":
             assert "This reverts commit " in c["message"] and "revert_target" in c
     conv = {c["convention"] for c in m["commits"] if c["type"] == "fix"}
-    assert conv == {"issue", "trailer", "cve", "jira", "keyword", "silent"}
+    assert conv == {"issue", "trailer", "cve", "jira_fixword", "jira_bare", "keyword", "silent"}
+    # r4: each counted convention's message matches SA3's own link patterns (tools/hist_meta.py, --sa3-links)
+    issue_fix_sa3 = re.compile(
+        r"\b(?:fix(?:es|ed)?|resolve[sd]?)\s+(?:#|\bGH-|\bbug\s*#?|\bbpo-|\bPR\s*#?)(\d{1,7})\b"
+        r"|\b(?:fix(?:es|ed)?|resolve[sd]?)\s*:?\s+([A-Z][A-Z0-9_]{1,15}-\d{1,7})\b"
+        r"|^GnuPG-bug-id:\s*(\d+)\b|^Fixes:\s*([0-9a-f]{7,40})\b", re.I | re.M)
+    cve = re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.I)
+    for c in m["commits"]:
+        if c["type"] == "fix" or c["type"] == "feature_with_ticket":
+            hit = bool(issue_fix_sa3.search(c["message"]) or cve.search(c["message"]))
+            assert hit == (c["convention"] in ("issue", "trailer", "cve", "jira_fixword", "ticket_feature")), c
+
+
+# -------------------------------------------------------------------------------- Linguist names ([r4])
+LINGUIST_CACHE = Path.home() / ".cache" / "temporal-crucible" / "linguist-e0c78d62c42a"
+
+
+def _linguist():
+    pats = []
+    for name in ("vendor.yml", "documentation.yml"):
+        p = LINGUIST_CACHE / name
+        if not p.is_file():
+            pytest.skip(f"GitHub Linguist's {name} is not cached at {p} (tools/laws_units.py fetches it there)")
+        pats += [(name, line[2:].strip(), re.compile(line[2:].strip()))
+                 for line in p.read_text().splitlines() if line.startswith("- ")]
+    return pats
+
+
+@pytest.mark.parametrize("args", [("--language", "python"), ("--language", "c"), ("--profile", "default")])
+def test_base_paths_avoid_linguist_lists(tmp_path_factory, args):
+    """r4: no base unit path (at either point or at the end) matches Linguist's vendor.yml or documentation.yml;
+    every non-unit file that does is a planted place; and the generator's fixed avoid-list agrees with the lists."""
+    pats = _linguist()
+    m, _ = generated(tmp_path_factory, "--seed", "3", *args)
+
+    def hits(path):
+        return [(n, src) for n, src, rx in pats if rx.search(path)]
+    planted = {"vendor", "docs", "readme", "licence", "attributes"}
+    for f in m["files"]:
+        for p in {f["path_at_snapshot"], f["path_at_prior"], f["path_final"]} - {None}:
+            if f["is_unit"]:
+                assert not hits(p), (p, hits(p))
+            elif hits(p):
+                assert f["kind"] in planted, (f["kind"], p, hits(p))
+    import codegen as CG                              # the fixed list must not be weaker than the real one
+    for name, rx in CG.LINGUIST_AVOID.items():
+        assert any(src == rx for _n, src, _r in pats) or name.startswith(("README", "cpplint", ".git")), name
+    for w in CG.DIR_WORDS:
+        assert not hits(f"src/a/{w}/x.py") and not hits(f"src/{w}/a/x.py"), w
+
+
+def test_generic_dir_names_are_matched_by_linguist(tmp_path_factory):
+    pats = _linguist()
+    m, _ = generated(tmp_path_factory, "--seed", "3", "--mutation", "generic_dir_names")
+    moved = [f for f in m["files"] if f.get("generic_dir") and f["path_at_snapshot"]]
+    assert moved
+    for f in moved:
+        assert any(rx.search(f["path_at_snapshot"]) for n, _s, rx in pats if n == "vendor.yml"), f
+    others = [f for f in m["files"] if f["is_unit"] and not f.get("generic_dir") and f["path_at_snapshot"]]
+    assert not any(rx.search(f["path_at_snapshot"]) for f in others for _n, _s, rx in pats)
 
 
 # -------------------------------------------------------------------------- the change effect ([r2])
@@ -792,7 +873,11 @@ def test_expected_labels_follow_the_written_rule(tmp_path_factory):
             assert lab["counted"] is False
             continue
         if c["type"] == "fix":
-            assert lab["counted"] == (c["convention"] in ("issue", "trailer", "cve", "jira")), (lid, lab)
+            assert lab["counted"] == (c["convention"] in ("issue", "trailer", "cve", "jira_fixword")), (lid, lab)
+            if c["convention"] == "jira_bare":        # r4: decided by the code; the looser wording kept
+                assert "after a fix word" in lab["clause"]
+                assert [(u["reading"], u["counted"], u["ruled"]) for u in lab["unruled_readings"]] == [
+                    ("registration_wording", True, False)]
         if c["type"] == "feature_with_ticket":
             assert lab["counted"] is True and "fix reference" in lab["clause"]
         if c["type"] == "revert":
@@ -825,12 +910,13 @@ def test_merge_labels_are_decided_by_the_ruling(tmp_path_factory):
     pre-snapshot code), fix-worded companions notwithstanding. Only a brought-in revert of post-cut code that
     quotes a ticket can leave it open."""
     m, _ = generated(tmp_path_factory, "--seed", "3", "--mutation", "merge_workflow")
-    assert m["rulings"] == [m["rulings"][0]] and m["rulings"][0]["date"] == "2026-11-14"
+    assert m["rulings"][0]["date"] == "2026-11-14" and "tainted merges" in m["rulings"][0]["ruling"]
+    assert len(m["rulings"]) == 2 and "jira_bare" in m["rulings"][1]["ruling"]
     by_id = {c["id"]: c for c in m["commits"]}
     realised = {r["hash"]: r for r in m["realised"]}
     snap_path = {f["id"]: f["path_at_snapshot"] for f in m["files"] if f["is_unit"] and f["path_at_snapshot"]}
     n_units = len(snap_path)
-    linked_conv = ("issue", "trailer", "cve", "jira", "ticket_feature")
+    linked_conv = ("issue", "trailer", "cve", "jira_fixword", "ticket_feature")
     amb = {a["hash"] for a in m["ambiguous"]}
     seen = {"counted": 0, "with_fix_worded": 0, "not_counted_linked": 0}
     for lab in m["expected_labels"]:

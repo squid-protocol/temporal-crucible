@@ -27,11 +27,14 @@ from __future__ import annotations
 
 import math
 import random
+import re
 from dataclasses import dataclass, field
 
 # --------------------------------------------------------------------------------------------- vocabulary
 # No word below is, or contains as a separate word, a branch keyword (if, elif, for, while, switch).
-DIR_WORDS = ["core", "net", "io", "storage", "parser", "render", "auth", "cache", "codec", "sched", "metrics",
+# r4: no directory word may be a name GitHub Linguist's vendor.yml / documentation.yml matches (LINGUIST_AVOID);
+# "cache" was one ((^|/)cache/) and is replaced by "memo".
+DIR_WORDS = ["core", "net", "io", "storage", "parser", "render", "auth", "memo", "codec", "sched", "metrics",
              "config", "plugins", "query", "index", "proto", "events", "model", "sync", "util", "store", "media",
              "crypto", "graph", "shell", "admin", "audit", "batch", "queue", "stream"]
 FILE_NOUNS = ["frame", "record", "buffer", "token", "packet", "session", "table", "cursor", "node", "header",
@@ -47,6 +50,33 @@ DOC_NOUNS = ["state", "entries", "buffers", "records", "frames", "requests", "of
              "results", "segments", "headers"]
 DOC_VERBS = ["Helpers that manage", "Routines that track", "Utilities that shape", "Code that moves",
              "Logic that groups", "Functions that read"]
+
+# r4: directory and file names that GitHub Linguist (v9.7.0, commit e0c78d62c42a) treats as vendored or as
+# documentation by name alone, with the pattern each matches. The base repository uses none of them except the
+# planted non-unit places (vendor/thirdparty/, docs/, LICENSE, README.md, .gitattributes); `check_linguist_names`
+# enforces it at generation time. The lists themselves are never read at run time.
+LINGUIST_AVOID = {
+    "cache/": r"(^|/)cache/", "dist/": r"(^|/)dist/", "env/": r"(^|/)env/", "testdata/": r"(^|/)testdata/",
+    "extern/, external/, externals/": r"(^|/)[Ee]xtern(als?)?/", "vendor/, vendors/": r"(^|/)vendors?/",
+    "third_party/, thirdparty/, 3rdparty/": r"(3rd|[Tt]hird)[-_]?[Pp]arty/", "node_modules/": r"(^|/)node_modules/",
+    "bower_components/": r"(^|/)bower_components/", "tests/fixtures/": r"(^|/)[Tt]ests?/fixtures/",
+    "specs/fixtures/": r"(^|/)[Ss]pecs?/fixtures/", "dependencies/ (top)": r"^[Dd]ependencies/",
+    "deps/ (top)": r"^deps/", "debian/ (top)": r"^debian/", "docs/, doc/ (top)": r"^[Dd]ocs?/",
+    "documentation/": r"(^|/)[Dd]ocumentation/", "javadoc/": r"(^|/)[Jj]avadoc/", "groovydoc/": r"(^|/)[Gg]roovydoc/",
+    "man/ (top)": r"^[Mm]an/", "examples/ (top)": r"^[Ee]xamples/", "demo/, demos/ (top)": r"^[Dd]emos?/",
+    "samples/, sample/ (top)": r"^[Ss]amples?/", "inst/doc/": r"(^|/)inst/doc/",
+    "README, CHANGELOG, CONTRIBUTING, COPYING, INSTALL, LICENSE, CITATION files":
+        r"(^|/)(README|[Rr]eadme|CHANGE(S|LOG)?|CONTRIBUTING|COPYING|INSTALL|LICEN[CS]E|[Ll]icen[cs]e|CITATION)(\.|$)",
+    "cpplint.py, configure, config.guess, config.sub": r"(^|/)(cpplint\.py|configure$|config\.guess$|config\.sub$)",
+    ".gitattributes, .gitignore, .gitmodules": r"(^|/)\.git(attributes|ignore|modules)$",
+}
+_AVOID_RX = [(name, re.compile(rx)) for name, rx in LINGUIST_AVOID.items()]
+
+
+def linguist_clash(path: str):
+    """The LINGUIST_AVOID entry `path` matches, or None."""
+    return next((name for name, rx in _AVOID_RX if rx.search(path)), None)
+
 
 PY_BRANCH_WORDS = ("if", "elif", "for", "while")
 C_BRANCH_WORDS = ("if", "for", "while", "switch")

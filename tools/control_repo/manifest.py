@@ -14,7 +14,7 @@ import re
 
 import history as hi
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 TREE_WIDE_SHARE, TREE_WIDE_MIN = 0.10, 20     # section 4: >= 10% of the unit files and >= 20 of them
 MAX_BROUGHT = 50                              # section 4: no inheritance past 50 brought-in commits
 WINDOW_DAYS = 730                             # section 2: the outcome window
@@ -28,6 +28,8 @@ CLAUSES = {
     "revert_ok": "HP: \"a revert whose target resolves to a commit that existed at the cut\"",
     "revert_late": "HP counts only \"a revert whose target resolves to a commit that existed at the cut\"; this "
                    "revert's target was made after the cut (HP_allreverts would count it)",
+    "jira_bare": "HP as SA3's code reads it (tools/hist_meta.py issue_fix_sa3): a tracker key is a fix reference "
+                 "only after a fix word; this commit carries a bare key",
     "keyword": "HP: no fix reference, CVE id or qualifying revert; fix wording alone is the KW tier "
                "(\"KW: the cleaned keyword rule, and no HP link\"), not HP",
     "none": "HP: no fix reference, CVE id or revert",
@@ -65,6 +67,12 @@ READINGS = {
                                        "out of the keyword outcome and the control pool",
 }
 RULED_MERGE_READING = "taint_governs_control_pool_only"
+READINGS_JIRA = {   # r4: a tracker key with no fix word ("PROJ-12: ...")
+    "code": "SA3's code (tools/hist_meta.py, issue_fix_sa3): a tracker key is a fix reference only after a fix word "
+            "(\"Fixes PROJ-12\"); a bare key is not counted. Decides the label",
+    "registration_wording": "the registration's wording, \"carries a fix reference (issue, Jira, ...)\", read to "
+                            "include any Jira key: the commit is counted. Not ruled; recorded as the alternative",
+}
 RULING = {"date": "2026-11-14", "by": "owner",
           "ruling": "tainted merges follow SA3's code (tools/sa3_outcomes.py): a merge's expected label is decided "
                     "by the reading `taint_governs_control_pool_only`; the other merge readings are kept on the "
@@ -72,6 +80,11 @@ RULING = {"date": "2026-11-14", "by": "owner",
           "applies_to": "first-parent merges (merge_workflow, bot_merges, huge_import_merge)",
           "not_ruled": "a revert of a commit made after the cut that quotes a ticket from its target's subject "
                        "stays ambiguous, in merges and in direct and squash commits"}
+RULING_JIRA = {"date": "2026-11-14", "by": "control_repo_spec.md revision 4",
+               "ruling": "a fix that carries a tracker key without a fix word (convention jira_bare, \"PROJ-12: ...\") "
+                         "is not counted, as SA3's code reads it; the registration's looser wording is recorded on "
+                         "the label under `unruled_readings` (reading `registration_wording`)",
+               "applies_to": "commits carrying a bare tracker key, delivered directly, squashed or in a merge"}
 RULING_TAG = "[decided by the owner ruling of 2026-11-14: tainted merges follow the code] "
 REVERT_READINGS = {
     "reference_counts": "a revert of a commit made after the cut that quotes a ticket from its target's subject "
@@ -145,10 +158,12 @@ def _merge_label(L, r):
     has_contested = any(k[2] for k in kids)
     merge_files = set(r["file_ids"])
 
-    def one(m, rr):
+    bare = {lid for lid in brought if (L.entries[lid].signals or {}).get("bare_key")}
+
+    def one(m, rr, bare_counts=False):
         links, barred, fix_worded, nonqual = [], [], [], []
         for lid, t, c, nq, kw, bot, same_rev in kids:
-            linked = bool(t) or (c is not None and rr == "reference_counts")
+            linked = bool(t) or (c is not None and rr == "reference_counts") or (bare_counts and lid in bare)
             if nq:
                 nonqual.append(f"{lid} {nq}")
             if kw and not linked and not c:
@@ -201,6 +216,12 @@ def _merge_label(L, r):
     # The owner's ruling decides the merge reading; the others are kept for the record when they differ.
     unruled = [entry(m, rr) for m in READINGS if m != RULED_MERGE_READING for rr in revert_readings
                if results[(m, rr)][::2] != results[(RULED_MERGE_READING, rr)][::2]]
+    for rr in revert_readings if bare else []:      # r4: a bare tracker key read as the registration words it
+        alt = one(RULED_MERGE_READING, rr, bare_counts=True)
+        if alt[::2] != results[(RULED_MERGE_READING, rr)][::2]:
+            unruled.append({"reading": "registration_wording" if rr is None else f"registration_wording + {rr}",
+                            "meaning": READINGS_JIRA["registration_wording"], "ruled": False,
+                            "counted": alt[0], "clause": alt[1], "positives": alt[2]})
     ruled = {rr: results[(RULED_MERGE_READING, rr)] for rr in revert_readings}
     if len({(c, json.dumps(p)) for c, _cl, p in ruled.values()}) == 1:
         counted, clause, pos = ruled[revert_readings[0]]
@@ -243,13 +264,20 @@ def expected_labels(plan, realised, snap_hash):
             lab["clause"] = ("; ".join(excluded) if r["kind"] != "merge"
                              else RULING_TAG + "; ".join(excluded))
         elif r["kind"] in ("direct", "squash"):
-            tiers, contested, nonqual, keyword = [], [], [], False
+            tiers, contested, nonqual, keyword, bare = [], [], [], False, []
             for lid in r["lids"]:
                 t, c, nq, kw = _entry_tiers(L.entries[lid], L.hash_of, L.cut_set)
+                key = (L.entries[lid].signals or {}).get("bare_key")
+                bare += [f"{lid}: {key}"] if key else []
                 tiers += [(k, f"{lid}: {d}") for k, d in t]
                 contested += [f"{lid}: {c}; {nq}"] if c else []
                 nonqual += [f"{lid} {nq}"] if nq else []
                 keyword |= kw
+            if bare and not tiers:                     # r4: the registration's looser wording, not ruled
+                lab["unruled_readings"] = [{
+                    "reading": "registration_wording", "meaning": READINGS_JIRA["registration_wording"],
+                    "ruled": False, "counted": True, "clause": CLAUSES["fixref"] + " [" + "; ".join(bare) + "]",
+                    "positives": L.positives(snap_units)}]
             if tiers:
                 lab["counted"] = True
                 lab["clause"] = "; ".join(CLAUSES[k] + f" [{d}]" for k, d in tiers)
@@ -263,6 +291,8 @@ def expected_labels(plan, realised, snap_hash):
                     {"reading": "nonqualifying_revert", "meaning": REVERT_READINGS["nonqualifying_revert"],
                      "counted": False, "clause": CLAUSES["revert_late"] + " [" + "; ".join(nonqual) + "]",
                      "positives": []}]})
+            elif bare:                                 # r4: decided by the code's reading
+                lab["clause"] = CLAUSES["jira_bare"] + " [" + "; ".join(bare) + "]"
             elif nonqual:
                 lab["clause"] = CLAUSES["revert_late"] + " [" + "; ".join(nonqual) + "]"
             elif keyword:
@@ -325,6 +355,8 @@ def build(plan, realised, snap_hash, prior_hash) -> dict:
                 rec["fix_weight"] = plan.fix_weights[fid]
                 rec["z"] = {k: plan.z[k][fid] for k in plan.z}
         rec["properties"] = {pt: plan.points[pt].get(fid) for pt in ("snapshot", "prior")}
+        if r.generic_dir:
+            rec["generic_dir"] = r.generic_dir
         stale = {callee: path for (caller, callee), path in sorted(plan.stale.items()) if caller == fid}
         if stale:
             rec["stale_imports"] = stale             # renames_after_snapshot: callee id -> path still imported
@@ -391,7 +423,7 @@ def build(plan, realised, snap_hash, prior_hash) -> dict:
                              "clamped_to_first_commit": by_hash[prior_hash]["time"] > snap_time - 365 * hi.DAY}},
         "mutations": plan.mutation_set.summary() | {"notes": plan.mutation_notes},
         "change_in_prior_year": change,
-        "rulings": [RULING],
+        "rulings": [RULING, RULING_JIRA],
         "counts": {"unit_files_at_snapshot": sum(1 for f in plan.points["snapshot"] if files[f].is_unit),
                    "logical_commits": len(plan.entries), "realised_commits": len(realised),
                    "true_fixes_after_snapshot": sum(1 for e in plan.entries if e.type == "fix" and e.time > snap_time)},
