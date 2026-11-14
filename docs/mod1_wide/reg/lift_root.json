@@ -1,0 +1,21 @@
+{
+ "repo": "root",
+ "status": "scan_incomplete",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 95218,
+ "cut": 1616002819,
+ "end": 1679074819,
+ "window_days": 730.0,
+ "start_year": 2000,
+ "age_at_cut": 20.32,
+ "snapshot": "546ea95c32031d3693feddb2f247391ada2f3ef8",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 6671,
+ "tree_unit_files": 13146,
+ "inbound_edges": 218517,
+ "complete": 0.508,
+ "call_coverage": 0.581,
+ "why": "scan holds 6680 of 13146 unit files in the tree"
+}

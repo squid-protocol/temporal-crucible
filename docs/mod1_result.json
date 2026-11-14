@@ -1,0 +1,880 @@
+{
+ "n": 37,
+ "excluded": [
+  {
+   "repo": "bugzilla",
+   "status": "no_negatives",
+   "why": "all 198 unit files are positive: nothing to rank"
+  },
+  {
+   "repo": "impacket",
+   "status": "under_floor",
+   "why": "25 positives, floor 30"
+  },
+  {
+   "repo": "livecode",
+   "status": "scan_incomplete",
+   "why": "scan holds 323 of 1049 unit files in the tree"
+  },
+  {
+   "repo": "macports-base",
+   "status": "scan_incomplete",
+   "why": "scan holds 0 of 128 unit files in the tree"
+  },
+  {
+   "repo": "pwntools",
+   "status": "scan_incomplete",
+   "why": "scan holds 141 of 177 unit files in the tree"
+  },
+  {
+   "repo": "root",
+   "status": "scan_incomplete",
+   "why": "scan holds 6680 of 13146 unit files in the tree"
+  },
+  {
+   "repo": "tigerbeetle",
+   "status": "under_floor",
+   "why": "17 positives, floor 30"
+  },
+  {
+   "repo": "wordpress",
+   "status": "scan_incomplete",
+   "why": "scan holds 907 of 1082 unit files in the tree"
+  },
+  {
+   "repo": "wrf-fortran",
+   "status": "scan_incomplete",
+   "why": "scan holds 747 of 950 unit files in the tree"
+  }
+ ],
+ "rows": [
+  {
+   "repo": "blast",
+   "lift": -0.0015909245758669588,
+   "ci95": [
+    -0.01678756253632252,
+    0.01441661891345003
+   ],
+   "positives": 780,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1999,
+   "age_at_cut": 19.09,
+   "language": "cpp",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.667,
+   "window_days": 730.0
+  },
+  {
+   "repo": "bun",
+   "lift": -0.0478712871287128,
+   "ci95": [
+    -0.08201121794871802,
+    -0.013549399480958457
+   ],
+   "positives": 250,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2021,
+   "age_at_cut": 3.76,
+   "language": "zig",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.821,
+   "window_days": 395.0
+  },
+  {
+   "repo": "circuitpython",
+   "lift": -0.08229675269317205,
+   "ci95": [
+    -0.11986185983827502,
+    -0.04547272100668054
+   ],
+   "positives": 138,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2013,
+   "age_at_cut": 8.42,
+   "language": "c",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.233,
+   "window_days": 730.0
+  },
+  {
+   "repo": "commons-lang",
+   "lift": -0.03206126687435107,
+   "ci95": [
+    -0.06978643949118923,
+    0.0010922140739584307
+   ],
+   "positives": 36,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2002,
+   "age_at_cut": 22.02,
+   "language": "java",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.808,
+   "window_days": 730.0
+  },
+  {
+   "repo": "cpython",
+   "lift": 0.03245722531436823,
+   "ci95": [
+    0.006036556036555951,
+    0.053879800853485094
+   ],
+   "positives": 210,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 1993,
+   "age_at_cut": 27.29,
+   "language": "python",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.715,
+   "window_days": 730.0
+  },
+  {
+   "repo": "curl",
+   "lift": -0.14653361344537807,
+   "ci95": [
+    -0.18109001171156103,
+    -0.11167229039953575
+   ],
+   "positives": 280,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 2000,
+   "age_at_cut": 23.5,
+   "language": "c",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.464,
+   "window_days": 730.0
+  },
+  {
+   "repo": "discourse",
+   "lift": -0.09916862039754692,
+   "ci95": [
+    -0.11926744665042022,
+    -0.0795096339345277
+   ],
+   "positives": 458,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2013,
+   "age_at_cut": 10.5,
+   "language": "ruby",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.304,
+   "window_days": 730.0
+  },
+  {
+   "repo": "django",
+   "lift": -0.09391211661922538,
+   "ci95": [
+    -0.11480167091789573,
+    -0.0740956790123457
+   ],
+   "positives": 381,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2005,
+   "age_at_cut": 14.32,
+   "language": "python",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.534,
+   "window_days": 730.0
+  },
+  {
+   "repo": "effect",
+   "lift": -0.09061903625954193,
+   "ci95": [
+    -0.14199570856562638,
+    -0.04772134645016002
+   ],
+   "positives": 131,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2020,
+   "age_at_cut": 4.27,
+   "language": "jsts",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.438,
+   "window_days": 585.0
+  },
+  {
+   "repo": "fieldtrip",
+   "lift": -0.013987444129605953,
+   "ci95": [
+    -0.0492321228603424,
+    0.021201827505195614
+   ],
+   "positives": 263,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2009,
+   "age_at_cut": 9.35,
+   "language": "matlab",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.635,
+   "window_days": 730.0
+  },
+  {
+   "repo": "freebsd-src",
+   "lift": -0.09040893491644564,
+   "ci95": [
+    -0.09986907567426029,
+    -0.08104291657541673
+   ],
+   "positives": 1589,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1994,
+   "age_at_cut": 24.52,
+   "language": "c",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.559,
+   "window_days": 730.0
+  },
+  {
+   "repo": "ghostty",
+   "lift": -0.07347422035564288,
+   "ci95": [
+    -0.11951187160100807,
+    -0.027740691292093222
+   ],
+   "positives": 124,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2022,
+   "age_at_cut": 3.44,
+   "language": "zig",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.6,
+   "window_days": 196.9
+  },
+  {
+   "repo": "gnupg",
+   "lift": -0.05375808860129416,
+   "ci95": [
+    -0.08488093881736358,
+    -0.023847507331378304
+   ],
+   "positives": 123,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1998,
+   "age_at_cut": 22.24,
+   "language": "c",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.7,
+   "window_days": 730.0
+  },
+  {
+   "repo": "go",
+   "lift": -0.08585687683118037,
+   "ci95": [
+    -0.10152636576529916,
+    -0.07081157656972581
+   ],
+   "positives": 1021,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2008,
+   "age_at_cut": 13.66,
+   "language": "go",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.639,
+   "window_days": 730.0
+  },
+  {
+   "repo": "godot",
+   "lift": -0.04575001191251449,
+   "ci95": [
+    -0.0622423391560607,
+    -0.02879305381072028
+   ],
+   "positives": 754,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2015,
+   "age_at_cut": 9.37,
+   "language": "c",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.6,
+   "window_days": 592.3
+  },
+  {
+   "repo": "kubernetes",
+   "lift": -0.07264605144112712,
+   "ci95": [
+    -0.09010137253476391,
+    -0.05328423311809183
+   ],
+   "positives": 576,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2014,
+   "age_at_cut": 7.61,
+   "language": "go",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.572,
+   "window_days": 730.0
+  },
+  {
+   "repo": "libxml2",
+   "lift": -0.02898299201666088,
+   "ci95": [
+    -0.08645870897944463,
+    0.019982698961937717
+   ],
+   "positives": 67,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1999,
+   "age_at_cut": 24.83,
+   "language": "c",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.425,
+   "window_days": 730.0
+  },
+  {
+   "repo": "mediawiki",
+   "lift": -0.003416383050583227,
+   "ci95": [
+    -0.04602836616797512,
+    0.04293128970001314
+   ],
+   "positives": 427,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2004,
+   "age_at_cut": 8.44,
+   "language": "php",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.477,
+   "window_days": 730.0
+  },
+  {
+   "repo": "micropython",
+   "lift": -0.036042049330884285,
+   "ci95": [
+    -0.068214357733414,
+    -0.005132163362582598
+   ],
+   "positives": 185,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2013,
+   "age_at_cut": 9.38,
+   "language": "c",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.39,
+   "window_days": 730.0
+  },
+  {
+   "repo": "moby",
+   "lift": -0.10611035145978276,
+   "ci95": [
+    -0.14617566750053135,
+    -0.06690733422488016
+   ],
+   "positives": 122,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2013,
+   "age_at_cut": 9.13,
+   "language": "go",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.646,
+   "window_days": 730.0
+  },
+  {
+   "repo": "ndpi",
+   "lift": 0.17847443159773418,
+   "ci95": [
+    0.06865079365079368,
+    0.3057330573305733
+   ],
+   "positives": 263,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2015,
+   "age_at_cut": 9.31,
+   "language": "c",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.859,
+   "window_days": 730.0
+  },
+  {
+   "repo": "opencv",
+   "lift": 0.04154460589016473,
+   "ci95": [
+    -0.005028735632183867,
+    0.09453985028621747
+   ],
+   "positives": 68,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2010,
+   "age_at_cut": 11.12,
+   "language": "cpp",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.585,
+   "window_days": 730.0
+  },
+  {
+   "repo": "pandas",
+   "lift": 0.0037188701320407525,
+   "ci95": [
+    -0.025611272275176122,
+    0.03345342254246009
+   ],
+   "positives": 193,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2011,
+   "age_at_cut": 11.43,
+   "language": "python",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.76,
+   "window_days": 730.0
+  },
+  {
+   "repo": "postgres",
+   "lift": -0.09903833390222627,
+   "ci95": [
+    -0.11561963172594714,
+    -0.08296340499027266
+   ],
+   "positives": 561,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1996,
+   "age_at_cut": 25.1,
+   "language": "c",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.539,
+   "window_days": 730.0
+  },
+  {
+   "repo": "prometheus",
+   "lift": -0.06572800137156576,
+   "ci95": [
+    -0.10003391698817143,
+    -0.026596436467681173
+   ],
+   "positives": 101,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2013,
+   "age_at_cut": 12.03,
+   "language": "go",
+   "drawn": false,
+   "merge_units": true,
+   "call_coverage": 0.825,
+   "window_days": 628.9
+  },
+  {
+   "repo": "racket",
+   "lift": -0.19021077899444283,
+   "ci95": [
+    -0.24310282463582256,
+    -0.13843045843045843
+   ],
+   "positives": 109,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2005,
+   "age_at_cut": 10.35,
+   "language": "racket",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.48,
+   "window_days": 730.0
+  },
+  {
+   "repo": "rails",
+   "lift": -0.06314012327780538,
+   "ci95": [
+    -0.0909645669291339,
+    -0.0364768314863716
+   ],
+   "positives": 323,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2005,
+   "age_at_cut": 16.29,
+   "language": "ruby",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.626,
+   "window_days": 730.0
+  },
+  {
+   "repo": "redis",
+   "lift": -0.07797673706764618,
+   "ci95": [
+    -0.1316522277227723,
+    -0.029444444444444495
+   ],
+   "positives": 66,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2009,
+   "age_at_cut": 12.78,
+   "language": "c",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.624,
+   "window_days": 730.0
+  },
+  {
+   "repo": "runtime",
+   "lift": -0.09864734299516909,
+   "ci95": [
+    -0.15430622009569372,
+    -0.030268418046830337
+   ],
+   "positives": 50,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2002,
+   "age_at_cut": 19.89,
+   "language": "csharp",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.673,
+   "window_days": 730.0
+  },
+  {
+   "repo": "scapy",
+   "lift": -0.0913015270985128,
+   "ci95": [
+    -0.15281906460562822,
+    -0.03433250335184834
+   ],
+   "positives": 86,
+   "old": 1,
+   "C_family": 0,
+   "start_year": 2003,
+   "age_at_cut": 19.14,
+   "language": "python",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.561,
+   "window_days": 730.0
+  },
+  {
+   "repo": "sphinx",
+   "lift": 0.10008000000000006,
+   "ci95": [
+    0.01823229291716677,
+    0.18939393939393934
+   ],
+   "positives": 125,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2007,
+   "age_at_cut": 14.07,
+   "language": "python",
+   "drawn": false,
+   "merge_units": false,
+   "call_coverage": 0.783,
+   "window_days": 730.0
+  },
+  {
+   "repo": "spock",
+   "lift": -0.10950720595072061,
+   "ci95": [
+    -0.1782833554754223,
+    -0.04116056177642824
+   ],
+   "positives": 45,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2009,
+   "age_at_cut": 11.96,
+   "language": "java",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.618,
+   "window_days": 730.0
+  },
+  {
+   "repo": "sqlite",
+   "lift": -0.07752616416876346,
+   "ci95": [
+    -0.1290507334737464,
+    -0.026747007119277688
+   ],
+   "positives": 99,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 2001,
+   "age_at_cut": 21.22,
+   "language": "c",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.795,
+   "window_days": 730.0
+  },
+  {
+   "repo": "sqlmap",
+   "lift": -0.09887616624257844,
+   "ci95": [
+    -0.1613987414187643,
+    -0.04129136029411773
+   ],
+   "positives": 90,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2008,
+   "age_at_cut": 10.05,
+   "language": "python",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.384,
+   "window_days": 730.0
+  },
+  {
+   "repo": "swift",
+   "lift": -0.12897734260441795,
+   "ci95": [
+    -0.16996040181734817,
+    -0.09494859978730952
+   ],
+   "positives": 145,
+   "old": 0,
+   "C_family": 0,
+   "start_year": 2011,
+   "age_at_cut": 11.11,
+   "language": "swift",
+   "drawn": true,
+   "merge_units": true,
+   "call_coverage": 0.102,
+   "window_days": 730.0
+  },
+  {
+   "repo": "tcpip_historical",
+   "lift": -0.10894500228488158,
+   "ci95": [
+    -0.13299338036507247,
+    -0.0834689449416871
+   ],
+   "positives": 394,
+   "old": 1,
+   "C_family": 1,
+   "start_year": 1980,
+   "age_at_cut": 12.01,
+   "language": "c",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.24,
+   "window_days": 730.0
+  },
+  {
+   "repo": "tensorflow",
+   "lift": -0.05298534570052338,
+   "ci95": [
+    -0.07530890062921936,
+    -0.030727040145793527
+   ],
+   "positives": 387,
+   "old": 0,
+   "C_family": 1,
+   "start_year": 2016,
+   "age_at_cut": 7.58,
+   "language": "cpp",
+   "drawn": true,
+   "merge_units": false,
+   "call_coverage": 0.552,
+   "window_days": 730.0
+  }
+ ],
+ "primary": {
+  "n": 37,
+  "coef": {
+   "intercept": -0.054509601982354466,
+   "old": -0.027214812563082388,
+   "C_family": 0.020071783152468874
+  },
+  "ci95": {
+   "old": [
+    -0.07276738695877268,
+    0.014071653576065195
+   ],
+   "C_family": [
+    -0.02309229943516505,
+    0.06695669721759097
+   ]
+  },
+  "reading": "not detected"
+ },
+ "sensitivity": {
+  "S1_new_languages_removed": {
+   "n": 30,
+   "coef": {
+    "intercept": -0.04297666766558169,
+    "old": -0.027962702627367362,
+    "C_family": 0.012435714858287046
+   },
+   "ci95": {
+    "old": [
+     -0.08111229156584705,
+     0.02069034739011159
+    ],
+    "C_family": [
+     -0.03621192530509571,
+     0.06602446822528171
+    ]
+   },
+   "reading": "not detected"
+  },
+  "S2_drawn_only": {
+   "n": 29,
+   "coef": {
+    "intercept": -0.07480068568813833,
+    "old": -0.0055128021724971605,
+    "C_family": 0.024672338611800744
+   },
+   "ci95": {
+    "old": [
+     -0.04452171619664845,
+     0.03322441602449867
+    ],
+    "C_family": [
+     -0.00931325300892448,
+     0.060335751975708125
+    ]
+   },
+   "reading": "not detected"
+  },
+  "S3_call_coverage": {
+   "n": 34,
+   "coef": {
+    "intercept": -0.04915737425217631,
+    "old": -0.03061788584449758,
+    "C_family": 0.022651076603964464
+   },
+   "ci95": {
+    "old": [
+     -0.07657660464377976,
+     0.012149816077673094
+    ],
+    "C_family": [
+     -0.021868796387099137,
+     0.07223820774783528
+    ]
+   },
+   "reading": "not detected"
+  },
+  "S4_full_window": {
+   "n": 32,
+   "coef": {
+    "intercept": -0.04863535530257349,
+    "old": -0.034515888384289733,
+    "C_family": 0.02292544143532162
+   },
+   "ci95": {
+    "old": [
+     -0.08807665729629281,
+     0.015052237698752902
+    ],
+    "C_family": [
+     -0.026319007102085686,
+     0.07900182168267603
+    ]
+   },
+   "reading": "not detected"
+  },
+  "S5_merge_workflow_removed": {
+   "n": 26,
+   "coef": {
+    "intercept": -0.041321288202379985,
+    "old": -0.04788280264340275,
+    "C_family": 0.021311855864354797
+   },
+   "ci95": {
+    "old": [
+     -0.11859541815514985,
+     0.010857207130827926
+    ],
+    "C_family": [
+     -0.0375532094652352,
+     0.090974912455988
+    ]
+   },
+   "reading": "not detected"
+  }
+ },
+ "verdict": "MOD-H1 not detected",
+ "secondary": {
+  "continuous_age": {
+   "n": 37,
+   "coef": {
+    "intercept": -0.06064356559036089,
+    "age_at_cut": -0.0003614895909038481,
+    "C_family": 0.018665254200151592
+   },
+   "ci95": {
+    "age_at_cut": [
+     -0.004094204092994115,
+     0.0026398073801819737
+    ],
+    "C_family": [
+     -0.025272732163125467,
+     0.0686261014063474
+    ]
+   },
+   "reading": "not detected"
+  },
+  "interaction": {
+   "n": 37,
+   "coef": {
+    "intercept": -0.06397318554633556,
+    "old": -0.0035558536531296405,
+    "C_family": 0.04215347813509144,
+    "old_x_C": -0.05047244567456585
+   },
+   "ci95": {
+    "old": [
+     -0.06595277145413242,
+     0.0530533915513333
+    ],
+    "C_family": [
+     -0.016808367003183947,
+     0.11209757392692786
+    ],
+    "old_x_C": [
+     -0.13858329047102916,
+     0.031895112257383326
+    ]
+   },
+   "reading": "not detected"
+  }
+ }
+}

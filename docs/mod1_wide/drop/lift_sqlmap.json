@@ -1,0 +1,49 @@
+{
+ "repo": "sqlmap",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 10339,
+ "cut": 1546720732,
+ "end": 1609792732,
+ "window_days": 730.0,
+ "start_year": 2008,
+ "age_at_cut": 10.05,
+ "snapshot": "590e8ed5aef8cb0b47ef85ebc3819be6c7f282bc",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 352,
+ "tree_unit_files": 353,
+ "inbound_edges": 3413,
+ "complete": 0.997,
+ "call_coverage": 0.384,
+ "wide": {
+  "fix_commits": 301,
+  "wide_commits": 1,
+  "positives_all": 90,
+  "positives_without_wide": 81,
+  "positive_share_all": 0.256,
+  "largest": {
+   "sha": "33b42a17d7",
+   "files": 36,
+   "share_of_unit_files": 0.102,
+   "subject": "Fixes #3622"
+  },
+  "wide_list": [
+   {
+    "sha": "33b42a17d7",
+    "files": 36,
+    "subject": "Fixes #3622"
+   }
+  ]
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 81,
+ "auc_loc": 0.9030112523347456,
+ "auc_in_degree": 0.7904651268734909,
+ "lift": -0.11254612546125464,
+ "ci95": [
+  -0.17558849916691588,
+  -0.05037341486642277
+ ]
+}

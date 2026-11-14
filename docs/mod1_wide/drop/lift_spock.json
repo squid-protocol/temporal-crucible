@@ -1,0 +1,43 @@
+{
+ "repo": "spock",
+ "status": "ok",
+ "language": "java",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 2696,
+ "cut": 1613603490,
+ "end": 1676675490,
+ "window_days": 730.0,
+ "start_year": 2009,
+ "age_at_cut": 11.96,
+ "snapshot": "aa5d487a4c7ada64ebf8e917ff6c30ba8164c85f",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 523,
+ "tree_unit_files": 525,
+ "inbound_edges": 4895,
+ "complete": 0.996,
+ "call_coverage": 0.618,
+ "wide": {
+  "fix_commits": 30,
+  "wide_commits": 0,
+  "positives_all": 45,
+  "positives_without_wide": 45,
+  "positive_share_all": 0.086,
+  "largest": {
+   "sha": "20010e1683",
+   "files": 7,
+   "share_of_unit_files": 0.013,
+   "subject": "Add inheritance support to conditional extensions (#1397)"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 45,
+ "auc_loc": 0.749674569967457,
+ "auc_in_degree": 0.6401673640167364,
+ "lift": -0.10950720595072061,
+ "ci95": [
+  -0.1782833554754223,
+  -0.04116056177642824
+ ]
+}

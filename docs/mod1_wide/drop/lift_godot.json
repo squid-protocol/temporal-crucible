@@ -1,0 +1,43 @@
+{
+ "repo": "godot",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 40799,
+ "cut": 1723797256,
+ "end": 1786869256,
+ "window_days": 592.3,
+ "start_year": 2015,
+ "age_at_cut": 9.37,
+ "snapshot": "e52cf866611afd8a8d66ec1ba8866efd26813bbf",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 2758,
+ "tree_unit_files": 2796,
+ "inbound_edges": 193967,
+ "complete": 0.992,
+ "call_coverage": 0.6,
+ "wide": {
+  "fix_commits": 953,
+  "wide_commits": 0,
+  "positives_all": 754,
+  "positives_without_wide": 754,
+  "positive_share_all": 0.273,
+  "largest": {
+   "sha": "b7a0971ad2",
+   "files": 152,
+   "share_of_unit_files": 0.055,
+   "subject": "Merge pull request #97934 from adamscott/give-AThousandShips-a-break"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 754,
+ "auc_loc": 0.7977380782202174,
+ "auc_in_degree": 0.7519880663077029,
+ "lift": -0.04575001191251449,
+ "ci95": [
+  -0.0622423391560607,
+  -0.02879305381072028
+ ]
+}

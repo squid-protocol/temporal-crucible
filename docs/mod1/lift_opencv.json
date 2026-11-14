@@ -1,0 +1,28 @@
+{
+ "repo": "opencv",
+ "status": "ok",
+ "language": "cpp",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 13472,
+ "cut": 1627140898,
+ "end": 1690212898,
+ "window_days": 730.0,
+ "start_year": 2010,
+ "age_at_cut": 11.12,
+ "snapshot": "f4d6a3ec4e1ccb823eed9554d322054106373986",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1574,
+ "tree_unit_files": 1588,
+ "inbound_edges": 84363,
+ "complete": 0.994,
+ "call_coverage": 0.585,
+ "positives": 68,
+ "auc_loc": 0.7478224357472073,
+ "auc_in_degree": 0.789367041637372,
+ "lift": 0.04154460589016473,
+ "ci95": [
+  -0.005028735632183867,
+  0.09453985028621747
+ ]
+}

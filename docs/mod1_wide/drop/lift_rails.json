@@ -1,0 +1,43 @@
+{
+ "repo": "rails",
+ "status": "ok",
+ "language": "ruby",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 45114,
+ "cut": 1620115833,
+ "end": 1683187833,
+ "window_days": 730.0,
+ "start_year": 2005,
+ "age_at_cut": 16.29,
+ "snapshot": "daaa3b58688d092b4fc3505cf74fece034f61dbf",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1316,
+ "tree_unit_files": 1327,
+ "inbound_edges": 28669,
+ "complete": 0.992,
+ "call_coverage": 0.626,
+ "wide": {
+  "fix_commits": 358,
+  "wide_commits": 0,
+  "positives_all": 323,
+  "positives_without_wide": 323,
+  "positive_share_all": 0.245,
+  "largest": {
+   "sha": "5c1bd20f0d",
+   "files": 25,
+   "share_of_unit_files": 0.019,
+   "subject": "Merge pull request #44693 from ghousemohamed/fix-docs-related-gem-versions"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 323,
+ "auc_loc": 0.7054598910640739,
+ "auc_in_degree": 0.6423197677862685,
+ "lift": -0.06314012327780538,
+ "ci95": [
+  -0.0909645669291339,
+  -0.0364768314863716
+ ]
+}

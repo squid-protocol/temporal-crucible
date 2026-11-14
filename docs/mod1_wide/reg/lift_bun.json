@@ -1,0 +1,54 @@
+{
+ "repo": "bun",
+ "status": "ok",
+ "language": "zig",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 14723,
+ "cut": 1740614535,
+ "end": 1803686535,
+ "window_days": 395.0,
+ "start_year": 2021,
+ "age_at_cut": 3.76,
+ "snapshot": "106055845635e1547c018f54fc3b294497c90648",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 452,
+ "tree_unit_files": 460,
+ "inbound_edges": 49566,
+ "complete": 0.987,
+ "call_coverage": 0.821,
+ "wide": {
+  "fix_commits": 509,
+  "wide_commits": 2,
+  "positives_all": 250,
+  "positives_without_wide": 233,
+  "positive_share_all": 0.553,
+  "largest": {
+   "sha": "a199b85f2b",
+   "files": 84,
+   "share_of_unit_files": 0.186,
+   "subject": "remove many `usingnamespace`, introduce new ref count and ref leak debugging tools (#18353)"
+  },
+  "wide_list": [
+   {
+    "sha": "a199b85f2b",
+    "files": 84,
+    "subject": "remove many `usingnamespace`, introduce new ref count and ref leak debugging tools (#18353)"
+   },
+   {
+    "sha": "4806e84cc1",
+    "files": 84,
+    "subject": "Revert \"remove many `usingnamespace`, introduce new ref count and ref leak debugging tools (#18353)\""
+   }
+  ]
+ },
+ "outcome": "registered",
+ "positives": 250,
+ "auc_loc": 0.8269603960396039,
+ "auc_in_degree": 0.7790891089108911,
+ "lift": -0.0478712871287128,
+ "ci95": [
+  -0.08201121794871802,
+  -0.013549399480958457
+ ]
+}

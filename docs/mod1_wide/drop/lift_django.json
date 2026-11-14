@@ -1,0 +1,43 @@
+{
+ "repo": "django",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 33792,
+ "cut": 1574861786,
+ "end": 1637933786,
+ "window_days": 730.0,
+ "start_year": 2005,
+ "age_at_cut": 14.32,
+ "snapshot": "69dbb6b7086699bea27609845b1cd89fd2f85e0b",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 807,
+ "tree_unit_files": 815,
+ "inbound_edges": 33576,
+ "complete": 0.99,
+ "call_coverage": 0.534,
+ "wide": {
+  "fix_commits": 774,
+  "wide_commits": 0,
+  "positives_all": 381,
+  "positives_without_wide": 381,
+  "positive_share_all": 0.472,
+  "largest": {
+   "sha": "188b003014",
+   "files": 39,
+   "share_of_unit_files": 0.048,
+   "subject": "Fixed #15982 -- Added DATE_INPUT_FORMATS to forms.DateTimeField default input formats."
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 381,
+ "auc_loc": 0.8193566473204934,
+ "auc_in_degree": 0.725444530701268,
+ "lift": -0.09391211661922538,
+ "ci95": [
+  -0.11480167091789573,
+  -0.0740956790123457
+ ]
+}

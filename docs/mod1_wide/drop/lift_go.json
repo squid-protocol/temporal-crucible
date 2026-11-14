@@ -1,0 +1,43 @@
+{
+ "repo": "go",
+ "status": "ok",
+ "language": "go",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 65483,
+ "cut": 1652752234,
+ "end": 1715824234,
+ "window_days": 730.0,
+ "start_year": 2008,
+ "age_at_cut": 13.66,
+ "snapshot": "aedf298daf508b564e4dddc7687fff8822315a5e",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 2419,
+ "tree_unit_files": 2830,
+ "inbound_edges": 71479,
+ "complete": 0.916,
+ "call_coverage": 0.639,
+ "wide": {
+  "fix_commits": 1496,
+  "wide_commits": 0,
+  "positives_all": 1021,
+  "positives_without_wide": 1021,
+  "positive_share_all": 0.422,
+  "largest": {
+   "sha": "8a57cc8e37",
+   "files": 33,
+   "share_of_unit_files": 0.014,
+   "subject": "crypto: use and test purego tag consistently"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 1021,
+ "auc_loc": 0.748706000877145,
+ "auc_in_degree": 0.6628491240459646,
+ "lift": -0.08585687683118037,
+ "ci95": [
+  -0.10152636576529916,
+  -0.07081157656972581
+ ]
+}

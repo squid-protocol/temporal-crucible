@@ -1,0 +1,153 @@
+{
+ "registration": "docs/hist_replication.md",
+ "hypothesis": "HR-2",
+ "fix_label": "raw",
+ "repos": [
+  {
+   "repo": "commons-lang",
+   "files": 250,
+   "positives": 108,
+   "periods": 271,
+   "evaluable": true,
+   "auc_loc": 0.8289319248826291,
+   "auc_entropy": 0.8047078768909754,
+   "auc_recidivism": 0.7241784037558685,
+   "lift_over_loc": -0.024224047991653674,
+   "lift_over_recidivism": 0.08052947313510694,
+   "lift_ci95": [
+    -0.0614422369389257,
+    0.01111543197874132
+   ],
+   "recall20_loc": 0.018518518518518517,
+   "recall20_entropy": 0.018518518518518517
+  },
+  {
+   "repo": "libgit2",
+   "files": 289,
+   "positives": 0,
+   "periods": 42,
+   "evaluable": false,
+   "why": "0 positives under the floor of 30"
+  },
+  {
+   "repo": "libxml2",
+   "files": 153,
+   "positives": 104,
+   "periods": 310,
+   "evaluable": true,
+   "auc_loc": 0.7321428571428571,
+   "auc_entropy": 0.7770800627943485,
+   "auc_recidivism": 0.801510989010989,
+   "lift_over_loc": 0.044937205651491396,
+   "lift_over_recidivism": -0.02443092621664056,
+   "lift_ci95": [
+    -0.016568483063328365,
+    0.10648148148148151
+   ],
+   "recall20_loc": 0.019230769230769232,
+   "recall20_entropy": 0.019230769230769232
+  },
+  {
+   "repo": "postgres",
+   "files": 2065,
+   "positives": 960,
+   "periods": 310,
+   "evaluable": true,
+   "auc_loc": 0.7937174773755656,
+   "auc_entropy": 0.790725867269985,
+   "auc_recidivism": 0.7722351055806939,
+   "lift_over_loc": -0.0029916101055806887,
+   "lift_over_recidivism": 0.01849076168929109,
+   "lift_ci95": [
+    -0.015326767301387267,
+    0.008501291989664095
+   ],
+   "recall20_loc": 0.036458333333333336,
+   "recall20_entropy": 0.040625
+  },
+  {
+   "repo": "prometheus",
+   "files": 329,
+   "positives": 127,
+   "periods": 146,
+   "evaluable": true,
+   "auc_loc": 0.9032704451547517,
+   "auc_entropy": 0.844605129804319,
+   "auc_recidivism": 0.7916504248850081,
+   "lift_over_loc": -0.058665315350432734,
+   "lift_over_recidivism": 0.05295470491931087,
+   "lift_ci95": [
+    -0.10023190389294401,
+    -0.02083995549904638
+   ],
+   "recall20_loc": 0.07086614173228346,
+   "recall20_entropy": 0.07086614173228346
+  },
+  {
+   "repo": "redis",
+   "files": 165,
+   "positives": 90,
+   "periods": 158,
+   "evaluable": true,
+   "auc_loc": 0.8292592592592593,
+   "auc_entropy": 0.8013333333333333,
+   "auc_recidivism": 0.8214814814814815,
+   "lift_over_loc": -0.02792592592592591,
+   "lift_over_recidivism": -0.020148148148148137,
+   "lift_ci95": [
+    -0.07992346187812782,
+    0.022030075187969955
+   ],
+   "recall20_loc": 0.022222222222222223,
+   "recall20_entropy": 0.022222222222222223
+  },
+  {
+   "repo": "ripgrep",
+   "files": 69,
+   "positives": 28,
+   "periods": 93,
+   "evaluable": false,
+   "why": "28 positives under the floor of 30"
+  },
+  {
+   "repo": "sphinx",
+   "files": 175,
+   "positives": 174,
+   "periods": 177,
+   "evaluable": true,
+   "auc_loc": 1.0,
+   "auc_entropy": 1.0,
+   "auc_recidivism": 0.9281609195402298,
+   "lift_over_loc": 0.0,
+   "lift_over_recidivism": 0.07183908045977017,
+   "lift_ci95": [
+    0.0,
+    0
+   ],
+   "recall20_loc": 0.011494252873563218,
+   "recall20_entropy": 0.017241379310344827
+  }
+ ],
+ "pooled": {
+  "poolable": true,
+  "k": 6,
+  "mean": -0.011478282287016936,
+  "se": 0.014196334576588802,
+  "ci95": [
+   -0.03930309805713099,
+   0.016346533483097114
+  ],
+  "positive": 1
+ },
+ "pooled_over_recidivism": {
+  "poolable": true,
+  "k": 6,
+  "mean": 0.029872490973115062,
+  "se": 0.01865527833584399,
+  "ci95": [
+   -0.006691854565139155,
+   0.06643683651136928
+  ],
+  "positive": 4
+ }
+}

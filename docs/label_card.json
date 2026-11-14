@@ -1,6 +1,6 @@
 {
  "gate": 0.7,
- "source": "docs/otherfix_audit.md (round 1 2026-11-11; confirmatory round, fresh sample, same doc)",
+ "source": "docs/otherfix_audit.md (CGR eight: round 1 2026-11-11, confirmatory round same doc); docs/otherfix_audit_pilot.md (curl, nDPI, openssl, 2026-11-13)",
  "transfer": "docs/fixlabel_transfer.md: 98-100% of the LAWS history-DB `fix` set appears in xc's events for seven of eight repos (ripgrep 72%), so the precision measured on xc's pipeline carries to the LAWS flag with a stated basis rather than an assumption.",
  "repos": [
   {
@@ -34,6 +34,16 @@
    "v3c_fit": true
   },
   {
+   "repo": "ndpi",
+   "language": "c",
+   "raw_precision": 0.667,
+   "raw_n": 30,
+   "v3c_precision": 0.68,
+   "v3c_n": 25,
+   "raw_fit": false,
+   "v3c_fit": false
+  },
+  {
    "repo": "libgit2",
    "language": "c",
    "raw_precision": 0.633,
@@ -44,12 +54,32 @@
    "v3c_fit": false
   },
   {
+   "repo": "curl",
+   "language": "c",
+   "raw_precision": 0.633,
+   "raw_n": 30,
+   "v3c_precision": 0.8,
+   "v3c_n": 25,
+   "raw_fit": false,
+   "v3c_fit": true
+  },
+  {
    "repo": "sphinx",
    "language": "python",
    "raw_precision": 0.6,
    "raw_n": 30,
    "v3c_precision": 0.783,
    "v3c_n": 23,
+   "raw_fit": false,
+   "v3c_fit": true
+  },
+  {
+   "repo": "openssl",
+   "language": "c",
+   "raw_precision": 0.5,
+   "raw_n": 30,
+   "v3c_precision": 0.8,
+   "v3c_n": 25,
    "raw_fit": false,
    "v3c_fit": true
   },

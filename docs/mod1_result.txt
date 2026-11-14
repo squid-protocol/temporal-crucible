@@ -1,0 +1,61 @@
+analysis set: 37 repos   excluded: 9
+    out  bugzilla          no_negatives    all 198 unit files are positive: nothing to rank
+    out  impacket          under_floor     25 positives, floor 30
+    out  livecode          scan_incomplete scan holds 323 of 1049 unit files in the tree
+    out  macports-base     scan_incomplete scan holds 0 of 128 unit files in the tree
+    out  pwntools          scan_incomplete scan holds 141 of 177 unit files in the tree
+    out  root              scan_incomplete scan holds 6680 of 13146 unit files in the tree
+    out  tigerbeetle       under_floor     17 positives, floor 30
+    out  wordpress         scan_incomplete scan holds 907 of 1082 unit files in the tree
+    out  wrf-fortran       scan_incomplete scan holds 747 of 950 unit files in the tree
+
+  cell                 n   mean lift  lift > 0  CI excl. 0
+  old/C                8     -0.0758      0/8        6/8
+  old/managed          8     -0.0675      1/8        6/8
+  young/C              9     -0.0218      2/9        8/9
+  young/managed       12     -0.0640      2/12       10/12
+
+  PRIMARY (all repos that pass the checks)   n=37
+    old            coef -0.0272   CI [-0.0728, +0.0141]
+    C_family       coef +0.0201   CI [-0.0231, +0.0670]
+    MOD-H1 (old lowers the lift): not detected
+
+  S1_new_languages_removed   n=30
+    old            coef -0.0280   CI [-0.0811, +0.0207]
+    C_family       coef +0.0124   CI [-0.0362, +0.0660]
+    MOD-H1 (old lowers the lift): not detected
+
+  S2_drawn_only   n=29
+    old            coef -0.0055   CI [-0.0445, +0.0332]
+    C_family       coef +0.0247   CI [-0.0093, +0.0603]
+    MOD-H1 (old lowers the lift): not detected
+
+  S3_call_coverage   n=34
+    old            coef -0.0306   CI [-0.0766, +0.0121]
+    C_family       coef +0.0227   CI [-0.0219, +0.0722]
+    MOD-H1 (old lowers the lift): not detected
+
+  S4_full_window   n=32
+    old            coef -0.0345   CI [-0.0881, +0.0151]
+    C_family       coef +0.0229   CI [-0.0263, +0.0790]
+    MOD-H1 (old lowers the lift): not detected
+
+  S5_merge_workflow_removed   n=26
+    old            coef -0.0479   CI [-0.1186, +0.0109]
+    C_family       coef +0.0213   CI [-0.0376, +0.0910]
+    MOD-H1 (old lowers the lift): not detected
+
+  SECONDARY continuous age at the cut (years)   n=37
+    age_at_cut     coef -0.0004   CI [-0.0041, +0.0026]
+    C_family       coef +0.0187   CI [-0.0253, +0.0686]
+    MOD-H1 (age_at_cut lowers the lift): not detected
+
+  SECONDARY with the age x family interaction   n=37
+    old            coef -0.0036   CI [-0.0660, +0.0531]
+    C_family       coef +0.0422   CI [-0.0168, +0.1121]
+    old_x_C        coef -0.0505   CI [-0.1386, +0.0319]
+    MOD-H1 (old lowers the lift): not detected
+
+  VERDICT: MOD-H1 not detected
+
+-> docs/mod1_result.json

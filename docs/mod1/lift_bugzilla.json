@@ -1,0 +1,22 @@
+{
+ "repo": "bugzilla",
+ "status": "no_negatives",
+ "language": "perl",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 9536,
+ "cut": 1292527579,
+ "end": 1355599579,
+ "window_days": 730.0,
+ "start_year": 1998,
+ "age_at_cut": 12.08,
+ "snapshot": "374ee5c8a6ad04213de38be4557398bb458219a9",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 198,
+ "tree_unit_files": 198,
+ "inbound_edges": 1681,
+ "complete": 1.0,
+ "call_coverage": 0.419,
+ "positives": 198,
+ "why": "all 198 unit files are positive: nothing to rank"
+}

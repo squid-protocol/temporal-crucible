@@ -1,0 +1,43 @@
+{
+ "repo": "moby",
+ "status": "ok",
+ "language": "go",
+ "family": "managed",
+ "merge_units": true,
+ "usable_commits": 19971,
+ "cut": 1652381285,
+ "end": 1715453285,
+ "window_days": 730.0,
+ "start_year": 2013,
+ "age_at_cut": 9.13,
+ "snapshot": "888c618c15c6a3c5f85c2cbe7e561e0401dc66a3",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1213,
+ "tree_unit_files": 1247,
+ "inbound_edges": 14186,
+ "complete": 0.973,
+ "call_coverage": 0.646,
+ "wide": {
+  "fix_commits": 94,
+  "wide_commits": 0,
+  "positives_all": 122,
+  "positives_without_wide": 122,
+  "positive_share_all": 0.101,
+  "largest": {
+   "sha": "62227e1bba",
+   "files": 11,
+   "share_of_unit_files": 0.009,
+   "subject": "Merge pull request #44733 from jg-public/fix-rootless-specspaths--T43111"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 122,
+ "auc_loc": 0.7892142867875764,
+ "auc_in_degree": 0.6831039353277937,
+ "lift": -0.10611035145978276,
+ "ci95": [
+  -0.14617566750053135,
+  -0.06690733422488016
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "repo": "wrf-fortran",
+ "status": "scan_incomplete",
+ "language": "fortran",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 6664,
+ "cut": 1486160998,
+ "end": 1549232998,
+ "window_days": 730.0,
+ "start_year": 2001,
+ "age_at_cut": 15.92,
+ "snapshot": "1133f9411a0d901f76eee0977e1c20587d7a5d57",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 747,
+ "tree_unit_files": 950,
+ "inbound_edges": 10940,
+ "complete": 0.786,
+ "call_coverage": 0.754,
+ "why": "scan holds 747 of 950 unit files in the tree"
+}

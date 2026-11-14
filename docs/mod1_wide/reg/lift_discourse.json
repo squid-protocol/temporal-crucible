@@ -1,0 +1,43 @@
+{
+ "repo": "discourse",
+ "status": "ok",
+ "language": "ruby",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 56540,
+ "cut": 1694069849,
+ "end": 1757141849,
+ "window_days": 730.0,
+ "start_year": 2013,
+ "age_at_cut": 10.5,
+ "snapshot": "243793ec6ea41a9bf53dc6b9585ba9239dfc4c85",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 3386,
+ "tree_unit_files": 3392,
+ "inbound_edges": 29105,
+ "complete": 0.999,
+ "call_coverage": 0.304,
+ "wide": {
+  "fix_commits": 771,
+  "wide_commits": 0,
+  "positives_all": 458,
+  "positives_without_wide": 458,
+  "positive_share_all": 0.135,
+  "largest": {
+   "sha": "160011793a",
+   "files": 21,
+   "share_of_unit_files": 0.006,
+   "subject": "Revert \"DEV: Upgrade Rails to version 7.1 (#27539)\""
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 458,
+ "auc_loc": 0.8699918867969552,
+ "auc_in_degree": 0.7708232663994082,
+ "lift": -0.09916862039754692,
+ "ci95": [
+  -0.11926744665042022,
+  -0.0795096339345277
+ ]
+}

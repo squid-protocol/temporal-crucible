@@ -1,0 +1,15 @@
+{
+ "note": "MOD-1 Amendment 2, 2026-11-13, before any drawn repo was scored. C family = no managed runtime (c, cpp, zig, fortran).",
+ "repos": {
+  "racket":      {"lang": "racket",  "family": "managed"},
+  "ghostty":     {"lang": "zig",     "family": "C"},
+  "swift":       {"lang": "swift",   "family": "managed"},
+  "wrf-fortran": {"lang": "fortran", "family": "C"},
+  "fieldtrip":   {"lang": "matlab",  "family": "managed"},
+  "rails":       {"lang": "ruby",    "family": "managed"},
+  "bugzilla":    {"lang": "perl",    "family": "managed"},
+  "discourse":   {"lang": "ruby",    "family": "managed"},
+  "tigerbeetle": {"lang": "zig",     "family": "C"},
+  "bun":         {"lang": "zig",     "family": "C"}
+ }
+}

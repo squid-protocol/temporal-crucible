@@ -1,0 +1,21 @@
+{
+ "repo": "livecode",
+ "status": "scan_incomplete",
+ "language": "cpp",
+ "family": "C",
+ "merge_units": true,
+ "usable_commits": 4436,
+ "cut": 1494694686,
+ "end": 1557766686,
+ "window_days": 730.0,
+ "start_year": 2013,
+ "age_at_cut": 3.92,
+ "snapshot": "ff2eb3f00f2feea9392dd9f53e0b9857d55afe87",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 323,
+ "tree_unit_files": 1049,
+ "inbound_edges": 10683,
+ "complete": 0.308,
+ "call_coverage": 0.644,
+ "why": "scan holds 323 of 1049 unit files in the tree"
+}

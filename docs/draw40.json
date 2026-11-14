@@ -1,0 +1,321 @@
+{
+ "seed": 20261113,
+ "per_cell": 10,
+ "old_before": 2006,
+ "n": 38,
+ "short": [
+  "old/C: 8 of 10"
+ ],
+ "draw": [
+  {
+   "repo": "racket",
+   "year": 1997,
+   "commits": 46093,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "macports-base",
+   "year": 2002,
+   "commits": 8934,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "root",
+   "year": 2000,
+   "commits": 95495,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "sqlite",
+   "year": 2000,
+   "commits": 31374,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "tcpip_historical",
+   "year": 1979,
+   "commits": 69979,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "freebsd-src",
+   "year": 1993,
+   "commits": 307285,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "blast",
+   "year": 1991,
+   "commits": 104999,
+   "lang": "cpp",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "gnupg",
+   "year": 1997,
+   "commits": 11074,
+   "lang": "c",
+   "age": "old",
+   "family": "C"
+  },
+  {
+   "repo": "ghostty",
+   "year": 2022,
+   "commits": 15617,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "swift",
+   "year": 2010,
+   "commits": 199206,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "livecode",
+   "year": 2013,
+   "commits": 29436,
+   "lang": "cpp",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "tensorflow",
+   "year": 2015,
+   "commits": 190859,
+   "lang": "cpp",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "opencv",
+   "year": 2010,
+   "commits": 36007,
+   "lang": "cpp",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "godot",
+   "year": 2013,
+   "commits": 82621,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "wrf-fortran",
+   "year": 2006,
+   "commits": 6748,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "micropython",
+   "year": 2013,
+   "commits": 18285,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "circuitpython",
+   "year": 2013,
+   "commits": 41066,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "fieldtrip",
+   "year": 2009,
+   "commits": 20265,
+   "lang": "c",
+   "age": "young",
+   "family": "C"
+  },
+  {
+   "repo": "rails",
+   "year": 2004,
+   "commits": 97248,
+   "lang": "jsts",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "cpython",
+   "year": 1990,
+   "commits": 130749,
+   "lang": "python",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "scapy",
+   "year": 2003,
+   "commits": 6792,
+   "lang": "python",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "django",
+   "year": 2005,
+   "commits": 34383,
+   "lang": "python",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "go",
+   "year": 1972,
+   "commits": 65792,
+   "lang": "go",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "mediawiki",
+   "year": 2003,
+   "commits": 134776,
+   "lang": "php",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "wordpress",
+   "year": 2003,
+   "commits": 52180,
+   "lang": "php",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "impacket",
+   "year": 2003,
+   "commits": 4200,
+   "lang": "python",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "bugzilla",
+   "year": 1998,
+   "commits": 9542,
+   "lang": "jsts",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "runtime",
+   "year": 2001,
+   "commits": 143868,
+   "lang": "csharp",
+   "age": "old",
+   "family": "managed"
+  },
+  {
+   "repo": "kubernetes",
+   "year": 2014,
+   "commits": 135937,
+   "lang": "go",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "discourse",
+   "year": 2013,
+   "commits": 64559,
+   "lang": "jsts",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "tigerbeetle",
+   "year": 2020,
+   "commits": 11820,
+   "lang": "java",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "bun",
+   "year": 2021,
+   "commits": 14819,
+   "lang": "jsts",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "sqlmap",
+   "year": 2008,
+   "commits": 10526,
+   "lang": "python",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "spock",
+   "year": 2007,
+   "commits": 3471,
+   "lang": "java",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "moby",
+   "year": 2013,
+   "commits": 56089,
+   "lang": "go",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "effect",
+   "year": 2020,
+   "commits": 7568,
+   "lang": "jsts",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "pandas",
+   "year": 2009,
+   "commits": 37297,
+   "lang": "python",
+   "age": "young",
+   "family": "managed"
+  },
+  {
+   "repo": "pwntools",
+   "year": 2013,
+   "commits": 4602,
+   "lang": "python",
+   "age": "young",
+   "family": "managed"
+  }
+ ],
+ "available": {
+  "young/managed": 41,
+  "old/C": 8,
+  "old/managed": 10,
+  "young/C": 12
+ }
+}

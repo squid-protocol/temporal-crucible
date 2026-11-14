@@ -1,0 +1,28 @@
+{
+ "repo": "sqlmap",
+ "status": "ok",
+ "language": "python",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 10339,
+ "cut": 1546720732,
+ "end": 1609792732,
+ "window_days": 730.0,
+ "start_year": 2008,
+ "age_at_cut": 10.05,
+ "snapshot": "590e8ed5aef8cb0b47ef85ebc3819be6c7f282bc",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 352,
+ "tree_unit_files": 353,
+ "inbound_edges": 3413,
+ "complete": 0.997,
+ "call_coverage": 0.384,
+ "positives": 90,
+ "auc_loc": 0.9045801526717557,
+ "auc_in_degree": 0.8057039864291773,
+ "lift": -0.09887616624257844,
+ "ci95": [
+  -0.1613987414187643,
+  -0.04129136029411773
+ ]
+}

@@ -55,6 +55,36 @@ a p-value and a verdict, not a descriptive/exploratory table):
    table wider than one registered claim. Don't quietly drop a guard to make
    a table simpler.
 
+## Know your label before you use it (2026-11-13)
+
+A study's dependent variable is a measurement like any other, and ours are keyword gates with
+**precision that varies by repo from 0.27 to 0.86**. [`docs/LABEL_CARD.md`](docs/LABEL_CARD.md) publishes
+it per repo, with the audit that measured it.
+
+- **No study uses a fix label whose precision on that repo is unpublished.** Measure it first
+  (`tools/otherfix_sample.py`, then the `otherfix_audit.md` pattern) or pick a label that has a number.
+- **Under the 0.70 gate the label is descriptive, or not used as an outcome.** `tools/label_card.py
+  --assert <repo> <label>` exits non-zero with the reason; `hist_replicate.py` excludes unfit repos
+  from its pool by default.
+- **Report the label with the result.** Two labels, two columns, both published — never only the
+  flattering one.
+
+Why this is a rule: HR-1 reported recidivism beating size at pooled +0.082, on a label audited **two days
+earlier** at 0.27 precision on commons-lang, the repo carrying its largest lift. Nothing required reading
+that audit. Cleaning the label reversed commons-lang (+0.143 → −0.015) and the pooled result fell to
++0.009, under its own registered bar.
+
+## Reuse the instrument; do not rebuild it (2026-11-13)
+
+Three measurement stacks were built over the same repositories — xc_harvest's events and audited label,
+LAWS's quarterly walks and its own fix flag, and HR's line deltas — and were discovered to agree 98-100%
+**by accident**, after a result had already gone out.
+
+Before building a harvest, a label or a walk: check whether it exists. `docs/LABEL_CARD.md` for labels,
+`laws-study/pilot/{dbs,history,deltas}` for structure, history and line deltas, `events/*_xc*.json` for
+labelled fix events. **Re-measuring something the programme has already measured is the expensive
+mistake, and not knowing it was measured is the dangerous one.**
+
 ## The experiment journal (every study gets an entry)
 
 [`docs/journal/`](docs/journal/README.md) is the program's lab notebook: one dated entry per study, arc or engine

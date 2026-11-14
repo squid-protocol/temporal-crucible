@@ -1,0 +1,43 @@
+{
+ "repo": "micropython",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 17743,
+ "cut": 1684378296,
+ "end": 1747450296,
+ "window_days": 730.0,
+ "start_year": 2013,
+ "age_at_cut": 9.38,
+ "snapshot": "4ce360fa831a35d7bc0e194f11d74632a0fba60b",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1833,
+ "tree_unit_files": 1942,
+ "inbound_edges": 18299,
+ "complete": 0.989,
+ "call_coverage": 0.39,
+ "wide": {
+  "fix_commits": 180,
+  "wide_commits": 0,
+  "positives_all": 185,
+  "positives_without_wide": 185,
+  "positive_share_all": 0.101,
+  "largest": {
+   "sha": "3bca93b2d0",
+   "files": 22,
+   "share_of_unit_files": 0.012,
+   "subject": "ports: Fix sys.stdout.buffer.write() return value."
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 185,
+ "auc_loc": 0.7416934531618997,
+ "auc_in_degree": 0.7056514038310154,
+ "lift": -0.036042049330884285,
+ "ci95": [
+  -0.068214357733414,
+  -0.005132163362582598
+ ]
+}

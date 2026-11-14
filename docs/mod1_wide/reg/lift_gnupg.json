@@ -1,0 +1,43 @@
+{
+ "repo": "gnupg",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 11033,
+ "cut": 1599546882,
+ "end": 1662618882,
+ "window_days": 730.0,
+ "start_year": 1998,
+ "age_at_cut": 22.24,
+ "snapshot": "2bc1ec294422504e2d2e5d20716aba68f1c2b0d7",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 466,
+ "tree_unit_files": 471,
+ "inbound_edges": 14759,
+ "complete": 0.989,
+ "call_coverage": 0.7,
+ "wide": {
+  "fix_commits": 184,
+  "wide_commits": 0,
+  "positives_all": 123,
+  "positives_without_wide": 123,
+  "positive_share_all": 0.264,
+  "largest": {
+   "sha": "dfdcf14738",
+   "files": 15,
+   "share_of_unit_files": 0.032,
+   "subject": "common,agent,dirmngr,g10,tools: Fix split_fields API."
+  },
+  "wide_list": []
+ },
+ "outcome": "registered",
+ "positives": 123,
+ "auc_loc": 0.841475266064614,
+ "auc_in_degree": 0.7877171774633198,
+ "lift": -0.05375808860129416,
+ "ci95": [
+  -0.08488093881736358,
+  -0.023847507331378304
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "repo": "fieldtrip",
+ "status": "ok",
+ "language": "matlab",
+ "family": "managed",
+ "merge_units": false,
+ "usable_commits": 18276,
+ "cut": 1554188328,
+ "end": 1617260328,
+ "window_days": 730.0,
+ "start_year": 2009,
+ "age_at_cut": 9.35,
+ "snapshot": "40352a8a57dc1ac4c6958751293b3bc1495d0635",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 1676,
+ "tree_unit_files": 1700,
+ "inbound_edges": 14846,
+ "complete": 0.986,
+ "call_coverage": 0.635,
+ "wide": {
+  "fix_commits": 241,
+  "wide_commits": 0,
+  "positives_all": 263,
+  "positives_without_wide": 263,
+  "positive_share_all": 0.157,
+  "largest": {
+   "sha": "e2f120cc9b",
+   "files": 45,
+   "share_of_unit_files": 0.027,
+   "subject": "FIX #971 - use strfind (or contains) instead of findstr"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 263,
+ "auc_loc": 0.7665552622443955,
+ "auc_in_degree": 0.7525678181147896,
+ "lift": -0.013987444129605953,
+ "ci95": [
+  -0.0492321228603424,
+  0.021201827505195614
+ ]
+}

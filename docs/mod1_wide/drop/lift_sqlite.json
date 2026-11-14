@@ -1,0 +1,43 @@
+{
+ "repo": "sqlite",
+ "status": "ok",
+ "language": "c",
+ "family": "C",
+ "merge_units": false,
+ "usable_commits": 29116,
+ "cut": 1667841713,
+ "end": 1730913713,
+ "window_days": 730.0,
+ "start_year": 2001,
+ "age_at_cut": 21.22,
+ "snapshot": "49507d2af6648f1c548cdc2175ac74ae0331973c",
+ "snapshot_offset_days": 0.0,
+ "unit_files": 376,
+ "tree_unit_files": 382,
+ "inbound_edges": 24723,
+ "complete": 0.99,
+ "call_coverage": 0.795,
+ "wide": {
+  "fix_commits": 445,
+  "wide_commits": 0,
+  "positives_all": 99,
+  "positives_without_wide": 99,
+  "positive_share_all": 0.263,
+  "largest": {
+   "sha": "a3d0c158a0",
+   "files": 7,
+   "share_of_unit_files": 0.019,
+   "subject": "Add loops and rows counters to \"USE TEMP B-TREE FOR ORDER BY\" records. Also fix the sqliteHwtime() function so that it r"
+  },
+  "wide_list": []
+ },
+ "outcome": "wide fix commits removed",
+ "positives": 99,
+ "auc_loc": 0.8341173467527259,
+ "auc_in_degree": 0.7565911825839624,
+ "lift": -0.07752616416876346,
+ "ci95": [
+  -0.1290507334737464,
+  -0.026747007119277688
+ ]
+}

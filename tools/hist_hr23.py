@@ -20,10 +20,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from hist_replicate import (REPOS, WINDOW_DAYS, CUT_Q, MIN_POSITIVES, BUDGET,  # noqa: E402
-                            auc, recall_at_budget, boot_ci)
+                            auc, recall_at_budget, boot_ci, corrected)
 from hist_fixlabel import fix_shas  # noqa: E402
 
 RULES = "raw"  # set from the CLI
+UNITS_ONLY = MERGE_AWARE = False  # docs/STUDY_CHECKLIST.md corrections, opt-in from the CLI
+
+
+def fix_rules(h):
+    """(unit-file predicate, merge clause for bare columns, the same for alias c, merges are units)"""
+    unit, mg, mu = corrected(h, UNITS_ONLY, MERGE_AWARE)
+    return unit, mg, mg.replace("merge", "c.merge"), mu
 
 PERIOD_DAYS = 30
 STUDY = Path("/srv/storage_16tb/projects/gitgalaxy/laws-study/pilot")
@@ -34,7 +41,8 @@ def ro(p: Path) -> sqlite3.Connection:
 
 
 def cut_of(h: sqlite3.Connection) -> tuple[int, int] | None:
-    cts = [r[0] for r in h.execute("select ct from commit_ where merge=0 and bot=0 order by ct")]
+    mg = fix_rules(h)[1]
+    cts = [r[0] for r in h.execute(f"select ct from commit_ where bot=0{mg} order by ct")]
     if len(cts) < 200:
         return None
     cut = cts[int(len(cts) * CUT_Q)]
@@ -56,10 +64,11 @@ def nearest_snapshot(w: sqlite3.Connection, when: int) -> str | None:
 
 def outcomes(h: sqlite3.Connection, cut: int, end: int) -> set[str]:
     """paths touched by a fix commit in the outcome window, under the active label"""
-    keep = fix_shas(h, RULES)
+    _, _, cmg, mu = fix_rules(h)
+    keep = fix_shas(h, RULES, mu)
     return {p for p, sha in h.execute(
         "select t.path, t.sha from touch t join commit_ c on c.sha=t.sha "
-        "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct>? and c.ct<=?", (cut, end))
+        f"where c.bot=0{cmg} and c.fix=1 and c.ct>? and c.ct<=?", (cut, end))
         if keep is None or sha in keep}
 
 
@@ -77,9 +86,10 @@ def hr2_repo(repo: str) -> dict:
     sha = nearest_snapshot(w, cut)
     if not sha:
         return {**rec, "evaluable": False, "why": "no scanned snapshot"}
+    unit, mg, cmg, mu = fix_rules(h)
     loc = {p: l for p, l in w.execute(
-        "select path, total_loc from file where commit_hash=? and generated=0", (sha,))}
-    ct_of = dict(h.execute("select sha, ct from commit_ where merge=0 and bot=0"))
+        "select path, total_loc from file where commit_hash=? and generated=0", (sha,)) if unit(p)}
+    ct_of = dict(h.execute(f"select sha, ct from commit_ where bot=0{mg}"))
 
     # changed lines per (period, path), periods tiled backwards from the cut
     per: dict[int, dict[str, int]] = {}
@@ -109,9 +119,9 @@ def hr2_repo(repo: str) -> dict:
     post = outcomes(h, cut, end)
     # recidivism on the same files, so "does entropy ADD" can be read off directly
     prior: dict[str, int] = {}
-    keepf = fix_shas(h, RULES)
+    keepf = fix_shas(h, RULES, mu)
     for path, sha in h.execute("select t.path, t.sha from touch t join commit_ c on c.sha=t.sha "
-                               "where c.merge=0 and c.bot=0 and c.fix=1 and c.ct<?", (cut,)):
+                               f"where c.bot=0{cmg} and c.fix=1 and c.ct<?", (cut,)):
         if keepf is None or sha in keepf:
             prior[path] = prior.get(path, 0) + 1
     rows = [(hcm.get(p, 0.0), float(l), prior.get(p, 0), 1 if p in post else 0)
@@ -141,8 +151,9 @@ def hr3_repo(repo: str) -> dict:
     if not c:
         return {**rec, "evaluable": False, "why": "too few usable commits"}
     cut, end = c
-    keepf = fix_shas(h, RULES)
-    ct_of = {s: c for s, c in h.execute("select sha, ct from commit_ where merge=0 and bot=0 and fix=1")
+    unit, mg, cmg, mu = fix_rules(h)
+    keepf = fix_shas(h, RULES, mu)
+    ct_of = {s: c for s, c in h.execute(f"select sha, ct from commit_ where bot=0{mg} and fix=1")
              if keepf is None or s in keepf}
     snaps = []
     import datetime as dt
@@ -194,6 +205,8 @@ def hr3_repo(repo: str) -> dict:
     for path, name, loc in w.execute(
             "select f.path, u.name, u.loc from func u join file f on f.id=u.file_id "
             "where u.commit_hash=? and f.generated=0", (cut_sha,)):
+        if not unit(path):
+            continue
         k = (path, name)
         if k in cand:
             merged += 1
@@ -231,9 +244,11 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--md", type=Path)
     ap.add_argument("--fix-label", default="raw", choices=("raw", "v2", "v3", "v3c"))
+    ap.add_argument("--units-only", action="store_true", help="rank only files that can be positive")
+    ap.add_argument("--merge-aware", action="store_true", help="keep merges where they are the labelled unit")
     a = ap.parse_args()
-    global RULES
-    RULES = a.fix_label
+    global RULES, UNITS_ONLY, MERGE_AWARE
+    RULES, UNITS_ONLY, MERGE_AWARE = a.fix_label, a.units_only, a.merge_aware
     fn = hr2_repo if a.which == "hr2" else hr3_repo
     res = []
     for r in REPOS:
