@@ -57,10 +57,17 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 39 | SA3-CH | code | Preparation skipped merge commits (7,832 changed files with no counted commit in one repo); rename-following built a map and never read it | R3 | 0 | unused-variable check; reconcile two counts that should agree |
 | 40 | all | process | No prior-work check before SA3, SA3-CH or the WCC draft, against the owner's standing rule | author, on reflection | — | required slot, filled before design |
 | 41 | all | controls | Placebos (must show nothing) but no positive control (a known effect the pipeline must recover); a null cannot tell "no effect" from "cannot see effects" | author, on reflection | — | required slot |
+| 42 | SA3 | inference / code | Holm step-down treats a "contradicted" primary as a failure, so two later primaries with intervals wholly above zero read "not detected"; the registration does not say that, and the consolidated text hid the difference | R4 (pre-scoring code review), by an end-to-end synthetic run | 3 | end-to-end synthetic run with one effect planted negative |
+| 43 | SA3 | spec vs code | "Not robust to the statistic" fires only when the primary statistic reads "supported"; the rule says whenever the two differ | R4 | 3 | reading rule as a truth table, tested cell by cell |
+| 44 | SA3 | seal | The seal covers the scorer but not the labels, the scans, the universe rule or the governing registration; three drawn repos' outcome files were rewritten after the leak and only a side calculation could show they were unchanged | R4 | 1 | seal every input the result depends on |
+| 45 | SA3 | reproducibility | One random stream shared across repos and predictors: a change to which secondary measures are scored moved the specificity mean by up to 0.0013 and a per-repo value by 0.011 | R4 | 1 | one stream per repo and purpose |
+| 46 | SA3 | disclosure | The amendment said a rule change affected two measures; it also un-silenced three count measures in 14 repo cells | R4 | 0 | diff the scored-cell table before and after any rule change |
+| 47 | SA3 | output | Outside the three confirmatory tests the output still says "supported" at an unadjusted 95%, including for the exploratory measure and when the gate has failed | R4 | 1 | one vocabulary for confirmatory readings, another for everything else |
+| 48 | SA3 | code | The "tracks reverted changes" reading compares 18 repos against 15 | R4 | 1 | every comparison names its repo set |
 
 ## What the log says
 
-**By class** (41 entries): label 5 · universe 5 · code 4 · control or gate 4 · statistic 2 · power 3 · measure
+**By class** (first 41 entries): label 5 · universe 5 · code 4 · control or gate 4 · statistic 2 · power 3 · measure
 or instrument 6 · inference 2 · spec 3 · process, record, tests 6 · blinding 1.
 
 **Nothing here is exotic.** The same few questions would have caught most of it:
@@ -84,6 +91,10 @@ investigated on real data. Nothing in the checklist said not to.
 
 **Two faults were found by nobody for the whole programme until this week** (11, 12), and both had already
 produced published results.
+
+**Fourth review, same artefact (entries 42–48).** R4 reviewed SA3's code after three reviews and a round of
+fixes, and still found one blocker and six lesser faults. Its blocker was found the way every statistic and gate
+fault here has been found: by running the whole thing on synthetic data with a known answer.
 
 ## Still open
 
