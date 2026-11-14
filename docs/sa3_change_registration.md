@@ -259,3 +259,36 @@ tests on the same repos and outcome.
 2. t−1 scans with the pinned engine and a fixed hash seed; blob-identical gate; predictor marginals published.
 3. Scorer; placebos; benchmark gate; power amendment. 4. Code review. **5. Everything above committed.**
 6. SA3 is scored. 7. SA3-CH is scored.
+
+## Amendment 2 — 2026-11-14, 9:11 AM Eastern: SA3-CH is withdrawn by the owner, before any scorer was written
+
+**State when written:** preparation from git and both sets of scans exist for 39 repos (`effect` has no
+earlier snapshot); no scorer, no gate and no placebo has been written or run; **no change in any measure has
+been put against any outcome.**
+
+**Owner decision, made explicitly.** The owner was offered three options — withdraw, park the study with only
+its freeze rule lifted, or keep the freeze and build it — and chose to withdraw.
+
+**Why.**
+1. A within-commit comparison (for each fix commit, the files it touched against size-matched files in the
+   same directory it did not touch) removes this study's central difficulty by construction: a file whose
+   structure changed is a file somebody was editing. Here that is handled by calipers and a benchmark gate
+   added after review. A change measure can be tested inside that design. It is not yet registered or
+   reviewed, and "better" is a judgement, not a demonstrated fact.
+2. Its power is lower than SA3's, and SA3 can only detect mean effects above about 0.05 to 0.08.
+3. It inherits SA3's label, which is "tied to a ticket" in the repos that hold half the positives.
+4. The third review found two real faults in the preparation that would have had to be fixed first: "edited"
+   misses files changed by merge commits (freebsd-src: 7,832 matched files changed with no counted commit),
+   and the rename-following builds a mapping it never uses.
+
+**What falls with it.** Amendment 1 rule 8 required this study to be fully built, gated and reviewed before
+SA3 was scored, so that it could not be finished with SA3's answer in hand. With no SA3-CH to finish, that
+rule has nothing left to protect, and **SA3 no longer waits for it.** SA3's own safeguards are unchanged: the
+disclosure in its Amendment 4, the size-surrogate gate, the independent code review and the hash seal.
+
+**What is kept.** The scans (`<pilot>/sa3ch_scans`), the preparation (`<pilot>/sa3ch_prep`) and
+`tools/sa3ch_prepare.py`, as inputs for whatever replaces this, with the two faults above recorded against
+them.
+
+**Not a result.** Nothing was measured, so nothing is concluded about whether a change in structure predicts
+fixes.
