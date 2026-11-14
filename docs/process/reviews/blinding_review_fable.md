@@ -77,3 +77,21 @@ A crash mid-write leaves a partial file. Write to a temporary name in the same d
 It did not run the two jobs end to end with its own harness; it read the job code and relied on the builder's
 tests for the seal, the one-run rule, the guard and the dry run. It did not test the owner's terminal prompt
 with a real key, by design.
+
+## Re-review after the builder's changes (same day)
+
+The builder made all seven changes and disputed none. Re-checked with the reviewer's own scripts.
+
+| check | result |
+|---|---|
+| Tests | 62 passed, no expected failures (run together with the control repository's 40: 102 passed, 151 s) |
+| Released copies are band-only | on a 945-file control repository with a planted effect: the count of positives in each size band is identical in all 20 copies and in the truth; the per-directory counts differ in every copy |
+| Leak | 0 of 259 true positives positive in all copies; overlap with the truth 28.9% against a prevalence of 27.4% |
+| Effect on scrambled labels | −0.0004 (sd 0.025 over copies) against a true +0.213: −0.2% |
+| Outputs | four files, written under temporary names and renamed; marginals and report contain no path; the report no longer carries any label-derived count |
+| Label builder | no option and no import of the directory-preserving cells |
+| Encryption | unchanged: round trip and tamper refusal re-run with a fresh throwaway key |
+
+**Accepted.** Noted by the builder and agreed: at about 300 files a minimum cell of 20 leaves no directory in
+the directory-preserving scramble either, so the gates job's "spread with clustering" differs from the
+band-only spread only in repositories of roughly 600 files or more.
