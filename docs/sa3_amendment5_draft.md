@@ -105,7 +105,7 @@ answer.
 |---|---|---|
 | `PU_reachable_universe` | remove files that are in the universe **and** that the history walk's own unit rule excludes (the walk applies the unit rule without the snapshot's `.gitattributes`). Defined by rule, never by "has no touch" | owner ruling of 2026-11-14 |
 | `PU_unreachable_made_reachable` | the other repair: rebuild the touches with the snapshot's attributes so those files can be positive | the review; the registered universe includes them |
-| `PU_generic_dirs_restored` | files excluded only by one of these GitHub patterns are ranked again: `(^|/)cache/`, `(^|/)dist/`, `(^|/)extern(al)?/`, `(^|/)env/`. The list is fixed here, before any per-repo count is seen | defect 55 |
+| `PU_generic_dirs_restored` | files excluded only by one of these GitHub patterns are ranked again: `(^|/)cache/`, `(^|/)dist/`, `(^|/)[Ee]xtern(als?)?/`, `(^|/)env/`. The list is fixed here, before any per-repo count is seen | defect 55 |
 | `PU_tracker_keys_case_sensitive` | a tracker key must be in capitals, as the registration writes it | defect 61 |
 | `PU_named_streams` | one random stream per repo and purpose, seeded from 2982 | defect 45 |
 | `PU_late_revert_ticket_dropped` | a late revert that quotes a ticket not counted | harness report |
