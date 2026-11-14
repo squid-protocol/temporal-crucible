@@ -78,6 +78,7 @@ reviewed the whole built system). *G* = Gemini 4 Argon, on the pull requests.
 | 60 | SA3 | code | The placebo stage crashes when no repository clears the floor | the harness | 4 | run each stage on an empty study |
 | 61 | SA3 | label | The tracker-key pattern is compiled case-insensitively: after a fix word, "UTF-8", "x86-64", "sha-1" count as fix references, moving fix-worded commits from the keyword outcome into the primary one. Size on SA3's repos unknown | R6 (review of the Amendment 5 draft), by trying made-up subjects | 5 | one commit per pattern form in a repository with known labels |
 | 62 | SA3 | record | Amendment 4 says the confirmatory run is frozen "as at `edc5c53`"; its own commit changed the scorer and narrowed the instrument-silent rule for two of the three confirmatory primaries. The first draft of Amendment 5 repeated the wrong reference | R6 | 1 | diff the frozen files against the named commit before writing "frozen" |
+| 63 | process | gate | **Reviewer-proposed, author-adopted, caught before use.** A control-suite pass rule (paired difference within 3 standard errors and within ±0.01) fails a correct pipeline: 4.6% for a typical row, 24% for the noisiest, at least one of 22 rows in 65% of simulated runs | author, by the simulation both design reviews had asked for | 1 | the rule that was already written down: simulate every gate before it is used |
 
 ## What the log says
 
