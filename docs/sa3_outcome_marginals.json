@@ -278,7 +278,7 @@
    "largest_commit_share": 0.056,
    "clears_floor": true
   },
-  "control_pool_commits": 827,
+  "control_pool_commits": 820,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,
@@ -359,14 +359,14 @@
   "complete": 0.998,
   "window_days": 730.0,
   "HP": {
-   "n_files": 264,
-   "n_commits": 571,
-   "largest_commit_share": 0.159,
+   "n_files": 263,
+   "n_commits": 565,
+   "largest_commit_share": 0.16,
    "clears_floor": true
   },
   "HP_allreverts": {
-   "n_files": 270,
-   "n_commits": 577,
+   "n_files": 269,
+   "n_commits": 571,
    "largest_commit_share": 0.156,
    "clears_floor": true
   },
@@ -383,18 +383,18 @@
    "clears_floor": false
   },
   "HP_fixref": {
-   "n_files": 264,
-   "n_commits": 570,
-   "largest_commit_share": 0.159,
+   "n_files": 263,
+   "n_commits": 564,
+   "largest_commit_share": 0.16,
    "clears_floor": true
   },
   "KW": {
    "n_files": 165,
-   "n_commits": 269,
+   "n_commits": 267,
    "largest_commit_share": 0.224,
    "clears_floor": true
   },
-  "control_pool_commits": 1948,
+  "control_pool_commits": 1940,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,
@@ -1085,12 +1085,12 @@
    "clears_floor": true
   },
   "KW": {
-   "n_files": 46,
-   "n_commits": 181,
-   "largest_commit_share": 0.13,
+   "n_files": 44,
+   "n_commits": 173,
+   "largest_commit_share": 0.136,
    "clears_floor": true
   },
-  "control_pool_commits": 815,
+  "control_pool_commits": 780,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,
@@ -1346,11 +1346,11 @@
   },
   "KW": {
    "n_files": 57,
-   "n_commits": 151,
+   "n_commits": 150,
    "largest_commit_share": 0.316,
    "clears_floor": false
   },
-  "control_pool_commits": 500,
+  "control_pool_commits": 496,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,
@@ -1489,14 +1489,14 @@
   "complete": 0.989,
   "window_days": 730.0,
   "HP": {
-   "n_files": 382,
-   "n_commits": 359,
+   "n_files": 381,
+   "n_commits": 356,
    "largest_commit_share": 0.063,
    "clears_floor": true
   },
   "HP_allreverts": {
-   "n_files": 459,
-   "n_commits": 381,
+   "n_files": 458,
+   "n_commits": 378,
    "largest_commit_share": 0.07,
    "clears_floor": true
   },
@@ -1513,18 +1513,18 @@
    "clears_floor": false
   },
   "HP_fixref": {
-   "n_files": 366,
-   "n_commits": 346,
+   "n_files": 365,
+   "n_commits": 343,
    "largest_commit_share": 0.066,
    "clears_floor": true
   },
   "KW": {
-   "n_files": 427,
-   "n_commits": 433,
+   "n_files": 422,
+   "n_commits": 428,
    "largest_commit_share": 0.052,
    "clears_floor": true
   },
-  "control_pool_commits": 2136,
+  "control_pool_commits": 2119,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,
@@ -1547,15 +1547,15 @@
   "complete": 0.994,
   "window_days": 628.9,
   "HP": {
-   "n_files": 51,
-   "n_commits": 54,
-   "largest_commit_share": 0.118,
+   "n_files": 49,
+   "n_commits": 51,
+   "largest_commit_share": 0.122,
    "clears_floor": true
   },
   "HP_allreverts": {
-   "n_files": 58,
-   "n_commits": 62,
-   "largest_commit_share": 0.103,
+   "n_files": 54,
+   "n_commits": 58,
+   "largest_commit_share": 0.111,
    "clears_floor": true
   },
   "HP_revert": {
@@ -1571,26 +1571,26 @@
    "clears_floor": false
   },
   "HP_fixref": {
-   "n_files": 51,
-   "n_commits": 54,
-   "largest_commit_share": 0.118,
+   "n_files": 49,
+   "n_commits": 51,
+   "largest_commit_share": 0.122,
    "clears_floor": true
   },
   "KW": {
    "n_files": 80,
-   "n_commits": 85,
+   "n_commits": 83,
    "largest_commit_share": 0.075,
    "clears_floor": true
   },
-  "control_pool_commits": 550,
+  "control_pool_commits": 511,
   "inheritance": {
-   "merges_in_window": 486,
+   "merges_in_window": 472,
    "merges_over_cap": 1,
-   "inherited_events": 37,
-   "reverts_seen": 17,
+   "inherited_events": 33,
+   "reverts_seen": 15,
    "reverts_of_pre_cut_code": 0,
-   "reverts_unresolved": 9,
-   "merges_tainted": 224
+   "reverts_unresolved": 7,
+   "merges_tainted": 220
   }
  },
  {
@@ -1736,13 +1736,13 @@
   "window_days": 730.0,
   "HP": {
    "n_files": 35,
-   "n_commits": 35,
+   "n_commits": 33,
    "largest_commit_share": 0.343,
    "clears_floor": false
   },
   "HP_allreverts": {
    "n_files": 35,
-   "n_commits": 36,
+   "n_commits": 34,
    "largest_commit_share": 0.343,
    "clears_floor": false
   },
@@ -1760,17 +1760,17 @@
   },
   "HP_fixref": {
    "n_files": 30,
-   "n_commits": 26,
+   "n_commits": 24,
    "largest_commit_share": 0.4,
    "clears_floor": false
   },
   "KW": {
    "n_files": 62,
-   "n_commits": 174,
+   "n_commits": 165,
    "largest_commit_share": 0.161,
    "clears_floor": true
   },
-  "control_pool_commits": 569,
+  "control_pool_commits": 530,
   "inheritance": {
    "merges_in_window": 0,
    "merges_over_cap": 0,

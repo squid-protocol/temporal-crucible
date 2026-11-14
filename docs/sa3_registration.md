@@ -436,3 +436,110 @@ this registration and reported four defects. Each was reproduced before being fi
 4. **Completeness was measured against the wrong denominator.** The scan reads a `git archive`, which honours
    `export-ignore`; the denominator was the raw tree. It is now the archive's file list. A body harvest is
    reused only if it records both the merges and the wider-tracker switches.
+
+## Amendment 4 — 2026-11-14, 9:06 AM Eastern: the point estimates were partly seen before scoring; what is frozen, what is replaced
+
+**This amendment is a disclosure first.** SA3 has not been scored. But while diagnosing a failed gate I printed
+numbers from which the confirmatory point estimates can be recovered, and the study must say so.
+
+### What happened
+
+1. The `placebo` stage ran (commit `5ffa330`). The block-permutation placebo of Amendment 1 rule 5 came out
+   at about +0.015 for three of the four primaries; the gate failed.
+2. To find out why, I ran three diagnostics on shuffled values (`tools/exploratory/sa3_placebo_diag{1,2,3}.py`).
+   The second printed, per primary, the study mean under a random permutation in blocks of four and under a
+   cyclic shift in the same blocks.
+3. A third independent review (a fresh Claude session, read-only, working on synthetic data) showed that those
+   two numbers determine the real study-mean effect: **real ≈ 4 × permutation − 3 × shift**, because a random
+   permutation of four leaves each file its own value one time in four. It verified the identity on synthetic
+   data in four scenarios and on real outcomes with non-structural file attributes, and put the precision at
+   about **±0.005 to ±0.01**.
+
+**So the point estimates of SA3-B, SA3-C, SA3-D and SA3-A on the primary outcome are no longer blind.** I have
+not done the arithmetic and neither reviewer tabulated it, but the inputs were on my screen and are in this
+session's record. From what was already published in `docs/sa3_build_status.md`, the three count primaries are
+bracketed at roughly 0.00 to +0.04 — at or below what the study can detect.
+
+### What that does to the claims
+
+- The three confirmatory tests are reported as **"pre-registered; point estimates partly seen before
+  scoring"**, and only if everything below under "frozen" runs exactly as it stood at commit `edc5c53`, the
+  last commit before the placebo stage ran.
+- **Anything changed after `5ffa330` that could move a result is a post-unblinding sensitivity**, labelled
+  `PU_` in the scorer's output, never the confirmatory result. That includes the reviewer's own
+  suggestions on data faults (below).
+
+### Frozen, exactly as at `edc5c53`
+
+The statistic (`bAUC − 0.5`, bands, the 1.5 caliper), the co-reported residualised statistic and the "must
+agree" rule, the outcome definitions, the repo list (15 drawn, 5 earlier), the floors, the Holm family
+(B, C, D) and its levels, the reading words, the matched control and its 200 draws, the seeds.
+
+### Replaced: the block-permutation gate is withdrawn
+
+It was never simulated before it became a gate, and it is not a valid one. Every draw keeps the same blocks,
+so a chance alignment between block values and block outcomes never averages out; the reviewer's synthetic
+null shows the registered criterion **passes only 29% of studies with no effect at all**, and almost never
+when the hypothesis is true. The block permutation stays only as the per-repo reference distribution for the
+side counts, where a non-zero mean does no harm.
+
+**New gate: a size surrogate.** Per repo and primary, a few parameters are fitted on **predictor versus LOC
+only** — the chance the value is non-zero as a logistic in ln LOC and its square, and among non-zeros a
+quadratic for ln x with a residual spread in three size thirds (for the risk score, its non-zero quantiles).
+200 made-up predictors are drawn from that fit. Each knows a file's LOC and nothing else about it, so it
+cannot carry a real effect (synthetic: its mean is +0.001 to +0.002 whether the planted effect is 0, 0.03 or
+0.08). **The gate passes if every surrogate mean, and both hash-placebo means, lie within 0.005 of zero.**
+
+Run today (`docs/sa3_placebo.json`), study mean over the 15 drawn repos:
+
+| placebo | mean | Monte Carlo SE | |
+|---|---|---|---|
+| path hash | +0.0003 | 0.0006 | within tolerance |
+| directory hash | +0.0005 | 0.0011 | within tolerance |
+| size surrogate of `in_degree` | +0.0011 | 0.0007 | within tolerance |
+| size surrogate of `struct_branch` | +0.0025 | 0.0007 | within tolerance |
+| size surrogate of `risk_safety_score` | −0.0006 | 0.0008 | within tolerance |
+| size surrogate of `amplified_cascading_flux` | +0.0014 | 0.0007 | within tolerance |
+
+**The gate passes.** The surrogate means are also the measured size leak of the statistic for each shape
+(the registration's claim that a size proxy scores exactly zero was wrong by this much). Each primary is
+therefore reported twice: as registered, and as **effect − its surrogate mean**, beside it.
+
+### Scorer faults fixed — none depends on an outcome
+
+| fault | fix |
+|---|---|
+| The control filled a missing value with zero; the main path dropped the file | the control uses the same rows |
+| "Fewer than 20 distinct values" silenced the yes/no indicator and nesting depth everywhere | the clause applies to continuous scores only |
+| The lock was three file names anyone could create | `lock` seals the git hash of the scorer, statistics, outcome builder, this registration, the placebo output, the power statement and the code review; `score` recomputes them |
+| Registered but not coded: `CHURN_any`, random-effects mean and τ, sign test, side counts from the block null, the "tracks reverted changes" reading, a summary of the logistic sensitivity, the engine SHA, sub-pools only at five repos | coded |
+| Earlier eight: "the window starts at the snapshot" was not applied | applied; no repo's floor status changed (curl 264 → 263 files, postgres 382 → 381, prometheus 51 → 49) |
+
+**Not run, and reported as not run:** S5 (tree-wide commits left in) and S8 (positives followed through
+renames). `dampened_flux`, named as a D secondary, does not exist in the pinned engine's output.
+
+### Data faults the review found — post-unblinding sensitivities only
+
+- **mediawiki:** its merges are authored by an account the bot rule matches, so about 80% of its mainline
+  units are in no outcome and no control.
+- **freebsd-src:** half its unit files are imported third-party code (`contrib/`, `crypto/`).
+- **django and circuitpython:** in django a third of the HP commits are features with a ticket; in
+  circuitpython eight merges supply 233 of 393 positive files and at least four are not fixes.
+- Sampled label precision, 48 HP commits read at diff level: 35 clear fixes, 4 plausible, 8 not, 1 unclear.
+
+None of these is fixed in the confirmatory run. Two extra cuts are reported and labelled:
+`PU_django_circuitpython_removed` and `PU_mediawiki_freebsd_removed`.
+
+### Power, restated
+
+The earlier figure (0.032) assumed repos do not differ in their true effect. With a between-repo spread of
+0.05 the detectable mean effect is **0.056**; with 0.08 it is **0.080**; and a predictor that clusters by
+directory roughly doubles the null spread (0.056 to 0.092). **A "not detected" here rules out mean effects
+above about 0.05 to 0.08, and nothing smaller.** `docs/sa3_power.md`.
+
+### The text in force
+
+Four amendments and about 25 rules now sit on top of a body that was itself rewritten in place.
+`docs/sa3_registration_consolidated.md` restates everything in force in one place, with the code line for
+each rule. It adds nothing; where it and this file disagree, this file and its amendments govern and the
+consolidated text is wrong.

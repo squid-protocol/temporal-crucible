@@ -14,6 +14,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0007378147861343337,
+    "struct_branch": 7.710635428761298e-05,
+    "risk_safety_score": 0.0025424627366791865,
+    "amplified_cascading_flux": 0.0004593192810281749
    }
   },
   "circuitpython": {
@@ -30,14 +36,20 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.000363182704140374,
+    "struct_branch": -0.0005118785599402656,
+    "risk_safety_score": 0.0007491650971809136,
+    "amplified_cascading_flux": -0.00014803163387241137
    }
   },
   "curl": {
    "n": 450,
-   "positives": 264,
-   "pairs": 3264,
-   "pairs_gt": 1703,
-   "pairs_lt": 1436,
+   "positives": 263,
+   "pairs": 3276,
+   "pairs_gt": 1691,
+   "pairs_lt": 1459,
    "clears_pair_floor": true,
    "bands": 10,
    "drawn": false,
@@ -46,6 +58,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": -0.0027096152735969874,
+    "struct_branch": -0.003340970561310943,
+    "risk_safety_score": -0.0006085959728849369,
+    "amplified_cascading_flux": -0.002780624508335986
    }
   },
   "django": {
@@ -62,6 +80,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.000726785576594197,
+    "struct_branch": 0.0022779294693617428,
+    "risk_safety_score": -0.0016602485475061565,
+    "amplified_cascading_flux": 0.006757041292630546
    }
   },
   "freebsd-src": {
@@ -78,6 +102,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.003199220296310387,
+    "struct_branch": 0.0007024548863458594,
+    "risk_safety_score": -0.004458683067037723,
+    "amplified_cascading_flux": -0.0010935288113093932
    }
   },
   "ghostty": {
@@ -94,6 +124,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0008325262636172168,
+    "struct_branch": 0.001566405818873005,
+    "risk_safety_score": 0.002257303993704901,
+    "amplified_cascading_flux": 0.003910674491248851
    }
   },
   "gnupg": {
@@ -110,6 +146,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0032770697996837316,
+    "struct_branch": 0.008055721387134507,
+    "risk_safety_score": -0.002113137176496123,
+    "amplified_cascading_flux": 0.01028797078322859
    }
   },
   "go": {
@@ -126,6 +168,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0016884083774025896,
+    "struct_branch": -0.00027338921360178125,
+    "risk_safety_score": 0.00013551789950133232,
+    "amplified_cascading_flux": 0.0017365061067416163
    }
   },
   "godot": {
@@ -142,6 +190,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.004222498277488173,
+    "struct_branch": 0.00389368997888331,
+    "risk_safety_score": 0.002044606974431153,
+    "amplified_cascading_flux": 0.0018075622094858522
    }
   },
   "libxml2": {
@@ -158,6 +212,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.007192801787526364,
+    "struct_branch": 0.012026166352162006,
+    "risk_safety_score": -0.010107124736725582,
+    "amplified_cascading_flux": 0.00336179902163839
    }
   },
   "mediawiki": {
@@ -174,6 +234,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0017886726968117316,
+    "struct_branch": -0.0006035716794806231,
+    "risk_safety_score": 0.0005836350010820402,
+    "amplified_cascading_flux": 0.002237378221459667
    }
   },
   "moby": {
@@ -190,6 +256,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": -0.00309349842965297,
+    "struct_branch": 0.0011811839572746946,
+    "risk_safety_score": -0.003441087526895098,
+    "amplified_cascading_flux": 0.003884336913058645
    }
   },
   "pandas": {
@@ -206,14 +278,20 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": -0.0033541452111225546,
+    "struct_branch": 0.0016938079299691012,
+    "risk_safety_score": -0.0047618434603501555,
+    "amplified_cascading_flux": -0.00021755921730175264
    }
   },
   "postgres": {
    "n": 2063,
-   "positives": 382,
-   "pairs": 42212,
-   "pairs_gt": 22849,
-   "pairs_lt": 18982,
+   "positives": 381,
+   "pairs": 42176,
+   "pairs_gt": 22904,
+   "pairs_lt": 18892,
    "clears_pair_floor": true,
    "bands": 10,
    "drawn": false,
@@ -222,14 +300,20 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0018545889291323712,
+    "struct_branch": 0.006034982247857638,
+    "risk_safety_score": -0.001922278606934742,
+    "amplified_cascading_flux": 0.004280328202916108
    }
   },
   "prometheus": {
    "n": 332,
-   "positives": 51,
-   "pairs": 849,
-   "pairs_gt": 497,
-   "pairs_lt": 339,
+   "positives": 49,
+   "pairs": 854,
+   "pairs_gt": 505,
+   "pairs_lt": 336,
    "clears_pair_floor": true,
    "bands": 10,
    "drawn": false,
@@ -238,6 +322,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.006391454732051062,
+    "struct_branch": 0.01102636253687888,
+    "risk_safety_score": 0.010113867338243512,
+    "amplified_cascading_flux": 0.0169842414658202
    }
   },
   "rails": {
@@ -254,6 +344,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.004024965888420105,
+    "struct_branch": 0.0022269004573498173,
+    "risk_safety_score": -0.0006007998222651575,
+    "amplified_cascading_flux": 0.0025115968042917114
    }
   },
   "scapy": {
@@ -270,6 +366,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": -0.005412958241337676,
+    "struct_branch": 0.008548140966911543,
+    "risk_safety_score": 0.0007844596113168667,
+    "amplified_cascading_flux": -0.01099290011990781
    }
   },
   "sphinx": {
@@ -286,6 +388,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0005281735894890316,
+    "struct_branch": 0.004092881387156473,
+    "risk_safety_score": 0.0034315976740773944,
+    "amplified_cascading_flux": 0.001843992026999413
    }
   },
   "spock": {
@@ -302,6 +410,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.006589004457343233,
+    "struct_branch": 0.006038886315589191,
+    "risk_safety_score": -0.004309373176712213,
+    "amplified_cascading_flux": -0.0023516347301675146
    }
   },
   "sqlmap": {
@@ -318,6 +432,12 @@
     "struct_branch": false,
     "risk_safety_score": false,
     "amplified_cascading_flux": false
+   },
+   "surrogate_mean": {
+    "in_degree": 0.0003111209013343916,
+    "struct_branch": 0.003191616536538897,
+    "risk_safety_score": 0.003674403366069744,
+    "amplified_cascading_flux": 0.0016111173121395206
    }
   }
  },
@@ -325,6 +445,7 @@
  "placebos": {
   "path_hash": {
    "mean": 0.00029371678500089634,
+   "mc_se": 0.0006371201780455246,
    "sd_of_study_mean": 0.009010239966535421,
    "range95": [
     -0.018555107796873107,
@@ -334,6 +455,7 @@
   },
   "dir_hash": {
    "mean": 0.00047513289609438724,
+   "mc_se": 0.0011055176618017097,
    "sd_of_study_mean": 0.015634380707629705,
    "range95": [
     -0.033245701009488086,
@@ -341,54 +463,62 @@
    ],
    "centred": true
   },
-  "block_perm:in_degree": {
-   "mean": 0.01496783182784025,
-   "sd_of_study_mean": 0.008248261848618309,
+  "size_surrogate:in_degree": {
+   "mean": 0.0010600445428778174,
+   "mc_se": 0.0006575512614615059,
+   "sd_of_study_mean": 0.009299179119143988,
    "range95": [
-    -0.002107772388900961,
-    0.029220672408908552
+    -0.015847917025454638,
+    0.01714874996861429
    ],
-   "centred": false
+   "centred": true
   },
-  "block_perm:struct_branch": {
-   "mean": 0.018141176490962804,
-   "sd_of_study_mean": 0.008267870407439076,
+  "size_surrogate:struct_branch": {
+   "mean": 0.0025376669736997736,
+   "mc_se": 0.000681640259730839,
+   "sd_of_study_mean": 0.009639848999708716,
    "range95": [
-    0.0038379819151309644,
-    0.03477585004692517
+    -0.01393089377075948,
+    0.023463227621367988
    ],
-   "centred": false
+   "centred": true
   },
-  "block_perm:risk_safety_score": {
-   "mean": 0.0035459057375016,
-   "sd_of_study_mean": 0.00830706420926856,
+  "size_surrogate:risk_safety_score": {
+   "mean": -0.000571574539819766,
+   "mc_se": 0.0007735502237288633,
+   "sd_of_study_mean": 0.010939652175741004,
    "range95": [
-    -0.00982883819479226,
-    0.02228145598443163
+    -0.021943714769077933,
+    0.021387879979292358
    ],
-   "centred": false
+   "centred": true
   },
-  "block_perm:amplified_cascading_flux": {
-   "mean": 0.01217560643853207,
-   "sd_of_study_mean": 0.008401633113136084,
+  "size_surrogate:amplified_cascading_flux": {
+   "mean": 0.0013599899268502862,
+   "mc_se": 0.0006932265923495087,
+   "sd_of_study_mean": 0.009803704486983601,
    "range95": [
-    -0.004985123185656008,
-    0.030001844466961088
+    -0.015995875617809425,
+    0.020362490354637365
    ],
-   "centred": false
+   "centred": true
   }
  },
- "valid": false,
+ "valid": true,
  "power": {
   "path_hash": {
    "tau=0.0": 0.0321,
    "tau=0.02": 0.037,
-   "tau=0.04": 0.0488
+   "tau=0.04": 0.0488,
+   "tau=0.05": 0.056,
+   "tau=0.08": 0.0802
   },
   "dir_hash": {
    "tau=0.0": 0.0556,
    "tau=0.02": 0.0586,
-   "tau=0.04": 0.0667
+   "tau=0.04": 0.0667,
+   "tau=0.05": 0.0722,
+   "tau=0.08": 0.0922
   }
  }
 }

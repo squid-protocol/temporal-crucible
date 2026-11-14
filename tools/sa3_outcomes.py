@@ -159,8 +159,14 @@ def build(repo: str) -> dict:
     chain = [s for s, in h.execute("select sha from commit_ order by rowid")]
     ct_of = dict(h.execute("select sha, ct from commit_"))
     touch: dict[str, set[str]] = defaultdict(set)
+    # Amendment 1 rule 10: the window starts at the scanned snapshot. For the drawn repos that is the cut itself;
+    # the earlier eight were scanned 4.6 to 42 days after their cut, and a fix made before the scan is not an outcome
+    snap_ct = int(subprocess.run(["git", "-C", str(POOL_DIR / repo), "show", "-s", "--format=%ct", u["snapshot"]],
+                                 capture_output=True, text=True).stdout.strip() or f["cut"])
+    lo = max(f["cut"], snap_ct)
+    out["window_start"] = lo
     for p, s in h.execute(f"select t.path, t.sha from touch t join commit_ c on c.sha=t.sha where {where_c} "
-                          "and c.ct>? and c.ct<=?", (f["cut"], f["end"])):
+                          "and c.ct>? and c.ct<=?", (lo, f["end"])):
         if p in files:
             touch[s].add(p)
     kw = fix_shas(h, "v3c", f["merge_units"]) or set()

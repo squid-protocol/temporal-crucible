@@ -13,12 +13,14 @@
 values shuffled among size-adjacent files; only shuffled values are ever scored), checks they centre on zero, and
 states the smallest detectable effect. It writes docs/sa3_placebo.json.
 
-`score` needs, committed in docs/: sa3_power.md (the power amendment), sa3ch_frozen.md (SA3-CH Amendment 1 rule 8:
-everything for the change study is built and reviewed first) and sa3_code_review.md (checklist item 15b).
+`score` needs docs/sa3_lock.json, written by `lock` after the power statement and the code review exist. The lock
+records the git blob hash of every file the result depends on (this scorer, the statistics, the outcome builder,
+the consolidated registration, the placebo output); `score` recomputes them and refuses to run if any differs.
+It is a tamper-evident seal, not a secret: it makes "the code changed after the review" impossible to miss.
 """
 from __future__ import annotations
 
-import argparse, hashlib, json, sys
+import argparse, hashlib, json, subprocess, sys
 from pathlib import Path
 
 import numpy as np
@@ -29,12 +31,21 @@ import sa3_stats as S  # noqa: E402
 from mod1_lift import frame, ro, STUDY  # noqa: E402
 from sa3_outcomes import universe, SCANS, OUT as OUTCOMES  # noqa: E402
 
-DOCS = Path("docs")
-MARKERS = ("sa3_power.md", "sa3ch_frozen.md", "sa3_code_review.md")
+ROOT = Path(__file__).resolve().parent.parent           # never the caller's working directory
+DOCS = ROOT / "docs"
+SEALED = ("tools/sa3_score.py", "tools/sa3_stats.py", "tools/sa3_outcomes.py", "tools/mod1_lift.py",
+          "docs/sa3_registration_consolidated.md", "docs/sa3_placebo.json", "docs/sa3_outcome_marginals.json",
+          "docs/sa3_power.md", "docs/sa3_code_review.md")
+POST_UNBLINDING = "PU_"                                 # prefix of every cut added after the point estimates leaked
+
+
+def blob(path: str) -> str:
+    return subprocess.run(["git", "-C", str(ROOT), "hash-object", path], capture_output=True, text=True).stdout.strip()
 NESTING = STUDY / "sa3_nesting"
 NEW_LANGS = {"racket", "ghostty", "swift", "wrf-fortran", "fieldtrip", "rails", "bugzilla", "discourse",
              "tigerbeetle", "bun"}                      # MOD-1 Amendment 1: language first measured 2026-11-13
-N_SALTS = N_PERMS = N_DRAWS = 200
+N_SALTS = N_PERMS = N_DRAWS = N_SURR = 200
+SURR_TOL = 0.005                                        # Amendment 4: the size-surrogate gate
 SEED = 2982
 
 # name -> (instrument, role, is a count)      role: primary | secondary
@@ -169,9 +180,52 @@ def design_for(d: dict, y: np.ndarray, valid: np.ndarray | None = None, caliper:
     return S.Design(d["loc"][idx], y[idx], band, kk, caliper), band, kk, idx
 
 
-def silent(x: np.ndarray) -> bool:
+def silent(x: np.ndarray, name: str = "") -> bool:
+    """non-zero in < 10% of files; or, for a continuous score only, fewer than 20 distinct values. Counts and the
+    one binary indicator are exempt from the second clause: a depth of 1..12 or a yes/no is not a broken score."""
     v = x[~np.isnan(x)]
-    return len(v) == 0 or (v != 0).mean() < 0.10 or len(np.unique(v)) < 20
+    if len(v) == 0 or (v != 0).mean() < 0.10:
+        return True
+    continuous = name in PREDICTORS and not PREDICTORS[name][2] and name != "risk_safety_nonzero"
+    return continuous and len(np.unique(v)) < 20
+
+
+def fit_size_model(x: np.ndarray, lg: np.ndarray, score: bool) -> dict:
+    """PREDICTOR VERSUS SIZE ONLY -- no outcome. A few parameters describing how x depends on LOC: the chance it is
+    non-zero (logistic in centred ln LOC and its square) and, among non-zeros, either its quantiles (a score) or a
+    quadratic for ln x with a residual SD in three size thirds (a count)."""
+    L = lg - lg.mean()
+    nz = x > 0
+    X = np.column_stack([np.ones(len(L)), L, L ** 2])
+    w = np.zeros(3)
+    for _ in range(60):
+        pr = 1 / (1 + np.exp(-np.clip(X @ w, -30, 30)))
+        W = pr * (1 - pr) + 1e-9
+        w += np.linalg.solve(X.T @ (X * W[:, None]) + 1e-6 * np.eye(3), X.T @ (nz - pr))
+    m = {"zero_w": w, "L": L, "X": X}
+    if not nz.any():
+        return {**m, "q": np.zeros(21)}
+    if score:
+        return {**m, "q": np.quantile(x[nz], np.linspace(0, 1, 21))}
+    A = X[nz]
+    b, *_ = np.linalg.lstsq(A, np.log(x[nz]), rcond=None)
+    res = np.log(x[nz]) - A @ b
+    cuts = np.quantile(L[nz], [1 / 3, 2 / 3])
+    g = np.digitize(L[nz], cuts)
+    sd = np.array([res[g == i].std() if (g == i).sum() > 5 else res.std() for i in range(3)])
+    return {**m, "b": b, "sd": sd, "cuts": cuts}
+
+
+def draw_surrogate(m: dict, rng) -> np.ndarray:
+    """a made-up predictor that knows a file's LOC and nothing else about it"""
+    n = len(m["L"])
+    nz = rng.random(n) < 1 / (1 + np.exp(-np.clip(m["X"] @ m["zero_w"], -30, 30)))
+    if "q" in m:
+        v = np.interp(rng.random(n), np.linspace(0, 1, 21), m["q"])
+    else:
+        sd = m["sd"][np.digitize(m["L"], m["cuts"])]
+        v = np.maximum(1, np.round(np.exp(m["X"] @ m["b"] + sd * rng.normal(size=n))))
+    return np.where(nz, v, 0.0)
 
 
 # ----------------------------------------------------------------------------------------------- stage 1: placebo
@@ -180,7 +234,7 @@ def stage_placebo() -> int:
     print(f"{len(repos)} repos clear the HP floor ({sum(r['drawn'] for r in repos)} drawn). No real predictor is scored here.")
     per, drawn = {}, []
     hashes = {"path_hash": np.zeros((len(repos), N_SALTS)), "dir_hash": np.zeros((len(repos), N_SALTS))}
-    perm = {p: np.full((len(repos), N_PERMS), np.nan) for p in PRIMARIES}
+    perm = {p: np.full((len(repos), N_SURR), np.nan) for p in PRIMARIES}   # size surrogates, not shuffles
     for ri, r in enumerate(repos):
         d = load(r["repo"], with_predictors=True)        # predictors are read ONLY to be shuffled
         y = d["y"]["HP"]
@@ -192,14 +246,13 @@ def stage_placebo() -> int:
                 hashes[name][ri, s] = des.effect(hash_placebo(d["paths"], s, by_dir))
         rng = np.random.default_rng(SEED)
         info["silent"] = {}
-        for p in PRIMARIES:
+        for p in PRIMARIES:                              # the real values are used ONLY to fit x-versus-LOC
             x = d["x"][p]
-            valid = ~np.isnan(x)
-            info["silent"][p] = bool(silent(x))
-            dz, _, _, idx = design_for(d, y, valid)
-            xv, lv, pv = x[idx], d["loc"][idx], [d["paths"][i] for i in idx]
-            for s in range(N_PERMS):
-                perm[p][ri, s] = dz.effect(S.block_permute(xv, lv, pv, rng))
+            info["silent"][p] = bool(silent(x, p))
+            model = fit_size_model(np.nan_to_num(x), d["lg"], score=not PREDICTORS[p][2])
+            for s in range(N_SURR):
+                perm[p][ri, s] = des.effect(draw_surrogate(model, rng))
+        info["surrogate_mean"] = {p: float(np.nanmean(perm[p][ri])) for p in PRIMARIES}
         per[r["repo"]] = info
         drawn.append(r["drawn"])
         print(f"  {r['repo']:<16} files {d['n']:>6} HP {int(y.sum()):>4} pairs {des.n:>8}  path-hash "
@@ -207,17 +260,18 @@ def stage_placebo() -> int:
     drawn = np.array(drawn)
     out = {"repos": per, "n_drawn": int(drawn.sum()), "placebos": {}}
 
-    def study(mat):                                      # the study mean over DRAWN repos, one value per salt
+    def study(mat):                                      # the study mean over DRAWN repos, one value per draw
         m = np.nanmean(mat[drawn], axis=0)
         lo, hi = np.quantile(m, [0.025, 0.975])
-        return {"mean": float(m.mean()), "sd_of_study_mean": float(m.std(ddof=1)), "range95": [float(lo), float(hi)],
-                "centred": bool(lo <= 0 <= hi and abs(m.mean()) <= 0.002)}
+        return {"mean": float(m.mean()), "mc_se": float(m.std(ddof=1) / np.sqrt(len(m))),
+                "sd_of_study_mean": float(m.std(ddof=1)), "range95": [float(lo), float(hi)],
+                "centred": bool(abs(m.mean()) <= SURR_TOL)}
 
     for name, mat in hashes.items():
         out["placebos"][name] = study(mat)
     for p, mat in perm.items():
-        out["placebos"][f"block_perm:{p}"] = study(mat)
-    gate = ["path_hash"] + [f"block_perm:{p}" for p in PRIMARIES]
+        out["placebos"][f"size_surrogate:{p}"] = study(mat)
+    gate = ["path_hash", "dir_hash"] + [f"size_surrogate:{p}" for p in PRIMARIES]
     out["valid"] = all(out["placebos"][g]["centred"] for g in gate)
     # power: the Holm-first interval (98.33% two-sided) at 80% power, from each null spread, for three values of
     # the between-repo SD of true effects
@@ -226,12 +280,13 @@ def stage_placebo() -> int:
     out["power"] = {}
     for name in ("path_hash", "dir_hash"):
         sd = out["placebos"][name]["sd_of_study_mean"]
-        out["power"][name] = {f"tau={t}": round(zc * float(np.sqrt(sd ** 2 + t ** 2 / n)), 4) for t in (0.0, 0.02, 0.04)}
+        out["power"][name] = {f"tau={t}": round(zc * float(np.sqrt(sd ** 2 + t ** 2 / n)), 4)
+                              for t in (0.0, 0.02, 0.04, 0.05, 0.08)}
     (DOCS / "sa3_placebo.json").write_text(json.dumps(out, indent=1) + "\n")
     print()
     for g, v in out["placebos"].items():
         print(f"  {g:<38} mean {v['mean']:+.4f}  95% range [{v['range95'][0]:+.4f}, {v['range95'][1]:+.4f}]  "
-              f"sd {v['sd_of_study_mean']:.4f}  {'centred' if v['centred'] else 'NOT CENTRED'}")
+              f"sd {v['sd_of_study_mean']:.4f}  {'within tolerance' if v['centred'] else 'OUTSIDE TOLERANCE'}")
     print(f"\n  validity gate: {'PASS' if out['valid'] else 'FAIL -- no SA3 result may be reported as a finding'}")
     print(f"  detectable mean effect, 80% power, Holm-first interval, {n} drawn repos: {json.dumps(out['power'])}")
     print("-> docs/sa3_placebo.json")
@@ -247,6 +302,10 @@ def control_effects(d: dict, preds: list[str], rng) -> dict:
     if K < 5:
         return {}
     diffs = {p: [] for p in preds}
+    sub = {}                                             # per predictor: the rows where it has a value
+    for p in preds:
+        v = np.flatnonzero(~np.isnan(d["x"][p]))
+        sub[p] = None if len(v) == d["n"] else v
     for _ in range(N_DRAWS):
         yc = np.zeros(d["n"], int)
         for s in rng.choice(len(pool), K, replace=False):
@@ -258,25 +317,46 @@ def control_effects(d: dict, preds: list[str], rng) -> dict:
             continue
         dc, dh = S.Design(d["loc"], yc, d["band"], d["k"]), S.Design(d["loc"], yh, d["band"], d["k"])
         for p in preds:
-            x = np.nan_to_num(d["x"][p], nan=0.0)
-            e = dh.effect(x) - dc.effect(x)
+            if sub[p] is None:
+                e = dh.effect(d["x"][p]) - dc.effect(d["x"][p])
+            else:                                        # a file with no value is dropped, as in the main path
+                v = sub[p]
+                pv = [d["paths"][i] for i in v]
+                band, k = S.bands(d["loc"][v], pv)
+                if not (0 < yc[v].sum() < len(v)) or not (0 < yh[v].sum() < len(v)):
+                    continue
+                e = (S.Design(d["loc"][v], yh[v], band, k).effect(d["x"][p][v])
+                     - S.Design(d["loc"][v], yc[v], band, k).effect(d["x"][p][v]))
             if e == e:
                 diffs[p].append(e)
     return {p: float(np.mean(v)) for p, v in diffs.items() if v}
 
 
+def churn_any(d: dict) -> np.ndarray:
+    """touched by ANY commit of the control pool: reported beside the matched control (Amendment 1 rule 2)"""
+    y = np.zeros(d["n"], int)
+    for files in d["pool"].values():
+        y[files] = 1
+    return y
+
+
 def stage_score() -> int:
-    missing = [m for m in MARKERS if not (DOCS / m).exists()]
-    if missing:
-        print("LOCKED. SA3 is not scored until these exist in docs/: " + ", ".join(missing))
-        print("  sa3_power.md        the power amendment, from `placebo`\n"
-              "  sa3ch_frozen.md     SA3-CH fully built, gated and reviewed (its Amendment 1, rule 8)\n"
-              "  sa3_code_review.md  the independent code review of this scorer (checklist item 15b)")
+    lock = DOCS / "sa3_lock.json"
+    if not lock.exists():
+        print("LOCKED. Run `sa3_score.py lock` after docs/sa3_power.md and docs/sa3_code_review.md are committed.")
+        return 2
+    sealed = json.loads(lock.read_text())["files"]
+    moved = [f for f in SEALED if sealed.get(f) != blob(f)]
+    if moved:
+        print("LOCKED. These changed after the seal, or were never sealed: " + ", ".join(moved))
         return 2
     plac = json.loads((DOCS / "sa3_placebo.json").read_text())
     rows = scored_repos()
     meta = {r["repo"]: r for r in rows}
-    res = {"valid": plac["valid"], "unavailable": UNAVAILABLE, "repos": {}, "tests": {}}
+    res = {"valid": plac["valid"], "unavailable": UNAVAILABLE, "repos": {}, "tests": {}, "sealed": sealed,
+           "engine": json.loads((SCANS / f"{rows[0]['repo']}.json").read_text())["engine"],
+           "not_run": {"S5": "tree-wide commits left in", "S8": "positives followed through renames",
+                       "nest_*": "Racket not measured; see docs for parse-error rates"}}
     eff: dict = {}                                       # (outcome, predictor, statistic) -> {repo: value}
     rng = np.random.default_rng(SEED)
     for r in rows:
@@ -292,7 +372,7 @@ def stage_score() -> int:
                     continue
                 x = d["x"][p]
                 valid = ~np.isnan(x)
-                if silent(x):
+                if silent(x, p):
                     cell[p] = {"status": "instrument silent"}
                     continue
                 des, band, k, idx = design_for(d, y, valid)
@@ -303,7 +383,8 @@ def stage_score() -> int:
                 pv = [d["paths"][i] for i in idx]
                 e = des.effect(xv)
                 null = np.array([des.effect(S.block_permute(xv, lv, pv, rng)) for _ in range(N_PERMS)])
-                c = {"status": "ok", "bauc": e, "dropped_null": int((~valid).sum()),
+                c = {"status": "ok", "bauc": e, "dropped_null": int((~valid).sum()), "null_sd": float(null.std(ddof=1)),
+                     "nonzero_share": float((xv != 0).mean()),
                      "residual": S.residual_effect(xv, yv, band, k, [np.log(lv)]),
                      "perm_p": float((np.abs(null - null.mean()) >= abs(e - null.mean())).mean()),
                      "S4_replaces": S.auc_plain(xv, yv) - S.auc_plain(lv, yv),
@@ -315,7 +396,9 @@ def stage_score() -> int:
                 if role == "primary" and oc == "HP":
                     c["ci95"] = S.boot_ci(des, xv, band, k, yv)
                 cell[p] = c
-                for stat in ("bauc", "residual", "S4_replaces", "S6_sauc_minus", "S7_tight"):
+                if role == "primary" and oc == "HP":       # effect beyond what size alone gives this shape
+                    c["minus_surrogate"] = e - plac["repos"].get(r["repo"], {}).get("surrogate_mean", {}).get(p, 0.0)
+                for stat in ("bauc", "residual", "minus_surrogate", "S4_replaces", "S6_sauc_minus", "S7_tight", "S9_logistic_z"):
                     if c.get(stat) is not None:
                         eff.setdefault((oc, p, stat), {})[r["repo"]] = c[stat]
             rec["outcomes"][oc] = cell
@@ -323,6 +406,13 @@ def stage_score() -> int:
             rec["specificity"] = control_effects(d, list(PREDICTORS), rng)
             for p, v in rec["specificity"].items():
                 eff.setdefault(("HP", p, "minus_control"), {})[r["repo"]] = v
+            ya = churn_any(d)
+            if 30 <= ya.sum() <= d["n"] - 30:
+                da = S.Design(d["loc"], ya, d["band"], d["k"])
+                for p in PRIMARIES:
+                    hp = rec["outcomes"].get("HP", {}).get(p, {})
+                    if hp.get("status") == "ok" and not np.isnan(d["x"][p]).any():
+                        eff.setdefault(("HP", p, "minus_churn_any"), {})[r["repo"]] = hp["bauc"] - da.effect(d["x"][p])
         res["repos"][r["repo"]] = rec
         print(f"  scored {r['repo']}", flush=True)
 
@@ -355,14 +445,56 @@ def stage_score() -> int:
     a = summarize(pick(("HP", "in_degree", "bauc"), drawn))
     res["tests"]["in_degree"] = {"exploratory": True, "bauc": a, "residual": summarize(pick(("HP", "in_degree", "residual"), drawn)),
                                  "reading": {"supported": "positive", "contradicted": "negative"}.get(a["reading"], a["reading"])}
+    # per-repo side counts from the block-permutation reference distribution (never a file bootstrap)
+    res["side_counts"] = {}
+    for p in PRIMARIES:
+        above = below = across = 0
+        for name, rec in res["repos"].items():
+            c = rec["outcomes"].get("HP", {}).get(p, {})
+            if c.get("status") != "ok" or not meta[name]["drawn"]:
+                continue
+            if c["perm_p"] < 0.05:
+                above += c["bauc"] > 0; below += c["bauc"] < 0
+            else:
+                across += 1
+        vals = pick(("HP", p, "bauc"), drawn)
+        pos, neg = sum(v > 0 for v in vals.values()), sum(v < 0 for v in vals.values())
+        res["side_counts"][p] = {"above": int(above), "below": int(below), "across": int(across),
+                                 "sign_test_p": float(sps.binomtest(pos, pos + neg, 0.5).pvalue) if pos + neg else None}
+    # precision-weighted random-effects mean and tau^2 (DerSimonian-Laird), within-repo variance from the null
+    res["random_effects"] = {}
+    for p in PRIMARIES:
+        vals = pick(("HP", p, "bauc"), drawn)
+        v = np.array([res["repos"][k]["outcomes"]["HP"][p]["null_sd"] ** 2 for k in vals])
+        e = np.array(list(vals.values()))
+        if len(e) >= 3 and (v > 0).all():
+            w = 1 / v
+            q = float((w * (e - (w * e).sum() / w.sum()) ** 2).sum())
+            tau2 = max(0.0, (q - (len(e) - 1)) / (w.sum() - (w ** 2).sum() / w.sum()))
+            ws = 1 / (v + tau2)
+            res["random_effects"][p] = {"mean": float((ws * e).sum() / ws.sum()), "se": float(ws.sum() ** -0.5),
+                                        "tau": float(tau2 ** 0.5)}
+    for p in CONFIRMATORY:                               # "tracks reverted changes": supported only with all reverts
+        allr = summarize(pick(("HP_allreverts", p, "bauc"), drawn), res["tests"][p]["holm_level"])
+        res["tests"][p]["allreverts"] = allr
+        if allr["reading"] == "supported" and not res["tests"][p]["reading"].startswith("supported"):
+            res["tests"][p]["allreverts_reading"] = "tracks reverted changes, not fixes"
     cuts = {"all_drawn": drawn, "earlier_eight": lambda m: not m["drawn"],
+            POST_UNBLINDING + "django_circuitpython_removed": lambda m: m["drawn"] and m["repo"] not in ("django", "circuitpython"),
+            POST_UNBLINDING + "mediawiki_freebsd_removed": lambda m: m["drawn"] and m["repo"] not in ("mediawiki", "freebsd-src"),
             "S1_new_languages_removed": lambda m: m["drawn"] and m["repo"] not in NEW_LANGS,
             "S2_merge_workflow_removed": lambda m: m["drawn"] and not m["merge_units"],
             "S3_full_window": lambda m: m["drawn"] and m["window_days"] >= 730,
             "go_django_removed": lambda m: m["drawn"] and m["repo"] not in ("go", "django"),
             "C_family": lambda m: m["drawn"] and m["family"] == "C",
             "managed": lambda m: m["drawn"] and m["family"] != "C"}
-    res["summaries"] = {f"{oc}|{p}|{stat}|{name}": summarize(pick((oc, p, stat), keep))
+    def summ(key, name, keep):
+        vals = pick(key, keep)
+        if name in ("C_family", "managed") and len(vals) < 5:
+            return {"n": len(vals), "reading": "not fitted (fewer than five repos)"}
+        return summarize(vals)
+
+    res["summaries"] = {f"{oc}|{p}|{stat}|{name}": summ((oc, p, stat), name, keep)
                         for (oc, p, stat) in sorted(eff) for name, keep in cuts.items()
                         if name == "all_drawn" or (oc == "HP" and stat == "bauc")}
     (DOCS / "sa3_result.json").write_text(json.dumps(res, indent=1, default=float) + "\n")
@@ -376,11 +508,25 @@ def stage_score() -> int:
     return 0
 
 
+def stage_lock() -> int:
+    missing = [f for f in SEALED if not (ROOT / f).exists()]
+    if missing:
+        print("cannot seal; missing: " + ", ".join(missing)); return 2
+    dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--"] + [f for f in SEALED if f != "docs/sa3_lock.json"],
+                           capture_output=True, text=True).stdout.strip()
+    if dirty:
+        print("cannot seal; uncommitted changes:\n" + dirty); return 2
+    head = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    (DOCS / "sa3_lock.json").write_text(json.dumps({"sealed_at_commit": head, "files": {f: blob(f) for f in SEALED}}, indent=1) + "\n")
+    print(f"sealed {len(SEALED)} files at {head[:9]} -> docs/sa3_lock.json")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=("placebo", "score"))
+    ap.add_argument("stage", choices=("placebo", "lock", "score"))
     a = ap.parse_args()
-    return stage_placebo() if a.stage == "placebo" else stage_score()
+    return {"placebo": stage_placebo, "lock": stage_lock, "score": stage_score}[a.stage]()
 
 
 if __name__ == "__main__":
