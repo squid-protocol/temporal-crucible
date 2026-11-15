@@ -88,3 +88,13 @@ WIRING: mean callers at birth -> 4 quarters later: 1.52->1.57, 0.69->0.69, 1.38-
 Top-1% hubs still top-5% a year later: lineage 98/94/80/98% vs naive identity 96/80/76/93%.
 Caveats: 4 repos; "unchanged" = same measurements, not same text; call-link recall about half; ledger rename recall 70-96%, so a few renames are still counted as death + birth;
 cause labels for split/merge/extract use same-file text containment only.
+
+## 8. Keywords over time, 7 repos (sqlmap, ripgrep, tigerbeetle, impacket + C: redis, libgit2, curl; quarterly; analysis/kw_split.py, kw_report.py)
+Density per kLOC, yearly curves, slope per year. Direction counts across 7 repos (rising/falling): print 2/5, bailout 2/5, branch 1/6, flux 1/6, io 2/5, def_test 6/1, def_safety 3/4, safety_neg 3/4, pointers 4/3, casts 3/4.
+Print falls in 5 of 7 (curl 8.8 -> 2.1, redis 10.2 -> 6.9, tigerbeetle 6.0 -> 2.0); the exceptions are the two Python tools (sqlmap, impacket). Safety does NOT rise everywhere:
+def_safety rises in curl 4.5->15.5, redis 11.3->31.8, sqlmap 9.4->32.6 and falls in libgit2, tigerbeetle, ripgrep, impacket; safety_neg falls in curl 11.9->2.2.
+Turnover vs rewriting (density change over the life, whole repo vs inside surviving code): curl print repo -6.7 / survivors -12.4 (old code had print removed, retrofit R 0.31);
+curl and libgit2 retrofit leaders are alloc, cleanup, print (R 0.22-0.31) = the families registered as predicted-high in TURN-H6; pointers in all three C repos change by turnover
+(retrofit R 0.03-0.08; redis repo +108 vs survivors -107, libgit2 -216 vs -9, curl +81 vs +4): new code differs from old, old code is rarely rewritten.
+Survivors carry 2-20% of line movement (curl 2%, libgit2 2%, ripgrep 2%, sqlmap 20%).
+Caveats: 7 repos, 3 of them C; density change inside survivors is a summed pair-to-pair figure, not a clean total; tigerbeetle has an empty first snapshot (no repo-level figure).
