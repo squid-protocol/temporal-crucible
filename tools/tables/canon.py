@@ -16,7 +16,10 @@ A row is one JSON object, UTF-8, keys in the schema's column order, no spaces:
   - real  the string of float.hex(); -0.0 is written as 0.0; NaN and infinities are refused (missing is null).
   - None  null.
 Rows are sorted by the bytes of their key columns (UTF-8 with surrogateescape), compared column by column; two
-rows with the same key are refused. The hash is SHA-256 over the rows' bytes, each followed by a newline, which
+rows with the same key are refused. A table defined outside schema.TABLES (the comparison scorer's tables,
+tools/compare/tables.py) passes its definition as `spec`; there a key column may also be "int", which sorts as a
+number (so position 10 comes after position 2). Tables of schema.TABLES have string keys only, so their bytes and
+hashes are what they were. The hash is SHA-256 over the rows' bytes, each followed by a newline, which
 is also exactly the file's content.
 """
 from __future__ import annotations
@@ -74,44 +77,63 @@ def value(typ: str, v, where: str = "") -> str:
     raise CanonError(f"{where}: unknown type {typ}")
 
 
-def row_bytes(table: str, row: dict) -> bytes:
-    cols = S.TABLES[table]["columns"]
+def _def(table: str, spec: dict | None) -> dict:
+    return S.TABLES[table] if spec is None else spec
+
+
+def row_bytes(table: str, row: dict, spec: dict | None = None) -> bytes:
+    t_ = _def(table, spec)
+    cols = t_["columns"]
     names = [c for c, _ in cols]
     if set(row) != set(names):
         raise CanonError(f"{table}: row columns {sorted(row)} are not the schema's {names}")
-    for k in S.TABLES[table]["key"]:
+    for k in t_["key"]:
         if row[k] is None:
             raise CanonError(f"{table}: key column {k} is null in {row!r}")
     return ("{" + ",".join(f"{jstr(c)}:{value(t, row[c], f'{table}.{c}')}" for c, t in cols) + "}").encode("utf-8")
 
 
-def key_of(table: str, row: dict) -> tuple[bytes, ...]:
-    return tuple(row[k].encode("utf-8", "surrogateescape") for k in S.TABLES[table]["key"])
+def _key_part(table: str, k: str, typ: str, v):
+    if typ == "int":                                  # a whole-number key sorts as a number
+        if isinstance(v, bool) or not isinstance(v, int):
+            raise CanonError(f"{table}: key column {k} is not an integer")
+        return v
+    return v.encode("utf-8", "surrogateescape")
 
 
-def table_bytes(table: str, rows) -> bytes:
+def key_of(table: str, row: dict, spec: dict | None = None) -> tuple:
+    t_ = _def(table, spec)
+    if spec is None:                                  # schema.TABLES: every key column is a string
+        return tuple(row[k].encode("utf-8", "surrogateescape") for k in t_["key"])
+    types = dict(t_["columns"])
+    return tuple(_key_part(table, k, types[k], row[k]) for k in t_["key"])
+
+
+def table_bytes(table: str, rows, spec: dict | None = None) -> bytes:
     rows = list(rows)
-    keyed = sorted(((key_of(table, r), row_bytes(table, r)) for r in rows), key=lambda kv: kv[0])
+    keyed = sorted(((key_of(table, r, spec), row_bytes(table, r, spec)) for r in rows), key=lambda kv: kv[0])
     for (a, _), (b, _) in zip(keyed, keyed[1:]):
         if a == b:
-            raise CanonError(f"{table}: two rows with key {tuple(x.decode('utf-8', 'surrogateescape') for x in a)}")
+            raise CanonError(f"{table}: two rows with key "
+                             f"{tuple(x.decode('utf-8', 'surrogateescape') if isinstance(x, bytes) else x for x in a)}")
     return b"".join(rb + b"\n" for _, rb in keyed)
 
 
-def table_hash(table: str, rows) -> str:
-    return hashlib.sha256(table_bytes(table, rows)).hexdigest()
+def table_hash(table: str, rows, spec: dict | None = None) -> str:
+    return hashlib.sha256(table_bytes(table, rows, spec)).hexdigest()
 
 
 def read_rows(path: Path) -> list[dict]:
     return [json.loads(line) for line in Path(path).read_bytes().decode("utf-8").splitlines() if line]
 
 
-def write_table(out_dir: Path, table: str, rows) -> dict:
+def write_table(out_dir: Path, table: str, rows, spec: dict | None = None) -> dict:
     """Write `<table>.<first 16 hex of the hash>.jsonl` (under protected/ for a protected table). A file of that
     name that already exists is never written over: identical content is accepted, anything else refused."""
-    data = table_bytes(table, rows)
+    t_ = _def(table, spec)
+    data = table_bytes(table, rows, spec)
     h = hashlib.sha256(data).hexdigest()
-    d = Path(out_dir) / ("protected" if S.TABLES[table]["protected"] else "")
+    d = Path(out_dir) / ("protected" if t_["protected"] else "")
     d.mkdir(parents=True, exist_ok=True)
     f = d / f"{table}.{h[:16]}.jsonl"
     if f.exists():
@@ -122,4 +144,4 @@ def write_table(out_dir: Path, table: str, rows) -> dict:
         tmp.write_bytes(data)
         tmp.rename(f)
     return {"file": str(f.relative_to(out_dir)), "hash": h, "rows": data.count(b"\n"),
-            "schema_version": S.TABLES[table]["version"], "protected": S.TABLES[table]["protected"]}
+            "schema_version": t_["version"], "protected": t_["protected"]}
