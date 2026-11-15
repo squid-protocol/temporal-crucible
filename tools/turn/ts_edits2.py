@@ -8,11 +8,13 @@ from tree_sitter_language_pack import get_parser
 B="/srv/storage_16tb/projects/curl_call_graph_evolution/turn_v2"; POOL="/srv/storage_16tb/projects/temporal-crucible-pool"
 LANG={"python":dict(exts=(".py",),calls={"call":"function"},fn=("function_definition",),dedent=True),
       "rust":dict(exts=(".rs",),calls={"call_expression":"function","macro_invocation":"macro"},fn=("function_item",),dedent=False),
-      "zig":dict(exts=(".zig",),calls={"call_expression":"function"},fn=("function_declaration",),dedent=False)}
-REPO_LANG={"sqlmap":"python","impacket":"python","ripgrep":"rust","tigerbeetle":"zig","scapy":"python","sphinx":"python"}
+      "zig":dict(exts=(".zig",),calls={"call_expression":"function"},fn=("function_declaration",),dedent=False),
+      "java":dict(exts=(".java",),calls={"method_invocation":"name","object_creation_expression":"type"},fn=("method_declaration","constructor_declaration"),dedent=False,wrap=True),
+      "go":dict(exts=(".go",),calls={"call_expression":"function"},fn=("function_declaration","method_declaration"),dedent=False)}
+REPO_LANG={"sqlmap":"python","impacket":"python","ripgrep":"rust","tigerbeetle":"zig","scapy":"python","sphinx":"python","commons-io":"java","prometheus":"go"}
 _P={}
 def feats(src:str,lang:str):
-    L=LANG[lang]; P=_P.setdefault(lang,get_parser(lang)); b=(textwrap.dedent(src) if L["dedent"] else src).encode()
+    L=LANG[lang]; P=_P.setdefault(lang,get_parser(lang)); b=(("class X {\n"+src+"\n}") if L.get("wrap") else (textwrap.dedent(src) if L["dedent"] else src)).encode()
     t=P.parse(b); cnt=collections.Counter(); calls=collections.Counter(); sig=None
     def txt(n): return b[n.start_byte:n.end_byte].decode("utf8","replace")
     def walk(n):
@@ -23,7 +25,7 @@ def feats(src:str,lang:str):
             f=n.child_by_field_name(fld)
             if f is not None:
                 name=re.sub(r"\s+","",txt(f))
-                if lang!="python" and f.type=="field_expression": name=name.split(".")[-1]
+                if lang!="python" and f.type in ("field_expression","selector_expression"): name=name.split(".")[-1]
                 if n.type=="macro_invocation": name+="!"
                 calls[name[:48]]+=1
         if sig is None and n.type in L["fn"]:

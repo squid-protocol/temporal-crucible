@@ -174,3 +174,11 @@ sphinx 89/85/75/63/52, expat 90/78/74/56/29, prometheus 87/79/68/58/44, libxml2 
 First-change hazard (chance that the first change falls at age k, given untouched until then): highest at age 1 in every repo (4-19%), falling to 1-5% by age 8; so the risk of a first change is front-loaded.
 What the first change is: a change of keywords at unchanged length is 11-62% of first changes (commons-io 62%, expat 40%, impacket 27%, curl 26%): in-place edits such as renames and API swaps are a large part of how functions first change.
 Caveat: "unchanged" = identical engine measurements (length, complexity, arguments, keyword counts), so a comment or whitespace edit does not count as change and a same-length rename of an identifier family does.
+
+## 15. Sweeps in Java and Go (commons-io, prometheus; ts_edits2.py now covers Python, Rust, Zig, Java, Go; tools/turn/)
+SWP-1 share of code edits in a sweep: commons-io 17.7%, prometheus 32.9%. SWP-2 distinct old->new pairs / migration-quarters: 44/52 and 96/102 (some migrations take several quarters: commons-io fail -> assertThrows, 209 functions over 7 quarters, 2020-10..2023-10; prometheus Wrap -> Errorf, 149 functions over 4 quarters).
+SWP-3 signature changed in organic vs sweep edits: commons-io 55 vs 20%, prometheus 29 vs 14%. Now 6 of 6 held-out repos agree (discovery 5 of 6).
+Named migrations: prometheus testify Ok -> NoError (339 functions, 2020 Q4) and Equals -> Equal (327), Appender -> AppenderV2 (118, 2026); commons-io YellOnFlush... -> ThrowOnFlush... (62), FileOutputStream -> newOutputStream (57, 2021-07), JUnit-style fail -> assertThrows.
+SWP-4 era: commons-io 6% (2000s) -> 30% (2020s) -> 5% (2025s); prometheus 16% -> 39% -> 34%.
+Across all 13 repos the sweep share of code edits runs 4% (ripgrep) to 44% (libgit2), median about 22%; migrations are mostly single-quarter (84-98% by distinct pair) but long migrations (test-framework moves) take 4-7 quarters.
+Caveats: Java calls include constructor type names (`new X`) as call names; Go and Java test-code migrations (assertion libraries) count as sweeps and are a large part of the Java and Go totals; the LAWS unit files exclude tests, which will lower these shares.
