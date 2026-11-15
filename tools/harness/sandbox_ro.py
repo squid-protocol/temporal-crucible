@@ -26,6 +26,12 @@ Mount order (bwrap applies its arguments in order; bind sources are resolved on 
 
 The engine export is not bound: nothing in phase B runs it (DECISIONS.md, phase B).
 
+One more allowed read-write root (docs/process/owner_job_spec.md, "Where things are written"): directories
+strictly inside PROTECTED_ROOT, the owner-run job's protected root, outside the study directory, this repository
+and every session scratch root. It is under the projects root, so every sandbox hides it unless it binds one of
+its directories. Tests name another root with `name_protected_root_for_tests`, which accepts only a directory
+under a session scratch root, so it can never widen where a real run may write.
+
 The guard (`inside_ro`, `assert_inside_ro`, `exec`) reads /proc/self/mountinfo and /proc/net/dev and nothing
 else; it never stats, opens or lists a target path. It passes only when: / is read-only; each hidden root is a
 read-only tmpfs; the study path and the pool path are read-only tmpfs mounts; every mount at or under a hidden
@@ -55,6 +61,8 @@ HIDDEN = SB.HIDDEN                        # /nvme-data, projects root, home, /tm
 FORBIDDEN = (STUDY, LAWS, Path("/nvme-data"), POOL, HOME / ".blind")
 WORKTREE = SB.WORKTREE
 ALLOWED_RW_ROOTS = (HOME / ".claude" / "jobs", Path("/tmp"))
+PROTECTED_ROOT = PROJECTS / "temporal-crucible-protected"     # the owner-run job's protected root (a constant)
+_test_protected_root: Path | None = None
 SandboxError = SB.SandboxError
 
 
@@ -62,10 +70,40 @@ def _under(p: Path, root: Path) -> bool:
     return p == root or root in p.parents
 
 
-def check_rw(p: Path) -> Path:
-    """A read-write directory: absolute, under ~/.claude/jobs or /tmp, outside every data root and this
-    repository. A string test: nothing is opened or statted."""
+def protected_roots() -> tuple[Path, ...]:
+    """the production protected root, and the one a test has named, if any"""
+    return (PROTECTED_ROOT,) + ((_test_protected_root,) if _test_protected_root is not None else ())
+
+
+def name_protected_root_for_tests(p: Path | None) -> None:
+    """TESTS ONLY: name a throwaway directory as a second protected root (None forgets it). It must lie under a
+    session scratch root and outside every data root and this repository. A string test."""
+    global _test_protected_root
+    if p is None:
+        _test_protected_root = None
+        return
     p = Path(os.path.abspath(p))
+    if any(_under(p, b) for b in FORBIDDEN + (WORKTREE, PROTECTED_ROOT)) or \
+            not any(a in p.parents for a in ALLOWED_RW_ROOTS):
+        raise SandboxError(f"{p}: a test protected root must be under {' or '.join(map(str, ALLOWED_RW_ROOTS))}")
+    _test_protected_root = p
+
+
+def in_protected_root(p: Path) -> bool:
+    """strictly inside a protected root (the root itself is never a read-write directory). A string test."""
+    p = Path(os.path.abspath(p))
+    return any(r in p.parents for r in protected_roots())
+
+
+def check_rw(p: Path) -> Path:
+    """A read-write directory: absolute, under ~/.claude/jobs or /tmp, or strictly inside the protected root;
+    outside every data root and this repository. A string test: nothing is opened or statted."""
+    p = Path(os.path.abspath(p))
+    if PROTECTED_ROOT in p.parents:
+        for bad in FORBIDDEN + (WORKTREE,):
+            if _under(p, bad):
+                raise SandboxError(f"{p} is inside {bad}; refused")
+        return p
     for bad in FORBIDDEN + (PROJECTS, WORKTREE):
         if _under(p, bad):
             raise SandboxError(f"{p} is inside {bad}; refused")
