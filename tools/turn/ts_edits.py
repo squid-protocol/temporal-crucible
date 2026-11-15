@@ -43,7 +43,7 @@ def analyse(name):
             ra="\n".join(la[ma[0]-1:ma[0]-1+ma[1]]); rb="\n".join(lb[mb[0]-1:mb[0]-1+mb[1]])
             if ra==rb: continue
             ta=LG.body_tokens(la,path_a,nm_a,ma[0],ma[1]); tb=LG.body_tokens(lb,path_b,nm_b,mb[0],mb[1])
-            e=dict(s=s,year=yrs[s+1],stage=lk.stage,code=(ta!=tb),dloc=mb[1]-ma[1])
+            e=dict(s=s,x=x,year=yrs[s+1],stage=lk.stage,code=(ta!=tb),dloc=mb[1]-ma[1])
             if e["code"]:
                 ca,ka,sa=feats(ra.encode()); cb,kb,sb=feats(rb.encode())
                 e["d"]={k:cb[k]-ca[k] for k in NODES+["NULL"] if cb[k]!=ca[k]}

@@ -119,3 +119,11 @@ impacket ''.join -> b''.join (2019), datetime.utcnow -> now (2025); tigerbeetle 
 Chains: one name is migrated more than once (libgit2 git_buf_free -> dispose -> git_str_dispose).
 Organic edits (outside sweeps) change signatures more often (libgit2 20% vs 9% in sweeps; impacket 14% vs 4%) and add guards (libgit2 14% vs 8%). In curl, print/log calls are added or removed in 6-7% of sweep edits and under 1% of organic edits.
 Caveats: sweep threshold is a discovery choice; call names are by text, macros unresolved; Zig/Rust/Python grammars via tree-sitter-language-pack with function slices from the engine's start_line/loc; ripgrep has too few events to say much.
+
+## 11. KW-4 measured: sweeps explain the retrofit (C: libgit2, redis, curl; analysis/kw4.py)
+H6 retrofit share R_f = |survivor drift| / (births + deaths + |drift|); H6 gap = mean R over {alloc, cleanup, print, safety_neg, io} minus mean R over {branch, pointers, args, macros, def_safety}.
+Re-computed with the edits that fall inside a sweep (same call/macro changed in >= max(10, 1%) of a quarter's code-edited functions) removed from the survivor drift:
+curl gap +0.196 -> -0.026 (alloc 0.28 -> 0.02, print 0.31 -> 0.01, cleanup 0.26 -> 0.06); libgit2 +0.081 -> -0.003 (alloc 0.22 -> 0.02, cleanup 0.22 -> 0.01).
+redis never showed the gap (-0.032 before, -0.011 after), so it does not test the idea. 7,000 of 33,665 curl code edits and 9,300 of 21,200 libgit2 edits are sweep edits.
+Reading: the predicted-high families look "retrofitted" because a few quarters rename or swap allocation, cleanup and print wrappers across many functions; outside those quarters they are no more rewritten than branches or pointers.
+Caveats: 3 C repos, one of them curl (discovery only); sweep membership comes from tree-sitter call names, the retrofit shares from engine keyword counts; sweep thresholds are discovery choices.
