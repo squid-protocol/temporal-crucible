@@ -5,6 +5,9 @@ Amendment 5 section 9, layers 1 and 3, and the blind test (as corrected by the e
 edited** (`docs/sa3_seal_run1.json` lists them): not the reference code, not the six sealed documents, not
 `tools/owner/`, `tools/harness/sandbox.py` or `sandbox_ro.py`.
 
+**Revision 2.1, 2026-11-15, after the build** (`reviews/comparison_scorer_build_review.md`): four corrections
+found by the builder — duplicate paths, non-finite telemetry values, and that a repo swap moves D summaries.
+
 **What Revision 2 changed** (`reviews/comparison_scorer_spec_review_claude.md`: 1 blocker, 10 major, 7 minor;
 "sound to build after changes"). The stream order of the first version was found correct. The rest:
 
@@ -83,8 +86,9 @@ Transcribed from the reference loader (`tools/sa3_score.py`, `load`) and checked
 the review. Where this text and the loader differ, the input check will show it, and that is a finding.
 
 - **A path** in the scan is the stored path with the scan root and one slash removed from its front if it
-  starts with them; otherwise with any leading slashes removed. If two scan rows map to one path, the later
-  row's values win.
+  starts with them; otherwise with any leading slashes removed. If two scan rows map to one path, each column takes the
+  later non-null value, the telemetry value the later record that parses, and both rows count toward the
+  call degrees. (Stored tables cannot hold a duplicate path; phase B refuses one.)
 - **Order:** universe paths in Python string order. **Size:** the scan's total line count as a real number;
   a universe file without one, or with one not above zero, stops the run.
 - **Bands:** the reference `bands` function on size and path, over the files in use.
@@ -124,6 +128,8 @@ builder copies exactly and a test compares with the reference's.
 | the key present with other text, or a non-empty list or object | **missing** |
 | text that is not valid JSON | **missing** |
 | valid JSON that is not an object (a list, a bare number) | **the loader stops with an error**; `flux` flags the row |
+| the key present with `Infinity` or a number too large to represent | +∞ |
+| the key present with `NaN` or `"nan"` | **missing** |
 
 No flagged row can exist in SA3's data: the loader has already been called on all 46 repos (phase B's silence
 count) and did not stop. The predictor-side check reports the number of flagged rows all the same.
@@ -334,7 +340,7 @@ with the layers expected to fire **written by the fault-writer before the run**:
 | one scan value of the risk score changed | an input | input check; cell map D (the placebo cannot see it) |
 | one path removed from the primary outcome's file list | an input | input check, label side; cell map D |
 | two pool commits swapped in order | an input | input check, label side; cell map R only |
-| two repos swapped in the marginals file of the tree under test | a document | cell map R only |
+| two repos swapped in the marginals file of the tree under test | a document | cell map R, and D summaries (floating-point sums follow repo order) unless the two are the first two |
 
 **Pass:** with the seal withheld, every faulty copy is flagged by at least the expected layers and no clean
 copy is flagged by any layer; with the seal, every faulty copy is flagged by the seal as well. The report
