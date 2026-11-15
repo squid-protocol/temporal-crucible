@@ -13,3 +13,4 @@ Thresholds (10 functions, 1%, 40% co-occurrence) are discovery choices. Callee n
 `kw_split.py`, `kw_report.py`, `kw4.py`, `turn_score.py`, `score_report.py`, `set1.py`, `heldout_eval.py` and the loaders `what_changes.py`, `cascade2.py` are the rest of the discovery harness. They import each other and a scratchpad path; read them as a record of the method, not as a tool.
 
 `forecast.py` (branch `turn/forecast` only) builds the function-level forecast ladder; see `docs/turn_forecast_firstlook.md`.
+`sweep_audit.py`, `audit_report.py`, `sweep_exp.py` (branch `turn/forecast`): fix-label audit and sweep-exposure experiment; see `docs/turn_sweeps_and_fixes.md`.
