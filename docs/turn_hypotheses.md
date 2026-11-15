@@ -1,6 +1,6 @@
 # TURN: what actually turns over (functions, wiring, hubs, keywords)
 
-**Status: DRAFT. Not registered, not reviewed.** Nothing here may be scored until the two independent design
+**Status: SUPERSEDED (2026-11-16) by `docs/turn_v3_proposal.md`; see `docs/turn_closeout.md`. Original draft text follows; not registered, not reviewed.** Nothing here may be scored until the two independent design
 reviews (checklist item 15a) are reconciled in a dated amendment. Written 2026-11-15.
 
 ## Question

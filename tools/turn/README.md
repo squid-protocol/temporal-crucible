@@ -10,4 +10,4 @@ They belong with the study because what the edit classes and sweep definitions s
 Dependencies: `tree-sitter`, `tree-sitter-language-pack`, and `structural_fingerprint.ledger` (structural-fingerprint-scanner, branch `ledger`, not yet merged).
 Paths to the scan databases and the repository pool are hard-coded to the discovery machine; the scans were made with `historical-call-graph-gif`.
 Thresholds (10 functions, 1%, 40% co-occurrence) are discovery choices. Callee names are matched as text; macros are not resolved.
-The keyword-over-time scripts (`kw_split.py`, `kw_report.py`) are not here yet: they need the discovery harness's scan loader to be tidied first.
+`kw_split.py`, `kw_report.py`, `kw4.py`, `turn_score.py`, `score_report.py`, `set1.py`, `heldout_eval.py` and the loaders `what_changes.py`, `cascade2.py` are the rest of the discovery harness. They import each other and a scratchpad path; read them as a record of the method, not as a tool.
