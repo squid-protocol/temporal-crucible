@@ -128,3 +128,30 @@ repos: `PU_reachable_universe`, `PU_unreachable_made_reachable`, `PU_window_asse
 | tigerbeetle | 1742940651 | True | True | 3180 | 1.0 | 1.0 | 0 (0) | 0 | 0 | 1.0 | 0 |
 | wordpress | 1593577443 | True | True | 52180 | 0.838 | 0.8383 | 0 (0) | 0 | 0 | 0.0 | 0 |
 | wrf-fortran | 1486160998 | True | True | 6664 | 0.786 | 0.7863 | 710 (539) | 0 | 65 | 0.0 | 0 |
+
+## Added 2026-11-15: the last count, the placebo reproduced, and the seal (the owner-run job)
+
+Run by the owner in their own terminal on 2026-11-15 at 6:33 AM Eastern (`tools/owner/prepare.py` at commit
+`60fe528`): **PASS**, 409 seconds, no failed stage. This job bound the outcome files and the link harvest; its
+public output is a fixed list of counts and verdicts, copied here as `docs/sa3_owner_report_run1.md` and
+`.json`, `docs/sa3_seal_run1.json` and `docs/sa3_owner_run_log_run1.json`. No session has opened its
+protected directory.
+
+- **Qualifying commits that qualify only through a lower-case tracker key** (Amendment 5 section 7 item 5,
+  defect log 61): **2 in the whole study** — one in bun, one in commons-lang — and none in the other 38
+  repos. `PU_tracker_keys_case_sensitive` therefore differs from the frozen run by one commit in one scored
+  repo (bun); commons-lang is not scored on the primary outcome.
+- **The reference outcome builder reproduces the stored outcome file** in all 40 repos (the primary
+  outcome's commits, as a set), with no disagreement between the stored links and the reference pattern
+  re-applied to the stored messages.
+- **The published placebo gate result is reproduced byte for byte** by the reference code on the real inputs
+  of the 20 repos scored on the primary outcome. That speaks for the universe, the line counts, the primary
+  outcome's file lists and the four primary predictors of those repos.
+- **The reference code is unchanged since `8fb7fe0`**: the twelve modules the scorer loads, and `hist_meta`.
+- **The external seal is written:** 397 entries; SHA-256 of `seal.json` `c99614eeb089ab52937a91b2082bb49796d5fd780c8fedcc0ce18fc3f7809417`. It holds the nine hashes the
+  reference `lock` is expected to write.
+- Nothing on disk changed during the run (6,384 entries recorded before and after).
+
+**Amendment 5's order of operations:** steps (a) to (d) and (f) are done; the placebo half of (e) is done.
+What remains before the owner runs `lock` and `score`: the comparison scorer and the blind seeded-fault test
+of the check as a whole.
