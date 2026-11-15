@@ -24,7 +24,9 @@ permutations; after a repo's outcomes, if HP clears its floor, the matched contr
     python3 tools/compare/scorer.py --tables PB --compare-tables CT --labels LT --sealed SC --out result.json
 
 The loop's steps are methods (repo_order, outcome_order, on_silent, control_draw, finish_cell) so that the
-stream tests can change one step in a subclass in the test file; nothing here switches a fault on.
+stream tests can change one step in a subclass in the test file; nothing here switches a fault on. `stream` is
+part 2's one hook (docs/process/comparison_scorer_part2_spec.md, section 3): the generator for one use of
+randomness, by key; here it returns the one shared stream every time (tools/compare/streams.py overrides it).
 """
 from __future__ import annotations
 
@@ -95,6 +97,11 @@ class Scorer:
 
     def finish_cell(self, repo: str, oc: str, p: str, c: dict) -> dict:
         return c
+
+    def stream(self, key: tuple, rng):
+        """the generator for one use of randomness: key ("perm", repo, outcome, predictor) for a cell's block
+        permutations, ("control", repo) for a repo's matched control. Part 1: the shared stream, every time"""
+        return rng
 
     # --------------------------------------------------------------------------------------- the reference's parts
     def design_for(self, d: dict, y, valid=None, caliper: float | None = None, k: int | None = None):
@@ -185,9 +192,10 @@ class Scorer:
                         continue
                     x = d["x"][p]
                     valid = ~np.isnan(x)
+                    g = self.stream(("perm", r["repo"], oc, p), rng)
                     if D.silent(x, p):
                         cell[p] = {"status": "instrument silent"}
-                        self.on_silent(d, oc, p, x, rng)
+                        self.on_silent(d, oc, p, x, g)
                         continue
                     des, band, k, idx = self.design_for(d, y, valid)
                     if not des.clears_pair_floor():
@@ -196,7 +204,7 @@ class Scorer:
                     xv, lv, yv = x[idx], d["loc"][idx], y[idx]
                     pv = [d["paths"][i] for i in idx]
                     e = des.effect(xv)
-                    null = np.array([des.effect(S.block_permute(xv, lv, pv, rng)) for _ in range(N_PERMS)])
+                    null = np.array([des.effect(S.block_permute(xv, lv, pv, g)) for _ in range(N_PERMS)])
                     c = {"status": "ok", "bauc": e, "dropped_null": int((~valid).sum()),
                          "null_sd": float(null.std(ddof=1)), "nonzero_share": float((xv != 0).mean()),
                          "residual": S.residual_effect(xv, yv, band, k, [np.log(lv)]),
@@ -218,7 +226,7 @@ class Scorer:
                             eff.setdefault((oc, p, stat), {})[r["repo"]] = c[stat]
                 rec["outcomes"][oc] = cell
             if r["HP"]["clears_floor"]:
-                rec["specificity"] = self.control_effects(d, list(PREDICTORS), rng)
+                rec["specificity"] = self.control_effects(d, list(PREDICTORS), self.stream(("control", r["repo"]), rng))
                 for p, v in rec["specificity"].items():
                     eff.setdefault(("HP", p, "minus_control"), {})[r["repo"]] = v
                 ya = self.churn_any(d)

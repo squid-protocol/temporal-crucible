@@ -56,3 +56,29 @@ CLI refuses `--real`.
 - In-process, the only SA3 module is the sealed copy of `sa3_stats.py`, after an `ast` check that it imports
   nothing but `sys`, `numpy`, `scipy.stats`.
 - The comparison scorer and the cell map run in-process on tables and JSON files.
+
+# Part 2: the corrected readings, the named streams, the sensitivities
+
+Built to `docs/process/comparison_scorer_part2_spec.md` (Revision 2), on decoys only; choices in `DECISIONS.md`
+(part 2, P1-P19, F10-F12).
+
+| file | what |
+|---|---|
+| `reading.py` | section 2: `coded` (the reference's Holm block) and `corrected` (with the two changes of the owner's note); the predicate; sections 2.2 and 2.3; the table for the owner (`python3 tools/compare/reading.py table --out docs/process/reading_rule_table.md`) |
+| `reading_b.py` | the second build of section 2.1, by a builder of another model (not written here) |
+| `streams.py` | section 3: the spawn keys, the generators, `NamedStreams` (part 1's scorer with its one hook overridden) |
+| `harvest_variant.py` | the two harvest copies (the owner job's `stage_copy` and `strip_harvest`, imported by file; the late-revert resolution), the reference outcome builder run unchanged in `sandbox_ro` on each |
+| `variants.py` | section 4: the variants in the spec's order, their baselines, floors and output |
+| `scorer.py` | part 1's scorer, with one hook added: `stream(key, rng)` returns the shared stream |
+
+```
+python3 tools/compare/reading.py counts
+python3 tools/compare/harvest_variant.py variant --study D/study --pool D/pool --repos a,b --variant late \
+        --scratch S --out O.json
+python3 tools/compare/variants.py --decoy-study BASE/N --scratch S --out O.txt
+COMPARE_STUDY_CACHE=~/.claude/jobs/<id>/tmp/cache python3 -m pytest -p no:cacheprovider tests/test_compare_part2.py
+```
+
+`--real` is refused by both command lines: on real data the variants run only inside the scoring job (a later
+specification). In-process: `reading.py` (pure), the comparison scorer, tools/owner's code; the reference
+`stage_score` (on synthetic readings, test 1f) and the reference outcome builder run only in `sandbox_ro`.

@@ -214,3 +214,128 @@ F7. **Section 8 test 4's "a silent predictor made to draw" and "two outcomes swa
 F8. **Section 7: the placebo layer of the blind test is not defined beyond its name**; 28 is the reading taken.
 F9. **No difference was found between section 4 and the reference**: the cell map is all-equal on both studies,
     every key the reference writes, every class.
+
+# Part 2: the corrected readings, the named streams, the sensitivities
+
+`docs/process/comparison_scorer_part2_spec.md` (Revision 2) is the brief; `reviews/comparison_scorer_part2_spec_review.md`
+and the owner's note `docs/sa3_amendment5_note_reading_draft.md` supplied the rulings. Runs of 2026-11-15 on
+decoys and synthetic inputs only, under `/home/joe/.claude/jobs/24bf9d40/tmp/part2_build/` (not committed).
+
+## The reading rule (section 2)
+
+P1. **`reading.py` is the first build.** `coded` and `corrected` are one function with two switches: change 1
+    replaces the coded stop condition (`primary != "supported"`) by `primary not in ("supported",
+    "contradicted")`; change 2 replaces `reading == "supported" and residualised != "supported"` by `reading is
+    not the Holm sentence and primary != residualised`. Nothing else differs. Holm order is Python's stable sort
+    on `p`, as the reference's `sorted(CONFIRMATORY, key=...)`. A reading outside the four is refused
+    (`ValueError`); `control` is compared with "supported" only.
+P2. **"Differ" and "more supported" in section 2.1's counts**: an input differs when the three words are not all
+    the same; "more supported" when the rule gives more words beginning "supported" than the coded rule. With
+    those, `counts_729` gives 135/51, 604/0, 631/51 and the plain null the same (test 1a).
+P3. **Change 2 read literally** (owner ruling 1): primary "not fitted" against residualised "not detected" reads
+    "not robust to the statistic". So does any "not fitted" against anything else. In the 729 space this cannot
+    occur; in the table it is most of the "F -> NR" rows. The spec does not single the case out; the literal
+    reading was kept.
+P4. **The predicate** (`applies`): change 1 applies when, in Holm order, a primary "contradicted" comes before a
+    primary "supported"; change 2 when any test's two readings differ. Equality on its complement holds on all
+    851,968 inputs of section 2.4 (test 1b); the predicate is wider than needed (a contradicted test after a
+    stop by "not detected" sets it without changing a word), which the spec allows.
+P5. **The table** (`docs/process/reading_rule_table.md`): every combination of (primary, residualised,
+    control supported or not) for the three tests in Holm order, with the gate: 4 x 4 x 2 cubed x 2 = **65,536
+    rows, 30,408 differ**, all with the gate passed. Codes are used to keep it at 4 MB; a legend and the count of
+    each word change head it. Which of B, C, D sits at a position does not change the words (the rule reads
+    positions only), so names are not rows.
+P6. **Against the reference itself** (test 1f): the Holm block's 21 lines are compared, as text, with a literal
+    copy held in the test; then the reference's own `stage_score` runs in `sandbox_ro` with its module globals
+    rebound to synthetic inputs (`load`, `scored_repos`, `silent`, `design_for`, `S`, `churn_any`,
+    `control_effects`, `summarize`, the paths, the lock check emptied, `PREDICTORS` cut to the four primaries),
+    each statistic's value encoding which test and statistic it is so the stand-in `summarize` can return the
+    chosen reading and p. The Holm block runs as written. 65,536 inputs in B, C, D order with both gates, and
+    every weak order of the p-values on every 16th combination (26,624): all equal to `coded`, words and order.
+    On the decoys (N, P and P's gate-failed variant) `coded` reproduces every stored reading (test 1g).
+P7. **Sections 2.2 and 2.3** are in `reading.py` as `beside` (coded, corrected, "same" or the sentence; it refuses
+    a result whose stored reading is not the coded rule's), `level_word` / `exploratory_word` (defect 47) and
+    `allreverts_same_repos` (defect 48: the drawn repos whose marginals rows clear both the HP and the
+    HP_allreverts floors, as the spec says; a repo in that set whose HP_allreverts cell is not `ok` gives no value).
+P8. **The second build** (`reading_b.py`) is compared with `reading.py` on all 851,968 inputs, plus the same with
+    the control reading "contradicted", "not fitted" or empty (test 1e); skipped, with the reason, when the file
+    is absent. This builder did not read `reading_b.py`.
+
+## The named streams (section 3)
+
+P9. **The hook** is `Scorer.stream(key, rng)`, returning `rng`; the loop asks it once per (repo, outcome,
+    predictor) before the silence check (the generator goes to `on_silent` and to the 200 block permutations) and
+    once per repo for the matched control. Keys: `("perm", repo, outcome, predictor)`, `("control", repo)`. Part 1's
+    cell maps stay all-equal on both studies (test 2b, and part 1's own 3a/3b).
+P10. **Spawn keys exactly as section 3**: `(r, 0, o, p)` and `(r, 1)`, r a Python int of up to 64 bits (numpy splits
+    it into two 32-bit words; harmless, review minor 2). Repo name: the marginals row's `repo`, UTF-8. Outcome
+    index in (HP, HP_allreverts, HP_revert, HP_cve, HP_fixref, KW); predictor index in `derive.PREDICTORS`
+    (the reference's order, part 1's test 2e). Test vectors, `Generator(PCG64(SeedSequence(2982,
+    spawn_key=K))).random(3)` as `float.hex`:
+
+    | key | spawn key | first three draws |
+    |---|---|---|
+    | ("perm", "bun", "HP", "struct_branch") | (635298010877155848, 0, 0, 5) | 0x1.9637eb8542ca7p-1, 0x1.0023445ff2650p-3, 0x1.d054f708354dap-1 |
+    | ("control", "bun") | (635298010877155848, 1) | 0x1.7e5e656551998p-3, 0x1.eea28f0cd2800p-7, 0x1.23efcb47b8c34p-2 |
+    | ("perm", "django", "KW", "in_degree") | (9046051841603672498, 0, 5, 0) | 0x1.f7f9044a69754p-3, 0x1.8933d9cf5c0fcp-3, 0x1.640df4143d995p-1 |
+
+P11. **"Dropping one predictor"** is read as dropping it from the scored set of every repo (the scorer's
+    `PREDICTORS`, patched in the test). The spec's exception for "the matched-control cells of that repo" was
+    allowed for and measured: under named streams the other predictors' control cells did not change either (the
+    draws do not depend on the predictor list).
+
+## The sensitivities (section 4)
+
+P12. **Harvest copies reuse the owner job's code by path**: `tools/owner/prepare.py`'s `stage_copy` (copy,
+    checkpoint, rollback mode, and its A' harvest through `tracker_keys.strip_harvest`) runs inside this module's
+    `prepare` stage, unchanged; the late-revert copy is made from the same converted copy. The builder runs in a
+    second stage with the chosen copy bound at `<study>/meta_sa3/<repo>.db`, the history and scan copies, the
+    sidecar, the clone and GitHub's two lists.
+P13. **The late-revert resolution as built**: the stored value lower-cased (git hashes are lower-case; the
+    pattern is case-insensitive); fewer than 7 characters (the empty value of a quoted `Revert "` line) does not
+    resolve; unique prefix among the commits reachable from the clone's HEAD (`git log`); time = the commit time,
+    or for a commit brought in by a merge, that merge's (the earliest merge of the history walk, `commit_` by
+    rowid, whose later parents reach it without passing through the walk); late = time > the frozen outcome
+    file's `cut`. Every `issue_fix` row of a commit with at least one late target is deleted; `trailer:*` and
+    `cve` rows are not (so a kernel-style revert whose `Fixes:` trailer names its target still qualifies, review
+    M4). No gating on the merge workflow: in a repo whose walk is every non-merge commit no walk commit is a
+    merge, so nothing is "brought in", as in the reference.
+P14. **Checked against the reference's own split** (test 3e): for every unit commit of the frozen all-reverts
+    outcome whose links can qualify it only through reverts, and every merge that inherits from exactly one
+    such commit, the reference puts it in the primary outcome exactly when the resolution finds a target at or
+    before the cut. 103 cases in study N and 103 in P; **no disagreement**. The merge-time clause never decides a
+    case on the decoys (the generator merges promptly: 0 brought-in commits made before the cut and merged after
+    it), so it is tested on a synthetic repository (test 3f), not against the reference.
+P15. **Which repos are rebuilt**: only those whose harvest copy lost a row; the others keep the frozen file. A
+    rebuilt file is used only when the builder, on the unmodified copy, reproduces the frozen file (parsed JSON,
+    the over-cap sample left out); otherwise the frozen file stands and the output says so. On real data the
+    owner job checked exactly that ("A equals the stored file"). On the decoys, bun's and ctrl-early2's outcome
+    files were edited by the recipe (pool cut, floor failed), so the late variant's rows there (1 and 2) are not
+    applied.
+P16. **A variant with no input changed is not scored again**: its result is the baseline's (the inputs are
+    identical); the output says "no row deleted". On both decoy studies the case-sensitive variant deletes no row
+    (the generator writes upper-case keys only).
+P17. **Floors**: a rebuilt repo's marginals row takes `n_files`, `n_commits`, `largest_commit_share` and
+    `clears_floor` of each outcome from the rebuilt file (`variants.apply_rebuilt`); the scorer is given that row
+    list in place of the sealed one.
+P18. **Output**: per variant, for each of the four primaries on each of the six outcomes, the bAUC summary over
+    the drawn repos (`summaries["<oc>|<p>|bauc|all_drawn"]`, at 95%), its n and "above zero" / "below zero" /
+    "not detected" / "not fitted (fewer than three repos)", and the difference of n, mean and interval ends
+    from the baseline. One fixed sentence heads it. `run` refuses to return an output in which "supported",
+    "contradicted", "holm", "0.9833" or "0.975" appears (case ignored); the test also shows the search finds them
+    in the reference's own `tests` block.
+P19. **What the variants changed on the decoys** (cell by cell against the baseline): `PU_named_streams` against
+    the frozen run: R cells only (W and D all equal) in all twelve repos; `PU_tracker_keys_case_sensitive`:
+    nothing; `PU_late_revert_ticket_dropped` against `PU_named_streams`: the matched-control cells of django,
+    go and racket only (one HP commit fewer in each; the HP files are unchanged because those commits' files are
+    also touched by other fix commits), and the study cells built from them. The same in N and P.
+
+## Findings
+
+F10. **"On an unedited decoy, the rebuilt file equals the frozen one"** (section 5, test 3) holds for the
+    case-sensitive variant (no row deleted) but not for the late-revert one: the generator writes reverts that
+    quote a ticket, some of them late (2 rows in django). Test 3c therefore expects the planted commits plus the
+    natural ones, the natural set measured on the unedited copy of the same repo and required to be disjoint from
+    the plants.
+F11. **A decoy whose outcome file was edited after the pipeline** cannot be rebuilt to the same file; see P15.
+F12. **`PU_named_streams` has no stated baseline in section 4's table**; the frozen run is taken.
