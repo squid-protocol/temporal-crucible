@@ -141,3 +141,21 @@ Chain vs direct jump (quarterly chain vs one direct link, same start function): 
 (0.1-7%: the chain finds the descendant a single long jump cannot). Errors do not accumulate fast: the chain is at least as complete as the direct jump.
 Reading: for the registered study the ledger is good enough to correct the identity bias (moves are near-perfect), but renames carry ~3-6% wrong links, concentrated in near-duplicate siblings (test methods, API-wrapper splits). The LAWS unit files exclude tests, which removes most of the commons-io-type errors.
 Caveats: thresholds were not set before looking at these numbers, so no pass/fail is claimed; text truth under-counts true renames where the body was rewritten; six repos.
+
+## 13. First scoring pass: one estimator per hypothesis, per repo, with bootstrap intervals (13 repos: 7 discovery, 6 held-out; analysis/turn_score.py, score_report.py)
+Interval = percentile bootstrap (1,000 draws, seed 2982) over snapshot pairs (or lineages / years). S = interval wholly on the predicted side of the proposed bound; n = not detected; C = wholly on the other side.
+Held-out repos (expat, libxml2, scapy, sphinx, commons-io, prometheus) were not used to set any bound. Results (discovery | held-out):
+ID-1 overcount >= 40%: S 4, n 3 | S 4, n 2 (point estimates 28%-463%). Replicates. Median lifetime ratio >= 1.3: point estimates 1.2-2.75 discovery, 1.02-2.85 held-out (no interval yet).
+ID-2 top 10% of quarters hold >= 60% of moves/renames: n 6, C 1 | S 2, n 2, C 2. Does not replicate as stated (scapy 38%, prometheus 37%, sphinx 49%); the original TURN-H1b bound was >= 0.40.
+GRO-1 births in new files > 60%: S 1, n 5, C 1 | n 3, C 3 (held-out 44-56%). The 0.60 bound was drift upward from the registered TURN-H3 bound (> 0.50); held-out sits around 0.50.
+GRO-2 deaths = whole file removed > 45%: S 1, n 6 | n 6 (35-78%). Not detected on either set.
+GRO-3 median quarterly deaths < 0.5% of population: S 5, C 2 | S 3, n 1, C 2 (prometheus 1.9%, sphinx 0.84%; the young fast repo tigerbeetle 4.3%). Holds in mature repos.
+GRO-3 top 10% of quarters hold >= 60% of deaths: n 5, C 2 | S 2, n 3, C 1.
+SET-1 unchanged after 4 quarters >= 80%: S 4, C 3 | S 1, n 1, C 4 (held-out 64-84%). Too strong as stated.
+SET-3 uncalled newborns still uncalled >= 95%: S 7 of 7 | S 5, n 1. Replicates cleanly (95-100%).
+SET-4 hubs persist >= 90% (lineage): S 6, C 1 | S 4, n 1, C 1. Replicates; lineage minus naive persistence > 3 points: S 1, n 5, C 1 | S 1, n 4, C 1 (always positive, usually small).
+DER-1 births from split/merge/extract < 2%: S 3, n 3, C 1 | S 2, n 3, C 1 (curl 3.8%, sphinx 3.6%, libxml2 3.0%); deaths < 5%: S 6, n 1 | S 2, n 4.
+KW-1 print density slope < 0 (C seats): S 2, n 1 | S 2 of 2 (expat -0.06, libxml2 -0.43). Replicates in 4 of 5 C repos.
+Not yet run on held-out: SWP-1..4, KW-2..4, EDT-1 (they need tree-sitter edit events for those repos).
+Proposed bound revisions (substantive minimums, decided before the confirmatory run, not tuned to any one repo): ID-2 >= 0.40; GRO-1 > 0.50; GRO-2 > 0.40; SET-1 > 0.60 with age/maturity as a declared moderator;
+GRO-3 median < 1% with maturity as a moderator; DER-1 births < 3%; SET-4 gap and ID-1 lifetime ratio reported with intervals, not gated. ID-1, SET-3, SET-4 (lineage >= 0.90), KW-1 and DER-1 deaths keep their bounds.

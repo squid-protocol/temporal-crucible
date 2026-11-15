@@ -46,3 +46,10 @@ Tree-sitter parses the function slice given by the engine's `start_line` and `lo
 ## Owed before any of this is registered
 Literature check (done at survey depth), power statement from the first seated repos, ledger held-out accuracy and chain accuracy, two independent design reviews
 (the owner has waived the second reviewer; PR #186 is stale and should be closed or rewritten).
+
+## Ledger acceptance gate and sensitivities (proposal, 2026-11-16)
+The ledger is the identity instrument for every test above, so it is gated before any hypothesis is scored.
+* **Gate (evaluated on the seated panel before scoring):** text-truth moves right >= 95% with wrong <= 1%; renames right >= 80% with wrong <= 8%; quarterly chain vs direct-jump disagreement <= 2% over four years.
+  Held-out result that motivated these: moves 98.9% right, 0.11% wrong; renames 84.4% right, 5.9% wrong (2.9% without one libxml2 reorganisation quarter); chain-vs-direct disagreement 0-2.0%. The numbers were seen before the gate was written; the gate is re-evaluated on the panel, whose truth is built the same way.
+* **Sensitivities, reported for every ledger-dependent hypothesis:** (1) links accepted on comments alone removed; (2) ambiguous links removed; (3) identity-only (path-and-name) ledger as the reference; (4) test files excluded (already true of the LAWS unit files).
+* A hypothesis is supported only if the primary run is supported; sensitivities are reported, not gating (checklist 14).
