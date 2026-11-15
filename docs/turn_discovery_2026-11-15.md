@@ -127,3 +127,17 @@ curl gap +0.196 -> -0.026 (alloc 0.28 -> 0.02, print 0.31 -> 0.01, cleanup 0.26 
 redis never showed the gap (-0.032 before, -0.011 after), so it does not test the idea. 7,000 of 33,665 curl code edits and 9,300 of 21,200 libgit2 edits are sweep edits.
 Reading: the predicted-high families look "retrofitted" because a few quarters rename or swap allocation, cleanup and print wrappers across many functions; outside those quarters they are no more rewritten than branches or pointers.
 Caveats: 3 C repos, one of them curl (discovery only); sweep membership comes from tree-sitter call names, the retrofit shares from engine keyword counts; sweep thresholds are discovery choices.
+
+## 12. Held-out check of the lineage ledger (packaged sfs ledger; 6 repos never used in the analyses above; analysis/heldout_eval.py)
+Repos (quarterly): expat, libxml2 (C), scapy, sphinx (Python), commons-io (Java), prometheus (Go). LAWS-panel repos are not in the local pool, so none was touched.
+Truth = function text (4-token shingles, own name masked, comments stripped) matched across dead and born functions, similarity >= 0.85, many-to-one pairs dropped; independent of the structure and comment evidence the ledger proposes with.
+MOVES (same name, different file): right 7,056 of 7,132 = 98.9%; wrong 8 (0.11%); missed 68 (1.0%).
+RENAMES (new name): right 711 of 842 = 84.4%; wrong 50 (5.9%); missed 81 (9.6%). By repo: expat 100% (7), scapy 89%, commons-io 86% (16 wrong), sphinx 89%, prometheus 91%, libxml2 50% (28 wrong).
+Where the wrong renames are: libxml2's 28 wrong renames are 27 from one quarter (2003-07, SAX.c split into SAX2.c and legacy.c): the old name (startElement) survives as a thin wrapper in legacy.c, so the ledger followed the name and its copied comment while the text truth follows the code (xmlSAX2StartElement).
+commons-io: 14 of 16 wrong are in_file_structure links between look-alike JUnit test methods in the same file (testSkip vs testCopyLarge_Skip). Both are failures of the same kind: near-identical siblings. Excluding the one libxml2 quarter, wrong renames are 22 of 758 (2.9%).
+Evidence behind accepted structure-proposed links (name_unique, in_file_structure, twin): body and comments agree 1-51%, body only 19-99%, comments only 0-30% (libxml2 30%, commons-io 10%, prometheus 7%, sphinx 3%, scapy 1%, expat 0%).
+Samples accepted on comments alone read as real continuations (xmlAddDocEntity xml_entities.c -> entities.c, render_partial builder.py -> html.py), where the body was refactored.
+Chain vs direct jump (quarterly chain vs one direct link, same start function): over 1 y same function 78-99.9%, disagree 0-0.8%; over 2 y disagree 0-1.1%; over 4 y disagree 0-2.0%. The rest is "both gone" (functions that really died) or "chain only"
+(0.1-7%: the chain finds the descendant a single long jump cannot). Errors do not accumulate fast: the chain is at least as complete as the direct jump.
+Reading: for the registered study the ledger is good enough to correct the identity bias (moves are near-perfect), but renames carry ~3-6% wrong links, concentrated in near-duplicate siblings (test methods, API-wrapper splits). The LAWS unit files exclude tests, which removes most of the commons-io-type errors.
+Caveats: thresholds were not set before looking at these numbers, so no pass/fail is claimed; text truth under-counts true renames where the body was rewritten; six repos.
