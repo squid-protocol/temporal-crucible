@@ -97,17 +97,17 @@ One test on its own (first in Holm order, so the Holm step does not act). Gate p
 | contradicted | supported | — | contradicted | not robust to the statistic | **yes** |
 | contradicted | contradicted | — | contradicted | contradicted |  |
 | contradicted | not detected | — | contradicted | not robust to the statistic | **yes** |
-| contradicted | not fitted | — | contradicted | not robust to the statistic | **yes** |
+| contradicted | not fitted | — | contradicted | contradicted |  |
 | not detected | supported | — | not detected | not robust to the statistic | **yes** |
 | not detected | contradicted | — | not detected | not robust to the statistic | **yes** |
 | not detected | not detected | — | not detected | not detected |  |
-| not detected | not fitted | — | not detected | not robust to the statistic | **yes** |
-| not fitted | supported | — | not fitted | not robust to the statistic | **yes** |
-| not fitted | contradicted | — | not fitted | not robust to the statistic | **yes** |
-| not fitted | not detected | — | not fitted | not robust to the statistic | **yes** |
+| not detected | not fitted | — | not detected | not detected |  |
+| not fitted | supported | — | not fitted | not fitted |  |
+| not fitted | contradicted | — | not fitted | not fitted |  |
+| not fitted | not detected | — | not fitted | not fitted |  |
 | not fitted | not fitted | — | not fitted | not fitted |  |
 
-9 of 20 rows differ. Change 2 never turns a reading into "supported". Note the rows with "not fitted" on one side only: read literally, they become "not robust" (see the question below).
+4 of 20 rows differ. Change 2 never turns a reading into "supported". Note the rows with "not fitted" on one side only: read literally, they become "not robust" (see the question below).
 
 ## 3. Both changes together, and the gate
 

@@ -58,7 +58,10 @@ def _read(tests, gate_valid, change1, change2):
 
         # Robustness to the statistic, then the control.
         if change2:
-            not_robust = (not holm_reworded) and primary != residualised
+            # owner ruling 2026-11-15 (edited by the reviewer): the coded condition stays; the literal extension does
+            # not act when either side is "not fitted"
+            not_robust = (reading == SUPPORTED and residualised != SUPPORTED) or (
+                (not holm_reworded) and primary != residualised and "not fitted" not in (primary, residualised))
         else:
             not_robust = reading == SUPPORTED and residualised != SUPPORTED
         if not_robust:

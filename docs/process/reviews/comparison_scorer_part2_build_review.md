@@ -29,3 +29,14 @@ no confirmatory reading; it decides only what the table says for an input that c
 the planted commits plus the decoys' own late reverts carrying tickets (the specification's "equals" was wrong);
 `PU_named_streams` is compared with the frozen run; a variant that deleted no row equals its baseline without
 being re-scored; trailers and CVE ids are untouched by the late-revert variant, as specified.
+
+## Owner ruling on "not fitted", and a mistake caught applying it
+
+The owner ruled (2026-11-15) that "not fitted" is no reading, so the literal extension of change 2 does not act
+when either statistic is "not fitted". The reviewer first applied this by switching change 2 off in that case;
+the builder's test "change 2 never gives more supported" then failed, because the coded rule already reads a
+supported primary with a "not fitted" residualised statistic as "not robust", and switching it off would have
+printed "supported". The rule is now: the coded condition always holds; the extension acts only when neither
+side is "not fitted". Both builds (`reading_b.py` edited by the reviewer, marked so) and the reviewer's
+transcription agree on 327,680 inputs; the reading-rule tests pass; the 729 counts are unchanged. Both tables
+regenerated.

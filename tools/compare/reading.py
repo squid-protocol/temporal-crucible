@@ -66,7 +66,11 @@ def _rule(tests, gate_valid: bool, change1: bool, change2: bool) -> dict[str, st
             reading = HOLM
         if (primary not in (SUPPORTED, CONTRADICTED)) if change1 else (primary != SUPPORTED):
             still = False
-        if (reading != HOLM and primary != resid) if change2 else (reading == SUPPORTED and resid != SUPPORTED):
+        coded_nr = reading == SUPPORTED and resid != SUPPORTED
+        # change 2 extends the coded condition; owner ruling 2026-11-15: the extension does not act when either side
+        # is "not fitted" (no reading), so the coded behaviour stays and change 2 never creates a "supported"
+        ext_nr = reading != HOLM and primary != resid and NOT_FITTED not in (primary, resid)
+        if (coded_nr or ext_nr) if change2 else coded_nr:
             reading = NOT_ROBUST
         elif reading == SUPPORTED:
             reading = SPECIFIC if t["control"] == SUPPORTED else ACTIVITY
@@ -101,7 +105,8 @@ def applies(tests) -> dict[str, bool]:
     order, before a test whose primary reads "supported"; change 2 when some test's two statistics differ"""
     prim = [tests[i]["primary"] for i in holm_order(tests)]
     c1 = any(prim[i] == CONTRADICTED and SUPPORTED in prim[i + 1:] for i in range(len(prim)))
-    c2 = any(t["primary"] != t["residualised"] for t in tests)
+    c2 = any(t["primary"] != t["residualised"] and "not fitted" not in (t["primary"], t["residualised"])
+             and t["primary"] != SUPPORTED for t in tests)                        # where the extension, not the coded rule, acts
     return {"change1": c1, "change2": c2, "any": c1 or c2}
 
 

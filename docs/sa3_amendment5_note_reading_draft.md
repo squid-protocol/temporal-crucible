@@ -10,7 +10,9 @@ as the first act of the scoring step, before the seal is re-taken.
    family failed)", as coded; every other test keeps its coded words.
 2. **Defect 43, read literally.** A test reads "not robust to the statistic" whenever its primary and its
    residualised statistic read differently, whatever the primary reads — except a test already reworded by the
-   Holm step. No new reading word is introduced.
+   Holm step, and the extension does not act when either statistic is "not fitted" (fewer than three repos: no reading at
+   all; owner ruling of the same day). The coded case — a supported primary whose residualised statistic does not
+   read supported is "not robust" — is kept in every case, so the change never creates a "supported". No new reading word is introduced.
 3. **How it is checked.** The rule is built twice by different models and compared on every input, and the full
    table of coded against corrected readings is published (`docs/process/reading_rule_table.md`) for the owner
    to read.

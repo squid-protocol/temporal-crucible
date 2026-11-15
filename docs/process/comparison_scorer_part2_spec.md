@@ -64,7 +64,9 @@ for each test in that order:
 a test already reworded by the Holm step:
 
 ```
-    if reading is not the Holm sentence and primary's reading != residualised's reading:
+    if (reading == "supported" and residualised's reading != "supported")        # the coded condition, kept
+       or (reading is not the Holm sentence and primary's reading != residualised's reading
+           and neither reading is "not fitted"):                 # the extension; owner ruling, 2026-11-15
         reading = "not robust to the statistic"
     elif reading == "supported":
         (as coded)
