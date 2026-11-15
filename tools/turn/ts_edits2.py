@@ -9,7 +9,7 @@ B="/srv/storage_16tb/projects/curl_call_graph_evolution/turn_v2"; POOL="/srv/sto
 LANG={"python":dict(exts=(".py",),calls={"call":"function"},fn=("function_definition",),dedent=True),
       "rust":dict(exts=(".rs",),calls={"call_expression":"function","macro_invocation":"macro"},fn=("function_item",),dedent=False),
       "zig":dict(exts=(".zig",),calls={"call_expression":"function"},fn=("function_declaration",),dedent=False)}
-REPO_LANG={"sqlmap":"python","impacket":"python","ripgrep":"rust","tigerbeetle":"zig"}
+REPO_LANG={"sqlmap":"python","impacket":"python","ripgrep":"rust","tigerbeetle":"zig","scapy":"python","sphinx":"python"}
 _P={}
 def feats(src:str,lang:str):
     L=LANG[lang]; P=_P.setdefault(lang,get_parser(lang)); b=(textwrap.dedent(src) if L["dedent"] else src).encode()

@@ -53,3 +53,8 @@ The ledger is the identity instrument for every test above, so it is gated befor
   Held-out result that motivated these: moves 98.9% right, 0.11% wrong; renames 84.4% right, 5.9% wrong (2.9% without one libxml2 reorganisation quarter); chain-vs-direct disagreement 0-2.0%. The numbers were seen before the gate was written; the gate is re-evaluated on the panel, whose truth is built the same way.
 * **Sensitivities, reported for every ledger-dependent hypothesis:** (1) links accepted on comments alone removed; (2) ambiguous links removed; (3) identity-only (path-and-name) ledger as the reference; (4) test files excluded (already true of the LAWS unit files).
 * A hypothesis is supported only if the primary run is supported; sensitivities are reported, not gating (checklist 14).
+
+## Ranges rather than thresholds (revision note, 2026-11-16)
+Thirteen repos (7 discovery, 6 held-out) give per-repo ranges for how repositories grow and change; several bounds above were stricter than those ranges (GRO-1, SET-1, ID-2). The registered claims should state the ranges and test direction and rough size per repo with intervals, not bounds tuned to the discovery repos.
+Sweep results on four held-out repos replicate SWP-1 (16-25%), SWP-2 (about 90% of migrations are single-quarter) and SWP-3 (4 of 4); proposed bound revisions: SWP-1 at least 15%, SWP-2 at least 85%.
+KW-3 (pointer change by turnover) is contradicted in 2 of 4 C repos, so it is re-stated as descriptive: report repo-level and within-survivor density change with their signs. EDT-1 holds in 4 of 5 C repos (not in libxml2); report with and without sweeps.

@@ -159,3 +159,18 @@ KW-1 print density slope < 0 (C seats): S 2, n 1 | S 2 of 2 (expat -0.06, libxml
 Not yet run on held-out: SWP-1..4, KW-2..4, EDT-1 (they need tree-sitter edit events for those repos).
 Proposed bound revisions (substantive minimums, decided before the confirmatory run, not tuned to any one repo): ID-2 >= 0.40; GRO-1 > 0.50; GRO-2 > 0.40; SET-1 > 0.60 with age/maturity as a declared moderator;
 GRO-3 median < 1% with maturity as a moderator; DER-1 births < 3%; SET-4 gap and ID-1 lifetime ratio reported with intervals, not gated. ID-1, SET-3, SET-4 (lineage >= 0.90), KW-1 and DER-1 deaths keep their bounds.
+
+## 14. Sweep, keyword and edit hypotheses on the held-out repos; SET-1 in detail (analysis/set1.py, ts_edits*.py, kw4.py)
+HELD-OUT sweeps (expat, libxml2 via the C classifier; scapy, sphinx via the Python one):
+SWP-1 share of code edits in a sweep: expat 22%, libxml2 25%, scapy 18.5%, sphinx 16% (discovery 21-44%, ripgrep 4%). SWP-2 one-quarter migrations: distinct old->new pairs / migration-quarters 8/9, 58/59, 18/21, 50/52.
+SWP-3 organic edits change signatures more than sweep edits: expat 30 vs 22%, libxml2 24 vs 12.5%, scapy 25 vs 17.5%, sphinx 40 vs 31%: 4 of 4 (discovery 5 of 6). SWP-4 era trend: mixed again (expat 2% -> 41%, libxml2 33% -> 12%, scapy 3% -> 26% -> 3%).
+Named migrations: scapy's Python 2 -> 3 move in 2017 (type -> isinstance 113 functions, ord -> orb 91, xrange -> range 58, chr -> chb 51, str -> raw 75); expat _XML_Parse_SINGLE_BYTES 274 functions (2026), libxml2 fprintf -> xmlGenericError 311 functions (2001) and back (71, 2024).
+KW-4 retrofit gap with sweeps removed: libxml2 +0.174 -> -0.045 (supports; with curl and libgit2, 3 of 3 testable repos); expat had no gap (-0.139), so does not test it.
+KW-2 (safety direction, descriptive): def_safety rising in expat, libxml2, sphinx, commons-io, falling in scapy, prometheus; safety_neg falling in expat, libxml2, scapy, sphinx, rising in commons-io, prometheus. Still no common direction (across 13 repos, def_safety rises in 7 and falls in 6).
+KW-3 pointer change is turnover: libxml2 contradicts (repo -116 per kLOC, survivors +158; opposite signs); expat has no repo-level figure (empty first snapshot). Combined with discovery: supported in curl and libgit2, contradicted in redis and libxml2, where surviving code and the repo as a whole moved in opposite directions.
+EDT-1 pointer edits and guard changes: expat 42% vs 8% (+33 points; 44 vs 10 outside sweeps) replicates; libxml2 46% vs 35% (+11 points; 36 vs 34 outside sweeps) does not. 4 of 5 C repos show +25 to +36 points.
+SET-1 in detail (identical engine measurements to birth state, by age in quarters; 1 / 2 / 4 / 8 / 16): redis 94/90/85/78/61, impacket 93/91/87/80/73, scapy 95/90/84/74/69, sqlmap 91/88/83/79/71, ripgrep 96/93/89/74/61, commons-io 94/90/80/66/44, libgit2 89/83/78/72/65,
+sphinx 89/85/75/63/52, expat 90/78/74/56/29, prometheus 87/79/68/58/44, libxml2 83/74/64/55/50, curl 81/73/62/50/39, tigerbeetle 83/74/59/46/15.
+First-change hazard (chance that the first change falls at age k, given untouched until then): highest at age 1 in every repo (4-19%), falling to 1-5% by age 8; so the risk of a first change is front-loaded.
+What the first change is: a change of keywords at unchanged length is 11-62% of first changes (commons-io 62%, expat 40%, impacket 27%, curl 26%): in-place edits such as renames and API swaps are a large part of how functions first change.
+Caveat: "unchanged" = identical engine measurements (length, complexity, arguments, keyword counts), so a comment or whitespace edit does not count as change and a same-length rename of an identifier family does.
