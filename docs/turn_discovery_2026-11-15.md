@@ -98,3 +98,24 @@ curl and libgit2 retrofit leaders are alloc, cleanup, print (R 0.22-0.31) = the 
 (retrofit R 0.03-0.08; redis repo +108 vs survivors -107, libgit2 -216 vs -9, curl +81 vs +4): new code differs from old, old code is rarely rewritten.
 Survivors carry 2-20% of line movement (curl 2%, libgit2 2%, ripgrep 2%, sqlmap 20%).
 Caveats: 7 repos, 3 of them C; density change inside survivors is a summed pair-to-pair figure, not a clean total; tigerbeetle has an empty first snapshot (no repo-level figure).
+
+## 9. Tree-sitter: what changes inside surviving functions (C: libgit2, redis, curl; analysis/ts_edits.py, ts_report.py)
+Method: each ledger-linked function's text at the two commits (git, start_line+loc), parsed with tree-sitter-c; edits classified by node-type, callee and signature deltas. C/.h only.
+Text changes in 5.2% (libgit2), 5.7% (redis), 18.3% (curl) of function-quarters; 4-12% of those are comments/whitespace only. Of code edits: signature changed 15-22%; guard (if) added 11-22% vs removed 6-8%;
+cast added 3-9%; goto 2%; alloc/free call changed 5-10%; #if changed 2-9%; print call added/removed < 2%.
+Pointer syntax (* and &) changes in 22-25% of code edits; in those, a guard changed in 43-51%, NULL use changed in 25-34%, signature in 26-33%, alloc/free in 10-16%; pointer use rose in 63-66%.
+Most-added/removed calls are API migrations, not logic: libgit2 git_buf_* -> git_str_*, assert -> GIT_ASSERT_ARG, giterr_set -> git_error_set, git_oid_fromstr -> git_oid_from_string;
+curl free/malloc/strdup/Curl_safefree -> curlx_free/curlx_calloc/curlx_safefree, fprintf/printf -> curl_mfprintf, + DEBUGASSERT; redis redisAssert -> serverAssert, redisLog -> serverLog, dict iterator API swap.
+By era: curl print-call removal 3.0% of code edits in the 2000s -> 0.4% in 2015s; libgit2 guard-added 17% (2010s) -> 7% (2020s).
+Caveats: edits are function-quarter diffs (several edits fold into one); "pointer syntax" in the first table includes field access (-> and .), the narrower figures in the pointer paragraph exclude it; pointer use rising may track function growth;
+unchanged text is skipped, so reformat-only edits count as comments/whitespace only; calls are by name only, with no resolution of macros.
+
+## 10. Mass-migration sweeps and tree-sitter for Python / Rust / Zig (analysis/ts_edits2.py, sweeps.py)
+Sweep = the same call/macro removed or added in >= max(10, 1%) of a quarter's code-edited functions. Migration = an old name removed and a new name added in the same functions (co-occurrence >= 40% of the smaller side).
+Share of code edits inside a sweep: libgit2 44%, tigerbeetle 38%, impacket 27%, sqlmap 22%, redis 22%, curl 21% (36% in the 2025s, 4% in the 2000s), ripgrep 4%.
+Sweeps are one-quarter events: nearly every migration lands in a single quarter (a few take two). Examples: libgit2 git_buf_free -> git_buf_dispose (757 functions, 2018-07), then -> git_str_dispose (719, 2021-10), assert -> GIT_ASSERT_ARG (539, 2021-01);
+curl free -> curlx_free (384, 2025 Q4), fprintf -> curl_mfprintf (329 over 2025 Q2-Q4); redis redisLog -> serverLog (116, 2015 Q3); sqlmap logger.warn -> logger.warning (291, 2022-07), range -> xrange (2012), Python-2-to-3 style moves;
+impacket ''.join -> b''.join (2019), datetime.utcnow -> now (2025); tigerbeetle camelCase -> snake_case (isSet -> is_set, constSlice -> const_slice, 2023-2025) and interface_call -> call (173, 2025-10).
+Chains: one name is migrated more than once (libgit2 git_buf_free -> dispose -> git_str_dispose).
+Organic edits (outside sweeps) change signatures more often (libgit2 20% vs 9% in sweeps; impacket 14% vs 4%) and add guards (libgit2 14% vs 8%). In curl, print/log calls are added or removed in 6-7% of sweep edits and under 1% of organic edits.
+Caveats: sweep threshold is a discovery choice; call names are by text, macros unresolved; Zig/Rust/Python grammars via tree-sitter-language-pack with function slices from the engine's start_line/loc; ripgrep has too few events to say much.
