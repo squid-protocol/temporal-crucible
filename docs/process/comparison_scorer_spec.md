@@ -156,7 +156,9 @@ these words of the registration:
 >    **effect = bAUC − 0.5.**
 > 4. **Pair floor:** ≥ 100 eligible pairs, ≥ 25 on each side.
 
-(`docs/sa3_registration_consolidated.md`, section 6, items 1 to 4, quoted exactly.)
+(`docs/sa3_registration_consolidated.md`, section 6, items 1 to 4, quoted word for word with the names of
+the reference functions and one sentence about an earlier check left out, so that the second builder is not
+pointed at the reference code.)
 
 It is written as a plain loop over pairs. Compared with the reference's value within 1e-9. **Where the words
 above leave a choice open** (how "equal-count" treats a remainder; how "by their share" combines the three
