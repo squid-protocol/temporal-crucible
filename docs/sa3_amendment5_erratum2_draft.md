@@ -1,4 +1,8 @@
-# SA3 — proposed second erratum to Amendment 5 (DRAFT; not in force)
+# SA3 — second erratum to Amendment 5 (ACCEPTED by the owner 2026-11-15; not yet entered)
+
+**Accepted by the owner on 2026-11-15 ("acceptance - proceed").** It is not yet in `docs/sa3_registration.md`:
+the registration is sealed. It is entered as the first act of the scoring step, and the seal is re-taken after
+it, before the owner runs `lock`.
 
 **2026-11-15.** One phrase of the registration's statistic is ambiguous, and an independent reader took it the
 other way from the code. It changes nothing that runs. It cannot be entered while the registration is sealed
