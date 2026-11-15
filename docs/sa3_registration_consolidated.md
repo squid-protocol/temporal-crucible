@@ -1,6 +1,6 @@
 # SA3 — everything in force, in one place
 
-**This restates `docs/sa3_registration.md` and its Amendments 1–5. It adds nothing.** Where the two disagree,
+**This restates `docs/sa3_registration.md`, its Amendments 1–5 and the erratum to Amendment 5. It adds nothing.** Where the two disagree,
 the registration and its amendments govern and this text is wrong. It exists because five amendments on a body
 that was itself edited in place cannot be held in one head, and the scorer had drifted from the text in nine
 places by the time a third review counted.
@@ -53,7 +53,7 @@ A file is positive if a qualifying commit in the window touches it. `sa3_outcome
 
 | outcome | a qualifying commit | role |
 |---|---|---|
-| **HP** | carries a fix reference, a CVE id, or a revert **whose target resolves to a commit that existed at the cut**. What a fix reference is, exactly: Amendment 5 section 5, where the code's patterns are quoted and govern. In short: an issue number, `GH-`, `bug`, `bpo-`, BSD `PR` number or tracker key **after a fix word** (fix, fixes, fixed, resolve, resolves, resolved); a `Fixes:` line naming a hash; the GnuPG bug trailer; a `Fixes:`, `Bug:` or `Reported-by:` trailer in the body. A tracker key is matched without regard to case (defect log 61) | **primary** |
+| **HP** | carries a fix reference, a CVE id, or a revert **whose target resolves to a commit that existed at the cut**. What a fix reference is, exactly: Amendment 5 section 5, where the code's patterns are quoted and govern. In short: an issue number, `GH-`, `bug`, `bpo-`, BSD `PR` number or tracker key **after a fix word** (fix, fixes, fixed, resolve, resolves, resolved); a `Fixes:` line naming a hash; the GnuPG bug trailer; a `Fixes:`, `Bug:` or `Reported-by:` trailer in the body. A tracker key is matched without regard to case, so "fix x86-64 build" qualifies (defect log 61); a capitalised token of the same shape that is not a tracker key, such as "Fix UTF-8 decoding", also qualifies and did under the registration's own pattern (erratum to Amendment 5) | **primary** |
 | HP_allreverts | as HP, every revert counted | secondary; supported only here reads "tracks reverted changes, not fixes" |
 | HP_revert, HP_cve, HP_fixref | the commit's exclusive tier, in the order revert, CVE, fix reference | reported, never pooled into a claim |
 | KW | the cleaned keyword rule, and no HP link | secondary |
@@ -191,7 +191,8 @@ job.
 
 **Before scoring** (Amendment 5 sections 2, 7, 9): the counts of section 7 are published; the three-layer
 check that the run is the frozen run passes on control repositories, blind, with seeded faults and clean
-copies; then the owner runs `lock` and `score`, once.
+copies — the check as a whole must flag each faulty copy, with the layer expected to catch it written down
+beforehand (erratum); then the owner runs `lock` and `score`, once.
 
 ## 11. What a result licenses
 
