@@ -9,10 +9,12 @@
 | Source | Says |
 |---|---|
 | Wiki `docs/wiki/02-15-chronometer.md` | The Chronometer measures **churn** (frequency of changes) and **stability (age)** from Git history; it sweeps only the past 12 months, halts once it has mapped 50% of active files or 5,000 files or 15 seconds, and also provides an author map (ownership entropy, silo risk) |
+| Wiki `docs/wiki/08-06-deep-churn.md` | **Deep Churn** = relative commit volatility, "highlights active hotspots"; commit volume divided by the square root of the file's "age in weeks", log-normalised against the repository maximum; Future Work: weigh commit size and separate trivial formatting commits from substantive changes |
+| Wiki `docs/wiki/08-10-file-stability.md` | **File Stability** = where a file sits on the repository timeline (RECENT / SETTLED / ESTABLISHED BASELINE), "not treating older code as inherently problematic"; Limitations: one rogue formatting commit resets the timeline; Future Work: ignore massive automated formatting commits |
 | `docs/vector_formulas.md` 12a | **stability** = (repo newest time minus the file's last-modified time) / (repo timeline) x 100, capped at 100; 50 if not git-tracked |
 | `docs/vector_formulas.md` 12b | **churn** = commits in the 12-month sweep / sqrt(weeks since the file's last modification, minimum 1) |
 | `docs/vectors.md` | `hist_stability` and `hist_churn` are the **PROMOTE** pair: the one layer the record supports as carrying defect lift beyond size; but "ablated to zero on every recorded row" because every scan sets `GITGALAXY_DISABLE_GIT_HISTORY` (temporal-crucible#29) |
-So both columns depend on the same term, **how recently the file last changed**: churn divides by it, stability is it. That is why they collapse into one axis, whatever the intent.
+So both columns depend on the same term, **how recently the file last changed** (the wiki pages call it the file's "age", but the code input is time since the last modification, not since creation; the wiki's own Future Work items, separating formatting commits and weighing commit size, are what the mechanical share and the sweep detector address): churn divides by it, stability is it. That is why they collapse into one axis, whatever the intent.
 **Two things to correct in the docs.** (1) The "ablated in every recorded scan" statement does not match the v2.12.0 master database, where sampled files carry churn in 21% and stability in 36% of cases (243 and 488 of 580 repos). (2) History-aware scans of historical commits work on `main` (`GITGALAXY_HISTORY_ASOF=1`, detached git worktree); the installed `galaxyscope` loads a stale copy without it, and `historical-call-graph-gif` exports plain trees with no `.git`.
 
 ## 3. What the research says
