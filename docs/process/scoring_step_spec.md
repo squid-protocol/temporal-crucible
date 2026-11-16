@@ -21,6 +21,7 @@ fresh-clone design itself was tested and found sound):
 1. **The failure table of section 6 is accepted as written**, before any build or result.
 2. **"Once" is defined as in section 5.**
 3. **A check that cannot be computed is treated as not confirmed** (added after the build's review; section 6).
+4. **A result whose code is not shown to be the pinned commit's** (the score stage's import check fails after the result file exists) is published and treated as not confirmed, the same way (owner ruling, 2026-11-16).
 
 ## 2. The order, with the commit at each step
 

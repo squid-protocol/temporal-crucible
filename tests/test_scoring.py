@@ -470,6 +470,8 @@ def test_1g_section6_sentences_each_exactly_when_its_case_happens():
                         ({"labels": lab_err, "compare": {"status": "failed", "code": "value_error"}, **rest,
                           "named": F}, ["gate", "label_check", "not_computed", "part_failed"])):
         assert SS.sentences_after(parts) == want, want
+    assert SS.sentences_after({"labels": lab_ok, "compare": cm(0, 0, 0), **rest}, unpinned=True) == \
+        ["gate", "code_unpinned"]                                     # owner ruling of 2026-11-16
     assert SS.check_not_computed({"labels": F, "compare": F}) == "unclassified"
     assert SS.check_not_computed({"labels": lab_err, "compare": cm(0, 0, 0)}) == "value_error"
     assert SS.check_not_computed({"labels": lab_ok, "compare": cm(0, 4, 0)}) is None
@@ -480,7 +482,7 @@ def test_1g_section6_sentences_each_exactly_when_its_case_happens():
                              (8, "after_lock_differs", "before_score"), (10, "score_crashed", None)):
         assert SS.stop_sentence(SS.Stop(step, code)) == want
     assert set(TX.SENTENCES) == {"run2_placebo", "before_score", "rehearsal", "gate", "label_check", "r_only",
-                                 "w_or_d", "not_computed", "part_failed"}
+                                 "w_or_d", "not_computed", "code_unpinned", "part_failed"}
     assert "the inputs the two routes read were not shown equal" in TX.SENTENCES["label_check"].lower()
     assert "the check did not confirm this run" in TX.SENTENCES["w_or_d"].lower()
     assert TX.LABEL_ADDITION == "the check did not confirm this run"
@@ -975,6 +977,32 @@ def test_3i_the_score_stage_fails_after_the_reference_wrote_its_result(routeP, r
     with pytest.raises(LG.LedgerError) as e:
         LG.decide(LG.read(led), False, "the stage crashed")
     assert e.value.code == "ledger_completed"
+
+
+def test_3m_import_check_fails_after_the_result_exists_not_confirmed(routeP, runP, tmp_path, monkeypatch):
+    """owner ruling of 2026-11-16: the score stage's import check fails (modules_differ) after the reference wrote
+    its file. The result is published as written, `completed` is in the ledger, and the run is NOT CONFIRMED: the
+    fixed sentence on the terminal and in the report, the label's clause, report.json's `unpinned` code"""
+    good = (Path(runP["out"]) / "sa3_result.json").read_bytes()
+
+    def score(job, real, step, name, *a, **k):
+        _write_result(job, good)
+        job.record(9, "score", "*", "failed", "modules_differ", 0)
+        return {"status": "failed", "code": "modules_differ", "modules": {}}
+    base = tmp_path / "m"
+    rc, lines, led = _inproc(routeP, base, monkeypatch, score)
+    assert rc == 0 and lines[-1] == "SCORED", lines[-8:]
+    receipt = receipt_of(lines)
+    assert [e["event"] for e in LG.read(led)] == ["started", "completed"] and LG.read(led)[1]["result_sha256"] == receipt
+    assert (base / "pub/sa3_result.json").read_bytes() == good
+    assert TX.RESULT_LINES["stage_modules"] in lines and TX.SENTENCES["code_unpinned"] in lines
+    assert printed(lines) == ["gate", "code_unpinned"]
+    rep = json.loads((base / "pub/report.json").read_text())
+    assert rep["unpinned"] == "modules_differ" and rep["score_stage"] == "modules_differ" and rep["label_addition"]
+    assert rep["sentences"] == ["gate", "code_unpinned"] and rep["cellmap"]["map"]["all_equal"]
+    md_ = (base / "pub/report.md").read_text()
+    assert md_.splitlines()[0] == f"**{TX.LABEL} The check did not confirm this run.**"
+    assert TX.SENTENCES["code_unpinned"] in md_
 
 
 def test_3j_a_result_cut_short_is_stopped_and_rerun_is_allowed(routeP, runP, tmp_path, monkeypatch):

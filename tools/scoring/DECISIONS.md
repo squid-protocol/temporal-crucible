@@ -220,8 +220,11 @@ written. Built and tested on decoys only (2026-11-15). Numbers are cited by `tes
     `--rerun` allowed. A launcher killed between the file and `completed` (ledger `started` only):
     `--resume` without `--receipt` on that run's protected directory (the name recorded in `started`) adopts it.
     A stage that ended failed after the file existed is published with a fixed line naming its code; for
-    `modules_differ` the line says the result's code is not shown to be the pinned commit's: **an owner ruling
-    on that case is open** (it is published and recorded, not stopped). `record`, `save_log`, `stopped()` and
+    `modules_differ` the line says the result's code is not shown to be the pinned commit's. **Owner ruling of
+    2026-11-16:** such a result is published as built and counts as NOT CONFIRMED, the same consequence as
+    `not_computed`: the fixed sentence `code_unpinned` is printed and written, the label gains "The check did not
+    confirm this run.", no hypothesis is called confirmatory until a decoy investigation, written up and dated,
+    places the cause; report.json carries `unpinned: "modules_differ"`. Test 3m. `record`, `save_log`, `stopped()` and
     `finish()` never raise (`launcher.log`). Tests 3h to 3l.
 33. **M1. One launcher at a time.** An exclusive `flock` on `<ledger>.lock`, taken in `main` before the ledger
     is read and held until the launcher ends; a held lock refuses with `ledger_locked`. `step9_score` reads the

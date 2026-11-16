@@ -34,6 +34,11 @@ SENTENCES = {
     "not_computed": ("The result stands as the registered output. The check could not be computed: {code}. The "
                      "check did not confirm this run: no hypothesis is called confirmatory until a decoy "
                      "investigation, written up and dated, places the cause."),
+    # owner ruling of 2026-11-16: the score stage's import check failed after the reference wrote its result
+    "code_unpinned": ("The result is published as written, but the score stage's import check failed "
+                      "(modules_differ): the result's code is not shown to be the pinned commit's. The check did not "
+                      "confirm this run: no hypothesis is called confirmatory until a decoy investigation, written "
+                      "up and dated, places the cause."),
     "part_failed": ("A corrected reading or a variant failed to run; it is reported \"failed\" with its code. A "
                     "later run is dated and labelled later. It never blocks the report."),
 }
@@ -58,7 +63,8 @@ RESULT_LINES = {
     "stage_failed": ("the score stage ended failed ({code}) after the reference had written its result; the result "
                      "is recorded and published as written"),
     "stage_modules": ("the score stage reported modules_differ: the result's code is not shown to be the pinned "
-                      "commit's (owner ruling open); the result is recorded and published as written"),
+                      "commit's (owner ruling of 2026-11-16: not confirmed); the result is recorded and published as "
+                      "written"),
 }
 
 

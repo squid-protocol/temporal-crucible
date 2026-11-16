@@ -875,7 +875,7 @@ def report_values(job: Job, parts: dict) -> dict:
     except Exception:                                            # noqa: BLE001  not even JSON: nothing read
         tests, expl, gate = {}, None, None
     lab, cm = parts.get("labels", {}), parts.get("compare", {})
-    sentences = sentences_after(parts)
+    sentences = sentences_after(parts, unpinned(job))
     return report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences)
 
 
@@ -933,7 +933,8 @@ def report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences) ->
     att = LG.read(LG.attempts_path(job.pl.ledger))
     return {
         "target": "real" if job.tgt.real else "decoy", "mode": job.mode, "made": now(),
-        "label_addition": "w_or_d" in sentences or "not_computed" in sentences,
+        "label_addition": bool({"w_or_d", "not_computed", "code_unpinned"} & set(sentences)),
+        "unpinned": "modules_differ" if unpinned(job) else None,
         "check_code": check_not_computed(parts),
         "score_stage": getattr(job, "score_stage_code", "none"),
         "result_shape": getattr(job, "result_shape", "expected"),
@@ -960,7 +961,7 @@ def report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences) ->
 REPORT = {
     "target": "word:target", "mode": "word:mode", "made": "time", "label_addition": "yesno",
     "check_code": "word:code?", "result_shape": "word:result_shape", "result_shape_at": "shapepos?",
-    "score_stage": "word:code",
+    "score_stage": "word:code", "unpinned": "word:code?",
     "rerun_reasons": ("list", "reason"),
     "tests": ("map", "word:confirmatory", {"holm_level": "real", "n": "count", "mean": "real?",
                                            "ci": ("opt", ("pair", "real")), "coded": "word:test_word",
@@ -989,6 +990,12 @@ STOPPED = {"target": "word:target", "mode": "word:mode", "made": "time", "step":
            "ledger_state": "word:ledger_state", "attempts": ("list", SC.ATTEMPT), "ledger": ("list", SC.LEDGER_ENTRY)}
 
 
+def unpinned(job) -> bool:
+    """owner ruling of 2026-11-16: an import-check failure of the score stage (modules_differ) after the result
+    file existed: published as written, and NOT CONFIRMED"""
+    return getattr(job, "score_stage_code", "none") == "modules_differ"
+
+
 def check_not_computed(parts: dict) -> str | None:
     """owner ruling of 2026-11-15: the code that kept the check from being computed (the label tables, the
     label-side input check or the comparison scorer ended failed), or None when the cell map is complete"""
@@ -1004,8 +1011,9 @@ def check_not_computed(parts: dict) -> str | None:
     return None
 
 
-def sentences_after(parts: dict) -> list[str]:
-    """section 6's sentences that apply after the score, in the table's order; the gate's always"""
+def sentences_after(parts: dict, unpinned: bool = False) -> list[str]:
+    """section 6's sentences that apply after the score, in the table's order; the gate's always. `unpinned`: the
+    score stage's import check failed after the reference wrote its result (owner ruling of 2026-11-16)"""
     out = ["gate"]
     lab, cm = parts.get("labels", {}), parts.get("compare", {})
     if lab.get("status") == "ok" and not lab["label_check"]["all_equal"]:
@@ -1015,6 +1023,8 @@ def sentences_after(parts: dict) -> list[str]:
         out.append("w_or_d" if by["W"] or by["D"] else "r_only")
     if check_not_computed(parts) is not None:
         out.append("not_computed")
+    if unpinned:
+        out.append("code_unpinned")
     if any(parts.get(k, {}).get("status") != "ok" for k in ("readings", "named", "hv_prepare",
                                                              "PU_tracker_keys_case_sensitive",
                                                              "PU_late_revert_ticket_dropped")):
@@ -1198,7 +1208,8 @@ def finish(job: Job, parts: dict) -> int:
     if getattr(job, "result_shape", "expected") != "expected":
         job.say(f"result_shape: unexpected ({TX.STOP_CODES['result_shape_unexpected']})")
     code = check_not_computed(parts) if parts else "not_run"
-    for s in sentences_after(parts) if parts else ["not_computed", "part_failed"]:
+    for s in (sentences_after(parts, unpinned(job)) if parts else
+              ["not_computed"] + (["code_unpinned"] if unpinned(job) else []) + ["part_failed"]):
         job.say(TX.sentence(s, code))
     if path is None:
         minimal_report(job, parts)
@@ -1212,10 +1223,11 @@ def minimal_report(job: Job, parts: dict) -> None:
     """the report could not be built: the result is published; say so with fixed words, the label as it stands
     (with its clause when the check did not confirm the run) and the section 6 sentences just printed"""
     try:
-        sents = sentences_after(parts) if parts else ["not_computed", "part_failed"]
+        sents = sentences_after(parts, unpinned(job)) if parts else \
+            ["not_computed"] + (["code_unpinned"] if unpinned(job) else []) + ["part_failed"]
         code = check_not_computed(parts) if parts else "not_run"
         label = TX.LABEL + (f" {TX.LABEL_ADDITION[0].upper()}{TX.LABEL_ADDITION[1:]}."
-                            if "w_or_d" in sents or "not_computed" in sents else "")
+                            if {"w_or_d", "not_computed", "code_unpinned"} & set(sents) else "")
         body = "\n\n".join([f"**{label}**", "The result is published (sa3_result.json, byte for byte). The report "
                              "could not be built from validated values; run --resume."]
                             + [TX.sentence(s, code) for s in sents])
