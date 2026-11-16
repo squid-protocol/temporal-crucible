@@ -1,0 +1,35 @@
+expat: 86 files libclang parsed (6 it could not), 61 libclang cross-file edges, 20 files with a caller
+  engine     edges     60  precision 100.0%  recall 98.4%  | reach: Spearman +0.974  mean abs error  0.01  top-10 found 10/10
+  eng-loose  edges     60  precision 100.0%  recall 98.4%  | reach: Spearman +0.974  mean abs error  0.01  top-10 found 10/10
+  ts-unique  edges     59  precision 98.3%  recall 95.1%  | reach: Spearman +0.974  mean abs error  0.02  top-10 found 10/10
+  ts-all     edges     59  precision 98.3%  recall 95.1%  | reach: Spearman +0.974  mean abs error  0.02  top-10 found 10/10
+redis: 553 files libclang parsed (295 it could not), 1052 libclang cross-file edges, 179 files with a caller
+  engine     edges    854  precision 92.3%  recall 74.9%  | reach: Spearman +0.754  mean abs error  0.59  top-10 found 9/10
+  eng-loose  edges    937  precision 91.1%  recall 81.2%  | reach: Spearman +0.764  mean abs error  0.50  top-10 found 10/10
+  ts-unique  edges   1024  precision 83.0%  recall 80.8%  | reach: Spearman +0.727  mean abs error  0.67  top-10 found 8/10
+  ts-all     edges   1083  precision 81.1%  recall 83.5%  | reach: Spearman +0.734  mean abs error  0.67  top-10 found 8/10
+hiredis: 39 files libclang parsed (13 it could not), 51 libclang cross-file edges, 11 files with a caller
+  engine     edges     38  precision 78.9%  recall 58.8%  | reach: Spearman +0.617  mean abs error  0.74  top-10 found 7/10
+  eng-loose  edges     53  precision 84.9%  recall 88.2%  | reach: Spearman +0.736  mean abs error  0.36  top-10 found 8/10
+  ts-unique  edges     32  precision 90.6%  recall 56.9%  | reach: Spearman +0.668  mean abs error  0.64  top-10 found 7/10
+  ts-all     edges     60  precision 81.7%  recall 96.1%  | reach: Spearman +0.873  mean abs error  0.33  top-10 found 9/10
+libuv: 236 files libclang parsed (133 it could not), 243 libclang cross-file edges, 37 files with a caller
+  engine     edges    136  precision 96.3%  recall 53.9%  | reach: Spearman +0.497  mean abs error  0.49  top-10 found 5/10
+  eng-loose  edges    190  precision 96.3%  recall 75.3%  | reach: Spearman +0.768  mean abs error  0.27  top-10 found 8/10
+  ts-unique  edges     31  precision 80.6%  recall 10.3%  | reach: Spearman +0.518  mean abs error  0.93  top-10 found 3/10
+  ts-all     edges    100  precision 93.0%  recall 38.3%  | reach: Spearman +0.815  mean abs error  0.65  top-10 found 8/10
+ndpi: 418 files libclang parsed (13 it could not), 321 libclang cross-file edges, 55 files with a caller
+  engine     edges    178  precision 93.8%  recall 52.0%  | reach: Spearman +0.686  mean abs error  0.39  top-10 found 8/10
+  eng-loose  edges    241  precision 92.5%  recall 69.5%  | reach: Spearman +0.688  mean abs error  0.27  top-10 found 9/10
+  ts-unique  edges    253  precision 85.0%  recall 67.0%  | reach: Spearman +0.888  mean abs error  0.34  top-10 found 9/10
+  ts-all     edges    359  precision 85.0%  recall 95.0%  | reach: Spearman +0.881  mean abs error  0.15  top-10 found 9/10
+zlib: 65 files libclang parsed (9 it could not), 53 libclang cross-file edges, 19 files with a caller
+  engine     edges     58  precision 74.1%  recall 81.1%  | reach: Spearman +0.763  mean abs error  0.38  top-10 found 8/10
+  eng-loose  edges     59  precision 72.9%  recall 81.1%  | reach: Spearman +0.741  mean abs error  0.40  top-10 found 8/10
+  ts-unique  edges     66  precision 69.7%  recall 86.8%  | reach: Spearman +0.843  mean abs error  0.42  top-10 found 8/10
+  ts-all     edges     69  precision 68.1%  recall 88.7%  | reach: Spearman +0.871  mean abs error  0.43  top-10 found 8/10
+file: 42 files libclang parsed (19 it could not), 16 libclang cross-file edges, 14 files with a caller
+  engine     edges      2  precision 50.0%  recall  6.2%  | reach: Spearman +0.203  mean abs error  0.38  top-10 found 1/10
+  eng-loose  edges      2  precision 50.0%  recall  6.2%  | reach: Spearman +0.203  mean abs error  0.38  top-10 found 1/10
+  ts-unique  edges     18  precision 72.2%  recall 81.2%  | reach: Spearman +0.806  mean abs error  0.19  top-10 found 8/10
+  ts-all     edges     18  precision 72.2%  recall 81.2%  | reach: Spearman +0.806  mean abs error  0.19  top-10 found 8/10

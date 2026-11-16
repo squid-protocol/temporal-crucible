@@ -1,0 +1,29 @@
+# Reach head-to-head: GitGalaxy's call graph vs a tree-sitter name-matching baseline, scored against libclang
+
+**Status:** exploratory, 7 small C repositories, 2026-11-16. Script `tools/sensor/h2h_reach.py`; output `reach_vs_treesitter_output.txt`. Question (owner): is our reach more accurate than a tool built on tree-sitter?
+
+## Method
+Ground truth: libclang 18.1.1 resolved calls (the engine's own gate adapter, `tests/tools/clang_callgraph.py`). Unit: the cross-file edge "file A calls a function defined in file B", which is what reach counts. Scored on files libclang could parse. Sources:
+* **engine** : `fcall_data` call edges that resolve to one definition (what `gitgalaxy reach` counts);
+* **eng-loose** : every resolved call edge including ambiguous ones, plus the tied-call candidates (`fcall_candidates`);
+* **ts-unique** : tree-sitter-c parse, a call to a name that exactly one file defines is an edge to that file;
+* **ts-all** : tree-sitter-c parse, a call to a name is an edge to every file that defines it.
+The tree-sitter baselines are my own minimal implementation (plain-name calls only; calls through fields or pointers ignored), not a specific product.
+
+## Result (mean over expat, redis, hiredis, libuv, ndpi, zlib, file)
+| source | edge precision | edge recall | reach ranking, Spearman |
+|---|---:|---:|---:|
+| engine (as `reach` counts) | 83.6% | 60.8% | +0.642 |
+| eng-loose (ambiguous edges and ties kept) | 84.0% | 71.4% | +0.696 |
+| ts-unique | 82.8% | 68.3% | +0.775 |
+| ts-all | 82.8% | 82.6% | +0.851 |
+
+**So no: on these repositories a plain tree-sitter name-matching tool gets the reach ranking right more often than ours** (Spearman 0.85 against 0.64), and finds more of the callers. Our edge precision is about the same (83.6% against 82.8%); it is clearly higher only on libuv (96.3 against 80.6 to 93.0), redis (92.3 against 81 to 83) and ndpi (93.8 against 85.0). It is lower on hiredis (78.9 against 90.6 for ts-unique) and zlib. Per repository (Spearman, engine / eng-loose / ts-all): expat .974 / .974 / .974, redis .754 / .764 / .734, hiredis .617 / .736 / .873, libuv .497 / .768 / .815, ndpi .686 / .688 / .881, zlib .763 / .741 / .871, file .203 / .203 / .806.
+
+## What it means
+* C has a flat namespace, so matching by name is about as strong as it gets there; this is the language where a tree-sitter baseline should do best. Go, Python and Java merge same-named methods in different packages, where scoping should help us; **not tested here**.
+* **The strict filter costs accuracy.** Keeping ambiguous edges (flagged) and tied candidates raised recall from 60.8% to 71.4% with no loss of precision (83.6% to 84.0%), and libuv's Spearman from +0.497 to +0.768. `gitgalaxy reach` today drops ambiguous edges silently; they should be counted and flagged.
+* One repository, `file`, is a failure of ours that is not explained: the engine finds 2 of 16 edges where name matching finds 13. Needs a look.
+
+## Limits
+Small repositories, and libclang could not parse part of most of them (redis 295 of 848 files, libuv 133 of 369, hiredis 13 of 52), so the reference covers only the parsed files and has its own gaps (macros, build configuration). curl, libgit2, libxml2, libpng and libexif were excluded: libclang parsed too few files without their generated headers (curl 260 of 1,069; libgit2 507 of 1,197) to be a reference. Seven repositories, exploratory, no registered test.
