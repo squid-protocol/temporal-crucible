@@ -55,6 +55,24 @@ def coupling(db, lib, exts=EXTS):
             out[path] = {"loc": loc, "includes": incs, "names": names, "sites": sites, "density": sites / loc}
     return out
 
+def coupling_learned(db, lib, exts=EXTS, min_files=2, min_share=0.8):
+    """Like coupling(), but the library's API names are LEARNED from the scan, not listed: an external name is the library's when it is called
+    from at least `min_files` files that include the library's header and at least `min_share` of all files that call it include that header.
+    Only the include pattern (what discovery would give: the header's directory or name) is needed."""
+    inc = re.compile(LIBS[lib][0]); files, ext = load(db)
+    including = {fid for fid, (path, _, imports) in files.items() if any(inc.search(i) for i in imports)}
+    callers = collections.defaultdict(set)
+    for fid, names in ext.items():
+        for c in names: callers[c].add(fid)
+    learned = {c for c, fs in callers.items() if len(fs & including) >= min_files and len(fs & including) / len(fs) >= min_share}
+    out = {}
+    for fid, (path, loc, imports) in files.items():
+        if not path.endswith(exts): continue
+        incs = [i for i in imports if inc.search(i)]; names = {c: n for c, n in ext.get(fid, {}).items() if c in learned}
+        if incs or names:
+            sites = len(incs) + sum(names.values()); out[path] = {"loc": loc, "includes": incs, "names": names, "sites": sites, "density": sites / loc}
+    return out
+
 def libraries(db, top=15):
     files, ext = load(db); local = {p.rsplit("/", 1)[-1] for p, _, _ in files.values()}
     cnt = collections.Counter(); fl = collections.defaultdict(set)

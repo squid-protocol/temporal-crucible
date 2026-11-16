@@ -1,0 +1,24 @@
+repo       library   snaps  sensor inc-only   regex    size  inc-size inc-sensor
+curl       openssl      99   0.645    0.613   0.622   0.313    +0.300     -0.032
+curl       c-ares       77   0.554    0.545   0.691   0.215    +0.330     -0.009
+curl       zlib         24   0.815    0.347   0.815   0.107    +0.240     -0.469
+curl       gnutls       66   0.720    0.700   0.720   0.095    +0.605     -0.021
+curl       libssh2      56   0.746    0.712   0.752   0.650    +0.062     -0.035
+curl       nghttp2      23   0.768    0.768   0.768   0.304    +0.464     +0.000
+curl       wolfssl      43   0.626    0.409   0.607   0.155    +0.255     -0.217
+curl       mbedtls      42   0.679    0.679   0.687   0.171    +0.507     +0.000
+libarchive zlib         32   0.256    0.256   0.279   0.530    -0.274     +0.000
+libarchive bzip2        24   0.486    0.486   0.516   0.350    +0.135     +0.000
+libarchive xz           39   0.609    0.609   0.610   0.359    +0.250     +0.000
+libarchive openssl      20   0.850    0.475   0.900   0.450    +0.025     -0.375
+libarchive zstd         26   0.511    0.511   0.511   0.274    +0.237     +0.000
+harfbuzz   icu          30   0.755    0.755   0.755   0.244    +0.511     +0.000
+harfbuzz   glib         32   0.664    0.409   0.789   0.415    -0.007     -0.255
+harfbuzz   graphite     39   0.970    0.970   0.970   0.256    +0.714     +0.000
+harfbuzz   uniscribe    32   0.637    0.637   0.637   0.245    +0.393     +0.000
+harfbuzz   coretext     49   0.826    0.191   0.826   0.191    +0.000     -0.634
+harfbuzz   freetype     23   0.703    0.167   0.703   0.101    +0.065     -0.536
+sensor - size (want > 0): units 19, mean +0.389, 99.7% lower bound +0.344, 90% CI [+0.363, +0.415]
+sensor - regex (non-inferior if lower CI > -0.05): units 19, mean -0.018, 99.7% lower bound -0.031, 90% CI [-0.025, -0.010]
+includes-only - size (want > 0): units 19, mean +0.253, 99.7% lower bound +0.213, 90% CI [+0.230, +0.275]
+includes-only - full sensor (non-inferior if lower CI > -0.05): units 19, mean -0.136, 99.7% lower bound -0.163, 90% CI [-0.152, -0.120]

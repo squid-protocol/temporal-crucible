@@ -34,20 +34,22 @@ def run(repo):
             y = np.array([1.0 if p in touched else 0.0 for p in paths])
             if y.sum() == 0: continue
             cs = LS.coupling(dbs[0], d, LE.EXTS[repo]); sens = np.array([cs.get(p, {}).get("density", 0.0) for p in paths])
+            cl = LS.coupling_learned(dbs[0], d, LE.EXTS[repo]); learned = np.array([cl.get(p, {}).get("density", 0.0) for p in paths])
+            inc = np.array([len(cs.get(p, {}).get("includes", ())) / loc[k] for k, p in enumerate(paths)])  # header includes only: no hand-written API-name list
             reg = np.array([rcoup[d].get(p, 0) for p in paths], dtype=float) / loc
             base = max(recall20(loc, loc, pr, y), recall20(-loc, loc, pr, y))
-            per[d].append({"sensor": recall20(sens, loc, pr, y), "regex": recall20(reg, loc, pr, y), "base": base, "pos": int(y.sum()), "found": int((sens > 0).sum())})
+            per[d].append({"sensor": recall20(sens, loc, pr, y), "regex": recall20(reg, loc, pr, y), "inc": recall20(inc, loc, pr, y), "learned": recall20(learned, loc, pr, y), "base": base, "pos": int(y.sum()), "found": int((sens > 0).sum())})
     return per
 
 def main():
     rng = np.random.default_rng(2982); allu = []
-    print(f"{'repo':10s} {'library':9s} {'snaps':>5s} {'sensor':>7s} {'regex':>7s} {'size':>7s} {'sensor-size':>11s} {'sensor-regex':>12s}")
+    print(f"{'repo':10s} {'library':9s} {'snaps':>5s} {'listed':>7s} {'inc-only':>8s} {'learned':>8s} {'regex':>7s} {'size':>7s} {'learn-size':>10s} {'learn-listed':>12s}")
     for repo in sys.argv[1:]:
         for d, v in run(repo).items():
             if len(v) < LE.MIN_SNAPS: continue
-            m = lambda k: float(np.mean([x[k] for x in v])); allu.append((repo, d, [x["sensor"] - x["base"] for x in v], [x["sensor"] - x["regex"] for x in v]))
-            print(f"{repo:10s} {d:9s} {len(v):5d} {m('sensor'):7.3f} {m('regex'):7.3f} {m('base'):7.3f} {m('sensor')-m('base'):+11.3f} {m('sensor')-m('regex'):+12.3f}")
-    for name, idx, margin in (("sensor - size (want > 0)", 2, 0.0), ("sensor - regex (non-inferior if lower CI > -0.05)", 3, -0.05)):
+            m = lambda k: float(np.mean([x[k] for x in v])); allu.append((repo, d, [x["sensor"] - x["base"] for x in v], [x["sensor"] - x["regex"] for x in v], [x["inc"] - x["base"] for x in v], [x["inc"] - x["sensor"] for x in v], [x["learned"] - x["base"] for x in v], [x["learned"] - x["sensor"] for x in v]))
+            print(f"{repo:10s} {d:9s} {len(v):5d} {m('sensor'):7.3f} {m('inc'):8.3f} {m('learned'):8.3f} {m('regex'):7.3f} {m('base'):7.3f} {m('learned')-m('base'):+10.3f} {m('learned')-m('sensor'):+12.3f}")
+    for name, idx, margin in (("sensor - size (want > 0)", 2, 0.0), ("sensor - regex (non-inferior if lower CI > -0.05)", 3, -0.05), ("includes-only - size (want > 0)", 4, 0.0), ("includes-only - full sensor (non-inferior if lower CI > -0.05)", 5, -0.05), ("LEARNED names - size (want > 0)", 6, 0.0), ("LEARNED names - listed names (non-inferior if lower CI > -0.05)", 7, -0.05)):
         arrs = [np.array(u[idx]) for u in allu]
         if not arrs: continue
         mean = float(np.mean([a.mean() for a in arrs])); b = np.array([np.mean([a[rng.integers(0, len(a), len(a))].mean() for a in arrs]) for _ in range(2000)])
