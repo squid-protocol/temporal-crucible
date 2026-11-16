@@ -1,0 +1,10 @@
+libgit2: 85 open markers; fossils (older than this repo's 90th-percentile repayment age, 2.0 y): 93%; hidden by triage: 0; standing warnings: 0; reopened: 0
+  id         where                                        marker    age stuck file commits    owner effort +others  status
+  d2d8a4c267 src/libgit2/repository.c:?                   TODO    15.8y   97%           15     gone      L       1  open FOSSIL | TODO : Ensure the parent tree structure already 
+  04b75175cf src/libgit2/repository.c:2665                TODO     4.9y   92%           15     gone      L       1  open FOSSIL | TODO: issue warning when warning API is availabl
+  899db0e397 src/libgit2/index.c:254                      TODO    13.5y   97%            7     gone      L       1  open FOSSIL | TODO: enable this when resolving case insensitiv
+  5ad203e50c src/libgit2/commit_graph.c:454               TODO     5.8y   95%            6     gone      M       1  open FOSSIL | TODO: properly open the file without access time
+  265deabab6 src/libgit2/commit_graph.c:599               TODO     5.8y   95%            6     gone      M       1  open FOSSIL | TODO: properly open the file without access time
+  da633c84dd src/libgit2/index.c:1022                     FIXME    8.4y   90%            7   active      L       1  open FOSSIL | FIXME: this is duplicated with the work in
+  711e70f9b0 src/libgit2/odb.c:459                        TODO    13.5y   97%            5     gone      M       0  open FOSSIL | TODO: inodes are not really relevant on Win32, s
+  aec73f6ea5 src/libgit2/pack-objects.c:718               TODO    14.0y   97%            5     gone      M       3  open FOSSIL | TODO

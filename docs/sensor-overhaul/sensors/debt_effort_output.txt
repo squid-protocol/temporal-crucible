@@ -1,0 +1,18 @@
+3,503 repaid markers in 6 repos; lines changed in that file by the repaying commit: median 35, 75th pct 120, 90th pct 380; 7% were one- or two-line edits
+
+Spearman with the size of the repaying change in that file (within repo, median over repos [min,max])
+  file size at the time (lines)                                                         +0.13 [-0.02,+0.35]
+  file commits in the last year                                                         +0.02 [-0.29,+0.18]
+  marker text length                                                                    +0.04 [-0.15,+0.11]
+  scope words in the text (rewrite, refactor, support, implement, handle, all, proper, ...) +0.03 [-0.04,+0.07]
+  marker age at repayment (years)                                                       +0.02 [-0.31,+0.17]
+  other markers repaid in the same file in the same commit                              +0.22 [+0.03,+0.52]
+
+share of repayments that were tiny (<= 5 lines changed in the file) by group
+  file < 500 lines                   n  1048   tiny   21%   median change 24 lines   90th pct 137
+  file 500-2000 lines                n  1522   tiny   13%   median change 34 lines   90th pct 368
+  file >= 2000 lines                 n   933   tiny    9%   median change 56 lines   90th pct 1301
+  scope words present                n   362   tiny   13%   median change 33 lines   90th pct 382
+  no scope words                     n  3141   tiny   14%   median change 35 lines   90th pct 378
+  one marker repaid in the commit    n  1764   tiny   20%   median change 23 lines   90th pct 194
+  2+ markers repaid together         n  1739   tiny    8%   median change 52 lines   90th pct 589

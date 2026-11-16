@@ -1,0 +1,26 @@
+MIGRATION SCOPE: git_buf_free -> git_buf_dispose   (libgit2, snapshot 34 = 2018-04, before the migration)
+  functions that call git_buf_free: 761 in 228 files; total size of those functions 29,267 lines; functions already calling git_buf_dispose: 0
+  of those callers: 327 in source files, 434 in tests/examples/docs
+  functions that depend on the callers (one more hop, ripple): 1276
+  files holding the most callers:
+    src/repository.c                                35 callers,  1588 lines
+    tests/core/buffer.c                             29 callers,  1044 lines
+    src/remote.c                                    22 callers,  1109 lines
+    src/submodule.c                                 21 callers,  1116 lines
+    src/refdb_fs.c                                  20 callers,   912 lines
+    tests/diff/stats.c                              15 callers,   272 lines
+  most depended-on callers (touch these carefully):  git_repository_free (242 callers), git_futils_rmdir_r (57 callers), git_remote_lookup (54 callers), git_submodule_lookup (48 callers), git_remote_create (36 callers)
+
+PROGRESS (snapshot, label, functions still calling git_buf_free, functions calling git_buf_dispose, share of the original callers still on git_buf_free):
+   34 2018-04    761     0   100.0%
+   35 2018-07      0   772     0.0%
+   36 2018-10      0   781     0.0%
+   37 2019-01      0   794     0.0%
+   38 2019-04      0   796     0.0%
+   39 2019-07      0   814     0.0%
+   40 2019-10      0   828     0.0%
+   41 2020-01      0   828     0.0%
+   42 2020-04      0   834     0.0%
+   43 2020-07      0   839     0.0%
+
+STRAGGLERS at snapshot 43 (2020-07): 0 functions still call git_buf_free (0 of them in tests/examples/docs, 0 in source): a plateau of callers in tests usually means the old name is still the public API, not unfinished work. By file:

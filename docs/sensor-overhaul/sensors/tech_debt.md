@@ -1,6 +1,6 @@
 # Sensor design: the debt ledger (from research to sensor)
 
-**Status: design, prototype, and a validated v2 trial (section 9); exploratory.** Replaces the sigmoid `risk_tech_debt` gauge. Prototype: `tools/sensor/debt_ledger.py` (output in `tech_debt_prototype_output.txt`); engine count check: `tools/sensor/debt_validity.py`.
+**Status: design, prototype, validated v2 trial (section 9), effort and triage (section 10); exploratory.** Replaces the sigmoid `risk_tech_debt` gauge. Prototype: `tools/sensor/debt_ledger.py` (output in `tech_debt_prototype_output.txt`); engine count check: `tools/sensor/debt_validity.py`.
 
 ## 1. The question the sensor answers
 *What self-admitted work is open in this file or function, how old is it compared with how this project normally behaves, who wrote it and are they still around, and is it sitting where someone is working right now?*
@@ -96,3 +96,15 @@ What to add to match it: an effort proxy, persisted marker IDs with triage statu
 5. **Persist marker positions and IDs in the engine** so lines resolve for every marker.
 6. **No outcome claims beyond repayment**; debt density still does not predict fixes.
 Caveats: C family and nine projects; marker detection uses the lifecycle study's comment heuristics; two-year horizon; one outcome; AUC 0.613 is modest, so the list is a prioritisation aid, not a forecast.
+
+## 10. Effort, stable IDs and triage (matching what repowise's list has)
+**Stable marker IDs.** `tools/sensor/debt_worklist.py` gives each marker an ID = hash of (birth file, marker word, birth text, occurrence number among identical texts), so the ID survives edits above the marker, moves and renames (it is derived from the birth state, which the tracker follows through moves, rewordings and renames). Not yet exercised across a re-scan on a later commit; by construction only.
+**Triage status.** A sidecar file per repo (`tools/sensor/triage/<repo>.json`) holds `acknowledged` (still open, ranked last), `false_positive` (hidden), `standing_warning` (kept on purpose, listed apart) and `resolved` (hidden; **reopened automatically if the marker is re-detected**, repowise's rule). Demo (`debt_triage_demo.txt`): a standing warning moved to its own list, an acknowledged marker dropped to the bottom, a "resolved" marker still in the code came back as `reopened`, an unknown ID was rejected.
+**Effort: what could and could not be validated** (`debt_effort.py`, `debt_effort_report.py`, 3,503 repaid markers in six C projects; target = lines changed in that file by the repaying commit: median 35, 90th percentile 380, only 7% were one- or two-line edits). **Nothing observable before repayment predicts how big the repaying change is:** within-repo rank correlations with the size of the change are file size +0.13 (range -0.02 to +0.35), file activity +0.02, marker text length +0.04, scope words in the text (rewrite, refactor, support, implement...) +0.03, marker age +0.02. The one real signal is **clustering: other markers repaid in the same file in the same commit, +0.22 (range +0.03 to +0.52)**; repayment in big commits that clear several markers together is 52 lines at the median against 23 for a lone marker. So the worklist does not pretend to estimate effort per marker. It shows an **empirical effort band by file size** and the **number of other open markers in the same file**:
+| Band | file size | what repaid debt in such files looked like |
+|---|---|---|
+| S | under 500 lines | median change 24 lines (90th percentile 137); 21% tiny (5 lines or fewer) |
+| M | 500-2,000 lines | median 34 (90th percentile 368); 13% tiny |
+| L | 2,000+ lines | median 56 (90th percentile 1,301); 9% tiny |
+The band describes what past repayment looked like in files of that size, not a forecast for this marker. Row example (libgit2): `src/libgit2/commit_graph.c:599 TODO 5.8 y, stuck 95%, 6 commits last year, owner gone, effort M, +1 other marker in the file, FOSSIL`.
+**Worklist columns now:** ID, where, marker, original age, stuck probability, file commits last year, owner status, effort band, other open markers in the file, triage status, fossil flag. Against repowise's list this adds stable IDs, triage with reopen-on-redetect and an effort band; what remains different is that repowise's effort and impact come from detector severities and weights, while ours is empirical and weak.
