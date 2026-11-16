@@ -1,0 +1,91 @@
+file-snapshots 77,706; last snapshot of each repo 77,706 code files in 580 repos
+
+metrics with any variance: ['cognitive_load', 'safety_score', 'tech_debt', 'verification', 'api_exposure', 'concurrency', 'state_flux', 'dead_code', 'stability', 'churn', 'documentation', 'secrets_risk'] | constant: ['spec_match'] 
+
+A. DEGENERACY  (last snapshots, pooled; share of files at exactly 0, at 100, and median among non-zero)
+  cognitive_load  zero  23.9%   at 100:   0.4%   median of non-zero   21.4
+  safety_score    zero  22.5%   at 100:   0.0%   median of non-zero   55.2
+  tech_debt       zero  63.1%   at 100:   2.0%   median of non-zero   37.8
+  verification    zero  36.8%   at 100:   0.0%   median of non-zero    2.4
+  api_exposure    zero  18.5%   at 100:   0.5%   median of non-zero   10.1
+  concurrency     zero  84.4%   at 100:   4.7%   median of non-zero   93.5
+  state_flux      zero  47.4%   at 100:  20.9%   median of non-zero   99.5
+  dead_code       zero  93.9%   at 100:   0.0%   median of non-zero    8.4
+  stability       zero  64.3%   at 100:   0.2%   median of non-zero    3.4
+  churn           zero  78.6%   at 100:   0.2%   median of non-zero   16.2
+  documentation   zero  10.1%   at 100:  62.7%   median of non-zero  100.0
+  secrets_risk    zero  99.8%   at 100:   0.1%   median of non-zero   98.3
+
+B. SIZE  Spearman with coding_loc, per repo: median [min, max] over repos
+  cognitive_load  +0.48 [-0.73,+0.86]
+  safety_score    +0.39 [-0.50,+0.87]
+  tech_debt       +0.10 [-0.83,+0.76]
+  verification    +0.33 [-0.72,+0.94]
+  api_exposure    +0.13 [-0.68,+0.90]
+  concurrency     +0.17 [-0.53,+0.71]
+  state_flux      +0.37 [-0.50,+0.84]
+  dead_code       +0.18 [-0.11,+0.67]
+  stability       +0.26 [-0.52,+0.59]
+  churn           +0.31 [-0.40,+0.79]
+  documentation   -0.09 [-0.59,+0.64]
+  secrets_risk    +0.08 [-0.05,+0.29]
+
+C. IS EACH METRIC JUST A SUMMARY OF KEYWORD-FAMILY DENSITIES?  best single family (Spearman, pooled) and 5-fold R2 from all densities + size
+  cognitive_load  R2 0.82   top families: struct_branch 0.75, state_flux 0.61, struct_snake_case 0.33
+  safety_score    R2 0.81   top families: state_flux 0.77, struct_branch 0.48, state_safety_neg 0.43
+  tech_debt       R2 0.51   top families: state_unreferenced 0.46, state_planned_debt 0.26, state_pointers 0.24
+  verification    R2 0.40   top families: struct_branch 0.46, def_test 0.41, state_pointers 0.30
+  api_exposure    R2 0.81   top families: arch_api 0.67, state_unreferenced 0.45, struct_generics 0.31
+  concurrency     R2 0.90   top families: arch_concurrency 0.97, struct_closures 0.28, state_halt_hits 0.27
+  state_flux      R2 0.61   top families: state_flux 0.63, struct_branch 0.55, def_test 0.29
+  dead_code       R2 0.80   top families: state_graveyard 1.00, state_fragile_debt 0.19, bitwise_ops 0.14
+  stability       R2 0.05   top families: def_safety 0.15, struct_snake_case 0.14, struct_spaces 0.13
+  churn           R2 0.08   top families: struct_comprehensions 0.14, struct_pascal_case 0.14, struct_func_start 0.13
+  documentation   R2 0.56   top families: def_doc 0.74, def_encapsulation 0.18, arch_api 0.17
+  secrets_risk    R2 0.78   top families: threat_private_info 1.00, threat_entropy 0.11, arch_crypto 0.08
+
+D. DIMENSIONALITY  PCA on within-repo ranks of the active metrics (pooled last snapshots)
+  variance explained by component: 36%, 14%, 11%, 10%, 8%, 6% | components for 90%: 8 of 12 | participation ratio 5.4
+  pairwise rank correlations among the 12 metrics: median +0.07, share with |r|>0.5: 8%
+
+E. DOES EACH METRIC TRACK WHAT ITS NAME SAYS?  Spearman with an independent measure, median [min,max] over repos
+  cognitive_load  vs max_func_complexity        +0.77 [+0.23,+1.00]
+  cognitive_load  vs avg_func_complexity        +0.72 [+0.21,+0.99]
+  api_exposure    vs normalized_blast_radius    +0.57 [-0.29,+0.90]
+  api_exposure    vs internal_dependency_links  +0.08 [-0.66,+0.77]
+  api_exposure    vs pagerank_score             +0.57 [-0.29,+0.90]
+  api_exposure    vs is_header                  +0.23 [-0.18,+0.91]
+  documentation   vs doc_ratio                  -0.45 [-0.95,+0.36]
+  tech_debt       vs debt                       +0.37 [-0.21,+0.95]
+  concurrency     vs conc                       +0.91 [+0.10,+1.00]
+  state_flux      vs state_flux                 +0.70 [-0.46,+1.00]
+  dead_code       vs state_unreferenced         +0.01 [-0.34,+0.45]
+  safety_score    vs def_safety                 +0.19 [-0.74,+0.82]
+  safety_score    vs state_danger               +0.16 [-0.64,+0.89]
+  verification    vs is_test                    -0.59 [-1.00,+0.14]
+  verification    vs def_test                   -0.36 [-0.85,+0.45]
+
+F. WHAT DO THEY SEPARATE?  AUC for telling a role from other files (within repo, median over repos) and share of variance that is between repos
+  is_test    (share of files 28%): cognitive 0.29  safety_sc 0.34  tech_debt 0.31  verificat 0.07  api_expos 0.27  concurren 0.51  state_flu 0.20  dead_code 0.50  stability 0.50  churn 0.50  documenta 0.63  secrets_r 0.50
+  is_header  (share of files 3%): cognitive 0.27  safety_sc 0.27  tech_debt 0.27  verificat 0.53  api_expos 0.88  concurren 0.49  state_flu 0.32  dead_code 0.49  stability 0.50  churn 0.50  documenta 0.52  secrets_r 0.50
+  is_docs    (share of files 6%): cognitive 0.52  safety_sc 0.52  tech_debt 0.44  verificat 0.22  api_expos 0.42  concurren 0.50  state_flu 0.38  dead_code 0.49  stability 0.50  churn 0.49  documenta 0.56  secrets_r 0.50
+  is_vendor  (share of files 0%): cognitive 0.42  safety_sc 0.54  tech_debt 0.66  verificat 0.46  api_expos 0.39  concurren 0.45  state_flu 0.46  dead_code 0.44  stability 0.50  churn 0.50  documenta 0.49  secrets_r 0.50
+
+G. THE MIX: cluster files on the active metrics' within-repo ranks (k=6), pooled
+   cognitive_load  safety_score  tech_debt  verification  api_exposure  concurrency  state_flux  dead_code  stability  churn  documentation  secrets_risk  files   is_test    header  median_loc
+0            0.36          0.34       0.83          0.57          0.44         0.48        0.41       0.49       0.50   0.50           0.46          0.50   9181  0.066006  0.015249        44.0
+1            0.31          0.30       0.37          0.45          0.76         0.46        0.34       0.49       0.48   0.48           0.47          0.50  14163  0.288851  0.077808        42.0
+2            0.75          0.75       0.52          0.73          0.80         0.51        0.79       0.52       0.55   0.56           0.40          0.51  15048  0.033293  0.021664       160.0
+3            0.63          0.64       0.39          0.31          0.39         0.57        0.45       0.50       0.51   0.50           0.58          0.50  12279  0.534327  0.010261        92.0
+4            0.79          0.77       0.65          0.73          0.30         0.52        0.79       0.52       0.51   0.52           0.49          0.50  11012  0.035598  0.009081       141.0
+5            0.23          0.25       0.41          0.28          0.26         0.49        0.29       0.49       0.48   0.47           0.60          0.50  16023  0.600574  0.009611        36.0
+  agreement of clusters with: role (test/header/docs/vendor) AMI 0.141 | language AMI 0.029 | repo AMI 0.021 | size quartile AMI 0.057 | archetype AMI 0.069
+
+H. STABILITY OVER TIME  Spearman of the same file's value two sampled snapshots apart (~2 years), median over repos
+  
+
+I. CHURN AND STABILITY (only populated where the scan could read git history)
+  churn      nonzero  21.4% | at 100   0.2% | repos with any nonzero 243 of 580
+  stability  nonzero  35.7% | at 100   0.2% | repos with any nonzero 488 of 580
+  among 27,957 files with history (494 repos): Spearman of churn with: coding_loc +0.29, risk_stability -0.88, raw_churn_freq +0.97, ownership_entropy +0.55, silo_risk +0.67, risk_cognitive_load +0.05, risk_tech_debt +0.03, risk_state_flux +0.11
+  stability with: coding_loc -0.23, risk_churn -0.88, raw_churn_freq -0.90, ownership_entropy -0.44, risk_cognitive_load -0.06, risk_tech_debt -0.02

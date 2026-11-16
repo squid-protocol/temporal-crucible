@@ -1,0 +1,30 @@
+35,139 file-years, 5,796 files, 7 repos
+
+A. LATER FIXES: AUC for 'any fix next year', later half of each repo (fit on the earlier half); mean over repos and range
+  label raw : size 0.785   size+prior 0.813   size+metrics 0.798   size+prior+metrics 0.819   gain from metrics: over size +0.013, over size+prior +0.006
+  label v3c : size 0.819   size+prior 0.834   size+metrics 0.829   size+prior+metrics 0.839   gain from metrics: over size +0.010, over size+prior +0.005
+  label reg : size 0.814   size+prior 0.820   size+metrics 0.818   size+prior+metrics 0.823   gain from metrics: over size +0.004, over size+prior +0.003
+
+B. SINGLE METRIC WITHIN SIZE: AUC for later fix (v3c) inside each size quartile, median over repo-quartiles (0.5 = nothing beyond size)
+  cognitive_load  0.584  [0.38,0.76]
+  safety_score    0.547  [0.33,0.71]
+  tech_debt       0.626  [0.38,0.75]
+  verification    0.617  [0.47,0.75]
+  api_exposure    0.523  [0.42,0.76]
+  concurrency     0.502  [0.44,0.61]
+  state_flux      0.613  [0.30,0.78]
+  dead_code       0.512  [0.38,0.65]
+  documentation   0.494  [0.24,0.60]
+  secrets_risk    0.500  [0.50,0.50]
+
+C. LATER CHANGE: Spearman between metric and relative change in the file's size over the next year, within size quartile (median over repo-quartiles)
+  cognitive_load  +0.03  [-0.23,+0.13]
+  safety_score    -0.00  [-0.18,+0.21]
+  tech_debt       +0.08  [-0.21,+0.27]
+  verification    +0.06  [-0.19,+0.26]
+  api_exposure    +0.01  [-0.07,+0.20]
+  concurrency     +0.05  [-0.10,+0.16]
+  state_flux      +0.07  [-0.18,+0.20]
+  dead_code       -0.00  [-0.13,+0.15]
+  documentation   -0.01  [-0.28,+0.09]
+  secrets_risk    +0.01  [-0.07,+0.04]

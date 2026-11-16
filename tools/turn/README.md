@@ -18,3 +18,4 @@ Thresholds (10 functions, 1%, 40% co-occurrence) are discovery choices. Callee n
 `sweep_forecast.py`, `intent.py`, `swap_check.py` (branch `turn/forecast`): sweep forecast tests and intent rules; see `docs/turn_sweep_forecast.md`.
 `fix_funcs.py`, `fn_frame.py`, `fn_model.py` (branch `turn/forecast`): function-level fix mapping and recidivism test; see `docs/turn_function_recidivism.md`.
 `scope_test.py`, `scope_report.py` (branch `turn/forecast`): would the engine's call graph outline a sweep's scope; see `docs/turn_sweep_scope.md`. Closing summary: `docs/turn_forecast_closeout.md`.
+`surface_area/` (branch `turn/forecast`): surface-area metric tests (`sa_*.py`), as-of history scans from git worktrees (`hist_scan.py`, needs the main engine extracted with `git archive origin/main` and `GITGALAXY_HISTORY_ASOF=1`) and the ripple test (`ripple_test.py`); see `docs/turn_surface_area.md`. Paths are hard-coded to the discovery machine.
