@@ -5,6 +5,9 @@ Work branch that followed the TURN discovery phase (PR #186 and `docs/turn_close
 ## Question
 What do the lineage ledger, sweep detector, tree-sitter edit classes and call graphs let us say, and not say, about predicting errors, fixes and the work they entail?
 
+## Start here for the GitGalaxy question
+`turn_gitgalaxy_assessment.md`: what the engine is good for, where it did not help, ranked feature recommendations, a pilot test, and a provenance table for every number.
+
 ## Documents on this branch
 `turn_forecast_firstlook.md` (function-level change forecast), `turn_sweeps_and_fixes.md` (label audit and sweep exposure), `turn_fix_catalog_and_archetypes.md` (what fix work looks like; six kinds of edit), `turn_edit_kinds_vs_fixes.md`, `turn_sweep_forecast.md`, `turn_function_recidivism.md`, `turn_sweep_scope.md`. Tools: `tools/turn/` (README lists each script; unfinished, hard-coded paths).
 
