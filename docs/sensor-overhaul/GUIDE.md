@@ -100,7 +100,7 @@ Repowise scores every file 1-10 from 59 detectors (parse tree, dependency graph,
 
 ## 7. Roadmap
 1. **Tech-debt ledger** (this repo, `sensors/tech_debt.md`): prototype done on four repos; next, move to engine inputs and test the acceptance checklist.
-2. **Activity sensor** (churn, stability, ownership merged); make history-aware scans the default for history studies; fix `historical-call-graph-gif`.
+2. **Activity sensor** (designed: `sensors/activity.md`; churn, stability and ownership become recent activity, age and ownership concentration). Engine work: whole-history walk, persisted horizons, as-of mode by default for historical scans, fix `historical-call-graph-gif`, correct the "ablated in every scan" text in `docs/vectors.md`.
 3. **Reach sensor** (callers, ripple, header flag) with the migration scope report as its first product.
 4. **Mutation, concurrency, cognitive-load drill-downs** (worst functions listed).
 5. **Hygiene sensors from the comment research** (documented public functions, header coverage, commented-out code, danger comments, comment neglect).
