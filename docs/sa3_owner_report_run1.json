@@ -1,0 +1,336 @@
+{
+ "first_line": "PASS",
+ "verdict": "PASS",
+ "codes": [],
+ "target": "real",
+ "started": 1794742399,
+ "finished": 1794742808,
+ "seconds": 409,
+ "repos": {
+  "blast": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "bugzilla": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "bun": {
+   "determined": true,
+   "reason": "none",
+   "count": 1,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "circuitpython": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "commons-lang": {
+   "determined": true,
+   "reason": "none",
+   "count": 1,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "cpython": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "curl": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "discourse": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "django": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "effect": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "fieldtrip": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "freebsd-src": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "ghostty": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "gnupg": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "go": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "godot": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "impacket": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "kubernetes": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "libxml2": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "mediawiki": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "micropython": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "moby": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "ndpi": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "opencv": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "pandas": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "postgres": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "prometheus": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "racket": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "rails": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "redis": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "runtime": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "scapy": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "sphinx": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "spock": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "sqlite": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "sqlmap": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "swift": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "tcpip_historical": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "tensorflow": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  },
+  "tigerbeetle": {
+   "determined": true,
+   "reason": "none",
+   "count": 0,
+   "a_equals_stored": true,
+   "disagreements": 0
+  }
+ },
+ "placebo": {
+  "verdict": "bytes_equal",
+  "code": "none",
+  "largest_difference": 0.0,
+  "numbers_differing": 0,
+  "integer_fields_equal": true,
+  "repos_in_stage": 20
+ },
+ "versions": {
+  "python": "3.12.3",
+  "numpy": "1.26.4",
+  "scipy": "1.11.4",
+  "git": "2.43.0",
+  "tar": "1.35",
+  "linear_algebra": [
+   "libblas.so.3.12.0",
+   "libgfortran.so.5.0.0",
+   "liblapack.so.3.12.0"
+  ]
+ },
+ "seal": {
+  "written": true,
+  "entries": 397,
+  "code_modules_found": [
+   "_engine",
+   "fixlike_v2",
+   "hist_fixlabel",
+   "hist_replicate",
+   "label_card",
+   "label_cascade",
+   "laws_history",
+   "laws_units",
+   "mod1_lift",
+   "sa3_outcomes",
+   "sa3_score",
+   "sa3_stats"
+  ],
+  "modules_unchanged_since_8fb7fe0": true,
+  "lock_expected_entries": 9
+ },
+ "manifest": {
+  "unchanged": true,
+  "entries": 6384
+ },
+ "stages_failed": 0
+}

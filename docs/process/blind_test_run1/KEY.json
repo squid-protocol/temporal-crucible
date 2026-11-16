@@ -1,0 +1,400 @@
+{
+ "what": "KEY of the blind test of the comparison check (docs/process/comparison_scorer_spec.md section 8, Revision 2.1), study P. Written by the fault-writer before any run.",
+ "written": "2026-11-15",
+ "copies_dir": "/home/joe/.claude/jobs/24bf9d40/tmp/blind_material/copies",
+ "pristine_side": "/home/joe/.claude/jobs/24bf9d40/tmp/blind_material/pristine",
+ "pristine_source": "/home/joe/.claude/jobs/24bf9d40/tmp/compare_build/cache/P/work (tree/tools, tree/docs, study, pool; tree/.git left out); diff -r equal at copy time",
+ "assignment": "secrets.SystemRandom().sample of 8 of the 16 numbers for the faulty copies, then SystemRandom().shuffle of the 8 kinds onto them; repo, file, value and commit choices inside each fault also by SystemRandom (scripts/make_faults.py)",
+ "layer_names": "runner layers: seal, placebo, input_check, cell_map_WD, cell_map_R",
+ "pass_rule": "seal withheld: every faulty copy fires at least its expected_seal_withheld layers; no clean copy fires any layer. With the seal: every faulty copy also fires the seal.",
+ "size_note": "every copy has the same file sizes as the pristine side except one faulty copy's changed file (the control reorder needs 30 more bytes; keeping the size would need a second edit)",
+ "copies": {
+  "01": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "02": {
+   "kind": "pool_commits_swapped",
+   "change": {
+    "file": "study/sa3_outcomes/mediawiki.json",
+    "repo": "mediawiki",
+    "location": "outcomes.control_pool.commits (dict order)",
+    "old": "position 3 = 251f2455c93f94c700c9d9a458ec409d691ef74e, position 42 = e917794ce597e6f9903a7ae37c734403cd229f5f",
+    "new": "position 3 = e917794ce597e6f9903a7ae37c734403cd229f5f, position 42 = 251f2455c93f94c700c9d9a458ec409d691ef74e",
+    "note": "two pool commits with different, non-empty file sets, out of 132; repo's pool is larger than K so draws are by position over a strict subset"
+   },
+   "sha256": {
+    "pristine": "a63e190be7f6da29306be2e71b41d52398feaff5a0872e5f2d646d7a8a2be55a",
+    "copy": "b5853fedc32079682e1c3e4d7afe621fe58f81d47d4fe08b0149c8a7c80e842b"
+   },
+   "byte_diff": {
+    "size": [
+     50278,
+     50278
+    ],
+    "n_ranges": 234,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "input_check (label side)",
+    "cell_map_R"
+   ],
+   "expected_seal_withheld": [
+    "input_check",
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [],
+   "must_stay_silent": [
+    "placebo",
+    "cell_map_WD"
+   ],
+   "why": "As the spec. The pool (132 commits) is larger than K (55 HP commits), so draws are by position over a strict subset and the swap changes which commits are drawn: matched-control difference (R). Pool order enters nothing else (churn_any is a union). Input check label side: pool order is compared.",
+   "expected_with_seal": [
+    "seal",
+    "input_check",
+    "cell_map_R"
+   ]
+  },
+  "03": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "04": {
+   "kind": "silent_rule_edc5c53",
+   "change": {
+    "file": "tree/tools/sa3_score.py",
+    "location": "function silent (lines 183-190)",
+    "old": "def silent(x: np.ndarray, name: str = \"\") -> bool:\n    \"\"\"non-zero in < 10% of files; or, for a continuous score only, fewer than 20 distinct values. Counts and the\n    one binary indicator are exempt from the second clause: a depth of 1..12 or a yes/no is not a broken score.\"\"\"\n    v = x[~np.isnan(x)]\n    if len(v) == 0 or (v != 0).mean() < 0.10:\n        return True\n    continuous = name in PREDICTORS and not PREDICTORS[name][2] and name != \"risk_safety_nonzero\"\n    return continuous and len(np.unique(v)) < 20\n",
+    "new": "def silent(x: np.ndarray, name: str = \"\") -> bool:\n    v = x[~np.isnan(x)]\n    return len(v) == 0 or (v != 0).mean() < 0.10 or len(np.unique(v)) < 20                                                                                                                                                                                                                                                                                                                                                                               \n",
+    "note": "the edc5c53 body (every predictor silent under 20 distinct values, no exemption for counts or the yes/no indicator) under the CURRENT signature: the edc5c53 def took no `name`, and the current callers pass one, so the literal def would only raise TypeError; the docstring is dropped as in edc5c53; trailing spaces on the last line keep the file size"
+   },
+   "sha256": {
+    "pristine": "38b7ad1ca43a8e4d0205462fafe3a519f00e14f0a98840766fb75155f73af271",
+    "copy": "894383fc411df6d2aa9d17ad0da3dcdb2ae2304e90f163c42cff7ff28cc930ce"
+   },
+   "byte_diff": {
+    "size": [
+     29887,
+     29887
+    ],
+    "n_ranges": 65,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "cell_map_WD (W: cells appear or vanish)",
+    "cell_map_R"
+   ],
+   "expected_seal_withheld": [
+    "cell_map_WD",
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [
+    "placebo",
+    "input_check"
+   ],
+   "must_stay_silent": [],
+   "why": "As the spec. Under the edc5c53 body every predictor with fewer than 20 distinct present values is silent, including the counts and the yes/no indicator risk_safety_nonzero (2 distinct values, so silent in every repo): its HP and KW cells change status to 'instrument silent' (W) and stop drawing, which shifts the shared stream (R). D summaries of the vanished cells change too. Placebo possible: the placebo file records silence for the four primaries; it fires only if a primary count (in_degree, struct_branch, amplified_cascading_flux) has fewer than 20 distinct values in some repo clearing the HP floor - not checked, so not required. Input check possible: it compares 'silence of every predictor'; if its reference-side silence comes from the copy's own silent() it fires, if from the comparison route's rule applied to both arrays it does not (the fault-writer did not read input_check.py).",
+   "expected_with_seal": [
+    "seal",
+    "cell_map_WD",
+    "cell_map_R"
+   ]
+  },
+  "05": {
+   "kind": "risk_score_scan_value",
+   "change": {
+    "file": "study/sa3_scans/django_master.db",
+    "repo": "django",
+    "location": "table file_data, row file_path = 'src/codec/proto/range_core.py', column risk_safety_score",
+    "old": 75.3026,
+    "new": 75.6565,
+    "note": "non-zero to non-zero; the value moves from sorted non-zero position 140 past 6 neighbours (positions 140..146 of 307), none of which is an interpolation point of the size model's 21 quantiles, so the placebo's quantiles, non-zero share and distinct count are bit-identical (checked); REAL stays REAL, size unchanged"
+   },
+   "sha256": {
+    "pristine": "c507dcbe1ffec1094ca644c12705194234042d2c42f79c805c41dbc3e961903c",
+    "copy": "725063dcdf3d32adb913fed3cbff4e726b46ac8a34a9315227066c789faf874e"
+   },
+   "byte_diff": {
+    "size": [
+     2211840,
+     2211840
+    ],
+    "n_ranges": 1,
+    "pages": [
+     144
+    ],
+    "integrity": "ok"
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "input_check",
+    "cell_map_WD (D)"
+   ],
+   "expected_seal_withheld": [
+    "input_check",
+    "cell_map_WD"
+   ],
+   "possible_seal_withheld": [
+    "cell_map_R"
+   ],
+   "must_stay_silent": [
+    "placebo"
+   ],
+   "why": "As the spec, and the change was built so that the placebo provably cannot see it: the placebo uses risk_safety_score only through the size model (the 21 quantiles of the non-zero values, the non-zero indicator) and silence (non-zero share, distinct count); the value was moved non-zero to non-zero across sorted positions none of which is a quantile interpolation point, to a new unique value, and the 21 quantiles were recomputed and are bit-identical. Input check: the loader array differs. D: S9_logistic_z (and the residual statistic) use the value itself, and the move past 3-6 neighbours can change bAUC. R possible: the permutation spread changes only if the moved rank changes some permuted concordance - likely, not certain.",
+   "expected_with_seal": [
+    "seal",
+    "input_check",
+    "cell_map_WD"
+   ]
+  },
+  "06": {
+   "kind": "control_checks_before_draws",
+   "change": {
+    "file": "tree/tools/sa3_score.py",
+    "location": "control_effects, the draw loop (lines 311-317)",
+    "old": "            yc[d[\"pool\"][pool[s]]] = 1\n        yh = np.zeros(d[\"n\"], int)\n        for s in (rng.choice(len(hp), K, replace=False) if K < len(hp) else range(len(hp))):\n            yh[d[\"hp_commits\"][hp[s]]] = 1\n        if not (0 < yc.sum() < d[\"n\"]) or not (0 < yh.sum() < d[\"n\"]):\n            continue\n",
+    "new": "            yc[d[\"pool\"][pool[s]]] = 1\n        if not (0 < yc.sum() < d[\"n\"]):\n            continue\n        yh = np.zeros(d[\"n\"], int)\n        for s in (rng.choice(len(hp), K, replace=False) if K < len(hp) else range(len(hp))):\n            yh[d[\"hp_commits\"][hp[s]]] = 1\n        if not (0 < yh.sum() < d[\"n\"]):\n            continue\n",
+    "note": "the control set's check now runs right after the pool draw and skips the HP draw when it fails, so a discarded draw no longer consumes the HP sub-draw; the file grows by 30 bytes (cannot be kept equal without a second edit)"
+   },
+   "sha256": {
+    "pristine": "38b7ad1ca43a8e4d0205462fafe3a519f00e14f0a98840766fb75155f73af271",
+    "copy": "0fa4ba1e9fdcdeb6a5d02e855bd81eef77a35a00948cbc8e4081f203c5cccb30"
+   },
+   "byte_diff": {
+    "size": [
+     29887,
+     29917
+    ],
+    "n_ranges": 881,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "cell_map_R"
+   ],
+   "expected_seal_withheld": [
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [],
+   "must_stay_silent": [
+    "input_check",
+    "placebo",
+    "cell_map_WD"
+   ],
+   "why": "As the spec. The change bites where a control set fails its check while K < HP commits (the HP sub-draw then consumes the stream in the reference, not in the copy): ctrl-plain, whose pool includes a commit touching every file (every control draw is discarded) and has fewer commits than HP. Its own matched control is empty either way; the stream after it differs, so ctrl-early1's permutation spreads/p-values (scored, not drawn) differ: R only. The placebo stage does not call control_effects.",
+   "expected_with_seal": [
+    "seal",
+    "cell_map_R"
+   ]
+  },
+  "07": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "08": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "09": {
+   "kind": "hp_path_removed",
+   "change": {
+    "file": "study/sa3_outcomes/circuitpython.json",
+    "repo": "circuitpython",
+    "location": "outcomes.HP.files and outcomes.HP.commits[...] (HP only; other outcomes untouched)",
+    "old": "path 'src/render/net/signal_manager.c' present in HP.files and in HP commits ['5609348f701958570cb660b773c272d9dd5a93c7', '229cc01b97e8fdbcbff6b0e1b590cd6f5aabcbe5']",
+    "new": "path removed from all of them (each such commit keeps >= 1 other path)",
+    "note": "the removed bytes are replaced by spaces in place so the file size is unchanged; HP.n_files is left as it was (the reference does not read it)"
+   },
+   "sha256": {
+    "pristine": "dd54ba64e9bd7bc55d37fdfa169f3d375fcdf6de96860cc8fbfdab16c63ad00a",
+    "copy": "6b447f4a59d7608263edefaaca0d993da7285eb80c1a13fc1eae0a4bd5eec568"
+   },
+   "byte_diff": {
+    "size": [
+     73013,
+     73013
+    ],
+    "n_ranges": 4,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "input_check (label side)",
+    "cell_map_WD (D)"
+   ],
+   "expected_seal_withheld": [
+    "input_check",
+    "placebo",
+    "cell_map_WD"
+   ],
+   "possible_seal_withheld": [
+    "cell_map_R"
+   ],
+   "must_stay_silent": [],
+   "why": "Spec plus placebo. The input check fires on the label side (positive flags, the primary outcome's commit files). The placebo stage builds its design on y = HP files, so removing a positive changes its pair counts and hash-placebo effects (the spec's table omits this). D: bAUC and every HP statistic of that repo change. R very likely (permutations and the matched control run on the changed y / commit lists), listed as possible to keep the expectation strict to what is certain.",
+   "expected_with_seal": [
+    "seal",
+    "input_check",
+    "placebo",
+    "cell_map_WD"
+   ]
+  },
+  "10": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "11": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "12": {
+   "kind": "marginals_repos_swapped",
+   "change": {
+    "file": "tree/docs/sa3_outcome_marginals.json",
+    "location": "top-level list (row order)",
+    "old": "position 2 = mediawiki, position 4 = go",
+    "new": "position 2 = go, position 4 = mediawiki",
+    "note": "both rows status ok, drawn, HP clears its floor; not among the first two"
+   },
+   "sha256": {
+    "pristine": "53e13f6e7eff62988df020015f6e8a2c4096c0516165258b9d4e16838abfa740",
+    "copy": "a05c73b5e5f1df89b5bd3f574b1b1a1e1312a8a25a8933e646d87b45a93eef3b"
+   },
+   "byte_diff": {
+    "size": [
+     13696,
+     13696
+    ],
+    "n_ranges": 136,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "cell_map_R",
+    "cell_map_WD (D summaries)"
+   ],
+   "expected_seal_withheld": [
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [
+    "cell_map_WD",
+    "placebo"
+   ],
+   "must_stay_silent": [
+    "input_check"
+   ],
+   "why": "Spec: R, and D summaries. R is certain (the shared stream is consumed in the new repo order). The D summaries (study means, t-intervals over drawn repos) are sums in repo order; whether a reordering of two of ten addends changes the last bit is value-dependent, so D is very likely but listed as possible rather than required. Placebo possible for the same reason (its study means are nanmean over repos in file order; per-repo values are reseeded and do not change). The input check reads the outcome and scan files per repo, not the marginals order.",
+   "expected_with_seal": [
+    "seal",
+    "cell_map_R"
+   ]
+  },
+  "13": {
+   "kind": "count_predictor_scan_value",
+   "change": {
+    "file": "study/sa3_scans/django_master.db",
+    "repo": "django",
+    "location": "table file_data, row file_path = 'src/memo/core/model/batch_tools.py', column struct_branch",
+    "old": 3,
+    "new": 22,
+    "note": "both values in 2..127, so the record's serial type (1-byte integer) and size are unchanged; the value moves up in the repo's ranking"
+   },
+   "sha256": {
+    "pristine": "c507dcbe1ffec1094ca644c12705194234042d2c42f79c805c41dbc3e961903c",
+    "copy": "bde5f3083e643ee708ecad1fb1e56d585344363b4b7ed0038422898342bd9d71"
+   },
+   "byte_diff": {
+    "size": [
+     2211840,
+     2211840
+    ],
+    "n_ranges": 1,
+    "pages": [
+     269
+    ],
+    "integrity": "ok"
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "input_check",
+    "cell_map_WD (D)",
+    "placebo"
+   ],
+   "expected_seal_withheld": [
+    "input_check",
+    "placebo",
+    "cell_map_WD",
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [],
+   "must_stay_silent": [],
+   "why": "Spec plus R. struct_branch is an HP primary: the copy's loader array differs from the tables (input check); the value moves up the ranking and changes the logistic and residual statistics (D); the placebo's count size model is a least-squares fit of ln x on the non-zeros, which changes, so the surrogate draws and their means change (placebo, as the spec says; it rests on integer rounding of the surrogates letting the change through, which over hundreds of files x draws it does); the permutation spread and the matched control are computed on the changed x (R).",
+   "expected_with_seal": [
+    "seal",
+    "input_check",
+    "placebo",
+    "cell_map_WD",
+    "cell_map_R"
+   ]
+  },
+  "14": {
+   "kind": "caliper",
+   "change": {
+    "file": "tree/tools/sa3_stats.py",
+    "location": "module constant CALIPER (line 28)",
+    "old": "CALIPER = 1.5",
+    "new": "CALIPER = 1.4"
+   },
+   "sha256": {
+    "pristine": "223f2ac2c3d09a278b18a27c6f70ec10597c928f3bc6bda50a5561430aa25ca1",
+    "copy": "d7b8d5bcee0accadddf1608a10ff4785b1abda74ac3bc4aa4b85c636653036c4"
+   },
+   "byte_diff": {
+    "size": [
+     10004,
+     10004
+    ],
+    "n_ranges": 1,
+    "pages": null
+   },
+   "other_files_changed": [],
+   "expected_seal_withheld_spec_table": [
+    "cell_map_WD (D)"
+   ],
+   "expected_seal_withheld": [
+    "placebo",
+    "cell_map_WD",
+    "cell_map_R"
+   ],
+   "possible_seal_withheld": [],
+   "must_stay_silent": [
+    "input_check"
+   ],
+   "why": "Adjusted up from the spec's 'cell map D'. CALIPER is the default of S.Design and of design_for, so it changes every eligible-pair set: D (bAUC etc.) certainly. The permutation spread and p-value are computed on the same changed design, so R cells differ too. The placebo stage builds its HP design with S.CALIPER from the copy's own sa3_stats.py and reports hash-placebo effects and pair counts, so the placebo layer fires. W may fire as well (pair-floor status could flip) but is not required: W is in the same runner layer as D, so cell_map_WD is expected either way. The loader does not use the caliper: input check silent.",
+   "expected_with_seal": [
+    "seal",
+    "placebo",
+    "cell_map_WD",
+    "cell_map_R"
+   ]
+  },
+  "15": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  },
+  "16": {
+   "kind": "clean",
+   "expected_seal_withheld": [],
+   "note": "byte-identical to the pristine side (diff -r), same sizes, modes and mtimes"
+  }
+ }
+}

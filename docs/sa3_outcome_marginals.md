@@ -27,6 +27,29 @@ Scored on the keyword outcome (secondary): 31 repos.
 - django (379 files from 743 commits) and go (910 from 1,279) are, as the first review warned, close to "ordinary
   work that names a ticket".
 
+## Why six repos are "scan incomplete" — traced 2026-11-14, from structure only
+
+The engine records what it refuses in `excluded_artifacts`, and prunes some directories without recording them
+at all. Unit files (by this study's rule) that the scan did not read:
+
+| repo | missing | where | the engine's reason |
+|---|---|---|---|
+| root | 6,446 of 12,225 | `interpreter/` (6,090) | directory never walked — it holds the bundled LLVM and cling |
+| livecode | 726 of 1,049 | `engine/` (715) | "System Exclusion, Hidden Directory, or Dynamic Ignored Dir" |
+| wrf-fortran | 203 of 950 | `var/` (148), `chem/` (49) | the same, plus a few array-payload and repetition blocks |
+| wordpress | 175 of 1,082 | `wp-includes/` (110), `wp-content/` (62) | never walked (101) or ignored dir (69) |
+| pwntools | 36 of 176 | `pwnlib/` | never walked (31) |
+| macports-base | 128 of 128 | `src/` | never walked |
+
+So the cause is one thing: **the engine's own rule for which directories to skip is wider than this study's
+unit rule** (linguist's vendored list plus tests, docs, examples, tutorials). In root the engine is arguably
+right — `interpreter/` is third-party code. In livecode it is not: `engine/` is the product. Nothing is changed
+here: these six stay excluded and listed, as registered. Aligning the two rules would be a dated amendment and
+would need the skipped directories classified one by one, which has not been done.
+
+No minified or opaque-archetype files sit in the scored repos' scans (checked on bun, mediawiki, django, go,
+rails, godot, freebsd-src: 0 minified, at most 1 obfuscation flag).
+
 ## Table
 
 ```
