@@ -1,0 +1,28 @@
+libuv: definitions libclang found 1255 (of which 88 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 134 named, 109 macro-only
+   definitions found: engine 1072/1255, tree-sitter 1166/1255;  of the macro-generated ones: engine 2/88, tree-sitter 0/88
+   recall on named pairs (134): engine 24/134, eng-loose 76/134, ts-unique 25/134, ts-all 93/134
+   recall on macro-only pairs (109): engine 107/109, eng-loose 107/109, ts-unique 0/109, ts-all 0/109
+redis: definitions libclang found 5868 (of which 23 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 953 named, 99 macro-only
+   definitions found: engine 4840/5868, tree-sitter 5845/5868;  of the macro-generated ones: engine 3/23, tree-sitter 0/23
+   recall on named pairs (953): engine 784/953, eng-loose 786/953, ts-unique 848/953, ts-all 876/953
+   recall on macro-only pairs (99): engine 4/99, eng-loose 68/99, ts-unique 2/99, ts-all 2/99
+ndpi: definitions libclang found 2988 (of which 96 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 314 named, 7 macro-only
+   definitions found: engine 1569/2988, tree-sitter 2892/2988;  of the macro-generated ones: engine 0/96, tree-sitter 0/96
+   recall on named pairs (314): engine 167/314, eng-loose 223/314, ts-unique 215/314, ts-all 305/314
+   recall on macro-only pairs (7): engine 0/7, eng-loose 0/7, ts-unique 0/7, ts-all 0/7
+hiredis: definitions libclang found 442 (of which 0 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 49 named, 2 macro-only
+   definitions found: engine 442/442, tree-sitter 442/442;  of the macro-generated ones: engine 0/0, tree-sitter 0/0
+   recall on named pairs (49): engine 29/49, eng-loose 43/49, ts-unique 29/49, ts-all 49/49
+   recall on macro-only pairs (2): engine 1/2, eng-loose 2/2, ts-unique 0/2, ts-all 0/2
+expat: definitions libclang found 876 (of which 509 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 59 named, 2 macro-only
+   definitions found: engine 777/876, tree-sitter 366/876;  of the macro-generated ones: engine 411/509, tree-sitter 0/509
+   recall on named pairs (59): engine 58/59, eng-loose 58/59, ts-unique 58/59, ts-all 58/59
+   recall on macro-only pairs (2): engine 2/2, eng-loose 2/2, ts-unique 0/2, ts-all 0/2
+zlib: definitions libclang found 393 (of which 16 have no function_definition anywhere in tree-sitter's parse); cross-file pairs: 53 named, 0 macro-only
+   definitions found: engine 265/393, tree-sitter 377/393;  of the macro-generated ones: engine 15/16, tree-sitter 0/16
+   recall on named pairs (53): engine 43/53, eng-loose 43/53, ts-unique 46/53, ts-all 47/53
+
+POOLED over the repositories above
+  definitions: 11822 (macro-generated, absent from tree-sitter's parse: 732); found: engine 8965, tree-sitter 11088; macro-generated: engine 431/732, tree-sitter 0/732
+  recall on named pairs (1562): engine 71% (1105), eng-loose 79% (1229), ts-unique 78% (1221), ts-all 91% (1428)
+  recall on macro-only pairs (219): engine 52% (114), eng-loose 82% (179), ts-unique 1% (2), ts-all 1% (2)

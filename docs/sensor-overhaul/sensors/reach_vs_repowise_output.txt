@@ -1,0 +1,112 @@
+### c /tmp/gitgalaxy-scratch/claude/h2h/expat /tmp/gitgalaxy-scratch/claude/h2h/expat_clang.json /tmp/gitgalaxy-scratch/claude/h2h/expat_galaxy_master.db
+expat [c]: 86 files, 61 reference cross-file edges, 20 files with a caller
+  engine     edges     60  precision 100.0%  recall 98.4%  | reach: Spearman +0.974  mean abs error  0.01  top-10 found 10/10
+  ts-unique  edges     59  precision 98.3%  recall 95.1%  | reach: Spearman +0.974  mean abs error  0.02  top-10 found 10/10
+  ts-all     edges     59  precision 98.3%  recall 95.1%  | reach: Spearman +0.974  mean abs error  0.02  top-10 found 10/10
+  rw-all     edges     97  precision 59.8%  recall 95.1%  | reach: Spearman +0.707  mean abs error  0.49  top-10 found 5/10
+  rw-conf    edges     88  precision 56.8%  recall 82.0%  | reach: Spearman +0.715  mean abs error  0.57  top-10 found 5/10
+### c /tmp/gitgalaxy-scratch/claude/h2h/redis /tmp/gitgalaxy-scratch/claude/h2h/redis_clang.json /tmp/gitgalaxy-scratch/claude/h2h/redis_galaxy_master.db
+redis [c]: 553 files, 1052 reference cross-file edges, 179 files with a caller
+  engine     edges    854  precision 92.3%  recall 74.9%  | reach: Spearman +0.754  mean abs error  0.59  top-10 found 9/10
+  ts-unique  edges   1024  precision 83.0%  recall 80.8%  | reach: Spearman +0.727  mean abs error  0.67  top-10 found 8/10
+  ts-all     edges   1083  precision 81.1%  recall 83.5%  | reach: Spearman +0.734  mean abs error  0.67  top-10 found 8/10
+  rw-all     edges   1173  precision 65.6%  recall 73.2%  | reach: Spearman +0.560  mean abs error  1.21  top-10 found 8/10
+  rw-conf    edges    783  precision 64.5%  recall 48.0%  | reach: Spearman +0.553  mean abs error  1.43  top-10 found 3/10
+### c /tmp/gitgalaxy-scratch/claude/h2h/hiredis /tmp/gitgalaxy-scratch/claude/h2h/hiredis_clang.json /tmp/gitgalaxy-scratch/claude/h2h/hiredis_galaxy_master.db
+hiredis [c]: 39 files, 51 reference cross-file edges, 11 files with a caller
+  engine     edges     38  precision 78.9%  recall 58.8%  | reach: Spearman +0.617  mean abs error  0.74  top-10 found 7/10
+  ts-unique  edges     32  precision 90.6%  recall 56.9%  | reach: Spearman +0.668  mean abs error  0.64  top-10 found 7/10
+  ts-all     edges     60  precision 81.7%  recall 96.1%  | reach: Spearman +0.873  mean abs error  0.33  top-10 found 9/10
+  rw-all     edges     43  precision 76.7%  recall 64.7%  | reach: Spearman +0.661  mean abs error  0.72  top-10 found 8/10
+  rw-conf    edges     36  precision 72.2%  recall 51.0%  | reach: Spearman +0.581  mean abs error  0.85  top-10 found 7/10
+### c /tmp/gitgalaxy-scratch/claude/h2h/libuv /tmp/gitgalaxy-scratch/claude/h2h/libuv_clang.json /tmp/gitgalaxy-scratch/claude/h2h/libuv_galaxy_master.db
+libuv [c]: 236 files, 243 reference cross-file edges, 37 files with a caller
+  engine     edges    136  precision 96.3%  recall 53.9%  | reach: Spearman +0.497  mean abs error  0.49  top-10 found 5/10
+  ts-unique  edges     31  precision 80.6%  recall 10.3%  | reach: Spearman +0.518  mean abs error  0.93  top-10 found 5/10
+  ts-all     edges    100  precision 93.0%  recall 38.3%  | reach: Spearman +0.815  mean abs error  0.65  top-10 found 9/10
+  rw-all     edges    270  precision 45.9%  recall 51.0%  | reach: Spearman +0.426  mean abs error  1.11  top-10 found 4/10
+  rw-conf    edges    266  precision 46.2%  recall 50.6%  | reach: Spearman +0.427  mean abs error  1.10  top-10 found 4/10
+### c /tmp/gitgalaxy-scratch/claude/h2h/ndpi /tmp/gitgalaxy-scratch/claude/h2h/ndpi_clang.json /tmp/gitgalaxy-scratch/claude/h2h/ndpi_galaxy_master.db
+ndpi [c]: 418 files, 321 reference cross-file edges, 55 files with a caller
+  engine     edges    178  precision 93.8%  recall 52.0%  | reach: Spearman +0.686  mean abs error  0.39  top-10 found 8/10
+  ts-unique  edges    253  precision 85.0%  recall 67.0%  | reach: Spearman +0.888  mean abs error  0.34  top-10 found 8/10
+  ts-all     edges    359  precision 85.0%  recall 95.0%  | reach: Spearman +0.881  mean abs error  0.15  top-10 found 9/10
+  rw-all     edges    551  precision 42.1%  recall 72.3%  | reach: Spearman +0.838  mean abs error  0.96  top-10 found 7/10
+  rw-conf    edges    524  precision 41.8%  recall 68.2%  | reach: Spearman +0.805  mean abs error  0.96  top-10 found 8/10
+### c /tmp/gitgalaxy-scratch/claude/h2h/zlib /tmp/gitgalaxy-scratch/claude/h2h/zlib_clang.json /tmp/gitgalaxy-scratch/claude/h2h/zlib_galaxy_master.db
+zlib [c]: 65 files, 53 reference cross-file edges, 19 files with a caller
+  engine     edges     58  precision 74.1%  recall 81.1%  | reach: Spearman +0.763  mean abs error  0.38  top-10 found 7/10
+  ts-unique  edges     66  precision 69.7%  recall 86.8%  | reach: Spearman +0.843  mean abs error  0.42  top-10 found 7/10
+  ts-all     edges     69  precision 68.1%  recall 88.7%  | reach: Spearman +0.871  mean abs error  0.43  top-10 found 6/10
+  rw-all     edges     76  precision 59.2%  recall 84.9%  | reach: Spearman +0.707  mean abs error  0.60  top-10 found 7/10
+  rw-conf    edges     73  precision 60.3%  recall 83.0%  | reach: Spearman +0.727  mean abs error  0.58  top-10 found 6/10
+### python /tmp/gitgalaxy-scratch/claude/h2h/corpus/fastapi__fastapi
+fastapi__fastapi [python]: 1135 files, 995 reference cross-file edges, 55 files with a caller
+  engine     edges    795  precision 80.9%  recall 64.6%  | reach: Spearman +0.580  mean abs error  0.42  top-10 found 5/10
+  ts-unique  edges    494  precision 80.2%  recall 39.8%  | reach: Spearman +0.549  mean abs error  0.59  top-10 found 6/10
+  ts-all     edges   7471  precision 12.9%  recall 97.0%  | reach: Spearman +0.487  mean abs error  5.73  top-10 found 3/10
+  rw-all     edges   1136  precision 85.2%  recall 97.3%  | reach: Spearman +0.745  mean abs error  0.16  top-10 found 5/10
+  rw-conf    edges   1127  precision 85.9%  recall 97.3%  | reach: Spearman +0.752  mean abs error  0.16  top-10 found 6/10
+### python /tmp/gitgalaxy-scratch/claude/h2h/corpus/pallets__flask
+pallets__flask [python]: 82 files, 97 reference cross-file edges, 20 files with a caller
+  engine     edges    184  precision 32.1%  recall 60.8%  | reach: Spearman +0.738  mean abs error  1.35  top-10 found 8/10
+  ts-unique  edges    210  precision 27.1%  recall 58.8%  | reach: Spearman +0.667  mean abs error  1.70  top-10 found 6/10
+  ts-all     edges    548  precision 13.3%  recall 75.3%  | reach: Spearman +0.543  mean abs error  5.52  top-10 found 5/10
+  rw-all     edges    124  precision 41.1%  recall 52.6%  | reach: Spearman +0.751  mean abs error  1.11  top-10 found 6/10
+  rw-conf    edges    124  precision 41.1%  recall 52.6%  | reach: Spearman +0.751  mean abs error  1.11  top-10 found 6/10
+### python /tmp/gitgalaxy-scratch/claude/h2h/corpus/encode__httpx
+encode__httpx [python]: 60 files, 77 reference cross-file edges, 19 files with a caller
+  engine     edges    114  precision 46.5%  recall 68.8%  | reach: Spearman +0.743  mean abs error  1.15  top-10 found 6/10
+  ts-unique  edges     80  precision 43.8%  recall 45.5%  | reach: Spearman +0.596  mean abs error  1.05  top-10 found 6/10
+  ts-all     edges    259  precision 21.6%  recall 72.7%  | reach: Spearman +0.522  mean abs error  3.40  top-10 found 5/10
+  rw-all     edges    110  precision 51.8%  recall 74.0%  | reach: Spearman +0.663  mean abs error  0.98  top-10 found 6/10
+  rw-conf    edges    107  precision 51.4%  recall 71.4%  | reach: Spearman +0.619  mean abs error  1.00  top-10 found 6/10
+### typescript /tmp/gitgalaxy-scratch/claude/h2h/corpus/colinhacks__zod
+colinhacks__zod [typescript]: 470 files, 180 reference cross-file edges, 27 files with a caller
+  engine     edges    114  precision 91.2%  recall 57.8%  | reach: Spearman +0.657  mean abs error  0.17  top-10 found 5/10
+  ts-unique  edges    561  precision 23.4%  recall 72.8%  | reach: Spearman +0.630  mean abs error  0.90  top-10 found 5/10
+  ts-all     edges   6263  precision  2.8%  recall 98.9%  | reach: Spearman +0.431  mean abs error 12.94  top-10 found 4/10
+  rw-all     edges    590  precision 27.6%  recall 90.6%  | reach: Spearman +0.710  mean abs error  0.91  top-10 found 7/10
+  rw-conf    edges    554  precision 29.4%  recall 90.6%  | reach: Spearman +0.802  mean abs error  0.83  top-10 found 7/10
+### javascript /tmp/gitgalaxy-scratch/claude/h2h/corpus/axios__axios
+axios__axios [javascript]: 236 files, 104 reference cross-file edges, 41 files with a caller
+  engine     edges    139  precision 55.4%  recall 74.0%  | reach: Spearman +0.860  mean abs error  0.35  top-10 found 6/10
+  ts-unique  edges    473  precision 15.2%  recall 69.2%  | reach: Spearman +0.661  mean abs error  1.79  top-10 found 2/10
+  ts-all     edges   2140  precision  4.0%  recall 81.7%  | reach: Spearman +0.239  mean abs error  8.70  top-10 found 1/10
+  rw-all     edges    287  precision 34.8%  recall 96.2%  | reach: Spearman +0.754  mean abs error  0.79  top-10 found 5/10
+  rw-conf    edges    233  precision 42.9%  recall 96.2%  | reach: Spearman +0.820  mean abs error  0.56  top-10 found 7/10
+### go /tmp/gitgalaxy-scratch/claude/h2h/corpus/spf13__cobra
+spf13__cobra [go]: 36 files, 125 reference cross-file edges, 25 files with a caller
+  engine     edges    130  precision 80.8%  recall 84.0%  | reach: Spearman +0.788  mean abs error  1.25  top-10 found 7/10
+  ts-unique  edges    132  precision 79.5%  recall 84.0%  | reach: Spearman +0.787  mean abs error  1.31  top-10 found 7/10
+  ts-all     edges    155  precision 74.8%  recall 92.8%  | reach: Spearman +0.850  mean abs error  1.28  top-10 found 8/10
+  rw-all     edges    113  precision 96.5%  recall 87.2%  | reach: Spearman +0.919  mean abs error  0.50  top-10 found 9/10
+  rw-conf    edges     98  precision 95.9%  recall 75.2%  | reach: Spearman +0.799  mean abs error  0.92  top-10 found 10/10
+### go /tmp/gitgalaxy-scratch/claude/h2h/corpus/gin-gonic__gin
+gin-gonic__gin [go]: 98 files, 333 reference cross-file edges, 73 files with a caller
+  engine     edges    177  precision 81.9%  recall 43.5%  | reach: Spearman +0.646  mean abs error  2.12  top-10 found 6/10
+  ts-unique  edges    210  precision 71.0%  recall 44.7%  | reach: Spearman +0.654  mean abs error  2.30  top-10 found 6/10
+  ts-all     edges    884  precision 31.2%  recall 82.9%  | reach: Spearman +0.587  mean abs error  6.36  top-10 found 3/10
+  rw-all     edges    184  precision 84.8%  recall 46.8%  | reach: Spearman +0.630  mean abs error  1.99  top-10 found 7/10
+  rw-conf    edges    180  precision 86.1%  recall 46.5%  | reach: Spearman +0.633  mean abs error  1.97  top-10 found 7/10
+### java /tmp/gitgalaxy-scratch/claude/h2h/corpus/google__gson
+google__gson [java]: 264 files, 743 reference cross-file edges, 69 files with a caller
+  engine     edges    659  precision 81.8%  recall 72.5%  | reach: Spearman +0.866  mean abs error  0.98  top-10 found 8/10
+  ts-unique  edges    442  precision 67.4%  recall 40.1%  | reach: Spearman +0.718  mean abs error  1.88  top-10 found 6/10
+  ts-all     edges   6379  precision 10.1%  recall 86.7%  | reach: Spearman +0.450  mean abs error 21.68  top-10 found 5/10
+  rw-all     edges    809  precision 88.1%  recall 96.0%  | reach: Spearman +0.797  mean abs error  0.39  top-10 found 9/10
+  rw-conf    edges    800  precision 88.6%  recall 95.4%  | reach: Spearman +0.788  mean abs error  0.38  top-10 found 9/10
+### rust /tmp/gitgalaxy-scratch/claude/h2h/corpus/serde-rs__json
+serde-rs__json [rust]: 71 files, 72 reference cross-file edges, 23 files with a caller
+  engine     edges     93  precision 55.9%  recall 72.2%  | reach: Spearman +0.810  mean abs error  0.77  top-10 found 8/10
+  ts-unique  edges     92  precision 48.9%  recall 62.5%  | reach: Spearman +0.799  mean abs error  0.93  top-10 found 6/10
+  ts-all     edges    240  precision 24.6%  recall 81.9%  | reach: Spearman +0.700  mean abs error  2.54  top-10 found 4/10
+  rw-all     edges     51  precision 84.3%  recall 59.7%  | reach: Spearman +0.871  mean abs error  0.44  top-10 found 8/10
+  rw-conf    edges     43  precision 90.7%  recall 54.2%  | reach: Spearman +0.915  mean abs error  0.44  top-10 found 7/10
+### rust /tmp/gitgalaxy-scratch/claude/h2h/corpus/BurntSushi__ripgrep
+BurntSushi__ripgrep [rust]: 102 files, 209 reference cross-file edges, 65 files with a caller
+  engine     edges    217  precision 59.0%  recall 61.2%  | reach: Spearman +0.841  mean abs error  1.35  top-10 found 5/10
+  ts-unique  edges    248  precision 52.8%  recall 62.7%  | reach: Spearman +0.808  mean abs error  1.56  top-10 found 5/10
+  ts-all     edges   2365  precision  8.2%  recall 92.3%  | reach: Spearman +0.762  mean abs error 21.29  top-10 found 6/10
+  rw-all     edges    154  precision 89.6%  recall 66.0%  | reach: Spearman +0.815  mean abs error  0.72  top-10 found 7/10
+  rw-conf    edges    136  precision 94.1%  recall 61.2%  | reach: Spearman +0.792  mean abs error  0.83  top-10 found 6/10

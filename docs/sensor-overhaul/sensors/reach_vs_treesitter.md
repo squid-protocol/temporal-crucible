@@ -46,3 +46,27 @@ Same method, scored on the engine gate's own compiler-grade references (pyan3 fo
 **Correction of the C-only conclusion above.** "Keep ambiguous edges: recall up, no precision lost" was true in C only. Elsewhere the looser set (eng-loose) costs precision (TS 91 to 41, Java 82 to 67, JS 55 to 44) and moves the ranking both ways (up in TS +0.18 and Go +0.07, down in Java -0.07 and JS -0.07). So ambiguous edges belong beside the count as "possible callers", not folded into it by default.
 
 **Limits.** One to three repositories per language (TypeScript, JavaScript and Java: one), pinned repositories chosen by the gate rather than at random, references that are themselves analysers with gaps (pyan3 is not type-checked), a minimal tree-sitter baseline of my own, file-level scoring only. The `file` repository's apparent engine failure was an artifact: libclang could not parse its real sources and the 16 scored edges were all in `src/missing/`, a vendored-shim directory the engine skips by design (`gitgalaxy_config.py` lists `missing` as a vendor container).
+
+## Update 2: macros, and repowise (same day)
+
+### Macros (C; `tools/sensor/h2h_macro.py`, output `reach_macros_output.txt`)
+libclang sees the preprocessed code; tree-sitter parses before the preprocessor runs. Pooled over expat, redis, ndpi, hiredis, libuv and zlib:
+* **Calls that exist only inside a macro expansion** (a file pair is "macro-only" when every libclang edge between the two files sits in an expansion whose invocation does not name the callee; 219 pairs): tree-sitter name matching finds **1%** (2 of 219); GitGalaxy counts **52%** (114), and **82%** (179) once ambiguous and tied edges are included. On libuv alone: 107 of 109 against 0.
+* **Functions a macro generates** (732 libclang definitions with no `function_definition` anywhere in tree-sitter's parse): tree-sitter finds **0**; GitGalaxy finds **431 (59%)**, but unevenly: expat 411 of 509, zlib 15 of 16, and almost none in libuv (2 of 88), redis (3 of 23) and ndpi (0 of 96).
+* **The other side of the ledger:** on ordinary calls ("named" pairs, 1,562) tree-sitter name matching finds more than GitGalaxy's counted edges (91% against 71%; 79% with possible callers). GitGalaxy's total definition count is also lower than tree-sitter's (8,965 against 11,088 of 11,822), mostly because it skips vendored and third-party directories that libclang parsed.
+So the hypothesis is half right: macro-hidden calls are a clear GitGalaxy advantage, macro-generated definitions are a real but patchy one, and none of it changes the C result for ordinary calls.
+
+### repowise (AGPL-3.0; black box; `tools/sensor/h2h_rw.py`, output `reach_vs_repowise_output.txt`)
+repowise 0.61.0 was run as a published package on scratch copies in a throwaway HOME with telemetry disabled and no agent, hook, editor or model setup (`init --mode fast --no-prose`); its index table of `calls` edges (symbol-level, with a confidence and a resolution origin per edge) was reduced to the same file-level pairs and scored against the same references. No repowise code was read, used or copied. `rw-all` = every call edge, `rw-conf` = confidence 0.85 or above (drops its labelled name-only fallback). Mean over the repositories (precision / recall / Spearman):
+
+| language | engine | rw-all | rw-conf | tree-sitter, one file |
+|---|---|---|---|---|
+| C (6) | 89 / 70 / +0.72 | 58 / 74 / +0.65 | 57 / 64 / +0.63 | 85 / 66 / +0.77 |
+| Python (3) | 53 / 65 / +0.69 | 59 / 75 / +0.72 | 59 / 74 / +0.71 | 50 / 48 / +0.60 |
+| TypeScript (1) | 91 / 58 / +0.66 | 28 / 91 / +0.71 | 29 / 91 / +0.80 | 23 / 73 / +0.63 |
+| JavaScript (1) | 55 / 74 / +0.86 | 35 / 96 / +0.75 | 43 / 96 / +0.82 | 15 / 69 / +0.66 |
+| Go (2) | 81 / 64 / +0.72 | 91 / 67 / +0.77 | 91 / 61 / +0.72 | 75 / 64 / +0.72 |
+| Java (1) | 82 / 72 / +0.87 | 88 / 96 / +0.80 | 89 / 95 / +0.79 | 67 / 40 / +0.72 |
+| Rust (2) | 57 / 67 / +0.83 | 87 / 63 / +0.84 | 92 / 58 / +0.85 | 51 / 63 / +0.80 |
+
+**Reading:** repowise is a strong tool and, on these repositories, comparable to GitGalaxy overall, not clearly worse or better. It is more precise in Go (91 against 81), Rust (87 against 57), Java (88 against 82) and Python (59 against 53) and finds more callers in Java (96 against 72), TypeScript (91 against 58) and JavaScript (96 against 74); GitGalaxy is more precise in C (89 against 58), TypeScript (91 against 28) and JavaScript (55 against 35), and ranks C, JavaScript and Java better. Ranking differences are small outside C (a few hundredths in Python, Go, Rust). Both beat plain name matching outside C. One to three repositories per language, the same references (themselves analysers), file-level scoring: treat any single difference as noise.
