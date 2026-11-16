@@ -64,7 +64,7 @@ Debt markers are discrete, locatable, ageable and, unlike a density, actionable;
 | dead_code | deprecated-marker density | **split** | deprecated markers (counts) and unreferenced non-public functions (call graph, listable) |
 | documentation | sigmoid, 58% at 100 | **replace** | percent of public functions documented (engine has `is_public`, `is_documented`) |
 | secrets_risk | density of private-info hits | **detector, not score** | a findings list |
-| stability, churn | constant without git history | **merge** | one **activity** sensor (commits, authors, ownership concentration) |
+| stability, churn | constant without git history; both driven by recency of the last change; churn = 365-day commit count (rho 0.96), stability = days since last change (0.97) | **merge, redesign** | an **activity** sensor on three independent axes: recent activity (365-day commits, with 90-day hot-now), age and lifetime, ownership concentration (activity-gated); see `sensors/activity.md` |
 | spec_match | off by default | **retire or keep optional** | |
 
 **New sensors the evidence supports:** mechanical-versus-organic share of recent edits (net churn); settledness (share of functions unchanged for N quarters); file role tag (the six profile types); debt ledger and the comment sensors (section 2.5).
@@ -92,6 +92,9 @@ Debt markers are discrete, locatable, ageable and, unlike a density, actionable;
 | 8 | Outcome relation reported, never claimed | AUC gain beyond size and prior fixes under raw, v3c and regression-only labels | `sa_outcomes.py`, `sa_outcomes_hist.py` |
 | 9 | Replicates on the population | repeat 1-6 on the master database sample | `sa_master.py` |
 
+### 5.1 History vectors: what the wiki promised and what the code does
+The wiki (`docs/wiki/02-15-chronometer.md`) describes churn (recent change frequency) and stability (age). The formulas (`docs/vector_formulas.md` 12a/12b) make both depend on the time since the file's last modification (stability is that time as a share of the repo timeline; churn divides the 12-month commit count by its square root), so they are one axis (rho -0.86). `docs/vectors.md` says the history vectors are ablated to zero in every recorded scan; the v2.12.0 master database shows values for about 40% of repos, and history-aware scans work on `main` with `GITGALAXY_HISTORY_ASOF=1`. Full analysis and redesign: `sensors/activity.md`.
+
 ## 6. What repowise and CodeScene do (lessons)
 Repowise scores every file 1-10 from 59 detectors (parse tree, dependency graph, git history): structural complexity, size, duplication, error handling, change history (churn, change entropy, co-change scatter, ownership, prior fixes), test coverage and quality, plus language-specific and performance families, with capped per-family deductions and absolute bands. It keeps three signals separate (code health fitted to a defect corpus, maintainability set by hand, performance risk). Its accuracy statement agrees with ours: ROC AUC 0.737 against 0.742 for lines of code alone, with the value in ordering a fixed review budget and explaining why; within size quartiles AUC is 0.525-0.718. **What to copy:** findings with locations and stable IDs, a ranked "fix first" list by impact and effort, triage status, a CI check. **Where we differ:** uniform multi-language coverage, the call graph, the lineage ledger, sweep and migration views. Sources: repowise `docs/layers/CODE_HEALTH.md`; repowise-bench; `docs/repowise_assessment.md`.
 
@@ -111,4 +114,4 @@ Repowise scores every file 1-10 from 59 detectors (parse tree, dependency graph,
 * How should the engine represent standard-library and macro callees so reach can be measured for the 44% of sweeps it cannot currently see?
 
 ## 9. Provenance
-`docs/turn_surface_area.md` (all of section 2.2-2.3, 2.6), `docs/turn_gitgalaxy_assessment.md`, `docs/turn_sweep_scope.md`, `docs/turn_sweep_forecast.md`, `docs/turn_forecast_closeout.md`, `docs/turn_edit_kinds_vs_fixes.md`, `docs/turn_function_recidivism.md`, `docs/repowise_assessment.md`, `docs/debt_lifecycle_exploratory.md`, `docs/drp.md`, `docs/comment_profiles_exploratory.md`, `docs/dead_code_panel.md`; tools in `tools/turn/` and `tools/sensor/`; logs in `docs/turn_surface_area_logs/`.
+`docs/turn_surface_area.md` (all of section 2.2-2.3, 2.6), `sensors/activity.md` and `sensors/tech_debt.md` (sensor designs), GitGalaxy `docs/wiki/02-15-chronometer.md`, `docs/vectors.md`, `docs/vector_formulas.md` (as of `origin/main`), `docs/turn_gitgalaxy_assessment.md`, `docs/turn_sweep_scope.md`, `docs/turn_sweep_forecast.md`, `docs/turn_forecast_closeout.md`, `docs/turn_edit_kinds_vs_fixes.md`, `docs/turn_function_recidivism.md`, `docs/repowise_assessment.md`, `docs/debt_lifecycle_exploratory.md`, `docs/drp.md`, `docs/comment_profiles_exploratory.md`, `docs/dead_code_panel.md`; tools in `tools/turn/` and `tools/sensor/`; logs in `docs/turn_surface_area_logs/`.

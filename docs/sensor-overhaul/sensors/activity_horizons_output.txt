@@ -1,0 +1,42 @@
+35,287 file-intervals, 7 repos; files with no git history up to the snapshot (renamed or new): 0%
+
+A. REDUNDANCY: within-repo rank correlations
+                    c30   c90  c365  clife  age_y  since_last_d  auth365  top_share365  risk_churn  risk_stability  raw_churn_freq  ownership_entropy  silo_risk
+c30                1.00  0.64  0.39   0.28   0.05         -0.52     0.37          0.04        0.47           -0.50            0.47               0.36       0.05
+c90                0.64  1.00  0.60   0.41   0.07         -0.71     0.56          0.08        0.68           -0.70            0.68               0.50       0.11
+c365               0.39  0.60  1.00   0.65   0.13         -0.77     0.91          0.30        0.96           -0.77            0.96               0.68       0.33
+clife              0.28  0.41  0.65   1.00   0.58         -0.54     0.59          0.08        0.63           -0.54            0.63               0.49       0.09
+age_y              0.05  0.07  0.13   0.58   1.00         -0.02     0.12         -0.10        0.10           -0.02            0.10               0.15      -0.10
+since_last_d      -0.52 -0.71 -0.77  -0.54  -0.02          1.00    -0.74         -0.35       -0.85            0.97           -0.85              -0.50      -0.38
+auth365            0.37  0.56  0.91   0.59   0.12         -0.74     1.00          0.22        0.88           -0.73            0.88               0.79       0.26
+top_share365       0.04  0.08  0.30   0.08  -0.10         -0.35     0.22          1.00        0.30           -0.34            0.30              -0.25       0.96
+risk_churn         0.47  0.68  0.96   0.63   0.10         -0.85     0.88          0.30        1.00           -0.86            1.00               0.66       0.33
+risk_stability    -0.50 -0.70 -0.77  -0.54  -0.02          0.97    -0.73         -0.34       -0.86            1.00           -0.86              -0.50      -0.37
+raw_churn_freq     0.47  0.68  0.96   0.63   0.10         -0.85     0.88          0.30        1.00           -0.86            1.00               0.66       0.33
+ownership_entropy  0.36  0.50  0.68   0.49   0.15         -0.50     0.79         -0.25        0.66           -0.50            0.66               1.00      -0.23
+silo_risk          0.05  0.11  0.33   0.09  -0.10         -0.38     0.26          0.96        0.33           -0.37            0.33              -0.23       1.00
+  engine churn+stability           PC1 93%  participation ratio 1.1 of 2
+  engine 5 history columns         PC1 70%  participation ratio 1.8 of 5
+  proposed 8 horizon features      PC1 53%  participation ratio 2.9 of 8
+  recent (c30,c90,c365)            PC1 76%  participation ratio 1.6 of 3
+  long (clife,age,since_last)      PC1 60%  participation ratio 2.1 of 3
+
+B. LATER FIXES: AUC, later half of each repo (mean over repos)
+  raw : size 0.784  size+prior 0.815  +engine churn/stab 0.798  +recent horizons 0.800  +long horizons 0.802  +all 8 horizons 0.800  +owners only 0.801  prior+engine 0.817  prior+8 horizons 0.816  prior+horizons+engine 0.815
+  v3c : size 0.816  size+prior 0.833  +engine churn/stab 0.833  +recent horizons 0.833  +long horizons 0.834  +all 8 horizons 0.831  +owners only 0.833  prior+engine 0.840  prior+8 horizons 0.836  prior+horizons+engine 0.836
+  reg : size 0.815  size+prior 0.821  +engine churn/stab 0.833  +recent horizons 0.830  +long horizons 0.832  +all 8 horizons 0.833  +owners only 0.825  prior+engine 0.835  prior+8 horizons 0.835  prior+horizons+engine 0.837
+
+C. SINGLE FEATURES within size quartile: AUC for later fix (v3c) | Spearman with later size change (median over repo-quartiles)
+  c30              AUC 0.562 [0.45,0.71]   change rho +0.15
+  c90              AUC 0.604 [0.46,0.80]   change rho +0.23
+  c365             AUC 0.661 [0.56,0.85]   change rho +0.26
+  clife            AUC 0.605 [0.25,0.85]   change rho +0.12
+  age_y            AUC 0.466 [0.23,0.58]   change rho -0.07
+  since_last_d     AUC 0.371 [0.21,0.53]   change rho -0.22
+  auth365          AUC 0.645 [0.56,0.81]   change rho +0.23
+  top_share365     AUC 0.538 [0.39,0.69]   change rho +0.04
+  risk_churn       AUC 0.649 [0.53,0.84]   change rho +0.26
+  risk_stability   AUC 0.405 [0.23,0.61]   change rho -0.17
+  raw_churn_freq   AUC 0.654 [0.49,0.84]   change rho +0.26
+  ownership_entropy AUC 0.605 [0.48,0.77]   change rho +0.18
+  silo_risk        AUC 0.540 [0.39,0.69]   change rho +0.05

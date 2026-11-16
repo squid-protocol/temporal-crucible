@@ -8,7 +8,7 @@ Research and prototypes live here; changes to the engine itself go to GitGalaxy 
 | Sensor | Replaces | Status | Design | Notes |
 |---|---|---|---|---|
 | Debt ledger | `risk_tech_debt` | prototype done on 4 repos; counts validated (+0.84 to +0.97) | [sensors/tech_debt.md](sensors/tech_debt.md) | needs marker positions, age and author in the engine |
-| Activity | `risk_churn`, `risk_stability` | evidence in; design next | GUIDE section 3 | needs history-aware scans by default |
+| Activity | `risk_churn`, `risk_stability` | design written, horizons tested (7 repos, 143 as-of scans) | [sensors/activity.md](sensors/activity.md) | engine: whole-history walk, persisted horizons, as-of by default; docs text to correct |
 | Reach | `risk_api_exposure` | evidence in (blast radius +0.63, headers AUC 0.90, ripple odds ratio 1.28); design next | GUIDE section 3 | first product: migration scope report |
 | Mutation | `risk_state_flux`, `risk_safety_score` | merge decided | GUIDE section 3 | one family density; rename |
 | Complexity drill-down | `risk_cognitive_load` | design next | GUIDE section 3 | list worst functions |
@@ -23,7 +23,7 @@ Research and prototypes live here; changes to the engine itself go to GitGalaxy 
 Copy [sensors/_template.md](sensors/_template.md), fill it in, run the acceptance checklist (GUIDE section 5) with the scripts in `tools/turn/surface_area/` and `tools/sensor/`, record the result on the board above.
 
 ## Tools
-`tools/sensor/` (prototypes: `debt_ledger.py`, `debt_validity.py`); `tools/turn/surface_area/` (descriptive and outcome tests, history-aware scans, ripple test); `tools/turn/` (earlier studies). Paths are hard-coded to the discovery machine.
+`tools/sensor/` (prototypes: `debt_ledger.py`, `debt_validity.py`, `activity_horizons.py`); `tools/turn/surface_area/` (descriptive and outcome tests, history-aware scans, ripple test); `tools/turn/` (earlier studies). Paths are hard-coded to the discovery machine.
 
 ## Conventions
 * Exploratory until a sensor passes the checklist; no outcome claims on any sensor.
