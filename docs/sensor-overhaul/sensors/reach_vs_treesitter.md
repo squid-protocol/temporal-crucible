@@ -18,7 +18,7 @@ The tree-sitter baselines are my own minimal implementation (plain-name calls on
 | ts-unique | 82.8% | 68.3% | +0.775 |
 | ts-all | 82.8% | 82.6% | +0.851 |
 
-**So no: on these repositories a plain tree-sitter name-matching tool gets the reach ranking right more often than ours** (Spearman 0.85 against 0.64), and finds more of the callers. Our edge precision is about the same (83.6% against 82.8%); it is clearly higher only on libuv (96.3 against 80.6 to 93.0), redis (92.3 against 81 to 83) and ndpi (93.8 against 85.0). It is lower on hiredis (78.9 against 90.6 for ts-unique) and zlib. Per repository (Spearman, engine / eng-loose / ts-all): expat .974 / .974 / .974, redis .754 / .764 / .734, hiredis .617 / .736 / .873, libuv .497 / .768 / .815, ndpi .686 / .688 / .881, zlib .763 / .741 / .871, file .203 / .203 / .806.
+**So no: on these repositories a plain tree-sitter name-matching tool gets the reach ranking right more often than ours** (Spearman 0.85 against 0.64, over the 7 repositories counted then; over the 6 valid ones, +0.86 against +0.72), and finds more of the callers. Our edge precision is about the same (83.6% against 82.8%); it is clearly higher only on libuv (96.3 against 80.6 to 93.0), redis (92.3 against 81 to 83) and ndpi (93.8 against 85.0). It is lower on hiredis (78.9 against 90.6 for ts-unique) and zlib. Per repository (Spearman, engine / eng-loose / ts-all): expat .974 / .974 / .974, redis .754 / .764 / .734, hiredis .617 / .736 / .873, libuv .497 / .768 / .815, ndpi .686 / .688 / .881, zlib .763 / .741 / .871, file .203 / .203 / .806.
 
 ## What it means
 * C has a flat namespace, so matching by name is about as strong as it gets there; this is the language where a tree-sitter baseline should do best. Go, Python and Java merge same-named methods in different packages, where scoping should help us; **not tested here**.
@@ -39,7 +39,7 @@ Same method, scored on the engine gate's own compiler-grade references (pyan3 fo
 | Go | engine / eng-loose / ts-unique / ts-all | 81 / 76 / 75 / 53 | 64 / 74 / 64 / 88 | +0.72 / +0.79 / +0.72 / +0.72 |
 | Java | engine / eng-loose / ts-unique / ts-all | 82 / 67 / 67 / 10 | 73 / 98 / 40 / 87 | **+0.87** / +0.80 / +0.72 / +0.45 |
 | Rust | engine / eng-loose / ts-unique / ts-all | 58 / 51 / 51 / 16 | 67 / 84 / 63 / 87 | +0.83 / +0.84 / +0.80 / +0.73 |
-| C (earlier, libclang) | engine / eng-loose / ts-unique / ts-all | 84 / 84 / 83 / 83 | 61 / 71 / 68 / 83 | +0.64 / +0.70 / +0.78 / **+0.85** |
+| C (libclang; 6 valid repositories, `file` excluded) | engine / eng-loose / ts-unique / ts-all | 89 / 90 / 85 / 85 | 70 / 82 / 66 / 83 | +0.72 / +0.78 / +0.77 / **+0.86** |
 
 **Reading:** C is the exception. In every other language the engine is more precise than name matching (by 5 points in Go, 30 or more in Java, TS, JS, Python and Rust), and its reach ranking is better than "match every definition of that name" (ts-all) everywhere (Java +0.87 against +0.45, JS +0.86 against +0.24, TS +0.66 against +0.43), and at least as good as the more conservative "match only a name one file defines" (ts-unique) in every language but Go, where it is level. Name matching works in C because C has one flat namespace; with methods and modules (`obj.get()`), it matches every `get` in the repository.
 
