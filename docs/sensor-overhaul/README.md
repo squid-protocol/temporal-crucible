@@ -17,13 +17,14 @@ Research and prototypes live here; changes to the engine itself go to GitGalaxy 
 | Documented public functions | `risk_documentation` | design next | GUIDE section 3 | engine has `is_public`, `is_documented` |
 | Secrets findings | `risk_secrets_risk` | decided: list, not score | GUIDE section 3 | |
 | Mechanical share, settledness, role tag | new | idea, evidence in | GUIDE section 3 | from sweep, hazard and role-cluster studies |
+| Change-aware: while-you-are-here prompt, diff-aware change report | new | prompt back-tested over 259k observations (50+ line gate: 2.7x natural repayment; editor's own markers 3.7x); report prototyped on 3 libgit2 commits | [sensors/change_aware.md](sensors/change_aware.md) | pilot needed |
 | Comment sensors (commented-out code, header coverage, neglect, danger language) | new | evidence in (precision 93-95%) | [sensors/tech_debt.md](sensors/tech_debt.md) section 4 | |
 
 ## How to add a sensor
 Copy [sensors/_template.md](sensors/_template.md), fill it in, run the acceptance checklist (GUIDE section 5) with the scripts in `tools/turn/surface_area/` and `tools/sensor/`, record the result on the board above.
 
 ## Tools
-`tools/sensor/` (prototypes: `debt_ledger.py`, `debt_validity.py`, `debt_trial.py`, `debt_trial_report.py`, `debt_effort.py`, `debt_worklist.py`, `reach_validity.py`, `migration_scope.py`, `activity_horizons.py`, `activity_mockup.py`); `tools/turn/surface_area/` (descriptive and outcome tests, history-aware scans, ripple test); `tools/turn/` (earlier studies). Paths are hard-coded to the discovery machine.
+`tools/sensor/` (prototypes: `debt_ledger.py`, `debt_validity.py`, `debt_trial.py`, `debt_trial_report.py`, `debt_effort.py`, `debt_worklist.py`, `reach_validity.py`, `migration_scope.py`, `while_here_backtest.py`, `change_report.py`, `activity_horizons.py`, `activity_mockup.py`); `tools/turn/surface_area/` (descriptive and outcome tests, history-aware scans, ripple test); `tools/turn/` (earlier studies). Paths are hard-coded to the discovery machine.
 
 ## Conventions
 * Exploratory until a sensor passes the checklist; no outcome claims on any sensor.

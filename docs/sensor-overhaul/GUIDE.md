@@ -91,7 +91,7 @@ Owner direction (2026-11-16): design something unique; take inspiration, solve i
    * **Validated for what it claims,** not for predicting defects: debt against repayment, reach against real dependence, activity against later change; negative results are published (effort cannot be predicted per marker).
    * **"Not measured" is a first-class state,** with the reason (outside the call graph, no history, unresolved callee).
    * **Multi-language from one engine,** with role tags so lists are comparable.
-4. **Candidate ideas still open** (each should be our own design and test): diff-aware sensors (what did this change do to a file's gauges), sensors with a track-record panel, and a "while you are here" prompt triggered by the change in front of the reader.
+4. **Ideas now prototyped** (our own designs; `sensors/change_aware.md`): a "while you are here" prompt triggered by the change in front of the reader (back-tested: gate on 50+ changed lines, editor's own markers first), and a diff-aware change report (what this change did: mechanical share, debt balance, reach of the touched functions). **Still open:** a pilot to learn whether the prompt raises repayment, and gauge deltas beyond the touched functions.
 
 ## 5. Acceptance checklist (run for every new or changed sensor)
 | # | Test | Pass | How |

@@ -1,0 +1,30 @@
+259,242 (commit, file, open marker) observations in 6 repos: libgit2 11,895, libxml2 125,872, redis 7,005, curl 19,248, harfbuzz 45,937, openssl 49,285
+markers repaid in the commit that touched their file: 3,355 of 259,242 observations = 1.29%
+
+A. HOW OFTEN IS A MARKER REPAID, BY SIZE OF THE CHANGE TO ITS FILE (per marker per commit)
+     0-   5:    90,245 observations   repaid   0.42%
+     5-  20:    82,498 observations   repaid   0.98%
+    20-  50:    39,558 observations   repaid   1.40%
+    50- 100:    18,741 observations   repaid   2.41%
+   100- 300:    15,588 observations   repaid   3.33%
+   300- inf:    12,612 observations   repaid   5.10%
+
+B. TRIGGER RULES REPLAYED OVER HISTORY (pooled): precision = surfaced markers that were actually repaid in that commit; recall = share of all repaid markers that the rule had surfaced
+  rule                                                 surfaced per fired commit precision   lift  recall
+  every open marker in a touched file                   259,242              7.2     1.29%   1.0x  100.0%
+  change in the file >= 20 lines                         86,499              6.9     2.51%   1.9x   64.6%
+  change >= 50 lines                                     46,941              7.5     3.44%   2.7x   48.1%
+  change >= 100 lines                                    28,200              8.9     4.12%   3.2x   34.6%
+  change >= 200 lines                                    16,590             11.8     4.88%   3.8x   24.1%
+  change >= 50 lines, fossil markers only                19,087              6.6     2.18%   1.7x   12.4%
+  change >= 100 lines, fossil markers only               11,647              7.9     2.91%   2.2x   10.1%
+  change >= 50 lines, the editor wrote the marker        20,410              5.4     4.81%   3.7x   29.3%
+  change >= 50 lines, file holds 3+ open markers         45,254              8.4     3.09%   2.4x   41.7%
+
+C. THE SAME RULES, REPO BY REPO (precision of 'change >= 50 lines' vs 'every marker')
+  libgit2    every marker  1.87%   change >= 50 lines  6.04%   + fossil only  3.23%   markers surfaced per fired commit (>=50 lines) 2.5
+  libxml2    every marker  0.44%   change >= 50 lines  1.60%   + fossil only  1.18%   markers surfaced per fired commit (>=50 lines) 22.6
+  redis      every marker  2.06%   change >= 50 lines  6.56%   + fossil only  4.41%   markers surfaced per fired commit (>=50 lines) 2.2
+  curl       every marker  1.60%   change >= 50 lines  4.19%   + fossil only  1.60%   markers surfaced per fired commit (>=50 lines) 2.6
+  harfbuzz   every marker  2.09%   change >= 50 lines  6.49%   + fossil only  3.18%   markers surfaced per fired commit (>=50 lines) 4.8
+  openssl    every marker  2.37%   change >= 50 lines  6.51%   + fossil only  8.45%   markers surfaced per fired commit (>=50 lines) 4.8
