@@ -9,7 +9,7 @@ on decoys only. Every choice the spec did not make is in `DECISIONS.md`.
 ```
 tmux new -s sa3
 cd /srv/storage_16tb/projects/temporal-crucible-wt-seat
-python3 tools/scoring/score_sa3.py --real --i-am-the-owner --commit <C, 40 hex> \
+python3 -I -B tools/scoring/score_sa3.py --real --i-am-the-owner --commit <C, 40 hex> \
     --seal <run-2's public directory>/seal.json \
     --protected /srv/storage_16tb/projects/temporal-crucible-protected/score-1 --out ~/sa3-score-1
 ```
@@ -25,15 +25,31 @@ power cut): the same command with a new protected and public directory and `--re
 spaces and `. , ; : ( ) - /`). After a completion: never again; only
 
 ```
-python3 tools/scoring/score_sa3.py --resume --real --i-am-the-owner --commit <the checkout's HEAD> \
+python3 -I -B tools/scoring/score_sa3.py --resume --real --i-am-the-owner --commit <the checkout's HEAD> \
     --receipt <the result's SHA-256 from the receipt line> --protected <the first run's> --out <the first run's>
 ```
 
-which re-runs steps 11 to 14 from the published result (from a fresh clone of the given commit if it is not C:
+which re-runs steps 11 to 14 from the result (from a fresh clone of the given commit if it is not C:
 those parts are labelled "run later, on <date>") and cannot start the reference `score`.
 
 Decoy mode, which the tests use: `--decoy DIR --ledger L` instead of `--real --i-am-the-owner`, run from a
 decoy checkout (`tools/scoring/decoy.py` builds the whole route of section 2 on throwaway directories).
+
+## Once the result exists (build review B1, M1)
+
+One launcher at a time: each holds an exclusive lock on `<ledger>.lock` for its whole life, taken before the ledger
+is read (a second one is refused, `ledger_locked`), and the ledger rule is decided again just before `started`.
+After `started`, only the clone's `docs/sa3_result.json` decides: if it exists and parses, `completed` is written
+first, then the receipt, then the copy to the public directory. If the copy fails the job says so and ends
+`STOPPED publish_failed`: run `--resume` with the receipt (it publishes from the clone). After Ctrl-C with the
+result recorded: `STOPPED interrupted`, then `--resume`. If the launcher died after the file was written and before
+`completed` (the ledger shows a start with no completion), `--resume` without `--receipt`, on that run's protected
+directory, adopts the result; `--rerun` is refused while that clone holds a result. With no result file (or one cut
+short): `stopped`, and a second start needs `--rerun REASON`. A failed `--resume` never touches the published report:
+its record is `stopped-N.md` / `stopped-N.json`.
+
+A real run on the production study and pool always uses the production ledger and refuses
+`OWNER_JOB_TEST_PROTECTED_ROOT`; any other study needs that test root (tests only).
 
 ## What the owner sees (a passing decoy run of study P, 3 min 50 s)
 
@@ -108,7 +124,7 @@ A part after the score ends `failed` with a stage code (an exception's type), or
 
 ## Public files (`--out`)
 
-`sa3_result.json` (the reference's file, byte for byte, after a shape check), `sa3_lock.json` (the reference
+`sa3_result.json` (the reference's file, byte for byte; its shape is checked after it is published), `sa3_lock.json` (the reference
 lock's file), `report.md` and `report.json` (validated values only; first lines: the label of Amendment 5
 section 8, any `--rerun` reason, SA3-B/C/D with the mean and interval at the Holm level and the reading as coded
 and as corrected with "same" or the sentence, SA3-A's exploratory reading, the placebo gate, the check's verdict,

@@ -88,13 +88,15 @@ written. Built and tested on decoys only (2026-11-15). Numbers are cited by `tes
 16. **The ledger** is one JSON object per line, appended, flushed, fsynced (and its directory on creation), at
     `<protected root>/sa3_score_ledger.jsonl`: on a real run the protected root that contains `--protected` (the
     production one; in tests a test-named one). `--ledger` is for decoys only, and must lie outside the protected
-    and public directories. Events: `started` (time, C, run-2's seal SHA-256, the `--rerun` reason), `completed`
-    (the result's SHA-256), `resume`, and one the spec does not name: **`stopped`** (a code), written when a start
-    produced no publishable result (crash, time-out, LOCKED, a result without the reference's shape). `stopped`
-    is a start with no completion, so a second start needs `--rerun REASON`.
-17. **The rule** (`ledger.decide`), read before the plan is printed: no entry → first start; a start with no
-    completion and `--rerun` → a second start; a completion → no start ever (`--rerun` too is refused); `--resume`
-    needs a completion. Refusals exit 2 and create nothing. Tests 1b, 3a, 3d.
+    and public directories. Events: `started` (time, C, run-2's seal SHA-256, the `--rerun` reason, the protected
+    directory's name), `completed` (the result's SHA-256), `resume`, and one the spec does not name: **`stopped`**
+    (a code), written when a start left no result file, or one that does not parse. `stopped` is a start with no
+    completion, so a second start needs `--rerun REASON`.
+17. **The rule** (`ledger.decide`), read under the lock (item 32) before the plan is printed: no entry → first
+    start; a start with no completion and `--rerun` → a second start (refused while that start's clone holds a
+    parseable result: `result_exists_resume`); a completion → no start ever (`--rerun` too is refused);
+    `--resume` needs a completion, or adopts the result in an open start's clone. Refusals exit 2 and create
+    nothing but the lock file. Tests 1b, 1h, 3a, 3d.
 18. **Every attempt is listed** although a failure in steps 1 to 8 writes no ledger entry: a second file beside
     the ledger, `sa3_score_ledger_attempts.jsonl`, records each attempt's start and its end (step and code). It
     decides nothing. The report and a stopped run's short report list it.
@@ -203,3 +205,42 @@ written. Built and tested on decoys only (2026-11-15). Numbers are cited by `tes
     streams, the late-revert variant, and the case variant if any repo loses a row), plus about 15 minutes of
     checks scaled from run-1's log (two seal verifications, the copies, the rehearsal on 40 repos, the harvest
     copies and builds): **about 2 to 3 hours**; with the review's factor of three either way, 1 to 7 hours.
+
+## The build review (docs/process/reviews/scoring_build_review.md), 2026-11-16
+
+32. **B1. After `started`, only the result file decides.** `step9_score` turns every exception after `started`
+    (`KeyboardInterrupt` included) into a stage result; `step10_publish` then looks at the clone's
+    `docs/sa3_result.json` only. Present and a JSON object, whatever the stage's status or exit code: `completed`
+    with its SHA-256 first, the receipt, the result's path in the protected directory, then the public copy inside
+    `try`. A failed copy prints a fixed line and ends `STOPPED publish_failed` (exit 1), never `stopped`;
+    `--resume` publishes from the clone when the public copy is missing (SHA-256 against the ledger and the
+    receipt). Interrupted with the result recorded: `STOPPED interrupted` (exit 130), ledger `started,
+    completed`, next command `--resume --receipt S`. Interrupted before any file: ledger `started, stopped
+    (interrupted)`, next command `--rerun REASON`. A file that does not parse: `stopped (result_truncated)`,
+    `--rerun` allowed. A launcher killed between the file and `completed` (ledger `started` only):
+    `--resume` without `--receipt` on that run's protected directory (the name recorded in `started`) adopts it.
+    A stage that ended failed after the file existed is published with a fixed line naming its code; for
+    `modules_differ` the line says the result's code is not shown to be the pinned commit's: **an owner ruling
+    on that case is open** (it is published and recorded, not stopped). `record`, `save_log`, `stopped()` and
+    `finish()` never raise (`launcher.log`). Tests 3h to 3l.
+33. **M1. One launcher at a time.** An exclusive `flock` on `<ledger>.lock`, taken in `main` before the ledger
+    is read and held until the launcher ends; a held lock refuses with `ledger_locked`. `step9_score` reads the
+    ledger and decides again just before appending `started`; a different answer is `ledger_changed`, nothing
+    started. Test 1h.
+34. **M2.** On a real run whose study or pool is the production path, the ledger is the constant
+    `<production protected root>/sa3_score_ledger.jsonl` and `OWNER_JOB_TEST_PROTECTED_ROOT` is refused; any
+    other study needs the test root, and its ledger and tables lie under it. Test 1i; test 8 unchanged.
+35. **M3, M4.** The stopping lines follow the ledger read at the stop: the section 6 row sentence ("nothing has
+    been scored") only while the ledger is empty; then one of three fixed ledger sentences (`texts.LEDGER_STATE`).
+    After a `completed`, a stop writes `stopped-N.md` / `.json` and never touches `report.*`. Everything after
+    `completed` is one `try` that ends in the report (`after_completed`). Tests 1j, 3b.
+36. **M5.** The deviation table draft is rewritten against its sources (29 rows and a footnote: every defect from
+    42 to 64, every name of `variants.TABLE`, the reference's `not_run` and `unavailable` keys). Test 1k.
+37. **Minors.** (2) the pin refuses an index entry marked assume-unchanged or skip-worktree (`git ls-files -v`)
+    and compares every module the launcher loaded from the checkout with the commit's blob; (3) each headline
+    test is read in its own `try` and kept if it fits its shape, whatever the rest of the result; (4) the minimal
+    report keeps the label's clause and the section 6 sentences; (5) `stopped()` never raises; (6) `started`
+    records the protected directory's name; (7) the label stage gets the day's time-out; (8) stale words
+    corrected; (9) the documented command is `python3 -I -B`, and the launcher sets a `sys.pycache_prefix` that
+    does not exist, so it never reads the checkout's `__pycache__`; (10) covered by item 32; (11) report times
+    carry US Eastern beside UTC. Minor 1 (`.pytest_cache/`) is the coordinator's to clear before the pin.

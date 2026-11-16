@@ -90,6 +90,7 @@ NOT_RUN = {"S5": "tree-wide commits left in", "S8": "positives followed through 
 SUMMARY_KEY = re.compile("(" + "|".join(OUTCOMES) + r")\|(" + "|".join(PREDICTORS) + r")\|(" + "|".join(STATS)
                          + r")\|(" + "|".join(CUTS) + ")")
 ENGINE = re.compile(r"[0-9a-f]{7,40}")     # the scan sidecar's engine pin (sa3_scan.ENGINE_SHA: 40 hex)
+DIRNAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,99}")
 CODEPATH = re.compile(r"tools/[A-Za-z0-9_][A-Za-z0-9_/.-]{0,120}\.py")
 REASON = re.compile(r"[A-Za-z0-9 .,;:()/-]{1,200}")
 SAME_WORDS = ("same", "reading depends on a rule corrected after the estimates were partly seen")
@@ -124,6 +125,7 @@ def words() -> dict:
         "part": ("labels", "compare", "readings", "named", "hv_prepare", "PU_tracker_keys_case_sensitive",
                  "PU_late_revert_ticket_dropped"),
         "tag": ("sa3-score-C",), "result_shape": ("expected", "unexpected"),
+        "ledger_state": ("empty", "open", "completed"),
     }
 
 
@@ -176,6 +178,10 @@ def leaf(kind: str, v, f: str, vocab: Vocab) -> None:
             seg in SHAPE_WORDS or (seg.startswith("<") and seg.endswith(">") and seg[1:-1] in ("key", "repo"))
             for seg in v.replace("[]", "").split("."))
         if not ok:
+            raise ReportError(f)
+        return
+    if k == "dirname":
+        if not (isinstance(v, str) and DIRNAME.fullmatch(v)):
             raise ReportError(f)
         return
     if k == "reason":
@@ -382,7 +388,7 @@ STEP = {"step": "count", "name": "word:step_name", "repo": "repo_or_all", "statu
 RUN_LOG = {"target": "word:target", "mode": "word:mode", "started": "time", "finished": "time?",
            "complete": "yesno", "steps": ("list", STEP)}
 LEDGER_ENTRY = {"event": "word:ledger_event", "time": "time", "commit": "anycommit", "seal_sha256": "hex64",
-                "rerun_reason": "reason?", "result_sha256": "hex64?", "code": "word:code"}
+                "rerun_reason": "reason?", "result_sha256": "hex64?", "code": "word:code", "protected": "dirname?"}
 ATTEMPT = {"event": "word:attempt_event", "time": "time", "mode": "word:mode", "commit": "anycommit",
            "step": "count", "code": "word:code"}
 

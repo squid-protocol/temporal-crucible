@@ -12,6 +12,11 @@ from __future__ import annotations
 
 import datetime as dt
 import importlib.util
+try:
+    from zoneinfo import ZoneInfo
+    EASTERN = ZoneInfo("America/New_York")
+except Exception:                                                # noqa: BLE001  no time-zone data: UTC only
+    EASTERN = None
 import re
 import sys
 from pathlib import Path
@@ -41,7 +46,12 @@ PART_LABEL = {"labels": "label tables and the label-side input check (step 11)",
 
 
 def day(t: int) -> str:
-    return f"{dt.datetime.fromtimestamp(t, dt.timezone.utc):%Y-%m-%d %H:%M} UTC"
+    """UTC, and US Eastern beside it (the owner reads Eastern; build review, minor 11)"""
+    u = dt.datetime.fromtimestamp(t, dt.timezone.utc)
+    if EASTERN is None:
+        return f"{u:%Y-%m-%d %H:%M} UTC"
+    e = u.astimezone(EASTERN)
+    return f"{u:%Y-%m-%d %H:%M} UTC ({e:%Y-%m-%d} {e:%I:%M %p}".replace(" 0", " ", 1) + f" {e.tzname()})"
 
 
 def f4(v) -> str:
@@ -116,6 +126,9 @@ def render(vals: dict, deviation: str, variant_table: list) -> str:
     L = []
     label = TX.LABEL + (f" {TX.LABEL_ADDITION[0].upper()}{TX.LABEL_ADDITION[1:]}." if vals["label_addition"] else "")
     L += [f"**{label}**", ""]
+    if vals["score_stage"] != "none":
+        L += [(TX.RESULT_LINES["stage_modules"] if vals["score_stage"] == "modules_differ"
+               else TX.RESULT_LINES["stage_failed"].format(code=vals["score_stage"])).capitalize() + ".", ""]
     if vals["result_shape"] != "expected":
         L += [f"result_shape: unexpected, at {vals['result_shape_at']}. The result is published byte for byte; "
               f"{TX.STOP_CODES['result_shape_unexpected']}.", ""]
@@ -281,15 +294,15 @@ def attempts_line(vals: dict) -> str:
 
 
 def render_stopped(vals: dict) -> str:
+    """a stop's short record; the sentences follow what the ledger held at the stop (build review M4)"""
     L = [f"STOPPED at step {vals['step']} ({TX.STEPS.get(vals['step'], '')}): {vals['code']}", "",
          TX.STOP_CODES.get(vals["code"], ""), ""]
-    s = "run2_placebo" if (vals["step"] == 1 and vals["code"] == "run2_placebo") else \
-        "rehearsal" if vals["step"] == 6 else "before_score" if vals["step"] <= 8 else None
-    if s:
-        L += [TX.SENTENCES[s], ""]
-    else:
-        L += ["A start is recorded in the ledger and no result was published: a second start needs --rerun REASON.",
-              ""]
+    if vals["ledger_state"] == "empty":
+        s = "run2_placebo" if (vals["step"] == 1 and vals["code"] == "run2_placebo") else \
+            "rehearsal" if vals["step"] == 6 else "before_score" if vals["step"] <= 8 else None
+        if s:
+            L += [TX.SENTENCES[s], ""]
+    L += [TX.LEDGER_STATE[vals["ledger_state"]], ""]
     L += [f"Target: {vals['target']}. Written {day(vals['made'])}.", "",
           "Attempts and resumes: " + attempts_line(vals), "",
           "Do not paste anything from the protected directory into a session.", ""]

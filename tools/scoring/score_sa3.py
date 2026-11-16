@@ -43,6 +43,11 @@ import traceback
 from pathlib import Path
 
 sys.dont_write_bytecode = True
+if sys.argv[1:2] != ["stage"]:
+    # the launcher never reads compiled files from the checkout's ignored __pycache__ directories (build review,
+    # minor 9): with a prefix that does not exist, every module it loads from here is compiled from its source,
+    # which step 1 compares with the commit's blobs. Stages run from the clone, which has no __pycache__.
+    sys.pycache_prefix = os.path.join(os.sep, "nonexistent", "score_sa3-reads-no-bytecode")
 HERE = Path(__file__).resolve().parent
 TOOLS = HERE.parent
 WORKTREE = TOOLS.parent
@@ -84,8 +89,8 @@ PREDICTOR_CHECK = "docs/sa3_predictor_check.json"      # committed in step 2 of 
 DEVIATION_TABLE = "docs/sa3_deviation_table.md"        # committed in step 3 of section 2 (a fixed path)
 SCORE_TIMEOUT = 86400                                  # section 3, step 9: a day
 STAGE_TIMEOUT = P.STAGE_TIMEOUT
-TEST_FAIL_ENV = "SCORE_SA3_TEST_FAIL"
-VERIFY_NAME = __import__("re").compile(r"[A-Za-z0-9_.<>/+-]{1,200}")                  # TESTS ONLY, decoys only: plant an exception in one stage
+TEST_FAIL_ENV = "SCORE_SA3_TEST_FAIL"                  # TESTS ONLY, decoys only: plant an exception in one stage
+VERIFY_NAME = __import__("re").compile(r"[A-Za-z0-9_.<>/+-]{1,200}")       # seal.py's "differs:" entry names
 PY = "/usr/bin/python3"
 GIT_ENV = {"GIT_NO_LAZY_FETCH": "1", "GIT_TERMINAL_PROMPT": "0", "GIT_OPTIONAL_LOCKS": "0"}
 GIT_C = ["-c", "gc.auto=0", "-c", "maintenance.auto=false", "-c", "core.autocrlf=false", "-c",
@@ -172,8 +177,9 @@ def git(cwd: Path, *args: str, check: bool = True, timeout: int = 3600) -> subpr
 
 
 def pin_problems(checkout: Path, commit: str, need_tag: bool = True) -> str | None:
-    """section 3, step 1: HEAD is the commit; nothing untracked, modified or ignored but __pycache__; the tag
-    points at it. Returns a stop code or None"""
+    """section 3, step 1: HEAD is the commit; nothing untracked, modified or ignored but __pycache__; no index entry
+    marked assume-unchanged or skip-worktree (they hide a modified file from `git status`: build review, minor 2);
+    the tag points at it. Returns a stop code or None"""
     head = git(checkout, "rev-parse", "HEAD").stdout.strip()
     if head != commit:
         return "head_differs"
@@ -182,10 +188,30 @@ def pin_problems(checkout: Path, commit: str, need_tag: bool = True) -> str | No
         path = line[3:]
         if not (line.startswith("!! ") and ("/__pycache__/" in "/" + path or path.endswith(".pyc"))):
             return "checkout_dirty"
+    for line in git(checkout, "ls-files", "-v").stdout.splitlines():
+        if line[:1].islower() or line[:1] == "S":            # assume-unchanged (lower case) or skip-worktree
+            return "checkout_dirty"
     if need_tag:
         t = git(checkout, "rev-parse", "-q", "--verify", f"refs/tags/{TAG}^{{commit}}", check=False)
         if t.returncode != 0 or t.stdout.strip() != commit:
             return "tag_differs"
+    return None
+
+
+def launcher_problems(checkout: Path, commit: str) -> str | None:
+    """every module this launcher loaded from the checkout's tools/ has, now, the bytes of the commit's blob
+    (build review, minor 2: the stages' modules are checked against the clone; these are the launcher's own)"""
+    tree = ls_tree(checkout, commit)
+    root = (checkout / "tools").resolve()
+    for m in list(sys.modules.values()):
+        f = getattr(m, "__file__", None)
+        if not f:
+            continue
+        p = Path(f).resolve()
+        if root in p.parents and p.suffix == ".py":
+            rel = "tools/" + str(p.relative_to(root))
+            if tree.get(rel) != blob(p.read_bytes()):
+                return "checkout_dirty"
     return None
 
 
@@ -227,22 +253,46 @@ class Job:
         self.sealed_root = pl.clone                 # the comparison scorer's sealed copies
         self.later: str | None = None               # "run later, on <date>" when a resume runs other code
         self.fail_stage = a.test_fail if not self.tgt.real else None
+        self.decision = "first"
+        self.production = False
+        self.interrupted = self.completed = self.publish_failed = False
+        self.score_stage_code = "none"
 
     # ------------------------------------------------------------------------------------------- the run log
     def record(self, step: int, name: str, repo: str, status: str, code: str, seconds: int) -> None:
+        """never raises (build review B1): a terminal or a public directory that fails is noted in launcher.log"""
         self.steps.append({"step": step, "name": name, "repo": repo, "status": status, "code": code,
                            "seconds": seconds})
-        self.echo(f"step {step} {name} {repo} {status}" + ("" if code == "none" else f" {code}"))
+        try:
+            self.echo(f"step {step} {name} {repo} {status}" + ("" if code == "none" else f" {code}"))
+        except Exception:                                        # noqa: BLE001
+            self.note_error()
         self.save_log(False)
 
     def save_log(self, complete: bool) -> None:
-        log = {"target": "real" if self.tgt.real else "decoy", "mode": self.mode, "started": self.started,
-               "finished": now() if complete else None, "complete": complete, "steps": self.steps}
+        """never raises"""
         try:
+            log = {"target": "real" if self.tgt.real else "decoy", "mode": self.mode, "started": self.started,
+                   "finished": now() if complete else None, "complete": complete, "steps": self.steps}
             SC.check(SC.RUN_LOG, log, "run_log", self.vocab)
-        except RP.ReportError:
-            return
-        atomic(self.pl.out / "run_log.json", json.dumps(log, indent=1) + "\n")
+            atomic(self.pl.out / "run_log.json", json.dumps(log, indent=1) + "\n")
+        except Exception:                                        # noqa: BLE001
+            self.note_error()
+
+    def note_error(self) -> None:
+        """the current exception's traceback into the protected directory's launcher.log; never raises"""
+        try:
+            with open(self.pl.prot / "launcher.log", "a") as fh:
+                traceback.print_exc(file=fh)
+        except Exception:                                        # noqa: BLE001
+            pass
+
+    def say(self, line: str) -> None:
+        """a terminal line that never raises"""
+        try:
+            self.echo(line)
+        except Exception:                                        # noqa: BLE001
+            self.note_error()
 
     # ------------------------------------------------------------------------------------------ stage runner
     def run_stage(self, step: int, name: str, repo: str, args: dict, inputs: list, rw: list[Path] = (),
@@ -330,7 +380,7 @@ def step1_pin(job: Job) -> None:
     """the pin, run-2's report, seal.py verify (the ledger was decided before the plan was printed)"""
     t0 = time.time()
     try:
-        bad = pin_problems(WORKTREE, job.commit)
+        bad = pin_problems(WORKTREE, job.commit) or launcher_problems(WORKTREE, job.commit)
     except (subprocess.SubprocessError, OSError):
         bad = "git_error"
     job.record(1, "pin", "*", "failed" if bad else "ok", bad or "none", int(time.time() - t0))
@@ -507,8 +557,9 @@ def tree_files(d: Path) -> dict[str, str]:
 
 def allowed_tables_dir(job: Job, d: str) -> Path:
     p = Path(os.path.abspath(d))
-    if job.tgt.real:                     # the stored tables root; in tests only, a test-named protected root
-        if not any(r in p.parents for r in (P.TABLES_ROOT,) + SR.protected_roots()[1:]):
+    if job.tgt.real:                     # the stored tables root; on a test real run only, the test root
+        roots = (P.TABLES_ROOT,) if job.production else tuple(SR.protected_roots()[1:])
+        if not any(r in p.parents for r in roots):
             raise Stop(5, "predictor_check_missing")
     else:
         try:
@@ -591,56 +642,107 @@ def step8_after_lock(job: Job) -> None:
 
 # ================================================================================================ the score
 def step9_score(job: Job, rerun: str | None) -> dict:
-    """the ledger entry `started` (written and flushed), then the reference `score`, unchanged, once"""
-    LG.append(job.pl.ledger, LG.entry("started", job.commit, job.seal_sha, rerun=rerun))
+    """the ledger re-read and the rule decided again under the lock (build review M1), the entry `started` (written
+    and flushed, with the protected directory's name), then the reference `score`, unchanged, once. Whatever
+    happens from here (an exception, an interruption) is returned as a stage result: step 10 decides on the file"""
+    try:
+        again = LG.decide(LG.read(job.pl.ledger), False, rerun)
+    except LG.LedgerError:
+        again = None
+    if again != job.decision:
+        job.record(9, "score", "*", "failed", "ledger_changed", 0)
+        raise Stop(9, "ledger_changed")
+    LG.append(job.pl.ledger, LG.entry("started", job.commit, job.seal_sha, rerun=rerun, protected=job.pl.prot.name))
     rw, code = lock_layout(job)
-    ins = [x for r in job.repos for x in job.loader_inputs(r)] + job.lists()
-    return job.run_stage(9, "score", "*", {"tools": str(job.pl.clone / "tools")}, ins, rw=rw, code=code,
-                         timeout=SCORE_TIMEOUT)
+    try:
+        ins = [x for r in job.repos for x in job.loader_inputs(r)] + job.lists()
+        return job.run_stage(9, "score", "*", {"tools": str(job.pl.clone / "tools")}, ins, rw=rw, code=code,
+                             timeout=SCORE_TIMEOUT)
+    except KeyboardInterrupt:
+        job.interrupted = True
+        job.note_error()
+        return {"status": "failed", "code": "interrupted", "modules": {}}
+    except BaseException:                                        # noqa: BLE001  decided on the file, not here
+        job.note_error()
+        return {"status": "failed", "code": "launcher_error", "modules": {}}
 
 
 def step10_publish(job: Job, res: dict) -> None:
-    """When the reference score returned 0 and wrote its file: the result is published byte for byte, `completed`
-    is written with its SHA-256 and the receipt printed, ALWAYS; only then is its shape checked, and an unexpected
-    shape is a verdict for the report (`result_shape_unexpected`, with a schema position), never a stop. `stopped`
-    is written only when the score produced no result (time-out, crash, exit 2, no file): a start with no
-    completion, so a second start needs --rerun"""
+    """Build review B1: once `started` is written, the existence of the clone's docs/sa3_result.json alone decides.
+    If it exists and parses as a JSON object (whatever the stage's status or exit code): `completed` with its
+    SHA-256 FIRST, then the receipt, then the copy to the public directory inside try (a failed copy is reported,
+    never a reason for --rerun; --resume publishes it later), then the shape check. If no file exists, or it does
+    not parse (cut short): `stopped` with a code, and a second start needs --rerun"""
     t0 = time.time()
     rf = job.pl.clone / "docs" / "sa3_result.json"
-    code = "none"
-    if res["status"] != "ok":
-        code = {"timeout": "score_timeout", "result_exists": "result_exists"}.get(res["code"], "score_crashed")
-    elif res["rc"] == 2:
-        code = "locked"
-    elif res["rc"] != 0:
-        code = "score_crashed"
-    elif not rf.is_file():
-        code = "no_result"
-    if code == "none":
-        data = rf.read_bytes()
-    if code != "none":
+    data = None
+    try:
+        if rf.is_file():
+            data = rf.read_bytes()
+    except OSError:
+        job.note_error()
+    if data is None:
+        if res.get("status") != "ok":
+            code = {"timeout": "score_timeout", "result_exists": "result_exists",
+                    "interrupted": "interrupted"}.get(res.get("code"), "score_crashed")
+        else:
+            code = "locked" if res.get("rc") == 2 else "score_crashed" if res.get("rc") != 0 else "no_result"
         LG.append(job.pl.ledger, LG.entry("stopped", job.commit, job.seal_sha, code=code))
         job.record(10, "publish", "*", "failed", code, int(time.time() - t0))
         raise Stop(10, code)
-    out = job.pl.out / "sa3_result.json"
-    tmp = out.with_name(".sa3_result.json.part")
-    tmp.write_bytes(data)
-    os.replace(tmp, out)
-    lock_bytes = (job.pl.clone / "docs" / "sa3_lock.json").read_bytes()
-    (job.pl.out / "sa3_lock.json").write_bytes(lock_bytes)
-    job.result_sha = sha256_bytes(data)
-    published = out.read_bytes() == rf.read_bytes()
-    LG.append(job.pl.ledger, LG.entry("completed", job.commit, job.seal_sha, result_sha256=job.result_sha))
-    job.echo(f"keep this line somewhere other than this machine: receipt sa3_result.json sha256 {job.result_sha} "
-             f"commit {job.commit} seal sha256 {job.seal_sha}")
-    job.record(10, "publish", "*", "ok" if published else "failed", "none" if published else "no_result",
-               int(time.time() - t0))
     try:
+        ok = isinstance(json.loads(data), dict)
+    except ValueError:
+        ok = False
+    if not ok:
+        LG.append(job.pl.ledger, LG.entry("stopped", job.commit, job.seal_sha, code="result_truncated"))
+        job.record(10, "publish", "*", "failed", "result_truncated", int(time.time() - t0))
+        raise Stop(10, "result_truncated")
+    job.result_sha = sha256_bytes(data)
+    LG.append(job.pl.ledger, LG.entry("completed", job.commit, job.seal_sha, result_sha256=job.result_sha))
+    job.completed = True
+    job.say(f"keep this line somewhere other than this machine: receipt sa3_result.json sha256 {job.result_sha} "
+            f"commit {job.commit} seal sha256 {job.seal_sha}")
+    job.say(TX.RESULT_LINES["where"].format(path=rf))
+    job.score_stage_code = "none" if res.get("status") == "ok" and res.get("rc") == 0 else \
+        (res.get("code") or "score_crashed") if res.get("status") != "ok" else "score_crashed"
+    if job.score_stage_code != "none":
+        job.say(TX.RESULT_LINES["stage_modules"] if job.score_stage_code == "modules_differ"
+                else TX.RESULT_LINES["stage_failed"].format(code=job.score_stage_code))
+    job.publish_failed = not publish(job, data)
+    job.record(10, "publish", "*", "failed" if job.publish_failed else "ok",
+               "publish_failed" if job.publish_failed else "none", int(time.time() - t0))
+    if job.publish_failed:
+        job.say(TX.RESULT_LINES["publish_failed"])
+    try:
+        job.lock = json.loads((job.pl.clone / "docs" / "sa3_lock.json").read_text())
         st = clone_status(job)
         job.after_score_status = sorted(st) == ["?? docs/sa3_lock.json", "?? docs/sa3_result.json"]
-    except (subprocess.SubprocessError, OSError):
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
         job.after_score_status = False
-    shape_check(job, data)
+    try:
+        shape_check(job, data)
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
+        job.result_shape, job.result_shape_at = "unexpected", "result"
+
+
+def publish(job: Job, data: bytes) -> bool:
+    """the result's bytes and the lock file into the public directory, atomically; False on any failure"""
+    try:
+        out = job.pl.out / "sa3_result.json"
+        tmp = out.with_name(".sa3_result.json.part")
+        tmp.write_bytes(data)
+        os.replace(tmp, out)
+        lock_bytes = (job.pl.clone / "docs" / "sa3_lock.json").read_bytes()
+        lt = job.pl.out / ".sa3_lock.json.part"
+        lt.write_bytes(lock_bytes)
+        os.replace(lt, job.pl.out / "sa3_lock.json")
+        return out.read_bytes() == data
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
+        return False
 
 
 def shape_check(job: Job, data: bytes) -> None:
@@ -699,7 +801,7 @@ def after_score(job: Job, runs: Path) -> dict:
 
     # ---- step 11: label tables and the label side of the input check
     lab = part(11, "labels", "*", {**base, "rehearse": str(job.runs / "rehearse")},
-               outcomes + tabs + [(str(job.runs / "rehearse"), job.runs / "rehearse")])
+               outcomes + tabs + [(str(job.runs / "rehearse"), job.runs / "rehearse")], timeout=SCORE_TIMEOUT)
     parts["labels"] = lab
     lt = lab["rundir"] / "labels" if lab["status"] == "ok" else None
     lt_in = [(str(lt), lt)] if lt else []
@@ -769,33 +871,48 @@ def report_values(job: Job, parts: dict) -> dict:
     rd = parts.get("readings", {})
     rd_ok = rd.get("status") == "ok"
     try:
-        if getattr(job, "result_shape", "expected") != "expected":
-            raise ValueError("not read: the result's shape is unexpected")
-        tests, expl, gate = result_lines(json.loads((job.pl.out / "sa3_result.json").read_text()), rd, rd_ok)
-    except Exception:                                            # noqa: BLE001  an unexpected shape: nothing read
+        tests, expl, gate = result_lines(json.loads((job.pl.out / "sa3_result.json").read_text()), rd, rd_ok, job)
+    except Exception:                                            # noqa: BLE001  not even JSON: nothing read
         tests, expl, gate = {}, None, None
     lab, cm = parts.get("labels", {}), parts.get("compare", {})
     sentences = sentences_after(parts)
     return report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences)
 
 
-def result_lines(res: dict, rd: dict, rd_ok: bool) -> tuple[dict, dict, bool]:
-    """the first lines' numbers and words, from the published result"""
+def result_lines(res: dict, rd: dict, rd_ok: bool, job: "Job") -> tuple[dict, dict | None, bool | None]:
+    """the first lines' numbers and words, each test read in its own try and kept only if it fits its fixed shape
+    (build review, minor 3: an unexpected shape elsewhere in the result does not withhold the headline numbers)"""
+    voc = SC.Vocab(repos=getattr(job, "marg_repos", frozenset()), commit=job.commit)
+
+    def interval(b):
+        ci = b.get("ci")
+        if isinstance(ci, list) and len(ci) == 2 and all(SC.finite_or_none(x) is not None for x in ci):
+            return [float(ci[0]), float(ci[1])]
+        return None
+
     tests = {}
     for n in SC.CONFIRMATORY:
-        t = res["tests"][n]
-        b = t["bauc"]
-        tests[n] = {"holm_level": float(t["holm_level"]), "n": int(b.get("n", 0)), "mean": SC.finite_or_none(b.get("mean")),
-                    "ci": [SC.finite_or_none(x) for x in b["ci"]] if "ci" in b and all(
-                        SC.finite_or_none(x) is not None for x in b["ci"]) else None,
-                    "coded": t["reading"], "corrected": rd["beside"][n]["corrected"] if rd_ok else None,
-                    "status": rd["beside"][n]["status"] if rd_ok else None}
-    a = res["tests"]["in_degree"]["bauc"]
-    expl = {"n": int(a.get("n", 0)), "mean": SC.finite_or_none(a.get("mean")),
-            "ci": [SC.finite_or_none(x) for x in a["ci"]] if "ci" in a and all(
-                SC.finite_or_none(x) is not None for x in a["ci"]) else None,
-            "reading": res["tests"]["in_degree"]["reading"]}
-    return tests, expl, bool(res["valid"])
+        try:
+            t = res["tests"][n]
+            b = t["bauc"]
+            row = {"holm_level": float(t["holm_level"]), "n": int(b.get("n", 0)), "mean": SC.finite_or_none(b.get("mean")),
+                   "ci": interval(b), "coded": t["reading"],
+                   "corrected": rd["beside"][n]["corrected"] if rd_ok else None,
+                   "status": rd["beside"][n]["status"] if rd_ok else None}
+            SC.check(REPORT["tests"][2], row, f"report.tests.{n}", voc)
+            tests[n] = row
+        except Exception:                                        # noqa: BLE001
+            continue
+    expl = None
+    try:
+        a = res["tests"]["in_degree"]["bauc"]
+        expl = {"n": int(a.get("n", 0)), "mean": SC.finite_or_none(a.get("mean")), "ci": interval(a),
+                "reading": res["tests"]["in_degree"]["reading"]}
+        SC.check(REPORT["exploratory"][1], expl, "report.exploratory", voc)
+    except Exception:                                            # noqa: BLE001
+        expl = None
+    gate = res.get("valid") if isinstance(res.get("valid"), bool) else None
+    return tests, expl, gate
 
 
 def report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences) -> dict:
@@ -818,6 +935,7 @@ def report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences) ->
         "target": "real" if job.tgt.real else "decoy", "mode": job.mode, "made": now(),
         "label_addition": "w_or_d" in sentences or "not_computed" in sentences,
         "check_code": check_not_computed(parts),
+        "score_stage": getattr(job, "score_stage_code", "none"),
         "result_shape": getattr(job, "result_shape", "expected"),
         "result_shape_at": getattr(job, "result_shape_at", None),
         "rerun_reasons": [e["rerun_reason"] for e in entries if e["event"] == "started" and e["rerun_reason"]],
@@ -842,6 +960,7 @@ def report_rest(job, parts, rd, rd_ok, tests, expl, gate, lab, cm, sentences) ->
 REPORT = {
     "target": "word:target", "mode": "word:mode", "made": "time", "label_addition": "yesno",
     "check_code": "word:code?", "result_shape": "word:result_shape", "result_shape_at": "shapepos?",
+    "score_stage": "word:code",
     "rerun_reasons": ("list", "reason"),
     "tests": ("map", "word:confirmatory", {"holm_level": "real", "n": "count", "mean": "real?",
                                            "ci": ("opt", ("pair", "real")), "coded": "word:test_word",
@@ -867,7 +986,7 @@ REPORT = {
 
 
 STOPPED = {"target": "word:target", "mode": "word:mode", "made": "time", "step": "count", "code": "word:code",
-           "attempts": ("list", SC.ATTEMPT), "ledger": ("list", SC.LEDGER_ENTRY)}
+           "ledger_state": "word:ledger_state", "attempts": ("list", SC.ATTEMPT), "ledger": ("list", SC.LEDGER_ENTRY)}
 
 
 def check_not_computed(parts: dict) -> str | None:
@@ -934,16 +1053,26 @@ def variant_table(job: Job) -> list:
     return []
 
 
-def write_stopped(job: Job, stop: Stop) -> None:
-    """before the score: a short public record (the job stopped, nothing scored), validated"""
+def write_stopped(job: Job, stop: Stop, state: str) -> Path:
+    """a short public record of the stop, validated. While the ledger holds no completion it is report.md /
+    report.json; after one, the published report is never touched: stopped-N.md / stopped-N.json beside it"""
     vals = {"target": "real" if job.tgt.real else "decoy", "mode": job.mode, "made": now(), "step": stop.step,
-            "code": stop.code, "attempts": LG.read(LG.attempts_path(job.pl.ledger)), "ledger": LG.read(job.pl.ledger)}
+            "code": stop.code, "ledger_state": state, "attempts": LG.read(LG.attempts_path(job.pl.ledger)),
+            "ledger": LG.read(job.pl.ledger)}
     voc = SC.Vocab(repos=getattr(job, "marg_repos", frozenset()), commit=job.commit)
     SC.check(STOPPED, vals, "stopped", voc)
     MD = scoring("report_md")
-    atomic(job.pl.out / "report.json", json.dumps(vals, indent=1) + "\n")
-    atomic(job.pl.out / "report.md", MD.render_stopped(vals))
+    if state == "completed":
+        n = 0
+        while (job.pl.out / f"stopped-{n}.md").exists():
+            n += 1
+        md, js = job.pl.out / f"stopped-{n}.md", job.pl.out / f"stopped-{n}.json"
+    else:
+        md, js = job.pl.out / "report.md", job.pl.out / "report.json"
+    atomic(js, json.dumps(vals, indent=1) + "\n")
+    atomic(md, MD.render_stopped(vals))
     atomic(job.pl.out / "ledger.jsonl", "".join(json.dumps(e, sort_keys=True) + "\n" for e in vals["ledger"]))
+    return md
 
 
 # =========================================================================================== the two routes
@@ -959,6 +1088,7 @@ def stop_sentence(stop: Stop) -> str | None:
 
 def run_full(job: Job, decision: str) -> int:
     """steps 1 to 14 of section 3"""
+    job.decision = decision
     rerun = job.a.rerun if decision == "rerun" else None
     try:
         step1_pin(job)
@@ -971,34 +1101,70 @@ def run_full(job: Job, decision: str) -> int:
         step8_after_lock(job)
         job.tools_tree = git(job.pl.clone, "rev-parse", f"{job.commit}:tools").stdout.strip()
         res = step9_score(job, rerun)
+    except Stop as e:
+        return stopped(job, e)
+    try:
         step10_publish(job, res)
     except Stop as e:
         return stopped(job, e)
     job.a.commit_of_result = job.commit
-    parts = safe_after(job, job.runs)
+    return after_completed(job, job.runs)
+
+
+def after_completed(job: Job, runs: Path) -> int:
+    """everything after `completed`, in one try that ends in the report (build review M4)"""
+    if getattr(job, "interrupted", False):
+        job.say(TX.RESULT_LINES["interrupted"])
+        job.save_log(True)
+        job.say("STOPPED interrupted")
+        return 130
+    if getattr(job, "publish_failed", False):
+        job.save_log(True)
+        job.say("STOPPED publish_failed")
+        return 1
+    parts: dict = {}
+    try:
+        parts = after_score(job, runs)
+    except BaseException:                                        # noqa: BLE001  the launcher's own fault
+        job.note_error()
     return finish(job, parts)
 
 
 def stopped(job: Job, e: Stop) -> int:
-    LG.append(LG.attempts_path(job.pl.ledger), LG.attempt("attempt_ended", job.mode, job.commit, e.step, e.code))
-    if e.field:
-        job.echo(f"invalid report value: {e.field}")
-    s = stop_sentence(e)
-    job.echo(f"stopped at step {e.step} ({TX.STEPS.get(e.step, '')}): {e.code}: {TX.STOP_CODES.get(e.code, '')}")
-    if s:
-        job.echo(TX.SENTENCES[s])
-    if e.step >= 9:
-        job.echo("A start is recorded in the ledger and no result was published: a second start needs "
-                 "--rerun REASON.")
+    """a stop, with the sentences chosen from what the ledger holds NOW (build review M4); after a `completed` it
+    never touches report.* (M3). Never raises"""
     try:
-        write_stopped(job, e)
-        job.echo(f"report: {job.pl.out / 'report.md'}")
+        state = LG.state(LG.read(job.pl.ledger))["word"]
     except Exception:                                            # noqa: BLE001
-        with open(job.pl.prot / "launcher.log", "a") as fh:
-            traceback.print_exc(file=fh)
+        state = "open"
+    try:
+        LG.append(LG.attempts_path(job.pl.ledger), LG.attempt("attempt_ended", job.mode, job.commit, e.step, e.code))
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
+    if e.field:
+        job.say(f"invalid report value: {e.field}")
+    job.say(f"stopped at step {e.step} ({TX.STEPS.get(e.step, '')}): {e.code}: {TX.STOP_CODES.get(e.code, '')}")
+    for line in stop_lines(e, state):
+        job.say(line)
+    try:
+        path = write_stopped(job, e, state)
+        job.say(f"report: {path}")
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
     job.save_log(True)
-    job.echo(f"STOPPED {e.code}")
+    job.say(f"STOPPED {e.code}")
     return 1
+
+
+def stop_lines(e: Stop, state: str) -> list[str]:
+    """section 6's row sentence only while the ledger is empty, then the ledger's own sentence"""
+    out = []
+    if state == "empty":
+        s = stop_sentence(e)
+        if s:
+            out.append(TX.SENTENCES[s])
+    out.append(TX.LEDGER_STATE[state])
+    return out
 
 
 def safe_after(job: Job, runs: Path) -> dict:
@@ -1013,57 +1179,95 @@ def safe_after(job: Job, runs: Path) -> dict:
 def finish(job: Job, parts: dict) -> int:
     """step 14: the report, always"""
     t0 = time.time()
-    LG.append(LG.attempts_path(job.pl.ledger), LG.attempt("attempt_ended", job.mode, job.commit, 14, "none"))
+    try:
+        LG.append(LG.attempts_path(job.pl.ledger), LG.attempt("attempt_ended", job.mode, job.commit, 14, "none"))
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
     try:
         path = write_report(job, parts)
         job.record(14, "report", "*", "ok", "none", int(time.time() - t0))
     except RP.ReportError as e:
-        job.echo(str(e))
+        job.say(str(e))
         job.record(14, "report", "*", "failed", "invalid_report_value", int(time.time() - t0))
         path = None
     except Exception:                                            # noqa: BLE001
-        with open(job.pl.prot / "launcher.log", "a") as fh:
-            traceback.print_exc(file=fh)
+        job.note_error()
         job.record(14, "report", "*", "failed", "launcher_error", int(time.time() - t0))
         path = None
     failed = [k for k, v in parts.items() if v.get("status") != "ok"] if parts else ["after_score"]
     if getattr(job, "result_shape", "expected") != "expected":
-        job.echo(f"result_shape: unexpected ({TX.STOP_CODES['result_shape_unexpected']})")
+        job.say(f"result_shape: unexpected ({TX.STOP_CODES['result_shape_unexpected']})")
     code = check_not_computed(parts) if parts else "not_run"
     for s in sentences_after(parts) if parts else ["not_computed", "part_failed"]:
-        job.echo(TX.sentence(s, code))
+        job.say(TX.sentence(s, code))
     if path is None:
-        minimal_report(job)
-    job.echo(f"report: {job.pl.out / 'report.md'}")
+        minimal_report(job, parts)
+    job.say(f"report: {job.pl.out / 'report.md'}")
     job.save_log(True)
-    job.echo("SCORED" + (f"; parts failed: {' '.join(sorted(failed))}" if failed else ""))
+    job.say("SCORED" + (f"; parts failed: {' '.join(sorted(failed))}" if failed else ""))
     return 0
 
 
-def minimal_report(job: Job) -> None:
-    """the report could not be built: the result is published; say so with fixed words only"""
+def minimal_report(job: Job, parts: dict) -> None:
+    """the report could not be built: the result is published; say so with fixed words, the label as it stands
+    (with its clause when the check did not confirm the run) and the section 6 sentences just printed"""
     try:
-        atomic(job.pl.out / "report.md", f"{TX.LABEL}\n\nThe result is published (sa3_result.json, byte for byte). "
-               "The report could not be built from validated values; run --resume.\n")
-    except OSError:
-        pass
+        sents = sentences_after(parts) if parts else ["not_computed", "part_failed"]
+        code = check_not_computed(parts) if parts else "not_run"
+        label = TX.LABEL + (f" {TX.LABEL_ADDITION[0].upper()}{TX.LABEL_ADDITION[1:]}."
+                            if "w_or_d" in sents or "not_computed" in sents else "")
+        body = "\n\n".join([f"**{label}**", "The result is published (sa3_result.json, byte for byte). The report "
+                             "could not be built from validated values; run --resume."]
+                            + [TX.sentence(s, code) for s in sents])
+        atomic(job.pl.out / "report.md", body + "\n")
+    except Exception:                                            # noqa: BLE001
+        job.note_error()
 
 
-def resume(job: Job) -> int:
-    """steps 11 to 14 again, from the published result. It checks the receipt and never starts the reference
-    score: nothing here, nor in what it calls, names the score stage"""
+def resume(job: Job, decision: str) -> int:
+    """steps 11 to 14 again, from the result. It never starts the reference score: nothing here, nor in what it
+    calls, names the score stage. With a completion in the ledger it checks the receipt against the ledger and the
+    clone's file, and publishes the result from the clone when the public copy is missing (build review B1). With
+    a start and no completion ("adopt"), it adopts a result left in THAT start's clone: the protected directory
+    must be the one the start names; `completed` is written and the receipt printed"""
     entries = LG.read(job.pl.ledger)
-    done = LG.state(entries)["completed"]
+    st = LG.state(entries)
+    clone_res = job.pl.clone / "docs" / "sa3_result.json"
+    out_res = job.pl.out / "sa3_result.json"
     try:
-        out_res = job.pl.out / "sa3_result.json"
-        clone_res = job.pl.clone / "docs" / "sa3_result.json"
-        got = {sha256_file(out_res), sha256_file(clone_res), done["result_sha256"]}
-        if got != {job.a.receipt}:
-            raise Stop(1, "receipt_differs")
-        bad = pin_problems(WORKTREE, job.commit, need_tag=False)
+        bad = pin_problems(WORKTREE, job.commit, need_tag=False) or launcher_problems(WORKTREE, job.commit)
         if bad:
             raise Stop(1, bad)
+        if decision == "adopt":
+            start = st["last_start"]
+            if start.get("protected") != job.pl.prot.name or not clone_res.is_file():
+                raise Stop(1, "nothing_to_resume")
+            data = clone_res.read_bytes()
+            try:
+                ok = isinstance(json.loads(data), dict)
+            except ValueError:
+                ok = False
+            if not ok:
+                raise Stop(1, "result_truncated")
+            sha = sha256_bytes(data)
+            LG.append(job.pl.ledger, LG.entry("completed", start["commit"], start["seal_sha256"], result_sha256=sha))
+            job.say(f"keep this line somewhere other than this machine: receipt sa3_result.json sha256 {sha} "
+                    f"commit {start['commit']} seal sha256 {start['seal_sha256']}")
+            job.say(TX.RESULT_LINES["where"].format(path=clone_res))
+            job.a.receipt = sha
+            entries = LG.read(job.pl.ledger)
+            st = LG.state(entries)
+        done = st["completed"]
+        if job.a.receipt is None or {sha256_file(clone_res), done["result_sha256"]} != {job.a.receipt}:
+            raise Stop(1, "receipt_differs")
+        if not out_res.is_file() or not (job.pl.out / "sa3_lock.json").is_file():
+            if not publish(job, clone_res.read_bytes()):
+                job.say(TX.RESULT_LINES["publish_failed"])
+                raise Stop(1, "publish_failed")
+        if sha256_file(out_res) != job.a.receipt:
+            raise Stop(1, "receipt_differs")
     except (OSError, subprocess.SubprocessError):
+        job.note_error()
         return stopped(job, Stop(1, "receipt_differs"))
     except Stop as e:
         return stopped(job, e)
@@ -1076,7 +1280,7 @@ def resume(job: Job) -> int:
     marg0 = json.loads((job.pl.clone / "docs" / "sa3_outcome_marginals.json").read_text())
     job.marg_repos = frozenset(r["repo"] for r in marg0)
     job.vocab.repos = job.marg_repos
-    shape_check(job, (job.pl.out / "sa3_result.json").read_bytes())
+    shape_check(job, out_res.read_bytes())
     n = 0
     while (job.pl.prot / f"resume-{n}").exists():
         n += 1
@@ -1088,6 +1292,7 @@ def resume(job: Job) -> int:
         try:
             step2_clone(job)
         except Stop as e:
+            job.pl.clone = job.sealed_root
             return stopped(job, e)
         job.code_root = job.pl.clone
         job.later = now()
@@ -1103,8 +1308,8 @@ def resume(job: Job) -> int:
     job.vocab.repos = job.marg_repos
     chk = json.loads((job.sealed_root / PREDICTOR_CHECK).read_text())
     job.pb, job.ct = Path(chk["phase_b"]["dir"]), Path(chk["compare"]["dir"])
-    parts = safe_after(job, base / "runs")
-    return finish(job, parts)
+    job.production = job.tgt.real and Path(job.tgt.study) == SR.STUDY
+    return after_completed(job, base / "runs")
 
 
 # ============================================================================================= the command
@@ -1131,8 +1336,8 @@ def places(a) -> Places:
         raise Refused("--protected and --out are both required; refused")
     if not a.resume and not a.seal:
         raise Refused("--seal (run-2's seal.json) is required; refused")
-    if a.resume and not (a.receipt and RP.HEX64.fullmatch(a.receipt)):
-        raise Refused("--resume needs --receipt with the 64-character SHA-256 of the receipt line; refused")
+    if a.receipt is not None and not RP.HEX64.fullmatch(a.receipt):
+        raise Refused("--receipt is the 64-character SHA-256 of the receipt line; refused")
     if a.rerun is not None and (a.resume or not SC.REASON.fullmatch(a.rerun)):
         raise Refused("--rerun REASON: letters, digits, spaces and . , ; : ( ) - / only, 1 to 200 characters, and "
                       "not with --resume; refused")
@@ -1143,8 +1348,21 @@ def places(a) -> Places:
     if tgt.real:
         if a.ledger:
             raise Refused("--ledger is for decoys only: a real run's ledger is the fixed one; refused")
-        root = next(r for r in SR.protected_roots() if r in prot.parents)
-        ledger = root / LEDGER_NAME
+        # build review M2: the production study or pool always uses the production ledger and refuses the test
+        # root; any other study needs the test root, so the production ledger only ever records the production study
+        production = Path(os.path.abspath(tgt.study)) == SR.STUDY or Path(os.path.abspath(tgt.pool)) == SR.POOL
+        test_root = SR.protected_roots()[1] if len(SR.protected_roots()) > 1 else None
+        if production:
+            if test_root is not None:
+                raise Refused(f"{TX.STOP_CODES['production_needs_production_ledger']}; refused")
+            if SR.PROTECTED_ROOT not in prot.parents:
+                raise Refused(f"the protected directory must be inside {SR.PROTECTED_ROOT}; refused")
+            ledger = SR.PROTECTED_ROOT / LEDGER_NAME
+        else:
+            if test_root is None or test_root not in prot.parents:
+                raise Refused(f"{TX.STOP_CODES['production_needs_production_ledger']}; refused")
+            ledger = test_root / LEDGER_NAME
+        a.production = production
     else:
         if not a.ledger:
             raise Refused("--ledger is required on a decoy; refused")
@@ -1153,6 +1371,7 @@ def places(a) -> Places:
             SR.check_rw(ledger.parent)
         except SR.SandboxError as e:
             raise Refused(f"ledger: {e}") from None
+        a.production = False
     for d in (prot, out):
         if ledger.parent == d or d in ledger.parents:
             raise Refused("the ledger must lie outside every run directory; refused")
@@ -1182,9 +1401,19 @@ def main(argv: list[str] | None = None, reader=default_reader, echo=print) -> in
     ap.add_argument("--resume", action="store_true")
     ap.add_argument("--receipt", metavar="SHA256")
     a = ap.parse_args(argv)
+    lock = None
     try:
         pl = places(a)
-        decision = LG.decide(LG.read(pl.ledger), a.resume, a.rerun)
+        lock = LG.hold(pl.ledger)                 # build review M1: one launcher at a time, before the ledger is read
+        entries = LG.read(pl.ledger)
+        decision = LG.decide(entries, a.resume, a.rerun)
+        if decision == "resume" and a.receipt is None:
+            raise Refused("--resume needs --receipt with the 64-character SHA-256 of the receipt line; refused")
+        if decision == "rerun":
+            start = LG.state(entries)["last_start"]
+            prev = pl.ledger.parent / str(start.get("protected") or "") / "clone" / "docs" / "sa3_result.json"
+            if start.get("protected") and result_in(prev):
+                raise LG.LedgerError("result_exists_resume")
         if pl.tgt.real:
             echo(TX.plan("real", str(pl.tgt.study), str(pl.tgt.pool), str(pl.prot), str(pl.out), str(pl.ledger),
                          a.commit))
@@ -1203,10 +1432,29 @@ def main(argv: list[str] | None = None, reader=default_reader, echo=print) -> in
             P.new_or_empty(pl.out, "public")
     except (Refused, P.Refused) as e:
         print(f"score_sa3: {e}", file=sys.stderr)
+        if lock is not None:
+            lock.close()
         return 2
     except LG.LedgerError as e:
         print(f"score_sa3: {e.code}: {TX.STOP_CODES[e.code]}; refused", file=sys.stderr)
+        if lock is not None:
+            lock.close()
         return 2
+    try:
+        return _run(a, pl, decision, echo)
+    finally:
+        lock.close()
+
+
+def result_in(f: Path) -> bool:
+    """a result file that parses as a JSON object (a file cut short is not a result)"""
+    try:
+        return f.is_file() and isinstance(json.loads(f.read_bytes()), dict)
+    except (OSError, ValueError):
+        return False
+
+
+def _run(a, pl: Places, decision: str, echo) -> int:
     for root in SR.protected_roots():
         if root in pl.prot.parents and not root.exists():
             root.mkdir(parents=True, mode=0o700)
@@ -1214,14 +1462,14 @@ def main(argv: list[str] | None = None, reader=default_reader, echo=print) -> in
     os.chmod(pl.prot, 0o700)
     pl.out.mkdir(parents=True, exist_ok=True)
     job = Job(a, pl, "resume" if a.resume else "score", echo)
+    job.production = a.production
     LG.append(LG.attempts_path(pl.ledger), LG.attempt("attempt_started", job.mode, a.commit))
     try:
-        return resume(job) if a.resume else run_full(job, decision)
+        return resume(job, decision) if a.resume else run_full(job, decision)
     except RP.ReportError as e:
         return stopped(job, Stop(job.steps[-1]["step"] if job.steps else 1, "invalid_report_value", e.field))
     except Exception:                                            # noqa: BLE001  the launcher's own fault
-        with open(pl.prot / "launcher.log", "a") as fh:
-            traceback.print_exc(file=fh)
+        job.note_error()
         return stopped(job, Stop(job.steps[-1]["step"] if job.steps else 1, "launcher_error"))
 
 

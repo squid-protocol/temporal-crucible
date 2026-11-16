@@ -297,8 +297,9 @@ def test_1a_refusals_before_anything(tmp_path, monkeypatch, capsys):
     assert rc == 2 and not asked
     err = capsys.readouterr().err
     assert "decoy tests only" in err
-    for p in ("prot", "pub", "led", "p", "o"):
+    for p in ("prot", "pub", "p", "o"):
         assert not (tmp_path / p).exists(), p
+    assert not (tmp_path / "led").exists() or [x.name for x in (tmp_path / "led").iterdir()] == ["l.jsonl.lock"]
 
 
 def test_1b_the_ledger_rule():
@@ -313,13 +314,14 @@ def test_1b_the_ledger_rule():
             ([], False, "why", "rerun_needs_start"), ([], True, None, "nothing_to_resume"),
             ([s], False, None, "ledger_has_entry"), ([s, st], False, None, "ledger_has_entry"),
             ([s, c], False, None, "ledger_completed"), ([s, c], False, "why", "ledger_completed"),
-            ([s, c, r], False, "why", "ledger_completed"), ([s], True, None, "nothing_to_resume")):
+            ([s, c, r], False, "why", "ledger_completed")):
         with pytest.raises(LG.LedgerError) as e:
             LG.decide(entries, resume, rerun)
         assert e.value.code == want, (entries, resume, rerun)
     assert LG.decide([s], False, "power cut") == "rerun"
     assert LG.decide([s, st], False, "crash") == "rerun"
     assert LG.decide([s, c], True, None) == "resume"
+    assert LG.decide([s], True, None) == "adopt" and LG.decide([s, st], True, None) == "adopt"
     assert LG.decide([s, c, r], True, None) == "resume"
     assert set(TX.STOP_CODES) >= {"ledger_has_entry", "ledger_completed", "rerun_needs_start", "nothing_to_resume"}
 
@@ -484,6 +486,156 @@ def test_1g_section6_sentences_each_exactly_when_its_case_happens():
     assert TX.LABEL_ADDITION == "the check did not confirm this run"
 
 
+# ================================================================== the build review's findings, unit level
+def _job(tmp_path: Path, ledger: Path, decoy: Path | None = None, commit: str = "a" * 40) -> "SS.Job":
+    """a Job on throwaway places, for the launcher's own functions (nothing runs a stage)"""
+    d = Path(decoy) if decoy else tmp_path / "decoy"
+    tgt = P.Target(d / "study", d / "pool", d / "docs", P.LINGUIST_HOST, False)
+    prot, out = tmp_path / "prot", tmp_path / "pub"
+    prot.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
+    a = SimpleNamespace(commit=commit, seal=str(tmp_path / "seal.json"), test_fail=None, rerun=None, receipt=None)
+    lines: list[str] = []
+    job = SS.Job(a, SS.Places(tgt, prot, out, ledger), "score", echo=lines.append)
+    job.lines = lines
+    return job
+
+
+def test_1h_one_launcher_at_a_time(tmp_path):
+    """build review M1: a held lock refuses a second launcher with nothing created; and step 9 decides the ledger
+    again before it appends `started`, so a second launcher that reaches step 9 starts nothing"""
+    led = tmp_path / "led" / "sa3_score_ledger.jsonl"
+    led.parent.mkdir()
+    holder = subprocess.Popen([PY, "-c", "import fcntl, sys, time; f = open(sys.argv[1], 'a'); "
+                               "fcntl.flock(f, fcntl.LOCK_EX); print('held', flush=True); time.sleep(60)",
+                               str(LG.lock_path(led))], stdout=subprocess.PIPE, text=True)
+    try:
+        assert holder.stdout.readline().strip() == "held"
+        d = tmp_path / "decoy"
+        (d / "docs").mkdir(parents=True)
+        p = run([PY, "-I", "-B", str(SCORING / "score_sa3.py"), "--decoy", str(d), "--commit", "a" * 40, "--seal",
+                 str(tmp_path / "s.json"), "--protected", str(tmp_path / "prot"), "--out", str(tmp_path / "pub"),
+                 "--ledger", str(led)], timeout=120)
+        assert p.returncode == 2 and "ledger_locked" in p.stderr, p.stderr
+        assert not (tmp_path / "prot").exists() and not (tmp_path / "pub").exists() and not led.exists()
+    finally:
+        holder.kill()
+        holder.wait()
+    calls = []
+    job1, job2 = _job(tmp_path / "j1", led), _job(tmp_path / "j2", led)
+    for j in (job1, job2):
+        j.decision, j.seal_sha, j.repos = "first", "b" * 64, []
+        j.run_stage = lambda step, name, *a, **k: calls.append((step, name)) or {"status": "ok", "rc": 0}
+    assert SS.step9_score(job1, None) == {"status": "ok", "rc": 0}
+    with pytest.raises(SS.Stop) as e:
+        SS.step9_score(job2, None)                              # the second launcher's decision is stale
+    assert (e.value.step, e.value.code) == (9, "ledger_changed")
+    assert calls == [(9, "score")] and [x["event"] for x in LG.read(led)] == ["started"]
+    assert LG.read(led)[0]["protected"] == "prot"
+
+
+def test_1i_the_production_ledger_is_only_for_the_production_study(tmp_path, monkeypatch):
+    """build review M2 (string tests; nothing opened): with the test variable set, a --real run on the default
+    (production) study and pool is refused; a --real run on another study without the test root is refused; with
+    the test root and another study, the ledger and tables lie under the test root"""
+    def args(**k):
+        base = dict(decoy=None, real=True, i_am_the_owner=True, real_study=str(SR.STUDY), real_pool=str(SR.POOL),
+                    real_docs=str(tmp_path / "docs"), linguist=str(P.LINGUIST_HOST), commit="a" * 40, seal="s",
+                    protected=None, out=str(tmp_path / "o"), ledger=None, rerun=None, resume=False, receipt=None)
+        base.update(k)
+        return SimpleNamespace(**base)
+    root = tmp_path / "proot"
+    monkeypatch.setenv(P.TEST_ROOT_ENV, str(root))
+    try:
+        with pytest.raises(SS.Refused) as e:
+            SS.places(args(protected=str(root / "score-1")))
+        assert "production" in str(e.value)
+        pl = SS.places(args(protected=str(root / "score-1"), real_study=str(tmp_path / "study"),
+                            real_pool=str(tmp_path / "pool")))
+        assert pl.ledger == root / SS.LEDGER_NAME
+    finally:
+        SR.name_protected_root_for_tests(None)
+    monkeypatch.delenv(P.TEST_ROOT_ENV)
+    with pytest.raises(SS.Refused):
+        SS.places(args(protected=str(SR.PROTECTED_ROOT / "score-1"), real_study=str(tmp_path / "study"),
+                       real_pool=str(tmp_path / "pool")))
+    pl = SS.places(args(protected=str(SR.PROTECTED_ROOT / "score-1")))
+    assert pl.ledger == SR.PROTECTED_ROOT / "sa3_score_ledger.jsonl"      # the production constant, as a string
+    assert not root.exists()
+
+
+def test_1j_stopping_lines_follow_the_ledger(tmp_path):
+    """build review M3/M4, one case each, the exact terminal lines: the section 6 row sentence only while the
+    ledger is empty; after a completion the published report is never touched; stopped() never raises"""
+    def lines_for(sub, entries, stop, report=None):
+        led = tmp_path / sub / "led" / "sa3_score_ledger.jsonl"
+        led.parent.mkdir(parents=True)
+        for e in entries:
+            LG.append(led, e)
+        job = _job(tmp_path / sub, led)
+        if report:
+            for f, b in report.items():
+                (job.pl.out / f).write_bytes(b)
+        assert SS.stopped(job, stop) == 1
+        return job, job.lines
+
+    s = LG.entry("started", "a" * 40, "b" * 64, protected="prot")
+    c = LG.entry("completed", "a" * 40, "b" * 64, result_sha256="c" * 64)
+    head = lambda st: f"stopped at step {st.step} ({TX.STEPS[st.step]}): {st.code}: {TX.STOP_CODES[st.code]}"  # noqa: E731
+    st = SS.Stop(3, "sealed_file_differs")
+    job, got = lines_for("empty", [], st)
+    assert got == [head(st), TX.SENTENCES["before_score"], TX.LEDGER_STATE["empty"],
+                   f"report: {job.pl.out / 'report.md'}", "STOPPED sealed_file_differs"]
+    job, got = lines_for("rerun_attempt", [s], st)                    # a --rerun attempt stopped before the score
+    assert got == [head(st), TX.LEDGER_STATE["open"], f"report: {job.pl.out / 'report.md'}",
+                   "STOPPED sealed_file_differs"]
+    st8 = SS.Stop(8, "launcher_error")                                # an error after `started`, reported at step 8
+    job, got = lines_for("after_started", [s], st8)
+    assert TX.SENTENCES["before_score"] not in got and TX.LEDGER_STATE["open"] in got
+    st6 = SS.Stop(6, "launcher_error")
+    job, got = lines_for("last_step_6", [s], st6)
+    assert TX.SENTENCES["rehearsal"] not in got
+    st1 = SS.Stop(1, "receipt_differs")                               # a failed --resume after a completion
+    rep = {"report.md": b"THE PUBLISHED REPORT\n", "report.json": b"{}\n"}
+    job, got = lines_for("completed", [s, c], st1, rep)
+    assert got == [head(st1), TX.LEDGER_STATE["completed"], f"report: {job.pl.out / 'stopped-0.md'}",
+                   "STOPPED receipt_differs"]
+    assert {f: (job.pl.out / f).read_bytes() for f in rep} == rep
+    assert json.loads((job.pl.out / "stopped-0.json").read_text())["ledger_state"] == "completed"
+    led = tmp_path / "gone" / "led" / "sa3_score_ledger.jsonl"        # stopped() never raises
+    led.parent.mkdir(parents=True)
+    job = _job(tmp_path / "gone", led)
+    shutil.rmtree(job.pl.out)
+    assert SS.stopped(job, st) == 1 and job.lines[-1] == "STOPPED sealed_file_differs"
+
+
+def test_1k_the_deviation_table_covers_its_sources():
+    """build review M5: every defect from 42 to 64, every name of variants.TABLE, the reference's not_run and
+    unavailable keys appear in the draft; every {{run:...}} token is one the job fills"""
+    text = (SCORING / "deviation_table_draft.md").read_text().split("-->", 1)[1]     # the table, not its note
+    for n in range(42, 65):
+        assert f"defect {n}" in text, n
+    table = ast.literal_eval(next(node.value for node in ast.parse(
+        (ROOT / "tools/compare/variants.py").read_text()).body if isinstance(node, ast.Assign) and
+        any(getattr(t, "id", "") == "TABLE" for t in node.targets)))
+    for name, _how, _t in table:
+        assert name in text, name
+    src = (ROOT / "tools/sa3_score.py").read_text()
+    unavailable = ast.literal_eval(next(node.value for node in ast.parse(src).body if isinstance(node, ast.Assign)
+                                        and any(getattr(t, "id", "") == "UNAVAILABLE" for t in node.targets)))
+    assert set(SC.UNAVAILABLE) == set(unavailable)
+    for k in list(SC.NOT_RUN) + list(unavailable):
+        assert f"`{k}`" in text or f"{k} (" in text, k
+    for k in SC.NOT_RUN:
+        assert f'"{k}"' in src, k                                      # the reference's own not_run keys
+    known = {"readings", "change1", "change2", "allreverts"} | {f"variant:{n}" for n in SC.VARIANT_NAMES}
+    toks = set(re.findall(r"\{\{run:([A-Za-z0-9_:]+)\}\}", text))
+    assert toks and toks <= known, toks - known
+    vals = {"tests": {}, "applies": None, "allreverts": None, "variants": [],
+            "parts": {"readings": {"code": "x"}}}
+    assert "{{run:" not in MD.fill_deviation(text, vals)
+
+
 # ================================================================================ 2. the whole job, study P
 def test_2a_whole_job_on_study_P(routeP, runP):
     """section 9, first item: fresh clone, lock, verify, score, comparison, report; the cell map all equal. The
@@ -493,6 +645,7 @@ def test_2a_whole_job_on_study_P(routeP, runP):
     receipt = receipt_of(lines)
     for line in lines:
         assert LINE.fullmatch(line) or line.startswith("keep this line somewhere other than this machine: receipt ") \
+            or line.startswith("the result is recorded in the ledger; it is in the protected directory at ") \
             or line in TX.SENTENCES.values() or line.startswith("report: ") or line == "SCORED", line
     assert printed(lines) == ["gate"]
     steps = [int(LINE.fullmatch(x).group(1)) for x in lines if LINE.fullmatch(x)]
@@ -675,16 +828,20 @@ def test_3b_resume_checks_the_receipt_and_never_starts_the_score(routeP, runP, t
     lines = []
     argv = ["--decoy", routeP["decoy"], "--resume", "--commit", routeP["commit"], "--receipt", "0" * 64,
             "--protected", str(prot), "--out", str(out), "--ledger", str(led)]
+    before = {f: (out / f).read_bytes() for f in ("report.md", "report.json", "sa3_result.json")}
     rc = SS.main(argv, echo=lines.append)
     assert rc == 1 and lines[-1] == "STOPPED receipt_differs", lines
     assert [e["event"] for e in LG.read(led)] == ["started", "completed"]
+    assert {f: (out / f).read_bytes() for f in before} == before            # build review M3: never overwritten
+    assert (out / "stopped-0.md").exists() and lines[-2] == f"report: {out / 'stopped-0.md'}"
+    assert printed(lines) == [] and TX.LEDGER_STATE["completed"] in lines    # M4: no "nothing has been scored"
     lines = []
     argv[argv.index("0" * 64)] = receipt
     rc = SS.main(argv, echo=lines.append)
     assert rc == 0 and lines[-1] == "SCORED", lines[-10:]
     assert [e["event"] for e in LG.read(led)] == ["started", "completed", "resume"]
     assert (out / "sa3_result.json").read_bytes() == result
-    assert (out / "report.md.superseded-0").exists()
+    assert (out / "report.md.superseded-0").read_bytes() == before["report.md"]
     rep = json.loads((out / "report.json").read_text())
     assert rep["mode"] == "resume" and rep["cellmap"]["map"]["all_equal"] and rep["later"] is None
     assert [a["mode"] for a in rep["attempts"] if a["event"] == "attempt_started"] == ["score", "resume", "resume"]
@@ -721,15 +878,184 @@ def test_3g_a_result_with_an_unforeseen_key_is_published_and_never_stops(routeP,
     assert any(x.startswith("result_shape: unexpected") for x in lines)
     rep = json.loads((out / "report.json").read_text())
     assert rep["result_shape"] == "unexpected" and rep["result_shape_at"] == "repos.<repo>.outcomes.HP.struct_branch.<key>"
-    assert rep["tests"] == {} and rep["exploratory"] is None
+    assert set(rep["tests"]) == set(SC.CONFIRMATORY) and rep["exploratory"] is not None   # minor 3: still read
+    assert all(t["mean"] is not None for t in rep["tests"].values())
     assert all(v["status"] == "ok" for v in rep["parts"].values())          # steps 11 to 13 ran
     md_ = (out / "report.md").read_text().splitlines()
     assert md_[2].startswith("result_shape: unexpected, at repos.<repo>.outcomes.HP.struct_branch.<key>.")
+    assert any(x.startswith("- **SA3-B** (struct_branch): mean +") for x in md_)
     log = json.loads((out / "run_log.json").read_text())
     assert {"step": 10, "name": "result_shape", "repo": "*", "status": "failed", "code": "result_shape_unexpected"} \
         == {k: v for k, v in next(s for s in log["steps"] if s["name"] == "result_shape").items() if k != "seconds"}
     p = run(DC.command(routeP, base / "p2", base / "o2", led), timeout=300)
     assert p.returncode == 2 and "ledger_completed" in p.stderr               # completed: no second start
+
+
+def _inproc(routeP, base: Path, monkeypatch, score, *extra: str, after=None) -> tuple[int, list[str], Path]:
+    """the whole job IN-PROCESS from the route's checkout, the score stage replaced by `score(job, real, args)`
+    (decoys only), and optionally the parts after the score by `after`"""
+    monkeypatch.setattr(SS, "WORKTREE", Path(routeP["repo"]))
+    real_stage = SS.Job.run_stage
+
+    def stage(self, step, name, *a, **k):
+        if name == "score":
+            return score(self, real_stage, step, name, *a, **k)
+        return real_stage(self, step, name, *a, **k)
+    monkeypatch.setattr(SS.Job, "run_stage", stage)
+    if after is not None:
+        monkeypatch.setattr(SS, "after_score", after)
+    led = base / "ledger" / "sa3_score_ledger.jsonl"
+    led.parent.mkdir(parents=True, exist_ok=True)
+    lines: list[str] = []
+    rc = SS.main(["--decoy", routeP["decoy"], "--commit", routeP["commit"], "--seal", routeP["seal"],
+                  "--protected", str(base / "prot"), "--out", str(base / "pub"), "--ledger", str(led), *extra],
+                 echo=lines.append)
+    return rc, lines, led
+
+
+def _write_result(job, data: bytes) -> None:
+    (job.pl.clone / "docs" / "sa3_result.json").write_bytes(data)
+
+
+def _resume_inproc(routeP, base: Path, led: Path, receipt: str | None) -> tuple[int, list[str]]:
+    lines: list[str] = []
+    argv = ["--decoy", routeP["decoy"], "--resume", "--commit", routeP["commit"], "--protected", str(base / "prot"),
+            "--out", str(base / "pub"), "--ledger", str(led)] + (["--receipt", receipt] if receipt else [])
+    return SS.main(argv, echo=lines.append), lines
+
+
+def test_3h_the_public_directory_fails_during_the_score(routeP, runP, tmp_path, monkeypatch):
+    """build review B1, experiment E2 as a test: the public directory stops taking writes as the score stage
+    starts. `completed` first, the receipt printed, the fixed line, a non-zero exit (never --rerun); then, the
+    directory writable again, --resume publishes the result from the clone byte for byte and completes"""
+    good = (Path(runP["out"]) / "sa3_result.json").read_bytes()
+
+    def score(job, real, step, name, *a, **k):
+        os.chmod(job.pl.out, 0o500)
+        return real(job, step, name, *a, **k)
+    base = tmp_path / "e2"
+    try:
+        rc, lines, led = _inproc(routeP, base, monkeypatch, score)
+    finally:
+        os.chmod(base / "pub", 0o700)
+    assert rc == 1 and lines[-1] == "STOPPED publish_failed", lines[-6:]
+    assert TX.RESULT_LINES["publish_failed"] in lines
+    receipt = receipt_of(lines)
+    ev = LG.read(led)
+    assert [e["event"] for e in ev] == ["started", "completed"] and ev[1]["result_sha256"] == receipt
+    clone_res = base / "prot/clone/docs/sa3_result.json"
+    assert clone_res.read_bytes() == good and not (base / "pub/sa3_result.json").exists()
+    with pytest.raises(LG.LedgerError):
+        LG.decide(ev, False, "a second look")                      # no --rerun
+    monkeypatch.undo()
+    monkeypatch.setattr(SS, "WORKTREE", Path(routeP["repo"]))
+    rc, lines = _resume_inproc(routeP, base, led, receipt)
+    assert rc == 0 and lines[-1] == "SCORED", lines[-8:]
+    assert (base / "pub/sa3_result.json").read_bytes() == clone_res.read_bytes()
+    assert [e["event"] for e in LG.read(led)] == ["started", "completed", "resume"]
+
+
+def test_3i_the_score_stage_fails_after_the_reference_wrote_its_result(routeP, runP, tmp_path, monkeypatch):
+    """build review B1, experiment E3 as a test: the stage reports failed after the file exists. The result is
+    recorded and published, the receipt printed, the stage's code named; no --rerun is allowed"""
+    good = (Path(runP["out"]) / "sa3_result.json").read_bytes()
+
+    def score(job, real, step, name, *a, **k):
+        _write_result(job, good)
+        job.record(9, "score", "*", "failed", "unclassified", 0)
+        return {"status": "failed", "code": "unclassified", "modules": {}}
+    rc, lines, led = _inproc(routeP, tmp_path / "e3", monkeypatch, score, after=lambda job, runs: {})
+    assert rc == 0 and lines[-1].startswith("SCORED"), lines[-6:]
+    assert TX.RESULT_LINES["stage_failed"].format(code="unclassified") in lines
+    receipt = receipt_of(lines)
+    assert [e["event"] for e in LG.read(led)] == ["started", "completed"]
+    assert hashlib.sha256((tmp_path / "e3/pub/sa3_result.json").read_bytes()).hexdigest() == receipt
+    rep = json.loads((tmp_path / "e3/pub/report.json").read_text())
+    assert rep["score_stage"] == "unclassified"
+    with pytest.raises(LG.LedgerError) as e:
+        LG.decide(LG.read(led), False, "the stage crashed")
+    assert e.value.code == "ledger_completed"
+
+
+def test_3j_a_result_cut_short_is_stopped_and_rerun_is_allowed(routeP, runP, tmp_path, monkeypatch):
+    """a result file that does not parse (a write cut short): `stopped` with result_truncated, nothing published,
+    the ledger's open-start sentence; --rerun is the next command (and is not refused for that file)"""
+    good = (Path(runP["out"]) / "sa3_result.json").read_bytes()
+
+    def score(job, real, step, name, *a, **k):
+        _write_result(job, good[: len(good) // 2])
+        return {"status": "failed", "code": "unclassified", "modules": {}}
+    rc, lines, led = _inproc(routeP, tmp_path / "t", monkeypatch, score)
+    assert rc == 1 and lines[-1] == "STOPPED result_truncated", lines[-6:]
+    assert [(e["event"], e["code"]) for e in LG.read(led)] == [("started", "none"), ("stopped", "result_truncated")]
+    assert TX.LEDGER_STATE["open"] in lines and not (tmp_path / "t/pub/sa3_result.json").exists()
+    assert not any("receipt sa3_result.json" in x for x in lines)
+    assert LG.decide(LG.read(led), False, "the result was cut short") == "rerun"
+
+
+def test_3k_interrupted_during_the_score(routeP, runP, tmp_path, monkeypatch):
+    """Ctrl-C (KeyboardInterrupt) during the score. After the file exists: the ledger holds started, completed;
+    the receipt is printed; STOPPED interrupted (exit 130); the next command is --resume with the receipt, which
+    completes. Before any file exists: the ledger holds started, stopped (interrupted); the next command is
+    --rerun REASON"""
+    good = (Path(runP["out"]) / "sa3_result.json").read_bytes()
+
+    def after_file(job, real, step, name, *a, **k):
+        _write_result(job, good)
+        raise KeyboardInterrupt
+    base = tmp_path / "k1"
+    rc, lines, led = _inproc(routeP, base, monkeypatch, after_file)
+    assert rc == 130 and lines[-1] == "STOPPED interrupted" and TX.RESULT_LINES["interrupted"] in lines, lines[-6:]
+    receipt = receipt_of(lines)
+    assert [e["event"] for e in LG.read(led)] == ["started", "completed"]
+    assert (base / "pub/sa3_result.json").read_bytes() == good
+    monkeypatch.setattr(SS, "after_score", lambda job, runs: {})
+    rc, lines = _resume_inproc(routeP, base, led, receipt)
+    assert rc == 0 and lines[-1].startswith("SCORED"), lines[-6:]
+
+    def before_file(job, real, step, name, *a, **k):
+        raise KeyboardInterrupt
+    rc, lines, led = _inproc(routeP, tmp_path / "k2", monkeypatch, before_file)
+    assert rc == 1 and lines[-1] == "STOPPED interrupted", lines[-6:]
+    assert [(e["event"], e["code"]) for e in LG.read(led)] == [("started", "none"), ("stopped", "interrupted")]
+    assert TX.LEDGER_STATE["open"] in lines
+    assert LG.decide(LG.read(led), False, "interrupted before any result") == "rerun"
+
+
+def test_3l_resume_adopts_a_result_the_ledger_never_completed(routeP, runP, tmp_path, monkeypatch):
+    """a launcher killed after the reference wrote its file and before `completed` (made here by hand: a copy of a
+    finished run whose ledger holds only `started`, the public result missing). --rerun is refused while that
+    clone holds a result; --resume on that protected directory, without a receipt, adopts it: `completed`, the
+    receipt, the result published from the clone, SCORED. Another protected directory adopts nothing"""
+    root = tmp_path / "root"
+    root.mkdir()
+    prot, out = root / "score-1", tmp_path / "pub"
+    shutil.copytree(runP["prot"], prot, symlinks=True)
+    shutil.copytree(runP["out"], out)
+    for f in ("sa3_result.json", "sa3_lock.json"):
+        (out / f).unlink()
+    led = root / "sa3_score_ledger.jsonl"
+    start = LG.read(Path(runP["ledger"]))[0]
+    LG.append(led, {**start, "protected": "score-1"})
+    p = run(DC.command(routeP, root / "score-2", tmp_path / "pub2", led, "--rerun", "it died"), timeout=300)
+    assert p.returncode == 2 and "result_exists_resume" in p.stderr, p.stderr
+    monkeypatch.setattr(SS, "WORKTREE", Path(routeP["repo"]))
+    monkeypatch.setattr(SS, "after_score", lambda job, runs: {})
+    other = root / "score-3"
+    shutil.copytree(prot / "clone", other / "clone", symlinks=True)
+    (tmp_path / "pub3").mkdir()
+    lines: list[str] = []
+    rc = SS.main(["--decoy", routeP["decoy"], "--resume", "--commit", routeP["commit"], "--protected", str(other),
+                  "--out", str(tmp_path / "pub3"), "--ledger", str(led)], echo=lines.append)
+    assert rc == 1 and lines[-1] == "STOPPED nothing_to_resume", lines[-4:]
+    lines = []
+    rc = SS.main(["--decoy", routeP["decoy"], "--resume", "--commit", routeP["commit"], "--protected", str(prot),
+                  "--out", str(out), "--ledger", str(led)], echo=lines.append)
+    assert rc == 0 and lines[-1].startswith("SCORED"), lines[-6:]
+    receipt = receipt_of(lines)
+    clone_res = (prot / "clone/docs/sa3_result.json").read_bytes()
+    assert hashlib.sha256(clone_res).hexdigest() == receipt and (out / "sa3_result.json").read_bytes() == clone_res
+    assert [e["event"] for e in LG.read(led)] == ["started", "completed", "resume"]
 
 
 @pytest.mark.parametrize("stage", ["labels", "compare", "named"])
@@ -864,10 +1190,20 @@ def test_4a_the_pin(routeP, tmp_path):
     r = Run({**routeP, "repo": str(repo)}, tmp_path / "c", timeout=300)
     assert r.rc == 1 and r.lines[-1] == "STOPPED checkout_dirty", r.lines
     git(repo, "checkout", "-q", "--", "tools/sa3_score.py")
+    for flag, x in (("--assume-unchanged", "e"), ("--skip-worktree", "f")):   # hidden from `git status` (minor 2)
+        git(repo, "update-index", flag, "tools/scoring/texts.py")
+        f = repo / "tools" / "scoring" / "texts.py"
+        keep = f.read_bytes()
+        f.write_bytes(keep + b"\n# changed after the pin\n")
+        assert git(repo, "status", "--porcelain") == ""
+        r = Run({**routeP, "repo": str(repo)}, tmp_path / x, timeout=300)
+        assert r.rc == 1 and r.lines[-1] == "STOPPED checkout_dirty", r.lines
+        f.write_bytes(keep)
+        git(repo, "update-index", flag.replace("--", "--no-", 1), "tools/scoring/texts.py")
     git(repo, "tag", "-f", "-a", "sa3-score-C", "-m", "elsewhere", routeP["commit"] + "~1")
     r = Run({**routeP, "repo": str(repo)}, tmp_path / "d", timeout=300)
     assert r.rc == 1 and r.lines[-1] == "STOPPED tag_differs", r.lines
-    for x in "abcd":
+    for x in "abcdef":
         assert not (tmp_path / x / "prot" / "runs").exists() and not (tmp_path / x / "prot" / "clone").exists()
         assert not (tmp_path / x / "ledger" / "sa3_score_ledger.jsonl").exists()
     assert TX.SENTENCES["before_score"] in r.lines

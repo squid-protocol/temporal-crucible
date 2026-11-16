@@ -18,10 +18,8 @@ from __future__ import annotations
 # case happens, and no other is.
 SENTENCES = {
     "run2_placebo": ("run-2's placebo is not bytes_equal: the route stops here; nothing has been scored."),
-    "before_score": ("A check before the score failed: the job stopped; nothing has been scored. The ledger has no "
-                     "entry, so a new attempt is still the first scoring."),
-    "rehearsal": ("The loader rehearsal failed: the job stopped; nothing has been scored. The ledger has no entry, "
-                  "so a new attempt is still the first scoring."),
+    "before_score": "A check before the score failed: the job stopped; nothing has been scored.",
+    "rehearsal": "The loader rehearsal failed: the job stopped; nothing has been scored.",
     "gate": ("The placebo gate is the `valid` field of the sealed placebo file, fixed since 2026-11-14; it cannot "
              "newly fail in this run."),
     "label_check": ("The result stands (Amendment 5 sections 2 and 9). The inputs the two routes read were not "
@@ -38,6 +36,29 @@ SENTENCES = {
                      "investigation, written up and dated, places the cause."),
     "part_failed": ("A corrected reading or a variant failed to run; it is reported \"failed\" with its code. A "
                     "later run is dated and labelled later. It never blocks the report."),
+}
+
+# what the ledger holds when a run stops (build review M4): chosen from the ledger read at that moment, never from
+# the step number. A section 6 row sentence ("nothing has been scored") is printed only with "empty".
+LEDGER_STATE = {
+    "empty": "The ledger has no entry: a new attempt is still the first scoring.",
+    "open": ("The ledger holds a start with no completion, and no result was recorded. If that run's clone holds a "
+             "result (<protected>/clone/docs/sa3_result.json), run --resume with that protected directory: it "
+             "adopts the result. Otherwise a second start needs --rerun REASON."),
+    "completed": ("The ledger records a completed score: the result is recorded and is never scored again. Nothing "
+                  "here changed the published result or report; run --resume to finish the report."),
+}
+# step 10 when the result exists (build review B1): fixed lines
+RESULT_LINES = {
+    "where": "the result is recorded in the ledger; it is in the protected directory at {path}",
+    "publish_failed": ("the result exists and is recorded; it could not be published; run --resume (it publishes "
+                       "the result from the clone)"),
+    "interrupted": ("interrupted after the result was recorded: the ledger holds started and completed; run --resume "
+                    "with the receipt to publish what is missing and finish the report"),
+    "stage_failed": ("the score stage ended failed ({code}) after the reference had written its result; the result "
+                     "is recorded and published as written"),
+    "stage_modules": ("the score stage reported modules_differ: the result's code is not shown to be the pinned "
+                      "commit's (owner ruling open); the result is recorded and published as written"),
 }
 
 
@@ -118,6 +139,13 @@ STOP_CODES = {
     "ledger_completed": "the ledger records a completed score: no second start, ever; only --resume",
     "rerun_needs_start": "--rerun is allowed only after a start with no completion",
     "ledger_unreadable": "the ledger cannot be read as the job writes it",
+    "ledger_locked": "another scoring job holds the ledger's lock: one launcher at a time",
+    "ledger_changed": "the ledger changed between the start of this run and the score: nothing was started",
+    "result_exists_resume": ("the open start's clone holds a result: run --resume with that protected directory, "
+                             "never --rerun"),
+    "production_needs_production_ledger": ("a run on the production study and pool uses the production ledger and "
+                                           "refuses OWNER_JOB_TEST_PROTECTED_ROOT; any other study needs that test "
+                                           "root"),
     # step 1
     "head_differs": "HEAD of the checkout is not the commit given with --commit",
     "checkout_dirty": "the checkout has an untracked, modified or ignored file other than __pycache__",
@@ -157,6 +185,9 @@ STOP_CODES = {
     "result_shape_unexpected": "the result was published, but it does not have the reference's expected shape "
                                "(its position is named in the report); the parts after it may fail on it",
     "result_exists": "a result file existed in the clone before the score",
+    "result_truncated": "the result file exists but does not parse as a JSON object (a write cut short)",
+    "interrupted": "the run was interrupted during the score, before any result file existed",
+    "publish_failed": "the result is recorded but could not be copied to the public directory: run --resume",
     # anywhere
     "invalid_report_value": "a value did not fit its fixed shape (the field is named on the terminal)",
     "launcher_error": "the launcher itself failed (its traceback is in the protected directory)",
