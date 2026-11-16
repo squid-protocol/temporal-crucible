@@ -1,0 +1,8 @@
+libgit2    files   791 | files with a marker by engine   81, by text search   71, both   70 | totals engine 146 vs text 129 | Spearman (all files) +0.92, (files with any) +0.83
+libxml2    files   130 | files with a marker by engine   51, by text search   46, both   46 | totals engine 636 vs text 549 | Spearman (all files) +0.95, (files with any) +0.93
+redis      files   667 | files with a marker by engine   97, by text search   69, both   69 | totals engine 233 vs text 165 | Spearman (all files) +0.84, (files with any) +0.78
+curl       files   708 | files with a marker by engine   70, by text search   64, both   63 | totals engine 114 vs text 106 | Spearman (all files) +0.94, (files with any) +0.74
+sqlmap     files   412 | files with a marker by engine   20, by text search   18, both   17 | totals engine 54 vs text 48 | Spearman (all files) +0.90, (files with any) +0.84
+scapy      files   301 | files with a marker by engine  106, by text search   96, both   96 | totals engine 399 vs text 335 | Spearman (all files) +0.95, (files with any) +0.93
+sphinx     files   416 | files with a marker by engine   85, by text search   81, both   81 | totals engine 318 vs text 274 | Spearman (all files) +0.97, (files with any) +0.90
+prometheus files   707 | files with a marker by engine  144, by text search  129, both  128 | totals engine 437 vs text 377 | Spearman (all files) +0.94, (files with any) +0.90

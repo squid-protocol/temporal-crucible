@@ -1,0 +1,49 @@
+
+=== libgit2: 80 open debt markers at HEAD (360 tracked over history, 258 repaid). Repo habit: 60% repaid within 1 year, 70% within 5 years
+  by marker: TODO 77, XXX 2, FIXME 1; bare (no explanation): 2%
+  age: median 11.6 y, older than 5 y: 81%, older than 10 y: 59%
+  this repo's habit: debt it repaid took a median 0.05 y, 90% within 2.0 y. Open items older than that ('fossils'): 92%
+  author no longer active (no commit in 2 y): 56%; in files changed >= 5 times in the last year: 16
+  fossils in files changed >= 5 times in the last year: 12
+  worklist: fossil debt in files being changed now (cheapest moment to decide):
+    src/libgit2/repository.c:2972  TODO  age 14.2 y  author inactive  file edits last year  15  | /* TODO: reinitialize the templates */
+    src/libgit2/pack-objects.c:525  TODO  age 14.2 y  author inactive  file edits last year   5  | /* TODO: peel objects */
+    src/libgit2/pack-objects.c:718  TODO  age 14.2 y  author inactive  file edits last year   5  | * TODO
+    src/libgit2/pack-objects.c:775  TODO  age 14.2 y  author inactive  file edits last year   5  | /* TODO: support reuse-delta */
+    src/libgit2/odb.c:459  TODO  age 13.5 y  author inactive  file edits last year   5  | /* TODO: inodes are not really relevant on Win32, so we need to find
+
+=== libxml2: 505 open debt markers at HEAD (1065 tracked over history, 455 repaid). Repo habit: 22% repaid within 1 year, 35% within 5 years
+  by marker: TODO 499, FIXME 6; bare (no explanation): 11%
+  age: median 21.1 y, older than 5 y: 81%, older than 10 y: 78%
+  this repo's habit: debt it repaid took a median 0.85 y, 90% within 19.8 y. Open items older than that ('fossils'): 76%
+  author no longer active (no commit in 2 y): 80%; in files changed >= 5 times in the last year: 44
+  fossils in files changed >= 5 times in the last year: 26
+  worklist: fossil debt in files being changed now (cheapest moment to decide):
+    parser.c:6289  TODO  age 25.7 y  author inactive  file edits last year   5  | * TODO Parameter-entity replacement text must be properly nested
+    parser.c:10145  TODO  age 25.7 y  author inactive  file edits last year   5  | * TODO The standalone document declaration must have the value "no"
+    parser.c:11100  TODO  age 25.7 y  author inactive  file edits last year   5  | /* TODO Avoid the extra copy, handle directly !!! */
+    tree.c:857  TODO  age 25.7 y  author inactive  file edits last year   5  | /* TODO !!! */
+    catalog.c:1408  TODO  age 25.2 y  author inactive  file edits last year  12  | /* TODO: sort the list according to REWRITE lengths and prefer value *
+
+=== curl: 6 open debt markers at HEAD (325 tracked over history, 311 repaid). Repo habit: 48% repaid within 1 year, 83% within 5 years
+  by marker: XXX 6; bare (no explanation): 0%
+  age: median 1.5 y, older than 5 y: 33%, older than 10 y: 33%
+  this repo's habit: debt it repaid took a median 1.06 y, 90% within 5.8 y. Open items older than that ('fossils'): 33%
+  author no longer active (no commit in 2 y): 33%; in files changed >= 5 times in the last year: 6
+  fossils in files changed >= 5 times in the last year: 2
+  worklist: fossil debt in files being changed now (cheapest moment to decide):
+    include/curl/typecheck-gcc.h:617  XXX   age 18.6 y  author inactive  file edits last year   8  | /* XXX: must not evaluate expr, so this check is not accurate */
+    include/curl/typecheck-gcc.h:652  XXX   age 18.6 y  author inactive  file edits last year   8  | * XXX: for now, int is also accepted (and therefore short and char, wh
+
+=== redis: 77 open debt markers at HEAD (240 tracked over history, 146 repaid). Repo habit: 54% repaid within 1 year, 77% within 5 years
+  by marker: TODO 51, XXX 17, HACK 8, FIXME 1; bare (no explanation): 1%
+  age: median 0.5 y, older than 5 y: 6%, older than 10 y: 1%
+  this repo's habit: debt it repaid took a median 0.02 y, 90% within 1.9 y. Open items older than that ('fossils'): 25%
+  author no longer active (no commit in 2 y): 18%; in files changed >= 5 times in the last year: 18
+  fossils in files changed >= 5 times in the last year: 11
+  worklist: fossil debt in files being changed now (cheapest moment to decide):
+    src/cluster_legacy.c:3363  TODO  age 13.0 y  author active  file edits last year  20  | /* TODO: instead of exiting the loop send every other
+    src/t_stream.c:1218  TODO  age  9.1 y  author active  file edits last year  39  | /* TODO: perform a garbage collection. */
+    src/db.c:293  TODO  age  4.9 y  author inactive  file edits last year  57  | *                replicas, use separate keyspace stats and events (TOD
+    src/db.c:351  TODO  age  4.9 y  author inactive  file edits last year  57  | /* TODO: Use separate hits stats for WRITE */
+    src/db.c:357  TODO  age  4.9 y  author inactive  file edits last year  57  | /* TODO: Use separate misses stats and notify event for WRITE */
