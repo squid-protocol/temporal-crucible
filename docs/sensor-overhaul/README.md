@@ -8,7 +8,7 @@ Research and prototypes live here; changes to the engine itself go to GitGalaxy 
 | Sensor | Replaces | Status | Design | Notes |
 |---|---|---|---|---|
 | Debt ledger | `risk_tech_debt` | prototype done on 4 repos; counts validated (+0.84 to +0.97) | [sensors/tech_debt.md](sensors/tech_debt.md) | needs marker positions, age and author in the engine |
-| Activity | `risk_churn`, `risk_stability` | design written, horizons tested (7 repos, 143 as-of scans) | [sensors/activity.md](sensors/activity.md) | engine: whole-history walk, persisted horizons, as-of by default; docs text to correct |
+| Activity | `risk_churn`, `risk_stability` | design written, horizons tested (7 repos), **mock-up back-tested on curl, libxml2, libgit2** | [sensors/activity.md](sensors/activity.md) | engine: whole-history walk, persisted horizons, as-of by default; docs text to correct |
 | Reach | `risk_api_exposure` | evidence in (blast radius +0.63, headers AUC 0.90, ripple odds ratio 1.28); design next | GUIDE section 3 | first product: migration scope report |
 | Mutation | `risk_state_flux`, `risk_safety_score` | merge decided | GUIDE section 3 | one family density; rename |
 | Complexity drill-down | `risk_cognitive_load` | design next | GUIDE section 3 | list worst functions |

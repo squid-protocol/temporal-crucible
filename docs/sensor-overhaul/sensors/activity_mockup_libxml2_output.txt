@@ -1,0 +1,66 @@
+libxml2: share of files by role: source 60%, tests/docs 37%, build/scripts 2%, ci/config 0%
+files whose history is shorter than the snapshot's repo age by > 5 years (rename not followed): n/a (rename-aware history)
+libxml2: 3,957 file-intervals over 28 history-aware snapshots; 245 files
+
+A. ARE THE AXES INDEPENDENT?  rank correlations (pooled within snapshot)
+                c365  since_last_d  age_y  top_share  mech_share  pagerank_score  coding_loc  risk_churn  risk_stability
+c365            1.00         -0.75   0.17       0.77        0.25            0.44        0.55        0.98           -0.75
+since_last_d   -0.75          1.00  -0.10      -0.63       -0.14           -0.45       -0.59       -0.78            1.00
+age_y           0.17         -0.10   1.00       0.08        0.07            0.20        0.29        0.16           -0.10
+top_share       0.77         -0.63   0.08       1.00        0.01            0.27        0.36        0.76           -0.63
+mech_share      0.25         -0.14   0.07       0.01        1.00            0.13        0.22        0.25           -0.14
+pagerank_score  0.44         -0.45   0.20       0.27        0.13            1.00        0.49        0.44           -0.45
+coding_loc      0.55         -0.59   0.29       0.36        0.22            0.49        1.00        0.55           -0.59
+risk_churn      0.98         -0.78   0.16       0.76        0.25            0.44        0.55        1.00           -0.78
+risk_stability -0.75          1.00  -0.10      -0.63       -0.14           -0.45       -0.59       -0.78            1.00
+
+B. PREDICTION (this repo only, fit on earlier half of snapshots, test on later half): AUC
+  later fix (v3c)    size 0.860  |  size+engine churn/stab 0.874  |  size+new panel (activity, age, 0.883  |  size+recent activity only 0.873  |  size+prior 0.875  |  size+prior+panel 0.881
+  later fix (raw)    size 0.836  |  size+engine churn/stab 0.853  |  size+new panel (activity, age, 0.868  |  size+recent activity only 0.851  |  size+prior 0.869  |  size+prior+panel 0.878
+  any later commit   size 0.733  |  size+engine churn/stab 0.771  |  size+new panel (activity, age, 0.793  |  size+recent activity only 0.766
+
+B2. WHICH AXIS EARNS IT? AUC for later fix (v3c) adding one thing at a time to size (fit earlier half, test later half)
+  size only                                  0.860
+  + recent activity (365-day commits)        0.873
+  + dormancy (days since last change)        0.869
+  + age                                      0.860
+  + ownership concentration                  0.861
+  + mechanical share                         0.863
+  + reach (PageRank)                         0.876
+  + engine churn and stability               0.874
+  + all five panel axes                      0.883
+
+C. WORKLISTS: how often do listed files get a fix / any change next interval, compared with all files that were active that year (c365>0)? pooled over snapshots; 95% interval resampling snapshots
+  L1 hot now: top decile of 365-day activity
+      n = 407 file-intervals (28 snapshots, median 15 per snapshot); later fix 67.8% vs 37.3% base (x1.82 [1.54,2.08]); any change 84.8% vs 65.1% base (x1.30 [1.16,1.48])
+  L2 hot and concentrated: active, top author >= 60% of commits and (owner inactive or share >= 90%)
+      n = 478 file-intervals (26 snapshots, median 11 per snapshot); later fix 55.0% vs 37.3% base (x1.48 [1.27,1.73]); any change 83.3% vs 65.1% base (x1.28 [1.14,1.46])
+  L3 dormant but depended on: no commit for 2+ years, reach in top decile
+      n = 35 file-intervals (18 snapshots, median 2 per snapshot); later fix 11.4% vs  2.7% base (x4.27 [0.00,10.37]); any change 37.1% vs 15.5% base (x2.40 [0.92,5.42])
+  L4a hot files, mostly organic edits (mechanical share < 25%)
+      n = 615 file-intervals (28 snapshots, median 26 per snapshot); later fix 60.0% vs 37.3% base (x1.61 [1.39,1.80]); any change 77.2% vs 65.1% base (x1.19 [1.06,1.36])
+  L4b hot files, mostly mechanical edits (mechanical share >= 50%)
+      n = 57 file-intervals (15 snapshots, median 2 per snapshot); later fix 70.2% vs 37.3% base (x1.88 [1.45,2.31]); any change 91.2% vs 65.1% base (x1.40 [1.26,1.57])
+  L1s hot now, SOURCE files only (top decile of source files): later fix 72.4% vs 47.6% base (x1.52); n=381
+
+D. THE PANEL AT SNAPSHOT 112 (2026-10-17), 146 code files
+  files active in the last year: 40; dormant 2+ years: 52; median age 22.9 y; median commits last 365 d among active 2
+  age x activity map:  old (10y+) & active 34 | old & dormant 81 | young (<5y) & active 5 | young & dormant 16
+  hot files, all roles (top by 365-day commits):
+    catalog.c                                    commits365  12 (90d  2)  age 25.4y  dormant     0d  top-author  42% active  mechanical   0%  reach pct  90
+    testparser.c                                 commits365   8 (90d  1)  age  3.0y  dormant    89d  top-author  12% active  mechanical   0%  reach pct  30
+    xmlregexp.c                                  commits365   8 (90d  4)  age 24.5y  dormant     1d  top-author  75% active  mechanical   0%  reach pct  77
+    runtest.c                                    commits365   7 (90d  0)  age 21.3y  dormant   110d  top-author  43% active  mechanical   0%  reach pct  30
+    xmllint.c                                    commits365   6 (90d  0)  age 26.5y  dormant   144d  top-author  50% active  mechanical   0%  reach pct  80
+    parser.c                                     commits365   5 (90d  0)  age 25.6y  dormant   107d  top-author  40% active  mechanical   0%  reach pct  99
+  hot SOURCE files:
+    catalog.c                                    commits365  12 (90d  2)  age 25.4y  dormant     0d  top-author  42% active  mechanical   0%  reach pct  90
+    testparser.c                                 commits365   8 (90d  1)  age  3.0y  dormant    89d  top-author  12% active  mechanical   0%  reach pct  30
+    xmlregexp.c                                  commits365   8 (90d  4)  age 24.5y  dormant     1d  top-author  75% active  mechanical   0%  reach pct  77
+    runtest.c                                    commits365   7 (90d  0)  age 21.3y  dormant   110d  top-author  43% active  mechanical   0%  reach pct  30
+    xmllint.c                                    commits365   6 (90d  0)  age 26.5y  dormant   144d  top-author  50% active  mechanical   0%  reach pct  80
+    xmlwriter.c                                  commits365   5 (90d  0)  age 23.0y  dormant   247d  top-author  40% active  mechanical   0%  reach pct  74
+  hot and concentrated, source files (knowledge-loss read):
+  dormant but depended on (source):
+  hot files that are mostly mechanical edits:
+    relaxng.c                                    commits365   4 (90d  0)  age 23.7y  dormant   138d  top-author  50% active  mechanical  69%  reach pct  77

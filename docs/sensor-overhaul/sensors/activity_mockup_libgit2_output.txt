@@ -1,0 +1,83 @@
+libgit2: share of files by role: tests/docs 66%, source 33%, ci/config 0%, build/scripts 0%
+files whose history is shorter than the snapshot's repo age by > 5 years (rename not followed): n/a (rename-aware history)
+libgit2: 7,655 file-intervals over 16 history-aware snapshots; 1,703 files
+
+A. ARE THE AXES INDEPENDENT?  rank correlations (pooled within snapshot)
+                c365  since_last_d  age_y  top_share  mech_share  pagerank_score  coding_loc  risk_churn  risk_stability
+c365            1.00         -0.78   0.07       0.51       -0.08            0.26        0.47        0.93           -0.77
+since_last_d   -0.78          1.00   0.01      -0.54       -0.02           -0.18       -0.41       -0.84            0.95
+age_y           0.07          0.01   1.00      -0.07        0.02            0.19        0.26        0.04            0.01
+top_share       0.51         -0.54  -0.07       1.00        0.08            0.07        0.14        0.55           -0.51
+mech_share     -0.08         -0.02   0.02       0.08        1.00           -0.09       -0.02       -0.07            0.01
+pagerank_score  0.26         -0.18   0.19       0.07       -0.09            1.00        0.29        0.23           -0.19
+coding_loc      0.47         -0.41   0.26       0.14       -0.02            0.29        1.00        0.44           -0.41
+risk_churn      0.93         -0.84   0.04       0.55       -0.07            0.23        0.44        1.00           -0.85
+risk_stability -0.77          0.95   0.01      -0.51        0.01           -0.19       -0.41       -0.85            1.00
+
+B. PREDICTION (this repo only, fit on earlier half of snapshots, test on later half): AUC
+  later fix (v3c)    size 0.790  |  size+engine churn/stab 0.767  |  size+new panel (activity, age, 0.798  |  size+recent activity only 0.781  |  size+prior 0.786  |  size+prior+panel 0.797
+  later fix (raw)    size 0.735  |  size+engine churn/stab 0.703  |  size+new panel (activity, age, 0.720  |  size+recent activity only 0.720  |  size+prior 0.735  |  size+prior+panel 0.724
+  any later commit   size 0.648  |  size+engine churn/stab 0.650  |  size+new panel (activity, age, 0.657  |  size+recent activity only 0.655
+
+B2. WHICH AXIS EARNS IT? AUC for later fix (v3c) adding one thing at a time to size (fit earlier half, test later half)
+  size only                                  0.790
+  + recent activity (365-day commits)        0.781
+  + dormancy (days since last change)        0.782
+  + age                                      0.787
+  + ownership concentration                  0.790
+  + mechanical share                         0.779
+  + reach (PageRank)                         0.802
+  + engine churn and stability               0.767
+  + all five panel axes                      0.798
+
+C. WORKLISTS: how often do listed files get a fix / any change next interval, compared with all files that were active that year (c365>0)? pooled over snapshots; 95% interval resampling snapshots
+  L1 hot now: top decile of 365-day activity
+      n = 746 file-intervals (16 snapshots, median 54 per snapshot); later fix 31.6% vs 14.3% base (x2.21 [1.76,2.73]); any change 84.9% vs 61.9% base (x1.37 [1.19,1.60])
+  L2 hot and concentrated: active, top author >= 60% of commits and (owner inactive or share >= 90%)
+      n = 489 file-intervals (16 snapshots, median 21 per snapshot); later fix  9.0% vs 14.3% base (x0.63 [0.45,0.93]); any change 59.3% vs 61.9% base (x0.96 [0.85,1.13])
+  L3 dormant but depended on: no commit for 2+ years, reach in top decile
+      n = 80 file-intervals (10 snapshots, median 7 per snapshot); later fix  3.8% vs  1.7% base (x2.15 [0.39,5.97]); any change 45.0% vs 39.1% base (x1.15 [0.87,1.50])
+  L4a hot files, mostly organic edits (mechanical share < 25%)
+      n = 670 file-intervals (16 snapshots, median 33 per snapshot); later fix 22.7% vs 14.3% base (x1.58 [0.95,2.42]); any change 78.4% vs 61.9% base (x1.27 [1.06,1.58])
+  L4b hot files, mostly mechanical edits (mechanical share >= 50%)
+      n = 571 file-intervals (14 snapshots, median 34 per snapshot); later fix 20.0% vs 14.3% base (x1.39 [1.13,1.62]); any change 70.4% vs 61.9% base (x1.14 [0.97,1.29])
+  L1s hot now, SOURCE files only (top decile of source files): later fix 38.6% vs 27.0% base (x1.43); n=560
+
+D. THE PANEL AT SNAPSHOT 64 (2025-08-11), 718 code files
+  files active in the last year: 380; dormant 2+ years: 281; median age 11.4 y; median commits last 365 d among active 1
+  age x activity map:  old (10y+) & active 237 | old & dormant 200 | young (<5y) & active 79 | young & dormant 56
+  hot files, all roles (top by 365-day commits):
+    src/libgit2/repository.c                     commits365  17 (90d  4)  age 15.0y  dormant     6d  top-author  65% active  mechanical  25%  reach pct  99
+    .github/workflows/main.yml                   commits365  15 (90d  0)  age  5.2y  dormant   220d  top-author  67% active  mechanical   -   reach pct  36
+    .github/workflows/benchmark.yml              commits365  11 (90d  0)  age  3.5y  dormant   161d  top-author 100% active  mechanical   -   reach pct  36
+    tests/libgit2/core/features.c                commits365  10 (90d  0)  age 12.1y  dormant   220d  top-author 100% active  mechanical   -   reach pct  36
+    .github/workflows/nightly.yml                commits365   9 (90d  0)  age  4.7y  dormant   220d  top-author  89% active  mechanical   -   reach pct  36
+    src/libgit2/libgit2.c                        commits365   9 (90d  0)  age 13.7y  dormant   220d  top-author 100% active  mechanical   0%  reach pct  93
+  hot SOURCE files:
+    src/libgit2/repository.c                     commits365  17 (90d  4)  age 15.0y  dormant     6d  top-author  65% active  mechanical  25%  reach pct  99
+    src/libgit2/libgit2.c                        commits365   9 (90d  0)  age 13.7y  dormant   220d  top-author 100% active  mechanical   0%  reach pct  93
+    src/libgit2/remote.c                         commits365   8 (90d  0)  age 14.1y  dormant   220d  top-author  38% active  mechanical  50%  reach pct  95
+    src/libgit2/indexer.c                        commits365   8 (90d  1)  age 14.0y  dormant     5d  top-author  88% active  mechanical  20%  reach pct  82
+    src/libgit2/index.c                          commits365   8 (90d  1)  age 15.0y  dormant    70d  top-author  75% active  mechanical  67%  reach pct  97
+    src/libgit2/streams/stransport.c             commits365   8 (90d  0)  age 10.3y  dormant   220d  top-author  88% active  mechanical   0%  reach pct  36
+  hot and concentrated, source files (knowledge-loss read):
+    src/libgit2/libgit2.c                        commits365   9 (90d  0)  age 13.7y  dormant   220d  top-author 100% active  mechanical   0%  reach pct  93
+    src/cli/main.c                               commits365   7 (90d  0)  age  3.5y  dormant   220d  top-author 100% active  mechanical   0%  reach pct  36
+    src/libgit2/commit_graph.c                   commits365   7 (90d  0)  age  4.6y  dormant   220d  top-author 100% active  mechanical  17%  reach pct  84
+    src/libgit2/merge.c                          commits365   6 (90d  0)  age 12.8y  dormant   220d  top-author 100% active  mechanical 100%  reach pct  92
+    src/libgit2/blame.c                          commits365   6 (90d  0)  age 11.9y  dormant   296d  top-author 100% active  mechanical   -   reach pct  88
+    src/libgit2/pack.c                           commits365   6 (90d  0)  age 14.0y  dormant   219d  top-author 100% active  mechanical  50%  reach pct  86
+  dormant but depended on (source):
+    src/util/runtime.c                           commits365   0 (90d  0)  age  4.8y  dormant  1265d  top-author   0% active  mechanical   -   reach pct  98
+    src/libgit2/object_api.c                     commits365   0 (90d  0)  age 12.3y  dormant  1265d  top-author   0% active  mechanical   -   reach pct  98
+    src/util/win32/utf-conv.c                    commits365   0 (90d  0)  age 13.9y  dormant   873d  top-author   0% active  mechanical   -   reach pct  98
+    src/util/thread.c                            commits365   0 (90d  0)  age  4.7y  dormant  1265d  top-author   0% active  mechanical   -   reach pct  97
+    src/libgit2/buf.c                            commits365   0 (90d  0)  age  3.8y  dormant  1265d  top-author   0% active  mechanical   -   reach pct  97
+    src/util/posix.c                             commits365   0 (90d  0)  age 14.1y  dormant   820d  top-author   0% active  mechanical   -   reach pct  96
+  hot files that are mostly mechanical edits:
+    src/libgit2/index.c                          commits365   8 (90d  1)  age 15.0y  dormant    70d  top-author  75% active  mechanical  67%  reach pct  97
+    src/libgit2/remote.c                         commits365   8 (90d  0)  age 14.1y  dormant   220d  top-author  38% active  mechanical  50%  reach pct  95
+    src/libgit2/pack.c                           commits365   6 (90d  0)  age 14.0y  dormant   219d  top-author 100% active  mechanical  50%  reach pct  86
+    src/libgit2/merge.c                          commits365   6 (90d  0)  age 12.8y  dormant   220d  top-author 100% active  mechanical 100%  reach pct  92
+    tests/libgit2/odb/backend/mempack.c          commits365   6 (90d  0)  age  7.4y  dormant   220d  top-author  67% active  mechanical 100%  reach pct  36
+    src/libgit2/midx.c                           commits365   4 (90d  0)  age  4.8y  dormant   220d  top-author 100% active  mechanical  67%  reach pct  79

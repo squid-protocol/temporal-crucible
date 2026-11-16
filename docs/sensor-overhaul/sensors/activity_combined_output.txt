@@ -1,0 +1,21 @@
+
+curl: 3,771 active source file-intervals, base later-fix rate 46.4%
+  hot only (top decile of activity)                              n=  392  later fix 91.6%  x1.97 [1.84,2.13]
+  reach only (top decile of reach)                               n=  391  later fix 53.2%  x1.15 [1.03,1.25]
+  hot AND high reach (activity top decile, reach top quartile)   n=  147  later fix 96.6%  x2.08 [1.95,2.26]
+  hot but low reach (activity top decile, reach bottom half)     n=  153  later fix 85.6%  x1.84 [1.65,2.04]
+  high reach but quiet (reach top decile, activity bottom half)  n=  169  later fix 29.0%  x0.62 [0.51,0.77]
+
+libxml2: 1,359 active source file-intervals, base later-fix rate 47.6%
+  hot only (top decile of activity)                              n=  152  later fix 88.2%  x1.85 [1.71,2.01]
+  reach only (top decile of reach)                               n=  154  later fix 68.2%  x1.43 [1.32,1.52]
+  hot AND high reach (activity top decile, reach top quartile)   n=   82  later fix 93.9%  x1.97 [1.81,2.14]
+  hot but low reach (activity top decile, reach bottom half)     n=25 (too few)
+  high reach but quiet (reach top decile, activity bottom half)  n=   44  later fix 45.5%  x0.95 [0.69,1.20]
+
+libgit2: 2,027 active source file-intervals, base later-fix rate 27.0%
+  hot only (top decile of activity)                              n=  210  later fix 55.7%  x2.06 [1.78,2.33]
+  reach only (top decile of reach)                               n=  211  later fix 39.8%  x1.47 [1.34,1.64]
+  hot AND high reach (activity top decile, reach top quartile)   n=   94  later fix 69.1%  x2.56 [2.08,2.98]
+  hot but low reach (activity top decile, reach bottom half)     n=   68  later fix 45.6%  x1.69 [1.26,2.35]
+  high reach but quiet (reach top decile, activity bottom half)  n=   68  later fix 20.6%  x0.76 [0.55,0.98]
