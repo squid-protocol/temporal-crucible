@@ -1,0 +1,55 @@
+fastapi__fastapi [python]: 1135 files, 995 reference cross-file edges, 55 files with a caller
+  engine     edges    795  precision 80.9%  recall 64.6%  | reach: Spearman +0.580  mean abs error  0.42  top-10 found 5/10
+  eng-loose  edges   1197  precision 80.5%  recall 96.9%  | reach: Spearman +0.745  mean abs error  0.21  top-10 found 4/10
+  ts-unique  edges    494  precision 80.2%  recall 39.8%  | reach: Spearman +0.549  mean abs error  0.59  top-10 found 7/10
+  ts-all     edges   7471  precision 12.9%  recall 97.0%  | reach: Spearman +0.487  mean abs error  5.73  top-10 found 3/10
+pallets__flask [python]: 82 files, 97 reference cross-file edges, 20 files with a caller
+  engine     edges    184  precision 32.1%  recall 60.8%  | reach: Spearman +0.738  mean abs error  1.35  top-10 found 8/10
+  eng-loose  edges    275  precision 24.7%  recall 70.1%  | reach: Spearman +0.692  mean abs error  2.22  top-10 found 7/10
+  ts-unique  edges    210  precision 27.1%  recall 58.8%  | reach: Spearman +0.667  mean abs error  1.70  top-10 found 6/10
+  ts-all     edges    548  precision 13.3%  recall 75.3%  | reach: Spearman +0.543  mean abs error  5.52  top-10 found 5/10
+encode__httpx [python]: 60 files, 77 reference cross-file edges, 19 files with a caller
+  engine     edges    114  precision 46.5%  recall 68.8%  | reach: Spearman +0.743  mean abs error  1.15  top-10 found 6/10
+  eng-loose  edges    143  precision 41.3%  recall 76.6%  | reach: Spearman +0.702  mean abs error  1.57  top-10 found 5/10
+  ts-unique  edges     80  precision 43.8%  recall 45.5%  | reach: Spearman +0.596  mean abs error  1.05  top-10 found 7/10
+  ts-all     edges    259  precision 21.6%  recall 72.7%  | reach: Spearman +0.522  mean abs error  3.40  top-10 found 5/10
+colinhacks__zod [typescript]: 470 files, 180 reference cross-file edges, 27 files with a caller
+  engine     edges    114  precision 91.2%  recall 57.8%  | reach: Spearman +0.657  mean abs error  0.17  top-10 found 5/10
+  eng-loose  edges    402  precision 40.5%  recall 90.6%  | reach: Spearman +0.834  mean abs error  0.52  top-10 found 6/10
+  ts-unique  edges    561  precision 23.4%  recall 72.8%  | reach: Spearman +0.630  mean abs error  0.90  top-10 found 5/10
+  ts-all     edges   6263  precision  2.8%  recall 98.9%  | reach: Spearman +0.431  mean abs error 12.94  top-10 found 4/10
+expressjs__express [javascript]: 141 files, 3 reference cross-file edges, 2 files with a caller
+  engine     edges      4  precision 50.0%  recall 66.7%  | reach: Spearman +0.496  mean abs error  0.02  top-10 found 1/10
+  eng-loose  edges      5  precision 60.0%  recall 100.0%  | reach: Spearman +0.811  mean abs error  0.01  top-10 found 2/10
+  ts-unique  edges     32  precision  0.0%  recall  0.0%  | reach: Spearman -0.020  mean abs error  0.25  top-10 found 0/10
+  ts-all     edges     54  precision  0.0%  recall  0.0%  | reach: Spearman -0.029  mean abs error  0.40  top-10 found 0/10
+axios__axios [javascript]: 236 files, 104 reference cross-file edges, 41 files with a caller
+  engine     edges    139  precision 55.4%  recall 74.0%  | reach: Spearman +0.860  mean abs error  0.35  top-10 found 7/10
+  eng-loose  edges    233  precision 43.8%  recall 98.1%  | reach: Spearman +0.791  mean abs error  0.56  top-10 found 4/10
+  ts-unique  edges    473  precision 15.2%  recall 69.2%  | reach: Spearman +0.661  mean abs error  1.79  top-10 found 2/10
+  ts-all     edges   2140  precision  4.0%  recall 81.7%  | reach: Spearman +0.239  mean abs error  8.70  top-10 found 1/10
+spf13__cobra [go]: 36 files, 125 reference cross-file edges, 25 files with a caller
+  engine     edges    130  precision 80.8%  recall 84.0%  | reach: Spearman +0.788  mean abs error  1.25  top-10 found 7/10
+  eng-loose  edges    141  precision 82.3%  recall 92.8%  | reach: Spearman +0.938  mean abs error  0.94  top-10 found 8/10
+  ts-unique  edges    132  precision 79.5%  recall 84.0%  | reach: Spearman +0.787  mean abs error  1.31  top-10 found 7/10
+  ts-all     edges    155  precision 74.8%  recall 92.8%  | reach: Spearman +0.850  mean abs error  1.28  top-10 found 7/10
+gin-gonic__gin [go]: 98 files, 333 reference cross-file edges, 73 files with a caller
+  engine     edges    177  precision 81.9%  recall 43.5%  | reach: Spearman +0.646  mean abs error  2.12  top-10 found 6/10
+  eng-loose  edges    266  precision 69.9%  recall 55.9%  | reach: Spearman +0.637  mean abs error  2.09  top-10 found 6/10
+  ts-unique  edges    210  precision 71.0%  recall 44.7%  | reach: Spearman +0.654  mean abs error  2.30  top-10 found 6/10
+  ts-all     edges    884  precision 31.2%  recall 82.9%  | reach: Spearman +0.587  mean abs error  6.36  top-10 found 3/10
+google__gson [java]: 264 files, 743 reference cross-file edges, 69 files with a caller
+  engine     edges    659  precision 81.8%  recall 72.5%  | reach: Spearman +0.866  mean abs error  0.98  top-10 found 8/10
+  eng-loose  edges   1088  precision 67.2%  recall 98.4%  | reach: Spearman +0.799  mean abs error  1.37  top-10 found 9/10
+  ts-unique  edges    442  precision 67.4%  recall 40.1%  | reach: Spearman +0.718  mean abs error  1.88  top-10 found 6/10
+  ts-all     edges   6379  precision 10.1%  recall 86.7%  | reach: Spearman +0.450  mean abs error 21.68  top-10 found 5/10
+serde-rs__json [rust]: 71 files, 72 reference cross-file edges, 23 files with a caller
+  engine     edges     93  precision 55.9%  recall 72.2%  | reach: Spearman +0.810  mean abs error  0.77  top-10 found 8/10
+  eng-loose  edges    122  precision 50.0%  recall 84.7%  | reach: Spearman +0.828  mean abs error  0.82  top-10 found 7/10
+  ts-unique  edges     92  precision 48.9%  recall 62.5%  | reach: Spearman +0.799  mean abs error  0.93  top-10 found 6/10
+  ts-all     edges    240  precision 24.6%  recall 81.9%  | reach: Spearman +0.700  mean abs error  2.54  top-10 found 4/10
+BurntSushi__ripgrep [rust]: 102 files, 209 reference cross-file edges, 65 files with a caller
+  engine     edges    217  precision 59.0%  recall 61.2%  | reach: Spearman +0.841  mean abs error  1.35  top-10 found 5/10
+  eng-loose  edges    339  precision 51.0%  recall 82.8%  | reach: Spearman +0.849  mean abs error  1.65  top-10 found 4/10
+  ts-unique  edges    248  precision 52.8%  recall 62.7%  | reach: Spearman +0.808  mean abs error  1.56  top-10 found 5/10
+  ts-all     edges   2365  precision  8.2%  recall 92.3%  | reach: Spearman +0.762  mean abs error 21.29  top-10 found 6/10
