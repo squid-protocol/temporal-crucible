@@ -16,3 +16,4 @@ Thresholds (10 functions, 1%, 40% co-occurrence) are discovery choices. Callee n
 `sweep_audit.py`, `audit_report.py`, `sweep_exp.py` (branch `turn/forecast`): fix-label audit and sweep-exposure experiment; see `docs/turn_sweeps_and_fixes.md`.
 `fix_catalog.py`, `cat_report.py`, `archetypes.py` (branch `turn/forecast`): fix-edit catalog and edit archetypes; see `docs/turn_fix_catalog_and_archetypes.md`.
 `sweep_forecast.py`, `intent.py`, `swap_check.py` (branch `turn/forecast`): sweep forecast tests and intent rules; see `docs/turn_sweep_forecast.md`.
+`fix_funcs.py`, `fn_frame.py`, `fn_model.py` (branch `turn/forecast`): function-level fix mapping and recidivism test; see `docs/turn_function_recidivism.md`.
