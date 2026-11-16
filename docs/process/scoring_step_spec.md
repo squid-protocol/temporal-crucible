@@ -20,6 +20,7 @@ fresh-clone design itself was tested and found sound):
 
 1. **The failure table of section 6 is accepted as written**, before any build or result.
 2. **"Once" is defined as in section 5.**
+3. **A check that cannot be computed is treated as not confirmed** (added after the build's review; section 6).
 
 ## 2. The order, with the commit at each step
 
@@ -133,6 +134,8 @@ The reference result always stands (Amendment 5 sections 2 and 9). Fixed now:
 | the label-side input check reads "not equal" or "not comparable" | after scoring | the result stands; the report says "the inputs the two routes read were not shown equal"; the cell map is still printed |
 | the cell map: R cells differ, W and D all equal | after scoring | the result stands; the report names the R class; "defect-specific" against "tracks activity" is marked unverified |
 | the cell map: any W or D cell differs | after scoring | the result stands as the registered output; the label gains "the check did not confirm this run"; **no hypothesis is called confirmatory** until a decoy investigation, written up and dated, places the cause |
+| **the check cannot be computed** (the label tables, the label-side input check or the comparison scorer fail, so there is no complete cell map) | after scoring | as "any W or D cell differs": the result stands; the report says "the check could not be computed: <code>"; the label gains "the check did not confirm this run"; no hypothesis is called confirmatory until a dated decoy investigation places the cause (owner ruling, 2026-11-15) |
+| the result's shape is not the one expected | after scoring | the result is published byte for byte and the ledger records `completed` regardless; the report says "result_shape: unexpected"; steps 11 to 13 run and may fail with their own codes |
 | a corrected reading or a variant fails to run | after scoring | reported "failed: code"; a later run is dated and labelled later; it never blocks the report |
 
 These sentences are constants in `tools/scoring/`, reviewed before C.
