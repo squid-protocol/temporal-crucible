@@ -22,8 +22,8 @@ The tree-sitter baselines are my own minimal implementation (plain-name calls on
 
 ## What it means
 * C has a flat namespace, so matching by name is about as strong as it gets there; this is the language where a tree-sitter baseline should do best. Go, Python and Java merge same-named methods in different packages, where scoping should help us; **not tested here**.
-* **The strict filter costs accuracy.** Keeping ambiguous edges (flagged) and tied candidates raised recall from 60.8% to 71.4% with no loss of precision (83.6% to 84.0%), and libuv's Spearman from +0.497 to +0.768. `gitgalaxy reach` today drops ambiguous edges silently; they should be counted and flagged.
-* One repository, `file`, is a failure of ours that is not explained: the engine finds 2 of 16 edges where name matching finds 13. Needs a look.
+* **In C, the strict filter costs accuracy.** Keeping ambiguous edges and tied candidates raised recall from 60.8% to 71.4% with no loss of precision (83.6% to 84.0%), and libuv's Spearman from +0.497 to +0.768. **This does not hold in the other languages** (see the update below): there the looser set costs precision, so ambiguous edges are shown beside the count as possible callers, not folded in.
+* The `file` repository was not a failure of the engine: see the update below (vendored `src/missing/` shims; libclang could not parse the real sources). It is excluded from the C averages above only in the sense that it should not have been counted; the 7-repository C row includes it, and without it the C engine's mean Spearman is +0.72 (name matching, ts-all: +0.86), so C's conclusion is unchanged.
 
 ## Limits
 Small repositories, and libclang could not parse part of most of them (redis 295 of 848 files, libuv 133 of 369, hiredis 13 of 52), so the reference covers only the parsed files and has its own gaps (macros, build configuration). curl, libgit2, libxml2, libpng and libexif were excluded: libclang parsed too few files without their generated headers (curl 260 of 1,069; libgit2 507 of 1,197) to be a reference. Seven repositories, exploratory, no registered test.
