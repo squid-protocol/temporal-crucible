@@ -1,6 +1,6 @@
 # Draft GitGalaxy issue: persist external callees and header include counts (for `gitgalaxy reach`)
 
-**Not filed.** Title: `reach: persist external callees (aggregated) and C-family include edges so migration scope and header reach need no second pass`
+**Not filed. Item 1 is built** on GitGalaxy branch `sensors/fcall-external` (f6318ca87, local, not pushed): new table `fcall_external(src_file_id, callee, callers)`, one row per (file, callee), same cascade and wipe as `fcall_candidates`; `fcall_data`, the graph and `fcall_rate_data` unchanged; golden masters pass (`crucible_check`, both modes); the sum of `callers` equals `fcall_rate_data.external` exactly. Measured rows (one snapshot): curl 8,850 (fcall_data 19,158), libgit2 8,072 (41,428), prometheus 13,655 (31,195). Validation: scoping `free` on the parent of curl commit 193cb00ce9 predicted 168 files, the commit changed 161, 157 in both (recall 0.98, precision 0.93). The reader is `gitgalaxy reach --callee NAME` (branch `sensors/reach`, 55ffac5d6). Item 2 (include counts) is not built. Title: `reach: persist external callees (aggregated) and C-family include edges so migration scope and header reach need no second pass`
 Labels to suggest: `enhancement`, `scope:core`? (owner's call). Relates to #3328, #3331, #3333, #8161.
 
 ## Context
