@@ -13,7 +13,7 @@ tar=subprocess.run(["git","-C",f"{POOL}/{name}","archive",commit],capture_output
 CM=re.compile(r"/\*.*?\*/|//[^\n]*",re.S); ID=re.compile(r"[A-Za-z_]\w*"); INC=re.compile(r'#\s*include\s*[<"]([^>"]+)[>"]')
 text={}; 
 for m in tf.getmembers():
-    if m.isfile() and m.name.lower().endswith((".c",".h",".cc",".cpp",".hpp")):
+    if m.isfile() and m.name.lower().endswith((".c",".h",".cc",".cpp",".hpp",".py",".go",".java",".rs",".zig")):
         try: text[m.name]=tf.extractfile(m).read().decode("utf8","replace")
         except Exception: pass
 ident=collections.defaultdict(set); incl=collections.defaultdict(set)

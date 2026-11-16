@@ -1,0 +1,84 @@
+---
+description: "> **File Reference:** [`gitgalaxy/metrics/signal_processor.py`](https://github.com/squid-protocol/gitgalaxy/blob/main/gitgalaxy/metrics/signal_processor..."
+---
+# Connectivity (API Surface)
+
+> **File Reference:** [`gitgalaxy/metrics/signal_processor.py`](https://github.com/squid-protocol/gitgalaxy/blob/main/gitgalaxy/metrics/signal_processor.py)
+>
+> **Vector:** `connectivity` (legacy alias `risk_api_exposure`) — Public API Surface Area & Export Ratio
+>
+> **⚠️ Naming update ([#2991](https://github.com/squid-protocol/gitgalaxy/issues/2991)):** formerly "API Exposure / `risk_api_exposure`." This vector measures the **size of a module's public surface**, not a probability of defect. See [`vectors.md`](https://github.com/squid-protocol/gitgalaxy/blob/main/docs/vectors.md) for the full reframe and the temporal-crucible evidence behind it.
+>
+> **Summary:** Measures the permeability of a module's public boundary by comparing exported public endpoints to total declared entities (functions + classes). It allows developers to distinguish encapsulated internal helpers from heavily exposed public interfaces.
+>
+> **Effect:** Maps directly to the GitGalaxy Universal Surface Spectrum (higher = more public surface, **not** higher risk):
+> * 🟦 **VERY LOW (Score 0-19):** Encapsulated Vault. Internal utility module with no public export surface.
+> * 🟨 **MODERATE (Score 40-59):** Balanced API. Balanced mix of public methods and internal private helpers.
+> * 🟥 **VERY HIGH (Score 80-100):** Public Entry Point. Exposes a large volume of public functions/classes to external consumers.
+
+## Engineering Summary
+This subsystem quantifies the public surface area of a given module. It solves the problem of structural ambiguity by algorithmically identifying whether a file functions as an internal utility vault or a heavily exposed public entry point. It exists to monitor API boundary permeability, highlighting modules that export too much logic. Integrated within GitGalaxy, it operates independently of language syntax by analyzing explicit export boundaries.
+
+## Purpose
+To measure the ratio of exported public endpoints against total declared entities, evaluating the encapsulation and overall external surface area of a source file.
+
+## Problem Being Solved
+Files that expose every internal function and class create highly coupled, brittle systems where changing internal implementation details breaks external consumers. Developers need visibility into which modules are leaking their internal state versus those properly encapsulating logic behind a narrow public interface.
+
+## Design
+The calculation multiplies a relative exposure ratio (public against public-plus-private) by a logarithmic volume weight and a network multiplier.
+- **Risk:** Export keywords (`export`, `public`, `module.exports`) or casing conventions (Go/Python) -- the `api` signal (**Public / Exported Surface**, column `arch_api`).
+- **Mitigation:** Internal/private boundaries -- the `encapsulation` signal (**Private Scope (private/static/_name)**, column `def_encapsulation`).
+
+**Mathematical Formulation** (as implemented in `_calc_api_exposure`; an earlier revision of this page described a 40/60 ratio-plus-volume blend that the code never shipped -- the `api_exposure` tuning keys are unread)
+1. **Encapsulation Short-Circuit:** If `api_hits == 0`, score is `0.0` (the ratio below would be $0$ anyway; encapsulation cannot push exposure below zero).
+2. **Exposure Ratio:**
+$$\text{Ratio} = \frac{\text{api\_hits}}{\max(\text{api\_hits} + \text{encapsulation}, 1)}$$
+3. **Logarithmic Volume Weight** over the UEF evidence-mass floor ([08-03](08-03-transforming-regex-counts.md)), so six public functions score the same whether they sit in 13 or 49 lines (#2655):
+$$\text{VolumeWeight} = \frac{\ln(\text{api\_hits} + 1)}{\ln(\max(\text{TotalLOC}, 50) + 1)}$$
+3b. **Isolated-Node Adjustment:** $\text{Network} = 0.2$ when the file has no inbound dependents (popularity $0$), else $\min(1 + \ln(1 + \text{popularity}) / 5, 2.0)$.
+4. **Compound Score & Path Modifier:**
+$$\text{RawScore} = \text{Ratio} \times \text{VolumeWeight} \times \text{Network} \times 100.0$$
+$$\text{FinalScore} = \min(\text{RawScore} \times Mp, 100.0)$$
+
+## Pipeline Integration
+```mermaid
+flowchart LR
+    A[Static Analyzer] -->|API hits, Entities| B[Exposure Calculator]
+    B -->|Ratio Calculation| C[Compound Scoring]
+    B -->|Volume Logarithm| C
+    C -->|Apply Multiplier| D[API Exposure Score]
+```
+- **Inputs received:** Heuristic `api_hits`, function counts, class counts, and Path Modifier ($Mp$).
+- **Outputs produced:** A normalized API exposure score (0-100).
+- **Dependencies:** Relies upstream on structural entity counting from the static analysis engine.
+
+## Tradeoffs
+- Multiplying the ratio by a logarithmic volume weight ensures that a file exporting 1 public function out of 1 total (100% ratio) scores much lower than a file exporting 50 public functions out of 100 (50% ratio). This correctly flags massive API surfaces over tiny single-export scripts, and the evidence-mass floor keeps a small file from inflating the weight just by being short.
+- Logarithmic scaling for absolute volume ensures that scores do not scale infinitely, capping out reasonably as API sizes hit critical mass.
+
+## Limitations
+- Relies purely on keyword and syntax conventions; it cannot deduce if a weakly-typed language module technically allows external consumption of unexported properties via runtime reflection.
+- Cannot evaluate the semantic complexity of the exported API (e.g., exposing one massive god-object is scored lower in volume than exposing 10 tiny pure functions).
+- Measures how much a file **offers** (export keywords against private ones), not how much other code **uses** it. The only use-based term is the popularity multiplier (0.2 for no inbound dependents, up to 2.0), which is capped and enters the product, so a heavily used file with few export keywords scores low.
+- C-family public/private conventions are weak signals: header files declare the API but define few functions, so the ratio is computed on the wrong file.
+
+## Performance Notes
+Utilizes an immediate short-circuit for files with zero `api_hits`, returning $0.0$. Arithmetic calculations operate in $O(1)$ time based on pre-scanned token counts.
+
+## Future Work
+Current metrics evaluate intra-file API volume. Planned improvements involve analyzing inter-file dependency graphs to measure true consumer blast radius (how many other files actually import the exposed API).
+
+## Measured Behavior (exploratory, 2026-11)
+> **Research notes:** temporal-crucible, branch `sensor-overhaul`, `docs/sensor-overhaul/sensors/reach.md` and `reach_validity_output.txt`. Exploratory: seven repositories (curl, libgit2, redis, libxml2, prometheus, sphinx, ripgrep), one snapshot each; the history-aware outcome tests cover three.
+
+- **The call graph is a sound measure of use.** Per function, the engine's cross-file callers agree with a plain text search for outside users at Spearman +0.74 to +0.92 (curl +0.88, libgit2 +0.90, redis +0.90, libxml2 +0.80, prometheus +0.92, sphinx +0.76, ripgrep +0.74). Precision is 1.00 (median: every caller the engine lists is real); recall is about half (median 0.33 to 1.00), because calls to functions the engine cannot resolve (standard library, macros) are not recorded, and the engine finds no outside caller for 10-42% of functions the text says are used elsewhere.
+- **Per file, "caller files" counted from those edges** tracks the text-search reach at +0.63 to +0.91 (curl +0.87, libgit2 +0.90, redis +0.91, libxml2 +0.90), better than `pagerank_score` (+0.38 to +0.87) and much better than `import_count` (+0.20 to +0.61).
+- **Header files are the exception.** A header declares an interface and defines few functions, so call-based reach is blind to it (Spearman with the number of files that `#include` it: -0.18 to +0.23). The engine's own measures reach +0.38 to +0.71 (`pagerank_score`) and are inconsistent across repositories. An include count, which the engine does not persist, is the right measure for headers.
+- **Relation to later fixes (descriptive).** Reach is one of two simple signals that add to code size for ranking later fixes (+0.018, +0.016 and +0.012 AUC on curl, libxml2, libgit2). Files with recent activity and high reach had later-fix rates 2.1, 2.0 and 2.6 times the active-file average; high-reach files with no recent activity were at 0.6 to 1.0 times: quiet foundations are not where fixes land.
+
+**Design direction.** The proposed [Reach sensor](08-26-reach-sensor.md) reports reach as caller counts (files, functions, one hop out) from the call graph, include counts for headers, a "not measured" state for files the graph cannot see, and keeps public-surface counts as context; a migration-scope report lists who is affected by renaming or removing a function.
+
+## Related Components
+- Static Analysis Engine
+- Path Context Modifier ($Mp$)

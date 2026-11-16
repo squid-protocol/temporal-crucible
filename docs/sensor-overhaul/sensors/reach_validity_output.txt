@@ -1,20 +1,70 @@
-curl snapshot 104 (bc9ab557): 4245 uniquely named functions compared
-FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.91; of functions the text says have outside users, the engine finds none for 15%; per-function recall of text callers (median) 0.50; precision of engine callers (median) 1.00
-FILE LEVEL (565 files): Spearman with 'files that mention any function the file defines' (text):
-  pagerank_score                     +0.87
-  normalized_blast_radius            +0.87
-  internal_dependency_links          +0.28
-  import_count                       +0.60
-  call-based caller files            +0.88
+curl snapshot 104 (bc9ab557): 4796 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.88; of functions the text says have outside users, the engine finds none for 18%; per-function recall of text callers (median) 0.50; precision of engine callers (median) 1.00
+FILE LEVEL (610 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.84
+  normalized_blast_radius            +0.84
+  internal_dependency_links          +0.24
+  import_count                       +0.56
+  call-based caller files            +0.87
   #include count (headers)           +1.00  (headers only, n=2)
 HEADERS (246 header files, 245 included somewhere): Spearman with the number of files that #include them: pagerank_score +0.39, normalized_blast_radius +0.39, internal_dependency_links +0.31, import_count +0.23, call-based caller files -0.07
-libgit2 snapshot 64 (58d9363f): 8890 uniquely named functions compared
-FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.91; of functions the text says have outside users, the engine finds none for 19%; per-function recall of text callers (median) 0.50; precision of engine callers (median) 1.00
-FILE LEVEL (678 files): Spearman with 'files that mention any function the file defines' (text):
-  pagerank_score                     +0.88
-  normalized_blast_radius            +0.88
-  internal_dependency_links          +0.14
-  import_count                       +0.38
+libgit2 snapshot 64 (58d9363f): 8922 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.90; of functions the text says have outside users, the engine finds none for 20%; per-function recall of text callers (median) 0.50; precision of engine callers (median) 1.00
+FILE LEVEL (681 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.87
+  normalized_blast_radius            +0.87
+  internal_dependency_links          +0.13
+  import_count                       +0.39
   call-based caller files            +0.90
   #include count (headers)           +nan  (headers only, n=5)
 HEADERS (320 header files, 318 included somewhere): Spearman with the number of files that #include them: pagerank_score +0.38, normalized_blast_radius +0.38, internal_dependency_links +0.47, import_count +0.49, call-based caller files -0.18
+redis snapshot 71 (86561a0f): 7126 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.90; of functions the text says have outside users, the engine finds none for 25%; per-function recall of text callers (median) 0.50; precision of engine callers (median) 1.00
+FILE LEVEL (262 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.81
+  normalized_blast_radius            +0.81
+  internal_dependency_links          +0.57
+  import_count                       +0.34
+  call-based caller files            +0.91
+  #include count (headers)           +0.85  (headers only, n=19)
+HEADERS (89 header files, 88 included somewhere): Spearman with the number of files that #include them: pagerank_score +0.71, normalized_blast_radius +0.71, internal_dependency_links -0.01, import_count +0.17, call-based caller files +0.19
+libxml2 snapshot 113 (febeb5c9): 3551 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.80; of functions the text says have outside users, the engine finds none for 42%; per-function recall of text callers (median) 0.33; precision of engine callers (median) 1.00
+FILE LEVEL (131 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.73
+  normalized_blast_radius            +0.73
+  internal_dependency_links          +0.47
+  import_count                       +0.61
+  call-based caller files            +0.90
+  #include count (headers)           +0.50  (headers only, n=3)
+HEADERS (67 header files, 64 included somewhere): Spearman with the number of files that #include them: pagerank_score +0.68, normalized_blast_radius +0.68, internal_dependency_links +0.19, import_count +0.27, call-based caller files +0.23
+prometheus snapshot 56 (1d4faeaf): 6015 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.92; of functions the text says have outside users, the engine finds none for 10%; per-function recall of text callers (median) 1.00; precision of engine callers (median) 1.00
+FILE LEVEL (714 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.74
+  normalized_blast_radius            +0.74
+  internal_dependency_links          +0.14
+  import_count                       +0.20
+  call-based caller files            +0.82
+  #include count (headers)           +nan  (headers only, n=0)
+HEADERS (0 header files, 0 included somewhere): Spearman with the number of files that #include them: pagerank_score +nan, normalized_blast_radius +nan, internal_dependency_links +nan, import_count +nan, call-based caller files +nan
+sphinx snapshot 77 (035a07c3): 3195 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.76; of functions the text says have outside users, the engine finds none for 36%; per-function recall of text callers (median) 0.89; precision of engine callers (median) 1.00
+FILE LEVEL (422 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.57
+  normalized_blast_radius            +0.57
+  internal_dependency_links          +0.22
+  import_count                       +0.36
+  call-based caller files            +0.63
+  #include count (headers)           +nan  (headers only, n=0)
+HEADERS (1 header files, 0 included somewhere): Spearman with the number of files that #include them: pagerank_score +nan, normalized_blast_radius +nan, internal_dependency_links +nan, import_count +nan, call-based caller files +nan
+ripgrep snapshot 42 (91f5d22e): 1002 uniquely named functions compared
+FUNCTION LEVEL: cross-file caller files, engine vs text search: Spearman +0.74; of functions the text says have outside users, the engine finds none for 32%; per-function recall of text callers (median) 0.97; precision of engine callers (median) 1.00
+FILE LEVEL (85 files): Spearman with 'files that mention any function the file defines' (text):
+  pagerank_score                     +0.38
+  normalized_blast_radius            +0.38
+  internal_dependency_links          +0.22
+  import_count                       +0.36
+  call-based caller files            +0.69
+  #include count (headers)           +nan  (headers only, n=0)
+HEADERS (0 header files, 0 included somewhere): Spearman with the number of files that #include them: pagerank_score +nan, normalized_blast_radius +nan, internal_dependency_links +nan, import_count +nan, call-based caller files +nan

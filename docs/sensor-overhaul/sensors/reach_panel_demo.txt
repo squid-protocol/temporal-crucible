@@ -1,0 +1,47 @@
+REACH PANEL  curl snapshot 104 (bc9ab557): 1126 files
+  coverage: source (call-based reach) 721; not measured (no functions, not a header) 159; header (include count) 246
+  files that the most other files call into (source):
+    lib/mprintf.c                                 403 caller files,   727 caller functions,  1382 more one hop out, 16 commits last year
+    lib/easy.c                                    303 caller files,   429 caller functions,   399 more one hop out, 66 commits last year
+    lib/setopt.c                                  259 caller files,   293 caller functions,   323 more one hop out, 75 commits last year
+    lib/memdebug.c                                209 caller files,   783 caller functions,  1656 more one hop out, 35 commits last year
+    lib/strerror.c                                152 caller files,   198 caller functions,   362 more one hop out, 22 commits last year
+    lib/multi.c                                    98 caller files,   203 caller functions,   305 more one hop out, 104 commits last year
+    lib/curlx/timeval.c                            95 caller files,   150 caller functions,   320 more one hop out, 15 commits last year
+    lib/curl_trc.c                                 94 caller files,   912 caller functions,  1559 more one hop out, 34 commits last year
+  most-used public functions (2674 functions are marked public):
+    curl_mfprintf                      lib/mprintf.c                      called from 319 other files
+    curl_easy_init                     lib/easy.c                         called from 262 other files
+    curl_global_cleanup                lib/easy.c                         called from 261 other files
+    curl_easy_cleanup                  lib/easy.c                         called from 260 other files
+    curl_global_init                   lib/easy.c                         called from 255 other files
+    curl_easy_setopt                   lib/setopt.c                       called from 255 other files
+  headers by number of files that include them: curl_setup.h (292), first.h (261), first.h (261), curl.h (151), urldata.h (136)
+  stable foundations (reach in the top decile, no commit in the last year): 0
+
+REACH PANEL  libgit2 snapshot 64 (58d9363f): 1299 files
+  coverage: not measured (no functions, not a header) 266; source (call-based reach) 713; header (include count) 320
+  files that the most other files call into (source):
+    src/util/errors.c                             591 caller files,  4813 caller functions,  6654 more one hop out, 0 commits last year
+    src/libgit2/repository.c                      317 caller files,  1249 caller functions,  2592 more one hop out, 17 commits last year
+    src/util/str.c                                269 caller files,  1168 caller functions,  2923 more one hop out, 0 commits last year
+    src/libgit2/oid.c                             260 caller files,   900 caller functions,  1648 more one hop out, 1 commits last year
+    src/libgit2/object_api.c                      157 caller files,   504 caller functions,   796 more one hop out, 0 commits last year
+    src/libgit2/refs.c                            146 caller files,   569 caller functions,  1078 more one hop out, 3 commits last year
+    src/util/alloc.c                              145 caller files,   344 caller functions,  1140 more one hop out, 1 commits last year
+    src/util/win32/posix_w32.c                    129 caller files,   393 caller functions,  3967 more one hop out, 1 commits last year
+  most-used public functions (6636 functions are marked public):
+    git_error_clear                    src/util/errors.c                  called from 466 other files
+    cl_git_report_failure              tests/clar/clar_libgit2.c          called from 421 other files
+    clar__assert_equal                 tests/clar/clar.c                  called from 352 other files
+    clar__assert                       tests/clar/clar.c                  called from 296 other files
+    git_str_dispose                    src/util/str.c                     called from 257 other files
+    cl_git_sandbox_cleanup             tests/clar/clar_libgit2.c          called from 223 other files
+  headers by number of files that include them: clar_libgit2.h (458), common.h (287), common.h (287), common.h (287), repository.h (179)
+  stable foundations (reach in the top decile, no commit in the last year): 9
+    src/util/errors.c                            591 caller files, 4813 caller functions
+    src/util/str.c                               269 caller files, 1168 caller functions
+    src/libgit2/object_api.c                     157 caller files, 504 caller functions
+    src/libgit2/buf.c                            91 caller files, 219 caller functions
+    src/util/util.c                              84 caller files, 188 caller functions
+
