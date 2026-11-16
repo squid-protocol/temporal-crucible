@@ -1,0 +1,24 @@
+target                     lang       files GG    RW | funcs GG     RW   both  only GG  only RW |  ctags GG finds RW finds
+-- MODERN
+expat                      c                92    92 |     1098   1009    647      451      362 |    660     0.98      1.0
+redis                      c               286   848 |     7289  18447   7283        6    11164 |  12601     0.58     0.99
+hiredis                    c                52    52 |      632    851    631        1      220 |    632      1.0      1.0
+libuv                      c               335   369 |     3140   3477   2561      579      916 |   2902     0.89     0.99
+ndpi                       c               363   430 |     2256   6105   2256        0     3849 |   4057     0.54      1.0
+zlib                       c                58    73 |      373    848    331       42      517 |    539     0.68     0.92
+fastapi__fastapi           python         1135  1138 |     4706   4514   4481      225       33 |   4728     0.99     0.95
+pallets__flask             python           82    83 |     1159    788    786      373        2 |   1161      1.0     0.68
+encode__httpx              python           60    60 |      962    917    917       45        0 |    962      1.0     0.95
+colinhacks__zod            typescript      466   507 |     2001   1656   1571      430       85 |   1133     0.98     0.95
+axios__axios               javascript      236   251 |     1057    564    550      507       14 |    726     0.61     0.44
+spf13__cobra               go               36    36 |      591    592    591        0        1 |    591      1.0      1.0
+gin-gonic__gin             go               98    98 |     1284   1310   1284        0       26 |   1302     0.99     0.99
+google__gson               java            264   264 |     2995   3005   2970       25       35 |   2902     0.99      1.0
+serde-rs__json             rust             71    71 |      826    818    782       44       36 |    831     0.99     0.95
+BurntSushi__ripgrep        rust            102   102 |     1775   1883   1762       13      121 |   1834     0.95     0.99
+-- LEGACY / OLD
+sphinx-2008 (Python 2)     python           52    52 |      616    589    589       27        0 |    617      1.0     0.95
+curl-1999 (old C)          c                67    68 |      120    245    120        0      125 |    130     0.92     0.95
+COBOL CardDemo             cobol            72    72 |      512    504    504        8        0 |      -        -        -
+Fortran WRF                fortran           6     0 |      137      0      0      137        0 |    135      1.0      0.0
+PL/I sample                pli               3     0 |        7      0      0        7        0 |      -        -        -
