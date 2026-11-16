@@ -1,18 +1,20 @@
 ### triage demo on libgit2 (demo state is deleted afterwards)
-5ad203e50c -> standing_warning
+5ad203e50c -> keep
 unknown id 0000000000
-da633c84dd -> acknowledged
-899db0e397 -> resolved
+da633c84dd -> watching
+899db0e397 -> done
 
---- list after triage: the standing warning is listed apart, the acknowledged marker drops to the bottom, the 'resolved' marker is still in the code so it REOPENS, an unknown ID is rejected:
-libgit2: 85 open markers; fossils (older than this repo's 90th-percentile repayment age, 2.0 y): 93%; hidden by triage: 0; standing warnings: 1; reopened: 0
-  id         where                                        marker    age stuck file commits    owner effort +others  status
-  d2d8a4c267 src/libgit2/repository.c:?                   TODO    15.8y   97%           15     gone      L       1  open FOSSIL | TODO : Ensure the parent tree structure already 
-  04b75175cf src/libgit2/repository.c:2665                TODO     4.9y   92%           15     gone      L       1  open FOSSIL | TODO: issue warning when warning API is availabl
-  899db0e397 src/libgit2/index.c:254                      TODO    13.5y   97%            7     gone      L       1  reopened FOSSIL | TODO: enable this when resolving case insensitiv
-  265deabab6 src/libgit2/commit_graph.c:599               TODO     5.8y   95%            6     gone      M       1  open FOSSIL | TODO: properly open the file without access time
-  711e70f9b0 src/libgit2/odb.c:459                        TODO    13.5y   97%            5     gone      M       0  open FOSSIL | TODO: inodes are not really relevant on Win32, s
-  aec73f6ea5 src/libgit2/pack-objects.c:718               TODO    14.0y   97%            5     gone      M       3  open FOSSIL | TODO
-  420f17307a src/libgit2/pack-objects.c:775               TODO    14.0y   97%            5     gone      M       3  open FOSSIL | TODO: support reuse-delta
-  standing warnings (kept on purpose):
+--- list after triage: the kept marker is listed apart, the watched one drops to the bottom, the 'done' marker is still in the code so it REOPENS, an unknown ID is rejected:
+libgit2: 85 open markers; fossils (older than this repo's 90th-percentile repayment age, 2.0 y): 93%; not debt: 0; kept on purpose: 1; reopened: 0
+  track record in THIS repo (open debt at half-year dates, repaid within 2 years): fossils 6.2% vs other debt 23.9%; fossils in hot files (10+ commits a year) 12.6% vs quiet files 2.1%; owner active 9.6% vs gone 4.1%
+  id         where                                        marker    age stuck file commits    owner usual size +others  status
+  d2d8a4c267 src/libgit2/repository.c:?                   TODO    15.8y   97%           15     gone          L       1  open FOSSIL | TODO : Ensure the parent tree structure already 
+  04b75175cf src/libgit2/repository.c:2665                TODO     4.9y   92%           15     gone          L       1  open FOSSIL | TODO: issue warning when warning API is availabl
+  899db0e397 src/libgit2/index.c:254                      TODO    13.5y   97%            7     gone          L       1  reopened FOSSIL | TODO: enable this when resolving case insensitiv
+  265deabab6 src/libgit2/commit_graph.c:599               TODO     5.8y   95%            6     gone          M       1  open FOSSIL | TODO: properly open the file without access time
+  711e70f9b0 src/libgit2/odb.c:459                        TODO    13.5y   97%            5     gone          M       0  open FOSSIL | TODO: inodes are not really relevant on Win32, s
+  aec73f6ea5 src/libgit2/pack-objects.c:718               TODO    14.0y   97%            5     gone          M       3  open FOSSIL | TODO
+  420f17307a src/libgit2/pack-objects.c:775               TODO    14.0y   97%            5     gone          M       3  open FOSSIL | TODO: support reuse-delta
+  kept on purpose:
     5ad203e50c src/libgit2/commit_graph.c | TODO: properly open the file without access time using O_NOA (kept on purpose: needs an O_NOATIME-capable open on all platforms)
+SARIF written: 85 results -> docs/sensor-overhaul/sensors/debt_libgit2_demo.sarif

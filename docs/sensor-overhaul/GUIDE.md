@@ -79,6 +79,20 @@ Debt markers are discrete, locatable, ageable and, unlike a density, actionable;
 7. **Say when the engine cannot see.** Unresolved callees, unsupported languages, scans without history: mark the sensor "not measured", not zero.
 8. **Report evidence status on the sensor itself** (measured, descriptive, validated against X), and never claim risk.
 
+### 4.1 Design stance: inspired, not copied
+Owner direction (2026-11-16): design something unique; take inspiration, solve it our own way. Ground rules, following the third-party IP rule (borrow ideas only, record where each came from, quote nothing long):
+1. **No imitation of vendor surfaces:** no 1-10 scale, no bands, no detector roster, no copied thresholds, weights or finding names, no "fix first" label. Our vocabulary is our own.
+2. **Standards over vendors:** where a workflow convention is needed (triage states, stable identity), map to an open standard (SARIF 2.1.0 suppressions and `partialFingerprints`), which the engine's SARIF recorder already speaks, and keep our own state names.
+3. **What is distinctively ours** (and what each sensor should lean on):
+   * **Time:** every sensor can be replayed at past dates because the engine, the lineage ledger and the history scans give us whole histories; we back-test our own flags.
+   * **Track record:** every flag ships with how that kind of flag has behaved **in this repo** (for example, "fossil debt here is repaid 6.2% of the time within two years, against 23.9% for other debt"). A flag without a measured track record is description only.
+   * **The repo's own baseline:** references come from the repo's own history, never a global scale.
+   * **Change as a first-class event:** sweeps (mechanical migrations), their mechanical share, scope and progress from the call graph; renames followed; original ages through moves and rewordings.
+   * **Validated for what it claims,** not for predicting defects: debt against repayment, reach against real dependence, activity against later change; negative results are published (effort cannot be predicted per marker).
+   * **"Not measured" is a first-class state,** with the reason (outside the call graph, no history, unresolved callee).
+   * **Multi-language from one engine,** with role tags so lists are comparable.
+4. **Candidate ideas still open** (each should be our own design and test): diff-aware sensors (what did this change do to a file's gauges), sensors with a track-record panel, and a "while you are here" prompt triggered by the change in front of the reader.
+
 ## 5. Acceptance checklist (run for every new or changed sensor)
 | # | Test | Pass | How |
 |---|---|---|---|
@@ -95,8 +109,8 @@ Debt markers are discrete, locatable, ageable and, unlike a density, actionable;
 ### 5.1 History vectors: what the wiki promised and what the code does
 The wiki (`docs/wiki/02-15-chronometer.md`) describes churn (recent change frequency) and stability (age). The formulas (`docs/vector_formulas.md` 12a/12b) make both depend on the time since the file's last modification (stability is that time as a share of the repo timeline; churn divides the 12-month commit count by its square root), so they are one axis (rho -0.86). `docs/vectors.md` says the history vectors are ablated to zero in every recorded scan; the v2.12.0 master database shows values for about 40% of repos, and history-aware scans work on `main` with `GITGALAXY_HISTORY_ASOF=1`. Full analysis and redesign: `sensors/activity.md`.
 
-## 6. What repowise and CodeScene do (lessons)
-Repowise scores every file 1-10 from 59 detectors (parse tree, dependency graph, git history): structural complexity, size, duplication, error handling, change history (churn, change entropy, co-change scatter, ownership, prior fixes), test coverage and quality, plus language-specific and performance families, with capped per-family deductions and absolute bands. It keeps three signals separate (code health fitted to a defect corpus, maintainability set by hand, performance risk). Its accuracy statement agrees with ours: ROC AUC 0.737 against 0.742 for lines of code alone, with the value in ordering a fixed review budget and explaining why; within size quartiles AUC is 0.525-0.718. **What to copy:** findings with locations and stable IDs, a ranked "fix first" list by impact and effort, triage status, a CI check. **Where we differ:** uniform multi-language coverage, the call graph, the lineage ledger, sweep and migration views. Sources: repowise `docs/layers/CODE_HEALTH.md`; repowise-bench; `docs/repowise_assessment.md`.
+## 6. Related tools (for orientation only)
+Static-analysis health tools such as repowise (AGPL-3.0) and CodeScene score files on a 1-10 scale from detector findings that include complexity, duplication, change history and test evidence. We read their public documentation to understand what users of such tools expect, and for what to avoid: a blended per-file number, scored findings that cannot be checked against what they claim, and (in repowise's own published numbers) an accuracy that ties a plain line count. **We do not use their detector rosters, thresholds, weights, names or score scale, and we copy no code or text;** the ideas below come from the published research they also draw on (Bird et al. on ownership, Hassan on change entropy, D'Ambros on co-change, Nagappan and Ball on relative churn) and from our own measurements. Sources: repowise `docs/layers/CODE_HEALTH.md` and `docs/architecture/code-health.md`, repowise-bench; `docs/repowise_assessment.md`.
 
 ## 7. Roadmap
 1. **Tech-debt ledger** (this repo, `sensors/tech_debt.md`): prototype done on four repos; next, move to engine inputs and test the acceptance checklist.

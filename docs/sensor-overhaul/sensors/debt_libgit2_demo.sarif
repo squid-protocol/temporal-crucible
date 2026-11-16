@@ -1,0 +1,2757 @@
+{
+ "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+ "version": "2.1.0",
+ "runs": [
+  {
+   "tool": {
+    "driver": {
+     "name": "debt-ledger (sensor-overhaul prototype)",
+     "rules": [
+      {
+       "id": "debt/open-marker",
+       "shortDescription": {
+        "text": "Open self-admitted debt marker"
+       }
+      }
+     ]
+    }
+   },
+   "results": [
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.8 years: TODO : Ensure the parent tree structure already exists by recursively building it through gitfo_mkdir_recurs()."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/repository.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "d2d8a4c267"
+     },
+     "properties": {
+      "age_years": 15.83,
+      "stuck_probability": 0.966,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 15,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 1,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.7 years: TODO:"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "include/git2/repository.h"
+        },
+        "region": {
+         "startLine": 223
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "7afae0ab24"
+     },
+     "properties": {
+      "age_years": 15.71,
+      "stuck_probability": 0.973,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.6 years: TODO: the reference implementation does pretty stupid"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/config_parse.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "06d458ace6"
+     },
+     "properties": {
+      "age_years": 15.61,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.6 years: TODO: properly open the file without access time"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1f1673b5e9"
+     },
+     "properties": {
+      "age_years": 15.59,
+      "stuck_probability": 0.978,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.6 years: TODO: open with noatime"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack.c"
+        },
+        "region": {
+         "startLine": 1098
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "b4af902d17"
+     },
+     "properties": {
+      "age_years": 15.59,
+      "stuck_probability": 0.976,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 15.6 years: TODO: optionally check the CRC on the packfile"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack.c"
+        },
+        "region": {
+         "startLine": 700
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "422bed0752"
+     },
+     "properties": {
+      "age_years": 15.59,
+      "stuck_probability": 0.978,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "XXX open for 15.0 years: XXX: Should dirmode here be configurable? Or is 0777 always fine?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/util/filebuf.c"
+        },
+        "region": {
+         "startLine": 55
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "d0ac365e59"
+     },
+     "properties": {
+      "age_years": 15.0,
+      "stuck_probability": 0.983,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.7 years: we leave an orphaned blob object behind - TODO"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/notes.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "4715369cb9"
+     },
+     "properties": {
+      "age_years": 14.66,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.6 years: TODO: eventually support streaming filtered files, for files which are bigger"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/blob.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "3acd4a01b8"
+     },
+     "properties": {
+      "age_years": 14.63,
+      "stuck_probability": 0.982,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.6 years: TODO: generate warning log if (macro->assigns.length == 0)"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/attrcache.c"
+        },
+        "region": {
+         "startLine": 480
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "05e40a7083"
+     },
+     "properties": {
+      "age_years": 14.58,
+      "stuck_probability": 0.982,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.6 years: TODO: set pathspec to \"current_file\" eventually"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/status/worktree.c"
+        },
+        "region": {
+         "startLine": 210
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "2e7a7c4766"
+     },
+     "properties": {
+      "age_years": 14.56,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.5 years: TODO: is it worth loading gitmodules from object cache?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/submodule.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "e107ff7119"
+     },
+     "properties": {
+      "age_years": 14.55,
+      "stuck_probability": 0.975,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 3,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.5 years: TODO: This no longer applies:"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/index/tests.c"
+        },
+        "region": {
+         "startLine": 206
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "47336012fb"
+     },
+     "properties": {
+      "age_years": 14.54,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "FIXME open for 14.5 years: FIXME: this test is slightly dumb"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/index/tests.c"
+        },
+        "region": {
+         "startLine": 223
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "43bd4187bd"
+     },
+     "properties": {
+      "age_years": 14.54,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.5 years: TODO: This is a little messy"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/object/tag/read.c"
+        },
+        "region": {
+         "startLine": 67
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "9b432ebb5a"
+     },
+     "properties": {
+      "age_years": 14.54,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.4 years: TODO: Implement remaining kinds of resets."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "include/git2/reset.h"
+        },
+        "region": {
+         "startLine": 45
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "c596be12cb"
+     },
+     "properties": {
+      "age_years": 14.35,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.3 years: TODO: support submodules?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/revparse.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "fe3e87c5f4"
+     },
+     "properties": {
+      "age_years": 14.29,
+      "stuck_probability": 0.97,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.2 years: TODO: make the test below actually fail"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/refs/revparse.c"
+        },
+        "region": {
+         "startLine": 303
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "d5e94e5a2a"
+     },
+     "properties": {
+      "age_years": 14.25,
+      "stuck_probability": 0.974,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.2 years: TODO: support merge-stage path lookup (\":2:Makefile\")"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/revparse.c"
+        },
+        "region": {
+         "startLine": 789
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "496486fb3a"
+     },
+     "properties": {
+      "age_years": 14.24,
+      "stuck_probability": 0.973,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.1 years: TODO: if case insensitive filesystem, then the following strcmps"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/submodule.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "0cf93b425c"
+     },
+     "properties": {
+      "age_years": 14.14,
+      "stuck_probability": 0.975,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 3,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO: two cases:"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/checkout.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "e324a00834"
+     },
+     "properties": {
+      "age_years": 14.01,
+      "stuck_probability": 0.974,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO: add support for chunked objects; see git.git 6c0d19b1"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack.c"
+        },
+        "region": {
+         "startLine": 395
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "3442b668a0"
+     },
+     "properties": {
+      "age_years": 14.01,
+      "stuck_probability": 0.977,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO: peel objects"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack-objects.c"
+        },
+        "region": {
+         "startLine": 525
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1c126a24b8"
+     },
+     "properties": {
+      "age_years": 14.01,
+      "stuck_probability": 0.965,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 5,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack-objects.c"
+        },
+        "region": {
+         "startLine": 718
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "aec73f6ea5"
+     },
+     "properties": {
+      "age_years": 14.01,
+      "stuck_probability": 0.967,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 5,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO: support reuse-delta"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack-objects.c"
+        },
+        "region": {
+         "startLine": 775
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "420f17307a"
+     },
+     "properties": {
+      "age_years": 14.01,
+      "stuck_probability": 0.966,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 5,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 14.0 years: TODO: insert actual similarity algo here"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_tform.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "4aed217bf7"
+     },
+     "properties": {
+      "age_years": 13.97,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.9 years: TODO: This is a little messy"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/object/tag/read.c"
+        },
+        "region": {
+         "startLine": 99
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "99b1660c91"
+     },
+     "properties": {
+      "age_years": 13.95,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.9 years: TODO: Expressions in refspecs doesn't actually work yet"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/online/push.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "d3c2ce2b3e"
+     },
+     "properties": {
+      "age_years": 13.88,
+      "stuck_probability": 0.977,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.9 years: TODO: Find a more precise way of checking errors than a exit code of -1."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/online/push.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "80119df0f1"
+     },
+     "properties": {
+      "age_years": 13.88,
+      "stuck_probability": 0.978,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.8 years: TODO: provide encoding / binary detection callbacks that can"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_driver.c"
+        },
+        "region": {
+         "startLine": 421
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "924745abab"
+     },
+     "properties": {
+      "age_years": 13.75,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 4,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.6 years: TODO: maybe abort if deltas.length > target_limit ???"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_tform.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "aa7118efa7"
+     },
+     "properties": {
+      "age_years": 13.64,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.5 years: TODO: support \"<commit>...<commit>\""
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/revwalk.c"
+        },
+        "region": {
+         "startLine": 255
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "5727723efe"
+     },
+     "properties": {
+      "age_years": 13.52,
+      "stuck_probability": 0.97,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.5 years: TODO: inodes are not really relevant on Win32, so we need to find"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/odb.c"
+        },
+        "region": {
+         "startLine": 459
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "711e70f9b0"
+     },
+     "properties": {
+      "age_years": 13.48,
+      "stuck_probability": 0.969,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 5,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.5 years: TODO: report!"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/merge.c"
+        },
+        "region": {
+         "startLine": 1586
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "f3a47fd71f"
+     },
+     "properties": {
+      "age_years": 13.46,
+      "stuck_probability": 0.928,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 4,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.5 years: TODO: enable this when resolving case insensitive conflicts"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/index.c"
+        },
+        "region": {
+         "startLine": 254
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "899db0e397"
+     },
+     "properties": {
+      "age_years": 13.45,
+      "stuck_probability": 0.966,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 7,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.3 years: TODO: warn that diff.<driver>.binary has invalid value"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_driver.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "96472dabd9"
+     },
+     "properties": {
+      "age_years": 13.34,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 4,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.3 years: TODO: warn if diff.<name>.command or diff.<name>.textconv are set"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_driver.c"
+        },
+        "region": {
+         "startLine": 273
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1daafdbe4d"
+     },
+     "properties": {
+      "age_years": 13.34,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 4,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.3 years: TODO: look up diff.<driver>.algorithm to turn on minimal / patience"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_driver.c"
+        },
+        "region": {
+         "startLine": 318
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "b874636a15"
+     },
+     "properties": {
+      "age_years": 13.34,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 4,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.3 years: TODO: check ofile.opts_flags to see if driver-specific per-file"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_xdiff.c"
+        },
+        "region": {
+         "startLine": 218
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "ea99f36b55"
+     },
+     "properties": {
+      "age_years": 13.34,
+      "stuck_probability": 0.981,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.1 years: TODO: optionally find moves in parents' files"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/blame_git.c"
+        },
+        "region": {
+         "startLine": 601
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "c8e8740843"
+     },
+     "properties": {
+      "age_years": 13.07,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.1 years: TODO: optionally find copies in parents' files"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/blame_git.c"
+        },
+        "region": {
+         "startLine": 603
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "adccd704a0"
+     },
+     "properties": {
+      "age_years": 13.07,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 13.1 years: TODO"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "tests/libgit2/blame/harder.c"
+        },
+        "region": {
+         "startLine": 36
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "5ff00f28e0"
+     },
+     "properties": {
+      "age_years": 13.07,
+      "stuck_probability": 0.978,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.8 years: TODO: if cumulative diff size is < 0.5 total size, flatten patch"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/patch_generate.c"
+        },
+        "region": {
+         "startLine": 754
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "85c31df148"
+     },
+     "properties": {
+      "age_years": 12.84,
+      "stuck_probability": 0.98,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.8 years: TODO: and unload the file content"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/patch_generate.c"
+        },
+        "region": {
+         "startLine": 755
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "bd418c7acd"
+     },
+     "properties": {
+      "age_years": 12.84,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: if we got an error, mark submodule config as invalid?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/submodule.c"
+        },
+        "region": {
+         "startLine": 700
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "fadfdd1d07"
+     },
+     "properties": {
+      "age_years": 12.54,
+      "stuck_probability": 0.973,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: warning if not a valid git repository"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_generate.c"
+        },
+        "region": {
+         "startLine": 1085
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "67ea46002a"
+     },
+     "properties": {
+      "age_years": 12.53,
+      "stuck_probability": 0.972,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: issue a warning once warnings API is available"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/attr_file.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "99587d67d9"
+     },
+     "properties": {
+      "age_years": 12.49,
+      "stuck_probability": 0.975,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: warning if macro found in file below repo root"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/attr_file.c"
+        },
+        "region": {
+         "startLine": 390
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "35e6d50533"
+     },
+     "properties": {
+      "age_years": 12.49,
+      "stuck_probability": 0.975,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: Cope with warnings"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/describe.c"
+        },
+        "region": {
+         "startLine": 343
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1390b72ecb"
+     },
+     "properties": {
+      "age_years": 12.46,
+      "stuck_probability": 0.973,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: unsigned long seen_commits = 0; /* TODO: Check long"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/describe.c"
+        },
+        "region": {
+         "startLine": 441
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "6eabb18a57"
+     },
+     "properties": {
+      "age_years": 12.46,
+      "stuck_probability": 0.975,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.5 years: TODO: contains to be implemented"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/describe.c"
+        },
+        "region": {
+         "startLine": 683
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "b6f43eee63"
+     },
+     "properties": {
+      "age_years": 12.46,
+      "stuck_probability": 0.974,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 12.4 years: TODO: issue warning when warning API is available */;"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/crlf.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "ff86177409"
+     },
+     "properties": {
+      "age_years": 12.44,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 2,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 11.6 years: TODO Find a replacement for _chsize() that handles big files."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/util/win32/posix_w32.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "caae6285df"
+     },
+     "properties": {
+      "age_years": 11.62,
+      "stuck_probability": 0.979,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 11.6 years: TODO: git marks the parents of the edges"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/pack-objects.c"
+        },
+        "region": {
+         "startLine": 1798
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "c34fffe4ee"
+     },
+     "properties": {
+      "age_years": 11.6,
+      "stuck_probability": 0.927,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 5,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 11.2 years: TODO: issue a warning"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/diff_driver.c"
+        },
+        "region": {
+         "startLine": 109
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "5e8256a469"
+     },
+     "properties": {
+      "age_years": 11.16,
+      "stuck_probability": 0.95,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 4,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 11.1 years: TODO: don't stat if assume unchanged for this path"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/iterator.c"
+        },
+        "region": {
+         "startLine": 1
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "e97c24bb60"
+     },
+     "properties": {
+      "age_years": 11.13,
+      "stuck_probability": 0.945,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 0,
+      "line_resolved": false
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 11.1 years: TODO: if case insensitive filesystem, then the following strcmp"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/submodule.c"
+        },
+        "region": {
+         "startLine": 2085
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "c12f86b0f6"
+     },
+     "properties": {
+      "age_years": 11.09,
+      "stuck_probability": 0.94,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "FIXME open for 8.4 years: FIXME: this is duplicated with the work in"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/index.c"
+        },
+        "region": {
+         "startLine": 1022
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "da633c84dd"
+     },
+     "properties": {
+      "age_years": 8.4,
+      "stuck_probability": 0.898,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 7,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     },
+     "suppressions": [
+      {
+       "kind": "external",
+       "status": "underReview",
+       "justification": "owner is looking at it"
+      }
+     ]
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 8.3 years: continue; /* TODO: warn"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/mailmap.c"
+        },
+        "region": {
+         "startLine": 254
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "840831ab82"
+     },
+     "properties": {
+      "age_years": 8.33,
+      "stuck_probability": 0.971,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "XXX open for 8.3 years: XXX: Warn?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/mailmap.c"
+        },
+        "region": {
+         "startLine": 383
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "16637fae58"
+     },
+     "properties": {
+      "age_years": 8.33,
+      "stuck_probability": 0.97,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 8.3 years: TODO: error? continue?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/indexer.c"
+        },
+        "region": {
+         "startLine": 1147
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "afea73fca3"
+     },
+     "properties": {
+      "age_years": 8.31,
+      "stuck_probability": 0.902,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 6,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 8.2 years: TODO: Once warnings lang, we should likely warn"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/config_file.c"
+        },
+        "region": {
+         "startLine": 795
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "c33497030d"
+     },
+     "properties": {
+      "age_years": 8.19,
+      "stuck_probability": 0.926,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 8.0 years: TODO: Once warnings land, we should likely warn"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/config_mem.c"
+        },
+        "region": {
+         "startLine": 64
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "da495d8130"
+     },
+     "properties": {
+      "age_years": 8.04,
+      "stuck_probability": 0.925,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 7.9 years: TODO: issue a warning when available"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/crlf.c"
+        },
+        "region": {
+         "startLine": 170
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "4a4f3e67f3"
+     },
+     "properties": {
+      "age_years": 7.86,
+      "stuck_probability": 0.942,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 7.9 years: TODO: issue a warning when available"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/crlf.c"
+        },
+        "region": {
+         "startLine": 190
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "d9b519231d"
+     },
+     "properties": {
+      "age_years": 7.86,
+      "stuck_probability": 0.942,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 6.0 years: TODO: properly open the file without access time using O_NOATIME"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/midx.c"
+        },
+        "region": {
+         "startLine": 300
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "29147d941c"
+     },
+     "properties": {
+      "age_years": 6.02,
+      "stuck_probability": 0.952,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 4,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 5.9 years: TODO: properly open the file without access time using O_NOATIME"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/midx.c"
+        },
+        "region": {
+         "startLine": 353
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "9eabd30c72"
+     },
+     "properties": {
+      "age_years": 5.88,
+      "stuck_probability": 0.951,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 4,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 5.8 years: TODO: properly open the file without access time using O_NOATIME"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/commit_graph.c"
+        },
+        "region": {
+         "startLine": 454
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "5ad203e50c"
+     },
+     "properties": {
+      "age_years": 5.76,
+      "stuck_probability": 0.946,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 6,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     },
+     "suppressions": [
+      {
+       "kind": "external",
+       "status": "accepted",
+       "justification": "kept on purpose: needs an O_NOATIME-capable open on all platforms"
+      }
+     ]
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 5.8 years: TODO: properly open the file without access time using O_NOATIME"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/commit_graph.c"
+        },
+        "region": {
+         "startLine": 599
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "265deabab6"
+     },
+     "properties": {
+      "age_years": 5.76,
+      "stuck_probability": 0.946,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 6,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 5.0 years: TODO: emit a warning (log for 'branch' only goes back to ...)"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/revparse.c"
+        },
+        "region": {
+         "startLine": 252
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1bfb28c6ad"
+     },
+     "properties": {
+      "age_years": 4.98,
+      "stuck_probability": 0.949,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 2,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 4.9 years: TODO: issue warning when warning API is available."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/repository.c"
+        },
+        "region": {
+         "startLine": 2665
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "04b75175cf"
+     },
+     "properties": {
+      "age_years": 4.92,
+      "stuck_probability": 0.925,
+      "fossil": true,
+      "owner_active": false,
+      "file_commits_365d": 15,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 4.6 years: TODO: Windows"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/cli/opt.c"
+        },
+        "region": {
+         "startLine": 327
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "2fd54d2760"
+     },
+     "properties": {
+      "age_years": 4.63,
+      "stuck_probability": 0.876,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 4.6 years: TODO: query actual console width."
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/cli/opt_usage.c"
+        },
+        "region": {
+         "startLine": 107
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "93a95a08ea"
+     },
+     "properties": {
+      "age_years": 4.63,
+      "stuck_probability": 0.905,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 4.6 years: TODO: we're reading blobs, we shouldn't pull them all into main"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/cli/cmd_hash_object.c"
+        },
+        "region": {
+         "startLine": 114
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "38dd1773ca"
+     },
+     "properties": {
+      "age_years": 4.63,
+      "stuck_probability": 0.895,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 3,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 3.6 years: TODO: do we really want to do revokcation checking ?"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/streams/schannel.c"
+        },
+        "region": {
+         "startLine": 320
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "623edb36ae"
+     },
+     "properties": {
+      "age_years": 3.57,
+      "stuck_probability": 0.913,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 0,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 2.3 years: if (blobsize > GIT_ATTR_MAX_FILE_SIZE) /* TODO: issue warning when warning API is available"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/attr_file.c"
+        },
+        "region": {
+         "startLine": 146
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "b3aad15cb9"
+     },
+     "properties": {
+      "age_years": 2.32,
+      "stuck_probability": 0.882,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 2.3 years: if (blobsize > GIT_ATTR_MAX_FILE_SIZE) /* TODO: issue warning when warning API is available"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/attr_file.c"
+        },
+        "region": {
+         "startLine": 204
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "64c7699223"
+     },
+     "properties": {
+      "age_years": 2.32,
+      "stuck_probability": 0.882,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 3,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 2.0 years: TODO: to implement automatically shrinking; resize() already support shrinking */ \\"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/util/hashmap.h"
+        },
+        "region": {
+         "startLine": 266
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "335ad357bb"
+     },
+     "properties": {
+      "age_years": 2.03,
+      "stuck_probability": 0.861,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 2.0 years: TODO: previous"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/cli/cmd_blame.c"
+        },
+        "region": {
+         "startLine": 221
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "e087475996"
+     },
+     "properties": {
+      "age_years": 1.99,
+      "stuck_probability": 0.848,
+      "fossil": true,
+      "owner_active": true,
+      "file_commits_365d": 1,
+      "usual_repayment_size_band": "S",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.5 years: TODO: this backend does not yet have support for namespaces. So if"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/refdb_reftable.c"
+        },
+        "region": {
+         "startLine": 1829
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "7526b624d9"
+     },
+     "properties": {
+      "age_years": 0.5,
+      "stuck_probability": 0.749,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 6,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.5 years: TODO: transaction API"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/refdb_reftable.c"
+        },
+        "region": {
+         "startLine": 1862
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "388f15f7b4"
+     },
+     "properties": {
+      "age_years": 0.5,
+      "stuck_probability": 0.724,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 6,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.4 years: TODO This entire block of code here appears to be unreachable!? I simply"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "deps/pcre2/pcre2_compile_class.c"
+        },
+        "region": {
+         "startLine": 1203
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "8e5a643917"
+     },
+     "properties": {
+      "age_years": 0.37,
+      "stuck_probability": 0.785,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "L",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.4 years: TODO This is far from correct... it doesn't support the SpecialCasing.txt"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "deps/pcre2/pcre2_substitute.c"
+        },
+        "region": {
+         "startLine": 370
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "55bdd5fc8a"
+     },
+     "properties": {
+      "age_years": 0.37,
+      "stuck_probability": 0.785,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 2,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 0,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.4 years: TODO: stop comparison on first delta"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/commit.c"
+        },
+        "region": {
+         "startLine": 1232
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "1a38736ad9"
+     },
+     "properties": {
+      "age_years": 0.37,
+      "stuck_probability": 0.712,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 8,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    },
+    {
+     "ruleId": "debt/open-marker",
+     "level": "note",
+     "message": {
+      "text": "TODO open for 0.4 years: TODO: stop casting away constness"
+     },
+     "locations": [
+      {
+       "physicalLocation": {
+        "artifactLocation": {
+         "uri": "src/libgit2/commit.c"
+        },
+        "region": {
+         "startLine": 1233
+        }
+       }
+      }
+     ],
+     "partialFingerprints": {
+      "debtMarkerId/v1": "59380cae4c"
+     },
+     "properties": {
+      "age_years": 0.37,
+      "stuck_probability": 0.71,
+      "fossil": false,
+      "owner_active": true,
+      "file_commits_365d": 8,
+      "usual_repayment_size_band": "M",
+      "other_open_markers_in_file": 1,
+      "line_resolved": true
+     }
+    }
+   ]
+  }
+ ]
+}
