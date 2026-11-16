@@ -1,0 +1,43 @@
+repo          library          snaps coupling   size      H1      H2      H3 coupled files (mean)
+prometheus    consul              36    0.542  0.097  +0.444  +0.468  -0.204                  1.1
+prometheus    k8s                 45    0.786  0.338  +0.448  +0.470  -0.025                 13.2
+prometheus    aws                 35    0.735  0.207  +0.528  +0.594  +0.011                  2.6
+prometheus    azure               32    0.764  0.186  +0.577  +0.608  +0.000                  2.4
+prometheus    grpc                14   not evaluable (< 20 snapshots with library work)
+prometheus    kingpin              2   not evaluable (< 20 snapshots with library work)
+prometheus    openstack           20    0.778  0.803  -0.025  +0.033  -0.110                  2.9
+prometheus    fsnotify             5   not evaluable (< 20 snapshots with library work)
+prometheus    docker              14   not evaluable (< 20 snapshots with library work)
+prometheus    opentelemetry       18   not evaluable (< 20 snapshots with library work)
+sphinx        jinja2              13   not evaluable (< 20 snapshots with library work)
+sphinx        pygments            43    0.550  0.368  +0.182  +0.222  +0.205                  4.7
+sphinx        babel               30    0.394  0.556  -0.163  +0.200  +0.092                  3.6
+sphinx        docutils            66    0.444  0.344  +0.099  +0.175  +0.131                 98.4
+sphinx        requests            27    0.623  0.515  +0.108  +0.183  +0.108                  2.2
+sphinx        snowballstemmer      6   not evaluable (< 20 snapshots with library work)
+sphinx        alabaster           17   not evaluable (< 20 snapshots with library work)
+sphinx        imagesize            2   not evaluable (< 20 snapshots with library work)
+sphinx        sphinxcontrib        8   not evaluable (< 20 snapshots with library work)
+sphinx        pytest              20    0.772  0.488  +0.284  +0.339  +0.284                 82.8
+commons-lang  junit               33    0.493  0.324  +0.170  +0.165  +0.170                129.6
+commons-lang  commons-text        11   not evaluable (< 20 snapshots with library work)
+commons-lang  jmh                  2   not evaluable (< 20 snapshots with library work)
+ripgrep       crossbeam            3   not evaluable (< 20 snapshots with library work)
+ripgrep       encoding_rs          4   not evaluable (< 20 snapshots with library work)
+ripgrep       regex               17   not evaluable (< 20 snapshots with library work)
+ripgrep       bstr                 4   not evaluable (< 20 snapshots with library work)
+ripgrep       pcre2                9   not evaluable (< 20 snapshots with library work)
+ripgrep       serde                1   not evaluable (< 20 snapshots with library work)
+ripgrep       anyhow               2   not evaluable (< 20 snapshots with library work)
+[ALL         ] LANG-H1 vs size                        units 11 mean +0.241 lower bound (alpha 0.0033) +0.188  90% CI [+0.209, +0.274]  SUPPORTED
+[ALL         ] LANG-H2 vs other libraries (placebo)   units 11 mean +0.314 lower bound (alpha 0.0033) +0.271  90% CI [+0.289, +0.341]  SUPPORTED
+[ALL         ] LANG-H3 vs file-name lookup            units 11 mean +0.060 lower bound (alpha 0.0033) +0.023  90% CI [+0.037, +0.084]  SUPPORTED
+[prometheus  ] LANG-H1 vs size                        units  5 mean +0.395 lower bound (alpha 0.0033) +0.331  90% CI [+0.354, +0.433]  SUPPORTED
+[prometheus  ] LANG-H2 vs other libraries (placebo)   units  5 mean +0.435 lower bound (alpha 0.0033) +0.375  90% CI [+0.399, +0.470]  SUPPORTED
+[prometheus  ] LANG-H3 vs file-name lookup            units  5 mean -0.066 lower bound (alpha 0.0033) -0.100  90% CI [-0.086, -0.045]  not supported
+[sphinx      ] LANG-H1 vs size                        units  5 mean +0.102 lower bound (alpha 0.0033) +0.013  90% CI [+0.045, +0.159]  SUPPORTED
+[sphinx      ] LANG-H2 vs other libraries (placebo)   units  5 mean +0.224 lower bound (alpha 0.0033) +0.152  90% CI [+0.181, +0.268]  SUPPORTED
+[sphinx      ] LANG-H3 vs file-name lookup            units  5 mean +0.164 lower bound (alpha 0.0033) +0.096  90% CI [+0.122, +0.208]  SUPPORTED
+[commons-lang] LANG-H1 vs size                        units  1 mean +0.170 lower bound (alpha 0.0033) +0.065  90% CI [+0.102, +0.244]  SUPPORTED
+[commons-lang] LANG-H2 vs other libraries (placebo)   units  1 mean +0.165 lower bound (alpha 0.0033) +0.065  90% CI [+0.098, +0.235]  SUPPORTED
+[commons-lang] LANG-H3 vs file-name lookup            units  1 mean +0.170 lower bound (alpha 0.0033) +0.062  90% CI [+0.102, +0.243]  SUPPORTED

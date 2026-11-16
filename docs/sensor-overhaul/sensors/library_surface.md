@@ -28,6 +28,14 @@ Engine call-graph coupling alone (LIB-E, before `fcall_external`): +0.335 over s
 
 **Do we need the hand-written lists? (tested, `lib_surface_includes_only_output.txt`, `lib_surface_learned_output.txt`)** Header includes alone (no function-name list; libraries discoverable from the scan) still beat size, **+0.253** (lower bound +0.209), but lose to the full sensor by **-0.136** (lower bound -0.164, fails the -0.05 margin). Where they lose: libraries reached through a wrapper header, so files call the API without including it (curl zlib 0.347 against 0.815, wolfssl, libarchive OpenSSL 0.475 against 0.850, harfbuzz CoreText, FreeType, glib). A naive learner that infers a library's names from files that include its header (names called from at least 2 including files, at least 80% of whose callers include it) gives the same result as includes-only: it cannot find names whose callers do not include the header, which is exactly the missing signal. Untested alternatives: learning name families by shared prefix, a user-supplied two-pattern profile for the libraries they care about, a shipped table.
 
+**Outside C (registered before any run: `library_surface_languages_registration.md`; output `lib_surface_languages_output.txt`).** Import coupling only (no function-name list: calls in these languages are bare names), 36 registered libraries in Go (prometheus), Python (sphinx), Java (commons-lang) and Rust (ripgrep); **11 were evaluable** (at least 20 snapshots with library-named work).
+| | units | mean | lower bound (alpha 0.0033) | verdict |
+|---|---:|---:|---:|---|
+| LANG-H1 coupling minus size | 11 | +0.241 | +0.188 | SUPPORTED |
+| LANG-H2 minus other libraries' coupling | 11 | +0.314 | +0.271 | SUPPORTED |
+| LANG-H3 minus file-name lookup | 11 | +0.060 | +0.023 | SUPPORTED |
+Per language, H1: Go 5 units +0.395 (lower +0.331); Python 5 units +0.102 (lower +0.013, marginal); Java 1 unit (junit) +0.170. **Rust: no evaluable unit** (ripgrep has too few library-named commits: regex 17, pcre2 9, the rest fewer), so Rust is untested. **Go H3 fails: -0.066** (a file-name lookup beats import coupling in prometheus, where package directories are named after the library, e.g. `discovery/consul/`). Weak units: sphinx babel -0.163 against size, prometheus openstack -0.025 against size. Limits: one repository per language, 25 of 36 registered libraries not evaluable, Java rests on one library; read the Go and Python results as supported, Java as a single case, Rust as open.
+
 ## 6. What it does not claim
 No risk or defect claim. It says where work on a library tends to land, not that those files are fragile. It does not follow the repository's own wrappers around a library, and the outcome label (a commit subject naming the library) misses work that never names it.
 
