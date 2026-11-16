@@ -1,0 +1,9 @@
+curl items tracked 325 rows 1451 open at HEAD 6
+openssl items tracked 1461 rows 6095 open at HEAD 135
+ndpi items tracked 251 rows 724 open at HEAD 156
+harfbuzz items tracked 1293 rows 2973 open at HEAD 156
+libarchive items tracked 433 rows 6077 open at HEAD 229
+libgit2 items tracked 360 rows 1930 open at HEAD 85
+libxml2 items tracked 1065 rows 21656 open at HEAD 505
+postgres items tracked 3141 rows 30959 open at HEAD 891
+redis items tracked 240 rows 298 open at HEAD 83

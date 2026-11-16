@@ -1,6 +1,6 @@
 # Sensor design: the debt ledger (from research to sensor)
 
-**Status: design plus a working prototype; exploratory.** Replaces the sigmoid `risk_tech_debt` gauge. Prototype: `tools/sensor/debt_ledger.py` (output in `tech_debt_prototype_output.txt`); engine count check: `tools/sensor/debt_validity.py`.
+**Status: design, prototype, and a validated v2 trial (section 9); exploratory.** Replaces the sigmoid `risk_tech_debt` gauge. Prototype: `tools/sensor/debt_ledger.py` (output in `tech_debt_prototype_output.txt`); engine count check: `tools/sensor/debt_validity.py`.
 
 ## 1. The question the sensor answers
 *What self-admitted work is open in this file or function, how old is it compared with how this project normally behaves, who wrote it and are they still around, and is it sitting where someone is working right now?*
@@ -65,3 +65,34 @@ Caveats: ages come from the marker line's last modification (rewordings reset it
 * Do maintainers want fossils surfaced, or do they treat old notes as documentation? (The `XXX` standing-warning reading suggests some are.)
 * Is "file edited now" the right trigger, or should big refactors and sweeps open a "while you are here" list?
 * Which marker words beyond TODO, FIXME, XXX, HACK are worth tracking across languages?
+
+## 9. Trial v2: checking the sensor's flags against what actually gets repaid
+`tools/sensor/debt_trial.py` tracks every TODO / FIXME / XXX / HACK comment through the whole non-merge history of the nine C projects of the lifecycle study (moves and rewordings continue an item; renames followed), so each marker has its **original age**, birth file and author. At every half-year date it takes the debt open then (72,163 item-observations) and records what the sensor would have shown: age, the repo yardstick **computed only from debt already repaid by that date** (no leakage), marker class, bare or explained, text length, the file's commits in the last year, and whether the author still has commits in the last two years. The outcome is the one a debt sensor can honestly claim: **was the marker repaid within two years** (items whose file was deleted are excluded). `tools/sensor/debt_trial_report.py`; output `debt_trial_output.txt`.
+
+**A. The fossil flag means something.** Repaid within two years: fossils 6.9%, other open debt 22.0% (all repos). In 8 of 9 projects fossils are repaid less (curl 30.8% vs 48.1%, openssl 10.7% vs 54.3%, libgit2 6.2% vs 23.9%, libxml2 2.5% vs 10.9%); ndpi is the exception (15.2% vs 11.4%).
+**B. The repo-relative yardstick is not a better predictor than plain age.** AUC for "will not be repaid in two years": raw age 0.636, age percentile within the repo 0.614, fossil flag 0.592, a fixed five-year threshold 0.592. The repo-relative form wins in 3 projects (curl, libxml2, openssl) and loses in 5. Keep it as the **explanation** (what is normal for this project) and for honest cross-repo reading, not as a better ranker.
+**C. What predicts stuck debt: file activity and owner, not marker class.** Forward-in-time AUC for "repaid within two years" (fit on the earlier half of dates, scored on the later half, mean of nine repos): age alone 0.512; plus the repo yardstick 0.541; plus marker class and bare 0.544; **plus file activity and owner 0.613**; plus text length 0.609. Odds ratios per standard deviation: file commits in the last year **1.36**, author still active **1.42**, age **0.56**; marker class (`XXX` 0.97, FIXME/HACK 1.02), bare (0.96) and text length (0.93) do essentially nothing.
+**D. The "cheap moment" is real.** Among fossils, repaid within two years: file with no commits that year **2.6%**, 1-9 commits 5.3%, **10 or more commits 12.6%**; author still active **10.0%** vs inactive **3.4%**. By class, all about the same (TODO 11.5%, FIXME/HACK 12.3%, XXX 11.7%; bare 10.4% vs explained 11.7%): the marker word does not say what will happen to it.
+**E. Original age matters.** The blame-based prototype dated curl's `lib/urldata.h` XXX note to 0.2 years (a later edit of the line); tracking gives 22.1 years. Counts at HEAD match the lifecycle study (curl 6, libgit2 85, libxml2 505, redis 83).
+
+### The ranked worklist and how it compares with repowise's
+**Yes, the sensor now outputs a ranked, located, explained list, built the same way in spirit as repowise's "fix first".** Each row: file and line, marker, original age, a **stuck probability** (the model above: older, quieter file, owner gone), the file's commits last year, and the fossil flag. The ranking key is stuck probability times file activity (stuck items sitting where somebody is already working), which combines the two validated tendencies (C, D); it is a heuristic, and it has not been tested that surfacing the list changes what gets repaid.
+| | repowise "fix first" | debt ledger v2 |
+|---|---|---|
+| Items ranked | findings from 59 detectors across families | debt markers only (one family) |
+| Rank basis | severity x marker weight, ranked by impact and effort ("refactoring targets") | stuck probability x file activity |
+| Validated against | bug fixes (AUC 0.737, a tie with lines of code) | **repayment**, the outcome a debt sensor claims (AUC 0.613; fossils repaid 6.9% vs 22.0%) |
+| Located | file and function | file and line (resolved for 33-88% of markers from tracked text; the engine should persist positions) |
+| Reason shown | detector and thresholds | age, fossil flag, activity, owner |
+| Effort estimate | yes | **no** (no validated proxy yet) |
+| Triage status and stable IDs | acknowledged, false positive, resolved; IDs survive edits | **no** (needs persisted marker IDs) |
+What to add to match it: an effort proxy, persisted marker IDs with triage status, and the same list shape for the other sensors (complexity, mutation, concurrency, unreferenced functions).
+
+### Design changes from the trial
+1. **Use original age** (tracked through moves, rewordings and renames), not blame; needs the lineage across snapshots or a history walk, not a per-line blame.
+2. **Rank by stuck probability and file activity;** drop marker class and bare from the ranking (they stay as filters and descriptors).
+3. **Keep the repo yardstick as an explanation**, show raw age next to it, and never claim it predicts better.
+4. **Owner status is a first-class field** (author still active in the last two years); it is the second strongest key.
+5. **Persist marker positions and IDs in the engine** so lines resolve for every marker.
+6. **No outcome claims beyond repayment**; debt density still does not predict fixes.
+Caveats: C family and nine projects; marker detection uses the lifecycle study's comment heuristics; two-year horizon; one outcome; AUC 0.613 is modest, so the list is a prioritisation aid, not a forecast.

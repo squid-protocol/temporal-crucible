@@ -1,0 +1,70 @@
+item-observations 72,163 (open debt items at half-year dates) from 9 C projects; repaid within 2 years: 11.7%
+
+A. DOES THE SENSOR'S 'FOSSIL' FLAG MEAN ANYTHING?  share repaid within 2 years (yardstick = repaid-debt ages known at that date only; no leakage)
+  repo          obs fossil share  repaid: fossils  repaid: not fossils
+  curl         1451          33%            30.8%                48.1%
+  harfbuzz     2973          53%            25.3%                41.8%
+  libarchive   6077          88%             2.4%                 4.6%
+  libgit2      1930          86%             6.2%                23.9%
+  libxml2     21656          87%             2.5%                10.9%
+  ndpi          724          20%            15.2%                11.4%
+  openssl      6095          59%            10.7%                54.3%
+  postgres    30959          57%             9.7%                15.5%
+  redis         298          71%            24.2%                33.3%
+  ALL         72163          69%             6.9%                22.0%
+
+B. REPO-RELATIVE vs GLOBAL AGE: AUC for telling which items will NOT be repaid within 2 years (higher = better), per repo then mean
+  raw age (years)                      mean 0.636   per repo: 0.56 0.66 0.67 0.73 0.52 0.55 0.76 0.67 0.60
+  age percentile within the repo       mean 0.614   per repo: 0.61 0.64 0.59 0.67 0.60 0.53 0.81 0.57 0.52
+  fossil flag                          mean 0.592   per repo: 0.58 0.59 0.54 0.63 0.64 0.47 0.76 0.57 0.55
+  age > 5 years (global threshold)     mean 0.592   per repo: 0.57 0.56 0.61 0.64 0.60 0.46 0.71 0.64 0.53
+
+C. WHAT ELSE PREDICTS STUCK DEBT?  logistic model for 'repaid within 2 years' (standardized; fit on the earlier half of dates in each repo, scored on the later half)
+  age only                             AUC mean 0.512 over 9 repos
+  + repo yardstick (age percentile)    AUC mean 0.541 over 9 repos
+  + marker class and bare              AUC mean 0.544 over 9 repos
+  + file activity and owner            AUC mean 0.613 over 9 repos
+  + text length                        AUC mean 0.609 over 9 repos
+  odds ratios per 1 sd (all data): lage 0.56, age_pct 1.06, xxx 0.97, fixme 1.02, bare 0.96, lc365 1.36, owner_active 1.42, ltlen 0.93
+
+D. IS THE 'CHEAP MOMENT' REAL?  repaid within 2 years among FOSSILS, by file activity and by owner
+  file quiet (0 commits in last year)      n  6571  repaid   2.6%
+  file moderately active (1-9 commits)     n 29613  repaid   5.3%
+  file hot (10+ commits)                   n 13401  repaid  12.6%
+  owner still active                       n 26659  repaid  10.0%
+  owner inactive                           n 22926  repaid   3.4%
+  all items, same split:  class TODO 11.5%  FIXME/HACK 12.3%  XXX 11.7%  bare 10.4%  explained 11.7%
+
+E. RANKED WORKLIST AT HEAD (original ages; stuck probability from the model above; ranked by stuck probability x file activity; fossils flagged)
+
+  === curl: 6 open markers; fossils (older than the repo's own 90th-percentile repayment age, 7.1 y): 100%; median original age 18.6 y; line resolved for 33% of markers
+    lib/urldata.h:?  XXX   age  22.1 y  stuck  90%  file commits last year 138  FOSSIL | curl_ftpauth ftpsslauth; /* what AUTH XXX to be attempted
+    lib/request.h:?  XXX   age  24.8 y  stuck  95%  file commits last year  16  FOSSIL | int httpcode; /* error code from the 'HTTP/1.? XXX' line
+    include/curl/typecheck-gcc.h:652  XXX   age  18.6 y  stuck  97%  file commits last year   8  FOSSIL | XXX: for now, int is also accepted (and therefore short and ch
+    include/curl/typecheck-gcc.h:617  XXX   age  18.6 y  stuck  97%  file commits last year   8  FOSSIL | XXX: must not evaluate expr, so this check is not accurate
+    include/curl/typecheck-gcc.h:?  XXX   age  18.6 y  stuck  97%  file commits last year   8  FOSSIL | XXX: should evaluate to true iff expr is a pointer
+    include/curl/typecheck-gcc.h:?  XXX   age  18.6 y  stuck  97%  file commits last year   8  FOSSIL | XXX: also check size of an char[] array?
+
+  === libgit2: 85 open markers; fossils (older than the repo's own 90th-percentile repayment age, 1.8 y): 93%; median original age 12.8 y; line resolved for 79% of markers
+    src/libgit2/repository.c:?  TODO  age  15.8 y  stuck  97%  file commits last year  15  FOSSIL | TODO : Ensure the parent tree structure already exists by recu
+    src/libgit2/repository.c:2665  TODO  age   4.9 y  stuck  92%  file commits last year  15  FOSSIL | TODO: issue warning when warning API is available.
+    src/libgit2/index.c:254  TODO  age  13.5 y  stuck  97%  file commits last year   7  FOSSIL | TODO: enable this when resolving case insensitive conflicts
+    src/libgit2/commit_graph.c:454  TODO  age   5.8 y  stuck  95%  file commits last year   6  FOSSIL | TODO: properly open the file without access time using O_NOATI
+    src/libgit2/commit_graph.c:599  TODO  age   5.8 y  stuck  95%  file commits last year   6  FOSSIL | TODO: properly open the file without access time using O_NOATI
+    src/libgit2/index.c:1022  FIXME age   8.4 y  stuck  90%  file commits last year   7  FOSSIL | FIXME: this is duplicated with the work in
+
+  === libxml2: 505 open markers; fossils (older than the repo's own 90th-percentile repayment age, 18.1 y): 82%; median original age 21.5 y; line resolved for 67% of markers
+    catalog.c:1408  TODO  age  25.2 y  stuck  97%  file commits last year  12  FOSSIL | TODO: sort the list according to REWRITE lengths and prefer va
+    xmlregexp.c:5092  TODO  age  24.5 y  stuck  98%  file commits last year   8  FOSSIL | TODO check that the values are acceptable character ranges for
+    parser.c:10145  TODO  age  25.7 y  stuck  98%  file commits last year   5  FOSSIL | TODO The standalone document declaration must have the value "
+    parser.c:6289  TODO  age  25.7 y  stuck  98%  file commits last year   5  FOSSIL | TODO Parameter-entity replacement text must be properly nested
+    parser.c:11100  TODO  age  25.7 y  stuck  98%  file commits last year   5  FOSSIL | TODO Avoid the extra copy, handle directly !!!
+    tree.c:?  TODO  age  23.6 y  stuck  98%  file commits last year   5  FOSSIL | TODO: the ocurence test seems bogus for namespaced names
+
+  === redis: 83 open markers; fossils (older than the repo's own 90th-percentile repayment age, 1.2 y): 35%; median original age 0.5 y; line resolved for 88% of markers
+    src/db.c:357  TODO  age   4.9 y  stuck  90%  file commits last year  57  FOSSIL | TODO: Use separate misses stats and notify event for WRITE
+    src/db.c:293  TODO  age   4.9 y  stuck  90%  file commits last year  57  FOSSIL | replicas, use separate keyspace stats and events (TODO)).
+    src/db.c:351  TODO  age   4.9 y  stuck  89%  file commits last year  57  FOSSIL | TODO: Use separate hits stats for WRITE
+    src/rdb.c:5460  TODO  age   3.7 y  stuck  89%  file commits last year  50  FOSSIL | TODO: maybe we could combine the fopen and open into one in th
+    src/config.c:1009  TODO  age   4.9 y  stuck  91%  file commits last year  36  FOSSIL | standardConfig **set_configs; /* TODO: make this a dict for be
+    src/t_stream.c:?  TODO  age   8.6 y  stuck  87%  file commits last year  39  FOSSIL | TODO: perform a garbage collection here if the ration between
