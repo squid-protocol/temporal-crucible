@@ -1,0 +1,5 @@
+SURFACE CHANGE openssl: files 27 -> 15, call+include sites 467 -> 422, distinct API names 194 -> 210
+  names_added (31): BIO_clear_retry_flags, BIO_get_data, BIO_get_shutdown, BIO_meth_new, BIO_meth_set_create, BIO_meth_set_ctrl, BIO_meth_set_destroy, BIO_meth_set_read, BIO_meth_set_write, BIO_set_data, BIO_set_init, BIO_set_retry_read
+  names_dropped (15): BIO_f_ssl, BIO_set_ssl, ERR_print_errors_fp, EVP_md5, SSL_CONN_CONFIG, SSL_CTX_load_verify_dir, SSL_CTX_load_verify_file, SSL_CTX_set_next_proto_select_cb, SSL_CTX_set_quic_method, SSL_IS_PROXY, SSL_SET_OPTION, SSL_get_app_data
+  files newly coupled (2): lib/vquic/quiche.h, lib/vtls/openssl.h
+  files no longer coupled (14): lib/amigaos.c, lib/amigaos.h, lib/curl_sasl.c, lib/vtls/bearssl.c, lib/vtls/gskit.c, lib/vtls/gtls.c, lib/vtls/mbedtls.c, lib/vtls/mesalink.c, lib/vtls/schannel.c, lib/vtls/schannel_verify.c, lib/vtls/sectransp.c, lib/vtls/vtls.c

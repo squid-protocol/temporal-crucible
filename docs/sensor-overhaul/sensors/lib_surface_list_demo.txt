@@ -1,0 +1,9 @@
+LIBRARY SURFACE openssl: 19 coupled files, 452 sites, 231 distinct API names
+  lib/vtls/openssl.c                                335 sites /  5453 lines = 0.061   194 names
+  lib/dllmain.c                                       2 sites /    65 lines = 0.031   1 names
+  lib/vquic/curl_osslq.c                             60 sites /  2459 lines = 0.024   40 names
+  lib/vquic/curl_quiche.h                             1 sites /    46 lines = 0.022   0 names
+  packages/vms/report_openssl_version.c               2 sites /    99 lines = 0.020   0 names
+  lib/vtls/openssl.h                                  3 sites /   156 lines = 0.019   0 names
+  lib/vquic/curl_ngtcp2.h                             1 sites /    60 lines = 0.017   0 names
+  lib/sha256.c                                        8 sites /   510 lines = 0.016   6 names
