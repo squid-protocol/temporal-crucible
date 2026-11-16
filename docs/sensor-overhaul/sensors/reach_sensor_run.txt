@@ -1,0 +1,79 @@
+=== curl @ bc9ab557
+REACH  1126 files; measured by call graph 721, by include count 246, not measured 159 (no functions, not a header).
+Counts are lower bounds: calls to standard-library names and macros are not recorded.
+Files the most other files call into:
+  lib/mprintf.c                                     403 caller files   727 caller functions  1382 one hop out
+  lib/easy.c                                        303 caller files   429 caller functions   399 one hop out
+  lib/setopt.c                                      259 caller files   293 caller functions   323 one hop out
+  lib/memdebug.c                                    209 caller files   783 caller functions  1656 one hop out
+  lib/strerror.c                                    152 caller files   198 caller functions   362 one hop out
+Most-used public functions:
+  curl_mfprintf                      lib/mprintf.c                            319 files
+  curl_easy_init                     lib/easy.c                               262 files
+  curl_global_cleanup                lib/easy.c                               261 files
+  curl_easy_cleanup                  lib/easy.c                               260 files
+  curl_global_init                   lib/easy.c                               255 files
+Headers by number of files that include them:
+  lib/curl_setup.h                                  291 files
+  lib/urldata.h                                     136 files
+  lib/curl_trc.h                                    101 files
+  src/tool_setup.h                                   83 files
+  lib/cfilters.h                                     58 files
+=== libgit2 @ 58d9363f
+REACH  1299 files; measured by call graph 713, by include count 320, not measured 266 (no functions, not a header).
+Counts are lower bounds: calls to standard-library names and macros are not recorded.
+Files the most other files call into:
+  src/util/errors.c                                 591 caller files  4813 caller functions  6654 one hop out
+  src/libgit2/repository.c                          317 caller files  1249 caller functions  2592 one hop out
+  src/util/str.c                                    269 caller files  1168 caller functions  2923 one hop out
+  src/libgit2/oid.c                                 260 caller files   900 caller functions  1648 one hop out
+  src/libgit2/object_api.c                          157 caller files   504 caller functions   796 one hop out
+Most-used public functions:
+  git_error_clear                    src/util/errors.c                        466 files
+  cl_git_report_failure              tests/clar/clar_libgit2.c                421 files
+  clar__assert_equal                 tests/clar/clar.c                        352 files
+  clar__assert                       tests/clar/clar.c                        296 files
+  git_str_dispose                    src/util/str.c                           257 files
+Headers by number of files that include them:
+  src/util/futils.h                                 160 files
+  src/libgit2/common.h                              139 files
+  include/git2/repository.h                         120 files
+  include/git2/common.h                             104 files
+  src/util/posix.h                                   93 files
+=== redis @ 86561a0f
+REACH  1145 files; measured by call graph 398, by include count 89, not measured 658 (no functions, not a header).
+Counts are lower bounds: calls to standard-library names and macros are not recorded.
+Files the most other files call into:
+  src/zmalloc.c                                      88 caller files   805 caller functions  2108 one hop out
+  src/sds.c                                          61 caller files   797 caller functions  1287 one hop out
+  src/server.c                                       53 caller files   552 caller functions   932 one hop out
+  src/networking.c                                   52 caller files   604 caller functions   991 one hop out
+  src/object.c                                       51 caller files   482 caller functions   756 one hop out
+Most-used public functions:
+  zfree                              src/zmalloc.c                            81 files
+  zmalloc                            src/zmalloc.c                            78 files
+  sdslen                             src/sds.h                                60 files
+  sdsfree                            src/sds.c                                53 files
+  sdsnewlen                          src/sds.c                                39 files
+Headers by number of files that include them:
+  src/server.h                                       80 files
+  src/redismodule.h                                  60 files
+  src/cluster.h                                      25 files
+  src/zmalloc.h                                      25 files
+  src/redisassert.h                                  23 files
+=== prometheus @ 1d4faeaf
+REACH  1562 files; measured by call graph 917, by include count 0, not measured 645 (no functions, not a header).
+Counts are lower bounds: calls to standard-library names and macros are not recorded.
+Files the most other files call into:
+  model/labels/labels_dedupelabels.go               141 caller files   576 caller functions  1171 one hop out
+  model/labels/labels_common.go                     128 caller files   473 caller functions  1311 one hop out
+  rules/manager.go                                  100 caller files   360 caller functions   713 one hop out
+  model/histogram/float_histogram.go                 94 caller files   469 caller functions   854 one hop out
+  tsdb/tsdbutil/dir_locker.go                        87 caller files   363 caller functions   944 one hop out
+Most-used public functions:
+  Lock                               tsdb/tsdbutil/dir_locker.go              86 files
+  Get                                model/labels/labels_common.go            64 files
+  Labels                             model/labels/labels_dedupelabels.go      63 files
+  Inc                                discovery/metrics_k8s_client.go          57 files
+  Done                               rules/manager.go                         54 files
+Headers by number of files that include them:
