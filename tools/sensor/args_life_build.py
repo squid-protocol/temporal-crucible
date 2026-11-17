@@ -42,5 +42,5 @@ for s, snap in enumerate(led._snaps):
         r = by_key.get(k, [])
         if j < len(r):
             rows.append((s, int(led.ids[s][i]), r[j][0], r[j][1], k[0], k[1], r[j][2]))
-pickle.dump({"name": name, "ct": cts, "rows": rows, "stages": [list(st) for st in led.stage]}, open(f"/tmp/gitgalaxy-scratch/claude/argl/{name}.pkl", "wb"))
+pickle.dump({"name": name, "ct": cts, "rows": rows, "stages": [list(st) for st in led.stage], "keys": [list(k) for k in led.keys]}, open(f"/tmp/gitgalaxy-scratch/claude/argl/{name}.pkl", "wb"))
 print(name, "snapshots", len(sn), "function-snapshots", len(rows), "lineages", led.n_lineages, f"{time.time()-t0:.0f}s")
