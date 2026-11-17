@@ -1,0 +1,127 @@
+functions 8,173,786; repos 580; languages 56
+
+== A. ARGUMENTS AND CALL-OUT BY LANGUAGE (5+ lines) ==
+language     functions args med  mean     5+     8+ no callee callees med rho args~loc rho callees~loc rho fan_out~callees
+c            1,354,547        2  2.20   7.7%   1.1%      7.7%           3         0.21            0.71                0.77
+cpp            657,174        1  1.87   7.0%   1.5%      8.3%           4         0.20            0.70                0.71
+python         674,248        1  1.97   7.1%   1.6%      5.7%           4         0.18            0.55                0.55
+csharp         443,261        1  1.14   3.7%   0.7%      7.7%           3        -0.06            0.56                0.67
+typescript     281,429        1  1.42   3.1%   0.7%     15.1%           2         0.14            0.56                0.59
+dart           235,699        1  1.09   3.7%   1.2%     22.7%           2        -0.06            0.54                0.68
+rust           329,464        1  1.56   4.5%   0.5%     10.9%           4         0.04            0.69                0.56
+java           251,136        0  0.93   3.1%   0.8%      5.4%           4         0.22            0.75                0.67
+javascript     250,328        1  1.28   2.5%   0.3%     16.3%           2         0.19            0.52                0.45
+kotlin         130,896        1  1.07   2.5%   0.6%     10.8%           3         0.09            0.56                0.52
+php            203,358        0  0.93   2.9%   0.7%     11.4%           4         0.02            0.59                0.65
+go             151,384        1  1.49   3.6%   0.4%      7.2%           4         0.15            0.74                0.68
+ruby            58,971        0  0.87   2.0%   0.4%      4.2%           4         0.12            0.59                0.40
+
+== B. ARGS vs DISTINCT CALLS (partial, size controlled) ==
+  c           raw +0.09  size-controlled -0.08
+  cpp         raw +0.15  size-controlled +0.01
+  python      raw +0.03  size-controlled -0.09
+  csharp      raw -0.01  size-controlled +0.03
+  typescript  raw +0.13  size-controlled +0.06
+  dart        raw -0.03  size-controlled +0.00
+  rust        raw -0.02  size-controlled -0.06
+  java        raw +0.07  size-controlled -0.15
+  javascript  raw +0.16  size-controlled +0.07
+  kotlin      raw +0.07  size-controlled +0.02
+  php         raw -0.13  size-controlled -0.18
+  go          raw +0.16  size-controlled +0.08
+  ruby        raw +0.05  size-controlled -0.02
+
+== C. KEYWORD SIGNALS (partial, size controlled; median over languages) ==
+
+  vs PARAMETERS:
+    def_test                   -0.32  (11/12 languages agree)
+    struct_args                +0.23  (2/3 languages agree)
+    struct_branch              +0.20  (12/13 languages agree)
+    arch_ui_framework          -0.16  (3/4 languages agree)
+    struct_class_start         -0.16  (5/6 languages agree)
+    def_encapsulation          +0.15  (9/10 languages agree)
+    struct_decorators          -0.15  (4/7 languages agree)
+    def_safety                 +0.13  (11/13 languages agree)
+    arch_api                   -0.11  (8/11 languages agree)
+    struct_generics            +0.10  (9/9 languages agree)
+    state_pointers             +0.09  (5/5 languages agree)
+    state_flux                 +0.08  (12/13 languages agree)
+
+  vs DISTINCT CALLS:
+    def_test                   +0.20  (12/12 languages agree)
+    struct_comprehensions      +0.18  (9/9 languages agree)
+    struct_closures            +0.15  (12/12 languages agree)
+    struct_class_start         -0.13  (4/6 languages agree)
+    arch_regex                 +0.11  (3/3 languages agree)
+    arch_io                    +0.10  (9/9 languages agree)
+    def_safety                 +0.10  (10/13 languages agree)
+    state_memory_alloc         +0.10  (5/5 languages agree)
+    arch_time                  +0.10  (5/5 languages agree)
+    arch_dependency_injection  +0.09  (3/3 languages agree)
+    def_cleanup                +0.08  (6/7 languages agree)
+    struct_linear              +0.07  (6/8 languages agree)
+
+== D. CALL GRAPH: ENGINE-RESOLVED FAN-IN ==
+  functions 8,173,786; fan-in recorded >0 for 35%; 1 caller 21%; 10+ callers 1.7%
+  top 1% of all functions by fan-in hold 46% of resolved calls (cut 14+ callers)
+  top 5% of all functions by fan-in hold 68% of resolved calls (cut 4+ callers)
+  top 10% of all functions by fan-in hold 84% of resolved calls (cut 2+ callers)
+
+  fan-in vs args / calls (partial, size controlled), non-test functions:
+  c           ~args +0.00  ~distinct calls -0.06  ~loc(raw) +0.09  ~public +0.13
+  cpp         ~args +0.00  ~distinct calls -0.01  ~loc(raw) +0.18  ~public -0.00
+  python      ~args +0.12  ~distinct calls -0.01  ~loc(raw) +0.14  ~public -0.18
+  csharp      ~args +0.12  ~distinct calls +0.01  ~loc(raw) +0.11  ~public -0.32
+  typescript  ~args +0.17  ~distinct calls +0.12  ~loc(raw) +0.11  ~public -0.08
+  dart        ~args +0.30  ~distinct calls +0.16  ~loc(raw) +0.09  ~public -0.25
+  rust        ~args +0.11  ~distinct calls +0.17  ~loc(raw) +0.19  ~public -0.15
+  java        ~args +0.12  ~distinct calls +0.08  ~loc(raw) +0.12  ~public -0.32
+  javascript  ~args +0.22  ~distinct calls +0.02  ~loc(raw) +0.15  ~public -0.08
+  kotlin      ~args +0.17  ~distinct calls +0.12  ~loc(raw) +0.18  ~public -0.05
+  php         ~args +0.31  ~distinct calls +0.04  ~loc(raw) +0.10  ~public -0.25
+  go          ~args +0.12  ~distinct calls +0.02  ~loc(raw) +0.13  ~public -0.21
+  ruby        ~args +0.40  ~distinct calls +0.07  ~loc(raw) +0.07  ~public -0.11
+
+  keyword signals vs fan-in, non-test functions:
+    def_encapsulation          +0.22  (9/10 languages agree)
+    struct_class_start         -0.18  (4/4 languages agree)
+    arch_api                   -0.15  (8/10 languages agree)
+    arch_ui_framework          -0.12  (4/4 languages agree)
+    struct_branch              +0.11  (13/13 languages agree)
+    struct_decorators          -0.09  (7/7 languages agree)
+    arch_import                -0.07  (2/4 languages agree)
+    state_flux                 +0.07  (13/13 languages agree)
+    arch_regex                 +0.06  (4/4 languages agree)
+    def_safety                 +0.04  (11/13 languages agree)
+    arch_dependency_injection  -0.04  (4/4 languages agree)
+    state_bailout_hits         +0.03  (10/12 languages agree)
+
+== E. HUB (10+ callers) vs LEAF (none), non-test, 5+ lines ==
+  c           args 2 vs 2; loc 13 vs 15; calls 3 vs 3; public 80% vs 35% (hubs 36,380, leaves 527,280)
+  cpp         args 1 vs 1; loc 10 vs 9; calls 3 vs 3; public 20% vs 10% (hubs 10,023, leaves 336,449)
+  python      args 3 vs 2; loc 18 vs 11; calls 3 vs 3; public 80% vs 86% (hubs 13,340, leaves 179,264)
+  csharp      args 2 vs 1; loc 12 vs 11; calls 2 vs 2; public 63% vs 79% (hubs 4,412, leaves 142,542)
+  typescript  args 2 vs 1; loc 12 vs 11; calls 2 vs 2; public 54% vs 45% (hubs 2,997, leaves 148,955)
+  dart        args 2 vs 0; loc 12 vs 10; calls 2 vs 1; public 27% vs 50% (hubs 1,940, leaves 154,954)
+  rust        args 2 vs 2; loc 9 vs 9; calls 3 vs 3; public 59% vs 53% (hubs 3,060, leaves 155,670)
+  java        args 1 vs 1; loc 9 vs 8; calls 4 vs 3; public 78% vs 89% (hubs 4,434, leaves 58,232)
+  javascript  args 2 vs 1; loc 13 vs 10; calls 2 vs 2; public 22% vs 17% (hubs 1,428, leaves 165,191)
+  kotlin      args 2 vs 1; loc 10 vs 8; calls 3 vs 2; public 25% vs 18% (hubs 682, leaves 71,832)
+  php         args 2 vs 0; loc 13 vs 11; calls 3 vs 3; public 72% vs 81% (hubs 4,345, leaves 79,074)
+  go          args 1 vs 1; loc 11 vs 10; calls 3 vs 3; public 58% vs 67% (hubs 3,049, leaves 41,769)
+  ruby        args 2 vs 0; loc 11 vs 10; calls 5 vs 4; public 26% vs 19% (hubs 540, leaves 26,762)
+
+== F. MOST COMMON CALLEE NAMES PER LANGUAGE (is the call list clean?) ==
+  c           printf, free, fprintf, printk, memset, memcpy, ASSERT, dev_err, strlen, kfree, assert, TRACE, strcmp, mutex_unlock
+  cpp         size, assert, get, static_cast, push_back, move, empty, end, begin, EXPECT_EQ, reinterpret_cast, dyn_cast, getType, new
+  python      len, assertEqual, get, isinstance, append, super, range, join, str, raises, list, set, create, assertRaises
+  csharp      Equal, Assert, CreateCompilation, Diagnostic, VerifyDiagnostics, WorkItem, Add, WithLocation, Throws, WriteLine, True, MethodImpl, WithArguments, Create
+  typescript  push, map, get, Error, t, filter, set, join, add, includes, resolve, forEach, find, toString
+  dart        expect, error, add, equals, v, assertParsedNodeText, print, Text, parseStringWithErrors, MaterialApp, Duration, contains, byType, newFile
+  rust        new, Ok, Some, assert_eq, unwrap, vec, map, clone, assert, len, iter, into, default, format
+  java        run, get, assertThat, of, assertEquals, add, put, runTest, build, size, getClass, toString, isEmpty, ArrayList
+  javascript  push, call, get, Error, map, apply, log, set, forEach, add, join, slice, resolve, filter
+  kotlin      get, assertEquals, listOf, foo, add, toString, TODO, DEBUG_INFO_EXPRESSION_TYPE, build, emptyList, isEmpty, println, A, error
+  php         assertEquals, assertSame, method, expects, willReturn, get, once, create, with, createMock, assertTrue, __, expectException, sprintf
+  go          len, Errorf, append, make, Run, Fatalf, Sprintf, New, Error, Equal, String, string, Fatal, byte
+  ruby        new, assert_equal, each, id, where, map, present?, to_s, first, find, include?, nil?, render, blank?
