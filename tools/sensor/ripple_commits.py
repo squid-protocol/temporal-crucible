@@ -61,7 +61,14 @@ def run(name):
     commits = all_commits(repo, lang)
     ordered = sorted((t, h) for h, (t, fs) in commits.items() if fs and len(fs) <= MAXFN)
     times = np.array([t for t, _ in ordered])
-    fixes = [e for e in json.load(open(f"{RF.EV}/{name}_xc2.json"))["events"] if e["class"] in RF.CLASSES and e["sha"] in commits and commits[e["sha"]][1]]
+    only = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--only-class=")]
+    fixes = [e for e in json.load(open(f"{RF.EV}/{name}_xc2.json"))["events"] if e["class"] in (only or RF.CLASSES) and e["sha"] in commits and commits[e["sha"]][1]]
+    named = {}
+    if "--exclude-named" in sys.argv:  # leave out the commit a regression fix names as its cause, so the cause is not built into the candidates
+        for e in fixes:
+            m = re.search(r"references ([0-9a-f]{7,40})", e.get("why", ""))
+            if m:
+                named[e["sha"]] = m.group(1)
     graphs, near_cache = {}, {}
 
     def G(s):
@@ -76,7 +83,7 @@ def run(name):
         Ff = commits[e["sha"]][1]
         lo_i = int(np.searchsorted(times, t - 45 * DAY, side="left"))
         hi_i = int(np.searchsorted(times, t, side="left"))
-        cand = [ordered[k] for k in range(lo_i, hi_i) if ordered[k][1] != e["sha"]]
+        cand = [ordered[k] for k in range(lo_i, hi_i) if ordered[k][1] != e["sha"] and not (e["sha"] in named and ordered[k][1].startswith(named[e["sha"]]))]
         picks = []
         for b, (a, z) in enumerate(BUCKETS):
             pool = [c for c in cand if t - z * DAY <= c[0] < t - a * DAY]
@@ -135,7 +142,7 @@ LABEL = [f"{a}-{z} d" for a, z in BUCKETS]
 
 
 def main():
-    names = sys.argv[1:]
+    names = [a for a in sys.argv[1:] if not a.startswith("--")]
     parts, same_all = [], collections.Counter()
     for nm in names:
         df, same, nfix = run(nm)
