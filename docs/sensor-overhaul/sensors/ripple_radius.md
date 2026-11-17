@@ -143,3 +143,18 @@ Most functions with no static caller in curl are callbacks, not dead code; in li
 | T4 a majority of fixes touch a function the inducing commit also touched | **not for OpenSSL** | 42% (45% within 30 days, 57% for 30 to 365 days, 34% after a year) |
 | T5 signature changes ripple to callers | not tested yet (pooled with FreeBSD) | |
 **Reading so far.** The radius replicates: fixes are found within one or two calls of the change about 1.6 times as often as same-file functions in both curl and OpenSSL, with the same size of effect. Two curl findings do not carry over: the caller direction (OpenSSL's callees are as enriched), and, as it turns out, the persistence: for OpenSSL's long-lag fixes (a year or more) the excess is gone, so the radius is a short-range effect in time as well as in the graph. Caveats as for curl, plus: 35 pairs fell outside the nearest snapshot (functions that did not exist at the snapshot, or renamed), 44 have no function name in a hunk header (OpenSSL's headers and macros), and the intervals are wide (126 pairs; 28 to 65 in the lag strata).
+
+## Retrieval and same-author tests (hypotheses fixed 2026-11-17 before running; `tools/sensor/ripple_rank.py`)
+Pairs: named-cause pairs from curl (message-referenced), OpenSSL and FreeBSD (`Fixes:` trailers), the ones whose fixed function lies outside the inducing commit's changed set.
+
+**Retrieval.** Given an inducing change (its changed functions), rank every other function in the call graph of the nearest quarterly snapshot and ask how high the function the fix later touched sits. Rankers: random; size only (largest first); same file as a changed function; call-graph distance only (callers and callees within 1, 2, 3 calls); file then graph; graph then file; file then graph then size. Metric: expected hit rate in the top 5, 10, 20, 50 (ties split evenly) and median rank, per pair, with the best-ranked fixed function counted.
+- **R1.** File then graph beats file alone at the top 20 by at least 5 percentage points, pooled (the graph adds ordering within and beyond the changed file).
+- **R2.** For fixes in a different file from every changed function, graph distance beats size at the top 50.
+- **R3.** The best ranker puts the fixed function in the top 20 for at least 40% of pairs, pooled.
+- **R4.** Size alone is no better than random by a large margin (hit at 20 under twice the random rate): the effect is about neighbourhood, not about big functions.
+
+**Same author.** Split pairs by whether the author of the fix is the author of the inducing commit.
+- **A1.** The excess within 2 calls against same-file functions is present for different-author pairs: ratio at least 1.3.
+- **A2.** Same-author pairs have a higher share of fixes in a function the inducing commit touched than different-author pairs.
+- **A3.** The radius ratio is not larger for same-author pairs: if the effect were only "one person finishing their own work", it would vanish for different authors.
+**Would surprise:** the graph adds nothing over the file in retrieval (R1 fails); the radius vanishes for different-author pairs.
