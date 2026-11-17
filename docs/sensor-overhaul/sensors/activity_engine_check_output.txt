@@ -1,0 +1,3 @@
+curl at a0c990c819: 4596 files compared; fields that differ: none
+libgit2 at 42a89d7cc9: 15650 files compared; fields that differ: none
+libxml2 at febeb5c91f: 3903 files compared; fields that differ: none
