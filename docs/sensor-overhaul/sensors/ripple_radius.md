@@ -102,3 +102,23 @@ Pairs: 4,248 curl fixes, 1,337 libgit2, 2,053 redis, 2,167 libxml2, 1,256 promet
 **What this changes.** The radius is not mainly a recent-work effect: regression-class fixes stay about 1.2 to 1.4 times as likely to be within one call of changes made up to 45 days earlier, and the excess is in the callers (1.42 to 1.50 at 3 to 30 days, with the callee excess gone after a day). Other fixes cluster near very recent changes and fall toward 1.15 with time. Together with the signature result this supports the review order in `gitgalaxy change` (changed signature first, its callers named).
 
 **Caveats.** Same as the forward design (file-mate null leaves author and release timing uncontrolled; static call graph; names from hunk headers, with ambiguous names dropped), plus: candidates are sampled (6 per bucket), so each fix is compared with a sample of its neighbours in time; the graph is the first quarterly snapshot after the earlier commit, so a fixed function that did not exist yet is dropped; the regression class includes reverts and fixes that only say "regression"; ripgrep (90 fixes) and the regression-only per-repository cells for libgit2 and redis are too small to read; sphinx and prometheus regression cells have wide intervals. P1 to P5 were fixed beforehand; the named-cause exclusion was added after seeing the first regression result.
+
+## Function pointers and callbacks, found with tree-sitter (2026-11-17; `tools/sensor/ts_refs.py`, `tools/sensor/ripple_links_refs.py`; output `ripple_refs_curl_output.txt`)
+**Question.** The static call graph has no edge for a function passed as a callback, stored in a table of function pointers or reached through a pointer, so the radius was probably understated.
+
+**How big is the blind spot** (one snapshot per repository; a reference is an identifier naming a function defined in the same snapshot, in a value position: argument, initialiser, assignment, `&f`, cast, return; left out: calls, declarations, member access, dereferences and comparisons, which cannot be told from a variable of the same name without scoping). Precision spot check: 13 of 14 random references were genuine (dispatch tables, `my_setopt(curl, CURLOPT_READFUNCTION, tool_read_cb)`); the one miss, a dereference of a variable named like a function, led to the dereference rule.
+| repository | functions with no static caller | of them referenced as a pointer or callback | functions with a static caller also referenced as a pointer |
+|---|---:|---:|---:|
+| curl | 895 | **725 (81%)** | 72 of 2,420 (3%) |
+| redis | 2,380 | 1,328 (56%) | 123 of 5,841 (2%) |
+| libxml2 | 869 | 355 (41%) | 63 of 2,517 (3%) |
+| libgit2 | 5,463 | 880 (16%) | 144 of 4,122 (3%) |
+Most functions with no static caller in curl are callbacks, not dead code; in libgit2 the uncalled functions are mostly public API entry points. Only 2% to 3% of statically called functions are also used as pointers, so the blind spot is a specific group of functions, not a general thinning of the graph.
+
+**Does it change the radius?** The curl named-cause pairs (212 with a fixed function outside the changed set) on three graphs:
+| graph | within 1 call (either direction) | against file-mates | different-file fixes, within 1 call | against file-mates |
+|---|---:|---:|---:|---:|
+| engine calls only | 41.0% | 1.77 [1.48, 2.20] | 19.2% | 2.08 [1.29, 3.95] |
+| plus references (a function that registers a callback gets an edge to it) | 43.9% | 1.87 [1.52, 2.24] | 21.2% | 2.42 [1.28, 5.36] |
+| plus siblings (functions filled into the same table) | 44.8% | 1.81 [1.52, 2.20] | 21.2% | 2.46 [1.30, 4.78] |
+**Reading.** The missing edges add about three percentage points of reach and nudge the enrichment up slightly (1.77 to 1.87; cross-file 2.08 to 2.42, interval overlapping), without changing any conclusion: the radius was understated a little, not by much, in curl. Callers stay the more enriched direction (2.51 against 1.78 within one call; cross-file 3.37 against 1.83). Not tested: the forward design on seven repositories with these edges; the Linux kernel, where function-pointer tables (`struct ..._ops`) carry much of the structure and the gap is likely larger; callbacks registered through string or numeric keys; and the engine's own `reference` edges (59 in curl) against this extraction.
