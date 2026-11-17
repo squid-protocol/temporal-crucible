@@ -1,0 +1,133 @@
+functions 8,269,603; repos 523; languages 49
+languages with 100k+ functions: c 1,677,784, cpp 1,373,899, python 855,081, java 649,822, csharp 642,336, typescript 552,657, rust 470,875, javascript 467,889, kotlin 250,170, php 223,903, dart 220,489, go 205,778, swift 108,891, ruby 101,836
+
+== A. ARGUMENT COUNT AND CALL-OUT BY LANGUAGE (functions of 5+ lines) ==
+language      functions args median   mean  5+ args  8+ args no callee callees med rho args~loc rho callees~loc
+c             1,516,483           2   2.24     8.0%     1.2%      8.1%           3         0.21            0.72
+cpp             843,128           2   1.92     7.6%     1.5%      5.3%           4         0.20            0.69
+python          585,943           1   2.05     7.7%     1.7%      7.9%           3         0.19            0.58
+java            337,761           1   1.19     4.3%     1.0%      6.8%           5        -0.03            0.70
+csharp          427,655           1   1.11     3.8%     0.7%      7.3%           3        -0.04            0.66
+typescript      324,913           1   1.34     2.8%     0.6%     14.2%           3         0.11            0.63
+rust            307,459           1   1.50     4.8%     0.6%      7.4%           4         0.07            0.68
+javascript      270,396           1   1.22     2.3%     0.4%     15.2%           2         0.17            0.62
+kotlin          114,209           1   1.08     2.6%     0.6%     11.1%           3         0.12            0.59
+php             169,749           0   0.98     3.0%     0.7%      9.5%           4         0.06            0.65
+dart            126,404           1   1.20     4.5%     1.6%     11.2%           2        -0.01            0.66
+go              144,921           1   1.52     3.7%     0.4%      3.7%           4         0.13            0.73
+ruby             55,508           0   0.84     1.7%     0.3%     22.2%           2         0.12            0.48
+
+== B. DO FUNCTIONS WITH MORE ARGUMENTS CALL MORE THINGS? (partial Spearman, size controlled) ==
+  c            raw +0.11   size-controlled -0.06
+  cpp          raw +0.13   size-controlled -0.01
+  python       raw +0.00   size-controlled -0.13
+  java         raw -0.22   size-controlled -0.28
+  csharp       raw -0.05   size-controlled -0.03
+  typescript   raw +0.08   size-controlled +0.01
+  rust         raw +0.15   size-controlled +0.14
+  javascript   raw +0.11   size-controlled +0.00
+  kotlin       raw +0.10   size-controlled +0.04
+  php          raw -0.08   size-controlled -0.16
+  dart         raw -0.22   size-controlled -0.28
+  go           raw +0.12   size-controlled +0.04
+  ruby         raw +0.10   size-controlled +0.05
+
+== C. KEYWORD SIGNALS AGAINST ARGUMENTS AND CALL-OUT (partial Spearman, size controlled; pooled over languages) ==
+
+  signal vs ARGS (parameters): strongest, median over languages, signs agreeing
+    def_test                   -0.29  (11/12 languages agree)
+    struct_args                +0.22  (2/3 languages agree)
+    struct_branch              +0.18  (12/13 languages agree)
+    def_encapsulation          +0.16  (10/11 languages agree)
+    def_safety                 +0.14  (12/13 languages agree)
+    arch_ui_framework          -0.14  (3/4 languages agree)
+    struct_class_start         -0.14  (5/7 languages agree)
+    struct_generics            +0.13  (9/9 languages agree)
+    struct_decorators          -0.12  (4/7 languages agree)
+    state_pointers             +0.10  (4/5 languages agree)
+    state_flux                 +0.10  (11/13 languages agree)
+    arch_api                   -0.10  (10/12 languages agree)
+    struct_closures            -0.08  (10/12 languages agree)
+    arch_import                -0.07  (4/4 languages agree)
+
+  signal vs CALLEES (distinct functions called): strongest, median over languages, signs agreeing
+    struct_args                +0.30  (3/3 languages agree)
+    def_test                   +0.19  (11/12 languages agree)
+    struct_comprehensions      +0.16  (9/9 languages agree)
+    struct_closures            +0.15  (12/12 languages agree)
+    struct_linear              +0.13  (7/9 languages agree)
+    arch_dependency_injection  +0.12  (3/3 languages agree)
+    arch_time                  +0.11  (5/5 languages agree)
+    arch_io                    +0.10  (9/9 languages agree)
+    arch_concurrency           +0.10  (9/9 languages agree)
+    state_memory_alloc         +0.09  (5/5 languages agree)
+    arch_regex                 +0.08  (4/4 languages agree)
+    def_cleanup                +0.08  (7/7 languages agree)
+    def_safety                 +0.07  (11/13 languages agree)
+    def_listeners              +0.07  (3/4 languages agree)
+
+== D. CALL-GRAPH POSITION: WHO GETS CALLED (names defined once in a repo; fan-in = distinct functions in the repo that call that name) ==
+  functions with a unique name in their repo (so fan-in is measurable): 4,288,687 of 8,269,603
+  top 1% of functions by fan-in hold 42% of all name-resolved calls (cut: 19+ callers)
+  top 5% of functions by fan-in hold 64% of all name-resolved calls (cut: 5+ callers)
+  top 10% of functions by fan-in hold 76% of all name-resolved calls (cut: 3+ callers)
+  never called by name in their repo: 54%; called by 1 function: 25%; 10+ callers: 2.4%
+
+  Fan-in against size, arguments and call-out (partial Spearman, size controlled, by language):
+  language      ~args  ~callees  ~loc (raw)
+  c             +0.01     -0.09       +0.04
+  cpp           +0.14     -0.22       +0.01
+  python        +0.30     -0.17       +0.05
+  java          +0.64     -0.31       -0.15
+  csharp        +0.57     -0.15       -0.06
+  typescript    +0.20     +0.02       -0.07
+  rust          +0.61     +0.15       -0.04
+  javascript    +0.24     -0.07       +0.05
+  kotlin        +0.37     -0.11       -0.04
+  php           +0.53     -0.19       +0.03
+  dart          +0.52     -0.17       -0.07
+  go            +0.31     -0.14       -0.29
+  ruby          +0.67     +0.06       +0.16
+
+  Keyword signals of hubs (partial Spearman of the signal with fan-in, size controlled; pooled over languages):
+    def_test                   -0.48  (11/11 languages agree)
+    struct_decorators          -0.42  (6/6 languages agree)
+    def_encapsulation          +0.33  (10/11 languages agree)
+    struct_branch              +0.31  (13/13 languages agree)
+    arch_api                   -0.18  (9/12 languages agree)
+    struct_class_start         -0.15  (6/6 languages agree)
+    state_flux                 +0.13  (12/13 languages agree)
+    arch_ui_framework          -0.12  (5/5 languages agree)
+    def_safety                 +0.11  (12/13 languages agree)
+    arch_import                -0.11  (3/4 languages agree)
+    def_test_skip              -0.11  (4/4 languages agree)
+    struct_comprehensions      +0.10  (9/9 languages agree)
+    struct_generics            +0.09  (7/9 languages agree)
+    state_bailout_hits         +0.09  (11/12 languages agree)
+
+== E. WHAT A HUB LOOKS LIKE (10+ callers) VERSUS A LEAF (called by nobody), same language, 5+ lines ==
+  language       median args    median loc  median callees        public
+  c                2 vs 2        13 vs 16         2 vs 3       82% vs 28 %   (hubs 34,268, leaves 480,981)
+  cpp              1 vs 1         9 vs 13         3 vs 5       28% vs 7  %   (hubs 7,037, leaves 424,557)
+  python           2 vs 1        18 vs 14         3 vs 4       87% vs 96 %   (hubs 7,329, leaves 229,213)
+  java             1 vs 0         9 vs 14         4 vs 9       71% vs 72 %   (hubs 3,289, leaves 94,069)
+  csharp           2 vs 0        12 vs 17         3 vs 4       65% vs 85 %   (hubs 2,647, leaves 156,682)
+  typescript       1 vs 1        14 vs 18         2 vs 3       71% vs 51 %   (hubs 3,134, leaves 49,598)
+  rust             2 vs 0        10 vs 16         4 vs 4       72% vs 27 %   (hubs 3,376, leaves 94,703)
+  javascript       1 vs 1        13 vs 12         3 vs 3       30% vs 19 %   (hubs 2,205, leaves 37,062)
+  php              1 vs 0        14 vs 13         4 vs 6       63% vs 87 %   (hubs 2,383, leaves 57,334)
+  go               1 vs 1        11 vs 29         3 vs 7       68% vs 85 %   (hubs 2,414, leaves 41,879)
+
+== F. WHAT EVERYONE CALLS: the 12 most common callee names per language, and the share of all call sites the top 20 names take ==
+  c            top20 share  8.1%  TRACE, memcpy, memset, dev_err, kfree, ARRAY_SIZE, FIXME, mutex_unlock, ok, mutex_lock, IS_ERR, container_of
+  cpp          top20 share  6.5%  size, DCHECK, push_back, TEST, move, get_singleton, end, get, begin, empty, CHECK, length
+  python       top20 share 14.7%  get, assertEqual, append, join, raises, async_block_till_done, patch, create, array, items, write, ValueError
+  java         top20 share 16.3%  get, assertThat, of, assertEquals, add, put, size, equalTo, build, toString, isEmpty, getMessage
+  csharp       top20 share 22.2%  Equal, nameof, WriteLine, foreach, Assert, WorkItem, Add, M, MethodImpl, Diagnostic, VerifyDiagnostics, True
+  typescript   top20 share 15.8%  push, get, async, Error, t, join, add, includes, resolve, it, forEach, toString
+  rust         top20 share 25.6%  Some, new, Ok, unwrap, pub, clone, into, iter, default, Err, let, to_string
+  javascript   top20 share 14.3%  push, Error, get, call, then, add, async, resolve, forEach, test, join, slice
+  kotlin       top20 share 16.3%  when, get, foo, assertEquals, listOf, add, toString, build, TODO, Suppress, bar, A
+  php          top20 share 18.5%  foreach, assertSame, assertEquals, get, isset, create, array, empty, assertTrue, __, sprintf, getId
+  dart         top20 share 26.1%  f, error, assertErrorsInCode, add, resolveTestCode, A, Function, assertNoErrorsInCode, foo, parseStringWithErrors, assertParsedNodeText, assertErrors
+  go           top20 share 29.9%  func, Errorf, append, make, Run, Fatalf, Sprintf, Error, Equal, New, Fatal, string

@@ -1,0 +1,47 @@
+measurable functions (non-test, unique name of 5+ chars, not a common name): 3,621,977
+  top 1% by fan-in hold 34% of the name-resolved calls (cut 18+)
+  top 5% by fan-in hold 57% of the name-resolved calls (cut 5+)
+  top 10% by fan-in hold 70% of the name-resolved calls (cut 3+)
+  never called: 49%; 1 caller: 28%; 10+: 2.2%
+
+fan-in vs args / callees (partial, size controlled), robust version:
+  c           ~args +0.01  ~callees -0.08   (n 1,286,222)
+  cpp         ~args +0.14  ~callees -0.22   (n 550,719)
+  python      ~args +0.11  ~callees -0.01   (n 159,062)
+  java        ~args +0.11  ~callees -0.05   (n 70,773)
+  csharp      ~args +0.37  ~callees -0.06   (n 115,754)
+  typescript  ~args +0.19  ~callees +0.04   (n 145,128)
+  rust        ~args +0.19  ~callees +0.06   (n 102,203)
+  javascript  ~args +0.23  ~callees -0.05   (n 87,943)
+  kotlin      ~args +0.15  ~callees +0.01   (n 24,892)
+  php         ~args +0.39  ~callees -0.01   (n 60,257)
+  dart        ~args +0.50  ~callees -0.17   (n 37,631)
+  go          ~args +0.01  ~callees -0.04   (n 56,425)
+  ruby        ~args +0.60  ~callees +0.09   (n 23,498)
+
+keyword signals vs fan-in, robust version (median partial over languages):
+  struct_class_start         -0.22 (4/4 languages agree)
+  struct_branch              +0.17 (13/13 languages agree)
+  struct_decorators          -0.15 (6/6 languages agree)
+  arch_ui_framework          -0.11 (4/4 languages agree)
+  arch_import                -0.11 (4/4 languages agree)
+  arch_api                   -0.08 (7/11 languages agree)
+  def_safety                 +0.07 (12/13 languages agree)
+  def_encapsulation          +0.07 (9/11 languages agree)
+  state_flux                 +0.07 (12/13 languages agree)
+  state_bailout_hits         +0.06 (10/12 languages agree)
+  state_print_hits           -0.05 (7/8 languages agree)
+  def_sync_locks             +0.04 (3/3 languages agree)
+
+hub (10+ callers) vs leaf (0) medians, robust version:
+  c           args 2 vs 2; loc 13 vs 16; callees 2 vs 3; public 82% vs 28% (hubs 33,599)
+  cpp         args 1 vs 1; loc 9 vs 13; callees 3 vs 5; public 29% vs 7% (hubs 6,071)
+  python      args 2 vs 2; loc 15 vs 12; callees 3 vs 3; public 86% vs 81% (hubs 2,984)
+  java        args 1 vs 1; loc 9 vs 9; callees 3 vs 4; public 78% vs 60% (hubs 1,068)
+  csharp      args 1 vs 0; loc 11 vs 12; callees 2 vs 3; public 68% vs 72% (hubs 1,535)
+  typescript  args 1 vs 1; loc 13 vs 17; callees 2 vs 3; public 76% vs 53% (hubs 2,421)
+  rust        args 2 vs 1; loc 9 vs 11; callees 4 vs 5; public 75% vs 39% (hubs 1,598)
+  javascript  args 1 vs 1; loc 13 vs 12; callees 3 vs 3; public 32% vs 20% (hubs 1,660)
+  php         args 1 vs 0; loc 14 vs 12; callees 4 vs 4; public 56% vs 77% (hubs 1,497)
+  dart        args 2 vs 0; loc 10 vs 15; callees 2 vs 3; public 26% vs 72% (hubs 738)
+  go          args 1 vs 1; loc 11 vs 14; callees 3 vs 4; public 73% vs 36% (hubs 1,043)
