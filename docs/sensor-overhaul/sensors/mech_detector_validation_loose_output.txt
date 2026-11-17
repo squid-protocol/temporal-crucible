@@ -1,0 +1,37 @@
+libgit2: 10794 commits, 1030577 changed source lines; study ground truth 138 migration pairs over its quarters
+  detector flags 391 commits (679 swaps, 32700 lines = 3.2% of all changed lines)
+  precision 23.1% of flagged swaps are a ground-truth migration of that quarter; purity 79.7% of flagged lines are a pure substitution
+  recall    98.2% of ground-truth migration lines sit in a commit where the same swap is flagged (11064 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 138 migrations; detector flagged at least half of the functions the study counts for 81.9%, at least 90% for 72.5%, nothing at all for 16.7% (flagged 10869 occurrences against 7934 functions)
+  flagged but not a quarter sweep (largest): git_path_isvalid -> git_path_validate x192 (88323cd072); git_fs_path_validate -> git_fs_path_is_valid x124 (434a46107b); git_oid_mkstr -> git_oid_fromstr x88 (fa48608ec3); git_path_validate -> git_fs_path_validate x80 (95117d4744)
+redis: 9480 commits, 966910 changed source lines; study ground truth 94 migration pairs over its quarters
+  detector flags 196 commits (385 swaps, 13560 lines = 1.4% of all changed lines)
+  precision 19.5% of flagged swaps are a ground-truth migration of that quarter; purity 54.2% of flagged lines are a pure substitution
+  recall    96.3% of ground-truth migration lines sit in a commit where the same swap is flagged (3076 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 94 migrations; detector flagged at least half of the functions the study counts for 70.2%, at least 90% for 56.4%, nothing at all for 28.7% (flagged 2961 occurrences against 2151 functions)
+  flagged but not a quarter sweep (largest): QU -> KQU x1004 (a9951b1b6a); fprintf -> malloc_printf x63 (ad4c0b4117); ql_release_iterator -> ql_reset_iterator x53 (818046d031); zsetAllocSize -> kvobjAllocSize x41 (5dec7d3675)
+curl: 21457 commits, 1477474 changed source lines; study ground truth 128 migration pairs over its quarters
+  detector flags 440 commits (721 swaps, 30270 lines = 2.0% of all changed lines)
+  precision 15.8% of flagged swaps are a ground-truth migration of that quarter; purity 74.5% of flagged lines are a pure substitution
+  recall    99.4% of ground-truth migration lines sit in a commit where the same swap is flagged (8115 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 128 migrations; detector flagged at least half of the functions the study counts for 75.8%, at least 90% for 69.5%, nothing at all for 22.7% (flagged 8063 occurrences against 4550 functions)
+  flagged but not a quarter sweep (largest): CINIT -> CURLOPT x289 (920deff861); state -> myssh_state x271 (09fed29460); Curl_safefree -> curlx_safefree x140 (438dd08b54); tool_safefree -> curlx_safefree x134 (0df6c01db3)
+libxml2: 5902 commits, 1137911 changed source lines; study ground truth 59 migration pairs over its quarters
+  detector flags 194 commits (325 swaps, 12764 lines = 1.1% of all changed lines)
+  precision 17.2% of flagged swaps are a ground-truth migration of that quarter; purity 29.4% of flagged lines are a pure substitution
+  recall    98.8% of ground-truth migration lines sit in a commit where the same swap is flagged (3023 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 59 migrations; detector flagged at least half of the functions the study counts for 76.3%, at least 90% for 64.4%, nothing at all for 23.7% (flagged 2988 occurrences against 1566 functions)
+  flagged but not a quarter sweep (largest): error -> xmlRngPErr x145 (4c00414711); NXT -> memcmp x117 (8f597c3bf5); xmlOutputBufferWriteString -> xmlOutputBufferWrite x79 (7a6361f710); printf -> fprintf x74 (f435365b59)
+prometheus: 9203 commits, 4965343 changed source lines; study ground truth 101 migration pairs over its quarters
+  detector flags 357 commits (644 swaps, 25280 lines = 0.5% of all changed lines)
+  precision 11.5% of flagged swaps are a ground-truth migration of that quarter; purity 20.6% of flagged lines are a pure substitution
+  recall    97.9% of ground-truth migration lines sit in a commit where the same swap is flagged (4204 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 101 migrations; detector flagged at least half of the functions the study counts for 46.5%, at least 90% for 39.6%, nothing at all for 47.5% (flagged 4115 occurrences against 3083 functions)
+  flagged but not a quarter sweep (largest): MarshalTo -> MarshalToSizedBuffer x639 (b5c833ca21); QueryEscape -> Encode x402 (906c3a2237); Do -> SendRequest x374 (5b27996cb3); mustLabelMatcher -> MustLabelMatcher x120 (9199fcb8d1)
+sphinx: 11245 commits, 659440 changed source lines; study ground truth 47 migration pairs over its quarters
+  detector flags 154 commits (180 swaps, 7698 lines = 1.2% of all changed lines)
+  precision 17.2% of flagged swaps are a ground-truth migration of that quarter; purity 42.1% of flagged lines are a pure substitution
+  recall    99.6% of ground-truth migration lines sit in a commit where the same swap is flagged (1657 occurrences in all) [circular: counted with the detector's own pairing; see below]
+  recall vs the study's own counts: 47 migrations; detector flagged at least half of the functions the study counts for 55.3%, at least 90% for 46.8%, nothing at all for 42.6% (flagged 1651 occurrences against 1379 functions)
+  flagged but not a quarter sweep (largest): exprCheck -> expr_check x206 (ce070af2fa); stringify -> stringify_annotation x144 (77a02cf696); with_app -> sphinx x141 (baaef9146d); add_text -> append x87 (68e85d5665)
+POOLED over libgit2, redis, curl, libxml2, prometheus, sphinx: precision 17.3%, purity 55.8%, mechanical share of changed lines 1.2%; of 567 study migrations the detector flagged >=50% for 69.5%, >=90% for 60.3%, nothing for 28.4%; of the 161 missed, 4 are visible to the pairing but spread below 5 per commit and 157 are mostly invisible to it

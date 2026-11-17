@@ -44,3 +44,22 @@ Caveats: three commits is a demo, not a validation; the mechanical detector is c
 * A pilot of the prompt (does showing the markers raise repayment, and at which cap and gate?).
 * A validated mechanical detector (precision and recall against the sweep detector's quarterly ground truth).
 * Extending the report to gauge deltas (complexity, mutation, concurrency) across more than the touched functions, and to a pull request as a set of commits.
+
+## Mechanical-share detector: validation (2026-11-16)
+
+Code: `tools/sensor/mech_detect.py` (the detector `change_report.py` now imports), `tools/sensor/mech_validate.py`. Outputs: `mech_detector_validation_output.txt` (strict), `..._loose_output.txt`, `..._cooc_output.txt`. Ground truth: the sweep study's quarterly migrations (`tools/turn/sweeps.py detect()`), 567 migrations over libgit2, redis, curl, libxml2, prometheus, sphinx (ripgrep has one; excluded from the pool). Every non-merge commit that touches source was scored, 1.0M to 5.0M changed lines per repository.
+
+| Variant | Flags | Migrations with >=50% of the study's functions flagged | >=90% | nothing flagged | Hand-read precision of flags outside the study's sweeps |
+|---|---|---|---|---|---|
+| strict (one call per line pair, equal-size hunks, 5+ per commit) | 1.1% of changed lines | 64.4% | 57.0% | 33.9% | 7 to 8 of 8 per repo were real renames |
+| loose (one swap per hunk) | 1.2% | 69.5% | 60.3% | 28.4% | not read |
+| co-occurrence (the study's rule at commit scale) | 1.4% | 79.5% | 72.5% | 19.0% | about 2 of 7 per repo |
+
+Findings:
+- **Precision against the study's sweeps (17%) is the wrong yardstick.** A study sweep needs 10+ functions and 1% of a quarter; a per-commit swap of 5 or more is a smaller, real rename. Reading random flags outside the sweeps, the strict ones were nearly all genuine renames (`git_buf_decode_percent -> git_str_decode_percent`, `strequal -> Curl_ascii_equal`). Hand sample is small (24 flags, 3 repos) and read by me alone.
+- **Purity (the new line equals the old line with only the name changed) is 63% pooled** (85% libgit2, 82% curl, 23% prometheus). Go and Python renames come with argument changes, so the share is a statement about renames, not pure find-and-replace. Report it as "rename-like", not "pure".
+- **Recall is 57% at >=90% of a sweep's functions.** Of the 192 migrations the strict rule missed, 188 are mostly invisible to line pairing (the call shares a line with other call changes, or the hunks are unequal), not just spread thin. The co-occurrence rule catches more but adds mostly non-renames (signature edits, `fprintf -> git_buf_printf`), so strict stays the default.
+- Two false-positive classes were found and fixed during validation: C declarators (`int (*cb)(...)` read as call `int`) and comment lines. Both now filtered.
+- **Share of changed lines the detector calls mechanical: 1.1% pooled** (0.5% to 3.3%). That is far below the study's 4% to 44% of in-place function edits, because the unit differs (lines of the whole commit against functions edited in place) and because most sweeps are multi-call. Do not compare the two numbers.
+
+Decision for `gitgalaxy change`: ship the strict rule, label it "repeated renames" with the count and the largest pair, never a percentage headline; show the share only as "lines in repeated renames".

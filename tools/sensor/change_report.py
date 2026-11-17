@@ -7,7 +7,7 @@ import sys, re, os, json, sqlite3, argparse, subprocess, pathlib, collections, b
 import numpy as np
 warnings.filterwarnings("ignore")
 HERE=pathlib.Path(__file__).resolve().parent; sys.path.insert(0,str(HERE)); sys.path.insert(0,str(HERE.parent))
-import debt_trial as DT, debt_lifecycle as DL
+import debt_trial as DT, debt_lifecycle as DL, mech_detect as MD
 SA="/srv/storage_16tb/projects/curl_call_graph_evolution/turn_v2/surface_area"; ENG=f"{SA}/engine_main"; YEAR=DL.YEAR
 CALL=re.compile(r"([A-Za-z_]\w*)\s*\("); KW={"if","while","for","switch","sizeof","return","defined"}; HUNK=re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 tst=lambda p: bool(re.search(r"(^|/)(tests?|examples?|fuzz\w*|docs?)(/|$)",p))
@@ -28,15 +28,7 @@ src_files=[p for p in files if not tst(p) and p.endswith((".c",".h",".cc",".cpp"
 tot=sum(a_+d for a_,d in files.values()); st=sum(sum(files[p]) for p in src_files)
 print(f"CHANGE {full[:10]}  {head[3][:90]}\n  author {head[1]}; {len(files)} files, {tot} lines changed ({st} in {len(src_files)} source files, {tot-st} in tests/docs/other)")
 # mechanical share: (old call -> new call) pairs repeated across equal-size hunks
-pairs=collections.Counter(); mech_lines=0
-for p,ra,ad in hl:
-    if len(ra)==len(ad) and ra:
-        for x,y in zip(ra,ad):
-            cx=[c for c in CALL.findall(x) if c not in KW]; cy=[c for c in CALL.findall(y) if c not in KW]
-            sx=set(cx)-set(cy); sy=set(cy)-set(cx)
-            if len(sx)==1 and len(sy)==1: pairs[(next(iter(sx)),next(iter(sy)))]+=1
-big={k:v for k,v in pairs.items() if v>=5}
-for (x,y),n in big.items(): mech_lines+=2*n
+pairs,big,_=MD.swaps(hl); mech_lines=MD.mechanical_lines(big)
 print("MECHANICAL SHARE")
 if big: print(f"  repeated swaps found: "+", ".join(f"{x} -> {y} x{n}" for (x,y),n in sorted(big.items(),key=lambda kv:-kv[1])[:4])+f"; about {100*min(mech_lines,tot)/max(tot,1):.0f}% of the changed lines belong to them")
 else: print("  no repeated call swaps (5 or more): the change is organic")

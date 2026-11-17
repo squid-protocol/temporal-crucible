@@ -1,0 +1,36 @@
+expat: libclang parsed 45 .c files; 178 include edges into 46 headers
+  stored imports  edges    196  precision 90.8%  recall 100.0%  | per header: Spearman +0.885, exactly right 83.0%
+  source text     edges    196  precision 90.8%  recall 100.0%  | per header: Spearman +0.885, exactly right 83.0%
+  engine column import_count     Spearman +0.383
+  engine column pagerank_score   Spearman +0.655
+  engine column popularity       Spearman +0.958
+redis: libclang parsed 504 .c files; 517 include edges into 89 headers
+  stored imports  edges    619  precision 83.4%  recall 99.8%  | per header: Spearman +0.805, exactly right 59.6%
+  source text     edges    619  precision 83.4%  recall 99.8%  | per header: Spearman +0.805, exactly right 59.6%
+  engine column import_count     Spearman +0.136
+  engine column pagerank_score   Spearman +0.477
+  engine column popularity       Spearman +0.676
+libuv: libclang parsed 331 .c files; 638 include edges into 28 headers
+  stored imports  edges    741  precision 86.0%  recall 99.8%  | per header: Spearman +0.922, exactly right 40.5%
+  source text     edges    741  precision 86.0%  recall 99.8%  | per header: Spearman +0.922, exactly right 40.5%
+  engine column import_count     Spearman +0.453
+  engine column pagerank_score   Spearman +0.299
+  engine column popularity       Spearman +0.705
+ndpi: libclang parsed 365 .c files; 943 include edges into 18 headers
+  stored imports  edges   1017  precision 92.7%  recall 100.0%  | per header: Spearman +0.786, exactly right 30.4%
+  source text     edges   1017  precision 92.7%  recall 100.0%  | per header: Spearman +0.786, exactly right 30.4%
+  engine column import_count     Spearman -0.322
+  engine column pagerank_score   Spearman +0.528
+  engine column popularity       Spearman +0.684
+hiredis: libclang parsed 25 .c files; 91 include edges into 25 headers
+  stored imports  edges    101  precision 88.1%  recall 97.8%  | per header: Spearman +0.944, exactly right 68.0%
+  source text     edges    101  precision 88.1%  recall 97.8%  | per header: Spearman +0.944, exactly right 68.0%
+  engine column import_count     Spearman -0.258
+  engine column pagerank_score   Spearman +0.834
+  engine column popularity       Spearman +0.942
+zlib: libclang parsed 43 .c files; 62 include edges into 19 headers
+  stored imports  edges     63  precision 98.4%  recall 100.0%  | per header: Spearman +0.962, exactly right 94.7%
+  source text     edges     63  precision 98.4%  recall 100.0%  | per header: Spearman +0.962, exactly right 94.7%
+  engine column import_count     Spearman +0.326
+  engine column pagerank_score   Spearman +0.636
+  engine column popularity       Spearman +0.962
