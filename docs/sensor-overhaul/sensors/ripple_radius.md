@@ -131,3 +131,15 @@ Most functions with no static caller in curl are callbacks, not dead code; in li
 - **T4 (same function).** A majority of fixes touch a function the inducing commit also touched (curl 71%); lower in OpenSSL, where lags are long.
 - **T5 (signatures).** When the inducing commit changed a parameter count, fixes land in callers more often (curl 33% against 13%); too few pairs to test here, reported if 15 or more.
 **Would surprise:** no excess against file-mates in either repository (curl's result would then be a curl effect); callees as enriched as callers.
+
+### OpenSSL results (2026-11-17; `ripple_openssl_output.txt`; FreeBSD to follow)
+**Data.** 261 `Fixes:` pairs; usable 177 (44 have no function name in a hunk header, 35 not found in the nearest quarterly snapshot, 5 sweeps, 10 with no same-file functions to compare); **126 have a fixed function outside the set the inducing commit changed**. In 42% of pairs the fixed function is also one the inducing commit changed (curl: 71%).
+
+| hypothesis | verdict | evidence (126 pairs) |
+|---|---|---|
+| T1 radius at least 1.3 against file-mates | **supported** | within 2 calls 51.6% against 34.1% for same-file functions: **1.57 [1.32, 1.95]** (curl 1.54); within 1 call 1.69 [1.31, 2.24] (curl 1.77). Against random same-size functions 30x |
+| T2 callers more enriched than callees | **not replicated** | within 1 call: callers 1.62 [1.12, 2.36], callees **1.75 [1.22, 2.55]**; within 2 calls callers 1.46, callees 1.79; in absolute terms callees 23.0% against callers 19.8% (curl: 29.7% against 16.5%, with callers the more enriched). The caller direction is not a general result |
+| T3 the effect fades with lag | **supported, and sharper than in curl** | fix within 30 days: within 1 call **2.11 [1.43, 3.24]**, within 2 calls 2.01 [1.54, 2.89]; 30 to 365 days: 2.27 [1.53, 3.73] and 1.88 [1.30, 3.15]; **a year or more later: 1.20 [0.77, 1.89] and 1.21 [0.91, 1.63]**, intervals including 1: no excess left. 85 of the 177 pairs are a year or more apart (median lag 500 days) |
+| T4 a majority of fixes touch a function the inducing commit also touched | **not for OpenSSL** | 42% (45% within 30 days, 57% for 30 to 365 days, 34% after a year) |
+| T5 signature changes ripple to callers | not tested yet (pooled with FreeBSD) | |
+**Reading so far.** The radius replicates: fixes are found within one or two calls of the change about 1.6 times as often as same-file functions in both curl and OpenSSL, with the same size of effect. Two curl findings do not carry over: the caller direction (OpenSSL's callees are as enriched), and, as it turns out, the persistence: for OpenSSL's long-lag fixes (a year or more) the excess is gone, so the radius is a short-range effect in time as well as in the graph. Caveats as for curl, plus: 35 pairs fell outside the nearest snapshot (functions that did not exist at the snapshot, or renamed), 44 have no function name in a hunk header (OpenSSL's headers and macros), and the intervals are wide (126 pairs; 28 to 65 in the lag strata).
