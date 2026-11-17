@@ -1,0 +1,55 @@
+curl: 169,801 function-intervals (source, 5+ lines); fix hunks with a function name 10,833, found among that snapshot's functions 8,408 (78%); a function is touched by a fix in 4.44% of intervals
+libgit2: 199,831 function-intervals (source, 5+ lines); fix hunks with a function name 4,799, found among that snapshot's functions 2,211 (46%); a function is touched by a fix in 0.97% of intervals
+redis: 264,699 function-intervals (source, 5+ lines); fix hunks with a function name 5,352, found among that snapshot's functions 3,609 (67%); a function is touched by a fix in 1.23% of intervals
+libxml2: 334,600 function-intervals (source, 5+ lines); fix hunks with a function name 11,017, found among that snapshot's functions 6,698 (61%); a function is touched by a fix in 1.76% of intervals
+
+pooled 968,931 function-intervals; fix touches: any 18,613, regression 3,414, other-fix 13,338, extrinsic 2,145, latent 618
+
+=== ANY FIXES: observed / expected-from-size, by parameter count (columns) and branch logic against size (rows) ===
+                               0                   1                   2                 3-4                  5+
+Q1 flat        1.79 [1.49,2.10]    1.21 [1.06,1.39]    0.97 [0.86,1.10]    0.99 [0.86,1.12]    0.84 [0.71,0.98] 
+Q2             1.33 [1.05,1.59]    1.05 [0.91,1.20]    0.99 [0.88,1.10]    0.94 [0.83,1.07]    0.91 [0.79,1.03] 
+Q3             1.31 [1.02,1.60]    1.09 [0.96,1.24]    0.91 [0.82,1.04]    0.96 [0.85,1.07]    0.91 [0.79,1.03] 
+Q4 branchy     1.53 [1.20,1.95]    1.01 [0.89,1.16]    0.97 [0.85,1.08]    0.91 [0.80,1.02]    0.93 [0.80,1.06] 
+  margins: parameters 0 1.55, 1 1.09, 2 0.96, 3-4 0.95, 5+ 0.89; branch rank Q1 flat 1.07, Q2 0.99, Q3 0.98, Q4 branchy 0.97
+  cells furthest above the additive (product of margins) expectation: Q1 flat x 0 params: 1.79 vs 1.66 (x1.08, 573 fixes); Q4 branchy x 5+ params: 0.93 vs 0.86 (x1.07, 422 fixes); Q1 flat x 1 params: 1.21 vs 1.16 (x1.05, 1186 fixes)
+  cells furthest below it: Q1 flat x 5+ params: 0.84 vs 0.95 (x0.88, 577 fixes); Q2 x 0 params: 1.33 vs 1.53 (x0.87, 252 fixes); Q3 x 0 params: 1.31 vs 1.52 (x0.86, 183 fixes)
+
+=== REGRESSION FIXES: observed / expected-from-size, by parameter count (columns) and branch logic against size (rows) ===
+                               0                   1                   2                 3-4                  5+
+Q1 flat        1.83 [1.27,2.39]    0.85 [0.63,1.09]    0.82 [0.61,1.01]    1.00 [0.73,1.37]    0.88 [0.65,1.16] 
+Q2             1.96 [0.86,3.38]    0.80 [0.61,1.03]    0.87 [0.69,1.05]    1.02 [0.78,1.29]    1.16 [0.88,1.47] 
+Q3             2.04 [1.05,3.49]    0.95 [0.70,1.22]    0.85 [0.68,1.05]    1.08 [0.82,1.34]    1.11 [0.78,1.47] 
+Q4 branchy     3.16 [1.56,5.14]    0.96 [0.71,1.25]    1.04 [0.75,1.29]    1.00 [0.81,1.26]    1.26 [1.01,1.55] 
+  margins: parameters 0 2.08, 1 0.90, 2 0.89, 3-4 1.02, 5+ 1.09; branch rank Q1 flat 0.94, Q2 0.98, Q3 1.01, Q4 branchy 1.06
+  cells furthest above the additive (product of margins) expectation: Q4 branchy x 0 params: 3.16 vs 2.21 (x1.43, 46 fixes); Q4 branchy x 5+ params: 1.26 vs 1.16 (x1.09, 107 fixes); Q4 branchy x 2 params: 1.04 vs 0.95 (x1.09, 268 fixes)
+  cells furthest below it: Q4 branchy x 3-4 params: 1.00 vs 1.09 (x0.92, 279 fixes); Q2 x 1 params: 0.80 vs 0.88 (x0.91, 129 fixes); Q1 flat x 5+ params: 0.88 vs 1.03 (x0.86, 112 fixes)
+
+=== OTHER-FIX FIXES: observed / expected-from-size, by parameter count (columns) and branch logic against size (rows) ===
+                               0                   1                   2                 3-4                  5+
+Q1 flat        1.79 [1.38,2.26]    1.32 [1.13,1.53]    1.02 [0.88,1.18]    0.97 [0.84,1.13]    0.86 [0.74,1.01] 
+Q2             1.14 [0.91,1.40]    1.07 [0.90,1.20]    1.00 [0.89,1.12]    0.92 [0.80,1.04]    0.86 [0.75,1.01] 
+Q3             1.19 [0.92,1.52]    1.15 [1.02,1.32]    0.93 [0.82,1.07]    0.96 [0.86,1.05]    0.84 [0.73,0.94] 
+Q4 branchy     1.23 [0.90,1.65]    1.02 [0.86,1.17]    0.95 [0.85,1.08]    0.86 [0.77,0.97]    0.86 [0.74,1.01] 
+  margins: parameters 0 1.44, 1 1.13, 2 0.97, 3-4 0.93, 5+ 0.86; branch rank Q1 flat 1.10, Q2 0.98, Q3 0.99, Q4 branchy 0.94
+  cells furthest above the additive (product of margins) expectation: Q1 flat x 0 params: 1.79 vs 1.59 (x1.13, 433 fixes); Q4 branchy x 5+ params: 0.86 vs 0.80 (x1.08, 287 fixes); Q1 flat x 1 params: 1.32 vs 1.25 (x1.06, 930 fixes)
+  cells furthest below it: Q4 branchy x 0 params: 1.23 vs 1.35 (x0.91, 77 fixes); Q3 x 0 params: 1.19 vs 1.42 (x0.83, 123 fixes); Q2 x 0 params: 1.14 vs 1.41 (x0.81, 167 fixes)
+
+=== OUTLIER FUNCTIONS: observed fix touches against expected over the function's life (functions present in 8+ intervals) ===
+  4,867 long-lived functions with expected touches of 1+; touched more than expected by 3+ standard errors: 170 (3.5%); fewer by 3+: 4 (0.1%)
+  most over-fixed:
+    redis      restoreCommand                       src/cluster.c                                fixes  18 vs   2.4 expected; params 1, branches 46, lines 170
+    redis      sigsegvHandler                       src/debug.c                                  fixes  15 vs   2.1 expected; params 3, branches 15, lines 108
+    libxml2    parseAndPrintFile                    xmllint.c                                    fixes  32 vs   8.0 expected; params 2, branches 288, lines 829
+    redis      setGenericCommand                    src/t_string.c                               fixes  11 vs   1.4 expected; params 9, branches 55, lines 147
+    libxml2    main                                 xmllint.c                                    fixes  28 vs   6.8 expected; params 2, branches 319, lines 695
+    libxml2    xmlParseReference                    parser.c                                     fixes  28 vs   7.3 expected; params 2, branches 119, lines 426
+    redis      genRedisInfoString                   src/server.c                                 fixes  28 vs   7.7 expected; params 3, branches 145, lines 809
+    redis      processCommand                       src/server.c                                 fixes  24 vs   6.2 expected; params 1, branches 136, lines 383
+    libxml2    xmlParseTryOrFinish                  parser.c                                     fixes  28 vs   8.0 expected; params 2, branches 352, lines 994
+    curl       my_getaddrinfo                       lib/hostip.c                                 fixes  11 vs   1.8 expected; params 4, branches 61, lines 398
+    redis      freeClient                           src/networking.c                             fixes  17 vs   3.9 expected; params 1, branches 34, lines 192
+    curl       Curl_if2ip                           lib/if2ip.c                                  fixes  11 vs   1.9 expected; params 6, branches 0, lines 18
+  large and branchy (top tenth of both): 368; of them never touched by a fix though 6.7 were expected on average: 25
+  most under-fixed among those (expected, observed): redis/luaV_execute 7.3 vs 0; redis/redisvFormatCommand 7.3 vs 0; libxml2/TRIO_ARGS5 6.8 vs 0; libxml2/TRIO_ARGS6 6.3 vs 0; redis/malloc_conf_init 5.0 vs 0; redis/lzf_compress 4.8 vs 0; libxml2/TRIO_ARGS3 4.6 vs 0; libxml2/xmlSchemaUnionWildcards 4.5 vs 0
+  over-fixed (3+ SE) with 5+ parameters: 22 of 170 over-fixed (13%) against 15% of all long-lived functions

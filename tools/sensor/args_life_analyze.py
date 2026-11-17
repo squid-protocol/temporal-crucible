@@ -25,7 +25,7 @@ rng = np.random.default_rng(2982)
 
 def load(name):
     d = pickle.load(open(f"{SP}/{name}.pkl", "rb"))
-    df = pd.DataFrame(d["rows"], columns=["s", "lin", "args", "loc", "path", "fn"])
+    df = pd.DataFrame(d["rows"], columns=["s", "lin", "args", "loc", "path", "fn", "cx"])
     df = df[~df.path.map(lambda p: bool(TESTP.search(p)))].copy()
     return df, d["ct"]
 

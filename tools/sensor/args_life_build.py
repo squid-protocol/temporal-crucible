@@ -26,14 +26,14 @@ t0 = time.time()
 snaps = [LG.Snapshot(Path(x["db"]), x["commit"], x.get("label", "")) for x in sn]
 led = LG.build_ledger(Path(f"{POOL}/{name}"), snaps, progress=lambda i, n: print(f"{name} pair {i}/{n} {time.time()-t0:.0f}s", file=sys.stderr, flush=True) if i % 10 == 0 else None)
 cts = [int(subprocess.run(["git", "-C", f"{POOL}/{name}", "show", "-s", "--format=%ct", x["commit"]], capture_output=True, text=True).stdout.strip()) for x in sn]
-rows = []  # (snapshot, lineage, args, loc, path, name)
+rows = []  # (snapshot, lineage, args, loc, path, name, complexity)
 for s, snap in enumerate(led._snaps):
     con = sqlite3.connect(f"file:{snaps[s].scan}?mode=ro", uri=True)
     files = {r[0]: r[1] for r in con.execute("SELECT id, file_path FROM file_data")}
     by_key = collections.defaultdict(list)
-    for fid, fname, loc, args in con.execute("SELECT file_id, func_name, loc, args FROM function_data ORDER BY id"):
+    for fid, fname, loc, args, cx in con.execute("SELECT file_id, func_name, loc, args, complexity FROM function_data ORDER BY id"):
         if fid in files and (loc or 0) >= 3:
-            by_key[(files[fid], fname)].append((int(args or 0), int(loc or 0)))
+            by_key[(files[fid], fname)].append((int(args or 0), int(loc or 0), int(cx or 0)))
     con.close()
     seen = collections.Counter()
     for i, k in enumerate(led.keys[s]):
@@ -41,6 +41,6 @@ for s, snap in enumerate(led._snaps):
         seen[k] += 1
         r = by_key.get(k, [])
         if j < len(r):
-            rows.append((s, int(led.ids[s][i]), r[j][0], r[j][1], k[0], k[1]))
+            rows.append((s, int(led.ids[s][i]), r[j][0], r[j][1], k[0], k[1], r[j][2]))
 pickle.dump({"name": name, "ct": cts, "rows": rows, "stages": [list(st) for st in led.stage]}, open(f"/tmp/gitgalaxy-scratch/claude/argl/{name}.pkl", "wb"))
 print(name, "snapshots", len(sn), "function-snapshots", len(rows), "lineages", led.n_lineages, f"{time.time()-t0:.0f}s")
