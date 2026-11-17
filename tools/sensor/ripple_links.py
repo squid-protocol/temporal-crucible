@@ -192,7 +192,7 @@ def analyse(name):
         if s >= 1:
             _, _, args0, *_ = graph(sn[s - 1]["db"])
             sig = any(k in args0 and k in args and args0[k] != args[k] for k in Im)
-        res.append({"lag": lk["lag"], "same_func": same_func, "obs": obs, "A": dict(nullA) if obs else None, "B": dict(nullB) if (obs and okB) else None, "sig": sig, "nI": len(Im), "nF": len(Fm), "nFo": len(Fo)})
+        res.append({"fix": lk["fix"], "ind": lk["ind"], "Im": Im, "Fm": Fm, "Fo": Fo, "graph": (nodes, loc, args, fwd, rev, by_file, dec, by_dec), "lag": lk["lag"], "same_func": same_func, "obs": obs, "A": dict(nullA) if obs else None, "B": dict(nullB) if (obs and okB) else None, "sig": sig, "nI": len(Im), "nF": len(Fm), "nFo": len(Fo)})
     return res, stats, len(L)
 
 
