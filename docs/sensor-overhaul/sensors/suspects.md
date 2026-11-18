@@ -102,3 +102,20 @@ Section in the change report after "REACH OF WHAT CHANGED" (`gitgalaxy/tools/sen
 4. **A subcommand** of its own (it is not only a section of `gitgalaxy change`; the change report may link to it).
 5. **Wiki PR #8636 merges first** (label `shepherd:merge` added 2026-11-18); the sensor's documentation links to that page.
 **Next:** run the held-out back-test against the gate; test the same-directory feature; then the engine issue.
+
+## 14. Back-test result against the gate (2026-11-18; `sensors/backtest_gate_output.txt`; `tools/sensor/backtest_gate.py`)
+Held-out repositories, causes by blame (SZZ style, 2,500 fix-like commits per repository at most), the validated ranking against size alone, repaired functions outside the changed set; the call graph of the nearest quarterly scan at or after the cause.
+| language (repositories) | pairs ranked | candidate functions per pair (median) | **function top 20: size alone / call distance alone / same file, distance, then size** | within-size AUC of call distance | **files, top 20** (size alone / the ranking); top 10 of the ranking |
+|---|---|---|---|---|---|
+| **C** (libgit2, redis, libxml2) | 1,604 | 2,605 to 4,444 | **5.4% / 31.3% / 47.3%** | **0.737** | 61.4% / **92.1%**; **83.6%** |
+| **Python** (sphinx, scapy, sqlmap) | 1,513 | 1,912 to 4,402 | **6.6% / 26.1% / 35.7%** | **0.644** (scapy 0.589) | 47.7% / **70.7%**; **60.9%** |
+| **Go** (prometheus) | 380 | 3,295 | **4.5% / 31.9% / 42.4%** | **0.692** | 32.0% / **78.7%**; **70.3%** |
+Per repository, function top 20 of the ranking: libgit2 53.4%, redis 43.5%, libxml2 46.9%; sphinx 44.1%, scapy 43.9%, sqlmap 27.9%; prometheus 42.4%.
+| gate criterion (section 11) | C | Python | Go |
+|---|---|---|---|
+| function top 20: at least 30% (C), 25% (Python, Go) | **47.3% pass** | **35.7% pass** | **42.4% pass** |
+| at least 50 times size alone | 9 times **fail** | 5 times **fail** | 9 times **fail** |
+| within-size AUC of call distance: at least 0.65 (C), 0.60 (Python, Go) | **0.737 pass** | **0.644 pass** | **0.692 pass** |
+**By the letter of the gate every language fails, on one criterion only: "at least 50 times the share of size alone".** That criterion was badly specified, and it is recorded as it came out. Size alone finds 4 to 8% in the top 20 of these repositories (2,000 to 4,400 candidate functions) where it found 0.2 to 0.4% in the research repositories (30,000 to 110,000 candidates): a ratio to size alone depends on how many candidates there are (117 to 290 times in the large repositories, 5 to 9 times here), not on the quality of the ranking. The same ranking is **29 to 42 percentage points above size alone** in every language here (C +41.9, Python +29.1, Go +37.9), and clears the absolute top-20 and the within-size criteria by 10 to 17 points and 0.04 to 0.09 AUC.
+**Proposed amendment (not applied; needs the owner's approval, and is proposed after seeing these numbers):** replace "at least 50 times size alone" with a scale-free pair: **the ranking's top-20 share at least 15 percentage points above size alone's and at least 3 times size alone's**. Under it all three languages pass (differences 41.9, 29.1 and 37.9 points; ratios 9, 5 and 9). An alternative without post-hoc risk is to re-run the gate on repositories of the research repositories' size (tens of thousands of functions: not available among the held-out ones).
+**Reading.** The sensor's core claim holds out of sample and out of language for C, Python and Go: the repaired function is in the top 20 for about half (C 47%) to a third (Python 36%) of the cases, and the file is in the top 10 for 61 to 84%. Python is weakest (the call graph resolves fewer calls: scapy's within-size AUC of 0.589 would fail the 0.60 bar on its own). Caveats: blame labels; small repositories flatter the top-20 figures; sqlmap (27.9%) shows a project where the list is much less effective; the files are fewer in these repositories (100 to 900), which inflates the file figures.

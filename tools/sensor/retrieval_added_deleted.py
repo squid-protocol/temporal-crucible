@@ -24,6 +24,8 @@ def file_worker(args):
     nfile = g.nfiles
     floc = np.bincount(g.fid, weights=g.loc, minlength=nfile)
     present = np.bincount(g.fid, minlength=nfile) > 0
+    if not present.any():
+        return []  # a snapshot with no functions
     cuts = np.percentile(floc[present], np.arange(10, 100, 10))
     fdec = np.searchsorted(cuts, floc)
     out = []

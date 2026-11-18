@@ -1,0 +1,57 @@
+
+libgit2 (C): 1309 blame pairs; 436 ranked (a repaired function outside the changed set exists in the graph); median candidates 3792 functions
+  functions: size alone top 20 5.6% top 100 23.7% AUC 0.711; call distance alone top 20 35.8% top 100 58.8% AUC 0.738; same file, distance, then size top 20 53.4% top 100 76.4% AUC 0.890; call distance within-size AUC 0.734
+  files: file size alone top 10 n/a, top 20 45.1%; event file, distance, then size top 10 n/a, top 20 87.6%
+
+redis (C): 1642 blame pairs; 629 ranked (a repaired function outside the changed set exists in the graph); median candidates 4444 functions
+  functions: size alone top 20 5.1% top 100 22.5% AUC 0.781; call distance alone top 20 30.2% top 100 53.6% AUC 0.752; same file, distance, then size top 20 43.5% top 100 67.5% AUC 0.918; call distance within-size AUC 0.747
+  files: file size alone top 10 n/a, top 20 56.8%; event file, distance, then size top 10 n/a, top 20 93.1%
+
+libxml2 (C): 1832 blame pairs; 539 ranked (a repaired function outside the changed set exists in the graph); median candidates 2605 functions
+  functions: size alone top 20 5.4% top 100 25.1% AUC 0.730; call distance alone top 20 29.0% top 100 57.0% AUC 0.740; same file, distance, then size top 20 46.9% top 100 66.7% AUC 0.865; call distance within-size AUC 0.729
+  files: file size alone top 10 n/a, top 20 80.0%; event file, distance, then size top 10 n/a, top 20 94.5%
+
+######## C pooled over libgit2, redis, libxml2: 1604 pairs ########
+  functions, size alone                       AUC 0.745  top 20   5.4%  top 100  23.7%
+  functions, call distance alone              AUC 0.744  top 20  31.3%  top 100  56.1%
+  functions, same file, distance, then size   AUC 0.892  top 20  47.3%  top 100  69.7%
+  functions, call distance alone within-size AUC 0.737
+  files, file size alone                    AUC 0.855  top 5  24.6%  top 10  39.7%  top 20  61.4%
+  files, event file, distance, then size    AUC 0.936  top 5  73.6%  top 10  83.6%  top 20  92.1%
+
+sphinx (Python): 1539 blame pairs; 450 ranked (a repaired function outside the changed set exists in the graph); median candidates 4402 functions
+  functions: size alone top 20 4.2% top 100 19.2% AUC 0.755; call distance alone top 20 31.0% top 100 41.4% AUC 0.669; same file, distance, then size top 20 44.1% top 100 63.7% AUC 0.882; call distance within-size AUC 0.665
+  files: file size alone top 10 n/a, top 20 36.6%; event file, distance, then size top 10 n/a, top 20 76.4%
+
+scapy (Python): 1142 blame pairs; 280 ranked (a repaired function outside the changed set exists in the graph); median candidates 2586 functions
+  functions: size alone top 20 8.0% top 100 28.4% AUC 0.706; call distance alone top 20 23.1% top 100 34.2% AUC 0.594; same file, distance, then size top 20 43.9% top 100 65.6% AUC 0.838; call distance within-size AUC 0.589
+  files: file size alone top 10 n/a, top 20 54.8%; event file, distance, then size top 10 n/a, top 20 80.2%
+
+sqlmap (Python): 2211 blame pairs; 783 ranked (a repaired function outside the changed set exists in the graph); median candidates 1912 functions
+  functions: size alone top 20 7.4% top 100 34.8% AUC 0.805; call distance alone top 20 24.3% top 100 41.4% AUC 0.663; same file, distance, then size top 20 27.9% top 100 51.2% AUC 0.873; call distance within-size AUC 0.651
+  files: file size alone top 10 n/a, top 20 51.5%; event file, distance, then size top 10 n/a, top 20 64.1%
+
+######## Python pooled over sphinx, scapy, sqlmap: 1513 pairs ########
+  functions, size alone                       AUC 0.772  top 20   6.6%  top 100  29.0%
+  functions, call distance alone              AUC 0.652  top 20  26.1%  top 100  40.1%
+  functions, same file, distance, then size   AUC 0.869  top 20  35.7%  top 100  57.6%
+  functions, call distance alone within-size AUC 0.644
+  files, file size alone                    AUC 0.799  top 5  14.6%  top 10  26.7%  top 20  47.7%
+  files, event file, distance, then size    AUC 0.873  top 5  50.8%  top 10  60.9%  top 20  70.7%
+
+prometheus (Go): 1260 blame pairs; 380 ranked (a repaired function outside the changed set exists in the graph); median candidates 3295 functions
+  functions: size alone top 20 4.5% top 100 19.8% AUC 0.697; call distance alone top 20 31.9% top 100 47.3% AUC 0.695; same file, distance, then size top 20 42.4% top 100 61.5% AUC 0.850; call distance within-size AUC 0.692
+  files: file size alone top 10 n/a, top 20 32.0%; event file, distance, then size top 10 n/a, top 20 78.7%
+
+######## Go pooled over prometheus: 380 pairs ########
+  functions, size alone                       AUC 0.697  top 20   4.5%  top 100  19.8%
+  functions, call distance alone              AUC 0.695  top 20  31.9%  top 100  47.3%
+  functions, same file, distance, then size   AUC 0.850  top 20  42.4%  top 100  61.5%
+  functions, call distance alone within-size AUC 0.692
+  files, file size alone                    AUC 0.788  top 5   9.4%  top 10  18.7%  top 20  32.0%
+  files, event file, distance, then size    AUC 0.903  top 5  59.1%  top 10  70.3%  top 20  78.7%
+
+=== GATE (suspects.md section 11) ===
+  C: top 20 47.3% (needs 30%), 9 times size alone (needs 50), within-size AUC 0.737 (needs 0.65), n 1604: FAIL
+  Python: top 20 35.7% (needs 25%), 5 times size alone (needs 50), within-size AUC 0.644 (needs 0.60), n 1513: FAIL
+  Go: top 20 42.4% (needs 25%), 9 times size alone (needs 50), within-size AUC 0.692 (needs 0.60), n 380: FAIL
