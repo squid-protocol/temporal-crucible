@@ -1117,3 +1117,28 @@ Surprise bar (within-size AUC of call distance at or below 0.55): not met.
 - **LG4.** The pooled non-C radius within 2 calls lies between 1.2 and 2.5 (the same order as C).
 - **LG5.** Pooled over the non-C repositories, causes of under 30 changed lines have at least 1.2 times the radius of causes of 100 or more lines (the size trend of C).
 **Would surprise:** a pooled non-C radius at or below 1.1 (then the pattern is a property of the C projects measured, or of trailer labels).
+
+#### Validation in other languages: results (2026-11-18; `lang_validation_output.txt`, `lang_validation_by_language_output.txt`; causes from SZZ-style blame, 2,500 fix-like commits sampled per repository at most)
+| repository (language) | fix-cause pairs / measured / repaired function outside the changed set | same function | radius within 1 call | **within 2 calls** | callers1 / callees1 | resolved call edges per function; functions with a caller |
+|---|---|---|---|---|---|---|
+| **calibration** DPDK (C) | 1,841 / 977 / 594 | 57% | 1.73 | **1.55** [1.44, 1.67] (trailers: 1.57) | 1.95 / 1.66 | 1.98; 67% |
+| calibration curl (C) | 1,306 / 815 / 383 | 70% | 1.63 | **1.43** [1.31, 1.58] (trailers: 1.65) | 1.64 / 1.75 | 2.28; 56% |
+| sphinx (Python) | 1,539 / 982 / 450 | 71% | 1.96 | **1.62** [1.42, 1.84] | 1.52 / 2.09 | 0.78; 21% |
+| scapy (Python) | 1,142 / 481 / 280 | 67% | 1.62 | **1.48** [1.24, 1.75] | 1.37 / 2.04 | 1.02; 25% |
+| sqlmap (Python) | 2,211 / 1,714 / 783 | 72% | 2.48 | **1.85** [1.67, 2.05] | 2.10 / 2.49 | 1.45; 36% |
+| prometheus (Go) | 1,260 / 698 / 380 | 63% | 1.93 | **1.50** [1.33, 1.69] | 1.99 / 1.96 | 1.57; 35% |
+| commons-lang (Java) | 684 / 179 / 73 | 73% | 1.39 | 1.18 [0.77, 1.80] | 1.38 / 1.40 | 0.72; 15% |
+| commons-io (Java) | 312 / 110 / 66 | 58% | 2.40 | 2.48 [1.86, 3.45] | 1.52 / 3.84 | 0.89; 16% |
+| ripgrep (Rust) | 173 / 87 / 64 | 38% | 0.92 | 1.04 [0.70, 1.39] | 0.00 / 1.03 | 0.26; 9% |
+| **pooled by language, within 2 calls** | | | | **Python 1.70 [1.59, 1.84] (n 1,245); Go 1.50 [1.33, 1.71] (315); Java 1.63 [1.24, 2.12] (110); Rust 1.04 [0.71, 1.35] (56); C with blame-based causes 1.50 [1.41, 1.59] (870)** | | |
+Pooled non-C (all seven): **1.63 [1.53, 1.73]** (n 2,096), same function 69%. Repairs in a different file, pooled non-C (n 869): callers1 1.47, callees1 2.72. Under 30 changed lines against 100 or more, pooled non-C: 2.11 against 1.41 (1.49 times); Python and C show the size trend in every repository that has enough small causes (sphinx 1.78 against 1.39, scapy 2.66 against 1.25, sqlmap 2.09 against 1.64, prometheus 2.97 against 1.35, DPDK 2.13 against 1.42).
+| hypothesis | verdict |
+|---|---|
+| LG1 SZZ radius within 25% of the trailer radius on DPDK and curl | **supported**: 1.55 against 1.57 (-1%), 1.43 against 1.65 (-14%): the blame-based label reproduces the trailer result in C |
+| LG2 radius at least 1.3 (lower bound above 1.1) in each Python, Go and Java repository with at least 100 pairs | **supported for the four testable repositories** (sphinx 1.62, scapy 1.48, sqlmap 1.85, prometheus 1.50, lower bounds 1.25 to 1.67); both Java repositories have fewer than 100 repaired pairs outside the changed set (73 and 66), so untestable (their pooled 1.63 is compatible, with an interval of 1.24 to 2.12) |
+| LG3 callers1 above callees1 for different-file repairs, pooled non-C | **not supported**: 1.47 against 2.72 (callees above callers in Python and Java; equal in Go: 1.06 and 1.06 on 132 pairs) |
+| LG4 pooled non-C radius between 1.2 and 2.5 | **supported**: 1.63 |
+| LG5 under 30 lines at least 1.2 times 100 or more, pooled non-C | **supported**: 2.11 against 1.41 = 1.49 |
+Surprise bar (pooled non-C radius at or below 1.1): not met.
+**Reading.** **The repair radius is not a property of C.** With a cause label that needs no trailers (calibrated on two C projects, where it reproduces the trailer value to within 1% and 14%), repairs land within two calls of the changed functions 1.5 to 1.9 times as often as same-file functions of similar size in three Python projects (1.48 to 1.85) and in a Go project (1.50), the same order as in C (1.57 to 2.15), and the size trend appears again (small causes about twice, large ones 1.4). **The caller-first direction does not carry over**: in Python and Java the callees are over-represented more than the callers (callers 1.47 against callees 2.72 for repairs in a different file). **A caution on every non-C figure:** the static call graph is much sparser than in C (0.7 to 1.6 resolved confident edges per function against 2.0 to 2.3; only 15 to 36% of functions have a recorded caller against 56 to 67%), because method calls through objects, interfaces and traits are not resolved. A sparse graph misses neighbours, so the radius is probably understated, the caller-direction numbers (callers need resolved incoming calls) cannot be trusted, and Rust (0.26 edges per function, 9% with a caller; ripgrep radius 1.04 on 56 pairs) and Java are untestable in practice rather than negative.
+**Caveats.** SZZ labels have their own artefacts (blame follows lines, not the author's intent, and the fixed function usually lies in the changed set by construction, so only the *other* functions the fix edited are measured; same-function shares of 57 to 73% here are not comparable with the trailer figures); fix commits identified by words in the subject; test files excluded from both sides; 2,500 fix-like commits sampled per repository; tree-sitter names are plain (methods of different classes with the same name in a file are merged); Ruby, PHP, C#, TypeScript and the rest are untested; nothing here tests the added and deleted function result, the ranking test or the will-it-need-a-fix test outside C.

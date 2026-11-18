@@ -1,0 +1,15 @@
+Python (sphinx, scapy, sqlmap): measured 3177, outside 1513, same function 71%; within 1 2.11 [1.93,2.31] (n 1245); within 2 1.70 [1.59,1.84] (n 1245); callers1 1.69 [1.44,1.99] (n 1245) callees1 2.26 [2.02,2.52] (n 1245); other-file repairs callers1 2.04 [1.21,3.53] (n 494) callees1 4.08 [3.00,5.67] (n 494); under 30 lines 2.06 [1.76,2.42] (n 405), 100+ 1.45 [1.29,1.63] (n 533)
+Go (prometheus): measured 698, outside 380, same function 63%; within 1 1.93 [1.67,2.28] (n 315); within 2 1.50 [1.33,1.71] (n 315); callers1 1.99 [1.34,2.82] (n 315) callees1 1.96 [1.65,2.32] (n 315); other-file repairs callers1 1.06 [0.35,1.97] (n 132) callees1 1.06 [0.53,1.75] (n 132); under 30 lines 2.97 [1.89,5.78] (n 15), 100+ 1.35 [1.17,1.55] (n 252)
+Java (commons-lang, commons-io): measured 289, outside 139, same function 67%; within 1 1.75 [1.22,2.37] (n 110); within 2 1.63 [1.24,2.12] (n 110); callers1 1.44 [0.76,2.39] (n 110) callees1 2.09 [1.34,3.11] (n 110); other-file repairs callers1 0.00 [0.00,0.00] (n 32) callees1 1.19 [0.00,4.62] (n 32); under 30 lines n/a, 100+ 1.64 [1.23,2.17] (n 81)
+Rust (ripgrep): measured 87, outside 64, same function 38%; within 1 0.92 [0.42,1.47] (n 56); within 2 1.04 [0.71,1.35] (n 56); callers1 0.00 [0.00,0.00] (n 56) callees1 1.03 [0.53,1.77] (n 56); other-file repairs callers1 n/a callees1 3.17 [1.59,6.34] (n 29); under 30 lines n/a, 100+ 1.04 [0.71,1.39] (n 49)
+C, SZZ pairs (dpdk, curl): measured 1792, outside 977, same function 63%; within 1 1.69 [1.57,1.86] (n 870); within 2 1.50 [1.41,1.59] (n 870); callers1 1.82 [1.52,2.21] (n 870) callees1 1.69 [1.54,1.85] (n 870); other-file repairs callers1 2.46 [1.53,4.07] (n 237) callees1 1.35 [1.00,1.82] (n 237); under 30 lines 1.85 [1.27,2.57] (n 59), 100+ 1.40 [1.32,1.49] (n 679)
+
+dpdk          functions  60500, resolved confident call edges 119584 (1.98 per function), functions with a caller 67%
+curl          functions   7392, resolved confident call edges  16834 (2.28 per function), functions with a caller 56%
+sphinx        functions   7499, resolved confident call edges   5853 (0.78 per function), functions with a caller 21%
+scapy         functions   7656, resolved confident call edges   7823 (1.02 per function), functions with a caller 25%
+sqlmap        functions   2982, resolved confident call edges   4319 (1.45 per function), functions with a caller 36%
+prometheus    functions  10562, resolved confident call edges  16635 (1.57 per function), functions with a caller 35%
+commons-lang  functions  11565, resolved confident call edges   8304 (0.72 per function), functions with a caller 15%
+commons-io    functions   7285, resolved confident call edges   6500 (0.89 per function), functions with a caller 16%
+ripgrep       functions   2419, resolved confident call edges    635 (0.26 per function), functions with a caller 9%

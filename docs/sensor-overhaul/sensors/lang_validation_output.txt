@@ -1,0 +1,90 @@
+dpdk (c): 46419 commits, 12942 fix-like subjects, blaming 2500
+  1841 fix-cause pairs from blame
+
+########## dpdk (c): 1841 pairs; dropped {'no function in a commit': 611, 'sweep': 14}; measured 977; with a repaired function outside the changed set 594; same function 57% ##########
+  within 1 call 1.73 [1.55,1.95] (n 563)
+  within 2 calls 1.55 [1.44,1.67] (n 563)
+  callers1 1.95 [1.52,2.45] (n 563)   callees1 1.66 [1.44,1.87] (n 563)
+  repairs in a different file (n 164): callers1 2.60 [1.40,4.41] (n 152)  callees1 1.28 [0.80,2.05] (n 152)
+  by size of the cause, within 2 calls: under 30 lines 2.13 [1.34,4.32] (n 30); 100 or more 1.42 [1.31,1.57] (n 457)
+curl (c): 40187 commits, 7361 fix-like subjects, blaming 2500
+  1306 fix-cause pairs from blame
+
+########## curl (c): 1306 pairs; dropped {'no function in a commit': 308, 'sweep': 46}; measured 815; with a repaired function outside the changed set 383; same function 70% ##########
+  within 1 call 1.63 [1.44,1.84] (n 307)
+  within 2 calls 1.43 [1.31,1.58] (n 307)
+  callers1 1.64 [1.21,2.16] (n 307)   callees1 1.75 [1.53,2.03] (n 307)
+  repairs in a different file (n 113): callers1 2.24 [0.57,6.14] (n 85)  callees1 1.41 [0.95,2.22] (n 85)
+  by size of the cause, within 2 calls: under 30 lines 1.56 [0.93,2.56] (n 29); 100 or more 1.38 [1.25,1.56] (n 222)
+sphinx (python): 16626 commits, 4255 fix-like subjects, blaming 2500
+  1539 fix-cause pairs from blame
+
+########## sphinx (python): 1539 pairs; dropped {'no function in a commit': 301, 'sweep': 58}; measured 982; with a repaired function outside the changed set 450; same function 71% ##########
+  within 1 call 1.96 [1.68,2.29] (n 387)
+  within 2 calls 1.62 [1.42,1.84] (n 387)
+  callers1 1.52 [1.13,2.02] (n 387)   callees1 2.09 [1.73,2.50] (n 387)
+  repairs in a different file (n 159): callers1 3.97 [1.09,10.50] (n 125)  callees1 2.84 [1.87,4.61] (n 125)
+  by size of the cause, within 2 calls: under 30 lines 1.78 [1.16,2.76] (n 82); 100 or more 1.39 [1.17,1.66] (n 197)
+scapy (python): 5454 commits, 1484 fix-like subjects, blaming 1484
+  1142 fix-cause pairs from blame
+
+########## scapy (python): 1142 pairs; dropped {'no function in a commit': 489, 'sweep': 70}; measured 481; with a repaired function outside the changed set 280; same function 67% ##########
+  within 1 call 1.62 [1.32,1.97] (n 250)
+  within 2 calls 1.48 [1.24,1.75] (n 250)
+  callers1 1.37 [1.04,1.79] (n 250)   callees1 2.04 [1.60,2.60] (n 250)
+  repairs in a different file (n 89): callers1 0.00 [0.00,0.00] (n 79)  callees1 0.92 [0.00,5.49] (n 79)
+  by size of the cause, within 2 calls: under 30 lines 2.66 [1.42,5.25] (n 33); 100 or more 1.25 [0.97,1.66] (n 160)
+sqlmap (python): 10339 commits, 3000 fix-like subjects, blaming 2500
+  2211 fix-cause pairs from blame
+
+########## sqlmap (python): 2211 pairs; dropped {'sweep': 83, 'no function in a commit': 338}; measured 1714; with a repaired function outside the changed set 783; same function 72% ##########
+  within 1 call 2.48 [2.18,2.97] (n 608)
+  within 2 calls 1.85 [1.67,2.05] (n 608)
+  callers1 2.10 [1.58,2.82] (n 608)   callees1 2.49 [2.12,2.93] (n 608)
+  repairs in a different file (n 390): callers1 2.01 [1.07,4.65] (n 290)  callees1 5.89 [3.85,9.57] (n 290)
+  by size of the cause, within 2 calls: under 30 lines 2.09 [1.77,2.50] (n 290); 100 or more 1.64 [1.33,1.99] (n 176)
+prometheus (go): 13932 commits, 2353 fix-like subjects, blaming 2353
+  1260 fix-cause pairs from blame
+
+########## prometheus (go): 1260 pairs; dropped {'no function in a commit': 220, 'sweep': 77}; measured 698; with a repaired function outside the changed set 380; same function 63% ##########
+  within 1 call 1.93 [1.65,2.26] (n 315)
+  within 2 calls 1.50 [1.33,1.69] (n 315)
+  callers1 1.99 [1.34,2.93] (n 315)   callees1 1.96 [1.65,2.30] (n 315)
+  repairs in a different file (n 162): callers1 1.06 [0.30,1.94] (n 132)  callees1 1.06 [0.53,1.80] (n 132)
+  by size of the cause, within 2 calls: under 30 lines 2.97 [1.95,5.74] (n 15); 100 or more 1.35 [1.19,1.54] (n 252)
+commons-lang (java): 9919 commits, 1145 fix-like subjects, blaming 1145
+  684 fix-cause pairs from blame
+
+########## commons-lang (java): 684 pairs; dropped {'no function in a commit': 452, 'sweep': 6}; measured 179; with a repaired function outside the changed set 73; same function 73% ##########
+  within 1 call 1.39 [0.84,2.27] (n 58)
+  within 2 calls 1.18 [0.77,1.80] (n 58)
+  callers1 1.38 [0.51,3.28] (n 58)   callees1 1.40 [0.72,2.32] (n 58)
+  repairs in a different file (n 12): callers1 n/a  callees1 n/a
+  by size of the cause, within 2 calls: under 30 lines n/a; 100 or more 1.24 [0.79,1.89] (n 44)
+commons-io (java): 6299 commits, 616 fix-like subjects, blaming 616
+  312 fix-cause pairs from blame
+
+########## commons-io (java): 312 pairs; dropped {'no function in a commit': 182}; measured 110; with a repaired function outside the changed set 66; same function 58% ##########
+  within 1 call 2.40 [1.61,3.78] (n 52)
+  within 2 calls 2.48 [1.86,3.45] (n 52)
+  callers1 1.52 [0.42,3.26] (n 52)   callees1 3.84 [2.04,7.44] (n 52)
+  repairs in a different file (n 23): callers1 n/a  callees1 0.99 [0.00,2.91] (n 20)
+  by size of the cause, within 2 calls: under 30 lines n/a; 100 or more 2.34 [1.88,3.26] (n 37)
+ripgrep (rust): 2241 commits, 293 fix-like subjects, blaming 293
+  173 fix-cause pairs from blame
+
+########## ripgrep (rust): 173 pairs; dropped {'no function in a commit': 48, 'sweep': 5}; measured 87; with a repaired function outside the changed set 64; same function 38% ##########
+  within 1 call 0.92 [0.43,1.51] (n 56)
+  within 2 calls 1.04 [0.70,1.39] (n 56)
+  callers1 0.00 [0.00,0.00] (n 56)   callees1 1.03 [0.57,1.78] (n 56)
+  repairs in a different file (n 34): callers1 n/a  callees1 3.17 [1.59,4.76] (n 29)
+  by size of the cause, within 2 calls: under 30 lines n/a; 100 or more 1.04 [0.69,1.43] (n 49)
+
+=== VERDICTS ===
+  LG1 calibration: dpdk SZZ 1.55 against trailer 1.57 (-1%), curl SZZ 1.43 against trailer 1.65 (-14%) (needs within 25%): supported
+  LG2 per repository (python, go, java): sphinx 1.62 [1.43,1.86] (n 450); scapy 1.48 [1.25,1.76] (n 280); sqlmap 1.85 [1.68,2.04] (n 783); prometheus 1.50 [1.32,1.71] (n 380); commons-lang 1.18 [0.77,1.75] (n 73); commons-io 2.48 [1.91,3.38] (n 66) (needs 1.3 with lower bound 1.1, n at least 100): not supported
+  pooled non-C (sphinx, scapy, sqlmap, prometheus, commons-lang, commons-io, ripgrep): within 2 calls 1.63 [1.53,1.73] (n 2096); same function 69%
+  LG3 different-file repairs, callers1 1.47 against callees1 2.72 (n 869): not supported
+  LG4 pooled non-C radius 1.63 (needs 1.2 to 2.5): supported
+  LG5 under 30 lines 2.11 against 100 or more 1.41 = 1.49 (needs 1.2): supported
+  surprise bar (pooled non-C radius at or below 1.1): not met
