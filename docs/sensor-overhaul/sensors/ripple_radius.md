@@ -206,3 +206,11 @@ For the 166 pairs where the fix is in a different file from every changed functi
 | A2 same-author pairs touch the same function more often | **supported** | 71% against 60% |
 | A3 the radius is not larger for same-author pairs | **supported** | equal pooled (1.59 against 1.62; callers within 1 call 2.22 against 2.14); in curl larger for different authors (3.20 against 2.09). OpenSSL has only 14 same-author pairs |
 **Reading.** The call-graph clustering of fixes does not come from one person finishing their own work: when someone else fixes a function near your change, it is as close to the change as when you do. What remains confounded is a shared feature, release or reviewer, which the author split does not remove.
+
+### Combined coverage: the watchlist is the changed functions plus the top k neighbours (hypotheses fixed 2026-11-17 before running; `tools/sensor/ripple_coverage.py`)
+Retrieval so far ranked only pairs whose fix lies outside the changed set. A real watchlist would list the changed functions too. Coverage = share of named-cause pairs whose fixed function is on the list "changed functions + the top k functions by (same file, then graph distance, then size)", for k = 0, 5, 10, 20, 50. Denominators: usable pairs (787: both commits' functions found in the nearest snapshot) and, as a conservative bound, all named pairs (1,208: curl 755, OpenSSL 261, FreeBSD 192; the unusable ones count as misses).
+- **C1.** The changed functions alone cover at least half of usable pairs (curl 71%, OpenSSL 42%, FreeBSD 69% touched a changed function).
+- **C2.** Adding the top 20 raises coverage of usable pairs to at least 75%.
+- **C3.** Over all named pairs the top-20 list still covers at least 50%.
+- **C4.** The extra gain from the top 20 over the changed functions alone is at least 15 percentage points in every repository.
+**Would surprise:** coverage over all named pairs under 40% with k = 20 (most of the benefit would then rest on the filtered subset).
