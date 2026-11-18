@@ -1,0 +1,34 @@
+
+########## dpdk: 25367 changes (test 10147); named as the cause of a fix within 730 days: 16.7%; 30 diff-line features, 16 shape and verb indicators ##########
+  test AUC logistic: S+P+N 0.773, S+P+N+K 0.787, S+P+N+K+T 0.789
+  test AUC gradient boosting: S+P+N 0.764, S+P+N+K 0.779, S+P+N+K+T 0.779
+  S+P+N+K+T minus S+P+N: logistic +0.016 [+0.011,+0.021], boosting +0.015
+  test AUC within size quartiles (lines under 8, 28, 98):
+    S+P+N           Q1 0.591  Q2 0.575  Q3 0.599  Q4 0.632
+    S+P+N+K+T       Q1 0.628  Q2 0.623  Q3 0.652  Q4 0.679
+    hgb S+P+N       Q1 0.566  Q2 0.547  Q3 0.597  Q4 0.613
+    hgb S+P+N+K+T   Q1 0.552  Q2 0.586  Q3 0.629  Q4 0.665
+  share of the fixed-cause changes in the top decile: S+P+N 30.1%, S+P+N+K+T 32.1%, hgb S+P+N+K+T 31.1% (random 10%)
+  strongest single features, within-size-decile AUC (all changes; above 0.5 = more often fixed): add_cond 0.583, add_call 0.548, add_ret 0.545, add_null 0.542, add_init 0.540, shape_other edit 0.461, add_err 0.537, shape_adds code 0.535, add_build 0.534, add_comment 0.533
+  changes whose subject marks them as fixes: 35.0% of changes; named-as-cause rate against other changes of the same size decile = 0.96
+
+########## mesa: 71875 changes (test 28750); named as the cause of a fix within 730 days: 6.2%; 30 diff-line features, 16 shape and verb indicators ##########
+  test AUC logistic: S+P+N 0.722, S+P+N+K 0.742, S+P+N+K+T 0.748
+  test AUC gradient boosting: S+P+N 0.715, S+P+N+K 0.739, S+P+N+K+T 0.748
+  S+P+N+K+T minus S+P+N: logistic +0.027 [+0.021,+0.034], boosting +0.033
+  test AUC within size quartiles (lines under 6, 17, 47):
+    S+P+N           Q1 0.563  Q2 0.540  Q3 0.582  Q4 0.646
+    S+P+N+K+T       Q1 0.613  Q2 0.592  Q3 0.650  Q4 0.713
+    hgb S+P+N       Q1 0.543  Q2 0.539  Q3 0.556  Q4 0.643
+    hgb S+P+N+K+T   Q1 0.602  Q2 0.613  Q3 0.643  Q4 0.714
+  share of the fixed-cause changes in the top decile: S+P+N 31.2%, S+P+N+K+T 36.4%, hgb S+P+N+K+T 36.2% (random 10%)
+  strongest single features, within-size-decile AUC (all changes; above 0.5 = more often fixed): add_cond 0.578, shape_adds code 0.560, rem_call 0.444, type_restructure 0.453, add_comment 0.546, type_feature 0.541, shape_other edit 0.465, add_null 0.534, add_ret 0.532, add_init 0.530
+  changes whose subject marks them as fixes: 19.0% of changes; named-as-cause rate against other changes of the same size decile = 0.97
+
+=== VERDICTS ===
+  KC1 full model minus S+P+N (logistic): dpdk +0.016, mesa +0.027 (needs +0.02 in both): not supported
+  KC2 smallest quartile, full model: dpdk 0.628, mesa 0.613 (needs 0.60 in both): supported
+  KC3 top-decile share, full over S+P+N: dpdk 1.07, mesa 1.17 (needs 1.15 in both): not supported
+  KC4 best single K feature, within-size AUC: dpdk 0.583, mesa 0.578 (needs 0.56 in both): supported
+  KC5 fix-subject changes, rate against others of the same size: dpdk 0.96, mesa 0.97 (needs 1.3 in both): not supported
+  surprise bar (full model adds under 0.01 over S+P+N in both): not met
