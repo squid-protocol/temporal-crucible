@@ -545,3 +545,26 @@ Other numbers: fixes per cause (kernel) 1: 66,236, 2: 15,935, 3: 5,201, 4: 2,447
 - **SK4 (size is the driver).** In a logistic model with log lines, shape and tenure together, the odds ratios for shape and for tenure move at least a third of the way toward 1 compared with their separate odds ratios: size takes most of the effect.
 - **SK5 (agreement).** The direction of SK1 to SK3 agrees in both repositories.
 **Would surprise:** SK1 below 1.1 in both: size would then not make a change sicker, and the "bad changes keep needing repairs" picture would need another driver.
+
+#### Which changes become sick: results (2026-11-18; `sick_changes_output.txt`)
+Causing commits at least 3 years old at the end of the history, measured, with an author: kernel 12,533 (34.5% have 2+ named fixes, mean 1.76 fixes); DPDK 4,896 (42.9%, mean 2.08).
+| causing change | kernel P(2+ fixes) | DPDK |
+|---|---|---|
+| under 20 lines | 14.5% | 13.6% |
+| 20 to 99 | 29.2% | 27.3% |
+| 100 to 499 | 55.0% | 51.6% |
+| 500 or more | **77.8%** (mean 5.2 fixes) | **77.2%** (mean 4.2) |
+| 1 function changed / 20 or more | 20.1% / 61.4% | 30.0% / 64.3% |
+| small surgical shapes pooled | 13.9% | 13.3% |
+| adds code | 32.3% | 29.1% |
+| large (100+ lines) | 57.3% | 58.2% |
+| author with under 20 earlier commits / 200 or more | 36.9% / 32.9% | 44.5% / 37.6% |
+| hypothesis | verdict |
+|---|---|
+| SK1 100+ lines against under 20 lines at least 1.3 | **supported by a wide margin**: 3.94 (kernel), 4.28 (DPDK) |
+| SK2 adds code against small surgical shapes at least 1.2 | **supported**: 2.33, 2.19 (but see SK4: shape rides on size) |
+| SK3 author with under 20 earlier commits against 200 or more at least 1.2 | **not supported, direction agrees**: 1.12 (kernel), 1.18 (DPDK); the effect is small and monotone with tenure |
+| SK4 shape and tenure effects move a third toward 1 once size is in the model | **supported in substance, poorly measured**: the shape effects disappear or flip (adds code 0.87 to 1.43, small shapes 0.27 to 1.65 in the kernel) because the reference group (mostly 100+ line changes) differs by size; the share-removed percentages printed (365%, 138% and so on) are not interpretable; tenure effect 1.10 and 1.02 after adjustment |
+| SK5 direction agrees in both repositories | **supported** for SK1 to SK3 |
+**Reading.** What becomes "sick" is, above all, **a big change**: the share with repeated repairs rises from 14% (under 20 lines) to 77% (500 or more) in both repositories, with a mean of 4 to 5 fixes per change at that size; the number of functions changed behaves the same way. Shape and author experience add little once size is accounted for (a mild effect for authors new to the repository). So the picture is the plain one: **big changes have more places to be wrong and are therefore repaired repeatedly**; nothing here shows a special kind of change that is intrinsically sick. **Selection caveat as registered:** only changes that were fixed at least once are in these data, so this cannot say how likely a big change is to be fixed at all, only that when it is, it is repaired repeatedly. The floor of one fix per cause makes the growth of fixes with size look sublinear.
+**Consequence for the repair radius.** Size drives three things at once: the number of repairs, their dispersion (large causes: more cross-file, slower) and the baseline's growth, which compresses the ratio. Any statement about the radius needs a size-matched comparison, and a churn- and age-matched baseline (the same-file baseline does not control for how recently or how often a function changed, and call-graph neighbours of a changed function are plausibly hotter than same-file strangers).

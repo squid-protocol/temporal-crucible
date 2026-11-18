@@ -1,0 +1,78 @@
+
+########## kernel: 12533 causing commits (measured, at least 3 y old at the end of the history); P(2+ fixes) overall 34.5%; mean fixes 1.76 ##########
+  by lines changed:
+    under 20                           n   3019  P(2+)  14.5% [13.3,15.8]  mean fixes 1.20
+    20 to 99                           n   5561  P(2+)  29.2% [28.1,30.4]  mean fixes 1.48
+    100 to 499                         n   3566  P(2+)  55.0% [53.4,56.7]  mean fixes 2.29
+    500 or more                        n    387  P(2+)  77.8% [73.4,81.6]  mean fixes 5.19
+  by causing shape:
+    large (100+ lines)                 n   3952  P(2+)  57.3% [55.7,58.8]  mean fixes 2.57
+    removes code                       n    321  P(2+)  10.9% [ 7.9,14.8]  mean fixes 1.15
+    adds a guard                       n    613  P(2+)  17.1% [14.4,20.3]  mean fixes 1.26
+    rewrites a condition               n    314  P(2+)  11.1% [ 8.1,15.1]  mean fixes 1.19
+    adds sync or release               n    670  P(2+)  17.8% [15.1,20.8]  mean fixes 1.24
+    replaces a call or argument        n    315  P(2+)  12.7% [ 9.5,16.8]  mean fixes 1.17
+    changes a type or declaration      n    110  P(2+)   9.1% [ 5.0,15.9]  mean fixes 1.09
+    adds code                          n   3253  P(2+)  32.3% [30.7,33.9]  mean fixes 1.54
+    small edit                         n    286  P(2+)  11.2% [ 8.0,15.4]  mean fixes 1.15
+    other edit                         n   2689  P(2+)  23.7% [22.2,25.4]  mean fixes 1.37
+    small surgical shapes pooled       n   1528  P(2+)  13.9% [12.2,15.7]  mean fixes 1.21
+    adds code                          n   3253  P(2+)  32.3% [30.7,33.9]  mean fixes 1.54
+  by the author's earlier commits in the repository:
+    under 20                           n   2196  P(2+)  36.9% [34.9,39.0]  mean fixes 1.82
+    20 to 199                          n   4113  P(2+)  35.7% [34.3,37.2]  mean fixes 1.80
+    200 or more                        n   6224  P(2+)  32.9% [31.7,34.1]  mean fixes 1.71
+  by functions changed:
+    1                                  n   2927  P(2+)  20.1% [18.6,21.5]  mean fixes 1.35
+    2 to 4                             n   4972  P(2+)  30.2% [28.9,31.5]  mean fixes 1.56
+    5 to 19                            n   4227  P(2+)  47.1% [45.6,48.6]  mean fixes 2.14
+    20 or more                         n    407  P(2+)  61.4% [56.6,66.0]  mean fixes 3.22
+  SK1 100+ lines / under 20 lines: 3.94 (needs 1.3);  SK2 adds code / small surgical: 2.33 (needs 1.2);  SK3 tenure under 20 / 200+: 1.12 (needs 1.2)
+  logistic odds ratios (per log-line for loglines; yes/no for the rest): separate -> together
+    loglines   2.03 -> 2.23
+    adds_code  0.87 -> 1.43
+    small      0.27 -> 1.65
+    newbie     1.13 -> 1.10
+    veteran    0.87 -> 0.93
+    share of each separate effect removed by adjusting for the others (log-odds): adds_code 365%, small 138%, newbie 24%, veteran 46%
+
+########## dpdk: 4896 causing commits (measured, at least 3 y old at the end of the history); P(2+ fixes) overall 42.9%; mean fixes 2.08 ##########
+  by lines changed:
+    under 20                           n    610  P(2+)  13.6% [11.1,16.6]  mean fixes 1.22
+    20 to 99                           n   1551  P(2+)  27.3% [25.2,29.6]  mean fixes 1.41
+    100 to 499                         n   2025  P(2+)  51.6% [49.4,53.7]  mean fixes 2.13
+    500 or more                        n    710  P(2+)  77.2% [74.0,80.1]  mean fixes 4.15
+  by causing shape:
+    large (100+ lines)                 n   2735  P(2+)  58.2% [56.3,60.0]  mean fixes 2.65
+    removes code                       n     54  P(2+)   9.3% [ 4.0,19.9]  mean fixes 1.09
+    adds a guard                       n    119  P(2+)  16.8% [11.2,24.5]  mean fixes 1.29
+    rewrites a condition               n     51  P(2+)  17.6% [ 9.6,30.3]  mean fixes 1.24
+    adds sync or release               n     42  P(2+)  11.9% [ 5.2,25.0]  mean fixes 1.19
+    replaces a call or argument        n     46  P(2+)   8.7% [ 3.4,20.3]  mean fixes 1.09
+    adds code                          n   1168  P(2+)  29.1% [26.6,31.8]  mean fixes 1.43
+    small edit                         n     92  P(2+)   8.7% [ 4.5,16.2]  mean fixes 1.09
+    other edit                         n    567  P(2+)  19.8% [16.7,23.2]  mean fixes 1.33
+    small surgical shapes pooled       n    308  P(2+)  13.3% [10.0,17.6]  mean fixes 1.19
+    adds code                          n   1168  P(2+)  29.1% [26.6,31.8]  mean fixes 1.43
+  by the author's earlier commits in the repository:
+    under 20                           n   1609  P(2+)  44.5% [42.1,46.9]  mean fixes 2.18
+    20 to 199                          n   2636  P(2+)  43.2% [41.3,45.1]  mean fixes 2.08
+    200 or more                        n    651  P(2+)  37.6% [34.0,41.4]  mean fixes 1.81
+  by functions changed:
+    1                                  n   1035  P(2+)  30.0% [27.3,32.9]  mean fixes 1.64
+    2 to 4                             n   1974  P(2+)  38.0% [35.9,40.2]  mean fixes 1.85
+    5 to 19                            n   1691  P(2+)  53.9% [51.5,56.2]  mean fixes 2.47
+    20 or more                         n    196  P(2+)  64.3% [57.4,70.7]  mean fixes 3.38
+  SK1 100+ lines / under 20 lines: 4.28 (needs 1.3);  SK2 adds code / small surgical: 2.19 (needs 1.2);  SK3 tenure under 20 / 200+: 1.18 (needs 1.2)
+  logistic odds ratios (per log-line for loglines; yes/no for the rest): separate -> together
+    loglines   1.98 -> 2.12
+    adds_code  0.46 -> 1.30
+    small      0.19 -> 1.63
+    newbie     1.10 -> 1.02
+    veteran    0.78 -> 0.86
+    share of each separate effect removed by adjusting for the others (log-odds): adds_code 134%, small 129%, newbie 75%, veteran 39%
+
+=== VERDICTS ===
+  kernel: SK1 supported (3.94); SK2 supported (2.33); SK3 not (1.12); SK4 shape/tenure effects shrink by a third or more: adds_code yes, small yes, newbie no, veteran yes
+  dpdk: SK1 supported (4.28); SK2 supported (2.19); SK3 not (1.18); SK4 shape/tenure effects shrink by a third or more: adds_code yes, small yes, newbie yes, veteran yes
+  SK5 direction agrees: SK1 yes, SK2 yes, SK3 yes
