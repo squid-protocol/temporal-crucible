@@ -1,0 +1,61 @@
+24474 measured kernel pairs; causing-change shape from the causing commit's .c/.h diff
+
+=== BY CAUSING SHAPE ===
+  causing shape                     pairs  share    lag  same fn cross-file   within 2 calls
+  comment only                         14   0.1%   240d      93%       7.1%   n/a
+  large (100+ lines)                10426  42.6%   301d      48%      17.9%    1.63 [1.59,1.66] (55% vs 34%, n 6755)
+  removes code                        448   1.8%   130d      65%      16.1%    2.34 [1.96,2.77] (42% vs 18%, n 225)
+  adds a guard                        926   3.8%   216d      76%       9.4%    2.87 [2.44,3.29] (43% vs 15%, n 389)
+  rewrites a condition                467   1.9%   138d      76%      12.2%    2.94 [2.31,3.66] (39% vs 13%, n 178)
+  adds sync or release               1030   4.2%   161d      73%      10.7%    2.81 [2.49,3.18] (49% vs 17%, n 491)
+  replaces a call or argument         447   1.8%   141d      70%      14.8%    3.40 [2.58,4.40] (37% vs 11%, n 198)
+  changes a type or declaration       136   0.6%   108d      78%      14.7%    3.82 [2.42,5.80] (32% vs 8%, n 50)
+  adds code                          5809  23.7%   265d      58%      12.7%    2.60 [2.49,2.72] (51% vs 20%, n 3392)
+  small edit                          417   1.7%   139d      71%      16.8%    2.82 [2.17,3.63] (35% vs 12%, n 191)
+  other edit                         4354  17.8%   174d      71%      11.3%    2.51 [2.38,2.64] (52% vs 21%, n 1954)
+
+  lag: slowest large (100+ lines) 301 d, fastest adds sync or release 161 d (factor 1.87); radius across causing shapes with 500+ pairs 1.63 to 2.87 (factor 1.76)
+
+=== PARAMETER COUNT CHANGED BY THE CAUSING COMMIT ===
+  signature changed      5136 lag  237d same fn  61% cross-file 11.3%   1.76 [1.70,1.81] (64% vs 37%, n 2849); fix shape 'adds a guard' 9.9% (all pairs 9.9%)
+  no signature change   19338 lag  241d same fn  58% cross-file 15.5%   2.09 [2.04,2.14] (49% vs 23%, n 10978); fix shape 'adds a guard' 9.9% (all pairs 9.9%)
+
+=== CAUSING SHAPE x FIX SHAPE: lift (observed / expected if independent), cells of 100+ pairs ===
+  most over-represented:
+    adds sync or release           -> adds sync or release           lift 2.53 (n 289)
+    replaces a call or argument    -> replaces a call or argument    lift 2.07 (n 120)
+    small edit                     -> small edit                     lift 1.65 (n 101)
+    adds a guard                   -> rewrites a condition           lift 1.52 (n 109)
+    large (100+ lines)             -> large (100+ lines)             lift 1.39 (n 384)
+    adds a guard                   -> adds a guard                   lift 1.38 (n 126)
+    adds a guard                   -> small edit                     lift 1.24 (n 168)
+    other edit                     -> replaces a call or argument    lift 1.21 (n 681)
+    other edit                     -> changes a type or declaration  lift 1.15 (n 164)
+    adds code                      -> adds code                      lift 1.14 (n 991)
+  most under-represented:
+    adds sync or release           -> other edit                     lift 0.71 (n 117)
+    adds sync or release           -> small edit                     lift 0.73 (n 110)
+    adds sync or release           -> adds code                      lift 0.76 (n 117)
+    adds a guard                   -> adds code                      lift 0.80 (n 111)
+    other edit                     -> adds a guard                   lift 0.82 (n 354)
+    other edit                     -> adds code                      lift 0.85 (n 556)
+    other edit                     -> adds sync or release           lift 0.88 (n 427)
+    large (100+ lines)             -> replaces a call or argument    lift 0.91 (n 1224)
+  diagonal (a fix with the same shape as its cause): large (100+ lines) 1.39, adds a guard 1.38, adds sync or release 2.53, adds code 1.14, other edit 1.02; 3 of 5 at 1.2 or more
+  adds code -> adds a guard: lift 0.93 (n 536)
+  replaces a call or argument -> adds a guard: lift 0.72 (n 32)
+
+  causing shape x subject-classified fix mechanism (row shares, mechanism-classified fixes only):
+subj_kind                      bounds/overflow  build/compile  concurrency  error handling  lifetime  null deref  uninitialized
+cause_shape                                                                                                                    
+adds a guard                              0.08           0.03         0.27            0.20      0.30        0.06           0.04
+adds code                                 0.10           0.08         0.37            0.10      0.22        0.09           0.03
+adds sync or release                      0.03           0.03         0.49            0.07      0.26        0.09           0.03
+changes a type or declaration             0.34           0.09         0.31            0.06      0.06        0.09           0.03
+comment only                              0.00           0.00         1.00            0.00      0.00        0.00           0.00
+large (100+ lines)                        0.09           0.07         0.33            0.13      0.26        0.08           0.05
+other edit                                0.09           0.09         0.34            0.13      0.23        0.08           0.05
+removes code                              0.06           0.12         0.33            0.08      0.23        0.10           0.07
+replaces a call or argument               0.17           0.07         0.32            0.10      0.21        0.08           0.04
+rewrites a condition                      0.06           0.09         0.36            0.09      0.24        0.09           0.06
+small edit                                0.12           0.09         0.27            0.14      0.24        0.09           0.06

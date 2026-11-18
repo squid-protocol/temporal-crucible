@@ -407,3 +407,31 @@ The same diff-shape rules (comment only, large, removes code, adds a guard, rewr
 - **CS4.** The diagonal recurs: a fix has the same shape as its causing change more often than expected (lift at least 1.2) for at least half of the shapes with 500 or more pairs.
 - **CS5.** The radius varies less across causing shapes than across fix shapes (factor below 1.65 among shapes of 500 or more pairs).
 **Would surprise:** no relation between causing shape and fix shape (every lift within 0.9 to 1.1): the kind of change would then not determine the kind of failure.
+
+#### Causing-change shape: results (2026-11-18; `linux_cause_shapes_output.txt`)
+**The causing commits are mostly large.** 10,426 of 24,474 (42.6%) change 100 or more `.c`/`.h` lines; "adds code" is 23.7%, "other edit" 17.8%; every small shape is 4% or less.
+| causing shape | pairs | median lag | same function | cross-file | within 2 calls |
+|---|---:|---:|---:|---:|---|
+| **large (100+ lines)** | 10,426 (42.6%) | **301 d** | **48%** | **17.9%** | **1.63 [1.59, 1.66]** |
+| adds code | 5,809 (23.7%) | 265 d | 58% | 12.7% | 2.60 [2.49, 2.72] |
+| other edit | 4,354 (17.8%) | 174 d | 71% | 11.3% | 2.51 [2.38, 2.64] |
+| adds sync or release | 1,030 (4.2%) | **161 d** | 73% | 10.7% | 2.81 [2.49, 3.18] |
+| adds a guard | 926 (3.8%) | 216 d | 76% | 9.4% | 2.87 [2.44, 3.29] |
+| rewrites a condition | 467 (1.9%) | 138 d | 76% | 12.2% | 2.94 [2.31, 3.66] |
+| removes code | 448 (1.8%) | 130 d | 65% | 16.1% | 2.34 [1.96, 2.77] |
+| replaces a call or argument | 447 (1.8%) | 141 d | 70% | 14.8% | 3.40 [2.58, 4.40] |
+| small edit | 417 (1.7%) | 139 d | 71% | 16.8% | 2.82 [2.17, 3.63] |
+| changes a type or declaration | 136 (0.6%) | 108 d | 78% | 14.7% | 3.82 [2.42, 5.80] (n 50) |
+Signature changed (5,136 pairs): radius 1.76, cross-file 11.3%; no signature change: 2.09, 15.5%; the share of "adds a guard" fixes is 9.9% in both (no relation).
+
+**Causing shape against fix shape (lift = observed over expected if independent; cells of 100 or more pairs).** Over-represented: **adds sync or release -> adds sync or release 2.53** (289 pairs), **replaces a call or argument -> replaces a call or argument 2.07** (120), small edit -> small edit 1.65, adds a guard -> rewrites a condition 1.52, large -> large 1.39, adds a guard -> adds a guard 1.38, other edit -> replaces a call or argument 1.21. Under-represented: adds sync or release -> other edit 0.71, -> small edit 0.73, -> adds code 0.76; adds a guard -> adds code 0.80. Against the subject-classified mechanism: a causing change that adds synchronisation or release is followed by concurrency fixes 49% of the time (33% to 37% for most others); one that changes a type or declaration by bounds and overflow fixes 34% (9% to 12% otherwise; 136 pairs, a third classified); one that adds a guard by lifetime (30%) and error-handling (20%) fixes (22% to 26% and 10% to 13% otherwise): a new early return can skip cleanup (plausible; about 270 classified pairs).
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| CS1 "adds code" is followed by more dispersed fixes than small edits (lower same-function share, higher cross-file) | **half** | same function 58% against 71% (yes); cross-file 12.7% against 16.8% (no); the most dispersed cause is the **large change** (48% same function, 17.9% cross-file, slowest, lowest radius) |
+| CS2 "adds a guard" fixes over-represented after "adds code" (at least 1.2), under-represented after "replaces a call" (at most 0.9) | **not supported** | 0.93 after adds code; 0.72 after replaces a call (32 pairs only) |
+| CS3 lag differs by at least 1.5 times between the slowest and fastest causing shape (500 or more pairs) | **supported** | large 301 d against adds sync or release 161 d (1.87 times); including smaller shapes 108 d (type or declaration) |
+| CS4 the diagonal recurs (same shape as the cause, lift at least 1.2) for at least half of the shapes with 500 or more pairs | **supported** | 3 of 5: adds sync or release 2.53, large 1.39, adds a guard 1.38; adds code 1.14, other edit 1.02; smaller shapes with 100 or more pairs: replaces a call 2.07, small edit 1.65 |
+| CS5 the radius varies less across causing shapes than across fix shapes (factor below 1.65) | **not supported** | factor 1.76 (1.63 to 2.87) across causing shapes with 500 or more pairs |
+**Reading.** (1) **The fix often repeats the kind of edit that caused it**: adding locking is followed by locking fixes (2.5 times expected), replacing a call by call-replacement fixes (2.1 times). (2) **How large the causing change is matters most**: the 43% of causes that change 100 or more lines produce the slowest (301 days) and most dispersed fixes (48% same function, 17.9% in another file) and the weakest radius (1.63); small surgical causes (a type, a call, a condition, a guard, a small edit) produce quick, local fixes and a strong radius (2.8 to 3.8). The ratio against the baseline falls for big changes partly because the baseline rises. (3) Parameter-count changes show no special link to the kind of fix. (4) The kinds of cause and the kinds of fix are related but not tightly (lifts 0.7 to 2.5), so the shape of the change says something, not everything, about the shape of the failure.
+**Caveats.** Shape rules are mine and coarse; 43% of causes land in the "large" bin, so the small shapes are few hundred pairs each with wide intervals; subject-classified mechanisms cover 29% of fixes; kernel conventions; associations against a same-file baseline.
