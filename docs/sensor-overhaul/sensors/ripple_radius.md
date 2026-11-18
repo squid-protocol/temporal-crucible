@@ -658,3 +658,26 @@ A hunk-header function counts as **verified** only if its text differs between t
 - **VR4 (selection).** At most 20% of the measured pairs are lost because a verified set is empty.
 - **VR5 (caller direction survives).** For fixes in a different file, the callers1 ratio exceeds the callees1 ratio in both (DPDK 2.43 against 1.24 before).
 **Would surprise:** the radius within 2 calls moving by more than 25% in either repository: the headline would then have been substantially an artefact of misattribution.
+
+#### Re-measuring the repair radius with verified functions: results (2026-11-18; `verify_dpdk_output.txt`, `verify_linux_output.txt`, `verified_compare_output.txt`)
+**What verification removed.** Function entries (hunk-header functions of every cause and fix commit): kernel 76.5% verified as edited, **13.0% identical (not edited)**, 10.4% present in one version only (kept), 0.1% unverifiable (renamed or added file, kept); DPDK 76.0%, **13.2%**, 10.5%, 0.3%. Pairs measured: kernel 24,474 -> 22,723 (7.2% lost); DPDK 9,867 -> 8,954 (9.3% lost).
+| | kernel unverified -> verified | DPDK |
+|---|---|---|
+| radius within 1 call | 2.44 -> **2.67** [2.59, 2.74] | 1.68 -> **1.88** [1.81, 1.94] |
+| radius within 2 calls | 1.99 -> **2.15** [2.10, 2.19] | 1.45 -> **1.57** [1.53, 1.62] |
+| same-function share | 58.5% -> 59.0% | 48.6% -> 49.8% |
+| under 20 lines | 2.79 -> 3.06 | 2.07 -> 2.09 |
+| 20 to 99 | 2.57 -> 2.79 | 2.10 -> 2.39 |
+| 100 to 499 | 1.73 -> 1.91 | 1.44 -> 1.60 |
+| 500 or more | 1.31 -> 1.31 | 1.18 -> 1.23 |
+| different-file fixes: callers1 / callees1 | 3.52 / 2.10 -> **4.43 / 2.74** (n 3,689) | 2.43 / 1.24 -> **2.87 / 1.50** (n 1,816) |
+| hypothesis | verdict |
+|---|---|
+| VR1 radius within 2 calls within 10% of the unverified figure | **supported**: +7.7% (kernel), +8.6% (DPDK); both *rise* |
+| VR2 same-function share rises by at least 2 points | **not supported**: +0.5 and +1.2 points |
+| VR3 size trend survives (under 20 lines over 500 or more at least 1.5) | **supported**: 2.34 (kernel), 1.69 (DPDK) |
+| VR4 at most 20% of pairs lost | **supported**: 7.2% and 9.3% |
+| VR5 callers above callees for different-file fixes | **supported**, and stronger in both |
+Surprise bar (a move above 25%): not met (worst 8.6%).
+**Reading.** The headline survives. Removing functions that were never edited *raises* the radius by about 8% in both repositories (phantom fixed functions sat mostly far from the changed set, so they diluted it), and strengthens the caller direction for fixes in another file (callers 4.43 against 2.74 in the kernel, 2.87 against 1.50 in DPDK). The size trend (small causes tight, large causes diffuse) is intact, now about 3.1 down to 1.3 in the kernel and 2.1 to 1.2 in DPDK. The same-function share hardly moves (phantoms in the changed set seldom stood between a cause and its fix). From here the verified measurements (`blast/<repo>_v`) supersede the unverified ones; the controls above (co-change, churn and age, shape tables, relaxation, sick changes) were run on unverified sets and are expected to hold, but have not been re-run.
+**Open ends.** 10.4% of function entries are present in one version only (a function added, removed or renamed by the commit, or one the parser could not find: macro-wrapped definitions); they are kept and not examined. A correction to a caveat above: the chain counts in the relaxation test and the "sick" analysis came from all 152,957 kernel pairs with C files in both commits (`links_linux_all.json`), not only the core subsystems, so the kernel chain counts are complete, not partial.

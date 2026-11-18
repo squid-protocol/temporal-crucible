@@ -1,0 +1,8 @@
+linux: verifying the functions of 51240 commits (226355 function entries)
+  8000/51240 commits
+  16000/51240 commits
+  24000/51240 commits
+  32000/51240 commits
+  40000/51240 commits
+  48000/51240 commits
+function entries: verified 173138 (76.5%), identical (not edited) 29498 (13.0%), in one version only (kept) 23530 (10.4%), unverifiable (file renamed, added or no parent) 189 (0.1%)

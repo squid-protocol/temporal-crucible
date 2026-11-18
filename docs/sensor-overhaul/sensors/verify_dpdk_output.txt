@@ -1,0 +1,4 @@
+dpdk: verifying the functions of 20243 commits (84702 function entries)
+  8000/20243 commits
+  16000/20243 commits
+function entries: verified 64409 (76.0%), identical (not edited) 11141 (13.2%), in one version only (kept) 8934 (10.5%), unverifiable (file renamed, added or no parent) 218 (0.3%)

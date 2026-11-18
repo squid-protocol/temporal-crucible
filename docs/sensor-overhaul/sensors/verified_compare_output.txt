@@ -1,0 +1,38 @@
+
+########## linux ##########
+  measured pairs: unverified 24474, verified 22723 (7.2% lost); with a fixed function outside the changed set: 14444 -> 12733
+  same-function share (all measured pairs): unverified 58.5%, verified 59.0% (pairs in both: 22659)
+  unverified either1  2.44 [2.39,2.50] (44% vs 18%, n 13827)  either2  1.99 [1.96,2.03] (52% vs 26%, n 13827)
+  verified   either1  2.67 [2.59,2.74] (43% vs 16%, n 12249)  either2  2.15 [2.10,2.19] (52% vs 24%, n 12249)
+  VR1 radius within 2 calls: 1.99 -> 2.15 (+7.7%): supported
+  VR2 same-function share change +0.5 points (needs +2): not supported
+  VR4 pairs lost 7.2% (needs 20% or less): supported
+  by size of the causing change (either2), unverified -> verified:
+    under 20      2.79 [2.61,2.98] (41% vs 15%, n 1969)  ->   3.06 [2.86,3.29] (40% vs 13%, n 1723)
+    20 to 99      2.57 [2.48,2.65] (53% vs 20%, n 5102)  ->   2.79 [2.69,2.90] (52% vs 19%, n 4469)
+    100 to 499    1.73 [1.69,1.78] (56% vs 33%, n 5270)  ->   1.91 [1.85,1.97] (57% vs 30%, n 4646)
+    500 or more   1.31 [1.26,1.37] (49% vs 37%, n 1486)  ->   1.31 [1.24,1.38] (46% vs 35%, n 1382)
+  VR3 ratio (under 20) / (500 or more), verified: 2.34 (needs 1.5): supported
+  different-file fixes, unverified n 3580: callers1 3.52 [3.06,4.07], callees1 2.10 [1.82,2.37]
+  different-file fixes, verified   n 3689: callers1 4.43 [3.71,5.39], callees1 2.74 [2.49,3.04]
+  VR5 caller direction survives: supported
+
+########## dpdk ##########
+  measured pairs: unverified 9867, verified 8954 (9.3% lost); with a fixed function outside the changed set: 6963 -> 6000
+  same-function share (all measured pairs): unverified 48.6%, verified 49.8% (pairs in both: 8911)
+  unverified either1  1.68 [1.63,1.73] (43% vs 25%, n 6500)  either2  1.45 [1.41,1.48] (51% vs 35%, n 6500)
+  verified   either1  1.88 [1.81,1.94] (44% vs 23%, n 5653)  either2  1.57 [1.53,1.62] (52% vs 33%, n 5653)
+  VR1 radius within 2 calls: 1.45 -> 1.57 (+8.6%): supported
+  VR2 same-function share change +1.2 points (needs +2): not supported
+  VR4 pairs lost 9.3% (needs 20% or less): supported
+  by size of the causing change (either2), unverified -> verified:
+    under 20      2.07 [1.78,2.41] (40% vs 19%, n 331)  ->   2.09 [1.76,2.47] (39% vs 19%, n 300)
+    20 to 99      2.10 [1.98,2.24] (50% vs 24%, n 1244)  ->   2.39 [2.21,2.58] (57% vs 24%, n 997)
+    100 to 499    1.44 [1.39,1.49] (55% vs 38%, n 2788)  ->   1.60 [1.55,1.67] (58% vs 36%, n 2378)
+    500 or more   1.18 [1.13,1.23] (47% vs 40%, n 2137)  ->   1.23 [1.19,1.29] (46% vs 37%, n 1959)
+  VR3 ratio (under 20) / (500 or more), verified: 1.69 (needs 1.5): supported
+  different-file fixes, unverified n 1561: callers1 2.43 [1.92,3.17], callees1 1.24 [1.04,1.44]
+  different-file fixes, verified   n 1816: callers1 2.87 [2.24,3.74], callees1 1.50 [1.31,1.68]
+  VR5 caller direction survives: supported
+
+  VR1 worst relative move: linux 7.7%, dpdk 8.6% (surprise bar 25%)
