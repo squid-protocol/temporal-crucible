@@ -171,3 +171,38 @@ Pairs: named-cause pairs from curl (message-referenced), OpenSSL and FreeBSD (`F
 | T5 signature changes ripple to callers | **supported** | inducing change altered a parameter count (40 pairs, 29 with a fix outside): callers within 1 call **34.5%**, against 20.1% for all pairs, **3.83 [1.50, 9.12]** against same-file functions; callees 1.37 [0.42, 3.40]. The same pattern as curl (33% against 13%) in a second and third repository |
 **Fixes in a different file from every changed function** (62 pairs): within 2 calls 27.4% against 18.2%, **1.56 [1.12, 2.32]**; within 1 call 1.34 [0.67, 2.63]: a real but modest cross-file effect, and the one that bears on Lyu et al.'s "ghost commits" (inducing commits sharing no file with the fix).
 **Reading.** Across curl, OpenSSL and FreeBSD (three repositories, three projects' conventions) fixes land within one or two calls of the change about 1.5 to 2 times as often as in same-file functions; the caller/callee direction varies by repository; and a signature change sends the fix to the callers in all three (curl 33% against 13%; pooled OpenSSL and FreeBSD 34.5% against 20.1%). The fade with time is repository-dependent. This is the review-order result in `gitgalaxy change` (changed signature first, callers named), now supported beyond curl; the broader "callers first for every change" claim is not.
+
+### Retrieval and same-author results (2026-11-17; `ripple_rank_output.txt`; curl, OpenSSL, FreeBSD pooled)
+**Data.** 787 usable named-cause pairs; **391 have a fixed function outside the inducing commit's changed set** (curl 212, OpenSSL 126, FreeBSD 53), the pairs retrieval is asked about. Candidates per pair: median 6,036 functions (curl 3,515, OpenSSL 21,055, FreeBSD 142,899).
+
+**Retrieval, pooled (expected share of pairs whose fixed function is in the top k; ties split evenly; the best-ranked fixed function counts):**
+| ranker | top 5 | top 10 | top 20 | top 50 | median rank |
+|---|---:|---:|---:|---:|---:|
+| random | 0.1% | 0.2% | 0.4% | 0.9% | 3,018 |
+| size only (largest first) | 0.8% | 2.2% | 4.1% | 7.2% | 1,365 |
+| same file as a changed function | 10.5% | 17.4% | 27.2% | 41.1% | 122 |
+| call-graph distance only (1 to 3 calls) | 13.0% | 19.8% | 28.0% | 40.5% | 135 |
+| file, then graph | 22.5% | 32.8% | 42.8% | 54.7% | 31 |
+| graph, then file | 20.9% | 29.5% | 38.8% | 52.4% | 42 |
+| file, then graph, then size | **27.2%** | **37.6%** | **46.5%** | **58.1%** | **27** |
+For the 166 pairs where the fix is in a different file from every changed function, graph distance alone is best: top 20 **12.4%** (top 50 21.0%) against size 6.0% (10.8%), file-first rankers 0.1% to 6.6%, random 0.4%.
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| R1 file then graph beats file alone at the top 20 by 5 points | **supported** | 42.8% against 27.2% pooled (+15.6); per repository +13 (curl), +18 (OpenSSL), +20 (FreeBSD) |
+| R2 for different-file fixes graph beats size at the top 50 | **supported** | 21.0% against 10.8% pooled; both far above random (1.0%) but small in absolute terms |
+| R3 best ranker at least 40% in the top 20 | **supported** | 46.5% pooled (curl 45.3%, OpenSSL 46.8%, FreeBSD 50.9%); top 5 27.2% |
+| R4 size alone no better than twice random | **not supported** | size is about 10 times random at the top 20 (4.1% against 0.4%); in OpenSSL it scores 0% because the largest functions are rarely the fixed ones; far weaker than file or graph |
+**Reading.** A watchlist of 20 functions chosen by (same file, then call distance, then size) holds the function the fix later touches for about 46% of pairs where the fix lands outside the changed code, from candidate sets of 3,500 to 143,000 functions; the hit rate does not fall as the repository grows. For fixes in a different file the graph carries it alone (12% at the top 20). Not shown: the share of all pairs covered once the changed functions themselves are on the list (a fix is in a changed function in 42% to 71% of pairs).
+
+**Same author (pooled, 787 pairs: 326 same author, 461 different).**
+| | pairs with a fix outside the changed set | within 1 call against same-file functions | within 2 calls | fix in a function the inducing commit touched |
+|---|---:|---|---|---:|
+| same author | 138 of 326 | 1.75 [1.35, 2.26] | 1.59 [1.30, 1.93] | 71% |
+| different author | 253 of 461 | 1.85 [1.55, 2.20] | 1.62 [1.43, 1.83] | 60% |
+| hypothesis | verdict | |
+|---|---|---|
+| A1 different-author pairs show the excess (at least 1.3) | **supported** | 1.62 [1.43, 1.83] within 2 calls; by repository curl 1.70, OpenSSL 1.53, FreeBSD 1.68 |
+| A2 same-author pairs touch the same function more often | **supported** | 71% against 60% |
+| A3 the radius is not larger for same-author pairs | **supported** | equal pooled (1.59 against 1.62; callers within 1 call 2.22 against 2.14); in curl larger for different authors (3.20 against 2.09). OpenSSL has only 14 same-author pairs |
+**Reading.** The call-graph clustering of fixes does not come from one person finishing their own work: when someone else fixes a function near your change, it is as close to the change as when you do. What remains confounded is a shared feature, release or reviewer, which the author split does not remove.
