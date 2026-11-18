@@ -1076,3 +1076,35 @@ The ranking test of the neighbourhood (reference: modified functions, kernel, DP
 - **RL4.** At file level the combined ranker (event file, then distance, then size) has a repaired file among its top 20 for at least 60% of pairs, for ADD and for DEL in both.
 - **RL5.** The function-level combined ranker's top-20 share is at least 40% for ADD and for DEL in both (modified functions: 45%).
 **Would surprise:** a within-size AUC at or below 0.55 for call distance in either group (then the neighbourhood of an added or deleted function is a size effect).
+
+#### Ranking test for added and deleted functions: results (2026-11-18; `retrieval_added_deleted_output.txt`; union rename filter)
+Pairs with events / ranked (a repaired function outside the event set exists in the graph); candidates per pair (median): DPDK ADD 8,421 / 4,342, 30,069 functions, 1,800 files; DPDK DEL 1,037 / 439, 33,561 and 1,971; Mesa ADD 3,575 / 2,041, 66,939 and 4,343; Mesa DEL 792 / 430, 66,226 and 4,197.
+**Functions (AUC, top 20 of about 30,000 to 67,000; DPDK ADD / DPDK DEL / Mesa ADD / Mesa DEL).**
+| ranker | AUC | top 20 |
+|---|---|---|
+| random | 0.500 | 0.1 / 0.1 / 0.0 / 0.0% |
+| size alone | 0.789 / 0.765 / 0.832 / 0.805 | **0.4 / 0.4 / 0.2 / 0.2%** |
+| same file as the event | 0.764 / 0.762 / 0.750 / 0.717 | 27.7 / 32.0 / 25.8 / 25.0% |
+| call distance alone | 0.677 / 0.663 / 0.700 / 0.671 | 39.6 / 36.5 / 40.7 / 35.8% |
+| file, then distance | 0.821 / 0.800 / 0.814 / 0.776 | 44.3 / 45.9 / 43.4 / 37.8% |
+| **file, distance, then size** | **0.916 / 0.905 / 0.934 / 0.911** | **52.5 / 52.9 / 50.4 / 44.3%** |
+Within-size AUC (size cannot help): call distance 0.677 / 0.663 / 0.700 / 0.671; file then distance 0.821 / 0.800 / 0.814 / 0.776. For comparison, modified functions pooled: size alone 0.737 and top 20 0.2%; call distance 0.734 and 30.0%; combined 0.925 and 45.1%.
+**Files (every file of the snapshot a candidate; a file is positive if a repaired function outside the event set lies in it).**
+| ranker | top 5 | top 20 | top 50 (DPDK ADD) | top 20, repairs in **other** files only: DPDK ADD / DPDK DEL / Mesa ADD / Mesa DEL |
+|---|---|---|---|---|
+| random | 0.3% | 1.3% | 3.3% | 1.3 / 1.2 / 0.5 / 0.5% |
+| file size alone | 1.8% | 7.1% | 17.8% | 5.7 / 5.1 / 2.6 / 2.5% |
+| the event's own file | 59.3% | 59.9% | 60.7% | not applicable |
+| call distance alone | 65.4% | 73.1% | 73.9% | 48.5 / 40.7 / 41.6 / 37.7% |
+| **event file, distance, then size** | **75.9%** | **79.9%** | 81.7% | **50.4 / 43.0 / 43.1 / 38.8%** |
+Combined file ranker, repaired file in the top 20, all repairs (DPDK ADD / DEL, Mesa ADD / DEL): **80% / 76% / 73% / 67%**; repairs in other files only: **50% / 43% / 43% / 39%**.
+| hypothesis | verdict |
+|---|---|
+| RL1 combined top 20 at least 3 times size alone in every group | **supported** (117 to 258 times) |
+| RL2 call distance within-size AUC at least 0.65 in every group | **supported**: 0.663 to 0.700 |
+| RL3 DEL call distance top 20 at least 30% | **supported**: 36.5%, 35.8% |
+| RL4 combined file ranker, repaired file in the top 20 for at least 60% | **supported**: 67% to 80% |
+| RL5 combined function ranker top 20 at least 40% | **supported**: 44% to 53% |
+Surprise bar (within-size AUC of call distance at or below 0.55): not met.
+**Reading.** The neighbourhood ranks the repaired function and file for added and deleted functions as well as it does for modified ones, and slightly better at the top: the combined function ranker has the repaired function in its top 20 of tens of thousands for 44 to 53% of pairs (45% for modified functions; size alone 0.2 to 0.4%), and at file level a repaired file is among the top 20 files for 67 to 80% of pairs (random 0.5 to 1.3%). **The easy part is the event's own file** (53 to 60% of pairs by itself); counting only repairs in **other** files the top 20 still holds one for **39 to 50%** of pairs (random 0.5 to 1.3%, file size 2.5 to 5.7%), found by call distance. The call-distance ranker alone is the one that works for other-file repairs (within-size AUC 0.66 to 0.70).
+**Caveats.** The event is known at change time, but the ranker uses where the added or deleted function sits and its call neighbours, which for an added function means its callers and callees at the next quarterly scan (a small look-ahead: calls added after the commit and before the scan are in the graph); only pairs where a repaired function outside the event set exists in the graph are ranked (about half of the pairs); size-only AUCs are high (0.77 to 0.83) because larger functions and files are repaired more often, but useless at the top (0.2 to 0.4%); two repositories, C only; "files" here are the files of repaired functions identified from the fix commit's verified hunk-header functions.
