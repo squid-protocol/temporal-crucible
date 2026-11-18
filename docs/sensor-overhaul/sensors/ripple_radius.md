@@ -727,3 +727,16 @@ Same-function share, verified: curl 72%, OpenSSL 43%, FreeBSD 72% (pooled 65%). 
 Surprise bar (pooled radius below 1.1): not met.
 **Reading.** The repair radius is present in all five repositories on verified functions: kernel 2.15, FreeBSD 2.17, OpenSSL 1.72, curl 1.65, DPDK 1.57, with intervals that exclude 1.3 for the kernel, DPDK, curl and OpenSSL (FreeBSD's lower bound is 1.62 on 39 pairs). The caller direction is solid in curl, the kernel and DPDK; the small repositories cannot confirm or deny it individually. The size trend replicates in direction only (1.17 against 2.3 in the kernel). The controls give the same answers on verified sets as before: the radius is not co-change, not hot or young code, and not an artefact of the hunk-header misattribution.
 **Not done.** Mesa and QEMU (about 9,700 and 4,000 pairs with C/H on both sides); the kernel-scale co-change and churn controls (need a 1.3-million-commit history); the repair structure re-run with verified functions (identical functions were removed from its tables, no further change); the 10 to 23% of function entries present in one version only.
+
+## Mesa replication (hypotheses fixed 2026-11-18 before running)
+Third large repository: 13,180 `Fixes:` pairs of which about 9,700 have C/H on both sides; **C only** (`.c` and `.h`; Mesa's C++ and Rust are not read, so C++-heavy parts such as the AMD compiler backend are out of scope and the figures describe Mesa's C). Methods as for the kernel and DPDK: full clone, quarterly scans of `src` and `include` from 2017, `verify_functions.py`, `blast_radius.py` on the verified sets, then radius, controls and structure. Mesa differs: median lag 64 days (kernel 241, DPDK 235) and 30% of fixes in a file the cause did not touch (kernel 11 to 15%).
+- **MR1.** Radius within 2 calls on verified functions at least 1.3 with lower bound above 1.2.
+- **MR2.** Same-function share of measured pairs between 40% and 75%.
+- **MR3.** For fixes in a different file, callers1 above callees1 (kernel 4.43 against 2.74; DPDK 2.87 against 1.50).
+- **MR4.** Size trend: radius for causes under 100 lines at least 1.3 times that for 100 lines or more.
+- **MR5.** Shape checks RS1 to RS5: at least 4 of 5 agree with the kernel's direction.
+- **MR6.** Co-change control: (b) within 2 calls and not a co-change partner at least 1.3; (a) the co-change ratio below 1.
+- **MR7.** Chance of another repair rises with each repair so far (k = 1 to 4) and size drives it (P(2+ fixes) for 100+ line causes at least 1.3 times that for under 20 lines).
+- **MR8.** Faster repairs are no tighter: the radius for fixes under 30 days is less than 1.15 times that for fixes over a year (as in the kernel and DPDK); *with Mesa's short lags I give this one a coin flip.*
+- **MR9.** Call-site adaptation: among caller repairs, "changes a call's arguments" at least 1.3 times as often as among same-function repairs; an added `if` testing a changed function at least 3 times as often.
+**Would surprise:** radius below 1.2: the pattern would then be specific to repositories with long repair lags.
