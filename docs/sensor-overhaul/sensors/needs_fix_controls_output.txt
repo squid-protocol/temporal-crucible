@@ -1,0 +1,47 @@
+
+########## dpdk: 25367 changes ##########
+  C1 label = a later fix-subject commit touches a changed function within 365 days: positives 39.3% of changes; overlap with the trailer label: 29.6% of them are also named causes
+    trailer label (reference, 730 d)               base AUC 0.773 -> 0.789  lift +0.016 [+0.011,+0.020]  (test n 10147, positives 14.0%)
+    alternative label (365 d)                      base AUC 0.765 -> 0.767  lift +0.002 [-0.001,+0.004]  (test n 10147, positives 32.5%)
+    added conditions, within-size-decile AUC on the alternative label: 0.532 (trailer label 0.583)
+    rate ratio on the alternative label: pure deletion 0.89 [0.79,1.00] (n 718); pure addition 0.76 [0.73,0.79] (n 5379)
+  C2 directory (41) and author (301) indicators in both models:
+    lift with directory and author indicators      base AUC 0.746 -> 0.760  lift +0.015 [+0.010,+0.018]  (test n 10147, positives 14.0%)
+  C3 drop the 1076 changes that add a new C/H file (4.2%): 24291 left, positives 15.6% (all 16.7%)
+    lift without new-file changes                  base AUC 0.769 -> 0.786  lift +0.017 [+0.013,+0.022]  (test n 9717, positives 13.1%)
+    rate ratio without new-file changes: pure deletion 0.28 [0.15,0.42] (n 718); pure addition 1.15 [1.07,1.22] (n 5022)
+  C4 observed lift +0.016; K+T shuffled within size deciles (60 shuffles): mean -0.002, 95th percentile -0.001, largest -0.000
+  C5 horizons on the 22963 changes at least three years before the end:
+    named as a cause within 365 days               base AUC 0.763 -> 0.783  lift +0.020 [+0.014,+0.025]  (test n 9186, positives 12.3%)
+    named as a cause within 730 days               base AUC 0.771 -> 0.792  lift +0.021 [+0.017,+0.026]  (test n 9186, positives 14.7%)
+    named as a cause within 1095 days              base AUC 0.773 -> 0.795  lift +0.023 [+0.018,+0.028]  (test n 9186, positives 15.9%)
+  C6 train on the latest 60%, test on the earliest 40%:
+    lift, reversed time split                      base AUC 0.795 -> 0.802  lift +0.007 [+0.002,+0.012]  (test n 10147, positives 19.7%)
+
+########## mesa: 71875 changes ##########
+  C1 label = a later fix-subject commit touches a changed function within 365 days: positives 35.9% of changes; overlap with the trailer label: 10.1% of them are also named causes
+    trailer label (reference, 730 d)               base AUC 0.722 -> 0.748  lift +0.027 [+0.019,+0.034]  (test n 28750, positives 6.1%)
+    alternative label (365 d)                      base AUC 0.754 -> 0.757  lift +0.003 [+0.001,+0.004]  (test n 28750, positives 35.6%)
+    added conditions, within-size-decile AUC on the alternative label: 0.522 (trailer label 0.578)
+    rate ratio on the alternative label: pure deletion 0.80 [0.76,0.85] (n 2625); pure addition 0.87 [0.84,0.89] (n 13861)
+  C2 directory (39) and author (301) indicators in both models:
+    lift with directory and author indicators      base AUC 0.698 -> 0.720  lift +0.022 [+0.016,+0.027]  (test n 28750, positives 6.1%)
+  C3 drop the 1060 changes that add a new C/H file (1.5%): 70815 left, positives 6.0% (all 6.2%)
+    lift without new-file changes                  base AUC 0.714 -> 0.742  lift +0.028 [+0.021,+0.035]  (test n 28326, positives 5.9%)
+    rate ratio without new-file changes: pure deletion 0.32 [0.22,0.45] (n 2625); pure addition 1.43 [1.31,1.56] (n 13614)
+  C4 observed lift +0.027; K+T shuffled within size deciles (60 shuffles): mean -0.003, 95th percentile -0.001, largest -0.000
+  C5 horizons on the 62210 changes at least three years before the end:
+    named as a cause within 365 days               base AUC 0.720 -> 0.744  lift +0.024 [+0.017,+0.031]  (test n 24884, positives 5.5%)
+    named as a cause within 730 days               base AUC 0.723 -> 0.747  lift +0.024 [+0.017,+0.031]  (test n 24884, positives 6.0%)
+    named as a cause within 1095 days              base AUC 0.724 -> 0.751  lift +0.026 [+0.020,+0.033]  (test n 24884, positives 6.3%)
+  C6 train on the latest 60%, test on the earliest 40%:
+    lift, reversed time split                      base AUC 0.708 -> 0.736  lift +0.027 [+0.021,+0.034]  (test n 28750, positives 5.9%)
+
+=== VERDICTS ===
+  CT1 lift on the alternative label: dpdk +0.002, mesa +0.003; added conditions within-size AUC dpdk 0.532, mesa 0.522 (needs +0.01 and 0.55 in both): not supported
+  CT2 lift with directory and author indicators: dpdk +0.015, mesa +0.022 (needs +0.01 in both): supported
+  CT3 lift without new-file changes: dpdk +0.017, mesa +0.028; pure deletions dpdk 0.28, mesa 0.32 (needs +0.01 and 0.8 in both): supported
+  CT4 observed lift against the 95th percentile of shuffled: dpdk +0.016 vs -0.001, mesa +0.027 vs -0.001: supported
+  CT5 lift by horizon (365 / 730 / 1095 days): dpdk +0.020 / +0.021 / +0.023; mesa +0.024 / +0.024 / +0.026 (needs +0.01 everywhere): supported
+  CT6 lift, reversed time: dpdk +0.007, mesa +0.027 (needs +0.01 in both): not supported
+  surprise bar (lift under +0.005 on the alternative label in both, or under C2): MET
