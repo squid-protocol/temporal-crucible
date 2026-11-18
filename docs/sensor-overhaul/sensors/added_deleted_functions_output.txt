@@ -1,0 +1,47 @@
+
+########## dpdk: 15829 pairs, 7626 cause commits, 13837 fix commits ##########
+  fix commits verified
+  cause commits with events: ADD 4105, NEWFILE 1136, DEL 622, DELFILE 37; skipped (more than 60 C/H files) 35; added functions matched to a deletion (moves, renames) 1984
+
+  ADD: 8446 pairs; measured 6755; with a repaired function outside the event set 4360; the fix edits an event function itself in 57% of measured pairs
+    either1  2.79 [2.63,2.96] (37% vs 13%, n 4074)  either2  2.23 [2.14,2.33] (43% vs 19%, n 4074)  callers1  3.45 [3.24,3.70] (31% vs 9%, n 4074)  callees1  1.49 [1.31,1.67] (7% vs 5%, n 4074)
+    relation of the repaired functions to the event: same 30%, caller 11%, callee 2%, two calls away 4%, same file, farther 20%, elsewhere 33% (n 16709)
+
+  NEWFILE: 3760 pairs; measured 2659; with a repaired function outside the event set 1060; the fix edits an event function itself in 79% of measured pairs
+    either1  2.06 [1.85,2.30] (33% vs 16%, n 920)  either2  1.77 [1.63,1.91] (38% vs 22%, n 920)  callers1  2.25 [1.98,2.57] (27% vs 12%, n 920)  callees1  1.48 [1.22,1.79] (8% vs 6%, n 920)
+    relation of the repaired functions to the event: same 46%, caller 7%, callee 2%, two calls away 2%, same file, farther 2%, elsewhere 41% (n 7478)
+
+  DEL: 1089 pairs; measured 454; with a repaired function outside the event set 454; the fix edits an event function itself in 0% of measured pairs
+    either1  3.99 [3.25,5.04] (33% vs 8%, n 430)  either2  3.11 [2.64,3.62] (38% vs 12%, n 430)  callers1  4.55 [3.56,5.99] (29% vs 6%, n 430)  callees1  2.23 [1.31,3.47] (5% vs 2%, n 430)
+    relation of the repaired functions to the event: same 0%, caller 16%, callee 3%, two calls away 4%, same file, farther 26%, elsewhere 52% (n 980)
+
+  DELFILE: 45 pairs; measured 15; with a repaired function outside the event set 15; the fix edits an event function itself in 0% of measured pairs
+    relation of the repaired functions to the event: same 0%, caller 25%, callee 0%, two calls away 6%, same file, farther 0%, elsewhere 69% (n 36)
+
+########## mesa: 9526 pairs, 7152 cause commits, 9370 fix commits ##########
+  fix commits verified
+  cause commits with events: ADD 2652, NEWFILE 541, DEL 668, DELFILE 57; skipped (more than 60 C/H files) 32; added functions matched to a deletion (moves, renames) 1321
+
+  ADD: 3595 pairs; measured 3192; with a repaired function outside the event set 2053; the fix edits an event function itself in 46% of measured pairs
+    either1  4.20 [3.75,4.62] (38% vs 9%, n 1931)  either2  3.00 [2.81,3.22] (44% vs 15%, n 1931)  callers1  4.93 [4.39,5.51] (35% vs 7%, n 1931)  callees1  1.78 [1.41,2.26] (4% vs 2%, n 1931)
+    relation of the repaired functions to the event: same 33%, caller 17%, callee 2%, two calls away 4%, same file, farther 15%, elsewhere 29% (n 5140)
+
+  NEWFILE: 1034 pairs; measured 879; with a repaired function outside the event set 250; the fix edits an event function itself in 79% of measured pairs
+    either1  2.44 [1.83,3.31] (29% vs 12%, n 231)  either2  1.93 [1.59,2.43] (33% vs 17%, n 231)  callers1  2.63 [1.81,3.89] (22% vs 8%, n 231)  callees1  2.24 [1.42,3.84] (10% vs 5%, n 231)
+    relation of the repaired functions to the event: same 69%, caller 5%, callee 2%, two calls away 1%, same file, farther 0%, elsewhere 22% (n 1363)
+
+  DEL: 824 pairs; measured 456; with a repaired function outside the event set 449; the fix edits an event function itself in 2% of measured pairs
+    either1  4.88 [3.94,6.39] (30% vs 6%, n 413)  either2  3.02 [2.52,3.63] (37% vs 12%, n 413)  callers1  5.47 [4.21,7.33] (27% vs 5%, n 413)  callees1  2.56 [1.27,4.86] (3% vs 1%, n 413)
+    relation of the repaired functions to the event: same 1%, caller 20%, callee 2%, two calls away 5%, same file, farther 17%, elsewhere 56% (n 817)
+
+  DELFILE: 85 pairs; measured 29; with a repaired function outside the event set 29; the fix edits an event function itself in 0% of measured pairs
+    relation of the repaired functions to the event: same 0%, caller 25%, callee 0%, two calls away 2%, same file, farther 0%, elsewhere 73% (n 59)
+
+=== VERDICTS ===
+  AD1 the fix edits the new function itself: dpdk 57%, mesa 46% (needs 60% in both): not supported
+  AD2 radius around added functions (within 2 calls): dpdk 2.23, mesa 3.00 (needs 1.5 in both): supported
+  AD3 added functions, callers1 against callees1: dpdk 3.45 vs 1.49, mesa 4.93 vs 1.78: supported
+  DL1 radius around deleted functions (previous graph, within 2 calls): dpdk 3.11, mesa 3.02 (needs 1.5 in both): supported
+  DL2 deleted functions, former callers1 against callees1: dpdk 4.55 vs 2.23, mesa 5.47 vs 2.56: supported
+  DL3 share of deleted-function pairs with a repair within 2 calls: 3+ former callers 48% (n 324) against at most 1 28% (n 399) = 1.74 (needs 1.2): supported
+  surprise bar (radius at or below 1.2 around both added and deleted functions): not met (ratios 2.23, 3.00, 3.11, 3.02)

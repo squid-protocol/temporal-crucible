@@ -994,3 +994,22 @@ Surprise bar (lift under +0.005 on the alternative label in both, or under C2): 
 - **DL2.** Around a deleted function, its former callers are over-represented more than its former callees (callers1 ratio above callees1 ratio), in both.
 - **DL3.** The size of the loss matters: deleted functions with 3 or more former callers have at least 1.2 times the share of pairs with a repair within 2 calls that deleted functions with at most 1 former caller have, pooled.
 **A group with fewer than 100 pairs having a fixed function outside the event set in a repository is reported but not tested.** **Would surprise:** a radius at or below 1.2 around both added and deleted functions (then the "neighbourhood absorbs a change" pattern is specific to modified functions).
+
+#### Added and deleted functions: first results (2026-11-18; `added_deleted_functions_output.txt`; before the rename check below)
+Events and counts, DPDK / Mesa. Cause commits with events: ADD 4,105 / 2,652, NEWFILE 1,136 / 541, DEL 622 / 668, DELFILE 37 / 57; added functions matched to a deletion (moves and renames, excluded, token Jaccard at least 0.7) 1,984 / 1,321.
+| group | pairs (measured) | the fix edits an event function itself | radius within 1 call | within 2 calls | callers1 / callees1 | relations of the repaired functions: same / caller / callee / 2 away / same file farther / elsewhere |
+|---|---|---|---|---|---|---|
+| **ADD** (function added to an existing file) | 8,446 (6,755) / 3,595 (3,192) | 57% / 46% | 2.79 / 4.20 | **2.23 / 3.00** | 3.45 / 1.49; 4.93 / 1.78 | 30, 11, 2, 4, 20, 33% / 33, 17, 2, 4, 15, 29% |
+| NEWFILE (a new file) | 3,760 (2,659) / 1,034 (879) | 79% / 79% | 2.06 / 2.44 | 1.77 / 1.93 | 2.25 / 1.48; 2.63 / 2.24 | 46, 7, 2, 2, 2, 41% / 69, 5, 2, 1, 0, 22% |
+| **DEL** (function deleted, previous graph) | 1,089 (454) / 824 (456) | 0% / 2% | 3.99 / 4.88 | **3.11 / 3.02** | 4.55 / 2.23; 5.47 / 2.56 | 0, 16, 3, 4, 26, 52% / 1, 20, 2, 5, 17, 56% |
+| DELFILE | 45 (15) / 85 (29) | not tested (fewer than 100) | | | | |
+| hypothesis | verdict |
+|---|---|
+| AD1 the fix edits the new function itself in at least 60% | **not supported**: 57% (DPDK), 46% (Mesa) (a new file: 79% in both) |
+| AD2 radius around added functions at least 1.5 | **supported**: 2.23, 3.00 |
+| AD3 callers over-represented more than callees around added functions | **supported**: 3.45 against 1.49, 4.93 against 1.78 |
+| DL1 radius around deleted functions at least 1.5 | **supported**: 3.11, 3.02 |
+| DL2 former callers over-represented more than former callees | **supported**: 4.55 against 2.23, 5.47 against 2.56 |
+| DL3 deleted functions with 3 or more former callers have at least 1.2 times the repair share of those with at most 1 | **supported**: 48% against 28% = 1.74 (n 324 and 399) |
+Surprise bar (radius at or below 1.2 around both): not met.
+**Reading (provisional).** Repairs do cluster around functions the graph gains or loses, more tightly than around modified functions (2.2 to 3.1 against 1.6 to 1.8 within 2 calls), callers more than callees, and a deletion with many former callers is followed by repairs in the old neighbourhood 1.7 times as often as one with few. **This rests on an unvalidated move-and-rename filter** (token-set overlap 0.7), which excluded a large share of added functions: a rename that slips through would appear as a delete plus an add whose "neighbourhood" is the same function under two names. The check below tests that filter.
