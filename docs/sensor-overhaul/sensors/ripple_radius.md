@@ -214,3 +214,24 @@ Retrieval so far ranked only pairs whose fix lies outside the changed set. A rea
 - **C3.** Over all named pairs the top-20 list still covers at least 50%.
 - **C4.** The extra gain from the top 20 over the changed functions alone is at least 15 percentage points in every repository.
 **Would surprise:** coverage over all named pairs under 40% with k = 20 (most of the benefit would then rest on the filtered subset).
+
+#### Combined coverage results (2026-11-17; `ripple_coverage_output.txt`)
+Share of named-cause pairs whose fixed function is on the list "changed functions + top k neighbours" (ranker: same file, then call distance, then size). The changed set has a median of 3 functions (75th percentile 8, 90th 17), so a k = 20 list is about 23 functions long (75th percentile 28, 90th 37).
+
+| | usable pairs | k = 0 (changed only) | k = 5 | k = 10 | k = 20 | k = 50 | **all named pairs, k = 0** | **all named pairs, k = 20** |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| curl | 507 of 755 | 71.2% | 78.5% | 80.9% | 83.0% | 86.2% | 47.8% | 55.8% |
+| OpenSSL | 177 of 261 | 42.4% | 55.4% | 62.1% | 67.2% | 77.4% | 28.7% | 45.6% |
+| FreeBSD | 103 of 192 | 68.9% | 75.7% | 78.6% | 83.5% | 84.5% | 37.0% | 44.8% |
+| **pooled** | **787 of 1,208** | **64.4%** | **72.9%** | **76.4%** | **79.5%** | **84.0%** | **42.0%** | **51.8%** |
+By lag, pooled usable pairs: fix within 30 days 69.2% (changed only) to 82.6% (k = 20); 30 to 365 days 61.7% to 78.0%; **a year or more 45.1% to 67.3%** (the neighbours add 22 points there, 13 for fast fixes).
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| C1 the changed functions alone cover at least half of usable pairs | **supported pooled** | 64.4%; OpenSSL alone 42.4% (long lags) |
+| C2 top 20 raises usable coverage to at least 75% | **supported pooled** | 79.5% (curl 83.0%, FreeBSD 83.5%, OpenSSL 67.2% below) |
+| C3 over all named pairs the top-20 list covers at least 50% | **just supported pooled** | 51.8% (curl 55.8%, OpenSSL 45.6%, FreeBSD 44.8%) |
+| C4 the top 20 adds at least 15 points in every repository | **not supported** | pooled +15.1; curl +11.8, FreeBSD +14.6, OpenSSL +24.8 |
+**Reading.** Putting the changed functions and the 20 best-ranked neighbours on a review list finds the function the fix later touches in about 80% of the pairs we could map and in about half of all named pairs (the unmapped pairs count as misses). The neighbours matter most where the lag is long (a year or more: 45% to 67%) and in OpenSSL, where fixes are slower and more distant. The conservative figure, 51.8%, is the one to quote.
+
+**A speed bug found and fixed.** `ripple_links.graph` recomputed the size percentiles once per function (quadratic: hours on FreeBSD's 143,000-function graphs); it now computes them once. Results are unchanged; the earlier FreeBSD runs were slow for this reason, not because of the analysis.

@@ -79,7 +79,8 @@ def graph(db):
     for k in nodes:
         by_file[k[0]].append(k)
     sizes = np.array([loc[k] for k in nodes])
-    dec = {k: int(np.searchsorted(np.percentile(sizes, np.arange(10, 100, 10)), loc[k])) for k in nodes}
+    cuts = np.percentile(sizes, np.arange(10, 100, 10))  # once, not per function (a per-function percentile is quadratic: hours on a 140,000-function graph)
+    dec = {k: int(np.searchsorted(cuts, loc[k])) for k in nodes}
     by_dec = collections.defaultdict(list)
     for k in nodes:
         by_dec[dec[k]].append(k)
