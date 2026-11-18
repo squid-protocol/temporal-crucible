@@ -848,3 +848,16 @@ Surprise bar (CA2 and CA3 both failing): **met**: interface (definition) changes
 - **PL4.** For fixes in a different file from every changed function (no file feature), distance alone has a within-size AUC of at least 0.60 pooled.
 - **PL5.** The fitted four-feature model reaches a test AUC at least 0.15 above size alone, pooled.
 **Would surprise:** a within-size AUC at or below 0.55: the neighbourhood would then be a size effect in disguise.
+
+#### How good a prediction is the neighbourhood, and is there lift over size? Results (2026-11-18; `retrieval_lift_output.txt`; kernel 12,733 pairs, DPDK 6,000, Mesa 3,799; verified sets; candidates per pair median 108,000 / 30,000 / 67,000)
+Ranking the fixed function (outside the changed set) among every function of the program, pooled: **size alone** AUC 0.737, top 20 **0.2%**, top 100 0.8%; same file 0.794 / 20.9% / 47.6%; call distance alone 0.734 / 30.0% / 48.9%; file then distance 0.851 / 39.9% / 62.0%; **file, distance, then size 0.925 / 45.1% / 65.1%**; caller count 0.524. **Within the same size decile** (the repowise form; size cannot help): file then distance 0.851, call distance alone 0.734, flat across size groups (0.82 to 0.84 for file then distance; 0.71 to 0.72 for distance), where repowise reports 0.52 to 0.57 in its lower quartiles. Fixes in a different file from every changed function (8,299 pairs): distance alone AUC 0.639 (within-size 0.639), top 20 15.2%, top 100 27.2%; size alone AUC 0.748 but top 20 0.2%. Fitted four-feature model (earliest 60% of pairs, scored on the latest 40%, after fixing a convergence problem in the first fit, where the unscaled weights gave a misleading 0.62 for the model without size): test AUC 0.888 against size alone 0.740; **0.848 without size**, so the neighbourhood features alone beat size alone by 0.11.
+| hypothesis | verdict |
+|---|---|
+| PL1 size-alone AUC at most 0.65 | **not supported**: 0.72 to 0.79 (large functions are fixed more often; as a top-k ranker size is nearly useless, 0.2%) |
+| PL2 combined top 20 at least 3 times size alone | **supported**: 45.1% against 0.2% |
+| PL3 within-size AUC at least 0.65 pooled | **supported**: 0.851 (distance alone 0.734) |
+| PL4 different-file fixes, distance alone within-size AUC at least 0.60 | **supported**: 0.639 |
+| PL5 fitted model test AUC at least 0.15 above size alone | **not supported, narrowly**: +0.148 |
+Surprise bar (within-size AUC at or below 0.55): not met.
+**Reading.** Given that a change is later fixed, the neighbourhood (same file, call distance) locates the fixed function far above size: within functions of the same size the AUC is 0.73 (calls only) to 0.85 (file and calls), against the wall repowise reports for file-level defect prediction. It is a different question (where a fix goes given a fix is needed, not whether a change will need one), so it is not a replication of that experiment. Most of the lift comes from the same-file feature; the call graph alone is a weaker, size-independent ranker and the main one for fixes in other files.
+**Not done.** A repowise-style test (which changes will need any fix beyond size, with never-fixed changes included); added and deleted functions (hunk-header attribution hides added functions, and the previous snapshot is needed for deleted ones); a version without named causes.

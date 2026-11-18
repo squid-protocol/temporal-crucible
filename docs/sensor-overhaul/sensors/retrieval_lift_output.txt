@@ -1,0 +1,85 @@
+linux: 12733 pairs ranked against 108039 candidates (median)
+dpdk: 6000 pairs ranked against 30068 candidates (median)
+mesa: 3799 pairs ranked against 66933 candidates (median)
+
+=== RANKING THE FIXED FUNCTION AMONG ALL FUNCTIONS (all pairs; AUC = chance the fixed function outranks a random other function) ===
+
+  linux: 12733 pairs
+    ranker                                      AUC   top 20  top 100  within-size AUC
+    random                                    0.500     0.0%     0.1%              nan
+    size (largest first)                      0.723     0.1%     0.3%              nan
+    same file                                 0.806    18.9%    46.2%            0.806
+    call distance                             0.739    28.7%    48.7%            0.739
+    file, then distance                       0.863    39.7%    61.6%            0.863
+    file, distance, then size                 0.926    44.6%    65.1%            0.863
+    caller count                              0.512     0.0%     0.1%            0.496
+
+  dpdk: 6000 pairs
+    ranker                                      AUC   top 20  top 100  within-size AUC
+    random                                    0.500     0.1%     0.4%              nan
+    size (largest first)                      0.736     0.3%     1.7%              nan
+    same file                                 0.792    24.3%    51.9%            0.791
+    call distance                             0.734    34.3%    52.2%            0.734
+    file, then distance                       0.847    42.5%    66.5%            0.846
+    file, distance, then size                 0.921    48.7%    68.9%            0.846
+    caller count                              0.536     0.1%     0.5%            0.526
+
+  mesa: 3799 pairs
+    ranker                                      AUC   top 20  top 100  within-size AUC
+    random                                    0.500     0.0%     0.2%              nan
+    size (largest first)                      0.785     0.2%     0.8%              nan
+    same file                                 0.759    22.1%    45.3%            0.759
+    call distance                             0.718    27.8%    44.2%            0.718
+    file, then distance                       0.817    36.5%    56.3%            0.817
+    file, distance, then size                 0.931    41.2%    59.1%            0.817
+    caller count                              0.547     0.0%     0.2%            0.524
+
+  pooled: 22532 pairs
+    ranker                                      AUC   top 20  top 100  within-size AUC
+    random                                    0.500     0.0%     0.2%              nan
+    size (largest first)                      0.737     0.2%     0.8%              nan
+    same file                                 0.794    20.9%    47.6%            0.794
+    call distance                             0.734    30.0%    48.9%            0.734
+    file, then distance                       0.851    39.9%    62.0%            0.851
+    file, distance, then size                 0.925    45.1%    65.1%            0.851
+    caller count                              0.524     0.0%     0.2%            0.509
+
+=== FITTED MODEL (trained on the earliest 60% of each repository's pairs, scored on the latest 40%) ===
+
+  linux (test): 5094 pairs
+    size (largest first)                      0.728     0.1%     0.3%              nan
+    file, distance, then size                 0.928    44.7%    64.5%            0.866
+    fitted (size, file, distance, callers)    0.894    30.0%    54.7%            0.877
+    fitted without size                       0.858    27.8%    52.1%            0.870
+
+  dpdk (test): 2400 pairs
+    size (largest first)                      0.733     0.2%     1.0%              nan
+    file, distance, then size                 0.924    48.2%    67.8%            0.856
+    fitted (size, file, distance, callers)    0.893    36.7%    63.4%            0.868
+    fitted without size                       0.856    32.4%    61.5%            0.864
+
+  mesa (test): 1520 pairs
+    size (largest first)                      0.792     0.1%     0.6%              nan
+    file, distance, then size                 0.929    42.3%    59.2%            0.815
+    fitted (size, file, distance, callers)    0.861    29.2%    53.3%            0.824
+    fitted without size                       0.801    26.0%    51.3%            0.819
+
+  pooled (test): 9014 pairs
+    size (largest first)                      0.740     0.1%     0.5%              nan
+    file, distance, then size                 0.927    45.2%    64.5%            0.855
+    fitted (size, file, distance, callers)    0.888    31.7%    56.8%            0.866
+    fitted without size                       0.848    28.7%    54.5%            0.860
+
+=== WITHIN-SIZE AUC BY SIZE QUARTILE OF THE FIXED FUNCTION (pooled; the repowise form) ===
+  file, then distance      size deciles 1-3: 0.835 (n 2519), size deciles 4-6: 0.842 (n 7584), size deciles 7-9: 0.841 (n 16464), size deciles 10: 0.818 (n 10447)
+  call distance            size deciles 1-3: 0.705 (n 2519), size deciles 4-6: 0.714 (n 7584), size deciles 7-9: 0.717 (n 16464), size deciles 10: 0.717 (n 10447)
+
+  fixes in a different file from every changed function (8299 pairs): call distance AUC 0.639, top 20 15.2%, top 100 27.2%, within-size AUC 0.639; size alone AUC 0.748, top 20 0.2%
+
+=== VERDICTS ===
+  PL1 size-alone AUC by repository: linux 0.723, dpdk 0.736, mesa 0.785 (needs 0.65 or less in each): not supported
+  PL2 top 20, combined against size alone: 45.1% against 0.2% = 290.5 times (needs 3): supported
+  PL3 within-size AUC of file then distance, pooled: 0.851 (needs 0.65; the two smallest quartiles are listed above): supported
+  PL4 different-file fixes, distance alone, within-size AUC 0.639 (needs 0.60)
+  PL5 test AUC fitted 0.888 against size alone 0.740: +0.148 (needs +0.15): not supported
+  surprise bar (within-size AUC at or below 0.55): not met
