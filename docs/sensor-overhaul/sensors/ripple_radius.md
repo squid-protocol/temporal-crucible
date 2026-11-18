@@ -235,3 +235,22 @@ By lag, pooled usable pairs: fix within 30 days 69.2% (changed only) to 82.6% (k
 **Reading.** Putting the changed functions and the 20 best-ranked neighbours on a review list finds the function the fix later touches in about 80% of the pairs we could map and in about half of all named pairs (the unmapped pairs count as misses). The neighbours matter most where the lag is long (a year or more: 45% to 67%) and in OpenSSL, where fixes are slower and more distant. The conservative figure, 51.8%, is the one to quote.
 
 **A speed bug found and fixed.** `ripple_links.graph` recomputed the size percentiles once per function (quadratic: hours on FreeBSD's 143,000-function graphs); it now computes them once. Results are unchanged; the earlier FreeBSD runs were slow for this reason, not because of the analysis.
+
+## A faster tool: `tools/sensor/blast_radius.py` (2026-11-17)
+**Why.** The blast-radius scripts were slow for avoidable reasons: one `git show` per commit, graphs as Python dicts of sets, a *sampled* same-file baseline (200 draws, each a list scan; hours at 140,000 functions), a quadratic percentile in the graph loader (found and fixed) and a single process. At the kernel's size (about 17,000 usable pairs, 53 snapshots of 144,000 functions) the old code would take days.
+**What it does instead.**
+1. Functions touched by each commit: **one** streaming `git log --no-walk --stdin -p -U0` pass over all needed commits, cached on disk.
+2. Graphs: one sparse-matrix structure per snapshot (callers and callees as CSR matrices; sizes, deciles and file ids as arrays); each pair's 1, 2 and 3-call neighbourhoods are three sparse matrix-vector products per direction.
+3. Baselines: the **exact** expected rate, from counts (same-file functions within one size decile, outside the changed set; and random same-decile functions), so no sampling and no list scans.
+4. Parallel over snapshots (each worker loads its snapshot once and measures all its pairs), results to a table; a separate `report` step groups by repository, lag, cross-file or subsystem with bootstrap intervals over pairs in seconds.
+**Validation on curl** (755 named pairs; the same inputs as the earlier scripts): the same 507 measured pairs, 212 with a fixed function outside the changed set, 71% same function; within 1 call 1.81 [1.47, 2.28] (earlier 1.77 [1.48, 2.20]), within 2 calls 1.57 [1.32, 1.89] (1.54 [1.32, 1.81]), callees 1.73 (1.66), callers 2.37 (2.69; sampling noise); cross-file pairs 2.56 within 1 call (2.08 earlier, with a slightly different definition of "different file"; intervals overlap). **Time: 5 seconds** end to end against minutes for the earlier version (OpenSSL and FreeBSD took over an hour each).
+**Not in the tool yet:** the signature-change split (needs arguments per snapshot), same-author split (needs authors), the retrieval and coverage rankers, tree-sitter callback edges (`ts_refs.py`) as an optional graph layer.
+
+## Kernel run: hypotheses fixed 2026-11-17 before any kernel distance was computed
+Input: the 34,349 pairs with the causing commit from 2014 on whose commits touch scanned files (`linux_fixes_pairs.md`); quarterly scans of the core subsystems; same method as curl, OpenSSL and FreeBSD (`blast_radius.py`).
+- **K1 (radius).** Pooled, the fixed function (outside the changed set) is within 2 calls of the changed code at least 1.3 times as often as same-file functions of similar size, with an interval excluding 1, and above 1.3 in at least 7 of the 10 largest subsystems (kernel, mm, include/linux, net/ipv4, net/core, net/netfilter, fs, fs/btrfs, block, net/sched).
+- **K2 (ghost commits).** For the 11% of pairs where the fix and the causing commit share no file, the excess within 2 calls is at least 1.3 (a connection the file view cannot see).
+- **K3 (direction).** Callers against callees is not the same in every subsystem: the caller-minus-callee gap within one call changes sign in at least 3 of the 10 largest.
+- **K4 (time).** The ratio for fixes a year or more after the change is lower than for fixes within 30 days, pooled and in at least 7 of the 10 largest subsystems, with a smooth decline across four lag buckets.
+- **K5 (precision).** The interval of the pooled within-2-calls ratio is narrower than 0.15 (the point of the scale).
+**Would surprise:** no excess in the cross-file pairs (the ghost commits stay unexplained); a ratio below 1.2 pooled (the earlier repositories were a small-sample artefact).
