@@ -1,0 +1,18 @@
+
+linux: 14444 pairs with a fixed function outside the changed set; share of causes 100+ lines 49%
+  under 20     n  2041 share 14.1%  same function  42%  either1  3.85 [3.55,4.21] (34% vs 9%, n 1969)  either2  2.79 [2.62,2.97] (41% vs 15%, n 1969)
+  20 to 99     n  5325 share 36.9%  same function  33%  either1  3.34 [3.18,3.48] (46% vs 14%, n 5102)  either2  2.57 [2.48,2.65] (53% vs 20%, n 5102)
+  100 to 499   n  5536 share 38.3%  same function  25%  either1  2.05 [1.99,2.11] (47% vs 23%, n 5270)  either2  1.73 [1.68,1.78] (56% vs 33%, n 5270)
+  500 or more  n  1542 share 10.7%  same function  17%  either1  1.43 [1.35,1.51] (38% vs 27%, n 1486)  either2  1.31 [1.25,1.38] (49% vs 37%, n 1486)
+
+dpdk: 6963 pairs with a fixed function outside the changed set; share of causes 100+ lines 76%
+  under 20     n   355 share  5.1%  same function  51%  either1  2.69 [2.18,3.31] (34% vs 13%, n 331)  either2  2.07 [1.80,2.45] (40% vs 19%, n 331)
+  20 to 99     n  1326 share 19.0%  same function  37%  either1  2.65 [2.46,2.88] (46% vs 17%, n 1244)  either2  2.10 [1.96,2.25] (50% vs 24%, n 1244)
+  100 to 499   n  3014 share 43.3%  same function  27%  either1  1.67 [1.60,1.75] (47% vs 28%, n 2788)  either2  1.44 [1.40,1.49] (55% vs 38%, n 2788)
+  500 or more  n  2268 share 32.6%  same function  17%  either1  1.29 [1.23,1.35] (37% vs 29%, n 2137)  either2  1.18 [1.13,1.22] (47% vs 40%, n 2137)
+
+openssl: 126 pairs with a fixed function outside the changed set; share of causes 100+ lines 78%
+  under 20     n     4 share  3.2%  same function  75%  either1            n/a  either2            n/a
+  20 to 99     n    24 share 19.0%  same function  25%  either1  1.64 [0.67,4.16] (36% vs 22%, n 22)  either2  1.88 [1.22,3.29] (50% vs 27%, n 22)
+  100 to 499   n    41 share 32.5%  same function  20%  either1  1.58 [0.93,2.72] (44% vs 28%, n 36)  either2  1.50 [1.06,2.19] (58% vs 39%, n 36)
+  500 or more  n    57 share 45.2%  same function  12%  either1  1.82 [1.33,2.50] (45% vs 25%, n 53)  either2  1.54 [1.26,1.96] (55% vs 35%, n 53)

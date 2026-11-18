@@ -1,0 +1,18 @@
+dpdk: change history of 52896 functions
+
+=== dpdk: 6963 pairs with a fixed function outside the changed set; matched baseline fell back to plain for 5.7% of fixed functions ===
+  sanity: fixed functions changed in the prior year 19.8% vs 24.6% of their same-file candidates; first change within the prior year 11.0% vs 15.2%
+  radius against the plain same-file baseline and against the churn- and age-matched baseline:
+    either1   plain  1.68 [1.63,1.73] (43% vs 25%, n 6500)   matched  1.67 [1.62,1.74] (43% vs 26%, n 6500)
+    either2   plain  1.45 [1.41,1.49] (51% vs 35%, n 6500)   matched  1.44 [1.41,1.48] (51% vs 35%, n 6500)
+    callers1  plain  1.84 [1.73,1.96] (16% vs 8%, n 6500)   matched  1.84 [1.73,1.96] (16% vs 8%, n 6500)
+    callees1  plain  1.69 [1.62,1.76] (33% vs 20%, n 6500)   matched  1.67 [1.61,1.74] (33% vs 20%, n 6500)
+  within 2 calls by size of the causing change (lines):
+    under 20     n   355 plain  2.07 [1.76,2.44] (40% vs 19%, n 331)   matched  2.08 [1.75,2.48] (40% vs 19%, n 331)
+    20 to 99     n  1326 plain  2.10 [1.97,2.25] (50% vs 24%, n 1244)   matched  2.09 [1.94,2.25] (50% vs 24%, n 1244)
+    100 to 499   n  3014 plain  1.44 [1.39,1.49] (55% vs 38%, n 2788)   matched  1.44 [1.39,1.50] (55% vs 38%, n 2788)
+    500 or more  n  2268 plain  1.18 [1.13,1.23] (47% vs 40%, n 2137)   matched  1.17 [1.13,1.22] (47% vs 40%, n 2137)
+
+  CH1 matched either2 1.44 [1.41,1.47] (needs 1.25, lower bound above 1.15): supported
+  CH2 matched / plain = 1.00 (needs 0.90 or lower): not supported
+  CH3 size bands with a lower bound above 1.2 (plain baseline): 3 of 4 (needs 3)
