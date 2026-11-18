@@ -1021,3 +1021,19 @@ The owner's pointer: the engine's structural fingerprint and git's rename and fo
 - **RC3.** M1 and M2 disagree on whether an added function is a move for at least 15% of the added functions (so the choice of matcher matters).
 - **RC4.** The reference finds moves that **neither** method matches in at most 15% of its moves.
 **Would surprise:** M1 recalling under 40% of the reference's moves (the 1,984 and 1,321 matched functions would then be a floor, and the unfiltered events a mixture with renames).
+
+#### Checking the move and rename filter: results (2026-11-18; `rename_check_output.txt`; DPDK, 120 cause commits that both add and delete functions, 600 added functions blamed)
+Reference (git line-origin tracking, `blame -w -M -C -C -C`): **move 191, new code 194, ambiguous 215** (the ambiguous ones are not scored).
+| matcher | recall of the reference's moves | right partner | calls new code a move |
+|---|---|---|---|
+| **M1** token-set overlap 0.7 (used in the added/deleted run) | **77%** (of 191) | 76% | **4%** |
+| **M2** engine-style structural match (18-family fingerprint, call set, size) | **57%** (of 124 moves with snapshot data) | 48% | 7% (of 96) |
+M2 had snapshot data (the function present in both the previous and the next quarterly scan) for 124 of the 191 moves and 96 of the 194 new functions. M1 and M2 disagree on whether an added function is a move for 14% of the 327 with snapshot data; **20% of the reference's moves (39 of 191) are matched by neither**.
+| hypothesis | verdict |
+|---|---|
+| RC1 M2 recall at least 70%, M1 at least 60% | **not supported**: M2 57%, M1 77% |
+| RC2 both call at most 10% of new code a move | **supported**: 4% and 7% |
+| RC3 disagreement at least 15% | **not supported, narrowly**: 14% |
+| RC4 moves neither finds at most 15% | **not supported**: 20% |
+Surprise bar (M1 recall under 40%): not met.
+**Reading.** The token-overlap filter used for the added and deleted run recognises 77% of the moves that git's own line tracking finds, with 4% false alarms, so the filter was reasonable; the structural fingerprint did **not** do better in this setting (57%, right partner 48%). Why M2 trails, by the examples: it compares quarterly scans (a function can change a lot within a quarter), the fingerprint here is 18 keyword families and a call set, not the engine's control-flow skeleton layer, and it needs the function in both scans. The moves neither finds are mostly **splits and rewrites** (for example `tap_tx_l3_cksum` and `tap_tx_l4_cksum` both taken out of `tap_tx_offload`; `hash_rxq_special_flow_enable` from `hash_rxq_allmulticast_enable`: one function becoming two or a body reworked while moving), which a name-free fingerprint does not catch either. **A cheap improvement:** treating a function as a move when either M1 or M2 says so recalls about 80% of the reference's moves; the exclusion in the added and deleted run misses roughly 1 in 4 moves, so some renames remain in the ADD and DEL groups. The effect of that on the radius around added and deleted functions is not yet measured. **Caveats.** One repository, 120 commits; the reference is itself imperfect (blame can miss heavy rewrites, and ambiguous cases are left out); M2 uses a 18-family proxy for the engine's fingerprint, not the full scanner.

@@ -1,0 +1,54 @@
+  scanned 60 cause commits; 9 with both added and deleted functions; 35 added functions blamed
+  scanned 120 cause commits; 16 with both added and deleted functions; 86 added functions blamed
+  scanned 180 cause commits; 22 with both added and deleted functions; 121 added functions blamed
+  scanned 240 cause commits; 29 with both added and deleted functions; 167 added functions blamed
+  scanned 300 cause commits; 33 with both added and deleted functions; 179 added functions blamed
+  scanned 360 cause commits; 36 with both added and deleted functions; 199 added functions blamed
+  scanned 420 cause commits; 41 with both added and deleted functions; 221 added functions blamed
+  scanned 480 cause commits; 46 with both added and deleted functions; 258 added functions blamed
+  scanned 540 cause commits; 52 with both added and deleted functions; 286 added functions blamed
+  scanned 600 cause commits; 59 with both added and deleted functions; 324 added functions blamed
+  scanned 660 cause commits; 64 with both added and deleted functions; 345 added functions blamed
+  scanned 720 cause commits; 70 with both added and deleted functions; 395 added functions blamed
+  scanned 780 cause commits; 75 with both added and deleted functions; 411 added functions blamed
+  scanned 840 cause commits; 79 with both added and deleted functions; 437 added functions blamed
+  scanned 900 cause commits; 82 with both added and deleted functions; 447 added functions blamed
+  scanned 960 cause commits; 86 with both added and deleted functions; 454 added functions blamed
+  scanned 1020 cause commits; 92 with both added and deleted functions; 480 added functions blamed
+  scanned 1080 cause commits; 95 with both added and deleted functions; 494 added functions blamed
+  scanned 1140 cause commits; 102 with both added and deleted functions; 540 added functions blamed
+  scanned 1200 cause commits; 103 with both added and deleted functions; 542 added functions blamed
+  scanned 1260 cause commits; 108 with both added and deleted functions; 556 added functions blamed
+  scanned 1320 cause commits; 113 with both added and deleted functions; 577 added functions blamed
+  scanned 1380 cause commits; 120 with both added and deleted functions; 600 added functions blamed
+
+dpdk: 120 commits, 600 added functions: reference says move 191, new code 194, ambiguous 215
+    recall of moves 77% (right partner 76%), calls new code a move 4% of the time
+  M2 fingerprint + call set + size: snapshot data available for 124 of 191 moves and 96 of 194 new functions
+    recall of moves 57% (right partner 48%), calls new code a move 7% of the time
+  M1 and M2 disagree on whether an added function is a move: 14% (of 327 with snapshot data)
+  reference moves matched by neither method: 39 of 191 (20%)
+
+  examples the reference calls moves that M1 missed (name in the new place <- partner):
+    update_mtu_from_frame_size (app/test-pmd/testpmd.c) <- update_jumbo_frame_offload (app/test-pmd/testpmd.c); M2: None
+    tap_tx_l3_cksum (drivers/net/tap/rte_eth_tap.c) <- tap_tx_offload (drivers/net/tap/rte_eth_tap.c); M2: tap_tx_offload
+    tap_tx_l4_cksum (drivers/net/tap/rte_eth_tap.c) <- tap_tx_offload (drivers/net/tap/rte_eth_tap.c); M2: None
+    hash_rxq_special_flow_enable (drivers/net/mlx5/mlx5_rxmode.c) <- hash_rxq_allmulticast_enable (drivers/net/mlx5/mlx5_rxmode.c); M2: None
+    priv_special_flow_enable (drivers/net/mlx5/mlx5_rxmode.c) <- priv_allmulticast_enable (drivers/net/mlx5/mlx5_rxmode.c); M2: None
+    qede_arfs_construct_pkt (drivers/net/qede/qede_filter.c) <- qede_fdir_construct_pkt (drivers/net/qede/qede_filter.c); M2: None
+    i40evf_add_del_eth_addr (drivers/net/i40e/i40e_ethdev_vf.c) <- i40evf_del_mac_addr_by_addr (drivers/net/i40e/i40e_ethdev_vf.c); M2: i40evf_del_mac_addr_by_addr
+    mlx5_dev_mempool_register (drivers/common/mlx5/mlx5_common.c) <- mlx5_dev_ctx_shared_mempool_unregister (drivers/net/mlx5/mlx5.c); M2: None
+  examples M2 calls a move that M1 did not (and what the reference says):
+    tap_tx_l3_cksum <- tap_tx_offload; reference move (lines older than the commit 54%)
+    hns3_config_ncsi_hw_err_int <- query_num_bds_in_msix; reference ambiguous (lines older than the commit 36%)
+    i40evf_add_del_eth_addr <- i40evf_del_mac_addr_by_addr; reference move (lines older than the commit 88%)
+    __rte_eth_dev_profile_init <- __rte_eth_profile_rx_init; reference move (lines older than the commit 50%)
+    process_maps <- find_user_mem_map; reference new (lines older than the commit 0%)
+    addr_is_chunk_aligned <- find_user_mem_map; reference new (lines older than the commit 10%)
+
+=== VERDICTS ===
+  RC1 recall: M2 57% (needs 70%), M1 77% (needs 60%): not supported
+  RC2 new code called a move: M1 4%, M2 7% (needs 10% or less for both): supported
+  RC3 disagreement 14% (needs 15% or more): not supported
+  RC4 moves neither finds 20% (needs 15% or less): not supported
+  surprise bar (M1 recall under 40%): not met
