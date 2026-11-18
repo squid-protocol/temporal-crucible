@@ -374,3 +374,27 @@ Rule-based and complete (every fix gets a shape): comment-only; large (100 or mo
 - **SH3.** The radius across shapes with 500 or more pairs stays within a factor of 1.5 (the general pattern).
 - **SH4.** Large fixes (100 or more lines) have the lowest radius and the highest cross-file share.
 **Would surprise:** a shape accounting for most of the radius, or radius differing by more than a factor of 2 across shapes.
+
+### Fix shape: results (2026-11-17; `linux_fix_shapes_output.txt`; 24,474 pairs, every fix classified)
+| shape of the fix | pairs | median lag | same function | cross-file | within 2 calls |
+|---|---:|---:|---:|---:|---|
+| replaces a call or argument | 3,172 (13.0%) | 178 d | 62% | 12.7% | **2.45 [2.28, 2.61]** |
+| changes a type or declaration | 804 (3.3%) | **111 d** | 56% | 13.4% | 2.42 [2.14, 2.76] |
+| removes code | 1,443 (5.9%) | **153 d** | 61% | 13.2% | 2.32 [2.11, 2.53] |
+| small edit (12 or fewer lines) | 3,594 (14.7%) | 205 d | 58% | 14.9% | 2.25 [2.10, 2.38] |
+| **adds a guard** (a new condition with a return or error) | 2,419 (9.9%) | **325 d** | **45%** | **19.5%** | 2.16 [2.04, 2.31] |
+| rewrites a condition | 1,901 (7.8%) | 247 d | 63% | 12.0% | 2.02 [1.87, 2.17] |
+| adds synchronisation or release | 2,718 (11.1%) | 269 d | 58% | 14.9% | 1.98 [1.87, 2.10] |
+| other edit | 3,910 (16.0%) | 251 d | 67% | 12.2% | 1.84 [1.79, 1.90] |
+| adds code | 3,666 (15.0%) | 313 d | 51% | 18.2% | 1.82 [1.74, 1.90] |
+| large (100 or more lines) | 649 (2.7%) | 315 d | **72%** | 12.0% | **1.48 [1.39, 1.58]** |
+| comment only | 198 (0.8%) | 155 d | 66% | 8.1% | 2.47 [1.78, 3.54] |
+Shape and subject-based mechanism agree where they should (a validation of both): "adds synchronisation or release" is 56% concurrency and 31% lifetime; "comment only" is 79% build or compile; "changes a type or declaration" is 28% build and 20% uninitialised; "adds a guard" is spread over NULL (20%), error handling (24%), lifetime (18%), concurrency (18%), bounds (14%).
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| SH1 guard additions have a shorter lag than code removals | **not supported (reverse)** | guards **325 d**, removals **153 d** |
+| SH2 code removals have the highest same-function share (500 or more pairs) | **not supported** | 61%; the highest are large fixes (72%), other edits (67%) |
+| SH3 the radius across shapes stays within a factor of 1.5 | **marginal** | 1.48 to 2.45 (factor 1.65); 1.82 to 2.45 (1.35) without the large fixes |
+| SH4 large fixes have the lowest radius and the highest cross-file share | **half** | lowest radius yes (1.48; a diff touching many functions has many neighbours), cross-file share no (12.0%; the highest is guard additions, 19.5%) |
+**Reading.** The most distinctive kind of fix is the **added guard** (a missing check or early return, 10% of fixes): it is the *least local* (45% in the same function, 19.5% in another file) and the *slowest* (325 days): a missing check is typically added at a different place from the change that made it necessary, long after. By contrast, mechanical corrections (replace a call or an argument, change a type, remove code) come sooner (111 to 178 days), and tightly around the change (radius 2.3 to 2.5). Feature-like fixes ("adds code") sit with the guard additions: later and more dispersed. Both the radius and the timing therefore depend on the *shape* of the correction: the dispersed, slow fixes add something that was missing; the tight, quick ones correct something that was wrong.

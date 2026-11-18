@@ -1,0 +1,32 @@
+24474 measured kernel pairs; fix shape from the fix commit's .c/.h diff
+  shape                             pairs  share    lag  same fn cross-file   within 2 calls (against same-file functions)
+  comment only                        198   0.8%   155d      66%       8.1%    2.47 [1.78,3.54] (42% vs 17%, n 81)
+  large (100+ lines)                  649   2.7%   315d      72%      12.0%    1.48 [1.39,1.58] (65% vs 44%, n 537)
+  removes code                       1443   5.9%   153d      61%      13.2%    2.32 [2.11,2.53] (54% vs 23%, n 642)
+  adds a guard                       2419   9.9%   325d      45%      19.5%    2.16 [2.04,2.31] (46% vs 21%, n 1469)
+  rewrites a condition               1901   7.8%   247d      63%      12.0%    2.02 [1.87,2.17] (52% vs 26%, n 991)
+  adds sync or release               2718  11.1%   269d      58%      14.9%    1.98 [1.87,2.10] (52% vs 26%, n 1611)
+  replaces a call or argument        3172  13.0%   178d      62%      12.7%    2.45 [2.28,2.61] (51% vs 21%, n 1363)
+  changes a type or declaration       804   3.3%   111d      56%      13.4%    2.42 [2.14,2.76] (52% vs 22%, n 389)
+  adds code                          3666  15.0%   313d      51%      18.2%    1.82 [1.74,1.90] (48% vs 26%, n 2467)
+  small edit                         3594  14.7%   205d      58%      14.9%    2.25 [2.10,2.38] (48% vs 22%, n 1543)
+  other edit                         3910  16.0%   251d      67%      12.2%    1.84 [1.79,1.90] (59% vs 32%, n 2734)
+
+  radius across shapes with 500+ pairs: 1.48 to 2.45 (factor 1.65)
+  median lag: adds a guard 325 d, removes code 153 d
+  highest same-function share (500+ pairs): large (100+ lines) (72%); lowest radius: large (100+ lines); highest cross-file: adds a guard
+
+  shape x subject-classified mechanism (row share of each shape, mechanism-classified fixes only):
+subj_kind                      bounds/overflow  build/compile  concurrency  error handling  lifetime  null deref  uninitialized
+shape                                                                                                                          
+adds a guard                              0.14           0.03         0.18            0.24      0.18        0.20           0.04
+adds code                                 0.10           0.06         0.42            0.11      0.24        0.05           0.04
+adds sync or release                      0.02           0.01         0.56            0.04      0.31        0.04           0.01
+changes a type or declaration             0.16           0.28         0.10            0.14      0.08        0.03           0.20
+comment only                              0.01           0.79         0.06            0.07      0.04        0.00           0.01
+large (100+ lines)                        0.04           0.01         0.68            0.04      0.20        0.01           0.01
+other edit                                0.11           0.06         0.41            0.12      0.22        0.05           0.03
+removes code                              0.04           0.14         0.35            0.14      0.26        0.04           0.04
+replaces a call or argument               0.15           0.10         0.26            0.09      0.23        0.11           0.06
+rewrites a condition                      0.11           0.05         0.32            0.09      0.30        0.11           0.02
+small edit                                0.11           0.07         0.16            0.21      0.25        0.12           0.09
