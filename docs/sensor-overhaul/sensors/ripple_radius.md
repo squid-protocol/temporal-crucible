@@ -356,3 +356,13 @@ Same 34,349 kernel pairs and 52 snapshots. Authors from `git log --format=%ae`; 
 - **D4.** Lifetime and error-handling fixes remain more local than average (cross-file share below 0.9 times the overall share).
 - **D5.** The radius across mechanisms stays within a factor of 1.5 (general pattern) with the larger sample.
 **Would surprise:** diff features recovering fewer than half of the subject classes (the label would then rest on words, not changes); the "other" fixes clustering into one dominant unlabelled group (a mechanism our taxonomy lacks).
+
+### Diff-based classification: results (2026-11-17; `linux_change_kinds_diff_output.txt`)
+| hypothesis | verdict | evidence |
+|---|---|---|
+| D1 the diff alone recovers the subject classes, macro-F1 at least 0.6 | **not supported** | cross-validated macro-F1 **0.46**, accuracy 54% (majority class 35%); F1 by class: concurrency 0.67, lifetime 0.53, build 0.50, bounds 0.43, error handling 0.41, NULL 0.35, uninitialised 0.35; most errors fall into concurrency (lock-like patterns overlap) |
+| D2 at least half of the 17,437 other fixes get a class (probability 0.6 or more) | **not supported, and the labels are unreliable** | 41% assigned (coverage 29% to 58%); reading the subjects of 35 assigned fixes (not used by the model), about a third looked right: the model was trained on fixes with descriptive subjects (a different population from the rest), so its labels for the unlabelled fixes are not used |
+| D3 lag order holds | **supported** | short classes (build 58 d, uninitialised 132 d, NULL 154 d; mean 115 d) against long (bounds 358 d, concurrency 280 d, lifetime 295 d; mean 311 d) |
+| D4 lifetime and error handling more local than average (below 0.9 times) | **mixed** | error handling 0.84 times, lifetime 0.91 times |
+| D5 radius across mechanisms within a factor of 1.5 | **supported** | 1.83 to 2.20 (factor 1.20) over classes of 300 or more pairs |
+**What the leftovers are** (the 10,279 fixes below probability 0.6, ten clusters by diff pattern): two groups hold 70%: **about 3,400 rewrite or add a condition** (more `if`, a permission or validity check, a livelock guard; example subjects "require CAP_NET_ADMIN in the device netns", "avoid livelock while updating retransmit path") and **about 3,800 remove calls to lock, alloc or get functions** ("Fix unsafe decode", "don't skb_tx_error() the source skb"). The keyword taxonomy has no class for either: the unlabelled fixes are mostly two mechanisms we had not named, not noise. **Decision:** the subject-based classes stay the reference labels; the model's labels are not used; the next step is a rule-based classification of the diff's *shape*, which needs no learning and covers every fix.

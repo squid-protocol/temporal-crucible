@@ -1,0 +1,86 @@
+24474 pairs; subject-classified 7037 (29%); classes ['bounds/overflow', 'build/compile', 'concurrency', 'error handling', 'lifetime', 'null deref', 'uninitialized']
+
+=== D1: cross-validated recovery of the subject label from the diff alone ===
+  bounds/overflow  precision 0.45 recall 0.42 F1 0.43 (n 650)
+  build/compile    precision 0.59 recall 0.43 F1 0.50 (n 499)
+  concurrency      precision 0.61 recall 0.74 F1 0.67 (n 2447)
+  error handling   precision 0.48 recall 0.35 F1 0.41 (n 852)
+  lifetime         precision 0.51 recall 0.55 F1 0.53 (n 1715)
+  null deref       precision 0.40 recall 0.31 F1 0.35 (n 574)
+  uninitialized    precision 0.52 recall 0.27 F1 0.35 (n 300)
+  accuracy 0.54, macro-F1 0.46 (majority-class accuracy 0.35)
+  at probability >= 0.6: covers 60% of labelled fixes, accuracy 66%
+  confusion (rows true, columns predicted):
+                 bounds  build/  concur  error   lifeti  null d  uninit
+bounds/overflow     272      34     170      30      86      47      11
+build/compile        52     215     113      24      58      30       7
+concurrency          78      48    1803      66     374      64      14
+error handling       41      28     173     299     226      69      16
+lifetime             74      16     502     114     946      46      17
+null deref           60      11     146      62     107     180       8
+uninitialized        31      12      64      27      72      14      80
+
+=== D2: the 17437 fixes the subject could not classify ===
+  assigned at probability >= 0.6: 7158 (41%); coverage of all pairs: 58% (from 29%)
+  predicted classes: concurrency 3874, lifetime 1202, bounds/overflow 936, build/compile 527, error handling 343, null deref 204, uninitialized 72
+  reading check (subject of a random fix the diff classified, not used by the model):
+    [bounds/ove] f2fs: zone: fix to avoid bio split on sequential zone
+    [bounds/ove] mm/damon/core: move static variable last_nr_regions to damon_ctx
+    [bounds/ove] ipv6/mcast: init as INCLUDE when join SSM INCLUDE group
+    [bounds/ove] net: fix skb length accounting after generic XDP frag adjustment
+    [bounds/ove] bpf: Check the new program of an iterator link update
+    [build/comp] bpf: Keep module's btf_data_size intact after load
+    [build/comp] mm/memory_hotplug: fix kerneldoc comment for __remove_memory
+    [build/comp] mm: exclude ZONE_DEVICE from GFP_ZONE_TABLE
+    [build/comp] f2fs: remove unneeded memory footprint accounting
+    [build/comp] mm/mseal: update VMA end correctly on merge
+    [concurrenc] sched/cache: Annotate lockless accesses to mm->sc_stat.cpu
+    [concurrenc] ubifs: Set/Clear I_LINKABLE under i_lock for whiteout inode
+    [concurrenc] netfilter: nft_meta: use 64-bit time arithmetic
+    [concurrenc] wifi: mac80211: fix up link station creation/insertion
+    [concurrenc] btrfs: fix invalid inode pointer dereferences during log replay
+    [error hand] fuse: reject fuse_notify() pagecache ops on directories
+    [error hand] netfilter: nat: don't register device notifier twice
+    [error hand] ipv4: Fix address dump when IPv4 is disabled on an interface
+    [error hand] mm: stop leaking PageTables
+    [error hand] dlm: fix error if active rsb is not hashed
+    [lifetime] nfs: Clean up /proc/net/rpc/nfs when nfs_fs_proc_net_init() fails.
+    [lifetime] ftrace: Fix function profiler's filtering functionality
+    [lifetime] bpf: Dont allow vmlinux BTF to be used in map_create and prog_load.
+    [lifetime] sched: Make class_schedulers avoid pushing current, and get rid of proxy_tag_curr()
+    [lifetime] memcg: move LRU size accounting on reparenting instead of copying it
+    [null deref] fs/proc/task_mmu: check p->vec_buf for NULL
+    [null deref] ipv4: stop route notification sizing when nexthop group shrinks
+    [null deref] vsock: ignore empty child namespace mode writes
+    [null deref] fs: Handle I_DONTCACHE in iput_final() instead of generic_drop_inode()
+    [null deref] net: sched: matchall: verify that filter is not NULL in mall_walk()
+    [uninitiali] ntfs3: Restore NULL folio initialization in ntfs_writepages()
+    [uninitiali] xfs: don't zap the attr fork on repair when there are queued pptr updates
+    [uninitiali] lib/test_vmalloc.c: avoid garbage in page array
+    [uninitiali] bpf: Fix reg_set_min_max corruption of fake_reg
+    [uninitiali] btrfs: zoned: fix negative space_info->bytes_readonly
+
+=== the 10279 left over (probability below 0.6): ten clusters by diff pattern ===
+  cluster 0:  3374 fixes; over-represented add_cond, rem_cond, add_null; e.g. sctp: avoid livelock while updating retransmit path | net: ip6_vti: require CAP_NET_ADMIN in the device netns for  | net: ip_vti: require CAP_NET_ADMIN in the device netns for c
+  cluster 1:   210 fixes; over-represented add_comment, add_call, add_cond; e.g. batman-adv: Fix debugfs path for renamed hardif | mm: debugfs: move rounddown_pow_of_two() out from do_fault p | rtnetlink: fix rtnl_fdb_dump() for ndmsg header
+  cluster 2:   138 fixes; over-represented rem_comment, rem_call, add_comment; e.g. ipv4: allow local fragmentation in ip_finish_output_gso() | ext4: revert commit which was causing fs corruption after jo | udp4: fix IP_CMSG_CHECKSUM for connected sockets
+  cluster 3:    97 fixes; over-represented add_call, rem_call, add_comment; e.g. tracing: Have tracer option be instance specific | net/flow_dissector: switch to siphash | wifi: mac80211: validate TX status rate metadata
+  cluster 4:   821 fixes; over-represented add_comment, rem_comment, add_cond; e.g. netlink: reset network and mac headers in netlink_dump() | net: sched: sch_netem: Refactor code in 4-state loss generat | Btrfs: incremental send, fix file corruption when no-holes f
+  cluster 5:   143 fixes; over-represented add_comment, add_call, add_cond; e.g. kernfs, sysfs, cgroup: restrict extra perm check on open to  | xprtrdma: Prevent loss of completion signals | ktime: Fix ktime_divns to do signed division
+  cluster 6:  1250 fixes; over-represented add_call, rem_call, add_cond; e.g. can: skb: make echo skb freeing safe in any IRQ context | rtnetlink: count IFLA_INFO_SLAVE_KIND in if_nlmsg_size | tracing: Have function tracer define options per instance
+  cluster 7:  3777 fixes; over-represented rem_lock, rem_alloc, rem_get; e.g. libceph: Fix unsafe decode in ceph_redirect_decode() | net: skbuff: don't skb_tx_error() the source skb in skb_zero | batman-adv: gw: acquire ethernet header only after skb reall
+  cluster 8:    94 fixes; over-represented add_call, rem_call, add_cond; e.g. net/packet: defer vmalloc TX_RING free until skbs finish | net: add missing SOF_TIMESTAMPING_OPT_ID support | udp6: add missing checks on edumux packet processing
+  cluster 9:   375 fixes; over-represented rem_call, add_call, add_type; e.g. xfrm: ah: account for ESN high bits in async callbacks | xfrm: ah: account for ESN high bits in async callbacks | xfrm: ah: account for ESN high bits in async callbacks
+
+=== D3-D5: lag, locality and radius by mechanism, subject-classified plus diff-classified ===
+  class             pairs    lag  same fn  cross-file x overall   within 2 calls
+  bounds/overflow    1586   358d      56%       14.6%     1.00x    2.04 [1.90,2.19] (52% vs 25%, n 892)
+  build/compile      1026    58d      58%       15.5%     1.06x    2.20 [1.97,2.47] (43% vs 20%, n 524)
+  concurrency        6321   280d      60%       15.1%     1.03x    1.83 [1.77,1.89] (55% vs 30%, n 4256)
+  error handling     1195   195d      63%       12.2%     0.84x    2.03 [1.86,2.24] (54% vs 27%, n 539)
+  lifetime           2917   295d      62%       13.3%     0.91x    1.98 [1.88,2.10] (53% vs 27%, n 1564)
+  null deref          778   154d      58%       15.2%     1.04x    2.15 [1.92,2.42] (52% vs 24%, n 377)
+  uninitialized       372   132d      58%       16.4%     1.12x    1.82 [1.53,2.18] (46% vs 26%, n 183)
+  unclassified      10279   228d      57%       14.8%     1.01x    2.12 [2.05,2.18] (50% vs 24%, n 5492)
+  radius across classes with 300+ pairs: 1.83 to 2.20 (factor 1.20)
+  median lag of the short classes (build, uninitialised, NULL): 115 d against the long classes (concurrency, lifetime, bounds): 311 d
