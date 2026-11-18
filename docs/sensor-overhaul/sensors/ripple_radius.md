@@ -283,3 +283,20 @@ Same 34,349 kernel pairs and 52 snapshots. Authors from `git log --format=%ae`; 
 - **S2.** The signature effect holds in the cross-file pairs and in both lag groups (under 30 days; a year or more).
 - **A1.** The radius (within 2 calls, same-file baseline) is at least 1.3 for different-author pairs, with an interval excluding 1; **A2.** same-author pairs have a higher same-function share than different-author pairs (earlier pooled: 71% against 60%); **A3.** the radius is not larger for same-author pairs (earlier: 1.59 against 1.62). The kernel has many reviewers and maintainers: different-author pairs should be the majority.
 **Would surprise:** the radius vanishing for different-author pairs (it would then be one person's work session); no caller enrichment after signature changes (it would then be a small-repository effect).
+
+### Kernel controls: results (2026-11-17; `linux_blast_report_controls.txt`)
+| group | all pairs | outside the changed set | same function | within 1 call callers / callees | within 2 calls |
+|---|---:|---:|---:|---|---|
+| different author | 16,265 | 9,436 | 57% | 2.49 [2.36, 2.65] / 2.72 [2.61, 2.84] | **2.06 [2.01, 2.11]** |
+| same author | 8,209 | 5,008 | 61% | 2.29 [2.15, 2.46] / 2.45 [2.35, 2.59] | 1.88 [1.82, 1.94] |
+| signature changed (a changed function's parameter count differs from the previous snapshot) | 5,136 | 2,962 | 61% | 2.27 [2.11, 2.43] (26% vs 11%) / 2.28 [2.17, 2.40] (42% vs 18%) | 1.76 [1.70, 1.81] |
+| no signature change | 19,338 | 11,482 | 58% | 2.48 [2.35, 2.61] (16% vs 6%) / 2.76 [2.66, 2.86] | 2.09 [2.04, 2.14] |
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| A1 radius at least 1.3 for different-author pairs | **supported** | 2.06 [2.01, 2.11]; different-author pairs are 66% of all |
+| A2 same-author pairs touch the same function more often | **supported, slightly** | 61% against 57% |
+| A3 the radius is not larger for same-author pairs | **supported** | 1.88 same author against 2.06 different: **larger for different authors**; the clustering is not one person finishing their own work |
+| S1 after a signature change the fix lands in callers more than callees, callers ratio at least 3.0 | **not supported** | callers 2.27 against callees 2.28; callers ratio 2.27 against 2.48 without a signature change |
+| S2 the signature effect holds in cross-file pairs and both lag groups | not tested (S1 failed) | |
+**The earlier signature result does not hold at scale.** In curl (33 pairs) callers within 1 call were 33% against 13%, and in OpenSSL and FreeBSD pooled (29 pairs) 3.83 times the same-file baseline [1.50, 9.12]. With 2,962 kernel pairs the caller excess is the same as for other changes (2.27 against 2.48), while the absolute caller rate is higher after a signature change (26% against 16%) because the baseline rises with it (11% against 6%: these changes touch well-connected functions). So the earlier figure was a small-sample overestimate, or specific to those repositories. Consequences: the wiki page and the `gitgalaxy change` output sentence that cited it are corrected (callers are listed as a checklist, since they must agree with a changed signature, not as where fixes tend to land); the forward-design figure (1.23 across seven repositories) measures something different (signature-changing edits against fixes in later quarters, against a same-file baseline) and is kept but weighed lightly.
