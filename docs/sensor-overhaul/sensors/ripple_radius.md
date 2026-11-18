@@ -1046,3 +1046,24 @@ The first run excluded added functions matched to a deleted one by token overlap
 - **SN4.** Callers1 stays above callees1 around both added and deleted functions in every filter, in both.
 - **SN5.** DL3 holds under the union filter: deleted functions with 3 or more former callers have at least 1.2 times the share of pairs with a repair within 2 calls that those with at most 1 have, pooled.
 **Would surprise:** the radius around added or deleted functions at or below 1.2 under any filter (then the result was a feature of one filter).
+
+#### Sensitivity of the added and deleted function result to the rename filter: results (2026-11-18; `added_deleted_sensitivity_output.txt`)
+Added functions excluded as moves, of 19,744 (DPDK) and 10,002 (Mesa): J.5 1,663 and 1,004; J.7 1,291 and 706; J.9 691 and 327; M2 477 and 356; union 1,355 and 815.
+Radius within 2 calls against the same-file baseline, by filter (**none** keeps every move as an add and a delete):
+| group | repository | none | J.5 | J.7 (first run) | J.9 | M2 | union |
+|---|---|---|---|---|---|---|---|
+| ADD | DPDK | 2.24 | 2.24 | 2.23 | 2.24 | 2.23 | 2.23 |
+| ADD | Mesa | 3.05 | 2.99 | 2.99 | 3.07 | 3.04 | 2.99 |
+| DEL (previous graph) | DPDK | 2.78 | 3.18 | 3.08 | 2.81 | 3.08 | 3.07 |
+| DEL | Mesa | 2.98 | 3.08 | 2.99 | 2.91 | 2.94 | 2.95 |
+Callers1 against callees1 (union): ADD DPDK 3.48 against 1.47, Mesa 4.93 against 1.75; DEL DPDK 4.56 against 1.91, Mesa 5.46 against 2.39. Same-function share of added-function pairs: 57% (DPDK) and 46% (Mesa) in every filter.
+| hypothesis | verdict |
+|---|---|
+| SN1 radius around added functions at least 1.5 in every filter | **supported**: 2.23 to 2.24 (DPDK), 2.99 to 3.07 (Mesa) |
+| SN2 radius around deleted functions at least 1.5 in every filter | **supported**: 2.78 to 3.18, 2.91 to 3.08 |
+| SN3 every radius within 15% of the J.7 value | **supported**: the largest deviation 10% (DEL, DPDK, J.5 and J.9 against J.7) |
+| SN4 callers1 above callees1 everywhere | **supported** (every filter, group and repository) |
+| SN5 DL3 under the union filter | **supported**: deleted functions with 3 or more former callers 48% (n 308) against 27% (n 398) with at most 1 = **1.80** |
+Surprise bar (any radius at or below 1.2): not met (lowest 2.23).
+**Reading.** The added and deleted function result does **not** depend on how renames are handled: the radius around added functions moves by under 3% across six filters (including none at all) and around deleted functions by at most 10%. So the roughly 1 move in 4 that the first filter missed cannot account for the result. After a function is added, repairs land within two calls of it 2.2 (DPDK) to 3.0 (Mesa) times as often as same-file functions of similar size, callers above callees; after one is deleted, repairs land among its former neighbours about 3 times as often, former callers above former callees, and a deletion with several former callers (3 or more) is followed by a repair in the old neighbourhood 1.8 times as often as one with at most one. These radii are larger than around modified functions (1.57 and 1.78 on the same verified measurement), so **the graph absorbs the gain or loss of a node at least as locally as it absorbs a change to one**.
+**Caveats.** Two repositories, C only; an added function is in the changed set as a whole (new functions that call or are called by many others will have large neighbourhoods; the baseline is same-file functions of similar size, which does not model that); the former callers of a deleted function have to be edited in the same commit, so what is measured is the repair that follows the commit, not the edit it forced; function splits and rewrites that move code (about 20% of git-confirmed moves are found by neither matcher) are in the ADD and DEL groups under every filter; NEWFILE and DELFILE are descriptive only (DELFILE under 100 pairs); the kernel was not run.

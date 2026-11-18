@@ -1,0 +1,36 @@
+
+########## dpdk: events {'NEWFILE': 23334, 'ADD': 19744, 'DELFILE': 2144, 'DEL': 3945}; ADD excluded as moves: J.5 1663, J.7 1291, J.9 691, M2 477, union 1355 (of 19744 added functions) ##########
+  none   ADD measured  6825, with a repaired function outside  4368, same function  57%  within 1 2.82 [2.67,2.98]  within 2 2.24 [2.15,2.35]  callers1 3.48 [3.27,3.72]  callees1 1.48 [1.31,1.65]
+  none   DEL measured   593, with a repaired function outside   592, same function   1%  within 1 3.39 [2.85,4.07]  within 2 2.78 [2.42,3.22]  callers1 3.87 [3.12,4.76]  callees1 1.97 [1.33,2.84]
+  J.5    ADD measured  6696, with a repaired function outside  4335, same function  56%  within 1 2.81 [2.65,2.98]  within 2 2.24 [2.14,2.34]  callers1 3.47 [3.26,3.69]  callees1 1.52 [1.34,1.70]
+  J.5    DEL measured   393, with a repaired function outside   393, same function   0%  within 1 4.00 [3.24,5.13]  within 2 3.18 [2.64,3.84]  callers1 4.50 [3.50,6.05]  callees1 1.97 [1.09,3.36]
+  J.7    ADD measured  6742, with a repaired function outside  4350, same function  57%  within 1 2.79 [2.64,2.95]  within 2 2.23 [2.12,2.34]  callers1 3.46 [3.25,3.70]  callees1 1.47 [1.32,1.62]
+  J.7    DEL measured   450, with a repaired function outside   450, same function   0%  within 1 3.94 [3.21,4.91]  within 2 3.08 [2.66,3.63]  callers1 4.48 [3.59,5.70]  callees1 2.12 [1.29,3.34]
+  J.9    ADD measured  6779, with a repaired function outside  4358, same function  57%  within 1 2.80 [2.65,2.97]  within 2 2.24 [2.14,2.34]  callers1 3.49 [3.25,3.73]  callees1 1.47 [1.31,1.65]
+  J.9    DEL measured   523, with a repaired function outside   522, same function   1%  within 1 3.48 [2.88,4.21]  within 2 2.81 [2.43,3.27]  callers1 4.10 [3.29,5.05]  callees1 1.76 [1.08,2.73]
+  M2     ADD measured  6781, with a repaired function outside  4352, same function  57%  within 1 2.80 [2.65,2.97]  within 2 2.23 [2.13,2.35]  callers1 3.49 [3.28,3.74]  callees1 1.47 [1.31,1.66]
+  M2     DEL measured   504, with a repaired function outside   503, same function   1%  within 1 3.75 [3.13,4.60]  within 2 3.08 [2.65,3.70]  callers1 4.39 [3.55,5.64]  callees1 1.89 [1.13,2.83]
+  union  ADD measured  6731, with a repaired function outside  4342, same function  57%  within 1 2.80 [2.63,2.96]  within 2 2.23 [2.14,2.33]  callers1 3.48 [3.26,3.72]  callees1 1.47 [1.32,1.63]
+  union  DEL measured   439, with a repaired function outside   439, same function   0%  within 1 3.92 [3.17,4.95]  within 2 3.07 [2.62,3.60]  callers1 4.56 [3.69,5.94]  callees1 1.91 [1.02,3.18]
+
+########## mesa: events {'ADD': 10002, 'NEWFILE': 15358, 'DEL': 4065, 'DELFILE': 1416}; ADD excluded as moves: J.5 1004, J.7 706, J.9 327, M2 356, union 815 (of 10002 added functions) ##########
+  none   ADD measured  3272, with a repaired function outside  2105, same function  46%  within 1 4.25 [3.88,4.67]  within 2 3.05 [2.86,3.29]  callers1 5.01 [4.47,5.57]  callees1 1.82 [1.43,2.28]
+  none   DEL measured   544, with a repaired function outside   537, same function   1%  within 1 4.60 [3.86,5.70]  within 2 2.98 [2.55,3.49]  callers1 5.31 [4.26,6.88]  callees1 2.40 [1.26,4.17]
+  J.5    ADD measured  3146, with a repaired function outside  2025, same function  45%  within 1 4.19 [3.81,4.64]  within 2 2.99 [2.76,3.22]  callers1 4.93 [4.41,5.57]  callees1 1.79 [1.40,2.23]
+  J.5    DEL measured   401, with a repaired function outside   394, same function   2%  within 1 5.09 [4.01,6.55]  within 2 3.08 [2.55,3.76]  callers1 5.95 [4.51,8.00]  callees1 1.99 [0.77,3.91]
+  J.7    ADD measured  3190, with a repaired function outside  2051, same function  46%  within 1 4.19 [3.82,4.60]  within 2 2.99 [2.77,3.23]  callers1 4.92 [4.42,5.47]  callees1 1.78 [1.39,2.17]
+  J.7    DEL measured   454, with a repaired function outside   447, same function   2%  within 1 4.83 [3.87,6.28]  within 2 2.99 [2.54,3.62]  callers1 5.40 [4.13,6.94]  callees1 2.56 [1.21,4.36]
+  J.9    ADD measured  3241, with a repaired function outside  2085, same function  46%  within 1 4.29 [3.90,4.76]  within 2 3.07 [2.85,3.30]  callers1 4.99 [4.50,5.57]  callees1 1.87 [1.47,2.33]
+  J.9    DEL measured   506, with a repaired function outside   499, same function   2%  within 1 4.63 [3.77,5.70]  within 2 2.91 [2.50,3.50]  callers1 5.21 [4.09,6.61]  callees1 2.64 [1.46,4.39]
+  M2     ADD measured  3230, with a repaired function outside  2076, same function  46%  within 1 4.22 [3.83,4.71]  within 2 3.04 [2.83,3.28]  callers1 5.02 [4.47,5.60]  callees1 1.74 [1.35,2.16]
+  M2     DEL measured   488, with a repaired function outside   481, same function   2%  within 1 4.71 [3.76,5.92]  within 2 2.94 [2.48,3.57]  callers1 5.65 [4.56,7.24]  callees1 2.09 [1.11,3.99]
+  union  ADD measured  3175, with a repaired function outside  2041, same function  46%  within 1 4.19 [3.84,4.62]  within 2 2.99 [2.76,3.24]  callers1 4.93 [4.42,5.50]  callees1 1.75 [1.39,2.21]
+  union  DEL measured   437, with a repaired function outside   430, same function   2%  within 1 4.83 [3.94,6.24]  within 2 2.95 [2.47,3.56]  callers1 5.46 [4.15,7.24]  callees1 2.39 [1.21,4.44]
+
+=== VERDICTS ===
+  SN1 radius around added functions within 2 calls, range over filters: dpdk 2.23 to 2.24, mesa 2.99 to 3.07 (needs 1.5 in all): supported
+  SN2 radius around deleted functions within 2 calls, range over filters: dpdk 2.78 to 3.18, mesa 2.91 to 3.08 (needs 1.5 in all): supported
+  SN3 largest relative deviation from the J.7 value over all filters, groups and repositories: 10% (needs 15%): supported
+  SN4 callers1 above callees1 in every filter, group and repository: supported
+  SN5 DL3 under the union filter: 3+ former callers 48% (n 308) against at most 1 27% (n 398) = 1.80 (needs 1.2): supported
+  surprise bar (any radius at or below 1.2): not met (lowest 2.23)
