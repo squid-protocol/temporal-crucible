@@ -1,0 +1,91 @@
+
+================ example 1 (pair 7787) ================
+CHANGE   378ab645bb net/bnxt: fix RSS RETA indirection table ops
+  changed functions: bnxt_reta_query_op (drivers/net/bnxt/bnxt_ethdev.c), bnxt_reta_update_op (drivers/net/bnxt/bnxt_ethdev.c), bnxt_hwrm_vnic_rss_cfg (drivers/net/bnxt/bnxt_hwrm.c); 93 lines
+SUSPECTS IF THIS BREAKS (ranked: same file, then call distance, then size)
+   1. bnxt_hwrm_send_message                 drivers/net/bnxt/bnxt_hwrm.c                           79 lines | same file as a changed function; called by a changed function
+   2. bnxt_rss_hash_update_op                drivers/net/bnxt/bnxt_ethdev.c                         55 lines | same file as a changed function; calls a changed function
+   3. bnxt_hwrm_vnic_rss_cfg_thor            drivers/net/bnxt/bnxt_hwrm.c                           40 lines | same file as a changed function; called by a changed function
+   4. bnxt_vnic_rss_configure                drivers/net/bnxt/bnxt_hwrm.c                           28 lines | same file as a changed function; calls a changed function
+   5. bnxt_rss_to_qid                        drivers/net/bnxt/bnxt_ethdev.c                         20 lines | same file as a changed function; called by a changed function
+   6. bnxt_qid_to_rxq                        drivers/net/bnxt/bnxt_ethdev.c                          7 lines | same file as a changed function; called by a changed function
+   7. bnxt_rss_hash_tbl_size                 drivers/net/bnxt/bnxt_ethdev.c                          7 lines | same file as a changed function; called by a changed function
+   8. bnxt_init_chip                         drivers/net/bnxt/bnxt_ethdev.c                        227 lines | same file as a changed function; 2 calls from a changed function
+   9. bnxt_rss_ctxts                         drivers/net/bnxt/bnxt_ethdev.c                          9 lines | same file as a changed function; 2 calls from a changed function
+  10. bnxt_dev_start_op                      drivers/net/bnxt/bnxt_ethdev.c                         41 lines | same file as a changed function; 3 calls from a changed function
+  11. bnxt_dev_init                          drivers/net/bnxt/bnxt_ethdev.c                        324 lines | same file as a changed function
+  12. bnxt_parse_fdir_filter                 drivers/net/bnxt/bnxt_ethdev.c                        229 lines | same file as a changed function
+  (26454 candidate functions; 635 files)
+SUSPECT FILES (top 10): bnxt_hwrm.c; bnxt_ethdev.c; bnxt_rxq.c; bnx2x.c; eal_memory.c; t4_hw.c; ecore_mng_tlv.c; mlx5_flow_tcf.c; parameters.c; enic_rxtx_vec_avx2.c
+WHAT ACTUALLY HAPPENED (575 days later): 4297cadef3 net/bnxt: propagate FW command failure to application
+  repaired bnxt_rss_hash_update_op (drivers/net/bnxt/bnxt_ethdev.c): function rank 2 of 26454; its file ranks 2 of 635
+
+================ example 2 (pair 8302) ================
+CHANGE   1eab95fe2e net/iavf: fix command after PF reset
+  changed functions: iavf_init_vf (drivers/net/iavf/iavf_ethdev.c), iavf_hash_init (drivers/net/iavf/iavf_hash.c), iavf_hash_uninit (drivers/net/iavf/iavf_hash.c), iavf_execute_vf_cmd (drivers/net/iavf/iavf_vchnl.c); 15 lines
+SUSPECTS IF THIS BREAKS (ranked: same file, then call distance, then size)
+   1. iavf_dev_init                          drivers/net/iavf/iavf_ethdev.c                         93 lines | same file as a changed function; calls a changed function
+   2. iavf_configure_queues                  drivers/net/iavf/iavf_vchnl.c                          84 lines | same file as a changed function; calls a changed function
+   3. iavf_add_del_all_mac_addr              drivers/net/iavf/iavf_vchnl.c                          60 lines | same file as a changed function; calls a changed function
+   4. iavf_fdir_add                          drivers/net/iavf/iavf_vchnl.c                          59 lines | same file as a changed function; calls a changed function
+   5. iavf_add_del_mc_addr_list              drivers/net/iavf/iavf_vchnl.c                          55 lines | same file as a changed function; calls a changed function
+   6. iavf_get_vf_resource                   drivers/net/iavf/iavf_vchnl.c                          52 lines | same file as a changed function; calls a changed function; called by a changed function
+   7. iavf_check_api_version                 drivers/net/iavf/iavf_vchnl.c                          48 lines | same file as a changed function; calls a changed function; called by a changed function
+   8. iavf_fdir_del                          drivers/net/iavf/iavf_vchnl.c                          46 lines | same file as a changed function; calls a changed function
+   9. iavf_fdir_check                        drivers/net/iavf/iavf_vchnl.c                          43 lines | same file as a changed function; calls a changed function
+  10. iavf_config_irq_map                    drivers/net/iavf/iavf_vchnl.c                          38 lines | same file as a changed function; calls a changed function
+  11. iavf_read_msg_from_pf                  drivers/net/iavf/iavf_vchnl.c                          37 lines | same file as a changed function; called by a changed function
+  12. iavf_config_promisc                    drivers/net/iavf/iavf_vchnl.c                          32 lines | same file as a changed function; calls a changed function
+  (34677 candidate functions; 721 files)
+SUSPECT FILES (top 10): iavf_ethdev.c; iavf_vchnl.c; iavf_hash.c; iavf_adminq.c; iavf_common.c; iavf_generic_flow.c; eal_common_log.c; iavf.h; rte_malloc.c; iavf_rxtx.c
+WHAT ACTUALLY HAPPENED (21 days later): c02ea7410e net/iavf: fix flow flush after PF reset
+  repaired iavf_dev_close (drivers/net/iavf/iavf_ethdev.c): function rank 49 of 34677; its file ranks 1 of 721
+  repaired iavf_hash_destroy (drivers/net/iavf/iavf_hash.c): function rank 45 of 34677; its file ranks 3 of 721
+  repaired iavf_handle_pf_event_msg (drivers/net/iavf/iavf_vchnl.c): function rank 59 of 34677; its file ranks 2 of 721
+
+================ example 3 (pair 3061) ================
+CHANGE   b277308e88 net/virtio-user: advertise control VQ support with vDPA
+  changed functions: vhost_vdpa_get_features (drivers/net/virtio/virtio_user/vhost_vdpa.c); 4 lines
+SUSPECTS IF THIS BREAKS (ranked: same file, then call distance, then size)
+   1. vhost_vdpa_ioctl                       drivers/net/virtio/virtio_user/vhost_vdpa.c            14 lines | same file as a changed function; called by a changed function
+   2. vhost_vdpa_get_protocol_features       drivers/net/virtio/virtio_user/vhost_vdpa.c             7 lines | same file as a changed function; called by a changed function
+   3. vhost_vdpa_set_protocol_features       drivers/net/virtio/virtio_user/vhost_vdpa.c             7 lines | same file as a changed function; called by a changed function
+   4. vhost_vdpa_setup                       drivers/net/virtio/virtio_user/vhost_vdpa.c            32 lines | same file as a changed function
+   5. vhost_vdpa_dma_map                     drivers/net/virtio/virtio_user/vhost_vdpa.c            30 lines | same file as a changed function
+   6. vhost_vdpa_set_memory_table            drivers/net/virtio/virtio_user/vhost_vdpa.c            30 lines | same file as a changed function
+   7. vhost_vdpa_get_config                  drivers/net/virtio/virtio_user/vhost_vdpa.c            29 lines | same file as a changed function
+   8. vhost_vdpa_dma_unmap                   drivers/net/virtio/virtio_user/vhost_vdpa.c            28 lines | same file as a changed function
+   9. vhost_vdpa_set_config                  drivers/net/virtio/virtio_user/vhost_vdpa.c            28 lines | same file as a changed function
+  10. vhost_vdpa_iotlb_batch_begin           drivers/net/virtio/virtio_user/vhost_vdpa.c            25 lines | same file as a changed function
+  11. vhost_vdpa_iotlb_batch_end             drivers/net/virtio/virtio_user/vhost_vdpa.c            25 lines | same file as a changed function
+  12. vhost_vdpa_enable_queue_pair           drivers/net/virtio/virtio_user/vhost_vdpa.c            24 lines | same file as a changed function
+  (46611 candidate functions; 813 files)
+SUSPECT FILES (top 10): vhost_vdpa.c; bnx2x.c; pmd_aesni_mb.c; t4_hw.c; mlx5_flow_dv.c; eal_memory.c; cn10k_tx.h; ice_switch_filter.c; cn9k_tx.h; ice_fdir.c
+WHAT ACTUALLY HAPPENED (398 days later): 58c8941541 net/virtio: fix vDPA device init advertising control queue
+  repaired virtio_user_dev_init (drivers/net/virtio/virtio_user/virtio_user_dev.c): function rank 1346 of 46611; its file ranks 638 of 813
+  repaired virtio_user_handle_mq (drivers/net/virtio/virtio_user/virtio_user_dev.c): function rank 20680 of 46611; its file ranks 638 of 813
+  repaired virtio_user_start_device (drivers/net/virtio/virtio_user/virtio_user_dev.c): function rank 7727 of 46611; its file ranks 638 of 813
+  repaired virtio_user_stop_device (drivers/net/virtio/virtio_user/virtio_user_dev.c): function rank 11982 of 46611; its file ranks 638 of 813
+
+================ example 4 (pair 2894) ================
+CHANGE   358ff83fe8 graph: add stats for mcore dispatch model
+  changed functions: rte_graph_obj_dump (lib/graph/graph_debug.c), cluster_node_arregate_stats (lib/graph/graph_stats.c), graph_cluster_stats_cb (lib/graph/graph_stats.c), print_banner (lib/graph/graph_stats.c), print_node (lib/graph/graph_stats.c), __graph_sched_node_enqueue (lib/graph/rte_graph_model_mcore_dispatch.c); 97 lines
+SUSPECTS IF THIS BREAKS (ranked: same file, then call distance, then size)
+   1. rte_graph_cluster_stats_get            lib/graph/graph_stats.c                                20 lines | same file as a changed function; calls a changed function
+   2. __rte_graph_mcore_dispatch_sched_node_enqueue lib/graph/rte_graph_model_mcore_dispatch.c             13 lines | same file as a changed function; calls a changed function
+   3. print_banner_dispatch                  lib/graph/graph_stats.c                                11 lines | same file as a changed function; called by a changed function
+   4. print_banner_default                   lib/graph/graph_stats.c                                 9 lines | same file as a changed function; called by a changed function
+   5. rte_graph_cluster_stats_create         lib/graph/graph_stats.c                                60 lines | same file as a changed function
+   6. stats_mem_populate                     lib/graph/graph_stats.c                                57 lines | same file as a changed function
+   7. graph_sched_wq_create                  lib/graph/rte_graph_model_mcore_dispatch.c             54 lines | same file as a changed function
+   8. __rte_graph_mcore_dispatch_sched_wq_process lib/graph/rte_graph_model_mcore_dispatch.c             38 lines | same file as a changed function
+   9. stats_mem_init                         lib/graph/graph_stats.c                                33 lines | same file as a changed function
+  10. cluster_add                            lib/graph/graph_stats.c                                27 lines | same file as a changed function
+  11. expand_pattern_to_cluster              lib/graph/graph_stats.c                                23 lines | same file as a changed function
+  12. rte_graph_cluster_stats_reset          lib/graph/graph_stats.c                                23 lines | same file as a changed function
+  (47281 candidate functions; 831 files)
+SUSPECT FILES (top 10): graph_stats.c; rte_graph_model_mcore_dispatch.c; graph_debug.c; rte_graph_worker.c; rte_ring_elem.h; graph.c; rte_mempool.h; test_graph_perf.c; rte_graph_model_mcore_dispatch.h; test_graph.c
+WHAT ACTUALLY HAPPENED (365 days later): 7d18ab565d graph: fix stats retrieval while destroying a graph
+  repaired rte_graph_cluster_stats_create (lib/graph/graph_stats.c): function rank 5 of 47281; its file ranks 1 of 831
+  repaired rte_graph_cluster_stats_get (lib/graph/graph_stats.c): function rank 1 of 47281; its file ranks 1 of 831
+  repaired stats_mem_init (lib/graph/graph_stats.c): function rank 9 of 47281; its file ranks 1 of 831
