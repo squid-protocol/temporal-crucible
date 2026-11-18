@@ -17,7 +17,7 @@ import fix_shapes as FS  # noqa: E402
 
 POOL = "/srv/storage_16tb/projects/temporal-crucible-pool"
 BASE = Path("/tmp/gitgalaxy-scratch/claude/blast")
-DATA = [("kernel", "linux", f"{POOL}/linux"), ("openssl", "openssl", f"{POOL}/openssl"), ("freebsd", "freebsd-src", f"{POOL}/freebsd-src")]
+DATA = [("kernel", "linux", f"{POOL}/linux"), ("openssl", "openssl", f"{POOL}/openssl"), ("freebsd", "freebsd-src", f"{POOL}/freebsd-src"), ("dpdk", "dpdk", f"{POOL}/dpdk")]
 rng = np.random.default_rng(2982)
 
 
@@ -85,21 +85,21 @@ def checks(df, name):
 def main():
     dfs = {lab: load(lab, d, p) for lab, d, p in DATA}
     dfs["openssl+freebsd"] = pd.concat([dfs["openssl"], dfs["freebsd"]], ignore_index=True)
-    for lab in ("kernel", "openssl", "freebsd", "openssl+freebsd"):
+    for lab in ("kernel", "dpdk", "openssl", "freebsd", "openssl+freebsd"):
         df = dfs[lab]
         print(f"\n########## {lab}: {len(df)} measured pairs ({int((df.nFo > 0).sum())} with a fixed function outside the changed set) ##########")
         table(df, "fix_shape", "FIX SHAPE", minn=3 if lab != "kernel" else 1)
         table(df, "cause_shape", "CAUSING SHAPE", minn=3 if lab != "kernel" else 1)
     print("\n########## DIRECTIONAL CHECKS (kernel first for reference) ##########")
-    allres = {lab: checks(dfs[lab], lab) for lab in ("kernel", "openssl", "freebsd", "openssl+freebsd")}
+    allres = {lab: checks(dfs[lab], lab) for lab in ("kernel", "dpdk", "openssl", "freebsd", "openssl+freebsd")}
     keys = list(allres["kernel"].keys())
     for k in keys:
         print(f"  {k}")
-        for lab in ("kernel", "openssl", "freebsd", "openssl+freebsd"):
+        for lab in ("kernel", "dpdk", "openssl", "freebsd", "openssl+freebsd"):
             r = allres[lab].get(k)
             print(f"    {lab:16s} " + ("not testable (too few pairs)" if r is None else f"{'AGREES' if r[0] else 'differs'}: {r[1]}"))
-    tested = [(lab, k, v) for lab in ("openssl", "freebsd") for k, v in allres[lab].items()]
-    print(f"\n  per repository (OpenSSL, FreeBSD): {sum(1 for _, _, v in tested if v[0])} of {len(tested)} testable checks agree with the kernel's direction")
+    tested = [(lab, k, v) for lab in ("dpdk", "openssl", "freebsd") for k, v in allres[lab].items()]
+    print(f"\n  per repository (DPDK, OpenSSL, FreeBSD): {sum(1 for _, _, v in tested if v[0])} of {len(tested)} testable checks agree with the kernel's direction")
     pooled = allres["openssl+freebsd"]
     print(f"  pooled OpenSSL + FreeBSD: {sum(1 for v in pooled.values() if v[0])} of {len(pooled)} agree")
     print("\n  causing x fix lifts, pooled OpenSSL+FreeBSD (cells of 8+ pairs), kernel in brackets:")

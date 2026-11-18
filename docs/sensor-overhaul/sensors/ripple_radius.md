@@ -466,3 +466,28 @@ Name agreed with the owner 2026-11-18: **repair radius** (how far from a change 
 - **DR4.** Shape replication, counted per check: of RS1 to RS5 (with large enough cells now), at least 4 of 5 agree with the kernel's direction.
 - **DR5.** Lag fade: ratio for fixes under 90 days exceeds the ratio for fixes over 1 year.
 **Would surprise:** a radius at or below 1.2 (the pattern would then be a kernel-and-small-repository result, and the trailer selection a suspect).
+
+#### Repair radius on DPDK: results (2026-11-18; `dpdk_blast_report.txt`, `shape_replication_dpdk_output.txt`; 41 quarterly snapshots scanned in 15 minutes, measurement 23 s)
+15,829 usable pairs; 9,867 measured (6,963 with a fixed function outside the changed set); 3,235 dropped for no function name in a hunk header, 325 sweeps, 2,402 not found in the snapshot.
+| | DPDK | kernel |
+|---|---|---|
+| same function | 49% | 58% |
+| radius within 2 calls, against same-file | **1.45 [1.41, 1.48]** | 1.99 [1.96, 2.03] |
+| same-file fixes: callers1 / callees1 | 1.80 / 1.73 | callees higher (2.66 / 2.33) |
+| different-file fixes (1,561 pairs): callers1 / callees1 | **2.43 / 1.24** | 3.52 / 2.10 |
+| radius under 30 d / 30 to 365 d / over a year | 1.48 / 1.46 / 1.42 | 2.13 to 1.94 |
+| cross-file share | 15.8% | 14.6% (of kernel pairs, 3,580) |
+| radius, causing change large / "adds code" / "other edit" | 1.32 / 2.07 / 2.26 | 1.63 / 2.60 / 2.51 |
+| median lag, large causes / all | 254 d / 235 d | 301 d / 241 d |
+| causes that are large | 69% | 43% |
+| same-kind recurrence (sync -> sync; call -> call) | 10.7 (n 20); 3.6 (n 19) | 2.53; 2.07 |
+| hypothesis | verdict |
+|---|---|
+| DR1 radius at least 1.5, lower bound above 1.3 | **failed on the point value**: 1.45 [1.41, 1.48]; the lower bound (1.41) clears 1.3. Present and strong against the "would surprise" bar of 1.2, but weaker than the kernel's 1.99 |
+| DR2 same-function share 40% to 75% | **supported** (49%) |
+| DR3 same-file favours callees, different-file favours callers | **half**: different-file callers 2.43 against callees 1.24 (supported, as in the kernel); same-file callers 1.80 vs callees 1.73 (not supported) |
+| DR4 at least 4 of 5 of RS1 to RS5 agree | **failed: 3 of 5.** RS2 (mechanical fixes faster; but only 227 d against 235 d here), RS4 (large causes: lowest same-function share, longest lag, 69%) and RS5 (recurrence) agree; RS1 (guard fixes: lower same-function share agrees; lag 219 d against 235 d does not) and RS3 (large fixes have the lowest radius: the lowest is "comment only", 1.17; large 1.24) differ |
+| DR5 radius under 30 d above radius over a year | **barely**: 1.48 against 1.42, overlapping intervals; the fade is not distinguishable |
+Count by the earlier rule: per repository 5 of 11 testable checks agree (DPDK 3 of 5, OpenSSL 1 of 4, FreeBSD 1 of 2).
+**Reading.** (1) **The repair radius replicates in a second large repository**, weaker (1.45 against 1.99) and uniform across lag and across fix shapes (1.2 to 1.7). (2) **The strongest replications are the dispersal ones**: large causing changes give the lowest same-function share and the longest lag in both the kernel and DPDK, and different-file fixes sit among callers more than callees in both. (3) **Details specific to the kernel**: guard fixes being slow, large fixes having the lowest radius, same-file fixes favouring callees, a clear fade with lag. (4) **Selection matters**: DPDK's near-mandatory trailer gives 69% large causing commits (kernel 43%).
+**Caveats.** Same as the kernel (associations, my shape rules, nearest snapshot); DPDK's unmeasured pairs (38% had no function name in a hunk header, many of them C files with unusual layouts or headers/macros) may differ from the measured ones.

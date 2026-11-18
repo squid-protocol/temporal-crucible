@@ -1,0 +1,177 @@
+
+########## kernel: 24474 measured pairs (14444 with a fixed function outside the changed set) ##########
+  FIX SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    comment only                     198   0.8%   155d     66%   8.1%    2.47 [1.78,3.54] (42% vs 17%, n 81)
+    large (100+ lines)               649   2.7%   315d     72%  12.0%    1.48 [1.39,1.58] (65% vs 44%, n 537)
+    removes code                    1443   5.9%   153d     61%  13.2%    2.32 [2.11,2.53] (54% vs 23%, n 642)
+    adds a guard                    2419   9.9%   325d     45%  19.5%    2.16 [2.04,2.31] (46% vs 21%, n 1469)
+    rewrites a condition            1901   7.8%   247d     63%  12.0%    2.02 [1.87,2.17] (52% vs 26%, n 991)
+    adds sync or release            2718  11.1%   269d     58%  14.9%    1.98 [1.87,2.10] (52% vs 26%, n 1611)
+    replaces a call or argument     3172  13.0%   178d     62%  12.7%    2.45 [2.28,2.61] (51% vs 21%, n 1363)
+    changes a type or declaration    804   3.3%   111d     56%  13.4%    2.42 [2.14,2.76] (52% vs 22%, n 389)
+    adds code                       3666  15.0%   313d     51%  18.2%    1.82 [1.74,1.90] (48% vs 26%, n 2467)
+    small edit                      3594  14.7%   205d     58%  14.9%    2.25 [2.10,2.38] (48% vs 22%, n 1543)
+    other edit                      3910  16.0%   251d     67%  12.2%    1.84 [1.79,1.90] (59% vs 32%, n 2734)
+    ALL                            24474          240d     58%  14.6%
+  CAUSING SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    comment only                      14   0.1%   240d     93%   7.1%   n/a
+    large (100+ lines)             10426  42.6%   301d     48%  17.9%    1.63 [1.59,1.67] (55% vs 34%, n 6755)
+    removes code                     448   1.8%   130d     65%  16.1%    2.34 [1.94,2.77] (42% vs 18%, n 225)
+    adds a guard                     926   3.8%   216d     76%   9.4%    2.87 [2.49,3.32] (43% vs 15%, n 389)
+    rewrites a condition             467   1.9%   138d     76%  12.2%    2.94 [2.36,3.63] (39% vs 13%, n 178)
+    adds sync or release            1030   4.2%   161d     73%  10.7%    2.81 [2.51,3.18] (49% vs 17%, n 491)
+    replaces a call or argument      447   1.8%   141d     70%  14.8%    3.40 [2.64,4.38] (37% vs 11%, n 198)
+    changes a type or declaration    136   0.6%   108d     78%  14.7%    3.82 [2.40,6.09] (32% vs 8%, n 50)
+    adds code                       5809  23.7%   265d     58%  12.7%    2.60 [2.49,2.71] (51% vs 20%, n 3392)
+    small edit                       417   1.7%   139d     71%  16.8%    2.82 [2.17,3.64] (35% vs 12%, n 191)
+    other edit                      4354  17.8%   174d     71%  11.3%    2.51 [2.38,2.64] (52% vs 21%, n 1954)
+    ALL                            24474          240d     58%  14.6%
+
+########## dpdk: 9867 measured pairs (6963 with a fixed function outside the changed set) ##########
+  FIX SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    comment only                      98   1.0%   459d     36%  30.6%    1.17 [0.85,1.54] (33% vs 28%, n 76)
+    large (100+ lines)               570   5.8%   250d     62%  11.8%    1.24 [1.17,1.32] (64% vs 52%, n 461)
+    removes code                     784   7.9%   224d     52%  14.4%    1.46 [1.33,1.59] (51% vs 35%, n 432)
+    adds a guard                     732   7.4%   219d     36%  17.8%    1.48 [1.35,1.63] (45% vs 30%, n 516)
+    rewrites a condition             589   6.0%   195d     50%  16.1%    1.46 [1.27,1.64] (43% vs 30%, n 369)
+    adds sync or release             307   3.1%   269d     54%  13.7%    1.52 [1.27,1.78] (54% vs 36%, n 179)
+    replaces a call or argument      869   8.8%   247d     46%  18.0%    1.57 [1.42,1.75] (48% vs 31%, n 504)
+    changes a type or declaration    299   3.0%   198d     47%  15.7%    1.73 [1.45,2.04] (50% vs 29%, n 177)
+    adds code                       1695  17.2%   270d     44%  18.1%    1.42 [1.34,1.50] (49% vs 34%, n 1262)
+    small edit                      1888  19.1%   184d     45%  15.6%    1.57 [1.47,1.68] (46% vs 29%, n 1058)
+    other edit                      2036  20.6%   248d     56%  13.8%    1.41 [1.35,1.48] (57% vs 41%, n 1466)
+    ALL                             9867          235d     49%  15.8%
+  CAUSING SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    large (100+ lines)              6809  69.0%   254d     40%  19.2%    1.32 [1.29,1.36] (52% vs 39%, n 4925)
+    removes code                      72   0.7%    59d     69%  27.8%    2.12 [1.09,4.19] (22% vs 10%, n 27)
+    adds a guard                     160   1.6%   151d     77%   9.4%    2.90 [2.04,4.44] (41% vs 14%, n 70)
+    rewrites a condition              69   0.7%   136d     84%   5.8%    1.97 [1.13,3.45] (48% vs 24%, n 25)
+    adds sync or release              60   0.6%   146d     90%   3.3%    1.19 [0.62,2.26] (36% vs 30%, n 22)
+    replaces a call or argument       60   0.6%   112d     88%   5.0%    1.44 [0.89,2.54] (50% vs 35%, n 24)
+    changes a type or declaration     26   0.3%   231d     50%  26.9%    1.47 [0.86,2.33] (47% vs 32%, n 15)
+    adds code                       1716  17.4%   220d     61%   6.0%    2.07 [1.91,2.24] (48% vs 23%, n 992)
+    small edit                       108   1.1%   119d     86%   5.6%    1.91 [1.36,2.75] (43% vs 23%, n 37)
+    other edit                       785   8.0%   188d     72%  11.6%    2.26 [2.01,2.55] (54% vs 24%, n 362)
+    ALL                             9867          235d     49%  15.8%
+
+########## openssl: 177 measured pairs (126 with a fixed function outside the changed set) ##########
+  FIX SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    large (100+ lines)                12   6.8%  1294d     50%  25.0%   n/a
+    removes code                       5   2.8%    11d     20%  20.0%   n/a
+    adds a guard                      30  16.9%   219d     27%  20.0%    1.53 [0.80,2.97] (43% vs 28%, n 23)
+    rewrites a condition              13   7.3%   182d     38%  15.4%   n/a
+    adds sync or release              28  15.8%   490d     50%  28.6%    1.60 [1.10,2.67] (53% vs 33%, n 15)
+    replaces a call or argument       10   5.6%   265d     40%  20.0%   n/a
+    changes a type or declaration      8   4.5%     9d     88%   0.0%   n/a
+    adds code                         24  13.6%   432d     54%  12.5%    2.01 [1.20,4.24] (65% vs 32%, n 17)
+    small edit                        32  18.1%   488d     31%  18.8%    1.69 [1.05,3.10] (39% vs 23%, n 18)
+    other edit                        15   8.5%    61d     47%  20.0%   n/a
+    ALL                              177          332d     42%  19.2%
+  CAUSING SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    large (100+ lines)               124  70.1%   292d     33%  26.6%    1.53 [1.27,1.91] (56% vs 37%, n 89)
+    adds a guard                       4   2.3%     7d     75%   0.0%   n/a
+    adds code                         26  14.7%   653d     42%   3.8%    1.74 [0.99,3.20] (56% vs 32%, n 16)
+    other edit                        18  10.2%   397d     83%   0.0%   n/a
+    ALL                              177          332d     42%  19.2%
+
+########## freebsd: 103 measured pairs (53 with a fixed function outside the changed set) ##########
+  FIX SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    comment only                       3   2.9%   241d    100%   0.0%   n/a
+    removes code                      13  12.6%     8d     69%  23.1%   n/a
+    rewrites a condition               8   7.8%   178d     75%   0.0%   n/a
+    replaces a call or argument       14  13.6%    50d     50%  14.3%   n/a
+    changes a type or declaration      7   6.8%    66d    100%   0.0%   n/a
+    adds code                         10   9.7%   176d     50%  50.0%   n/a
+    small edit                        23  22.3%    17d     52%  17.4%   n/a
+    other edit                        20  19.4%   350d     95%   5.0%   n/a
+    ALL                              103           66d     69%  14.6%
+  CAUSING SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    large (100+ lines)                32  31.1%   109d     50%  21.9%    1.97 [1.44,2.92] (50% vs 25%, n 22)
+    removes code                       3   2.9%     2d     67%  33.3%   n/a
+    adds a guard                       4   3.9%   116d     75%   0.0%   n/a
+    rewrites a condition               4   3.9%   246d     75%  25.0%   n/a
+    replaces a call or argument        3   2.9%   459d    100%   0.0%   n/a
+    adds code                         23  22.3%   197d     78%   8.7%   n/a
+    small edit                         6   5.8%     2d     83%  16.7%   n/a
+    other edit                        26  25.2%    41d     73%  11.5%   n/a
+    ALL                              103           66d     69%  14.6%
+
+########## openssl+freebsd: 280 measured pairs (179 with a fixed function outside the changed set) ##########
+  FIX SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    comment only                       3   1.1%   241d    100%   0.0%   n/a
+    large (100+ lines)                13   4.6%  1271d     54%  23.1%   n/a
+    removes code                      18   6.4%    10d     56%  22.2%   n/a
+    adds a guard                      32  11.4%   219d     25%  18.8%    1.59 [0.97,2.88] (48% vs 30%, n 25)
+    rewrites a condition              21   7.5%   182d     52%   9.5%   n/a
+    adds sync or release              30  10.7%   438d     53%  26.7%    1.60 [1.10,2.61] (50% vs 31%, n 16)
+    replaces a call or argument       24   8.6%    73d     46%  16.7%    1.74 [1.25,2.84] (73% vs 42%, n 15)
+    changes a type or declaration     15   5.4%    11d     93%   0.0%   n/a
+    adds code                         34  12.1%   365d     53%  23.5%    2.00 [1.21,3.68] (52% vs 26%, n 25)
+    small edit                        55  19.6%   120d     40%  18.2%    2.03 [1.44,3.13] (39% vs 19%, n 28)
+    other edit                        35  12.5%   202d     74%  11.4%    1.55 [1.13,2.35] (65% vs 42%, n 17)
+    ALL                              280          195d     52%  17.5%
+  CAUSING SHAPE
+    shape                          pairs  share    lag same fn  cross   within 2 calls
+    large (100+ lines)               156  55.7%   231d     37%  25.6%    1.59 [1.34,1.94] (55% vs 35%, n 111)
+    removes code                       3   1.1%     2d     67%  33.3%   n/a
+    adds a guard                       8   2.9%     8d     75%   0.0%   n/a
+    rewrites a condition               6   2.1%   246d     83%  16.7%   n/a
+    adds sync or release               3   1.1%    66d    100%   0.0%   n/a
+    replaces a call or argument        4   1.4%  1169d    100%   0.0%   n/a
+    adds code                         49  17.5%   252d     59%   6.1%    2.43 [1.51,4.38] (60% vs 25%, n 25)
+    small edit                         6   2.1%     2d     83%  16.7%   n/a
+    other edit                        44  15.7%   125d     77%   6.8%    1.87 [1.32,3.41] (56% vs 30%, n 16)
+    ALL                              280          195d     52%  17.5%
+
+########## DIRECTIONAL CHECKS (kernel first for reference) ##########
+  RS1 guard fixes: same-function share below all, lag above the median
+    kernel           AGREES: 45% vs 58%; 325 d vs 240 d (n 2419)
+    dpdk             differs: 36% vs 49%; 219 d vs 235 d (n 732)
+    openssl          differs: 27% vs 42%; 219 d vs 332 d (n 30)
+    freebsd          not testable (too few pairs)
+    openssl+freebsd  AGREES: 25% vs 52%; 219 d vs 195 d (n 32)
+  RS2 call/type/removal fixes: lag below the median
+    kernel           AGREES: 165 d vs 240 d (n 5419)
+    dpdk             AGREES: 227 d vs 235 d (n 1952)
+    openssl          AGREES: 11 d vs 332 d (n 23)
+    freebsd          AGREES: 13 d vs 66 d (n 34)
+    openssl+freebsd  AGREES: 11 d vs 195 d (n 57)
+  RS3 lowest radius is the large fixes
+    kernel           AGREES: lowest: large (100+ lines) 1.48 (shapes with 15+ pairs: 11)
+    dpdk             differs: lowest: comment only 1.17 (shapes with 15+ pairs: 11)
+    openssl          differs: lowest: adds a guard 1.53 (shapes with 15+ pairs: 4)
+    freebsd          not testable (too few pairs)
+    openssl+freebsd  differs: lowest: other edit 1.55 (shapes with 15+ pairs: 6)
+  RS4 causes mostly large; large causes lowest same-function share, longest lag
+    kernel           AGREES: large causes 43%; lowest same-function: large (100+ lines); longest lag: large (100+ lines)
+    dpdk             AGREES: large causes 69%; lowest same-function: large (100+ lines); longest lag: large (100+ lines)
+    openssl          differs: large causes 70%; lowest same-function: large (100+ lines); longest lag: adds code
+    freebsd          differs: large causes 31%; lowest same-function: large (100+ lines); longest lag: adds code
+    openssl+freebsd  differs: large causes 56%; lowest same-function: large (100+ lines); longest lag: adds code
+  RS5 diagonal lifts (sync->sync, call->call) at least 1.0
+    kernel           AGREES: sync 2.53 (n 289), call 2.07 (n 120)
+    dpdk             AGREES: sync 10.71 (n 20), call 3.6 (n 19)
+    openssl          not testable (too few pairs)
+    freebsd          not testable (too few pairs)
+    openssl+freebsd  not testable (too few pairs)
+
+  per repository (DPDK, OpenSSL, FreeBSD): 5 of 11 testable checks agree with the kernel's direction
+  pooled OpenSSL + FreeBSD: 2 of 4 agree
+
+  causing x fix lifts, pooled OpenSSL+FreeBSD (cells of 8+ pairs), kernel in brackets:
+    adds sync or release         -> adds sync or release          3.11 (n 1) [kernel 2.53]
+    replaces a call or argument  -> replaces a call or argument   2.92 (n 1) [kernel 2.07]
+    small edit                   -> small edit                    2.55 (n 3) [kernel 1.65]
+    adds a guard                 -> adds a guard                  0.00 (n 0) [kernel 1.38]
+    large (100+ lines)           -> large (100+ lines)            1.38 (n 10) [kernel 1.39]
+    adds code                    -> adds code                     1.01 (n 6) [kernel 1.14]
+    adds code                    -> adds a guard                  1.07 (n 6) [kernel 0.93]
