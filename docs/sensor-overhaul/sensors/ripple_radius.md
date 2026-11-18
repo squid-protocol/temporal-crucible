@@ -629,3 +629,23 @@ The bucket (13% DPDK, 17% kernel of parsed edits) is split, in this order, by wh
 - **SP3.** Signature changes and moves are the two largest pieces of the bucket in both repositories.
 - **SP4.** The excess of "no statement change" among callee repairs (kernel 20.0% against 13.4% for same-function repairs) belongs mostly to signature or preprocessor changes, not to moves.
 - **ST4 re-scored (post hoc, labelled as such):** with the named pieces counted as typed, at least 85% of the parsed edits are typed, excluding "rewrites" and "other".
+
+#### Splitting the "no statement change" bucket: results (2026-11-18; `repair_structure_dpdk_output.txt`, `repair_structure_linux_output.txt`, `repair_structure_excl_identical_output.txt`)
+The bucket (DPDK 818 edits, 12.9% of parsed; kernel 4,287, 16.7%):
+| piece | DPDK (share of bucket / of parsed) | kernel |
+|---|---|---|
+| **identical function (attribution)** | **64.3% / 8.3%** | **75.1% / 12.5%** |
+| moves or re-nests statements | 10.5% / 1.4% | 9.9% / 1.7% |
+| comments or whitespace only | 7.1% / 0.9% | 4.1% / 0.7% |
+| changes preprocessor lines | 6.1% / 0.8% | 1.4% / 0.2% |
+| changes signature or storage class | 4.5% / 0.6% | 4.2% / 0.7% |
+| other | 7.5% / 1.0% | 5.4% / 0.9% |
+| hypothesis | DPDK | kernel |
+|---|---|---|
+| SP1 at least 75% of the bucket in a named piece | 93%: supported | 95%: supported |
+| SP2 identical function at most 10% of parsed edits | 8.3%: supported | **12.5%: not supported** |
+| SP3 signature and moves are the two largest pieces | not supported (identical function is largest; moves second, then comments) | same |
+| SP4 the callee excess is signature or preprocessor, not moves | **not supported in a different way**: 70% (DPDK) and 87% (kernel) of the callee bucket is identical functions, not signature, preprocessor or moves |
+**The finding: 8% (DPDK) and 12.5% (kernel) of the "fixed functions" were not edited at all.** The hunk-header context names the function before the changed lines, so edits to file-level text after a function (an initialiser table, a struct, a macro, a comment) are attributed to the function above them. By relation the share of records that are identical functions: DPDK same 6.4%, caller 3.3%, callee 10.9%, two calls away 11.8%, same file farther 13.0%, elsewhere 7.4%; kernel same 7.9%, caller 4.6%, **callee 17.3%**, two calls away 14.9%, **same file farther 19.9%**, elsewhere 16.5%. The phantoms are concentrated among repairs that are not in the same function (up to one in five), so the measured repair radius and the structure tables both mix real edits with misattributions.
+**ST4, scored on real edits (identical functions removed from the denominator):** 86.6% (DPDK) and 89.8% (kernel) of edits get a named type, **supported**. The other scores barely move: ST1 callers 33% / 35%, callees 1% / 2%; ST2 1.21 / 1.19 (still short of 1.3); ST3 Cramer's V 0.113 / 0.093; ST5 8.5 / 8.4. The caller finding stands: changes a call's arguments 21.5% (DPDK) and 18.8% (kernel) among callers against 12.6% and 11.1% for same-function repairs.
+**Consequence.** (1) The structure tables need the identical-function records removed; with them removed the bucket largely disappears and the conclusions are unchanged. (2) **Every radius figure so far counts these phantoms as fixed functions** (and probably also as changed functions on the cause side). Their direction of bias is not obvious: a phantom sits in the file of the real edit, so far phantoms dilute the radius and near ones inflate it. The radius must be re-measured with only verified functions (functions whose text really changed, on both the cause and the fix side).

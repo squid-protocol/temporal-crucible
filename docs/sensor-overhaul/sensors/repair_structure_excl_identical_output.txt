@@ -1,0 +1,12 @@
+
+dpdk: parsed 6364; identical-function records 526 (8.3%) ; by relation share of records that are identical functions:
+   same 6.4%, caller 3.3%, callee 10.9%, two calls away 11.8%, same file, farther 13.0%, elsewhere 7.4%
+   ST4 excluding identical functions: 86.6% typed (needs 85%)
+   ST1 callers 33% / callees 1%; ST2 1.21; ST3 V 0.113; ST5 8.5 (5.0% vs 0.6%)
+   guard share by relation: same 18.9%, caller 19.3%, callee 21.4%, two calls away 15.9%, same file, farther 27.6%, elsewhere 27.0%; changes a call's arguments: same 12.6%, caller 21.5%, callee 13.7%, two calls away 18.3%, same file, farther 9.1%, elsewhere 10.3%
+
+linux: parsed 25663; identical-function records 3219 (12.5%) ; by relation share of records that are identical functions:
+   same 7.9%, caller 4.6%, callee 17.3%, two calls away 14.9%, same file, farther 19.9%, elsewhere 16.5%
+   ST4 excluding identical functions: 89.8% typed (needs 85%)
+   ST1 callers 35% / callees 2%; ST2 1.19; ST3 V 0.093; ST5 8.4 (4.8% vs 0.6%)
+   guard share by relation: same 22.6%, caller 23.8%, callee 27.5%, two calls away 24.7%, same file, farther 22.4%, elsewhere 20.2%; changes a call's arguments: same 11.1%, caller 18.8%, callee 10.5%, two calls away 10.5%, same file, farther 9.7%, elsewhere 11.9%

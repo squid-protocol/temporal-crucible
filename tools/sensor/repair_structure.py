@@ -62,11 +62,19 @@ def functions(src, wanted):
 def summarize(fn, src):
     """Statements (type, normalised text, flag), calls (callee, args), declaration texts of a function."""
     stmts, calls = collections.Counter(), collections.Counter()
-    stack = [fn.child_by_field_name("body")]
+    body = fn.child_by_field_name("body")
+    extra = {"header": norm(src[fn.start_byte:body.start_byte]) if body is not None else "", "tokens": [], "preproc": collections.Counter(), "seq": [], "raw": src[fn.start_byte:fn.end_byte]}
+    stack = [(body, 0)]
     while stack:
-        n = stack.pop()
+        n, depth = stack.pop()
         if n is None:
             continue
+        if n.type.startswith("preproc_"):
+            extra["preproc"][norm(src[n.start_byte:n.end_byte]).split(" ")[0:3].__str__()] += 1
+        if n.child_count == 0 and n.type != "comment":
+            extra["tokens"].append(src[n.start_byte:n.end_byte])
+        if n.type in STMT:
+            extra["seq"].append((n.type, depth))
         if n.type == "call_expression":
             f = n.child_by_field_name("function")
             a = n.child_by_field_name("arguments")
@@ -90,13 +98,14 @@ def summarize(fn, src):
                 stmts[(n.type, head, exits)] += 1
             else:
                 stmts[(n.type, norm(src[n.start_byte:n.end_byte]), False)] += 1
-        stack.extend(n.children)
-    return stmts, calls
+        stack.extend((c, depth + (1 if n.type in STMT else 0)) for c in reversed(n.children))
+    extra["tokens"] = b" ".join(extra["tokens"])
+    return stmts, calls, extra
 
 
 def classify(old, new, changed_names):
-    so, co = old
-    sn, cn = new
+    so, co, eo = old
+    sn, cn, en = new
     added, removed = sn - so, so - sn
     ac, rc = cn - co, co - cn
     na, nr = sum(added.values()), sum(removed.values())
@@ -115,7 +124,18 @@ def classify(old, new, changed_names):
     touches = any(callee(k[0]) in changed_names for k in list(ac) + list(rc))
     ret_handling = any(k[0] == "if_statement" and any(re.search(rf"\b{re.escape(n)}\b", k[1]) for n in changed_names) for k in added)
     if na == 0 and nr == 0 and not ac and not rc:
-        label = "no statement change"
+        if eo["raw"] == en["raw"]:
+            label = "identical function (attribution)"
+        elif eo["header"] != en["header"]:
+            label = "changes signature or storage class"
+        elif eo["tokens"] == en["tokens"]:
+            label = "comments or whitespace only"
+        elif eo["preproc"] != en["preproc"]:
+            label = "changes preprocessor lines"
+        elif eo["seq"] != en["seq"]:
+            label = "moves or re-nests statements"
+        else:
+            label = "other (no statement change)"
     elif guard and nr <= 2 * na:
         label = "adds a guard"
     elif lock_added and nr <= na:
@@ -260,22 +280,39 @@ def report(df, repo):
     shares = tab.div(tab.sum(axis=1), axis=0)
     cols = list(tab.sum().sort_values(ascending=False).index)
     print("\n  edit type (row shares) by relation:")
-    print("  " + " " * 20 + " ".join(f"{c[:14]:>14s}" for c in cols))
+    print("  " + " " * 20 + " ".join(f"{c[:11]:>11s}" for c in cols))
     for r in RELS:
         if r in shares.index:
-            print(f"  {r:20s}" + " ".join(f"{100 * shares.loc[r, c]:13.1f}%" for c in cols) + f"   n {int(tab.loc[r].sum())}")
-    print("  " + f"{'ALL':20s}" + " ".join(f"{100 * (ok.label == c).mean():13.1f}%" for c in cols))
+            print(f"  {r:20s}" + " ".join(f"{100 * shares.loc[r, c]:10.1f}%" for c in cols) + f"   n {int(tab.loc[r].sum())}")
+    print("  " + f"{'ALL':20s}" + " ".join(f"{100 * (ok.label == c).mean():10.1f}%" for c in cols))
     cal, cae, same = ok[ok.rel == "caller"], ok[ok.rel == "callee"], ok[ok.rel == "same"]
     st1c, st1e = 100 * cal.touches.mean(), 100 * cae.touches.mean()
     g = lambda d: (d.label.isin(["adds a guard", "changes a condition"])).mean()  # noqa: E731
     st2 = g(cae) / g(cal) if g(cal) > 0 else float("nan")
     v = cramers_v(tab.loc[[r for r in RELS if r in tab.index]])
-    named = ok[~ok.label.isin(["rewrites", "no statement change"])]
+    named = ok[~ok.label.isin(["rewrites", "other (no statement change)", "identical function (attribution)"])]
+    bucket_labels = ["identical function (attribution)", "changes signature or storage class", "comments or whitespace only", "changes preprocessor lines", "moves or re-nests statements", "other (no statement change)"]
+    bk = ok[ok.label.isin(bucket_labels)]
+    print(f"\n  THE FORMER 'NO STATEMENT CHANGE' BUCKET: {len(bk)} edits ({100 * len(bk) / len(ok):.1f}% of parsed)")
+    for b in bucket_labels:
+        print(f"    {b:38s} {int((bk.label == b).sum()):5d}  {100 * (bk.label == b).mean():5.1f}% of the bucket  {100 * (ok.label == b).mean():4.1f}% of all parsed edits")
+    sizes = bk.label.value_counts()
+    top2 = set(sizes.drop("other (no statement change)", errors="ignore").index[:2])
+    sp1 = 1 - (bk.label == "other (no statement change)").mean()
+    sp2 = (ok.label == "identical function (attribution)").mean()
+    print(f"  SP1 share of the bucket in a named piece {100 * sp1:.0f}% (needs 75%): {'supported' if sp1 >= 0.75 else 'not supported'}")
+    print(f"  SP2 identical function (attribution) {100 * sp2:.1f}% of parsed edits (needs 10% or less): {'supported' if sp2 <= 0.10 else 'not supported'}")
+    print(f"  SP3 two largest named pieces: {sorted(top2)} (needs signature and moves): {'supported' if top2 == {'changes signature or storage class', 'moves or re-nests statements'} else 'not supported'}")
+    cb = bk[bk.rel == "callee"]
+    print("  SP4 pieces among callee repairs (share of callee 'bucket' edits): " + ", ".join(f"{b.split(' (')[0]} {100 * (cb.label == b).mean():.0f}%" for b in bucket_labels))
+    print("      share of all edits by relation, bucket as a whole: " + ", ".join(f"{r} {100 * bk[bk.rel == r].shape[0] / max(ok[ok.rel == r].shape[0], 1):.1f}%" for r in RELS))
+    for lab in ("changes signature or storage class", "changes preprocessor lines", "moves or re-nests statements"):
+        print(f"      {lab:38s} by relation: " + ", ".join(f"{r} {100 * (ok[ok.rel == r].label == lab).mean():.1f}%" for r in RELS))
     st5 = cal.ret_handling.mean() / same.ret_handling.mean() if same.ret_handling.mean() > 0 else float("nan")
     print(f"\n  ST1 edits that call a changed function: callers {st1c:.0f}% (needs 40%), callees {st1e:.0f}% (needs 15% or less): {'supported' if st1c >= 40 and st1e <= 15 else 'not supported'}")
     print(f"  ST2 guard-or-condition share, callees / callers = {st2:.2f} (needs 1.3): {'supported' if st2 >= 1.3 else 'not supported'}")
     print(f"  ST3 Cramer's V of edit type by relation = {v:.3f} (needs 0.10): {'supported' if v >= 0.10 else 'not supported'}")
-    print(f"  ST4 named type for {100 * len(named) / len(ok):.0f}% of parsed edits (needs 85%): {'supported' if len(named) / len(ok) >= 0.85 else 'not supported'}")
+    print(f"  ST4 (re-scored post hoc, with the split pieces counted as typed; rewrites, other and identical functions untyped): {100 * len(named) / len(ok):.0f}% of parsed edits typed (needs 85%): {'supported' if len(named) / len(ok) >= 0.85 else 'not supported'}")
     print(f"  ST5 'an added if tests a changed function', callers {100 * cal.ret_handling.mean():.1f}% vs same function {100 * same.ret_handling.mean():.1f}% = {st5:.2f} (needs 1.5): {'supported' if st5 >= 1.5 else 'not supported'}")
 
 
