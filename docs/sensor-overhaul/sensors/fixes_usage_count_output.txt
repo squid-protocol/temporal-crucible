@@ -1,0 +1,50 @@
+
+dpdk: 46,419 non-merge commits; 17,613 Fixes: trailers (37.9% of commits; 0 reverts left out); 17,590 resolved and ordered pairs
+  lag: median 333 d, within 30 days 18%, a year or more 48%
+  inducing commits by year: 2018: 2980, 2019: 2031, 2020: 1927, 2021: 1793, 2022: 1022, 2023: 742, 2024: 568, 2025: 391, 2026: 238; from 2019 on: 8712
+
+qemu: 127,227 non-merge commits; 5,386 Fixes: trailers (4.2% of commits; 26 reverts left out); 5,355 resolved and ordered pairs
+  lag: median 247 d, within 30 days 20%, a year or more 45%
+  inducing commits by year: 2018: 387, 2019: 543, 2020: 654, 2021: 501, 2022: 509, 2023: 595, 2024: 465, 2025: 418, 2026: 287; from 2019 on: 3972
+
+systemd: 83,403 non-merge commits; 159 Fixes: trailers (0.2% of commits; 0 reverts left out); 158 resolved and ordered pairs
+  lag: median 31 d, within 30 days 50%, a year or more 24%
+  inducing commits by year: 2018: 8, 2019: 11, 2020: 9, 2021: 24, 2022: 8, 2023: 15, 2024: 28, 2025: 7, 2026: 14; from 2019 on: 116
+
+u-boot: 101,560 non-merge commits; 3,546 Fixes: trailers (3.5% of commits; 8 reverts left out); 3,443 resolved and ordered pairs
+  lag: median 234 d, within 30 days 17%, a year or more 41%
+  inducing commits by year: 2018: 258, 2019: 337, 2020: 387, 2021: 384, 2022: 382, 2023: 383, 2024: 335, 2025: 265, 2026: 150; from 2019 on: 2623
+
+xen: 48,450 non-merge commits; 1,731 Fixes: trailers (3.6% of commits; 7 reverts left out); 1,723 resolved and ordered pairs
+  lag: median 511 d, within 30 days 24%, a year or more 53%
+  inducing commits by year: 2018: 92, 2019: 161, 2020: 181, 2021: 168, 2022: 153, 2023: 119, 2024: 157, 2025: 159, 2026: 42; from 2019 on: 1140
+
+mesa: 233,413 non-merge commits; 13,258 Fixes: trailers (5.7% of commits; 90 reverts left out); 13,180 resolved and ordered pairs
+  lag: median 64 d, within 30 days 39%, a year or more 21%
+  inducing commits by year: 2018: 813, 2019: 1299, 2020: 1362, 2021: 1500, 2022: 1408, 2023: 1455, 2024: 1507, 2025: 1355, 2026: 907; from 2019 on: 10793
+
+ovs: 20,903 non-merge commits; 1,633 Fixes: trailers (7.8% of commits; 4 reverts left out); 1,613 resolved and ordered pairs
+  lag: median 239 d, within 30 days 26%, a year or more 43%
+  inducing commits by year: 2018: 265, 2019: 172, 2020: 100, 2021: 91, 2022: 99, 2023: 71, 2024: 72, 2025: 22, 2026: 22; from 2019 on: 649
+
+openwrt: 72,925 non-merge commits; 2,466 Fixes: trailers (3.4% of commits; 3 reverts left out); 2,419 resolved and ordered pairs
+  lag: median 18 d, within 30 days 55%, a year or more 18%
+  inducing commits by year: 2018: 176, 2019: 186, 2020: 224, 2021: 205, 2022: 276, 2023: 241, 2024: 325, 2025: 310, 2026: 302; from 2019 on: 2069
+
+libvirt: 54,556 non-merge commits; 749 Fixes: trailers (1.4% of commits; 0 reverts left out); 748 resolved and ordered pairs
+  lag: median 53 d, within 30 days 40%, a year or more 26%
+  inducing commits by year: 2018: 25, 2019: 72, 2020: 146, 2021: 116, 2022: 93, 2023: 68, 2024: 73, 2025: 56, 2026: 34; from 2019 on: 658
+
+zephyr: 159,821 non-merge commits; 196 Fixes: trailers (0.1% of commits; 0 reverts left out); 192 resolved and ordered pairs
+  lag: median 83 d, within 30 days 38%, a year or more 23%
+  inducing commits by year: 2018: 6, 2019: 4, 2020: 11, 2021: 13, 2022: 33, 2023: 24, 2024: 30, 2025: 35, 2026: 29; from 2019 on: 179
+
+=== sample of 60 pairs per repository with 200 or more pairs: do both commits touch .c/.h (trees are fetched on demand, so this is slow) ===
+  dpdk       both commits touch .c/.h in 83% (n 60, 0 s); share no file in 22%; projected pairs with C/H on both sides: about 14,658
+  qemu       both commits touch .c/.h in 75% (n 60, 90 s); share no file in 18%; projected pairs with C/H on both sides: about 4,016
+  u-boot     both commits touch .c/.h in 68% (n 60, 457 s); share no file in 20%; projected pairs with C/H on both sides: about 2,352
+  xen        both commits touch .c/.h in 92% (n 60, 0 s); share no file in 18%; projected pairs with C/H on both sides: about 1,579
+  mesa       both commits touch .c/.h in 73% (n 60, 63 s); share no file in 30%; projected pairs with C/H on both sides: about 9,665
+  ovs        both commits touch .c/.h in 77% (n 60, 117 s); share no file in 18%; projected pairs with C/H on both sides: about 1,236
+  openwrt    both commits touch .c/.h in 13% (n 60, 180 s); share no file in 30%; projected pairs with C/H on both sides: about 322
+  libvirt    both commits touch .c/.h in 83% (n 60, 212 s); share no file in 17%; projected pairs with C/H on both sides: about 623
