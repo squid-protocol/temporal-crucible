@@ -366,3 +366,11 @@ Same 34,349 kernel pairs and 52 snapshots. Authors from `git log --format=%ae`; 
 | D4 lifetime and error handling more local than average (below 0.9 times) | **mixed** | error handling 0.84 times, lifetime 0.91 times |
 | D5 radius across mechanisms within a factor of 1.5 | **supported** | 1.83 to 2.20 (factor 1.20) over classes of 300 or more pairs |
 **What the leftovers are** (the 10,279 fixes below probability 0.6, ten clusters by diff pattern): two groups hold 70%: **about 3,400 rewrite or add a condition** (more `if`, a permission or validity check, a livelock guard; example subjects "require CAP_NET_ADMIN in the device netns", "avoid livelock while updating retransmit path") and **about 3,800 remove calls to lock, alloc or get functions** ("Fix unsafe decode", "don't skb_tx_error() the source skb"). The keyword taxonomy has no class for either: the unlabelled fixes are mostly two mechanisms we had not named, not noise. **Decision:** the subject-based classes stay the reference labels; the model's labels are not used; the next step is a rule-based classification of the diff's *shape*, which needs no learning and covers every fix.
+
+### Fix shape from the diff (hypotheses fixed 2026-11-17 before running; `tools/sensor/fix_shapes.py`)
+Rule-based and complete (every fix gets a shape): comment-only; large (100 or more changed lines); removes code (removed lines at least twice the added, 4 or fewer added); adds a guard (a new condition with a return or error assignment, few lines); rewrites a condition (a removed and an added condition in a hunk); adds synchronisation or release (lock, atomic, free, put); replaces a call or argument; changes a type or declaration; adds code; small edit; other. Same tables as before: lag, same-function and cross-file share, radius.
+- **SH1.** Guard additions have a shorter median lag than code removals.
+- **SH2.** Code removals have the highest same-function share among shapes with 500 or more pairs.
+- **SH3.** The radius across shapes with 500 or more pairs stays within a factor of 1.5 (the general pattern).
+- **SH4.** Large fixes (100 or more lines) have the lowest radius and the highest cross-file share.
+**Would surprise:** a shape accounting for most of the radius, or radius differing by more than a factor of 2 across shapes.
