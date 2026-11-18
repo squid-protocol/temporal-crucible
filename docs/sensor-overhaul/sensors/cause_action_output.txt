@@ -1,0 +1,46 @@
+linux: 21861 records; 42738 classified shared identifiers
+dpdk: 5283 records; 10090 classified shared identifiers
+mesa: 6530 records; 13501 classified shared identifiers
+openssl: 72 records; 0 classified shared identifiers
+
+66329 (pair, fixed function, shared identifier) tokens; 19938 pairs
+
+=== cause action on the shared identifier, by relation of the repair (row shares) ===
+                                defined redefined or sig definition remov check added, cha          new use      use removed      use changed   header def   n
+  same                            11.2%             1.8%             1.0%            31.7%            29.5%             2.9%            21.7%        6.5%  42545
+  caller                          11.8%             3.7%             0.7%            32.6%            25.9%             2.9%            22.4%        9.3%  2326
+  callee                          13.9%             1.3%             0.6%            30.6%            38.2%             1.9%            13.6%        5.2%  7065
+  two calls away                  11.7%             1.7%             1.2%            33.2%            32.6%             3.8%            15.7%        8.3%  1492
+  same file, farther              11.8%             1.4%             1.0%            31.0%            33.7%             2.5%            18.7%        6.4%  6717
+  elsewhere                       12.6%             1.4%             0.5%            28.9%            33.3%             3.9%            19.4%        9.5%  6184
+  ALL                             11.7%             1.7%             0.9%            31.3%            31.1%             2.9%            20.2%        6.8%  66329
+
+=== by identifier class (what kind of name), cause action row shares ===
+  callee                 9.5%             2.7%             0.5%            19.0%            44.3%             4.7%            19.3%   n 14513
+  field                 13.2%             1.6%             0.5%            35.2%            28.0%             2.3%            19.1%   n 18102
+  macro                 14.8%             1.7%             0.8%            34.6%            30.4%             3.4%            14.4%   n 8177
+  type                   0.7%             0.1%             0.1%             5.2%            57.0%             5.1%            31.9%   n 1669
+  variable              11.7%             1.4%             1.6%            36.6%            24.0%             1.9%            22.8%   n 23868
+
+  CA1 uses and checks 86% of the shared identifiers (needs 60%): supported
+  CA2 header definitions among shared identifiers: repairs not in the same function 7.0% against same function 6.5% = 1.08 (needs 1.5): not supported
+  CA3 share of repairs in 'same file, farther' or 'elsewhere': causes with an interface change 28.9% (n 7314) against without 22.9% (n 12624) = 1.26 [1.21,1.32] (needs 1.3): not supported
+      'elsewhere' alone: 16.7% against 12.9% = 1.30; pairs with an interface change: 37%
+  CA4 repair adds a guard or changes a condition: after 'check' actions 53.0% against 26.5% for the others = 2.00 (needs 1.3): supported
+  CA5 repair changes call arguments or replaces a callee: after 'redefined or signature changed' 31.6% against 23.6% for all = 1.34 (needs 1.5): not supported
+
+=== cause action x repair edit type: row shares (top edit types) ===
+  defined                        n   7782 adds a guard 22.5%  changes a cal 15.4%  rewrites 13.6%  changes a con  9.7%  adds statemen  9.7%  replaces a ca  6.8%  removes state  7.2%
+  redefined or signature changed n   1159 adds a guard 18.9%  changes a cal 23.1%  rewrites 11.4%  changes a con  8.4%  adds statemen  6.7%  replaces a ca  8.5%  removes state  5.7%
+  definition removed             n    610 adds a guard 26.4%  changes a cal 14.4%  rewrites 14.4%  changes a con  6.1%  adds statemen  7.5%  replaces a ca  9.3%  removes state  3.3%
+  check added, changed or remove n  20790 adds a guard 34.9%  changes a cal  9.4%  rewrites  9.4%  changes a con 18.2%  adds statemen  7.8%  replaces a ca  4.5%  removes state  6.4%
+  new use                        n  20655 adds a guard 18.5%  changes a cal 18.5%  rewrites 14.8%  changes a con  8.1%  adds statemen  8.2%  replaces a ca  8.5%  removes state  7.9%
+  use removed                    n   1920 adds a guard 20.6%  changes a cal 13.0%  rewrites 10.5%  changes a con  4.5%  adds statemen 16.1%  replaces a ca 10.0%  removes state  4.4%
+  use changed                    n  13413 adds a guard 16.8%  changes a cal 25.4%  rewrites 14.6%  changes a con  6.2%  adds statemen  7.0%  replaces a ca  8.4%  removes state  5.4%
+  ALL                            n  66329 adds a guard 23.9%  changes a cal 16.6%  rewrites 12.8%  changes a con 11.0%  adds statemen  8.2%  replaces a ca  7.1%  removes state  6.6%
+
+=== per repository: shares of cause actions, and CA3 ===
+  linux    n  42738  defined 12%, redefined 2%, definition 1%, check 33%, new 29%, use 3%, use 20%;  CA3 far share with interface change 28.9% vs without 22.3%  (pairs with an interface change 38%)
+  dpdk     n  10090  defined 13%, redefined 1%, definition 1%, check 29%, new 35%, use 2%, use 18%;  CA3 far share with interface change 27.7% vs without 20.2%  (pairs with an interface change 37%)
+  mesa     n  13501  defined 9%, redefined 1%, definition 1%, check 28%, new 37%, use 3%, use 21%;  CA3 far share with interface change 29.8% vs without 26.2%  (pairs with an interface change 31%)
+  openssl  n      0  defined nan%, redefined nan%, definition nan%, check nan%, new nan%, use nan%, use nan%;  CA3 far share with interface change 32.1% vs without 17.6%  (pairs with an interface change 29%)

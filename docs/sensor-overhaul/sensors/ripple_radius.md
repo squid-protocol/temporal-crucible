@@ -814,3 +814,28 @@ For each (pair, fixed function, shared identifier) of the previous analysis the 
 - **CA4.** The cause's action on the identifier predicts the repair's edit type: for "check added, changed or removed", the repair is "adds a guard" or "changes a condition" at least 1.3 times as often as for the other classes (lift over all tokens).
 - **CA5.** "Redefined or signature changed" identifiers are followed by repairs that "change a call's arguments" or "replace a callee" at least 1.5 times as often as the average shared identifier.
 **Would surprise:** CA2 and CA3 both failing: the interface (definition) changes would then not be what carries repairs to other places, and the shared names would be ordinary uses.
+
+#### What did the cause do to the shared identifier? Results (2026-11-18; `cause_action_output.txt`; kernel, DPDK, Mesa; 66,329 (pair, fixed function, shared identifier) tokens from 19,938 pairs)
+OpenSSL produced no classified tokens (49 pairs; the cause-side diff lines were not matched; its pairs are in the pair-level CA3 row only).
+| cause action on the shared identifier | all | same function | caller | callee | two calls away | same file, farther | elsewhere |
+|---|---|---|---|---|---|---|---|
+| check added, changed or removed | 31.3% | 31.7 | 32.6 | 30.6 | 33.2 | 31.0 | 28.9 |
+| new use | 31.1% | 29.5 | 25.9 | **38.2** | 32.6 | 33.7 | 33.3 |
+| use changed | 20.2% | 21.7 | 22.4 | 13.6 | 15.7 | 18.7 | 19.4 |
+| defined | 11.7% | 11.2 | 11.8 | 13.9 | 11.7 | 11.8 | 12.6 |
+| redefined or signature changed | 1.7% | 1.8 | 3.7 | 1.3 | 1.7 | 1.4 | 1.4 |
+| use removed | 2.9% | 2.9 | 2.9 | 1.9 | 3.8 | 2.5 | 3.9 |
+| definition removed | 0.9% | 1.0 | 0.7 | 0.6 | 1.2 | 1.0 | 0.5 |
+| definition in a header (an interface change) | 6.8% | 6.5 | 9.3 | 5.2 | 8.3 | 6.4 | **9.5** |
+By the kind of name: types are almost always newly used (57%), variables most often checked (36.6%), callees mostly newly used (44.3%) and least often checked (19.0%), fields and macros resemble each other (checks 35%, new use 28 to 30%). 37% of pairs have a cause with an interface change (kernel 38%, DPDK 37%, Mesa 31%).
+| hypothesis | verdict |
+|---|---|
+| CA1 uses and checks at least 60% of shared identifiers | **supported**: 86% (uses and checks; definitions are 14%) |
+| CA2 repairs outside the same function have at least 1.5 times the header-definition share of same-function repairs | **not supported**: 7.0% against 6.5% (1.08); the callers (9.3%) and "elsewhere" (9.5%) are 1.4 to 1.5 times the same-function figure, callees (5.2%) lower: post hoc, not a result |
+| CA3 causes with an interface change have at least 1.3 times the share of repairs in "same file, farther" or "elsewhere" | **not supported, narrowly**: 28.9% against 22.9% = 1.26 [1.21, 1.32]; "elsewhere" alone 16.7% against 12.9% = 1.30; in the kernel 28.9 against 22.3, DPDK 27.7 against 20.2, Mesa 29.8 against 26.2 |
+| CA4 after a "check" action the repair adds a guard or changes a condition at least 1.3 times as often | **supported, strongly**: 53.0% against 26.5% = **2.00** (adds a guard 34.9% against 23.9% overall; changes a condition 18.2% against 11.0%) |
+| CA5 after "redefined or signature changed" the repair changes call arguments or replaces a callee at least 1.5 times as often | **not supported**: 31.6% against 23.6% = 1.34 (n 1,159) |
+Surprise bar (CA2 and CA3 both failing): **met**: interface (definition) changes are not what carries repairs to other places in any big way: the shared names are mostly ordinary uses and checks. The cause-level effect exists but is modest (1.26 times).
+**Other cross-tabulation (row shares).** After "use changed" the repair most often changes a call's arguments (25.4% against 16.6% overall); after "defined" it is most often adds a guard (22.5%) or changes a call's arguments (15.4%); after "check" adds a guard (34.9%) or changes a condition (18.2%).
+**Reading.** (1) **What the cause did to the shared name is mostly ordinary**: it tested the name in a condition (31%), started using it (31%) or changed a use (20%); defining something new is 12% and redefining or removing a definition is 3%. (2) **The repair mirrors the cause's action**: a cause that touched a check on a name is followed, twice as often as otherwise, by a repair that adds or changes a guard or condition on it; a cause that changed a use is followed by a repair that changes arguments 1.5 times as often. The previously found recurrence of edit types (sync after sync, call after call) shows up here at the level of the shared name. (3) **Interface changes are a minor carrier**: 37% of causes change a definition in a header, and their repairs land away from the cause's function and file 1.26 times as often. The main link between a change and its repairs elsewhere is shared objects, checks and uses, not changed interfaces.
+**Caveats.** Rule-based classification of lines (regular expressions for definitions, no parser; a definition line of the shape `type name(...)` at column zero counts as a function definition or prototype, a one-name line ending in a comma as an enum constant); an identifier can appear in several actions and gets the first in the precedence (definition first, then check, then use); interface change means a definition line in a `.h` file only; association, not mechanism; the kernel is 64% of the tokens; OpenSSL not classified.
