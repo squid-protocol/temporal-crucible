@@ -1,0 +1,39 @@
+Fixes: trailers in the kernel history: 154466; resolved and ordered pairs 152957; dropped {'revert': 1096, 'unresolved or self': 1503, 'inducing not before fix': 6}
+  both commits touch a scanned .c/.h file: 39198; and the inducing commit is from 2014 on (the snapshots start 2014-01): 34349
+  lag: median 279 d; within 30 days 17%; a year or more 45%
+  fix and inducing commit share no file: 3702 (11%): the cross-file pairs
+
+Pairs by subsystem of the fix (inducing from 2014, both commits in the scanned set); cross-file = no shared file:
+  subsystem                pairs  cross-file
+  kernel                    4987         473
+  mm                        2782         343
+  include/linux             2647         318
+  net/ipv4                  1459         176
+  net/core                  1215         118
+  net/netfilter             1196         125
+  fs                        1062          97
+  fs/btrfs                  1055         101
+  block                      995         113
+  net/sched                  864         100
+  include/net                844         112
+  fs/xfs                     735          52
+  net/ipv6                   734          70
+  fs/smb                     725         370
+  fs/nfs                     605          47
+  net/bluetooth              602          32
+  lib                        590          66
+  security                   582          53
+  fs/f2fs                    534          35
+  net/mptcp                  531          45
+  net/mac80211               523          38
+  fs/nfsd                    397          29
+  crypto                     381          46
+  fs/ext4                    380          31
+  net/sunrpc                 365          32
+  net/bridge                 284          25
+  net/tipc                   258          15
+  net/wireless               252          15
+  net/smc                    247           9
+  fs/afs                     244           9
+
+Inducing commits by year: 2014: 1308, 2015: 1900, 2016: 2678, 2017: 2951, 2018: 3314, 2019: 3072, 2020: 3423, 2021: 3288, 2022: 2844, 2023: 2809, 2024: 2760, 2025: 2533, 2026: 1469
