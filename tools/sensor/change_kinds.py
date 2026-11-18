@@ -19,7 +19,9 @@ import pandas as pd
 sys.path.insert(0, "/srv/storage_16tb/projects/temporal-crucible/.claude/worktrees/sensor-overhaul/tools/sensor")
 import blast_radius as BR  # noqa: E402
 
-REPO = "/srv/storage_16tb/projects/temporal-crucible-pool/linux"
+import os  # noqa: E402
+
+REPO = os.environ.get("BLAST_REPO_PATH", "/srv/storage_16tb/projects/temporal-crucible-pool/linux")
 
 FIX_RULES = [
     ("lifetime", r"use[- ]after[- ]free|double[- ]free|\buaf\b|memory leak|\bleaks?\b|\bleaked\b|ref(erence)? ?count|\brefcnt|\bkref|dangling|\bfree(s|d)?\b.*\b(twice|again|early|too early|before)|\bput\b.*\b(missing|extra|unbalanced)|unbalanced|\bptr_err\b.*leak"),
