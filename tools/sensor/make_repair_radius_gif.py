@@ -7,7 +7,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-W, H = 1000, 620
+W, H = 1000, 660
 BG, INK, MUTED = "#fbfaf6", "#1f2937", "#6b7280"
 BOX, BOX_LINE = "#ebe8df", "#6b7280"
 ORANGE, RED, AMBER, BLUE, GREEN = "#f59e0b", "#dc2626", "#fbbf24", "#2563eb", "#059669"
@@ -92,7 +92,6 @@ def frame(title, draw_fn):
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
     d.text((40, 28), title, font=F(22, True), fill=INK)
-    d.text((W - 40, 30), "repair radius", font=F(16), fill=MUTED, anchor="ra")
     draw_fn(d)
     return im
 
@@ -136,7 +135,7 @@ FRAMES.append((5.5, frame("What does not happen", lambda d: (graph(d, {"B": RED}
 
 
 def closing(d):
-    d.rounded_rectangle((30, 80, W - 30, H - 30), 20, fill="#111827")
+    d.rounded_rectangle((30, 80, W - 30, H - 55), 20, fill="#111827")
     d.text((W / 2, 135), "This appears to be useful as a checklist", font=F(34, True), fill="white", anchor="mm")
     d.text((W / 2, 180), "when you change a function:", font=F(24), fill="#d1d5db", anchor="mm")
     items = ["Look inside the function itself first.", "Check that its callers handle the new result.", "Search for other code using the same names.", "A big change? Plan for repeated follow-up fixes."]
@@ -150,13 +149,46 @@ def closing(d):
 
 FRAMES.append((9.0, frame("The repair radius", closing)))
 
+SLOW = 1.5  # slide time multiplier (the first version ran at 1.0)
+FADE_STEPS, FADE_MS = 3, 90
+
+
+def progress(im, i, n):
+    """Slide progress: a counter at the top right and a bar with one dot per step along the bottom."""
+    im = im.copy()
+    d = ImageDraw.Draw(im)
+    d.text((W - 40, 30), f"repair radius  \u00b7  {i + 1} / {n}", font=F(16), fill=MUTED, anchor="ra")
+    x0, x1, y = 40, W - 40, H - 22
+    d.rounded_rectangle((x0, y - 3, x1, y + 3), 3, fill="#d1d5db")
+    d.rounded_rectangle((x0, y - 3, x0 + (x1 - x0) * (i + 1) / n, y + 3), 3, fill=BLUE)
+    for k in range(n):
+        cx = x0 + (x1 - x0) * (k + 0.5) / n
+        d.ellipse((cx - 6, y - 6, cx + 6, y + 6), fill=BLUE if k <= i else "#d1d5db", outline="#fbfaf6", width=2)
+    return im
+
+
+def build():
+    n = len(FRAMES)
+    slides = [progress(im, i, n) for i, (_, im) in enumerate(FRAMES)]
+    seq, dur = [], []
+    for i, im in enumerate(slides):
+        seq.append(im)
+        dur.append(int(FRAMES[i][0] * SLOW * 1000))
+        if i + 1 < n:
+            for k in range(1, FADE_STEPS + 1):
+                seq.append(Image.blend(im, slides[i + 1], k / (FADE_STEPS + 1)))
+                dur.append(FADE_MS)
+    return slides, seq, dur
+
+
 if __name__ == "__main__":
     out = Path(sys.argv[1])
-    ims = [im.convert("P", palette=Image.ADAPTIVE, colors=64) for _, im in FRAMES]
-    ims[0].save(out, save_all=True, append_images=ims[1:], duration=[int(s * 1000) for s, _ in FRAMES], loop=0, optimize=True)
+    slides, seq, dur = build()
+    pal = [im.convert("P", palette=Image.ADAPTIVE, colors=64) for im in seq]
+    pal[0].save(out, save_all=True, append_images=pal[1:], duration=dur, loop=0, optimize=True)
     if "--frames-dir" in sys.argv:
         d = Path(sys.argv[sys.argv.index("--frames-dir") + 1])
         d.mkdir(parents=True, exist_ok=True)
-        for i, (_, im) in enumerate(FRAMES):
+        for i, im in enumerate(slides):
             im.save(d / f"frame_{i}.png")
-    print(out, out.stat().st_size // 1024, "KB,", len(FRAMES), "frames")
+    print(out, out.stat().st_size // 1024, "KB,", len(slides), "slides,", len(seq), "frames,", round(sum(dur) / 1000), "s")
