@@ -9,6 +9,8 @@ the fixed function (outside the changed set) is (a) in the co-change set, (b) wi
 import bisect
 import collections
 import json
+import os
+import pickle
 import subprocess
 import sys
 from concurrent.futures import ProcessPoolExecutor
@@ -34,7 +36,10 @@ def main():
     shas = [a for a, _ in allc]
     cts = np.array([b for _, b in allc])
     print(f"{repo}: {len(shas)} non-merge commits; reading the functions each touched (one git pass, cached)", flush=True)
-    touched = BR.touched_all(repo, shas, lang, out / "touched_all.pkl")
+    histdir = Path(os.environ.get("HIST_SRC", out))
+    touched = BR.touched_all(repo, shas, lang, histdir / "touched_all.pkl")
+    ver = pickle.load(open(out / "touched.pkl", "rb"))
+    touched = {**touched, **{k: [tuple(x) for x in v] for k, v in ver.items()}}  # pair commits: the sets of OUTDIR (verified if a _v directory)
     idx = collections.defaultdict(list)  # function key -> commit positions (ascending, as shas are time-sorted)
     for ci, s in enumerate(shas):
         t = touched[s]

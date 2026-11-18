@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Repair radius within size bands of the causing change (lines added plus removed), plain same-file baseline, for repositories with measure.pkl and diff_feats.pkl.
     python tools/sensor/radius_by_size.py linux dpdk"""
+import os
 import sys
 
 import numpy as np
@@ -11,7 +12,7 @@ import blast_radius as BR  # noqa: E402
 
 rng = np.random.default_rng(2982)
 for repo in sys.argv[1:]:
-    d = f"/tmp/gitgalaxy-scratch/claude/blast/{repo}"
+    d = f"/tmp/gitgalaxy-scratch/claude/blast/{repo}{os.environ.get('BLAST_SUFFIX', '')}"
     m = pd.read_pickle(f"{d}/measure.pkl")
     m = m[(m.status == "ok") & (m.nFo > 0)].copy()
     f = pd.read_pickle(f"{d}/diff_feats.pkl")

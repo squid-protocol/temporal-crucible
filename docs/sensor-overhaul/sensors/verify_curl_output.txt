@@ -1,0 +1,2 @@
+curl: verifying the functions of 1398 commits (10004 function entries)
+function entries: verified 7562 (75.6%), in one version only (kept) 1305 (13.0%), identical (not edited) 1081 (10.8%), unverifiable (file renamed, added or no parent) 56 (0.6%)

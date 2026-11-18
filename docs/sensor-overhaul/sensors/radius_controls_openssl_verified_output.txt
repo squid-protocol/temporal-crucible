@@ -1,0 +1,18 @@
+openssl: change history of 29007 functions
+
+=== openssl: 115 pairs with a fixed function outside the changed set; matched baseline fell back to plain for 4.7% of fixed functions ===
+  sanity: fixed functions changed in the prior year 11.9% vs 23.4% of their same-file candidates; first change within the prior year 6.2% vs 13.9%
+  radius against the plain same-file baseline and against the churn- and age-matched baseline:
+    either1   plain  1.90 [1.33,2.74] (36% vs 19%, n 105)   matched  1.94 [1.33,2.74] (36% vs 19%, n 105)
+    either2   plain  1.72 [1.39,2.26] (50% vs 29%, n 105)   matched  1.66 [1.30,2.18] (50% vs 30%, n 105)
+    callers1  plain  1.70 [0.96,3.06] (11% vs 7%, n 105)   matched  1.82 [1.04,3.20] (11% vs 6%, n 105)
+    callees1  plain  2.00 [1.31,2.95] (26% vs 13%, n 105)   matched  2.05 [1.32,3.15] (26% vs 13%, n 105)
+  within 2 calls by size of the causing change (lines):
+    under 20     n     4 plain            n/a   matched            n/a
+    20 to 99     n    20 plain  2.35 [1.33,5.00] (50% vs 21%, n 18)   matched  2.18 [1.08,5.29] (50% vs 23%, n 18)
+    100 to 499   n    38 plain  1.59 [1.01,2.64] (53% vs 33%, n 34)   matched  1.51 [0.99,2.46] (53% vs 35%, n 34)
+    500 or more  n    53 plain  1.73 [1.28,2.40] (49% vs 28%, n 49)   matched  1.75 [1.30,2.53] (49% vs 28%, n 49)
+
+  CH1 matched either2 1.66 [1.32,2.16] (needs 1.25, lower bound above 1.15): supported
+  CH2 matched / plain = 0.97 (needs 0.90 or lower): not supported
+  CH3 size bands with a lower bound above 1.2 (plain baseline): 2 of 4 (needs 3)

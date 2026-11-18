@@ -5,6 +5,7 @@
 import bisect
 import collections
 import json
+import os
 import subprocess
 import sys
 
@@ -20,6 +21,7 @@ BASE = "/tmp/gitgalaxy-scratch/claude"
 DATA = {"kernel": ("linux", f"{BASE}/argl/links_linux_all.json"), "dpdk": ("dpdk", f"{BASE}/argl/links_dpdk.json")}
 SMALL = {"adds a guard", "rewrites a condition", "replaces a call or argument", "small edit"}
 rng = np.random.default_rng(2982)
+SUF = os.environ.get("BLAST_SUFFIX", "")  # "_v" reads the verified-function measurements
 YEAR = 365.25 * 86400
 
 
@@ -51,7 +53,7 @@ def tenure(repo, cause_shas, cause_ct):
 def main():
     allres = {}
     for name, (repo, lp) in DATA.items():
-        d = f"{BASE}/blast/{repo}"
+        d = f"{BASE}/blast/{repo}{SUF}"
         links = json.load(open(lp))
         nfix = collections.Counter(p["ind"] for p in links)
         ind_ct = {p["ind"]: p["ind_ct"] for p in links}

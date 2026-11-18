@@ -3,6 +3,7 @@
 (docs/sensor-overhaul/sensors/ripple_radius.md, "Replicating the shape tables on OpenSSL and FreeBSD", fixed before running).
 
     python tools/sensor/shape_replication.py        (needs measure.pkl for linux, openssl, freebsd-src under /tmp/gitgalaxy-scratch/claude/blast/)"""
+import os
 import sys
 from pathlib import Path
 
@@ -19,13 +20,14 @@ POOL = "/srv/storage_16tb/projects/temporal-crucible-pool"
 BASE = Path("/tmp/gitgalaxy-scratch/claude/blast")
 DATA = [("kernel", "linux", f"{POOL}/linux"), ("openssl", "openssl", f"{POOL}/openssl"), ("freebsd", "freebsd-src", f"{POOL}/freebsd-src"), ("dpdk", "dpdk", f"{POOL}/dpdk")]
 rng = np.random.default_rng(2982)
+SUF = os.environ.get("BLAST_SUFFIX", "")  # "_v" reads the verified-function measurements
 
 
 def load(label, d, path):
     CK.REPO = path
-    df = pd.read_pickle(BASE / d / "measure.pkl")
+    df = pd.read_pickle(BASE / (d + SUF) / "measure.pkl")
     df = df[df.status == "ok"].copy()
-    feats = CD.diff_features(list(df.ind) + list(df.fix), BASE / d / "diff_feats.pkl")
+    feats = CD.diff_features(list(df.ind) + list(df.fix), BASE / (d + SUF) / "diff_feats.pkl")
     df["fix_shape"] = [FS.shape(feats[s]) for s in df.fix]
     df["cause_shape"] = [FS.shape(feats[s]) for s in df.ind]
     df["cross"] = ~df.same_file.astype(bool)

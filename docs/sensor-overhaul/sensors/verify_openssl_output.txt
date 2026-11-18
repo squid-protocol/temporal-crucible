@@ -1,0 +1,2 @@
+openssl: verifying the functions of 452 commits (11196 function entries)
+function entries: verified 8127 (72.6%), in one version only (kept) 2625 (23.4%), identical (not edited) 410 (3.7%), unverifiable (file renamed, added or no parent) 34 (0.3%)

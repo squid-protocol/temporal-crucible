@@ -6,6 +6,7 @@ docs/sensor-overhaul/sensors/ripple_radius.md, fixed before running.
 import bisect
 import collections
 import json
+import os
 import pickle
 import subprocess
 import sys
@@ -94,8 +95,9 @@ def main():
     pairs = json.load(open(pairs_path))
     log = subprocess.run(["git", "-C", f"{BR.POOL}/{repo}", "log", "--no-merges", "--format=%H %ct"], capture_output=True, text=True).stdout.split("\n")
     ct_of = {l.split()[0]: int(l.split()[1]) for l in log if l.strip()}
-    touched = pickle.load(open(out / "touched_all.pkl", "rb"))
-    touched = {**pickle.load(open(out / "touched.pkl", "rb")), **touched}  # pair commits not reachable from HEAD are only in touched.pkl
+    histdir = Path(os.environ.get("HIST_SRC", out))  # the unverified all-commit function sets (history for churn and age)
+    touched = pickle.load(open(histdir / "touched_all.pkl", "rb"))
+    touched = {**touched, **pickle.load(open(out / "touched.pkl", "rb"))}  # pair commits: the (verified, if OUTDIR is a _v directory) sets win
     tmp = collections.defaultdict(list)
     for s, fs in touched.items():
         if s in ct_of and 0 < len(fs) <= MAXCO:

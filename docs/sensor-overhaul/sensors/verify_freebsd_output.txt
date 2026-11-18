@@ -1,0 +1,2 @@
+freebsd-src: verifying the functions of 352 commits (2112 function entries)
+function entries: verified 1414 (67.0%), in one version only (kept) 421 (19.9%), identical (not edited) 277 (13.1%)

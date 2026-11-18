@@ -4,6 +4,7 @@
     python tools/sensor/relaxation.py        (needs measure.pkl for linux and dpdk, and the pair lists, under /tmp/gitgalaxy-scratch/claude)"""
 import collections
 import json
+import os
 import sys
 
 import numpy as np
@@ -13,7 +14,8 @@ sys.path.insert(0, "/srv/storage_16tb/projects/temporal-crucible/.claude/worktre
 import blast_radius as BR  # noqa: E402
 
 BASE = "/tmp/gitgalaxy-scratch/claude"
-DATA = {"kernel": (f"{BASE}/blast/linux", f"{BASE}/argl/links_linux_all.json"), "dpdk": (f"{BASE}/blast/dpdk", f"{BASE}/argl/links_dpdk.json")}
+SUF = os.environ.get("BLAST_SUFFIX", "")  # "_v" reads the verified-function measurements
+DATA = {"kernel": (f"{BASE}/blast/linux{SUF}", f"{BASE}/argl/links_linux_all.json"), "dpdk": (f"{BASE}/blast/dpdk{SUF}", f"{BASE}/argl/links_dpdk.json")}
 rng = np.random.default_rng(2982)
 YEAR = 365.25
 

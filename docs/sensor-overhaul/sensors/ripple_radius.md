@@ -692,3 +692,38 @@ Surprise bar (a move above 25%): not met (worst 8.6%).
 - **SR4.** Size trend: pooled radius for causes under 100 lines is at least 1.2 times that for causes of 100 or more lines.
 - **SR5.** The three repositories agree in direction on SR1 to SR3 (each point estimate above 1.0 within 2 calls; callers above callees).
 **Would surprise:** a pooled small-repository radius below 1.1: the pattern would then be a property of large, trailer-rich repositories.
+
+#### Controls re-run on verified functions and small repositories: results (2026-11-18; `*_verified_output.txt`, `small_repos_pooled_output.txt`, `verify_{openssl,freebsd,curl}_output.txt`)
+**Part 1: the controls on verified sets (kernel and DPDK, OpenSSL where possible).**
+| control | unverified | verified |
+|---|---|---|
+| co-change (a) fixed function in the co-change set (DPDK) | 0.76 | **0.83** [0.78, 0.87]; OpenSSL 0.36 -> 0.38 |
+| co-change (b) within 2 calls and not a co-change partner | 1.60 | **1.71** [1.66, 1.77]; OpenSSL 1.91 -> 1.96 |
+| both signals, share of the within-2-calls hits | 17% | 15% |
+| churn- and age-matched baseline, DPDK | 1.44 against plain 1.45 | **1.55 against plain 1.57** (matched / plain 0.98); fixed functions changed in the prior year 20.1% against 23.3% of candidates |
+| relaxation RX1 fast/slow within 1 call | 1.11 / 1.06 | 1.12 / 1.08 (both short of 1.15) |
+| RX2 later fix within 2 calls | -1.0 / -4.2 points | -1.5 [-3.7, +0.8] / -4.0 [-7.1, -1.1] |
+| RX3 chance of another repair, k = 1 to 5 | 0.29 to 0.66; 0.39 to 0.70 | identical (chain counts do not depend on function sets) |
+| RX4 gaps | kernel not, DPDK supported | unchanged |
+| sick changes SK1 / SK2 / SK3 (kernel; DPDK) | 3.94 / 2.33 / 1.12; 4.28 / 2.19 / 1.18 | 3.92 / 2.40 / 1.12; 4.47 / 2.42 / **1.20** |
+| shape checks RS1 to RS5 on DPDK | 3 of 5 agree (RS3 differs) | **4 of 5 agree**: RS3 now agrees (large fixes have the lowest radius, 1.33) |
+| per repository (DPDK, OpenSSL, FreeBSD) | 5 of 11 testable checks agree | **6 of 11** |
+**RR1 supported, at its limit:** three verdicts changed, all on DPDK and all marginal or derived: RS3 (differs -> agrees), DR4 (3 of 5 -> 4 of 5, the same change seen through the bar of the DPDK hypotheses), SK3 (1.18 -> 1.20, a bar of 1.2). **RR2 supported:** the co-change ratio (a) stays below 1 (0.83), matching changes the DPDK radius by 2%, the chance of another repair keeps rising. The DPDK shape picture is now closer to the kernel's: guard fixes still not slow there (RS1 differs), but large fixes have the lowest radius, large causes have the lowest same-function share and the longest lag, and the same kind of edit recurs (sync to sync 9.9, call to call 3.6).
+**Part 2: curl, OpenSSL and FreeBSD.** Function entries identified as not edited: curl 10.8%, OpenSSL 3.7% (but 23.4% present in one version only, kept), FreeBSD 13.1% (19.9% in one version only).
+| radius within 2 calls | unverified | verified |
+|---|---|---|
+| curl | 1.57 [1.33, 1.85] (n 171) | **1.65** [1.41, 2.00] (n 156) |
+| OpenSSL | 1.56 [1.33, 1.86] (115) | **1.72** [1.38, 2.20] (105) |
+| FreeBSD | 2.35 [1.76, 3.41] (47) | **2.17** [1.62, 3.12] (39) |
+| pooled | 1.64 [1.46, 1.82] (333) | **1.74** [1.52, 2.00] (300) |
+Same-function share, verified: curl 72%, OpenSSL 43%, FreeBSD 72% (pooled 65%). Different-file fixes (pooled, verified; n 132): callers1 3.21 [1.35, 13.99] against callees1 1.35 [0.57, 2.95] (curl 7.90 against 1.51; OpenSSL 0.52 against 1.21 with 39 pairs; FreeBSD too few). By size (pooled, verified): under 100 lines 1.91 [1.56, 2.40], 100 or more 1.63 [1.39, 1.92].
+| hypothesis | verdict |
+|---|---|
+| SR1 pooled verified radius at least 1.3, lower bound above 1.1 | **supported**: 1.74 [1.52, 2.00] |
+| SR2 verification raises the pooled radius | **supported**: +5.6% (curl +5%, OpenSSL +10%, FreeBSD -8%) |
+| SR3 callers above callees (different-file fixes, pooled) | **supported**: 3.21 against 1.35 (wide intervals) |
+| SR4 under 100 lines over 100 or more at least 1.2 | **not supported**: 1.17, same direction as the kernel and DPDK, smaller than they show |
+| SR5 all three agree on radius above 1 and callers above callees | **not supported**: curl only (OpenSSL's callers-versus-callees contrast goes the other way on 39 pairs; FreeBSD too few) |
+Surprise bar (pooled radius below 1.1): not met.
+**Reading.** The repair radius is present in all five repositories on verified functions: kernel 2.15, FreeBSD 2.17, OpenSSL 1.72, curl 1.65, DPDK 1.57, with intervals that exclude 1.3 for the kernel, DPDK, curl and OpenSSL (FreeBSD's lower bound is 1.62 on 39 pairs). The caller direction is solid in curl, the kernel and DPDK; the small repositories cannot confirm or deny it individually. The size trend replicates in direction only (1.17 against 2.3 in the kernel). The controls give the same answers on verified sets as before: the radius is not co-change, not hot or young code, and not an artefact of the hunk-header misattribution.
+**Not done.** Mesa and QEMU (about 9,700 and 4,000 pairs with C/H on both sides); the kernel-scale co-change and churn controls (need a 1.3-million-commit history); the repair structure re-run with verified functions (identical functions were removed from its tables, no further change); the 10 to 23% of function entries present in one version only.
