@@ -1,0 +1,27 @@
+linux: 14046 measured pairs with a cause under 100 lines (of 24474)
+26130 (pair, fixed function) records; parsing the edits
+  2000/13565 fix commits
+  4000/13565 fix commits
+  6000/13565 fix commits
+  8000/13565 fix commits
+  10000/13565 fix commits
+  12000/13565 fix commits
+
+########## linux: 26130 records; parsed 25663 (98%); not parsed: function not found 467 ##########
+  relation to the cause: same 11668 (45%), caller 1384 (5%), callee 2476 (10%), two calls away 909 (4%), same file, farther 4293 (17%), elsewhere 4933 (19%)
+
+  edit type (row shares) by relation:
+                        adds a guard no statement c adds statement changes a call       rewrites   adds locking changes a cond removes statem replaces a cal   adds cleanup changes a decl changes a retu
+  same                         20.8%          13.4%           9.4%          10.2%           9.8%           5.9%           7.8%           7.7%           6.0%           5.3%           2.3%           1.4%   n 11668
+  caller                       22.8%           7.7%          13.2%          18.0%           5.8%           6.4%           4.9%           5.1%           7.1%           6.7%           2.0%           0.4%   n 1384
+  callee                       22.7%          20.0%          10.5%           8.7%           6.7%           5.7%           5.7%           4.8%           4.9%           5.0%           2.3%           2.7%   n 2476
+  two calls away               21.0%          18.0%          12.2%           8.9%           7.0%           6.5%           6.2%           5.7%           4.3%           7.4%           1.0%           1.8%   n 909
+  same file, farther           17.9%          22.7%          13.6%           7.8%           6.4%           7.8%           4.8%           4.5%           5.6%           5.5%           1.7%           1.8%   n 4293
+  elsewhere                    16.9%          20.1%          13.8%           9.9%           6.8%           9.0%           4.2%           5.0%           6.6%           4.6%           1.8%           1.2%   n 4933
+  ALL                          19.9%          16.7%          11.3%          10.0%           8.0%           6.8%           6.2%           6.2%           6.0%           5.3%           2.1%           1.5%
+
+  ST1 edits that call a changed function: callers 34% (needs 40%), callees 2% (needs 15% or less): not supported
+  ST2 guard-or-condition share, callees / callers = 1.03 (needs 1.3): not supported
+  ST3 Cramer's V of edit type by relation = 0.087 (needs 0.10): not supported
+  ST4 named type for 75% of parsed edits (needs 85%): not supported
+  ST5 'an added if tests a changed function', callers 4.6% vs same function 0.5% = 8.70 (needs 1.5): supported

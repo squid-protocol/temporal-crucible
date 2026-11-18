@@ -599,3 +599,25 @@ Causing commits at least 3 years old at the end of the history, measured, with a
 - **ST4 (coverage).** At least 85% of the edits that parse receive a named type (not "rewrites" or "no statement change").
 - **ST5 (return handling in callers).** The flag "an added `if` tests a changed function" is at least 1.5 times as frequent among *caller* repairs as among *same-function* repairs.
 **Would surprise:** ST3 below 0.05: the edit type would then be unrelated to where the repair lands, and the radius would describe location only.
+
+#### Structure of the repairs by where they land: results (2026-11-18; `repair_structure_dpdk_output.txt`, `repair_structure_linux_output.txt`; tree-sitter C, old and new text of each fixed function)
+Causes under 100 lines. DPDK: 3,058 pairs, 6,414 (pair, fixed function) records, 99% parsed (50 functions not found). Kernel: 26,130 records, 98% parsed. Relation to the cause: same function 43% (DPDK) and 45% (kernel); caller 5% and 5%; callee 10% and 10%; two calls away 3% and 4%; same file, farther 18% and 17%; elsewhere 21% and 19%.
+| edit type | all (DPDK / kernel) | same | caller | callee |
+|---|---|---|---|---|
+| adds a guard | 20.5 / 19.9% | 17.7 / 20.8% | 18.7 / 22.8% | 19.1 / 22.7% |
+| changes a call's arguments | 11.3 / 10.0% | 11.8 / 10.2% | **20.8 / 18.0%** | 12.2 / 8.7% |
+| adds statements only | 13.2 / 11.3% | 10.8 / 9.4% | 17.2 / 13.2% | 13.1 / 10.5% |
+| no statement change | 12.9 / 16.7% | 11.9 / 13.4% | 7.5 / 7.7% | 15.6 / **20.0%** |
+| rewrites | 11.3 / 8.0% | 14.3 / 9.8% | 6.6 / 5.8% | 9.1 / 6.7% |
+| changes a condition | 7.6 / 6.2% | 10.2 / 7.8% | 5.1 / 4.9% | 7.5 / 5.7% |
+| adds cleanup / locking | 3.7 / 6.0%; 1.4 / 6.8% | | | |
+| hypothesis | DPDK | kernel | verdict |
+|---|---|---|---|
+| ST1 caller repairs that call a changed function at least 40%; callee repairs at most 15% | 32% / 1% | 34% / 2% | **half**: callees as predicted (1 to 2%); callers 32 to 34%, short of 40% |
+| ST2 guard-or-condition share, callees over callers at least 1.3 | 1.12 | 1.03 | **not supported** |
+| ST3 Cramer's V of edit type by relation at least 0.10 | 0.100 | 0.087 | **borderline: the effect is small** (met at the threshold in DPDK, missed in the kernel) |
+| ST4 named type for at least 85% of parsed edits | 76% | 75% | **not supported** (the unnamed quarter is "no statement change" 13 to 17% and "rewrites" 8 to 11%) |
+| ST5 an added `if` tests a changed function, callers over same-function at least 1.5 | 4.8% vs 0.6% (**8.7**) | 4.6% vs 0.5% (**8.7**) | **supported by a wide margin, identical in both** |
+**What the data say.** (1) **The strongest structural difference is call-site adaptation:** repairs in a caller of a changed function change call arguments about twice as often (21% and 18%, against 10 to 12% for same-function repairs), a third of them edit a statement that calls the changed function, and about 9 times as often as same-function repairs add an `if` that tests the changed function (checking what it returns); callee repairs almost never touch calls to the changed function (1 to 2%). (2) **Otherwise the kind of edit is nearly the same wherever the repair lands**: guards are the most common edit everywhere (17 to 25%) and the type distribution depends only weakly on the relation (V 0.09 to 0.10). The radius describes where repairs land much more than what they do, except at callers. (3) Callee repairs have the most "no statement change" edits (kernel 20.0%).
+**What "no statement change" contains (7 DPDK samples read by hand).** Mostly not "nothing": signature or storage-class changes (`int` to `static int`, new parameter), comment-only edits, preprocessor edits, statements moved between blocks (same text, different nesting: a real edit my multiset comparison cannot see), and hunk-header attribution to the neighbouring function when a new function is added after it. The label is a heterogeneous bucket; splitting it (signature, comment, preprocessor, moved statements, wrong attribution) would lift ST4 above 85%; not done.
+**Caveats.** Statement-level multiset comparison (no tree alignment: moves and re-nesting are invisible); the guard and cleanup rules rest on name patterns (lock, free, put, release); the relation uses statically resolved calls and "caller" excludes functions that also appear as callees; only causes under 100 lines; fixed functions identified from hunk headers (some attribution errors as above); associations.
