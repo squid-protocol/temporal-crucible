@@ -1,0 +1,60 @@
+
+########## dpdk (c): 60500 functions, 5238 files parsed ##########
+  A. recorded call edges 123151: unique target 97%, ambiguous target 1%, unresolved 2%
+     by step (edges; share unresolved; share ambiguous): import 52943 (0%; 1%), file 46584 (0%; 1%), unique 20554 (0%; 0%), tie 1790 (100%; 0%), class 577 (0%; 42%), receiver 302 (3%; 41%), typed 247 (0%; 5%), proximate 88 (0%; 100%), qualified 61 (0%; 2%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 67308; the engine has a call edge for 96%, a resolved target for 94%, a unique target for 93%
+     by call form (pairs; any edge; resolved; unique): plain 66976 (96%; 94%; 93%); member 332 (1%; 1%; 1%)
+
+########## curl (c): 7392 functions, 909 files parsed ##########
+  A. recorded call edges 17501: unique target 96%, ambiguous target 3%, unresolved 0%
+     by step (edges; share unresolved; share ambiguous): unique 10100 (0%; 0%), file 4730 (0%; 2%), import 1178 (1%; 3%), typed 692 (0%; 14%), class 383 (0%; 68%), qualified 150 (0%; 3%), receiver 127 (13%; 54%), unseen 80 (0%; 0%), tie 47 (100%; 0%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 10017; the engine has a call edge for 99%, a resolved target for 99%, a unique target for 99%
+     by call form (pairs; any edge; resolved; unique): plain 9999 (100%; 99%; 99%)
+
+########## sphinx (python): 7499 functions, 696 files parsed ##########
+  A. recorded call edges 11672: unique target 50%, ambiguous target 37%, unresolved 13%
+     by step (edges; share unresolved; share ambiguous): import 3555 (13%; 18%), receiver 3450 (23%; 53%), file 1911 (10%; 27%), class 1530 (0%; 30%), typed 1056 (0%; 80%), qualified 97 (0%; 54%), unseen 64 (0%; 5%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 4974; the engine has a call edge for 87%, a resolved target for 80%, a unique target for 48%
+     by call form (pairs; any edge; resolved; unique): member 3659 (89%; 79%; 39%); plain 1315 (82%; 81%; 73%)
+
+########## scapy (python): 7656 functions, 381 files parsed ##########
+  A. recorded call edges 14146: unique target 55%, ambiguous target 24%, unresolved 21%
+     by step (edges; share unresolved; share ambiguous): import 6443 (24%; 9%), file 2915 (39%; 14%), receiver 2494 (10%; 62%), class 1945 (0%; 37%), qualified 193 (0%; 29%), typed 99 (0%; 52%), unseen 55 (62%; 9%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 5375; the engine has a call edge for 86%, a resolved target for 83%, a unique target for 53%
+     by call form (pairs; any edge; resolved; unique): member 3773 (84%; 80%; 41%); plain 1602 (89%; 89%; 83%)
+
+########## sqlmap (python): 2982 functions, 485 files parsed ##########
+  A. recorded call edges 7020: unique target 62%, ambiguous target 25%, unresolved 14%
+     by step (edges; share unresolved; share ambiguous): import 2504 (16%; 21%), receiver 2010 (23%; 32%), file 1118 (9%; 26%), class 757 (0%; 30%), qualified 447 (0%; 6%), unseen 143 (0%; 3%), typed 35 (0%; 54%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 3983; the engine has a call edge for 91%, a resolved target for 84%, a unique target for 62%
+     by call form (pairs; any edge; resolved; unique): plain 1471 (95%; 95%; 75%); member 2512 (88%; 78%; 54%)
+
+########## prometheus (go): 10562 functions, 751 files parsed ##########
+  A. recorded call edges 37393: unique target 44%, ambiguous target 38%, unresolved 18%
+     by step (edges; share unresolved; share ambiguous): receiver 16258 (36%; 42%), file 7219 (0%; 34%), import 6783 (3%; 52%), unique 3715 (0%; 0%), unseen 1367 (0%; 0%), nearest 1289 (2%; 98%), tie 684 (100%; 0%), class 78 (0%; 8%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 15002; the engine has a call edge for 97%, a resolved target for 82%, a unique target for 49%
+     by call form (pairs; any edge; resolved; unique): member 10869 (97%; 77%; 38%); plain 4133 (99%; 93%; 79%)
+
+########## commons-lang (java): 11565 functions, 636 files parsed ##########
+  A. recorded call edges 24214: unique target 34%, ambiguous target 55%, unresolved 10%
+     by step (edges; share unresolved; share ambiguous): receiver 7681 (30%; 48%), unseen 4623 (0%; 77%), overload 3020 (0%; 57%), class 2781 (0%; 34%), qualified 2764 (0%; 42%), file 1511 (15%; 47%), import 1358 (1%; 86%), unique 476 (1%; 91%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 6975; the engine has a call edge for 86%, a resolved target for 73%, a unique target for 33%
+     by call form (pairs; any edge; resolved; unique): member 5493 (89%; 73%; 30%); plain 1482 (75%; 74%; 46%)
+
+########## commons-io (java): 7285 functions, 563 files parsed ##########
+  A. recorded call edges 16174: unique target 40%, ambiguous target 48%, unresolved 12%
+     by step (edges; share unresolved; share ambiguous): receiver 6341 (30%; 39%), class 2270 (0%; 41%), qualified 2138 (0%; 61%), import 2002 (0%; 66%), overload 1832 (0%; 71%), unseen 854 (0%; 0%), file 667 (6%; 58%), unique 42 (12%; 0%), nearest 28 (0%; 100%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 5665; the engine has a call edge for 88%, a resolved target for 76%, a unique target for 34%
+     by call form (pairs; any edge; resolved; unique): plain 1054 (83%; 83%; 48%); member 4611 (89%; 74%; 30%)
+
+########## ripgrep (rust): 2419 functions, 101 files parsed ##########
+  A. recorded call edges 3147: unique target 20%, ambiguous target 47%, unresolved 33%
+     by step (edges; share unresolved; share ambiguous): receiver 1853 (51%; 46%), file 1033 (4%; 47%), nearest 68 (0%; 100%), unseen 53 (6%; 2%), tie 48 (100%; 0%), class 38 (0%; 61%), qualified 32 (0%; 69%), import 21 (0%; 76%)
+  B. name-resolvable call pairs (file, callee name) found in the source: 2104; the engine has a call edge for 34%, a resolved target for 25%, a unique target for 9%
+     by call form (pairs; any edge; resolved; unique): plain 198 (95%; 91%; 70%); path 319 (41%; 26%; 6%); member 1587 (25%; 16%; 2%)
+
+=== VERDICTS ===
+  CG1 ambiguous share of resolved call edges: dpdk 1%, curl 3%, sphinx 43%, scapy 30%, sqlmap 29%, prometheus 46%, commons-lang 62%, commons-io 54%, ripgrep 70% (needs at least 25% in Python, Java and Go repositories, at most 20% in C): supported
+  CG2 independent recall (any edge): non-C (python, java, go, rust) pooled 88% (needs 85% or less); C pooled 96% (needs 90% or more): not supported
+  CG3 non-C recall by form: plain 90%, member 88% (needs plain at least 10 points above member): not supported
+  surprise bar (non-C recall below 50%): not met (88%)

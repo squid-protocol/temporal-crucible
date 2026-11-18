@@ -15,6 +15,7 @@ PAIRS.json: a list of {"fix", "ind", "fix_ct", "ind_ct", "lag", optional "fix_fi
 import argparse
 import collections
 import json
+import os
 import pickle
 import sqlite3
 import subprocess
@@ -108,7 +109,8 @@ class Graph:
         self.index = {k: i for i, k in enumerate(keys)}
         n = len(keys)
         src, dst = [], []
-        for s, d in con.execute("SELECT src_func_id, dst_func_id FROM fcall_data WHERE kind = 'call' AND dst_func_id IS NOT NULL AND COALESCE(candidates, 1) <= 1"):
+        maxc = int(os.environ.get("BLAST_MAXC", "1"))  # edges with at most this many candidate targets; 1 = confident edges only (the default of every earlier result)
+        for s, d in con.execute(f"SELECT src_func_id, dst_func_id FROM fcall_data WHERE kind = 'call' AND dst_func_id IS NOT NULL AND COALESCE(candidates, 1) <= {maxc}"):
             if s in key_of and d in key_of and key_of[s] != key_of[d]:
                 src.append(self.index[key_of[s]])
                 dst.append(self.index[key_of[d]])
