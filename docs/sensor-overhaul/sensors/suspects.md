@@ -1,6 +1,6 @@
-# Sensor design: suspects (the repair radius as a worklist)
+# Sensor design: where to look first (the repair radius as a worklist)
 
-**Status: design with evidence and a real-change mock-up (section 6); exploratory; nothing built.** Extends the change report (`gitgalaxy change`, section "REACH OF WHAT CHANGED"). Evidence: `sensors/ripple_radius.md` (the log, with a prediction written before every run), `sensors/lang_validation_output.txt`, `sensors/callgraph_audit_output.txt`, `sensors/retrieval_added_deleted_output.txt`, `sensors/retrieval_lift_output.txt`. Public write-up: `docs/wiki/08-29-repair-radius.md` (engine PR #8636). Mock-up: `tools/sensor/suspects_mockup.py`.
+**Status: design with evidence and a real-change mock-up (section 6); exploratory; nothing built. Owner decisions 2026-11-18 recorded in section 13.** Extends the change report (`gitgalaxy change`, section "REACH OF WHAT CHANGED"). Evidence: `sensors/ripple_radius.md` (the log, with a prediction written before every run), `sensors/lang_validation_output.txt`, `sensors/callgraph_audit_output.txt`, `sensors/retrieval_added_deleted_output.txt`, `sensors/retrieval_lift_output.txt`. Public write-up: `docs/wiki/08-29-repair-radius.md` (engine PR #8636). Mock-up: `tools/sensor/suspects_mockup.py`.
 
 ## 1. The question the sensor answers
 *If something breaks after this change, which functions and files should I look at first?*
@@ -94,3 +94,11 @@ Section in the change report after "REACH OF WHAT CHANGED" (`gitgalaxy/tools/sen
 4. Engine issue and pull request: the section, tests, wiki; C first, Python and Go next if they pass.
 5. Track record (`gitgalaxy backtest`) as a second pull request.
 **Owner decisions needed:** the name; the gate numbers (section 11); whether the track record is in version 1; whether it appears only in `gitgalaxy change` or also as a `suspects` subcommand; the order against the open wiki PR #8636 (the page this sensor would link to).
+
+## 13. Owner decisions (2026-11-18)
+1. **Name: "Where to look first"** (the section and the subcommand; "repair radius" remains the name of the finding).
+2. **Gate numbers (section 11) approved as written.**
+3. **Two pull requests**: the first with the list (functions and files, reason tags, size note, per-language states); the second with the per-repository track record (`gitgalaxy backtest`).
+4. **A subcommand** of its own (it is not only a section of `gitgalaxy change`; the change report may link to it).
+5. **Wiki PR #8636 merges first** (label `shepherd:merge` added 2026-11-18); the sensor's documentation links to that page.
+**Next:** run the held-out back-test against the gate; test the same-directory feature; then the engine issue.
