@@ -1,0 +1,156 @@
+24474 measured pairs
+
+=== FIX MECHANISM (from the fix commit's subject, then the first 600 characters of its body) ===
+  class                 pairs  share   lag (median)   same function   cross-file   radius within 2 calls, callers and callees within 1 call (against same-file functions)
+  lifetime             2316   9.5%  lag   341 d   same function  64%   cross-file  12%   2 calls 1.87 [1.77,1.99]   callers1 2.20 [1.90,2.48]   callees1 2.49 [2.28,2.75]
+  concurrency          3792  15.5%  lag   301 d   same function  59%   cross-file  15%   2 calls 1.92 [1.83,2.00]   callers1 2.21 [2.02,2.41]   callees1 2.50 [2.32,2.67]
+  null deref            893   3.6%  lag   119 d   same function  60%   cross-file  14%   2 calls 2.20 [1.95,2.44]   callers1 2.89 [2.26,3.64]   callees1 2.72 [2.32,3.24]
+  bounds/overflow      1022   4.2%  lag   425 d   same function  55%   cross-file  16%   2 calls 2.17 [1.99,2.38]   callers1 2.15 [1.72,2.64]   callees1 3.01 [2.63,3.48]
+  uninitialized         486   2.0%  lag   177 d   same function  59%   cross-file  16%   2 calls 1.74 [1.50,2.04]   callers1 2.11 [1.46,2.99]   callees1 2.06 [1.56,2.65]
+  error handling       1346   5.5%  lag   208 d   same function  62%   cross-file  11%   2 calls 2.15 [1.99,2.34]   callers1 2.85 [2.34,3.47]   callees1 2.86 [2.48,3.27]
+  build/compile        1084   4.4%  lag    57 d   same function  58%   cross-file  14%   2 calls 2.18 [2.01,2.42]   callers1 2.48 [1.92,3.15]   callees1 2.75 [2.34,3.23]
+  other               13535  55.3%  lag   239 d   same function  57%   cross-file  15%   2 calls 1.99 [1.95,2.04]   callers1 2.48 [2.35,2.62]   callees1 2.63 [2.52,2.75]
+  classified from the subject: 29%, from the body: 16%, unclassified (other): 55%
+  lifetime + NULL/missing check + error handling: 42% of classified fixes (Q1)
+
+=== CAUSING-CHANGE TYPE (verb after the subsystem prefix of the causing commit's subject) ===
+  feature              8254  33.7%  lag   327 d   same function  47%   cross-file  19%   2 calls 1.85 [1.79,1.91]   callers1 2.16 [2.01,2.30]   callees1 2.36 [2.24,2.48]
+  restructure          5165  21.1%  lag   180 d   same function  65%   cross-file  12%   2 calls 1.96 [1.88,2.05]   callers1 2.50 [2.29,2.73]   callees1 2.57 [2.41,2.75]
+  optimization          880   3.6%  lag   197 d   same function  70%   cross-file  10%   2 calls 2.11 [1.91,2.33]   callers1 2.61 [2.12,3.32]   callees1 2.80 [2.36,3.22]
+  fix                  4037  16.5%  lag   189 d   same function  71%   cross-file  10%   2 calls 2.34 [2.23,2.48]   callers1 3.35 [3.02,3.77]   callees1 3.39 [3.11,3.66]
+  other                6138  25.1%  lag   228 d   same function  59%   cross-file  14%   2 calls 2.04 [1.97,2.12]   callers1 2.27 [2.09,2.48]   callees1 2.66 [2.52,2.83]
+  most common verbs: add 4477, fix 2231, use 1133, introduce 916, support 801, implement 740, allow 634, remove 514, make 499, convert 428, move 412, don't 388, do 316, avoid 265, handle 265, enable 206, refactor 191, check 188
+
+=== SIZE OF THE CAUSING CHANGE ===
+  by lines changed in .c/.h:
+  (-1.0, 9.0]          2153   8.8%  lag   163 d   same function  74%   cross-file  13%   2 calls 2.90 [2.62,3.20]   callers1 4.71 [3.80,6.06]   callees1 3.63 [3.05,4.37]
+  (9.0, 49.0]          6964  28.5%  lag   209 d   same function  69%   cross-file  12%   2 calls 2.64 [2.53,2.77]   callers1 3.67 [3.33,4.08]   callees1 3.65 [3.37,3.91]
+  (49.0, 199.0]        9604  39.2%  lag   237 d   same function  56%   cross-file  12%   2 calls 2.18 [2.12,2.24]   callers1 2.59 [2.44,2.77]   callees1 3.12 [2.98,3.26]
+  (199.0, 1000000000.0]   5753  23.5%  lag   336 d   same function  44%   cross-file  22%   2 calls 1.45 [1.41,1.49]   callers1 1.69 [1.58,1.82]   callees1 1.72 [1.65,1.80]
+  by functions touched:
+  (0.0, 1.0]           4558  18.6%  lag   190 d   same function  63%   cross-file  16%   2 calls 2.98 [2.77,3.23]   callers1 4.51 [3.66,5.43]   callees1 4.03 [3.52,4.60]
+  (1.0, 3.0]           6362  26.0%  lag   231 d   same function  56%   cross-file  16%   2 calls 2.54 [2.43,2.64]   callers1 2.99 [2.71,3.36]   callees1 3.70 [3.46,3.94]
+  (3.0, 9.0]           8709  35.6%  lag   261 d   same function  56%   cross-file  15%   2 calls 1.99 [1.93,2.04]   callers1 2.44 [2.30,2.61]   callees1 2.71 [2.59,2.84]
+  (9.0, 1000000000.0]   4845  19.8%  lag   262 d   same function  62%   cross-file  10%   2 calls 1.46 [1.42,1.51]   callers1 1.88 [1.76,2.01]   callees1 1.73 [1.65,1.83]
+  by subsystems crossed:
+  (-1.0, 1.0]         12978  53.0%  lag   226 d   same function  65%   cross-file  11%   2 calls 2.15 [2.09,2.21]   callers1 2.69 [2.54,2.84]   callees1 2.90 [2.78,3.03]
+  (1.0, 2.0]           6609  27.0%  lag   252 d   same function  53%   cross-file  15%   2 calls 1.88 [1.82,1.95]   callers1 2.21 [2.06,2.38]   callees1 2.43 [2.31,2.56]
+  (2.0, 1000000000.0]   4887  20.0%  lag   266 d   same function  48%   cross-file  24%   2 calls 1.81 [1.73,1.89]   callers1 2.15 [1.96,2.33]   callees1 2.23 [2.09,2.38]
+
+=== CAUSING TYPE x FIX MECHANISM: lift (observed / expected if independent), pairs with 80 or more ===
+  fix           -> lifetime         lift 1.25 (n 479)
+  fix           -> concurrency      lift 1.17 (n 731)
+  fix           -> uninitialized    lift 1.15 (n 92)
+  fix           -> bounds/overflow  lift 1.14 (n 192)
+  restructure   -> null deref       lift 1.12 (n 212)
+  optimization  -> concurrency      lift 1.12 (n 153)
+  restructure   -> concurrency      lift 1.09 (n 873)
+  restructure   -> error handling   lift 1.08 (n 307)
+  restructure   -> bounds/overflow  lift 0.78 (n 169)
+  feature       -> concurrency      lift 0.88 (n 1120)
+  fix           -> build/compile    lift 0.88 (n 157)
+  fix           -> null deref       lift 0.90 (n 133)
+  feature       -> uninitialized    lift 0.91 (n 149)
+
+=== CROSS-FILE SHARE BY FIX MECHANISM (Q4) against the overall share ===
+  lifetime          11.6% (0.79 x the overall 14.6%)
+  concurrency       15.3% (1.05 x the overall 14.6%)
+  null deref        14.4% (0.99 x the overall 14.6%)
+  bounds/overflow   15.9% (1.08 x the overall 14.6%)
+  uninitialized     16.5% (1.13 x the overall 14.6%)
+  error handling    11.1% (0.76 x the overall 14.6%)
+  build/compile     14.2% (0.97 x the overall 14.6%)
+  other             15.2% (1.04 x the overall 14.6%)
+
+=== SPOT CHECKS (random examples per class; the rule's call in brackets) ===
+  -- lifetime (2316 pairs)
+     [subj] btrfs: fix ulist leaks in error paths of qgroup self tests
+     [body] mac80211: allocate and fill tidstats only when needed
+     [subj] block: Fix reference counting for zone write plugs in error state
+     [subj] padata: do not leak refcount in reorder_work
+     [subj] Bluetooth: hci_sync: Avoid use-after-free in dbg for hci_add_adv_monitor()
+     [subj] vsock: do not leave dangling sk pointer in vsock_create()
+     [subj] net/tcp: Fix socket memory leak in TCP-AO failure handling for IPv6
+     [subj] mm/gup: limit pagecache folio refcount when grabbing references
+     [subj] NFS: Fix use-after-free in nfs4_init_client()
+     [body] bpf, sockmap: Reject unhashed UDP sockets on sockmap update
+     [subj] futex: Optimize per-cpu reference counting
+     [subj] nl80211: fix station_info pertid memory leak
+  -- concurrency (3792 pairs)
+     [subj] Bluetooth: L2CAP: Fix deadlock
+     [subj] bpf, sockmap: RCU dereferenced psock may be used outside RCU block
+     [subj] l2tp: fix race in pppol2tp_release with session object destroy
+     [subj] tcp: annotate data-races around tp->delivered and tp->delivered_ce
+     [body] mptcp: fix kmalloc flag in mptcp_pm_nl_get_local_id
+     [body] ext4: Fixes len calculation in mpage_journal_page_buffers
+     [body] btrfs: reset RO counter on block group if we fail to relocate
+     [subj] mm/slab: disallow kfree_rcu_sheaf() on PREEMPT_RT again
+     [subj] can: protect the receive lists with a per-device lock
+     [body] net: qrtr: start MHI channel after endpoit creation
+     [body] pipe: make poll_usage boolean and annotate its access
+     [subj] z3fold: prevent reclaim/free race for headless pages
+  -- null deref (893 pairs)
+     [subj] block: fix NULL pointer dereferenced within __blk_rq_map_sg
+     [subj] statmount: Fix the null-ptr-deref in do_statmount()
+     [subj] SUNRPC: svcauth_gss: avoid NULL deref on zero length gss_token in gss_read_proxy_verf
+     [subj] aio: Fix null ptr deref in aio_complete() wakeup
+     [body] mac80211: mesh: embedd mesh_paths and mpp_paths into ieee80211_if_mesh
+     [subj] wifi: cfg80211: tests: Fix potential NULL dereference in test_cfg80211_parse_colocated_ap()
+     [subj] fib_trie: Address possible NULL pointer dereference in resize
+     [body] net: sock: fix access via invalid file descriptor
+     [subj] netfilter: Fix potential null pointer dereference
+     [body] cfg80211: fix debugfs rename crash
+     [body] tracing/eprobes: Have event probes be consistent with kprobes and uprobes
+     [subj] blktrace: fix dereference after null check
+  -- bounds/overflow (1022 pairs)
+     [subj] hugetlbfs: fix a truncation issue in hugepages parameter
+     [body] gfs2: reject invalid inode sizes
+     [subj] page cache: fix page_cache_next/prev_miss off by one
+     [subj] ipv6: sr: fix BUG due to headroom too small after SRH push
+     [subj] netfilter: nf_tables: possible module reference underflow in error path
+     [subj] squashfs: avoid out of bounds writes in decompressors
+     [subj] tracing/probes: Fix potential underflow in LEN_OR_ZERO macro
+     [subj] net/tls: fix slab-out-of-bounds bug in decrypt_internal
+     [subj] ext4: fix out of bounds punch offset
+     [subj] mm/hugetlb_cgroup: fix -Wformat-truncation warning
+     [subj] Bluetooth: mgmt: Fix slab-out-of-bounds in tlv_data_is_valid
+     [subj] net: flower: fix stack-out-of-bounds in fl_set_key_cfm()
+  -- uninitialized (486 pairs)
+     [subj] net: dsa: uninitialized variable in dsa_slave_netdevice_event()
+     [subj] netfs: Fix a KMSAN uninit-value error in netfs_clear_buffer
+     [body] tipc: check msg->req data len in tipc_nl_compat_bearer_disable
+     [subj] hsr: Fix uninit-value access in fill_frame_info()
+     [body] tracing: Do not initialize tracefs work if tracing is disabled
+     [body] net: mctp: Don't access ifa_index when missing
+     [subj] mpls: fix uninitialized in_label var warning in mpls_getroute
+     [subj] btrfs: scrub: fix uninitialized return value in recover_scrub_rbio
+     [body] mptcp: init mptcp request socket earlier
+     [subj] Bluetooth: fix uninitialized variables notify_evt
+     [subj] xattr: fix uninitialized out-param
+     [body] net: use skb_header_pointer() for TCPv4 GSO frag_off check
+  -- error handling (1346 pairs)
+     [subj] block: fix missing queue put in error path
+     [subj] net: genetlink: return the error code when attribute parsing fails.
+     [body] net-sysfs: fix netdev_queue_add_kobject() breakage
+     [body] io_uring: fix free of unallocated buffer list
+     [subj] bpf: Fix error path in htab_map_alloc()
+     [body] netfilter: nf_conntrack_expect: restore helper propagation via expectation
+     [subj] netfilter: nf_tables: nft_exthdr: the presence return value should be little-endian
+     [body] NFSv4: retry GETATTR if GET_DIR_DELEGATION failed
+     [subj] ceph: fix error handling in ceph_get_caps()
+     [subj] mm/page_alloc: correct return value of populated elements if bulk array is populated
+     [subj] af_unix: call proto_unregister() in the error path in af_unix_init()
+     [body] mm/numa: no task_numa_fault() call if PMD is changed
+  -- build/compile (1084 pairs)
+     [body] signal/posixtimers: Handle ignore/blocked sequences correctly
+     [body] tcp: add a missing sk_defer_free_flush() in tcp_splice_read()
+     [body] uaccess: Fix scoped_user_read_access() for 'pointer to const'
+     [subj] net: fix build error in devmap helper calls
+     [body] 8021q: make vlan_pcpu_stats visible without CONFIG_VLAN_8021Q
+     [subj] bpf: fix build error with clang
+     [body] libceph: don't omit used_replica in target_copy()
+     [body] netns: move {inc,dec}_net_namespaces into #ifdef
+     [subj] svcrdma: Remove unused variables in xprt_rdma_bc_allocate()
+     [subj] net: fix sparse warning in sk_dst_set()
+     [subj] bpf: Fix bpf_prog_pack build for ppc64_defconfig
+     [subj] tcp: fix build fong CONFIG_MPTCP=n

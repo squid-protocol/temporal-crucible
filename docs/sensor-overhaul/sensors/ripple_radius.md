@@ -310,3 +310,40 @@ Same 34,349 kernel pairs and 52 snapshots. Authors from `git log --format=%ae`; 
 - **Q5.** The radius (within 2 calls, same-file baseline) differs by fix mechanism: the largest class value is at least 1.3 times the smallest among classes with 300 or more pairs.
 - **Q6.** Larger causing changes (more functions touched) have a higher cross-file share of fixes (monotone over four size bands).
 **Would surprise:** one mechanism or one change type accounting for most of the radius (then "the pattern" is mostly one phenomenon), or no difference in radius by mechanism.
+
+### What kinds of changes: results (2026-11-17; `linux_change_kinds_output.txt`; the first run that also used the body-based calls is `..._with_body.txt`)
+**Method check.** Spot checks (12 random commits per class) showed the subject-based calls right about 85 to 90% of the time and the body-based calls (16% of pairs) right about a third of the time (stack-trace words), so the classes below use the **subject only**: 29% of the 24,474 pairs get a mechanism, 71% stay "other" (a coarse classifier: the classes describe a subset, not the whole). The causing-change type comes from the verb in its subject (an unreliable label for "use", "make", "set", folded into restructuring).
+
+**Fix mechanism** (subject-classified fixes: 7,037):
+| mechanism | pairs | median lag | same function | cross-file | within 2 calls (against same-file functions) |
+|---|---:|---:|---:|---:|---|
+| concurrency (race, deadlock, lock, RCU, atomics) | 2,447 | 296 d | 60% | 15% | 1.97 [1.85, 2.08] |
+| lifetime (use-after-free, leak, refcount, dangling) | 1,715 | **350 d** | 66% | **11%** | 1.93 [1.80, 2.09] |
+| error handling (error path, unwind, return value) | 852 | 187 d | 65% | **12%** | 2.07 [1.88, 2.32] |
+| bounds and overflow | 650 | **424 d** | 56% | 14% | 2.22 [1.96, 2.51] |
+| NULL dereference or missing check | 574 | 116 d | 60% | 14% | 2.18 [1.88, 2.51] |
+| build or compile problem | 499 | **31 d** | 60% | 13% | 2.25 [1.94, 2.59] |
+| uninitialised data | 300 | 94 d | 60% | 16% | 1.65 [1.39, 1.96] |
+| other (unclassified) | 17,437 | 241 d | 57% | 15% | 1.99 [1.94, 2.03] |
+
+**Causing-change type:**
+| type | pairs | median lag | same function | cross-file | within 2 calls |
+|---|---:|---:|---:|---:|---|
+| feature (add, introduce, support, implement, allow, enable) | 8,254 (34%) | 327 d | **47%** | **19%** | 1.85 [1.79, 1.91] |
+| restructuring (convert, move, rename, split, refactor, use, make, remove) | 5,165 (21%) | 180 d | 65% | 12% | 1.96 [1.89, 2.04] |
+| a fix (fix of a fix) | 4,037 (17%) | 189 d | **71%** | **10%** | **2.34 [2.23, 2.46]** (callers 3.35, callees 3.39) |
+| optimisation (avoid, reduce, improve, skip) | 880 (4%) | 197 d | 70% | 10% | 2.11 [1.91, 2.33] |
+| other | 6,138 (25%) | 228 d | 59% | 14% | 2.04 [1.97, 2.12] |
+
+**Size of the causing change** (within 2 calls: observed against expected, ratio): changed 9 or fewer lines 38% against 13%, **2.90**; 10 to 49 lines 47% against 18%, 2.64; 50 to 199 lines 56% against 26%, 2.18; 200 or more 53% against 37%, **1.45**. By functions touched: one function 32% against 11%, **2.98**; 10 or more 66% against 45%, **1.46**. Same-function share falls from 74% (9 or fewer lines) to 44% (200 or more); cross-file share is 22% for changes of 200 or more lines (12% to 13% below), and 24% for changes crossing three or more subsystems (11% for one).
+
+| hypothesis | verdict | evidence |
+|---|---|---|
+| Q1 lifetime, NULL/missing check and error handling are at least 40% of classified fixes | **supported by the letter** | 45%; but concurrency is the largest class (35% of classified), so the three are not the three biggest |
+| Q2 concurrency fixes have a median lag at least 1.5 times NULL-check fixes | **supported** | 296 d against 116 d (2.6 times); the longest are bounds (424 d) and lifetime (350 d), the shortest build (31 d), uninitialised (94 d) and NULL (116 d) |
+| Q3 restructuring changes have a higher cross-file share than features | **not supported (reverse)** | restructuring 12%, **features 19%** |
+| Q4 cross-file pairs are enriched (1.3 times) for lifetime and error-path fixes | **not supported (reverse)** | lifetime 0.75 times and error handling 0.81 times the overall 14.6%: these are *more local*; no mechanism reaches 1.3 times (uninitialised 1.09) |
+| Q5 the radius differs by mechanism (largest at least 1.3 times the smallest, classes of 300 or more) | **marginal** | 2.25 (build) against 1.65 (uninitialised) is 1.36 times, with overlapping intervals; apart from uninitialised all classes are 1.93 to 2.25: the pattern is not specific to one kind of fix |
+| Q6 more functions touched, higher cross-file share, monotone | **not supported for functions touched** | 16%, 16%, 15%, 10% (falling); true for **subsystems crossed** (11%, 15%, 24%); by lines the 200-line band jumps to 22% |
+**Reading.** (1) The radius is **not one phenomenon**: it appears for every kind of fix we could classify (1.65 to 2.25), and for every kind of causing change (1.85 to 2.34). (2) **How fast** a fix comes depends on what is wrong: build problems in a month, NULL and uninitialised-data fixes in three to four months, locking and lifetime bugs in ten to twelve, bounds errors in fourteen. (3) **Where** the fix lands depends on the change: features are followed by dispersed fixes (47% in the same function, 19% in another file, the longest lag), fixes of fixes and small surgical edits by tight ones (71% to 74% in the same function, radius 2.3 to 2.9). (4) Lifetime and error-path fixes are more local than average, against my prediction. (5) The ratio against the same-file baseline falls with the size of the causing change largely because the baseline rises (a large change has many functions with neighbours); in absolute terms the share of fixes within 2 calls rises from 32% to 66% as the functions touched rise from one to ten or more.
+**Caveats.** Keyword classes are coarse and describe 29% of fixes; the causing-change type rests on one verb; kernel conventions (descriptive subjects) may not generalise; "feature" commits also include refactors with an "add" verb; the size bands are correlated with subsystem and era; all comparisons are associations against a same-file baseline.

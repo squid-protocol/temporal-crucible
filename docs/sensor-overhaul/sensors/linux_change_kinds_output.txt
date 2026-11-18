@@ -1,0 +1,114 @@
+24474 measured pairs
+
+=== FIX MECHANISM (from the fix commit's subject, then the first 600 characters of its body) ===
+  class                 pairs  share   lag (median)   same function   cross-file   radius within 2 calls, callers and callees within 1 call (against same-file functions)
+  lifetime             1715   7.0%  lag   350 d   same function  66%   cross-file  11%   2 calls 1.93 [1.80,2.09] (53% vs 28%)   callers1 2.17 [1.85,2.53]   callees1 2.72 [2.42,3.07]
+  concurrency          2447  10.0%  lag   296 d   same function  60%   cross-file  15%   2 calls 1.97 [1.85,2.08] (54% vs 27%)   callers1 2.23 [1.98,2.52]   callees1 2.54 [2.33,2.77]
+  null deref            574   2.3%  lag   116 d   same function  60%   cross-file  14%   2 calls 2.18 [1.88,2.51] (54% vs 25%)   callers1 2.68 [1.91,3.71]   callees1 2.86 [2.25,3.62]
+  bounds/overflow       650   2.7%  lag   424 d   same function  56%   cross-file  14%   2 calls 2.22 [1.96,2.51] (56% vs 25%)   callers1 2.33 [1.72,3.01]   callees1 2.97 [2.49,3.64]
+  uninitialized         300   1.2%  lag    94 d   same function  60%   cross-file  16%   2 calls 1.65 [1.39,1.96] (45% vs 27%)   callers1 2.01 [1.21,3.06]   callees1 1.69 [1.20,2.45]
+  error handling        852   3.5%  lag   187 d   same function  65%   cross-file  12%   2 calls 2.07 [1.88,2.32] (58% vs 28%)   callers1 2.97 [2.34,3.74]   callees1 2.65 [2.20,3.16]
+  build/compile         499   2.0%  lag    31 d   same function  60%   cross-file  13%   2 calls 2.25 [1.94,2.59] (49% vs 22%)   callers1 2.22 [1.38,3.28]   callees1 3.00 [2.37,3.78]
+  other               17437  71.2%  lag   241 d   same function  57%   cross-file  15%   2 calls 1.99 [1.94,2.03] (51% vs 26%)   callers1 2.45 [2.35,2.56]   callees1 2.60 [2.52,2.70]
+  classified from the subject: 29%, from the body: 16%, unclassified (other): 55%
+  lifetime + NULL/missing check + error handling: 45% of classified fixes (Q1)
+
+=== CAUSING-CHANGE TYPE (verb after the subsystem prefix of the causing commit's subject) ===
+  feature              8254  33.7%  lag   327 d   same function  47%   cross-file  19%   2 calls 1.85 [1.79,1.91] (47% vs 25%)   callers1 2.16 [2.02,2.31]   callees1 2.36 [2.26,2.46]
+  restructure          5165  21.1%  lag   180 d   same function  65%   cross-file  12%   2 calls 1.96 [1.89,2.04] (54% vs 28%)   callers1 2.50 [2.28,2.73]   callees1 2.57 [2.40,2.75]
+  optimization          880   3.6%  lag   197 d   same function  70%   cross-file  10%   2 calls 2.11 [1.91,2.33] (59% vs 28%)   callers1 2.61 [2.06,3.21]   callees1 2.80 [2.38,3.30]
+  fix                  4037  16.5%  lag   189 d   same function  71%   cross-file  10%   2 calls 2.34 [2.23,2.46] (54% vs 23%)   callers1 3.35 [3.01,3.76]   callees1 3.39 [3.14,3.71]
+  other                6138  25.1%  lag   228 d   same function  59%   cross-file  14%   2 calls 2.04 [1.97,2.12] (56% vs 27%)   callers1 2.27 [2.07,2.50]   callees1 2.66 [2.51,2.82]
+  most common verbs: add 4477, fix 2231, use 1133, introduce 916, support 801, implement 740, allow 634, remove 514, make 499, convert 428, move 412, don't 388, do 316, avoid 265, handle 265, enable 206, refactor 191, check 188
+
+=== SIZE OF THE CAUSING CHANGE ===
+  by lines changed in .c/.h:
+  (-1.0, 9.0]          2153   8.8%  lag   163 d   same function  74%   cross-file  13%   2 calls 2.90 [2.65,3.18] (38% vs 13%)   callers1 4.71 [3.78,5.74]   callees1 3.63 [3.07,4.31]
+  (9.0, 49.0]          6964  28.5%  lag   209 d   same function  69%   cross-file  12%   2 calls 2.64 [2.52,2.76] (47% vs 18%)   callers1 3.67 [3.34,4.09]   callees1 3.65 [3.38,3.93]
+  (49.0, 199.0]        9604  39.2%  lag   237 d   same function  56%   cross-file  12%   2 calls 2.18 [2.12,2.24] (56% vs 26%)   callers1 2.59 [2.44,2.77]   callees1 3.12 [2.98,3.25]
+  (199.0, 1000000000.0]   5753  23.5%  lag   336 d   same function  44%   cross-file  22%   2 calls 1.45 [1.41,1.49] (53% vs 37%)   callers1 1.69 [1.58,1.80]   callees1 1.72 [1.64,1.81]
+  by functions touched:
+  (0.0, 1.0]           4558  18.6%  lag   190 d   same function  63%   cross-file  16%   2 calls 2.98 [2.76,3.20] (32% vs 11%)   callers1 4.51 [3.73,5.31]   callees1 4.03 [3.57,4.55]
+  (1.0, 3.0]           6362  26.0%  lag   231 d   same function  56%   cross-file  16%   2 calls 2.54 [2.42,2.64] (50% vs 20%)   callers1 2.99 [2.70,3.27]   callees1 3.70 [3.46,3.96]
+  (3.0, 9.0]           8709  35.6%  lag   261 d   same function  56%   cross-file  15%   2 calls 1.99 [1.93,2.04] (54% vs 27%)   callers1 2.44 [2.29,2.61]   callees1 2.71 [2.59,2.83]
+  (9.0, 1000000000.0]   4845  19.8%  lag   262 d   same function  62%   cross-file  10%   2 calls 1.46 [1.42,1.51] (66% vs 45%)   callers1 1.88 [1.76,2.00]   callees1 1.73 [1.65,1.82]
+  by subsystems crossed:
+  (-1.0, 1.0]         12978  53.0%  lag   226 d   same function  65%   cross-file  11%   2 calls 2.15 [2.09,2.21] (55% vs 26%)   callers1 2.69 [2.54,2.86]   callees1 2.90 [2.78,3.03]
+  (1.0, 2.0]           6609  27.0%  lag   252 d   same function  53%   cross-file  15%   2 calls 1.88 [1.82,1.95] (51% vs 27%)   callers1 2.21 [2.06,2.38]   callees1 2.43 [2.30,2.58]
+  (2.0, 1000000000.0]   4887  20.0%  lag   266 d   same function  48%   cross-file  24%   2 calls 1.81 [1.73,1.88] (45% vs 25%)   callers1 2.15 [1.98,2.36]   callees1 2.23 [2.10,2.40]
+
+=== CAUSING TYPE x FIX MECHANISM: lift (observed / expected if independent), pairs with 80 or more ===
+  fix           -> lifetime         lift 1.24 (n 350)
+  restructure   -> null deref       lift 1.19 (n 144)
+  fix           -> concurrency      lift 1.18 (n 477)
+  optimization  -> concurrency      lift 1.15 (n 101)
+  restructure   -> concurrency      lift 1.13 (n 585)
+  fix           -> bounds/overflow  lift 1.13 (n 121)
+  restructure   -> error handling   lift 1.06 (n 191)
+  other         -> error handling   lift 1.06 (n 226)
+  restructure   -> bounds/overflow  lift 0.78 (n 107)
+  feature       -> uninitialized    lift 0.81 (n 82)
+  feature       -> concurrency      lift 0.87 (n 721)
+  restructure   -> lifetime         lift 0.90 (n 327)
+  other         -> concurrency      lift 0.92 (n 563)
+
+=== CROSS-FILE SHARE BY FIX MECHANISM (Q4) against the overall share ===
+  lifetime          11.0% (0.75 x the overall 14.6%)
+  concurrency       14.5% (0.99 x the overall 14.6%)
+  null deref        14.1% (0.96 x the overall 14.6%)
+  bounds/overflow   14.3% (0.98 x the overall 14.6%)
+  uninitialized     16.0% (1.09 x the overall 14.6%)
+  error handling    11.9% (0.81 x the overall 14.6%)
+  build/compile     13.2% (0.90 x the overall 14.6%)
+  other             15.2% (1.04 x the overall 14.6%)
+
+=== SPOT CHECKS (random examples per class; the rule's call in brackets) ===
+  -- lifetime (1715 pairs)
+     [subj] lockd: Plug nlm_file refcount leak on cached nlm_do_fopen() failure
+     [subj] mm/mempolicy: fix use-after-free of VMA iterator
+     [subj] perf: Fix dangling cgroup pointer in cpuctx
+     [subj] nfs/localio: add refcounting for each iocb IO associated with NFS pgio header
+     [subj] mm/gup: limit pagecache folio refcount when grabbing references
+     [subj] sunrpc: fix use-after-free in __rpc_clnt_handle_event and __rpc_clnt_remove_pipedir
+  -- concurrency (2447 pairs)
+     [subj] mm/memory.c: properly pte_offset_map_lock/unlock in vm_insert_pages()
+     [subj] ocfs2/dlm: fix race between convert and migration
+     [subj] ocfs2: fix posix_acl_create deadlock
+     [subj] can: bcm: add locking when updating filter and timer values
+     [subj] nfs_common: must not hold RCU while calling nfsd_file_put_local
+     [subj] bpf: Tighten tail call checks for lingering locks, RCU, preempt_disable
+  -- null deref (574 pairs)
+     [subj] net: sched: null actions array pointer before releasing action
+     [subj] openvswitch: meter: fix NULL pointer dereference in ovs_meter_cmd_reply_start
+     [subj] net/sched: fix NULL dereference in the error path of tcf_csum_init()
+     [subj] fuse: fix NULL pointer dereference in fuse_request_find
+     [subj] mm: memcontrol: fix NULL-ptr deref in percpu stats flush
+     [subj] bpf: Fix NULL pointer dereference when registering bpf trampoline
+  -- bounds/overflow (650 pairs)
+     [subj] smb/client: fix out-of-bounds read in smb2_compound_op()
+     [subj] fsverity: explicitly check for buffer overflow in build_merkle_tree()
+     [subj] erofs: fix buffer copy overflow of ztailpacking feature
+     [subj] ksmbd: fix SMB2 CREATE response buffer overflow
+     [subj] sched/eevdf: Prevent vlag from going out of bounds in reweight_eevdf()
+     [subj] net/ncsi: fix heap OOB read in NCSI_CMD_SEND_CMD payload length
+  -- uninitialized (300 pairs)
+     [subj] tipc: Fix kernel-infoleak due to uninitialized TLV value
+     [subj] Bluetooth: fix passkey uninitialized when used
+     [subj] tcp: fix another uninit-value (sk_rx_queue_mapping)
+     [subj] fib_trie: Fix uninitialized variable warning
+     [subj] ext2: avoid bogus -Wmaybe-uninitialized warning
+     [subj] crypto: lib/mpi - Fix an "Uninitialized scalar variable" issue
+  -- error handling (852 pairs)
+     [subj] nfsd: propagate SETXATTR value decode errors
+     [subj] ipv4: Fix error return code in fib_table_insert()
+     [subj] kcm: fix strp_init() order and cleanup
+     [subj] tracing: Fix wakeup tracers on failure of acquiring calltime
+     [subj] mm: zswap: fix global shrinker error handling logic
+     [subj] block: fix device_add_disk() kobject_create_and_add() error handling
+  -- build/compile (499 pairs)
+     [subj] smb: client: fix busy dentry warning on unmount after DIO
+     [subj] mm/uffd: fix warning without PTE_MARKER_UFFD_WP compiled in
+     [subj] ocfs2: fix a static checker warning
+     [subj] netfilter: xt_hashlimit: fix build error caused by 64bit division
+     [subj] batman-adv: Fix "line over 80 characters" checkpatch warning
+     [subj] cpuset: fix warning when disabling remote partition
