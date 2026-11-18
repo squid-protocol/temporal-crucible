@@ -169,9 +169,20 @@ def measure_snapshot(args):
         row = {"pid": it["pid"], "status": "ok", "sig": sig, "nI": len(I), "nF": len(F), "nFo": len(Fo), "same_func": bool(len(np.intersect1d(F, I))), "same_file": bool(len(np.intersect1d(g.fid[F], g.fid[I]))), "cands": g.n - len(I)}
         if len(Fo):
             near = g.near(I)
+            rels = list(RELS)
+            if it.get("CO") is not None:  # co-change control: functions that changed together with the changed set before the causing commit
+                co = np.zeros(g.n, dtype=bool)
+                co[[g.index[k] for k in it["CO"] if k in g.index]] = True
+                co[I] = False
+                row["co_n"] = int(co.sum())
+                near["cochange"] = co
+                near["near2_nocochange"] = near["either2"] & ~co
+                near["cochange_notnear2"] = co & ~near["either2"]
+                row["o_both"] = float((near["either2"] & co)[Fo].any())
+                rels += ["cochange", "near2_nocochange", "cochange_notnear2"]
             im_key = np.bincount(g.key_fd[I], minlength=g.keyspace) if len(I) else None
             im_dec = np.bincount(g.dec[I], minlength=NDEC)
-            for rel in RELS:
+            for rel in rels:
                 m = near[rel]
                 row[f"o_{rel}"] = float(m[Fo].any())
                 nk = np.bincount(g.key_fd[m], minlength=g.keyspace)

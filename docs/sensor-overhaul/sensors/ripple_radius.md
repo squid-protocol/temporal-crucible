@@ -498,3 +498,20 @@ Count by the earlier rule: per repository 5 of 11 testable checks agree (DPDK 3 
 - **CC2.** History is a stronger signal than structure here: the ratio for (a) is at least 1.2 times the repair-radius ratio (either2) on DPDK. (Echoing the 'history predicts, structure describes' debate.)
 - **CC3.** The two signals overlap only partly: of fixed functions found within 2 calls, at most half are also in the co-change set; and (c) has a ratio above 1.3.
 **Would surprise:** (b) at or below 1.1 on DPDK: the call graph would then add nothing beyond change history, and "repair radius" would be a co-change effect.
+
+#### Co-change control: results (2026-11-18; `cochange_dpdk_output.txt`, `cochange_openssl_output.txt`; blast_radius.py gained an optional `CO` item field)
+DPDK, 6,963 pairs with a fixed function outside the changed set (5,042 whose changed functions have earlier co-change history; median co-change set 18 functions); OpenSSL 124 pairs (113 with history; median set 104).
+| measure (ratio against same-file functions of similar size) | DPDK | OpenSSL |
+|---|---|---|
+| repair radius, within 2 calls | 1.45 [1.41, 1.48] | 1.57 [1.30, 1.92] |
+| (a) fixed function in the co-change set | **0.76 [0.72, 0.80]** | **0.36 [0.20, 0.51]** |
+| (b) within 2 calls and NOT in the co-change set | **1.60 [1.55, 1.64]** | **1.91 [1.53, 2.45]** |
+| (c) in the co-change set and NOT within 2 calls | 0.67 [0.63, 0.72] | 0.28 [0.11, 0.46] |
+| both signals, share of the within-2-calls hits | 17% | 9% |
+| CC | verdict |
+|---|---|
+| CC1 (b) at least 1.3, lower bound above 1.15 | **supported**: 1.60 [1.55, 1.64] (OpenSSL 1.91); removing co-change partners raises the ratio, as they are not where the fixes are |
+| CC2 co-change ratio at least 1.2 times the graph ratio | **not supported, and reversed**: fixed functions are less often earlier co-change partners of the changed functions than same-file functions of similar size (0.76; OpenSSL 0.36) |
+| CC3 at most half the graph hits are also co-change hits; (c) above 1.3 | **half**: overlap 17% (supported); (c) 0.67 (not supported) |
+Surprise bar ((b) at or below 1.1): not met. The call graph carries the signal that history does not, in these two repositories.
+**Reading.** The repair radius is **not** co-change history under another name: the call-graph neighbourhood keeps (and strengthens) its ratio once co-change partners are excluded, and the two signals share only 17% of hits. **Caution on the reversed co-change result**: ratios below 1 mean the baseline (older, often-changed functions in the same file) are more often co-change partners than the fixed functions. One untested reason is function age: fixes land disproportionately in young functions with little prior history, which a co-change set built from earlier commits cannot contain. So this control shows that the graph is not a stand-in for co-change; it does **not** show that history is a poor predictor in general (a history signal that takes age into account is a separate test). OpenSSL has 124 pairs; the kernel was not run (a full-history function index of 1.3 million commits).

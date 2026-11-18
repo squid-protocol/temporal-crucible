@@ -1,0 +1,17 @@
+dpdk: 46419 non-merge commits; reading the functions each touched (one git pass, cached)
+12269 pairs to measure in 41 snapshots
+
+=== dpdk: 6963 pairs with a fixed function outside the changed set; 1921 have no earlier co-change history for the changed functions (median co-change set 18 functions) ===
+  all pairs (6963):
+    repair radius (within 2 calls)                    1.45 [1.41,1.48] (51% vs 35%, n 6500)
+    (a) in the co-change set                          0.76 [0.72,0.80] (16% vs 21%, n 6500)
+    (b) within 2 calls, NOT in the co-change set      1.60 [1.55,1.64] (45% vs 28%, n 6500)
+    (c) in the co-change set, NOT within 2 calls      0.67 [0.63,0.72] (9% vs 14%, n 6500)
+  pairs whose changed functions have co-change history (5042):
+    repair radius (within 2 calls)                    1.50 [1.46,1.54] (57% vs 38%, n 4717)
+    (a) in the co-change set                          0.76 [0.72,0.80] (22% vs 29%, n 4717)
+    (b) within 2 calls, NOT in the co-change set      1.73 [1.67,1.78] (49% vs 28%, n 4717)
+    (c) in the co-change set, NOT within 2 calls      0.67 [0.63,0.72] (13% vs 19%, n 4717)
+
+  of 3545 pairs with a fixed function within 2 calls, 17% also have one in the co-change set (both signals)
+  of 1135 pairs with a fixed function in the co-change set, 54% also have one within 2 calls

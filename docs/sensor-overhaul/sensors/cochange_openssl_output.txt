@@ -1,0 +1,19 @@
+openssl: 41545 non-merge commits; reading the functions each touched (one git pass, cached)
+warning: exhaustive rename detection was skipped due to too many files.
+warning: you may want to set your diff.renameLimit variable to at least 13906 and retry the command.
+210 pairs to measure in 42 snapshots
+
+=== openssl: 124 pairs with a fixed function outside the changed set; 11 have no earlier co-change history for the changed functions (median co-change set 104 functions) ===
+  all pairs (124):
+    repair radius (within 2 calls)                    1.57 [1.30,1.92] (54% vs 34%, n 113)
+    (a) in the co-change set                          0.36 [0.20,0.51] (11% vs 30%, n 113)
+    (b) within 2 calls, NOT in the co-change set      1.91 [1.53,2.45] (50% vs 26%, n 113)
+    (c) in the co-change set, NOT within 2 calls      0.28 [0.11,0.46] (6% vs 22%, n 113)
+  pairs whose changed functions have co-change history (113):
+    repair radius (within 2 calls)                    1.60 [1.33,1.94] (55% vs 35%, n 103)
+    (a) in the co-change set                          0.36 [0.18,0.53] (12% vs 32%, n 103)
+    (b) within 2 calls, NOT in the co-change set      1.99 [1.58,2.62] (50% vs 25%, n 103)
+    (c) in the co-change set, NOT within 2 calls      0.28 [0.10,0.50] (7% vs 24%, n 103)
+
+  of 64 pairs with a fixed function within 2 calls, 9% also have one in the co-change set (both signals)
+  of 12 pairs with a fixed function in the co-change set, 50% also have one within 2 calls
