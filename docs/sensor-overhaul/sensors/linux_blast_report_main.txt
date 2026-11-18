@@ -1,0 +1,15 @@
+24474 measured pairs; 14444 with a fixed function outside the changed set; same function in 58% of pairs; cross-file 3580
+
+=== all pairs ===
+  all                  n 14444: callers1  2.41 [2.31,2.53] (18% vs 7%, n 13827) | callees1  2.62 [2.53,2.70] (32% vs 12%, n 13827) | either1  2.44 [2.38,2.51] (44% vs 18%, n 13827) | either2  1.99 [1.96,2.03] (52% vs 26%, n 13827)
+
+=== cross ===
+  False                n 10864: callers1  2.33 [2.23,2.43] (21% vs 9%, n 10509) | callees1  2.66 [2.57,2.74] (40% vs 15%, n 10509) | either1  2.43 [2.37,2.49] (52% vs 22%, n 10509) | either2  1.98 [1.94,2.02] (61% vs 31%, n 10509)
+  True                 n  3580: callers1  3.52 [3.08,4.11] (8% vs 2%, n 3318) | callees1  2.10 [1.85,2.40] (9% vs 4%, n 3318) | either1  2.60 [2.36,2.83] (16% vs 6%, n 3318) | either2  2.08 [1.93,2.22] (24% vs 12%, n 3318)
+
+=== lagb ===
+  a year or more       n  6463: callers1  2.30 [2.17,2.44] (17% vs 8%, n 6159) | callees1  2.55 [2.43,2.66] (32% vs 12%, n 6159) | either1  2.37 [2.29,2.46] (43% vs 18%, n 6159) | either2  1.94 [1.89,2.00] (51% vs 26%, n 6159)
+  30 to 365 d          n  5676: callers1  2.51 [2.35,2.68] (19% vs 8%, n 5447) | callees1  2.64 [2.50,2.75] (32% vs 12%, n 5447) | either1  2.46 [2.35,2.56] (44% vs 18%, n 5447) | either2  1.99 [1.93,2.05] (52% vs 26%, n 5447)
+  under 30 d           n  2305: callers1  2.51 [2.25,2.82] (17% vs 7%, n 2221) | callees1  2.75 [2.56,2.96] (33% vs 12%, n 2221) | either1  2.62 [2.48,2.79] (45% vs 17%, n 2221) | either2  2.13 [2.04,2.24] (53% vs 25%, n 2221)
+
+(ratio against same-file functions of similar size, 95% interval over pairs; then observed % vs expected %)
