@@ -1,0 +1,37 @@
+openssl: 49 measured pairs with a cause under 100 lines (of 167)
+72 (pair, fixed function) records; parsing the edits
+
+########## openssl: 72 records; parsed 72 (100%); not parsed:  ##########
+  relation to the cause: same 41 (57%), caller 5 (7%), callee 5 (7%), two calls away 4 (6%), same file, farther 12 (17%), elsewhere 5 (7%)
+
+  edit type (row shares) by relation:
+                      adds a guar    rewrites adds cleanu adds statem replaces a  changes a c changes a d changes pre changes a r changes a c other (no s comments or
+  same                      56.1%       14.6%       14.6%        0.0%        0.0%        0.0%        4.9%        0.0%        2.4%        2.4%        2.4%        2.4%   n 41
+  caller                    40.0%       40.0%        0.0%        0.0%        0.0%       20.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%   n 5
+  callee                    40.0%        0.0%        0.0%       20.0%       20.0%       20.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%   n 5
+  two calls away            25.0%        0.0%        0.0%        0.0%       25.0%        0.0%        0.0%       50.0%        0.0%        0.0%        0.0%        0.0%   n 4
+  same file, farther        75.0%        0.0%        8.3%        8.3%        8.3%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%   n 12
+  elsewhere                 80.0%        0.0%        0.0%       20.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%        0.0%   n 5
+  ALL                       56.9%       11.1%        9.7%        4.2%        4.2%        2.8%        2.8%        2.8%        1.4%        1.4%        1.4%        1.4%
+
+  THE FORMER 'NO STATEMENT CHANGE' BUCKET: 4 edits (5.6% of parsed)
+    identical function (attribution)           0    0.0% of the bucket   0.0% of all parsed edits
+    changes signature or storage class         0    0.0% of the bucket   0.0% of all parsed edits
+    comments or whitespace only                1   25.0% of the bucket   1.4% of all parsed edits
+    changes preprocessor lines                 2   50.0% of the bucket   2.8% of all parsed edits
+    moves or re-nests statements               0    0.0% of the bucket   0.0% of all parsed edits
+    other (no statement change)                1   25.0% of the bucket   1.4% of all parsed edits
+  SP1 share of the bucket in a named piece 75% (needs 75%): supported
+  SP2 identical function (attribution) 0.0% of parsed edits (needs 10% or less): supported
+  SP3 two largest named pieces: ['changes preprocessor lines', 'comments or whitespace only'] (needs signature and moves): not supported
+  SP4 pieces among callee repairs (share of callee 'bucket' edits): identical function nan%, changes signature or storage class nan%, comments or whitespace only nan%, changes preprocessor lines nan%, moves or re-nests statements nan%, other nan%
+      share of all edits by relation, bucket as a whole: same 4.9%, caller 0.0%, callee 0.0%, two calls away 50.0%, same file, farther 0.0%, elsewhere 0.0%
+      changes signature or storage class     by relation: same 0.0%, caller 0.0%, callee 0.0%, two calls away 0.0%, same file, farther 0.0%, elsewhere 0.0%
+      changes preprocessor lines             by relation: same 0.0%, caller 0.0%, callee 0.0%, two calls away 50.0%, same file, farther 0.0%, elsewhere 0.0%
+      moves or re-nests statements           by relation: same 0.0%, caller 0.0%, callee 0.0%, two calls away 0.0%, same file, farther 0.0%, elsewhere 0.0%
+
+  ST1 edits that call a changed function: callers 20% (needs 40%), callees 0% (needs 15% or less): not supported
+  ST2 guard-or-condition share, callees / callers = 1.00 (needs 1.3): not supported
+  ST3 Cramer's V of edit type by relation = 0.476 (needs 0.10): supported
+  ST4 (re-scored post hoc, with the split pieces counted as typed; rewrites, other and identical functions untyped): 88% of parsed edits typed (needs 85%): supported
+  ST5 'an added if tests a changed function', callers 20.0% vs same function 0.0% = nan (needs 1.5): not supported

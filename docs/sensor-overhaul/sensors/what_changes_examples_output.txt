@@ -1,0 +1,36 @@
+
+=== mesa: repairs with NO call path to the cause that still share identifiers ===
+cause : anv: prep work for separate tessellation shaders
+repair: brw: handle GLSL/GLSL tessellation parameters  [src/intel/vulkan/genX_shader.c:emit_ds_shader, removes statements]
+shared: domain (field), tes_prog_data (variable)
+
+cause : nir: Add a range_base+range to nir_intrinsic_load_ubo().
+repair: vc4: Add missing range_base/range at nir_load_ubos in yuv_blit fs.  [src/gallium/drivers/vc4/vc4_blit.c:vc4_get_yuv_fs, adds statements]
+shared: nir_intrinsic_set_range (callee), nir_intrinsic_set_range_base (callee)
+
+cause : kmsro: Fix renderonly_scanout BO aliasing
+repair: winsys/panfrost: Fix a scanout resource leak  [src/gallium/winsys/panfrost/drm/panfrost_drm_winsys.c:panfrost_create_kms_dumb_buffer_for_resource, adds locking]
+shared: CALLOC_STRUCT (callee), bo_map (field), bo_map_lock (field), create_dumb (variable), free_dumb (variable), free_scanout (variable)
+
+cause : nvk: Don't advertise sparse residency on Maxwell A
+repair: nvk: Reject sparse images on Maxwell A and earlier  [src/nouveau/vulkan/nvk_image.c:nvk_GetPhysicalDeviceImageFormatProperties2, adds a guard]
+shared: MAXWELL_B (macro), cls_eng3d (field)
+
+
+=== dpdk: repairs with NO call path to the cause that still share identifiers ===
+cause : ethdev: add Rx error counters for missed, badcrc and badlen packets
+repair: ethdev: remove missed packets from error counter  [drivers/net/e1000/em_ethdev.c:eth_em_stats_get, rewrites]
+shared: algnerrc (field), cexterr (field), crcerrs (field), ierrors (field), imissed (field), rlec (field)
+
+cause : net/bnxt: support Tx descriptor status
+repair: net/bnxt: fix Tx descriptor status implementation  [drivers/net/bnxt/bnxt_ethdev.c:bnxt_tx_descriptor_status_op, adds a guard]
+shared: CMPL_VALID (callee), RING_CMP (callee), RTE_ETH_TX_DESC_DONE (macro), RTE_ETH_TX_DESC_UNAVAIL (macro), bnxt_cp_ring_info (type), bnxt_cp_ring_info (variable)
+
+cause : net/mlx5: fix multicast
+repair: net/mlx5/windows: fix MAC address ownership tracking  [drivers/net/mlx5/windows/mlx5_os.c:mlx5_os_mac_addr_flush, replaces a callee]
+shared: BITFIELD_ISSET (callee), mac_own (field)
+
+cause : net/ixgbe: support committing TM hierarchy
+repair: net/ixgbe: fix not supporting NULL TM profile  [drivers/net/ixgbe/ixgbe_tm.c:ixgbe_hierarchy_commit, adds a guard]
+shared: peak (field), profile (field), rate (field), root (field), shaper_profile (field), tm_conf (variable)
+

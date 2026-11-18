@@ -26,6 +26,28 @@ STMT = {"if_statement", "while_statement", "for_statement", "do_statement", "swi
 _P = None
 
 
+KEYWORDS = set("auto break case char const continue default do double else enum extern float for goto if inline int long register restrict return short signed sizeof static struct switch typedef union unsigned void volatile while bool true false uint8_t uint16_t uint32_t uint64_t int8_t int16_t int32_t int64_t size_t ssize_t u8 u16 u32 u64 s8 s16 s32 s64".split())
+TOKEN = re.compile(r"(->|\.)?\s*([A-Za-z_]\w*)\s*(\()?")
+STRING = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'')
+TYPE = re.compile(r"\b(?:struct|enum|union)\s+([A-Za-z_]\w*)")
+
+
+def idents(texts):
+    """{(name, class)} for the identifiers of statement texts: callee, field, macro, type, variable."""
+    out = set()
+    for t in texts:
+        t = STRING.sub(" ", t)
+        for m in TYPE.finditer(t):
+            out.add((m.group(1), "type"))
+        for m in TOKEN.finditer(t):
+            name = m.group(2)
+            if name in KEYWORDS or len(name) < 3:
+                continue
+            cls = "field" if m.group(1) else "callee" if m.group(3) else "macro" if name.upper() == name and any(c.isalpha() for c in name) else "variable"
+            out.add((name, cls))
+    return out
+
+
 def norm(b):
     return re.sub(r"\s+", " ", b.decode("utf8", "replace")).strip()
 
@@ -158,7 +180,8 @@ def classify(old, new, changed_names):
         label = "removes statements"
     else:
         label = "rewrites"
-    return label, touches, ret_handling, na, nr
+    ids = idents([k[1] for k in list(added) + list(removed)] + [k[0] + "(" + k[1] for k in list(ac) + list(rc)])
+    return label, touches, ret_handling, na, nr, ids
 
 
 def blob(repo, rev, path, cache):
@@ -186,8 +209,8 @@ def edit_worker(job):
             if r["func"] not in fn_new or r["func"] not in fn_old:
                 out.append({**r, "status": "function not found"})
                 continue
-            label, touches, rh, na, nr = classify(summarize(fn_old[r["func"]], src_old), summarize(fn_new[r["func"]], src_new), set(r["changed_names"]))
-            out.append({**r, "status": "ok", "label": label, "touches": touches, "ret_handling": rh, "na": na, "nr": nr})
+            label, touches, rh, na, nr, ids = classify(summarize(fn_old[r["func"]], src_old), summarize(fn_new[r["func"]], src_new), set(r["changed_names"]))
+            out.append({**r, "status": "ok", "label": label, "touches": touches, "ret_handling": rh, "na": na, "nr": nr, "idents": sorted(ids)})
     return out
 
 

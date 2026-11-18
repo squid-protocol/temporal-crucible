@@ -1,0 +1,79 @@
+
+########## mesa: 6530 records (4220 pairs, causes under 100 lines, verified functions) ##########
+  share of repairs with a shared identifier against the shuffled baseline, by relation to the cause:
+    same                  82.0% vs  1.1%  ratio 74.39 [68.58,81.25] (n 3186)
+    caller                53.5% vs  0.8%  ratio 65.71 [49.84,94.24] (n 301)
+    callee                73.1% vs  1.2%  ratio 63.31 [52.19,80.45] (n 550)
+    two calls away        54.8% vs  0.7%  ratio 74.19 [51.45,119.52] (n 210)
+    same file, farther    60.5% vs  1.1%  ratio 54.52 [46.31,66.86] (n 658)
+    elsewhere             38.6% vs  1.0%  ratio 40.13 [34.33,46.31] (n 1625)
+  shared identifiers by class (share of shared tokens), by relation:
+    same                 n  9110  callee 17.2%  field 30.2%  macro 14.0%  variable 37.1%  type  1.5%
+    caller               n   370  callee 20.8%  field 31.9%  macro 16.5%  variable 28.1%  type  2.7%
+    callee               n  1351  callee 19.9%  field 26.6%  macro 11.3%  variable 39.5%  type  2.7%
+    two calls away       n   286  callee 17.8%  field 35.0%  macro 13.3%  variable 31.1%  type  2.8%
+    same file, farther   n  1128  callee 16.4%  field 37.8%  macro 14.7%  variable 28.7%  type  2.4%
+    elsewhere            n  1327  callee 13.5%  field 46.6%  macro 13.9%  variable 22.5%  type  3.4%
+
+########## dpdk: 5283 records (2748 pairs, causes under 100 lines, verified functions) ##########
+  share of repairs with a shared identifier against the shuffled baseline, by relation to the cause:
+    same                  77.4% vs  0.9%  ratio 82.22 [74.37,91.79] (n 2491)
+    caller                49.1% vs  1.0%  ratio 50.55 [37.59,72.12] (n 283)
+    callee                67.8% vs  1.2%  ratio 55.14 [46.85,66.52] (n 569)
+    two calls away        47.4% vs  0.8%  ratio 60.00 [41.36,97.33] (n 152)
+    same file, farther    57.1% vs  0.9%  ratio 63.58 [52.58,79.60] (n 685)
+    elsewhere             40.2% vs  0.8%  ratio 51.81 [43.85,62.27] (n 1103)
+  shared identifiers by class (share of shared tokens), by relation:
+    same                 n  6333  callee 16.8%  field 25.3%  macro 18.1%  variable 37.5%  type  2.4%
+    caller               n   356  callee 32.9%  field 20.2%  macro 10.1%  variable 32.9%  type  3.9%
+    callee               n  1316  callee 18.2%  field 23.6%  macro 16.3%  variable 37.8%  type  4.1%
+    two calls away       n   180  callee 23.9%  field 36.1%  macro 13.9%  variable 21.7%  type  4.4%
+    same file, farther   n   958  callee 15.4%  field 27.1%  macro 16.5%  variable 36.2%  type  4.7%
+    elsewhere            n   967  callee 16.8%  field 30.3%  macro 17.7%  variable 33.8%  type  1.4%
+
+########## openssl: 72 records (49 pairs, causes under 100 lines, verified functions) ##########
+  share of repairs with a shared identifier against the shuffled baseline, by relation to the cause:
+    same                 n/a
+    caller               n/a
+    callee               n/a
+    two calls away       n/a
+    same file, farther   n/a
+    elsewhere            n/a
+  shared identifiers by class (share of shared tokens), by relation:
+
+########## pooled: 11885 records (6272 pairs, causes under 100 lines, verified functions) ##########
+  share of repairs with a shared identifier against the shuffled baseline, by relation to the cause:
+    same                  79.4% vs  1.0%  ratio 77.52 [73.04,83.19] (n 5718)
+    caller                50.9% vs  0.9%  ratio 57.69 [47.66,73.46] (n 589)
+    callee                70.1% vs  1.2%  ratio 59.03 [51.71,67.49] (n 1124)
+    two calls away        51.1% vs  0.8%  ratio 68.00 [52.20,97.47] (n 366)
+    same file, farther    58.2% vs  1.0%  ratio 58.66 [51.19,67.81] (n 1355)
+    elsewhere             39.2% vs  0.9%  ratio 44.26 [39.89,49.90] (n 2733)
+  shared identifiers by class (share of shared tokens), by relation:
+    same                 n 15443  callee 17.0%  field 28.2%  macro 15.6%  variable 37.2%  type  1.9%
+    caller               n   726  callee 26.7%  field 26.2%  macro 13.4%  variable 30.4%  type  3.3%
+    callee               n  2667  callee 19.0%  field 25.1%  macro 13.8%  variable 38.7%  type  3.4%
+    two calls away       n   466  callee 20.2%  field 35.4%  macro 13.5%  variable 27.5%  type  3.4%
+    same file, farther   n  2086  callee 16.0%  field 32.9%  macro 15.5%  variable 32.2%  type  3.5%
+    elsewhere            n  2294  callee 14.9%  field 39.8%  macro 15.5%  variable 27.3%  type  2.6%
+
+=== VERDICTS ===
+  WC1 pooled ratio against the baseline, per relation: same 77.52, caller 57.69, callee 59.03, two calls away 68.00, same file, farther 58.66, elsewhere 44.26 (needs 2 in each): supported
+  WC2 mesa: same 82%, caller/callee 63%, same file farther 60%, elsewhere 39%: ordered
+  WC2 dpdk: same 77%, caller/callee 58%, same file farther 57%, elsewhere 40%: ordered
+  WC2 openssl: not testable
+  WC2 ordered in 2 of 3 repositories (needs 3 of 4): not supported
+  WC3 data share (field, macro, variable, type) among shared identifiers outside the same function and the callers: 83% (needs 60%): supported
+  WC4 'elsewhere' shared identifiers that are fields or macros: 55% (needs 50%): supported
+  surprise bar: 'elsewhere' observed within 1.3 times the baseline: not met (ratio 44.26)
+
+  by edit type (pooled): share of repairs with a shared identifier, against the baseline:
+    adds statements                     54.7% vs  0.7%  ratio 80.50 [69.95,93.55] (n 2052)
+    adds a guard                        69.1% vs  1.1%  ratio 62.79 [56.29,69.78] (n 1923)
+    changes a call's arguments          69.0% vs  1.3%  ratio 51.58 [46.25,57.44] (n 1819)
+    rewrites                            75.2% vs  1.5%  ratio 50.64 [45.30,57.63] (n 1373)
+    changes a condition                 80.9% vs  1.1%  ratio 71.20 [63.12,82.10] (n 1210)
+    removes statements                  67.8% vs  0.6%  ratio 113.01 [90.79,140.96] (n 858)
+    replaces a callee                   72.9% vs  1.1%  ratio 66.56 [56.28,83.44] (n 557)
+    changes a declared type             72.1% vs  1.0%  ratio 74.72 [58.39,97.87] (n 549)
+    adds cleanup                        62.4% vs  0.6%  ratio 105.62 [83.44,144.85] (n 542)
