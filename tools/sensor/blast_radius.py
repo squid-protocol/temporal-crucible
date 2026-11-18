@@ -68,6 +68,28 @@ def touched_all(repo, shas, lang, cache_file):
     return {s: [tuple(x) for x in cache[s]] for s in dict.fromkeys(shas)}
 
 
+def authors_all(repo, shas, cache_file):
+    """sha -> author e-mail (lower case), one `git log --no-walk --stdin` pass, cached."""
+    cache = pickle.load(open(cache_file, "rb")) if Path(cache_file).exists() else {}
+    need = [s for s in dict.fromkeys(shas) if s not in cache]
+    if need:
+        res = subprocess.run(["git", "-C", f"{POOL}/{repo}", "log", "--no-walk=unsorted", "--stdin", "--format=%H %ae"], input="\n".join(need) + "\n", capture_output=True, text=True, errors="replace").stdout
+        for line in res.splitlines():
+            h, _, e = line.partition(" ")
+            cache[h] = e.strip().lower()
+        pickle.dump(cache, open(cache_file, "wb"))
+    return cache
+
+
+def args_by_key(db):
+    """(path, function) -> parameter count, last row wins (as the earlier scripts)."""
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    files = {r[0]: r[1] for r in con.execute("SELECT id, file_path FROM file_data")}
+    out = {(files[ff], nm): int(a or 0) for ff, nm, a in con.execute("SELECT file_id, func_name, args FROM function_data") if ff in files}
+    con.close()
+    return out
+
+
 # ------------------------------------------------------------------ stage 2: compact graphs
 class Graph:
     """One snapshot's call graph as arrays: nodes keyed (path, function), confident resolved call edges, size deciles, file ids."""
@@ -75,12 +97,13 @@ class Graph:
     def __init__(self, db):
         con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
         files = {r[0]: r[1] for r in con.execute("SELECT id, file_path FROM file_data")}
-        key_of, loc = {}, {}
-        for fid, ff, nm, lo in con.execute("SELECT id, file_id, func_name, loc FROM function_data"):
+        key_of, loc, argc = {}, {}, {}
+        for fid, ff, nm, lo, ar in con.execute("SELECT id, file_id, func_name, loc, args FROM function_data"):
             if ff in files:
                 k = (files[ff], nm)
                 key_of[fid] = k
                 loc[k] = max(loc.get(k, 0), int(lo or 0))
+                argc[k] = int(ar or 0)
         keys = sorted(loc)
         self.index = {k: i for i, k in enumerate(keys)}
         n = len(keys)
@@ -92,6 +115,7 @@ class Graph:
         con.close()
         self.n = n
         self.loc = np.array([loc[k] for k in keys], dtype=np.int64)
+        self.args = np.array([argc[k] for k in keys], dtype=np.int64)
         cuts = np.percentile(self.loc, np.arange(10, 100, 10)) if n else np.array([])
         self.dec = np.searchsorted(cuts, self.loc).astype(np.int64)
         fpaths = sorted({k[0] for k in keys})
@@ -128,8 +152,9 @@ class Graph:
 
 # ------------------------------------------------------------------ per-snapshot worker
 def measure_snapshot(args):
-    db, items = args
+    db, prev_db, items = args
     g = Graph(db)
+    prev = args_by_key(prev_db) if prev_db else None
     rows = []
     for it in items:
         I = np.array(sorted({g.index[k] for k in it["I"] if k in g.index}), dtype=np.int64)
@@ -138,7 +163,10 @@ def measure_snapshot(args):
             rows.append({"pid": it["pid"], "status": "not found in the snapshot"})
             continue
         Fo = np.setdiff1d(F, I)
-        row = {"pid": it["pid"], "status": "ok", "nI": len(I), "nF": len(F), "nFo": len(Fo), "same_func": bool(len(np.intersect1d(F, I))), "same_file": bool(len(np.intersect1d(g.fid[F], g.fid[I]))), "cands": g.n - len(I)}
+        sig = None
+        if prev is not None:
+            sig = any((k in prev) and prev[k] != int(g.args[g.index[k]]) for k in it["I"] if k in g.index)  # a changed function whose parameter count differs from the previous snapshot's
+        row = {"pid": it["pid"], "status": "ok", "sig": sig, "nI": len(I), "nF": len(F), "nFo": len(Fo), "same_func": bool(len(np.intersect1d(F, I))), "same_file": bool(len(np.intersect1d(g.fid[F], g.fid[I]))), "cands": g.n - len(I)}
         if len(Fo):
             near = g.near(I)
             im_key = np.bincount(g.key_fd[I], minlength=g.keyspace) if len(I) else None
@@ -176,6 +204,7 @@ def run(args):
     np.save(out / "snapshot_cts.npy", cts)
     shas = [p[k] for p in pairs for k in ("fix", "ind")]
     touched = touched_all(repo, shas, args.lang, out / "touched.pkl")
+    authors = authors_all(repo, shas, out / "authors.pkl")
     by_snap = collections.defaultdict(list)
     meta, dropped = [], collections.Counter()
     for pid, p in enumerate(pairs):
@@ -189,9 +218,9 @@ def run(args):
             dropped["sweep (too many functions)"] += 1
         else:
             by_snap[s].append({"pid": pid, "I": I, "F": F})
-            meta.append({"pid": pid, "snapshot": s, "lag": p["lag"], "fix": p["fix"], "ind": p["ind"], "repo": p.get("repo", repo), "fix_files": p.get("fix_files"), "ind_files": p.get("ind_files")})
+            meta.append({"pid": pid, "snapshot": s, "lag": p["lag"], "fix": p["fix"], "ind": p["ind"], "repo": p.get("repo", repo), "fix_files": p.get("fix_files"), "ind_files": p.get("ind_files"), "same_author": authors.get(p["fix"]) == authors.get(p["ind"]) and authors.get(p["fix"]) is not None})
     print(f"{repo}: {len(pairs)} pairs; to measure {len(meta)} in {len(by_snap)} snapshots; dropped {dict(dropped)}", flush=True)
-    jobs = [(sn[s]["db"], items) for s, items in sorted(by_snap.items())]
+    jobs = [(sn[s]["db"], sn[s - 1]["db"] if s >= 1 else None, items) for s, items in sorted(by_snap.items())]
     rows = []
     with ProcessPoolExecutor(max_workers=args.workers) as ex:
         for i, r in enumerate(ex.map(measure_snapshot, jobs)):
@@ -244,7 +273,8 @@ def report(args):
             if len(d) < args.min_n:
                 continue
             line = " | ".join(f"{rel} {fmt(ratio(d, rel, 'eB', rng))}" for rel in args.rels)
-            print(f"  {name:20s} n {len(d):5d}: {line}")
+            allg = df if col is None else df[df[col].astype(str) == name]
+            print(f"  {name:20s} n {len(d):5d} (all {len(allg):5d}, same function {100 * allg.same_func.mean():3.0f}%): {line}")
     print("\n(ratio against same-file functions of similar size, 95% interval over pairs; then observed % vs expected %)")
 
 
