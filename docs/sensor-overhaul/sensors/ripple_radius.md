@@ -924,3 +924,35 @@ Surprise bar (full model adds under 0.01 over S+P+N in both): not met.
 - **EX5.** Changes that add synchronisation (lock, atomic, RCU, barriers) and remove none have a rate ratio of at least 1.3.
 - **Exploratory scan (no prediction):** the rate ratio of each of the 30 add and remove line kinds (present or not) in both repositories; those pointing the same way in both with intervals excluding 1 are listed. Thirty patterns in two repositories invite chance findings, so only agreement across both counts.
 **Would surprise:** a cross-repository AUC below size alone in either direction (then the kind-of-change lift was fitting to one project).
+
+#### Transfer between repositories, and the pattern of additions and deletions: results (2026-11-18; `needs_fix_patterns_output.txt`)
+**Part A, transfer (trained on the whole of one repository, tested on the whole of the other).**
+| | size alone | size, process, neighbourhood | + diff-line kinds | + shape and verb (full) | top-decile share, full (S+P+N) |
+|---|---|---|---|---|---|
+| DPDK -> Mesa (test base rate 6.2%) | 0.710 | 0.714 | 0.732 | **0.739** | 34.6% (30.3%) |
+| Mesa -> DPDK (base rate 16.7%) | 0.772 | 0.779 | 0.791 | **0.791** | 31.1% (29.3%) |
+Gradient boosting the same within 0.01 (0.732 and 0.790 for the full model). Standardised coefficients of the diff-line and shape features: Spearman correlation between the two repositories 0.57, the same sign for 30 of 46 features; **added conditions is the largest coefficient in both (+0.40 DPDK, +0.26 Mesa)**; "comment only" shape strongly negative in both (-0.13, -0.23), "adds code" shape positive (+0.14, +0.13), "replaces a call or argument" negative (-0.08, -0.09).
+**Part B, additions and deletions (Mantel-Haenszel rate ratio within size deciles; DPDK / Mesa).**
+| pattern | rate ratio |
+|---|---|
+| **pure addition** (nothing removed) | 1.13 [1.06, 1.19] / **1.44** [1.34, 1.56] |
+| **pure deletion** (nothing added) | **0.27** [0.14, 0.42] / **0.32** [0.22, 0.42] |
+| mixed (both added and removed) | 0.94 / 0.80 |
+| adds an allocation, no release added | 1.14 / 1.26 (against allocation with release: 0.94 / 0.86) |
+| adds calls with no condition, null check, error handling or return | **0.66** / **0.66** (against added calls with a check: 0.57 / 0.60) |
+| removes conditions, adds none | **0.37** / **0.58** |
+| adds synchronisation, removes none | 1.24 [0.79, 1.66] (n 37) / 1.42 [0.78, 2.22] (n 53): too rare to say |
+**Exploratory scan (same direction in both repositories, interval excludes 1; DPDK / Mesa).** Every kind of **added** line is more often in changes named as causes than the same-size changes without it: **added conditions 2.03 / 1.81** (the largest), added null checks 1.48 / 1.59, added error handling 1.40 / 1.64, added initialisation 1.45 / 1.59, added returns 1.49 / 1.44, added comments 1.46 / 1.60, added releases 1.30 / 1.54, added allocations 1.29 / 1.47, added calls 1.51 / 1.31, added build lines 1.45 / 1.34, added type conversions 1.33 / 1.32, added bounds 1.28 / 1.29. Every kind of **removed** line is at or below 1: removed build lines 0.86 / 0.68, removed type conversions 0.88 / 0.72, removed calls 0.91 / 0.70, removed comments 0.89 / 0.79, removed returns 0.90 / 0.82, removed bounds 0.90 / 0.83; removed null checks, locks, releases, errors, initialisations, allocations and conditions about 1.0 (0.85 to 1.16). The synchronisation line kinds are too rare in these two projects to measure (fewer than 200 changes).
+| hypothesis | verdict |
+|---|---|
+| TR1 the full model beats size, process and neighbourhood by 0.01 in both directions | **supported**: +0.024, +0.013 (and above size alone in both: 0.739 against 0.710, 0.791 against 0.772) |
+| TR2 added conditions positive in both fits; coefficients correlate at 0.4 | **supported**: +0.40 and +0.26; Spearman 0.57 |
+| EX1 pure additions at least 1.2 and pure deletions at most 0.8 | **half**: deletions 0.27 and 0.32 (supported by a wide margin); additions 1.13 (DPDK, short) and 1.44 (Mesa) |
+| EX2 allocation without release at least 1.3 against allocation with | **not supported, reversed**: 0.94, 0.86 |
+| EX3 added calls without a check at least 1.2 against added calls with one | **not supported, reversed**: 0.57, 0.60 (added calls without a check are *less* often the cause) |
+| EX4 removing conditions without adding any at least 1.3 | **not supported, reversed**: 0.37, 0.58 |
+| EX5 adding synchronisation without removing at least 1.3 | **not supported / not testable**: n 37 and 53, intervals span 1 |
+Surprise bar (cross-repository AUC below size alone): not met.
+**Reading.** (1) **The kind-of-change signal transfers**: a model fitted on one project adds 0.013 to 0.024 AUC over size, process and neighbourhood on the other, and the strongest feature (added conditions) is the same in both. So it is not fitting one project. (2) **What marks a change as one that will need a fix is added logic, and deleted code almost never does**: changes that only delete are named as causes about 0.3 times as often as same-size changes, changes that remove conditions without adding any 0.4 to 0.6 times as often; every kind of added line is above 1 (1.3 to 2.0, added conditions the most) and added calls without any accompanying check (0.66) are below the average. The prediction that unbalanced additions (an allocation with no release, calls with no check) would carry the risk was wrong in direction: the risk is in the **amount of added logic**, branches and checks above all, not in what is missing. (3) This fits the earlier finding that a cause which touched a check is followed by a repair that adds or changes a guard: added branches are where the later fixes go.
+**A weakness of the label that bears directly on this.** A fix names the commit that **introduced** the faulty lines, which is easiest to identify for added code (the lines can be blamed); a bug caused by deleting something is traceable but is cited less naturally. So the 0.3 rate ratio of pure deletions, and the lift of every kind of added line, are partly a feature of how causes get named and cannot be read as "deleting is safe". The within-size design removes size, not this asymmetry.
+**Caveats.** Two repositories only; the line kinds are regular expressions tuned to the kernel's idioms (lock, get and put patterns match little in DPDK and Mesa); 30 patterns scanned in two repositories (only agreement across both is listed); association; the lift over size, 0.013 to 0.024 AUC, is small in practical terms.
