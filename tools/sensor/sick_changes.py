@@ -18,7 +18,7 @@ import blast_radius as BR  # noqa: E402
 import fix_shapes as FS  # noqa: E402
 
 BASE = "/tmp/gitgalaxy-scratch/claude"
-DATA = {"kernel": ("linux", f"{BASE}/argl/links_linux_all.json"), "dpdk": ("dpdk", f"{BASE}/argl/links_dpdk.json")}
+DATA = {"kernel": ("linux", f"{BASE}/argl/links_linux_all.json"), "dpdk": ("dpdk", f"{BASE}/argl/links_dpdk.json"), "mesa": ("mesa", f"{BASE}/argl/links_mesa.json")}
 SMALL = {"adds a guard", "rewrites a condition", "replaces a call or argument", "small edit"}
 rng = np.random.default_rng(2982)
 SUF = os.environ.get("BLAST_SUFFIX", "")  # "_v" reads the verified-function measurements

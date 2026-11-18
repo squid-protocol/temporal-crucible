@@ -1,0 +1,17 @@
+mesa: 233419 non-merge commits; reading the functions each touched (one git pass, cached)
+8028 pairs to measure in 41 snapshots
+
+=== mesa: 3799 pairs with a fixed function outside the changed set; 279 have no earlier co-change history for the changed functions (median co-change set 69 functions) ===
+  all pairs (3799):
+    repair radius (within 2 calls)                    1.78 [1.71,1.85] (46% vs 26%, n 3549)
+    (a) in the co-change set                          1.04 [1.00,1.09] (30% vs 28%, n 3549)
+    (b) within 2 calls, NOT in the co-change set      2.18 [2.08,2.31] (37% vs 17%, n 3549)
+    (c) in the co-change set, NOT within 2 calls      1.01 [0.95,1.07] (20% vs 20%, n 3549)
+  pairs whose changed functions have co-change history (3520):
+    repair radius (within 2 calls)                    1.77 [1.70,1.84] (46% vs 26%, n 3296)
+    (a) in the co-change set                          1.04 [1.00,1.09] (32% vs 31%, n 3296)
+    (b) within 2 calls, NOT in the co-change set      2.22 [2.11,2.34] (36% vs 16%, n 3296)
+    (c) in the co-change set, NOT within 2 calls      1.01 [0.94,1.08] (22% vs 21%, n 3296)
+
+  of 1763 pairs with a fixed function within 2 calls, 25% also have one in the co-change set (both signals)
+  of 1131 pairs with a fixed function in the co-change set, 39% also have one within 2 calls

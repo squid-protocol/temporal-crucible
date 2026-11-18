@@ -15,7 +15,7 @@ import blast_radius as BR  # noqa: E402
 
 BASE = "/tmp/gitgalaxy-scratch/claude"
 SUF = os.environ.get("BLAST_SUFFIX", "")  # "_v" reads the verified-function measurements
-DATA = {"kernel": (f"{BASE}/blast/linux{SUF}", f"{BASE}/argl/links_linux_all.json"), "dpdk": (f"{BASE}/blast/dpdk{SUF}", f"{BASE}/argl/links_dpdk.json")}
+DATA = {"kernel": (f"{BASE}/blast/linux{SUF}", f"{BASE}/argl/links_linux_all.json"), "dpdk": (f"{BASE}/blast/dpdk{SUF}", f"{BASE}/argl/links_dpdk.json"), "mesa": (f"{BASE}/blast/mesa{SUF}", f"{BASE}/argl/links_mesa.json")}
 rng = np.random.default_rng(2982)
 YEAR = 365.25
 

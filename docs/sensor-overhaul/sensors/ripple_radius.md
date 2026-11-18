@@ -740,3 +740,35 @@ Third large repository: 13,180 `Fixes:` pairs of which about 9,700 have C/H on b
 - **MR8.** Faster repairs are no tighter: the radius for fixes under 30 days is less than 1.15 times that for fixes over a year (as in the kernel and DPDK); *with Mesa's short lags I give this one a coin flip.*
 - **MR9.** Call-site adaptation: among caller repairs, "changes a call's arguments" at least 1.3 times as often as among same-function repairs; an added `if` testing a changed function at least 3 times as often.
 **Would surprise:** radius below 1.2: the pattern would then be specific to repositories with long repair lags.
+
+#### Mesa replication: results (2026-11-18; `*_mesa_output.txt`, `verified_compare_mesa_output.txt`, `verify_*`; C only, `src` and `include`, 41 quarterly scans in 27 minutes)
+9,526 usable pairs; verification found 11.4% of function entries not edited (kernel 13.0%, DPDK 13.2%); 7,410 measured unverified, **7,021 verified** (5.2% lost), 3,799 with a fixed function outside the changed set.
+| | Mesa (verified) | kernel | DPDK |
+|---|---|---|---|
+| radius within 2 calls | **1.78** [1.71, 1.85] (unverified 1.68) | 2.15 | 1.57 |
+| same-function share | 57.2% | 59.0% | 49.8% |
+| size bands: under 20 / 20 to 99 / 100 to 499 / 500+ | 2.16 / 2.02 / 1.70 / 1.34 | 3.06 / 2.79 / 1.91 / 1.31 | 2.09 / 2.39 / 1.60 / 1.23 |
+| different-file fixes (1,482): callers1 / callees1 | **4.37** [3.33, 5.93] / 2.28 [1.91, 2.75] | 4.43 / 2.74 | 2.87 / 1.50 |
+| co-change (a) fixed function in the co-change set | **1.04** [1.00, 1.09] | 0.83 (DPDK) | |
+| co-change (b) within 2 calls, not a co-change partner | **2.18** [2.08, 2.31] | | 1.71 |
+| churn- and age-matched radius | 1.74 against plain 1.78 | | 1.55 against 1.57 |
+| radius by lag: under 30 d / 30 to 365 d / 1 to 2 y / over 2 y | **1.97 / 1.72 / 1.69 / 1.55** | 2.13 to 1.93 | 1.48 to 1.39 |
+| chance of another repair, k = 1 to 5 | 0.19, 0.34, 0.41, 0.58, 0.57 | 0.29 to 0.66 | 0.39 to 0.70 |
+| P(2+ fixes): under 20 lines / 500 or more | 10.5% / 49.1% (3.22 times for 100+) | 14.5% / 77.8% | 13.6% / 77.2% |
+| repairs in callers: change a call's arguments (against same-function) | 27.2% (16.8%) | 18.8% (11.1%) | 21.5% (12.6%) |
+| repairs in callers: an added `if` tests a changed function (against same function) | 5.0% (0.3%) = 14.4 times | 8.4 | 8.5 |
+| hypothesis | verdict |
+|---|---|
+| MR1 radius at least 1.3, lower bound above 1.2 | **supported**: 1.78 [1.71, 1.85] |
+| MR2 same-function share 40 to 75% | **supported**: 57% |
+| MR3 callers above callees, different-file fixes | **supported**: 4.37 against 2.28 |
+| MR4 radius under 100 lines at least 1.3 times that of 100 or more | **not supported, narrowly**: 2.05 against 1.59, ratio 1.29 |
+| MR5 at least 4 of 5 shape checks agree | **supported**: 4 of 5 (guard fixes again not slow: 55 d against 64 d; RS5 sync to sync 15.7, n 7; call to call 2.6) |
+| MR6 (b) at least 1.3 and (a) below 1 | **half**: (b) 2.18 supported; (a) 1.04 [1.00, 1.09], **not below 1** (the reversal seen in DPDK and OpenSSL does not appear in Mesa) |
+| MR7 chance of another repair rises; size drives it | **supported**: rises 0.19 to 0.58, SK1 3.22 (SK3 tenure 0.97, no effect; SK2 adds code 1.75) |
+| MR8 fast repairs not tighter (fast/slow under 1.15) | **failed**: 1.30 (2.45 within 1 call under 30 days against 1.89 over a year); in Mesa the radius does fade with lag (1.97 to 1.55) |
+| MR9 caller repairs: call arguments at least 1.3 times; added `if` at least 3 times | **supported**: 1.62 times and 14.4 times |
+Surprise bar (radius below 1.2): not met. The structure table (6,530 parsed edits, 99%; identical-function records 0 after verification; coverage 88% typed): relation same 49%, caller 5%, callee 8%, two calls away 3%, same file farther 10%, elsewhere 25%; Cramer's V of edit type by relation 0.128 (ST3 supported); ST1 callers 37% (short of 40%), callees 2%; ST2 callees over callers 1.41 (guards 20.9% in callee repairs against 9.6% in caller repairs); ST4 88%.
+**Reading.** Mesa, a third independent large repository (and a different domain, graphics drivers rather than operating systems or networking), reproduces the main findings on verified C functions: a repair radius of about 1.8 that survives churn matching and strengthens when co-change partners are removed, the caller direction (4.4 against 2.3), size as the driver of repeated repairs, rising chance of another repair, and call-site adaptation (callers: arguments changed 1.6 times as often, an added `if` testing the changed function 14 times as often). Where Mesa differs it points the same way as one of the other repositories: the radius fades with lag (as in the kernel's small fade, but clearer: 1.97 to 1.55), co-change partners are not under-represented (the DPDK and OpenSSL reversal is not a general law), and the size trend is slightly weaker than the kernel's.
+**Across the five repositories with verified radii:** kernel 2.15, FreeBSD 2.17 (n 39), OpenSSL 1.72, Mesa 1.78, curl 1.65, DPDK 1.57; the small-repository pooled figure 1.74.
+**Caveats.** C only: Mesa's C++ and Rust files (a large part of its newer compiler code) are outside the measurement; 30% of Mesa's trailer pairs lacked C on both sides; hunk-header attribution and static resolution as before; the lag distribution (median 64 days) is much shorter than the kernel's, so "later" repairs here are within months.

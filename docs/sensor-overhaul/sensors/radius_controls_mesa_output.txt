@@ -1,0 +1,18 @@
+mesa: change history of 122557 functions
+
+=== mesa: 3799 pairs with a fixed function outside the changed set; matched baseline fell back to plain for 10.8% of fixed functions ===
+  sanity: fixed functions changed in the prior year 41.0% vs 44.9% of their same-file candidates; first change within the prior year 14.1% vs 19.3%
+  radius against the plain same-file baseline and against the churn- and age-matched baseline:
+    either1   plain  2.18 [2.08,2.30] (39% vs 18%, n 3549)   matched  2.13 [2.02,2.23] (39% vs 18%, n 3549)
+    either2   plain  1.78 [1.72,1.86] (46% vs 26%, n 3549)   matched  1.74 [1.67,1.82] (46% vs 27%, n 3549)
+    callers1  plain  2.27 [2.06,2.51] (11% vs 5%, n 3549)   matched  2.27 [1.99,2.53] (11% vs 5%, n 3549)
+    callees1  plain  2.22 [2.10,2.36] (31% vs 14%, n 3549)   matched  2.14 [2.01,2.27] (31% vs 15%, n 3549)
+  within 2 calls by size of the causing change (lines):
+    under 20     n   756 plain  2.16 [1.86,2.48] (27% vs 12%, n 710)   matched  2.10 [1.82,2.43] (27% vs 13%, n 710)
+    20 to 99     n  1264 plain  2.02 [1.89,2.17] (49% vs 24%, n 1173)   matched  1.99 [1.84,2.16] (49% vs 24%, n 1173)
+    100 to 499   n  1271 plain  1.70 [1.61,1.79] (56% vs 33%, n 1173)   matched  1.65 [1.56,1.76] (56% vs 34%, n 1173)
+    500 or more  n   508 plain  1.34 [1.23,1.45] (45% vs 33%, n 493)   matched  1.33 [1.21,1.44] (45% vs 34%, n 493)
+
+  CH1 matched either2 1.74 [1.67,1.82] (needs 1.25, lower bound above 1.15): supported
+  CH2 matched / plain = 0.98 (needs 0.90 or lower): not supported
+  CH3 size bands with a lower bound above 1.2 (plain baseline): 4 of 4 (needs 3)

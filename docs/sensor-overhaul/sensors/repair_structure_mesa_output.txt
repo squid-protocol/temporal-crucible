@@ -1,0 +1,39 @@
+mesa: 4260 measured pairs with a cause under 100 lines (of 7021)
+6602 (pair, fixed function) records; parsing the edits
+  2000/4211 fix commits
+  4000/4211 fix commits
+
+########## mesa: 6602 records; parsed 6530 (99%); not parsed: function not found 72 ##########
+  relation to the cause: same 3186 (49%), caller 301 (5%), callee 550 (8%), two calls away 210 (3%), same file, farther 658 (10%), elsewhere 1625 (25%)
+
+  edit type (row shares) by relation:
+                      adds statem changes a c adds a guar changes a c    rewrites removes sta changes a d adds cleanu replaces a  adds lockin other (no s changes a r moves or re changes pre comments or changes sig
+  same                      13.8%       16.8%       11.7%       14.5%       13.6%        6.8%        6.0%        3.3%        3.9%        1.7%        1.5%        1.7%        2.5%        1.8%        0.3%        0.1%   n 3186
+  caller                    20.3%       27.2%        9.6%       10.3%        2.3%        4.3%        2.7%       11.0%        4.7%        2.3%        2.7%        1.0%        1.0%        0.3%        0.3%        0.0%   n 301
+  callee                    18.9%       15.1%       20.9%        7.3%        9.5%        4.9%        6.0%        4.2%        3.8%        2.9%        0.2%        3.6%        0.5%        1.5%        0.4%        0.4%   n 550
+  two calls away            18.1%       14.3%       21.0%       11.9%        8.1%        4.3%        2.4%        8.1%        7.1%        1.0%        1.9%        0.0%        1.4%        0.0%        0.0%        0.5%   n 210
+  same file, farther        28.1%       12.8%       14.1%        7.4%        9.0%        3.6%        4.9%        8.2%        4.7%        0.8%        2.3%        2.0%        0.5%        0.8%        0.5%        0.5%   n 658
+  elsewhere                 26.3%       19.1%       11.1%        8.6%        7.6%        4.6%        4.2%        5.1%        4.6%        3.1%        2.5%        1.4%        0.4%        0.7%        0.2%        0.3%   n 1625
+  ALL                       19.2%       17.2%       12.8%       11.4%       10.6%        5.6%        5.2%        4.8%        4.3%        2.1%        1.8%        1.7%        1.5%        1.3%        0.3%        0.2%
+
+  THE FORMER 'NO STATEMENT CHANGE' BUCKET: 335 edits (5.1% of parsed)
+    identical function (attribution)           0    0.0% of the bucket   0.0% of all parsed edits
+    changes signature or storage class        14    4.2% of the bucket   0.2% of all parsed edits
+    comments or whitespace only               20    6.0% of the bucket   0.3% of all parsed edits
+    changes preprocessor lines                84   25.1% of the bucket   1.3% of all parsed edits
+    moves or re-nests statements              99   29.6% of the bucket   1.5% of all parsed edits
+    other (no statement change)              118   35.2% of the bucket   1.8% of all parsed edits
+  SP1 share of the bucket in a named piece 65% (needs 75%): not supported
+  SP2 identical function (attribution) 0.0% of parsed edits (needs 10% or less): supported
+  SP3 two largest named pieces: ['changes preprocessor lines', 'moves or re-nests statements'] (needs signature and moves): not supported
+  SP4 pieces among callee repairs (share of callee 'bucket' edits): identical function 0%, changes signature or storage class 12%, comments or whitespace only 12%, changes preprocessor lines 50%, moves or re-nests statements 19%, other 6%
+      share of all edits by relation, bucket as a whole: same 6.3%, caller 4.3%, callee 2.9%, two calls away 3.8%, same file, farther 4.4%, elsewhere 4.2%
+      changes signature or storage class     by relation: same 0.1%, caller 0.0%, callee 0.4%, two calls away 0.5%, same file, farther 0.5%, elsewhere 0.3%
+      changes preprocessor lines             by relation: same 1.8%, caller 0.3%, callee 1.5%, two calls away 0.0%, same file, farther 0.8%, elsewhere 0.7%
+      moves or re-nests statements           by relation: same 2.5%, caller 1.0%, callee 0.5%, two calls away 1.4%, same file, farther 0.5%, elsewhere 0.4%
+
+  ST1 edits that call a changed function: callers 37% (needs 40%), callees 2% (needs 15% or less): not supported
+  ST2 guard-or-condition share, callees / callers = 1.41 (needs 1.3): supported
+  ST3 Cramer's V of edit type by relation = 0.128 (needs 0.10): supported
+  ST4 (re-scored post hoc, with the split pieces counted as typed; rewrites, other and identical functions untyped): 88% of parsed edits typed (needs 85%): supported
+  ST5 'an added if tests a changed function', callers 5.0% vs same function 0.3% = 14.43 (needs 1.5): supported
