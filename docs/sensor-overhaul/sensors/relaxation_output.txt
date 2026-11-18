@@ -1,0 +1,36 @@
+
+########## kernel: 24474 measured pairs, 14444 with a fixed function outside the changed set ##########
+  RX1 radius by lag (ratio against same-file; share within k calls):
+    under 30 d   n  2305 | either1 2.62 [2.46,2.78] | either2 2.13 [2.04,2.24] | either3 1.95 [1.87,2.02] 
+    30 to 365 d  n  5676 | either1 2.46 [2.37,2.55] | either2 1.99 [1.93,2.05] | either3 1.81 [1.76,1.86] 
+    1 to 2 y     n  2051 | either1 2.46 [2.31,2.61] | either2 1.97 [1.89,2.07] | either3 1.79 [1.71,1.87] 
+    over 2 y     n  4412 | either1 2.32 [2.22,2.42] | either2 1.93 [1.86,2.00] | either3 1.75 [1.69,1.80] 
+    RX1: either1 ratio under 30 d 2.62 vs over a year 2.37: fast/slow = 1.11 (needs at least 1.15)
+  RX2: 2449 causes with two or more fixes outside the changed set; within 2 calls: earlier fix 53.6%, later fix 52.6% (difference -1.0 points, 95% interval -3.1 to +1.2); within 1 call: 45.2% -> 43.9%; median lag earlier 94 d, later 711 d
+  RX3 chains: 93423 causes with at least one named fix; fixes per cause: 1: 66236, 2: 15935, 3: 5201, 4: 2447, 5: 1225, 6+: 2379
+    P(at least k+1 | at least k): k=1: 0.291, k=2: 0.414, k=3: 0.538, k=4: 0.596, k=5: 0.660
+    share of causes that are themselves fixes (fix-of-fix): 10.0%; share of fixes that have a fix of their own: 6.4%
+  RX4: 5590 causes (3+ fixes within 3 y, cause at least 3 y before the end): median lag to fix 1 43 d, gap fix 1 to 2 28 d, gap 2 to 3 50 d
+
+########## dpdk: 9867 measured pairs, 6963 with a fixed function outside the changed set ##########
+  RX1 radius by lag (ratio against same-file; share within k calls):
+    under 30 d   n  1188 | either1 1.70 [1.59,1.82] | either2 1.48 [1.40,1.57] | either3 1.43 [1.35,1.52] 
+    30 to 365 d  n  2820 | either1 1.74 [1.66,1.83] | either2 1.46 [1.41,1.51] | either3 1.37 [1.33,1.42] 
+    1 to 2 y     n  1177 | either1 1.63 [1.51,1.77] | either2 1.46 [1.38,1.55] | either3 1.40 [1.32,1.48] 
+    over 2 y     n  1778 | either1 1.59 [1.49,1.71] | either2 1.39 [1.32,1.46] | either3 1.33 [1.27,1.39] 
+    RX1: either1 ratio under 30 d 1.70 vs over a year 1.61: fast/slow = 1.06 (needs at least 1.15)
+  RX2: 1350 causes with two or more fixes outside the changed set; within 2 calls: earlier fix 53.6%, later fix 49.4% (difference -4.2 points, 95% interval -6.6 to -1.7); within 1 call: 45.6% -> 41.3%; median lag earlier 99 d, later 665 d
+  RX3 chains: 7626 causes with at least one named fix; fixes per cause: 1: 4653, 2: 1444, 3: 611, 4: 336, 5: 173, 6+: 409
+    P(at least k+1 | at least k): k=1: 0.390, k=2: 0.514, k=3: 0.600, k=4: 0.634, k=5: 0.703
+    share of causes that are themselves fixes (fix-of-fix): 16.0%; share of fixes that have a fix of their own: 8.8%
+  RX4: 1057 causes (3+ fixes within 3 y, cause at least 3 y before the end): median lag to fix 1 32 d, gap fix 1 to 2 35 d, gap 2 to 3 80 d
+
+=== VERDICTS (supported = True) ===
+  kernel  RX1: not supported
+  kernel  RX2: not supported
+  kernel  RX3: not supported
+  kernel  RX4: not supported
+  dpdk    RX1: not supported
+  dpdk    RX2: not supported
+  dpdk    RX3: not supported
+  dpdk    RX4: supported
