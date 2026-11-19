@@ -121,3 +121,25 @@ Surprise bar (RD5 fails): **met**: no part of the overlap is detectably an inher
 - **CP4.** L alone keeps its strength in the inherited universe: top 20 at least 30% pooled.
 **Would surprise (siblings add nothing):** LP less than 1 point above L pooled.
 **Caveats fixed in advance.** Lineages differ in age and activity (dsda-doom starts in 2000, inter-doom in 2023): early changes have thin priors; the pair prior can only help for changes whose functions were changed and repaired in a sibling earlier; independence of lineages is partial (shared borrowed code); the universe is the inherited functions only (a restriction the sensor would not have).
+
+#### DOOM-R3 results (2026-11-18; `doom_r3_output.txt`; 576 changes in six held-out lineages with a repaired inherited function outside the changed set; universe of 548 to 1,746 inherited functions per change, random top 20 about 3.0%)
+| ranker | top 10 | top 20 | top 100 |
+|---|---|---|---|
+| **L** local call graph (the validated ranking) | **37.2%** | **45.3%** | 74.8% |
+| H hotness in the sibling lineages (before the change) | 13.5% | 21.2% | 55.9% |
+| **P** pair prior from the siblings | 18.1% | **28.5%** | 58.9% |
+| LH reciprocal-rank fusion of L and H | 27.4% | 42.4% | **79.9%** |
+| LP reciprocal-rank fusion of L and P | 29.9% | 42.9% | **79.9%** |
+Per lineage, top 20 (L / H / P / LH / LP): crispy-doom 43.7 / 12.6 / 22.3 / 27.2 / 31.1% (103 changes); dsda-doom 45.0 / 13.0 / 18.0 / 37.0 / 37.0% (100); nugget-doom 53.6 / 33.3 / 46.4 / 59.5 / 56.0% (84); doomretro 44.3 / 25.6 / 28.5 / 46.3 / 46.3% (246); fastdoom 57.7 / 15.4 / 38.5 / 46.2 / 53.8% (26); inter-doom 11.8 / 5.9 / 23.5 / 17.6 / 17.6% (17).
+| hypothesis | verdict |
+|---|---|
+| CP1 the pair prior alone at least three times random in the top 20 | **supported**: 28.5% against about 3.0% (9.4 times) |
+| CP2 LP at least 3 points above L pooled and in at least 4 of 6 lineages | **not supported**: **-2.4** pooled (-12.6, -8.0, +2.4, +2.0, -3.8, +5.9) |
+| CP3 LP at least 2 points above LH | **not supported**: +0.5 |
+| CP4 L alone at least 30% in the inherited universe | **supported**: 45.3% |
+Surprise bar (LP less than 1 point above L): **met** at the top 20.
+**Reading.** **A sibling lineage's repair history is a real signal on its own** (the pair prior finds a repaired function in the top 20 for 28.5% of changes, 9 times random, and about 7 points more than popularity alone, 21.2%; at the top 100, 58.9% against 55.9%) but **it does not improve the local call-graph ranking at the top of the list**: rank fusion lowered the top 20 (42.9% against 45.3%; worse in four lineages) and raised the top 100 (79.9% against 74.8%). Where the local ranker has a strong ordering, averaging in a weaker ranker moves its best candidates down; where it runs out (positions 20 to 100) the prior fills in. **Most of what sibling history knows is which functions are busy** (H gets 21.2% alone, P 28.5%); the pair-specific part is real but small. Caveats: rank fusion is one way of combining (parameter-free, chosen in advance); six lineages of unequal size (17 to 246 changes); universe restricted to inherited functions; priors thin for early changes; partially shared code between lineages.
+
+#### Exploratory follow-up (not pre-registered; hypotheses written before running, labelled post hoc because they were suggested by the R3 result)
+- **E1.** Using the sibling prior **only as a tie-break** inside the local ordering (same file, then call distance, then the pair prior, then hotness, then size; ranker **T1**) does not lose anything at the top: its top 20 is at least the local ranker's (45.3%) and its top 100 at least 2 points above it.
+- **E2.** Keeping the local ranker's top 10 and ordering the rest by the fusion of L and P (**T2**) has a top 20 within 1 point of L and a top 100 at least 3 points above L.
