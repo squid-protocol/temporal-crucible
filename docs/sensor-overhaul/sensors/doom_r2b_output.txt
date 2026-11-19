@@ -1,0 +1,8 @@
+cross-lineage overlaps with repairs on both sides: 548; null draws: 32804; positive control overlaps: 76
+token-level similarity median: observed 0.000, null 0.250 (90th percentile 0.778), positive control 1.000
+share of the observed overlaps above the null's 90th percentile: 0% (10% by construction); share at least 0.8: observed 0%, null 10%, control 96%
+
+=== VERDICTS ===
+  RD4 positive control median 1.000 (needs 0.8): supported
+  RD5 median difference -0.250 (needs +0.05) and share above the null's 90th percentile 0% (needs 20%): not supported
+  surprise bar (RD5 fails): MET
