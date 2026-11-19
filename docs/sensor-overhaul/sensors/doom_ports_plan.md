@@ -83,3 +83,20 @@ DOOM-R1 and R1b show that independent lineages repair the same neighbour pairs (
 - **RD2.** Counting only overlaps that are **not** the same defect, the observed number is at least 1.5 times the popularity-matched null's number of non-same-defect overlaps (the coupling signal survives).
 - **RD3.** In the positive control (chocolate-doom with crispy-doom) at least 80% of the overlaps are the same defect (the method recognises a shared repair).
 **Would surprise (the effect is the inherited defect):** more than 80% of the cross-lineage overlaps are the same defect **and** RD2 at or below 1.2.
+
+#### DOOM-R2 results (2026-11-18; `doom_r2_output.txt`), exact line comparison
+Across the six independent lineages **588 overlapping (F, G) pairs: exactly 1 has two repairs of G with a removed-line Jaccard of at least 0.5** (median similarity 0.00; 100% exactly 0); the popularity-matched null has 352.4 overlaps, 332.9 of them not the same defect; **the positive control chocolate-doom with crispy-doom: 73 of 93 overlaps (78%) are the same defect**.
+| hypothesis | verdict |
+|---|---|
+| RD1 fewer than half of the overlaps are the same defect | **supported**: 0% (1 of 588) |
+| RD2 overlaps that are not the same defect at least 1.5 times the popularity-matched null | **supported**: 587 against 332.9 = 1.76 |
+| RD3 the positive control recognises at least 80% as the same defect | **not supported, narrowly**: 78% |
+Surprise bar: not met.
+**What this does and does not show.** The result looks decisive (the overlaps are not one inherited defect) but the test's **sensitivity across diverged code is unknown**: the control uses lineages that share commits and therefore identical text, whereas independent lineages have reformatted code, renamed variables and rewritten functions since 1993, so exact normalised-line equality can read 0 even for the same defect; and the null is 0 as well, so zero similarity cannot tell the two explanations apart. A comparison that survives renaming is needed (token level), calibrated against the null.
+
+## 10. DOOM-R2b: token-level comparison of the repairs (hypotheses fixed 2026-11-18 before running; `tools/sensor/doom_r2b.py`)
+**Similarity** of two repairs of one function: Jaccard of the **sets of word tokens** (identifiers, keywords, numbers; lower case) of their removed lines, or of their added lines when neither repair removes any. Same pairs as R2 (the cross-lineage overlaps of the six independent lineages), the same popularity-matched null (the repaired function drawn from the neighbourhood proportionally to its repair count in each lineage, 100 permutations, similarity computed on the drawn function's repairs), the positive control chocolate-doom with crispy-doom.
+- **RD4.** The positive control's median similarity is at least 0.8 (the measure recognises a shared repair).
+- **RD5.** The observed cross-lineage overlaps have a higher median similarity than the null by at least 0.05, and at least 20% of them exceed the null's 90th percentile (10% by construction): evidence that part of the overlap is the same inherited defect.
+- **RD6.** If RD5 holds, the overlaps above the null's 90th percentile are no more than half of all overlaps: a majority of the overlap is not an inherited defect.
+**Would surprise:** RD5 failing (observed similarity not above the null): then no part of the overlap is detectably an inherited defect and the coupling reading stands without qualification.

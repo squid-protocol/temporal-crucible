@@ -1,0 +1,18 @@
+crispy-doom: 1089 pairs, 223 inherited (F, G) observations, 1004 repaired-function texts
+dsda-doom: 1219 pairs, 291 inherited (F, G) observations, 759 repaired-function texts
+nugget-doom: 864 pairs, 319 inherited (F, G) observations, 892 repaired-function texts
+doomretro: 2620 pairs, 474 inherited (F, G) observations, 1863 repaired-function texts
+fastdoom: 365 pairs, 344 inherited (F, G) observations, 473 repaired-function texts
+inter-doom: 158 pairs, 31 inherited (F, G) observations, 178 repaired-function texts
+chocolate-doom: 777 pairs, 93 inherited (F, G) observations, 636 repaired-function texts
+
+cross-lineage overlaps among the 6 independent lineages: 588; the same defect (similarity at least 0.5): 1 (0%); not the same defect: 587
+popularity-matched null (100 permutations): overlaps 352.4, of which not the same defect 332.9
+positive control chocolate-doom with crispy-doom (shared commits): 93 overlaps, the same defect 73 (78%)
+similarity of the cross-lineage overlaps: median 0.00; share exactly 0: 100%; share at least 0.8: 0%
+
+=== VERDICTS ===
+  RD1 same-defect share of the overlaps 0% (needs under 50%): supported
+  RD2 not-the-same-defect overlaps 587 against null 332.9 = 1.76 (needs 1.5): supported
+  RD3 positive control same-defect share 78% (needs 80%): not supported
+  surprise bar (more than 80% same defect and RD2 at or below 1.2): not met
