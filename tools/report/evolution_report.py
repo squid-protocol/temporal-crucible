@@ -394,26 +394,32 @@ def scan_series(out, scans):
         con = sqlite3.connect(f"file:{s['db']}?mode=ro", uri=True)
         files = {r[0]: r[1] for r in con.execute("SELECT id, file_path FROM file_data")}
         keys = {(files[f], n) for f, n in con.execute("SELECT file_id, func_name FROM function_data") if f in files}
-        tl, cl, dl, pd_, fd_, hl = con.execute("SELECT sum(total_loc), sum(coding_loc), sum(doc_loc), sum(state_planned_debt), sum(state_fragile_debt), 0 FROM file_data").fetchone()
-        nfun, hdr, docd = con.execute("SELECT count(*), sum(has_header_comment), sum(is_documented) FROM function_data").fetchone()
+        fc = {r[1] for r in con.execute("PRAGMA table_info(file_data)")}  # scans made by older engines lack some columns: missing ones count as zero
+        uc = {r[1] for r in con.execute("PRAGMA table_info(function_data)")}
+        sf = lambda c: f"sum({c})" if c in fc else "0"  # noqa: E731
+        su = lambda c: f"sum({c})" if c in uc else "0"  # noqa: E731
+        tl, cl, dl, pd_, fd_, hl = con.execute(f"SELECT sum(total_loc), sum(coding_loc), {sf('doc_loc')}, {sf('state_planned_debt')}, {sf('state_fragile_debt')}, 0 FROM file_data").fetchone()
+        nfun, hdr, docd = con.execute(f"SELECT count(*), {su('has_header_comment')}, {su('is_documented')} FROM function_data").fetchone()
+        graph_cols = {"func_fan_in", "func_pagerank"} <= uc
+        have_arch = "func_archetype" in uc
         com_stats.append({"code_lines": cl or 0, "comment_lines": dl or 0, "planned": pd_ or 0, "fragile": fd_ or 0, "functions": nfun or 0, "header": hdr or 0, "documented": docd or 0})
         fm = {}
-        for f, nm, fi_, pr_ in con.execute("SELECT file_id, func_name, func_fan_in, func_pagerank FROM function_data"):
+        for f, nm, fi_, pr_ in con.execute("SELECT file_id, func_name, func_fan_in, func_pagerank FROM function_data" if graph_cols else "SELECT file_id, func_name, 0, 0 FROM function_data"):
             if f in files:
                 cur = fm.get(nm)
                 if cur is None or (fi_ or 0) > cur[0]:
                     fm[nm] = (fi_ or 0, pr_ or 0.0, files[f])
         fan.append(fm)
         af = {}
-        for f, nm, ar in con.execute("SELECT file_id, func_name, func_archetype FROM function_data"):
+        for f, nm, ar in con.execute("SELECT file_id, func_name, func_archetype FROM function_data" if have_arch else "SELECT file_id, func_name, NULL FROM function_data"):
             if f in files and ar:
                 af[(files[f], nm)] = ar
         arch_f.append(af)
-        arch_c.append({files[fid]: ar for fid, ar in con.execute("SELECT id, composition_file_archetype FROM file_data") if ar and fid in files})
+        arch_c.append({files[fid]: ar for fid, ar in con.execute("SELECT id, composition_file_archetype FROM file_data" if "composition_file_archetype" in fc else "SELECT id, NULL FROM file_data") if ar and fid in files})
         if i == len(sn) - 1:
             locs = {(files[f], n): (l or 0) for f, n, l in con.execute("SELECT file_id, func_name, loc FROM function_data") if f in files}
             langs = collections.Counter(r[0] for r in con.execute("SELECT language FROM file_data") if r[0])
-            last_extra = {"languages": dict(langs.most_common(6)), "files": sum(langs.values()), "public_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute("SELECT sum(is_public), count(*) FROM function_data").fetchone()), "unreferenced_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute("SELECT sum(func_fan_in = 0), count(*) FROM function_data").fetchone())}
+            last_extra = {"languages": dict(langs.most_common(6)), "files": sum(langs.values()), "public_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute(f"SELECT {su('is_public')}, count(*) FROM function_data").fetchone()), "unreferenced_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute("SELECT sum(func_fan_in = 0), count(*) FROM function_data" if graph_cols else "SELECT 0, count(*) FROM function_data").fetchone()), "graph_ok": graph_cols, "archetypes_ok": have_arch}
         con.close()
         keys_by_q.append(keys)
         ctr = subprocess.run(["git", "-C", out["_repo"], "show", "-s", "--format=%ct", s["commit"]], capture_output=True, text=True).stdout.strip()
@@ -464,8 +470,8 @@ def scan_series(out, scans):
         k = max(cs["code_lines"], 1) / 1000
         q["comments"] = {"density": cs["comment_lines"] / max(cs["code_lines"], 1), "planned_per_kloc": cs["planned"] / k, "fragile_per_kloc": cs["fragile"] / k, "header_share": (cs["header"] / cs["functions"]) if cs["functions"] else None, "documented_share": (cs["documented"] / cs["functions"]) if cs["functions"] else None}
     out["lifetimes"] = lifetimes(sn, keys_by_q, locs)
-    out["hubs"] = hubs(sn, fan, first, keys_by_q, out["_repo"])
-    out["archetypes"] = archetypes(sn, arch_f, arch_c, edited_by_q)
+    out["hubs"] = hubs(sn, fan, first, keys_by_q, out["_repo"]) if last_extra.get("graph_ok") else None
+    out["archetypes"] = archetypes(sn, arch_f, arch_c, edited_by_q) if last_extra.get("archetypes_ok") else None
     out["current_extra"] = last_extra
     out["current_extra"]["top_dirs"] = [{"dir": d, "functions": c} for d, c in collections.Counter("/".join(k[0].split("/")[:2]) for k in keys_by_q[-1]).most_common(8)]
     out["current_extra"]["largest_functions"] = [{"function": k[1], "file": k[0], "lines": l} for l, k in sorted(((locs.get(k, 0), k) for k in keys_by_q[-1]), reverse=True)[:5]]
@@ -669,6 +675,41 @@ def radius(out, scans):
     return out
 
 
+STAGE_CUTS = {"expanding": 0.15, "growing": 0.05, "steady": -0.02}  # annual growth in functions over the last three years; set from the reference repositories (docs/sensor-overhaul/report-design/stage_calibration.md)
+
+
+def stage_indicators(out):
+    """The measured series a stage label rests on: growth, how much of the code is edited each year, how much of the work is fixes, how much is untouched, how old the project is."""
+    q = out.get("quarters")
+    gq = [x for x in out.get("git_quarters", []) if not x.get("partial")]
+    if not q or len(q) < 13 or len(gq) < 4:
+        return None
+    from datetime import date as D
+    f1, f0 = q[-1]["functions"], q[-13]["functions"]
+    years = (D.fromisoformat(q[-1]["date"]) - D.fromisoformat(q[-13]["date"])).days / 365.25
+    if f0 <= 0 or years <= 0:
+        return None
+    last4 = gq[-4:]
+    edits = sum(x["edits_organic"] + x["edits_sweeps"] + x["edits_fixes"] + x["edits_mechanical"] for x in last4)
+    fixes = sum(x["edits_fixes"] for x in last4)
+    sweeps = sum(x["edits_sweeps"] for x in last4)
+    fr = [x["untouched_4q_share"] for x in q if x.get("untouched_4q_share") is not None and not x.get("partial")]
+    return {"growth_per_year": (f1 / f0) ** (1 / years) - 1, "functions": f1, "edits_per_function_per_year": edits / max(f1, 1), "fix_share_last_year": fixes / max(edits, 1), "sweep_share_last_year": sweeps / max(edits, 1), "untouched_share": fr[-1] if fr else None, "authors_last_year": len({a for x in last4 for a in [x["authors"]]}) and max(x["authors"] for x in last4)}
+
+
+def stage_of(out):
+    """A label for the pace of net growth (not a product life-cycle claim), with the indicators it rests on and the age of the project."""
+    ind = stage_indicators(out)
+    if not ind:
+        return None
+    g = ind["growth_per_year"]
+    label = "expanding" if g >= STAGE_CUTS["expanding"] else "growing" if g >= STAGE_CUTS["growing"] else "steady" if g >= STAGE_CUTS["steady"] else "shrinking"
+    words = {"expanding": "Expanding: the code base is growing fast", "growing": "Growing: steady additions", "steady": "Steady: little net growth, the work is mostly upkeep", "shrinking": "Shrinking: more code is leaving than arriving"}
+    age = out.get("facts_age_years")
+    return {"label": label, "summary": words[label], "indicators": {k: (round(v, 3) if isinstance(v, float) else v) for k, v in ind.items()},
+            "rule": f"By growth in functions per year over the last three years: expanding at {STAGE_CUTS['expanding'] * 100:.0f}% or more, growing from {STAGE_CUTS['growing'] * 100:.0f}%, steady from {STAGE_CUTS['steady'] * 100:.0f}%, shrinking below. It describes the pace of net growth, not a product life cycle. Exploratory: the cut points were set by inspecting 19 reference repositories (docs/sensor-overhaul/report-design/stage_calibration.md) and have not been checked against how maintainers describe their projects."}
+
+
 def build_facts(out, internal):
     """A deterministic fact sheet about the repository as it stands now: structured fields plus plain sentences, each derived from a stated field (no model, no guessing)."""
     commits, cat, nf = internal["commits"], internal["cat"], internal["nf"]
@@ -703,7 +744,10 @@ def build_facts(out, internal):
         if L.get("median_age_alive_years") is not None:
             f["age_of_code"] = {"median_function_age_years": round(L["median_age_alive_years"], 1), "share_present_since_first_scan": round(L["alive_now_older_than_observed"], 3), "first_scan": L["since"]}
             sent.append(f"The median function is {L['median_age_alive_years']:.1f} years old (counted from the first scan {L['since']} or its birth); {L['alive_now_older_than_observed'] * 100:.0f}% of today's functions were already there at the first scan.")
-        H = out["hubs"]
+        H = out.get("hubs")
+        if not H:
+            H = None
+    if q and H:
         a, c = H["now"]["callers"][0], H["now"]["centrality"][0]
         slim = lambda rows: [{k: v for k, v in h.items() if not k.startswith("spark")} for h in rows]  # noqa: E731  (copies: the page still needs the sparklines)
         f["hubs"] = {"most_called": slim(H["now"]["callers"][:5]), "most_central": slim(H["now"]["centrality"][:5]), "in_both_lists_of_ten": H["in_both_lists"], "persistence": H["persistence"], "former_hubs": H["former"][:3]}
@@ -714,6 +758,7 @@ def build_facts(out, internal):
         if H["former"]:
             fh = H["former"][0]
             sent.append(f"{fh['function']} was once a hub (peak {fh['peak_callers']:,} callers in {fh['peak_quarter']}); " + (f"it is still defined in {fh['still_defined_in']} but that directory is not in the latest scan, so its callers are not counted now." if fh.get("still_defined_in") else ("it is no longer in the code." if fh["gone"] else f"it is down to {fh['callers_now']:,} callers now.")))
+    if q:
         A = out.get("archetypes")
         if A and A["now"]:
             top3 = A["now"][:3]
@@ -734,8 +779,10 @@ def build_facts(out, internal):
     if out.get("lag_median_days") is not None and out.get("pairs", 0) >= 30:
         f["median_days_from_change_to_fix"] = round(out["lag_median_days"])
         sent.append(f"Across its history {ce['organic'] * 100:.0f}% of function edits are organic change, {ce['sweeps'] * 100:.0f}% sweeps and {ce['fixes'] * 100:.0f}% fixes; a fix arrives a median {round(out['lag_median_days'])} days after the change that caused it.")
-    f["stage"] = None
-    f["stage_note"] = "A building / maturing / maintenance label needs thresholds calibrated on a reference set; not computed yet."
+    st = stage_of(out)
+    f["stage"] = st
+    if st:
+        sent.insert(1, f"Stage (exploratory): {st['summary']}; the code base grew {st['indicators']['growth_per_year'] * 100:.1f}% a year over the last three years, each function was edited {st['indicators']['edits_per_function_per_year']:.2f} times a year on average, and {st['indicators']['fix_share_last_year'] * 100:.0f}% of last year's function edits were fixes.")
     f["sentences"] = sent
     f["reliability"] = {"call_graph": {"c": "checked against libclang: hubs, ranks and coupling agree", "java": "hubs sensitive to overloaded names; indicative", "go": "not yet evaluated", "python": "not yet evaluated", "rust": "records about a third of resolvable calls; indicative"}.get(out["lang"], "not evaluated")}
     return f

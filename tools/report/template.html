@@ -112,8 +112,13 @@ details.how[open] summary { margin-bottom: 6px; }
 .empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
 </style><style>
 .tablewrap td:nth-child(2) { word-break: break-all; font-size: 12.5px; color: var(--fg2); }
+.stagebox { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
+.stagebox > div { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.stagebox b { font-family: var(--font-head); font-size: 22px; }
 .facts { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
 .spark { width: 96px; height: 24px; display: block; }
+.stack { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.box.xtall { height: 380px; }
 .verdict { font-size: 18px; color: var(--fg); max-width: 70ch; }
 .sowhat b { font-weight: 400; display: block; }
 </style>
@@ -153,6 +158,7 @@ details.how[open] summary { margin-bottom: 6px; }
 
 <section id="now">
   <div class="sec-head"><h2>Where it stands now</h2><span class="chip strong"><i></i>Strong · facts read from the data, no prediction</span></div>
+  <div class="stagebox" id="stageBox" hidden><div><span class="kicker">Stage</span><b id="stageLabel"></b><span class="chip explor"><i></i>Exploratory</span></div><p id="stageText"></p><details class="how"><summary>How the stage is decided</summary><p id="stageRule"></p></details></div>
   <ul class="facts" id="factList"></ul>
   <div id="hubBlock" hidden>
     <div class="grid2">
@@ -173,9 +179,9 @@ details.how[open] summary { margin-bottom: 6px; }
   <div class="sec-head"><h2 data-base="Growth">Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
   <div class="fig"><h3>How big the code base is</h3><div class="box tall"><canvas id="cSize" role="img" aria-label="Functions in the code base per quarter"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
   <div class="fig" id="gifFig" hidden><h3>The call graph over time</h3><img id="gifImg" alt="Animation of the call graph growing over the quarterly scans" style="max-width:100%;border-radius:8px;border:1px solid var(--line)"><p class="cap">Every file is a circle and every function a dot in it; roads between files carry calls, wider for more calls. Green flashes are new functions, amber removed ones. Drawn by <a class="more" href="https://github.com/squid-protocol/historical-call-graph-gif" target="_blank" rel="noopener">historical-call-graph-gif</a> from the same scans.</p></div>
-  <div class="grid2">
+  <div class="stack">
     <div class="fig"><h3>What the growth is made of</h3><div class="box"><canvas id="cBirths" role="img" aria-label="New and removed functions per quarter"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so it is reorganisation, not creation or loss.</p></div>
-    <div class="fig"><h3>Age layers</h3><div class="box"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
+    <div class="fig"><h3>Age layers</h3><div class="box xtall"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
   </div>
   <div class="sowhat" id="sw_growth"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-31-evolution-growth" href="#">How growth is measured →</a>
@@ -196,9 +202,9 @@ details.how[open] summary { margin-bottom: 6px; }
 <section id="types" hidden>
   <div class="sec-head"><h2 data-base="Kinds of functions">Kinds of functions</h2><span class="chip moderate"><i></i>Moderate · the engine's function types; exploratory over time</span></div>
   <div class="glance" id="typeStats"></div>
-  <div class="grid2">
+  <div class="stack">
     <div class="fig"><h3>What the code is made of today</h3><div class="tablewrap"><table id="typeTable"><thead><tr><th>Function type</th><th class="num">Share</th><th>What it means</th></tr></thead><tbody></tbody></table></div></div>
-    <div class="fig"><h3>The mix over time</h3><div class="box tall"><canvas id="cTypes" role="img" aria-label="Function types over time"></canvas></div><p class="cap">The eight most common types today; the rest are grouped.</p></div>
+    <div class="fig"><h3>The mix over time</h3><div class="box xtall"><canvas id="cTypes" role="img" aria-label="Function types over time"></canvas></div><p class="cap">The eight most common types today; the rest are grouped. Top of the key is the top layer.</p></div>
   </div>
   <div class="fig"><h3>Do functions keep their type?</h3><div class="tablewrap"><table id="retTable"><thead><tr><th></th><th class="num">Kept the same type a year later</th><th class="num">Compared</th></tr></thead><tbody></tbody></table></div><p class="cap" id="retCap"></p></div>
   <div class="sowhat" id="sw_types"><span>So what</span><b></b></div>
@@ -390,7 +396,15 @@ el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h
 
 // where it stands now (facts first)
 const F = DATA.facts;
-el("factList").innerHTML = F.sentences.map(t => `<li>${esc(t)}</li>`).join("");
+const ST = F.stage;
+if (ST) {
+  el("stageBox").hidden = false;
+  el("stageLabel").textContent = ST.label.charAt(0).toUpperCase() + ST.label.slice(1);
+  const i = ST.indicators;
+  el("stageText").textContent = `${ST.summary}. The code base grew ${(100 * i.growth_per_year).toFixed(1)}% a year over the last three years; each function was edited ${i.edits_per_function_per_year.toFixed(2)} times a year on average; ${pct(i.fix_share_last_year)} of last year's edits were fixes and ${pct(i.sweep_share_last_year)} were sweeps; ${i.untouched_share != null ? pct(i.untouched_share) + " of older functions were untouched for four quarters. " : ""}The project is ${F.age_years} years old.`;
+  el("stageRule").textContent = ST.rule;
+}
+el("factList").innerHTML = F.sentences.filter(t => !t.startsWith("Stage (exploratory)")).map(t => `<li>${esc(t)}</li>`).join("");
 el("factsJson").textContent = JSON.stringify(F, null, 1);
 el("copyFacts").onclick = () => { const t = JSON.stringify(F, null, 1); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { el("copyNote").textContent = "Copied."; }).catch(() => { const r = document.createRange(); r.selectNodeContents(el("factsJson")); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); el("copyNote").textContent = "Select and copy the text below."; }); };
 function spark(vals) {
@@ -462,6 +476,10 @@ function base(extra) {
     plugins: { legend: { display: false }, tooltip: { backgroundColor: css("--card"), titleColor: css("--fg"), bodyColor: css("--fg2"), borderColor: css("--line"), borderWidth: 1, padding: 10 } },
     scales: { x: { grid: { display: false }, ticks: { color: fg2, maxTicksLimit: 8, maxRotation: 0, autoSkipPadding: 18 }, border: { color: css("--line") } }, y: { grid: { color: grid }, ticks: { color: fg2 }, border: { display: false } } } }, extra || {});
 }
+function isDark() { const m = css("--bg").match(/[0-9a-f]{2}/gi); return m ? (parseInt(m[0], 16) + parseInt(m[1], 16) + parseInt(m[2], 16)) / 3 < 128 : false; }
+// spectrum from violet (first) to red (last); light and dark themes get different lightness so every band reads on its own background
+function rainbow(n, i) { const h = n <= 1 ? 0 : 270 - 270 * i / (n - 1); return isDark() ? `hsl(${h.toFixed(0)} 68% 60%)` : `hsl(${h.toFixed(0)} 74% 46%)`; }
+const sideLegend = () => ({ display: true, position: window.innerWidth < 640 ? "bottom" : "right", reverse: true, labels: { color: css("--fg2"), boxWidth: 14, boxHeight: 14, font: { size: 12 }, padding: 8 } });
 function lerp(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
 const legendOn = () => ({ display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } });
 function line(id, labels, data, color, fmtTip, yopts) {
@@ -482,8 +500,8 @@ function render() {
       { label: "Removed", data: q1.map(q => -q.deaths_removed), backgroundColor: s2, borderSkipped: false }, { label: "Moved out", data: q1.map(q => -q.deaths_moved), backgroundColor: s4, borderSkipped: false } ] }, options: o2 }));
     const years = DATA.cohort_years, ramp = css("--ramp-new").replace("#", ""), rampOld = css("--ramp-old").replace("#", "");
     const o3 = base(); o3.scales.y.stacked = true; o3.scales.y.ticks.callback = v => fmt(v);
-    o3.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } }; o3.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
-    charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0, pointRadius: 0, backgroundColor: lerp(ramp, rampOld, 1 - i / Math.max(years.length - 1, 1)) })) }, options: o3 }));
+    o3.plugins.legend = sideLegend(); o3.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: i === 0 ? y + " or earlier" : y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: rainbow(years.length, i) })) }, options: o3 }));
     const q4 = Q.filter(q => q.untouched_4q_share != null && !q.partial), l4 = q4.map(q => q.label);
     const o4 = base(); o4.scales.y.ticks.callback = v => v + "%"; o4.scales.y.min = 0; o4.scales.y.max = 100; o4.plugins.legend = legendOn(); o4.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "%" };
     charts.push(new Chart(el("cHeat"), { type: "line", data: { labels: l4, datasets: [
@@ -496,9 +514,9 @@ function render() {
 
   if (AR && AR.mix) {
     const o = base(); o.scales.y.stacked = true; o.scales.y.ticks.callback = v => fmt(v);
-    o.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } }; o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
-    const ramp = css("--ramp-new").replace("#", ""), rampOld = css("--ramp-old").replace("#", ""), labs = AR.mix.labels;
-    charts.push(new Chart(el("cTypes"), { type: "line", data: { labels: Q.map(q => q.label), datasets: labs.map((k, i) => ({ label: k, data: AR.mix.series[k], fill: true, stack: "t", borderWidth: 0, pointRadius: 0, backgroundColor: k === "Other types" ? css("--s4b") : lerp(ramp, rampOld, i / Math.max(labs.length - 2, 1)) })) }, options: o }));
+    o.plugins.legend = sideLegend(); o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    const labs = AR.mix.labels, named = labs.filter(k => k !== "Other types").length;
+    charts.push(new Chart(el("cTypes"), { type: "line", data: { labels: Q.map(q => q.label), datasets: labs.map((k, i) => ({ label: k, data: AR.mix.series[k], fill: true, stack: "t", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: k === "Other types" ? css("--s4b") : rainbow(named, named - 1 - i) })) }, options: o }));
   }
   if (L && L.curves && Object.keys(L.curves).length) {
     const o = base(); o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%"; o.scales.x.ticks.callback = function (v) { const g = L.grid[v]; return g % 1 === 0 ? g + " y" : ""; };
