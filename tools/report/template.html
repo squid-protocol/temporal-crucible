@@ -112,9 +112,15 @@ details.how[open] summary { margin-bottom: 6px; }
 .empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
 </style><style>
 .tablewrap td:nth-child(2) { word-break: break-all; font-size: 12.5px; color: var(--fg2); }
+#checkTable td:nth-child(2) { word-break: normal; font-size: 13.5px; color: var(--fg); min-width: 180px; }
 .stagebox { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
 .stagebox > div { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .stagebox b { font-family: var(--font-head); font-size: 22px; }
+.warnbox { border: 1px solid var(--s2); border-left-width: 4px; border-radius: 8px; padding: 10px 14px; max-width: 82ch; font-size: 14px; }
+.pill { font-size: 11.5px; font-weight: 600; border-radius: 999px; padding: 1px 8px; border: 1px solid var(--line); white-space: nowrap; }
+.pill.ok { color: var(--fg); }
+.pill.warn { border-color: var(--s2); }
+.pill.fail { background: var(--s2); color: #fff; border-color: var(--s2); }
 .facts { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
 .spark { width: 96px; height: 24px; display: block; }
 .stack { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
@@ -159,6 +165,7 @@ details.how[open] summary { margin-bottom: 6px; }
 <section id="now">
   <div class="sec-head"><h2>Where it stands now</h2><span class="chip strong"><i></i>Strong · facts read from the data, no prediction</span></div>
   <div class="stagebox" id="stageBox" hidden><div><span class="kicker">Stage</span><b id="stageLabel"></b><span class="chip explor"><i></i>Exploratory</span></div><p id="stageText"></p><details class="how"><summary>How the stage is decided</summary><p id="stageRule"></p></details></div>
+  <div class="warnbox" id="cgWarn" hidden></div>
   <ul class="facts" id="factList"></ul>
   <div id="hubBlock" hidden>
     <div class="grid2">
@@ -284,6 +291,12 @@ details.how[open] summary { margin-bottom: 6px; }
 
 <section id="quality">
   <div class="sec-head"><h2>How far to trust this report</h2><span class="chip strong"><i></i>Strong · counts</span></div>
+  <div id="selfCheck" hidden>
+    <h3>Self-check</h3>
+    <p id="ratingText"></p>
+    <div class="tablewrap"><table id="checkTable"><thead><tr><th>Check</th><th>Result</th><th></th></tr></thead><tbody></tbody></table></div>
+    <p class="cap">Each check compares the report with git or with an independent tree-sitter parse of the same snapshot. They never change a figure; they say how far to trust it. The call-graph baseline matches plain calls by name, so it cannot see calls through function pointers or macros, which GitGalaxy can.</p>
+  </div>
   <div class="cards" id="qualityCards"></div>
   <div class="empty">Whether a particular change will need a fix is not something this report can say; size predicts it, little else does. How well this repository's "look first" and triage lists work is measured separately by <code>gitgalaxy backtest</code>.</div>
   <a class="more" data-wiki="08-37-evolution-label-quality" href="#">Label quality and limits →</a>
@@ -418,7 +431,7 @@ if (HB) {
   el("hubCallers").querySelector("tbody").innerHTML = HB.now.callers.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.callers)}</td><td>${spark(r.spark)}</td></tr>`).join("");
   el("hubCentral").querySelector("tbody").innerHTML = HB.now.centrality.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${r.since_first_scan ? "&ge; " : ""}${r.age_years}</td><td>${spark(r.spark_callers || r.spark)}</td></tr>`).join("");
   const p1 = HB.persistence["callers_1 year"], p5 = HB.persistence["callers_5 years"], c1 = HB.persistence["centrality_1 year"];
-  el("hubCap").textContent = "Callers: how many functions call it. Central: its PageRank in the call graph, so it also counts callers that are themselves important. " + (p1 ? `Of the top 1% most-called functions, ${pct(p1.including_removed)} were still in the top 5% a year later` + (p5 ? `, ${pct(p5.including_removed)} five years later` : "") + (c1 ? `; for centrality ${pct(c1.including_removed)} after a year` : "") + " (removed functions count as gone). " : "") + (DATA.facts.reliability ? "Call-graph reliability for this language: " + DATA.facts.reliability.call_graph + "." : "");
+  el("hubCap").textContent = "Callers: how many functions call it. Central: its PageRank in the call graph, so it also counts callers that are themselves important. " + (p1 ? `Of the top 1% most-called functions, ${pct(p1.including_removed)} were still in the top 5% a year later` + (p5 ? `, ${pct(p5.including_removed)} five years later` : "") + (c1 ? `; for centrality ${pct(c1.including_removed)} after a year` : "") + " (removed functions count as gone). " : "") + (DATA.facts.reliability ? "Call-graph reliability for this language: " + DATA.facts.reliability.call_graph + "." : "") + (DATA.self_check && DATA.self_check.rating ? " Self-check on this repository: " + DATA.self_check.rating.label.toLowerCase() + " (see the end of the report)." : "");
   if (HB.former.length) { el("formerFig").hidden = false; el("formerTable").querySelector("tbody").innerHTML = HB.former.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.peak_callers)}</td><td>${esc(r.peak_quarter)}</td><td class="num">${r.still_defined_in ? "defined in " + esc(r.still_defined_in) + ", not in the latest scan" : (r.gone ? "gone" : fmt(r.callers_now))}</td></tr>`).join(""); }
 }
 
@@ -469,6 +482,24 @@ if (CM && CM.some(c => c && c.density > 0)) {
 }
 let secN = 1;
 ["growth", "lifetimes", "types", "activity", "sweeps", "repairs", "sizes", "repeat", "comments"].forEach(id => { const sec = el(id), h = sec.querySelector("h2[data-base]"); if (!sec.hidden && h) h.textContent = (secN++) + " · " + h.dataset.base; });
+
+// self-check
+const SCK = DATA.self_check;
+if (SCK && SCK.rows && SCK.rows.length) {
+  el("selfCheck").hidden = false;
+  const lab = { ok: "Pass", warn: "Warning", fail: "Fail", info: "Info" };
+  el("checkTable").querySelector("tbody").innerHTML = SCK.rows.map(r => `<tr><td><b>${esc(r.what)}</b><br><span class="cap">${esc(r.detail)}</span></td><td>${esc(r.value)}</td><td><span class="pill ${r.status}">${lab[r.status] || r.status}</span></td></tr>`).join("");
+  const rt = SCK.rating;
+  if (rt) {
+    el("ratingText").textContent = rt.text;
+    const bad = rt.label !== "Good", st = rt.standing, stBad = rt.standing_label && rt.standing_label !== "Good";
+    if (bad || stBad) {
+      const w = el("cgWarn"); w.hidden = false;
+      const calls = SCK.rows.find(r => r.id === "calls");
+      w.textContent = (bad ? "Warning: " : "Note: ") + `call-graph rating ${(bad ? rt.label : rt.standing_label).toLowerCase()}. ` + (st ? `Against ${st.reference} (a compiler-grade reference) our research found GitGalaxy recovers ${pct(st.recall)} of cross-file call edges in ${DATA.lang === "c" ? "C" : DATA.lang} with ${pct(st.precision)} precision; a tree-sitter name matcher recovers ${pct(st.tree_sitter_recall)}. ` : "") + (calls ? `On this repository GitGalaxy found ${pct(calls.data.recall)} of the calls an independent name matcher finds, so it agrees with that baseline; calls hidden from a name matcher (function pointers, macros) and anything a compiler resolves that neither tool does are not covered. ` : "") + "Hub lists, repair radius and call counts are lower bounds.";
+    }
+  }
+}
 
 // charts
 function base(extra) {

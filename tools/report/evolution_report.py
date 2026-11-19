@@ -817,6 +817,10 @@ def build_facts(out, internal):
     if st:
         sent.insert(1, f"Stage (exploratory): {st['summary']}; the code base grew {st['indicators']['growth_per_year'] * 100:.1f}% a year over the last three years, each function was edited {st['indicators']['edits_per_function_per_year']:.2f} times a year on average, and {st['indicators']['fix_share_last_year'] * 100:.0f}% of last year's function edits were fixes.")
     f["sentences"] = sent
+    sc = out.get("self_check") or {}
+    if sc.get("rating"):
+        f["call_graph_self_check"] = {"rating": sc["rating"]["label"], "checks": [{"id": r["id"], "status": r["status"], "value": r["value"]} for r in sc["rows"] if r["id"] in ("calls", "filepairs", "functions", "imports", "coverage")]}
+        sent.append("Self-check of the call graph against a tree-sitter baseline on this repository: " + sc["rating"]["label"].lower() + "; " + "; ".join(f"{r['what'].lower()}: {r['value']}" for r in sc["rows"] if r["id"] in ("calls", "functions", "imports")) + ".")
     f["reliability"] = {"call_graph": {"c": "checked against libclang: hubs, ranks and coupling agree", "java": "hubs sensitive to overloaded names; indicative", "go": "not yet evaluated", "python": "not yet evaluated", "rust": "records about a third of resolvable calls; indicative"}.get(out["lang"], "not evaluated")}
     return f
 
@@ -832,6 +836,7 @@ def main():
     ap.add_argument("--cache")
     ap.add_argument("--link-base", default="https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki")
     ap.add_argument("--radius", action="store_true")
+    ap.add_argument("--no-validate", action="store_true", help="skip the self-checks against a tree-sitter baseline (they take seconds to a minute)")
     ap.add_argument("--gif", help="optional GIF of the call graph over time (from tools/report/make_gif.py), embedded in the page if under 9 MB")
     args = ap.parse_args()
     if not re.fullmatch(r"[\w.-]+", args.name):
@@ -846,6 +851,13 @@ def main():
         out = scan_series(out, args.scans)
         if args.radius:
             out = radius(out, args.scans)
+    import self_check as SC
+    sn_last = None
+    if args.scans:
+        sn_all = json.load(open(args.scans))
+        sn_last = sn_all[-1]
+    rows = SC.checks(out, out["_internal"], args.repo, sn_last["commit"] if sn_last else None, sn_last["db"] if sn_last else None, args.lang, validate=not args.no_validate)
+    out["self_check"] = {"rows": rows, "rating": SC.rating(rows, args.lang) if args.scans and not args.no_validate else None, "standing": SC.STANDING.get(args.lang)}
     out["facts"] = build_facts(out, out["_internal"])
     out["link_base"] = args.link_base
     if args.gif and Path(args.gif).exists():

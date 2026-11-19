@@ -33,3 +33,5 @@ Eight draft pages for the evolution report prototype (`tools/report/evolution_re
 Also added 2026-11-19: `08-38-evolution-lifetimes` and `08-39-evolution-comments` (function lifetimes; comment trends), linked from the report's new sections.
 
 Also added 2026-11-19: `08-42-evolution-stage` (the stage label).
+
+Also added 2026-11-19: `08-43-evolution-self-check` (the report's self-check and call-graph rating).
