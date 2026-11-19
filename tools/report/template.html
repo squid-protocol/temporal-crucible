@@ -111,6 +111,7 @@ details.how summary { cursor: pointer; color: var(--fg3); }
 details.how[open] summary { margin-bottom: 6px; }
 .empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
 </style><style>
+.tablewrap td:nth-child(2) { word-break: break-all; font-size: 12.5px; color: var(--fg2); }
 .verdict { font-size: 18px; color: var(--fg); max-width: 70ch; }
 .sowhat b { font-weight: 400; display: block; }
 </style>
@@ -149,8 +150,9 @@ details.how[open] summary { margin-bottom: 6px; }
 </section>
 
 <section id="growth" hidden>
-  <div class="sec-head"><h2>1 · Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
+  <div class="sec-head"><h2 data-base="Growth">Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
   <div class="fig"><h3>How big the code base is</h3><div class="box tall"><canvas id="cSize" role="img" aria-label="Functions in the code base per quarter"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
+  <div class="fig" id="gifFig" hidden><h3>The call graph over time</h3><img id="gifImg" alt="Animation of the call graph growing over the quarterly scans" style="max-width:100%;border-radius:8px;border:1px solid var(--line)"><p class="cap">Every file is a circle and every function a dot in it; roads between files carry calls, wider for more calls. Green flashes are new functions, amber removed ones. Drawn by <a class="more" href="https://github.com/squid-protocol/historical-call-graph-gif" target="_blank" rel="noopener">historical-call-graph-gif</a> from the same scans.</p></div>
   <div class="grid2">
     <div class="fig"><h3>What the growth is made of</h3><div class="box"><canvas id="cBirths" role="img" aria-label="New and removed functions per quarter"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so it is reorganisation, not creation or loss.</p></div>
     <div class="fig"><h3>Age layers</h3><div class="box"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
@@ -159,8 +161,20 @@ details.how[open] summary { margin-bottom: 6px; }
   <a class="more" data-wiki="08-31-evolution-growth" href="#">How growth is measured →</a>
 </section>
 
+<section id="lifetimes" hidden>
+  <div class="sec-head"><h2 data-base="Function lifetimes">Function lifetimes</h2><span class="chip moderate"><i></i>Moderate · quarterly scans; a moved function counts as a death and a birth</span></div>
+  <div class="glance" id="lifeStats"></div>
+  <div class="fig"><h3>How long functions last</h3><div class="box"><canvas id="cSurv" role="img" aria-label="Share of functions still present after a number of years"></canvas></div><p class="cap" id="survCap"></p></div>
+  <div class="grid2">
+    <div class="fig"><h3>Longest-lived functions that have since gone</h3><div class="tablewrap"><table id="diedTable"><thead><tr><th>Function</th><th>File</th><th class="num">Years</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="fig"><h3>Largest functions present since the first scan</h3><div class="tablewrap"><table id="oldTable"><thead><tr><th>Function</th><th>File</th><th class="num">Lines</th></tr></thead><tbody></tbody></table></div></div>
+  </div>
+  <div class="sowhat" id="sw_life"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-38-evolution-lifetimes" href="#">How lifetimes are measured →</a>
+</section>
+
 <section id="activity">
-  <div class="sec-head"><h2 id="actTitle">Where the work goes</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
+  <div class="sec-head"><h2 data-base="Where the work goes">Where the work goes</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
   <div class="fig"><h3>Function edits by kind, per quarter
     <span style="margin-left:auto"><button class="tog" id="tAbs" aria-pressed="true">Edits</button> <button class="tog" id="tShare" aria-pressed="false">Share</button></span></h3>
     <div class="box tall"><canvas id="cWork" role="img" aria-label="Function edits by kind per quarter"></canvas></div>
@@ -178,7 +192,7 @@ details.how[open] summary { margin-bottom: 6px; }
 </section>
 
 <section id="sweeps">
-  <div class="sec-head"><h2>Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
+  <div class="sec-head"><h2 data-base="Sweeps">Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
   <p id="sweepIntro"></p>
   <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th class="num" id="sweepCol">Fixes that name it as their cause</th></tr></thead><tbody></tbody></table></div>
   <div class="sowhat" id="sw_sweeps"><span>So what</span><b></b></div>
@@ -186,7 +200,7 @@ details.how[open] summary { margin-bottom: 6px; }
 </section>
 
 <section id="repairs">
-  <div class="sec-head"><h2>Repairs: when, and how close</h2><span class="chip moderate" id="repChip"><i></i>Moderate</span></div>
+  <div class="sec-head"><h2 data-base="Repairs: when, and how close">Repairs: when, and how close</h2><span class="chip moderate" id="repChip"><i></i>Moderate</span></div>
   <div id="repairsEmpty" class="empty" hidden></div>
   <div class="grid2" id="repairsGrid">
     <div class="fig"><h3>How long fixes took</h3><div class="box"><canvas id="cLag" role="img" aria-label="Histogram of time from cause to fix"></canvas></div><p class="cap" id="lagCap"></p></div>
@@ -203,18 +217,30 @@ details.how[open] summary { margin-bottom: 6px; }
 </section>
 
 <section id="sizes">
-  <div class="sec-head"><h2>Which changes get repaired</h2><span class="chip strong" id="sizeChip"><i></i>Strong</span></div>
+  <div class="sec-head"><h2 data-base="Which changes get repaired">Which changes get repaired</h2><span class="chip strong" id="sizeChip"><i></i>Strong</span></div>
   <div class="fig"><h3>Share of changes later blamed for a fix, by size</h3><div class="box"><canvas id="cSize2" role="img" aria-label="Share of changes later blamed for a fix by number of functions edited"></canvas></div><p class="cap" id="sizeCap"></p></div>
   <div class="sowhat" id="sw_sizes"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-36-evolution-which-changes" href="#">How this was measured →</a>
 </section>
 
 <section id="repeat">
-  <div class="sec-head"><h2>Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
+  <div class="sec-head"><h2 data-base="Repeat spots">Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
   <div class="glance" id="repeatStats"></div>
   <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
   <div class="sowhat" id="sw_repeat"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-35-evolution-repeat-spots" href="#">How repeat spots are counted →</a>
+</section>
+
+<section id="comments" hidden>
+  <div class="sec-head"><h2 data-base="Comments">Comments</h2><span class="chip moderate"><i></i>Moderate · counts from the scanner</span></div>
+  <div class="grid2">
+    <div class="fig"><h3>Comment lines per line of code</h3><div class="box"><canvas id="cDens" role="img" aria-label="Comment lines per line of code over time"></canvas></div><p class="cap">Includes licence banners and commented-out code.</p></div>
+    <div class="fig"><h3>Functions with a comment above them</h3><div class="box"><canvas id="cHdr" role="img" aria-label="Share of functions with a header comment"></canvas></div><p class="cap">A comment block directly above the function, and a doc-style comment.</p></div>
+    <div class="fig"><h3>Debt and fragility markers per 1,000 lines of code</h3><div class="box"><canvas id="cMark" role="img" aria-label="Debt and fragility markers per thousand lines of code"></canvas></div><p class="cap">Planned: TODO-type notes. Fragile: HACK, FIXME and similar warnings.</p></div>
+  </div>
+  <div class="sowhat" id="sw_comments"><span>So what</span><b></b></div>
+  <div class="empty">From our research on nine C projects (not computed for this repository): about three quarters of TODO, FIXME and XXX comments are eventually removed, though projects range from 38% to 98%; about half are cleared by their own author, mostly in clean-ups rather than fixes; and a file's commenting style stays stable for years.</div>
+  <a class="more" data-wiki="08-39-evolution-comments" href="#">How comments are measured →</a>
 </section>
 
 <section id="quality">
@@ -265,7 +291,6 @@ el("compLegend").innerHTML = comp.map(([n, k, c]) => `<span><i style="background
 sw("sw_glance", `Sweeps are ${pct(CC.sweeps, 1)} of the commits that change functions but ${pct(C.sweeps)} of the function edits. Setting them apart from ordinary work makes the other trends readable.` + (fd.trailer_habit ? "" : " Fixes here are found from commit subjects only: this project does not use Fixes: trailers."));
 
 // work
-el("actTitle").textContent = Q ? "2 · Where the work goes" : "1 · Where the work goes";
 const totals = GQ.filter(q => !q.partial).map(q => ["organic", "sweeps", "fixes", "mechanical"].reduce((a, k) => a + q["edits_" + k], 0));
 const sorted = totals.slice().sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)];
 const busiest = GQ.filter(q => !q.partial)[totals.indexOf(Math.max(...totals))];
@@ -330,6 +355,37 @@ const qc = [
 ];
 el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h3><p>${d}</p></div>`).join("");
 
+// gif, lifetimes, comments (scan mode)
+const L = DATA.lifetimes, CM = Q ? Q.map(q => q.comments) : null;
+if (DATA.gif_data_uri) { el("gifFig").hidden = false; el("gifImg").src = DATA.gif_data_uri; }
+if (L && L.counts && (L.counts.born || L.counts.initial)) {
+  el("lifetimes").hidden = false;
+  const b = L.counts.born, ini = L.counts.initial, sb_ = L.survive.born || {}, si = L.survive.initial || {};
+  const st = [];
+  if (L.median_age_alive_years != null) st.push([L.median_age_alive_years.toFixed(1) + " years", "median age of today's functions (counted from the first scan or their birth)"]);
+  st.push([pct(L.alive_now_older_than_observed), `of today's functions were already there at the first scan (${L.since}), ${L.years_observed.toFixed(1)} years ago`]);
+  if (b) { const s5 = sb_["5"], s1 = sb_["1"]; if (s1 != null) st.push([pct(s1), "of functions born during the scans were still there a year later"]); if (s5 != null) st.push([pct(s5), "were still there after five years"]); }
+  if (b && b.median_years != null) st.push([b.median_years.toFixed(1) + " years", "half-life of a new function (half are gone by then)"]);
+  el("lifeStats").innerHTML = st.map(([x, y]) => `<div class="stat"><b>${x}</b><span>${y}</span></div>`).join("");
+  el("survCap").textContent = (b ? `${fmt(b.functions)} functions were born during the scans (${fmt(b.died)} have gone); ` : "") + (ini ? `${fmt(ini.functions)} were already there at the first scan (${fmt(ini.died)} have gone). ` : "") + "A function that moved or was renamed counts as gone and new, so lifetimes are a lower bound.";
+  el("diedTable").querySelector("tbody").innerHTML = L.longest_died.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${r.at_least ? "at least " : ""}${r.years}</td></tr>`).join("");
+  el("oldTable").querySelector("tbody").innerHTML = L.oldest_alive.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.lines)}</td></tr>`).join("");
+  const parts = [];
+  if (b && sb_["5"] != null) parts.push(`${pct(sb_["5"])} of functions born during the scans lasted five years`);
+  if (ini && si["5"] != null) parts.push(`${pct(si["5"])} of those already there at the start are still present five years on`);
+  sw("sw_life", parts.length ? parts.join(", and ") + "." : "");
+}
+if (CM && CM.some(c => c && c.density > 0)) {
+  el("comments").hidden = false;
+  const f0 = CM.find(c => c.density > 0), fl = CM[CM.length - 1];
+  const parts = [`Comment lines per line of code went from ${f0.density.toFixed(2)} to ${fl.density.toFixed(2)}`];
+  if (fl.header_share != null) parts.push(`${pct(fl.header_share)} of functions now have a comment block above them`);
+  parts.push(`${fl.planned_per_kloc.toFixed(2)} TODO-type and ${fl.fragile_per_kloc.toFixed(2)} fragility markers per 1,000 lines`);
+  sw("sw_comments", parts.join("; ") + ".");
+}
+let secN = 1;
+["growth", "lifetimes", "activity", "sweeps", "repairs", "sizes", "repeat", "comments"].forEach(id => { const sec = el(id), h = sec.querySelector("h2[data-base]"); if (!sec.hidden && h) h.textContent = (secN++) + " · " + h.dataset.base; });
+
 // charts
 function base(extra) {
   const fg2 = css("--fg2"), grid = css("--grid");
@@ -367,6 +423,27 @@ function render() {
     const sizes = Q.map(q => q.functions), g = sizes[sizes.length - 1] / sizes[0], births = Q.slice(1).reduce((a, q) => a + q.births_new_code, 0), moved = Q.slice(1).reduce((a, q) => a + q.births_moved, 0);
     sw("sw_growth", `The code base grew ${g.toFixed(1)} times, from ${fmt(sizes[0])} to ${fmt(sizes[sizes.length - 1])} functions. Of the functions that appeared over the scans, ${pct(births / (births + moved))} were new code and ${pct(moved / (births + moved))} were existing names reappearing elsewhere (moves and renames).`);
   } else { el("heatFig").hidden = true; }
+
+  if (L && L.curves && Object.keys(L.curves).length) {
+    const o = base(); o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%"; o.scales.x.ticks.callback = function (v) { const g = L.grid[v]; return g % 1 === 0 ? g + " y" : ""; };
+    o.plugins.legend = legendOn(); o.plugins.tooltip.callbacks = { title: items => items[0].label + " years", label: c => c.dataset.label + ": " + c.parsed.y.toFixed(0) + "% still present" };
+    const ds = [];
+    if (L.curves.born) ds.push({ label: "Born during the scans", data: L.curves.born.map(v => 100 * v), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, stepped: true });
+    if (L.curves.initial) ds.push({ label: "Already there at the first scan", data: L.curves.initial.map(v => 100 * v), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, stepped: true });
+    charts.push(new Chart(el("cSurv"), { type: "line", data: { labels: L.grid.map(v => String(v)), datasets: ds }, options: o }));
+  }
+  if (CM && CM.some(c => c && c.density > 0)) {
+    const ql = Q.map(q => q.label);
+    line("cDens", ql, CM.map(c => c.density), s1, v => v.toFixed(2) + " comment lines per code line", { ticks: { color: css("--fg2"), callback: v => v.toFixed(2) }, min: 0 });
+    const o2c = base(); o2c.plugins.legend = legendOn(); o2c.scales.y.min = 0; o2c.scales.y.max = 100; o2c.scales.y.ticks.callback = v => v + "%"; o2c.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(0) + "%" };
+    charts.push(new Chart(el("cHdr"), { type: "line", data: { labels: ql, datasets: [
+      { label: "Comment block above", data: CM.map(c => c.header_share == null ? null : 100 * c.header_share), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Doc-style comment", data: CM.map(c => c.documented_share == null ? null : 100 * c.documented_share), borderColor: s3, backgroundColor: s3, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o2c }));
+    const o3c = base(); o3c.plugins.legend = legendOn(); o3c.scales.y.min = 0; o3c.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(2) };
+    charts.push(new Chart(el("cMark"), { type: "line", data: { labels: ql, datasets: [
+      { label: "Planned (TODO-type)", data: CM.map(c => c.planned_per_kloc), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Fragile (HACK, FIXME-type)", data: CM.map(c => c.fragile_per_kloc), borderColor: s2, backgroundColor: s2, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o3c }));
+  }
   const gq = GQ.filter(q => !q.partial), gl = gq.map(q => q.label), keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names2 = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
   const o5 = base(); o5.scales.y.stacked = true; o5.scales.y.ticks.callback = v => workMode === "abs" ? fmt(v) : v + "%"; if (workMode === "share") o5.scales.y.max = 100;
   o5.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (workMode === "abs" ? fmt(c.parsed.y) + " edits" : c.parsed.y.toFixed(1) + "%") };

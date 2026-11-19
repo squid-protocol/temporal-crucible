@@ -148,3 +148,10 @@ Needed for "more local than typical": run the git-only partition and the radius 
 | Git-only report claimed things it cannot show | reader | fixed (explicit "not available without scans" note, sentences hidden) |
 
 **Deferred (not done):** vendoring Chart.js for an offline page and an integrity hash; replacing numpy and pandas; the research-tool imports (blame sampling and radius) behind a plugin interface so the command can run on any clone; streaming `%B` for 250,000-commit repositories; a shuffle baseline for repeat spots; re-measuring the fix-rule miss rate for the shipped rule; moving the size section up; annotating sweeps on the timeline; a table view of each chart; matching renames for births and deaths; whether to scale blame-sample shares.
+
+## 11. Additions (2026-11-19, owner request)
+- **Call-graph GIF** (section Growth): `tools/report/make_gif.py` feeds our existing scan databases to historical-call-graph-gif (no rescan), then `evolution_report.py --gif` embeds it (limit 9 MB). DPDK: 4.9 MB, nDPI: 3.1 MB.
+- **Function lifetimes** (scan mode): Kaplan-Meier survival of functions (born during the scans vs already there at the first scan), half-life, median age of today's functions, longest-lived functions that have gone, largest functions present since the first scan. Identity is (file, name); moves count as death plus birth. True age before the first scan is unknown.
+- **Comments** (scan mode): comment lines per code line, functions with a comment above and doc-style comments, TODO-type and fragility markers per 1,000 lines. A static box states the nine-project research result and says it was not computed for the repository shown.
+- **Candidates from the comment research, not in the report yet:** commented-out code (about 93% precise), share of danger wording, banner length (licence changes), who wrote a comment, AI-assisted commit comment patterns, TODO repayment time per project (needs the git history of each marker).
+- **Fix:** a nearly empty first scan (nDPI's first scan had 2 files) is skipped so growth and age are not distorted.

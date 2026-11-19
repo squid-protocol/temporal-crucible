@@ -372,14 +372,29 @@ def build(args):
 
 def scan_series(out, scans):
     sn = json.load(open(scans))
+    def n_functions(snap):
+        con = sqlite3.connect(f"file:{snap['db']}?mode=ro", uri=True)
+        try:
+            return con.execute("SELECT count(*) FROM function_data").fetchone()[0]
+        finally:
+            con.close()
+    while len(sn) > 1 and n_functions(sn[0]) < 100:  # an almost empty first scan (the repository's first commits) would distort growth and age
+        sn = sn[1:]
     internal = out["_internal"]
     commits, diff, cat, nf = internal["commits"], internal["diff"], internal["cat"], internal["nf"]
     cts = []
     keys_by_q = []
-    for s in sn:
+    com_stats = []
+    locs = {}
+    for i, s in enumerate(sn):
         con = sqlite3.connect(f"file:{s['db']}?mode=ro", uri=True)
         files = {r[0]: r[1] for r in con.execute("SELECT id, file_path FROM file_data")}
         keys = {(files[f], n) for f, n in con.execute("SELECT file_id, func_name FROM function_data") if f in files}
+        tl, cl, dl, pd_, fd_, hl = con.execute("SELECT sum(total_loc), sum(coding_loc), sum(doc_loc), sum(state_planned_debt), sum(state_fragile_debt), 0 FROM file_data").fetchone()
+        nfun, hdr, docd = con.execute("SELECT count(*), sum(has_header_comment), sum(is_documented) FROM function_data").fetchone()
+        com_stats.append({"code_lines": cl or 0, "comment_lines": dl or 0, "planned": pd_ or 0, "fragile": fd_ or 0, "functions": nfun or 0, "header": hdr or 0, "documented": docd or 0})
+        if i == len(sn) - 1:
+            locs = {(files[f], n): (l or 0) for f, n, l in con.execute("SELECT file_id, func_name, loc FROM function_data") if f in files}
         con.close()
         keys_by_q.append(keys)
         ctr = subprocess.run(["git", "-C", out["_repo"], "show", "-s", "--format=%ct", s["commit"]], capture_output=True, text=True).stdout.strip()
@@ -426,6 +441,76 @@ def scan_series(out, scans):
         quarters.append(q)
     out["quarters"] = quarters
     out["cohort_years"] = years
+    for q, cs in zip(quarters, com_stats):
+        k = max(cs["code_lines"], 1) / 1000
+        q["comments"] = {"density": cs["comment_lines"] / max(cs["code_lines"], 1), "planned_per_kloc": cs["planned"] / k, "fragile_per_kloc": cs["fragile"] / k, "header_share": (cs["header"] / cs["functions"]) if cs["functions"] else None, "documented_share": (cs["documented"] / cs["functions"]) if cs["functions"] else None}
+    out["lifetimes"] = lifetimes(sn, keys_by_q, locs)
+    return out
+
+
+def km(durations, events, grid):
+    """Kaplan-Meier survival at the grid points (years)."""
+    d = np.array(durations, dtype=float)
+    e = np.array(events, dtype=bool)
+    order = np.argsort(d)
+    d, e = d[order], e[order]
+    n = len(d)
+    surv, res, i = 1.0, [], 0
+    uniq = np.unique(d[e])
+    ptr = 0
+    out = []
+    for t in grid:
+        while ptr < len(uniq) and uniq[ptr] <= t:
+            at_risk = n - int(np.searchsorted(d, uniq[ptr], side="left"))
+            deaths = int(((d == uniq[ptr]) & e).sum())
+            surv *= 1 - deaths / max(at_risk, 1)
+            ptr += 1
+        out.append(surv)
+    return out
+
+
+def lifetimes(sn, keys_by_q, locs):
+    """How long functions live, from their presence in the quarterly scans. Identity is (file, name): a function that moves or is renamed counts as a death and a birth."""
+    sizes = [len(k) for k in keys_by_q]
+    start = next((i for i, n in enumerate(sizes) if n >= 100), 0)
+    from datetime import date as D
+    dts = [D.fromisoformat(x["date"]) for x in sn]
+    yrs = lambda a, b: (dts[b] - dts[a]).days / 365.25  # noqa: E731
+    first, last = {}, {}
+    for i in range(start, len(keys_by_q)):
+        for k in keys_by_q[i]:
+            first.setdefault(k, i)
+            last[k] = i
+    n = len(keys_by_q)
+    groups = {"born": [], "initial": []}
+    died = []
+    for k, f in first.items():
+        alive = last[k] == n - 1
+        dur = yrs(f, n - 1) if alive else yrs(f, last[k] + 1)
+        g = "initial" if f == start else "born"
+        groups[g].append((dur, not alive))
+        if not alive:
+            died.append((dur, k, f, last[k] + 1, g))
+    grid = [round(0.25 * j, 2) for j in range(0, int(yrs(start, n - 1) / 0.25) + 1)]
+    out = {"since": sn[start]["label"], "years_observed": yrs(start, n - 1), "grid": grid, "curves": {}, "survive": {}, "counts": {}}
+    for g, v in groups.items():
+        if len(v) < 50:
+            continue
+        sv = km([d for d, _ in v], [e for _, e in v], grid)
+        out["curves"][g] = sv
+        out["counts"][g] = {"functions": len(v), "died": sum(1 for _, e in v if e), "alive": sum(1 for _, e in v if not e)}
+        out["survive"][g] = {str(y): (sv[grid.index(y)] if y in grid else None) for y in (1, 2, 5, 10)}
+        below = [t for t, sval in zip(grid, sv) if sval <= 0.5]
+        out["counts"][g]["median_years"] = below[0] if below else None
+    died.sort(reverse=True)
+    out["longest_died"] = [{"function": k[1], "file": k[0], "years": round(d, 1), "born": sn[f]["label"] if g == "born" else "before " + sn[start]["label"], "died": sn[dq]["label"], "at_least": g == "initial"} for d, k, f, dq, g in died[:8]]
+    old = sorted(((locs.get(k, 0), k) for k, f in first.items() if f == start and last[k] == n - 1), reverse=True)[:8]
+    out["oldest_alive"] = [{"function": k[1], "file": k[0], "lines": l} for l, k in old]
+    out["initial_still_alive"] = sum(1 for k, f in first.items() if f == start and last[k] == n - 1)
+    out["alive_now"] = len(keys_by_q[-1])
+    out["alive_now_older_than_observed"] = out["initial_still_alive"] / max(len(keys_by_q[-1]), 1)
+    ages = [yrs(f, n - 1) for k, f in first.items() if last[k] == n - 1]
+    out["median_age_alive_years"] = float(np.median(ages)) if ages else None
     return out
 
 
@@ -476,6 +561,7 @@ def main():
     ap.add_argument("--cache")
     ap.add_argument("--link-base", default="https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki")
     ap.add_argument("--radius", action="store_true")
+    ap.add_argument("--gif", help="optional GIF of the call graph over time (from tools/report/make_gif.py), embedded in the page if under 9 MB")
     args = ap.parse_args()
     if not re.fullmatch(r"[\w.-]+", args.name):
         ap.error("--name may contain only letters, digits, dot, underscore and hyphen")
@@ -490,11 +576,20 @@ def main():
         if args.radius:
             out = radius(out, args.scans)
     out["link_base"] = args.link_base
+    if args.gif and Path(args.gif).exists():
+        import base64
+        raw = Path(args.gif).read_bytes()
+        if len(raw) <= 9_000_000:
+            out["gif_data_uri"] = "data:image/gif;base64," + base64.b64encode(raw).decode()
+            out["gif_bytes"] = len(raw)
     out.pop("_internal_dump", None)
     internal = out.pop("_internal")
     out.pop("_repo")
     out.pop("_out")
+    uri = out.pop("gif_data_uri", None)
     json.dump(out, open(Path(args.out) / f"{args.name}_evolution.json", "w"), indent=1, default=float)
+    if uri:
+        out["gif_data_uri"] = uri
     tpl = (HERE / "template.html").read_text()
     payload = json.dumps(out, separators=(",", ":"), default=float).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     html = tpl.replace("__TITLE__", f"Evolution of {args.name}").replace("__DATA__", payload)  # title first: the payload may contain any text
