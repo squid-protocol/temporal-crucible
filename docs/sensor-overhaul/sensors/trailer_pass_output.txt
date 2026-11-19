@@ -1,0 +1,42 @@
+
+##### dpdk: 46,419 commits; trailer prevalence since 2015: reported-by 2%, tested-by 3%, reviewed-by 20%, acked-by 52%, suggested-by 1%, co-developed-by 0%, link 0%, closes 0%, bugzilla 0%, cc-stable 26%
+
+##### mesa: 233,419 commits; trailer prevalence since 2015: reported-by 0%, tested-by 2%, reviewed-by 63%, acked-by 8%, suggested-by 0%, co-developed-by 0%, link 0%, closes 2%, bugzilla 1%, cc-stable 5%
+
+=== FIX SIDE: 17,275 measured named-cause pairs since 2015 ===
+  Reported-by  with    dpdk  n   360 ( 3.6%) median lag    99 d  same function  56%  radius  1.63 [1.42,1.90] (52% vs 32%, n 200)
+  Reported-by  without dpdk  n  9507 (96.4%) median lag   242 d  same function  48%  radius  1.44 [1.40,1.48] (51% vs 35%, n 6300)
+  Reported-by  with    mesa  n   140 ( 1.9%) median lag    39 d  same function  64%  radius  1.92 [1.48,2.52] (49% vs 25%, n 68)
+  Reported-by  without mesa  n  7268 (98.1%) median lag    65 d  same function  55%  radius  1.68 [1.62,1.74] (45% vs 27%, n 3867)
+  Reported-by  with    both  n   500 ( 2.9%) median lag    78 d  same function  59%  radius  1.69 [1.50,1.92] (51% vs 30%, n 268)
+  Reported-by  without both  n 16775 (97.1%) median lag   137 d  same function  51%  radius  1.52 [1.49,1.55] (49% vs 32%, n 10167)
+  Cc: stable   with    dpdk  n  7475 (75.8%) median lag   371 d  same function  48%  radius  1.44 [1.40,1.48] (51% vs 35%, n 5031)
+  Cc: stable   without dpdk  n  2392 (24.2%) median lag    20 d  same function  51%  radius  1.46 [1.39,1.53] (51% vs 35%, n 1469)
+  Cc: stable   with    mesa  n   258 ( 3.5%) median lag    98 d  same function  57%  radius  1.90 [1.61,2.25] (46% vs 24%, n 142)
+  Cc: stable   without mesa  n  7150 (96.5%) median lag    64 d  same function  56%  radius  1.67 [1.61,1.74] (46% vs 27%, n 3793)
+  Cc: stable   with    both  n  7733 (44.8%) median lag   362 d  same function  48%  radius  1.45 [1.41,1.49] (51% vs 35%, n 5173)
+  Cc: stable   without both  n  9542 (55.2%) median lag    39 d  same function  54%  radius  1.60 [1.56,1.65] (47% vs 29%, n 5262)
+
+=== CAUSE SIDE: 83,322 organic commits since 2015, older than 3 years before the end ===
+  dpdk: cited rate overall 29.0%
+     Reviewed/Acked/Tested-by   with  11886 (70.3%): cited  29.7% vs without  27.4%; rate ratio within size strata 1.09 [1.03, 1.15]
+     Reviewed-by                with   3824 (22.6%): cited  28.7% vs without  29.1%; rate ratio within size strata 0.97 [0.92, 1.02]
+     Tested-by                  with    545 ( 3.2%): cited  36.3% vs without  28.8%; rate ratio within size strata 1.28 [1.16, 1.44]
+     Acked-by                   with   8788 (52.0%): cited  29.9% vs without  28.1%; rate ratio within size strata 1.08 [1.04, 1.13]
+  mesa: cited rate overall 10.6%
+     Reviewed/Acked/Tested-by   with  49253 (74.2%): cited  10.7% vs without  10.6%; rate ratio within size strata 1.01 [0.96, 1.06]
+     Reviewed-by                with  46261 (69.6%): cited  10.5% vs without  11.0%; rate ratio within size strata 0.98 [0.93, 1.02]
+     Tested-by                  with   1607 ( 2.4%): cited  13.2% vs without  10.6%; rate ratio within size strata 1.21 [1.06, 1.37]
+     Acked-by                   with   4464 ( 6.7%): cited  13.2% vs without  10.4%; rate ratio within size strata 1.13 [1.04, 1.22]
+  both: cited rate overall 14.4%
+     Reviewed/Acked/Tested-by   with  61139 (73.4%): cited  14.4% vs without  14.4%; rate ratio within size strata 1.04 [1.01, 1.09]
+     Reviewed-by                with  50085 (60.1%): cited  11.9% vs without  18.1%; rate ratio within size strata 0.97 [0.94, 1.01]
+     Tested-by                  with   2152 ( 2.6%): cited  19.1% vs without  14.2%; rate ratio within size strata 1.24 [1.14, 1.35]
+     Acked-by                   with  13252 (15.9%): cited  24.3% vs without  12.5%; rate ratio within size strata 1.09 [1.05, 1.14]
+
+=== VERDICTS ===
+  TP1 Reported-by share of fix commits: DPDK 3.6% (needs 15%), Mesa 1.9% (needs 10%): not supported
+  TP2 median lag with 78 d, without 137 d, ratio 0.57 (needs 1.3): not supported
+  TP3 radius with 1.69, without 1.52, gap +0.17 (needs within 0.2): supported
+  TP4 rate ratio for reviewed/acked/tested 1.04 [1.01, 1.08] (needs below 0.9 with the interval excluding 1): not supported
+  TP5 Cc: stable: n 7733, median lag 362 d vs 39 d; radius 1.45 vs 1.60
