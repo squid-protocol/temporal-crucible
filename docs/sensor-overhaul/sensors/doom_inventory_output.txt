@@ -1,0 +1,53 @@
+port                     lang        commits  first   last pinned sha in history
+linuxdoom                c                 4   2012   2024 yes
+chocolate-doom           c              4890   2005   2026 yes
+crispy-doom              c              7500   2005   2026 yes
+doomgeneric              c               103   2012   2026 yes
+doomretro                c             21027   2013   2026 yes
+prboom-plus              c              3222   2000   2023 yes
+dsda-doom                c              9362   2000   2026 yes
+woof                     c              3306   2008   2026 yes
+eternity                 cpp            7161   2006   2026 yes
+odamex                   cpp           10530   2007   2026 yes
+gzdoom                   cpp           20572   2006   2026 yes
+room4doom                rust             34   2026   2026 NO (HEAD used)
+gore                                     429   2025   2026 yes
+managed-doom                             831   2019   2025 yes
+mochadoom                                135   2015   2026 yes
+rust-doom                                313   2014   2021 yes
+doom-wasm                                 11   2021   2024 yes
+fastdoom                                3647   2017   2026 yes
+puredoom                                  54   2022   2026 yes
+doom-ios                                   2   2012   2012 yes
+doom3-bfg                                  6   2012   2015 yes
+doom-ascii                                43   2022   2026 yes
+srb2                                   11282   2014   2025 yes
+freedoom                                2944   2006   2026 yes
+helion                                  5477   2019   2026 yes
+doomsday                               22764   2003   2023 yes
+edge-classic                            3824   2021   2026 yes
+nugget-doom                             4613   2008   2026 yes
+inter-doom                              1446   2023   2026 yes
+sdl-doom                                  57   2019   2022 yes
+doom3do                                   10   2014   2023 yes
+sqldoom                  sql               1   2026   2026 yes
+doomf77                  fortran           1   2026   2026 yes
+doom-scheme              scheme           20   2026   2026 yes
+dartdoom                 dart             41   2026   2026 yes
+doo-cr                   crystal         329   2026   2026 yes
+kocoa-doom               kotlin          140   2015   2022 yes
+fsharp-doom              fsharp           13   2022   2022 yes
+cssdoom                  javascript       29   2026   2026 yes
+doom-fx                  assembly         12   2020   2022 yes
+fps-cob                  cobol             3   2026   2026 yes
+agentic-cobol-doom-cc    cobol            17   2026   2026 yes
+agentic-cobol-doom-codex cobol            12   2026   2026 yes
+mood                     c                 8   2012   2025 yes
+
+44 ports with full history; total commits 146225
+
+SHARED HISTORY (ports that share at least 20 commits; shared / smaller port's commits):
+  chocolate-doom     crispy-doom          4887 commits shared (100% of the smaller history)
+  woof               nugget-doom          3244 commits shared (98% of the smaller history)
+  mochadoom          kocoa-doom            129 commits shared (96% of the smaller history)
+  prboom-plus        dsda-doom            2966 commits shared (92% of the smaller history)
