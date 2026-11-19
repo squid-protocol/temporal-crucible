@@ -1480,3 +1480,34 @@ Surprise bars (UC2 below 1.15 or UC1 below 40%): not met (DPDK's lower bound is 
 - **RM4.** Among organic non-fix commits (categories 6 to 11) the share of function edits in cited commits is between 10% and 40% in both repositories.
 - **RM5.** Per function edit, the cited rate of "adds code" commits and of "modifies code" commits is within a factor of 2 of each other (size explains the rest).
 **Would surprise:** fix categories above 40% of edits, or adds + removes + modifies below 25% of edits.
+
+#### Complete partition of function edits: results (2026-11-19; `work_partition_output.txt`; totals reconcile to 46,419 commits / 189,837 edits (DPDK) and 233,419 / 687,372 (Mesa); Mesa's blame over 18,755 commits took 22 minutes, the diff features 2)
+Share of function edits (share of commits), and the share of each category's edits in commits later **cited** as the cause of a fix (named or blame):
+| category | DPDK edits (commits) / cited | Mesa edits (commits) / cited |
+|---|---|---|
+| touches no C/H function | 0 (22.6%) | 0 (31.3%) |
+| sweep (over 60 functions) | **20.9%** (0.5%) / 44% | **18.0%** (0.3%) / 52% |
+| revert | 0 (0%) | 0.4% (0.4%) / 8% |
+| fix, named cause | **15.6%** (27.5%) / 17% | 2.4% (4.1%) / 10% |
+| fix, cause by blame | 1.9% (2.0%) / 22% | **5.9%** (6.9%) / 15% |
+| fix, no cause found | 0.2% (0.5%) / 13% | 0.6% (1.2%) / 7% |
+| tests only | 2.0% (1.9%) / 31% | 0.1% (0.2%) / 1% |
+| comment or whitespace only | 0.2% / 0% | 0.1% / 3% |
+| formatting, docs, licence (subject) | 0.6% / 4% | 1.0% / 10% |
+| **adds code** | **26.8%** (24.7%) / 45% | **21.5%** (20.4%) / 24% |
+| removes code | 4.0% (3.1%) / 16% | 5.9% (5.0%) / 8% |
+| modifies, feature verb | 6.4% (3.7%) / 35% | 6.6% (4.5%) / 20% |
+| modifies, restructure verb | 13.6% (7.7%) / 26% | **21.5%** (12.5%) / 16% |
+| modifies, optimization verb | 1.5% / 22% | 1.0% / 13% |
+| modifies, other verb | 6.1% (4.0%) / 25% | 14.7% (11.5%) / 17% |
+Grouped, share of function edits (DPDK / Mesa): **sweeps 20.9 / 18.0**; **fixes of all kinds 17.8 / 9.0** (cause known 17.5 / 8.3); **mechanical other** (reverts, tests only, comment only, formatting) 2.8 / 1.7; **organic code changes** (adds, removes, modifies) **58.5 / 71.3**. The organic changes that were later cited as the cause of a fix: **34.0% / 18.4% of their edits**.
+**Hand check** (40 random commits of adds, removes and modifies per repository, read by subject): DPDK about 3 fixes the keyword rule missed ("cap memcpy at field size", "avoid panicking in absence of ethdev shared data", "skip memzone freeing if port created"); Mesa about 8 ("handle an out-of-bounds sampler/image index better", "added divide by zero checks", "Returns a GL_INVALID_VALUE error ... when buffer size is negative", "do not overwrite loads_push_constants when declaring shader args", "always emit PGM_RSRC1_HS when emitting the TCS epilog state", "ignore stage flags that are expanded", "disable some more code so that it compiles quietly", "Guard XCB_PRESENT_OPTION_SUBOPTIMAL ..."). Hidden fixes: DPDK 3 of 40 (8%, interval about 2 to 20%), Mesa 8 of 40 (20%, about 9 to 36%), of the organic code changes (58.5% and 71.3% of edits): **about 1 to 12% (DPDK) and 6 to 26% (Mesa) of all function edits are fixes the subject rule did not find** (my reading of subjects, a judgment).
+| hypothesis | verdict |
+|---|---|
+| RM1 fix categories at most 30% of edits | **supported**: 17.8% and 9.0% (before hidden fixes: add up to about 12% and 26%) |
+| RM2 sweeps, reverts, tests-only, comment-only, formatting at least 30% | **not supported**: 23.7% and 19.7% |
+| RM3 at most 4 of 40 hidden fixes per repository | **DPDK supported (about 3); Mesa not (about 8)** |
+| RM4 cited share of organic non-fix edits 10 to 40% | **supported**: 34.0% and 18.4% |
+| RM5 cited rate per edit, adds vs modifies, within a factor 2 | **supported**: 44.7% vs 27.4% (1.63); 24.4% vs 17.1% (1.43) |
+Surprise bars (fix categories over 40% of edits; adds + removes + modifies under 25%): not met.
+**Reading.** Of all function edits, **about a fifth are sweeps, about a tenth to a sixth are recognisable fixes (more if the hidden ones are counted, up to about a quarter in Mesa), a few percent are mechanical, and 58 to 71% are organic code changes**: added code is the largest single category (27% and 22%), then restructuring (14% and 22%). **A third (DPDK) and a fifth (Mesa) of the edits in organic changes are later cited as the cause of a fix**, so about 20% and 13% of *all* function edits (34.0% x 58.5%; 18.4% x 71.3%) are changes that were later repaired; sweeps are cited more than anything else (44% and 52% of their edits, because they touch so much), and edits in added code are cited about 1.4 to 1.6 times as often as edits in modified code. Caveats: categories come from subject keywords, hunk-header functions and a three-to-one added/removed rule; hidden fixes in the remainder are a manual estimate from 40 subjects per project; "cited" means named or blamed as the cause of a later fix (a lower bound: unfound causes and fixes without keywords add more); DPDK has no `Revert` subjects in this rule.

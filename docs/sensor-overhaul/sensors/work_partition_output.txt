@@ -1,0 +1,132 @@
+
+##### dpdk: 46,419 commits, 10,511 touch no C/H function; blame needed for 1,134, diff features for 20,687 (1s)
+  blame: 919 of 1,134 cause found (37s)
+  diff features done (73s)
+
+  category                                 commits % commits   fn edits  % edits  cited commits  cited edits  cited per edit
+  none                                      10,511     22.6%          0     0.0%           6.8%         0.0%
+  sweep                                        245      0.5%     39,718    20.9%          42.9%        44.0%
+  revert                                         0      0.0%          0     0.0%           0.0%         0.0%
+  fix, named cause                          12,783     27.5%     29,629    15.6%           9.4%        16.7%
+  fix, cause by blame                          919      2.0%      3,700     1.9%          13.1%        21.6%
+  fix, no cause found                          215      0.5%        473     0.2%           9.8%        12.5%
+  tests only                                   901      1.9%      3,810     2.0%          19.6%        31.1%
+  comment or whitespace only                    84      0.2%        313     0.2%           0.0%         0.0%
+  formatting, docs, licence (subject)          158      0.3%      1,125     0.6%           5.1%         4.4%
+  adds code                                 11,471     24.7%     50,939    26.8%          34.7%        44.7%
+  removes code                               1,421      3.1%      7,578     4.0%           9.1%        15.5%
+  modifies: feature verb                     1,732      3.7%     12,200     6.4%          25.2%        34.9%
+  modifies: restructure verb                 3,578      7.7%     25,875    13.6%          16.7%        25.6%
+  modifies: optimization verb                  549      1.2%      2,907     1.5%          14.9%        21.5%
+  modifies: other verb                       1,852      4.0%     11,570     6.1%          15.9%        25.0%
+  TOTAL                                     46,419              189,837   (check: commits 46,419, edits 189,837)
+
+  HAND CHECK sample (dpdk): subjects of 40 random commits of adds / removes / modifies
+    [adds code] examples/qos_sched: add stats
+    [adds code] net/hns3: obtain supported speed for fiber port
+    [adds code] net/failsafe: support xstats
+    [adds code] net/qede/base: add attention bits for AH chip
+    [modifies: fe] net/intel: create common scalar Tx function
+    [modifies: re] net/sfc/base: move datapath config to ef10 NIC board cfg
+    [adds code] net/mlx5: validate connection tracking action
+    [adds code] common/sfc_efx/base: provide PHY link get method on Medford4
+    [modifies: re] net/virtio: remove port ID info from Rx queue
+    [modifies: re] examples/dma: replace getopt with argparse
+    [adds code] net/cxgbe: support setting VLAN PCP via flow API
+    [modifies: ot] net/virtio: align dynamic log names with standard
+    [adds code] net/cnxk: add Tx burst for CN10K
+    [modifies: fe] net/octeontx2: support flow API flags based extraction
+    [adds code] net/sfc/base: import monitors access via MCDI
+    [modifies: re] net/ena/base: rework Rx ring submission queue
+    [adds code] ethdev: add vlan type when setting ether type
+    [adds code] net/mlx5: initialize connection tracking management
+    [removes code] bitops: promote bit manipulation API to stable
+    [adds code] net/mlx5: improve Verbs flow priority discovery
+    [adds code] cryptodev: add sym session header size function
+    [modifies: op] event/dlb: skip memzone freeing if port created
+    [adds code] pipeline: add API for code generation
+    [modifies: re] net/ice/base: move and redefine debug cq function
+    [adds code] telemetry: use 64-bit signed values in API
+    [adds code] net/ntnic: add match and action DB attributes
+    [modifies: fe] common/cnxk: add pool BPID to RQ while using common pool
+    [adds code] examples/l3fwd: reorganise and optimize LPM code path
+    [modifies: re] ip_frag: rename structures in fragmentation table
+    [adds code] net/mlx5: add Multi-Packet Rx support
+    [modifies: op] ethdev: avoid panicking in absence of ethdev shared data
+    [modifies: ot] lib: restrict use of keyword extern
+    [modifies: ot] net/iavf: do not store ethdev pointer
+    [adds code] net/bnxt/tf_ulp: cap memcpy at field size
+    [adds code] vdpa/sfc: support MAC filter config
+    [removes code] sched: promote a function as stable
+    [adds code] net/mlx5: support flow meter action for HWS
+    [adds code] vhost: improve vDPA block device configure condition
+    [adds code] event/dlb2: add token pop API
+    [adds code] common/mlx5: support more fields in DevX CQ create
+
+##### mesa: 233,419 commits, 73,138 touch no C/H function; blame needed for 18,755, diff features for 128,146 (8s)
+  blame: 16,056 of 18,755 cause found (1314s)
+  diff features done (1449s)
+
+  category                                 commits % commits   fn edits  % edits  cited commits  cited edits  cited per edit
+  none                                      73,138     31.3%          0     0.0%           1.1%         0.0%
+  sweep                                        768      0.3%    123,822    18.0%          45.8%        52.1%
+  revert                                       845      0.4%      2,868     0.4%           6.0%         8.3%
+  fix, named cause                           9,553      4.1%     16,714     2.4%           5.9%        10.0%
+  fix, cause by blame                       16,056      6.9%     40,872     5.9%           7.6%        14.9%
+  fix, no cause found                        2,699      1.2%      4,413     0.6%           5.3%         7.3%
+  tests only                                   460      0.2%        975     0.1%           0.4%         0.6%
+  comment or whitespace only                   411      0.2%        645     0.1%           2.9%         3.3%
+  formatting, docs, licence (subject)        1,754      0.8%      7,204     1.0%           3.5%         9.5%
+  adds code                                 47,532     20.4%    147,808    21.5%          14.7%        24.4%
+  removes code                              11,576      5.0%     40,488     5.9%           3.7%         8.3%
+  modifies: feature verb                    10,461      4.5%     45,188     6.6%           9.5%        19.7%
+  modifies: restructure verb                29,101     12.5%    148,028    21.5%           8.4%        16.3%
+  modifies: optimization verb                2,140      0.9%      7,064     1.0%           7.8%        13.3%
+  modifies: other verb                      26,925     11.5%    101,283    14.7%           7.8%        17.3%
+  TOTAL                                    233,419              687,372   (check: commits 233,419, edits 687,372)
+
+  HAND CHECK sample (mesa): subjects of 40 random commits of adds / removes / modifies
+    [modifies: ot] don't use new glDrawPixel routines in Xserver
+    [adds code] radv: do nir_shader_gather_info after radv_nir_lower_rt_abi
+    [adds code] v3d: Use combined input/output segments.
+    [modifies: ot] i965: Calculate enabled[] and nr_enabled once and re-use the values.
+    [modifies: fe] nv50: add a header file for nv50_query
+    [modifies: ot] anv/cmd_buffer: Emit CS push constants after binding tables
+    [removes code] radv: remove some declared but unused functions/macros
+    [modifies: ot] radv/video: handle encode control parameters better.
+    [adds code] Modify assert to reflect rebase criteria
+    [modifies: ot] added divide by zero checks
+    [adds code] freedreno/ir3: add support for store instructions
+    [modifies: ot] radv: always emit PGM_RSRC1_HS when emitting the TCS epilog state
+    [modifies: re] disable some more code so that it compiles quietly on Windows.
+    [modifies: ot] #ifdef-out unused big-endian texel fetch functions
+    [modifies: re] intel: move pipe enable sanity check to where it belongs
+    [modifies: re] radeonsi: merge 2 conditional blocks with same condition into 1 in culling code
+    [adds code] radv: Add scratch stack to reduce LDS stack in RT traversal.
+    [adds code] radv: ignore stage flags that are expanded for radv_stage_flush()
+    [modifies: ot] radv: do not overwrite loads_push_constants when declaring shader args
+    [modifies: ot] intel: combine common gather routines in INTEL_MEASURE
+    [modifies: re] frontends/va: Simplify AV1 slice parameters handling
+    [modifies: re] Rename static variable in temporary tnl code
+    [adds code] ac/llvm: implement load_pixel_coord
+    [removes code] aco, radv: Remove VS IO information from ACO.
+    [modifies: ot] vulkan/wsi/x11: Guard XCB_PRESENT_OPTION_SUBOPTIMAL by ignore_suboptimal
+    [adds code] radeonsi: handle an out-of-bounds sampler/image index better
+    [modifies: ot] freedreno: Name more *_DBG_ECO_CNTL regs
+    [modifies: re] egl_dri2: Drop the use of _egl[SG]etConfigKey.
+    [modifies: re] intel/tools: Refactor gen_disasm_disassemble() to use annotations
+    [adds code] anv: Implement VK_KHR_external_fence
+    [modifies: re] intel/blorp: rename blorp_copy() and blorp_buffer_copy()
+    [modifies: re] radv: Remove unused args of radv_image_view_init.
+    [modifies: fe] nir/intrinsics: Add a load_push_constant intrinsic
+    [adds code] mesa: Returns a GL_INVALID_VALUE error on several APIs when buffer size is negative
+    [removes code] pan/bi: Use bi_dontcare for ZS_EMIT
+    [modifies: re] freedreno/decode: Replace/remove __tonumber()
+    [modifies: fe] radeonsi: add need_fmask_expand parameter into si_decompress_subresource
+    [adds code] d3d12: Generate a pipe format -> typeless mapping table too
+    [modifies: fe] gallium/tgsi: add support for stencil writes.
+    [removes code] mapi: Remove usage of _glapi_check_multithread and _glapi_destroy_multithread
+
+=== VERDICT INPUTS (hand check RM3 is read by eye) ===
+  dpdk: RM1 fix side 17.8% (needs 30% or less); RM2 mechanical 23.7% (needs 30% or more); adds+removes+modifies 58.5% (surprise below 25%); RM4 cited share of organic non-fix edits 34.0% (needs 10 to 40); RM5 cited per edit adds 44.7% vs modifies 27.4% (ratio 1.63, needs within 2)
+  mesa: RM1 fix side 9.0% (needs 30% or less); RM2 mechanical 19.7% (needs 30% or more); adds+removes+modifies 71.3% (surprise below 25%); RM4 cited share of organic non-fix edits 18.4% (needs 10 to 40); RM5 cited per edit adds 24.4% vs modifies 17.1% (ratio 1.43, needs within 2)
