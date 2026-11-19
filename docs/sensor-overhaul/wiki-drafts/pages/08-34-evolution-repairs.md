@@ -9,7 +9,7 @@ A cause is named in the fix (`Fixes: <sha>`) or found by blame: `git blame -w -M
 - **Lag histogram:** time from cause to fix. Median and the share over a year. The shape tells whether bugs are found in days (fuzzers, CI) or months (users).
 - **Cause types:** the first verb of the causing commit's subject (feature, restructure, optimization, fix). For each, the share of fixes that land in the same function as the cause and the median lag.
 - **Radius (with scans):** how much closer than chance a fix lands to the changed function, within one or two calls, against same-sized functions in the same file. See [repair radius](08-29-repair-radius.md).
-- **`Cc: stable`:** where a project uses it, fixes tagged for stable took far longer than untagged ones (DPDK: 371 against 20 days since 2015): the tag marks bugs that reached a release.
+- **`Cc: stable`:** where a project uses it, fixes tagged for stable took far longer than untagged ones (DPDK: 371 against 20 days for fixes since 2015; 486 against 22 over the whole history): the tag marks bugs that reached a release.
 
 ## Measured behavior (exploratory unless noted)
 - Repair radius 1.4 to 2.0 within two calls across large C projects and the DOOM lineages (replicated); blame-derived causes give the same radius as named ones (1.40 and 1.63 against 1.45 and 1.60).
@@ -19,3 +19,12 @@ A cause is named in the fix (`Fixes: <sha>`) or found by blame: `git blame -w -M
 ## Limits
 - Only fixes with a findable cause are counted; fixes whose cause is outside the history are not "extrinsic" in this report, they are simply unmatched.
 - Blame names where fixed lines last changed, not always the cause.
+
+## What changed in the report
+Cause type in the report is a simplified rule: a fix-like subject counts as a fix, otherwise the first verb (also past tense and -ing) decides, and "other, unclassified" holds the rest. The research table (41% in the same function for feature causes, 197 days) used the pooled DPDK and Mesa pairs and a narrower rule; the report prints the repository's own numbers, which can differ (DPDK: feature 33%, 359 days; fix 69%).
+
+## Worked example
+Reading the table: if "A feature" shows 33% in the same function and "A fix (a fix of a fix)" 69%, fixes of features scatter across the code while fixes of fixes return to the same function.
+
+## What to do about it
+After a feature, widen the review to callers and the same file; after a fix, re-test the same function. With blame-derived causes, treat the lag as the time since the fixed lines last changed.

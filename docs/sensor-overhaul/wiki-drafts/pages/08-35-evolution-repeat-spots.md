@@ -17,3 +17,9 @@ For every fix commit, the functions named in its diff headers get one fix each. 
 ## Limits
 - Function identity is (file, name) from git diff headers; a function renamed or moved starts a new count.
 - A refactor that touches a function in a fix-like commit counts as a fix.
+
+## Worked example
+curl: 78% of fix edits land in functions fixed twice or more, and the most repaired function (`Curl_http`) has 86 fixes. DPDK: 60%. The two are not directly comparable: curl has 27 years of history and far fewer functions.
+
+## What to do about it
+Use the list of the most repaired functions as a review and test priority. The report does not claim that a heavily repaired function needs redesign; large validators and parsers accumulate fixes because they hold many cases. There is no baseline for how much repetition chance alone would produce.

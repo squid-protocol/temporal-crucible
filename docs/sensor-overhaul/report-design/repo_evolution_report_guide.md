@@ -123,3 +123,28 @@ Needed for "more local than typical": run the git-only partition and the radius 
 4. Which of themes F to H and L, R, T (keywords, arguments, additions and deletions, tests, libraries) stay as optional sections and which move to separate pages?
 5. How hard should the report push on "extrinsic" and "latent" (my advice: do not label them; show "no findable cause" and the unnamed-fix share)?
 6. Does the audience include people who will read it without the research behind it? If so the A/B/C/D explainer moves to the top.
+
+## 10. Owner decisions (2026-11-19) and review amendment
+
+**Decisions.** (1) Build both modes: git-only, and with quarterly scans (both exist in the generator). (2) Headline "Evolution of X". (3) The reliability panel is a separate command, `gitgalaxy backtest` (`backtest_command_note.md`). (4) Optional sections: build, then independent review. (5) Readers will not read the research: each section links to a wiki page (drafts in `wiki-drafts/pages/08-30` to `08-37`, to be built out in the GitGalaxy repository).
+
+**Independent review (three fresh reviewers, 2026-11-19): methods, a non-expert reader, engineering.** Findings and what was done:
+| Finding | Reviewer | Status |
+|---|---|---|
+| Script-injection through commit text (the data was written into a script tag unescaped); `--name` and `--link-base` unchecked | engineering | fixed; test added |
+| Diff parser dropped paths with spaces and non-ASCII names, mishandled deleted files, content lines that look like headers | engineering | fixed (per-file header state, `core.quotepath=off`); tests added |
+| Empty repository and failed git calls crashed | engineering | fixed (clear exit) |
+| Cache key was HEAD only, non-atomic pickle | engineering | fixed (key covers language, parser version and rules; atomic gzip JSON) |
+| `*q = 2;` counted as a comment; `latest.c` counted as a test | engineering | fixed; tests added |
+| Fixed "so what" sentences contradicted the repository's own numbers | methods, reader | fixed: sentences are generated from the repository's numbers, or hidden |
+| Cause type from bare verbs left 44 to 74% in "other"; past tense missed | methods | partly fixed (lemma, fix-like subjects); curl still 44% other, flagged in the page |
+| Blame sample (1,500 of 4,751 for curl) presented as complete; unsearched fixes labelled "no cause found"; sweep column "No" meant "not searched" | methods | fixed: "not searched" category, coverage shown, "none found" wording, lower-bound notes |
+| Wiki wording contradicted the research log (kind of change); stale and wrong numbers | methods | fixed in the drafts |
+| Test attachment blind to non-code test files | methods | fixed (any file under a test directory) |
+| "fix typo" counted as a fix | methods | fixed (formatting rule first); DPDK fixes 17.8 to 17.3% |
+| "Untouched for four quarters" counted young functions; last quarter partial | methods | fixed |
+| Repeat-spot share has no baseline, advice to redesign unsupported | methods | advice removed; function-count share and a comparison caution added; baseline still missing |
+| Jargon, chart ids, glossary first, dual-axis chart, no text alternatives, sweep rows not actionable | reader | fixed (plain wording, verdict first, glossary collapsed, charts split, aria-labels, fix counts per sweep) |
+| Git-only report claimed things it cannot show | reader | fixed (explicit "not available without scans" note, sentences hidden) |
+
+**Deferred (not done):** vendoring Chart.js for an offline page and an integrity hash; replacing numpy and pandas; the research-tool imports (blame sampling and radius) behind a plugin interface so the command can run on any clone; streaming `%B` for 250,000-commit repositories; a shuffle baseline for repeat spots; re-measuring the fix-rule miss rate for the shipped rule; moving the size section up; annotating sweeps on the timeline; a table view of each chart; matching renames for births and deaths; whether to scale blame-sample shares.

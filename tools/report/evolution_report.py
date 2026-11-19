@@ -9,7 +9,10 @@
 Definitions follow the research log (docs/sensor-overhaul/sensors/ripple_radius.md, "Accounting for all the work"); every figure carries a confidence label
 and the report links to wiki pages that explain how it is computed."""
 import argparse
+import bisect
 import collections
+import gzip
+import hashlib
 import json
 import os
 import pickle
@@ -32,13 +35,14 @@ FIX = re.compile(r"\b(fix|fixes|fixed|bug|regression|crash|leak|overflow|race|de
 FMT = re.compile(r"\b(typo|typos|spelling|whitespace|style|checkpatch|indent(ation)?|licen[cs]e|docs?|documentation|comments?|copyright|spdx)\b", re.I)
 FIXES_TRAILER = re.compile(r"^Fixes:\s*([0-9a-fA-F]{8,40})", re.M)
 TESTPART = {"test", "tests", "testing", "__tests__", "spec", "specs", "testdata", "t"}
-COMMENT = {"c": re.compile(r"^\s*(/\*|\*|//|$)"), "go": re.compile(r"^\s*(//|/\*|\*|$)"), "python": re.compile(r"^\s*(#|\"\"\"|'''|$)"), "rust": re.compile(r"^\s*(//|/\*|\*|$)")}
+COMMENT = {"c": re.compile(r"^\s*(/\*|\*(\s|/|$)|//|$)"), "go": re.compile(r"^\s*(//|/\*|\*|$)"), "python": re.compile(r"^\s*(#|\"\"\"|'''|$)"), "rust": re.compile(r"^\s*(//|/\*|\*|$)")}
 VERBS = {
     "feature": {"add", "introduce", "implement", "support", "enable", "allow", "new", "create", "expose", "provide", "extend", "export", "register", "enhance", "initial"},
     "restructure": {"convert", "move", "rename", "split", "merge", "refactor", "simplify", "cleanup", "clean", "consolidate", "rework", "reorganize", "reorganise", "unify", "replace", "switch", "use", "make", "factor", "separate", "change", "remove", "drop"},
     "optimization": {"optimize", "optimise", "speed", "improve", "reduce", "avoid", "skip", "cache", "batch", "prefetch", "defer", "shrink", "inline", "streamline", "limit", "tune", "increase", "decrease"},
-    "fix": {"fix", "fixes", "correct", "handle", "prevent", "check", "validate", "ensure", "protect", "harden", "don't", "do", "never", "properly", "revert", "restore", "sanitize", "sanitise", "verify", "guard", "wait", "clear", "reset"},
+    "fix": {"correct", "handle", "prevent", "validate", "ensure", "protect", "harden", "restore", "sanitize", "sanitise", "verify", "guard", "reset"},
 }
+PARSER_VERSION = "2"  # bump when the diff parser or the rules change: part of the cache key
 GROUPS = ["organic", "sweeps", "fixes", "mechanical"]
 CAT_GROUP = {"sweep": "sweeps", "revert": "mechanical", "tests only": "mechanical", "comment or whitespace only": "mechanical", "formatting, docs, licence (subject)": "mechanical"}
 
@@ -60,12 +64,28 @@ def func_name(ctx, lang):
 def is_test(path):
     parts = path.lower().split("/")
     fn = parts[-1]
-    return any(p in TESTPART for p in parts[:-1]) or fn.startswith("test_") or fn.endswith(("_test.go", "_test.py", "_test.c", "_test.rs", "test.c"))
+    return any(p in TESTPART for p in parts[:-1]) or fn.startswith("test_") or fn.endswith(("_test.go", "_test.py", "_test.c", "_test.cc", "_test.cpp", "_test.rs"))
+
+
+def lemma(w):
+    """Map a past-tense, -ing or plural verb to a listed bare verb ('added', 'adds', 'adding' -> 'add')."""
+    known = set().union(*VERBS.values())
+    for cand in (w, w[:-1], w[:-2], w[:-3], w[:-3] + "e", w[:-2] + "e", w[:-1] + "e"):
+        if cand in known:
+            return cand
+    if len(w) > 3 and w[-1] == w[-2]:  # 'dropped' -> 'drop'
+        for cand in (w[:-3], w[:-4]):
+            if cand in known:
+                return cand
+    return w
 
 
 def cause_verb(subject):
+    """Type of a causing commit from its subject: a fix-like subject first, then the first verb (lemmatised); everything else is 'other'."""
+    if FIX.search(subject):
+        return "fix"
     seg = subject.split(": ")[-1].strip().lower()
-    w = re.split(r"[\s,/(]", seg, 1)[0]
+    w = lemma(re.split(r"[\s,/(]", seg, 1)[0])
     for k, vs in VERBS.items():
         if w in vs:
             return k
@@ -73,64 +93,96 @@ def cause_verb(subject):
 
 
 def git(repo, *a):
-    return subprocess.run(["git", "-C", repo, *a], capture_output=True, text=True, errors="replace").stdout
+    r = subprocess.run(["git", "-c", "core.quotepath=off", "-C", repo, *a], capture_output=True, text=True, errors="replace")
+    if r.returncode:
+        raise SystemExit(f"git {' '.join(a[:2])} failed in {repo}: {r.stderr.strip()[:200]}")
+    return r.stdout
 
 
 def load_commits(repo):
-    out = git(repo, "log", "--no-merges", "--format=%x1d%H%x1f%ct%x1f%ae%x1f%s%x1f%B%x1e")
+    out = git(repo, "log", "--no-merges", "--name-only", "--format=%x1d%H%x1f%ct%x1f%ae%x1f%s%x1f%B%x1e")
     commits = {}
     for blk in out.split("\x1d")[1:]:
         head, _, rest = blk.partition("\x1e")
         p = head.split("\x1f", 4)
         if len(p) >= 5:
-            commits[p[0]] = {"ct": int(p[1]), "author": p[2].lower(), "subject": p[3], "body": p[4]}
+            files = [f for f in rest.split("\n") if f.strip()]
+            commits[p[0]] = {"ct": int(p[1]), "author": p[2].lower(), "subject": p[3], "body": p[4], "any_test": any(is_test(f) for f in files), "all_test": bool(files) and all(is_test(f) for f in files)}
     return commits
 
 
-def diff_pass(repo, lang, cache_file):
-    """sha -> {funcs: [(path, function)], add, rem, comment_only, files: [path]} for code files, one streaming `git log -p -U0` pass, cached."""
+def diff_pass(repo, lang, cache_dir, name):
+    """sha -> {funcs: [(path, function)], add, rem, nc, files: [path]} for code files, one streaming `git log -p -U0` pass over code paths, cached as gzip JSON.
+    The cache key covers HEAD, the language, the parser version and the rule tables, so a stale cache is never reused."""
     head = git(repo, "rev-parse", "HEAD").strip()
+    key = hashlib.sha1(json.dumps([head, lang, PARSER_VERSION, EXTS[lang], COMMENT[lang].pattern, HUNK.pattern], default=str).encode()).hexdigest()[:16]
+    Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    cache_file = Path(cache_dir) / f"diff_{name}_{key}.json.gz"
     if cache_file.exists():
-        c = pickle.load(open(cache_file, "rb"))
-        if c.get("head") == head:
-            return c["data"]
+        try:
+            with gzip.open(cache_file, "rt") as fh:
+                data = json.load(fh)
+            return {s: {**d, "funcs": [tuple(f) for f in d["funcs"]]} for s, d in data.items()}
+        except (OSError, ValueError):
+            pass
     exts = EXTS[lang]
     cm = COMMENT[lang]
-    proc = subprocess.Popen(["git", "-C", repo, "log", "--no-merges", "-p", "-U0", "--no-color", "-M", "--format=\x1dC %H"], stdout=subprocess.PIPE, text=True, errors="replace")
+    pathspec = ["--"] + [f"*{e}" for e in exts]
+    proc = subprocess.Popen(["git", "-c", "core.quotepath=off", "-C", repo, "log", "--no-merges", "-p", "-U0", "--no-color", "-M", "--format=\x1dC %H", *pathspec], stdout=subprocess.PIPE, text=True, errors="replace")
     data, sha, cur = {}, None, None
+    old = new = None
+    in_header = False
 
-    def new(s):
-        data[s] = {"funcs": set(), "add": 0, "rem": 0, "nc": 0, "files": set()}
+    def clean(p):
+        p = p.rstrip("\n").split("\t")[0]
+        if p.startswith('"') and p.endswith('"'):
+            p = p[1:-1]
+        return p
 
     for line in proc.stdout:
         if line.startswith("\x1dC "):
-            sha, cur = line[3:].strip(), None
-            new(sha)
-        elif sha:
-            if line.startswith("+++ b/"):
-                cur = line[6:].rstrip("\n")
-                if cur.endswith(exts):
+            sha, cur, in_header = line[3:].strip(), None, False
+            data[sha] = {"funcs": set(), "add": 0, "rem": 0, "nc": 0, "files": set()}
+        elif sha is None:
+            continue
+        elif line.startswith("diff --git "):
+            cur, old, new, in_header = None, None, None, True
+        elif in_header and line.startswith("--- "):
+            old = clean(line[4:])
+            old = old[2:] if old.startswith("a/") else old
+        elif in_header and line.startswith("+++ "):
+            new = clean(line[4:])
+            new = new[2:] if new.startswith("b/") else new
+        elif line.startswith("@@"):
+            if in_header:
+                in_header = False
+                path = new if new and new != "/dev/null" else old
+                cur = path if path and path.endswith(exts) else None
+                if cur:
                     data[sha]["files"].add(cur)
-                else:
-                    cur = None
-            elif cur and line.startswith("@@"):
+            if cur:
                 m = HUNK.match(line.rstrip("\n"))
                 n = func_name(m.group(1), lang) if m else None
                 if n:
                     data[sha]["funcs"].add((cur, n))
-            elif cur and line[:1] in "+-" and not line.startswith(("+++", "---")):
-                d = data[sha]
-                if line[0] == "+":
-                    d["add"] += 1
-                else:
-                    d["rem"] += 1
-                if not cm.match(line[1:]):
-                    d["nc"] += 1
+        elif cur and not in_header and line[:1] in "+-":
+            d = data[sha]
+            if line[0] == "+":
+                d["add"] += 1
+            else:
+                d["rem"] += 1
+            if not cm.match(line[1:]):
+                d["nc"] += 1
     proc.wait()
+    if proc.returncode:
+        raise SystemExit(f"git log -p failed in {repo}")
     for d in data.values():
         d["funcs"] = sorted(d["funcs"])
         d["files"] = sorted(d["files"])
-    pickle.dump({"head": head, "data": data}, open(cache_file, "wb"))
+    tmp = cache_file.with_suffix(".tmp")
+    with gzip.open(tmp, "wt") as f:
+        json.dump(data, f)
+    os.replace(tmp, cache_file)
     return data
 
 
@@ -143,7 +195,7 @@ def resolve_pairs(commits):
         for m in FIXES_TRAILER.finditer(c["body"]):
             h = m.group(1).lower()
             cand = [x for x in by12.get(h[:8], []) if x.startswith(h)]
-            if len(cand) == 1 and cand[0] != s and commits[cand[0]]["ct"] < c["ct"]:
+            if len(cand) == 1 and cand[0] != s and commits[cand[0]]["ct"] <= c["ct"]:
                 pairs.append((s, cand[0]))
     return list(dict.fromkeys(pairs))
 
@@ -161,7 +213,7 @@ def blame_pairs(repo, lang, fixes, commits, n):
             for fix, ind, _n, _t in res:
                 if ind != fix and ind in commits and commits[ind]["ct"] < commits[fix]["ct"]:
                     pairs.append((fix, ind))
-    return pairs, len(fixes)
+    return pairs, fixes
 
 
 def qlabel(ts):
@@ -175,8 +227,12 @@ def build(args):
     cache = Path(args.cache or Path(args.out) / "cache")
     cache.mkdir(parents=True, exist_ok=True)
     commits = load_commits(repo)
-    diff = diff_pass(repo, lang, cache / f"diff_{args.name}.pkl")
-    nf = {s: len(diff.get(s, {}).get("funcs", [])) for s in commits}
+    diff = diff_pass(repo, lang, cache, args.name)
+    EMPTY = {"funcs": [], "add": 0, "rem": 0, "nc": 0, "files": []}
+    diff = collections.defaultdict(lambda: EMPTY, diff)
+    if not commits:
+        raise SystemExit(f"no commits found in {repo}")
+    nf = {s: len(diff[s]["funcs"]) for s in commits}
     named = resolve_pairs(commits)
     named_fix = {f for f, _ in named}
     trailer_fix = {s for s, c in commits.items() if FIXES_TRAILER.search(c["body"])}
@@ -184,15 +240,17 @@ def build(args):
     blame_info = None
     unnamed = [s for s, c in commits.items() if 1 <= nf[s] <= 60 and not c["subject"].lower().startswith("revert") and s not in trailer_fix and FIX.search(c["subject"])]
     blamed = {}
+    sampled_set = set()
     if args.blame:
-        bp, nb = blame_pairs(repo, lang, unnamed, commits, args.blame)
+        bp, sampled_fixes = blame_pairs(repo, lang, unnamed, commits, args.blame)
         blamed = {f: i for f, i in bp}
-        blame_info = {"sampled": nb, "found": len(bp), "unnamed_fix_like": len(unnamed)}
+        sampled_set = {f for f, _ in sampled_fixes}
+        blame_info = {"sampled": len(sampled_fixes), "found": len(bp), "unnamed_fix_like": len(unnamed), "coverage": len(sampled_fixes) / max(len(unnamed), 1)}
         pairs += [p for p in bp]
     cited = {i for _, i in pairs}
     cat = {}
     for s, c in commits.items():
-        d = diff.get(s)
+        d = diff[s]
         n = nf[s]
         subj = c["subject"]
         if n == 0:
@@ -203,12 +261,17 @@ def build(args):
             cat[s] = "revert"
         elif s in trailer_fix:
             cat[s] = "fix, named cause"
-        elif FIX.search(subj):
-            cat[s] = "fix, cause by blame" if s in blamed else ("fix, no cause found" if args.blame else "fix, cause not searched")
-        elif d["files"] and all(is_test(f) for f in d["files"]):
-            cat[s] = "tests only"
-        elif FMT.search(subj):
+        elif FMT.search(subj):  # "fix typo", "fix whitespace": formatting, not a repair
             cat[s] = "formatting, docs, licence (subject)"
+        elif FIX.search(subj):
+            if s in blamed:
+                cat[s] = "fix, cause by blame"
+            elif s in sampled_set:
+                cat[s] = "fix, no cause found"
+            else:
+                cat[s] = "fix, cause not searched"
+        elif c["all_test"]:
+            cat[s] = "tests only"
         elif d["nc"] == 0 and (d["add"] + d["rem"]) > 0:
             cat[s] = "comment or whitespace only"
         elif d["add"] >= 3 * max(d["rem"], 1):
@@ -233,7 +296,6 @@ def build(args):
     out["composition_commits"] = {g: comp_c[g] / max(sum(comp_c.values()), 1) for g in GROUPS}
     out["categories"] = {k: {"commits": sum(1 for v in cat.values() if v == k), "edits": sum(nf[s] for s, v in cat.items() if v == k)} for k in sorted(set(cat.values()))}
     # label quality
-    since = commits and sorted(c["ct"] for c in commits.values())[len(commits) // 2]
     out["label_quality"] = {
         "fixes_trailer_share_of_function_commits": len([s for s in trailer_fix if nf[s] > 0]) / max(out["commits_with_functions"], 1),
         "fixes_trailer_share_of_all": len(trailer_fix) / max(len(commits), 1),
@@ -258,7 +320,7 @@ def build(args):
     out["pairs_all"] = len(pairs)
     ct_rows = collections.defaultdict(list)
     for (f, i), lg in zip(pm, lags):
-        ff, fi = set(diff.get(f, {}).get("funcs", [])), set(diff.get(i, {}).get("funcs", []))
+        ff, fi = set(diff[f]["funcs"]), set(diff[i]["funcs"])
         ct_rows[cause_verb(commits[i]["subject"])].append((bool(ff & fi) if ff and fi else None, lg))
     out["cause_types"] = [{"cause": k, "pairs": len(v), "same_function": float(np.mean([x[0] for x in v if x[0] is not None])) if any(x[0] is not None for x in v) else None, "median_lag": float(np.median([x[1] for x in v]))} for k, v in sorted(ct_rows.items(), key=lambda kv: -len(kv[1]))]
     # cc stable lag
@@ -269,7 +331,7 @@ def build(args):
     fc = collections.Counter()
     for s, k in cat.items():
         if k.startswith("fix"):
-            for f in diff.get(s, {}).get("funcs", []):
+            for f in diff[s]["funcs"]:
                 fc[tuple(f)] += 1
     tot = sum(fc.values())
     out["repeat_spots"] = {"fix_edits": tot, "functions_fixed": len(fc), "share_in_fixed_2plus": sum(v for v in fc.values() if v >= 2) / tot if tot else None, "share_in_fixed_5plus": sum(v for v in fc.values() if v >= 5) / tot if tot else None}
@@ -279,6 +341,15 @@ def build(args):
     rows = [(nf[s], s in cited) for s, k in cat.items() if k in ("adds code", "removes code", "modifies") and commits[s]["ct"] <= end - 3 * 365 * 86400]
     bands = [(1, 1, "1 function"), (2, 3, "2-3"), (4, 10, "4-10"), (11, 30, "11-30"), (31, 60, "31-60")]
     out["size_bands"] = [{"band": lab, "commits": sum(1 for n, c in rows if a <= n <= b), "later_repaired": (float(np.mean([c for n, c in rows if a <= n <= b])) if any(a <= n <= b for n, c in rows) else None)} for a, b, lab in bands]
+    out["pairs_dropped_no_function_share"] = 1 - (out["pairs"] / out["pairs_all"]) if out["pairs_all"] else None
+    out["same_function_overall"] = (lambda v: float(np.mean(v)) if v else None)([bool(set(diff[f]["funcs"]) & set(diff[i]["funcs"])) for f, i in pm if diff[f]["funcs"] and diff[i]["funcs"]])
+    citing = collections.Counter(i for f, i in pairs)
+    for sw_row, (n_, s_) in zip(out["largest_sweeps"], sw):
+        sw_row["fixes_citing"] = int(citing.get(s_, 0))
+    fn_counts = collections.Counter(fc.values())
+    out["repeat_spots"]["functions_fixed_2plus_share"] = (sum(v for k, v in fn_counts.items() if k >= 2) / len(fc)) if fc else None
+    out["fix_definition"] = {"trailer_fixes": len(trailer_fix), "subject_only_fixes": len(unnamed), "trailer_habit": len(trailer_fix) >= 0.02 * len(commits)}
+    out["blame_complete"] = (not args.blame and len(unnamed) == 0) or bool(blame_info and blame_info["coverage"] >= 0.999) or (not args.blame and len(named) > 0.5 * max(len(unnamed) + len(trailer_fix), 1))
     out["size_bands_basis"] = "named" if not args.blame else "named + blame sample (understates)"
     # calendar-quarter series (git only)
     qs = collections.OrderedDict()
@@ -291,9 +362,10 @@ def build(args):
             q["edits"][g] += nf[s]
         if cat[s].startswith("fix"):
             q["fix_commits"] += 1
-            if any(is_test(f) for f in diff.get(s, {}).get("files", [])):
+            if commits[s]["any_test"]:
                 q["fix_with_test"] += 1
-    out["git_quarters"] = [{"label": k, "commits": v["commits"], **{f"edits_{g}": v["edits"][g] for g in GROUPS}, "authors": len(v["authors"]), "top_author_share": max(v["authors"].values()) / v["commits"], "fix_commits": v["fix_commits"], "fix_with_test": v["fix_with_test"]} for k, v in qs.items()]
+    cur_q = qlabel(datetime.now(timezone.utc).timestamp())
+    out["git_quarters"] = [{"label": k, "commits": v["commits"], **{f"edits_{g}": v["edits"][g] for g in GROUPS}, "authors": len(v["authors"]), "top_author_share": max(v["authors"].values()) / v["commits"], "fix_commits": v["fix_commits"], "fix_with_test": v["fix_with_test"], "partial": k == cur_q} for k, v in qs.items()]
     out["_internal"] = {"cat": cat, "nf": nf, "commits": commits, "diff": diff, "pairs": pairs, "cited": cited}
     return out
 
@@ -310,13 +382,17 @@ def scan_series(out, scans):
         keys = {(files[f], n) for f, n in con.execute("SELECT file_id, func_name FROM function_data") if f in files}
         con.close()
         keys_by_q.append(keys)
-        cts.append(int(subprocess.run(["git", "-C", out["_repo"], "show", "-s", "--format=%ct", s["commit"]], capture_output=True, text=True).stdout.strip()))
+        ctr = subprocess.run(["git", "-C", out["_repo"], "show", "-s", "--format=%ct", s["commit"]], capture_output=True, text=True).stdout.strip()
+        if not ctr.isdigit():
+            raise SystemExit(f"scan commit {s['commit'][:10]} ({s.get('label')}) is not in the repository")
+        cts.append(int(ctr))
     first = {}
     for i, keys in enumerate(keys_by_q):
         for k in keys:
             first.setdefault(k, i)
     years = sorted({sn[i]["date"][:4] for i in set(first.values())})
     ct_sorted = sorted((c["ct"], s) for s, c in commits.items())
+    ct_times = [t for t, _ in ct_sorted]
     quarters, edited_by_q, prev = [], [], None
     for i, s in enumerate(sn):
         keys = keys_by_q[i]
@@ -333,18 +409,19 @@ def scan_series(out, scans):
             q["deaths_moved"] = sum(1 for k in prev - keys if k[1] in names_now)
             edited = set()
             e = collections.Counter()
-            for t, c in ct_sorted:
-                if lo < t <= hi:
-                    g = CAT_GROUP.get(cat[c], "fixes" if cat[c].startswith("fix") else ("organic" if cat[c] != "none" else None))
-                    if g:
-                        e[g] += nf[c]
-                        edited.update(tuple(f) for f in diff.get(c, {}).get("funcs", []))
+            for t, c in ct_sorted[bisect.bisect_right(ct_times, lo) : bisect.bisect_right(ct_times, hi)]:
+                g = CAT_GROUP.get(cat[c], "fixes" if cat[c].startswith("fix") else ("organic" if cat[c] != "none" else None))
+                if g:
+                    e[g] += nf[c]
+                    edited.update(tuple(f) for f in diff[c]["funcs"])
             for g in GROUPS:
                 q["edits_" + g] = e[g]
             edited_by_q.append(edited)
             q["edited_functions"] = len(edited & keys)
             recent = set().union(*edited_by_q[-4:]) if len(edited_by_q) >= 4 else None
-            q["untouched_4q_share"] = (1 - len(recent & keys) / max(len(keys), 1)) if recent is not None else None
+            old_keys = keys & keys_by_q[i - 4] if i >= 4 else None  # only functions that already existed four scans ago can be "untouched for four quarters"
+            q["untouched_4q_share"] = (1 - len(recent & old_keys) / max(len(old_keys), 1)) if recent is not None and old_keys else None
+            q["partial"] = (cts[i] - cts[i - 1]) < 60 * 86400
         prev = keys
         quarters.append(q)
     out["quarters"] = quarters
@@ -400,6 +477,10 @@ def main():
     ap.add_argument("--link-base", default="https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki")
     ap.add_argument("--radius", action="store_true")
     args = ap.parse_args()
+    if not re.fullmatch(r"[\w.-]+", args.name):
+        ap.error("--name may contain only letters, digits, dot, underscore and hyphen")
+    if not args.link_base.startswith("https://"):
+        ap.error("--link-base must start with https://")
     Path(args.out).mkdir(parents=True, exist_ok=True)
     out = build(args)
     out["_repo"] = args.repo
@@ -415,7 +496,8 @@ def main():
     out.pop("_out")
     json.dump(out, open(Path(args.out) / f"{args.name}_evolution.json", "w"), indent=1, default=float)
     tpl = (HERE / "template.html").read_text()
-    html = tpl.replace("__DATA__", json.dumps(out, separators=(",", ":"), default=float)).replace("__TITLE__", f"Evolution of {args.name}")
+    payload = json.dumps(out, separators=(",", ":"), default=float).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+    html = tpl.replace("__TITLE__", f"Evolution of {args.name}").replace("__DATA__", payload)  # title first: the payload may contain any text
     (Path(args.out) / f"{args.name}_evolution.html").write_text(html)
     c = out["composition_edits"]
     print(f"{args.name}: {out['commits']:,} commits, {out['function_edits']:,} function edits, mode {out['mode']}; edits: " + ", ".join(f"{g} {100 * c[g]:.1f}%" for g in GROUPS) + f"; named pairs {out['pairs']:,}; median lag {out['lag_median_days'] and round(out['lag_median_days'])} d")

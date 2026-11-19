@@ -110,114 +110,121 @@ details.how { font-size: 13px; color: var(--fg2); }
 details.how summary { cursor: pointer; color: var(--fg3); }
 details.how[open] summary { margin-bottom: 6px; }
 .empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
+</style><style>
+.verdict { font-size: 18px; color: var(--fg); max-width: 70ch; }
+.sowhat b { font-weight: 400; display: block; }
 </style>
 
 <div class="wrap">
 <header>
   <div class="kicker">GitGalaxy · repository evolution</div>
   <h1 id="title"></h1>
-  <p class="lede">How this repository grew, where the work went, how quickly and where repairs arrived, and which functions keep needing them. Built from the git history<span id="scanNote"></span>.</p>
+  <p class="verdict" id="verdict"></p>
   <div class="meta" id="meta"></div>
-  <div class="gloss">
-    <div><b>Sweep</b>One commit that edits more than 60 functions: a rename, an API conversion, a reformat. Planned and mechanical.</div>
-    <div><b>Organic change</b>Ordinary work: new features, refactors, new code, removals.</div>
-    <div><b>Fix</b>A commit that says it fixes something (a Fixes: trailer or a fix-like subject).</div>
-    <div><b>Cause</b>The earlier commit a fix repairs: named in the fix, or found by blame.</div>
-  </div>
+  <div class="notice" id="modeNote"></div>
 </header>
 
 <section id="glance">
-  <div class="sec-head"><h2>At a glance</h2><span class="chip strong"><i></i>Strong · rule-based counts</span></div>
+  <div class="sec-head"><h2>At a glance</h2><span class="chip strong"><i></i>Strong · counting rules</span></div>
   <div class="glance" id="glanceStats"></div>
   <div class="fig">
     <h3>Where the function edits went</h3>
     <div class="bar" id="compBar" role="img" aria-label="Share of function edits by kind"></div>
     <div class="legend" id="compLegend"></div>
-    <p class="cap">A function edit is a function named in a commit's diff headers; a function edited in two commits counts twice. Sweeps are under 1% of commits but often a fifth of all edits.</p>
+    <p class="cap">A function edit is one function named in one commit's diff headers; a function changed in two commits counts twice.</p>
   </div>
-  <div class="sowhat"><span>So what</span>Separating planned mechanical sweeps from everything else makes the other trends readable.</div>
+  <div class="sowhat" id="sw_glance"><span>So what</span><b></b></div>
+  <details class="how"><summary>Terms and confidence labels</summary>
+    <div class="gloss">
+      <div><b>Sweep</b>One commit that edits more than 60 functions: a rename, an API conversion, a reformat. Usually planned and mechanical.</div>
+      <div><b>Organic change</b>Ordinary work: new features, refactors, new code, removals.</div>
+      <div><b>Fix</b>A commit that says it fixes something: a Fixes: trailer, or a fix-like subject.</div>
+      <div><b>Cause</b>The earlier commit a fix repairs, named in the fix or found by git blame. "Later blamed for a fix" means a commit was the cause of at least one fix.</div>
+      <div><b>Strong</b>A counting rule, or a result that held on other projects.</div>
+      <div><b>Moderate</b>Rests on a label with known error, such as fix-like subjects.</div>
+      <div><b>Exploratory</b>One project, no replication yet.</div>
+    </div>
+  </details>
   <a class="more" data-wiki="08-30-evolution-report" href="#">What this report measures and how →</a>
 </section>
 
 <section id="growth" hidden>
   <div class="sec-head"><h2>1 · Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
-  <div class="fig"><h3><span class="id">T1</span>How big the code base is</h3><div class="box tall"><canvas id="cSize"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
+  <div class="fig"><h3>How big the code base is</h3><div class="box tall"><canvas id="cSize" role="img" aria-label="Functions in the code base per quarter"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
   <div class="grid2">
-    <div class="fig"><h3><span class="id">T2</span>What the growth is made of</h3><div class="box"><canvas id="cBirths"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file: reorganisation, not creation or loss.</p></div>
-    <div class="fig"><h3><span class="id">T3</span>Age layers</h3><div class="box"><canvas id="cCohorts"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. The first year includes everything that existed at the first scan.</p></div>
+    <div class="fig"><h3>What the growth is made of</h3><div class="box"><canvas id="cBirths" role="img" aria-label="New and removed functions per quarter"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so it is reorganisation, not creation or loss.</p></div>
+    <div class="fig"><h3>Age layers</h3><div class="box"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
   </div>
-  <div class="sowhat"><span>So what</span>Shows whether growth is new code or reorganisation, and how much of today's code is old.</div>
+  <div class="sowhat" id="sw_growth"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-31-evolution-growth" href="#">How growth is measured →</a>
 </section>
 
 <section id="activity">
-  <div class="sec-head"><h2 id="actTitle">Activity over time</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
-  <div class="fig"><h3><span class="id">T5</span>Function edits by kind, per quarter
+  <div class="sec-head"><h2 id="actTitle">Where the work goes</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
+  <div class="fig"><h3>Function edits by kind, per quarter
     <span style="margin-left:auto"><button class="tog" id="tAbs" aria-pressed="true">Edits</button> <button class="tog" id="tShare" aria-pressed="false">Share</button></span></h3>
-    <div class="box tall"><canvas id="cWork"></canvas></div>
+    <div class="box tall"><canvas id="cWork" role="img" aria-label="Function edits by kind per quarter"></canvas></div>
     <div class="legend"><span><i style="background:var(--s1)"></i>Organic change</span><span><i style="background:var(--s2)"></i>Sweeps</span><span><i style="background:var(--s3)"></i>Fixes</span><span><i style="background:var(--s4)"></i>Mechanical (tests-only, comments, formatting, reverts)</span></div>
+    <p class="cap" id="partialNote"></p>
   </div>
   <div class="grid2">
-    <div class="fig"><h3><span class="id">T11</span>Contributors</h3><div class="box"><canvas id="cAuthors"></canvas></div><p class="cap">Distinct authors per quarter, and the share of commits by the most active one.</p></div>
-    <div class="fig" id="heatFig"><h3><span class="id">T4</span>How much of the code is alive</h3><div class="box"><canvas id="cHeat"></canvas></div><p class="cap">Edited this quarter, and untouched for four quarters, as shares of the functions that exist (needs the scans).</p></div>
-    <div class="fig" id="fixFig"><h3><span class="id">T16</span>Fixes that ship with a test</h3><div class="box"><canvas id="cFixTest"></canvas></div><p class="cap">Share of fix commits that also touch a test file.</p></div>
+    <div class="fig"><h3>Active authors per quarter</h3><div class="box"><canvas id="cAuthors" role="img" aria-label="Distinct authors per quarter"></canvas></div><p class="cap">Distinct author e-mail addresses (one person with two addresses counts twice; bots count).</p></div>
+    <div class="fig"><h3>Share of commits by the busiest author</h3><div class="box"><canvas id="cTop" role="img" aria-label="Share of commits by the most active author"></canvas></div><p class="cap">A high and steady share means one person carries the project.</p></div>
+    <div class="fig" id="heatFig"><h3>How much of the code is alive</h3><div class="box"><canvas id="cHeat" role="img" aria-label="Share of functions edited and untouched"></canvas></div><p class="cap">Edited this quarter, and untouched for four quarters (among functions that already existed four quarters earlier).</p></div>
+    <div class="fig" id="fixFig"><h3>Fixes that ship with a test</h3><div class="box"><canvas id="cFixTest" role="img" aria-label="Share of fix commits touching a test file"></canvas></div><p class="cap">Share of fix commits that touch a file under a test directory.</p></div>
   </div>
-  <div class="sowhat"><span>So what</span>Most of the code is quiet in any given year. Work concentrates in a small live fraction plus the occasional sweep across everything.</div>
+  <div class="sowhat" id="sw_work"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-32-evolution-work" href="#">How edits are classified →</a>
 </section>
 
 <section id="sweeps">
-  <div class="sec-head"><h2>2 · Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
+  <div class="sec-head"><h2>Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
   <p id="sweepIntro"></p>
-  <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th>Later cited as the cause of a fix</th></tr></thead><tbody></tbody></table></div>
-  <div class="sowhat"><span>So what</span>Each sweep is a migration with a known scope; you can see which were followed by repairs.</div>
+  <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th class="num" id="sweepCol">Fixes that name it as their cause</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat" id="sw_sweeps"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-33-evolution-sweeps" href="#">How sweeps are found →</a>
 </section>
 
 <section id="repairs">
-  <div class="sec-head"><h2>3 · Repairs: when, and how close</h2><span class="chip moderate"><i></i>Moderate · causes named by Fixes: trailers or found by blame</span></div>
+  <div class="sec-head"><h2>Repairs: when, and how close</h2><span class="chip moderate" id="repChip"><i></i>Moderate</span></div>
   <div id="repairsEmpty" class="empty" hidden></div>
   <div class="grid2" id="repairsGrid">
-    <div class="fig"><h3><span class="id">T7</span>How long fixes took</h3><div class="box"><canvas id="cLag"></canvas></div><p class="cap" id="lagCap"></p></div>
-    <div class="fig" id="hopFig" hidden><h3>How much closer than chance fixes land</h3><div class="hop" id="hops"></div><p class="cap">Within one or two calls of a changed function, against same-sized functions in the same file. 1.0 (the line) means no pattern.</p></div>
+    <div class="fig"><h3>How long fixes took</h3><div class="box"><canvas id="cLag" role="img" aria-label="Histogram of time from cause to fix"></canvas></div><p class="cap" id="lagCap"></p></div>
+    <div class="fig" id="hopFig" hidden><h3>How close fixes land to the change that caused them</h3><div class="hop" id="hops"></div><p class="cap">Compared with same-sized functions in the same file. The vertical line is 1.0: no pattern. 2.0 means a fix is about twice as likely as chance to land there.</p></div>
   </div>
   <div class="fig" id="causeFig">
-    <h3>Which causing changes produce which fixes</h3>
-    <div class="tablewrap"><table id="causeTable"><thead><tr><th>Causing change</th><th class="num">Pairs</th><th>Fix in the same function</th><th class="num">Median lag</th></tr></thead><tbody></tbody></table></div>
-    <p class="cap">Cause type is the first verb of the causing commit's subject.</p>
+    <h3>What kind of change caused the fixes</h3>
+    <div class="tablewrap"><table id="causeTable"><thead><tr><th>Causing change</th><th class="num">Fixes</th><th>Fix lands in the same function</th><th class="num">Median days to fix</th></tr></thead><tbody></tbody></table></div>
+    <p class="cap" id="causeCap"></p>
   </div>
-  <div class="example">
-    <div><code>Day 1</code> function B changes.</div>
-    <div><code>Months later</code> a bug appears. The fix edits B itself about half the time.</div>
-    <div>When it does not, the fix is usually in a function that calls B, or in B's file: look there first.</div>
-  </div>
-  <div class="sowhat"><span>So what</span>After a feature, repairs arrive late and scattered: widen the review. After a fix of a fix, they come back to the same function.</div>
+  <div class="example" id="example"></div>
+  <div class="sowhat" id="sw_repairs"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-34-evolution-repairs" href="#">How repairs are matched to causes →</a>
 </section>
 
-<section id="repeat">
-  <div class="sec-head"><h2>4 · Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
-  <div class="glance" id="repeatStats"></div>
-  <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
-  <div class="sowhat"><span>So what</span>Repairs repeat: the second fix in a function is common. A function fixed five times is a candidate for redesign, not another patch.</div>
-  <a class="more" data-wiki="08-35-evolution-repeat-spots" href="#">How repeat spots are counted →</a>
-</section>
-
 <section id="sizes">
-  <div class="sec-head"><h2>5 · Which changes get repaired</h2><span class="chip strong"><i></i>Strong · size is the one per-change signal that held up</span></div>
-  <div class="fig"><h3>Share of changes later cited as the cause of a fix, by size</h3><div class="box"><canvas id="cSize2"></canvas></div><p class="cap" id="sizeCap"></p></div>
-  <div class="sowhat"><span>So what</span>Bigger changes are repaired far more often. Nothing else we measured (author experience, reviewer trailers, structure) added to size.</div>
+  <div class="sec-head"><h2>Which changes get repaired</h2><span class="chip strong" id="sizeChip"><i></i>Strong</span></div>
+  <div class="fig"><h3>Share of changes later blamed for a fix, by size</h3><div class="box"><canvas id="cSize2" role="img" aria-label="Share of changes later blamed for a fix by number of functions edited"></canvas></div><p class="cap" id="sizeCap"></p></div>
+  <div class="sowhat" id="sw_sizes"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-36-evolution-which-changes" href="#">How this was measured →</a>
 </section>
 
+<section id="repeat">
+  <div class="sec-head"><h2>Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
+  <div class="glance" id="repeatStats"></div>
+  <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat" id="sw_repeat"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-35-evolution-repeat-spots" href="#">How repeat spots are counted →</a>
+</section>
+
 <section id="quality">
-  <div class="sec-head"><h2>6 · How far to trust this report</h2><span class="chip strong"><i></i>Strong · counts</span></div>
+  <div class="sec-head"><h2>How far to trust this report</h2><span class="chip strong"><i></i>Strong · counts</span></div>
   <div class="cards" id="qualityCards"></div>
   <div class="empty">Whether a particular change will need a fix is not something this report can say; size predicts it, little else does. How well this repository's "look first" and triage lists work is measured separately by <code>gitgalaxy backtest</code>.</div>
   <a class="more" data-wiki="08-37-evolution-label-quality" href="#">Label quality and limits →</a>
 </section>
 
-<footer>Built by GitGalaxy from the repository's git history<span id="scanFoot"></span>. Definitions, measured behaviour and caveats are in the <a class="more" id="repoLink" href="https://github.com/squid-protocol/gitgalaxy">GitGalaxy repository</a> wiki. Figures are descriptions of the past, not forecasts.</footer>
+<footer>Built by GitGalaxy from the repository's git history<span id="scanFoot"></span>. Definitions, measured behaviour and caveats are in the <a class="more" id="repoLink" href="https://github.com/squid-protocol/gitgalaxy">GitGalaxy repository</a> wiki. Figures describe the past; they are not forecasts.</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -229,51 +236,96 @@ const fmt = n => Math.round(n).toLocaleString("en-US");
 const pct = (x, d = 0) => x == null ? "n/a" : (100 * x).toFixed(d) + "%";
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const el = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const sw = (id, text) => { const e = el(id); if (!text) { e.hidden = true; } else e.querySelector("b").textContent = text; };
 const charts = [];
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const C = DATA.composition_edits, CC = DATA.composition_commits;
+const complete = DATA.blame_complete;
+const LQ = DATA.label_quality;
+const covPct = LQ.blame ? pct(LQ.blame.coverage) : null;
 
 document.querySelectorAll("a.more[data-wiki]").forEach(a => { a.href = DATA.link_base + "/" + a.dataset.wiki + ".md"; a.target = "_blank"; a.rel = "noopener"; });
 el("title").textContent = "Evolution of " + DATA.name;
 const lastQ = Q ? Q[Q.length - 1] : null;
-if (Q) { el("scanNote").textContent = " and quarterly scans"; el("scanFoot").textContent = " and " + Q.length + " quarterly scans"; el("growth").hidden = false; }
-el("meta").innerHTML = `<span><b>Span</b> ${DATA.span[0]} to ${DATA.span[1]}</span><span><b>Commits</b> ${fmt(DATA.commits)}</span>` + (lastQ ? `<span><b>Functions now</b> ${fmt(lastQ.functions)}</span><span><b>Scans</b> ${Q.length} quarterly</span>` : `<span><b>Mode</b> git history only</span>`) + `<span><b>Language</b> ${DATA.lang}</span><span><b>Generated</b> ${DATA.generated}</span>`;
-const C = DATA.composition_edits, CC = DATA.composition_commits;
-const stats = [[fmt(DATA.function_edits), "function edits in total"], [pct(C.sweeps), "of edits are sweeps (" + pct(CC.sweeps, 1) + " of commits)"], [pct(C.fixes), "of edits are fixes"], [pct(C.organic), "are organic change"]];
-if (DATA.lag_median_days != null) stats.push([Math.round(DATA.lag_median_days) + " days", "median time from a change to the fix it caused"]);
+if (Q) { el("scanFoot").textContent = " and " + Q.length + " quarterly scans"; el("growth").hidden = false; }
+el("meta").innerHTML = `<span><b>Span</b> ${esc(DATA.span[0])} to ${esc(DATA.span[1])}</span><span><b>Commits</b> ${fmt(DATA.commits)}</span>` + (lastQ ? `<span><b>Functions now</b> ${fmt(lastQ.functions)}</span><span><b>Scans</b> ${Q.length} quarterly</span>` : `<span><b>Mode</b> git history only</span>`) + `<span><b>Language</b> ${esc(DATA.lang)}</span><span><b>Generated</b> ${esc(DATA.generated)}</span>`;
+let verdict = `${pct(C.organic)} of ${DATA.name}'s function edits were ordinary organic work, ${pct(C.sweeps)} were mechanical sweeps and ${pct(C.fixes)} were fixes.`;
+if (DATA.lag_median_days != null && DATA.pairs >= 30) verdict += ` A fix arrived a median ${Math.round(DATA.lag_median_days)} days after the change that caused it.`;
+if (lastQ) verdict += ` The code base grew from ${fmt(Q[0].functions)} to ${fmt(lastQ.functions)} functions.`;
+el("verdict").textContent = verdict;
+el("modeNote").textContent = Q ? "Built from git history and quarterly scans of the code." + (DATA.radius ? " Includes how close fixes land to the change that caused them." : "") : "Built from git history only. Not available without scans: growth, age layers, how much of the code is alive, and how close fixes land to the change that caused them.";
+const fd = DATA.fix_definition;
+const stats = [[fmt(DATA.function_edits), "function edits in total"], [pct(C.sweeps), "of edits are sweeps (" + pct(CC.sweeps, 1) + " of the commits that change functions)"], [pct(C.fixes), "of edits are fixes"], [pct(C.organic), "are organic change"]];
+if (DATA.lag_median_days != null && DATA.pairs >= 30) stats.push([Math.round(DATA.lag_median_days) + " days", "median time from a change to the fix it caused"]);
 if (DATA.repeat_spots.share_in_fixed_2plus != null) stats.push([pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits land in a function fixed more than once"]);
 el("glanceStats").innerHTML = stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 const comp = [["Organic change", "organic", "--s1"], ["Sweeps", "sweeps", "--s2"], ["Fixes", "fixes", "--s3"], ["Mechanical", "mechanical", "--s4"]];
 el("compBar").innerHTML = comp.map(([n, k, c]) => `<div title="${n} ${pct(C[k], 1)}" style="flex:${Math.max(C[k], 0.0005)};background:var(${c})"></div>`).join("");
 el("compLegend").innerHTML = comp.map(([n, k, c]) => `<span><i style="background:var(${c})"></i>${n} ${pct(C[k], 1)}</span>`).join("");
+sw("sw_glance", `Sweeps are ${pct(CC.sweeps, 1)} of the commits that change functions but ${pct(C.sweeps)} of the function edits. Setting them apart from ordinary work makes the other trends readable.` + (fd.trailer_habit ? "" : " Fixes here are found from commit subjects only: this project does not use Fixes: trailers."));
+
+// work
 el("actTitle").textContent = Q ? "2 · Where the work goes" : "1 · Where the work goes";
-el("sweeps").querySelector("h2").textContent = Q ? "3 · Sweeps" : "2 · Sweeps";
-el("sweepIntro").textContent = DATA.sweep_count + " commits edit more than 60 functions at once. The largest:";
-el("sweepTable").querySelector("tbody").innerHTML = DATA.largest_sweeps.map(s => `<tr><td>${s.date}</td><td class="num">${fmt(s.functions)}</td><td>${esc(s.subject)}</td><td>${s.cited_as_cause ? "Yes" : "No"}</td></tr>`).join("");
+const totals = GQ.filter(q => !q.partial).map(q => ["organic", "sweeps", "fixes", "mechanical"].reduce((a, k) => a + q["edits_" + k], 0));
+const sorted = totals.slice().sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)];
+const busiest = GQ.filter(q => !q.partial)[totals.indexOf(Math.max(...totals))];
+let workText = `The busiest quarter (${busiest.label}) had ${fmt(Math.max(...totals))} function edits; the median quarter had ${fmt(med)}.`;
+if (lastQ) { const u = Q.filter(q => q.untouched_4q_share != null && !q.partial).slice(-1)[0]; if (u) workText += ` Of the functions older than a year, ${pct(u.untouched_4q_share)} were not edited in the last four quarters (${u.label}).`; }
+sw("sw_work", workText);
+if (GQ[GQ.length - 1].partial) el("partialNote").textContent = "The latest quarter (" + GQ[GQ.length - 1].label + ") is not finished and is left out of the charts' trends where noted.";
+
+// sweeps
+el("sweepIntro").textContent = fmt(DATA.sweep_count) + " commits edit more than 60 functions at once. The largest twelve:";
+if (!complete) el("sweepCol").textContent = "Fixes found that name it as their cause (sampled)";
+el("sweepTable").querySelector("tbody").innerHTML = DATA.largest_sweeps.map(s => `<tr><td>${esc(s.date)}</td><td class="num">${fmt(s.functions)}</td><td>${esc(s.subject)}</td><td class="num">${s.fixes_citing > 0 ? fmt(s.fixes_citing) : (complete ? "0" : "none found")}</td></tr>`).join("");
+const big = DATA.largest_sweeps[0], blamedN = DATA.largest_sweeps.filter(s => s.fixes_citing > 0).length;
+sw("sw_sweeps", `The largest sweep (${big.date}, ${fmt(big.functions)} functions) is "${big.subject}". ${blamedN} of the twelve largest were later named as the cause of at least one fix` + (complete ? "." : `; blame covers only ${covPct} of the unnamed fixes, so this is a lower bound.`));
 
 // repairs
+const names = { feature: "A feature", restructure: "A restructure", fix: "A fix (a fix of a fix)", other: "Other, unclassified", optimization: "An optimisation" };
+el("repChip").innerHTML = "<i></i>" + (complete ? "Moderate · causes named by Fixes: trailers" : `Moderate · causes found by blame on a sample (${covPct} of unnamed fixes)`);
 if (!DATA.pairs || DATA.pairs < 30) {
-  el("repairsGrid").hidden = true; el("causeFig").hidden = true;
+  el("repairsGrid").hidden = true; el("causeFig").hidden = true; el("example").hidden = true;
   el("repairsEmpty").hidden = false;
-  el("repairsEmpty").textContent = "Too few fixes name their cause in this repository (" + (DATA.pairs || 0) + " pairs from Fixes: trailers) to describe repair timing. Re-run with --blame to derive causes by blame.";
+  el("repairsEmpty").textContent = "Too few fixes name their cause in this repository (" + (DATA.pairs || 0) + " pairs) to describe repair timing. Run with --blame to find causes by blame.";
+  sw("sw_repairs", "");
 } else {
-  el("lagCap").textContent = `${fmt(DATA.pairs)} fix/cause pairs. Median ${Math.round(DATA.lag_median_days)} days; ${pct((DATA.lag_hist[5].pairs + DATA.lag_hist[6].pairs) / DATA.pairs)} of fixes arrive more than a year after the change that caused them.` + (DATA.stable_lag.with != null && DATA.stable_lag.without != null ? ` Fixes tagged Cc: stable took ${Math.round(DATA.stable_lag.with)} days; untagged fixes ${Math.round(DATA.stable_lag.without)}.` : "");
-  const names = { feature: "A feature", restructure: "A restructure", fix: "A fix (a fix of a fix)", other: "Other", optimization: "An optimisation" };
-  el("causeTable").querySelector("tbody").innerHTML = DATA.cause_types.map(r => `<tr><td>${names[r.cause] || r.cause}</td><td class="num">${fmt(r.pairs)}</td><td>${r.same_function == null ? "n/a" : `<span class="inbar" style="width:${160 * r.same_function}px"></span> ${pct(r.same_function)}`}</td><td class="num">${Math.round(r.median_lag)} d</td></tr>`).join("");
+  const lagTxt = `${fmt(DATA.pairs)} fix and cause pairs. Median ${Math.round(DATA.lag_median_days)} days; ${pct((DATA.lag_hist[5].pairs + DATA.lag_hist[6].pairs) / DATA.pairs)} of fixes arrive more than a year after the change that caused them.` + (DATA.stable_lag.with != null && DATA.stable_lag.without != null ? ` Fixes tagged Cc: stable took ${Math.round(DATA.stable_lag.with)} days; untagged fixes ${Math.round(DATA.stable_lag.without)}.` : "") + (complete ? "" : " With blame, the lag is the time since the fixed lines last changed, which can be later than when the bug was introduced.") + ` ${pct(DATA.pairs_dropped_no_function_share)} of the pairs were left out because one commit names no function.`;
+  el("lagCap").textContent = lagTxt;
+  const other = DATA.cause_types.find(r => r.cause === "other"), otherShare = other ? other.pairs / DATA.pairs : 0;
+  el("causeTable").querySelector("tbody").innerHTML = DATA.cause_types.map(r => `<tr><td>${esc(names[r.cause] || r.cause)}</td><td class="num">${fmt(r.pairs)}</td><td>${r.same_function == null ? "n/a" : `<span class="inbar" style="width:${160 * r.same_function}px"></span> ${pct(r.same_function)}`}</td><td class="num">${Math.round(r.median_lag)}</td></tr>`).join("");
+  el("causeCap").textContent = "Cause type is read from the first verb of the causing commit's subject (a fix-like subject counts as a fix). " + (otherShare > 0.4 ? `${pct(otherShare)} of the causes fit no verb, so treat this table as indicative.` : `${pct(otherShare)} fit no verb.`);
   if (DATA.radius) {
     el("hopFig").hidden = false;
-    const hs = ["either1", "either2", "callers1", "callees1"].map(k => DATA.radius[k]).filter(Boolean);
-    el("hops").innerHTML = hs.map(h => `<span>${h.label}</span><div class="hoptrack"><div style="width:${100 * Math.min(h.ratio, 2.6) / 2.6}%"></div><u style="left:${100 / 2.6}%"></u></div><b style="color:var(--fg)">${h.ratio.toFixed(2)}x</b>`).join("");
+    const lab = { either1: "Within one call of the change", either2: "Within two calls", callers1: "In a function that calls it", callees1: "In a function it calls" };
+    const hs = ["either1", "either2", "callers1", "callees1"].map(k => [lab[k], DATA.radius[k]]).filter(h => h[1]);
+    el("hops").innerHTML = hs.map(([l, h]) => `<span>${l}</span><div class="hoptrack"><div style="width:${100 * Math.min(h.ratio, 2.6) / 2.6}%"></div><u style="left:${100 / 2.6}%"></u></div><b style="color:var(--fg)">${h.ratio.toFixed(2)}x</b>`).join("");
   }
+  const sf = DATA.same_function_overall;
+  el("example").innerHTML = `<div><code>Day 1</code> function B changes.</div><div><code>Months later</code> a bug appears (median ${Math.round(DATA.lag_median_days)} days here). The fix edits B itself in ${pct(sf)} of the cases in this repository.</div>` + (DATA.radius && DATA.radius.either2 ? `<div>When it does not, the fix is about ${DATA.radius.either2.ratio.toFixed(1)} times as likely as chance to land within two calls of B.</div>` : "");
+  const rows = DATA.cause_types.filter(r => r.cause !== "other" && r.pairs >= 30 && r.same_function != null).sort((a, b) => b.same_function - a.same_function);
+  sw("sw_repairs", rows.length >= 2 ? `In this repository, fixes of ${names[rows[0].cause].toLowerCase()} land in the same function ${pct(rows[0].same_function)} of the time and fixes of ${names[rows[rows.length - 1].cause].toLowerCase()} ${pct(rows[rows.length - 1].same_function)}.` : `Fixes land in the same function ${pct(sf)} of the time.`);
 }
-el("repeatStats").innerHTML = [[fmt(DATA.repeat_spots.fix_edits), "fix edits in total"], [fmt(DATA.repeat_spots.functions_fixed), "distinct functions fixed"], [pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits in functions fixed 2+ times"], [pct(DATA.repeat_spots.share_in_fixed_5plus), "in functions fixed 5+ times"]].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+// sizes
+const sb = DATA.size_bands.filter(b => b.later_repaired != null && b.commits >= 20);
+el("sizeChip").innerHTML = "<i></i>" + (complete ? "Strong · size is the one per-change signal that held up" : "Moderate · lower bounds from a blame sample");
+el("sizeCap").textContent = "Organic changes at least three years old (so each had time to be repaired); size is the number of functions edited." + (complete ? "" : ` Causes come from blame on ${covPct} of the unnamed fixes, so shares are lower bounds and not comparable with repositories that name their causes.`);
+if (sb.length >= 2) sw("sw_sizes", `Changes that edit ${sb[sb.length - 1].band} functions were later blamed for a fix ${pct(sb[sb.length - 1].later_repaired)} of the time, against ${pct(sb[0].later_repaired)} for ${sb[0].band === "1 function" ? "single-function changes" : sb[0].band + " functions"}. Nothing else we measured (author experience, reviewer trailers, structure) added much beyond size.`); else el("sw_sizes").hidden = true;
+
+// repeat
+const RS = DATA.repeat_spots;
+el("repeatStats").innerHTML = [[fmt(RS.fix_edits), "fix edits in total"], [fmt(RS.functions_fixed), "distinct functions fixed"], [pct(RS.share_in_fixed_2plus), "of fix edits in functions fixed 2+ times"], [pct(RS.functions_fixed_2plus_share), "of the functions ever fixed were fixed 2+ times"]].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 el("fixedTable").querySelector("tbody").innerHTML = DATA.most_fixed.map(f => `<tr><td><code>${esc(f.function)}</code></td><td>${esc(f.file)}</td><td class="num">${f.fixes}</td></tr>`).join("");
-el("sizeCap").textContent = "Organic commits at least three years old (so each had time to be repaired); size is the number of functions edited. Causes: " + DATA.size_bands_basis + ".";
-const LQ = DATA.label_quality;
+sw("sw_repeat", `${pct(RS.share_in_fixed_2plus)} of fix edits land in functions that were fixed before. The share is higher in older projects and in projects with fewer functions, so compare it only with similar ones.`);
+
+// quality
 const qc = [
-  ["Causes named", `${pct(LQ.fixes_trailer_share_of_function_commits)} of the commits that change functions carry a Fixes: trailer (${fmt(LQ.named_pairs)} usable pairs). ${LQ.blame ? `Blame found a cause for ${pct(LQ.blame.found / LQ.blame.sampled)} of a sample of ${fmt(LQ.blame.sampled)} unnamed fix-like commits.` : "Run with --blame to find causes for unnamed fixes."}`],
-  ["Fix labels", `${pct(LQ.fix_like_subject_share)} of commit subjects look like fixes. The subject rule misses roughly 8 to 20% of fixes in the remainder (hand checks on two projects).`],
-  ["Shipped bugs", `${pct(LQ.cc_stable_share, 1)} of commits carry Cc: stable, and ${pct(LQ.reported_by_share, 1)} Reported-by. Where used, Cc: stable marks bugs that reached a release.`],
-  ["Function names", "Functions come from git diff headers; about one in eight is a neighbour of the function actually edited. Counts are indicators, not exact."],
+  ["How fixes are found", fd.trailer_habit ? `${pct(LQ.fixes_trailer_share_of_function_commits)} of the commits that change functions carry a Fixes: trailer, which names the cause (${fmt(LQ.named_pairs)} usable pairs). Fix-like subjects add ${fmt(fd.subject_only_fixes)} more fixes.` : `This project does not use Fixes: trailers (${pct(LQ.fixes_trailer_share_of_function_commits, 1)} of commits). Fixes are found from commit subjects, and causes by blame${LQ.blame ? ` on a sample covering ${covPct} of ${fmt(LQ.blame.unnamed_fix_like)} unnamed fixes; blame found a cause for ${pct(LQ.blame.found / LQ.blame.sampled)} of those` : ". Run with --blame to find causes"}.`],
+  ["Fix labels", `${pct(LQ.fix_like_subject_share)} of commit subjects look like fixes. In hand checks on DPDK and Mesa (a narrower rule than this one) the subject rule missed roughly 8 to 20% of fixes in the remainder, so the fix share is a floor.`],
+  ["Pairs left out", `${pct(DATA.pairs_dropped_no_function_share)} of fix and cause pairs are left out because one of the commits names no function (header-only, macro and struct-level bugs disappear). Fixes are matched to a cause only if one can be found, so lag is measured on fixes that exist.`],
+  ["Function names", "Functions come from git diff headers; roughly one in ten names a neighbour of the function actually edited. Counts are indicators, not exact."],
+  ["Shipped bugs", `${pct(LQ.cc_stable_share, 1)} of commits carry Cc: stable and ${pct(LQ.reported_by_share, 1)} Reported-by. Where used, Cc: stable marks bugs that reached a release.`],
   ["Cannot say", "Fixes with no findable cause are shown as such, never as 'extrinsic'. Whether a given change will need a fix is not predicted."],
 ];
 el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h3><p>${d}</p></div>`).join("");
@@ -287,14 +339,17 @@ function base(extra) {
 }
 function lerp(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
 const legendOn = () => ({ display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } });
+function line(id, labels, data, color, fmtTip, yopts) {
+  const o = base(); o.scales.y = Object.assign(o.scales.y, yopts || {}); o.plugins.tooltip.callbacks = { label: c => fmtTip(c.parsed.y) };
+  charts.push(new Chart(el(id), { type: "line", data: { labels, datasets: [{ data, borderColor: color, backgroundColor: color, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o }));
+}
 let workMode = "abs";
 function render() {
   charts.splice(0).forEach(c => c.destroy());
   const s1 = css("--s1"), s2 = css("--s2"), s3 = css("--s3"), s4 = css("--s4"), s4b = css("--s4b");
   if (Q) {
     const labels = Q.map(q => q.label);
-    const o1 = base(); o1.scales.y.ticks.callback = v => fmt(v); o1.plugins.tooltip.callbacks = { label: c => "Functions: " + fmt(c.parsed.y) };
-    charts.push(new Chart(el("cSize"), { type: "line", data: { labels, datasets: [{ label: "Functions", data: Q.map(q => q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o1 }));
+    line("cSize", labels, Q.map(q => q.functions), s1, v => "Functions: " + fmt(v), { ticks: { color: css("--fg2"), callback: v => fmt(v) } });
     const q1 = Q.slice(1), l1 = q1.map(q => q.label);
     const o2 = base(); o2.scales.x.stacked = true; o2.scales.y.stacked = true; o2.scales.y.ticks.callback = v => fmt(Math.abs(v)); o2.plugins.legend = legendOn(); o2.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(Math.abs(c.parsed.y)) };
     charts.push(new Chart(el("cBirths"), { type: "bar", data: { labels: l1, datasets: [
@@ -304,29 +359,28 @@ function render() {
     const o3 = base(); o3.scales.y.stacked = true; o3.scales.y.ticks.callback = v => fmt(v);
     o3.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } }; o3.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
     charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0, pointRadius: 0, backgroundColor: lerp(ramp, rampOld, 1 - i / Math.max(years.length - 1, 1)) })) }, options: o3 }));
-    const q4 = Q.filter(q => q.untouched_4q_share != null), l4 = q4.map(q => q.label);
+    const q4 = Q.filter(q => q.untouched_4q_share != null && !q.partial), l4 = q4.map(q => q.label);
     const o4 = base(); o4.scales.y.ticks.callback = v => v + "%"; o4.scales.y.min = 0; o4.scales.y.max = 100; o4.plugins.legend = legendOn(); o4.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "%" };
     charts.push(new Chart(el("cHeat"), { type: "line", data: { labels: l4, datasets: [
       { label: "Untouched for four quarters", data: q4.map(q => 100 * q.untouched_4q_share), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
       { label: "Edited this quarter", data: q4.map(q => 100 * q.edited_functions / q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o4 }));
+    const sizes = Q.map(q => q.functions), g = sizes[sizes.length - 1] / sizes[0], births = Q.slice(1).reduce((a, q) => a + q.births_new_code, 0), moved = Q.slice(1).reduce((a, q) => a + q.births_moved, 0);
+    sw("sw_growth", `The code base grew ${g.toFixed(1)} times, from ${fmt(sizes[0])} to ${fmt(sizes[sizes.length - 1])} functions. Of the functions that appeared over the scans, ${pct(births / (births + moved))} were new code and ${pct(moved / (births + moved))} were existing names reappearing elsewhere (moves and renames).`);
   } else { el("heatFig").hidden = true; }
-  const gl = GQ.map(q => q.label), keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
+  const gq = GQ.filter(q => !q.partial), gl = gq.map(q => q.label), keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names2 = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
   const o5 = base(); o5.scales.y.stacked = true; o5.scales.y.ticks.callback = v => workMode === "abs" ? fmt(v) : v + "%"; if (workMode === "share") o5.scales.y.max = 100;
   o5.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (workMode === "abs" ? fmt(c.parsed.y) + " edits" : c.parsed.y.toFixed(1) + "%") };
-  charts.push(new Chart(el("cWork"), { type: "line", data: { labels: gl, datasets: keys.map((k, i) => ({ label: names[i], data: GQ.map(q => { const t = keys.reduce((a, kk) => a + q["edits_" + kk], 0) || 1; return workMode === "abs" ? q["edits_" + k] : 100 * q["edits_" + k] / t; }), fill: true, borderColor: cols[i], backgroundColor: cols[i], borderWidth: 1, pointRadius: 0, stack: "w", tension: 0.15 })) }, options: o5 }));
-  const o6 = base(); o6.plugins.legend = legendOn(); o6.scales.y.ticks.callback = v => fmt(v); o6.scales.y1 = { position: "right", min: 0, max: 100, grid: { display: false }, ticks: { color: css("--fg2"), callback: v => v + "%" }, border: { display: false } };
-  o6.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (c.dataset.yAxisID === "y1" ? c.parsed.y.toFixed(0) + "%" : fmt(c.parsed.y)) };
-  charts.push(new Chart(el("cAuthors"), { type: "line", data: { labels: gl, datasets: [
-    { label: "Active authors", data: GQ.map(q => q.authors), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 },
-    { label: "Top author's share of commits", data: GQ.map(q => 100 * q.top_author_share), yAxisID: "y1", borderColor: s2, backgroundColor: s2, borderWidth: 2, pointRadius: 0, tension: 0.2, borderDash: [5, 4] } ] }, options: o6 }));
-  const gf = GQ.filter(q => q.fix_commits >= 5), o7 = base(); o7.scales.y.min = 0; o7.scales.y.max = 100; o7.scales.y.ticks.callback = v => v + "%"; o7.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% of fix commits touch a test" };
-  charts.push(new Chart(el("cFixTest"), { type: "line", data: { labels: gf.map(q => q.label), datasets: [{ label: "Fixes with a test", data: gf.map(q => 100 * q.fix_with_test / q.fix_commits), borderColor: s3, backgroundColor: s3, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o7 }));
+  charts.push(new Chart(el("cWork"), { type: "line", data: { labels: gl, datasets: keys.map((k, i) => ({ label: names2[i], data: gq.map(q => { const t = keys.reduce((a, kk) => a + q["edits_" + kk], 0) || 1; return workMode === "abs" ? q["edits_" + k] : 100 * q["edits_" + k] / t; }), fill: true, borderColor: cols[i], backgroundColor: cols[i], borderWidth: 1, pointRadius: 0, stack: "w", tension: 0.15 })) }, options: o5 }));
+  line("cAuthors", gl, gq.map(q => q.authors), s1, v => fmt(v) + " authors", { ticks: { color: css("--fg2"), callback: v => fmt(v) }, min: 0 });
+  line("cTop", gl, gq.map(q => 100 * q.top_author_share), s2, v => v.toFixed(0) + "% of commits", { ticks: { color: css("--fg2"), callback: v => v + "%" }, min: 0, max: 100 });
+  const gf = gq.filter(q => q.fix_commits >= 5);
+  line("cFixTest", gf.map(q => q.label), gf.map(q => 100 * q.fix_with_test / q.fix_commits), s3, v => v.toFixed(0) + "% of fix commits touch a test", { ticks: { color: css("--fg2"), callback: v => v + "%" }, min: 0, max: 100 });
   if (DATA.pairs >= 30) {
     const o8 = base(); o8.scales.y.ticks.callback = v => fmt(v); o8.plugins.tooltip.callbacks = { label: c => fmt(c.parsed.y) + " fixes" };
     charts.push(new Chart(el("cLag"), { type: "bar", data: { labels: DATA.lag_hist.map(b => b.bin), datasets: [{ label: "Fixes", data: DATA.lag_hist.map(b => b.pairs), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o8, { interaction: { mode: "nearest", intersect: true } }) }));
   }
-  const sb = DATA.size_bands.filter(b => b.later_repaired != null), o9 = base(); o9.scales.y.ticks.callback = v => v + "%"; o9.scales.y.min = 0; o9.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% later repaired" };
-  charts.push(new Chart(el("cSize2"), { type: "bar", data: { labels: sb.map(b => b.band + " (" + fmt(b.commits) + " commits)"), datasets: [{ label: "Later repaired", data: sb.map(b => 100 * b.later_repaired), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o9, { interaction: { mode: "nearest", intersect: true } }) }));
+  const o9 = base(); o9.scales.y.ticks.callback = v => v + "%"; o9.scales.y.min = 0; o9.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% later blamed for a fix" };
+  charts.push(new Chart(el("cSize2"), { type: "bar", data: { labels: sb.map(b => b.band + " (" + fmt(b.commits) + " commits)"), datasets: [{ label: "Later blamed", data: sb.map(b => 100 * b.later_repaired), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o9, { interaction: { mode: "nearest", intersect: true } }) }));
 }
 function setMode(m) { workMode = m; el("tAbs").setAttribute("aria-pressed", m === "abs"); el("tShare").setAttribute("aria-pressed", m === "share"); render(); }
 el("tAbs").onclick = () => setMode("abs"); el("tShare").onclick = () => setMode("share");
