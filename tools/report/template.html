@@ -492,11 +492,11 @@ if (SCK && SCK.rows && SCK.rows.length) {
   const rt = SCK.rating;
   if (rt) {
     el("ratingText").textContent = rt.text;
-    const bad = rt.label !== "Good", st = rt.standing, stBad = rt.standing_label && rt.standing_label !== "Good";
+    const cgl = rt.compiler_grade && rt.compiler_grade.label !== "Not rated" ? rt.compiler_grade.label : null, bad = rt.label !== "Good" || (cgl && cgl !== "Good"), st = rt.standing, stBad = rt.standing_label && rt.standing_label !== "Good";
     if (bad || stBad) {
       const w = el("cgWarn"); w.hidden = false;
       const calls = SCK.rows.find(r => r.id === "calls");
-      w.textContent = (bad ? "Warning: " : "Note: ") + `call-graph rating ${(bad ? rt.label : rt.standing_label).toLowerCase()}. ` + (st ? `Against ${st.reference} (a compiler-grade reference) our research found GitGalaxy recovers ${pct(st.recall)} of cross-file call edges in ${DATA.lang === "c" ? "C" : DATA.lang} with ${pct(st.precision)} precision; a tree-sitter name matcher recovers ${pct(st.tree_sitter_recall)}. ` : "") + (calls ? `On this repository GitGalaxy found ${pct(calls.data.recall)} of the calls an independent name matcher finds, so it agrees with that baseline; calls hidden from a name matcher (function pointers, macros) and anything a compiler resolves that neither tool does are not covered. ` : "") + "Hub lists, repair radius and call counts are lower bounds.";
+      w.textContent = (bad ? "Warning: " : "Note: ") + `call-graph rating ${(cgl || (bad ? rt.label : rt.standing_label)).toLowerCase()}. ` + (st ? `Against ${st.reference} (a compiler-grade reference) our research found GitGalaxy recovers ${pct(st.recall)} of cross-file call edges in ${DATA.lang === "c" ? "C" : DATA.lang} with ${pct(st.precision)} precision; a tree-sitter name matcher recovers ${pct(st.tree_sitter_recall)}. ` : "") + (rt.compiler_grade ? `On this repository, against ${rt.compiler_grade.reference}, GitGalaxy found ${pct(rt.compiler_grade.recall)} of the call edges (precision ${pct(rt.compiler_grade.precision)}) in the ${pct(rt.compiler_grade.parsed_share)} of files where libclang found functions. ` : "") + (calls ? `Against an independent name matcher it found ${pct(calls.data.recall)} of the calls; calls hidden from a name matcher (function pointers, macros) and anything a compiler resolves that neither tool does are not covered. ` : "") + "Hub lists, repair radius and call counts are lower bounds.";
     }
   }
 }

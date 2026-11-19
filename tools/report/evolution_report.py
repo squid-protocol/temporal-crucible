@@ -836,6 +836,9 @@ def main():
     ap.add_argument("--cache")
     ap.add_argument("--link-base", default="https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki")
     ap.add_argument("--radius", action="store_true")
+    ap.add_argument("--reference", choices=["libclang"], help="also compare the call graph with a compiler-grade reference (C only; slow on large projects)")
+    ap.add_argument("--clang-python", help="python that has the libclang wheel (default: the venv named by GITGALAXY_CLANG_PYTHON)")
+    ap.add_argument("--clang-adapter", help="the engine's tests/tools/clang_callgraph.py")
     ap.add_argument("--no-validate", action="store_true", help="skip the self-checks against a tree-sitter baseline (they take seconds to a minute)")
     ap.add_argument("--gif", help="optional GIF of the call graph over time (from tools/report/make_gif.py), embedded in the page if under 9 MB")
     args = ap.parse_args()
@@ -856,7 +859,10 @@ def main():
     if args.scans:
         sn_all = json.load(open(args.scans))
         sn_last = sn_all[-1]
-    rows = SC.checks(out, out["_internal"], args.repo, sn_last["commit"] if sn_last else None, sn_last["db"] if sn_last else None, args.lang, validate=not args.no_validate)
+    ref = {"python": args.clang_python or os.environ.get("GITGALAXY_CLANG_PYTHON"), "adapter": args.clang_adapter or os.environ.get("GITGALAXY_CLANG_ADAPTER"), "cache_dir": str(Path(args.out) / "cache")} if args.reference == "libclang" and (args.clang_python or os.environ.get("GITGALAXY_CLANG_PYTHON")) else None
+    rows = SC.checks(out, out["_internal"], args.repo, sn_last["commit"] if sn_last else None, sn_last["db"] if sn_last else None, args.lang, validate=not args.no_validate, reference=ref)
+    if out.get("baseline_check"):
+        out["baseline_check"].pop("_sets", None)
     out["self_check"] = {"rows": rows, "rating": SC.rating(rows, args.lang) if args.scans and not args.no_validate else None, "standing": SC.STANDING.get(args.lang)}
     out["facts"] = build_facts(out, out["_internal"])
     out["link_base"] = args.link_base

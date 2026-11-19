@@ -1,0 +1,26 @@
+1. What the cut points mean (call edges, pass at 85%, warning from 65%)
+   recall now   0% lost   5% lost  10% lost  15% lost  20% lost  30% lost  40% lost
+         100%      pass      pass      pass      pass      warn      warn      fail
+          95%      pass      pass      pass      warn      warn      warn      fail
+          90%      pass      pass      warn      warn      warn      fail      fail
+          88%      pass      warn      warn      warn      warn      fail      fail
+
+2. Reference repositories
+   repository     lang    files read  functions  calls vs name matcher  calls vs libclang  libclang parsed   imports
+   curl           c         928/1071        99%                    99%                81%              73%      100%
+   curl           c                -          -                      -                  -                -         -
+   dpdk           c        5327/5335        98%                    99%                90%              89%       99%
+   expat          c            93/93        94%                    99%                71%              53%      100%
+   libgit2        c        1197/1197        96%                    98%                69%              93%       89%
+   libxml2        c          156/156        99%                    98%                83%              46%      100%
+   ndpi           c          386/468        98%                    99%                88%              78%      100%
+   prometheus     go         763/763       100%                    86%                  -                -       54%
+   redis          c          856/856        97%                    99%                85%              61%      100%
+   ripgrep        rust       102/102        95%                    10%                  -                -       67%
+   scapy          python     396/399       100%                    75%                  -                -       99%
+   sphinx         python     716/775       100%                    78%                  -                -       75%
+   sqlmap         python     488/488        99%                    84%                  -                -       95%
+
+   Repositories with both: 7. Mean recall vs name matcher 99%, vs libclang 81% (gap +18 points).
+   The cheap check gives the same status as the compiler-grade one in 2 of 7 repositories; where it differs it is the more lenient one in 5.
+   Correlation of the two recalls across repositories: +0.06
