@@ -1256,3 +1256,22 @@ Surprise bar (N1 within 1 point of FILE, cause elsewhere): not met.
 - **AC2.** N beats LEX by at least 15 points of recall at 20.
 - **AC3.** For fixes that edit more than one file, at least one other edited file is among N's top 5 files for at least 60% of them.
 **Would surprise (the neighbourhood does not help the symptom-site or agent problems):** SY1 below 40%, or AC2 below 5 points.
+
+#### Reverse triage extensions: results (2026-11-19; `triage_sites_output.txt`, `agent_context_output.txt`; DPDK and Mesa, 600 pairs sampled each for sites and bisect; agent context 3,827 fixes in 9 repositories)
+**Symptom sites** (true cause in the top 20, pooled; REC / FILE / BLAME / N1): whole fix 2.8 / 59.9 / 56.3 / **74.8%**; S1 first edited function 2.8 / 58.6 / 48.9 / **71.8%**; S2 random edited function 2.8 / 58.7 / 48.9 / **72.3%**; S3 a caller of an edited function (457 pairs) 3.1 / 45.3 / 20.1 / **59.1%**; S4 function named in the subject (192 pairs) 2.6 / 9.9 / 6.8 / **9.9%**.
+**Bisect** (steps to isolate the cause; classic bisect over all commits of the window 14.7 on average): uniform over candidates 13.7; recency 14.7; FILE-weighted 8.4; BLAME-weighted 9.4; **N1-weighted 6.4** (median 5; at most 5 tests for 53%); with the single first function as the site 6.7 (50%). Priors fitted on one half of the pairs, evaluated on the other (both ways).
+**Agent context** (other functions a fix edits, given the first one; recall at 20, pooled): SIZE 8.1%, SAMEFILE 40.5%, **N 42.7%**, LEX 27.8%, N+LEX 43.9%; fixes with at least one other function found: N 56.6%, N+LEX 60.2%; other edited file in the top 5 files: N 48.6% (size alone 28.4%). By repository N ranges 36% to 51%.
+| hypothesis | verdict |
+|---|---|
+| SY1 one edited function as the site, N1 top 20 at least 55% | **supported**: 71.8% and 72.3% |
+| SY2 caller as the site, N1 at least 25% and 5 points over FILE | **supported**: 59.1% against 45.3% |
+| SY3 function named in the subject, N1 at least 50% | **not supported**: 9.9% |
+| SY4 the caller site is the hardest | **not supported** (S4 is lowest, by far) |
+| BS1 N1-weighted bisect at least 3 tests fewer than classic | **supported**: 8.3 fewer (6.4 against 14.7) |
+| BS2 at least 0.5 fewer than FILE-weighted | **supported**: 2.0 fewer |
+| BS3 at most 5 tests for at least 30% | **supported**: 53% |
+| AC1 N recall at 20 at least 50% | **not supported**: 42.7% |
+| AC2 N at least 15 points above LEX | **not supported, by 0.1 point**: +14.9 |
+| AC3 other edited file in the top 5 files for at least 60% | **not supported**: 48.6% |
+Surprise bar (SY1 below 40% or AC2 below 5): not met.
+**Reading.** (1) **The reverse ranking survives realistic sites:** from one edited function it still finds the cause in the top 20 for 72%, and from a function one call upstream (a symptom surfacing away from the fault) for 59%, 14 points above file overlap and three times what blame manages. (2) **Used to guide a bisect it roughly halves the tests** (6.4 against 14.7; half of the searches need 5 or fewer), the most practical number so far. It needs candidate priors only, not any test oracle. (3) **S4 is a failed test of mine, not evidence about the method:** the identifiers in a subject line that matched a graph function are mostly generic words (`init`, `free`, `check`), so the "site" is usually a wrong function (FILE also gets 9.9%); a proper test needs the real bug report. (4) **Agent context is a weaker result:** given one function of a fix, the other functions it edits are in the top 20 at 43% (56.6% find at least one); the call graph helps modestly over same-file (+2 points) and name-word overlap is far behind alone (27.8%) but adds when fused (+1.2). Three of my predictions missed (AC1, AC2 by 0.1, AC3), so for retrieval-for-agents the honest claim is "about 4 in 10 of the functions to co-edit are in a 20-item list", from the first function alone. **Caveats:** bisect priors are fitted on the same two repositories (cross-fitted within them); the bisect counts probes of a perfect oracle on commits that touch C functions (commits that do not are excluded from candidates, which flatters all weighted rankers equally but not the classic count over all commits); two repositories for the triage tests; agent context uses fix-edited functions as truth (co-edits, not necessarily needed context).

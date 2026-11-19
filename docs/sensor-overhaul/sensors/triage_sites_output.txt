@@ -1,0 +1,25 @@
+
+########## dpdk: 907 ranked pair-sites; ALL 230, S1 225, S2 222, S3 176, S4 54; bisect pairs 455 ##########
+
+########## mesa: 1570 ranked pair-sites; ALL 388, S1 382, S2 381, S3 281, S4 138; bisect pairs 770 ##########
+
+=== SITES: share of pairs with the true cause in the top 20 (pooled) ===
+  site   pairs     REC    FILE   BLAME      N1
+  ALL      618    2.8%   59.9%   56.3%   74.8%
+  S1       607    2.8%   58.6%   48.9%   71.8%
+  S2       603    2.8%   58.7%   48.9%   72.3%
+  S3       457    3.1%   45.3%   20.1%   59.1%
+  S4       192    2.6%    9.9%    6.8%    9.9%
+
+=== PRIOR-WEIGHTED BISECT (steps to isolate the cause) ===
+  site ALL (618 pairs): classic_all mean 14.7, median 15, at most 5 steps 0%; uniform mean 13.7, median 14, at most 5 steps 0%; REC mean 14.7, median 13, at most 5 steps 0%; FILE mean 8.4, median 7, at most 5 steps 28%; BLAME mean 9.4, median 7, at most 5 steps 40%; N1 mean 6.4, median 5, at most 5 steps 53%
+  site S1 (607 pairs): classic_all mean 14.7, median 15, at most 5 steps 0%; uniform mean 13.7, median 14, at most 5 steps 0%; REC mean 14.7, median 13, at most 5 steps 0%; FILE mean 8.6, median 7, at most 5 steps 29%; BLAME mean 10.2, median 10, at most 5 steps 35%; N1 mean 6.7, median 5, at most 5 steps 50%
+
+=== VERDICTS ===
+  SY1 N1 top 20 with one edited function as the site: S1 71.8%, S2 72.3% (needs 55%): supported
+  SY2 caller as the site (S3): N1 59.1% (needs 25%), FILE 45.3% (needs N1 5 points above): supported
+  SY3 function named in the subject (S4): N1 9.9% (needs 50%): not supported
+  SY4 lowest N1 top 20 among the sites: S4 (needs S3): not supported
+  BS1 N1-weighted mean 6.4 against classic over all commits 14.7: +8.3 steps saved (needs 3): supported
+  BS2 N1 against FILE-weighted: +1.98 steps (needs 0.5): supported
+  BS3 share needing at most 5 tests with N1: 53% (needs 30%): supported

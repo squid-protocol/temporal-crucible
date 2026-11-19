@@ -1,0 +1,24 @@
+dpdk: 433 fixes with at least 2 edited functions in the graph; SIZE recall@20 0.8%; SAMEFILE recall@20 40.9%; N recall@20 45.1%; LEX recall@20 41.9%; N+LEX recall@20 56.8%
+mesa: 296 fixes with at least 2 edited functions in the graph; SIZE recall@20 0.3%; SAMEFILE recall@20 45.8%; N recall@20 51.2%; LEX recall@20 31.7%; N+LEX recall@20 56.7%
+libgit2: 290 fixes with at least 2 edited functions in the graph; SIZE recall@20 3.9%; SAMEFILE recall@20 43.5%; N recall@20 46.2%; LEX recall@20 26.5%; N+LEX recall@20 43.4%
+redis: 423 fixes with at least 2 edited functions in the graph; SIZE recall@20 7.8%; SAMEFILE recall@20 38.3%; N recall@20 38.6%; LEX recall@20 24.1%; N+LEX recall@20 40.4%
+libxml2: 707 fixes with at least 2 edited functions in the graph; SIZE recall@20 7.1%; SAMEFILE recall@20 33.7%; N recall@20 37.3%; LEX recall@20 30.8%; N+LEX recall@20 42.0%
+sphinx: 393 fixes with at least 2 edited functions in the graph; SIZE recall@20 3.9%; SAMEFILE recall@20 41.2%; N recall@20 42.8%; LEX recall@20 23.1%; N+LEX recall@20 45.5%
+scapy: 379 fixes with at least 2 edited functions in the graph; SIZE recall@20 5.8%; SAMEFILE recall@20 47.6%; N recall@20 48.0%; LEX recall@20 14.5%; N+LEX recall@20 30.6%
+sqlmap: 586 fixes with at least 2 edited functions in the graph; SIZE recall@20 28.4%; SAMEFILE recall@20 36.7%; N recall@20 36.3%; LEX recall@20 30.2%; N+LEX recall@20 41.6%
+prometheus: 320 fixes with at least 2 edited functions in the graph; SIZE recall@20 1.9%; SAMEFILE recall@20 48.0%; N recall@20 50.9%; LEX recall@20 21.0%; N+LEX recall@20 42.1%
+
+=== POOLED (3827 fixes; median other edited functions 2) ===
+  SIZE      recall at 20   8.1%   at least one other edited function in the top 20  15.7%
+  SAMEFILE  recall at 20  40.5%   at least one other edited function in the top 20  53.9%
+  N         recall at 20  42.7%   at least one other edited function in the top 20  56.6%
+  LEX       recall at 20  27.8%   at least one other edited function in the top 20  40.8%
+  N+LEX     recall at 20  43.9%   at least one other edited function in the top 20  60.2%
+  fixes with other edited files: 2126; at least one in the top 5 files: N 48.6%, size alone 28.4%
+  by repository, recall at 20 (N / LEX / N+LEX): dpdk 45 / 42 / 57; mesa 51 / 32 / 57; libgit2 46 / 27 / 43; redis 39 / 24 / 40; libxml2 37 / 31 / 42; sphinx 43 / 23 / 45; scapy 48 / 15 / 31; sqlmap 36 / 30 / 42; prometheus 51 / 21 / 42
+
+=== VERDICTS ===
+  AC1 N recall at 20 42.7% (needs 50%): not supported
+  AC2 N minus LEX +14.9 points (needs +15): not supported
+  AC3 other edited file in the top 5 files for 48.6% (needs 60%): not supported
+  surprise bar (AC2 below 5 points): not met
