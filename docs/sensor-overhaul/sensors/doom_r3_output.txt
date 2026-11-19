@@ -1,9 +1,9 @@
-crispy-doom: 103 changes ranked (median universe 1746 functions): L top 20 43.7%; H top 20 12.6%; P top 20 22.3%; LH top 20 27.2%; LP top 20 31.1%
-dsda-doom: 100 changes ranked (median universe 639 functions): L top 20 45.0%; H top 20 13.0%; P top 20 18.0%; LH top 20 37.0%; LP top 20 37.0%
-nugget-doom: 84 changes ranked (median universe 590 functions): L top 20 53.6%; H top 20 33.3%; P top 20 46.4%; LH top 20 59.5%; LP top 20 56.0%
-doomretro: 246 changes ranked (median universe 548 functions): L top 20 44.3%; H top 20 25.6%; P top 20 28.5%; LH top 20 46.3%; LP top 20 46.3%
-fastdoom: 26 changes ranked (median universe 581 functions): L top 20 57.7%; H top 20 15.4%; P top 20 38.5%; LH top 20 46.2%; LP top 20 53.8%
-inter-doom: 17 changes ranked (median universe 1210 functions): L top 20 11.8%; H top 20 5.9%; P top 20 23.5%; LH top 20 17.6%; LP top 20 17.6%
+crispy-doom: 103 changes ranked (median universe 1746 functions): L top 20 43.7%; H top 20 12.6%; P top 20 22.3%; LH top 20 27.2%; LP top 20 31.1%; T1 top 20 44.7%; T2 top 20 42.7%
+dsda-doom: 100 changes ranked (median universe 639 functions): L top 20 45.0%; H top 20 13.0%; P top 20 18.0%; LH top 20 37.0%; LP top 20 37.0%; T1 top 20 49.0%; T2 top 20 46.0%
+nugget-doom: 84 changes ranked (median universe 590 functions): L top 20 53.6%; H top 20 33.3%; P top 20 46.4%; LH top 20 59.5%; LP top 20 56.0%; T1 top 20 50.0%; T2 top 20 59.5%
+doomretro: 246 changes ranked (median universe 548 functions): L top 20 44.3%; H top 20 25.6%; P top 20 28.5%; LH top 20 46.3%; LP top 20 46.3%; T1 top 20 45.9%; T2 top 20 51.6%
+fastdoom: 26 changes ranked (median universe 581 functions): L top 20 57.7%; H top 20 15.4%; P top 20 38.5%; LH top 20 46.2%; LP top 20 53.8%; T1 top 20 53.8%; T2 top 20 57.7%
+inter-doom: 17 changes ranked (median universe 1210 functions): L top 20 11.8%; H top 20 5.9%; P top 20 23.5%; LH top 20 17.6%; LP top 20 17.6%; T1 top 20 11.8%; T2 top 20 23.5%
 
 === POOLED ===
 576 changes; random top 20 would be about 3.0%
@@ -12,6 +12,8 @@ inter-doom: 17 changes ranked (median universe 1210 functions): L top 20 11.8%; 
   pair prior                             top 10  18.1%  top 20  28.5%  top 100  58.9%
   local + hotness (fusion)               top 10  27.4%  top 20  42.4%  top 100  79.9%
   local + pair prior (fusion)            top 10  29.9%  top 20  42.9%  top 100  79.9%
+  T1 local, prior as tie-break (exploratory) top 10  37.2%  top 20  46.2%  top 100  74.8%
+  T2 local top 10 then fusion (exploratory) top 10  37.2%  top 20  49.7%  top 100  79.9%
 
 === VERDICTS ===
   CP1 pair prior top 20 28.5% against random about 3.0% = 9.4 times (needs 3): supported
@@ -19,3 +21,5 @@ inter-doom: 17 changes ranked (median universe 1210 functions): L top 20 11.8%; 
   CP3 LP minus LH +0.5 points (needs +2): not supported
   CP4 L alone top 20 45.3% (needs 30%): supported
   surprise bar (LP less than 1 point above L): MET
+  E1 (exploratory) T1 minus L: top 20 +0.9 points (needs 0 or more), top 100 +0.0 (needs +2): not supported
+  E2 (exploratory) T2 minus L: top 20 +4.3 (needs within 1), top 100 +5.0 (needs +3): not supported

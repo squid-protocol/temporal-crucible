@@ -143,3 +143,13 @@ Surprise bar (LP less than 1 point above L): **met** at the top 20.
 #### Exploratory follow-up (not pre-registered; hypotheses written before running, labelled post hoc because they were suggested by the R3 result)
 - **E1.** Using the sibling prior **only as a tie-break** inside the local ordering (same file, then call distance, then the pair prior, then hotness, then size; ranker **T1**) does not lose anything at the top: its top 20 is at least the local ranker's (45.3%) and its top 100 at least 2 points above it.
 - **E2.** Keeping the local ranker's top 10 and ordering the rest by the fusion of L and P (**T2**) has a top 20 within 1 point of L and a top 100 at least 3 points above L.
+
+#### Exploratory follow-up: results (2026-11-18; `doom_r3_output.txt`; post hoc, on the same 576 changes)
+| ranker | top 10 | top 20 | top 100 |
+|---|---|---|---|
+| L local | 37.2% | 45.3% | 74.8% |
+| T1 local with the prior as tie-break (same file, call distance, pair prior, hotness, size) | 37.2% | 46.2% | 74.8% |
+| **T2 local top 10, then the rest by fusion of L and P** | 37.2% | **49.7%** | **79.9%** |
+| E1 T1 at least L at the top 20 and 2 points above at the top 100 | **not supported**: +0.9 and +0.0 (the tie-break rarely changes the order: the local classes are large and the prior is sparse) |
+| E2 T2 within 1 point of L at the top 20 and 3 points above at the top 100 | **not supported as written** (the top 20 rose by 4.3, outside "within 1"), but the outcome is better than the prediction: **+4.4 at the top 20 and +5.1 at the top 100 over the local ranking alone**, with the top 10 unchanged |
+**Reading.** The sibling prior helps **after** the local ranker's strongest candidates, not mixed into them: keep the local top 10, fill positions 11 onward with the fusion of the local ranking and the prior, and the top 20 rises from 45.3% to 49.7% and the top 100 from 74.8% to 79.9%. **Caveats:** the rule was chosen after seeing the R3 results, on the same data (one parameter, the 10); six lineages of unequal size (17 to 246 changes); the universe is the inherited functions; it needs a confirmation set not used here (the C++ lineages, or other DOOM families, or any project family with sibling histories) before it goes anywhere near an engine.
