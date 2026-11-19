@@ -1190,3 +1190,23 @@ The mock-up's miss (virtio-user: four repaired functions in a sibling file of th
 - **SD3.** For repairs in **other files only**, the function top-20 rises by at least 5 points and the file top-10 by at least 5 points (S over B), in each dataset.
 - **SD4.** No loss for repairs in the changed files: the function top-20 for the same-file repairs does not fall by more than 1 point (S against B).
 **Would surprise:** a gain under 1 point in any dataset (then directory proximity adds nothing the same-file and call-distance rankers do not already have).
+
+#### Same directory as a ranking feature: results (2026-11-18; `same_directory_output.txt`)
+B = same file, call distance, size (the validated ranking); S = the same with "same directory" as a tie-break within each call distance; G = graded directory category as the tie-break. DPDK and Mesa: 4,000 trailer pairs each sampled (1,429 and 1,601 ranked); held-out repositories: blame pairs.
+| dataset (pairs) | function top 20 B / S | function top 100, other-file repairs only B / S | **files top 10, other-file repairs only B / S** | files top 20, other-file only B / S | files top 10, all repairs B / S |
+|---|---|---|---|---|---|
+| DPDK (1,429) | 49.4 / 49.7% | 20.0 / **39.4%** | 51.7 / **63.0%** | 58.5 / **77.3%** | 83.2 / 87.2% |
+| Mesa (1,601) | 40.8 / 41.0% | 15.0 / 22.0% | 30.9 / **37.3%** | 39.3 / **51.3%** | 67.2 / 70.0% |
+| C held-out (1,604) | 47.3 / 47.3% | 22.7 / 24.1% | 51.0 / 52.7% | 75.7 / 77.7% | 83.6 / 84.3% |
+| Python held-out (1,513) | 35.7 / **38.1%** | 30.6 / 33.0% | 34.0 / 38.6% | 50.5 / 52.8% | 60.9 / 64.0% |
+| Go held-out (380) | 42.4 / 43.5% | 24.4 / **35.1%** | 42.4 / 46.6% | 59.4 / **69.8%** | 70.3 / 72.4% |
+G (graded) equals S within 0.1 point everywhere at function level and within 1 to 3 points at file level (Go file top 10: S 46.6%, G 44.9%). **Repairs in the changed files themselves:** unchanged (S = B in every dataset). Function top 20 for repairs in **other files only** (B / S): DPDK 3.6 / 4.6%, Mesa 2.9 / 3.4%, C 2.9 / 3.0%, Python 7.3 / 10.8%, Go 4.5 / 6.3%. (The spot check on the mock-up's pair is not in the sampled pairs.)
+| hypothesis | verdict |
+|---|---|
+| SD1 S raises the function top 20 by at least 3 points in every dataset | **not supported**: +0.4, +0.2, +0.0, +2.4, +1.1 |
+| SD2 G at least as good as S | **supported** (differences -0.1 to +0.0) |
+| SD3 other-file repairs: function top 20 and file top 10 each up by at least 5 points in every dataset | **not supported**: function top 20 +1.0, +0.5, +0.1, +3.6, +1.7; file top 10 **+11.3**, **+6.4**, +1.7, +4.6, +4.2 |
+| SD4 no loss for same-file repairs | **supported** (exactly unchanged) |
+Surprise bar (a gain under 1 point in any dataset): **met** for the function top 20 in four of five datasets.
+**Reading.** **Directory proximity helps files, not the top 20 functions.** A repaired function in a sibling file is usually far down any function list (a directory holds hundreds of functions with no call link to the change), so the function top 20 barely moves (+0.0 to +2.4); but ranked as **files**, the sibling file rises sharply: for repairs in other files the top-10 files contain a repaired file 63% instead of 52% (DPDK), 37% instead of 31% (Mesa), 47% instead of 42% (Go), 39% instead of 34% (Python), and 53% instead of 51% (C held-out). The top 100 functions for other-file repairs doubles in DPDK (20% to 39%) and rises by 8 to 11 points in Mesa and Go. Nothing is lost for repairs in the changed files. **Design consequence:** use the directory as a tie-break in the **file ranking** (changed file, then call distance, then same directory, then size) and keep the function list as it is; a suspect file can carry the reason "same directory as X's file". The graded version adds nothing over the binary one.
+**Caveats.** Trailer pairs sampled to 4,000 per repository; blame-based pairs for held-out repositories; C held-out repositories are small, so file top-10 and top-20 are high for every ranker; the gain is largest where repositories are organised in directories by driver or module (DPDK, Mesa) and smallest in flat projects (libgit2, redis).
