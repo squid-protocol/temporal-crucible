@@ -115,6 +115,16 @@ class Graph:
                 src.append(self.index[key_of[s]])
                 dst.append(self.index[key_of[d]])
         con.close()
+        fp = os.environ.get("BLAST_FNPTR")  # directory of function-pointer edge files (fnptr_edges.py); unset = the call graph as in every earlier result
+        if fp:
+            import hashlib
+            import pickle
+            f = os.path.join(fp, hashlib.md5(db.encode()).hexdigest() + ".pkl")
+            if os.path.exists(f):
+                for a_key, b_key in pickle.load(open(f, "rb"))["edges"]:
+                    if a_key in self.index and b_key in self.index and a_key != b_key:
+                        src.append(self.index[a_key])
+                        dst.append(self.index[b_key])
         self.n = n
         self.loc = np.array([loc[k] for k in keys], dtype=np.int64)
         self.args = np.array([argc[k] for k in keys], dtype=np.int64)
