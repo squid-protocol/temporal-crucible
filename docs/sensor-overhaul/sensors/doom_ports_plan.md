@@ -162,3 +162,22 @@ The rule **T2** (the local ranking's top 10 kept, the rest ordered by reciprocal
 - **CF4.** The local ranking alone reaches at least 30% in the top 20, pooled (the validated ranking holds in C++).
 - **CF5.** T2 is at least as good as the local ranking in the top 20 in at least 2 of the 3 lineages.
 **Would surprise (the T2 gain was fitted to the design set):** T2's pooled top 20 at or below the local ranking's.
+
+#### DOOM-R3c results (2026-11-19; `doom_r3c_output.txt`; 332 changes in eternity, odamex and srb2, none used in R1 to R3; siblings: the six C lineages; the harness crashed once on a missing snapshot-date cache and was re-run unchanged otherwise; the script's CP lines are the R3 hypotheses and are not the verdicts of this section, which are computed from its table)
+| ranker | top 10 | top 20 | top 100 |
+|---|---|---|---|
+| **L** local call graph | 38.9% | **49.4%** | 78.6% |
+| H sibling hotness only | 8.1% | 12.3% | 56.3% |
+| **P** sibling pair prior only | 16.3% | **25.6%** | 59.3% |
+| LP fusion of L and P | 34.0% | 47.9% | 80.7% |
+| **T2** local top 10, then fusion | 38.9% | **52.1%** | **80.7%** |
+Per lineage, top 20 (L / P / LP / T2): eternity (C++, 106 changes) 49.1 / 34.0 / 51.9 / **56.6%**; odamex (C++, 148) 46.6 / 21.6 / 43.2 / 45.3%; srb2 (C, 78) 55.1 / 21.8 / 51.3 / **59.0%**. Random top 20 about 3.4% (universe 506 to 657 inherited functions).
+| hypothesis | verdict |
+|---|---|
+| CF1 T2's top 20 at least 2 points above the local ranking's, pooled | **supported**: +2.7 (52.1% against 49.4%) |
+| CF2 T2's top 100 at least 2 points above, pooled | **supported, narrowly**: +2.1 (80.7% against 78.6%) |
+| CF3 the pair prior alone at least 3 times random in the top 20 | **supported**: 25.6% against 3.4% = 7.5 times |
+| CF4 the local ranking alone at least 30% in the top 20 | **supported**: 49.4% (the validated ranking holds in C++ and in a divergent C game) |
+| CF5 T2 at least as good as the local ranking in at least 2 of 3 lineages | **supported**: eternity +7.5, srb2 +3.9, odamex -1.3 |
+Surprise bar (T2's pooled top 20 at or below the local ranking's): not met.
+**Reading.** **The rule confirms on lineages it was not designed on, with a smaller effect:** +2.7 points in the top 20 (design set +4.4) and +2.1 in the top 100 (design set +5.1); two lineages gain (eternity, srb2), one loses slightly (odamex); the plain fusion (LP) again loses at the top (47.9% against 49.4%). The sibling pair prior transfers (7.5 times random; hotness alone transfers poorly here, 12.3% against 21.2% in R3, so what travels is the pair-specific history, not popularity). **Caveats:** three lineages of 78 to 148 changes; the effect is within what a different draw of changes could move (no interval computed); universe restricted to inherited functions; priors only from the six design lineages; blame labels. **Position:** the sibling prior is a real but modest second signal (about +2 to +3 points at the top of the list); not worth engine work in the first pull request; a candidate for a later phase if sibling histories are available.

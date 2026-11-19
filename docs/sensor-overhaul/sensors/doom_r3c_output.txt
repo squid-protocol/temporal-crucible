@@ -1,0 +1,22 @@
+eternity: 106 changes ranked (median universe 514 functions): L top 20 49.1%; H top 20 24.5%; P top 20 34.0%; LH top 20 44.3%; LP top 20 51.9%; T1 top 20 50.9%; T2 top 20 56.6%
+odamex: 148 changes ranked (median universe 657 functions): L top 20 46.6%; H top 20 8.1%; P top 20 21.6%; LH top 20 39.9%; LP top 20 43.2%; T1 top 20 43.2%; T2 top 20 45.3%
+srb2: 78 changes ranked (median universe 506 functions): L top 20 55.1%; H top 20 3.8%; P top 20 21.8%; LH top 20 47.4%; LP top 20 51.3%; T1 top 20 55.1%; T2 top 20 59.0%
+
+=== POOLED ===
+332 changes; random top 20 would be about 3.4%
+  local call graph (validated ranking)   top 10  38.9%  top 20  49.4%  top 100  78.6%
+  hotness only                           top 10   8.1%  top 20  12.3%  top 100  56.3%
+  pair prior                             top 10  16.3%  top 20  25.6%  top 100  59.3%
+  local + hotness (fusion)               top 10  29.2%  top 20  43.1%  top 100  78.6%
+  local + pair prior (fusion)            top 10  34.0%  top 20  47.9%  top 100  80.7%
+  T1 local, prior as tie-break (exploratory) top 10  38.0%  top 20  48.5%  top 100  74.1%
+  T2 local top 10 then fusion (exploratory) top 10  38.9%  top 20  52.1%  top 100  80.7%
+
+=== VERDICTS ===
+  CP1 pair prior top 20 25.6% against random about 3.4% = 7.5 times (needs 3): supported
+  CP2 LP minus L (points): pooled -1.5; per lineage eternity +2.8, odamex -3.4, srb2 -3.8 (needs +3 pooled and positive-3 in 4 lineages): not supported
+  CP3 LP minus LH +4.8 points (needs +2): supported
+  CP4 L alone top 20 49.4% (needs 30%): supported
+  surprise bar (LP less than 1 point above L): MET
+  E1 (exploratory) T1 minus L: top 20 -0.9 points (needs 0 or more), top 100 -4.5 (needs +2): not supported
+  E2 (exploratory) T2 minus L: top 20 +2.7 (needs within 1), top 100 +2.1 (needs +3): not supported

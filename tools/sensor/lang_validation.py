@@ -23,9 +23,9 @@ import repair_structure as RS  # noqa: E402
 import verify_functions as VF  # noqa: E402
 
 B = "/tmp/gitgalaxy-scratch/claude"
-CFG = {"sphinx": "python", "scapy": "python", "sqlmap": "python", "prometheus": "go", "commons-lang": "java", "commons-io": "java", "ripgrep": "rust", "dpdk": "c", "curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c", "crispy-doom": "c", "dsda-doom": "c", "nugget-doom": "c", "doomretro": "c", "fastdoom": "c", "inter-doom": "c", "chocolate-doom": "c"}
-EXT = {"python": (".py",), "go": (".go",), "java": (".java",), "rust": (".rs",), "c": (".c", ".h")}
-NODES = {"python": {"function_definition"}, "go": {"function_declaration", "method_declaration"}, "java": {"method_declaration", "constructor_declaration"}, "rust": {"function_item"}, "c": {"function_definition"}}
+CFG = {"sphinx": "python", "scapy": "python", "sqlmap": "python", "prometheus": "go", "commons-lang": "java", "commons-io": "java", "ripgrep": "rust", "dpdk": "c", "curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c", "crispy-doom": "c", "dsda-doom": "c", "nugget-doom": "c", "doomretro": "c", "fastdoom": "c", "inter-doom": "c", "chocolate-doom": "c", "eternity": "cpp", "odamex": "cpp", "srb2": "c"}
+EXT = {"python": (".py",), "go": (".go",), "java": (".java",), "rust": (".rs",), "c": (".c", ".h"), "cpp": (".cpp", ".cc", ".cxx", ".c", ".h", ".hpp", ".hh")}
+NODES = {"python": {"function_definition"}, "go": {"function_declaration", "method_declaration"}, "java": {"method_declaration", "constructor_declaration"}, "rust": {"function_item"}, "c": {"function_definition"}, "cpp": {"function_definition"}}
 TESTPART = {"test", "tests", "testing", "__tests__", "spec", "specs", "testdata"}
 FIXRE = re.compile(r"\b(fix|fixes|fixed|bug|regression)\b", re.I)
 rng = np.random.default_rng(2982)
@@ -54,6 +54,11 @@ def func_texts(lang, src):
         if n.type in NODES[lang]:
             if lang == "c":
                 nm = RS.func_name(n, src)
+            elif lang == "cpp":
+                d = n.child_by_field_name("declarator")
+                while d is not None and d.type in ("pointer_declarator", "reference_declarator", "parenthesized_declarator", "function_declarator", "array_declarator"):
+                    d = d.child_by_field_name("declarator")
+                nm = src[d.start_byte:d.end_byte].decode("utf8", "replace") if d is not None and d.type in ("identifier", "qualified_identifier", "field_identifier", "destructor_name", "operator_name", "template_function") else None
             else:
                 x = n.child_by_field_name("name")
                 nm = src[x.start_byte:x.end_byte].decode("utf8", "replace") if x is not None else None

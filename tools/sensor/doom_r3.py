@@ -19,13 +19,16 @@ import lang_validation as LV  # noqa: E402
 B = "/tmp/gitgalaxy-scratch/claude"
 INF = 10**18
 KS = (10, 20, 100)
+import os  # noqa: E402
+HELD = os.environ.get("DOOM_HELD", ",".join(D.LIN)).split(",")
+SIBS = os.environ.get("DOOM_SIBS", ",".join(D.LIN)).split(",")
 
 
 def main():
     g0 = BR.Graph(D.REFDB)
     refnames = {D.norm(n) for (p, n), i in g0.index.items() if g0.loc[i] >= 3}
     data = {}
-    for repo in D.LIN:
+    for repo in sorted(set(HELD) | set(SIBS)):
         pairs, info = LV.build(repo, 3000)
         pair_first, hot_times, fixseen = {}, collections.defaultdict(list), set()
         for p in pairs:
@@ -45,12 +48,17 @@ def main():
             v.sort()
         data[repo] = {"pairs": pairs, "info": info, "pair_first": pair_first, "hot": hot_times}
     res = {}
-    for L in D.LIN:
-        sibs = [r for r in D.LIN if r != L]
+    for L in HELD:
+        sibs = [r for r in SIBS if r != L]
         pairs, info = data[L]["pairs"], data[L]["info"]
         sn = json.load(open(f"{BR.B}/scan_{L}/snapshots.json"))
         cf = f"{B}/blast/lang_{L}_snapcts.npy"
-        cts = np.load(cf)
+        import os
+        if os.path.exists(cf):
+            cts = np.load(cf)
+        else:
+            cts = np.array([int(subprocess.run(["git", "-C", f"{BR.POOL}/{L}", "show", "-s", "--format=%ct", x["commit"]], capture_output=True, text=True).stdout.strip()) for x in sn])
+            np.save(cf, cts)
         by = collections.defaultdict(list)
         for p in pairs:
             I, F = info[p["ind"]][0], info[p["fix"]][0]
@@ -116,8 +124,8 @@ def main():
         n = len(hits["L"][20])
         print(f"{L}: {n} changes ranked (median universe {int(np.median(hits['N'][20])) if n else 0} functions): " + "; ".join(f"{nm_} top 20 {100 * np.mean(hits[nm_][20]):.1f}%" for nm_ in ("L", "H", "P", "LH", "LP", "T1", "T2")), flush=True)
     print("\n=== POOLED ===")
-    pooled = {nm_: {k: [x for L in D.LIN for x in res[L][nm_][k]] for k in KS} for nm_ in ("L", "H", "P", "LH", "LP", "T1", "T2")}
-    N = np.concatenate([res[L]["N"][20] for L in D.LIN])
+    pooled = {nm_: {k: [x for L in HELD for x in res[L][nm_][k]] for k in KS} for nm_ in ("L", "H", "P", "LH", "LP", "T1", "T2")}
+    N = np.concatenate([res[L]["N"][20] for L in HELD])
     print(f"{len(pooled['L'][20])} changes; random top 20 would be about {100 * np.mean(20 / N):.1f}%")
     for nm_, lab in (("L", "local call graph (validated ranking)"), ("H", "hotness only"), ("P", "pair prior"), ("LH", "local + hotness (fusion)"), ("LP", "local + pair prior (fusion)"), ("T1", "T1 local, prior as tie-break (exploratory)"), ("T2", "T2 local top 10 then fusion (exploratory)")):
         print(f"  {lab:38s} top 10 {100 * np.mean(pooled[nm_][10]):5.1f}%  top 20 {100 * np.mean(pooled[nm_][20]):5.1f}%  top 100 {100 * np.mean(pooled[nm_][100]):5.1f}%")
@@ -126,8 +134,8 @@ def main():
     p20 = {k: float(np.mean(v[20])) for k, v in pooled.items()}
     print(f"  CP1 pair prior top 20 {100 * p20['P']:.1f}% against random about {100 * rnd:.1f}% = {p20['P'] / rnd:.1f} times (needs 3): {'supported' if p20['P'] >= 3 * rnd else 'not supported'}")
     gain = 100 * (p20["LP"] - p20["L"])
-    perl = {L: 100 * (np.mean(res[L]["LP"][20]) - np.mean(res[L]["L"][20])) for L in D.LIN if res[L]["L"][20]}
-    print(f"  CP2 LP minus L (points): pooled {gain:+.1f}; per lineage " + ", ".join(f"{L} {v:+.1f}" for L, v in perl.items()) + f" (needs +3 pooled and positive-3 in 4 lineages): {'supported' if gain >= 3 and sum(1 for v in perl.values() if v >= 3) >= 4 else 'not supported'}")
+    perl = {L: 100 * (np.mean(res[L]["LP"][20]) - np.mean(res[L]["L"][20])) for L in HELD if res[L]["L"][20]}
+    print(f"  CP2 LP minus L (points): pooled {gain:+.1f}; per lineage " + ", ".join(f"{L} {v:+.1f}" for L, v in perl.items()) + f" (needs +3 pooled and positive-3 in 4 lineages): {'supported' if gain >= 3 and sum(1 for v in perl.values() if v >= 3) >= min(4, len(perl)) else 'not supported'}")
     g3 = 100 * (p20["LP"] - p20["LH"])
     print(f"  CP3 LP minus LH {g3:+.1f} points (needs +2): {'supported' if g3 >= 2 else 'not supported'}")
     print(f"  CP4 L alone top 20 {100 * p20['L']:.1f}% (needs 30%): {'supported' if p20['L'] >= 0.3 else 'not supported'}")
