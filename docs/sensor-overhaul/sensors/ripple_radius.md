@@ -1392,3 +1392,13 @@ Same pairs and the same `blast_radius.py run` / `report` as the DPDK result abov
 - **FR2.** The observed share of fixed functions within 2 calls (either direction) rises by at most 2 points.
 - **FR3.** For different-file fixes (1,561 pairs) the share within 2 calls rises by at least 2 points (the new edges are cross-file by nature, so any gain shows there).
 **Would surprise:** the within-2-calls ratio moving by 0.2 or more in either direction.
+
+#### Forward repair radius on DPDK under the function-pointer edges: results (2026-11-19; `fnptr_forward_radius_output.txt`; the baseline re-measured in the same run reproduced 9,867 measured pairs and 6,963 with a fixed function outside the changed set)
+Within 2 calls (either direction), ratio against same-file functions of similar size, observed % vs expected %: **all pairs: baseline 1.45 [1.41, 1.48] (51% vs 35%); with the edges 1.43 [1.40, 1.47] (52% vs 36%).** Within 1 call: 1.68 -> 1.67. Callers1: 1.84 -> 1.83; callees1: 1.69 -> 1.68. Same-file fixes (5,402): 1.48 -> 1.47. **Different-file fixes (1,561): 1.20 [1.09, 1.31] (22% vs 18%) -> 1.18 [1.08, 1.28] (24% vs 20%)**; callers1 2.43 -> 2.39, callees1 1.24 -> 1.26.
+| hypothesis | verdict |
+|---|---|
+| FR1 ratio within 0.10 of the baseline | **supported**: 1.43 against 1.45 (-0.02) |
+| FR2 observed share within 2 calls rises by at most 2 points | **supported**: +1 (51% to 52%) |
+| FR3 different-file share within 2 calls rises by at least 2 points | **supported, but empty**: 22% to 24%, and the baseline's expected share rose just as much (18% to 20%), so the ratio fell slightly (1.20 to 1.18) |
+Surprise bar (moving by 0.2 or more): not met.
+**Reading.** The new edges (12,016 at the latest scan, correct by the 30-of-30 check) add connectivity to the observed fixed functions and to the same-size same-file baseline in equal measure, so **the repair radius does not change** (1.45 to 1.43; intervals overlap almost entirely). Together with the unchanged reverse triage (79.0% and 55.8% at the top 20), **DPDK's findings are robust to this class of missing edge.** The edges do help the one thing they were built for, linking generic API code to driver code and tests: the test reach within 10 calls rose from 6.3% to 28.4%. **Not shown:** robustness to other missing edge classes (macros, positional initializers, bare function-pointer variables, Tcl and other-language tests), or to this edge class in other C projects (kernel, Mesa, redis); that would need the extractor run there. DPDK only.

@@ -1,0 +1,22 @@
+##### fr_base
+9867 measured pairs; 6963 with a fixed function outside the changed set; same function in 49% of pairs; cross-file 1561
+
+=== all pairs ===
+  all                  n  6963 (all  9867, same function  49%): either1  1.68 [1.63,1.73] (43% vs 25%, n 6500) | either2  1.45 [1.41,1.48] (51% vs 35%, n 6500) | callers1  1.84 [1.73,1.96] (16% vs 8%, n 6500) | callees1  1.69 [1.63,1.75] (33% vs 20%, n 6500)
+
+=== cross ===
+  False                n  5402 (all  8306, same function  58%): either1  1.70 [1.65,1.75] (50% vs 30%, n 5114) | either2  1.48 [1.44,1.51] (59% vs 40%, n 5114) | callers1  1.80 [1.70,1.91] (18% vs 10%, n 5114) | callees1  1.73 [1.67,1.80] (40% vs 23%, n 5114)
+  True                 n  1561 (all  1561, same function   0%): either1  1.49 [1.30,1.71] (15% vs 10%, n 1386) | either2  1.20 [1.09,1.31] (22% vs 18%, n 1386) | callers1  2.43 [1.91,3.16] (6% vs 2%, n 1386) | callees1  1.24 [1.04,1.47] (10% vs 8%, n 1386)
+
+(ratio against same-file functions of similar size, 95% interval over pairs; then observed % vs expected %)
+##### fr_fp
+9867 measured pairs; 6963 with a fixed function outside the changed set; same function in 49% of pairs; cross-file 1561
+
+=== all pairs ===
+  all                  n  6963 (all  9867, same function  49%): either1  1.67 [1.62,1.72] (44% vs 26%, n 6500) | either2  1.43 [1.40,1.47] (52% vs 36%, n 6500) | callers1  1.83 [1.72,1.93] (16% vs 9%, n 6500) | callees1  1.68 [1.62,1.75] (34% vs 20%, n 6500)
+
+=== cross ===
+  False                n  5402 (all  8306, same function  58%): either1  1.69 [1.64,1.74] (51% vs 30%, n 5114) | either2  1.47 [1.44,1.50] (60% vs 41%, n 5114) | callers1  1.79 [1.69,1.89] (19% vs 10%, n 5114) | callees1  1.72 [1.66,1.78] (40% vs 23%, n 5114)
+  True                 n  1561 (all  1561, same function   0%): either1  1.50 [1.30,1.71] (16% vs 11%, n 1386) | either2  1.18 [1.08,1.28] (24% vs 20%, n 1386) | callers1  2.39 [1.89,3.10] (6% vs 3%, n 1386) | callees1  1.26 [1.07,1.49] (11% vs 9%, n 1386)
+
+(ratio against same-file functions of similar size, 95% interval over pairs; then observed % vs expected %)
