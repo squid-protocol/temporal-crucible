@@ -1,0 +1,48 @@
+source                pairs   median recency rank of the cause
+DPDK Fixes pairs        600                               1504
+Mesa Fixes pairs        968                               2193
+OSS-Fuzz four            73                                  7
+nDPI                     84                                 11
+harfbuzz (n 12)          12                                  8
+
+=== DPDK Fixes pairs: held-out halves, top 1 / 5 / 20 ===
+    REC        0.2%    1.0%    2.3%
+    N1        26.2%   58.7%   79.0%
+    RRF60      4.8%    8.3%   22.0%
+    RRFk       6.2%   23.2%   56.5%
+    SWITCH    26.2%   58.7%   79.0%
+    ORACLE    26.2%   58.7%   79.0%
+=== Mesa Fixes pairs: held-out halves, top 1 / 5 / 20 ===
+    REC        0.4%    0.7%    3.5%
+    N1        30.3%   55.1%   71.2%
+    RRF60     11.7%   21.2%   45.4%
+    RRFk      14.5%   36.0%   63.0%
+    SWITCH    30.3%   55.1%   71.2%
+    ORACLE    30.3%   55.2%   72.1%
+=== OSS-Fuzz four: held-out halves, top 1 / 5 / 20 ===
+    REC       12.3%   42.5%   78.1%
+    N1        19.2%   24.7%   34.2%
+    RRF60     24.7%   43.8%   67.1%
+    RRFk      21.9%   42.5%   80.8%
+    SWITCH    12.3%   42.5%   78.1%
+    ORACLE    30.1%   57.5%   89.0%
+=== nDPI: held-out halves, top 1 / 5 / 20 ===
+    REC        0.0%   34.5%   57.1%
+    N1        16.7%   35.7%   45.2%
+    RRF60     16.7%   41.7%   64.3%
+    RRFk      16.7%   43.3%   65.1%
+    SWITCH     0.0%   34.5%   57.1%
+    ORACLE    16.7%   54.8%   72.6%
+=== harfbuzz (n 12): held-out halves, top 1 / 5 / 20 ===
+    REC        0.0%   41.7%   75.0%
+    N1         8.3%    8.3%   25.0%
+    RRF60     16.7%   33.3%   75.0%
+    RRFk      16.7%   33.3%   65.8%
+    SWITCH     0.0%   41.7%   75.0%
+    ORACLE     8.3%   50.0%   75.0%
+
+=== VERDICTS ===
+  FU1 RRF top 20: DPDK+Mesa pooled 36.4% (needs 65), OSS-Fuzz four 67.1% (needs 65), nDPI 64.3% (needs 60): not supported
+  FU2 SWITCH within 90% of the better of REC/N1 in 4 of 4 sources (needs all); beats RRF in 3 of 4 (needs 3): supported
+  FU3 RRFk minus RRF60 by source: DPDK Fixes pairs +34.5, Mesa Fixes pairs +17.7, OSS-Fuzz four +13.7, nDPI +0.8 (needs +2 in one): supported
+  surprise bar (RRF below 50% on DPDK+Mesa): MET

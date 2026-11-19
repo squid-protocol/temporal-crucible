@@ -1604,3 +1604,21 @@ Sources (each its own regime): DPDK and Mesa `Fixes:` pairs (the 1,568 ranked pa
 - **FU2.** SWITCH reaches at least 90% of the better of REC and N1 (top 20) in every source with at least 50 pairs, and beats RRF in at least 3 of the 4 sources (DPDK, Mesa, OSS-Fuzz four, nDPI).
 - **FU3.** RRFk beats RRF (k = 60) by at least 2 points in at least one source.
 **Would surprise:** RRF below 50% on DPDK+Mesa (the fusion would then be a fuzz-only fix).
+
+#### A ranker for both regimes: results (2026-11-19; `lag_fusion_output.txt`; held-out halves of 20 random 2-fold splits per source)
+**The regime is easy to read off a project's own known causes:** the median recency rank of the true cause (1 = the most recent candidate) is **1,504 (DPDK), 2,193 (Mesa)** against **7 (OSS-Fuzz four), 11 (nDPI), 8 (harfbuzz)**: two orders of magnitude apart.
+Top 1 / 5 / 20 on held-out halves:
+| source (pairs) | REC | N1 | RRF (k 60) | RRFk (k fitted) | SWITCH | best of REC and N1 per pair (an oracle, not a ranker) |
+|---|---|---|---|---|---|---|
+| DPDK Fixes (600) | 0.2 / 1.0 / 2.3 | 26.2 / 58.7 / **79.0** | 4.8 / 8.3 / 22.0 | 6.2 / 23.2 / 56.5 | 26.2 / 58.7 / **79.0** | 79.0 |
+| Mesa Fixes (968) | 0.4 / 0.7 / 3.5 | 30.3 / 55.1 / **71.2** | 11.7 / 21.2 / 45.4 | 14.5 / 36.0 / 63.0 | 30.3 / 55.1 / **71.2** | 72.1 |
+| OSS-Fuzz four (73) | 12.3 / 42.5 / **78.1** | 19.2 / 24.7 / 34.2 | 24.7 / 43.8 / 67.1 | 21.9 / 42.5 / **80.8** | 12.3 / 42.5 / **78.1** | 89.0 |
+| nDPI (84) | 0.0 / 34.5 / 57.1 | 16.7 / 35.7 / 45.2 | 16.7 / 41.7 / **64.3** | 16.7 / 43.3 / **65.1** | 0.0 / 34.5 / 57.1 | 72.6 |
+| harfbuzz (12, anecdote) | 0.0 / 41.7 / 75.0 | 8.3 / 8.3 / 25.0 | 16.7 / 33.3 / 75.0 | 16.7 / 33.3 / 65.8 | 0.0 / 41.7 / 75.0 | 75.0 |
+| hypothesis | verdict |
+|---|---|
+| FU1 RRF top 20 at least 65% (DPDK+Mesa), 65% (OSS-Fuzz four), 60% (nDPI) | **not supported**: **36.4%** (22.0 DPDK, 45.4 Mesa), 67.1%, 64.3%: the fusion works in the fast regime and collapses in the slow one |
+| FU2 SWITCH within 90% of the better of REC/N1 everywhere and beating RRF in at least 3 of 4 | **supported**: it equals the better of the two in all four sources (79.0, 71.2, 78.1, 57.1) and beats RRF in DPDK, Mesa and OSS-Fuzz four (not nDPI: 57.1 vs 64.3) |
+| FU3 RRFk beats RRF (k 60) by at least 2 points in one source | **supported**: DPDK +34.5, Mesa +17.7, OSS-Fuzz four +13.7, nDPI +0.8 (a large k is a flat fusion that adds little recency pull) |
+Surprise bar (RRF below 50% on DPDK+Mesa): **met**.
+**Reading.** (1) **The regime is not hard to know**: a project's own handful of known causes separate the two by 100 times (median recency rank 7 to 11 against 1,500 to 2,200). (2) **A regime switch (recency when the median cause is among the 30 most recent, else the neighbourhood) is safe: it matches the better ranker in every source**, and it needs only a few dozen known pairs per project (a project's own blame-derived or named causes). (3) **A fixed fusion is not safe**: RRF with k = 60 loses 57 points in DPDK; a fused ranker needs its k fitted per regime, and then it is flat in the slow regime (56.5 and 63.0 against 79.0 and 71.2 for N1) and competitive in the fast regime (80.8% on OSS-Fuzz four, the best number there; 65.1% on nDPI, the best there). (3) **What none of them reach is the oracle**: choosing REC or N1 per pair would give 89.0% and 72.6% on the fuzz sets (against 78.1% and 57.1%): in the fast regime the two rankers find *different* causes, so knowing which one applies to a given failure (for example from the crash type or the size of the candidate) is worth up to 11 to 15 points. **Caveats:** one regime rule fitted on halves of the same source; four sources of 73 to 968 pairs; harfbuzz is 12 pairs; no per-failure selection tried. **What is left:** a per-failure choice of ranker, and a simple trial of RRFk with a family of k per project.
