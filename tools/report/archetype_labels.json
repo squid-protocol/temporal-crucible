@@ -1,0 +1,24 @@
+{
+ "source": "gitgalaxy/standards/analysis_lens.py FUNCTION_ARCHETYPE_DEFINITIONS at origin/main 489e7f8a92",
+ "definitions": {
+  "Interface Declarations": "signature/entry function exposing an API with minimal logic",
+  "Type Conversions": "cast- and conversion-heavy function",
+  "State Mutators": "general-purpose function that reassigns or mutates state",
+  "Callbacks & Closures": "built around closures or callbacks (handlers, async continuations)",
+  "Parameter Forwarders": "thin, many-argument glue that forwards to other code",
+  "Compute Cores": "dense algorithmic logic (high decision density per line)",
+  "C Struct Operations": "operates on C structs and pointers (data-structure logic)",
+  "Many-Argument Workhorses": "large, many-parameter procedural function doing heavy lifting",
+  "I/O & Config Routines": "dominated by I/O and configuration handling",
+  "Encapsulated Accessors": "getters/setters and private-scope accessors",
+  "Annotated Framework Methods": "decorator/annotation-driven framework method",
+  "Generic / Templated Code": "generic / type-parameterized (templated) function",
+  "Defensive Guards": "validation and error handling (null checks, guards, early bailouts)",
+  "Tests & Verification": "assertion-heavy test or verification function",
+  "Unclassified": "no dominant structural signature (too small or ambiguous)"
+ },
+ "older_set": {
+  "Stateful Encapsulated Methods": "method that holds state behind private scope (label from an older engine set; meaning approximate)",
+  "Annotated & Test Methods": "annotated or test method (label from an older engine set; meaning approximate)"
+ }
+}

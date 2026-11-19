@@ -385,6 +385,10 @@ def scan_series(out, scans):
     cts = []
     keys_by_q = []
     com_stats = []
+    fan = []
+    arch_f = []
+    arch_c = []
+    last_extra = {}
     locs = {}
     for i, s in enumerate(sn):
         con = sqlite3.connect(f"file:{s['db']}?mode=ro", uri=True)
@@ -393,8 +397,23 @@ def scan_series(out, scans):
         tl, cl, dl, pd_, fd_, hl = con.execute("SELECT sum(total_loc), sum(coding_loc), sum(doc_loc), sum(state_planned_debt), sum(state_fragile_debt), 0 FROM file_data").fetchone()
         nfun, hdr, docd = con.execute("SELECT count(*), sum(has_header_comment), sum(is_documented) FROM function_data").fetchone()
         com_stats.append({"code_lines": cl or 0, "comment_lines": dl or 0, "planned": pd_ or 0, "fragile": fd_ or 0, "functions": nfun or 0, "header": hdr or 0, "documented": docd or 0})
+        fm = {}
+        for f, nm, fi_, pr_ in con.execute("SELECT file_id, func_name, func_fan_in, func_pagerank FROM function_data"):
+            if f in files:
+                cur = fm.get(nm)
+                if cur is None or (fi_ or 0) > cur[0]:
+                    fm[nm] = (fi_ or 0, pr_ or 0.0, files[f])
+        fan.append(fm)
+        af = {}
+        for f, nm, ar in con.execute("SELECT file_id, func_name, func_archetype FROM function_data"):
+            if f in files and ar:
+                af[(files[f], nm)] = ar
+        arch_f.append(af)
+        arch_c.append({files[fid]: ar for fid, ar in con.execute("SELECT id, composition_file_archetype FROM file_data") if ar and fid in files})
         if i == len(sn) - 1:
             locs = {(files[f], n): (l or 0) for f, n, l in con.execute("SELECT file_id, func_name, loc FROM function_data") if f in files}
+            langs = collections.Counter(r[0] for r in con.execute("SELECT language FROM file_data") if r[0])
+            last_extra = {"languages": dict(langs.most_common(6)), "files": sum(langs.values()), "public_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute("SELECT sum(is_public), count(*) FROM function_data").fetchone()), "unreferenced_share": (lambda r: (r[0] or 0) / max(r[1], 1))(con.execute("SELECT sum(func_fan_in = 0), count(*) FROM function_data").fetchone())}
         con.close()
         keys_by_q.append(keys)
         ctr = subprocess.run(["git", "-C", out["_repo"], "show", "-s", "--format=%ct", s["commit"]], capture_output=True, text=True).stdout.strip()
@@ -445,6 +464,11 @@ def scan_series(out, scans):
         k = max(cs["code_lines"], 1) / 1000
         q["comments"] = {"density": cs["comment_lines"] / max(cs["code_lines"], 1), "planned_per_kloc": cs["planned"] / k, "fragile_per_kloc": cs["fragile"] / k, "header_share": (cs["header"] / cs["functions"]) if cs["functions"] else None, "documented_share": (cs["documented"] / cs["functions"]) if cs["functions"] else None}
     out["lifetimes"] = lifetimes(sn, keys_by_q, locs)
+    out["hubs"] = hubs(sn, fan, first, keys_by_q, out["_repo"])
+    out["archetypes"] = archetypes(sn, arch_f, arch_c, edited_by_q)
+    out["current_extra"] = last_extra
+    out["current_extra"]["top_dirs"] = [{"dir": d, "functions": c} for d, c in collections.Counter("/".join(k[0].split("/")[:2]) for k in keys_by_q[-1]).most_common(8)]
+    out["current_extra"]["largest_functions"] = [{"function": k[1], "file": k[0], "lines": l} for l, k in sorted(((locs.get(k, 0), k) for k in keys_by_q[-1]), reverse=True)[:5]]
     return out
 
 
@@ -514,6 +538,101 @@ def lifetimes(sn, keys_by_q, locs):
     return out
 
 
+def archetypes(sn, arch_f, arch_c, edited_by_q):
+    """Function types (the engine's function archetypes) now, over time, and how stable they are: share of functions (and of files, by composition label) that keep their label a year later, edited or not."""
+    meta = json.load(open(HERE / "archetype_labels.json"))
+    defs = {**meta["definitions"], **meta["older_set"]}
+    n = len(arch_f)
+    last = collections.Counter(arch_f[-1].values())
+    total = sum(last.values()) or 1
+    order = [k for k, _ in last.most_common()]
+    keep = order[:8]
+    series = {k: [sum(1 for v in arch_f[i].values() if v == k) for i in range(n)] for k in keep}
+    series["Other types"] = [len(arch_f[i]) - sum(series[k][i] for k in keep) for i in range(n)]
+    now = [{"label": k, "count": last[k], "share": last[k] / total, "meaning": defs.get(k, "no written definition for this label")} for k in order]
+    L = 4
+
+    def retention(maps, edited_of, min_n):
+        ed_same = ed_tot = un_same = un_tot = 0
+        trans = collections.Counter()
+        for i in range(0, n - L):
+            a, b = maps[i], maps[i + L]
+            if len(a) < min_n:
+                continue
+            edited = set().union(*edited_by_q[i : i + L]) if i + L <= len(edited_by_q) else set()
+            edp = {k[0] for k in edited}
+            for k, v in a.items():
+                w = b.get(k)
+                if w is None:
+                    continue
+                if edited_of(k, edited, edp):
+                    ed_tot += 1
+                    ed_same += v == w
+                    if v != w:
+                        trans[(v, w)] += 1
+                else:
+                    un_tot += 1
+                    un_same += v == w
+        return {"edited_kept": ed_same / ed_tot if ed_tot else None, "edited_n": ed_tot, "unedited_kept": un_same / un_tot if un_tot else None, "unedited_n": un_tot, "transitions": [{"from": a, "to": b, "count": c} for (a, b), c in trans.most_common(6)]}
+    ret_f = retention(arch_f, lambda k, ed, edp: k in ed, 1000)
+    ret_c = retention(arch_c, lambda k, ed, edp: k in edp, 100)
+    return {"definitions_source": meta["source"], "now": now, "mix": {"labels": list(series), "series": series}, "retention_function": ret_f, "retention_file": ret_c, "years": L / 4, "label_note": "Labels are the engine's; scans made by an older engine can carry older names (marked in the table)."}
+
+
+def hubs(sn, fan, first, keys_by_q, repo=None):
+    """Hubs by callers (fan-in) and by centrality (PageRank), tracked by function NAME so a file move does not look like a death: the lists now, how long hubs stay hubs, former hubs.
+    `fan[i]` maps name -> (callers, pagerank, file) for the best-known definition of that name at scan i."""
+    n = len(fan)
+    from datetime import date as D
+    d_last = D.fromisoformat(sn[-1]["date"])
+    first_name = {}
+    for (path, nm), f in first.items():
+        first_name[nm] = min(f, first_name.get(nm, f))
+    first_idx = min(first_name.values()) if first_name else 0
+    top = lambda fm, which, m: [k for k, _ in sorted(fm.items(), key=lambda kv: -kv[1][which])[:m]]  # noqa: E731
+
+    def row(nm, which):
+        f = first_name.get(nm, n - 1)
+        v = fan[-1][nm]
+        return {"function": nm, "file": v[2], "callers": int(v[0]), "centrality": v[1], "age_years": round((d_last - D.fromisoformat(sn[f]["date"])).days / 365.25, 1), "since_first_scan": f == first_idx, "spark": [fan[i].get(nm, (0, 0, ""))[which] for i in range(n)], "spark_callers": [fan[i].get(nm, (0, 0, ""))[0] for i in range(n)]}
+    now = {"callers": [row(k, 0) for k in top(fan[-1], 0, 10)], "centrality": [row(k, 1) for k in top(fan[-1], 1, 10)]}
+    both = {r["function"] for r in now["callers"]} & {r["function"] for r in now["centrality"]}
+    persist = {}
+    for L, lab in ((4, "1 year"), (20, "5 years")):
+        for which, name in ((0, "callers"), (1, "centrality")):
+            inc, sur = [], []
+            for i in range(0, n - L):
+                if len(fan[i]) < 1000:
+                    continue
+                A = set(top(fan[i], which, max(int(len(fan[i]) * 0.01), 1)))
+                B = set(top(fan[i + L], which, max(int(len(fan[i + L]) * 0.05), 1)))
+                alive = A & set(fan[i + L])
+                inc.append(len(A & B) / len(A))
+                sur.append(len(A & B) / max(len(alive), 1))
+            if inc:
+                persist[f"{name}_{lab}"] = {"including_removed": float(np.mean(inc)), "among_survivors": float(np.mean(sur)), "n": len(inc)}
+    now100 = set(top(fan[-1], 0, 100))
+    peak = {}
+    for i in range(n):
+        for nm, v in fan[i].items():
+            if v[0] > peak.get(nm, (0, 0, ""))[0]:
+                peak[nm] = (v[0], i, v[2])
+    former = []
+    for nm, (fi, i, path) in sorted(peak.items(), key=lambda kv: -kv[1][0]):
+        if nm in now100:
+            continue
+        former.append({"function": nm, "file": path, "peak_callers": int(fi), "peak_quarter": sn[i]["label"], "callers_now": int(fan[-1][nm][0]) if nm in fan[-1] else None, "gone": nm not in fan[-1]})
+        if len(former) >= 5:
+            break
+    for fh in former:  # a function missing from the latest scan may still be in the code: the scanner skips some directories (for example any named log or logs)
+        fh["still_defined_in"] = None
+        if repo and fh["gone"]:
+            r = subprocess.run(["git", "-C", repo, "grep", "-n", "-E", "-m1", f"^[A-Za-z_][A-Za-z0-9_ \\*]*\\b{re.escape(fh['function'])}\\(", "HEAD", "--", "*.c", "*.h", "*.cc", "*.cpp"], capture_output=True, text=True, errors="replace")
+            if r.returncode == 0 and r.stdout.strip():
+                fh["still_defined_in"] = r.stdout.split("\n")[0].split(":")[1] if r.stdout.count(":") >= 2 else None
+    return {"now": now, "in_both_lists": len(both), "persistence": persist, "former": former, "labels": [x["label"] for x in sn], "identity": "function name"}
+
+
 def radius(out, scans):
     """Repair radius within 1 and 2 calls (optional): needs tools/sensor/blast_radius.py and a clone under its pool."""
     import blast_radius as BR
@@ -550,6 +669,78 @@ def radius(out, scans):
     return out
 
 
+def build_facts(out, internal):
+    """A deterministic fact sheet about the repository as it stands now: structured fields plus plain sentences, each derived from a stated field (no model, no guessing)."""
+    commits, cat, nf = internal["commits"], internal["cat"], internal["nf"]
+    cts = [c["ct"] for c in commits.values()]
+    last_ct, first_ct = max(cts), min(cts)
+    day = lambda t: datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%d")  # noqa: E731
+    y1, y2 = last_ct - 365 * 86400, last_ct - 730 * 86400
+    cur = [s for s, c in commits.items() if c["ct"] > y1]
+    prev = [s for s, c in commits.items() if y2 < c["ct"] <= y1]
+    grp = {s: CAT_GROUP.get(k, "fixes" if k.startswith("fix") else ("organic" if k != "none" else None)) for s, k in cat.items()}
+    edits = lambda ss: collections.Counter({g: sum(nf[s] for s in ss if grp[s] == g) for g in GROUPS})  # noqa: E731
+    e_cur, e_prev = edits(cur), edits(prev)
+    f = {"repository": out["name"], "language": out["lang"], "first_commit": day(first_ct), "latest_commit": day(last_ct), "age_years": round((last_ct - first_ct) / (365.25 * 86400), 1), "commits": out["commits"],
+         "last_12_months": {"commits": len(cur), "authors": len({commits[s]["author"] for s in cur}), "function_edits": sum(e_cur.values()), "edits_by_kind": dict(e_cur), "sweeps": sum(1 for s in cur if cat[s] == "sweep"), "fix_commits": sum(1 for s in cur if cat[s].startswith("fix")),
+                            "previous_12_months": {"commits": len(prev), "function_edits": sum(e_prev.values())}}}
+    sent = []
+    sent.append(f"{out['name']} has {out['commits']:,} commits over {f['age_years']} years (first {f['first_commit']}, latest {f['latest_commit']}).")
+    l12 = f["last_12_months"]
+    if l12["commits"]:
+        trend = ""
+        if l12["previous_12_months"]["function_edits"]:
+            r = l12["function_edits"] / l12["previous_12_months"]["function_edits"]
+            trend = f" (function edits {'up' if r > 1.1 else 'down' if r < 0.9 else 'about level'} {abs(r - 1) * 100:.0f}% on the year before)" if abs(r - 1) >= 0.1 else " (function edits about level with the year before)"
+        sent.append(f"In the last 12 months: {l12['commits']:,} commits by {l12['authors']} authors, {l12['function_edits']:,} function edits, {l12['sweeps']} sweeps and {l12['fix_commits']:,} fix commits{trend}.")
+    q = out.get("quarters")
+    if q:
+        ex = out["current_extra"]
+        f["size"] = {"functions": q[-1]["functions"], "files": ex["files"], "languages": ex["languages"], "top_directories": ex["top_dirs"], "public_function_share": round(ex["public_share"], 3), "functions_never_called_share": round(ex["unreferenced_share"], 3)}
+        langs = ", ".join(f"{k} ({v:,} files)" for k, v in list(ex["languages"].items())[:3])
+        sent.append(f"Today the code base has {q[-1]['functions']:,} functions in {ex['files']:,} files; main languages: {langs}. The largest areas by functions are {', '.join(d['dir'] + ' (' + format(d['functions'], ',') + ')' for d in ex['top_dirs'][:3])}.")
+        L = out.get("lifetimes", {})
+        if L.get("median_age_alive_years") is not None:
+            f["age_of_code"] = {"median_function_age_years": round(L["median_age_alive_years"], 1), "share_present_since_first_scan": round(L["alive_now_older_than_observed"], 3), "first_scan": L["since"]}
+            sent.append(f"The median function is {L['median_age_alive_years']:.1f} years old (counted from the first scan {L['since']} or its birth); {L['alive_now_older_than_observed'] * 100:.0f}% of today's functions were already there at the first scan.")
+        H = out["hubs"]
+        a, c = H["now"]["callers"][0], H["now"]["centrality"][0]
+        slim = lambda rows: [{k: v for k, v in h.items() if not k.startswith("spark")} for h in rows]  # noqa: E731  (copies: the page still needs the sparklines)
+        f["hubs"] = {"most_called": slim(H["now"]["callers"][:5]), "most_central": slim(H["now"]["centrality"][:5]), "in_both_lists_of_ten": H["in_both_lists"], "persistence": H["persistence"], "former_hubs": H["former"][:3]}
+        sent.append(f"The most-called function is {a['function']} ({a['callers']:,} callers, {a['file']}); the most central is {c['function']} ({c['file']}). {H['in_both_lists']} of the top ten appear in both lists.")
+        pr = H["persistence"].get("callers_1 year")
+        if pr:
+            sent.append(f"Hubs are stable here: of the top 1% most-called functions, {pr['including_removed'] * 100:.0f}% were still in the top 5% a year later (a function that disappears counts as not persisting; moves between files do not).")
+        if H["former"]:
+            fh = H["former"][0]
+            sent.append(f"{fh['function']} was once a hub (peak {fh['peak_callers']:,} callers in {fh['peak_quarter']}); " + (f"it is still defined in {fh['still_defined_in']} but that directory is not in the latest scan, so its callers are not counted now." if fh.get("still_defined_in") else ("it is no longer in the code." if fh["gone"] else f"it is down to {fh['callers_now']:,} callers now.")))
+        A = out.get("archetypes")
+        if A and A["now"]:
+            top3 = A["now"][:3]
+            f["function_types"] = {"most_common": [{"label": t["label"], "share": round(t["share"], 3)} for t in top3], "kept_type_after_a_year": {"edited": A["retention_function"]["edited_kept"], "unedited": A["retention_function"]["unedited_kept"]}}
+            sent.append("The most common function types are " + ", ".join(f"{t['label']} ({t['share'] * 100:.0f}%)" for t in top3) + (f"; {A['retention_function']['unedited_kept'] * 100:.1f}% of untouched functions and {A['retention_function']['edited_kept'] * 100:.0f}% of edited ones kept their type a year later." if A["retention_function"]["edited_kept"] is not None and A["retention_function"]["unedited_kept"] is not None else "."))
+        f["largest_functions"] = ex["largest_functions"]
+        lf = ex["largest_functions"][0]
+        sent.append(f"The largest function is {lf['function']} ({lf['lines']:,} lines, {lf['file']}).")
+        cm = q[-1].get("comments")
+        if cm:
+            f["comments"] = {"comment_lines_per_code_line": round(cm["density"], 3), "functions_with_comment_above": round(cm["header_share"], 3) if cm["header_share"] is not None else None, "todo_markers_per_kloc": round(cm["planned_per_kloc"], 2), "fragile_markers_per_kloc": round(cm["fragile_per_kloc"], 2)}
+    if out.get("most_fixed"):
+        mf = out["most_fixed"][0]
+        f["most_repaired_function"] = mf
+        sent.append(f"The most repaired function is {mf['function']} ({mf['fixes']} fix commits, {mf['file']}).")
+    ce = out["composition_edits"]
+    f["work_mix"] = {k: round(v, 3) for k, v in ce.items()}
+    if out.get("lag_median_days") is not None and out.get("pairs", 0) >= 30:
+        f["median_days_from_change_to_fix"] = round(out["lag_median_days"])
+        sent.append(f"Across its history {ce['organic'] * 100:.0f}% of function edits are organic change, {ce['sweeps'] * 100:.0f}% sweeps and {ce['fixes'] * 100:.0f}% fixes; a fix arrives a median {round(out['lag_median_days'])} days after the change that caused it.")
+    f["stage"] = None
+    f["stage_note"] = "A building / maturing / maintenance label needs thresholds calibrated on a reference set; not computed yet."
+    f["sentences"] = sent
+    f["reliability"] = {"call_graph": {"c": "checked against libclang: hubs, ranks and coupling agree", "java": "hubs sensitive to overloaded names; indicative", "go": "not yet evaluated", "python": "not yet evaluated", "rust": "records about a third of resolvable calls; indicative"}.get(out["lang"], "not evaluated")}
+    return f
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
@@ -575,6 +766,7 @@ def main():
         out = scan_series(out, args.scans)
         if args.radius:
             out = radius(out, args.scans)
+    out["facts"] = build_facts(out, out["_internal"])
     out["link_base"] = args.link_base
     if args.gif and Path(args.gif).exists():
         import base64

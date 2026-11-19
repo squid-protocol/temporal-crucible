@@ -112,6 +112,8 @@ details.how[open] summary { margin-bottom: 6px; }
 .empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
 </style><style>
 .tablewrap td:nth-child(2) { word-break: break-all; font-size: 12.5px; color: var(--fg2); }
+.facts { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
+.spark { width: 96px; height: 24px; display: block; }
 .verdict { font-size: 18px; color: var(--fg); max-width: 70ch; }
 .sowhat b { font-weight: 400; display: block; }
 </style>
@@ -149,6 +151,24 @@ details.how[open] summary { margin-bottom: 6px; }
   <a class="more" data-wiki="08-30-evolution-report" href="#">What this report measures and how →</a>
 </section>
 
+<section id="now">
+  <div class="sec-head"><h2>Where it stands now</h2><span class="chip strong"><i></i>Strong · facts read from the data, no prediction</span></div>
+  <ul class="facts" id="factList"></ul>
+  <div id="hubBlock" hidden>
+    <div class="grid2">
+      <div class="fig"><h3>Most-called functions</h3><div class="tablewrap"><table id="hubCallers"><thead><tr><th>Function</th><th>File</th><th class="num">Callers</th><th>Over time</th></tr></thead><tbody></tbody></table></div></div>
+      <div class="fig"><h3>Most central functions</h3><div class="tablewrap"><table id="hubCentral"><thead><tr><th>Function</th><th>File</th><th class="num">Age (y)</th><th>Callers over time</th></tr></thead><tbody></tbody></table></div></div>
+    </div>
+    <p class="cap" id="hubCap"></p>
+    <div class="fig" id="formerFig" hidden><h3>Former hubs</h3><div class="tablewrap"><table id="formerTable"><thead><tr><th>Function</th><th>File</th><th class="num">Peak callers</th><th>Peak</th><th class="num">Callers now</th></tr></thead><tbody></tbody></table></div></div>
+  </div>
+  <details class="how"><summary>Facts as data, for an assistant or a script</summary>
+    <p><button class="tog" id="copyFacts">Copy facts as JSON</button> <span id="copyNote" class="cap"></span></p>
+    <pre id="factsJson" style="max-height:260px;overflow:auto;font-size:12px;background:var(--grid);padding:10px;border-radius:8px;white-space:pre-wrap"></pre>
+  </details>
+  <a class="more" data-wiki="08-40-evolution-stands-now" href="#">What these facts are and how they are read →</a>
+</section>
+
 <section id="growth" hidden>
   <div class="sec-head"><h2 data-base="Growth">Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
   <div class="fig"><h3>How big the code base is</h3><div class="box tall"><canvas id="cSize" role="img" aria-label="Functions in the code base per quarter"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
@@ -171,6 +191,18 @@ details.how[open] summary { margin-bottom: 6px; }
   </div>
   <div class="sowhat" id="sw_life"><span>So what</span><b></b></div>
   <a class="more" data-wiki="08-38-evolution-lifetimes" href="#">How lifetimes are measured →</a>
+</section>
+
+<section id="types" hidden>
+  <div class="sec-head"><h2 data-base="Kinds of functions">Kinds of functions</h2><span class="chip moderate"><i></i>Moderate · the engine's function types; exploratory over time</span></div>
+  <div class="glance" id="typeStats"></div>
+  <div class="grid2">
+    <div class="fig"><h3>What the code is made of today</h3><div class="tablewrap"><table id="typeTable"><thead><tr><th>Function type</th><th class="num">Share</th><th>What it means</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="fig"><h3>The mix over time</h3><div class="box tall"><canvas id="cTypes" role="img" aria-label="Function types over time"></canvas></div><p class="cap">The eight most common types today; the rest are grouped.</p></div>
+  </div>
+  <div class="fig"><h3>Do functions keep their type?</h3><div class="tablewrap"><table id="retTable"><thead><tr><th></th><th class="num">Kept the same type a year later</th><th class="num">Compared</th></tr></thead><tbody></tbody></table></div><p class="cap" id="retCap"></p></div>
+  <div class="sowhat" id="sw_types"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-41-evolution-function-types" href="#">What the function types are →</a>
 </section>
 
 <section id="activity">
@@ -349,11 +381,48 @@ const qc = [
   ["How fixes are found", fd.trailer_habit ? `${pct(LQ.fixes_trailer_share_of_function_commits)} of the commits that change functions carry a Fixes: trailer, which names the cause (${fmt(LQ.named_pairs)} usable pairs). Fix-like subjects add ${fmt(fd.subject_only_fixes)} more fixes.` : `This project does not use Fixes: trailers (${pct(LQ.fixes_trailer_share_of_function_commits, 1)} of commits). Fixes are found from commit subjects, and causes by blame${LQ.blame ? ` on a sample covering ${covPct} of ${fmt(LQ.blame.unnamed_fix_like)} unnamed fixes; blame found a cause for ${pct(LQ.blame.found / LQ.blame.sampled)} of those` : ". Run with --blame to find causes"}.`],
   ["Fix labels", `${pct(LQ.fix_like_subject_share)} of commit subjects look like fixes. In hand checks on DPDK and Mesa (a narrower rule than this one) the subject rule missed roughly 8 to 20% of fixes in the remainder, so the fix share is a floor.`],
   ["Pairs left out", `${pct(DATA.pairs_dropped_no_function_share)} of fix and cause pairs are left out because one of the commits names no function (header-only, macro and struct-level bugs disappear). Fixes are matched to a cause only if one can be found, so lag is measured on fixes that exist.`],
+  ["What the scan skips", "The scanner skips directories named log, logs, tmp, temp, docs and licences, and build outputs, by default. Code in such a directory (DPDK's lib/log, a logging library) is missing from the call-graph figures, so a hub that lives there is not counted."],
   ["Function names", "Functions come from git diff headers; roughly one in ten names a neighbour of the function actually edited. Counts are indicators, not exact."],
   ["Shipped bugs", `${pct(LQ.cc_stable_share, 1)} of commits carry Cc: stable and ${pct(LQ.reported_by_share, 1)} Reported-by. Where used, Cc: stable marks bugs that reached a release.`],
   ["Cannot say", "Fixes with no findable cause are shown as such, never as 'extrinsic'. Whether a given change will need a fix is not predicted."],
 ];
 el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h3><p>${d}</p></div>`).join("");
+
+// where it stands now (facts first)
+const F = DATA.facts;
+el("factList").innerHTML = F.sentences.map(t => `<li>${esc(t)}</li>`).join("");
+el("factsJson").textContent = JSON.stringify(F, null, 1);
+el("copyFacts").onclick = () => { const t = JSON.stringify(F, null, 1); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { el("copyNote").textContent = "Copied."; }).catch(() => { const r = document.createRange(); r.selectNodeContents(el("factsJson")); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); el("copyNote").textContent = "Select and copy the text below."; }); };
+function spark(vals) {
+  const w = 96, h = 24, mx = Math.max(...vals, 1), pts = vals.map((v, i) => `${(i * (w - 2) / Math.max(vals.length - 1, 1) + 1).toFixed(1)},${(h - 2 - (h - 4) * v / mx).toFixed(1)}`).join(" ");
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Callers over time, peak ${fmt(mx)}"><polyline points="${pts}" fill="none" stroke="var(--s1)" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+const HB = DATA.hubs;
+if (HB) {
+  el("hubBlock").hidden = false;
+  el("hubCallers").querySelector("tbody").innerHTML = HB.now.callers.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.callers)}</td><td>${spark(r.spark)}</td></tr>`).join("");
+  el("hubCentral").querySelector("tbody").innerHTML = HB.now.centrality.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${r.since_first_scan ? "&ge; " : ""}${r.age_years}</td><td>${spark(r.spark_callers || r.spark)}</td></tr>`).join("");
+  const p1 = HB.persistence["callers_1 year"], p5 = HB.persistence["callers_5 years"], c1 = HB.persistence["centrality_1 year"];
+  el("hubCap").textContent = "Callers: how many functions call it. Central: its PageRank in the call graph, so it also counts callers that are themselves important. " + (p1 ? `Of the top 1% most-called functions, ${pct(p1.including_removed)} were still in the top 5% a year later` + (p5 ? `, ${pct(p5.including_removed)} five years later` : "") + (c1 ? `; for centrality ${pct(c1.including_removed)} after a year` : "") + " (removed functions count as gone). " : "") + (DATA.facts.reliability ? "Call-graph reliability for this language: " + DATA.facts.reliability.call_graph + "." : "");
+  if (HB.former.length) { el("formerFig").hidden = false; el("formerTable").querySelector("tbody").innerHTML = HB.former.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.peak_callers)}</td><td>${esc(r.peak_quarter)}</td><td class="num">${r.still_defined_in ? "defined in " + esc(r.still_defined_in) + ", not in the latest scan" : (r.gone ? "gone" : fmt(r.callers_now))}</td></tr>`).join(""); }
+}
+
+// kinds of functions (archetypes)
+const AR = DATA.archetypes;
+if (AR && AR.now && AR.now.length) {
+  el("types").hidden = false;
+  const rf = AR.retention_function, rc = AR.retention_file;
+  const st = [[AR.now[0].label, pct(AR.now[0].share) + " of functions are the most common type"]];
+  if (rf.unedited_kept != null) st.push([pct(rf.unedited_kept, 1), "of functions nobody edited kept their type after a year"]);
+  if (rf.edited_kept != null) st.push([pct(rf.edited_kept), "of edited functions kept their type"]);
+  el("typeStats").innerHTML = st.map(([b, s_]) => `<div class="stat"><b>${esc(b)}</b><span>${s_}</span></div>`).join("");
+  el("typeTable").querySelector("tbody").innerHTML = AR.now.slice(0, 10).map(r => `<tr><td>${esc(r.label)}</td><td class="num">${pct(r.share, 1)}</td><td>${esc(r.meaning)}</td></tr>`).join("");
+  const rows = [["Functions that were edited", rf.edited_kept, rf.edited_n], ["Functions nobody edited", rf.unedited_kept, rf.unedited_n], ["Files (by what their functions are) that were edited", rc.edited_kept, rc.edited_n], ["Files nobody edited", rc.unedited_kept, rc.unedited_n]];
+  el("retTable").querySelector("tbody").innerHTML = rows.filter(r => r[1] != null).map(([l, v, n_]) => `<tr><td>${l}</td><td class="num">${pct(v, 1)}</td><td class="num">${fmt(n_)}</td></tr>`).join("");
+  const tr = rf.transitions.slice(0, 3).map(t_ => `${esc(t_.from)} to ${esc(t_.to)} (${fmt(t_.count)})`).join("; ");
+  el("retCap").textContent = "Compared over all one-year windows in the scans, for functions present at both ends. " + (tr ? "The most common changes of type: " + tr + ". " : "") + AR.label_note;
+  sw("sw_types", rf.unedited_kept != null && rf.edited_kept != null ? `A function's type is decided by its code, so untouched code never changes type (${pct(rf.unedited_kept, 1)}), and ${pct(rf.edited_kept)} of edited functions keep theirs: edits rarely change what a function is.` : "");
+}
 
 // gif, lifetimes, comments (scan mode)
 const L = DATA.lifetimes, CM = Q ? Q.map(q => q.comments) : null;
@@ -384,7 +453,7 @@ if (CM && CM.some(c => c && c.density > 0)) {
   sw("sw_comments", parts.join("; ") + ".");
 }
 let secN = 1;
-["growth", "lifetimes", "activity", "sweeps", "repairs", "sizes", "repeat", "comments"].forEach(id => { const sec = el(id), h = sec.querySelector("h2[data-base]"); if (!sec.hidden && h) h.textContent = (secN++) + " · " + h.dataset.base; });
+["growth", "lifetimes", "types", "activity", "sweeps", "repairs", "sizes", "repeat", "comments"].forEach(id => { const sec = el(id), h = sec.querySelector("h2[data-base]"); if (!sec.hidden && h) h.textContent = (secN++) + " · " + h.dataset.base; });
 
 // charts
 function base(extra) {
@@ -424,6 +493,13 @@ function render() {
     sw("sw_growth", `The code base grew ${g.toFixed(1)} times, from ${fmt(sizes[0])} to ${fmt(sizes[sizes.length - 1])} functions. Of the functions that appeared over the scans, ${pct(births / (births + moved))} were new code and ${pct(moved / (births + moved))} were existing names reappearing elsewhere (moves and renames).`);
   } else { el("heatFig").hidden = true; }
 
+
+  if (AR && AR.mix) {
+    const o = base(); o.scales.y.stacked = true; o.scales.y.ticks.callback = v => fmt(v);
+    o.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } }; o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    const ramp = css("--ramp-new").replace("#", ""), rampOld = css("--ramp-old").replace("#", ""), labs = AR.mix.labels;
+    charts.push(new Chart(el("cTypes"), { type: "line", data: { labels: Q.map(q => q.label), datasets: labs.map((k, i) => ({ label: k, data: AR.mix.series[k], fill: true, stack: "t", borderWidth: 0, pointRadius: 0, backgroundColor: k === "Other types" ? css("--s4b") : lerp(ramp, rampOld, i / Math.max(labs.length - 2, 1)) })) }, options: o }));
+  }
   if (L && L.curves && Object.keys(L.curves).length) {
     const o = base(); o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%"; o.scales.x.ticks.callback = function (v) { const g = L.grid[v]; return g % 1 === 0 ? g + " y" : ""; };
     o.plugins.legend = legendOn(); o.plugins.tooltip.callbacks = { title: items => items[0].label + " years", label: c => c.dataset.label + ": " + c.parsed.y.toFixed(0) + "% still present" };
