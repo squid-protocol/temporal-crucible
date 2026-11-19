@@ -23,7 +23,7 @@ import repair_structure as RS  # noqa: E402
 import verify_functions as VF  # noqa: E402
 
 B = "/tmp/gitgalaxy-scratch/claude"
-CFG = {"sphinx": "python", "scapy": "python", "sqlmap": "python", "prometheus": "go", "commons-lang": "java", "commons-io": "java", "ripgrep": "rust", "dpdk": "c", "curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c"}
+CFG = {"sphinx": "python", "scapy": "python", "sqlmap": "python", "prometheus": "go", "commons-lang": "java", "commons-io": "java", "ripgrep": "rust", "dpdk": "c", "curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c", "crispy-doom": "c", "dsda-doom": "c", "nugget-doom": "c", "doomretro": "c", "fastdoom": "c", "inter-doom": "c", "chocolate-doom": "c"}
 EXT = {"python": (".py",), "go": (".go",), "java": (".java",), "rust": (".rs",), "c": (".c", ".h")}
 NODES = {"python": {"function_definition"}, "go": {"function_declaration", "method_declaration"}, "java": {"method_declaration", "constructor_declaration"}, "rust": {"function_item"}, "c": {"function_definition"}}
 TESTPART = {"test", "tests", "testing", "__tests__", "spec", "specs", "testdata"}

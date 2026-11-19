@@ -1,0 +1,44 @@
+linuxdoom: 765 function names of 3+ lines; inherited names present in at least 4 of the 6 lineages: 562
+crispy-doom (c): 7509 commits, 1371 fix-like subjects, blaming 1371
+  1089 fix-cause pairs from blame
+
+crispy-doom: 1089 blame pairs; ALL functions: outside 308, radius within 2 calls 1.66 [1.48,1.87]; INHERITED only: outside 89, radius 1.13 [0.75,1.59]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 223
+dsda-doom (c): 9378 commits, 1534 fix-like subjects, blaming 1534
+  1219 fix-cause pairs from blame
+
+dsda-doom: 1219 blame pairs; ALL functions: outside 390, radius within 2 calls 1.66 [1.52,1.84]; INHERITED only: outside 87, radius 1.54 [1.10,2.24]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 291
+nugget-doom (c): 4645 commits, 1058 fix-like subjects, blaming 1058
+  864 fix-cause pairs from blame
+
+nugget-doom: 864 blame pairs; ALL functions: outside 233, radius within 2 calls 1.50 [1.36,1.67]; INHERITED only: outside 79, radius 1.54 [1.26,1.87]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 319
+doomretro (c): 21429 commits, 4207 fix-like subjects, blaming 3000
+  2620 fix-cause pairs from blame
+
+doomretro: 2620 blame pairs; ALL functions: outside 538, radius within 2 calls 1.82 [1.66,2.00]; INHERITED only: outside 199, radius 1.49 [1.25,1.76]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 474
+fastdoom (c): 3652 commits, 507 fix-like subjects, blaming 507
+  365 fix-cause pairs from blame
+
+fastdoom: 365 blame pairs; ALL functions: outside 85, radius within 2 calls 1.37 [1.13,1.65]; INHERITED only: outside 25, radius 1.53 [1.17,2.06]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 344
+inter-doom (c): 1466 commits, 196 fix-like subjects, blaming 196
+  158 fix-cause pairs from blame
+
+inter-doom: 158 blame pairs; ALL functions: outside 45, radius within 2 calls 2.02 [1.26,3.39]; INHERITED only: outside 18, radius n/a; inherited (cause, repair) pairs within 2 calls in linuxdoom: 31
+chocolate-doom (c): 4893 commits, 995 fix-like subjects, blaming 995
+  777 fix-cause pairs from blame
+
+chocolate-doom: 777 blame pairs; ALL functions: outside 226, radius within 2 calls 1.46 [1.29,1.65]; INHERITED only: outside 49, radius 1.16 [0.78,1.70]; inherited (cause, repair) pairs within 2 calls in linuxdoom: 93
+
+=== DB3: do independent lineages repair the same functions? ===
+  562 inherited functions; mean pairwise Spearman between lineages 0.356 (range 0.22 to 0.50), partial (size and fan-in removed) 0.248; shared-history control chocolate-doom with crispy-doom 0.842
+
+=== DB4: do independent lineages repair the same neighbours? ===
+  inherited (cause, repair) pairs within 2 calls per lineage: crispy-doom 223, dsda-doom 291, nugget-doom 319, doomretro 474, fastdoom 344, inter-doom 31, chocolate-doom 93
+  overlap over 6 lineages: observed 588, null mean 257.3 (95th percentile 278): ratio 2.29
+  shared-history control chocolate-doom with crispy-doom: observed 93, null mean 17.1
+
+=== VERDICTS ===
+  DB1 radius within 2 calls (lineages with at least 100 pairs outside the changed set): crispy-doom 1.66 [1.48], dsda-doom 1.66 [1.52], nugget-doom 1.50 [1.36], doomretro 1.82 [1.66]: supported
+  DB2 inherited-only radius against all-functions radius: crispy-doom -32%, dsda-doom -7%, nugget-doom +2%, doomretro -18% (needs within 25% in each): not supported
+  DB3 mean pairwise Spearman 0.356 (needs 0.20), partial 0.248 (needs 0.10): supported
+  DB4 observed overlap 588 against null 257.3 = 2.29 (needs 2): supported
+  surprise bar (partial DB3 below 0.05 and DB4 at or below the null): not met
