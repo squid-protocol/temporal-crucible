@@ -1219,3 +1219,24 @@ The ranking so far runs forward (a change, then where the repair lands). Inciden
 - **RT4.** On the "cause elsewhere" pairs, N1's top 20 is at least 2 points above N1b's (the directory step adds).
 - **RT5.** Recency alone gets the true cause into the top 20 for at most 5% of all pairs (the candidate lists are long: thousands).
 **Would surprise (the neighbourhood is no help backwards):** on "cause elsewhere" pairs N1's top 20 within 1 point of FILE's.
+
+#### Reverse triage: results (2026-11-19; `triage_reverse_output.txt`; DPDK and Mesa trailer-named pairs, 1,500 sampled per repository; ranked: DPDK 600, Mesa 968; the rest dropped: true cause older than 730 days or without functions 505 and 255, no failure function 205 and 124, failure function not in the graph, no earlier scan; candidates per fix: thousands)
+Rank of the true cause among the commits of the 730 days before the fix, pooled (1,568 pairs):
+| ranker | top 1 | top 5 | top 20 | MRR |
+|---|---|---|---|---|
+| REC recency alone | 0.3% | 0.8% | **3.1%** | 0.009 |
+| SIZE | 0.0% | 0.0% | 0.8% | 0.002 |
+| FILE touches a failure file | 14.9% | 35.3% | 59.1% | 0.252 |
+| BLAME changed a failure function | 26.0% | 46.4% | 55.5% | 0.349 |
+| N1b neighbourhood without directory | 28.7% | 55.9% | 73.1% | 0.409 |
+| **N1 neighbourhood** | **28.7%** | **56.4%** | **74.2%** | **0.411** |
+**Cause elsewhere** (the true cause did not change a failure function: 681 pairs, 43%): REC 0.0 / 0.1 / **1.8%**; FILE 5.3 / 17.3 / **35.1%**; BLAME 0.0 / 0.0 / 1.2%; N1b 5.7 / 22.0 / 41.7%; **N1 5.7 / 23.1 / 44.2%** (top 1, top 5, top 20). By repository, N1 top 20: DPDK all 79.0%, cause elsewhere 55.8% (REC 0.0%, FILE 40.4%); Mesa 71.2% and 36.8% (REC 2.9%, FILE 31.7%).
+| hypothesis | verdict |
+|---|---|
+| RT1 N1 top 20 at least 50%, all pairs | **supported**: 74.2% |
+| RT2 cause elsewhere: N1 top 20 at least 20%, recency at most 5% | **supported**: 44.2% and 1.8% |
+| RT3 N1b at least 5 points above FILE (cause elsewhere) | **supported**: +6.6 |
+| RT4 N1 at least 2 points above N1b (cause elsewhere) | **supported**: +2.5 |
+| RT5 recency alone at most 5% (all pairs) | **supported**: 3.1% |
+Surprise bar (N1 within 1 point of FILE, cause elsewhere): not met.
+**Reading.** Searched backwards, the neighbourhood ranks the causing change into the top 20 of thousands of recent commits for **74% of repairs** (recency: 3%), and for **44% of the repairs whose cause did not change a failure function**, the case line blame cannot solve (blame: 1%; file overlap alone: 35%; the call graph adds 6.6 points, the directory 2.5). The same ingredients as the forward list work in reverse. 57% of the causes changed a failure function (blame's territory); even there the neighbourhood ranking is better in the top 20 (the same function is touched by many commits in two years, and the call-graph tiers order them). Top 1 is modest (28.7%): this narrows a search, it does not name the culprit. **Caveats:** the failure site is the **fix's** edited functions, a proxy (a real report points at a symptom, often elsewhere); only causes within 730 days (about a third dropped in DPDK); hunk-header function sets (unverified) for the candidates; two C repositories; trailer-named causes; the candidates are commits that changed 1 to 60 functions.
