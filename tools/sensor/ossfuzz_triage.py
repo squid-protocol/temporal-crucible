@@ -19,6 +19,8 @@ import lang_validation as LV  # noqa: E402
 B = "/tmp/gitgalaxy-scratch/claude"
 DAY = 86400
 YEARS = 5
+LV.CFG["ndpi"] = "c"
+LV.CFG["harfbuzz"] = "cpp"
 SKIP = ("fuzz", "LLVMFuzzer", "_start", "main", "__libc", "libc_start")
 RK = ["REC", "FILE", "BLAME", "N1", "N1TOP", "N1FIX", "RRF", "N1R100"]  # RRF and N1R100 are post hoc (added after the registered run)
 
@@ -60,7 +62,7 @@ def run(repo, entries):
     todo = [s for s in need if s not in info]
     print(f"{repo}: {len(entries)} entries with usable commits; {len(need):,} commits in the windows, {len(todo):,} to parse", flush=True)
     with ProcessPoolExecutor(max_workers=6) as ex:
-        for r in ex.map(LV.commit_worker, [(path, "c", todo[i : i + 25]) for i in range(0, len(todo), 25)]):
+        for r in ex.map(LV.commit_worker, [(path, LV.CFG.get(repo, "c"), todo[i : i + 25]) for i in range(0, len(todo), 25)]):
             info.update(r)
     pickle.dump(info, open(cache, "wb"))
     sn = json.load(open(f"{BR.B}/scan_{repo}/snapshots.json"))
@@ -129,9 +131,8 @@ def run(repo, entries):
             rrf = 1 / (60 + rankdata(rec, method="min")) + 1 / (60 + rankdata(-a["N1"], method="min"))
             rank["RRF"] = 1 + int((rrf > rrf[jt]).sum())
             recent = rec <= np.sort(rec)[min(99, len(rec) - 1)]
-            n1r = np.where(recent, a["N1"] + 1e30, a["N1"])
-            rank["N1R100"] = 1 + int((n1r > n1r[jt]).sum())
-            out.append({"repo": repo, "id": e["id"], "rank": rank, "ncand": len(cand), "artifact": ind_count[e["ind"]] >= 3, "frames": len(set(site_all)), "same_func": bool(set(keys_c[jt]) & set(site_all)), "lag": (e["fix_ct"] - e["ind_ct"]) / DAY})
+            rank["N1R100"] = 1 + int(((recent > recent[jt]) | ((recent == recent[jt]) & (a["N1"] > a["N1"][jt]))).sum())  # exact lexicographic order (an earlier version added 1e30 to float scores, which collapses ties)
+            out.append({"repo": repo, "id": e["id"], "rank": rank, "ncand": len(cand), "artifact": ind_count[e["ind"]] >= 3, "frames": len(set(site_all)), "same_func": bool(set(keys_c[jt]) & set(site_all)), "lag": (e["fix_ct"] - e["ind_ct"]) / DAY, "arr": {"rec": rec.astype(np.float32), "base": ((a["N1"] + rec) / 1e10).astype(np.float32), "jt": jt}})
     print(f"  ranked {len(out)}; dropped {dict(drop)}", flush=True)
     return out
 
@@ -139,10 +140,12 @@ def run(repo, entries):
 def main():
     rows = json.load(open(f"{B}/osv/rows.json"))
     res = []
-    for repo in ("curl", "libxml2", "openssl", "libgit2"):
+    repos = sys.argv[1:] or ["curl", "libxml2", "openssl", "libgit2"]
+    tag = "_".join(repos) if sys.argv[1:] else "main4"
+    for repo in repos:
         ent = [r for r in rows if r["pkg"] == repo and r["intro"] and r["fixed"] and r["intro"][0] != r["fixed"][0]]
         res += run(repo, ent)
-    pickle.dump(res, open(f"{B}/osv/ossfuzz_results.pkl", "wb"))
+    pickle.dump(res, open(f"{B}/osv/ossfuzz_results_{tag}.pkl", "wb"))
 
     def t(rs, k, n=20):
         v = [x["rank"][k] for x in rs if x["rank"][k] is not None]
@@ -158,7 +161,7 @@ def main():
     table(res, "all kept entries")
     table([x for x in res if not x["artifact"]], "without artifact entries (introduced commit shared by 3 or more)")
     table([x for x in res if x["artifact"]], "artifact entries only")
-    for repo in ("curl", "libxml2", "openssl", "libgit2"):
+    for repo in repos:
         table([x for x in res if x["repo"] == repo], repo)
     print(f"\n  lag from the introduced commit to the fix: median {np.median([x['lag'] for x in res]):.0f} d; share under 30 d {100 * np.mean([x['lag'] < 30 for x in res]):.0f}%; under 180 d {100 * np.mean([x['lag'] < 180 for x in res]):.0f}%; over a year {100 * np.mean([x['lag'] > 365 for x in res]):.0f}%")
     print(f"\n  the introduced commit changed a crash-site function: {100 * np.mean([x['same_func'] for x in res]):.0f}% of entries")

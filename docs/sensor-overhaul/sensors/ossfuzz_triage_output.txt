@@ -18,7 +18,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP      6.8%   17.8%   27.4%   49.3%
     N1FIX     27.1%   32.2%   35.6%   59.3%   (n 59)
     RRF       24.7%   43.8%   67.1%   93.2%
-    N1R100    54.8%   79.5%   90.4%   90.4%
+    N1R100    30.1%   38.4%   56.2%   89.0%
 
   without artifact entries (introduced commit shared by 3 or more) (48 entries; median candidates 931)
     ranker    top 1   top 5  top 20  top 100
@@ -29,7 +29,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP     10.4%   18.8%   31.2%   60.4%
     N1FIX     39.0%   46.3%   51.2%   68.3%   (n 41)
     RRF       33.3%   56.2%   77.1%   93.8%
-    N1R100    60.4%   83.3%   91.7%   91.7%
+    N1R100    35.4%   47.9%   66.7%   89.6%
 
   artifact entries only (25 entries; median candidates 1062)
     ranker    top 1   top 5  top 20  top 100
@@ -40,7 +40,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP      0.0%   16.0%   20.0%   28.0%
     N1FIX      0.0%    0.0%    0.0%   38.9%   (n 18)
     RRF        8.0%   20.0%   48.0%   92.0%
-    N1R100    44.0%   72.0%   88.0%   88.0%
+    N1R100    20.0%   20.0%   36.0%   88.0%
 
   curl (14 entries; median candidates 2845)
     ranker    top 1   top 5  top 20  top 100
@@ -51,7 +51,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP     21.4%   21.4%   21.4%   57.1%
     N1FIX     14.3%   14.3%   14.3%   71.4%   (n 7)
     RRF       28.6%   42.9%   78.6%   85.7%
-    N1R100    50.0%   64.3%   85.7%   85.7%
+    N1R100    28.6%   42.9%   78.6%   85.7%
 
   libxml2 (50 entries; median candidates 791)
     ranker    top 1   top 5  top 20  top 100
@@ -62,7 +62,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP      2.0%   16.0%   26.0%   48.0%
     N1FIX     25.0%   29.5%   31.8%   54.5%   (n 44)
     RRF       20.0%   42.0%   66.0%   96.0%
-    N1R100    54.0%   86.0%   96.0%   96.0%
+    N1R100    26.0%   32.0%   48.0%   94.0%
 
   openssl (6 entries; median candidates 5360)
     ranker    top 1   top 5  top 20  top 100
@@ -84,7 +84,7 @@ libgit2: 8 entries with usable commits; 6,956 commits in the windows, 0 to parse
     N1TOP      0.0%   33.3%   66.7%   66.7%
     N1FIX      0.0%   33.3%   66.7%   66.7%   (n 3)
     RRF       33.3%   66.7%   66.7%  100.0%
-    N1R100   100.0%  100.0%  100.0%  100.0%
+    N1R100    66.7%  100.0%  100.0%  100.0%
 
   lag from the introduced commit to the fix: median 3 d; share under 30 d 82%; under 180 d 95%; over a year 1%
 

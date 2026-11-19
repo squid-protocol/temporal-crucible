@@ -1,0 +1,36 @@
+windows fitted on each whole source (90th percentile of the cause's recency rank): DPDK+Mesa Fixes pairs W = 9046, OSS-Fuzz (4 repositories) W = 79
+
+=== DPDK+Mesa Fixes pairs: 1568 pairs; held-out halves (20 random 2-fold splits); top 1 / 5 / 20 ===
+    REC          0.3%    0.8%    3.1%
+    N1          28.7%   56.4%   74.2%
+    N1W         28.2%   53.8%   69.1%
+    N1W100       6.4%    8.2%    9.1%
+    N1Wother     5.4%    6.9%    7.5%
+
+=== OSS-Fuzz (4 repositories): 73 pairs; held-out halves (20 random 2-fold splits); top 1 / 5 / 20 ===
+    REC         12.3%   42.5%   78.1%
+    N1          19.2%   24.7%   34.2%
+    N1W         26.7%   38.5%   57.6%
+    N1W100      30.1%   38.4%   56.2%
+    N1Wother    19.2%   24.7%   34.2%
+
+=== VERDICTS ===
+  LW1 OSS-Fuzz N1W 57.6% vs N1 34.2% (needs +20): ok; DPDK/Mesa N1W 69.1% vs N1 74.2% (needs not worse than -2): no
+  LW2 OSS-Fuzz N1W top 20 57.6% vs REC 78.1% (needs +5); top 5 38.5% vs 42.5% (needs +20): not supported
+  LW3 OSS-Fuzz window on DPDK/Mesa loses 61.7 points (needs 20); DPDK/Mesa window on OSS-Fuzz loses 23.4 points (needs 10)
+
+=== HOLD-OUT ossfuzz_results_ndpi.pkl: 84 entries; windows fitted on OSS-Fuzz (4 repositories) W = 79 ===
+    REC          0.0%   34.5%   57.1%
+    N1          16.7%   35.7%   45.2%
+    N1W         16.7%   39.3%   58.3%
+    N1W100      16.7%   39.3%   58.3%
+    N1Wother    16.7%   35.7%   45.2%
+    median lag 10 d; under 14 d 56%
+
+=== HOLD-OUT ossfuzz_results_harfbuzz.pkl: 12 entries; windows fitted on OSS-Fuzz (4 repositories) W = 79 ===
+    REC          0.0%   41.7%   75.0%
+    N1           8.3%    8.3%   25.0%
+    N1W         16.7%   41.7%   75.0%
+    N1W100      16.7%   41.7%   75.0%
+    N1Wother     8.3%    8.3%   25.0%
+    median lag 1 d; under 14 d 83%

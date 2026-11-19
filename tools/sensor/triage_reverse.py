@@ -93,7 +93,7 @@ def run(repo, n=1500):
             sc = {"REC": -rec, "SIZE": nf * 1e10 - rec, "FILE": sfile * 1e10 - rec, "BLAME": sf * 1e10 - rec,
                   "N1b": (sf * 1e4 + sfile * 1e3 + dsc * 1e2) * 1e10 - rec, "N1": (sf * 1e4 + sfile * 1e3 + dsc * 1e2 + sdir * 10) * 1e10 - rec}
             jt = cand.index(ci)
-            res.append({"same_func": bool(sf[jt]), "ncand": len(cand), "rank": {k: 1 + int((v > v[jt]).sum()) for k, v in sc.items()}})
+            res.append({"same_func": bool(sf[jt]), "ncand": len(cand), "rank": {k: 1 + int((v > v[jt]).sum()) for k, v in sc.items()}, "arr": {"rec": rec.astype(np.float32), "base": (sf * 1e4 + sfile * 1e3 + dsc * 1e2 + sdir * 10).astype(np.float32), "jt": jt}, "repo": repo})
     print(f"\n########## {repo}: {len(pairs)} pairs sampled; dropped {dict(drop)}; ranked {len(res)}; median candidates {int(np.median([r['ncand'] for r in res]))} ##########", flush=True)
     return res
 
@@ -115,6 +115,7 @@ def main():
         allres[repo] = res
         table(res, "all pairs")
         table([x for x in res if not x["same_func"]], "cause elsewhere (the true cause did not change a failure function)")
+    pickle.dump([x for r in allres.values() for x in r], open(f"{B}/osv/trailer_triage_arrays.pkl", "wb"))
     pooled = [x for r in allres.values() for x in r]
     print("\n######## pooled ########")
     table(pooled, "all pairs")

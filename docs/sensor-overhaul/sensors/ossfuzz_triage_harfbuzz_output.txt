@@ -1,0 +1,60 @@
+harfbuzz: 104 entries with usable commits; 17,967 commits in the windows, 17,967 to parse
+  ranked 12; dropped {'introduced commit changes no function or is a sweep': 13, 'no crash frame is a function of the scan': 79}
+
+=== POOLED ===
+
+  all kept entries (12 entries; median candidates 4868)
+    ranker    top 1   top 5  top 20  top 100
+    REC        0.0%   41.7%   75.0%   91.7%
+    FILE       8.3%   25.0%   33.3%   58.3%
+    BLAME      8.3%   25.0%   75.0%   91.7%
+    N1         8.3%    8.3%   25.0%   41.7%
+    N1TOP      8.3%   16.7%   25.0%   50.0%
+    N1FIX     41.7%   58.3%   58.3%   83.3%   (n 12)
+    RRF       16.7%   33.3%   75.0%   91.7%
+    N1R100    16.7%   41.7%   75.0%   91.7%
+
+  without artifact entries (introduced commit shared by 3 or more) (12 entries; median candidates 4868)
+    ranker    top 1   top 5  top 20  top 100
+    REC        0.0%   41.7%   75.0%   91.7%
+    FILE       8.3%   25.0%   33.3%   58.3%
+    BLAME      8.3%   25.0%   75.0%   91.7%
+    N1         8.3%    8.3%   25.0%   41.7%
+    N1TOP      8.3%   16.7%   25.0%   50.0%
+    N1FIX     41.7%   58.3%   58.3%   83.3%   (n 12)
+    RRF       16.7%   33.3%   75.0%   91.7%
+    N1R100    16.7%   41.7%   75.0%   91.7%
+
+  artifact entries only (0 entries; median candidates 0)
+    ranker    top 1   top 5  top 20  top 100
+    REC        nan%    nan%    nan%    nan%
+    FILE       nan%    nan%    nan%    nan%
+    BLAME      nan%    nan%    nan%    nan%
+    N1         nan%    nan%    nan%    nan%
+    N1TOP      nan%    nan%    nan%    nan%
+    N1FIX      nan%    nan%    nan%    nan%   (n 0)
+    RRF        nan%    nan%    nan%    nan%
+    N1R100     nan%    nan%    nan%    nan%
+
+  harfbuzz (12 entries; median candidates 4868)
+    ranker    top 1   top 5  top 20  top 100
+    REC        0.0%   41.7%   75.0%   91.7%
+    FILE       8.3%   25.0%   33.3%   58.3%
+    BLAME      8.3%   25.0%   75.0%   91.7%
+    N1         8.3%    8.3%   25.0%   41.7%
+    N1TOP      8.3%   16.7%   25.0%   50.0%
+    N1FIX     41.7%   58.3%   58.3%   83.3%   (n 12)
+    RRF       16.7%   33.3%   75.0%   91.7%
+    N1R100    16.7%   41.7%   75.0%   91.7%
+
+  lag from the introduced commit to the fix: median 1 d; share under 30 d 92%; under 180 d 100%; over a year 0%
+
+  the introduced commit changed a crash-site function: 8% of entries
+
+=== VERDICTS ===
+  OF1 N1 top 20 25.0% (needs 35%): not supported
+  OF2 N1 25.0% vs REC 75.0% (needs 3x) and FILE 33.3% (needs +10): not supported
+  OF3 N1TOP 25.0% vs N1 25.0% (needs within 10): supported
+  OF4 N1FIX 58.3% vs N1 25.0% (needs +10): supported
+  OF5 N1 without artifacts 25.0% vs all 25.0% (needs +5): not supported
+  surprise bar (N1 less than 10 points above REC): MET
