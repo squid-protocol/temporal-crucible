@@ -1511,3 +1511,15 @@ Grouped, share of function edits (DPDK / Mesa): **sweeps 20.9 / 18.0**; **fixes 
 | RM5 cited rate per edit, adds vs modifies, within a factor 2 | **supported**: 44.7% vs 27.4% (1.63); 24.4% vs 17.1% (1.43) |
 Surprise bars (fix categories over 40% of edits; adds + removes + modifies under 25%): not met.
 **Reading.** Of all function edits, **about a fifth are sweeps, about a tenth to a sixth are recognisable fixes (more if the hidden ones are counted, up to about a quarter in Mesa), a few percent are mechanical, and 58 to 71% are organic code changes**: added code is the largest single category (27% and 22%), then restructuring (14% and 22%). **A third (DPDK) and a fifth (Mesa) of the edits in organic changes are later cited as the cause of a fix**, so about 20% and 13% of *all* function edits (34.0% x 58.5%; 18.4% x 71.3%) are changes that were later repaired; sweeps are cited more than anything else (44% and 52% of their edits, because they touch so much), and edits in added code are cited about 1.4 to 1.6 times as often as edits in modified code. Caveats: categories come from subject keywords, hunk-header functions and a three-to-one added/removed rule; hidden fixes in the remainder are a manual estimate from 40 subjects per project; "cited" means named or blamed as the cause of a later fix (a lower bound: unfound causes and fixes without keywords add more); DPDK has no `Revert` subjects in this rule.
+
+#### A typical quarter (2026-11-19, descriptive, not pre-registered; `typical_quarter.py`, `typical_quarter_output.txt`; median of the last 16 quarterly scans; components are medians, so they do not add exactly)
+| | DPDK (55k functions) | Mesa (84k) |
+|---|---|---|
+| commits / distinct functions edited | 776 / 2,368 (4.3% of functions) | 4,280 / 6,560 (7.8%) |
+| edited by organic commits / sweeps / fixes / mechanical | 1,477 / 610 / 530 / 74 | 5,172 / 1,482 / 801 / 72 |
+| edited twice or more in the quarter | 432 | 1,902 |
+| **births** (new functions) | **1,103**: new file, new name 544; existing file, new name 437; moved or renamed 131 | **3,659**: 1,062; 1,225; 810 |
+| **deaths** | **346**: whole file removed 28; function removed from a kept file 134; moved or renamed 128 | **2,016**: 288; 546; 732 |
+| fix edits / in functions fixed 2+ times in the history / fixed 5+ times | 577 / 301 (52%) / 81 (14%) | 898 / 549 (61%) / 178 (20%) |
+| organic-edited functions also fixed in the same quarter / sweep-edited ones | 80 of 1,477 (5.4%) / 15 of 610 (2.5%) | 352 of 5,172 (6.8%) / 48 of 1,482 (3.2%) |
+Whole history: functions fixed 2+ times hold 60% (DPDK) and 61% (Mesa) of fix edits; the top 1% of fixed functions hold 8%, the top 10% hold 31 to 32%. 24 random sweep subjects per project: renames (`rename bonded to bonding`, `rename LIST_ENTRY() to list_entry()`), API conversions (`replace logging helpers`, `standardize on negative errno values`, `all: rename PIPE_SHADER_GEOMETRY to MESA_SHADER_GEOMETRY`), reformatting (`unify the indent coding style`, `add .clang-format`), branch merges, generated headers.

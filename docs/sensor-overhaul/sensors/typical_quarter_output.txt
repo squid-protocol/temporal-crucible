@@ -1,0 +1,46 @@
+
+##### dpdk: median over the last 16 quarters (functions in the graph: 54,976)
+  commits                                 776
+  edited_total                          2,368
+  edit_organic                          1,477
+  edit_sweep                              610
+  edit_fix                                530
+  edit_mechanical                          74
+  edited_twice                            432
+  births                                1,103
+  birth_new_file_new_name                 544
+  birth_existing_file_new_name            437
+  birth_moved                             131
+  deaths                                  346
+  death_file_removed_gone                  28
+  death_file_kept_gone                    134
+  death_moved                             128
+  fix_edits                               577
+  fix_in_repeat_spots                     301
+  fix_in_hot_spots                         81
+  org_also_fixed_same_q                    80
+  sweep_also_fixed_same_q                  15
+  whole history: 33,802 fix edits in 19,995 distinct functions; functions fixed 2+ times hold 60% of fix edits; top 1% of fixed functions hold 8%, top 10% hold 31%
+
+##### mesa: median over the last 16 quarters (functions in the graph: 84,266)
+  commits                               4,280
+  edited_total                          6,560
+  edit_organic                          5,172
+  edit_sweep                            1,482
+  edit_fix                                801
+  edit_mechanical                          72
+  edited_twice                          1,902
+  births                                3,659
+  birth_new_file_new_name               1,062
+  birth_existing_file_new_name          1,225
+  birth_moved                             810
+  deaths                                2,016
+  death_file_removed_gone                 288
+  death_file_kept_gone                    546
+  death_moved                             732
+  fix_edits                               898
+  fix_in_repeat_spots                     549
+  fix_in_hot_spots                        178
+  org_also_fixed_same_q                   352
+  sweep_also_fixed_same_q                  48
+  whole history: 61,999 fix edits in 35,629 distinct functions; functions fixed 2+ times hold 61% of fix edits; top 1% of fixed functions hold 8%, top 10% hold 32%
