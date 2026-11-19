@@ -8,6 +8,7 @@ Four timelines from the quarterly scans. Quarterly means a function born and del
 |---|---|
 | Size | Functions found by the scan at each quarter |
 | Births and deaths | **New code**: a function whose name did not exist in the previous scan. **Moved in**: new here, but the name existed elsewhere before. **Removed**: gone, and the name no longer exists. **Moved out**: gone here, the name exists elsewhere. |
+| Language mix | Share of code lines by language at each scan, as the scanner classifies files (markup and data files included); the eight largest languages today, the rest grouped |
 | Age layers | Functions present at each quarter, grouped by the year they first appeared. The first layer includes everything that existed at the first scan. |
 | How much is alive | Share of the functions edited this quarter (named in a commit's diff headers), and share untouched for the last four quarters |
 
@@ -19,3 +20,6 @@ Four timelines from the quarterly scans. Quarterly means a function born and del
 - Moves are matched by function name, which is crude (two unrelated functions with one name look like a move).
 - Function identity is (file, name); a moved file looks like deaths plus births with the same names.
 - A scan reads the code at a commit; macros and generated code affect counts.
+
+## Language mix
+A project that is 85 to 96% one language shows the other languages only as thin bands at the top; the facts section states the biggest shift since the first scan. The share counts the lines of every file the scanner classified, so documentation-like markup and build files appear as languages.

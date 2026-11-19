@@ -388,6 +388,7 @@ def scan_series(out, scans):
     fan = []
     arch_f = []
     arch_c = []
+    lang_rows = []
     last_extra = {}
     locs = {}
     for i, s in enumerate(sn):
@@ -410,6 +411,10 @@ def scan_series(out, scans):
                 if cur is None or (fi_ or 0) > cur[0]:
                     fm[nm] = (fi_ or 0, pr_ or 0.0, files[f])
         fan.append(fm)
+        if "language" in fc:
+            lang_rows.append({(lg or "other"): (n_, l_ or 0) for lg, n_, l_ in con.execute(f"SELECT language, count(*), {sf('coding_loc')} FROM file_data GROUP BY language")})
+        else:
+            lang_rows.append({})
         af = {}
         for f, nm, ar in con.execute("SELECT file_id, func_name, func_archetype FROM function_data" if have_arch else "SELECT file_id, func_name, NULL FROM function_data"):
             if f in files and ar:
@@ -470,6 +475,7 @@ def scan_series(out, scans):
         k = max(cs["code_lines"], 1) / 1000
         q["comments"] = {"density": cs["comment_lines"] / max(cs["code_lines"], 1), "planned_per_kloc": cs["planned"] / k, "fragile_per_kloc": cs["fragile"] / k, "header_share": (cs["header"] / cs["functions"]) if cs["functions"] else None, "documented_share": (cs["documented"] / cs["functions"]) if cs["functions"] else None}
     out["lifetimes"] = lifetimes(sn, keys_by_q, locs)
+    out["languages"] = language_mix(lang_rows)
     out["hubs"] = hubs(sn, fan, first, keys_by_q, out["_repo"]) if last_extra.get("graph_ok") else None
     out["archetypes"] = archetypes(sn, arch_f, arch_c, edited_by_q) if last_extra.get("archetypes_ok") else None
     out["current_extra"] = last_extra
@@ -583,6 +589,26 @@ def archetypes(sn, arch_f, arch_c, edited_by_q):
     ret_f = retention(arch_f, lambda k, ed, edp: k in ed, 1000)
     ret_c = retention(arch_c, lambda k, ed, edp: k in edp, 100)
     return {"definitions_source": meta["source"], "now": now, "mix": {"labels": list(series), "series": series}, "retention_function": ret_f, "retention_file": ret_c, "years": L / 4, "label_note": "Labels are the engine's; scans made by an older engine can carry older names (marked in the table)."}
+
+
+def language_mix(rows):
+    """Share of code lines (and files) per language at each scan: the eight largest languages today, the rest grouped."""
+    if not rows or not rows[-1]:
+        return None
+    last = rows[-1]
+    order = sorted(last, key=lambda k: -last[k][1])
+    keep = [k for k in order if last[k][1] > 0][:8]
+    if not keep:
+        return None
+    labels = keep + ["other"]
+    lines = {k: [r.get(k, (0, 0))[1] for r in rows] for k in keep}
+    files = {k: [r.get(k, (0, 0))[0] for r in rows] for k in keep}
+    lines["other"] = [sum(v[1] for kk, v in r.items() if kk not in keep) for r in rows]
+    files["other"] = [sum(v[0] for kk, v in r.items() if kk not in keep) for r in rows]
+    tot = [max(sum(lines[k][i] for k in labels), 1) for i in range(len(rows))]
+    first = next((i for i, t in enumerate(tot) if t > 1000), 0)
+    shift = sorted(((lines[k][-1] / tot[-1] - lines[k][first] / tot[first], k) for k in keep), key=lambda x: -abs(x[0]))[:3]
+    return {"labels": labels, "lines": lines, "files": files, "biggest_shifts": [{"language": k, "from": lines[k][first] / tot[first], "to": lines[k][-1] / tot[-1]} for d, k in shift]}
 
 
 def hubs(sn, fan, first, keys_by_q, repo=None):
@@ -764,6 +790,13 @@ def build_facts(out, internal):
             top3 = A["now"][:3]
             f["function_types"] = {"most_common": [{"label": t["label"], "share": round(t["share"], 3)} for t in top3], "kept_type_after_a_year": {"edited": A["retention_function"]["edited_kept"], "unedited": A["retention_function"]["unedited_kept"]}}
             sent.append("The most common function types are " + ", ".join(f"{t['label']} ({t['share'] * 100:.0f}%)" for t in top3) + (f"; {A['retention_function']['unedited_kept'] * 100:.1f}% of untouched functions and {A['retention_function']['edited_kept'] * 100:.0f}% of edited ones kept their type a year later." if A["retention_function"]["edited_kept"] is not None and A["retention_function"]["unedited_kept"] is not None else "."))
+        LG = out.get("languages")
+        if LG:
+            tot_l = sum(LG["lines"][k][-1] for k in LG["labels"]) or 1
+            f["languages_by_lines"] = {k: round(LG["lines"][k][-1] / tot_l, 3) for k in LG["labels"] if LG["lines"][k][-1]}
+            top_l = ", ".join(f"{k} {LG['lines'][k][-1] / tot_l * 100:.0f}%" for k in LG["labels"][:3] if LG["lines"][k][-1])
+            sh = LG["biggest_shifts"][0] if LG["biggest_shifts"] else None
+            sent.append(f"By lines of code: {top_l}." + (f" The biggest shift since the first scan: {sh['language']} went from {sh['from'] * 100:.0f}% to {sh['to'] * 100:.0f}%." if sh and abs(sh["to"] - sh["from"]) >= 0.02 else " The language mix has been stable."))
         f["largest_functions"] = ex["largest_functions"]
         lf = ex["largest_functions"][0]
         sent.append(f"The largest function is {lf['function']} ({lf['lines']:,} lines, {lf['file']}).")

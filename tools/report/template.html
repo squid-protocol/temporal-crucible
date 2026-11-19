@@ -181,6 +181,7 @@ details.how[open] summary { margin-bottom: 6px; }
   <div class="fig" id="gifFig" hidden><h3>The call graph over time</h3><img id="gifImg" alt="Animation of the call graph growing over the quarterly scans" style="max-width:100%;border-radius:8px;border:1px solid var(--line)"><p class="cap">Every file is a circle and every function a dot in it; roads between files carry calls, wider for more calls. Green flashes are new functions, amber removed ones. Drawn by <a class="more" href="https://github.com/squid-protocol/historical-call-graph-gif" target="_blank" rel="noopener">historical-call-graph-gif</a> from the same scans.</p></div>
   <div class="stack">
     <div class="fig"><h3>What the growth is made of</h3><div class="box"><canvas id="cBirths" role="img" aria-label="New and removed functions per quarter"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so it is reorganisation, not creation or loss.</p></div>
+    <div class="fig" id="langFig" hidden><h3>Language mix over time</h3><div class="box xtall"><canvas id="cLang" role="img" aria-label="Share of code lines by language over time"></canvas></div><p class="cap">Share of code lines by language at each scan, as the scanner classifies files (markup and data files are included). The eight largest languages today; the rest are grouped.</p></div>
     <div class="fig"><h3>Age layers</h3><div class="box xtall"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
   </div>
   <div class="sowhat" id="sw_growth"><span>So what</span><b></b></div>
@@ -512,6 +513,14 @@ function render() {
   } else { el("heatFig").hidden = true; }
 
 
+
+  if (DATA.languages) {
+    el("langFig").hidden = false;
+    const LG = DATA.languages, tot = Q.map((q, i) => LG.labels.reduce((a, k) => a + LG.lines[k][i], 0) || 1), named = LG.labels.filter(k => k !== "other").length;
+    const o = base(); o.scales.y.stacked = true; o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%";
+    o.plugins.legend = sideLegend(); o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "% of lines" };
+    charts.push(new Chart(el("cLang"), { type: "line", data: { labels: Q.map(q => q.label), datasets: LG.labels.map((k, i) => ({ label: k, data: LG.lines[k].map((v, j) => 100 * v / tot[j]), fill: true, stack: "lg", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: k === "other" ? css("--s4b") : rainbow(named, named - 1 - i) })) }, options: o }));
+  }
   if (AR && AR.mix) {
     const o = base(); o.scales.y.stacked = true; o.scales.y.ticks.callback = v => fmt(v);
     o.plugins.legend = sideLegend(); o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
