@@ -1523,3 +1523,12 @@ Surprise bars (fix categories over 40% of edits; adds + removes + modifies under
 | fix edits / in functions fixed 2+ times in the history / fixed 5+ times | 577 / 301 (52%) / 81 (14%) | 898 / 549 (61%) / 178 (20%) |
 | organic-edited functions also fixed in the same quarter / sweep-edited ones | 80 of 1,477 (5.4%) / 15 of 610 (2.5%) | 352 of 5,172 (6.8%) / 48 of 1,482 (3.2%) |
 Whole history: functions fixed 2+ times hold 60% (DPDK) and 61% (Mesa) of fix edits; the top 1% of fixed functions hold 8%, the top 10% hold 31 to 32%. 24 random sweep subjects per project: renames (`rename bonded to bonding`, `rename LIST_ENTRY() to list_entry()`), API conversions (`replace logging helpers`, `standardize on negative errno values`, `all: rename PIPE_SHADER_GEOMETRY to MESA_SHADER_GEOMETRY`), reformatting (`unify the indent coding style`, `add .clang-format`), branch merges, generated headers.
+
+## What the commit trailers add: reports, stable, review (hypotheses fixed 2026-11-19 before running; `tools/sensor/trailer_pass.py`)
+A pass over the trailers of every non-merge commit of DPDK and Mesa (`git log %(trailers)`): `Reported-by`, `Tested-by`, `Reviewed-by`, `Acked-by`, `Cc: stable`, `Link`, `Closes`, `Bugzilla`, `Suggested-by`, `Co-developed-by`. Uses the partition's categories and the "cited as a cause" flag (named or blame cause), the measured named-cause pairs of the radius run, and only commits from 2015 on (before that Mesa has few trailers).
+- **TP1.** The share of named-cause fix commits (measured pairs) that carry a `Reported-by` is at least 15% in DPDK and 10% in Mesa (report-driven fixes are a sizable group).
+- **TP2.** Fixes with a `Reported-by` have a median lag at least 1.3 times that of fixes without (found by someone else, later).
+- **TP3.** The repair radius within 2 calls of report-driven fixes is within 0.2 of the others (the same pattern).
+- **TP4.** Among organic non-fix commits older than 3 years before the end of the history, those with a `Reviewed-by`, `Acked-by` or `Tested-by` are cited as the cause of a later fix at a lower rate than those without, within deciles of the number of functions changed (Mantel-Haenszel rate ratio below 0.9, interval excluding 1), pooled.
+- **TP5.** Fixes with `Cc: stable` have a longer median lag than those without (descriptive; no threshold) and the same radius within 0.2.
+**Would surprise:** TP4 above 1.1 (review marks riskier changes after size control).
