@@ -1,0 +1,18 @@
+
+##### dpdk: 46,419 non-merge commits; 35,908 touch C/H functions; 189,837 function-edit events (hunk-header functions)
+  sweeps (more than 60 functions): 245 commits = 0.7% of function-touching commits, 20.9% of function edits
+  organic commits 35,663, 79.1% of edits
+  fix-like (subject keyword or Fixes: trailer), organic: 13,940 commits = 39.1% of organic commits, 17.9% of all edits
+  with a Fixes: trailer, organic: 12,783 commits = 35.8%, 15.6% of all edits
+  named-cause pairs usable (trailer, C/H both sides): 12,756 fix commits, 15.6% of all edits
+  measured named-cause pairs 9,867: repaired functions 23,068 = 12.2% of all function edits; of them in the cause's own changed set 30%, outside it 16,260 (8.6% of all edits)
+  of the outside-the-set repairs 6,500 pairs measurable: within 2 calls of the change 8,359 (observed) against 6,602 expected by chance in the same files: excess 1,757 = 0.93% of all function edits; 11% of outside-the-set repairs
+
+##### mesa: 233,419 non-merge commits; 160,281 touch C/H functions; 687,372 function-edit events (hunk-header functions)
+  sweeps (more than 60 functions): 768 commits = 0.5% of function-touching commits, 18.0% of function edits
+  organic commits 159,513, 82.0% of edits
+  fix-like (subject keyword or Fixes: trailer), organic: 29,236 commits = 18.3% of organic commits, 9.5% of all edits
+  with a Fixes: trailer, organic: 9,625 commits = 6.0%, 2.5% of all edits
+  named-cause pairs usable (trailer, C/H both sides): 8,803 fix commits, 2.2% of all edits
+  measured named-cause pairs 7,410: repaired functions 12,245 = 1.8% of all function edits; of them in the cause's own changed set 41%, outside it 7,192 (1.0% of all edits)
+  of the outside-the-set repairs 3,936 pairs measurable: within 2 calls of the change 3,092 (observed) against 2,087 expected by chance in the same files: excess 1,005 = 0.15% of all function edits; 14% of outside-the-set repairs
