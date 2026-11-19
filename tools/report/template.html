@@ -1,0 +1,336 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout concept: a single reading column of numbered-by-content sections; charts share one quarterly x axis so they read as one timeline. */
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --fg: #14171a;
+  --fg2: #4b5561;
+  --fg3: #737c88;
+  --line: #e0e3e8;
+  --grid: #eceef1;
+  --s1: #2a78d6;   /* organic / new code */
+  --s2: #eb6834;   /* sweeps / removed */
+  --s3: #1baf7a;   /* fixes */
+  --s4: #9aa3ad;   /* mechanical / moved */
+  --s4b: #c5cbd2;
+  --accent: #2a78d6;
+  --ramp-new: #d3e4fa;
+  --ramp-old: #1d4a96;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+    --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+  --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.1; }
+h2 { font-size: 22px; line-height: 1.2; }
+h3 { font-size: 16px; }
+p { margin: 0; max-width: 68ch; }
+.kicker { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); font-weight: 600; }
+.lede { color: var(--fg2); font-size: 16px; }
+header { display: flex; flex-direction: column; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--fg2); font-size: 13px; }
+.meta b { color: var(--fg); font-weight: 600; }
+.notice { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; color: var(--fg2); font-size: 13px; max-width: 90ch; }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.chip { font-size: 12px; color: var(--fg2); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--fg2); display: inline-block; }
+.chip.strong i { background: var(--fg2); }
+.chip.moderate i { background: linear-gradient(90deg, var(--fg2) 50%, transparent 50%); }
+.chip.explor i { background: transparent; }
+.sowhat { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; color: var(--fg); max-width: 72ch; }
+.sowhat span { color: var(--fg3); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; display: block; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+.fig { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fig h3 { display: flex; justify-content: flex-start; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.fig .cap { color: var(--fg3); font-size: 12.5px; max-width: 70ch; }
+.box { position: relative; height: 270px; }
+.box.tall { height: 320px; }
+.id { font-family: var(--font-head); font-size: 11px; color: var(--fg3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-right: 6px; font-weight: 600; }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 2px solid var(--line); }
+.stat b { font-family: var(--font-head); font-size: 26px; line-height: 1.1; font-weight: 600; }
+.stat span { color: var(--fg2); font-size: 12.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--fg2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.bar { display: flex; height: 26px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.bar div { min-width: 2px; }
+.cmp { display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font-weight: 600; color: var(--fg2); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+td.num, th.num { text-align: right; padding-right: 14px; }
+.inbar { display: inline-block; height: 8px; border-radius: 2px; background: var(--s1); vertical-align: middle; }
+.hop { display: grid; grid-template-columns: 150px 1fr 52px; gap: 8px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.hoptrack { position: relative; height: 14px; background: var(--grid); border-radius: 3px; }
+.hoptrack div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--s1); border-radius: 3px; }
+.hoptrack u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--fg); text-decoration: none; }
+.example { background: var(--grid); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--fg2); display: grid; gap: 4px; max-width: 80ch; }
+.example code { font-family: var(--font-head); color: var(--fg); font-weight: 600; }
+.status { font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); color: var(--fg2); white-space: nowrap; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.card h3 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.card p { color: var(--fg2); font-size: 13px; }
+button.tog { font: inherit; font-size: 12.5px; color: var(--fg2); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 3px 10px; cursor: pointer; }
+button.tog[aria-pressed="true"] { color: var(--fg); border-color: var(--fg2); background: var(--grid); }
+button.tog:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+footer { color: var(--fg3); font-size: 12.5px; max-width: 80ch; }
+@media (max-width: 520px) { .hop { grid-template-columns: 110px 1fr 46px; } .box { height: 240px; } }
+</style>
+<style>
+.more { font-size: 13px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.more:hover { border-bottom-color: var(--accent); }
+.gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px 20px; font-size: 13.5px; color: var(--fg2); }
+.gloss b { color: var(--fg); display: block; font-weight: 600; }
+details.how { font-size: 13px; color: var(--fg2); }
+details.how summary { cursor: pointer; color: var(--fg3); }
+details.how[open] summary { margin-bottom: 6px; }
+.empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">GitGalaxy · repository evolution</div>
+  <h1 id="title"></h1>
+  <p class="lede">How this repository grew, where the work went, how quickly and where repairs arrived, and which functions keep needing them. Built from the git history<span id="scanNote"></span>.</p>
+  <div class="meta" id="meta"></div>
+  <div class="gloss">
+    <div><b>Sweep</b>One commit that edits more than 60 functions: a rename, an API conversion, a reformat. Planned and mechanical.</div>
+    <div><b>Organic change</b>Ordinary work: new features, refactors, new code, removals.</div>
+    <div><b>Fix</b>A commit that says it fixes something (a Fixes: trailer or a fix-like subject).</div>
+    <div><b>Cause</b>The earlier commit a fix repairs: named in the fix, or found by blame.</div>
+  </div>
+</header>
+
+<section id="glance">
+  <div class="sec-head"><h2>At a glance</h2><span class="chip strong"><i></i>Strong · rule-based counts</span></div>
+  <div class="glance" id="glanceStats"></div>
+  <div class="fig">
+    <h3>Where the function edits went</h3>
+    <div class="bar" id="compBar" role="img" aria-label="Share of function edits by kind"></div>
+    <div class="legend" id="compLegend"></div>
+    <p class="cap">A function edit is a function named in a commit's diff headers; a function edited in two commits counts twice. Sweeps are under 1% of commits but often a fifth of all edits.</p>
+  </div>
+  <div class="sowhat"><span>So what</span>Separating planned mechanical sweeps from everything else makes the other trends readable.</div>
+  <a class="more" data-wiki="08-30-evolution-report" href="#">What this report measures and how →</a>
+</section>
+
+<section id="growth" hidden>
+  <div class="sec-head"><h2>1 · Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
+  <div class="fig"><h3><span class="id">T1</span>How big the code base is</h3><div class="box tall"><canvas id="cSize"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
+  <div class="grid2">
+    <div class="fig"><h3><span class="id">T2</span>What the growth is made of</h3><div class="box"><canvas id="cBirths"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file: reorganisation, not creation or loss.</p></div>
+    <div class="fig"><h3><span class="id">T3</span>Age layers</h3><div class="box"><canvas id="cCohorts"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. The first year includes everything that existed at the first scan.</p></div>
+  </div>
+  <div class="sowhat"><span>So what</span>Shows whether growth is new code or reorganisation, and how much of today's code is old.</div>
+  <a class="more" data-wiki="08-31-evolution-growth" href="#">How growth is measured →</a>
+</section>
+
+<section id="activity">
+  <div class="sec-head"><h2 id="actTitle">Activity over time</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
+  <div class="fig"><h3><span class="id">T5</span>Function edits by kind, per quarter
+    <span style="margin-left:auto"><button class="tog" id="tAbs" aria-pressed="true">Edits</button> <button class="tog" id="tShare" aria-pressed="false">Share</button></span></h3>
+    <div class="box tall"><canvas id="cWork"></canvas></div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Organic change</span><span><i style="background:var(--s2)"></i>Sweeps</span><span><i style="background:var(--s3)"></i>Fixes</span><span><i style="background:var(--s4)"></i>Mechanical (tests-only, comments, formatting, reverts)</span></div>
+  </div>
+  <div class="grid2">
+    <div class="fig"><h3><span class="id">T11</span>Contributors</h3><div class="box"><canvas id="cAuthors"></canvas></div><p class="cap">Distinct authors per quarter, and the share of commits by the most active one.</p></div>
+    <div class="fig" id="heatFig"><h3><span class="id">T4</span>How much of the code is alive</h3><div class="box"><canvas id="cHeat"></canvas></div><p class="cap">Edited this quarter, and untouched for four quarters, as shares of the functions that exist (needs the scans).</p></div>
+    <div class="fig" id="fixFig"><h3><span class="id">T16</span>Fixes that ship with a test</h3><div class="box"><canvas id="cFixTest"></canvas></div><p class="cap">Share of fix commits that also touch a test file.</p></div>
+  </div>
+  <div class="sowhat"><span>So what</span>Most of the code is quiet in any given year. Work concentrates in a small live fraction plus the occasional sweep across everything.</div>
+  <a class="more" data-wiki="08-32-evolution-work" href="#">How edits are classified →</a>
+</section>
+
+<section id="sweeps">
+  <div class="sec-head"><h2>2 · Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
+  <p id="sweepIntro"></p>
+  <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th>Later cited as the cause of a fix</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat"><span>So what</span>Each sweep is a migration with a known scope; you can see which were followed by repairs.</div>
+  <a class="more" data-wiki="08-33-evolution-sweeps" href="#">How sweeps are found →</a>
+</section>
+
+<section id="repairs">
+  <div class="sec-head"><h2>3 · Repairs: when, and how close</h2><span class="chip moderate"><i></i>Moderate · causes named by Fixes: trailers or found by blame</span></div>
+  <div id="repairsEmpty" class="empty" hidden></div>
+  <div class="grid2" id="repairsGrid">
+    <div class="fig"><h3><span class="id">T7</span>How long fixes took</h3><div class="box"><canvas id="cLag"></canvas></div><p class="cap" id="lagCap"></p></div>
+    <div class="fig" id="hopFig" hidden><h3>How much closer than chance fixes land</h3><div class="hop" id="hops"></div><p class="cap">Within one or two calls of a changed function, against same-sized functions in the same file. 1.0 (the line) means no pattern.</p></div>
+  </div>
+  <div class="fig" id="causeFig">
+    <h3>Which causing changes produce which fixes</h3>
+    <div class="tablewrap"><table id="causeTable"><thead><tr><th>Causing change</th><th class="num">Pairs</th><th>Fix in the same function</th><th class="num">Median lag</th></tr></thead><tbody></tbody></table></div>
+    <p class="cap">Cause type is the first verb of the causing commit's subject.</p>
+  </div>
+  <div class="example">
+    <div><code>Day 1</code> function B changes.</div>
+    <div><code>Months later</code> a bug appears. The fix edits B itself about half the time.</div>
+    <div>When it does not, the fix is usually in a function that calls B, or in B's file: look there first.</div>
+  </div>
+  <div class="sowhat"><span>So what</span>After a feature, repairs arrive late and scattered: widen the review. After a fix of a fix, they come back to the same function.</div>
+  <a class="more" data-wiki="08-34-evolution-repairs" href="#">How repairs are matched to causes →</a>
+</section>
+
+<section id="repeat">
+  <div class="sec-head"><h2>4 · Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
+  <div class="glance" id="repeatStats"></div>
+  <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat"><span>So what</span>Repairs repeat: the second fix in a function is common. A function fixed five times is a candidate for redesign, not another patch.</div>
+  <a class="more" data-wiki="08-35-evolution-repeat-spots" href="#">How repeat spots are counted →</a>
+</section>
+
+<section id="sizes">
+  <div class="sec-head"><h2>5 · Which changes get repaired</h2><span class="chip strong"><i></i>Strong · size is the one per-change signal that held up</span></div>
+  <div class="fig"><h3>Share of changes later cited as the cause of a fix, by size</h3><div class="box"><canvas id="cSize2"></canvas></div><p class="cap" id="sizeCap"></p></div>
+  <div class="sowhat"><span>So what</span>Bigger changes are repaired far more often. Nothing else we measured (author experience, reviewer trailers, structure) added to size.</div>
+  <a class="more" data-wiki="08-36-evolution-which-changes" href="#">How this was measured →</a>
+</section>
+
+<section id="quality">
+  <div class="sec-head"><h2>6 · How far to trust this report</h2><span class="chip strong"><i></i>Strong · counts</span></div>
+  <div class="cards" id="qualityCards"></div>
+  <div class="empty">Whether a particular change will need a fix is not something this report can say; size predicts it, little else does. How well this repository's "look first" and triage lists work is measured separately by <code>gitgalaxy backtest</code>.</div>
+  <a class="more" data-wiki="08-37-evolution-label-quality" href="#">Label quality and limits →</a>
+</section>
+
+<footer>Built by GitGalaxy from the repository's git history<span id="scanFoot"></span>. Definitions, measured behaviour and caveats are in the <a class="more" id="repoLink" href="https://github.com/squid-protocol/gitgalaxy">GitGalaxy repository</a> wiki. Figures are descriptions of the past, not forecasts.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const DATA = __DATA__;
+const Q = DATA.quarters || null;
+const GQ = DATA.git_quarters;
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const pct = (x, d = 0) => x == null ? "n/a" : (100 * x).toFixed(d) + "%";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const el = id => document.getElementById(id);
+const charts = [];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+document.querySelectorAll("a.more[data-wiki]").forEach(a => { a.href = DATA.link_base + "/" + a.dataset.wiki + ".md"; a.target = "_blank"; a.rel = "noopener"; });
+el("title").textContent = "Evolution of " + DATA.name;
+const lastQ = Q ? Q[Q.length - 1] : null;
+if (Q) { el("scanNote").textContent = " and quarterly scans"; el("scanFoot").textContent = " and " + Q.length + " quarterly scans"; el("growth").hidden = false; }
+el("meta").innerHTML = `<span><b>Span</b> ${DATA.span[0]} to ${DATA.span[1]}</span><span><b>Commits</b> ${fmt(DATA.commits)}</span>` + (lastQ ? `<span><b>Functions now</b> ${fmt(lastQ.functions)}</span><span><b>Scans</b> ${Q.length} quarterly</span>` : `<span><b>Mode</b> git history only</span>`) + `<span><b>Language</b> ${DATA.lang}</span><span><b>Generated</b> ${DATA.generated}</span>`;
+const C = DATA.composition_edits, CC = DATA.composition_commits;
+const stats = [[fmt(DATA.function_edits), "function edits in total"], [pct(C.sweeps), "of edits are sweeps (" + pct(CC.sweeps, 1) + " of commits)"], [pct(C.fixes), "of edits are fixes"], [pct(C.organic), "are organic change"]];
+if (DATA.lag_median_days != null) stats.push([Math.round(DATA.lag_median_days) + " days", "median time from a change to the fix it caused"]);
+if (DATA.repeat_spots.share_in_fixed_2plus != null) stats.push([pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits land in a function fixed more than once"]);
+el("glanceStats").innerHTML = stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+const comp = [["Organic change", "organic", "--s1"], ["Sweeps", "sweeps", "--s2"], ["Fixes", "fixes", "--s3"], ["Mechanical", "mechanical", "--s4"]];
+el("compBar").innerHTML = comp.map(([n, k, c]) => `<div title="${n} ${pct(C[k], 1)}" style="flex:${Math.max(C[k], 0.0005)};background:var(${c})"></div>`).join("");
+el("compLegend").innerHTML = comp.map(([n, k, c]) => `<span><i style="background:var(${c})"></i>${n} ${pct(C[k], 1)}</span>`).join("");
+el("actTitle").textContent = Q ? "2 · Where the work goes" : "1 · Where the work goes";
+el("sweeps").querySelector("h2").textContent = Q ? "3 · Sweeps" : "2 · Sweeps";
+el("sweepIntro").textContent = DATA.sweep_count + " commits edit more than 60 functions at once. The largest:";
+el("sweepTable").querySelector("tbody").innerHTML = DATA.largest_sweeps.map(s => `<tr><td>${s.date}</td><td class="num">${fmt(s.functions)}</td><td>${esc(s.subject)}</td><td>${s.cited_as_cause ? "Yes" : "No"}</td></tr>`).join("");
+
+// repairs
+if (!DATA.pairs || DATA.pairs < 30) {
+  el("repairsGrid").hidden = true; el("causeFig").hidden = true;
+  el("repairsEmpty").hidden = false;
+  el("repairsEmpty").textContent = "Too few fixes name their cause in this repository (" + (DATA.pairs || 0) + " pairs from Fixes: trailers) to describe repair timing. Re-run with --blame to derive causes by blame.";
+} else {
+  el("lagCap").textContent = `${fmt(DATA.pairs)} fix/cause pairs. Median ${Math.round(DATA.lag_median_days)} days; ${pct((DATA.lag_hist[5].pairs + DATA.lag_hist[6].pairs) / DATA.pairs)} of fixes arrive more than a year after the change that caused them.` + (DATA.stable_lag.with != null && DATA.stable_lag.without != null ? ` Fixes tagged Cc: stable took ${Math.round(DATA.stable_lag.with)} days; untagged fixes ${Math.round(DATA.stable_lag.without)}.` : "");
+  const names = { feature: "A feature", restructure: "A restructure", fix: "A fix (a fix of a fix)", other: "Other", optimization: "An optimisation" };
+  el("causeTable").querySelector("tbody").innerHTML = DATA.cause_types.map(r => `<tr><td>${names[r.cause] || r.cause}</td><td class="num">${fmt(r.pairs)}</td><td>${r.same_function == null ? "n/a" : `<span class="inbar" style="width:${160 * r.same_function}px"></span> ${pct(r.same_function)}`}</td><td class="num">${Math.round(r.median_lag)} d</td></tr>`).join("");
+  if (DATA.radius) {
+    el("hopFig").hidden = false;
+    const hs = ["either1", "either2", "callers1", "callees1"].map(k => DATA.radius[k]).filter(Boolean);
+    el("hops").innerHTML = hs.map(h => `<span>${h.label}</span><div class="hoptrack"><div style="width:${100 * Math.min(h.ratio, 2.6) / 2.6}%"></div><u style="left:${100 / 2.6}%"></u></div><b style="color:var(--fg)">${h.ratio.toFixed(2)}x</b>`).join("");
+  }
+}
+el("repeatStats").innerHTML = [[fmt(DATA.repeat_spots.fix_edits), "fix edits in total"], [fmt(DATA.repeat_spots.functions_fixed), "distinct functions fixed"], [pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits in functions fixed 2+ times"], [pct(DATA.repeat_spots.share_in_fixed_5plus), "in functions fixed 5+ times"]].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+el("fixedTable").querySelector("tbody").innerHTML = DATA.most_fixed.map(f => `<tr><td><code>${esc(f.function)}</code></td><td>${esc(f.file)}</td><td class="num">${f.fixes}</td></tr>`).join("");
+el("sizeCap").textContent = "Organic commits at least three years old (so each had time to be repaired); size is the number of functions edited. Causes: " + DATA.size_bands_basis + ".";
+const LQ = DATA.label_quality;
+const qc = [
+  ["Causes named", `${pct(LQ.fixes_trailer_share_of_function_commits)} of the commits that change functions carry a Fixes: trailer (${fmt(LQ.named_pairs)} usable pairs). ${LQ.blame ? `Blame found a cause for ${pct(LQ.blame.found / LQ.blame.sampled)} of a sample of ${fmt(LQ.blame.sampled)} unnamed fix-like commits.` : "Run with --blame to find causes for unnamed fixes."}`],
+  ["Fix labels", `${pct(LQ.fix_like_subject_share)} of commit subjects look like fixes. The subject rule misses roughly 8 to 20% of fixes in the remainder (hand checks on two projects).`],
+  ["Shipped bugs", `${pct(LQ.cc_stable_share, 1)} of commits carry Cc: stable, and ${pct(LQ.reported_by_share, 1)} Reported-by. Where used, Cc: stable marks bugs that reached a release.`],
+  ["Function names", "Functions come from git diff headers; about one in eight is a neighbour of the function actually edited. Counts are indicators, not exact."],
+  ["Cannot say", "Fixes with no findable cause are shown as such, never as 'extrinsic'. Whether a given change will need a fix is not predicted."],
+];
+el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h3><p>${d}</p></div>`).join("");
+
+// charts
+function base(extra) {
+  const fg2 = css("--fg2"), grid = css("--grid");
+  return Object.assign({ responsive: true, maintainAspectRatio: false, animation: false, interaction: { mode: "index", intersect: false },
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: css("--card"), titleColor: css("--fg"), bodyColor: css("--fg2"), borderColor: css("--line"), borderWidth: 1, padding: 10 } },
+    scales: { x: { grid: { display: false }, ticks: { color: fg2, maxTicksLimit: 8, maxRotation: 0, autoSkipPadding: 18 }, border: { color: css("--line") } }, y: { grid: { color: grid }, ticks: { color: fg2 }, border: { display: false } } } }, extra || {});
+}
+function lerp(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
+const legendOn = () => ({ display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } });
+let workMode = "abs";
+function render() {
+  charts.splice(0).forEach(c => c.destroy());
+  const s1 = css("--s1"), s2 = css("--s2"), s3 = css("--s3"), s4 = css("--s4"), s4b = css("--s4b");
+  if (Q) {
+    const labels = Q.map(q => q.label);
+    const o1 = base(); o1.scales.y.ticks.callback = v => fmt(v); o1.plugins.tooltip.callbacks = { label: c => "Functions: " + fmt(c.parsed.y) };
+    charts.push(new Chart(el("cSize"), { type: "line", data: { labels, datasets: [{ label: "Functions", data: Q.map(q => q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o1 }));
+    const q1 = Q.slice(1), l1 = q1.map(q => q.label);
+    const o2 = base(); o2.scales.x.stacked = true; o2.scales.y.stacked = true; o2.scales.y.ticks.callback = v => fmt(Math.abs(v)); o2.plugins.legend = legendOn(); o2.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(Math.abs(c.parsed.y)) };
+    charts.push(new Chart(el("cBirths"), { type: "bar", data: { labels: l1, datasets: [
+      { label: "New code", data: q1.map(q => q.births_new_code), backgroundColor: s1, borderSkipped: false }, { label: "Moved in", data: q1.map(q => q.births_moved), backgroundColor: s4b, borderSkipped: false },
+      { label: "Removed", data: q1.map(q => -q.deaths_removed), backgroundColor: s2, borderSkipped: false }, { label: "Moved out", data: q1.map(q => -q.deaths_moved), backgroundColor: s4, borderSkipped: false } ] }, options: o2 }));
+    const years = DATA.cohort_years, ramp = css("--ramp-new").replace("#", ""), rampOld = css("--ramp-old").replace("#", "");
+    const o3 = base(); o3.scales.y.stacked = true; o3.scales.y.ticks.callback = v => fmt(v);
+    o3.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } }; o3.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0, pointRadius: 0, backgroundColor: lerp(ramp, rampOld, 1 - i / Math.max(years.length - 1, 1)) })) }, options: o3 }));
+    const q4 = Q.filter(q => q.untouched_4q_share != null), l4 = q4.map(q => q.label);
+    const o4 = base(); o4.scales.y.ticks.callback = v => v + "%"; o4.scales.y.min = 0; o4.scales.y.max = 100; o4.plugins.legend = legendOn(); o4.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "%" };
+    charts.push(new Chart(el("cHeat"), { type: "line", data: { labels: l4, datasets: [
+      { label: "Untouched for four quarters", data: q4.map(q => 100 * q.untouched_4q_share), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Edited this quarter", data: q4.map(q => 100 * q.edited_functions / q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o4 }));
+  } else { el("heatFig").hidden = true; }
+  const gl = GQ.map(q => q.label), keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
+  const o5 = base(); o5.scales.y.stacked = true; o5.scales.y.ticks.callback = v => workMode === "abs" ? fmt(v) : v + "%"; if (workMode === "share") o5.scales.y.max = 100;
+  o5.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (workMode === "abs" ? fmt(c.parsed.y) + " edits" : c.parsed.y.toFixed(1) + "%") };
+  charts.push(new Chart(el("cWork"), { type: "line", data: { labels: gl, datasets: keys.map((k, i) => ({ label: names[i], data: GQ.map(q => { const t = keys.reduce((a, kk) => a + q["edits_" + kk], 0) || 1; return workMode === "abs" ? q["edits_" + k] : 100 * q["edits_" + k] / t; }), fill: true, borderColor: cols[i], backgroundColor: cols[i], borderWidth: 1, pointRadius: 0, stack: "w", tension: 0.15 })) }, options: o5 }));
+  const o6 = base(); o6.plugins.legend = legendOn(); o6.scales.y.ticks.callback = v => fmt(v); o6.scales.y1 = { position: "right", min: 0, max: 100, grid: { display: false }, ticks: { color: css("--fg2"), callback: v => v + "%" }, border: { display: false } };
+  o6.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (c.dataset.yAxisID === "y1" ? c.parsed.y.toFixed(0) + "%" : fmt(c.parsed.y)) };
+  charts.push(new Chart(el("cAuthors"), { type: "line", data: { labels: gl, datasets: [
+    { label: "Active authors", data: GQ.map(q => q.authors), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+    { label: "Top author's share of commits", data: GQ.map(q => 100 * q.top_author_share), yAxisID: "y1", borderColor: s2, backgroundColor: s2, borderWidth: 2, pointRadius: 0, tension: 0.2, borderDash: [5, 4] } ] }, options: o6 }));
+  const gf = GQ.filter(q => q.fix_commits >= 5), o7 = base(); o7.scales.y.min = 0; o7.scales.y.max = 100; o7.scales.y.ticks.callback = v => v + "%"; o7.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% of fix commits touch a test" };
+  charts.push(new Chart(el("cFixTest"), { type: "line", data: { labels: gf.map(q => q.label), datasets: [{ label: "Fixes with a test", data: gf.map(q => 100 * q.fix_with_test / q.fix_commits), borderColor: s3, backgroundColor: s3, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o7 }));
+  if (DATA.pairs >= 30) {
+    const o8 = base(); o8.scales.y.ticks.callback = v => fmt(v); o8.plugins.tooltip.callbacks = { label: c => fmt(c.parsed.y) + " fixes" };
+    charts.push(new Chart(el("cLag"), { type: "bar", data: { labels: DATA.lag_hist.map(b => b.bin), datasets: [{ label: "Fixes", data: DATA.lag_hist.map(b => b.pairs), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o8, { interaction: { mode: "nearest", intersect: true } }) }));
+  }
+  const sb = DATA.size_bands.filter(b => b.later_repaired != null), o9 = base(); o9.scales.y.ticks.callback = v => v + "%"; o9.scales.y.min = 0; o9.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% later repaired" };
+  charts.push(new Chart(el("cSize2"), { type: "bar", data: { labels: sb.map(b => b.band + " (" + fmt(b.commits) + " commits)"), datasets: [{ label: "Later repaired", data: sb.map(b => 100 * b.later_repaired), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o9, { interaction: { mode: "nearest", intersect: true } }) }));
+}
+function setMode(m) { workMode = m; el("tAbs").setAttribute("aria-pressed", m === "abs"); el("tShare").setAttribute("aria-pressed", m === "share"); render(); }
+el("tAbs").onclick = () => setMode("abs"); el("tShare").onclick = () => setMode("share");
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>

@@ -26,3 +26,6 @@ Drafts for GitGalaxy's `docs/wiki/`, written against `origin/main` (checked 2026
 
 ## What these pages do and do not claim
 They state what the code does, what was measured (13 repositories, a 580-repository population sample for the descriptive results, 7 repositories for history-aware outcome tests) and what is proposed. They make **no risk or defect claim**; outcome relations are reported as small and descriptive. Third-party tools are not copied: the design notes use our own vocabulary and an open standard (SARIF) where a convention was needed (`GUIDE.md` section 4.1).
+
+## Evolution report pages (added 2026-11-19)
+Eight draft pages for the evolution report prototype (`tools/report/evolution_report.py`): `08-30-evolution-report` (overview and glossary), `08-31-evolution-growth`, `08-32-evolution-work`, `08-33-evolution-sweeps`, `08-34-evolution-repairs`, `08-35-evolution-repeat-spots`, `08-36-evolution-which-changes`, `08-37-evolution-label-quality`. The report links each section to its page on `docs/wiki/` in the GitGalaxy repository (`--link-base` changes the base), so the links resolve once these pages are merged. Numbers 08-30 to 08-37 are the next free ones in `origin/main` (08-29 is `repair-radius`). Nothing here has been applied to the engine repository.
