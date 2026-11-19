@@ -1,0 +1,373 @@
+<title>Repo Evolution Report</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout concept: a single reading column of numbered-by-content sections; charts share one quarterly x axis so they read as one timeline. */
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --fg: #14171a;
+  --fg2: #4b5561;
+  --fg3: #737c88;
+  --line: #e0e3e8;
+  --grid: #eceef1;
+  --s1: #2a78d6;   /* organic / new code */
+  --s2: #eb6834;   /* sweeps / removed */
+  --s3: #1baf7a;   /* fixes */
+  --s4: #9aa3ad;   /* mechanical / moved */
+  --s4b: #c5cbd2;
+  --accent: #2a78d6;
+  --ramp-new: #d3e4fa;
+  --ramp-old: #1d4a96;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+    --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+  --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.1; }
+h2 { font-size: 22px; line-height: 1.2; }
+h3 { font-size: 16px; }
+p { margin: 0; max-width: 68ch; }
+.kicker { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); font-weight: 600; }
+.lede { color: var(--fg2); font-size: 16px; }
+header { display: flex; flex-direction: column; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--fg2); font-size: 13px; }
+.meta b { color: var(--fg); font-weight: 600; }
+.notice { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; color: var(--fg2); font-size: 13px; max-width: 90ch; }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.chip { font-size: 12px; color: var(--fg2); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--fg2); display: inline-block; }
+.chip.strong i { background: var(--fg2); }
+.chip.moderate i { background: linear-gradient(90deg, var(--fg2) 50%, transparent 50%); }
+.chip.explor i { background: transparent; }
+.sowhat { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; color: var(--fg); max-width: 72ch; }
+.sowhat span { color: var(--fg3); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; display: block; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+.fig { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fig h3 { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.fig .cap { color: var(--fg3); font-size: 12.5px; max-width: 70ch; }
+.box { position: relative; height: 270px; }
+.box.tall { height: 320px; }
+.id { font-family: var(--font-head); font-size: 11px; color: var(--fg3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-right: 6px; font-weight: 600; }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 2px solid var(--line); }
+.stat b { font-family: var(--font-head); font-size: 26px; line-height: 1.1; font-weight: 600; }
+.stat span { color: var(--fg2); font-size: 12.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--fg2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.bar { display: flex; height: 26px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.bar div { min-width: 2px; }
+.cmp { display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font-weight: 600; color: var(--fg2); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+td.num, th.num { text-align: right; padding-right: 14px; }
+.inbar { display: inline-block; height: 8px; border-radius: 2px; background: var(--s1); vertical-align: middle; }
+.hop { display: grid; grid-template-columns: 150px 1fr 52px; gap: 8px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.hoptrack { position: relative; height: 14px; background: var(--grid); border-radius: 3px; }
+.hoptrack div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--s1); border-radius: 3px; }
+.hoptrack u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--fg); text-decoration: none; }
+.example { background: var(--grid); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--fg2); display: grid; gap: 4px; max-width: 80ch; }
+.example code { font-family: var(--font-head); color: var(--fg); font-weight: 600; }
+.status { font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); color: var(--fg2); white-space: nowrap; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.card h3 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.card p { color: var(--fg2); font-size: 13px; }
+button.tog { font: inherit; font-size: 12.5px; color: var(--fg2); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 3px 10px; cursor: pointer; }
+button.tog[aria-pressed="true"] { color: var(--fg); border-color: var(--fg2); background: var(--grid); }
+button.tog:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+footer { color: var(--fg3); font-size: 12.5px; max-width: 80ch; }
+@media (max-width: 520px) { .hop { grid-template-columns: 110px 1fr 46px; } .box { height: 240px; } }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Repo evolution report · mock-up</div>
+  <h1>DPDK: ten years of change, by kind</h1>
+  <p class="lede">How the repository grew, where the work went, how quickly and where repairs arrived, and which functions keep needing them.</p>
+  <div class="meta" id="meta"></div>
+  <div class="notice">Mock-up with real numbers from our DPDK scans (41 quarterly snapshots) and git history. The Mesa comparison row is also measured. Everything under "Not drawn yet" is a proposal from the design guide, not a result.</div>
+</header>
+
+<section id="glance">
+  <div class="sec-head"><h2>At a glance</h2><span class="chip strong"><i></i>Strong · rule-based counts</span></div>
+  <div class="glance" id="glanceStats"></div>
+  <div class="fig">
+    <h3>Where the function edits went, whole history</h3>
+    <div class="bar" id="compBar" role="img" aria-label="Share of function edits by kind"></div>
+    <div class="legend" id="compLegend"></div>
+    <div class="cmp" id="cmpRow"></div>
+    <p class="cap">Function edits are the functions named in each commit's diff headers (a function edited in two commits counts twice). A sweep is a commit that edits more than 60 functions. Fixes are commits with a Fixes: trailer or a fix-like subject.</p>
+  </div>
+  <div class="sowhat"><span>So what</span>About one edit in five is a planned mechanical sweep that says little about the project's own health; separating it out makes every other trend readable.</div>
+</section>
+
+<section id="growth">
+  <div class="sec-head"><h2>1 · Growth</h2><span class="chip strong"><i></i>Strong · from the scans</span></div>
+  <div class="fig">
+    <h3><span><span class="id">T1</span>How big the code base is</span></h3>
+    <div class="box tall"><canvas id="cSize"></canvas></div>
+    <p class="cap">Functions found by the scan at each quarter. Dots mark quarters with a sweep over 1,000 functions.</p>
+  </div>
+  <div class="grid2">
+    <div class="fig">
+      <h3><span><span class="id">T2</span>What the growth is made of</span></h3>
+      <div class="box"><canvas id="cBirths"></canvas></div>
+      <p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so most of it is reorganisation, not creation or loss.</p>
+    </div>
+    <div class="fig">
+      <h3><span><span class="id">T3</span>Age layers of the code base</span></h3>
+      <div class="box"><canvas id="cCohorts"></canvas></div>
+      <p class="cap">Functions present at each quarter, grouped by the year they first appeared. "2016" includes everything that existed at the first scan.</p>
+    </div>
+  </div>
+  <div class="example" id="typicalQuarter"></div>
+  <div class="sowhat"><span>So what</span>Growth is mostly new code arriving in new files (drivers). Few functions are deleted with a whole file; about a third of apparent deletion is code that moved.</div>
+</section>
+
+<section id="work">
+  <div class="sec-head"><h2>2 · Where the work goes</h2><span class="chip moderate"><i></i>Moderate · fix labels come from message habits</span></div>
+  <div class="fig">
+    <h3><span><span class="id">T5</span>Function edits by kind, per quarter</span>
+      <span><button class="tog" id="tAbs" aria-pressed="true">Edits</button> <button class="tog" id="tShare" aria-pressed="false">Share</button></span></h3>
+    <div class="box tall"><canvas id="cWork"></canvas></div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Organic change</span><span><i style="background:var(--s2)"></i>Sweeps</span><span><i style="background:var(--s3)"></i>Fixes</span><span><i style="background:var(--s4)"></i>Mechanical (tests-only, comments, formatting, reverts)</span></div>
+  </div>
+  <div class="fig">
+    <h3><span><span class="id">T4</span>How much of the code is alive</span></h3>
+    <div class="box"><canvas id="cHeat"></canvas></div>
+    <p class="cap">Edited this quarter: share of the functions that exist and were named in a commit that quarter. Untouched: share not edited in the last four quarters. The first three quarters are omitted because there is not yet four quarters of history.</p>
+  </div>
+  <div class="sowhat"><span>So what</span>Most of the code is quiet in any given year; the work is concentrated in a small live fraction plus the occasional sweep across everything.</div>
+</section>
+
+<section id="sweeps">
+  <div class="sec-head"><h2>3 · Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
+  <p>Planned mechanical work: renames, API conversions, reformatting, namespace changes. These are the largest commits by function count.</p>
+  <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th>Later cited as the cause of a fix</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat"><span>So what</span>Each sweep is a migration with a known scope. Whether repairs followed is visible per sweep, so a team can see which kinds of sweep were quiet and which were not.</div>
+</section>
+
+<section id="repairs">
+  <div class="sec-head"><h2>4 · Repairs: when, and how close</h2><span class="chip moderate"><i></i>Moderate · causes named by Fixes: trailers</span></div>
+  <div class="grid2">
+    <div class="fig">
+      <h3><span><span class="id">T7</span>How long fixes took</span></h3>
+      <div class="box"><canvas id="cLag"></canvas></div>
+      <p class="cap" id="lagCap"></p>
+    </div>
+    <div class="fig">
+      <h3><span>How much closer than chance fixes land</span></h3>
+      <div class="hop" id="hops"></div>
+      <p class="cap">Within one or two calls of a changed function, against same-sized functions in the same file. 1.0 (the line) means no pattern. Callers (code that depends on the changed function) are enriched more than callees.</p>
+    </div>
+  </div>
+  <div class="example">
+    <div><code>Day 1</code> function B changes.</div>
+    <div><code>Month 8</code> a bug appears; the fix edits B itself about half the time.</div>
+    <div>When it does not, the fixed function is within two calls of B about 1.45 times as often as a random neighbour in the same file, usually one of B's callers.</div>
+  </div>
+  <div class="fig">
+    <h3>Which causing changes produce which fixes</h3>
+    <div class="tablewrap"><table id="causeTable"><thead><tr><th>Causing change</th><th class="num">Pairs</th><th>Fix in the same function</th><th class="num">Radius (2 calls)</th><th class="num">Median lag</th></tr></thead><tbody></tbody></table></div>
+    <p class="cap">Cause type is the first verb of the causing commit's subject. A fix of a fix is the tightest; a feature is followed by scattered, later repairs.</p>
+  </div>
+  <div class="sowhat"><span>So what</span>After a feature, repairs arrive late and scattered: widen the review. After a fix or an optimisation they come back to the same function: look there first.</div>
+</section>
+
+<section id="repeat">
+  <div class="sec-head"><h2>5 · Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
+  <div class="glance" id="repeatStats"></div>
+  <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat"><span>So what</span>Repairs are spread wide but repeat: the second fix in a function is common. A function fixed five times is a candidate for redesign, not another patch.</div>
+</section>
+
+<section id="sizes">
+  <div class="sec-head"><h2>6 · Which changes get repaired</h2><span class="chip strong"><i></i>Strong · size is the one per-change signal that held up</span></div>
+  <div class="fig">
+    <h3>Share of changes later cited as the cause of a fix, by size</h3>
+    <div class="box"><canvas id="cSize2"></canvas></div>
+    <p class="cap">Organic commits from 2015 that are at least three years old (so every change had time to be repaired). Size is the number of functions the commit edits.</p>
+  </div>
+  <div class="sowhat"><span>So what</span>Bigger changes are repaired far more often. Nothing else we measured (author experience, reviewer trailers, structure) added to size.</div>
+</section>
+
+<section id="reliability">
+  <div class="sec-head"><h2>7 · What this history can and cannot tell you</h2><span class="chip moderate"><i></i>Moderate · tested on this repository</span></div>
+  <div class="cards">
+    <div class="card"><h3>Detection regime <span class="status">Slow</span></h3><p>The causing change is, at the median, the 1,504th most recent change before the fix. Bugs here are found over months, not days, so structure helps more than recency.</p></div>
+    <div class="card"><h3>Look-first list <span class="status">79% top 20</span></h3><p>Given a repaired function, the neighbourhood ranking put the true causing commit in its top 20 for 79% of tested repairs. Most-recent-first managed 2.3%; file overlap 61%.</p></div>
+    <div class="card"><h3>Bisect saving <span class="status">6.4 vs 14.7 tests</span></h3><p>Weighting a bisect by that ranking needed 6.4 tests on average against 14.7 for plain bisect (DPDK and Mesa pooled).</p></div>
+    <div class="card"><h3>Shipped bugs <span class="status">Cc: stable</span></h3><p>Fixes tagged Cc: stable took a median 371 days; untagged fixes took 20. The tag marks bugs that reached a release.</p></div>
+    <div class="card"><h3>Label quality <span class="status">Good</span></h3><p>27.5% of all commits (36% of the commits that change functions) carry a Fixes: trailer. 83% of unnamed fix-like commits had a cause found by blame. The subject rule misses about 8% of fixes in the remainder.</p></div>
+    <div class="card"><h3>Cannot say</h3><p>Whether a particular change will need a fix (size predicts, little else does). Fixes with no findable cause are shown as such, not as "extrinsic".</p></div>
+  </div>
+  <div class="sowhat"><span>So what</span>Treat the look-first list as a shortlist that narrows a search about twenty-fold, right about four times in five here. It is not a verdict on any one change.</div>
+</section>
+
+<section id="notdrawn">
+  <div class="sec-head"><h2>Not drawn yet: candidate sections</h2><span class="chip explor"><i></i>Proposals from the design guide</span></div>
+  <p>Ideas from your questions that have data behind them but no chart here. The guide lists which to keep.</p>
+  <div class="cards" id="cands"></div>
+</section>
+
+<footer>Source: <code>docs/sensor-overhaul/report-design/dpdk_report_data.json</code>, built by <code>tools/sensor/report_data.py</code> from the quarterly scans and the work partition. Definitions, caveats and the research log: <code>docs/sensor-overhaul/sensors/ripple_radius.md</code>. Reference bands (how DPDK compares with other projects) are not shown because the reference set is still two projects.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const DATA = {"repo":"dpdk","quarters":[{"label":"2016 Q4","date":"2016-12-25","functions":11489,"cohorts":{"2016":11489,"2017":0,"2018":0,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2017 Q1","date":"2017-03-19","functions":12815,"births_new_code":1443,"births_moved":1202,"deaths_removed":133,"deaths_moved":1186,"commits":797,"edits_organic":1738,"commits_organic":399,"edits_sweeps":84,"commits_sweeps":1,"edits_fixes":449,"commits_fixes":188,"edits_mechanical":84,"commits_mechanical":15,"edited_functions":1153,"untouched_4q_share":0.9100273117440499,"cohorts":{"2016":10170,"2017":2645,"2018":0,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2017 Q2","date":"2017-06-23","functions":14809,"births_new_code":2146,"births_moved":125,"deaths_removed":193,"deaths_moved":84,"commits":1458,"edits_organic":3141,"commits_organic":689,"edits_sweeps":953,"commits_sweeps":9,"edits_fixes":841,"commits_fixes":368,"edits_mechanical":126,"commits_mechanical":49,"edited_functions":2321,"untouched_4q_share":0.7949220068877034,"cohorts":{"2016":9988,"2017":4821,"2018":0,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2017 Q3","date":"2017-09-22","functions":15527,"births_new_code":734,"births_moved":80,"deaths_removed":72,"deaths_moved":24,"commits":818,"edits_organic":1613,"commits_organic":327,"edits_sweeps":377,"commits_sweeps":3,"edits_fixes":518,"commits_fixes":220,"edits_mechanical":157,"commits_mechanical":23,"edited_functions":1328,"untouched_4q_share":0.7531396921491595,"cohorts":{"2016":9963,"2017":5564,"2018":0,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2017 Q4","date":"2017-12-24","functions":16699,"births_new_code":1599,"births_moved":268,"deaths_removed":425,"deaths_moved":270,"commits":1352,"edits_organic":3596,"commits_organic":647,"edits_sweeps":1224,"commits_sweeps":9,"edits_fixes":973,"commits_fixes":398,"edits_mechanical":82,"commits_mechanical":19,"edited_functions":2515,"untouched_4q_share":0.6905802742679202,"cohorts":{"2016":9558,"2017":7141,"2018":0,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2018 Q1","date":"2018-03-22","functions":20332,"births_new_code":3546,"births_moved":1652,"deaths_removed":89,"deaths_moved":1476,"commits":1343,"edits_organic":2197,"commits_organic":531,"edits_sweeps":549,"commits_sweeps":5,"edits_fixes":932,"commits_fixes":380,"edits_mechanical":122,"commits_mechanical":32,"edited_functions":2253,"untouched_4q_share":0.6844383238245131,"cohorts":{"2016":8202,"2017":6935,"2018":5195,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2018 Q2","date":"2018-06-22","functions":22581,"births_new_code":2858,"births_moved":421,"deaths_removed":673,"deaths_moved":357,"commits":1773,"edits_organic":4060,"commits_organic":797,"edits_sweeps":1104,"commits_sweeps":9,"edits_fixes":1125,"commits_fixes":534,"edits_mechanical":110,"commits_mechanical":31,"edited_functions":3227,"untouched_4q_share":0.7020061113325362,"cohorts":{"2016":7590,"2017":6584,"2018":8407,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2018 Q3","date":"2018-09-20","functions":23507,"births_new_code":1078,"births_moved":199,"deaths_removed":267,"deaths_moved":84,"commits":914,"edits_organic":2237,"commits_organic":425,"edits_sweeps":258,"commits_sweeps":4,"edits_fixes":543,"commits_fixes":258,"edits_mechanical":42,"commits_mechanical":15,"edited_functions":1689,"untouched_4q_share":0.6996213893733781,"cohorts":{"2016":7451,"2017":6435,"2018":9621,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2018 Q4","date":"2018-12-22","functions":25874,"births_new_code":2471,"births_moved":140,"deaths_removed":199,"deaths_moved":45,"commits":1550,"edits_organic":3107,"commits_organic":693,"edits_sweeps":863,"commits_sweeps":5,"edits_fixes":1054,"commits_fixes":483,"edits_mechanical":122,"commits_mechanical":32,"edited_functions":3144,"untouched_4q_share":0.7152353714153203,"cohorts":{"2016":7420,"2017":6419,"2018":12035,"2019":0,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2019 Q1","date":"2019-03-23","functions":26527,"births_new_code":825,"births_moved":2050,"deaths_removed":222,"deaths_moved":2000,"commits":636,"edits_organic":1162,"commits_organic":221,"edits_sweeps":552,"commits_sweeps":3,"edits_fixes":506,"commits_fixes":230,"edits_mechanical":51,"commits_mechanical":13,"edited_functions":1185,"untouched_4q_share":0.7548535454442643,"cohorts":{"2016":8208,"2017":5071,"2018":11332,"2019":1916,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2019 Q2","date":"2019-06-25","functions":26457,"births_new_code":1247,"births_moved":69,"deaths_removed":688,"deaths_moved":698,"commits":1056,"edits_organic":2113,"commits_organic":393,"edits_sweeps":2182,"commits_sweeps":12,"edits_fixes":857,"commits_fixes":364,"edits_mechanical":100,"commits_mechanical":23,"edited_functions":3195,"untouched_4q_share":0.7356843179498809,"cohorts":{"2016":8178,"2017":5065,"2018":10047,"2019":3167,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2019 Q3","date":"2019-09-15","functions":27944,"births_new_code":1566,"births_moved":586,"deaths_removed":189,"deaths_moved":476,"commits":1074,"edits_organic":1882,"commits_organic":390,"edits_sweeps":555,"commits_sweeps":2,"edits_fixes":919,"commits_fixes":372,"edits_mechanical":118,"commits_mechanical":30,"edited_functions":2153,"untouched_4q_share":0.7408388204981391,"cohorts":{"2016":8155,"2017":5044,"2018":9595,"2019":5150,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2019 Q4","date":"2019-12-20","functions":30071,"births_new_code":2382,"births_moved":310,"deaths_removed":289,"deaths_moved":276,"commits":1556,"edits_organic":3696,"commits_organic":712,"edits_sweeps":929,"commits_sweeps":7,"edits_fixes":1134,"commits_fixes":460,"edits_mechanical":206,"commits_mechanical":47,"edited_functions":3569,"untouched_4q_share":0.7480629177612983,"cohorts":{"2016":7995,"2017":4829,"2018":9499,"2019":7748,"2020":0,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2020 Q1","date":"2020-03-25","functions":30857,"births_new_code":894,"births_moved":292,"deaths_removed":138,"deaths_moved":262,"commits":937,"edits_organic":1729,"commits_organic":350,"edits_sweeps":554,"commits_sweeps":5,"edits_fixes":708,"commits_fixes":297,"edits_mechanical":121,"commits_mechanical":18,"edited_functions":2067,"untouched_4q_share":0.7362024824189001,"cohorts":{"2016":7961,"2017":4822,"2018":9361,"2019":7527,"2020":1186,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2020 Q2","date":"2020-06-25","functions":33562,"births_new_code":2774,"births_moved":1214,"deaths_removed":223,"deaths_moved":1060,"commits":1376,"edits_organic":3215,"commits_organic":606,"edits_sweeps":815,"commits_sweeps":7,"edits_fixes":1268,"commits_fixes":427,"edits_mechanical":235,"commits_mechanical":47,"edited_functions":3392,"untouched_4q_share":0.7475418628210476,"cohorts":{"2016":7673,"2017":4724,"2018":9176,"2019":7002,"2020":4987,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2020 Q3","date":"2020-09-25","functions":34681,"births_new_code":1524,"births_moved":204,"deaths_removed":457,"deaths_moved":152,"commits":1368,"edits_organic":4220,"commits_organic":698,"edits_sweeps":763,"commits_sweeps":4,"edits_fixes":826,"commits_fixes":349,"edits_mechanical":108,"commits_mechanical":29,"edited_functions":3406,"untouched_4q_share":0.7271128283498169,"cohorts":{"2016":7496,"2017":4697,"2018":9057,"2019":6920,"2020":6511,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2020 Q4","date":"2020-12-19","functions":37645,"births_new_code":3316,"births_moved":1052,"deaths_removed":472,"deaths_moved":932,"commits":1815,"edits_organic":4995,"commits_organic":880,"edits_sweeps":1283,"commits_sweeps":7,"edits_fixes":1211,"commits_fixes":496,"edits_mechanical":231,"commits_mechanical":49,"edited_functions":4181,"untouched_4q_share":0.736246513481206,"cohorts":{"2016":7385,"2017":3899,"2018":8878,"2019":6749,"2020":10734,"2021":0,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2021 Q1","date":"2021-03-25","functions":38788,"births_new_code":1168,"births_moved":262,"deaths_removed":199,"deaths_moved":88,"commits":1256,"edits_organic":3089,"commits_organic":583,"edits_sweeps":0,"commits_sweeps":0,"edits_fixes":927,"commits_fixes":389,"edits_mechanical":31,"commits_mechanical":14,"edited_functions":2413,"untouched_4q_share":0.7382180055687326,"cohorts":{"2016":7348,"2017":3878,"2018":8776,"2019":6738,"2020":10621,"2021":1427,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2021 Q2","date":"2021-06-24","functions":39859,"births_new_code":1456,"births_moved":6133,"deaths_removed":507,"deaths_moved":6011,"commits":1110,"edits_organic":2263,"commits_organic":435,"edits_sweeps":373,"commits_sweeps":4,"edits_fixes":1073,"commits_fixes":444,"edits_mechanical":91,"commits_mechanical":14,"edited_functions":2259,"untouched_4q_share":0.7899846960535889,"cohorts":{"2016":6207,"2017":3405,"2018":7419,"2019":6023,"2020":8070,"2021":8735,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2021 Q3","date":"2021-09-24","functions":41449,"births_new_code":1604,"births_moved":231,"deaths_removed":126,"deaths_moved":119,"commits":1146,"edits_organic":3370,"commits_organic":592,"edits_sweeps":858,"commits_sweeps":9,"edits_fixes":708,"commits_fixes":330,"edits_mechanical":76,"commits_mechanical":25,"edited_functions":2783,"untouched_4q_share":0.8016598711669762,"cohorts":{"2016":6142,"2017":3391,"2018":7397,"2019":6006,"2020":7988,"2021":10525,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2021 Q4","date":"2021-12-02","functions":43671,"births_new_code":2733,"births_moved":265,"deaths_removed":581,"deaths_moved":195,"commits":1568,"edits_organic":4850,"commits_organic":784,"edits_sweeps":2683,"commits_sweeps":10,"edits_fixes":1322,"commits_fixes":435,"edits_mechanical":198,"commits_mechanical":48,"edited_functions":5616,"untouched_4q_share":0.7709692931235832,"cohorts":{"2016":5894,"2017":3367,"2018":7356,"2019":5901,"2020":7794,"2021":13359,"2022":0,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2022 Q1","date":"2022-03-21","functions":43155,"births_new_code":805,"births_moved":98,"deaths_removed":1086,"deaths_moved":333,"commits":956,"edits_organic":2219,"commits_organic":362,"edits_sweeps":1094,"commits_sweeps":6,"edits_fixes":788,"commits_fixes":363,"edits_mechanical":104,"commits_mechanical":27,"edited_functions":2887,"untouched_4q_share":0.7629938593442243,"cohorts":{"2016":5697,"2017":3338,"2018":7343,"2019":5109,"2020":7546,"2021":13220,"2022":902,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2022 Q2","date":"2022-06-24","functions":43962,"births_new_code":879,"births_moved":203,"deaths_removed":98,"deaths_moved":177,"commits":860,"edits_organic":2042,"commits_organic":389,"edits_sweeps":206,"commits_sweeps":1,"edits_fixes":724,"commits_fixes":285,"edits_mechanical":201,"commits_mechanical":29,"edited_functions":2212,"untouched_4q_share":0.7693690005004322,"cohorts":{"2016":5647,"2017":3319,"2018":7324,"2019":5089,"2020":7471,"2021":13130,"2022":1982,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2022 Q3","date":"2022-09-25","functions":43874,"births_new_code":231,"births_moved":113,"deaths_removed":250,"deaths_moved":182,"commits":365,"edits_organic":746,"commits_organic":144,"edits_sweeps":111,"commits_sweeps":1,"edits_fixes":249,"commits_fixes":120,"edits_mechanical":19,"commits_mechanical":2,"edited_functions":798,"untouched_4q_share":0.7918357113552446,"cohorts":{"2016":5626,"2017":3249,"2018":7117,"2019":5089,"2020":7435,"2021":13034,"2022":2324,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2022 Q4","date":"2022-12-21","functions":45578,"births_new_code":1872,"births_moved":275,"deaths_removed":209,"deaths_moved":234,"commits":1199,"edits_organic":3092,"commits_organic":557,"edits_sweeps":809,"commits_sweeps":6,"edits_fixes":900,"commits_fixes":384,"edits_mechanical":194,"commits_mechanical":33,"edited_functions":2975,"untouched_4q_share":0.8404932204133573,"cohorts":{"2016":5606,"2017":3226,"2018":7103,"2019":5022,"2020":7264,"2021":12959,"2022":4398,"2023":0,"2024":0,"2025":0,"2026":0}},{"label":"2023 Q1","date":"2023-03-23","functions":46612,"births_new_code":1356,"births_moved":170,"deaths_removed":338,"deaths_moved":154,"commits":985,"edits_organic":2777,"commits_organic":501,"edits_sweeps":578,"commits_sweeps":5,"edits_fixes":738,"commits_fixes":313,"edits_mechanical":149,"commits_mechanical":32,"edited_functions":2624,"untouched_4q_share":0.8501887925856002,"cohorts":{"2016":5594,"2017":3226,"2018":7089,"2019":5014,"2020":7229,"2021":12776,"2022":4160,"2023":1524,"2024":0,"2025":0,"2026":0}},{"label":"2023 Q2","date":"2023-06-23","functions":47287,"births_new_code":887,"births_moved":134,"deaths_removed":245,"deaths_moved":101,"commits":815,"edits_organic":2293,"commits_organic":459,"edits_sweeps":81,"commits_sweeps":1,"edits_fixes":508,"commits_fixes":209,"edits_mechanical":145,"commits_mechanical":30,"edited_functions":2036,"untouched_4q_share":0.8548649734599362,"cohorts":{"2016":5584,"2017":3063,"2018":7064,"2019":5011,"2020":7202,"2021":12706,"2022":4126,"2023":2531,"2024":0,"2025":0,"2026":0}},{"label":"2023 Q3","date":"2023-09-25","functions":47510,"births_new_code":495,"births_moved":59,"deaths_removed":284,"deaths_moved":47,"commits":423,"edits_organic":866,"commits_organic":121,"edits_sweeps":1454,"commits_sweeps":12,"edits_fixes":278,"commits_fixes":110,"edits_mechanical":154,"commits_mechanical":17,"edited_functions":1643,"untouched_4q_share":0.8413176173437171,"cohorts":{"2016":5576,"2017":3032,"2018":7006,"2019":4982,"2020":7174,"2021":12568,"2022":4116,"2023":3056,"2024":0,"2025":0,"2026":0}},{"label":"2023 Q4","date":"2023-12-21","functions":48738,"births_new_code":1438,"births_moved":325,"deaths_removed":263,"deaths_moved":272,"commits":1087,"edits_organic":3266,"commits_organic":496,"edits_sweeps":1457,"commits_sweeps":7,"edits_fixes":822,"commits_fixes":344,"edits_mechanical":179,"commits_mechanical":24,"edited_functions":3398,"untouched_4q_share":0.8396733554926341,"cohorts":{"2016":5503,"2017":3027,"2018":6927,"2019":4976,"2020":7161,"2021":12495,"2022":4066,"2023":4583,"2024":0,"2025":0,"2026":0}},{"label":"2024 Q1","date":"2024-03-25","functions":49880,"births_new_code":1296,"births_moved":193,"deaths_removed":138,"deaths_moved":209,"commits":892,"edits_organic":2141,"commits_organic":400,"edits_sweeps":69,"commits_sweeps":1,"edits_fixes":587,"commits_fixes":252,"edits_mechanical":176,"commits_mechanical":44,"edited_functions":1979,"untouched_4q_share":0.8505012028869287,"cohorts":{"2016":5503,"2017":3027,"2018":6920,"2019":4947,"2020":7112,"2021":12459,"2022":3923,"2023":4503,"2024":1486,"2025":0,"2026":0}},{"label":"2024 Q2","date":"2024-06-25","functions":50513,"births_new_code":698,"births_moved":50,"deaths_removed":107,"deaths_moved":8,"commits":376,"edits_organic":1053,"commits_organic":153,"edits_sweeps":644,"commits_sweeps":4,"edits_fixes":257,"commits_fixes":116,"edits_mechanical":42,"commits_mechanical":7,"edited_functions":1479,"untouched_4q_share":0.854809652960624,"cohorts":{"2016":5495,"2017":3027,"2018":6910,"2019":4948,"2020":7095,"2021":12436,"2022":3913,"2023":4464,"2024":2225,"2025":0,"2026":0}},{"label":"2024 Q3","date":"2024-09-03","functions":51138,"births_new_code":688,"births_moved":19,"deaths_removed":68,"deaths_moved":14,"commits":598,"edits_organic":1279,"commits_organic":294,"edits_sweeps":1670,"commits_sweeps":5,"edits_fixes":413,"commits_fixes":173,"edits_mechanical":32,"commits_mechanical":12,"edited_functions":1918,"untouched_4q_share":0.84946615041652,"cohorts":{"2016":5495,"2017":3025,"2018":6907,"2019":4942,"2020":7095,"2021":12409,"2022":3886,"2023":4459,"2024":2920,"2025":0,"2026":0}},{"label":"2024 Q4","date":"2024-12-23","functions":54478,"births_new_code":3596,"births_moved":319,"deaths_removed":355,"deaths_moved":220,"commits":1320,"edits_organic":4158,"commits_organic":698,"edits_sweeps":2389,"commits_sweeps":10,"edits_fixes":703,"commits_fixes":287,"edits_mechanical":97,"commits_mechanical":29,"edited_functions":4812,"untouched_4q_share":0.8358787033297845,"cohorts":{"2016":5475,"2017":3011,"2018":6898,"2019":4938,"2020":6969,"2021":12227,"2022":3852,"2023":4314,"2024":6794,"2025":0,"2026":0}},{"label":"2025 Q1","date":"2025-03-24","functions":55473,"births_new_code":1390,"births_moved":6957,"deaths_removed":484,"deaths_moved":6868,"commits":806,"edits_organic":2147,"commits_organic":369,"edits_sweeps":971,"commits_sweeps":9,"edits_fixes":567,"commits_fixes":218,"edits_mechanical":69,"commits_mechanical":9,"edited_functions":2451,"untouched_4q_share":0.8514772952607574,"cohorts":{"2016":2900,"2017":2593,"2018":6299,"2019":4189,"2020":5882,"2021":11617,"2022":3516,"2023":3763,"2024":6367,"2025":8347,"2026":0}},{"label":"2025 Q2","date":"2025-06-18","functions":56377,"births_new_code":959,"births_moved":52,"deaths_removed":94,"deaths_moved":13,"commits":555,"edits_organic":1348,"commits_organic":266,"edits_sweeps":3040,"commits_sweeps":3,"edits_fixes":325,"commits_fixes":148,"edits_mechanical":49,"commits_mechanical":16,"edited_functions":4155,"untouched_4q_share":0.8140199017329762,"cohorts":{"2016":2900,"2017":2591,"2018":6295,"2019":4183,"2020":5877,"2021":11614,"2022":3489,"2023":3762,"2024":6344,"2025":9322,"2026":0}},{"label":"2025 Q3","date":"2025-09-24","functions":56859,"births_new_code":579,"births_moved":34,"deaths_removed":91,"deaths_moved":40,"commits":455,"edits_organic":1286,"commits_organic":174,"edits_sweeps":186,"commits_sweeps":2,"edits_fixes":383,"commits_fixes":153,"edits_mechanical":12,"commits_mechanical":4,"edited_functions":1306,"untouched_4q_share":0.8115513814875394,"cohorts":{"2016":2899,"2017":2588,"2018":6296,"2019":4179,"2020":5878,"2021":11604,"2022":3487,"2023":3750,"2024":6304,"2025":9874,"2026":0}},{"label":"2025 Q4","date":"2025-12-05","functions":58258,"births_new_code":2456,"births_moved":251,"deaths_removed":1146,"deaths_moved":162,"commits":834,"edits_organic":1949,"commits_organic":356,"edits_sweeps":1733,"commits_sweeps":9,"edits_fixes":717,"commits_fixes":261,"edits_mechanical":85,"commits_mechanical":15,"edited_functions":2445,"untouched_4q_share":0.8508874317690274,"cohorts":{"2016":2896,"2017":2544,"2018":6287,"2019":4178,"2020":5865,"2021":11539,"2022":3470,"2023":3726,"2024":5303,"2025":12450,"2026":0}},{"label":"2026 Q1","date":"2026-03-25","functions":58600,"births_new_code":630,"births_moved":36,"deaths_removed":237,"deaths_moved":87,"commits":597,"edits_organic":1187,"commits_organic":206,"edits_sweeps":330,"commits_sweeps":3,"edits_fixes":686,"commits_fixes":256,"edits_mechanical":98,"commits_mechanical":24,"edited_functions":1557,"untouched_4q_share":0.8575255972696245,"cohorts":{"2016":2892,"2017":2543,"2018":6283,"2019":4171,"2020":5809,"2021":11493,"2022":3452,"2023":3703,"2024":5264,"2025":12325,"2026":665}},{"label":"2026 Q2","date":"2026-06-25","functions":59163,"births_new_code":713,"births_moved":110,"deaths_removed":189,"deaths_moved":71,"commits":575,"edits_organic":1746,"commits_organic":252,"edits_sweeps":560,"commits_sweeps":4,"edits_fixes":513,"commits_fixes":214,"edits_mechanical":14,"commits_mechanical":8,"edited_functions":1808,"untouched_4q_share":0.8961513107854571,"cohorts":{"2016":2889,"2017":2520,"2018":6240,"2019":4157,"2020":5805,"2021":11442,"2022":3411,"2023":3670,"2024":5247,"2025":12296,"2026":1486}},{"label":"2026 Q3","date":"2026-09-23","functions":59440,"births_new_code":1057,"births_moved":128,"deaths_removed":717,"deaths_moved":191,"commits":745,"edits_organic":1388,"commits_organic":236,"edits_sweeps":373,"commits_sweeps":3,"edits_fixes":851,"commits_fixes":354,"edits_mechanical":57,"commits_mechanical":14,"edited_functions":1749,"untouched_4q_share":0.8905619111709286,"cohorts":{"2016":2806,"2017":2516,"2018":6044,"2019":4156,"2020":5793,"2021":11010,"2022":3410,"2023":3634,"2024":5242,"2025":12188,"2026":2641}},{"label":"2026 Q4","date":"2026-11-17","functions":60091,"births_new_code":1132,"births_moved":367,"deaths_removed":487,"deaths_moved":361,"commits":864,"edits_organic":2226,"commits_organic":319,"edits_sweeps":161,"commits_sweeps":2,"edits_fixes":930,"commits_fixes":400,"edits_mechanical":72,"commits_mechanical":27,"edited_functions":2158,"untouched_4q_share":0.8986037842605382,"cohorts":{"2016":2804,"2017":2508,"2018":5972,"2019":4129,"2020":5764,"2021":10796,"2022":3320,"2023":3597,"2024":5167,"2025":11955,"2026":4079}}],"cohort_years":["2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"],"lag_hist":[{"bin":"under a week","pairs":403},{"bin":"1-4 weeks","pairs":1495},{"bin":"1-3 months","pairs":1067},{"bin":"3-6 months","pairs":1436},{"bin":"6-12 months","pairs":1517},{"bin":"1-2 years","pairs":1597},{"bin":"over 2 years","pairs":2352}],"lag_median_days":234.9898611111111,"cause_types":[{"cause":"feature","pairs":5922,"same_function":0.3910840932117528,"radius_2":1.2999924815014414,"median_lag":261.6842013888889},{"cause":"restructure","pairs":1374,"same_function":0.5691411935953421,"radius_2":1.7065885676937858,"median_lag":183.29414351851852},{"cause":"fix","pairs":1354,"same_function":0.758493353028065,"radius_2":2.020673259441204,"median_lag":168.39755208333332},{"cause":"other","pairs":1002,"same_function":0.5109780439121756,"radius_2":1.6168170311647914,"median_lag":203.25886574074073},{"cause":"optimization","pairs":215,"same_function":0.7302325581395349,"radius_2":1.778696539498742,"median_lag":199.96756944444445}],"largest_sweeps":[{"date":"2025-04-07","functions":2905,"subject":"build: mark exported symbols","cited_as_cause":false},{"date":"2021-10-22","functions":1105,"subject":"ethdev: add namespace","cited_as_cause":true},{"date":"2024-07-04","functions":1042,"subject":"net/ice/base: convert enum return type to int","cited_as_cause":false},{"date":"2025-10-20","functions":772,"subject":"net/ntnic: move nthw to prefix part","cited_as_cause":false},{"date":"2023-12-21","functions":687,"subject":"lib: add more logging helpers","cited_as_cause":false},{"date":"2014-06-10","functions":633,"subject":"remove trailing whitespaces","cited_as_cause":false},{"date":"2024-10-03","functions":589,"subject":"drivers: remove redundant newline from logs","cited_as_cause":true},{"date":"2022-01-11","functions":557,"subject":"fix spelling in comments and strings","cited_as_cause":false},{"date":"2024-10-03","functions":551,"subject":"drivers: replace logging helpers","cited_as_cause":true},{"date":"2019-05-24","functions":468,"subject":"net: add rte prefix to ether structures","cited_as_cause":true},{"date":"2021-10-24","functions":454,"subject":"mbuf: add namespace to offload flags","cited_as_cause":true},{"date":"2019-05-24","functions":453,"subject":"net: add rte prefix to ether defines","cited_as_cause":true}],"repeat_spots":{"fix_edits":33802,"functions_fixed":19995,"share_in_fixed_2plus":0.5975977752795693,"share_in_fixed_5plus":0.19602390391101118},"most_fixed":[{"function":"flow_dv_validate","file":"drivers/net/mlx5/mlx5_flow_dv.c","fixes":60},{"function":"mlx5_dev_spawn","file":"drivers/net/mlx5/linux/mlx5_os.c","fixes":47},{"function":"mlx5_pci_probe","file":"drivers/net/mlx5/mlx5.c","fixes":43},{"function":"flow_dv_translate","file":"drivers/net/mlx5/mlx5_flow_dv.c","fixes":39},{"function":"bnxt_rx_pkt","file":"drivers/net/bnxt/bnxt_rxr.c","fixes":28},{"function":"bnxt_dev_init","file":"drivers/net/bnxt/bnxt_ethdev.c","fixes":28},{"function":"launch_args_parse","file":"app/test-pmd/parameters.c","fixes":27},{"function":"bnxt_dev_start_op","file":"drivers/net/bnxt/bnxt_ethdev.c","fixes":26},{"function":"mlx5_dev_close","file":"drivers/net/mlx5/mlx5.c","fixes":25},{"function":"eth_i40e_dev_init","file":"drivers/net/i40e/i40e_ethdev.c","fixes":24}],"size_bands":[{"band":"1 function","commits":3828,"later_repaired":0.17163009404388715},{"band":"2-3","commits":5059,"later_repaired":0.26270013836726624},{"band":"4-10","commits":5356,"later_repaired":0.3625840179238238},{"band":"11-30","commits":1586,"later_repaired":0.4426229508196721},{"band":"31-60","commits":271,"later_repaired":0.45018450184501846}],"composition":{"fixes":0.17805801819455638,"organic":0.5850756175034372,"mechanical":0.027644768933348083,"sweeps":0.20922159536865836},"composition_edits":189837};
+const Q = DATA.quarters;
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const pct = (x, d = 0) => (100 * x).toFixed(d) + "%";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const el = id => document.getElementById(id);
+const charts = [];
+
+// ----- static content -----
+const last = Q[Q.length - 1];
+const totEdits = DATA.composition_edits;
+el("meta").innerHTML = `<span><b>Span</b> ${Q[0].label} to ${last.label}</span><span><b>Commits</b> 46,419</span><span><b>Functions now</b> ${fmt(last.functions)}</span><span><b>Scans</b> ${Q.length} quarterly</span><span><b>Language</b> C</span>`;
+el("glanceStats").innerHTML = [
+  [fmt(last.functions), "functions today"],
+  [pct(DATA.composition.sweeps), "of function edits are sweeps (0.5% of commits)"],
+  [pct(DATA.composition.fixes), "of function edits are fixes"],
+  [pct(DATA.composition.organic), "are organic change: features, refactors, new code"],
+  [Math.round(DATA.lag_median_days) + " days", "median time from a change to the fix it caused"],
+  [pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits land in a function fixed more than once"],
+].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+const comp = [["Organic change", "organic", "--s1"], ["Sweeps", "sweeps", "--s2"], ["Fixes", "fixes", "--s3"], ["Mechanical", "mechanical", "--s4"]];
+el("compBar").innerHTML = comp.map(([n, k, c]) => `<div title="${n} ${pct(DATA.composition[k], 1)}" style="flex:${DATA.composition[k]};background:var(${c})"></div>`).join("");
+el("compLegend").innerHTML = comp.map(([n, k, c]) => `<span><i style="background:var(${c})"></i>${n} ${pct(DATA.composition[k], 1)}</span>`).join("");
+const mesa = { organic: 0.713, sweeps: 0.180, fixes: 0.090, mechanical: 0.017 };
+el("cmpRow").innerHTML = `<span>DPDK</span><div class="bar">${comp.map(([n, k, c]) => `<div style="flex:${DATA.composition[k]};background:var(${c})"></div>`).join("")}</div><span>Mesa</span><div class="bar">${comp.map(([n, k, c]) => `<div style="flex:${mesa[k]};background:var(${c})"></div>`).join("")}</div>`;
+el("typicalQuarter").innerHTML = `<div><b style="color:var(--fg)">A typical recent quarter</b> (median of the last 16)</div><div>776 commits edit 2,368 functions (4% of the code). 1,103 functions are born: 544 as brand-new code in new files, 437 as new functions in existing files, 131 moved. 346 disappear: 28 with a whole file, 134 removed from a file that stays, 128 moved elsewhere.</div>`;
+
+el("lagCap").textContent = `Median ${Math.round(DATA.lag_median_days)} days; ${pct((DATA.lag_hist[5].pairs + DATA.lag_hist[6].pairs) / DATA.lag_hist.reduce((a, b) => a + b.pairs, 0))} of fixes arrive more than a year after the change that caused them.`;
+const hops = [["Within 1 call, any direction", 1.68], ["Within 2 calls", 1.45], ["Callers, 1 call", 1.84], ["Callees, 1 call", 1.69]];
+el("hops").innerHTML = hops.map(([n, v]) => `<span>${n}</span><div class="hoptrack"><div style="width:${100 * v / 2.2}%"></div><u style="left:${100 / 2.2}%"></u></div><b style="color:var(--fg)">${v.toFixed(2)}x</b>`).join("");
+const ctNames = { feature: "A feature", restructure: "A restructure", fix: "A fix (fix of a fix)", other: "Other", optimization: "An optimisation" };
+el("causeTable").querySelector("tbody").innerHTML = DATA.cause_types.filter(r => ctNames[r.cause]).map(r => `<tr><td>${ctNames[r.cause]}</td><td class="num">${fmt(r.pairs)}</td><td><span class="inbar" style="width:${160 * r.same_function}px"></span> ${pct(r.same_function)}</td><td class="num">${r.radius_2.toFixed(2)}</td><td class="num">${Math.round(r.median_lag)} d</td></tr>`).join("");
+el("sweepTable").querySelector("tbody").innerHTML = DATA.largest_sweeps.map(s => `<tr><td>${s.date}</td><td class="num">${fmt(s.functions)}</td><td>${s.subject.replace(/</g, "&lt;")}</td><td>${s.cited_as_cause ? "Yes" : "No"}</td></tr>`).join("");
+el("repeatStats").innerHTML = [
+  [fmt(DATA.repeat_spots.fix_edits), "fix edits in total"],
+  [fmt(DATA.repeat_spots.functions_fixed), "distinct functions fixed"],
+  [pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits in functions fixed 2+ times"],
+  [pct(DATA.repeat_spots.share_in_fixed_5plus), "in functions fixed 5+ times"],
+].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+el("fixedTable").querySelector("tbody").innerHTML = DATA.most_fixed.map(f => `<tr><td><code>${f.function}</code></td><td>${f.file}</td><td class="num">${f.fixes}</td></tr>`).join("");
+const cands = [
+  ["T6 · Sweep timeline", "Next", "One mark per sweep: date, size, subject; filled if repairs followed. Today the table above."],
+  ["T8 · Fix rate", "Next", "Fix edits as a share of edits per quarter, and the share of fixes with a findable cause: is the project spending more of its effort repairing?"],
+  ["T9 · Concentration of repairs", "Next", "Cumulative share of fix edits against functions ranked by number of fixes (a Lorenz curve): spread or concentrated?"],
+  ["T10 · Hub growth", "Needs work", "Fan-in of the ten most-called functions per quarter: which functions become load-bearing."],
+  ["T11 · Contributors", "Next", "Active authors per quarter and the top author's share of commits (the activity sensor already stores it)."],
+  ["T12 · Library exposure", "Next", "External libraries called per quarter, stacked: where the outside world touches the code."],
+  ["T13 · Keyword mix", "Needs work", "Share of functions using static, const, goto, inline per quarter: how building style changes."],
+  ["T14 · Regime strip", "Needs work", "Rolling lag regime (fast or slow): did the project adopt fuzzing or CI that shortened detection?"],
+  ["T15 · Signature churn", "Next", "Share of edited functions whose argument count changed: when interfaces move."],
+  ["T16 · Test attachment", "Next", "Share of fix commits that touch a test file, and how much of the code the tests reach."],
+  ["Scope card per sweep", "Optional", "For a planned sweep: functions, files, share of the old name's callers covered, completion."],
+  ["Additions and deletions", "Optional", "Where repairs land around new and removed functions (radius 2.2 to 3.1 against 1.6 to 1.8 for modified)."],
+];
+el("cands").innerHTML = cands.map(([t, s, d]) => `<div class="card"><h3>${t}<span class="status">${s}</span></h3><p>${d}</p></div>`).join("");
+
+// ----- charts -----
+function base(extra) {
+  const fg2 = css("--fg2"), grid = css("--grid");
+  return Object.assign({
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: css("--card"), titleColor: css("--fg"), bodyColor: css("--fg2"), borderColor: css("--line"), borderWidth: 1, padding: 10 } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: fg2, maxTicksLimit: 10, maxRotation: 0 }, border: { color: css("--line") } },
+      y: { grid: { color: grid }, ticks: { color: fg2 }, border: { display: false } },
+    },
+  }, extra || {});
+}
+function lerp(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
+let workMode = "abs";
+function render() {
+  charts.splice(0).forEach(c => c.destroy());
+  const labels = Q.map(q => q.label);
+  const s1 = css("--s1"), s2 = css("--s2"), s3 = css("--s3"), s4 = css("--s4"), s4b = css("--s4b"), fg3 = css("--fg3");
+  const sweepQs = DATA.largest_sweeps.filter(s => s.functions >= 1000).map(s => Q.findIndex((q, i) => i > 0 && s.date > Q[i - 1].date && s.date <= q.date)).filter(i => i > 0);
+  const o1 = base();
+  o1.scales.y.ticks.callback = v => fmt(v);
+  o1.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+  charts.push(new Chart(el("cSize"), { type: "line", data: { labels, datasets: [
+    { label: "Functions", data: Q.map(q => q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2, fill: false },
+    { label: "Quarter with a sweep over 1,000 functions", data: Q.map((q, i) => sweepQs.includes(i) ? q.functions : null), borderColor: s2, backgroundColor: s2, showLine: false, pointRadius: 6, pointBorderColor: css("--card"), pointBorderWidth: 2 },
+  ] }, options: Object.assign(o1, { plugins: Object.assign(o1.plugins, { legend: { display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } } }) }) }));
+
+  const q1 = Q.slice(1), l1 = q1.map(q => q.label);
+  const o2 = base(); o2.scales.x.stacked = true; o2.scales.y.stacked = true; o2.scales.y.ticks.callback = v => fmt(Math.abs(v));
+  o2.plugins.legend = { display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } };
+  o2.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(Math.abs(c.parsed.y)) };
+  charts.push(new Chart(el("cBirths"), { type: "bar", data: { labels: l1, datasets: [
+    { label: "New code", data: q1.map(q => q.births_new_code), backgroundColor: s1, borderSkipped: false },
+    { label: "Moved in", data: q1.map(q => q.births_moved), backgroundColor: s4b, borderSkipped: false },
+    { label: "Removed", data: q1.map(q => -q.deaths_removed), backgroundColor: s2, borderSkipped: false },
+    { label: "Moved out", data: q1.map(q => -q.deaths_moved), backgroundColor: s4, borderSkipped: false },
+  ] }, options: o2 }));
+
+  const years = DATA.cohort_years;
+  const ramp = css("--ramp-new"), rampOld = css("--ramp-old");
+  const o3 = base(); o3.scales.y.stacked = true; o3.scales.y.ticks.callback = v => fmt(v);
+  o3.plugins.legend = { display: true, position: "bottom", labels: { color: css("--fg2"), boxWidth: 10, boxHeight: 10, font: { size: 11 } } };
+  o3.plugins.tooltip.callbacks = { label: c => (c.dataset.label === "2016" ? "2016 or earlier" : c.dataset.label) + ": " + fmt(c.parsed.y) };
+  charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0, pointRadius: 0, backgroundColor: lerp(ramp.replace("#", ""), rampOld.replace("#", ""), 1 - i / (years.length - 1)) })) }, options: o3 }));
+
+  const keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
+  const o5 = base(); o5.scales.y.stacked = true; o5.scales.x.stacked = false;
+  o5.scales.y.ticks.callback = v => workMode === "abs" ? fmt(v) : v + "%";
+  if (workMode === "share") { o5.scales.y.max = 100; }
+  o5.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (workMode === "abs" ? fmt(c.parsed.y) + " edits" : c.parsed.y.toFixed(1) + "%") };
+  charts.push(new Chart(el("cWork"), { type: "line", data: { labels: l1, datasets: keys.map((k, i) => ({ label: names[i], data: q1.map(q => { const t = keys.reduce((a, kk) => a + q["edits_" + kk], 0); return workMode === "abs" ? q["edits_" + k] : 100 * q["edits_" + k] / t; }), fill: true, borderColor: cols[i], backgroundColor: cols[i], borderWidth: 1, pointRadius: 0, stack: "w", tension: 0.15 })) }, options: o5 }));
+
+  const q4 = Q.slice(4), l4 = q4.map(q => q.label);
+  const o4 = base(); o4.scales.y.ticks.callback = v => v + "%"; o4.scales.y.min = 0; o4.scales.y.max = 100;
+  o4.plugins.legend = { display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } };
+  o4.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "%" };
+  charts.push(new Chart(el("cHeat"), { type: "line", data: { labels: l4, datasets: [
+    { label: "Untouched for four quarters", data: q4.map(q => 100 * q.untouched_4q_share), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+    { label: "Edited this quarter", data: q4.map(q => 100 * q.edited_functions / q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+  ] }, options: o4 }));
+
+  const o6 = base(); o6.scales.y.ticks.callback = v => fmt(v);
+  o6.plugins.tooltip.callbacks = { label: c => fmt(c.parsed.y) + " fixes" };
+  charts.push(new Chart(el("cLag"), { type: "bar", data: { labels: DATA.lag_hist.map(b => b.bin), datasets: [{ label: "Fixes", data: DATA.lag_hist.map(b => b.pairs), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o6, { interaction: { mode: "nearest", intersect: true } }) }));
+
+  const o7 = base(); o7.scales.y.ticks.callback = v => v + "%"; o7.scales.y.min = 0; o7.scales.y.max = 60;
+  o7.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% later repaired" };
+  charts.push(new Chart(el("cSize2"), { type: "bar", data: { labels: DATA.size_bands.map(b => b.band + " (" + fmt(b.commits) + " commits)"), datasets: [{ label: "Later repaired", data: DATA.size_bands.map(b => 100 * b.later_repaired), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o7, { interaction: { mode: "nearest", intersect: true } }) }));
+}
+function setMode(m) { workMode = m; el("tAbs").setAttribute("aria-pressed", m === "abs"); el("tShare").setAttribute("aria-pressed", m === "share"); render(); }
+el("tAbs").onclick = () => setMode("abs");
+el("tShare").onclick = () => setMode("share");
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>
