@@ -1285,3 +1285,15 @@ Tests are functions in the call graph too (they call the code they exercise). Qu
 - **TS5.** In at least 4 of the 5 repositories N's top 5 beats SIZE's by at least 15 points.
 **Would surprise (the call graph does not reach the tests):** N's top 5 within 2 points of DIR's.
 **Known limit stated in advance:** truth is where authors put tests, not what fails; macro registries and test harnesses hide call edges.
+
+#### Test selection: results (2026-11-19; `test_selection_output.txt`; 305 fixes: dpdk 24, mesa 11, libgit2 108, redis 155, libxml2 7; median 32 to 377 test files per repository)
+Pooled, a touched test file among the first 1 / 5 / 10 test files, and run budget (share of all test files run before the first touched one): SIZE 3.9 / 16.7 / 25.2%, 34.9%; DIR 6.2 / 17.7 / 27.2%, 34.2%; **NAME 25.9 / 48.9 / 56.7%, 20.7%**; N 20.3 / 35.4 / 43.9%, 28.1%; N+NAME 22.3 / 33.8 / 43.0%, 21.2%. Top 5 by repository (SIZE / DIR / NAME / N / N+NAME): dpdk 8 / 4 / 88 / 75 / 79; mesa 9 / 64 / 73 / 73 / 82; libgit2 15 / 15 / 51 / 48 / 43; redis 19 / 17 / 40 / 17 / 17; libxml2 43 / 43 / 43 / 43 / 43.
+| hypothesis | verdict |
+|---|---|
+| TS1 N top 5 at least 40%, SIZE at most 10% | **not supported**: 35.4% and 16.7% |
+| TS2 N at least 5 points above DIR | **supported**: +17.7 |
+| TS3 N run budget at most 15% | **not supported**: 28.1% |
+| TS4 N+NAME at least 3 points above N | **not supported**: -1.6 |
+| TS5 N beats SIZE by 15 points in 4 of 5 repositories | **not supported**: 3 of 5 (redis and libxml2 fail) |
+Surprise bar (N within 2 points of DIR): not met.
+**Reading.** The call graph does reach the tests (+17.7 points over path proximity, 2 to 5 times random), but a plain **file-name match between the edited source file and the test file (NAME) beats it** (48.9% against 35.4% in the top 5) and adding the graph to NAME does not help (fusion 33.8%). Redis shows the limit: its call graph never reaches the test files that fixes touch (N equals DIR), so the graph signal there is nil. **Caveats:** three repositories have 7 to 24 fixes; truth is the test files an author touched, not test failures; only test files that exist in the earlier C graph count (Tcl, Python and shell test suites are outside it); fixes that add a new test file are excluded because the file is not in the earlier graph. **Position:** for choosing tests, naming convention carries most of the signal; the call graph is a weaker second source and is worth including only where tests call the code directly (DPDK, Mesa, libgit2).
