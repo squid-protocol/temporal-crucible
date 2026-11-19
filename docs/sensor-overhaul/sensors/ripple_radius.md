@@ -1308,3 +1308,18 @@ Prompted by the weak test-selection result (redis: the graph never reached the t
 - **TE2.** At least 50% of the fixes with both have a touched test file within 3 calls of an edited source function.
 - **TE3.** N1T is at least 3 points above N1 in the top 20 on those pairs.
 **Would surprise (the tests are as visible as the source):** TA1 in all 5 repositories with at least 80% wired, and TA2 nowhere.
+
+#### Test-graph audit and tests as a signal: results (2026-11-19; `test_graph_audit_output.txt`)
+**Audit** (latest scan; test files / test functions; wired = share of test files with an edge into non-test code, confident edges / all edges; test reach = share of non-test functions within 3 calls of any test function): dpdk 301 / 4,843, 86.4 / 86.4%, reach **5.4%**; mesa 333 / 3,932, 80.5 / 85.3%, **4.0%**; libgit2 477 / 5,234, 95.0 / 95.0%, **38.9%**; redis 369 / 2,500, 32.8 / 32.8%, **7.7%**; libxml2 34 / 88, 8.8 / 8.8%, **0.4%**; scapy 4 / 36, 75 / 75%, 0.2%; sphinx 205 / 2,069, 53.7 / 61.5%, 10.5%; prometheus 299 / 3,635, 86.6 / 97.0%, 27.2%.
+**Signal of change:** fixes touching a test file: dpdk 5% (132 of 2,419), mesa 1% (21 of 2,487), libgit2 15%, redis 17%, libxml2 11%; pooled 8.5%. Of the 307 fixes that edit a source function and a test file present in the graph, a touched test file is within 3 calls of an edited source function for 25.7% (dpdk 75%, mesa 36%, libgit2 51%, redis 1%, libxml2 0%). Reverse triage on fixes that touch a test file: only 9 pairs (dpdk 5, mesa 4); N1T 80% against N1 60% in dpdk, equal in mesa.
+| hypothesis | verdict |
+|---|---|
+| TA1 at least 3 of 5 C repositories with at least 50% of test files wired | **supported**: 3 of 5 (dpdk, mesa, libgit2), redis 33%, libxml2 9% |
+| TA2 ambiguous edges add at least 10 points in 2 repositories | **not supported**: 1 (prometheus +10.4; mesa +4.8, sphinx +7.8) |
+| TA3 redis wired below 20% | **not supported**: 32.8% |
+| TA4 median test reach at most 50% | **supported**: 6.5% (far lower than predicted) |
+| TE1 at least 30% of fixes touch a test file | **not supported**: 8.5% |
+| TE2 touched test file within 3 calls for at least 50% | **not supported**: 25.7% |
+| TE3 N1T at least 3 points above N1 | **inconclusive**: +11.1 points on 9 pairs (the script's "supported" is not a verdict) |
+Surprise bar (all 5 at least 80% wired, ambiguous edges nowhere): not met.
+**Reading.** (1) **Most test files are wired but the tests reach little of the code**: 4 to 8% of non-test functions are within 3 calls of a test function in dpdk, mesa and redis (libgit2 39%, prometheus 27%); the call graph holds the tests but its edges mostly stop at the API boundary, so a fix deep in the source is rarely within 3 calls of the test the author touched (25.7%; dpdk 75% where the tests call the internals, redis 1%). (2) **Ambiguous edges are not the cure** (+10 points in one repository). The gap is missing or deeper edges, not unresolved targets. (3) **Test edits are rare signals in these projects** (8.5% of fixes; mesa 1%, mostly because fixes ship without tests or tests live in other languages and harnesses), too rare for a general ranking feature; the one data point (N1T +20 in dpdk on 5 pairs) is anecdote. (4) **Gaps in my audit**: libxml2's tests are mostly top-level files my path rule does not match (34 test files found), so its 8.8% and 0.4% understate its tests; the 3-call reach was not repeated at larger distances. **Next:** measure test reach at 5 and 10 calls to see whether the tests connect at all, and test whether test-reachability separates repaired functions from size-matched peers.

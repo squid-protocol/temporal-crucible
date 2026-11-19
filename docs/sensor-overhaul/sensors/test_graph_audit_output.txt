@@ -1,0 +1,28 @@
+=== AUDIT: test files wired into the source, and test reach (latest scan) ===
+  repo       test files test funcs wired (conf.)  wired (all)  test reach 3
+  dpdk              301       4843         86.4%        86.4%          5.4%
+  mesa              333       3932         80.5%        85.3%          4.0%
+  libgit2           477       5234         95.0%        95.0%         38.9%
+  redis             369       2500         32.8%        32.8%          7.7%
+  libxml2            34         88          8.8%         8.8%          0.4%
+  scapy               4         36         75.0%        75.0%          0.2%
+  sphinx            205       2069         53.7%        61.5%         10.5%
+  prometheus        299       3635         86.6%        97.0%         27.2%
+
+=== TESTS AS A SIGNAL OF CHANGE ===
+  dpdk: fixes 2419, touching a test file 132 (5%); with source function and graph test file 24, test file within 3 calls 18 (75%)
+  mesa: fixes 2487, touching a test file 21 (1%); with source function and graph test file 11, test file within 3 calls 4 (36%)
+  libgit2: fixes 1309, touching a test file 190 (15%); with source function and graph test file 110, test file within 3 calls 56 (51%)
+  redis: fixes 1642, touching a test file 274 (17%); with source function and graph test file 155, test file within 3 calls 1 (1%)
+  libxml2: fixes 1832, touching a test file 209 (11%); with source function and graph test file 7, test file within 3 calls 0 (0%)
+  dpdk triage, fixes touching a test file: 5 pairs; top 20 N1 60.0%, N1T 80.0%
+  mesa triage, fixes touching a test file: 4 pairs; top 20 N1 75.0%, N1T 75.0%
+
+=== VERDICTS ===
+  TA1 repositories with at least 50% wired: 3 of 5 (needs 3): supported
+  TA2 repositories where ambiguous edges add 10 points: 1 (needs 2): not supported
+  TA3 redis wired 32.8% (needs below 20%): not supported
+  TA4 median test reach 6.5% (needs 50% or less): supported
+  TE1 fixes touching a test file 8.5% (needs 30%): not supported
+  TE2 touched test file within 3 calls 25.7% of 307 fixes (needs 50%): not supported
+  TE3 N1T minus N1 +11.1 points on 9 pairs (needs +3): supported
