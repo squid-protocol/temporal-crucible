@@ -67,3 +67,12 @@ DB4's null replaced the repaired function by a uniform draw from the cause's 2-c
 - **DB4b.** The observed overlap is at least 1.5 times the popularity-matched null mean.
 - **DB4c.** After removing the 20 most-repaired inherited functions, the observed overlap is at least 1.5 times the uniform-null mean.
 **Would surprise:** DB4b at or below 1.2 (then the neighbour-pair overlap of DB4 was the hotspots).
+
+#### DOOM-R1b results (2026-11-18; `doom_r1b_output.txt`)
+Observed overlap of (cause, repair) function pairs across the six lineages: **588**. Uniform null 256.8 (2.29 times). **Popularity-matched null 350.4 (95th percentile 377): 1.68 times.** With the 20 most-repaired inherited functions removed (the hotspots: the main loops and responders `D_DoomMain`, `G_Ticker`, `G_Responder`, `HU_Drawer`, `P_KillMobj`, `P_SetupLevel`, `P_SpawnMapThing`, `R_DrawPSprite`, `I_GetEvent`, `I_InitGraphics`, `M_Drawer` and similar): observed 235 against a uniform null of 99.0, **2.37 times**.
+| hypothesis | verdict |
+|---|---|
+| DB4b observed overlap at least 1.5 times the popularity-matched null | **supported**: 1.68 |
+| DB4c after removing the 20 most-repaired functions, at least 1.5 times the uniform null | **supported**: 2.37 |
+Surprise bar (DB4b at or below 1.2): not met.
+**Reading.** Hotspots explain **about a third of the excess** (the null rises from 257 to 350 when it keeps each lineage's hotspots) but **not the effect**: the same neighbour pairs are repaired in independent lineages 1.7 times more than a popularity-matched chance, and 2.4 times without the 20 hotspots. What remains unseparated is the inherited-latent-bug explanation (same code, same defect): it is a property of the code, not of the people, but it is not structural coupling in the sense of the repair radius; separating them needs the repair diffs (do independent lineages change the same lines for the same reason?).

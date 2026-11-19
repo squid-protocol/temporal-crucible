@@ -1,0 +1,10 @@
+lineages with at least 30 inherited pairs: ['crispy-doom', 'dsda-doom', 'nugget-doom', 'doomretro', 'fastdoom', 'inter-doom']
+20 most-repaired inherited functions removed in the trimmed test: ['amresponder', 'ddisplay', 'ddoommain', 'gbuildticcmd', 'gdoloadlevel', 'gresponder', 'gticker', 'hudrawer', 'igetevent', 'iinitgraphics', 'mdrawer', 'mresponder', 'pkillmobj', 'psetuplevel', 'pspawnmapthing', 'rdrawpsprite', 'rexecutesetviewsize', 'rprojectsprite', 'rstorewallrange', 'stresponder']
+
+observed overlap 588; uniform null 256.8 (2.29 times); popularity-matched null 350.4 (95th percentile 377): 1.68 times
+trimmed: observed 235, uniform null 99.0: 2.37 times
+
+=== VERDICTS ===
+  DB4b popularity-matched ratio 1.68 (needs 1.5): supported
+  DB4c trimmed ratio 2.37 (needs 1.5): supported
+  surprise bar (DB4b at or below 1.2): not met
