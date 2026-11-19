@@ -1449,3 +1449,25 @@ The census above counted only fixes with a `Fixes:` trailer. **Unnamed fix-like 
 - **UC3.** Within 0.15 of the trailer-named radius of the same repository (DPDK 1.45, Mesa 1.60), so the pattern does not depend on the trailer habit.
 - **UC4.** Accounting: with the unnamed fixes added (sample scaled to all unnamed fix-like commits), pairs with a named or blame-derived cause hold at least 20% of DPDK's function edits and at least 8% of Mesa's; the radius excess (observed minus expected landings within 2 calls) stays under 3% of all function edits in both.
 **Would surprise:** UC2 below 1.15 (the pattern is a feature of trailer-named fixes) or UC1 below 40% (most unnamed fixes have no blameable cause).
+
+#### Census with blame-derived causes: results (2026-11-19; `work_census_blame_output.txt`; the first launch printed nothing because the script lacked its `main()` call; fixed and rerun)
+| | DPDK | Mesa |
+|---|---|---|
+| unnamed fix-like commits (subject fix, fixes, fixed, bug, regression; no trailer; 1 to 60 functions) | 969 = 1.9% of all function edits | 17,207 = **6.1%** |
+| sampled / blame cause found | 969 / 801 (**83%**) | 2,500 / 2,131 (**85%**) |
+| measured (after dropping 392 / 544 with no function name in a commit hunk header, 13 / 92 sweeps) / with a fixed function outside the changed set | 194 / 115 | 922 / 418 |
+| same-function share of measured | 49% | 65% |
+| **radius within 2 calls, blame-derived** (trailer-named in brackets) | **1.40 [1.14, 1.71]** (1.45) | **1.63 [1.48, 1.80]** (1.60) |
+| within 1 call | 1.70 [1.29, 2.26] | 2.00 [1.74, 2.30] |
+| median lag | 330 d | 226 d |
+| scaled: edits of unnamed fixes with a blame cause / their radius excess, as share of all function edits | 1.5% / 0.01% | **5.2%** / 0.13% |
+| **named + blame-caused repairs, share of all function edits** | **12.2% + 1.5% = 13.7%** | **1.8% + 5.2% = 7.0%** |
+| radius excess, named + blame | 0.93% + 0.01% | 0.15% + 0.13% |
+| hypothesis | verdict |
+|---|---|
+| UC1 blame cause for at least 60% | **supported**: 83% and 85% |
+| UC2 radius at least 1.3 with lower bound above 1.2, each repository | **half**: Mesa 1.63 [1.48, 1.80] supported; DPDK 1.40 [1.14, 1.71] not supported on the lower bound (only 115 pairs) |
+| UC3 within 0.15 of the trailer-named radius | **supported**: -0.05 and +0.03 |
+| UC4 caused repairs at least 20% of DPDK's and 8% of Mesa's edits; excess under 3% | **not supported**: 13.7% and 7.0%; the excess part is supported (0.94%, 0.28%) |
+Surprise bars (UC2 below 1.15 or UC1 below 40%): not met (DPDK's lower bound is 1.14, its point estimate 1.40).
+**Reading.** (1) **The radius does not depend on the `Fixes:` habit**: blame-derived causes of unnamed fixes give the same radius (1.40 against 1.45; 1.63 against 1.60), and blame finds a cause for 83 to 85% of them. (2) **Counting unnamed fixes changes the picture of the project, not of the radius**: DPDK is a trailer project (almost all fixes are named; unnamed ones are 1.9% of edits), Mesa mostly is not (its unnamed fixes carry 6.1% of edits, three times its named ones). With both, **7 to 14% of all function edits are repairs of an earlier change**, and the radius's excess over chance is **about 1% (DPDK) and 0.3% (Mesa) of function edits**. (3) Caveats: the unnamed set uses the narrow subject rule (fix, bug, regression), narrower than the keywords of the first census, so DPDK's unnamed share is a floor; half of the blamed pairs (392 of 801; 544 of 2,131) are lost in the measurement for lack of a function name in a hunk header, so the radius rests on 194 and 922 pairs (115 and 418 outside the changed set); the work shares scale the blame rate to all unnamed fix-like commits (the 17,207 are not all genuine fixes); blame names where the fixed lines were last changed, not necessarily the cause.
