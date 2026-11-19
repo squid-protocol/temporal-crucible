@@ -1,0 +1,130 @@
+17277 measured pairs (dpdk 9867, mesa 7410); with a fixed function outside the changed set 11195
+
+=== MECHANISM CLASS (fix subject and body), pooled DPDK + Mesa ===
+  mech                            pairs  share  lag d  same fn cross-file | within 2 calls (against same-file) | within 1 call
+  other                           13004  75.3%    127      52%        18% |  1.54 [1.50,1.58] (48% vs 31%, n 7847) |  1.82 [1.76,1.88] (41% vs 23%, n 7847)
+  lifetime                          875   5.1%    226      52%        16% |  1.53 [1.40,1.67] (53% vs 35%, n 519) |  1.76 [1.59,1.97] (45% vs 25%, n 519)
+  build/compile                     800   4.6%     66      50%        19% |  1.50 [1.37,1.66] (47% vs 31%, n 483) |  1.72 [1.52,1.93] (40% vs 23%, n 483)
+  error handling                    794   4.6%    190      52%        18% |  1.56 [1.42,1.71] (50% vs 32%, n 458) |  1.92 [1.72,2.13] (44% vs 23%, n 458)
+  concurrency                       578   3.3%    203      59%        14% |  1.40 [1.27,1.56] (55% vs 39%, n 352) |  1.65 [1.46,1.87] (47% vs 29%, n 352)
+  bounds/overflow                   575   3.3%    216      44%        17% |  1.37 [1.23,1.53] (49% vs 36%, n 392) |  1.59 [1.39,1.83] (40% vs 25%, n 392)
+  null deref                        391   2.3%    119      48%        16% |  1.51 [1.29,1.73] (46% vs 31%, n 237) |  1.50 [1.22,1.88] (33% vs 22%, n 237)
+  uninitialized                     260   1.5%    124      48%        15% |  1.48 [1.26,1.72] (54% vs 37%, n 148) |  1.68 [1.35,2.02] (44% vs 26%, n 148)
+  -- dpdk only, radius within 2 calls:
+     other                          n  7015  1.46 [1.43,1.51] (51% vs 35%, n 4633)
+     error handling                 n   606  1.52 [1.39,1.66] (49% vs 32%, n 380)
+     lifetime                       n   553  1.52 [1.37,1.69] (56% vs 37%, n 345)
+     build/compile                  n   499  1.35 [1.23,1.51] (46% vs 34%, n 330)
+     bounds/overflow                n   402  1.28 [1.13,1.43] (48% vs 37%, n 297)
+     concurrency                    n   317  1.30 [1.12,1.47] (57% vs 44%, n 202)
+     null deref                     n   292  1.37 [1.17,1.59] (45% vs 33%, n 198)
+     uninitialized                  n   183  1.46 [1.21,1.77] (57% vs 39%, n 115)
+  -- mesa only, radius within 2 calls:
+     other                          n  5989  1.67 [1.61,1.74] (45% vs 27%, n 3214)
+     lifetime                       n   322  1.55 [1.32,1.82] (47% vs 30%, n 174)
+     build/compile                  n   301  1.95 [1.60,2.40] (48% vs 25%, n 153)
+     concurrency                    n   261  1.59 [1.38,1.86] (51% vs 32%, n 150)
+     error handling                 n   188  1.80 [1.43,2.21] (53% vs 29%, n 78)
+     bounds/overflow                n   173  1.73 [1.37,2.19] (53% vs 30%, n 95)
+     null deref                     n    99  2.60 [1.78,3.83] (54% vs 21%, n 39)
+     uninitialized                  n    77  1.57 [1.01,2.33] (45% vs 29%, n 33)
+
+=== FIX SHAPE (fix diff), pooled DPDK + Mesa ===
+  shape                           pairs  share  lag d  same fn cross-file | within 2 calls (against same-file) | within 1 call
+  small edit                       3753  21.7%    106      52%        16% |  1.66 [1.56,1.76] (44% vs 27%, n 1829) |  1.96 [1.83,2.10] (37% vs 19%, n 1829)
+  adds code                        3349  19.4%    154      45%        22% |  1.47 [1.41,1.54] (45% vs 30%, n 2325) |  1.72 [1.63,1.83] (37% vs 22%, n 2325)
+  other edit                       3031  17.5%    165      59%        15% |  1.44 [1.38,1.49] (56% vs 39%, n 2105) |  1.70 [1.62,1.79] (48% vs 28%, n 2105)
+  replaces a call or argument      1887  10.9%    116      53%        16% |  1.73 [1.60,1.86] (50% vs 29%, n 954) |  2.14 [1.94,2.33] (42% vs 20%, n 954)
+  removes code                     1227   7.1%    123      53%        17% |  1.57 [1.44,1.71] (48% vs 31%, n 642) |  1.77 [1.56,2.00] (39% vs 22%, n 642)
+  adds a guard                     1098   6.4%    138      38%        19% |  1.58 [1.47,1.72] (46% vs 29%, n 749) |  1.86 [1.68,2.08] (38% vs 21%, n 749)
+  rewrites a condition             1089   6.3%    113      58%        15% |  1.58 [1.44,1.71] (46% vs 29%, n 611) |  1.96 [1.76,2.20] (41% vs 21%, n 611)
+  large (100+ lines)                702   4.1%    200      62%        15% |  1.27 [1.21,1.34] (64% vs 50%, n 566) |  1.46 [1.38,1.57] (58% vs 40%, n 566)
+  changes a type or declaration     584   3.4%    122      51%        17% |  1.88 [1.63,2.11] (49% vs 26%, n 311) |  2.20 [1.85,2.64] (39% vs 18%, n 311)
+  adds sync or release              428   2.5%    182      51%        16% |  1.48 [1.27,1.72] (48% vs 32%, n 254) |  1.75 [1.47,2.08] (39% vs 22%, n 254)
+  comment only                      129   0.7%    261      40%        26% |  1.27 [0.98,1.64] (34% vs 27%, n 90) |  1.39 [0.96,1.89] (29% vs 21%, n 90)
+  -- dpdk only, radius within 2 calls:
+     other edit                     n  2036  1.41 [1.34,1.48] (57% vs 41%, n 1466)
+     small edit                     n  1888  1.57 [1.46,1.68] (46% vs 29%, n 1058)
+     adds code                      n  1695  1.42 [1.35,1.51] (49% vs 34%, n 1262)
+     replaces a call or argument    n   869  1.57 [1.42,1.75] (48% vs 31%, n 504)
+     removes code                   n   784  1.46 [1.33,1.62] (51% vs 35%, n 432)
+     adds a guard                   n   732  1.48 [1.35,1.64] (45% vs 30%, n 516)
+     rewrites a condition           n   589  1.46 [1.28,1.66] (43% vs 30%, n 369)
+     large (100+ lines)             n   570  1.24 [1.17,1.32] (64% vs 52%, n 461)
+     adds sync or release           n   307  1.52 [1.30,1.83] (54% vs 36%, n 179)
+     changes a type or declaration  n   299  1.73 [1.47,2.09] (50% vs 29%, n 177)
+     comment only                   n    98  1.17 [0.88,1.54] (33% vs 28%, n 76)
+  -- mesa only, radius within 2 calls:
+     small edit                     n  1865  1.81 [1.65,1.96] (41% vs 23%, n 771)
+     adds code                      n  1654  1.54 [1.44,1.65] (40% vs 26%, n 1063)
+     replaces a call or argument    n  1018  1.92 [1.72,2.11] (52% vs 27%, n 450)
+     other edit                     n   995  1.52 [1.42,1.64] (52% vs 34%, n 639)
+     rewrites a condition           n   500  1.77 [1.55,2.03] (50% vs 28%, n 242)
+     removes code                   n   443  1.91 [1.63,2.29] (43% vs 22%, n 210)
+     adds a guard                   n   366  1.85 [1.60,2.17] (49% vs 26%, n 233)
+     changes a type or declaration  n   285  2.13 [1.71,2.67] (47% vs 22%, n 134)
+     large (100+ lines)             n   132  1.45 [1.29,1.67] (63% vs 43%, n 105)
+     adds sync or release           n   121  1.33 [0.91,1.79] (32% vs 24%, n 75)
+     comment only                   n    31            n/a
+
+=== CAUSING-CHANGE TYPE (cause subject verb), pooled DPDK + Mesa ===
+  cause                           pairs  share  lag d  same fn cross-file | within 2 calls (against same-file) | within 1 call
+  feature                          8879  51.4%    197      41%        21% |  1.36 [1.32,1.40] (45% vs 33%, n 6218) |  1.56 [1.51,1.61] (38% vs 24%, n 6218)
+  restructure                      3027  17.5%     94      59%        16% |  1.77 [1.69,1.88] (55% vs 31%, n 1547) |  2.14 [2.02,2.28] (47% vs 22%, n 1547)
+  other                            2770  16.0%     83      56%        17% |  1.66 [1.59,1.76] (51% vs 30%, n 1561) |  2.01 [1.88,2.15] (43% vs 22%, n 1561)
+  fix                              2203  12.8%    111      75%         8% |  2.00 [1.87,2.14] (60% vs 30%, n 936) |  2.51 [2.30,2.74] (52% vs 21%, n 936)
+  optimization                      398   2.3%    105      74%         9% |  1.81 [1.58,2.08] (62% vs 34%, n 174) |  2.21 [1.83,2.71] (54% vs 24%, n 174)
+  -- dpdk only, radius within 2 calls:
+     feature                        n  5981  1.30 [1.26,1.34] (47% vs 36%, n 4418)
+     restructure                    n  1388  1.72 [1.59,1.85] (57% vs 33%, n 781)
+     fix                            n  1313  2.06 [1.90,2.24] (63% vs 31%, n 576)
+     other                          n   994  1.62 [1.51,1.77] (57% vs 35%, n 638)
+     optimization                   n   191  1.86 [1.58,2.20] (70% vs 38%, n 87)
+  -- mesa only, radius within 2 calls:
+     feature                        n  2898  1.56 [1.47,1.65] (40% vs 26%, n 1800)
+     other                          n  1776  1.69 [1.58,1.83] (46% vs 27%, n 923)
+     restructure                    n  1639  1.83 [1.70,1.97] (53% vs 29%, n 766)
+     fix                            n   890  1.89 [1.69,2.14] (54% vs 28%, n 360)
+     optimization                   n   207  1.75 [1.38,2.22] (54% vs 31%, n 87)
+
+=== FT6: (mechanism, shape) cells of at least 40 pairs with a fixed function outside the changed set, by radius within 2 calls ===
+  build/compile    x replaces a call or argument    n   70  radius 2.42 [1.69, 3.91]
+  error handling   x replaces a call or argument    n   41  radius 2.02 [1.44, 3.10]
+  other            x changes a type or declaration  n  232  radius 1.82 [1.57, 2.10]
+  build/compile    x removes code                   n   60  radius 1.79 [1.34, 2.55]
+  build/compile    x changes a type or declaration  n   41  radius 1.76 [1.16, 2.76]
+  other            x replaces a call or argument    n  722  radius 1.70 [1.56, 1.84]
+  other            x small edit                     n 1437  radius 1.69 [1.59, 1.81]
+  other            x rewrites a condition           n  471  radius 1.68 [1.52, 1.88]
+  build/compile    x small edit                     n  103  radius 1.66 [1.37, 2.04]
+  uninitialized    x small edit                     n   60  radius 1.65 [1.30, 2.07]
+  other            x adds a guard                   n  536  radius 1.64 [1.51, 1.81]
+  null deref       x adds a guard                   n   50  radius 1.63 [1.10, 2.47]
+  lifetime         x small edit                     n   95  radius 1.62 [1.31, 2.17]
+  error handling   x other edit                     n   87  radius 1.62 [1.38, 1.92]
+  other            x removes code                   n  512  radius 1.60 [1.45, 1.76]
+  concurrency      x adds code                      n  106  radius 1.56 [1.32, 1.92]
+  bounds/overflow  x replaces a call or argument    n   61  radius 1.54 [1.03, 2.18]
+  error handling   x small edit                     n   75  radius 1.54 [1.24, 1.93]
+  lifetime         x other edit                     n   89  radius 1.53 [1.31, 1.80]
+  lifetime         x adds sync or release           n  124  radius 1.52 [1.22, 1.89]
+  other            x adds code                      n 1996  radius 1.49 [1.43, 1.58]
+  bounds/overflow  x small edit                     n   78  radius 1.48 [1.13, 1.92]
+  other            x other edit                     n 1805  radius 1.45 [1.39, 1.52]
+  concurrency      x other edit                     n   98  radius 1.45 [1.20, 1.77]
+  other            x adds sync or release           n  110  radius 1.37 [1.10, 1.67]
+  bounds/overflow  x adds code                      n   77  radius 1.35 [1.09, 1.70]
+  lifetime         x adds code                      n   97  radius 1.33 [1.06, 1.67]
+  error handling   x adds code                      n   85  radius 1.32 [1.07, 1.62]
+  other            x large (100+ lines)             n  511  radius 1.29 [1.21, 1.37]
+  concurrency      x small edit                     n   43  radius 1.26 [0.78, 1.81]
+  error handling   x adds a guard                   n   80  radius 1.25 [0.98, 1.58]
+  bounds/overflow  x other edit                     n   84  radius 1.22 [0.97, 1.53]
+  build/compile    x adds code                      n   76  radius 1.18 [0.95, 1.43]
+  other            x comment only                   n   81  radius 1.16 [0.87, 1.48]
+  build/compile    x other edit                     n   93  radius 1.13 [0.98, 1.33]
+
+=== VERDICTS ===
+  FT1 mechanism radii (classes of 100+ pairs): highest error handling 1.56, lowest bounds/overflow 1.37, ratio 1.14 (needs 1.3): not supported
+  FT2 highest same-function shapes: [('large (100+ lines)', 62), ('other edit', 59), ('rewrites a condition', 58)]; highest cross-file: [('comment only', 26), ('adds code', 22), ('adds a guard', 19)] (needs guard and small edit on top of the first, large and adds code on the second)
+  FT3 same-function share by cause type: feature 41% (n 8879), restructure 59% (n 3027), other 56% (n 2770), fix 75% (n 2203), optimization 74% (n 398)

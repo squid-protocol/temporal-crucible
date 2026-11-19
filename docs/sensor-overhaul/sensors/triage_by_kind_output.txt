@@ -1,0 +1,31 @@
+dpdk: 600 pairs ranked
+mesa: 968 pairs ranked
+
+=== POOLED (1568 pairs) top 20: N1 74.2%, N1L (category lag prior, cross-fitted) 71.9%; top 5: N1 56.4%, N1L 49.7%; MRR N1 0.411, N1L 0.338
+
+--- by mech: N1 top 20 / N1L top 20 ---
+  other                          n 1235   72.9%   70.5%
+  lifetime                       n   67   85.1%   85.1%
+  build/compile                  n   62   75.8%   71.0%
+  concurrency                    n   52   71.2%   71.2%
+  error handling                 n   50   76.0%   74.0%
+  bounds/overflow                n   50   82.0%   78.0%
+  uninitialized                  n   29   79.3%   79.3%
+  null deref                     n   23   87.0%   87.0%
+
+--- by shape: N1 top 20 / N1L top 20 ---
+  small edit                     n  378   74.9%   72.0%
+  adds code                      n  326   66.0%   62.6%
+  other edit                     n  247   78.1%   75.3%
+  replaces a call or argument    n  185   82.7%   81.1%
+  rewrites a condition           n  101   82.2%   80.2%
+  removes code                   n   90   75.6%   73.3%
+  adds a guard                   n   81   80.2%   79.0%
+  large (100+ lines)             n   64   51.6%   54.7%
+  changes a type or declaration  n   51   74.5%   70.6%
+  adds sync or release           n   34   79.4%   82.4%
+  comment only                   n   11   45.5%   54.5%
+
+=== VERDICTS ===
+  FT4 categories of 50+ pairs: 15; lowest N1 top 20 large (100+ lines) 51.6%, highest lifetime 85.1% (needs all at least 55% and a spread of at most 25 points): not supported
+  FT5 N1L minus N1 top 20 -2.2 points (needs +2): not supported
