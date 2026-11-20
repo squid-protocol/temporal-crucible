@@ -63,14 +63,17 @@ Repeat runs (3) with CPU seconds as the load-robust measure; provenance check pe
 targets pinned; full-vs-delta scans never mixed; sweeps removed or reported beside every in-place-change estimate; two independent
 design reviews; the exploratory numbers above are not reused as confirmation.
 
-SF-11 ORCHESTRATORS ARE HUBS [owner prediction]. GitGalaxy's orchestrator module(s) are hubs, and the owner's two other orchestrators
-  (names to be confirmed by the owner when the second and third repos are added) will be hubs in their own repos. Measure: file-level
-  fan-in and fan-out concentration (top-1% share, as in the TURN hub tables) and hub persistence (top-5% a year later; TURN range
-  94-98%) for each orchestrator file against the repo's other files, size-matched. Predict each orchestrator is in the top 1% by
-  fan-out and top 5% by pagerank for most snapshots, with persistence at or above the TURN range. Refuted if an orchestrator is
-  not in the top 5% on either measure, or if hub rank is explained by size alone. Note the quick pagerank check on 2026-11-20 picked a
-  re-export `__init__.py` or a vendored script as the top hub, so hub rank must be computed over engine code with re-exports and
-  vendored files excluded (a declared exclusion, set before scoring).
+SF-11 ORCHESTRATORS ARE HUBS [owner prediction]. The three orchestrator modules of GitGalaxy, `gitgalaxy/galaxyscope.py` (the scan
+  orchestrator), `gitgalaxy/cobol_refractor_controller.py` and `gitgalaxy/cobol_to_java_controller.py`, are hubs of the repo's file-level
+  graph. (Owner named the two controllers on 2026-11-20; the controllers first appear on 2026-04-15 and 2026-04-17, so their hub
+  trajectory starts after the first snapshot.) Measure: file-level fan-in, fan-out and pagerank over engine code (re-export `__init__.py`
+  files, vendored trees and tests excluded, a declared exclusion set before scoring), top-1% share as in the TURN hub tables, and hub
+  persistence (top-5% a year later; TURN range 94-98%; here the window is months, so use the longest available window and say so).
+  Predict each orchestrator is in the top 1% by fan-out and top 5% by pagerank in most snapshots after it appears, size-matched against
+  other files of similar LOC. Refuted if any of the three is outside the top 5% on both measures for most snapshots, or if rank is
+  explained by file size alone. Note: orchestrators are the files that call many things, so fan-out is partly definitional; fan-in
+  and the size-matched comparison carry the test. This is a prediction about one repo with three files, so the unit of replication is
+  the file, not the repo.
 
 ## Decisions and open inputs (owner, 2026-11-20)
 1. No remembered dates for the speed-up refactors. Ground truth for SF-1/SF-8 therefore has to come from the data: candidate steps are
@@ -78,4 +81,5 @@ SF-11 ORCHESTRATORS ARE HUBS [owner prediction]. GitGalaxy's orchestrator module
    confirms or rejects each candidate afterwards. This makes the ground truth post-hoc: SF-8 is exploratory unless the candidate list is
    frozen before the commit text is read.
 2. No new time slots yet. Hold at the 12 slots and 3 repeats until the first results are read; more time points later.
-3. Hub files assumed `detector.py` and `galaxyscope.py` until the owner says otherwise (SF-11 adds the two other orchestrators).
+3. Hub files: `detector.py` and `galaxyscope.py` for SF-4 (assumed); the orchestrators for SF-11 are named above (owner, 2026-11-20).
+4. Next data step (owner agreed 2026-11-20): time every 25th first-parent commit (index divisible by 25, plus the last commit) on keyword-rosetta, cics-crucible and the one-file-per-language control, one repeat each, then structure-scan the same commits. The sampling rule is fixed before the commit text is read.
