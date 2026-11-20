@@ -24,7 +24,7 @@ import verify_functions as VF  # noqa: E402
 
 B = "/tmp/gitgalaxy-scratch/claude"
 CFG = {"sphinx": "python", "scapy": "python", "sqlmap": "python", "prometheus": "go", "commons-lang": "java", "commons-io": "java", "ripgrep": "rust", "dpdk": "c", "curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c", "crispy-doom": "c", "dsda-doom": "c", "nugget-doom": "c", "doomretro": "c", "fastdoom": "c", "inter-doom": "c", "chocolate-doom": "c", "eternity": "cpp", "odamex": "cpp", "srb2": "c"}
-EXT = {"python": (".py",), "go": (".go",), "java": (".java",), "rust": (".rs",), "c": (".c", ".h"), "cpp": (".cpp", ".cc", ".cxx", ".c", ".h", ".hpp", ".hh")}
+EXT = {"python": (".py",), "go": (".go",), "java": (".java",), "rust": (".rs",), "c": (".c", ".h"), "fortran": (".f", ".F", ".f90", ".F90", ".f95", ".F95", ".for", ".FOR"), "cpp": (".cpp", ".cc", ".cxx", ".c", ".h", ".hpp", ".hh")}
 NODES = {"python": {"function_definition"}, "go": {"function_declaration", "method_declaration"}, "java": {"method_declaration", "constructor_declaration"}, "rust": {"function_item"}, "c": {"function_definition"}, "cpp": {"function_definition"}}
 TESTPART = {"test", "tests", "testing", "__tests__", "spec", "specs", "testdata"}
 FIXRE = re.compile(r"\b(fix|fixes|fixed|bug|regression)\b", re.I)

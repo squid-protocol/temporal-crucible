@@ -27,10 +27,10 @@ B = "/srv/storage_16tb/projects/curl_call_graph_evolution/turn_v2"
 POOL = "/srv/storage_16tb/projects/temporal-crucible-pool"
 SRC = {"curl": "ts_edits_c2.pkl", "libgit2": "ts_edits_c2.pkl", "redis": "ts_edits_c2.pkl", "libxml2": "ts_edits_ho_c.pkl", "prometheus": "ts_edits_ho_jg.pkl", "sphinx": "ts_edits_ho_py.pkl", "ripgrep": "ts_edits_lang.pkl"}
 LANG = {"curl": "c", "libgit2": "c", "redis": "c", "libxml2": "c", "prometheus": "go", "sphinx": "python", "ripgrep": "rust"}
-EXTS = {"c": (".c", ".h"), "go": (".go",), "python": (".py",), "rust": (".rs",)}
+EXTS = {"c": (".c", ".h"), "go": (".go",), "python": (".py",), "rust": (".rs",), "fortran": (".f", ".F", ".f90", ".F90", ".f95", ".F95", ".for", ".FOR")}
 CLASSES = ("regression", "other-fix", "extrinsic", "latent")
 ATTRS = f"{SP}/attrs"
-open(ATTRS, "w").write("*.go diff=golang\n*.py diff=python\n*.rs diff=rust\n")
+open(ATTRS, "w").write("*.go diff=golang\n*.py diff=python\n*.rs diff=rust\n" + "".join(f"*{e} diff=fortran\n" for e in EXTS["fortran"]))
 HUNK = re.compile(r"^@@ -\S+ \+\S+ @@ ?(.*)$")
 IDENT = re.compile(r"([A-Za-z_]\w*)\s*$")
 RELS = ("callers1", "callers2", "callees1", "callees2", "either1", "either2")
@@ -46,6 +46,8 @@ def func_name(ctx, lang):
         m = re.match(r"^func\s*(?:\([^)]*\)\s*)?(\w+)", ctx)
     elif lang == "python":
         m = re.search(r"\bdef\s+(\w+)", ctx)
+    elif lang == "fortran":
+        m = re.search(r"\b(?:subroutine|function|program|module)\s+(\w+)", ctx, re.I)
     else:
         m = re.search(r"\bfn\s+(\w+)", ctx)
     return m.group(1) if m else None

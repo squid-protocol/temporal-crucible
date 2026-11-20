@@ -28,21 +28,24 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "sensor"))
 
-EXTS = {"c": (".c", ".h", ".cc", ".cpp", ".hpp"), "go": (".go",), "python": (".py",), "rust": (".rs",)}
+FORTRAN_EXTS = (".f", ".F", ".f90", ".F90", ".f95", ".F95", ".for", ".FOR")
+EXTS = {"c": (".c", ".h", ".cc", ".cpp", ".hpp"), "go": (".go",), "python": (".py",), "rust": (".rs",), "fortran": FORTRAN_EXTS}
+# git names a hunk's function only for lines at column 0 unless the language's diff driver is on: without it a Python or Rust METHOD edit gets the class name (or none) and is lost.
+ATTRIBUTES = "*.go diff=golang\n*.py diff=python\n*.rs diff=rust\n" + "".join(f"*{e} diff=fortran\n" for e in FORTRAN_EXTS)
 HUNK = re.compile(r"^@@ -\S+ \+\S+ @@ ?(.*)$")
 IDENT = re.compile(r"([A-Za-z_]\w*)\s*$")
 FIX = re.compile(r"\b(fix|fixes|fixed|bug|regression|crash|leak|overflow|race|deadlock|uaf|null)\b", re.I)
 FMT = re.compile(r"\b(typo|typos|spelling|whitespace|style|checkpatch|indent(ation)?|licen[cs]e|docs?|documentation|comments?|copyright|spdx)\b", re.I)
 FIXES_TRAILER = re.compile(r"^Fixes:\s*([0-9a-fA-F]{8,40})", re.M)
 TESTPART = {"test", "tests", "testing", "__tests__", "spec", "specs", "testdata", "t"}
-COMMENT = {"c": re.compile(r"^\s*(/\*|\*(\s|/|$)|//|$)"), "go": re.compile(r"^\s*(//|/\*|\*|$)"), "python": re.compile(r"^\s*(#|\"\"\"|'''|$)"), "rust": re.compile(r"^\s*(//|/\*|\*|$)")}
+COMMENT = {"c": re.compile(r"^\s*(/\*|\*(\s|/|$)|//|$)"), "go": re.compile(r"^\s*(//|/\*|\*|$)"), "python": re.compile(r"^\s*(#|\"\"\"|'''|$)"), "rust": re.compile(r"^\s*(//|/\*|\*|$)"), "fortran": re.compile(r"^(?:[cC*](?:\s|$)|\s*!|\s*$)")}  # free-form `!`, fixed-form `C`/`*` in column 1
 VERBS = {
     "feature": {"add", "introduce", "implement", "support", "enable", "allow", "new", "create", "expose", "provide", "extend", "export", "register", "enhance", "initial"},
     "restructure": {"convert", "move", "rename", "split", "merge", "refactor", "simplify", "cleanup", "clean", "consolidate", "rework", "reorganize", "reorganise", "unify", "replace", "switch", "use", "make", "factor", "separate", "change", "remove", "drop"},
     "optimization": {"optimize", "optimise", "speed", "improve", "reduce", "avoid", "skip", "cache", "batch", "prefetch", "defer", "shrink", "inline", "streamline", "limit", "tune", "increase", "decrease"},
     "fix": {"correct", "handle", "prevent", "validate", "ensure", "protect", "harden", "restore", "sanitize", "sanitise", "verify", "guard", "reset"},
 }
-PARSER_VERSION = "2"  # bump when the diff parser or the rules change: part of the cache key
+PARSER_VERSION = "3"  # bump when the diff parser or the rules change: part of the cache key
 GROUPS = ["organic", "sweeps", "fixes", "mechanical"]
 CAT_GROUP = {"sweep": "sweeps", "revert": "mechanical", "tests only": "mechanical", "comment or whitespace only": "mechanical", "formatting, docs, licence (subject)": "mechanical"}
 
@@ -56,6 +59,8 @@ def func_name(ctx, lang):
         m = re.match(r"^func\s*(?:\([^)]*\)\s*)?(\w+)", ctx)
     elif lang == "python":
         m = re.search(r"\bdef\s+(\w+)", ctx)
+    elif lang == "fortran":
+        m = re.search(r"\b(?:subroutine|function|program|module)\s+(\w+)", ctx, re.I)
     else:
         m = re.search(r"\bfn\s+(\w+)", ctx)
     return m.group(1) if m else None
@@ -128,7 +133,9 @@ def diff_pass(repo, lang, cache_dir, name):
     exts = EXTS[lang]
     cm = COMMENT[lang]
     pathspec = ["--"] + [f"*{e}" for e in exts]
-    proc = subprocess.Popen(["git", "-c", "core.quotepath=off", "-C", repo, "log", "--no-merges", "-p", "-U0", "--no-color", "-M", "--format=\x1dC %H", *pathspec], stdout=subprocess.PIPE, text=True, errors="replace")
+    attrs = Path(cache_dir) / "diff_attributes"
+    attrs.write_text(ATTRIBUTES)
+    proc = subprocess.Popen(["git", "-c", "core.quotepath=off", "-c", f"core.attributesFile={attrs}", "-C", repo, "log", "--no-merges", "-p", "-U0", "--no-color", "-M", "--format=\x1dC %H", *pathspec], stdout=subprocess.PIPE, text=True, errors="replace")
     data, sha, cur = {}, None, None
     old = new = None
     in_header = False
@@ -821,7 +828,7 @@ def build_facts(out, internal):
     if sc.get("rating"):
         f["call_graph_self_check"] = {"rating": sc["rating"]["label"], "checks": [{"id": r["id"], "status": r["status"], "value": r["value"]} for r in sc["rows"] if r["id"] in ("calls", "filepairs", "functions", "imports", "coverage")]}
         sent.append("Self-check of the call graph against a tree-sitter baseline on this repository: " + sc["rating"]["label"].lower() + "; " + "; ".join(f"{r['what'].lower()}: {r['value']}" for r in sc["rows"] if r["id"] in ("calls", "functions", "imports")) + ".")
-    f["reliability"] = {"call_graph": {"c": "checked against libclang: hubs, ranks and coupling agree", "java": "hubs sensitive to overloaded names; indicative", "go": "not yet evaluated", "python": "not yet evaluated", "rust": "records about a third of resolvable calls; indicative"}.get(out["lang"], "not evaluated")}
+    f["reliability"] = {"call_graph": {"c": "checked against libclang: hubs, ranks and coupling agree", "java": "hubs sensitive to overloaded names; indicative", "go": "not yet evaluated", "python": "not yet evaluated", "rust": "records about a third of resolvable calls; indicative", "fortran": "not yet evaluated"}.get(out["lang"], "not evaluated")}
     return f
 
 
