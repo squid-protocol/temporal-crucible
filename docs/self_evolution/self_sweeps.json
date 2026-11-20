@@ -1,0 +1,327 @@
+{
+ "code_edits": 4033,
+ "in_sweep": 506,
+ "migrations": [
+  {
+   "s": 12,
+   "old": "eq.get",
+   "new": "raw_signals.get",
+   "n": 17,
+   "nold": 18,
+   "nnew": 18
+  },
+  {
+   "s": 26,
+   "old": "open",
+   "new": "open_source",
+   "n": 13,
+   "nold": 21,
+   "nnew": 13
+  },
+  {
+   "s": 31,
+   "old": "G_jstr",
+   "new": "jstr",
+   "n": 11,
+   "nold": 12,
+   "nnew": 11
+  }
+ ],
+ "one_sided": [
+  {
+   "s": 2,
+   "kind": "adoption",
+   "name": "len",
+   "n": 13
+  },
+  {
+   "s": 3,
+   "kind": "adoption",
+   "name": "len",
+   "n": 16
+  },
+  {
+   "s": 3,
+   "kind": "adoption",
+   "name": "float",
+   "n": 10
+  },
+  {
+   "s": 4,
+   "kind": "adoption",
+   "name": "len",
+   "n": 10
+  },
+  {
+   "s": 5,
+   "kind": "removal",
+   "name": "s.get",
+   "n": 12
+  },
+  {
+   "s": 9,
+   "kind": "adoption",
+   "name": "enforce_licensing_guard",
+   "n": 22
+  },
+  {
+   "s": 19,
+   "kind": "removal",
+   "name": "len",
+   "n": 11
+  },
+  {
+   "s": 20,
+   "kind": "adoption",
+   "name": "len",
+   "n": 11
+  },
+  {
+   "s": 25,
+   "kind": "adoption",
+   "name": "sorted",
+   "n": 11
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "_has_column",
+   "n": 11
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "bool",
+   "n": 17
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "set",
+   "n": 11
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "f.get",
+   "n": 17
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "read_source",
+   "n": 28
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "m.group",
+   "n": 11
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "sorted",
+   "n": 12
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "int",
+   "n": 19
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "nfc",
+   "n": 21
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "str",
+   "n": 14
+  },
+  {
+   "s": 26,
+   "kind": "adoption",
+   "name": "len",
+   "n": 27
+  },
+  {
+   "s": 27,
+   "kind": "removal",
+   "name": "len",
+   "n": 10
+  },
+  {
+   "s": 27,
+   "kind": "adoption",
+   "name": "any",
+   "n": 10
+  },
+  {
+   "s": 27,
+   "kind": "adoption",
+   "name": "len",
+   "n": 13
+  },
+  {
+   "s": 28,
+   "kind": "adoption",
+   "name": "any",
+   "n": 12
+  },
+  {
+   "s": 28,
+   "kind": "adoption",
+   "name": "Untranslatable",
+   "n": 13
+  },
+  {
+   "s": 28,
+   "kind": "adoption",
+   "name": "str",
+   "n": 14
+  },
+  {
+   "s": 28,
+   "kind": "adoption",
+   "name": "len",
+   "n": 20
+  },
+  {
+   "s": 28,
+   "kind": "adoption",
+   "name": "out.append",
+   "n": 10
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "Untranslatable",
+   "n": 11
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "str",
+   "n": 12
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "len",
+   "n": 11
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "set",
+   "n": 15
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "opts.get",
+   "n": 10
+  },
+  {
+   "s": 29,
+   "kind": "adoption",
+   "name": "CicsError",
+   "n": 17
+  },
+  {
+   "s": 30,
+   "kind": "adoption",
+   "name": "len",
+   "n": 17
+  },
+  {
+   "s": 30,
+   "kind": "adoption",
+   "name": "set",
+   "n": 10
+  },
+  {
+   "s": 31,
+   "kind": "adoption",
+   "name": "len",
+   "n": 15
+  },
+  {
+   "s": 34,
+   "kind": "adoption",
+   "name": "add_flag",
+   "n": 26
+  },
+  {
+   "s": 34,
+   "kind": "adoption",
+   "name": "len",
+   "n": 10
+  },
+  {
+   "s": 34,
+   "kind": "adoption",
+   "name": "enforce",
+   "n": 26
+  }
+ ],
+ "era": {
+  "gemini": [
+   100,
+   860
+  ],
+  "transition": [
+   0,
+   67
+  ],
+  "claude": [
+   103,
+   971
+  ],
+  "fleet": [
+   303,
+   2135
+  ]
+ },
+ "weeks": [
+  "2026-W12",
+  "2026-W13",
+  "2026-W14",
+  "2026-W15",
+  "2026-W16",
+  "2026-W17",
+  "2026-W18",
+  "2026-W19",
+  "2026-W20",
+  "2026-W22",
+  "2026-W23",
+  "2026-W24",
+  "2026-W25",
+  "2026-W26",
+  "2026-W27",
+  "2026-W28",
+  "2026-W29",
+  "2026-W30",
+  "2026-W31",
+  "2026-W32",
+  "2026-W33",
+  "2026-W34",
+  "2026-W35",
+  "2026-W36",
+  "2026-W37",
+  "2026-W38",
+  "2026-W39",
+  "2026-W40",
+  "2026-W41",
+  "2026-W42",
+  "2026-W43",
+  "2026-W44",
+  "2026-W45",
+  "2026-W46",
+  "2026-W47"
+ ]
+}
