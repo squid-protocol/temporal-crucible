@@ -1,0 +1,27 @@
+# Could bots label PRs and issues uniformly to get better repair-radius data? Exploration of gitgalaxy's PRs, issues and labels (EXPLORATORY; 2026-11-20)
+
+Data: every issue and PR of squid-protocol/gitgalaxy pulled once (read-only): 8,779 items, 2026-04-23 to 2026-11-20; 6,613 PRs (6,487 merged) and 2,166 issues (1,862 closed as completed, 160 not planned, 144 open). Authors: 6,389 PRs and 1,971 issues come from the owner's account (agent-written, so text is uniform), 188 PRs from dependency/automation bots, 192 issues from a workflow bot.
+
+## What the labels cover
+- 82 labels in a mixed scheme: meaning (bug, enhancement, refactor, core-engine, legacy-modernization, ...), priority, churn routing and scope (scope:*, era:*, lane:*, claim:*), and bot state (shepherd:*). The biggest PR label is the workflow label `shepherd:merge` (3,077).
+- Issues: 99% have a label; 772 are labelled `bug`. PRs: 53% have a label but only 270 (4%) carry a kind label (enhancement 80, bug 77, github-actions 56, testing 55, ...) and 442 (7%) any label that is not workflow/bot state. A PR's kind is mostly not recorded as a label.
+
+## Links that already exist
+- 57% of PRs link an issue with a keyword; `Part of #N` is the most common (2,845 uses; 2,799 PRs have a parent), closing keywords (Fixes/Closes/Resolves) 1,206 from 1,057 PRs to 1,184 issues. 556 of the 772 bug issues (72%) are closed by a PR through a closing keyword: the FIX side of a repair is well linked.
+- The CAUSE side is almost absent. Only 45 of 2,166 issues (2%) name an earlier merged PR with causal wording (after, since, introduced by, regression), 18 of them bugs; joined with a closing PR that gives just 26 independent (cause PR, fix PR) pairs. Another 510 PRs name an earlier PR with causal wording in their own body, but most of these are follow-ups, not regressions.
+- Bug issues are locatable: 81% mention a file path, 21% a function-like token, 20% a hex sha. All but one are filed by the owner's account.
+
+## How far deterministic rules get on the PR stream (6,613 PRs)
+Rules from author, title prefix, labels and the files the squash commit touched (6,363 PRs map to a first-parent commit):
+- generated docs/data by a bot 1,474 (22%); tests only 998 (15%); fix by title or label 594 (9%); docs only 384 (6%); feature by title or label 205 (3%); dependency bots 188 (3%); chore/refactor/perf by title 68 (1%); CI only 61 (1%).
+- 60% sorted for free; 2,641 PRs (40%) need reading: about 4.5M characters, roughly 2.0M tokens at the owner's measured 1.74x token correction.
+- Epic structure groups 42% of PRs by initiative with no reading at all: parents #6072 (155 PRs, the ladder climb), #4270 (76, CICS command breadth), #6266 (49), #8009 (49), #4108 (39), #4628 (39), #5274 (38), #6278 (36).
+
+## What this suggests (nothing run yet; recommendations only)
+1. Three layers of labelling. (a) Free: the rules above plus the epic parent, as a sidecar table (PR number, kind, area, initiative), not 8,000 GitHub label writes into a scheme that already has 82 labels. (b) Reading: a model labels the unresolved 40% with a fixed rubric (kind, area, mechanical or not, sweep or not). (c) Cause links: for each bug issue with a closing PR, a model reads the ISSUE TEXT and a time-window list of candidate PRs (merged before the issue, touching the files the issue names) and returns the causing PR, a confidence, a quoted evidence line, or "no findable cause" (the epic's wording).
+2. Keep the cause label independent of the fix. If the model sees the fix diff, or if candidates come from blame of the fix's lines, locality leaks back in (the blame circularity already found). Give it issue text and candidate PRs by time and file only; use blame agreement afterwards as a check, not an input.
+3. Measure the labeller before trusting it: score it on the 26 regex-found independent pairs plus a hand-labelled gold set (the owner labels about 50 bug issues), and run two models (for example Claude and Gemini) to report agreement, as for the design reviews.
+4. Fix it at the source going forward. The owner's account writes almost all issues and PRs through agent rules, so adding a required structured line to the bug-issue and PR templates (`Introduced by: #PR / sha / unknown`, `Kind: ...`) costs nothing and gives clean labels from now on.
+5. Feed the repair radius: independent (cause PR, fix PR) pairs from layer (c) replace the blame-derived pairs; layer (a)/(b) kinds remove mechanical, docs-only, test-only and generated PRs from the candidate causes; the epic parent marks sweeps.
+Cost note: layer (b) is about 2M tokens; layer (c) a few hundred bug issues with a short candidate list each. A 100-issue pilot costs little; model, credits and budget are the owner's call.
+Limits: regex wording will undercount cause links in free text (comments were not read; only bodies, trimmed to 4,000 characters); the agent-written issues may omit causes the agent did not know; categories from title prefixes depend on the agents' conventions, which changed over the eight months.
