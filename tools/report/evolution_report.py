@@ -671,7 +671,7 @@ def radius(out, scans):
     import pandas as pd
     repo = out["_repo"]
     pool = Path(BR.POOL)
-    if Path(repo).resolve().parent != pool.resolve():
+    if Path(repo).absolute().parent != pool.absolute() and Path(repo).resolve().parent != pool.resolve():  # a pool entry may be a symlink to the data disk
         out["radius"] = None
         out["radius_note"] = "The repair radius needs the research pool layout; it is not computed for this repository."
         return out
