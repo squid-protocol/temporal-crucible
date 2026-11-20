@@ -38,3 +38,8 @@ Caveats: weekly windows give fewer events per window than TURN's quarters, which
 
 ## Evolution artifact (call network of the engine code)
 `tools/selfhistory/evo/make_artifact.py` builds a GIF, MP4 and one-file interactive HTML with the historical-call-graph-gif tool from 46 of the 180 daily snapshots (4,729 functions ever seen, 4,252 alive at the end, 1,011 file-to-file roads). Scope: files under gitgalaxy/ or backend/ (renamed gitgalaxy/), no tests, no standards/ pattern tables, no __init__.py; it includes the translator subtree and the Java/Python files it ships. A file that moves shows as a death plus a birth (a limit of the tool). Binaries are not committed.
+
+
+## Evolution report from the epic-#8715 generator, and comparison with the reference repos
+The prototype generator for `gitgalaxy evolution` (temporal-crucible branch `sensor-overhaul`) was run on GitGalaxy's own history: `real_report/gitgalaxy-engine_evolution.html` (engine-only scans) and `real_report/gitgalaxy-whole-repo_evolution.html` (all scanned code, including vendored JS and tests).
+How GitGalaxy differs from the 19 reference repositories and the DPDK mock-up: `comparison_with_reference_repos.md`. Summary: same organic share as DPDK (58%), a different time scale (22x growth in 8 months, 37 edits per function-year against at most 2.6), far more mechanical edits, repairs in days, and the same concentration of repeat repairs.
