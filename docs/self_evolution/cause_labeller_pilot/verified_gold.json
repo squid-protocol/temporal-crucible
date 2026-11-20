@@ -1,0 +1,25 @@
+{
+ "verified_gold": {
+  "5525": [
+   5512
+  ],
+  "4859": [
+   4843,
+   4851
+  ],
+  "3867": [
+   3856,
+   3857,
+   3858
+  ],
+  "4300": [
+   4290
+  ],
+  "4528": [
+   4522
+  ]
+ },
+ "rule": "a sentence counts only if it asserts that the named PR's change introduced or triggered the problem; timing ('after #N', 'found after #N'), context, measurement before/after, and negations ('not caused by') do not count",
+ "judged_by": "author reading the 15 regex-gold sentences; one reader, not blinded to the 4 batch-2 labels seen before judging; 4528 and 4300 are the least certain",
+ "regex_gold_precision": "5 of 15 (33%)"
+}
