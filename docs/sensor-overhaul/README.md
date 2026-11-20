@@ -22,6 +22,9 @@ Research and prototypes live here; changes to the engine itself go to GitGalaxy 
 | Change-aware: while-you-are-here prompt, diff-aware change report | new | prompt back-tested over 259k observations (50+ line gate: 2.7x natural repayment; editor's own markers 3.7x); report prototyped on 3 libgit2 commits | [sensors/change_aware.md](sensors/change_aware.md) | pilot needed |
 | Comment sensors (commented-out code, header coverage, neglect, danger language) | new | evidence in (precision 93-95%) | [sensors/tech_debt.md](sensors/tech_debt.md) section 4 | |
 
+## Findings logs
+- [Evolution report, accuracy by language, research-code studies (2026-11-19/20)](sensors/research_code_findings_2026-11-19.md): includes a correction for Python/Rust method edits and the WRF, OpenFold, ColabFold results.
+
 ## How to add a sensor
 Copy [sensors/_template.md](sensors/_template.md), fill it in, run the acceptance checklist (GUIDE section 5) with the scripts in `tools/turn/surface_area/` and `tools/sensor/`, record the result on the board above.
 
