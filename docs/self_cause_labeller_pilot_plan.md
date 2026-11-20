@@ -18,3 +18,7 @@ Two models, labelling independently: Claude (4 subagents of 25 issues, no shared
 - Plausibility check afterwards (not an input): for the non-gold labels where both models agree on a cause, the share where the cause PR touched a file the fix PR also touched, compared with the same share for the other candidates of those issues. Reported, not gated.
 - Hand check: the owner's own labels of about 50 of these issues would be the real gold; this pilot cannot replace that.
 - If the first three rules pass, scale to all closed-by-PR bug issues (556) and feed the repair-radius design B; otherwise report and stop.
+
+
+## Amendment 1 (2026-11-20, while the labels were being collected; the rule below replaces the gold-recall rule above)
+Reading the 15 gold sentences showed the regex 'gold' is not gold: only 5 assert that the named PR caused the problem (5525, 4859, 3867, 4300, 4528); the others give timing, context, a before/after measurement or a negation. The gold-recall rule therefore applies to the 5 author-verified issues only, and the regex-gold group is reported as a test of the regex, not of the labellers. Judged by one reader (the author) who had seen four batch-2 labels first; 4300 and 4528 are the least certain. Rubric clarification made before collection: a labeller may return a PR number the issue text itself names. The agreement rules (null versus non-null at least 70%, exact cause at least 60%, stop below 50%) are unchanged.
