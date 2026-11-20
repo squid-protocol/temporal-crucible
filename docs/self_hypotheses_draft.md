@@ -5,7 +5,7 @@ Per STUDY_CHECKLIST item 15 it needs two independent design reviews and a dated 
 Written 2026-11-20 by Claude from owner direction in session; owner supplied the domain claims marked [owner].
 
 ## Data and what has already been seen (exploratory, labelled so)
-- 180 daily full scans of GitGalaxy (checkout scans, engine at HEAD of the scan day's tree), `dbs/`; 12-slot engine speed runs
+- 180 daily full scans of GitGalaxy (checkout scans of each day's commit, all scanned by ONE fixed scanner: the engine-main worktree at fc8dd7125, 2026-11-16; see `tools/selfhistory/ENGINE_PINS.md`), `dbs/`; 12-slot engine speed runs
   on three fixed targets (keyword-rosetta, cics-crucible, language-crucible), per-stage and per-regex timers, CPU seconds
   (`docs/self_speed/runs.jsonl`, summary in `docs/self_speed/rep_summary.md`); full commit list, commit messages and PR/bot comments (not yet pulled).
 - Already looked at before drafting (so these are discovery, not confirmatory): speed table rep 1 (keyword-rosetta 0.79 s -> 4.61 s
