@@ -1,6 +1,6 @@
 # GitGalaxy-on-itself: structure-function hypotheses (DRAFT, unregistered, local only)
 
-Status: EXPLORATORY DRAFT, NOT REGISTERED. Nothing here is in `docs/HYPOTHESES.md`; no verdict is claimed. Draft for the hypothesis-first register (temporal-crucible `docs/HYPOTHESES.md`). Pushed as a draft PR on 2026-11-20 at the owner's request.
+Status: EXPLORATORY DRAFT, NOT REGISTERED. SUPERSEDED IN PART by `docs/self_hypotheses_amendment_1.md` (2026-11-20, reconciliation of two independent reviews): where they differ, the amendment governs. Nothing here is in `docs/HYPOTHESES.md`; no verdict is claimed. Draft for the hypothesis-first register (temporal-crucible `docs/HYPOTHESES.md`). Pushed as a draft PR on 2026-11-20 at the owner's request.
 Per STUDY_CHECKLIST item 15 it needs two independent design reviews and a dated amendment before it is registered.
 Written 2026-11-20 by Claude from owner direction in session; owner supplied the domain claims marked [owner].
 
