@@ -61,3 +61,10 @@ Until the planted-regression control recovers its plants blind, the SF-1/2 holdo
 
 ## Not registered
 YAML or settings tracking (post hoc, exploratory); any hypothesis about speed caused by CI workflow files; new time slots (still on hold per the owner's decision 2).
+
+## Addendum 1 (2026-11-20, evening): result of the SF-11 report check
+Checked `evolution_artifact/real/gitgalaxy_evolution.html` and `gitgalaxy_evolution_whole_repo.html` (both written 2026-11-20 1:59 PM Eastern; the 'hubs' blocks in each).
+- The reports print FUNCTION-level hubs only: top ten functions by callers and by centrality (`hubs.now`), top five (`most_called`, `most_central`), and former hubs. No file-level fan-in, fan-out or PageRank ranking is printed.
+- Orchestrator files appear in four other places, none a hub rank: fix counts per function (`_process_file_worker` in `galaxyscope.py`, 24 fixes), oldest-alive functions (all of `galaxyscope.py`), function counts per top-level module (`galaxyscope.py` 60, `cobol_refractor_controller.py` 13, `cobol_to_java_controller.py` 6), and import-edge examples (`cobol_refractor_controller.py` to `cobol_jcl_forge.py` and `cobol_microservice_slicer.py`).
+- The registered downgrade condition (file-level rankings displayed for the three files) is NOT met, so SF-11 stays CONFIRMATORY.
+- Disclosure: none of the three orchestrator files holds a function in the top-ten hub lists (those are in `core/detector.py`, `core/source_text.py`, `core/prism.py`, `core/call_resolver.py`, `core/mainframe_boundary.py`, `cobolrt/Cobol.java`, and a tools file). That is a function-level measure, not the registered file-level one, but it was seen before scoring; any SF-11 write-up states it.
