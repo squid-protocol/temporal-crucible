@@ -9,6 +9,8 @@ Stdlib-only. Not part of the CI `verify` job (it compiles only top-level `tools/
 | `compare_dbs.py A.db B.db` | table-by-table comparison of two snapshot DBs (ids mapped to file paths); verdict identical / structure_equal / STRUCTURE_DIFFERS. Used to check delta scans against full scans. |
 | `speed_probe.py slots` / `run` | runs each sampled commit's OWN engine on pinned targets with `--file-speed --splicing-speed`, records wall seconds, CPU seconds, stage and per-regex timings, files mapped. Checks provenance (fails if any module loads from the live checkout), detects each engine's supported flags, and redirects the March-2026 engines' hard-coded output directory in throwaway worktrees. |
 | `speed_report.py` | median over repeats per slot and target, spread, per-stage table. |
+| `join_steps.py` | joins each speed step to the commits in the interval (files by kind, lines, function births/changes from the anchor DBs, perf-worded subjects). |
+| `bisect_cost.py A B THRESH` | bisects first-parent commits for the first one at which a control corpus costs at least THRESH CPU seconds. |
 
 Environment overrides: `GG_REPO` (GitGalaxy clone with history), `GG_PY` (python with the engine dependencies). Targets are
 pinned checkouts under `targets/` (keyword-rosetta, cics-crucible, language-crucible at fixed refs).

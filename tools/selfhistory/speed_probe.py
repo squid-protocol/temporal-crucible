@@ -16,7 +16,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MIRROR, ENG, SPEED, RAW = HERE / "mirror.git", HERE / "eng", HERE / "speed", HERE / "speed" / "raw"
-PY = os.environ.get("GG_PY", "/srv/storage_16tb/projects/gitgalaxy/venvs/selfscan/bin/python")   # a python with the engine dependencies
+PY = "/srv/storage_16tb/projects/gitgalaxy/venvs/selfscan/bin/python"
 TARGETS = ["keyword-rosetta", "cics-crucible", "language-crucible"]
 
 
@@ -41,7 +41,7 @@ def parse(out):
     r = {}
     m = re.search(r"PIPELINE_SUCCESS: (\d+) files mapped in ([\d.]+)s", out)
     if m: r["files_mapped"], r["pipeline_s"] = int(m.group(1)), float(m.group(2))
-    m = re.search(r"MISSION_SUCCESS: (\d+) stars mapped in ([\d.]+)s", out)
+    m = re.search(r"MISSION_SUCCESS: (\d+) (?:stars|files) mapped in ([\d.]+)s", out)
     if m and "pipeline_s" not in r: r["files_mapped"], r["pipeline_s"] = int(m.group(1)), float(m.group(2))
     m = re.search(r"Processed ([\d,]+) lines of code at ([\d,]+) LOC/s", out)
     if m: r["loc"], r["loc_per_s"] = int(m.group(1).replace(",", "")), int(m.group(2).replace(",", ""))
@@ -78,7 +78,7 @@ def ensure_engine(s):
     return wt
 
 
-V6 = os.environ.get("GG_REPO", "/srv/storage_16tb/projects/gitgalaxy/v6")   # live checkout: any import from here = provenance failure
+V6 = "/srv/storage_16tb/projects/gitgalaxy/v6"
 
 
 def engine_entry(wt):
