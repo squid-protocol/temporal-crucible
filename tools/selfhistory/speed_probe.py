@@ -130,6 +130,17 @@ def one_run(s, target, rep, flags):
         f.write(out)
     if p.returncode:
         rec["tail"] = out[-400:]
+    try:                                   # output parity: a speed change that only skips output must be visible
+        import sqlite3 as _sq
+        dbp = next(iter(work.glob("*_master.db")), None)
+        if dbp:
+            _c = _sq.connect(f"file:{dbp}?mode=ro&immutable=1", uri=True)
+            rec["out_funcs"] = _c.execute("select count(*) from function_data").fetchone()[0]
+            try: rec["out_edges"] = _c.execute("select count(*) from edge_data").fetchone()[0]
+            except Exception: pass
+            _c.close()
+    except Exception:
+        pass
     shutil.rmtree(work, ignore_errors=True)
     return rec
 
