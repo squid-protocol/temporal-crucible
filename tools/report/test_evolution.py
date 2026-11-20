@@ -80,6 +80,45 @@ class Parser(unittest.TestCase):
             self.assertEqual(len(list((Path(t) / "cache").glob("diff_x_*.json.gz"))), 2)
 
 
+class Languages(unittest.TestCase):
+    """The function a hunk belongs to must be found for methods (Python, Rust) and for Fortran, which git names only with the language's diff driver."""
+
+    def _edit_names(self, fname, v1, v2, lang):
+        with tempfile.TemporaryDirectory() as t:
+            d = new_repo(t)
+            (d / fname).write_text(v1)
+            commit(d, "add")
+            (d / fname).write_text(v2)
+            sha = commit(d, "change", "2020-01-02T00:00:00")
+            data = ER.diff_pass(str(d), lang, Path(t) / "cache", "x")
+            return {f[1] for f in data[sha]["funcs"]}
+
+    def test_python_method_edit_is_attributed_to_the_method(self):
+        body = lambda n: "class A:\n    def helper(self):\n        return 1\n\n    def target(self):\n        x = 1\n        y = 2\n        return %d\n\n    def other(self):\n        return 3\n" % n
+        self.assertEqual(self._edit_names("m.py", body(1), body(2), "python"), {"target"})
+
+    def test_rust_method_edit_is_attributed_to_the_method(self):
+        body = lambda n: "struct A;\nimpl A {\n    fn helper(&self) -> i32 {\n        1\n    }\n\n    fn target(&self) -> i32 {\n        let x = 1;\n        let y = 2;\n        %d\n    }\n\n    fn other(&self) -> i32 {\n        3\n    }\n}\n" % n
+        self.assertEqual(self._edit_names("m.rs", body(1), body(2), "rust"), {"target"})
+
+    def test_fortran_free_and_fixed_form_and_uppercase_extensions(self):
+        free = lambda n: "module m\ncontains\n  subroutine helper(a)\n    real :: a\n    a = 1.0\n  end subroutine helper\n\n  subroutine target(a)\n    real :: a\n    a = 2.0\n    a = a + %d.0\n  end subroutine target\n\n  real function other(a)\n    real :: a\n    other = a\n  end function other\nend module m\n" % n
+        self.assertEqual(self._edit_names("m.F90", free(1), free(2), "fortran"), {"target"})
+        fixed = lambda n: "      SUBROUTINE HELPER(A)\n      REAL A\n      A = 1.0\n      RETURN\n      END\n\n      SUBROUTINE TARGET(A)\n      REAL A\n      A = 2.0\n      A = A + %d.0\n      RETURN\n      END\n" % n
+        self.assertEqual(self._edit_names("m.F", fixed(1), fixed(2), "fortran"), {"TARGET"})
+
+    def test_fortran_comment_classifier(self):
+        cm = ER.COMMENT["fortran"]
+        for line in ("! free-form comment", "   ! indented comment", "C fixed-form comment", "c lower-case fixed", "* star comment", "", "   "):
+            self.assertTrue(cm.match(line), line)
+        for line in ("call foo(a)", "      CALL FOO(A)", "  x = 1.0 ! trailing", "      continue", "cat = 1"):
+            self.assertFalse(cm.match(line), line)
+
+    def test_fortran_function_name_forms(self):
+        for ctx, want in (("subroutine foo(a, b)", "foo"), ("SUBROUTINE FOO(A)", "FOO"), ("end subroutine foo", "foo"), ("real function bar(x)", "bar"), ("module m", "m"), ("program main", "main")):
+            self.assertEqual(ER.func_name(ctx, "fortran"), want, ctx)
+
+
 class Rules(unittest.TestCase):
     def test_comment_classifier(self):
         cm = ER.COMMENT["c"]

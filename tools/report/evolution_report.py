@@ -180,6 +180,7 @@ def diff_pass(repo, lang, cache_dir, name):
                 d["rem"] += 1
             if not cm.match(line[1:]):
                 d["nc"] += 1
+    proc.stdout.close()
     proc.wait()
     if proc.returncode:
         raise SystemExit(f"git log -p failed in {repo}")
