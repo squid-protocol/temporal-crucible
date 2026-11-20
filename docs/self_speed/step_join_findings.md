@@ -27,7 +27,7 @@ language-crucible CPU 288 s (2026-10-02) -> 65 s (2026-10-18): every stage falls
 Per mapped file the cost went 0.029 s (2026-03-21) -> 0.086 s (10-02) -> ~0.07-0.1 s (11-20): per-file cost has risen about 2-3x over the period.
 
 ## 4. Commit-text screen (SF-8 tier c), one count
-277 of 6,695 commit subjects (4.1%) match a performance keyword list; 72 of those (26%) touch scan-path code or pattern tables, the rest are CI, docs and test-timing commits.
+277 of 6,695 commit subjects (4.1%) match a performance keyword list; 72 of those (26%) touch scan-path code or pattern tables, the rest are CI, docs and test-timing commits. CORRECTION (2026-11-20, from an independent review): the keyword pattern lacked a closing word boundary (it matched PERFORM, FastAPI and the lint rule PERF401) and had a trailing-space bug; with a corrected pattern ('batch' also dropped as noise) the count is 209 subjects (3.1%), 54 of them (26%) touching scan-path code or pattern tables. The culprit commit of the 7.6x step is still not flagged.
 The commit that caused the 7.6x step (`6b604f91a`) is NOT among the matches (its subject says pre-compile, small scans, 30% win; no keyword fires). One miss, so no recall estimate.
 
 ## Method notes
