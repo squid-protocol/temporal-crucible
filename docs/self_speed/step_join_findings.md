@@ -33,3 +33,17 @@ The commit that caused the 7.6x step (`6b604f91a`) is NOT among the matches (its
 ## Method notes
 Provenance of every engine run is checked (no module loaded from the live checkout); March-2026 engines needed their hard-coded output directory redirected; the 2026-05-26 engine prints "files mapped" where others print "stars mapped" (parser fixed in this branch).
 Reproduce: `tools/selfhistory/join_steps.py`, `bisect_cost.py` (needs the private mirror and targets described in the README; the one-file-per-language corpus is built from keyword-rosetta `data/<lang>/` by taking the first file of each).
+
+## 5. The other three bisections (language-crucible CPU seconds, one probe per commit, boundary re-checked with 2 repeats)
+- **2026-10-02 -> 10-18, CPU 332 s -> 93 s at the boundary:** commit `14fc9c7a5` (#5512, "aperture: vendored trees under any name"; +39 lines in `aperture.py` and two small edits).
+  Files mapped fall 3,389 -> 991 at that commit. This is the engine scanning less, not scanning faster: it blocks 2,757 files of the benchmark corpus itself as "Hidden Directory, or Dynamic Ignored Dir"
+  (each `data/<language>/` folder holds a cloned third-party project, which the new rule treats as vendored). A whole-repo scan of language-crucible now sees 43 of 66 language folders.
+- **2026-07-27 -> 08-13, CPU 130 s -> 176 s:** two steps of about 15% each, files mapped unchanged within each. One is pinned to `89d86da58` (2026-08-10, #1234, "prevent Prism from swallowing code due to quotes in comments"):
+  parent 149.9 s vs commit 173.3 s (2 repeats each), files mapped 2,945 both. A correctness fix that makes the engine read code it previously skipped, so cost rises. The first step (131.7 -> 150.6 s) lies between two probes 42 commits apart and is not localised.
+- **2026-11-04 -> 11-20, CPU 68 s -> 96 s:** NOT localised. Probes rise gradually (72.7 -> 80.2 s over 2026-11-09..11) and the boundary check did not confirm a step (parent 84.7 s vs found commit 79.1 s; the threshold crossing is inside the noise, about 4-6% at this load). Treat as drift.
+
+## 6. Functions and files per language in language-crucible (pinned v1.7.0; today's engine, each `data/<language>/` folder scanned as its own target)
+The whole-repo scan is screen-dependent (section 5), so the per-language counts use one scan per folder: 66 folders, 3,736 files on disk, 3,364 mapped, 52,820 functions, 1,047,248 code lines, 372 excluded.
+Largest by functions: cobol 11,430 (585 files mapped), typescript 8,471 (52), python 3,905 (305), zig 3,542 (41), rust 2,127 (57), c 2,096 (40), cpp 1,765 (45), dart 1,750 (8), php 1,707 (42), assembly 1,525 (236).
+Functions per mapped file range from 3.6 (groovy) and 3.8 (powershell) to 162.9 (typescript) and 218.8 (dart). 13 folders yield zero functions (blueprint, db2_sql, hlo, json, markdown, mlir, plaintext, proto, protobuf, sqlite, tabular, td, text): data and markup, as expected.
+Detection quirks visible in the table: the `dockerfile` folder is mostly detected as go (55 of 61 mapped files); several folders carry a few markdown/plaintext files. Full table: `join/language_crucible_perdir.json` (also per detected language); the whole-repo comparison for the 2026-10-02 and 2026-11-20 engines is `join/language_crucible_by_language.json`.

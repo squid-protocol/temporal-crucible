@@ -1,0 +1,27 @@
+=== B2: 2026-10-02 -> 2026-10-18, language-crucible CPU 288 -> 65 (down), threshold 176
+910 commits in window; target language-crucible metric cpu_s threshold 176.0 down
+  idx  454 62e336309 2026-10-12 docs: auto-update graph comparison data (#4946)                         cpu_s=295.21 cpu=295.21 files=3380
+  idx  681 99e675129 2026-10-17 MQ burned estates: pin COPAUA0C's MQ options, copybooks and translation cpu_s=291.77 cpu=291.77 files=3380
+  idx  795 4c72683d8 2026-10-18 outcome pilot: add the five other burned mainframe estates, subdir-scop cpu_s=290.33 cpu=290.33 files=3380
+  idx  852 df740871b 2026-10-18 C2: probe the 31+ digit intermediate on the oracle, record a declared d cpu_s=297.73 cpu=297.73 files=3381
+  idx  880 bd8098dd6 2026-10-18 tools: DOOM speedrun libclang subset oracle, --clang PORTS (Part of #54 cpu_s=92.03 cpu=92.03 files=991
+  idx  866 138d1e78a 2026-10-18 det: D2 re-check -- Lossless keeps X'25' under the IBM037 family, a hex cpu_s=91.59 cpu=91.59 files=991
+  idx  859 4dd263251 2026-10-18 pr_gates: clean-env lint/mypy PATH names the dir the matched tool is in cpu_s=328.47 cpu=328.47 files=3389
+  idx  862 4e218dd7c 2026-10-18 equivalence: INQACCCU on generated Db2 rows (Part of #4507) (#5510)     cpu_s=107.82 cpu=107.82 files=991
+  idx  860 14fc9c7a5 2026-10-18 aperture: vendored trees under any name -- third_party_* prefixes, *_li cpu_s=92.41 cpu=92.41 files=991
+FIRST COMMIT PAST THRESHOLD: 14fc9c7a55cd5d980e3008e586195046057b97c2
+14fc9c7a5 2026-10-18
+aperture: vendored trees under any name -- third_party_* prefixes, *_libs containers, foreign-license directories (Part of #5464) (#5512)
+
+Co-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>
+Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+ gitgalaxy/core/aperture.py                   | 39 +++++++++++++-----
+ gitgalaxy/core/guidestar_lens.py             |  5 +--
+ gitgalaxy/metrics/chronometer.py             |  5 +--
+ tests/core_engine/test_vendored_dirs_4545.py | 60 ++++++++++++++++++++++++++++
+ 4 files changed, 91 insertions(+), 18 deletions(-)
+
+boundary check (parent vs found commit), 2 repeats each:
+  idx  859 4dd263251 2026-10-18 pr_gates: clean-env lint/mypy PATH names the dir the matched tool is in cpu_s=331.98 cpu=331.98 files=3389
+  idx  860 14fc9c7a5 2026-10-18 aperture: vendored trees under any name -- third_party_* prefixes, *_li cpu_s=93.0 cpu=93.0 files=991
