@@ -899,3 +899,8 @@ question than a reviewer asks.
 
 **Decision rule (a) applies.** Open a gitgalaxy issue for an effort-aware "review budget" ranking on prior security
 fixes and change entropy. A further unseen-repo replication is registered before either feeds any score weight.
+
+## SF: GitGalaxy-on-itself (registration 1, 2026-11-20)
+
+Registered in `docs/self_registration_1.md` (frozen candidate list and hashes in `docs/self_speed/frozen_2026-11-20/`; freeze tip `7203d2555753ca2b29e180de3cb8d7845aca6a06`).
+Confirmatory: SF-1/2 merged (holdout commits after the freeze only; one score at 20 events or 2027-03-31) and SF-11 (conditional on a check of the evolution report). Exploratory: SF-3, SF-4, SF-5(a), SF-7, SF-8, SF-9. Dropped: SF-6, SF-10 as a hypothesis, SF-5(b). No verdict is claimed.
