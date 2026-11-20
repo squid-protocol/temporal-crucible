@@ -1,0 +1,1731 @@
+{
+ "counts": {
+  "merged PRs": 6487,
+  "fix PRs (title prefix fix/bugfix/fixes/fixed, or label bug)": 626,
+  "  by title": 574,
+  "  by bug label": 76,
+  "fix PRs mapped to a first-parent commit": 615,
+  "fix commits present in the diff cache": 590,
+  "fix commits with >=1 Python engine function": 379,
+  "  engine function touches summed over those commits": 1169,
+  "pairs (A, later fix B within 30 d), both with engine functions": 39285
+ },
+ "counts_pairs": {
+  "B functions touched by A as well (not outside)": 3399,
+  "A functions touched (summed over used+dropped pairs)": 106890,
+  "A functions dropped (not in scan graph)": 3073,
+  "pairs used": 31830,
+  "outside functions used": 79567,
+  "outside B functions dropped (not in scan graph)": 37707,
+  "  ...file absent from scan (new/renamed/deleted file)": 23456,
+  "pairs dropped: no outside B function in scan": 6698,
+  "outside functions with no file-mate (excluded from null-B rows)": 129,
+  "  ...file present, function absent (new/renamed/deleted function)": 14251,
+  "pairs dropped: A has no function in scan": 757
+ },
+ "V1": {
+  "all": {
+   "nullA": {
+    "n_funcs": 79567,
+    "n_Bcommits": 372,
+    "same_file": {
+     "obs": 0.2654115399600337,
+     "null": 0.12017526110070763,
+     "ratio": 2.2085372440973283,
+     "lo": 1.899881623292606,
+     "hi": 2.523770461589995
+    },
+    "callers1": {
+     "obs": 0.03466261138411653,
+     "null": 0.014146631141050936,
+     "ratio": 2.450237872077683,
+     "lo": 2.0737225294316883,
+     "hi": 2.8632489365938945
+    },
+    "callees1": {
+     "obs": 0.03717621627056443,
+     "null": 0.023182852187464662,
+     "ratio": 1.6036083899403113,
+     "lo": 1.3701218219421947,
+     "hi": 1.8538607322520793
+    },
+    "either1": {
+     "obs": 0.06932522276823307,
+     "null": 0.03636155692686667,
+     "ratio": 1.9065526514077933,
+     "lo": 1.6644868383481655,
+     "hi": 2.1588178381120824
+    },
+    "callers2": {
+     "obs": 0.060489901592368694,
+     "null": 0.023640202596553847,
+     "ratio": 2.5587725547321076,
+     "lo": 2.1734493907837495,
+     "hi": 2.9552980857039053
+    },
+    "callees2": {
+     "obs": 0.06862141340002766,
+     "null": 0.043885153392738165,
+     "ratio": 1.5636589619710133,
+     "lo": 1.3354585228352895,
+     "hi": 1.8130363496943371
+    },
+    "either2": {
+     "obs": 0.12561740420023376,
+     "null": 0.06563305139065186,
+     "ratio": 1.9139351521621544,
+     "lo": 1.65999081998151,
+     "hi": 2.166166910691013
+    },
+    "callers3": {
+     "obs": 0.07222843641208039,
+     "null": 0.028948307715510165,
+     "ratio": 2.495083205619693,
+     "lo": 2.1195044393120472,
+     "hi": 2.875505329358171
+    },
+    "callees3": {
+     "obs": 0.08134025412545402,
+     "null": 0.0562059647843955,
+     "ratio": 1.4471818860769128,
+     "lo": 1.2363640811268761,
+     "hi": 1.6682774866486532
+    },
+    "either3": {
+     "obs": 0.1500747797453718,
+     "null": 0.08320918219865024,
+     "ratio": 1.8035843614841611,
+     "lo": 1.5737425944470735,
+     "hi": 2.027415074173674
+    }
+   },
+   "nullB": {
+    "n_funcs": 79438,
+    "n_Bcommits": 372,
+    "same_file": {
+     "obs": 0.2655026561595206,
+     "null": 0.2655026561595206,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.03469372340693371,
+     "null": 0.015420516629320981,
+     "ratio": 2.249841833506806,
+     "lo": 1.9517173029527068,
+     "hi": 2.5816497790131883
+    },
+    "callees1": {
+     "obs": 0.03713587955386591,
+     "null": 0.035302877715954584,
+     "ratio": 1.0519221648914736,
+     "lo": 0.943740383977505,
+     "hi": 1.1658271934518623
+    },
+    "either1": {
+     "obs": 0.06931191621138498,
+     "null": 0.049489664895893605,
+     "ratio": 1.4005331488339927,
+     "lo": 1.2936702274251493,
+     "hi": 1.504061981039586
+    },
+    "callers2": {
+     "obs": 0.060562954757169114,
+     "null": 0.023438908331025438,
+     "ratio": 2.583864141701668,
+     "lo": 2.253411430670714,
+     "hi": 2.9457507063080133
+    },
+    "callees2": {
+     "obs": 0.06863214078904303,
+     "null": 0.07573019209949891,
+     "ratio": 0.9062718433206924,
+     "lo": 0.8302590551138619,
+     "hi": 0.9853201477334962
+    },
+    "either2": {
+     "obs": 0.1256955109645258,
+     "null": 0.09734629522394828,
+     "ratio": 1.2912202839908724,
+     "lo": 1.210615530391926,
+     "hi": 1.372510706639497
+    },
+    "callers3": {
+     "obs": 0.07232055187693547,
+     "null": 0.02633978700370102,
+     "ratio": 2.7456771714506907,
+     "lo": 2.3490782237761136,
+     "hi": 3.174931136056756
+    },
+    "callees3": {
+     "obs": 0.0813716357410811,
+     "null": 0.09017390921221582,
+     "ratio": 0.90238558416693,
+     "lo": 0.8289735801374607,
+     "hi": 0.9770783836084171
+    },
+    "either3": {
+     "obs": 0.15019260303633022,
+     "null": 0.11466842065510208,
+     "ratio": 1.3097991772998883,
+     "lo": 1.220807116658091,
+     "hi": 1.4025515325788134
+    }
+   }
+  },
+  "lag<=2d": {
+   "nullA": {
+    "n_funcs": 11820,
+    "n_Bcommits": 360,
+    "same_file": {
+     "obs": 0.26302876480541454,
+     "null": 0.10039974619289335,
+     "ratio": 2.6198150371821622,
+     "lo": 2.3162216126697865,
+     "hi": 2.9337329851075027
+    },
+    "callers1": {
+     "obs": 0.031387478849407784,
+     "null": 0.01014340101522843,
+     "ratio": 3.0943742441302797,
+     "lo": 2.580524235445516,
+     "hi": 3.6542614079779154
+    },
+    "callees1": {
+     "obs": 0.04458544839255499,
+     "null": 0.018746192893401015,
+     "ratio": 2.378373499413305,
+     "lo": 1.9585742473711456,
+     "hi": 2.8545205741156114
+    },
+    "either1": {
+     "obs": 0.07453468697123519,
+     "null": 0.028234771573604024,
+     "ratio": 2.6398190180832133,
+     "lo": 2.264985344547679,
+     "hi": 3.0553565037825745
+    },
+    "callers2": {
+     "obs": 0.05084602368866328,
+     "null": 0.01746700507614213,
+     "ratio": 2.910975491620653,
+     "lo": 2.455962168379342,
+     "hi": 3.3863261942111493
+    },
+    "callees2": {
+     "obs": 0.07817258883248732,
+     "null": 0.03567343485617595,
+     "ratio": 2.191338993501875,
+     "lo": 1.8334317577397867,
+     "hi": 2.6071231961719166
+    },
+    "either2": {
+     "obs": 0.12707275803722504,
+     "null": 0.051999576988155695,
+     "ratio": 2.4437267646652066,
+     "lo": 2.1240713113632608,
+     "hi": 2.792160498475373
+    },
+    "callers3": {
+     "obs": 0.05634517766497462,
+     "null": 0.021776649746192873,
+     "ratio": 2.5874125874125897,
+     "lo": 2.2156450865204405,
+     "hi": 2.997289657478243
+    },
+    "callees3": {
+     "obs": 0.09179357021996616,
+     "null": 0.048185702199661624,
+     "ratio": 1.904996005653535,
+     "lo": 1.6042150079333732,
+     "hi": 2.2547521660423424
+    },
+    "either3": {
+     "obs": 0.14619289340101524,
+     "null": 0.0687263113367174,
+     "ratio": 2.127175030313476,
+     "lo": 1.8726769720500063,
+     "hi": 2.412519868668311
+    }
+   },
+   "nullB": {
+    "n_funcs": 11795,
+    "n_Bcommits": 360,
+    "same_file": {
+     "obs": 0.2635862653666808,
+     "null": 0.2635862653666808,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.0314540059347181,
+     "null": 0.01368503603221703,
+     "ratio": 2.298423318774589,
+     "lo": 1.9084691957636983,
+     "hi": 2.749728053852938
+    },
+    "callees1": {
+     "obs": 0.0446799491309877,
+     "null": 0.035990674014412874,
+     "ratio": 1.2414312972603714,
+     "lo": 1.0824415721447043,
+     "hi": 1.4088009739000773
+    },
+    "either1": {
+     "obs": 0.07469266638406104,
+     "null": 0.04880415430267062,
+     "ratio": 1.5304571393827793,
+     "lo": 1.3822842348231774,
+     "hi": 1.6866555853025864
+    },
+    "callers2": {
+     "obs": 0.05095379398050021,
+     "null": 0.02138151759220009,
+     "ratio": 2.3830765875612117,
+     "lo": 1.9862879775868898,
+     "hi": 2.8374757128604906
+    },
+    "callees2": {
+     "obs": 0.07833827893175074,
+     "null": 0.07637303942348452,
+     "ratio": 1.0257321107435449,
+     "lo": 0.9113582934682849,
+     "hi": 1.1418691430070729
+    },
+    "either2": {
+     "obs": 0.12734209410767275,
+     "null": 0.09619626960576518,
+     "ratio": 1.3237737245898458,
+     "lo": 1.2148609020803192,
+     "hi": 1.4400573023603174
+    },
+    "callers3": {
+     "obs": 0.056464603645612545,
+     "null": 0.02376896990250106,
+     "ratio": 2.375559558417007,
+     "lo": 1.9992212540269565,
+     "hi": 2.801286647604039
+    },
+    "callees3": {
+     "obs": 0.09198813056379822,
+     "null": 0.09207715133531161,
+     "ratio": 0.9990331936835317,
+     "lo": 0.8963307260878884,
+     "hi": 1.1077469381580896
+    },
+    "either3": {
+     "obs": 0.14650275540483257,
+     "null": 0.11424374735057223,
+     "ratio": 1.282370009758777,
+     "lo": 1.181958437577013,
+     "hi": 1.3853963713720092
+    }
+   }
+  },
+  "lag>2d": {
+   "nullA": {
+    "n_funcs": 67747,
+    "n_Bcommits": 360,
+    "same_file": {
+     "obs": 0.265827269104167,
+     "null": 0.12362554799474523,
+     "ratio": 2.150261603818865,
+     "lo": 1.8529073665080864,
+     "hi": 2.470652936491577
+    },
+    "callers1": {
+     "obs": 0.03523403250328428,
+     "null": 0.014845085391235021,
+     "ratio": 2.373447614123358,
+     "lo": 1.9660973657095715,
+     "hi": 2.789598928822937
+    },
+    "callees1": {
+     "obs": 0.03588350775680104,
+     "null": 0.023956927982050843,
+     "ratio": 1.4978342708917396,
+     "lo": 1.2538605554691373,
+     "hi": 1.763307685040273
+    },
+    "either1": {
+     "obs": 0.06841631363750425,
+     "null": 0.037779458869027394,
+     "ratio": 1.8109394810203001,
+     "lo": 1.5653678313435633,
+     "hi": 2.0666283982962828
+    },
+    "callers2": {
+     "obs": 0.06217249472301357,
+     "null": 0.024717256852701982,
+     "ratio": 2.5153476817237164,
+     "lo": 2.114640287539414,
+     "hi": 2.9529518597268765
+    },
+    "callees2": {
+     "obs": 0.06695499431709154,
+     "null": 0.045317873854192794,
+     "ratio": 1.4774522417471463,
+     "lo": 1.2544880919101433,
+     "hi": 1.722368152164039
+    },
+    "either2": {
+     "obs": 0.12536348472995115,
+     "null": 0.06801172007616574,
+     "ratio": 1.843262963935593,
+     "lo": 1.5961729674882343,
+     "hi": 2.0963130184636
+    },
+    "callers3": {
+     "obs": 0.07499963097996959,
+     "null": 0.030199566032444253,
+     "ratio": 2.483467176296353,
+     "lo": 2.0842332050359325,
+     "hi": 2.9023319562290113
+    },
+    "callees3": {
+     "obs": 0.07951643615215434,
+     "null": 0.05760528141467519,
+     "ratio": 1.3803671156425805,
+     "lo": 1.1750288557581605,
+     "hi": 1.6152186903902743
+    },
+    "either3": {
+     "obs": 0.15075206282196998,
+     "null": 0.08573604735265022,
+     "ratio": 1.7583276518673099,
+     "lo": 1.5392975658273103,
+     "hi": 1.9928645055779963
+    }
+   },
+   "nullB": {
+    "n_funcs": 67643,
+    "n_Bcommits": 360,
+    "same_file": {
+     "obs": 0.2658368197744039,
+     "null": 0.2658368197744039,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.035258637257365874,
+     "null": 0.01572313469242937,
+     "ratio": 2.242468690059799,
+     "lo": 1.8860652847385875,
+     "hi": 2.603019882806237
+    },
+    "callees1": {
+     "obs": 0.03582041009417087,
+     "null": 0.03518294575935426,
+     "ratio": 1.018118560599694,
+     "lo": 0.9014429938231424,
+     "hi": 1.1370508855928934
+    },
+    "either1": {
+     "obs": 0.06837366763744955,
+     "null": 0.04960919829102791,
+     "ratio": 1.3782457687854894,
+     "lo": 1.2587475110089417,
+     "hi": 1.4930209498002571
+    },
+    "callers2": {
+     "obs": 0.062238516919710836,
+     "null": 0.023797658294280256,
+     "ratio": 2.6153210601679158,
+     "lo": 2.247221193895141,
+     "hi": 2.9943315622670728
+    },
+    "callees2": {
+     "obs": 0.06693966855402629,
+     "null": 0.07561809795544255,
+     "ratio": 0.8852334343753268,
+     "lo": 0.8032825768375929,
+     "hi": 0.9672001771060352
+    },
+    "either2": {
+     "obs": 0.12540839406886153,
+     "null": 0.0975468267226469,
+     "ratio": 1.2856224880121718,
+     "lo": 1.1978209348042859,
+     "hi": 1.3727648393926144
+    },
+    "callers3": {
+     "obs": 0.07508537468769866,
+     "null": 0.026788063805567447,
+     "ratio": 2.80294146052069,
+     "lo": 2.3959876759015444,
+     "hi": 3.2560082374475896
+    },
+    "callees3": {
+     "obs": 0.079520423399317,
+     "null": 0.08984203834838783,
+     "ratio": 0.8851137492111893,
+     "lo": 0.8079094566393568,
+     "hi": 0.962765092474996
+    },
+    "either3": {
+     "obs": 0.15083600668214006,
+     "null": 0.11474247150481204,
+     "ratio": 1.3145612492390348,
+     "lo": 1.2200612371389177,
+     "hi": 1.415365029713144
+    }
+   }
+  }
+ },
+ "R3": {
+  "all": {
+   "k1": {
+    "raw_callers_over_callees": [
+     0.9342372881355933,
+     0.7782974060818088,
+     1.1209905348068867
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.1387911659214076,
+     1.7743903202378282,
+     2.5664873239649446
+    ]
+   },
+   "k2": {
+    "raw_callers_over_callees": [
+     0.882428466617755,
+     0.7300867351873329,
+     1.0624183951243436
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.851091712431525,
+     2.375829195018369,
+     3.4287266893700323
+    ]
+   },
+   "k3": {
+    "raw_callers_over_callees": [
+     0.8887685643564357,
+     0.7333858237169539,
+     1.0773300434070865
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     3.0426873164041757,
+     2.5191156903111773,
+     3.6698628365397
+    ]
+   }
+  },
+  "lag<=2d": {
+   "k1": {
+    "raw_callers_over_callees": [
+     0.7039848197343453,
+     0.5736497665162548,
+     0.8689108527131783
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     1.8514301386204939,
+     1.460848379173516,
+     2.359288636557022
+    ]
+   },
+   "k2": {
+    "raw_callers_over_callees": [
+     0.6504329004329005,
+     0.5242685721502586,
+     0.808613399714327
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.323293345894903,
+     1.8363778972358777,
+     2.940799243894621
+    ]
+   },
+   "k3": {
+    "raw_callers_over_callees": [
+     0.6138248847926268,
+     0.49683033148112665,
+     0.756890024992895
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.3778584870219275,
+     1.8855166808327783,
+     2.9847381589850195
+    ]
+   }
+  },
+  "lag>2d": {
+   "k1": {
+    "raw_callers_over_callees": [
+     0.9843169624432522,
+     0.7909565601912205,
+     1.2016606759911184
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.2025614470076413,
+     1.7702820322521047,
+     2.688543644062501
+    ]
+   },
+   "k2": {
+    "raw_callers_over_callees": [
+     0.9297703180212014,
+     0.75907270541932,
+     1.1275026313440193
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     2.9543857683295047,
+     2.4202333462998653,
+     3.5668196252526085
+    ]
+   },
+   "k3": {
+    "raw_callers_over_callees": [
+     0.9442275515895148,
+     0.7615927843787696,
+     1.161039242506149
+    ],
+    "excess_ratio_nullB_callers_over_callees": [
+     3.166758468071096,
+     2.5833925842184415,
+     3.832168124801309
+    ]
+   }
+  }
+ },
+ "perm_check": [
+  {
+   "rep": 0,
+   "nfuncs": 71274,
+   "nullA": {
+    "n_funcs": 71274,
+    "n_Bcommits": 375,
+    "same_file": {
+     "obs": 0.26396722507506243,
+     "null": 0.12149381261048921,
+     "ratio": 2.172680397489417,
+     "lo": 1.925879562458088,
+     "hi": 2.432045010499637
+    },
+    "callers1": {
+     "obs": 0.03530039004405534,
+     "null": 0.015982756685467336,
+     "ratio": 2.20865466069148,
+     "lo": 1.9199499150446766,
+     "hi": 2.5074926308590935
+    },
+    "callees1": {
+     "obs": 0.03552487583129893,
+     "null": 0.023029084939809742,
+     "ratio": 1.5426090929860639,
+     "lo": 1.3241020079123038,
+     "hi": 1.7804275080733756
+    },
+    "either1": {
+     "obs": 0.06846816510929651,
+     "null": 0.03792526026320957,
+     "ratio": 1.8053446340015213,
+     "lo": 1.6032276197146205,
+     "hi": 2.0229922034869787
+    },
+    "callers2": {
+     "obs": 0.06121446810898785,
+     "null": 0.026326991609843715,
+     "ratio": 2.3251600112980486,
+     "lo": 2.0399308232296103,
+     "hi": 2.6294551054762794
+    },
+    "callees2": {
+     "obs": 0.0690293795774055,
+     "null": 0.04368325055419929,
+     "ratio": 1.5802253427033417,
+     "lo": 1.3690806072229629,
+     "hi": 1.8161826824056337
+    },
+    "either2": {
+     "obs": 0.12571204085641327,
+     "null": 0.06768856806128455,
+     "ratio": 1.857212295325776,
+     "lo": 1.655417470950034,
+     "hi": 2.0645629414672815
+    },
+    "callers3": {
+     "obs": 0.07312624519460112,
+     "null": 0.031931068832954525,
+     "ratio": 2.2901283253985856,
+     "lo": 2.0013014632311923,
+     "hi": 2.572153784616994
+    },
+    "callees3": {
+     "obs": 0.08517832589724163,
+     "null": 0.05566553020736874,
+     "ratio": 1.530180806325386,
+     "lo": 1.325223120496526,
+     "hi": 1.7478616294441411
+    },
+    "either3": {
+     "obs": 0.15364649100653816,
+     "null": 0.08521066588096639,
+     "ratio": 1.8031368422959169,
+     "lo": 1.6096904134512784,
+     "hi": 1.99569979527121
+    }
+   },
+   "nullB": {
+    "n_funcs": 71144,
+    "n_Bcommits": 375,
+    "same_file": {
+     "obs": 0.2641262790959181,
+     "null": 0.2641262790959181,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.03533678173844597,
+     "null": 0.014197683571348242,
+     "ratio": 2.488911769364804,
+     "lo": 2.208523519667187,
+     "hi": 2.8068253300450716
+    },
+    "callees1": {
+     "obs": 0.03551950972675138,
+     "null": 0.03379258967727426,
+     "ratio": 1.0511035131065578,
+     "lo": 0.9458614475151096,
+     "hi": 1.1599153143987226
+    },
+    "either1": {
+     "obs": 0.06849488361632745,
+     "null": 0.04699328123243002,
+     "ratio": 1.4575463091744951,
+     "lo": 1.3545818025739018,
+     "hi": 1.5632614443825457
+    },
+    "callers2": {
+     "obs": 0.06127010007871359,
+     "null": 0.02225479309569325,
+     "ratio": 2.7531192860458717,
+     "lo": 2.442203796700746,
+     "hi": 3.074523443492014
+    },
+    "callees2": {
+     "obs": 0.06905712358034409,
+     "null": 0.07437183740020238,
+     "ratio": 0.928538624220627,
+     "lo": 0.8557454577289132,
+     "hi": 0.9978542573736293
+    },
+    "either2": {
+     "obs": 0.1257871359496233,
+     "null": 0.09481143877206794,
+     "ratio": 1.326708439179187,
+     "lo": 1.2472044758260385,
+     "hi": 1.4050283603618383
+    },
+    "callers3": {
+     "obs": 0.07320364331496683,
+     "null": 0.025196573147419347,
+     "ratio": 2.905301561711157,
+     "lo": 2.554109519603627,
+     "hi": 3.2854874142047374
+    },
+    "callees3": {
+     "obs": 0.08523557854492297,
+     "null": 0.09147384178567414,
+     "ratio": 0.931802763293056,
+     "lo": 0.8677450953184264,
+     "hi": 0.9958889953868078
+    },
+    "either3": {
+     "obs": 0.15377263015855167,
+     "null": 0.11480595693241878,
+     "ratio": 1.339413339405993,
+     "lo": 1.2567798348020705,
+     "hi": 1.4248539105366875
+    }
+   }
+  },
+  {
+   "rep": 1,
+   "nfuncs": 71140,
+   "nullA": {
+    "n_funcs": 71140,
+    "n_Bcommits": 376,
+    "same_file": {
+     "obs": 0.26352263143098115,
+     "null": 0.1224292943491706,
+     "ratio": 2.152447523542934,
+     "lo": 1.9023079257341806,
+     "hi": 2.4213100609938354
+    },
+    "callers1": {
+     "obs": 0.03501546246837223,
+     "null": 0.015903500140567895,
+     "ratio": 2.2017456634626007,
+     "lo": 1.9286816552530925,
+     "hi": 2.503747559006434
+    },
+    "callees1": {
+     "obs": 0.03543716615125105,
+     "null": 0.023507520382344653,
+     "ratio": 1.507482098276353,
+     "lo": 1.3018637421901822,
+     "hi": 1.7279993310720916
+    },
+    "either1": {
+     "obs": 0.06789429294349171,
+     "null": 0.03823334270452625,
+     "ratio": 1.7757875231624474,
+     "lo": 1.580236228608473,
+     "hi": 1.9801122021090913
+    },
+    "callers2": {
+     "obs": 0.05962890075906663,
+     "null": 0.0263789710430138,
+     "ratio": 2.2604710646914614,
+     "lo": 1.9833424027404225,
+     "hi": 2.553470583164431
+    },
+    "callees2": {
+     "obs": 0.07098678661793646,
+     "null": 0.04456972167556932,
+     "ratio": 1.5927132579974699,
+     "lo": 1.3888837145086097,
+     "hi": 1.8151196425740415
+    },
+    "either2": {
+     "obs": 0.12545684565645207,
+     "null": 0.06860359853809393,
+     "ratio": 1.8287210631784703,
+     "lo": 1.6417524968207822,
+     "hi": 2.0256517636477804
+    },
+    "callers3": {
+     "obs": 0.0718864211414113,
+     "null": 0.032064590947427626,
+     "ratio": 2.241925407976501,
+     "lo": 1.9691487690023144,
+     "hi": 2.5445280190178203
+    },
+    "callees3": {
+     "obs": 0.08786899072251898,
+     "null": 0.05677473994939556,
+     "ratio": 1.5476775552092064,
+     "lo": 1.3577164055236903,
+     "hi": 1.7520111915430263
+    },
+    "either3": {
+     "obs": 0.15432949114422265,
+     "null": 0.08640181332583644,
+     "ratio": 1.7861834746710583,
+     "lo": 1.6169775939717446,
+     "hi": 1.965291790638924
+    }
+   },
+   "nullB": {
+    "n_funcs": 71018,
+    "n_Bcommits": 376,
+    "same_file": {
+     "obs": 0.2637077923906615,
+     "null": 0.2637077923906615,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.035075614632909966,
+     "null": 0.013933439409727097,
+     "ratio": 2.5173694449357042,
+     "lo": 2.2487113593154247,
+     "hi": 2.8199514735256277
+    },
+    "callees1": {
+     "obs": 0.0354417190008167,
+     "null": 0.033734898194823844,
+     "ratio": 1.0505951076578242,
+     "lo": 0.9514901182238114,
+     "hi": 1.1569293033099672
+    },
+    "either1": {
+     "obs": 0.06795460305837957,
+     "null": 0.046565589005604195,
+     "ratio": 1.459330903131091,
+     "lo": 1.3598850968503857,
+     "hi": 1.5609855161342696
+    },
+    "callers2": {
+     "obs": 0.05973133571770537,
+     "null": 0.02194084598270861,
+     "ratio": 2.72238070331377,
+     "lo": 2.4223250006729673,
+     "hi": 3.043079438075072
+    },
+    "callees2": {
+     "obs": 0.07105240924835957,
+     "null": 0.07460094623898163,
+     "ratio": 0.952433083365264,
+     "lo": 0.883411750688639,
+     "hi": 1.0220193056250249
+    },
+    "either2": {
+     "obs": 0.1256160410036892,
+     "null": 0.09450315412993888,
+     "ratio": 1.3292259095497603,
+     "lo": 1.256451853866207,
+     "hi": 1.4051064373335236
+    },
+    "callers3": {
+     "obs": 0.07200991297980794,
+     "null": 0.024855811202793655,
+     "ratio": 2.8971057267973785,
+     "lo": 2.5483244433883505,
+     "hi": 3.286977523430497
+    },
+    "callees3": {
+     "obs": 0.08796361485820496,
+     "null": 0.09227033991382462,
+     "ratio": 0.9533249247846936,
+     "lo": 0.8921080383854749,
+     "hi": 1.0154256427610195
+    },
+    "either3": {
+     "obs": 0.1545382860683207,
+     "null": 0.11501246162944598,
+     "ratio": 1.3436655809195823,
+     "lo": 1.2652440390698019,
+     "hi": 1.4245894533929704
+    }
+   }
+  },
+  {
+   "rep": 2,
+   "nfuncs": 71506,
+   "nullA": {
+    "n_funcs": 71506,
+    "n_Bcommits": 376,
+    "same_file": {
+     "obs": 0.26387995412972337,
+     "null": 0.12239567309037014,
+     "ratio": 2.1559581925325837,
+     "lo": 1.8963013902347872,
+     "hi": 2.4264430036884215
+    },
+    "callers1": {
+     "obs": 0.03603893379576539,
+     "null": 0.015694067630688324,
+     "ratio": 2.2963411808736267,
+     "lo": 2.025189745947874,
+     "hi": 2.6043025664592787
+    },
+    "callees1": {
+     "obs": 0.035745252146673005,
+     "null": 0.023307834307610544,
+     "ratio": 1.5336153361533618,
+     "lo": 1.3190964667724023,
+     "hi": 1.7464563210800923
+    },
+    "either1": {
+     "obs": 0.06943473274969933,
+     "null": 0.03790870696165355,
+     "ratio": 1.8316302062197964,
+     "lo": 1.6284533887802406,
+     "hi": 2.030291534013727
+    },
+    "callers2": {
+     "obs": 0.060050904819176014,
+     "null": 0.025986770340950406,
+     "ratio": 2.310826009977344,
+     "lo": 2.038313974153488,
+     "hi": 2.614574242862917
+    },
+    "callees2": {
+     "obs": 0.07177020110200542,
+     "null": 0.04433949598635081,
+     "ratio": 1.6186517123266062,
+     "lo": 1.3942160193891655,
+     "hi": 1.8667462533213357
+    },
+    "either2": {
+     "obs": 0.12680054820574496,
+     "null": 0.06804953430481356,
+     "ratio": 1.8633565901828018,
+     "lo": 1.66014936677628,
+     "hi": 2.0737880434000235
+    },
+    "callers3": {
+     "obs": 0.07314071546443655,
+     "null": 0.03163650602746624,
+     "ratio": 2.311908761382724,
+     "lo": 2.037855852592703,
+     "hi": 2.6101001336943
+    },
+    "callees3": {
+     "obs": 0.08885967611109558,
+     "null": 0.05668629205940761,
+     "ratio": 1.5675690344672755,
+     "lo": 1.3500171173255242,
+     "hi": 1.799796405658808
+    },
+    "either3": {
+     "obs": 0.1566721673705703,
+     "null": 0.0859718764858893,
+     "ratio": 1.8223653335784191,
+     "lo": 1.6387740660346641,
+     "hi": 2.0187333980362583
+    }
+   },
+   "nullB": {
+    "n_funcs": 71378,
+    "n_Bcommits": 376,
+    "same_file": {
+     "obs": 0.2640449438202247,
+     "null": 0.2640449438202247,
+     "ratio": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "callers1": {
+     "obs": 0.03607554148337023,
+     "null": 0.014028972512538873,
+     "ratio": 2.571502756251499,
+     "lo": 2.297316493925621,
+     "hi": 2.8884421666432063
+    },
+    "callees1": {
+     "obs": 0.03575331334584886,
+     "null": 0.03413979097200816,
+     "ratio": 1.047262221820973,
+     "lo": 0.9557884759838201,
+     "hi": 1.1405257048558004
+    },
+    "either1": {
+     "obs": 0.06947518843341086,
+     "null": 0.0471828154333268,
+     "ratio": 1.4724680542131914,
+     "lo": 1.3744962164986885,
+     "hi": 1.5791538049398883
+    },
+    "callers2": {
+     "obs": 0.06013057244529127,
+     "null": 0.0220379528706324,
+     "ratio": 2.728500818486675,
+     "lo": 2.421828877349518,
+     "hi": 3.0561003943012746
+    },
+    "callees2": {
+     "obs": 0.0718288548292191,
+     "null": 0.07586539269803025,
+     "ratio": 0.9467934228604348,
+     "lo": 0.8762372958795722,
+     "hi": 1.0146469437141448
+    },
+    "either2": {
+     "obs": 0.1269298663453725,
+     "null": 0.09596080024657459,
+     "ratio": 1.3227262175724028,
+     "lo": 1.2523093384859136,
+     "hi": 1.3972743013206828
+    },
+    "callers3": {
+     "obs": 0.07324385665050856,
+     "null": 0.0249265179747261,
+     "ratio": 2.938391022956883,
+     "lo": 2.584644233731343,
+     "hi": 3.3363934516712193
+    },
+    "callees3": {
+     "obs": 0.08894897587491944,
+     "null": 0.09360335117263029,
+     "ratio": 0.9502755484776726,
+     "lo": 0.8843382197006066,
+     "hi": 1.0145665341658574
+    },
+    "either3": {
+     "obs": 0.1568550533777915,
+     "null": 0.11650991902266811,
+     "ratio": 1.3462806831689054,
+     "lo": 1.267005834893308,
+     "hi": 1.428749355327193
+    }
+   }
+  }
+ ],
+ "size_check": {
+  "share in file with >=50 functions": 0.17929543655032865,
+  ">=100": 0.03177196576470145,
+  ">=200": 2.5136048864478993e-05,
+  "median functions in file": 26.0,
+  "share with <=5 file-mates": 0.17470810763256123
+ },
+ "size_check_A": {
+  "A_total_distinct_A_commits_funcs": 1131,
+  "in file >=50": 313,
+  "in file >=100": 87,
+  "in file >=200": 2
+ },
+ "graphs_used": {
+  "n_scans": 80,
+  "median_nodes": 340.0,
+  "median_edges": 342.0,
+  "median_isolated_share": 0.12627986348122866
+ },
+ "lag_share_le2d": 0.10243095329005981,
+ "V2": [
+  {
+   "issue": 3929,
+   "cause_pr": 3923,
+   "fix_pr": 3939,
+   "cause_commit": "34fc2dc9839e6b8b43063705e280a7ff75f98e20",
+   "fix_commit": "6b604f91a731a1c7a257db8ffb29f350f370fefb",
+   "lag_days": 0.11,
+   "scan": "2026-09-27",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/core/detector.py::__init__",
+    "gitgalaxy/core/detector.py::_active_coding_rules",
+    "gitgalaxy/core/detector.py::_function_slice",
+    "gitgalaxy/core/detector.py::_is_synthetic_satellite_name",
+    "gitgalaxy/core/detector.py::coding_analysis",
+    "gitgalaxy/core/detector.py::comment_analysis",
+    "gitgalaxy/core/detector.py::splice"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/galaxyscope.py::_active_languages",
+    "gitgalaxy/galaxyscope.py::_extract_features_parallel"
+   ],
+   "cause_funcs_non_engine": 8,
+   "fix_funcs_non_engine": 4,
+   "same_function_overlap": [],
+   "same_file_overlap": [],
+   "cause_funcs_in_scan": 7,
+   "outside_fix_funcs": 2,
+   "outside_fix_funcs_in_scan": 2,
+   "outside_relations": [
+    {
+     "func": "gitgalaxy/galaxyscope.py::_active_languages",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/galaxyscope.py::_extract_features_parallel",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    }
+   ]
+  },
+  {
+   "issue": 1193,
+   "cause_pr": 698,
+   "fix_pr": 1197,
+   "cause_commit": "864cfbc3cca81f5e6dbd6466b1a4ad5c2c779dd8",
+   "fix_commit": "3dd93d2e658aec68f6e9923dbc0b57e9fa035423",
+   "lag_days": 12.54,
+   "scan": "2026-07-28",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/core/prism.py::__init__",
+    "gitgalaxy/core/prism.py::_compile_regex_matrix",
+    "gitgalaxy/core/prism.py::_strip_single_line_comments"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/core/prism.py::__init__",
+    "gitgalaxy/core/prism.py::_compile_regex_matrix",
+    "gitgalaxy/core/prism.py::_compile_single_line_delimiter_pattern",
+    "gitgalaxy/core/prism.py::_guard_metadata_signal",
+    "gitgalaxy/core/prism.py::_strip_segment_comments",
+    "gitgalaxy/core/prism.py::_strip_single_line_comments"
+   ],
+   "cause_funcs_non_engine": 1,
+   "fix_funcs_non_engine": 2,
+   "same_function_overlap": [
+    "gitgalaxy/core/prism.py::__init__",
+    "gitgalaxy/core/prism.py::_compile_regex_matrix",
+    "gitgalaxy/core/prism.py::_strip_single_line_comments"
+   ],
+   "same_file_overlap": [
+    "gitgalaxy/core/prism.py"
+   ],
+   "cause_funcs_in_scan": 3,
+   "outside_fix_funcs": 3,
+   "outside_fix_funcs_in_scan": 3,
+   "outside_relations": [
+    {
+     "func": "gitgalaxy/core/prism.py::_compile_single_line_delimiter_pattern",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/core/prism.py::_guard_metadata_signal",
+     "same_file": true,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/core/prism.py::_strip_segment_comments",
+     "same_file": true,
+     "callers1": true,
+     "callees1": false,
+     "callers2": true,
+     "callees2": false,
+     "callers3": true,
+     "callees3": false
+    }
+   ]
+  },
+  {
+   "issue": 3909,
+   "cause_pr": 3866,
+   "fix_pr": 3935,
+   "cause_commit": "786f6e3cd7cebd2d758a6b66564fc1f76240bf6a",
+   "fix_commit": "69ba8dfcce319e8ed9be535ee2e2604067a25df3",
+   "lag_days": 0.41,
+   "scan": "2026-09-27",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/cobol_refractor_controller.py::process_payload",
+    "gitgalaxy/cobol_to_java_controller.py::main",
+    "gitgalaxy/core/aperture.py::_load_gitignore_patterns",
+    "gitgalaxy/core/guidestar_lens.py::_parse_makefile",
+    "gitgalaxy/core/guidestar_lens.py::_parse_package_json",
+    "gitgalaxy/core/guidestar_lens.py::_parse_toml_style_manifest",
+    "gitgalaxy/core/guidestar_lens.py::_scan_gitattributes",
+    "gitgalaxy/core/guidestar_lens.py::_scan_gitignore_evasion",
+    "gitgalaxy/core/source_text.py::_utf16_without_bom",
+    "gitgalaxy/core/source_text.py::decode_source",
+    "gitgalaxy/core/source_text.py::read_source",
+    "gitgalaxy/core/state_rehydrator.py::load_state",
+    "gitgalaxy/galaxyscope.py::_process_file_worker",
+    "gitgalaxy/galaxyscope.py::main",
+    "gitgalaxy/metrics/chronometer.py::_load_ignored_revs",
+    "gitgalaxy/metrics/tensor_scanner.py::_parse_gguf",
+    "gitgalaxy/recorders/audit_recorder.py::generate_report",
+    "gitgalaxy/recorders/llm_recorder.py::_macro",
+    "gitgalaxy/recorders/llm_recorder.py::pct",
+    "gitgalaxy/recorders/record_keeper.py::_seq_base",
+    "gitgalaxy/recorders/record_keeper.py::record_mission",
+    "gitgalaxy/recorders/sbom_recorder.py::_scan_single_file",
+    "gitgalaxy/security/manifest_parser.py::_parse_gradle",
+    "gitgalaxy/security/manifest_parser.py::_parse_package_json",
+    "gitgalaxy/security/manifest_parser.py::_parse_package_lock",
+    "gitgalaxy/security/manifest_parser.py::_parse_pip_conf",
+    "gitgalaxy/security/manifest_parser.py::_parse_pyproject_toml",
+    "gitgalaxy/security/manifest_parser.py::_parse_requirements_txt",
+    "gitgalaxy/security/manifest_parser.py::_parse_yarn_lock",
+    "gitgalaxy/security/manifest_parser.py::slice_manifest",
+    "gitgalaxy/tools/cobol_to_cobol/cics_transaction_reader.py::_add",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_compiler_forge.py::flatten_copybooks",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_compiler_forge.py::main",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py::extract_lineage",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_etl_unpacker.py::unpack_ebcdic_file",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::find_copybook",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::replacer",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::x_ray_dead_code",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_auditor.py::parse_jcl_intent",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py::analyze_cobol_intent",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_lexical_patcher.py::patch_lexical_traps",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py::slice_business_logic",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py::forge_schemas",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py::scan_system_limits",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::_systsin_member_text",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_guardrail.py::_project_java",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::_source_text",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_worklist.py::java_todos",
+    "gitgalaxy/tools/cobol_to_java/port_runner.py::_read",
+    "gitgalaxy/tools/network_auditing/full_api_network_map.py::auto_discover_swagger",
+    "gitgalaxy/tools/network_auditing/full_api_network_map.py::map_physical_codebase",
+    "gitgalaxy/tools/supply_chain_security/vault_sentinel.py::main",
+    "gitgalaxy/tools/terabyte_log_scanning/pii_leak_hunter.py::_mask_validated",
+    "gitgalaxy/tools/terabyte_log_scanning/pii_leak_hunter.py::main",
+    "gitgalaxy/tools/terabyte_log_scanning/terabyte_log_scanner.py::main"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/cobol_refractor_controller.py::main",
+    "gitgalaxy/cobol_refractor_controller.py::process_payload",
+    "gitgalaxy/cobol_to_java_controller.py::main",
+    "gitgalaxy/core/ebcdic_codecs.py::register",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py::code_view",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py::extract_lineage",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::find_copybook",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::replacer",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::resolve_copybooks",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::shared",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::x_ray_dead_code",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py::analyze_cobol_intent",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py::slice_business_logic",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py::data_entries",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py::forge_schemas",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py::scan_system_limits",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::_int",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::_systsin_member_text",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::load_galaxy_ir",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::runner_runs",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_decoder_forge.py::generate_decoder_util",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::_source_text",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::build_ticket",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::trim_ticket",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::write_port_tickets"
+   ],
+   "cause_funcs_non_engine": 3,
+   "fix_funcs_non_engine": 1,
+   "same_function_overlap": [
+    "gitgalaxy/cobol_refractor_controller.py::process_payload",
+    "gitgalaxy/cobol_to_java_controller.py::main",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py::extract_lineage",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::find_copybook",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::replacer",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::x_ray_dead_code",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py::analyze_cobol_intent",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py::slice_business_logic",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py::forge_schemas",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py::scan_system_limits",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::_systsin_member_text",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::_source_text"
+   ],
+   "same_file_overlap": [
+    "gitgalaxy/cobol_refractor_controller.py",
+    "gitgalaxy/cobol_to_java_controller.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py",
+    "gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py"
+   ],
+   "cause_funcs_in_scan": 54,
+   "outside_fix_funcs": 13,
+   "outside_fix_funcs_in_scan": 13,
+   "outside_relations": [
+    {
+     "func": "gitgalaxy/cobol_refractor_controller.py::main",
+     "same_file": true,
+     "callers1": true,
+     "callees1": false,
+     "callers2": true,
+     "callees2": false,
+     "callers3": true,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/core/ebcdic_codecs.py::register",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/cobol_dag_architect.py::code_view",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::resolve_copybooks",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/cobol_graveyard_finder.py::shared",
+     "same_file": true,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py::data_entries",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::_int",
+     "same_file": true,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::load_galaxy_ir",
+     "same_file": true,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::runner_runs",
+     "same_file": true,
+     "callers1": true,
+     "callees1": false,
+     "callers2": true,
+     "callees2": false,
+     "callers3": true,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_decoder_forge.py::generate_decoder_util",
+     "same_file": false,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::build_ticket",
+     "same_file": true,
+     "callers1": true,
+     "callees1": false,
+     "callers2": true,
+     "callees2": true,
+     "callers3": true,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::trim_ticket",
+     "same_file": true,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::write_port_tickets",
+     "same_file": true,
+     "callers1": true,
+     "callees1": true,
+     "callers2": true,
+     "callees2": true,
+     "callers3": true,
+     "callees3": true
+    }
+   ]
+  },
+  {
+   "issue": 5525,
+   "cause_pr": 5512,
+   "fix_pr": 5590,
+   "cause_commit": "14fc9c7a55cd5d980e3008e586195046057b97c2",
+   "fix_commit": "6af200ef0a0c85445beb5f9bffb33a6fa3a8b0f0",
+   "lag_days": 0.64,
+   "scan": "2026-10-18",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/core/aperture.py::__init__",
+    "gitgalaxy/core/aperture.py::_check_ignore_rules",
+    "gitgalaxy/core/aperture.py::_license_texts",
+    "gitgalaxy/core/aperture.py::_probe",
+    "gitgalaxy/core/aperture.py::is_candidate_name",
+    "gitgalaxy/core/aperture.py::looks_like_virtualenv",
+    "gitgalaxy/core/guidestar_lens.py::_calculate_documentation_coverage",
+    "gitgalaxy/metrics/chronometer.py::_determine_commit_bounds"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/core/aperture.py::_has_foreign_license",
+    "gitgalaxy/core/aperture.py::_has_root_license",
+    "gitgalaxy/core/aperture.py::_license_family",
+    "gitgalaxy/core/aperture.py::looks_like_virtualenv"
+   ],
+   "cause_funcs_non_engine": 1,
+   "fix_funcs_non_engine": 1,
+   "same_function_overlap": [
+    "gitgalaxy/core/aperture.py::looks_like_virtualenv"
+   ],
+   "same_file_overlap": [
+    "gitgalaxy/core/aperture.py"
+   ],
+   "cause_funcs_in_scan": 7,
+   "outside_fix_funcs": 3,
+   "outside_fix_funcs_in_scan": 3,
+   "outside_relations": [
+    {
+     "func": "gitgalaxy/core/aperture.py::_has_foreign_license",
+     "same_file": true,
+     "callers1": true,
+     "callees1": true,
+     "callers2": true,
+     "callees2": true,
+     "callers3": true,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/core/aperture.py::_has_root_license",
+     "same_file": true,
+     "callers1": true,
+     "callees1": true,
+     "callers2": true,
+     "callees2": true,
+     "callers3": true,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/core/aperture.py::_license_family",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    }
+   ]
+  },
+  {
+   "issue": 4758,
+   "cause_pr": 4740,
+   "fix_pr": 4761,
+   "cause_commit": "d207e3586a873b7c86e69230ca852b32892d0f32",
+   "fix_commit": "a497a304f49010737210b9faf1ebd0e1d50fca19",
+   "lag_days": 0.2,
+   "scan": "2026-10-08",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [],
+   "fix_funcs_engine": [],
+   "cause_funcs_non_engine": 7,
+   "fix_funcs_non_engine": 10,
+   "same_function_overlap": [],
+   "same_file_overlap": [],
+   "cause_funcs_in_scan": 0,
+   "outside_fix_funcs": 0,
+   "outside_fix_funcs_in_scan": 0
+  },
+  {
+   "issue": 3946,
+   "cause_pr": 3887,
+   "fix_pr": 3951,
+   "cause_commit": "0fa306dfdee5d697c49a900d1cfc2bc8d3d73135",
+   "fix_commit": "42d503cef2a08f92381971bdab523caf4a026b5b",
+   "lag_days": 0.47,
+   "scan": "2026-09-27",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/core/mainframe_boundary.py::extract_boundary",
+    "gitgalaxy/core/state_rehydrator.py::load_state",
+    "gitgalaxy/galaxyscope.py::_process_file_worker",
+    "gitgalaxy/recorders/audit_recorder.py::_mainframe_facts_block",
+    "gitgalaxy/recorders/llm_recorder.py::_root",
+    "gitgalaxy/recorders/record_keeper.py::_seq_base",
+    "gitgalaxy/recorders/record_keeper.py::record_mission",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::is_program",
+    "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::load_galaxy_ir",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::__init__",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::named",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::repository_source",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::sources",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::build_ticket",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_port_tickets.py::ticket_markdown",
+    "gitgalaxy/tools/cobol_to_java/java_target.py::load_target",
+    "gitgalaxy/tools/cobol_to_java/port_runner.py::_read"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::db2_dates_source",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_decoder_forge.py::generate_decoder_util",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::_codec_put",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::_service_methods",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::entity_source",
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::key_source"
+   ],
+   "cause_funcs_non_engine": 5,
+   "fix_funcs_non_engine": 9,
+   "same_function_overlap": [],
+   "same_file_overlap": [
+    "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py"
+   ],
+   "cause_funcs_in_scan": 17,
+   "outside_fix_funcs": 6,
+   "outside_fix_funcs_in_scan": 6,
+   "outside_relations": [
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_db2_forge.py::db2_dates_source",
+     "same_file": true,
+     "callers1": false,
+     "callees1": true,
+     "callers2": false,
+     "callees2": true,
+     "callers3": false,
+     "callees3": true
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_decoder_forge.py::generate_decoder_util",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::_codec_put",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::_service_methods",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::entity_source",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    },
+    {
+     "func": "gitgalaxy/tools/cobol_to_java/cobol_to_java_repository_forge.py::key_source",
+     "same_file": false,
+     "callers1": false,
+     "callees1": false,
+     "callers2": false,
+     "callees2": false,
+     "callers3": false,
+     "callees3": false
+    }
+   ]
+  },
+  {
+   "issue": 2827,
+   "cause_pr": 2734,
+   "fix_pr": 2914,
+   "cause_commit": "860d091b013fa8740e386647c7c72aefcc2c3a84",
+   "fix_commit": "d098b6ce04ccd0c2ead01e71df9e69fa2e9ff944",
+   "lag_days": 4.48,
+   "scan": "2026-09-04",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [
+    "gitgalaxy/core/detector.py::splice",
+    "gitgalaxy/galaxyscope.py::_calculate_risk_exposures"
+   ],
+   "fix_funcs_engine": [
+    "gitgalaxy/core/detector.py::splice"
+   ],
+   "cause_funcs_non_engine": 2,
+   "fix_funcs_non_engine": 1,
+   "same_function_overlap": [
+    "gitgalaxy/core/detector.py::splice"
+   ],
+   "same_file_overlap": [
+    "gitgalaxy/core/detector.py"
+   ],
+   "cause_funcs_in_scan": 2,
+   "outside_fix_funcs": 0,
+   "outside_fix_funcs_in_scan": 0,
+   "outside_relations": []
+  },
+  {
+   "issue": 4859,
+   "cause_pr": 4843,
+   "fix_pr": 4860,
+   "cause_commit": "ad14a1ad9c6a50baf1c3246c35d4f48b037ae9f6",
+   "fix_commit": "b6112c4fc3c93f2834fe60cd2fe77ca0bba582a0",
+   "lag_days": 0.38,
+   "scan": "2026-10-10",
+   "cause_in_cache": false,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [],
+   "fix_funcs_engine": [],
+   "cause_funcs_non_engine": 0,
+   "fix_funcs_non_engine": 0,
+   "same_function_overlap": [],
+   "same_file_overlap": [],
+   "cause_funcs_in_scan": 0,
+   "outside_fix_funcs": 0,
+   "outside_fix_funcs_in_scan": 0
+  },
+  {
+   "issue": 5208,
+   "cause_pr": 4705,
+   "fix_pr": 5210,
+   "cause_commit": "2018d6b9157fa668f8bf2aa313e7e1c823b51622",
+   "fix_commit": "3481f78710f1e8cda84b8989d7cf3e8f7cc5ec5c",
+   "lag_days": 6.98,
+   "scan": "2026-10-08",
+   "cause_in_cache": true,
+   "fix_in_cache": true,
+   "cause_funcs_engine": [],
+   "fix_funcs_engine": [],
+   "cause_funcs_non_engine": 6,
+   "fix_funcs_non_engine": 2,
+   "same_function_overlap": [],
+   "same_file_overlap": [],
+   "cause_funcs_in_scan": 0,
+   "outside_fix_funcs": 0,
+   "outside_fix_funcs_in_scan": 0
+  },
+  {
+   "issue": 2204,
+   "cause_pr": 1975,
+   "fix_pr": 2205,
+   "cause_commit": null,
+   "fix_commit": "7efcc7299d7268cdcacaaaf89398b713bc7e301f",
+   "note": "PR has no first-parent commit"
+  }
+ ]
+}
