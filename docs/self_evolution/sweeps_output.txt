@@ -1,0 +1,18 @@
+linked pairs examined: 165608 | text changed: 4295 | code edits (token change): 4033
+
+== gitgalaxy: 4,033 code edits; in a sweep (same call/macro changed in >= 10 functions that quarter): 12.5%; quarters with a sweep: 16
+   3 migration-quarters; 3 distinct old->new pairs. Largest:
+     eq.get -> raw_signals.get: 17 functions over 1 quarter(s), 2026-W26 .. 2026-W26
+     open -> open_source: 13 functions over 1 quarter(s), 2026-W40 .. 2026-W40
+     G_jstr -> jstr: 11 functions over 1 quarter(s), 2026-W45 .. 2026-W45
+   adoptions with no old name removed: len (163), str (40), set (36), read_source (28), add_flag (26)
+   removals with no replacement: len (21), s.get (12)
+   what the edits are         in sweeps    organic
+     signature changed            18.4%      22.5%
+     guard added                  51.4%      23.7%
+     guard removed                 4.7%       3.9%
+     grew (net lines up)          77.3%      57.6%
+     print/log call added          1.0%       0.9%
+     print/log call removed        0.4%       0.2%
+   share of code edits in sweeps by era: 2025s 13%
+share of code edits in sweeps by era: {'gemini': '100/860 = 12%', 'transition': '0/67 = 0%', 'claude': '103/971 = 11%', 'fleet': '303/2135 = 14%'}

@@ -1,0 +1,20 @@
+agent-era eligible commits with features: 1005
+
+[B] n=487 classes={'other': 60, 'feature': 225, 'fix': 165, 'refactor': 31, 'perf': 6} groups=190
+  other     baseline AUC 0.722  +ast 0.683  delta -0.039
+  feature   baseline AUC 0.758  +ast 0.754  delta -0.004
+  fix       baseline AUC 0.636  +ast 0.640  delta +0.003
+  refactor  baseline AUC 0.165  +ast 0.216  delta +0.051
+  macro delta (ast - locked baseline): +0.003
+  permutation p (within module, 100 perms): 0.188
+  time-blocked (train <Nov, test Nov) baseline [0.522 0.774 0.557 0.319] +ast [0.443 0.77  0.611 0.433] classes ['other', 'feature', 'fix', 'refactor']
+
+[A] n=1005 classes={'feature': 353, 'fix': 548, 'other': 24, 'perf': 22, 'refactor': 58} groups=619
+  feature   baseline AUC 0.774  +ast 0.785  delta +0.011
+  fix       baseline AUC 0.735  +ast 0.748  delta +0.012
+  other     baseline AUC 0.543  +ast 0.619  delta +0.075
+  perf      baseline AUC 0.679  +ast 0.594  delta -0.085
+  refactor  baseline AUC 0.784  +ast 0.788  delta +0.004
+  macro delta (ast - locked baseline): +0.003
+  permutation p (within module, 100 perms): 0.218
+  time-blocked (train <Nov, test Nov) baseline [0.557 0.547 0.503 0.537 0.501] +ast [0.585 0.568 0.559 0.489 0.596] classes ['feature', 'fix', 'other', 'perf', 'refactor']

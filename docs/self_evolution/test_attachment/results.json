@@ -1,0 +1,510 @@
+{
+ "steps": {
+  "weeks": 36,
+  "engine_files_ever": 246,
+  "engine_files_at_tip": 219,
+  "file_weeks_with_touches": 977,
+  "touches": 7796,
+  "fix_touches": 1297,
+  "rows_dropped": {
+   "file not in tree at previous week-end (new that week or moved)": 106,
+   "no size in daily scan at previous week-end": 34,
+   "week 0 (no previous week-end commit)": 6
+  },
+  "rows_in_lag1_model": 831
+ },
+ "attached_share_by_month": {
+  "2026-03": {
+   "weekly_snapshots": 2,
+   "mean_engine_files": 14.5,
+   "share_attached_mean_of_weeks": 0.0,
+   "share_attached_last_week": 0.0
+  },
+  "2026-04": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 31.2,
+   "share_attached_mean_of_weeks": 0.0,
+   "share_attached_last_week": 0.0
+  },
+  "2026-05": {
+   "weekly_snapshots": 5,
+   "mean_engine_files": 46.8,
+   "share_attached_mean_of_weeks": 0.559,
+   "share_attached_last_week": 0.833
+  },
+  "2026-06": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 49.5,
+   "share_attached_mean_of_weeks": 0.878,
+   "share_attached_last_week": 0.92
+  },
+  "2026-07": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 51.2,
+   "share_attached_mean_of_weeks": 0.936,
+   "share_attached_last_week": 0.943
+  },
+  "2026-08": {
+   "weekly_snapshots": 5,
+   "mean_engine_files": 53.0,
+   "share_attached_mean_of_weeks": 0.943,
+   "share_attached_last_week": 0.943
+  },
+  "2026-09": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 70.8,
+   "share_attached_mean_of_weeks": 0.934,
+   "share_attached_last_week": 0.896
+  },
+  "2026-10": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 151.0,
+   "share_attached_mean_of_weeks": 0.907,
+   "share_attached_last_week": 0.926
+  },
+  "2026-11": {
+   "weekly_snapshots": 4,
+   "mean_engine_files": 205.0,
+   "share_attached_mean_of_weeks": 0.935,
+   "share_attached_last_week": 0.941
+  }
+ },
+ "descriptive_lag1": {
+  "attached": {
+   "file_weeks": 714,
+   "files": 143,
+   "touches": 6269,
+   "fix_touches": 1195,
+   "pooled_fix_share": 0.191,
+   "mean_row_fix_share": 0.157,
+   "loc_q10_50_90": [
+    73.6,
+    282.0,
+    1726.0
+   ]
+  },
+  "unattached": {
+   "file_weeks": 117,
+   "files": 61,
+   "touches": 663,
+   "fix_touches": 64,
+   "pooled_fix_share": 0.097,
+   "mean_row_fix_share": 0.07,
+   "loc_q10_50_90": [
+    38.0,
+    219.0,
+    1200.8000000000002
+   ]
+  }
+ },
+ "attachment_variation_lag1": {
+  "share_rows_attached": 0.859,
+  "rows": 831,
+  "unattached_rows": 117,
+  "unattached_files": 61,
+  "files_ever_in_rows": 173,
+  "files_with_both_states_in_rows": 31,
+  "count_attached_quantiles_10_50_90": [
+   1.0,
+   2.0,
+   26.0
+  ],
+  "unattached_rows_by_era": {
+   "gemini": 86,
+   "fleet": 22,
+   "claude": 5,
+   "transition": 4
+  },
+  "rows_by_era": {
+   "fleet": 396,
+   "gemini": 215,
+   "claude": 151,
+   "transition": 69
+  }
+ },
+ "T1": {
+  "label": "T1 lag1 attached(>=1)",
+  "rows": 831,
+  "files": 173,
+  "coef": -0.5602941423254361,
+  "se": 0.34746364440261546,
+  "p": 0.1068475382886911,
+  "coef_ci95": [
+   -1.2413103712915947,
+   0.12072208664072259
+  ],
+  "OR": 0.5710410717944622,
+  "OR_ci95": [
+   0.28900526550604133,
+   1.1283112960076904
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -1.597,
+   "lloc": -0.214,
+   "age": 0.006,
+   "rec": 0.288,
+   "era_transition": 1.859,
+   "era_claude": 2.254,
+   "era_fleet": 0.846,
+   "grp_tools": -0.427,
+   "grp_recorders": -0.924,
+   "grp_other": -0.37
+  },
+  "verdict": "NOT SUPPORTED (interval includes 0)"
+ },
+ "T2": {
+  "label": "T2 lag1 log(1+n attached tests)",
+  "rows": 831,
+  "files": 173,
+  "coef": -0.5748506182929115,
+  "se": 0.1746886636076933,
+  "p": 0.0009993307724845512,
+  "coef_ci95": [
+   -0.9172341074714232,
+   -0.23246712911439982
+  ],
+  "OR": 0.5627889328995076,
+  "OR_ci95": [
+   0.3996228276966385,
+   0.7925758015870991
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -3.1,
+   "lloc": -0.038,
+   "age": 0.025,
+   "rec": 0.412,
+   "era_transition": 1.671,
+   "era_claude": 2.331,
+   "era_fleet": 1.367,
+   "grp_tools": -0.414,
+   "grp_recorders": -1.073,
+   "grp_other": -0.585
+  },
+  "verdict": "SUPPORTED (interval wholly below 0)"
+ },
+ "T3a_lead_attached": {
+  "label": "lead (end of following week) attached",
+  "rows": 761,
+  "files": 161,
+  "coef": -1.1717119139236913,
+  "se": 0.41485071506264615,
+  "p": 0.004736653573713872,
+  "coef_ci95": [
+   -1.984804374407166,
+   -0.35861945344021673
+  ],
+  "OR": 0.3098360743061975,
+  "OR_ci95": [
+   0.13740749190994117,
+   0.6986401658826161
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -1.083,
+   "lloc": -0.222,
+   "age": 0.006,
+   "rec": 0.278,
+   "era_transition": 2.072,
+   "era_claude": 2.451,
+   "era_fleet": 1.089,
+   "grp_tools": -0.463,
+   "grp_recorders": -0.934,
+   "grp_other": -0.378
+  }
+ },
+ "T3a_lag_on_lead_subset": {
+  "label": "lagged attached on the same rows as the lead model",
+  "rows": 761,
+  "files": 161,
+  "coef": -0.6629198732450837,
+  "se": 0.3171618158825089,
+  "p": 0.03660316545304404,
+  "coef_ci95": [
+   -1.2845456096461247,
+   -0.041294136844042595
+  ],
+  "OR": 0.5153443952149067,
+  "OR_ci95": [
+   0.27677631955300114,
+   0.9595468503531456
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -1.379,
+   "lloc": -0.219,
+   "age": 0.005,
+   "rec": 0.28,
+   "era_transition": 1.808,
+   "era_claude": 2.222,
+   "era_fleet": 0.862,
+   "grp_tools": -0.476,
+   "grp_recorders": -0.923,
+   "grp_other": -0.355
+  }
+ },
+ "T3a_lead_log": {
+  "label": "lead log(1+n)",
+  "rows": 761,
+  "files": 161,
+  "coef": -0.5157904434893136,
+  "se": 0.19090451356217064,
+  "p": 0.0068960204027591196,
+  "coef_ci95": [
+   -0.8899564145573063,
+   -0.1416244724213208
+  ],
+  "OR": 0.5970284907736465,
+  "OR_ci95": [
+   0.41067365175518905,
+   0.8679471333796236
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -2.91,
+   "lloc": -0.017,
+   "age": 0.011,
+   "rec": 0.348,
+   "era_transition": 1.759,
+   "era_claude": 2.87,
+   "era_fleet": 1.578,
+   "grp_tools": -0.398,
+   "grp_recorders": -1.063,
+   "grp_other": -0.564
+  }
+ },
+ "T3a_lag_log_on_lead_subset": {
+  "label": "lag log(1+n), lead subset",
+  "rows": 761,
+  "files": 161,
+  "coef": -0.5660852152831297,
+  "se": 0.17393458517408716,
+  "p": 0.0011355742881626514,
+  "coef_ci95": [
+   -0.9069907378902551,
+   -0.2251796926760044
+  ],
+  "OR": 0.5677436881955836,
+  "OR_ci95": [
+   0.40373734931978333,
+   0.798372744134251
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -2.944,
+   "lloc": -0.043,
+   "age": 0.024,
+   "rec": 0.399,
+   "era_transition": 1.593,
+   "era_claude": 2.26,
+   "era_fleet": 1.333,
+   "grp_tools": -0.452,
+   "grp_recorders": -1.071,
+   "grp_other": -0.562
+  }
+ },
+ "T3b_all_files_existing_both_weeks": {
+  "0": {
+   "rises": 310,
+   "file_weeks": 2288,
+   "share": 0.1355
+  },
+  "1": {
+   "rises": 82,
+   "file_weeks": 229,
+   "share": 0.3581
+  }
+ },
+ "T3b_only_unattached_at_start_POSTHOC": {
+  "0": {
+   "rises": 58,
+   "file_weeks": 393,
+   "share": 0.1476
+  },
+  "1": {
+   "rises": 0,
+   "file_weeks": 12,
+   "share": 0.0
+  }
+ },
+ "T3b_touched_files_only_POSTHOC": {
+  "0": {
+   "rises": 152,
+   "file_weeks": 661,
+   "share": 0.23
+  },
+  "1": {
+   "rises": 82,
+   "file_weeks": 229,
+   "share": 0.3581
+  }
+ },
+ "T3b_OR_fix_vs_nofix_cluster_robust": {
+  "OR": 3.5592714505112806,
+  "ci95": [
+   2.3366357154721715,
+   5.421646675406024
+  ]
+ },
+ "ROB_lag2_attached": {
+  "label": "attachment at end of week t-2",
+  "rows": 742,
+  "files": 155,
+  "coef": -0.31432821353300433,
+  "se": 0.45597064915197766,
+  "p": 0.49059635295285653,
+  "coef_ci95": [
+   -1.2080142638782294,
+   0.5793578368122209
+  ],
+  "OR": 0.7302793012712223,
+  "OR_ci95": [
+   0.2987900088464031,
+   1.784891870796585
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -1.222,
+   "lloc": -0.311,
+   "age": 0.009,
+   "rec": 0.384,
+   "era_transition": 1.626,
+   "era_claude": 2.126,
+   "era_fleet": 0.12,
+   "grp_tools": -0.792,
+   "grp_recorders": -1.053,
+   "grp_other": -0.412
+  },
+  "verdict": "NOT SUPPORTED (interval includes 0)"
+ },
+ "ROB_lag2_log": {
+  "label": "log(1+n) at end of week t-2",
+  "rows": 742,
+  "files": 155,
+  "coef": -0.3351747619383392,
+  "se": 0.22765897805291904,
+  "p": 0.1409488368212006,
+  "coef_ci95": [
+   -0.7813781596792552,
+   0.11102863580257671
+  ],
+  "OR": 0.7152130834052179,
+  "OR_ci95": [
+   0.45777468975459107,
+   1.1174269048125527
+  ],
+  "dropped_constant_columns": [],
+  "other_coefs": {
+   "const": -2.163,
+   "lloc": -0.187,
+   "age": 0.023,
+   "rec": 0.417,
+   "era_transition": 1.557,
+   "era_claude": 2.09,
+   "era_fleet": 0.43,
+   "grp_tools": -0.808,
+   "grp_recorders": -1.196,
+   "grp_other": -0.518
+  },
+  "verdict": "NOT SUPPORTED (interval includes 0)"
+ },
+ "ROB_file_level": {
+  "files": 159,
+  "dropped": {
+   "born < 4 weeks before the end": 30,
+   "no touches in window": 32,
+   "existed at start of data (birth unknown)": 14,
+   "no size": 5,
+   "not in tree at end of its first 4 weeks": 6
+  },
+  "attached_files": 120,
+  "pooled_fix_share": {
+   "0": 0.126,
+   "1": 0.174
+  },
+  "files_by_att": {
+   "0": 39,
+   "1": 120
+  },
+  "decile_matched_OR": {
+   "OR": 1.3654044380089048,
+   "ci95": [
+    0.911521923550982,
+    2.0452928571060744
+   ]
+  },
+  "within_decile_diff_in_pooled_share": [
+   {
+    "dec": 0,
+    "n_unatt": 9,
+    "n_att": 8,
+    "share_unatt": 0.136,
+    "share_att": 0.049
+   },
+   {
+    "dec": 1,
+    "n_unatt": 3,
+    "n_att": 12,
+    "share_unatt": 0.053,
+    "share_att": 0.017
+   },
+   {
+    "dec": 2,
+    "n_unatt": 8,
+    "n_att": 9,
+    "share_unatt": 0.156,
+    "share_att": 0.194
+   },
+   {
+    "dec": 3,
+    "n_unatt": 6,
+    "n_att": 9,
+    "share_unatt": 0.071,
+    "share_att": 0.154
+   },
+   {
+    "dec": 4,
+    "n_unatt": 3,
+    "n_att": 13,
+    "share_unatt": 0.156,
+    "share_att": 0.065
+   },
+   {
+    "dec": 5,
+    "n_unatt": 3,
+    "n_att": 13,
+    "share_unatt": 0.149,
+    "share_att": 0.159
+   },
+   {
+    "dec": 6,
+    "n_unatt": 3,
+    "n_att": 12,
+    "share_unatt": 0.125,
+    "share_att": 0.126
+   },
+   {
+    "dec": 7,
+    "n_unatt": 1,
+    "n_att": 15,
+    "share_unatt": 0.1,
+    "share_att": 0.236
+   },
+   {
+    "dec": 8,
+    "n_unatt": 2,
+    "n_att": 14,
+    "share_unatt": 0.0,
+    "share_att": 0.141
+   },
+   {
+    "dec": 9,
+    "n_unatt": 1,
+    "n_att": 15,
+    "share_unatt": 0.11,
+    "share_att": 0.183
+   }
+  ]
+ }
+}

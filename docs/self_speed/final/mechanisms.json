@@ -1,0 +1,538 @@
+{
+ "snapshot_hash": "fb9a176c82",
+ "n_events": 35,
+ "n_events_cpu": 32,
+ "n_events_files_only": 3,
+ "events_missing_commit_files": [],
+ "n_first_parent_commits": 6700,
+ "n_engine_path_commits": 1634,
+ "n_cache_gap_commits": 27,
+ "n_engine_path_commits_used": 1607,
+ "bucket_counts_events": {
+  "a": 5,
+  "b": 12,
+  "c": 15,
+  "d": 1,
+  "e": 0,
+  "gap": 2
+ },
+ "bucket_counts_engine_path": {
+  "a": 614,
+  "b": 690,
+  "c": 303,
+  "d": 0,
+  "e": 0,
+  "gap": 27
+ },
+ "bucket_counts_all": {
+  "a": 614,
+  "b": 690,
+  "c": 303,
+  "d": 5037,
+  "e": 29,
+  "gap": 27
+ },
+ "bucket5_counts_events": {
+  "a": 5,
+  "b": 19,
+  "c": 8,
+  "d": 1,
+  "e": 0,
+  "gap": 2
+ },
+ "bucket5_counts_engine_path": {
+  "a": 614,
+  "b": 827,
+  "c": 166,
+  "d": 0,
+  "e": 0,
+  "gap": 27
+ },
+ "gap_events": [
+  "21f84abe4a",
+  "92dae57c58"
+ ],
+ "strict_a_events": 0,
+ "strict_a_engine_path": 18,
+ "gap_effect": {
+  "base_share_excluding_gap": 0.8114499066583696,
+  "base_share_gap_counted_as_quiet": 0.8145654834761322,
+  "n_gap": 27
+ },
+ "quiet_tests": {
+  "primary: CPU-metric events (files-only events excluded)": {
+   "events_in_group": 32,
+   "events_not_engine_path_or_gap": 3,
+   "variants": {
+    "q_ab3": {
+     "n_events": 29,
+     "quiet_events": 15,
+     "share": 0.5172413793103449,
+     "ci95": [
+      0.3253149963614431,
+      0.7055144170481586
+     ],
+     "n_others": 1575,
+     "quiet_others": 1287,
+     "share_others": 0.8171428571428572,
+     "fisher_odds_ratio": 0.23976023976023977,
+     "fisher_p": 0.00026688116408130964,
+     "mh_odds_ratio": 0.2827467469321075,
+     "mh_p": 0.0020546646776963924,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 5,
+       "events_quiet": 1,
+       "others": 40,
+       "others_quiet": 23
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 22
+      },
+      "claude": {
+       "events": 14,
+       "events_quiet": 8,
+       "others": 755,
+       "others_quiet": 607
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 6,
+       "others": 751,
+       "others_quiet": 635
+      }
+     },
+     "label": "(a)+(b), quiet = core with <=3 functions (primary)"
+    },
+    "q_ab5": {
+     "n_events": 29,
+     "quiet_events": 22,
+     "share": 0.7586206896551724,
+     "ci95": [
+      0.5645996540114524,
+      0.8970164492273824
+     ],
+     "n_others": 1575,
+     "quiet_others": 1417,
+     "share_others": 0.8996825396825396,
+     "fisher_odds_ratio": 0.35043855227341464,
+     "fisher_p": 0.023706915818996352,
+     "mh_odds_ratio": 0.44910676332662236,
+     "mh_p": 0.14627174449389654,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 5,
+       "events_quiet": 2,
+       "others": 40,
+       "others_quiet": 30
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 1,
+       "others": 29,
+       "others_quiet": 25
+      },
+      "claude": {
+       "events": 14,
+       "events_quiet": 12,
+       "others": 755,
+       "others_quiet": 662
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 7,
+       "others": 751,
+       "others_quiet": 700
+      }
+     },
+     "label": "(a)+(b) with a cutoff of 5 functions"
+    },
+    "q_strict_a": {
+     "n_events": 29,
+     "quiet_events": 0,
+     "share": 0.0,
+     "ci95": [
+      0.0,
+      0.11944486906950272
+     ],
+     "n_others": 1575,
+     "quiet_others": 18,
+     "share_others": 0.011428571428571429,
+     "fisher_odds_ratio": 0.0,
+     "fisher_p": 1.0,
+     "mh_odds_ratio": 0.0,
+     "mh_p": 1.0,
+     "mh_strata_used": 3,
+     "strata": {
+      "gemini": {
+       "events": 5,
+       "events_quiet": 0,
+       "others": 40,
+       "others_quiet": 2
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 0
+      },
+      "claude": {
+       "events": 14,
+       "events_quiet": 0,
+       "others": 755,
+       "others_quiet": 6
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 0,
+       "others": 751,
+       "others_quiet": 10
+      }
+     },
+     "label": "strict bucket (a) alone (only standards files)"
+    }
+   }
+  },
+  "all events incl. files-only": {
+   "events_in_group": 35,
+   "events_not_engine_path_or_gap": 3,
+   "variants": {
+    "q_ab3": {
+     "n_events": 32,
+     "quiet_events": 17,
+     "share": 0.53125,
+     "ci95": [
+      0.34743680928637977,
+      0.7090601770939846
+     ],
+     "n_others": 1575,
+     "quiet_others": 1287,
+     "share_others": 0.8171428571428572,
+     "fisher_odds_ratio": 0.25361305361305364,
+     "fisher_p": 0.0002462149185794203,
+     "mh_odds_ratio": 0.3146280544212622,
+     "mh_p": 0.002632023466816442,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 6,
+       "events_quiet": 2,
+       "others": 40,
+       "others_quiet": 23
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 22
+      },
+      "claude": {
+       "events": 16,
+       "events_quiet": 9,
+       "others": 755,
+       "others_quiet": 607
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 6,
+       "others": 751,
+       "others_quiet": 635
+      }
+     },
+     "label": "(a)+(b), quiet = core with <=3 functions (primary)"
+    },
+    "q_ab5": {
+     "n_events": 32,
+     "quiet_events": 24,
+     "share": 0.75,
+     "ci95": [
+      0.5659506250777457,
+      0.8853839948974116
+     ],
+     "n_others": 1575,
+     "quiet_others": 1417,
+     "share_others": 0.8996825396825396,
+     "fisher_odds_ratio": 0.33450952717007765,
+     "fisher_p": 0.01315656927164348,
+     "mh_odds_ratio": 0.4429110316788515,
+     "mh_p": 0.10215700293060326,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 6,
+       "events_quiet": 3,
+       "others": 40,
+       "others_quiet": 30
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 1,
+       "others": 29,
+       "others_quiet": 25
+      },
+      "claude": {
+       "events": 16,
+       "events_quiet": 13,
+       "others": 755,
+       "others_quiet": 662
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 7,
+       "others": 751,
+       "others_quiet": 700
+      }
+     },
+     "label": "(a)+(b) with a cutoff of 5 functions"
+    },
+    "q_strict_a": {
+     "n_events": 32,
+     "quiet_events": 0,
+     "share": 0.0,
+     "ci95": [
+      0.0,
+      0.10888116067935288
+     ],
+     "n_others": 1575,
+     "quiet_others": 18,
+     "share_others": 0.011428571428571429,
+     "fisher_odds_ratio": 0.0,
+     "fisher_p": 1.0,
+     "mh_odds_ratio": 0.0,
+     "mh_p": 0.9955176898595687,
+     "mh_strata_used": 3,
+     "strata": {
+      "gemini": {
+       "events": 6,
+       "events_quiet": 0,
+       "others": 40,
+       "others_quiet": 2
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 0
+      },
+      "claude": {
+       "events": 16,
+       "events_quiet": 0,
+       "others": 755,
+       "others_quiet": 6
+      },
+      "fleet": {
+       "events": 9,
+       "events_quiet": 0,
+       "others": 751,
+       "others_quiet": 10
+      }
+     },
+     "label": "strict bucket (a) alone (only standards files)"
+    }
+   }
+  },
+  "CPU events above 25%": {
+   "events_in_group": 13,
+   "events_not_engine_path_or_gap": 0,
+   "variants": {
+    "q_ab3": {
+     "n_events": 13,
+     "quiet_events": 5,
+     "share": 0.38461538461538464,
+     "ci95": [
+      0.13857933889016005,
+      0.6842223970859369
+     ],
+     "n_others": 1594,
+     "quiet_others": 1299,
+     "share_others": 0.814930991217064,
+     "fisher_odds_ratio": 0.14193610469591994,
+     "fisher_p": 0.0007813542123874119,
+     "mh_odds_ratio": 0.19218586460788617,
+     "mh_p": 0.005335517608281657,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 3,
+       "events_quiet": 1,
+       "others": 43,
+       "others_quiet": 24
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 22
+      },
+      "claude": {
+       "events": 6,
+       "events_quiet": 2,
+       "others": 765,
+       "others_quiet": 614
+      },
+      "fleet": {
+       "events": 3,
+       "events_quiet": 2,
+       "others": 757,
+       "others_quiet": 639
+      }
+     },
+     "label": "(a)+(b), quiet = core with <=3 functions (primary)"
+    },
+    "q_ab5": {
+     "n_events": 13,
+     "quiet_events": 9,
+     "share": 0.6923076923076923,
+     "ci95": [
+      0.3857383382492905,
+      0.9090796054279033
+     ],
+     "n_others": 1594,
+     "quiet_others": 1432,
+     "share_others": 0.8983688833124216,
+     "fisher_odds_ratio": 0.2545391061452514,
+     "fisher_p": 0.03728715330129947,
+     "mh_odds_ratio": 0.38286619656787096,
+     "mh_p": 0.2080792204534594,
+     "mh_strata_used": 4,
+     "strata": {
+      "gemini": {
+       "events": 3,
+       "events_quiet": 2,
+       "others": 43,
+       "others_quiet": 31
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 1,
+       "others": 29,
+       "others_quiet": 25
+      },
+      "claude": {
+       "events": 6,
+       "events_quiet": 4,
+       "others": 765,
+       "others_quiet": 671
+      },
+      "fleet": {
+       "events": 3,
+       "events_quiet": 2,
+       "others": 757,
+       "others_quiet": 705
+      }
+     },
+     "label": "(a)+(b) with a cutoff of 5 functions"
+    },
+    "q_strict_a": {
+     "n_events": 13,
+     "quiet_events": 0,
+     "share": 0.0,
+     "ci95": [
+      0.0,
+      0.247052638000471
+     ],
+     "n_others": 1594,
+     "quiet_others": 18,
+     "share_others": 0.011292346298619825,
+     "fisher_odds_ratio": 0.0,
+     "fisher_p": 0.9999999999998418,
+     "mh_odds_ratio": 0.0,
+     "mh_p": 1.0,
+     "mh_strata_used": 3,
+     "strata": {
+      "gemini": {
+       "events": 3,
+       "events_quiet": 0,
+       "others": 43,
+       "others_quiet": 2
+      },
+      "transition": {
+       "events": 1,
+       "events_quiet": 0,
+       "others": 29,
+       "others_quiet": 0
+      },
+      "claude": {
+       "events": 6,
+       "events_quiet": 0,
+       "others": 765,
+       "others_quiet": 6
+      },
+      "fleet": {
+       "events": 3,
+       "events_quiet": 0,
+       "others": 757,
+       "others_quiet": 10
+      }
+     },
+     "label": "strict bucket (a) alone (only standards files)"
+    }
+   }
+  }
+ },
+ "share_all_events_incl_nonengine_not_quiet": {
+  "quiet": 17,
+  "n": 35
+ },
+ "text_screen": {
+  "corrected_regex": {
+   "population": "engine-path first-parent commits",
+   "n_population": 1634,
+   "hits": 54,
+   "hit_rate": 0.033047735618115054,
+   "events_in_population": 34,
+   "events_hit": 5,
+   "recall": 0.14705882352941177,
+   "recall_ci95": [
+    0.04952845525617976,
+    0.31056573039512547
+   ],
+   "precision": 0.09259259259259259,
+   "event_base_rate": 0.0208078335373317,
+   "other_hit_rate": 0.030625,
+   "fisher_odds_ratio": 5.4574243490499645,
+   "fisher_p": 0.004380391169631933,
+   "events_all_hit": 5,
+   "events_all": 35,
+   "hit_events": [
+    "46a6aff44c",
+    "68ff0c3885",
+    "2a70f9ac86",
+    "7e2808c964",
+    "115f265465"
+   ]
+  },
+  "join_steps_regex_old": {
+   "population": "engine-path first-parent commits",
+   "n_population": 1634,
+   "hits": 74,
+   "hit_rate": 0.04528763769889841,
+   "events_in_population": 34,
+   "events_hit": 5,
+   "recall": 0.14705882352941177,
+   "recall_ci95": [
+    0.04952845525617976,
+    0.31056573039512547
+   ],
+   "precision": 0.06756756756756757,
+   "event_base_rate": 0.0208078335373317,
+   "other_hit_rate": 0.043125,
+   "fisher_odds_ratio": 3.8255872063968015,
+   "fisher_p": 0.016537811982084875,
+   "events_all_hit": 5,
+   "events_all": 35,
+   "hit_events": [
+    "46a6aff44c",
+    "68ff0c3885",
+    "2a70f9ac86",
+    "7e2808c964",
+    "115f265465"
+   ]
+  }
+ }
+}

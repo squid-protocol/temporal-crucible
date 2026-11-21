@@ -1,0 +1,48 @@
+{
+ "era_docs": {
+  "gemini": {
+   "n": 142,
+   "doc_birth": 89,
+   "doc_30": 94,
+   "gained": 6,
+   "lost": 1,
+   "text_changed": 17
+  },
+  "transition": {
+   "n": 22,
+   "doc_birth": 13,
+   "doc_30": 13,
+   "gained": 1,
+   "lost": 1,
+   "text_changed": 1
+  },
+  "claude": {
+   "n": 927,
+   "doc_birth": 655,
+   "doc_30": 641,
+   "gained": 3,
+   "lost": 17,
+   "text_changed": 45
+  },
+  "fleet": {
+   "n": 1782,
+   "doc_birth": 1141,
+   "doc_30": 1175,
+   "gained": 41,
+   "lost": 7,
+   "text_changed": 215
+  }
+ },
+ "comment_only": {
+  "gemini": 194,
+  "transition": 2,
+  "claude": 42,
+  "fleet": 24
+ },
+ "text_changed": {
+  "gemini": 1054,
+  "transition": 69,
+  "claude": 1013,
+  "fleet": 2159
+ }
+}

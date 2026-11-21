@@ -1,0 +1,282 @@
+[
+ {
+  "id": 1,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "feat: implement Domain Ontologies and Context-Aware Security Profiles",
+  "touches_scan_path": true
+ },
+ {
+  "id": 2,
+  "mechanism": "unknown",
+  "secondary": "infrastructure_or_other",
+  "confidence": "low",
+  "evidence": "add photos for readme again",
+  "touches_scan_path": true
+ },
+ {
+  "id": 3,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "infrastructure_or_other",
+  "confidence": "high",
+  "evidence": "Update docs, site core, and add keyword fingerprinting",
+  "touches_scan_path": true
+ },
+ {
+  "id": 4,
+  "mechanism": "unknown",
+  "secondary": "infrastructure_or_other",
+  "confidence": "low",
+  "evidence": "security updates",
+  "touches_scan_path": true
+ },
+ {
+  "id": 5,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "refactor_or_restructure",
+  "confidence": "medium",
+  "evidence": "temporal & sec upgrades",
+  "touches_scan_path": true
+ },
+ {
+  "id": 6,
+  "mechanism": "refactor_or_restructure",
+  "secondary": "infrastructure_or_other",
+  "confidence": "medium",
+  "evidence": "Merge pull request #87 from squid-protocol/feature/clarity_updates_5",
+  "touches_scan_path": true
+ },
+ {
+  "id": 7,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "feat(ci): Implement Deterministic Golden Crucible Regression Pipeline",
+  "touches_scan_path": true
+ },
+ {
+  "id": 8,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "screen_or_skip",
+  "confidence": "medium",
+  "evidence": "This PR implements a blazing-fast $O(N)$ literal string fallback screen for heavily minified payloads.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 9,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "feat(sarif): inject exact LOC precision into security dashboard alerts",
+  "touches_scan_path": true
+ },
+ {
+  "id": 10,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "Fix prism.py's comment-family taxonomy -- comment/code separation was completely broken for all 58 languages (#386) (#389)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 11,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "fix(extraction): Harden Dart syntax extraction (#969)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 12,
+  "mechanism": "correctness_fix",
+  "secondary": "optimisation",
+  "confidence": "high",
+  "evidence": "This PR implements critical extraction hardening for **PHP** and resolves a catastrophic parsing vulnerability in **Dart** that was causing intermittent CI failures.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 13,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "medium",
+  "evidence": "fix(core): give core_var_decl/design_* naming-convention signatures real producers (#1151)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 14,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "fix(core): prevent Prism from swallowing code due to quotes in comments (fixes #1222) (#1234)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 15,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "docs: auto-update tree-sitter accuracy data (#1475)",
+  "touches_scan_path": false
+ },
+ {
+  "id": 16,
+  "mechanism": "unknown",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "Save current state before TS diagnostics",
+  "touches_scan_path": true
+ },
+ {
+  "id": 17,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "C# args regex now correctly matches tuple return types, tuple-typed parameters, and generic methods.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 18,
+  "mechanism": "optimisation",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "This maintains the exact same depth-3 matching capabilities while eliminating the exponential backtracking.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 19,
+  "mechanism": "screen_or_skip",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "20 previously-dropped real source files now scanned, 0 removed, 0 unrelated changes.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 20,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "fix(core-engine): the orphan census counts references, not name repetitions (#2727, #2728) (#2754)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 21,
+  "mechanism": "screen_or_skip",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "Removes the `is_inert` guard around Phase 5.5 in `gitgalaxy/galaxyscope.py`, so the lens runs on all 5 formats.",
+  "touches_scan_path": true
+ },
+ {
+  "id": 22,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf: kill ReDoS + O(N^2) splice hot paths behind v2.7.0 speed outliers (#3043)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 23,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf(detector): skip =-less lines before the var-decl backtracking regex (#3063)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 24,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf(detector): required-literal prefilter for the shared coding_analysis rule pass (#3070)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 25,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "feat(mainframe): capture the CICS transaction map (#3211-followup, epic #3122) (#3251)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 26,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "medium",
+  "evidence": "#3814 (part 1): UAX #31 names for Python, Java, JavaScript and TypeScript (#3847)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 27,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "medium",
+  "evidence": "#3814 (part 5): UAX #31 names for Rust, Swift, Dart, PHP and Ruby (#3877)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 28,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "#3814: identifier classes stay cheap on a miss (astral gaps filled) (#3900)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 29,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "memo compiled rule dicts per extractor; compile the scan's languages before a fork",
+  "touches_scan_path": true
+ },
+ {
+  "id": 30,
+  "mechanism": "optimisation",
+  "secondary": "infrastructure_or_other",
+  "confidence": "high",
+  "evidence": "#3929: pre-compile before a fork only for scans of 500+ files (small scans keep #3923's 30% win) (#3939)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 31,
+  "mechanism": "screen_or_skip",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "aperture: payload guards keep files with function definitions beside a data table (Part of #5460) (#5493)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 32,
+  "mechanism": "screen_or_skip",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "aperture: vendored trees under any name -- third_party_* prefixes, *_libs containers, foreign-license directories (Part of #5464) (#5512)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 33,
+  "mechanism": "optimisation",
+  "secondary": "infrastructure_or_other",
+  "confidence": "high",
+  "evidence": "`_standalone_spans`: `str.find` plus one compiled char class, same matches. Local scan 17 s -> 2 s",
+  "touches_scan_path": true
+ },
+ {
+  "id": 34,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf: X-Ray and the vault scan run only the signatures they read (Part of #5500) (#6105)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 35,
+  "mechanism": "screen_or_skip",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "security: every one-line signature reads lines of 250+ chars in chunks (Part of #8429) (#8615)",
+  "touches_scan_path": true
+ }
+]

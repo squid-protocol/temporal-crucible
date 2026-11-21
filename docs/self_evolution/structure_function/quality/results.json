@@ -1,0 +1,3450 @@
+{
+ "N_first_parent": 6700,
+ "first_lang_file_idx": 2081,
+ "first_lang_file_date": "2026-08-31T01:55:47",
+ "rows_total": 9194,
+ "excluded": {
+  "rows real empty/0 (recall undefined)": 2605,
+  "  of which found_functions also 0": 1171
+ },
+ "shas_not_on_first_parent": 9,
+ "mapped_by_date": 9,
+ "rows_on_mapped_shas": 363,
+ "languages": 53,
+ "consecutive_pairs": 9141,
+ "quality_steps": 149,
+ "steps_recall_crit": 77,
+ "steps_found_crit": 118,
+ "Q4a_steps_with_langfile": 15,
+ "Q4a_share": 0.10067114093959731,
+ "Q4a_pre_langfile_era_steps": 120,
+ "Q4a_share_post_era": 0.5172413793103449,
+ "Q4a_steps_language_without_rule_file": 4,
+ "win_len_median": 4.0,
+ "win_len_p25_p75": [
+  4.0,
+  8.0
+ ],
+ "share_win_gt50": 0.026845637583892617,
+ "share_win_eq1": 0.006711409395973154,
+ "n_win_eq1": 1,
+ "n_win_le0": 0,
+ "single_commit_windows_with_langfile": 1,
+ "perm_first_measured_idx": 1058,
+ "perm_exact_expected_share_all": 0.03978791844031193,
+ "perm_share_mean": 0.03965436241610738,
+ "perm_share_p95": 0.06711409395973154,
+ "perm_share_max": 0.10738255033557047,
+ "perm_p_ge_observed": 0.001,
+ "measured_commits": 233,
+ "first_measured_commit_langs": 25,
+ "Q4b_commits_ge5_rows_total": 233,
+ "Q4b_commits_ge5_rows_excl_first": 232,
+ "Q4b_commits_ge5_quality_steps": 5,
+ "Q4b_detail": [
+  {
+   "idx": 1058,
+   "sha": "013b5c2540",
+   "date": "2026-08-11",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 25,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1059,
+   "sha": "0153fa0198",
+   "date": "2026-08-11",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 25,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1062,
+   "sha": "85b865815e",
+   "date": "2026-08-11",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 30,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1063,
+   "sha": "ae84661542",
+   "date": "2026-08-11",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 30,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1066,
+   "sha": "2f2ef97494",
+   "date": "2026-08-11",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1067,
+   "sha": "16a62b2505",
+   "date": "2026-08-11",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1071,
+   "sha": "7beeb6394d",
+   "date": "2026-08-11",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1075,
+   "sha": "3acec85efa",
+   "date": "2026-08-11",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1079,
+   "sha": "3db4aebc40",
+   "date": "2026-08-11",
+   "n_files": 2,
+   "core_files": [
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1083,
+   "sha": "491f38eaac",
+   "date": "2026-08-11",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 3
+  },
+  {
+   "idx": 1087,
+   "sha": "e0eb02a8a5",
+   "date": "2026-08-11",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1091,
+   "sha": "2880d6ba31",
+   "date": "2026-08-11",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1097,
+   "sha": "e40edf21e3",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1103,
+   "sha": "afd4d1697e",
+   "date": "2026-08-12",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 4
+  },
+  {
+   "idx": 1107,
+   "sha": "63269ec484",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 3
+  },
+  {
+   "idx": 1111,
+   "sha": "1e8db53851",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 4
+  },
+  {
+   "idx": 1115,
+   "sha": "b89a7c4574",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 1119,
+   "sha": "15ead75b07",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1123,
+   "sha": "e38769fe1c",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1127,
+   "sha": "221de9355c",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1131,
+   "sha": "c58b31dffc",
+   "date": "2026-08-12",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1135,
+   "sha": "666e768a8f",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1139,
+   "sha": "13b227a803",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1143,
+   "sha": "70e51515bf",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1147,
+   "sha": "069d5b5472",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1151,
+   "sha": "fa8b8be695",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1157,
+   "sha": "84175ff564",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1163,
+   "sha": "b9c0ec1597",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1167,
+   "sha": "8fc2abe138",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1171,
+   "sha": "efb8eb3975",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1175,
+   "sha": "e011de73df",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1179,
+   "sha": "a3cbebaa09",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1183,
+   "sha": "6eb16c0552",
+   "date": "2026-08-12",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1187,
+   "sha": "9791e82430",
+   "date": "2026-08-12",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1190,
+   "sha": "c49faa6492",
+   "date": "2026-08-12",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1195,
+   "sha": "065cacc66e",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1200,
+   "sha": "c75310a565",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1204,
+   "sha": "0fb17ed15f",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1210,
+   "sha": "ce7ad5ae9e",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1216,
+   "sha": "3602305dbc",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1220,
+   "sha": "f2704eb874",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1224,
+   "sha": "f0cef7a056",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1230,
+   "sha": "77d2f110f9",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1234,
+   "sha": "a5fe4b7f9f",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1238,
+   "sha": "7c300a0150",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1242,
+   "sha": "a6bdf91a7a",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1246,
+   "sha": "e1f27d8969",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1250,
+   "sha": "fced4edf51",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1254,
+   "sha": "031d9d7326",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1258,
+   "sha": "38d93942a9",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1262,
+   "sha": "85a2be1581",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1266,
+   "sha": "fcd40d2c8c",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1270,
+   "sha": "68a24d697c",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1274,
+   "sha": "197ddba5fb",
+   "date": "2026-08-13",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1278,
+   "sha": "0ffa90a9b5",
+   "date": "2026-08-13",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1282,
+   "sha": "cb59c23623",
+   "date": "2026-08-14",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1286,
+   "sha": "0b071d32f2",
+   "date": "2026-08-14",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1290,
+   "sha": "7894f7f341",
+   "date": "2026-08-14",
+   "n_files": 2,
+   "core_files": [
+    "recorders/record_keeper.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 17
+  },
+  {
+   "idx": 1294,
+   "sha": "786065398d",
+   "date": "2026-08-14",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1303,
+   "sha": "9c37a6f89b",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1307,
+   "sha": "63ba8880a5",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1311,
+   "sha": "c720ca1297",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1324,
+   "sha": "e6a70aabc7",
+   "date": "2026-08-14",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1328,
+   "sha": "916965394f",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1332,
+   "sha": "fcf103c77f",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1335,
+   "sha": "38b5dd4261",
+   "date": "2026-08-14",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1339,
+   "sha": "b5ad82f314",
+   "date": "2026-08-14",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1352,
+   "sha": "54d07022cd",
+   "date": "2026-08-14",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1357,
+   "sha": "dcd0a8b736",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1361,
+   "sha": "819d513d31",
+   "date": "2026-08-14",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1364,
+   "sha": "837c92d7b6",
+   "date": "2026-08-14",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1369,
+   "sha": "6ee5630f67",
+   "date": "2026-08-15",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1372,
+   "sha": "fac5029076",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1376,
+   "sha": "1e40f23ddc",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1380,
+   "sha": "6f0b6451e8",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1384,
+   "sha": "365e85dcb3",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1388,
+   "sha": "7c317e5e55",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1393,
+   "sha": "6804f28399",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1397,
+   "sha": "b0a3769155",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1401,
+   "sha": "9f10e07bd8",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1405,
+   "sha": "942f00076f",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1409,
+   "sha": "a90fc09894",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1413,
+   "sha": "9e57ad2224",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1416,
+   "sha": "a468b54203",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1420,
+   "sha": "db1db356cb",
+   "date": "2026-08-15",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1424,
+   "sha": "5fc2693260",
+   "date": "2026-08-15",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1428,
+   "sha": "3e0257d858",
+   "date": "2026-08-15",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1437,
+   "sha": "da7bca2f46",
+   "date": "2026-08-16",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1443,
+   "sha": "c4ec043556",
+   "date": "2026-08-16",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1447,
+   "sha": "b8bd93b43f",
+   "date": "2026-08-16",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1458,
+   "sha": "5bc4b02b46",
+   "date": "2026-08-16",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1461,
+   "sha": "b614ebc2c9",
+   "date": "2026-08-16",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 1465,
+   "sha": "f13a0cce35",
+   "date": "2026-08-16",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 1469,
+   "sha": "ccec57296f",
+   "date": "2026-08-17",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1473,
+   "sha": "75fbef3a33",
+   "date": "2026-08-17",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1477,
+   "sha": "6b022e690f",
+   "date": "2026-08-17",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1481,
+   "sha": "424bdeae70",
+   "date": "2026-08-17",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1487,
+   "sha": "3b000d1f37",
+   "date": "2026-08-17",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1491,
+   "sha": "a2e3c25190",
+   "date": "2026-08-17",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1497,
+   "sha": "9dc6229861",
+   "date": "2026-08-17",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1501,
+   "sha": "b6ab7332a0",
+   "date": "2026-08-17",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1505,
+   "sha": "e46bf45db1",
+   "date": "2026-08-18",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1509,
+   "sha": "8419a3c6b3",
+   "date": "2026-08-18",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1513,
+   "sha": "eb7ae341d3",
+   "date": "2026-08-18",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1517,
+   "sha": "03415d9b79",
+   "date": "2026-08-18",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1521,
+   "sha": "bcc1e5ae85",
+   "date": "2026-08-18",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1524,
+   "sha": "0536d25edf",
+   "date": "2026-08-18",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 31,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1526,
+   "sha": "64f7e5660a",
+   "date": "2026-08-18",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 3
+  },
+  {
+   "idx": 1551,
+   "sha": "3bed75a41d",
+   "date": "2026-08-20",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1564,
+   "sha": "d94ad347bc",
+   "date": "2026-08-20",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1568,
+   "sha": "706059d560",
+   "date": "2026-08-20",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1580,
+   "sha": "75bfc09ce8",
+   "date": "2026-08-20",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1589,
+   "sha": "f1c0fd4262",
+   "date": "2026-08-20",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1611,
+   "sha": "6d8f5d5d85",
+   "date": "2026-08-20",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 3
+  },
+  {
+   "idx": 1619,
+   "sha": "96e2b2885c",
+   "date": "2026-08-20",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1623,
+   "sha": "b7a93963bf",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1631,
+   "sha": "5d01ef6cc3",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 1635,
+   "sha": "60b98b8a5c",
+   "date": "2026-08-21",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1643,
+   "sha": "dba721861d",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1651,
+   "sha": "b5495c902c",
+   "date": "2026-08-21",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1655,
+   "sha": "2b2dbe4ad5",
+   "date": "2026-08-21",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1661,
+   "sha": "aebb0e030f",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1665,
+   "sha": "2af69294a3",
+   "date": "2026-08-21",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1671,
+   "sha": "529d3de9c6",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1675,
+   "sha": "b483d16fb2",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1687,
+   "sha": "c02337ccfc",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1691,
+   "sha": "1237fac91f",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1701,
+   "sha": "9b6b8d2c97",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1705,
+   "sha": "3c19f559d6",
+   "date": "2026-08-21",
+   "n_files": 1,
+   "core_files": [
+    "core/prism.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1709,
+   "sha": "5a8a3a11d1",
+   "date": "2026-08-22",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1715,
+   "sha": "7d9eb75cf7",
+   "date": "2026-08-22",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1719,
+   "sha": "2d3d6c38d6",
+   "date": "2026-08-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1725,
+   "sha": "48ccff57f9",
+   "date": "2026-08-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1731,
+   "sha": "9900e66e9c",
+   "date": "2026-08-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1734,
+   "sha": "1dcfeaa1c1",
+   "date": "2026-08-22",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1740,
+   "sha": "82506120ba",
+   "date": "2026-08-22",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1748,
+   "sha": "17061b7aaf",
+   "date": "2026-08-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1752,
+   "sha": "97ff328b47",
+   "date": "2026-08-22",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1756,
+   "sha": "eeb08960fb",
+   "date": "2026-08-22",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1770,
+   "sha": "5b8e2c3f2e",
+   "date": "2026-08-22",
+   "n_files": 2,
+   "core_files": [
+    "galaxyscope.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1784,
+   "sha": "9613322a88",
+   "date": "2026-08-23",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1788,
+   "sha": "ffc7635539",
+   "date": "2026-08-23",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1804,
+   "sha": "4fd9ee3f88",
+   "date": "2026-08-23",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1810,
+   "sha": "caf8133a24",
+   "date": "2026-08-23",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1819,
+   "sha": "6714135aff",
+   "date": "2026-08-24",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1828,
+   "sha": "e7d082671f",
+   "date": "2026-08-24",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1832,
+   "sha": "03216dfc4f",
+   "date": "2026-08-24",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1839,
+   "sha": "d45eedd7ec",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1848,
+   "sha": "f4d2229941",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1853,
+   "sha": "d914281e6e",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1858,
+   "sha": "dc6a5d138f",
+   "date": "2026-08-26",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1861,
+   "sha": "fa3557c9eb",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1872,
+   "sha": "7337da10e2",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1877,
+   "sha": "34faa339d1",
+   "date": "2026-08-26",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1882,
+   "sha": "07ef873dbf",
+   "date": "2026-08-26",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1887,
+   "sha": "b671f66786",
+   "date": "2026-08-26",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1892,
+   "sha": "df25fa5684",
+   "date": "2026-08-26",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1902,
+   "sha": "735812523a",
+   "date": "2026-08-27",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1907,
+   "sha": "51ce6c9887",
+   "date": "2026-08-27",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1912,
+   "sha": "12d7aa327d",
+   "date": "2026-08-27",
+   "n_files": 2,
+   "core_files": [
+    "metrics/statistical_auditor.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1921,
+   "sha": "b81adabe88",
+   "date": "2026-08-27",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1926,
+   "sha": "1676865566",
+   "date": "2026-08-27",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1931,
+   "sha": "6e72ff340b",
+   "date": "2026-08-27",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1936,
+   "sha": "1f1c2b36e5",
+   "date": "2026-08-27",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1984,
+   "sha": "461ff8cdf7",
+   "date": "2026-08-28",
+   "n_files": 1,
+   "core_files": [
+    "recorders/llm_recorder.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 6
+  },
+  {
+   "idx": 1985,
+   "sha": "8249af84de",
+   "date": "2026-08-28",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 1988,
+   "sha": "3578aa3196",
+   "date": "2026-08-28",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1992,
+   "sha": "1b23569443",
+   "date": "2026-08-29",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 1995,
+   "sha": "2ec303cdca",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2001,
+   "sha": "cfbaeaf1e6",
+   "date": "2026-08-29",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2004,
+   "sha": "db66ef7be9",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2007,
+   "sha": "c237d032b5",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2011,
+   "sha": "e5e9a921b2",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2014,
+   "sha": "0e1ad6d11b",
+   "date": "2026-08-29",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2017,
+   "sha": "eba59396e4",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2020,
+   "sha": "4e19b1ee2e",
+   "date": "2026-08-29",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2023,
+   "sha": "b46b2dd56d",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2026,
+   "sha": "1f628e24ed",
+   "date": "2026-08-29",
+   "n_files": 2,
+   "core_files": [
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2029,
+   "sha": "df68f70b0a",
+   "date": "2026-08-29",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2033,
+   "sha": "fdf0243013",
+   "date": "2026-08-29",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 3
+  },
+  {
+   "idx": 2036,
+   "sha": "236bdecc01",
+   "date": "2026-08-30",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2039,
+   "sha": "bd27a195dd",
+   "date": "2026-08-30",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2042,
+   "sha": "f4c1114b49",
+   "date": "2026-08-30",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2046,
+   "sha": "01a5f0ac1a",
+   "date": "2026-08-30",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 7
+  },
+  {
+   "idx": 2049,
+   "sha": "e190671fe1",
+   "date": "2026-08-30",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2055,
+   "sha": "6c5274426d",
+   "date": "2026-08-30",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2058,
+   "sha": "ae2d0e8e67",
+   "date": "2026-08-30",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2061,
+   "sha": "4cc5001f56",
+   "date": "2026-08-30",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2067,
+   "sha": "fd9b0faba0",
+   "date": "2026-08-30",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2074,
+   "sha": "5c06080e70",
+   "date": "2026-08-31",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "standards/language_standards.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2077,
+   "sha": "ce1365bb08",
+   "date": "2026-08-31",
+   "n_files": 1,
+   "core_files": [
+    "core/prism.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2084,
+   "sha": "7b7cf31c4e",
+   "date": "2026-08-31",
+   "n_files": 4,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 1,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2087,
+   "sha": "a31f354fd5",
+   "date": "2026-08-31",
+   "n_files": 2,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2094,
+   "sha": "3f6449e96a",
+   "date": "2026-08-31",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2133,
+   "sha": "1ea7959f86",
+   "date": "2026-09-02",
+   "n_files": 4,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 4,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2210,
+   "sha": "932cddcba5",
+   "date": "2026-09-06",
+   "n_files": 36,
+   "core_files": [
+    "standards/how_to_add_a_language.md",
+    "standards/signal_contracts.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 34,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2223,
+   "sha": "8c8624a95a",
+   "date": "2026-09-07",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2228,
+   "sha": "6f6a7d1dbb",
+   "date": "2026-09-07",
+   "n_files": 19,
+   "core_files": [
+    "standards/how_to_add_a_language.md",
+    "standards/signal_contracts.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 17,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2237,
+   "sha": "2195e990bc",
+   "date": "2026-09-07",
+   "n_files": 23,
+   "core_files": [
+    "standards/how_to_add_a_language.md",
+    "standards/signal_contracts.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 21,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2259,
+   "sha": "3b58de7057",
+   "date": "2026-09-08",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2295,
+   "sha": "339e22082b",
+   "date": "2026-09-10",
+   "n_files": 5,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/language_lens.py",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 5,
+   "lang_files_touched": 0,
+   "n_lang_rows": 45,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2366,
+   "sha": "da5053768c",
+   "date": "2026-09-15",
+   "n_files": 6,
+   "core_files": [
+    "core/aperture.py",
+    "core/detector.py",
+    "galaxyscope.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 5,
+   "lang_files_touched": 1,
+   "n_lang_rows": 46,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2373,
+   "sha": "74478385aa",
+   "date": "2026-09-15",
+   "n_files": 2,
+   "core_files": [
+    "core/prism.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 1,
+   "n_lang_rows": 46,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2380,
+   "sha": "3407fabde3",
+   "date": "2026-09-16",
+   "n_files": 6,
+   "core_files": [
+    "core/prism.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 4,
+   "lang_files_touched": 2,
+   "n_lang_rows": 47,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2392,
+   "sha": "e83be08b4b",
+   "date": "2026-09-16",
+   "n_files": 5,
+   "core_files": [
+    "core/detector.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 4,
+   "lang_files_touched": 1,
+   "n_lang_rows": 48,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2396,
+   "sha": "9d97cb2257",
+   "date": "2026-09-16",
+   "n_files": 6,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 5,
+   "lang_files_touched": 1,
+   "n_lang_rows": 49,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2406,
+   "sha": "43f4ec2934",
+   "date": "2026-09-17",
+   "n_files": 9,
+   "core_files": [
+    "core/detector.py",
+    "core/prism.py",
+    "standards/analysis_lens.py",
+    "standards/gitgalaxy_config.py",
+    "standards/language_addition_costs.jsonl",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 7,
+   "lang_files_touched": 2,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2414,
+   "sha": "7f1d3cd31e",
+   "date": "2026-09-17",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_lens.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 7
+  },
+  {
+   "idx": 2415,
+   "sha": "9e9e4054e5",
+   "date": "2026-09-17",
+   "n_files": 4,
+   "core_files": [
+    "standards/language_lens.py",
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 1,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2425,
+   "sha": "6f991d0f2f",
+   "date": "2026-09-17",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2428,
+   "sha": "a08896aa09",
+   "date": "2026-09-17",
+   "n_files": 1,
+   "core_files": [
+    "core/detector.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2470,
+   "sha": "da69812f67",
+   "date": "2026-09-19",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "standards/how_to_add_a_language.md"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 1,
+   "n_lang_rows": 50,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 2487,
+   "sha": "22545ca562",
+   "date": "2026-09-20",
+   "n_files": 11,
+   "core_files": [
+    "core/README.md",
+    "core/invocation_resolver.py",
+    "core/mainframe_boundary.py",
+    "core/state_rehydrator.py",
+    "galaxyscope.py",
+    "recorders/README.md",
+    "recorders/record_keeper.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 9,
+   "lang_files_touched": 1,
+   "n_lang_rows": 51,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2499,
+   "sha": "f4c5025560",
+   "date": "2026-09-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 51,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2502,
+   "sha": "0aff8e5314",
+   "date": "2026-09-22",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 51,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2505,
+   "sha": "32a1f1c91a",
+   "date": "2026-09-22",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 51,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2527,
+   "sha": "091ab9d411",
+   "date": "2026-09-23",
+   "n_files": 4,
+   "core_files": [
+    "core/aperture.py",
+    "core/guidestar_lens.py",
+    "galaxyscope.py",
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 4,
+   "lang_files_touched": 0,
+   "n_lang_rows": 51,
+   "n_lang_quality_steps": 5
+  },
+  {
+   "idx": 2565,
+   "sha": "38bdf3edf7",
+   "date": "2026-09-23",
+   "n_files": 3,
+   "core_files": [
+    "core/detector.py",
+    "metrics/statistical_auditor.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2594,
+   "sha": "38661bc203",
+   "date": "2026-09-23",
+   "n_files": 4,
+   "core_files": [
+    "core/detector.py",
+    "metrics/statistical_auditor.py",
+    "standards/signal_contracts.py"
+   ],
+   "n_core": 3,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2601,
+   "sha": "b323ce026d",
+   "date": "2026-09-24",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2658,
+   "sha": "d778508ff9",
+   "date": "2026-09-24",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 2666,
+   "sha": "fd48989397",
+   "date": "2026-09-24",
+   "n_files": 9,
+   "core_files": [
+    "core/data_moves.py",
+    "core/hlasm_cics.py",
+    "core/how_to_add_a_fact_channel.md",
+    "core/invocation_resolver.py",
+    "core/mainframe_boundary.py",
+    "core/uow_handlers.py"
+   ],
+   "n_core": 6,
+   "lang_files_touched": 2,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 2681,
+   "sha": "84381f8f85",
+   "date": "2026-09-25",
+   "n_files": 5,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2732,
+   "sha": "1806efbbf7",
+   "date": "2026-09-25",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 2988,
+   "sha": "828997e0c7",
+   "date": "2026-09-30",
+   "n_files": 6,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 3002,
+   "sha": "4f53a4cbe1",
+   "date": "2026-10-01",
+   "n_files": 1,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 1,
+   "n_lang_rows": 52,
+   "n_lang_quality_steps": 1
+  },
+  {
+   "idx": 3117,
+   "sha": "2c7b6e33ae",
+   "date": "2026-10-03",
+   "n_files": 5,
+   "core_files": [
+    "core/detector.py",
+    "standards/analysis_lens.py",
+    "standards/language_standards/__init__.py",
+    "standards/language_standards/_lens_config.py"
+   ],
+   "n_core": 4,
+   "lang_files_touched": 1,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 3125,
+   "sha": "d8a41d3dbc",
+   "date": "2026-10-03",
+   "n_files": 0,
+   "core_files": [],
+   "n_core": 0,
+   "lang_files_touched": 0,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 2
+  },
+  {
+   "idx": 3155,
+   "sha": "b350be44fb",
+   "date": "2026-10-04",
+   "n_files": 2,
+   "core_files": [
+    "standards/fact_channel_confidence.json"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 1,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 3212,
+   "sha": "a42fc11fe4",
+   "date": "2026-10-05",
+   "n_files": 3,
+   "core_files": [
+    "core/mainframe_boundary.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 2,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 3222,
+   "sha": "173711a3d7",
+   "date": "2026-10-05",
+   "n_files": 3,
+   "core_files": [
+    "core/aperture.py",
+    "core/detector.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 3227,
+   "sha": "9679a9c880",
+   "date": "2026-10-05",
+   "n_files": 2,
+   "core_files": [
+    "core/mainframe_boundary.py",
+    "core/prism.py"
+   ],
+   "n_core": 2,
+   "lang_files_touched": 0,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 0
+  },
+  {
+   "idx": 3346,
+   "sha": "88a76425c6",
+   "date": "2026-10-07",
+   "n_files": 1,
+   "core_files": [
+    "standards/language_standards/__init__.py"
+   ],
+   "n_core": 1,
+   "lang_files_touched": 0,
+   "n_lang_rows": 53,
+   "n_lang_quality_steps": 1
+  }
+ ],
+ "Q4b_with_core_touch": 195,
+ "Q4b_big_step_commits_core_touch": 4,
+ "steps_window_core_commit": 136,
+ "steps_window_lang_and_core": 15,
+ "steps_window_lang_only": 0,
+ "steps_window_core_only": 121,
+ "steps_window_neither": 13,
+ "steps_single_commit_candidate": 1,
+ "steps_multi_commit": 148,
+ "needs_localisation_scan": 148,
+ "events": 35,
+ "events_index_matches_fp": 35,
+ "Q5_events_in_any_step_window": 8,
+ "Q5_event_step_pairs": 8,
+ "Q5_events_before_first_measured": 14,
+ "Q5_dir_by_found_sign": {
+  "up|found_up": 6,
+  "down|found_up": 2
+ },
+ "Q5_dir_by_recall_sign": {
+  "up|rec_down": 1,
+  "up|rec_up": 1,
+  "up|rec_flat": 1,
+  "up|rec_undefined": 3,
+  "down|rec_undefined": 2
+ },
+ "Q5_pairs_event_is_end_commit": 0,
+ "Q5_pairs_window_len1": 0,
+ "Q5_pairs": [
+  {
+   "event": "2fc593a0a2",
+   "dir": "up",
+   "size_cpu": 0.124,
+   "lang": "dart",
+   "win_len": 4,
+   "d_found": 28.0,
+   "d_rec": -14.0,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "f3e84f765f",
+   "dir": "up",
+   "size_cpu": 0.398,
+   "lang": "typescript",
+   "win_len": 11,
+   "d_found": 203.0,
+   "d_rec": 6.900000000000006,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "c42ed21ec3",
+   "dir": "up",
+   "size_cpu": null,
+   "lang": "powershell",
+   "win_len": 6,
+   "d_found": 18.0,
+   "d_rec": 0.0,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "5f150b9d6c",
+   "dir": "up",
+   "size_cpu": 0.786,
+   "lang": "assembly",
+   "win_len": 256,
+   "d_found": 301.0,
+   "d_rec": null,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "0bbdc137b6",
+   "dir": "up",
+   "size_cpu": 0.191,
+   "lang": "assembly",
+   "win_len": 256,
+   "d_found": 301.0,
+   "d_rec": null,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "6f9c449ae0",
+   "dir": "down",
+   "size_cpu": 0.219,
+   "lang": "assembly",
+   "win_len": 256,
+   "d_found": 301.0,
+   "d_rec": null,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "5998bd8d40",
+   "dir": "down",
+   "size_cpu": 0.115,
+   "lang": "assembly",
+   "win_len": 256,
+   "d_found": 301.0,
+   "d_rec": null,
+   "event_is_end_commit": false
+  },
+  {
+   "event": "6b604f91a7",
+   "dir": "up",
+   "size_cpu": 4.871,
+   "lang": "assembly",
+   "win_len": 256,
+   "d_found": 301.0,
+   "d_rec": null,
+   "event_is_end_commit": false
+  }
+ ],
+ "Q6_quality_steps": {
+  "n": 28,
+  "n_rules_changed": 1,
+  "pooled_found": [
+   -0.3216777806746954,
+   0.09506645249416451,
+   28
+  ],
+  "pooled_recall": null,
+  "within_lang_found_rho_median": null,
+  "within_lang_found_n_langs": 0,
+  "within_lang_recall_rho_median": null,
+  "within_lang_recall_n_langs": 0
+ },
+ "Q6_all_consecutive_pairs": {
+  "n": 1986,
+  "n_rules_changed": 77,
+  "pooled_found": [
+   -0.013996287102506387,
+   0.5330373282123048,
+   1986
+  ],
+  "pooled_recall": [
+   0.0028180575834578473,
+   0.922670878279812,
+   1189
+  ],
+  "within_lang_found_rho_median": -0.025000000000000005,
+  "within_lang_found_n_langs": 23,
+  "within_lang_recall_rho_median": 0.025000000000000005,
+  "within_lang_recall_n_langs": 5
+ },
+ "Q6_tip_languages_with_rule_file": 52,
+ "Q6_tip_n_recall": 29,
+ "Q6_tip_rules_vs_recall": [
+  -0.15698838284577837,
+  0.4160562347021039,
+  29
+ ],
+ "Q6_tip_lines_vs_recall": [
+  -0.08625412027290584,
+  0.6563980750228691,
+  29
+ ],
+ "Q6_tip_rules_vs_found": [
+  0.5176457498283177,
+  8.495542417127324e-05,
+  52
+ ],
+ "Q6_tip_lines_vs_found": [
+  0.496616504056268,
+  0.00018065932462624546,
+  52
+ ],
+ "Q6_tip_rules_vs_real_control": [
+  0.5619839723676223,
+  1.4559953991651769e-05,
+  52
+ ],
+ "langs_in_csv_without_rule_file": [
+  "objective-c"
+ ],
+ "steps_by_month": {
+  "2026-08": 123,
+  "2026-09": 22,
+  "2026-10": 4
+ },
+ "steps_by_language": {
+  "haskell": 10,
+  "typescript": 9,
+  "dart": 7,
+  "cpp": 6,
+  "rust": 6,
+  "cobol": 6,
+  "css": 5,
+  "java": 5,
+  "powershell": 5,
+  "lua": 4,
+  "objective-c": 4,
+  "ruby": 4,
+  "shell": 4,
+  "zig": 4,
+  "fortran": 4,
+  "tcl": 4,
+  "embedded_python": 4,
+  "groovy": 3,
+  "html": 3,
+  "javascript": 3,
+  "kotlin": 3,
+  "perl": 3,
+  "scala": 3,
+  "swift": 3,
+  "assembly": 3,
+  "sqlite": 3,
+  "c": 2,
+  "csharp": 2,
+  "go": 2,
+  "jcl": 2,
+  "livecode": 2,
+  "yacc": 2,
+  "yaml": 2,
+  "pli": 2,
+  "hlasm": 2,
+  "csd": 2,
+  "solidity": 1,
+  "matlab": 1,
+  "python": 1,
+  "abap": 1,
+  "ada": 1,
+  "agc_assembly": 1,
+  "dockerfile": 1,
+  "m4": 1,
+  "scheme": 1,
+  "bms": 1,
+  "rexx": 1
+ },
+ "top_net_found_gain": [
+  [
+   "cobol",
+   9699.0
+  ],
+  [
+   "zig",
+   2839.0
+  ],
+  [
+   "c",
+   1715.0
+  ],
+  [
+   "typescript",
+   1421.0
+  ],
+  [
+   "cpp",
+   1376.0
+  ],
+  [
+   "assembly",
+   1277.0
+  ],
+  [
+   "dart",
+   1224.0
+  ],
+  [
+   "livecode",
+   964.0
+  ],
+  [
+   "ada",
+   959.0
+  ],
+  [
+   "rust",
+   920.0
+  ]
+ ],
+ "net_found_total": 29485.0,
+ "improvement_attribution_sum_positive_deltas": {
+  "engine-wide (core only in window)": 12164.0,
+  "engine-wide (>=5-language commit)": 17169.0,
+  "neither (other files / unattributable)": 560.0,
+  "both in window (ambiguous)": 1894.0,
+  "language-specific (lang file only in window)": 4.0
+ },
+ "improvement_attribution_n_pairs": {
+  "engine-wide (core only in window)": 143,
+  "engine-wide (>=5-language commit)": 55,
+  "neither (other files / unattributable)": 9,
+  "both in window (ambiguous)": 9,
+  "language-specific (lang file only in window)": 1
+ },
+ "negative_deltas_sum": -2306.0,
+ "first_row_commit_excluded_from_improvement": "013b5c2540",
+ "other_series": {
+  "call_resolution_history.csv": {
+   "lines": 1850,
+   "distinct_commits": 43,
+   "also_in_ts_accuracy": 4,
+   "share_of_series_commits_in_ts": 0.09302325581395349
+  },
+  "graph_coverage_history.csv": {
+   "lines": 442,
+   "distinct_commits": 13,
+   "also_in_ts_accuracy": 0,
+   "share_of_series_commits_in_ts": 0.0
+  },
+  "ground_truth_history.jsonl": {
+   "lines": 10825,
+   "distinct_commits": 56,
+   "also_in_ts_accuracy": 5,
+   "share_of_series_commits_in_ts": 0.08928571428571429
+  }
+ },
+ "ts_distinct_commits": 234,
+ "perm_post_era_n": 29,
+ "perm_post_era_exact_expected_share": 0.0837882796922281,
+ "perm_post_era_observed": 0.5172413793103449
+}

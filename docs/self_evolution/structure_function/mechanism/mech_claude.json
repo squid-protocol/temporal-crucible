@@ -1,0 +1,282 @@
+[
+ {
+  "id": 1,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "feat: implement Domain Ontologies and Context-Aware Security Profiles",
+  "touches_scan_path": true
+ },
+ {
+  "id": 2,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "low",
+  "evidence": "add photos for readme again",
+  "touches_scan_path": true
+ },
+ {
+  "id": 3,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "infrastructure_or_other",
+  "confidence": "medium",
+  "evidence": "Update docs, site core, and add keyword fingerprinting",
+  "touches_scan_path": true
+ },
+ {
+  "id": 4,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "low",
+  "evidence": "security updates",
+  "touches_scan_path": false
+ },
+ {
+  "id": 5,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "low",
+  "evidence": "temporal & sec upgrades",
+  "touches_scan_path": true
+ },
+ {
+  "id": 6,
+  "mechanism": "infrastructure_or_other",
+  "secondary": "refactor_or_restructure",
+  "confidence": "low",
+  "evidence": "Merge pull request #87 from squid-protocol/feature/clarity_updates_5",
+  "touches_scan_path": true
+ },
+ {
+  "id": 7,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "medium",
+  "evidence": "feat(ci): Implement Deterministic Golden Crucible Regression Pipeline",
+  "touches_scan_path": true
+ },
+ {
+  "id": 8,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "optimisation",
+  "confidence": "medium",
+  "evidence": "implements a blazing-fast O(N) literal string fallback screen for heavily minified payloads",
+  "touches_scan_path": true
+ },
+ {
+  "id": 9,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "upgrades the SARIF exporter to provide exact Line of Code (LOC) precision for security dashboard alerts",
+  "touches_scan_path": true
+ },
+ {
+  "id": 10,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "Comment/code separation was completely broken for every one of the 58 supported languages",
+  "touches_scan_path": true
+ },
+ {
+  "id": 11,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "fix(extraction): Harden Dart syntax extraction (#969)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 12,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "Extraction hardening: php (#968)",
+  "touches_scan_path": true
+ },
+ {
+  "id": 13,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "medium",
+  "evidence": "had zero producers anywhere in language_standards.py -- permanently 0 in every scan",
+  "touches_scan_path": true
+ },
+ {
+  "id": 14,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "tokenizer in Prism was incorrectly matching quotes inside comments as the start of string literals",
+  "touches_scan_path": true
+ },
+ {
+  "id": 15,
+  "mechanism": "infrastructure_or_other",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "docs: auto-update tree-sitter accuracy data (#1475)",
+  "touches_scan_path": false
+ },
+ {
+  "id": 16,
+  "mechanism": "unknown",
+  "secondary": null,
+  "confidence": "low",
+  "evidence": "Save current state before TS diagnostics",
+  "touches_scan_path": true
+ },
+ {
+  "id": 17,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "Fix #2051: C# args regex truncation on tuples and generic methods",
+  "touches_scan_path": true
+ },
+ {
+  "id": 18,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "resolve ReDoS timeout in typescript args extraction",
+  "touches_scan_path": true
+ },
+ {
+  "id": 19,
+  "mechanism": "correctness_fix",
+  "secondary": "screen_or_skip",
+  "confidence": "high",
+  "evidence": "Semantic Path Shield had an optional prefix and no left word boundary, so an infra word matched as the suffix",
+  "touches_scan_path": true
+ },
+ {
+  "id": 20,
+  "mechanism": "correctness_fix",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "the orphan census counts references, not name repetitions",
+  "touches_scan_path": true
+ },
+ {
+  "id": 21,
+  "mechanism": "screen_or_skip",
+  "secondary": "correctness_fix",
+  "confidence": "high",
+  "evidence": "skipped Phase 5.5 (SecurityLens.scan_content) for all of them, so a hardcoded credential was invisible",
+  "touches_scan_path": true
+ },
+ {
+  "id": 22,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf: kill ReDoS + O(N^2) splice hot paths behind v2.7.0 speed outliers",
+  "touches_scan_path": true
+ },
+ {
+  "id": 23,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf(detector): skip =-less lines before the var-decl backtracking regex",
+  "touches_scan_path": true
+ },
+ {
+  "id": 24,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "perf(detector): required-literal prefilter for the shared coding_analysis rule pass",
+  "touches_scan_path": true
+ },
+ {
+  "id": 25,
+  "mechanism": "new_feature_or_rule",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "the engine now reads the CICS transaction map",
+  "touches_scan_path": true
+ },
+ {
+  "id": 26,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "medium",
+  "evidence": "Name patterns were [A-Za-z_]\\w*: a non-Latin name was missed",
+  "touches_scan_path": true
+ },
+ {
+  "id": 27,
+  "mechanism": "new_feature_or_rule",
+  "secondary": "correctness_fix",
+  "confidence": "medium",
+  "evidence": "a unit named in Devanagari, Tamil, Han, Hangul was missed",
+  "touches_scan_path": true
+ },
+ {
+  "id": 28,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "identifier classes stay cheap on a miss; class miss 135-189x an ASCII class",
+  "touches_scan_path": true
+ },
+ {
+  "id": 29,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "memo compiled rule dicts per extractor; compile the scan's languages before a fork",
+  "touches_scan_path": true
+ },
+ {
+  "id": 30,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "pre-compile before a fork only for a scan of 500+ files",
+  "touches_scan_path": true
+ },
+ {
+  "id": 31,
+  "mechanism": "screen_or_skip",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "payload guards keep a file that has function definitions beside a data table",
+  "touches_scan_path": true
+ },
+ {
+  "id": 32,
+  "mechanism": "screen_or_skip",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "vendored trees under any name -- third_party_* prefixes, *_libs containers, foreign-license directories",
+  "touches_scan_path": true
+ },
+ {
+  "id": 33,
+  "mechanism": "correctness_fix",
+  "secondary": "optimisation",
+  "confidence": "medium",
+  "evidence": "two per-function ID_CONTINUE regexes overflowed re's 512-entry cache and cost 15 s of a 17 s scan",
+  "touches_scan_path": true
+ },
+ {
+  "id": 34,
+  "mechanism": "optimisation",
+  "secondary": null,
+  "confidence": "high",
+  "evidence": "X-Ray and the vault scan run only the signatures they read",
+  "touches_scan_path": true
+ },
+ {
+  "id": 35,
+  "mechanism": "correctness_fix",
+  "secondary": "new_feature_or_rule",
+  "confidence": "medium",
+  "evidence": "every one-line signature reads lines of 250+ chars in chunks",
+  "touches_scan_path": true
+ }
+]

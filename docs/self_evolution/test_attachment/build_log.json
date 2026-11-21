@@ -1,0 +1,340 @@
+{
+ "first_parent_commits": 6700,
+ "non_merge_commits": 6919,
+ "weeks": 36,
+ "week_first": "2026-03-16",
+ "week_last": "2026-11-16",
+ "fix_commits_all": 695,
+ "fix_commits_by_subject": 643,
+ "diff_cache_commits": 4111,
+ "diff_cache_commits_not_in_git_log": 0,
+ "engine_function_touches": 7796,
+ "engine_file_weeks_with_touches_any_file": 977,
+ "snapshots": [
+  {
+   "week": "2026-03-16",
+   "commit": "e7716ecc8b",
+   "engine_files": 14,
+   "test_files": 0,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 0,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-03-23",
+   "commit": "64afc0d6b5",
+   "engine_files": 15,
+   "test_files": 0,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 0,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-03-30",
+   "commit": "84a9be9025",
+   "engine_files": 15,
+   "test_files": 0,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 0,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-04-06",
+   "commit": "a0d341d3a4",
+   "engine_files": 18,
+   "test_files": 0,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 0,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-04-13",
+   "commit": "0972ff99ad",
+   "engine_files": 46,
+   "test_files": 0,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 0,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-04-20",
+   "commit": "1790ae7e03",
+   "engine_files": 46,
+   "test_files": 5,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 5,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-04-27",
+   "commit": "1a326044c4",
+   "engine_files": 46,
+   "test_files": 5,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 5,
+   "files_attached": 0
+  },
+  {
+   "week": "2026-05-04",
+   "commit": "f4201a683a",
+   "engine_files": 46,
+   "test_files": 16,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 6,
+   "files_attached": 14
+  },
+  {
+   "week": "2026-05-11",
+   "commit": "b7c21fedec",
+   "engine_files": 47,
+   "test_files": 50,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 39
+  },
+  {
+   "week": "2026-05-18",
+   "commit": "b7c21fedec",
+   "engine_files": 47,
+   "test_files": 50,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 39
+  },
+  {
+   "week": "2026-05-25",
+   "commit": "e720430ef3",
+   "engine_files": 48,
+   "test_files": 53,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 40
+  },
+  {
+   "week": "2026-06-01",
+   "commit": "32bfb0d347",
+   "engine_files": 49,
+   "test_files": 54,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 41
+  },
+  {
+   "week": "2026-06-08",
+   "commit": "a9536e5be8",
+   "engine_files": 49,
+   "test_files": 54,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 41
+  },
+  {
+   "week": "2026-06-15",
+   "commit": "9ff048e30d",
+   "engine_files": 50,
+   "test_files": 58,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 46
+  },
+  {
+   "week": "2026-06-22",
+   "commit": "47941cb40d",
+   "engine_files": 50,
+   "test_files": 58,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 12,
+   "files_attached": 46
+  },
+  {
+   "week": "2026-06-29",
+   "commit": "cbdc32510e",
+   "engine_files": 50,
+   "test_files": 54,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 8,
+   "files_attached": 46
+  },
+  {
+   "week": "2026-07-06",
+   "commit": "1ed1d86615",
+   "engine_files": 51,
+   "test_files": 56,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 9,
+   "files_attached": 48
+  },
+  {
+   "week": "2026-07-13",
+   "commit": "1a59a19447",
+   "engine_files": 51,
+   "test_files": 56,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 9,
+   "files_attached": 48
+  },
+  {
+   "week": "2026-07-20",
+   "commit": "7465501528",
+   "engine_files": 53,
+   "test_files": 66,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 14,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-07-27",
+   "commit": "bbcb27391f",
+   "engine_files": 53,
+   "test_files": 111,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 59,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-08-03",
+   "commit": "cbd22da776",
+   "engine_files": 53,
+   "test_files": 167,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 112,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-08-10",
+   "commit": "fa8f9c9288",
+   "engine_files": 53,
+   "test_files": 172,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 106,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-08-17",
+   "commit": "22c94ac1a2",
+   "engine_files": 53,
+   "test_files": 180,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 112,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-08-24",
+   "commit": "323d107b1f",
+   "engine_files": 53,
+   "test_files": 187,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 115,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-08-31",
+   "commit": "abbac2230b",
+   "engine_files": 53,
+   "test_files": 203,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 114,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-09-07",
+   "commit": "5409f82303",
+   "engine_files": 53,
+   "test_files": 222,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 123,
+   "files_attached": 50
+  },
+  {
+   "week": "2026-09-14",
+   "commit": "c1084a1f5b",
+   "engine_files": 62,
+   "test_files": 270,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 137,
+   "files_attached": 59
+  },
+  {
+   "week": "2026-09-21",
+   "commit": "71f80928a6",
+   "engine_files": 115,
+   "test_files": 487,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 181,
+   "files_attached": 103
+  },
+  {
+   "week": "2026-09-28",
+   "commit": "1af1ab20f9",
+   "engine_files": 132,
+   "test_files": 616,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 236,
+   "files_attached": 117
+  },
+  {
+   "week": "2026-10-05",
+   "commit": "41daa2a858",
+   "engine_files": 138,
+   "test_files": 758,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 306,
+   "files_attached": 124
+  },
+  {
+   "week": "2026-10-12",
+   "commit": "2721b9fc4f",
+   "engine_files": 159,
+   "test_files": 963,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 420,
+   "files_attached": 146
+  },
+  {
+   "week": "2026-10-19",
+   "commit": "64741733fe",
+   "engine_files": 175,
+   "test_files": 1235,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 569,
+   "files_attached": 162
+  },
+  {
+   "week": "2026-10-26",
+   "commit": "7d2e1f6272",
+   "engine_files": 190,
+   "test_files": 1416,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 669,
+   "files_attached": 176
+  },
+  {
+   "week": "2026-11-02",
+   "commit": "9a819f4496",
+   "engine_files": 201,
+   "test_files": 1557,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 733,
+   "files_attached": 188
+  },
+  {
+   "week": "2026-11-09",
+   "commit": "9f0ede058e",
+   "engine_files": 210,
+   "test_files": 1655,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 760,
+   "files_attached": 197
+  },
+  {
+   "week": "2026-11-16",
+   "commit": "7203d25557",
+   "engine_files": 219,
+   "test_files": 1721,
+   "tests_unparsable": 0,
+   "tests_resolving_to_no_engine_file": 787,
+   "files_attached": 206
+  }
+ ],
+ "scan_days": 180
+}

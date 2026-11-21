@@ -1,0 +1,53 @@
+685 commits in window
+  idx  342 e2eabd77e 2026-09-25 CI: skip the Java compile when a PR does not change the generated Java (#3664)  cpu=2.41
+  idx  513 6764cbf8b 2026-09-27 docs: auto-update tri-comparison data (#3921)  cpu=5.08
+  idx  598 9341d685c 2026-10-01 docs: auto-update tree-sitter accuracy data (#4074)  cpu=33.965
+  idx  555 716ac4f33 2026-09-29 Fix #3998: no-scan lineage reads SELECT with the engine's reader (#3999)  cpu=34.34
+  idx  534 42d503cef 2026-09-27 #3945 / #3946 / #3949 / #3950: generated Java reads KSDS files in key order, re  cpu=30.310000000000002
+  idx  523 5998bd8d4 2026-09-27 Claude/fork precompile (#3931)  cpu=5.154999999999999
+  idx  528 6b604f91a 2026-09-27 #3929: pre-compile before a fork only for scans of 500+ files (small scans keep  cpu=30.25
+  idx  525 aeb8075e6 2026-09-27 docs: auto-update tri-comparison data (#3937)  cpu=5.1899999999999995
+  idx  526 f8cebb388 2026-09-27 docs: auto-update graph comparison data (#3938)  cpu=5.115
+  idx  527 5d27aa142 2026-09-27 #3834 (part 2): the Cultural Gauntlet's India slice -- cp1140, rupee currency,   cpu=5.15
+FIRST SLOW COMMIT: 6b604f91a731a1c7a257db8ffb29f350f370fefb
+6b604f91a731a1c7a257db8ffb29f350f370fefb
+2026-09-27 19:31:06 -0400
+#3929: pre-compile before a fork only for scans of 500+ files (small scans keep #3923's 30% win) (#3939)
+* #3929: pre-compile before a fork only for a scan of 500+ files
+
+Three-way A/B (pre-#3914 / main / fix, A-vs-A control, whole-command time):
+pre-compiling every claimant in the parent took the 3,280-file crucible
+corpus to -0.7% (main +0.2%), but made a 40-file C scan slower than main
+(-21% vs -26% against pre-#3914): its 3 workers start on idle cores, where
+compiling lazily -- in parallel, only what each meets (never objective-c
+there) -- beats one serial compile. Large scans keep every core busy to the
+end, where a worker's own compile is wall time (#3929: curl -0.47 s).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5
+
+* #3914: ReDoS harnesses send their child a plain compiled pattern
+
+assert_redos_immune spawns a child and allows it timeout_sec (1 s) from
+start(). Since #3923 a registry rule is a LazyPattern, which unpickles
+through gitgalaxy's language registry: the child imported 74 gitgalaxy
+modules (258 ms here, more on a loaded runner) inside that window and a
+linear rule read as hung (macOS 3.9 on #3939: agc_assembly func_start).
+
+_plain() compiles the rule in the parent; a plain pattern unpickles through
+`re` alone (0.6 ms, no gitgalaxy import). _best_of_timing compiles before
+its clock too. A disabled rule (None) passes through as before.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5
+
+---------
+
+Co-authored-by: Claude <noreply@anthropic.com>
+
+ gitgalaxy/galaxyscope.py                           | 10 +++++++++-
+ tests/extraction/_extraction_harness.py            | 12 +++++++++++-
+ tests/extraction/languages/_strict_harness.py      | 13 ++++++++++++-
+ tests/extraction/languages/test_livecode_strict.py |  4 ++--
+ 4 files changed, 34 insertions(+), 5 deletions(-)
+

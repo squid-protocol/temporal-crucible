@@ -1,0 +1,473 @@
+[
+ {
+  "col": "struct_branch",
+  "oracle": "branch",
+  "n_oracle": 63759,
+  "n_family": 64497,
+  "recall": 0.993,
+  "precision": 0.981,
+  "rho": 0.981,
+  "missed_top": []
+ },
+ {
+  "col": "complexity",
+  "oracle": "branch",
+  "n_oracle": 63759,
+  "n_family": 64497,
+  "recall": 0.993,
+  "precision": 0.981,
+  "rho": 0.981,
+  "missed_top": []
+ },
+ {
+  "col": "struct_args",
+  "oracle": "args",
+  "n_oracle": 71405,
+  "n_family": 72044,
+  "recall": 1.0,
+  "precision": 0.991,
+  "rho": 0.079,
+  "missed_top": []
+ },
+ {
+  "col": "struct_closures",
+  "oracle": "closures",
+  "n_oracle": 8862,
+  "n_family": 4100,
+  "recall": 0.453,
+  "precision": 0.98,
+  "rho": 0.646,
+  "missed_top": []
+ },
+ {
+  "col": "struct_comprehensions",
+  "oracle": "comps",
+  "n_oracle": 23186,
+  "n_family": 21228,
+  "recall": 0.833,
+  "precision": 0.91,
+  "rho": 0.852,
+  "missed_top": []
+ },
+ {
+  "col": "struct_decorators",
+  "oracle": "decorators",
+  "n_oracle": 4156,
+  "n_family": 0,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": null,
+  "missed_top": [
+   [
+    "staticmethod",
+    1952
+   ],
+   [
+    "property",
+    728
+   ],
+   [
+    "classmethod",
+    621
+   ],
+   [
+    "contextlib.contextmanager",
+    391
+   ],
+   [
+    "_reads",
+    336
+   ],
+   [
+    "functools.lru_cache(maxsize=8)",
+    105
+   ],
+   [
+    "contextmanager",
+    11
+   ],
+   [
+    "lru_cache(maxsize=8)",
+    6
+   ]
+  ]
+ },
+ {
+  "col": "arch_io",
+  "oracle": "io",
+  "n_oracle": 2528,
+  "n_family": 1467,
+  "recall": 0.251,
+  "precision": 0.433,
+  "rho": 0.314,
+  "missed_top": [
+   [
+    "read_text",
+    1746
+   ],
+   [
+    "rglob",
+    713
+   ],
+   [
+    "glob",
+    691
+   ],
+   [
+    "read",
+    154
+   ],
+   [
+    "write_text",
+    135
+   ],
+   [
+    "rmtree",
+    127
+   ],
+   [
+    "mkdir",
+    80
+   ],
+   [
+    "write",
+    48
+   ]
+  ]
+ },
+ {
+  "col": "arch_regex",
+  "oracle": "regex",
+  "n_oracle": 20707,
+  "n_family": 11040,
+  "recall": 0.533,
+  "precision": 1.0,
+  "rho": 0.718,
+  "missed_top": [
+   [
+    "finditer",
+    5153
+   ],
+   [
+    "fullmatch",
+    3390
+   ],
+   [
+    "match",
+    3186
+   ],
+   [
+    "search",
+    2777
+   ],
+   [
+    "findall",
+    1873
+   ],
+   [
+    "sub",
+    754
+   ],
+   [
+    "escape",
+    492
+   ]
+  ]
+ },
+ {
+  "col": "state_print_hits",
+  "oracle": "print",
+  "n_oracle": 509,
+  "n_family": 525,
+  "recall": 1.0,
+  "precision": 0.97,
+  "rho": 0.985,
+  "missed_top": []
+ },
+ {
+  "col": "arch_time",
+  "oracle": "time",
+  "n_oracle": 1210,
+  "n_family": 652,
+  "recall": 0.539,
+  "precision": 1.0,
+  "rho": 0.736,
+  "missed_top": [
+   [
+    "perf_counter",
+    1183
+   ],
+   [
+    "now",
+    23
+   ],
+   [
+    "strftime",
+    17
+   ]
+  ]
+ },
+ {
+  "col": "arch_serialization",
+  "oracle": "serial",
+  "n_oracle": 702,
+  "n_family": 0,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": null,
+  "missed_top": [
+   [
+    "dumps",
+    978
+   ],
+   [
+    "loads",
+    416
+   ],
+   [
+    "safe_load",
+    105
+   ],
+   [
+    "load",
+    54
+   ],
+   [
+    "dump",
+    30
+   ],
+   [
+    "unpack",
+    3
+   ]
+  ]
+ },
+ {
+  "col": "threat_eval_exec",
+  "oracle": "exec",
+  "n_oracle": 724,
+  "n_family": 0,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": null,
+  "missed_top": [
+   [
+    "check_output",
+    648
+   ],
+   [
+    "call",
+    373
+   ],
+   [
+    "run",
+    124
+   ],
+   [
+    "Popen",
+    6
+   ]
+  ]
+ },
+ {
+  "col": "state_bailout_hits",
+  "oracle": "raise",
+  "n_oracle": 12089,
+  "n_family": 12413,
+  "recall": 1.0,
+  "precision": 0.974,
+  "rho": 0.985,
+  "missed_top": []
+ },
+ {
+  "col": "state_halt_hits",
+  "oracle": "exit",
+  "n_oracle": 185,
+  "n_family": 0,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": null,
+  "missed_top": [
+   [
+    "exit",
+    421
+   ],
+   [
+    "_exit",
+    22
+   ]
+  ]
+ },
+ {
+  "col": "def_telemetry",
+  "oracle": "telemetry",
+  "n_oracle": 1389,
+  "n_family": 4899,
+  "recall": 1.0,
+  "precision": 0.284,
+  "rho": 0.529,
+  "missed_top": []
+ },
+ {
+  "col": "arch_concurrency",
+  "oracle": "threads",
+  "n_oracle": 371,
+  "n_family": 555,
+  "recall": 0.714,
+  "precision": 0.477,
+  "rho": 0.581,
+  "missed_top": [
+   [
+    "ProcessPoolExecutor",
+    106
+   ],
+   [
+    "submit",
+    106
+   ]
+  ]
+ },
+ {
+  "col": "def_sync_locks",
+  "oracle": "locks",
+  "n_oracle": 1,
+  "n_family": 96,
+  "recall": 1.0,
+  "precision": 0.01,
+  "rho": 0.102,
+  "missed_top": []
+ },
+ {
+  "col": "state_cast_hits",
+  "oracle": "cast",
+  "n_oracle": 19599,
+  "n_family": 20117,
+  "recall": 1.0,
+  "precision": 0.974,
+  "rho": 0.982,
+  "missed_top": [
+   [
+    "str",
+    1
+   ]
+  ]
+ },
+ {
+  "col": "bitwise_ops",
+  "oracle": "bitwise",
+  "n_oracle": 14439,
+  "n_family": 6700,
+  "recall": 0.15,
+  "precision": 0.323,
+  "rho": 0.109,
+  "missed_top": []
+ },
+ {
+  "col": "arch_globals",
+  "oracle": "globals",
+  "n_oracle": 868,
+  "n_family": 508,
+  "recall": 0.447,
+  "precision": 0.764,
+  "rho": 0.581,
+  "missed_top": []
+ },
+ {
+  "col": "lazy_evaluation",
+  "oracle": "yield",
+  "n_oracle": 15208,
+  "n_family": 646,
+  "recall": 0.041,
+  "precision": 0.964,
+  "rho": 0.166,
+  "missed_top": []
+ },
+ {
+  "col": "arch_import",
+  "oracle": "imports",
+  "n_oracle": 3670,
+  "n_family": 3675,
+  "recall": 1.0,
+  "precision": 0.999,
+  "rho": 0.999,
+  "missed_top": []
+ },
+ {
+  "col": "def_cleanup",
+  "oracle": "cleanup",
+  "n_oracle": 3463,
+  "n_family": 864,
+  "recall": 0.142,
+  "precision": 0.571,
+  "rho": 0.267,
+  "missed_top": []
+ },
+ {
+  "col": "is_documented",
+  "oracle": "doc",
+  "n_oracle": 50961,
+  "n_family": 45715,
+  "recall": 0.892,
+  "precision": 0.994,
+  "rho": 0.831,
+  "missed_top": []
+ },
+ {
+  "col": "arch_events",
+  "oracle": "events",
+  "n_oracle": 258,
+  "n_family": 414,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": -0.005,
+  "missed_top": [
+   [
+    "connect",
+    162
+   ],
+   [
+    "register",
+    91
+   ],
+   [
+    "dispatch",
+    5
+   ]
+  ]
+ },
+ {
+  "col": "arch_api",
+  "oracle": "api",
+  "n_oracle": 0,
+  "n_family": 36327,
+  "recall": 0.0,
+  "precision": 0.0,
+  "rho": null,
+  "missed_top": []
+ },
+ {
+  "col": "def_safety",
+  "oracle": "safety",
+  "n_oracle": 8411,
+  "n_family": 15889,
+  "recall": 1.0,
+  "precision": 0.529,
+  "rho": 0.688,
+  "missed_top": []
+ },
+ {
+  "col": "state_danger",
+  "oracle": "danger",
+  "n_oracle": 116,
+  "n_family": 354,
+  "recall": 0.319,
+  "precision": 0.105,
+  "rho": 0.18,
+  "missed_top": [
+   [
+    "environ",
+    138
+   ]
+  ]
+ }
+]

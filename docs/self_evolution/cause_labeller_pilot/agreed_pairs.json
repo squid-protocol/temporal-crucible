@@ -1,0 +1,92 @@
+[
+ {
+  "issue": 3929,
+  "cause_pr": 3923,
+  "fix_prs": [
+   3939
+  ],
+  "claude_conf": "high",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 1193,
+  "cause_pr": 698,
+  "fix_prs": [
+   1197
+  ],
+  "claude_conf": "medium",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 3909,
+  "cause_pr": 3866,
+  "fix_prs": [
+   3935
+  ],
+  "claude_conf": "low",
+  "gemini_conf": "medium"
+ },
+ {
+  "issue": 5525,
+  "cause_pr": 5512,
+  "fix_prs": [
+   5590
+  ],
+  "claude_conf": "high",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 4758,
+  "cause_pr": 4740,
+  "fix_prs": [
+   4761
+  ],
+  "claude_conf": "low",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 3946,
+  "cause_pr": 3887,
+  "fix_prs": [
+   3951
+  ],
+  "claude_conf": "low",
+  "gemini_conf": "medium"
+ },
+ {
+  "issue": 2827,
+  "cause_pr": 2734,
+  "fix_prs": [
+   2914
+  ],
+  "claude_conf": "medium",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 4859,
+  "cause_pr": 4843,
+  "fix_prs": [
+   4860
+  ],
+  "claude_conf": "medium",
+  "gemini_conf": "high"
+ },
+ {
+  "issue": 5208,
+  "cause_pr": 4705,
+  "fix_prs": [
+   5210
+  ],
+  "claude_conf": "low",
+  "gemini_conf": "medium"
+ },
+ {
+  "issue": 2204,
+  "cause_pr": 1975,
+  "fix_prs": [
+   2205
+  ],
+  "claude_conf": "high",
+  "gemini_conf": "high"
+ }
+]

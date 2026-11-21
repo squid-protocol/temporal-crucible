@@ -1,0 +1,15 @@
+commits 1005 with >=1 matched event (both views): 995 | events matched share: 0.983
+
+[B] n=485 classes=['other', 'feature', 'fix', 'refactor']
+  base   per-class AUC [0.726 0.753 0.633 0.263] macro 0.594  vs base +0.000
+  ast    per-class AUC [0.755 0.754 0.643 0.294] macro 0.612  vs base +0.018
+  struct per-class AUC [0.7   0.757 0.653 0.369] macro 0.620  vs base +0.026
+  both   per-class AUC [0.739 0.752 0.658 0.335] macro 0.621  vs base +0.027
+  R2 (ast minus structure, same folds): -0.008
+
+[A] n=995 classes=['feature', 'fix', 'other', 'perf', 'refactor']
+  base   per-class AUC [0.768 0.732 0.637 0.683 0.804] macro 0.725  vs base +0.000
+  ast    per-class AUC [0.779 0.74  0.667 0.602 0.842] macro 0.726  vs base +0.001
+  struct per-class AUC [0.771 0.744 0.616 0.64  0.827] macro 0.720  vs base -0.005
+  both   per-class AUC [0.773 0.737 0.653 0.577 0.864] macro 0.721  vs base -0.004
+  R2 (ast minus structure, same folds): +0.006
