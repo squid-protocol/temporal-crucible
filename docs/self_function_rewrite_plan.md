@@ -49,3 +49,49 @@ length) must not separate buckets.
 ## Prior work check owed before registering
 Commit-message-to-change classification (Hindle et al. maintenance activities, Levin and Yehudai), edit-script mining
 (GumTree), refactoring detectors (RefactoringMiner), static ReDoS analysers; to be read, not assumed.
+
+---
+# Amendment 1 (2026-11-20): independent review by Claude Opus (ast/review_claude.md; Gemini 4 Neon review pending, to be reconciled in Amendment 2)
+
+Review verified the counts (4,561 / 3,665 / 870 / 298; 1,152 and 417 functions; 3,986 within 20%). Corrections and rulings. Where this
+differs from the plan above, this governs.
+
+## Facts corrected
+- "232 complexity-naming commits" came from my broad message regex (complexity classes, quadratic, linearity, ReDoS, backtracking, in
+  subject OR body, incl. test-harness commits); the review's strict `complexit` search finds 34 first-parent commits. The 232 is NOT used
+  as a label set. The perf/complexity label comes from the frozen intent coding below.
+- 37 of the 52 refinement rows are SLOWDOWNS (cost up). R4 splits speed-ups (about 10-15 with an engine rewrite) from slowdowns
+  ("unclaimed cost"); both are case studies, no AUC.
+- The probe dropped 67 renamed engine files, counted 108 docstring-only and 45 nested-def changes, ignored decorators, excluded the 870
+  signature changes and cut subjects at 100 chars (join must use the full subject). 88% of rewrite commits are agent-written; Mar-Jun
+  is human, Oct is 554 agent commits to 3 human.
+
+## Rulings
+1. PROBE v2 (ast/probe2.py): follow renames (R/C), nested defs stripped from the parent's body hash, docstring-only as its own kind,
+   decorators inside the signature, signature changes kept as a parallel kind (with body_changed flag), full subject stored, merge-of-
+   branch commits flagged tangled. All analyses use v2 events.
+2. UNIT/SAMPLE: sample COMMITS, stratified era (human / mixed / agent) x module, <= 5 units per function, inverse-probability weights,
+   about 400 commits; seed and strata frozen before text is read. Effective n is commits, not units.
+3. CLAIM ATTRIBUTION: a unit is coded only if its commit rewrites <= 2 functions, or the text names the function or file; sensitivity
+   at cutoffs 1, 3, 6. Tangled = > 6 body rewrites or branch-merge commit or sweep hash (>= 5 units with the same normalised edit script, or
+   frozen mechanical subject regex: ruff|lint|format|rename|typing|merge|autofix).
+4. CLAIM BUCKETS = INTENT ONLY: fix/correctness, feature/extension, perf (incl. complexity), refactor/cleanup, other. Multi-label allowed
+   with a `primary`. Mechanism words stay on the ast side; no regex/table or test/CI bucket.
+5. CIRCULARITY CONTROL: intent is coded from (a) the linked issue title+body ("Part of/Fixes/Closes #N") and (b) PR text with a frozen
+   mechanism stoplist masked (loop, set, dict, guard, regex, pattern, compile, cache, hoist, early return, try/except, constant, lookup,
+   precompute, ...). R1 is reported on both; the gap is the narration effect.
+6. ERA: primary analysis = agent era; human era descriptive. A "month + module only" baseline is mandatory.
+7. VALIDATION: GroupKFold by FILE, plus a time-blocked check (train earlier, test later). Baselines: full size (n_old, n_new, signed and
+   absolute delta, diff lines), file identity + date, month + module. A size-residualised ast model is also reported.
+8. PRIMARY STATISTICS (two only): R1 = macro one-vs-rest AUC of the ast model minus the best baseline, permutation test within file
+   groups; R2 = R1 minus the same for the GitGalaxy structure view on the SAME folds and SAME units, equal feature budget; Holm over
+   the two. Group bootstrap CIs; minimal effect of interest 0.10 (power: perf has ~40-80 commits). Everything else descriptive, no p-values.
+9. R2 FAIRNESS: report the share of units with a GitGalaxy function row first; compare only on units where both views exist.
+10. PLACEBOS: label permutation within file group, and mismatched-text placebo (claim from a random other commit, same module and month).
+    Identifier length is descriptive only.
+11. R3: "contradiction" renamed "not ast-visible"; inspect 5 members per cell before naming a cluster; k by stability.
+12. CODER RELIABILITY: second coder blind with a different prompt, 20% subset, kappa per bucket (not pooled); rules frozen after a
+    20-commit pilot and before main coding. Owner may code a ~50-commit slice (offered, not required).
+13. R5: normalise per function and per KLOC; mark the human/agent boundary and big sweeps (ruff adoption, autofix) on every plot.
+14. Prior work added: Herzig and Zeller (tangled changes), Hattori and Lanza (commit-size classes), work on faithfulness of
+    generated commit/PR text, GumTree / RefactoringMiner as an edit-type cross-check of the ast diff vocabulary.
