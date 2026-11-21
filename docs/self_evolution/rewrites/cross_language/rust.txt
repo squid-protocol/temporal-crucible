@@ -1,0 +1,16 @@
+language rust: 6826 functions matched to the oracle, 671 unmatched (left out)
+
+family                  oracle  family  recall   prec    rho  status        missed tokens
+complexity                1533    2176    1.00   0.70   0.82  over-counts   
+struct_branch             1533    2176    1.00   0.70   0.82  over-counts   
+args                      4554    4554    1.00   1.00   1.00  ok            
+struct_closures           1142     608    0.52   0.98   0.70  misses        
+struct_decorators         2400    2576    1.00   0.93   0.93  ok            
+state_bailout_hits         231     237    0.78   0.76   0.76  both          unreachable!:48, exit:20, unimplemented!:2
+bitwise_ops                 55    1071    1.00   0.05   0.22  over-counts   
+state_print_hits            54      55    1.00   0.98   0.99  ok            
+state_halt_hits            114      49    0.36   0.84   0.55  misses        sleep:48, time::sleep:42, thread::sleep:9
+arch_regex                   0       0     -      -      -    no-instances  
+arch_time                  269      37    0.11   0.78   0.28  both          Instant::now:146, Duration::from_millis:136, Duration::from_secs:80, SystemTime::now:1
+arch_io                    129     253    0.49   0.25   0.34  both          TcpListener::bind:22, OpenOptions::new:21, TcpStream::connect:17, stdout:11, stdin:10
+is_documented             2059    2124    0.92   0.89   0.86  ok            
