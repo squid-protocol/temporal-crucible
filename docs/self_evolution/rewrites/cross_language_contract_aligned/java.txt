@@ -1,0 +1,15 @@
+language java: 2616 functions matched to the oracle, 6 unmatched (left out)
+
+family                  oracle  family  recall   prec    rho  status        missed tokens
+struct_branch              681     425    0.62   0.99   0.76  misses        catch_clause:307, &&:11
+args                      1076    1041    0.97   1.00   0.95  ok            
+struct_closures            113     123    1.00   0.92   0.96  ok            
+struct_decorators         2044    2044    0.99   0.99   0.80  ok            @Nullable:16
+state_bailout_hits         472     472    1.00   1.00   1.00  ok            
+bitwise_ops                  4     291    0.75   0.01   0.08  both          |=:2
+state_print_hits            20      31    1.00   0.65   0.80  over-counts   
+state_halt_hits              5       7    1.00   0.71   0.84  over-counts   
+arch_regex                   0       2     -     0.00    -    over-counts   
+arch_time                   16       6    0.38   1.00   0.61  misses        System.nanoTime:17, TimeUnit.:9
+arch_io                      1      44    0.00   0.00  -0.00  both          URL:1
+is_documented              139     194    1.00   0.72   0.84  over-counts   

@@ -1,0 +1,188 @@
+{
+ "language": "c",
+ "matched": 6073,
+ "unmatched": 3,
+ "families": [
+  {
+   "family": "struct_branch",
+   "rule": "branch",
+   "definition": "decision points: if, loops, case clauses, catch handlers, conditional expressions, && and ||",
+   "oracle_functions": 4361,
+   "family_functions": 4359,
+   "recall": 0.999,
+   "precision": 1.0,
+   "rho": 0.992,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "||",
+     6
+    ],
+    [
+     "&&",
+     3
+    ]
+   ]
+  },
+  {
+   "family": "args",
+   "rule": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 5478,
+   "family_functions": 5478,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 1.0,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_decorators",
+   "rule": "decorators",
+   "definition": "annotations, attributes or decorators on the function",
+   "oracle_functions": 0,
+   "family_functions": 0,
+   "recall": null,
+   "precision": null,
+   "rho": null,
+   "status": "no-instances",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "rule": "panics_and_aborts",
+   "definition": "throw / panic / unreachable marker / process exit",
+   "oracle_functions": 125,
+   "family_functions": 257,
+   "recall": 0.984,
+   "precision": 0.479,
+   "rho": 0.68,
+   "status": "over-counts",
+   "missed_tokens": [
+    [
+     "_exit",
+     2
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "rule": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ & | ~ (and the compound assignments)",
+   "oracle_functions": 1129,
+   "family_functions": 597,
+   "recall": 0.464,
+   "precision": 0.878,
+   "rho": 0.629,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "&",
+     977
+    ],
+    [
+     "|",
+     312
+    ]
+   ]
+  },
+  {
+   "family": "state_print_hits",
+   "rule": "debug_prints",
+   "definition": "ad-hoc debug output to the console",
+   "oracle_functions": 205,
+   "family_functions": 207,
+   "recall": 1.0,
+   "precision": 0.99,
+   "rho": 0.995,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_halt_hits",
+   "rule": "thread_sleeps",
+   "definition": "sleeps and timed waits",
+   "oracle_functions": 33,
+   "family_functions": 33,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 1.0,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_regex",
+   "rule": "regex_execution",
+   "definition": "evaluates or builds a regular expression",
+   "oracle_functions": 1,
+   "family_functions": 1,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 1.0,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_time",
+   "rule": "time_date_logic",
+   "definition": "instantiates or computes with a clock or calendar value: now/time/date constructors, durations, formatting",
+   "oracle_functions": 65,
+   "family_functions": 52,
+   "recall": 0.523,
+   "precision": 0.654,
+   "rho": 0.582,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "time",
+     35
+    ]
+   ]
+  },
+  {
+   "family": "arch_io",
+   "rule": "io",
+   "definition": "opens or reads/writes a file or a network connection",
+   "oracle_functions": 137,
+   "family_functions": 125,
+   "recall": 0.774,
+   "precision": 0.848,
+   "rho": 0.809,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "close",
+     34
+    ],
+    [
+     "mmap",
+     4
+    ],
+    [
+     "fgets",
+     3
+    ],
+    [
+     "accept",
+     1
+    ],
+    [
+     "connect",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "is_documented",
+   "rule": "doc",
+   "definition": "structured documentation directly above (/** */, ///, godoc)",
+   "oracle_functions": 26,
+   "family_functions": 29,
+   "recall": 0.962,
+   "precision": 0.862,
+   "rho": 0.91,
+   "status": "ok",
+   "missed_tokens": []
+  }
+ ]
+}

@@ -1,0 +1,191 @@
+{
+ "language": "typescript",
+ "matched": 2142,
+ "unmatched": 175,
+ "families": [
+  {
+   "family": "struct_branch",
+   "rule": "branch",
+   "definition": "decision points: if, loops, case clauses, catch handlers, conditional expressions, && and ||",
+   "oracle_functions": 849,
+   "family_functions": 896,
+   "recall": 0.98,
+   "precision": 0.929,
+   "rho": 0.955,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "catch_clause",
+     10
+    ],
+    [
+     "ternary_expression",
+     9
+    ],
+    [
+     "&&",
+     4
+    ],
+    [
+     "||",
+     2
+    ]
+   ]
+  },
+  {
+   "family": "args",
+   "rule": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 1201,
+   "family_functions": 1336,
+   "recall": 0.999,
+   "precision": 0.898,
+   "rho": 0.947,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_closures",
+   "rule": "closures",
+   "definition": "anonymous callables: function literals, lambdas, arrow functions, closures",
+   "oracle_functions": 413,
+   "family_functions": 617,
+   "recall": 0.792,
+   "precision": 0.53,
+   "rho": 0.609,
+   "status": "both",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_decorators",
+   "rule": "decorators",
+   "definition": "annotations, attributes or decorators on the function",
+   "oracle_functions": 0,
+   "family_functions": 10,
+   "recall": null,
+   "precision": 0.0,
+   "rho": null,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "rule": "panics_and_aborts",
+   "definition": "throw / panic / unreachable marker / process exit",
+   "oracle_functions": 50,
+   "family_functions": 50,
+   "recall": 0.98,
+   "precision": 0.98,
+   "rho": 0.98,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "throw",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "rule": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ & | ~ (and the compound assignments)",
+   "oracle_functions": 3,
+   "family_functions": 40,
+   "recall": 1.0,
+   "precision": 0.075,
+   "rho": 0.272,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_print_hits",
+   "rule": "debug_prints",
+   "definition": "ad-hoc debug output to the console",
+   "oracle_functions": 18,
+   "family_functions": 21,
+   "recall": 1.0,
+   "precision": 0.857,
+   "rho": 0.925,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_halt_hits",
+   "rule": "thread_sleeps",
+   "definition": "sleeps and timed waits",
+   "oracle_functions": 59,
+   "family_functions": 62,
+   "recall": 0.983,
+   "precision": 0.935,
+   "rho": 0.956,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "setImmediate",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "arch_regex",
+   "rule": "regex_execution",
+   "definition": "evaluates or builds a regular expression",
+   "oracle_functions": 98,
+   "family_functions": 71,
+   "recall": 0.633,
+   "precision": 0.873,
+   "rho": 0.734,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "test",
+     38
+    ],
+    [
+     "regex-literal",
+     23
+    ],
+    [
+     "exec",
+     3
+    ]
+   ]
+  },
+  {
+   "family": "arch_time",
+   "rule": "time_date_logic",
+   "definition": "instantiates or computes with a clock or calendar value: now/time/date constructors, durations, formatting",
+   "oracle_functions": 1,
+   "family_functions": 64,
+   "recall": 1.0,
+   "precision": 0.016,
+   "rho": 0.123,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_io",
+   "rule": "io",
+   "definition": "opens or reads/writes a file or a network connection",
+   "oracle_functions": 4,
+   "family_functions": 19,
+   "recall": 1.0,
+   "precision": 0.211,
+   "rho": 0.46,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "is_documented",
+   "rule": "doc",
+   "definition": "structured documentation directly above (/** */, ///, godoc)",
+   "oracle_functions": 30,
+   "family_functions": 119,
+   "recall": 1.0,
+   "precision": 0.252,
+   "rho": 0.491,
+   "status": "over-counts",
+   "missed_tokens": []
+  }
+ ]
+}

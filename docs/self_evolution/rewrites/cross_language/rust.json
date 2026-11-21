@@ -1,0 +1,214 @@
+{
+ "language": "rust",
+ "matched": 6826,
+ "unmatched": 671,
+ "families": [
+  {
+   "family": "complexity",
+   "definition": "decision points: if, loops, case clauses, catch handlers, conditional expressions, && and ||",
+   "oracle_functions": 1533,
+   "family_functions": 2176,
+   "recall": 1.0,
+   "precision": 0.705,
+   "rho": 0.818,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_branch",
+   "definition": "same count as complexity",
+   "oracle_functions": 1533,
+   "family_functions": 2176,
+   "recall": 1.0,
+   "precision": 0.705,
+   "rho": 0.818,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 4554,
+   "family_functions": 4554,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 1.0,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_closures",
+   "definition": "function literals, lambdas and closures defined inside the function",
+   "oracle_functions": 1142,
+   "family_functions": 608,
+   "recall": 0.522,
+   "precision": 0.98,
+   "rho": 0.699,
+   "status": "misses",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_decorators",
+   "definition": "annotations, attributes or decorators on the function",
+   "oracle_functions": 2400,
+   "family_functions": 2576,
+   "recall": 1.0,
+   "precision": 0.932,
+   "rho": 0.933,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "definition": "throw / panic / process-exit",
+   "oracle_functions": 231,
+   "family_functions": 237,
+   "recall": 0.775,
+   "precision": 0.755,
+   "rho": 0.757,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "unreachable!",
+     48
+    ],
+    [
+     "exit",
+     20
+    ],
+    [
+     "unimplemented!",
+     2
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ ~ (& and | are address-of, pipes, bounds and closures too, so left out)",
+   "oracle_functions": 55,
+   "family_functions": 1071,
+   "recall": 1.0,
+   "precision": 0.051,
+   "rho": 0.216,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_print_hits",
+   "definition": "output to the console",
+   "oracle_functions": 54,
+   "family_functions": 55,
+   "recall": 1.0,
+   "precision": 0.982,
+   "rho": 0.991,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_halt_hits",
+   "definition": "sleeps and timed waits",
+   "oracle_functions": 114,
+   "family_functions": 49,
+   "recall": 0.36,
+   "precision": 0.837,
+   "rho": 0.545,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "sleep",
+     48
+    ],
+    [
+     "time::sleep",
+     42
+    ],
+    [
+     "thread::sleep",
+     9
+    ]
+   ]
+  },
+  {
+   "family": "arch_regex",
+   "definition": "executes or builds a regular expression",
+   "oracle_functions": 0,
+   "family_functions": 0,
+   "recall": null,
+   "precision": null,
+   "rho": null,
+   "status": "no-instances",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_time",
+   "definition": "reads a clock",
+   "oracle_functions": 269,
+   "family_functions": 37,
+   "recall": 0.108,
+   "precision": 0.784,
+   "rho": 0.284,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "Instant::now",
+     146
+    ],
+    [
+     "Duration::from_millis",
+     136
+    ],
+    [
+     "Duration::from_secs",
+     80
+    ],
+    [
+     "SystemTime::now",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "arch_io",
+   "definition": "opens or reads/writes a file or a network connection",
+   "oracle_functions": 129,
+   "family_functions": 253,
+   "recall": 0.488,
+   "precision": 0.249,
+   "rho": 0.335,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "TcpListener::bind",
+     22
+    ],
+    [
+     "OpenOptions::new",
+     21
+    ],
+    [
+     "TcpStream::connect",
+     17
+    ],
+    [
+     "stdout",
+     11
+    ],
+    [
+     "stdin",
+     10
+    ]
+   ]
+  },
+  {
+   "family": "is_documented",
+   "definition": "a doc comment directly above",
+   "oracle_functions": 2059,
+   "family_functions": 2124,
+   "recall": 0.917,
+   "precision": 0.889,
+   "rho": 0.861,
+   "status": "ok",
+   "missed_tokens": []
+  }
+ ]
+}

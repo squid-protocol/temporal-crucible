@@ -1,0 +1,5461 @@
+{
+ "abap": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IF",
+   "string_delta": 0
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FREE",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ENQUEUE_",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "WRITE",
+   "string_delta": 0
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CL_BADI_BASE",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TABLES",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TRUNCATE",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CONSTANTS",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "SELECT",
+   "string_delta": 0
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FREE",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CL_ABAP_TYPEDESCR",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TRY",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "UNASSIGNED",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ABS",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CL_BSP_CONTEXT",
+   "string_delta": 1
+  },
+  "state_mutation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MOVE",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ENQUEUE_",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "BAL_LOG_CREATE",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CL_ABAP_UNIT_ASSERT",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IGNORE",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PARAMETERS",
+   "string_delta": 1
+  }
+ },
+ "ada": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  }
+ },
+ "agc_assembly": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MASK",
+   "string_delta": null
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "BZF",
+   "string_delta": null
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ENDOFJOB",
+   "string_delta": null
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EXEC",
+   "string_delta": null
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FLASH",
+   "string_delta": null
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "RUPT",
+   "string_delta": null
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CURTAINS",
+   "string_delta": null
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DSKY",
+   "string_delta": null
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ERASABLE",
+   "string_delta": null
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "POODOO",
+   "string_delta": null
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "INDEX",
+   "string_delta": null
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "INDEX",
+   "string_delta": null
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "INHINT",
+   "string_delta": null
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TASKOVER",
+   "string_delta": null
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "VAD",
+   "string_delta": null
+  },
+  "state_mutation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TS",
+   "string_delta": null
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "INHINT",
+   "string_delta": null
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DNTM",
+   "string_delta": null
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "SELFCHECK",
+   "string_delta": null
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "VARDELAY",
+   "string_delta": null
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NOUN",
+   "string_delta": null
+  }
+ },
+ "apex": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Queueable",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fflib_ApexMocks",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PlatformEvent",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "UserInfo",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "emptyRecycleBin",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "final",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Http",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "isAccessible",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Decimal",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "RestRequest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "StubProvider",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ApexPages",
+   "string_delta": 1
+  }
+ },
+ "assembly": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "and",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "je",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "lock",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "iret",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "hlt",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "equ",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syscall",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sys_mmap",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "hlt",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "endbr64",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "cli",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fadd",
+   "string_delta": 1
+  },
+  "state_mutation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xchg",
+   "string_delta": 0
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "lock",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pause",
+   "string_delta": 1
+  }
+ },
+ "c": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "thrd_create",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "printf",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "plugin_register",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "static",
+   "string_delta": 0
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "epoll_wait",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "const",
+   "string_delta": 2
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fork",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on_event",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "uintptr_t",
+   "string_delta": 2
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "regcomp",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assert",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "strcpy",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dgemm",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "cJSON_Parse",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FCGI_Accept",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mtx_lock",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syslog",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TEST",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IGNORE_TEST",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "time_t",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "GtkWidget",
+   "string_delta": 1
+  }
+ },
+ "cpp": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "co_await",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "printf",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IServiceCollection",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "emit",
+   "string_delta": 1
+  },
+  "explicit_casts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "static_cast",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "extern",
+   "string_delta": 0
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "const",
+   "string_delta": 2
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fopen",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mmap",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "new",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "uintptr_t",
+   "string_delta": 2
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "decltype",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "__m128",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "rapidjson",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FCGI_Accept",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TEST",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "GTEST_SKIP",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Q_OBJECT",
+   "string_delta": 1
+  }
+ },
+ "csharp": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IServiceCollection",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EventHandler",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ConfigurationManager",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "const",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NamedPipeServerStream",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MemoryPool",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fixed",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DllImport",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dynamic",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Matrix4x4",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "XmlSerializer",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "RenderFragment",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DateTimeOffset",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ControllerBase",
+   "string_delta": 1
+  }
+ },
+ "css": {
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unset",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "gap",
+   "string_delta": 1
+  }
+ },
+ "dart": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ConsumerWidget",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "StreamController",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "exit",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "File",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ReceivePort",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Arena",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Opaque",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MethodChannel",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Float64List",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "jsonDecode",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "shelf",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "testWidgets",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xit",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Stopwatch",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Widget",
+   "string_delta": 1
+  }
+ },
+ "db2_sql": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IF",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "ECHO",
+   "string_delta": 0
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "LIKE",
+   "string_delta": 1
+  }
+ },
+ "dockerfile": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "nohup",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "STOPSIGNAL",
+   "string_delta": 0
+  },
+  "io": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "COPY",
+   "string_delta": 0
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EXPOSE",
+   "string_delta": 0
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "JAVA_OPTS",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ONBUILD",
+   "string_delta": 0
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "HEALTHCHECK",
+   "string_delta": 0
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "LOG_LEVEL",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pytest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "skipTests",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xvfb",
+   "string_delta": 1
+  }
+ },
+ "embedded_python": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "irq",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Final",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "open",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bytearray",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "raise",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ptr8",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getattr",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "except",
+   "string_delta": 0
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "math",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "microdot",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Lock",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unittest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MagicMock",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "framebuf",
+   "string_delta": 1
+  }
+ },
+ "fortran": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "iand",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IF",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "close",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "COARRAY",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PRINT",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EVENT_QUERY",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "COMMON",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ASSIGN",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "OPEN",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MPI_Init",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ALLOCATE",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "stop",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EQUIVALENCE",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ALLOCATABLE",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "COMMON",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NAMELIST",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "lock",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "log_info",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DATE_AND_TIME",
+   "string_delta": 1
+  }
+ },
+ "go": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "println",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EventBus",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "var",
+   "string_delta": 0
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syscall",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "panic",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "uintptr",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "cgo",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ExecuteTemplate",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Mutex",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ServeHTTP",
+   "string_delta": 1
+  }
+ },
+ "groovy": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "synchronized",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "println",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ApplicationEvent",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "File",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addListener",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "invokeMethod",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "null",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "BigDecimal",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MarkupBuilder",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "synchronized",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "SwingBuilder",
+   "string_delta": 1
+  }
+ },
+ "haskell": {
+  "auth_middleware": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "requireAuthId",
+   "string_delta": 1
+  },
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "shift",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "hClose",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "forkIO",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "putStr",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ReaderT",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Event",
+   "string_delta": 1
+  },
+  "explicit_casts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unsafeCoerce",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getEnv",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "die",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IO",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "createProcess",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "subscribe",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "malloc",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Ptr",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TemplateHaskell",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "makeRegex",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unsafePerformIO",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Complex",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "decode",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Yesod",
+   "string_delta": 1
+  },
+  "state_mutation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "modifyIORef",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "takeMVar",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "logDebug",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "hspec",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ignore",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "threadDelay",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getCurrentTime",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Threepenny",
+   "string_delta": 1
+  }
+ },
+ "html": {
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": null
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": null
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "required",
+   "string_delta": null
+  }
+ },
+ "java": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "synchronized",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ApplicationContext",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ApplicationEvent",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ThreadLocal",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Unsafe",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "final",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "File",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ProcessBuilder",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "SegmentAllocator",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MemorySegment",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "native",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "null",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "BigDecimal",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ObjectMapper",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ModelAndView",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "verifyZeroInteractions",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "delay",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "LocalDate",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "SwingUtilities",
+   "string_delta": 1
+  }
+ },
+ "javascript": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Inject",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "emit",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fetch",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "postMessage",
+   "string_delta": 1
+  },
+  "lazy_evaluation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "yield",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "prototype",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "with",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getServerSideProps",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "jest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xit",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "setTimeout",
+   "string_delta": 1
+  }
+ },
+ "kotlin": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "shl",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "suspend",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "LiveData",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "exitProcess",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "File",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "BroadcastReceiver",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "memScoped",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CPointer",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "javaClass",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "require",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "as",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sin",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Moshi",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ApplicationCall",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "shouldBe",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mockk",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "delay",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "LocalDate",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Modifier",
+   "string_delta": 1
+  }
+ },
+ "livecode": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bitAnd",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dispatch",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "do",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "quit",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "frontscripts",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "matchText",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sqrt",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "jsonImport",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "revLog",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Levure",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "card",
+   "string_delta": 1
+  }
+ },
+ "lua": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "collectgarbage",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "print",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "inject",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "explicit_casts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "tonumber",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "_G",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "load",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "subscribe",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "collectgarbage",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "error",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "__index",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pcall",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "rawget",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "loadstring",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "setup",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xdescribe",
+   "string_delta": 1
+  }
+ },
+ "m4": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ifelse",
+   "string_delta": null
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "m4_popdef",
+   "string_delta": null
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "errprint",
+   "string_delta": null
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AC_REQUIRE",
+   "string_delta": null
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AC_ARG_VAR",
+   "string_delta": null
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syscmd",
+   "string_delta": null
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sysval",
+   "string_delta": null
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "m4_fatal",
+   "string_delta": null
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "translit",
+   "string_delta": null
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "m4_assert",
+   "string_delta": null
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "changequote",
+   "string_delta": null
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": null
+  },
+  "state_mutation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pushdef",
+   "string_delta": null
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AC_MSG_CHECKING",
+   "string_delta": null
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AT_SETUP",
+   "string_delta": null
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AT_SKIP_IF",
+   "string_delta": null
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": null
+  }
+ },
+ "makefile": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ifeq",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "wait",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 0
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "curl",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "curl",
+   "string_delta": 0
+  },
+  "listeners": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "inotifywait",
+   "string_delta": 0
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "grep",
+   "string_delta": 0
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bc",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "tar",
+   "string_delta": 0
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pytest",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "date",
+   "string_delta": 0
+  }
+ },
+ "matlab": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bitand",
+   "string_delta": 1
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "clear",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "parfor",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "disp",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "notify",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "global",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "system",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "load",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "system",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addlistener",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "libpointer",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "feval",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "regexp",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fft",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "jsondecode",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "webwindow",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "labBarrier",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "log4m",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TestCase",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assume",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "tic",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "uifigure",
+   "string_delta": 1
+  }
+ },
+ "objective-c": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dealloc",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dispatch_async",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "printf",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TyphoonComponentFactory",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSNotificationCenter",
+   "string_delta": 1
+  },
+  "explicit_casts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "typeof",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "extern",
+   "string_delta": 0
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "const",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSFileHandle",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSXPCConnection",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "alloc",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "id",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "objc_msgSend",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSRegularExpression",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "__weak",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "__unsafe_unretained",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sin",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSJSONSerialization",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "WOComponent",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSLock",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "os_log",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "XCTest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "XCTSkip",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSDate",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "UIView",
+   "string_delta": 1
+  }
+ },
+ "perl": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "close",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "print",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IOC",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "emit",
+   "string_delta": 1
+  },
+  "explicit_casts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "int",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "exit",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Readonly",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "open",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "undef",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "die",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "AUTOLOAD",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "croak",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PDL",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Dancer2",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "lock",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "cmp_ok",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "localtime",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Template",
+   "string_delta": 1
+  }
+ },
+ "php": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Fiber",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ContainerInterface",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "EventDispatcher",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "const",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fopen",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "shell_exec",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "call_user_func",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "preg_match",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unserialize",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bcadd",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unserialize",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Response",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PHPUnit",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "markTestSkipped",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "strtotime",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "renderView",
+   "string_delta": 1
+  }
+ },
+ "pli": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "IF",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ATTACH",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "INTERNAL",
+   "string_delta": 0
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "STATIC",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NONASSIGNABLE",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "RESIGNAL",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "POINTER",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DEFINED",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NOHANDLE",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ZUNIT",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DFHMDF",
+   "string_delta": 1
+  }
+ },
+ "powershell": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dispose",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "RunspaceFactory",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "InversionOfControl",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "no-control",
+   "code_delta": 0,
+   "comment_delta": 0,
+   "keyword": "hidden",
+   "string_delta": 0
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ErrorActionPreference",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "iex",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "iwr",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on_",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "iex",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "lock",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Mock",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pending",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "HtmlDocument",
+   "string_delta": 1
+  }
+ },
+ "python": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Depends",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Signal",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Final",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "open",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "multiprocessing",
+   "string_delta": 1
+  },
+  "lazy_evaluation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "yield",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on_event",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "raise",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "c_void_p",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getattr",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Any",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "render_template",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Lock",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unittest",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "MagicMock",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "timedelta",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "streamlit",
+   "string_delta": 1
+  },
+  "vectorized_math": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "einsum",
+   "string_delta": 0
+  }
+ },
+ "ruby": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Thread",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "puts",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "inject",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Wisper",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ENV",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "freeze",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "File",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Open3",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ObjectSpace",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "raise",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "method_missing",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "rescue",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Math",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "respond_to",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "skip",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ActionView",
+   "string_delta": 1
+  }
+ },
+ "rust": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Extension",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "crossbeam_channel",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "OnceCell",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "reqwest",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "GlobalAlloc",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PhantomData",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unwrap_or",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unwrap",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "f32",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "actix_web",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Mutex",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "slint",
+   "string_delta": 1
+  }
+ },
+ "scala": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bracket",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Future",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "println",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ZLayer",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Source",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Source",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ActorSystem",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addEventListener",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Zone",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CFuncPtr",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "implicit",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "require",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "null",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "algebird",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "asJson",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Action",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "synchronized",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assertEquals",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ignore",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "FiniteDuration",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Laminar",
+   "string_delta": 1
+  }
+ },
+ "scheme": {
+  "bitwise_ops": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ash",
+   "string_delta": 0
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "display",
+   "string_delta": 0
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "hook",
+   "string_delta": 0
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 0
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "read",
+   "string_delta": 0
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "error",
+   "string_delta": 0
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "guard",
+   "string_delta": 0
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syslog",
+   "string_delta": 0
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 0
+  }
+ },
+ "shell": {
+  "auth_middleware": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "kinit",
+   "string_delta": 0
+  },
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "wait",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mkfifo",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sudo",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "curl",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "curl",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "read",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "exit",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "grep",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bc",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "jq",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CONTENT_TYPE",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "flock",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "logger",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assertTrue",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bats_skip",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "date",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dialog",
+   "string_delta": 1
+  }
+ },
+ "solidity": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "delete",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "emit",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "selfdestruct",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "constant",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "delegatecall",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "new",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "revert",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "memory",
+   "string_delta": 2
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fallback",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "require",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "unchecked",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "keccak256",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "nonReentrant",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "setUp",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "now",
+   "string_delta": 1
+  }
+ },
+ "sqlite": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "CASE",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "VACUUM",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "disp",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sqlite3_load_extension",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TEMP",
+   "string_delta": 1
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sqlite_master",
+   "string_delta": 1
+  },
+  "immutability_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "STRICT",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "PRAGMA",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ABORT",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "json_extract",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "REGEXP",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "TRANSACTION",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abs",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "json_extract",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sqlite_stat1",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "strftime",
+   "string_delta": 1
+  }
+ },
+ "swift": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "print",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Swinject",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NotificationCenter",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fatalError",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "URLSession",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "URLSession",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "addObserver",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "malloc",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "pointers": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "OpaquePointer",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dynamic",
+   "string_delta": 1
+  },
+  "regex_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "NSRegularExpression",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "catch",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "simd",
+   "string_delta": 1
+  },
+  "serialization_parsing": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "JSONDecoder",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Vapor",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Logger",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "XCTest",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "DateFormatter",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "View",
+   "string_delta": 1
+  }
+ },
+ "tcl": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "close",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "vwait",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bind",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "exec",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "bind",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "error",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "rename",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "catch",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "expr",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syslog",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "do_test",
+   "string_delta": 1
+  },
+  "ui_framework": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "button",
+   "string_delta": 1
+  }
+ },
+ "typescript": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "async",
+   "string_delta": 1
+  },
+  "dependency_injection": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Inject",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "private",
+   "string_delta": 1
+  },
+  "events": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "dispatchEvent",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "eval",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fetch",
+   "string_delta": 1
+  },
+  "ipc_rpc_bridges": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "postMessage",
+   "string_delta": 1
+  },
+  "lazy_evaluation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "yield",
+   "string_delta": 1
+  },
+  "listeners": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "on",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "throw",
+   "string_delta": 1
+  },
+  "reflection_metaprogramming": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "prototype",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "any",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "random",
+   "string_delta": 1
+  },
+  "ssr_boundaries": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "getServerSideProps",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "mutex",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "xit",
+   "string_delta": 1
+  },
+  "thread_sleeps": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "sleep",
+   "string_delta": 1
+  },
+  "time_date_logic": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "setTimeout",
+   "string_delta": 1
+  }
+ },
+ "yacc": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "printf",
+   "string_delta": 1
+  },
+  "encapsulation": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "static",
+   "string_delta": 0
+  },
+  "globals": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "yylval",
+   "string_delta": 1
+  },
+  "high_risk_execution": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "fopen",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "malloc",
+   "string_delta": 1
+  },
+  "panics_and_aborts": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "abort",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assert",
+   "string_delta": 1
+  },
+  "telemetry": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "syslog",
+   "string_delta": 1
+  }
+ },
+ "yaml": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 1
+  },
+  "debug_prints": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "echo",
+   "string_delta": 1
+  },
+  "io": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "wget",
+   "string_delta": 1
+  },
+  "test": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "pytest",
+   "string_delta": 1
+  }
+ },
+ "zig": {
+  "branch": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "if",
+   "string_delta": 0
+  },
+  "cleanup": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "deinit",
+   "string_delta": 1
+  },
+  "concurrency": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "suspend",
+   "string_delta": 1
+  },
+  "memory_alloc": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "ArenaAllocator",
+   "string_delta": 1
+  },
+  "safety": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "try",
+   "string_delta": 1
+  },
+  "safety_bypasses": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "undefined",
+   "string_delta": 1
+  },
+  "scientific": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "f16",
+   "string_delta": 1
+  },
+  "sync_locks": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "Mutex",
+   "string_delta": 1
+  },
+  "test_skip": {
+   "state": "pass",
+   "code_delta": 1,
+   "comment_delta": 0,
+   "keyword": "assume",
+   "string_delta": 1
+  }
+ }
+}
