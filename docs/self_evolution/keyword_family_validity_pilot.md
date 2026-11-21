@@ -1,5 +1,14 @@
 # Do GitGalaxy's keyword families measure what their names say? Python pilot (2026-11-21, exploratory, discovery not confirmation)
 
+> **Update 2026-11-21 (later): superseded in part.** The oracles were aligned to the families' written contracts (`gitgalaxy/standards/signal_contracts.py`,
+> 71 families) after this note was written. What changed: closures are anonymous callables only (a nested `def` is not one); `bitwise_ops` includes `&` and `|`
+> (and type annotations such as `str | None` are not counted); `time_date_logic` includes durations; `doc` is structured documentation (`/** */`, `///`, godoc);
+> debug prints leave out writers and log calls; `serialization_parsing` covers JSON, YAML, XML, CSV and protobuf, so the "by design" reading of its
+> pickle-only rule below is wrong (the contract says JSON counts: gitgalaxy#8882). Two rows were oracle errors and are withdrawn (Go print, C documented).
+> Re-run numbers: `rewrites/cross_language_contract_aligned/`. The grid that now carries these results: gitgalaxy PR #8876; corrections to the public issues:
+> #8861, #8862 (comment), #8866, #8868.
+
+
 Test: for the 72,044 Python functions in the engine's own code (the isolated-file scans of the rewritten files, `ast/gscan/trees/new`), count what Python's `ast`
 says each function really does (calls, comprehensions, closures, decorators, raises, ...), then compare each `function_data` family column on the same function:
 recall (oracle > 0 and family > 0), precision (family > 0 and oracle > 0) and rank correlation. Matching is by file and start line (100% matched).
@@ -26,7 +35,7 @@ comprehensions (0.83/0.91), documented (0.89/0.99).
 
 ## Dead on Python
 struct_decorators fires in 0 functions although 4,156 have decorators (the `decorated_by` column holds them: the family regex exists, the function column is never
-fed: a data-flow gap, not a keyword gap). json (978 dumps, 416 loads) sits in no family: `serialization_parsing` is unsafe deserialization only by design.
+fed: a data-flow gap, not a keyword gap). json (978 dumps, 416 loads) sits in no family: the Python `serialization_parsing` rule matches only pickle/marshal/literal_eval, although the contract names JSON, YAML, XML, CSV and protobuf (gitgalaxy#8882).
 
 ## Corrections after reading the rules (2026-11-21)
 The first version of this note listed `state_halt_hits` and `threat_eval_exec` as dead. That was a wrong mapping on my side: `state_halt_hits` is "Sleeps & Timed

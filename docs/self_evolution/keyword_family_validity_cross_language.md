@@ -1,5 +1,14 @@
 # Keyword-family validity across languages (2026-11-21, exploratory, discovery not confirmation)
 
+> **Update 2026-11-21 (later): superseded in part.** The oracles were aligned to the families' written contracts (`gitgalaxy/standards/signal_contracts.py`,
+> 71 families) after this note was written. What changed: closures are anonymous callables only (a nested `def` is not one); `bitwise_ops` includes `&` and `|`
+> (and type annotations such as `str | None` are not counted); `time_date_logic` includes durations; `doc` is structured documentation (`/** */`, `///`, godoc);
+> debug prints leave out writers and log calls; `serialization_parsing` covers JSON, YAML, XML, CSV and protobuf, so the "by design" reading of its
+> pickle-only rule below is wrong (the contract says JSON counts: gitgalaxy#8882). Two rows were oracle errors and are withdrawn (Go print, C documented).
+> Re-run numbers: `rewrites/cross_language_contract_aligned/`. The grid that now carries these results: gitgalaxy PR #8876; corrections to the public issues:
+> #8861, #8862 (comment), #8866, #8868.
+
+
 Follows `keyword_family_validity_pilot.md` (Python). The family-validity tool (gitgalaxy PR #8864, `tests/tools/family_oracle.py` and
 `family_oracle_ts.py`) scored six more languages against a tree-sitter reading of the same functions, one real repository each, scanned with the pinned
 scanner: Go (prometheus), Rust (tokio), JavaScript (express), TypeScript (vue), Java (retrofit), C (redis). Raw tool output and JSON: `rewrites/cross_language/`.
