@@ -95,3 +95,23 @@ differs from the plan above, this governs.
 13. R5: normalise per function and per KLOC; mark the human/agent boundary and big sweeps (ruff adoption, autofix) on every plot.
 14. Prior work added: Herzig and Zeller (tangled changes), Hattori and Lanza (commit-size classes), work on faithfulness of
     generated commit/PR text, GumTree / RefactoringMiner as an edit-type cross-check of the ast diff vocabulary.
+
+---
+# Amendment 2 (2026-11-20): reconciliation with the Gemini 4 Neon review (rewrites/review_gemini.md)
+Probe v2 result: 9,443 events (body 4,429, born 3,686, signature 896, deleted 317, docstring-only 115); 633 events sit on merge commits.
+
+Agreed by both reviewers: commit-level unit, circularity needs an intent-only text source, sweeps and tangling must be removed before
+sampling, one pre-declared primary statistic. Where they differ:
+
+| Issue | Claude | Gemini | Ruling |
+|---|---|---|---|
+| Sampling | ~400 commits, stratified | only ~23 perf-titled commits exist; a 400 sample gives 7-25 perf, minimum detectable effect 0.19-0.30 | **Code ALL eligible commits** (non-tangled, <= 6 events of any kind, agent era primary); no sample, no weights. Per-function cap of 5 units applies only inside the ast model. Power is reported honestly: perf has ~20-45 commits, so R1 for perf is descriptive with CI; macro AUC over the other buckets carries the test |
+| CV groups | by file + time block | file groups leak: 37% of commits span files, 114 issues span files; 96% of non-mechanical commits form one component | **Group by connected component** (commits linked by shared issue/epic or shared file, union-find); plus time-blocked split (train Sep-Oct, test Nov) |
+| Circularity text | issue text or masked PR | 69% of linked issues contain mechanism words, 38% filed same day as the PR | Primary text = linked issues filed > 24 h before the PR, code spans and symbols stripped, stoplist masked; PR text reported separately as **narration fidelity**, not intent |
+| Attribution gate | <= 2 functions or named in text | named-symbol gate biases buckets (feat 59% <= 2 vs perf 83%) | **Drop the named-symbol gate.** Commit-level pooled ast deltas for commit-level claims; function-level claims only for single-function commits |
+| Tangling | > 6 body rewrites | 208 commits exceed 6 once born/signature/deleted are counted | Tangled = > 6 events of ANY kind, merge commits, sweep hash, mechanical subject |
+| Text export | -- | 21% of PR bodies truncated at 4,000 | Export untruncated commit/PR/issue text |
+| Moves | link renames | 21 exact moves, 63 delete+born pairs in one commit | Pair delete+born by normalised body similarity (>= 0.9) and treat as a move, not a rewrite |
+| Baselines | three baselines | adaptive best-baseline picking leaks | **One locked primary baseline: size + month + module**, inside nested CV; file-identity and others are labelled exploratory |
+
+Zero-delta rewrites (565) and docstring-only changes are stratified out of R1 and reported on their own.
