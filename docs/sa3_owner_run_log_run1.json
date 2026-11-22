@@ -1,0 +1,1179 @@
+{
+ "target": "real",
+ "started": 1794742399,
+ "finished": 1794742808,
+ "complete": true,
+ "last_stage": "report",
+ "invalid_in_stage": [],
+ "stages": [
+  {
+   "stage": "setup",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "manifest_before",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "seal_inputs",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 37
+  },
+  {
+   "stage": "copy",
+   "repo": "blast",
+   "status": "ok",
+   "code": "none",
+   "seconds": 4
+  },
+  {
+   "stage": "build_A",
+   "repo": "blast",
+   "status": "ok",
+   "code": "none",
+   "seconds": 4
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "blast",
+   "status": "ok",
+   "code": "none",
+   "seconds": 4
+  },
+  {
+   "stage": "count",
+   "repo": "blast",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "bugzilla",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "bugzilla",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "bugzilla",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "bugzilla",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "bun",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "bun",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "bun",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "bun",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "circuitpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "circuitpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "circuitpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "circuitpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "commons-lang",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "commons-lang",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "commons-lang",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "commons-lang",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "cpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_A",
+   "repo": "cpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "cpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "count",
+   "repo": "cpython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "curl",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "curl",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "curl",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "curl",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "discourse",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "discourse",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "discourse",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "discourse",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "django",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "django",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "django",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "django",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "effect",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "effect",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "effect",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "effect",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "fieldtrip",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "fieldtrip",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "fieldtrip",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "fieldtrip",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "freebsd-src",
+   "status": "ok",
+   "code": "none",
+   "seconds": 10
+  },
+  {
+   "stage": "build_A",
+   "repo": "freebsd-src",
+   "status": "ok",
+   "code": "none",
+   "seconds": 21
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "freebsd-src",
+   "status": "ok",
+   "code": "none",
+   "seconds": 18
+  },
+  {
+   "stage": "count",
+   "repo": "freebsd-src",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "copy",
+   "repo": "ghostty",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "ghostty",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "ghostty",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "ghostty",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "gnupg",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "gnupg",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "gnupg",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "gnupg",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "go",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_A",
+   "repo": "go",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "go",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "go",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "godot",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "godot",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "godot",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "count",
+   "repo": "godot",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "impacket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "impacket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "impacket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "impacket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "kubernetes",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_A",
+   "repo": "kubernetes",
+   "status": "ok",
+   "code": "none",
+   "seconds": 7
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "kubernetes",
+   "status": "ok",
+   "code": "none",
+   "seconds": 6
+  },
+  {
+   "stage": "count",
+   "repo": "kubernetes",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "libxml2",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "libxml2",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "libxml2",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "libxml2",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "mediawiki",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "mediawiki",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "mediawiki",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "count",
+   "repo": "mediawiki",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "micropython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "micropython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "micropython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "micropython",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "moby",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "moby",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "moby",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "moby",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "ndpi",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "ndpi",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "ndpi",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "ndpi",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "opencv",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "opencv",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "opencv",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "opencv",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "pandas",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "pandas",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "pandas",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "pandas",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "postgres",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "postgres",
+   "status": "ok",
+   "code": "none",
+   "seconds": 7
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "postgres",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "postgres",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "prometheus",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "prometheus",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "prometheus",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "prometheus",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "racket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "racket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "racket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "racket",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "rails",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "rails",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "rails",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "rails",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "redis",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "redis",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "redis",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "redis",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "runtime",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_A",
+   "repo": "runtime",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "runtime",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "count",
+   "repo": "runtime",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "scapy",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "scapy",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "scapy",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "scapy",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "sphinx",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "sphinx",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "sphinx",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "sphinx",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "spock",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "spock",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "spock",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "spock",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "sqlite",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "sqlite",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "sqlite",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "count",
+   "repo": "sqlite",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "sqlmap",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "sqlmap",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "sqlmap",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "sqlmap",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "swift",
+   "status": "ok",
+   "code": "none",
+   "seconds": 3
+  },
+  {
+   "stage": "build_A",
+   "repo": "swift",
+   "status": "ok",
+   "code": "none",
+   "seconds": 9
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "swift",
+   "status": "ok",
+   "code": "none",
+   "seconds": 7
+  },
+  {
+   "stage": "count",
+   "repo": "swift",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "tcpip_historical",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "build_A",
+   "repo": "tcpip_historical",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "tcpip_historical",
+   "status": "ok",
+   "code": "none",
+   "seconds": 2
+  },
+  {
+   "stage": "count",
+   "repo": "tcpip_historical",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "copy",
+   "repo": "tensorflow",
+   "status": "ok",
+   "code": "none",
+   "seconds": 5
+  },
+  {
+   "stage": "build_A",
+   "repo": "tensorflow",
+   "status": "ok",
+   "code": "none",
+   "seconds": 7
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "tensorflow",
+   "status": "ok",
+   "code": "none",
+   "seconds": 6
+  },
+  {
+   "stage": "count",
+   "repo": "tensorflow",
+   "status": "ok",
+   "code": "none",
+   "seconds": 1
+  },
+  {
+   "stage": "copy",
+   "repo": "tigerbeetle",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_A",
+   "repo": "tigerbeetle",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "build_Aprime",
+   "repo": "tigerbeetle",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "count",
+   "repo": "tigerbeetle",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "placebo",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 68
+  },
+  {
+   "stage": "runtime",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "manifest_after",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  },
+  {
+   "stage": "seal",
+   "repo": "*",
+   "status": "ok",
+   "code": "none",
+   "seconds": 0
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+copy  seal          placebo       input_check   cell_map_WD   cell_map_R    with seal   seal withheld
+01    silent        silent        silent        silent        silent        clean       clean
+02    fired         silent        fired         silent        fired         flagged     flagged
+03    silent        silent        silent        silent        silent        clean       clean
+04    fired         silent        fired         fired         fired         flagged     flagged
+05    fired         silent        fired         fired         fired         flagged     flagged
+06    fired         silent        silent        fired         fired         flagged     flagged
+07    silent        silent        silent        silent        silent        clean       clean
+08    silent        silent        silent        silent        silent        clean       clean
+09    fired         fired         fired         fired         fired         flagged     flagged
+10    silent        silent        silent        silent        silent        clean       clean
+11    silent        silent        silent        silent        silent        clean       clean
+12    fired         silent        silent        fired         fired         flagged     flagged
+13    fired         fired         fired         fired         fired         flagged     flagged
+14    fired         fired         silent        fired         fired         flagged     flagged
+15    silent        silent        silent        silent        silent        clean       clean
+16    silent        silent        silent        silent        silent        clean       clean
