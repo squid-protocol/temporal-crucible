@@ -1,0 +1,207 @@
+{
+ "language": "typescript",
+ "matched": 2142,
+ "unmatched": 175,
+ "families": [
+  {
+   "family": "complexity",
+   "definition": "decision points: if, loops, case clauses, catch handlers, conditional expressions, && and ||",
+   "oracle_functions": 849,
+   "family_functions": 896,
+   "recall": 0.98,
+   "precision": 0.929,
+   "rho": 0.955,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "catch_clause",
+     10
+    ],
+    [
+     "ternary_expression",
+     9
+    ],
+    [
+     "&&",
+     4
+    ],
+    [
+     "||",
+     2
+    ]
+   ]
+  },
+  {
+   "family": "struct_branch",
+   "definition": "same count as complexity",
+   "oracle_functions": 849,
+   "family_functions": 896,
+   "recall": 0.98,
+   "precision": 0.929,
+   "rho": 0.955,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "catch_clause",
+     10
+    ],
+    [
+     "ternary_expression",
+     9
+    ],
+    [
+     "&&",
+     4
+    ],
+    [
+     "||",
+     2
+    ]
+   ]
+  },
+  {
+   "family": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 1201,
+   "family_functions": 1336,
+   "recall": 0.999,
+   "precision": 0.898,
+   "rho": 0.947,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_closures",
+   "definition": "function literals, lambdas and closures defined inside the function",
+   "oracle_functions": 413,
+   "family_functions": 617,
+   "recall": 0.792,
+   "precision": 0.53,
+   "rho": 0.609,
+   "status": "both",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_decorators",
+   "definition": "annotations, attributes or decorators on the function",
+   "oracle_functions": 0,
+   "family_functions": 10,
+   "recall": null,
+   "precision": 0.0,
+   "rho": null,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "definition": "throw / panic / process-exit",
+   "oracle_functions": 50,
+   "family_functions": 50,
+   "recall": 0.98,
+   "precision": 0.98,
+   "rho": 0.98,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "throw",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ ~ (& and | are address-of, pipes, bounds and closures too, so left out)",
+   "oracle_functions": 1,
+   "family_functions": 40,
+   "recall": 1.0,
+   "precision": 0.025,
+   "rho": 0.159,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_print_hits",
+   "definition": "output to the console",
+   "oracle_functions": 18,
+   "family_functions": 21,
+   "recall": 1.0,
+   "precision": 0.857,
+   "rho": 0.925,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_halt_hits",
+   "definition": "sleeps and timed waits",
+   "oracle_functions": 59,
+   "family_functions": 62,
+   "recall": 0.983,
+   "precision": 0.935,
+   "rho": 0.956,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "setImmediate",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "arch_regex",
+   "definition": "executes or builds a regular expression",
+   "oracle_functions": 98,
+   "family_functions": 71,
+   "recall": 0.633,
+   "precision": 0.873,
+   "rho": 0.734,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "test",
+     38
+    ],
+    [
+     "regex-literal",
+     23
+    ],
+    [
+     "exec",
+     3
+    ]
+   ]
+  },
+  {
+   "family": "arch_time",
+   "definition": "reads a clock",
+   "oracle_functions": 1,
+   "family_functions": 64,
+   "recall": 1.0,
+   "precision": 0.016,
+   "rho": 0.123,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_io",
+   "definition": "opens or reads/writes a file or a network connection",
+   "oracle_functions": 4,
+   "family_functions": 19,
+   "recall": 1.0,
+   "precision": 0.211,
+   "rho": 0.46,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "is_documented",
+   "definition": "a doc comment directly above",
+   "oracle_functions": 67,
+   "family_functions": 119,
+   "recall": 0.463,
+   "precision": 0.261,
+   "rho": 0.319,
+   "status": "both",
+   "missed_tokens": []
+  }
+ ]
+}

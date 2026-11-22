@@ -1,0 +1,33 @@
+### nginx: 444 files, 3440 funcs, 1242 commits (touching .c/.h), 259 fix-like (21%)
+
+[file-level] n=259 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.25   partial|LOC=+0.08 (p=0.206)   rho(fix_share,bc)|LOC,commits=-0.05 (p=0.472)
+  pr: raw rho(fix_count, pr)=-0.02   partial|LOC=+0.06 (p=0.326)   rho(fix_share,pr)|LOC,commits=-0.11 (p=0.086)
+  br: raw rho(fix_count, br)=-0.02   partial|LOC=+0.06 (p=0.296)   rho(fix_share,br)|LOC,commits=-0.11 (p=0.103)
+  size baseline: rho(fix_count, LOC)=+0.59, rho(fix_count, total commits)=+0.59
+
+[function graph] 2959 nodes in graph, 8755 edges, 10 multi-function cycles (41 funcs)
+  funcs touched by >=1 fix commit: 333/3440
+  size baseline: rho(fix_touches, LOC)=+0.25, rho(fix_touches, complexity)=+0.21
+  betweenness: raw rho=+0.05   partial|LOC,complexity=+0.02 (p=0.435)
+  fan_in: raw rho=+0.01   partial|LOC,complexity=+0.01 (p=0.595)
+  fan_out: raw rho=+0.24   partial|LOC,complexity=+0.10 (p=0.003)
+  top-5% betweenness funcs: 148 funcs = 7% of LOC, receive 6% of fix touches
+  cycle members: 41 funcs = 2.1% of LOC, receive 2.4% of fix touches; mean touches 0.22 vs 0.13
+
+[grid, threshold=8] 2959 funcs; size-adjusted = observed fixes / fixes predicted from LOC+complexity
+  quadrant                                  n    LOC    cx fix/func %touched share_of_fixes     adj. lift (95% CI)
+  ordinary (low/low)                     2618     56   7.9     0.10       8%            71%      0.92x (0.81-1.04)
+  utility (high in, low out)              139     55   9.2     0.05       4%             2%      0.49x (0.16-0.88)
+  orchestrator (low in, high out)         197    211  32.1     0.51      41%            26%      1.39x (1.13-1.69)
+  hub (high in, high out)                   5    194  38.0     0.60      40%             1%      2.00x (0.00-5.40)
+
+[name test] lifecycle-named functions (free/close/destroy/cleanup/finalize/done/remove...)
+    all lifecycle-named                          n= 191 fixes=  20 lift=1.42x (0.83-2.17)
+      lifecycle + orchestrator                   n=   2 (too few)
+      lifecycle + high fan-in                    n=  21 fixes=   4 lift=1.50x (0.00-3.06)
+    non-lifecycle orchestrators                  n= 195 fixes= 100 lift=1.39x (1.11-1.72)
+    lifecycle with fan-out>=5                    n=  14 fixes=   6 lift=2.20x (0.78-3.99)
+[path test] CLI/tool code vs library
+    CLI/tool orchestrators                       n=   0 (too few)
+    library orchestrators                        n= 197 fixes= 101 lift=1.39x (1.03-1.76)

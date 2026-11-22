@@ -1,0 +1,20 @@
+### curl: 643 files, 5111 funcs, 7464 commits (touching .c/.h), 1388 fix-like (19%)
+
+[file-level] n=449 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.37   partial|LOC=-0.06 (p=0.189)   rho(fix_share,bc)|LOC,commits=-0.01 (p=0.824)
+  pr: raw rho(fix_count, pr)=-0.15   partial|LOC=+0.03 (p=0.465)   rho(fix_share,pr)|LOC,commits=-0.02 (p=0.761)
+  br: raw rho(fix_count, br)=-0.15   partial|LOC=+0.03 (p=0.472)   rho(fix_share,br)|LOC,commits=-0.02 (p=0.724)
+  size baseline: rho(fix_count, LOC)=+0.72, rho(fix_count, total commits)=+0.88
+
+[function graph] 4321 nodes in graph, 13481 edges, 11 multi-function cycles (50 funcs)
+  funcs touched by >=1 fix commit: 1828/5111
+  size baseline: rho(fix_touches, LOC)=+0.37, rho(fix_touches, complexity)=+0.36
+  betweenness: raw rho=+0.06   partial|LOC,complexity=+0.00 (p=0.934)
+  fan_in: raw rho=-0.05   partial|LOC,complexity=+0.01 (p=0.688)
+  fan_out: raw rho=+0.32   partial|LOC,complexity=+0.10 (p=0.003)
+  top-5% betweenness funcs: 217 funcs = 7% of LOC, receive 9% of fix touches
+  cycle members: 50 funcs = 1.6% of LOC, receive 2.2% of fix touches; mean touches 1.46 vs 0.75
+
+[co-change locality] 1950 function pairs changed together in one fix commit (<=12 funcs per commit)
+  all pairs: n=1950  within 2 call hops: 46.4%   null (random fix-touched pairs): 11.1% (range 10.4-12.5)   lift x4.2
+  cross-file pairs only: n=1099  within 2 call hops: 29.8%   null (random fix-touched pairs): 10.1% (range 8.9-11.4)   lift x2.9

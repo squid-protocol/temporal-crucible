@@ -1,0 +1,43 @@
+### redis: 818 files, 7160 funcs, 2695 commits (touching .c/.h), 930 fix-like (35%)
+
+[file-level] n=194 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.48   partial|LOC=+0.06 (p=0.402)   rho(fix_share,bc)|LOC,commits=-0.21 (p=0.003)
+  pr: raw rho(fix_count, pr)=+0.12   partial|LOC=+0.06 (p=0.449)   rho(fix_share,pr)|LOC,commits=-0.26 (p=0.003)
+  br: raw rho(fix_count, br)=+0.12   partial|LOC=+0.06 (p=0.502)   rho(fix_share,br)|LOC,commits=-0.26 (p=0.003)
+  size baseline: rho(fix_count, LOC)=+0.72, rho(fix_count, total commits)=+0.84
+
+[function graph] 6492 nodes in graph, 23410 edges, 13 multi-function cycles (153 funcs)
+  funcs touched by >=1 fix commit: 1555/7160
+  size baseline: rho(fix_touches, LOC)=+0.33, rho(fix_touches, complexity)=+0.27
+  betweenness: raw rho=+0.09   partial|LOC,complexity=+0.05 (p=0.003)
+  fan_in: raw rho=-0.04   partial|LOC,complexity=-0.03 (p=0.053)
+  fan_out: raw rho=+0.31   partial|LOC,complexity=+0.14 (p=0.003)
+  top-5% betweenness funcs: 325 funcs = 9% of LOC, receive 13% of fix touches
+  cycle members: 153 funcs = 4.1% of LOC, receive 5.1% of fix touches; mean touches 0.81 vs 0.36
+
+[fan-in buckets] (unique resolved callers)
+  callers   n_funcs  meanLOC  meanCx  %touched  fix/func  fix/1kLOC  callers_co-fixed(mean, when touched)  %fixes_w/_any_caller_co-changed
+        0     1350     32.5     6.8       27%      0.46       14.1                             0.00            0%
+        1     2263     28.6     6.3       23%      0.34       11.9                             0.18           18%
+      2-3     1651     26.0     5.8       23%      0.36       13.7                             0.34           24%
+      4-9      873     23.3     5.5       20%      0.37       15.7                             0.50           28%
+    10-29      263     16.8     3.5       22%      0.32       19.0                             0.67           33%
+      30+       92     16.9     4.1       24%      0.36       21.2                             5.12           55%
+
+  top fan-in functions: callers | loc | cx | fix touches
+    520 |  14 |   6 |  0 | src/sds.h::sdslen
+    448 |  11 |   3 |  1 | src/sds.c::sdsfree
+    410 |  18 |   1 |  0 | src/zmalloc.c::zfree
+    326 |  10 |   0 |  1 | src/server.c::_serverLog
+    300 |   5 |   1 |  0 | src/zmalloc.c::zmalloc
+    222 |   5 |   0 |  0 | src/redisassert.c::_serverAssert
+    208 |   3 |   0 |  0 | src/sds.c::sdsempty
+    188 |   4 |   1 |  0 | src/sds.c::sdsnew
+    183 |  12 |   3 |  0 | src/adlist.c::listNext
+    182 |   4 |   0 |  0 | src/adlist.c::listRewind
+    181 |   4 |   0 |  0 | src/networking.c::addReplyError
+    162 |  48 |  21 |  0 | src/object.c::decrRefCount
+
+  rho(fan_in, LOC)=-0.04  rho(fan_in, complexity)=-0.00  rho(fan_in, fix touches)=-0.04
+  fan-in>=10: 355 funcs, mean LOC 16.8 vs 28.0; mean complexity 3.6 vs 6.2
+  fixes touching a fan-in>=10 function: 117; median callers also changed in same commit: 0 of median 19 callers; share changing >=1 caller: 39%; share changing >=5 callers: 9%

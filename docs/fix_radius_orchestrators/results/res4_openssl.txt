@@ -1,0 +1,37 @@
+### openssl: 2286 files, 18879 funcs, 9607 commits (touching .c/.h), 2236 fix-like (23%)
+
+[file-level] n=1489 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.30   partial|LOC=+0.10 (p=0.003)   rho(fix_share,bc)|LOC,commits=+0.01 (p=0.850)
+  pr: raw rho(fix_count, pr)=+0.02   partial|LOC=+0.04 (p=0.193)   rho(fix_share,pr)|LOC,commits=-0.05 (p=0.033)
+  br: raw rho(fix_count, br)=+0.02   partial|LOC=+0.04 (p=0.179)   rho(fix_share,br)|LOC,commits=-0.05 (p=0.030)
+  size baseline: rho(fix_count, LOC)=+0.65, rho(fix_count, total commits)=+0.75
+
+[function graph] 15837 nodes in graph, 41999 edges, 22 multi-function cycles (104 funcs)
+  funcs touched by >=1 fix commit: 2867/18879
+  size baseline: rho(fix_touches, LOC)=+0.33, rho(fix_touches, complexity)=+0.32
+  betweenness: raw rho=+0.10   partial|LOC,complexity=+0.05 (p=0.003)
+  fan_in: raw rho=+0.04   partial|LOC,complexity=+0.02 (p=0.023)
+  fan_out: raw rho=+0.29   partial|LOC,complexity=+0.13 (p=0.003)
+  top-5% betweenness funcs: 792 funcs = 9% of LOC, receive 11% of fix touches
+  cycle members: 104 funcs = 1.2% of LOC, receive 1.3% of fix touches; mean touches 0.49 vs 0.24
+
+[grid, threshold=8] 15837 funcs; size-adjusted = observed fixes / fixes predicted from LOC+complexity
+  quadrant                                  n    LOC    cx fix/func %touched share_of_fixes     adj. lift (95% CI)
+  ordinary (low/low)                    13798     21   3.8     0.18      14%            64%      0.92x (0.88-0.96)
+  utility (high in, low out)              879     17   3.2     0.21      17%             5%      1.24x (1.04-1.44)
+  orchestrator (low in, high out)        1133    123  28.2     1.04      52%            31%      1.18x (1.09-1.27)
+  hub (high in, high out)                  27    163  32.4     1.15      59%             1%      1.08x (0.59-1.68)
+
+  most fixes beyond size-expectation in orchestrator (low in, high out): (excess | fixes | in | out | loc)
+     12.5 | 15 |   0 |  46 |  342 | apps/cmp.c::cmp_main
+      7.3 |  9 |   1 |  16 |  207 | apps/cmp.c::setup_client_ctx
+      7.1 |  8 |   1 |  15 |  124 | apps/speed.c::multiblock_speed
+      6.8 | 12 |   0 |  94 |  800 | apps/req.c::req_main
+      6.7 |  8 |   5 |  13 |  187 | crypto/evp/evp_enc.c::evp_cipher_init_internal
+
+  most fixes beyond size-expectation in hub (high in, high out): (excess | fixes | in | out | loc)
+      3.9 |  6 |   9 |  33 |  284 | apps/lib/apps.c::load_key_certs_crls
+      3.0 |  4 |   9 |  14 |  151 | crypto/encode_decode/decoder_pkey.c::OSSL_DECODER_CTX_new_for_pkey
+      1.8 |  4 |  19 |  26 |  317 | crypto/evp/ctrl_params_translate.c::default_fixup_args
+      1.7 |  3 |  11 |  16 |  198 | crypto/evp/p_lib.c::evp_pkey_export_to_provider
+      1.2 |  3 |  11 |  20 |  306 | crypto/evp/signature.c::evp_pkey_signature_init
