@@ -1,0 +1,43 @@
+=== B4: 2026-11-04 -> 2026-11-20, language-crucible CPU 68 -> 96 (up), threshold 82
+794 commits in window; target language-crucible metric cpu_s threshold 82.0 up
+  idx  396 40cffc6a8 2026-11-11 Signal display names: audit JSON labels use the display names (Part of  cpu_s=82.38 cpu=82.38 files=992
+  idx  198 a47a5f3a9 2026-11-07 EPSNBRVL: 1 survivor killed by 1 new call (Part of #4628) (#8027)       cpu_s=73.3 cpu=73.3 files=992
+  idx  297 518641ffc 2026-11-09 COBOL program discovery: a directory named like a program is not a prog cpu_s=72.74 cpu=72.74 files=992
+  idx  346 bf1fcbd9b 2026-11-10 Cics-crucible case hc-send-map-freekb: SEND MAP FREEKB, PR body only (P cpu_s=77.89 cpu=77.89 files=992
+  idx  371 a6726f5a4 2026-11-11 Standalone Sysout honours gitgalaxy.sysout: DISPLAY in CICS-only estate cpu_s=79.65 cpu=79.65 files=992
+  idx  383 a63b194b9 2026-11-11 Health cases HCITDB01 family: compare the job log now that DISPLAY reac cpu_s=79.32 cpu=79.32 files=992
+  idx  389 ec646235c 2026-11-11 Cics-crucible case hc-file-token: READ UPDATE TOKEN, PR body only (Part cpu_s=80.22 cpu=80.22 files=992
+  idx  392 6465f11fc 2026-11-11 golden_export: project and prove-mutant carry the record layouts, postt cpu_s=78.17 cpu=78.17 files=992
+  idx  394 0ac066e64 2026-11-11 golden-verify sweep: posttran GoldenRegressionTest passes under mvn (Pa cpu_s=78.89 cpu=78.89 files=992
+  idx  395 1a0d24471 2026-11-11 golden_export project: write a pom.xml from the project (Part of #4052) cpu_s=80.07 cpu=80.07 files=992
+FIRST COMMIT PAST THRESHOLD: 40cffc6a8f40d6e8094bf0281889ab4bd110f99a
+40cffc6a8 2026-11-11
+Signal display names: audit JSON labels use the display names (Part of #8009) (#8286)
+
+Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+ docs/signals.md                                    |   2 +-
+ gitgalaxy/standards/analysis_lens.py               |  22 ++++++++++-----------
+ tests/core_engine/test_signal_display_names.py     |  14 +++++++++++++
+ .../state_mutation_weighted_view.json              | Bin 0 -> 74675 bytes
+ ...tions_variable_reassignments_weighted_view.json | Bin 74701 -> 0 bytes
+ .../calls_signatures_with_arguments.json           | Bin 0 -> 204924 bytes
+ .../defensive_checks_assert_try_guards.json        | Bin 0 -> 204498 bytes
+ .../defensive_programming_constructs.json          | Bin 204494 -> 0 bytes
+ .../error_exits_raise_throw_abort.json             | Bin 0 -> 204182 bytes
+ .../exposed_api_public_exports.json                | Bin 204481 -> 0 bytes
+ .../fatal_aborts_exceptions.json                   | Bin 204176 -> 0 bytes
+ .../function_parameters.json                       | Bin 204910 -> 0 bytes
+ .../immutability_const_readonly_final.json         | Bin 0 -> 204199 bytes
+ .../immutable_data_declarations.json               | Bin 204191 -> 0 bytes
+ .../metaprogramming_macros_reflection_goto.json    | Bin 0 -> 204357 bytes
+ .../metaprogramming_reflection.json                | Bin 204343 -> 0 bytes
+ .../private_encapsulated_scopes.json               | Bin 204202 -> 0 bytes
+ .../private_scope_private_static_name.json         | Bin 0 -> 204209 bytes
+ .../public_exported_surface.json                   | Bin 0 -> 204478 bytes
+ .../sequential_logic_declarations.json             | Bin 206122 -> 0 bytes
+ .../sleeps_timed_waits.json                        | Bin 0 -> 204034 bytes
+ .../state_mutation.json                            | 
+boundary check (parent vs found commit), 2 repeats each:
+  idx  395 1a0d24471 2026-11-11 golden_export project: write a pom.xml from the project (Part of #4052) cpu_s=84.695 cpu=84.695 files=992
+  idx  396 40cffc6a8 2026-11-11 Signal display names: audit JSON labels use the display names (Part of  cpu_s=79.14500000000001 cpu=79.14500000000001 files=992

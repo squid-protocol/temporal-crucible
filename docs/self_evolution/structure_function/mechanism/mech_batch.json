@@ -1,0 +1,2665 @@
+[
+ {
+  "id": 1,
+  "subject": "feat: implement Domain Ontologies and Context-Aware Security Profiles",
+  "commit_message": "feat: implement Domain Ontologies and Context-Aware Security Profiles\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/audit_recorder.py",
+    "added": "4",
+    "deleted": "6"
+   },
+   {
+    "path": "gitgalaxy/chronometer.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/detector.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "91",
+    "deleted": "11"
+   },
+   {
+    "path": "gitgalaxy/gitgalaxy_standards_v011.py",
+    "added": "0",
+    "deleted": "10550"
+   },
+   {
+    "path": "gitgalaxy/gitgalaxy_standards_v1.py",
+    "added": "10624",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/gpu_recorder.py",
+    "added": "9",
+    "deleted": "13"
+   },
+   {
+    "path": "gitgalaxy/guidestar_lens.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/language_lens.py",
+    "added": "2",
+    "deleted": "2"
+   },
+   {
+    "path": "gitgalaxy/llm_recorder.py",
+    "added": "7",
+    "deleted": "7"
+   },
+   {
+    "path": "gitgalaxy/prism.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/security_lens.py",
+    "added": "79",
+    "deleted": "86"
+   },
+   {
+    "path": "gitgalaxy/signal_processor.py",
+    "added": "71",
+    "deleted": "6"
+   },
+   {
+    "path": "pyproject.toml",
+    "added": "2",
+    "deleted": "2"
+   }
+  ],
+  "n_files": 14,
+  "engine_functions_touched": [
+   "gitgalaxy/audit_recorder.py::generate_report",
+   "gitgalaxy/galaxyscope.py::__init__",
+   "gitgalaxy/galaxyscope.py::_init_worker",
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/galaxyscope.py::_second_pass_relational",
+   "gitgalaxy/galaxyscope.py::main",
+   "gitgalaxy/galaxyscope.py::run_mission",
+   "gitgalaxy/gpu_recorder.py::save_minified",
+   "gitgalaxy/language_lens.py::inspect",
+   "gitgalaxy/llm_recorder.py::_build_markdown",
+   "gitgalaxy/llm_recorder.py::generate_artifacts",
+   "gitgalaxy/security_lens.py::__init__",
+   "gitgalaxy/security_lens.py::arm_lens",
+   "gitgalaxy/signal_processor.py::__init__",
+   "gitgalaxy/signal_processor.py::calculate_risk_vector"
+  ],
+  "n_engine_functions_touched": 15
+ },
+ {
+  "id": 2,
+  "subject": "add photos for readme again",
+  "commit_message": "add photos for readme again\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "README.md",
+    "added": "3",
+    "deleted": "0"
+   },
+   {
+    "path": "docs/assets/apollo-11 screenshot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/assets/metaview.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/1_Foundation__Architecture.md",
+    "added": "1",
+    "deleted": "0"
+   },
+   {
+    "path": "docs/wiki/240_Claim_1_--_Optimum_Search_Strategies_Change_with_Scale.md",
+    "added": "109",
+    "deleted": "91"
+   },
+   {
+    "path": "docs/wiki/241_Claim_2_--_Coding_Languages_Evolve_Towards_Explicitness.md",
+    "added": "1",
+    "deleted": "3"
+   },
+   {
+    "path": "docs/wiki/File_Archetypes.md",
+    "added": "143",
+    "deleted": "0"
+   },
+   {
+    "path": "docs/wiki/File_Architectypes",
+    "added": "0",
+    "deleted": "56"
+   },
+   {
+    "path": "docs/wiki/Ridgelines_Plots.md",
+    "added": "215",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "14",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/signal_processor.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "mkdocs.yml",
+    "added": "3",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 12,
+  "engine_functions_touched": [
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/signal_processor.py::_calc_obscured_payload"
+  ],
+  "n_engine_functions_touched": 2
+ },
+ {
+  "id": 3,
+  "subject": "Update docs, site core, and add keyword fingerprinting",
+  "commit_message": "Update docs, site core, and add keyword fingerprinting\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "docs/wiki/File_Archetypes.md",
+    "added": "201",
+    "deleted": "121"
+   },
+   {
+    "path": "docs/wiki/Keyword_Fingerprinting.md",
+    "added": "43",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/detector.py",
+    "added": "2",
+    "deleted": "2"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "92",
+    "deleted": "89"
+   },
+   {
+    "path": "gitgalaxy/gitgalaxy_standards_v1.py",
+    "added": "18",
+    "deleted": "18"
+   },
+   {
+    "path": "gitgalaxy/llm_recorder.py",
+    "added": "20",
+    "deleted": "16"
+   },
+   {
+    "path": "gitgalaxy/signal_processor.py",
+    "added": "8",
+    "deleted": "1"
+   },
+   {
+    "path": "mkdocs.yml",
+    "added": "1",
+    "deleted": "0"
+   },
+   {
+    "path": "site/config/colors.js",
+    "added": "17",
+    "deleted": "17"
+   },
+   {
+    "path": "site/index.html",
+    "added": "12",
+    "deleted": "2"
+   },
+   {
+    "path": "site/js/core/galaxy-engine.js",
+    "added": "79",
+    "deleted": "22"
+   },
+   {
+    "path": "site/js/core/phase-6-shaders.js",
+    "added": "1",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 12,
+  "engine_functions_touched": [
+   "gitgalaxy/detector.py::splice",
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/gitgalaxy_standards_v1.py::get_policy",
+   "gitgalaxy/llm_recorder.py::_build_markdown",
+   "gitgalaxy/signal_processor.py::calculate_risk_vector"
+  ],
+  "n_engine_functions_touched": 5
+ },
+ {
+  "id": 4,
+  "subject": "security updates",
+  "commit_message": "security updates\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "docs/wiki/DOOM_Comparisons.md",
+    "added": "100",
+    "deleted": "0"
+   },
+   {
+    "path": "docs/wiki/File_Archetypes.md",
+    "added": "121",
+    "deleted": "197"
+   },
+   {
+    "path": "docs/wiki/Ridgelines_Plots.md",
+    "added": "75",
+    "deleted": "71"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/avg_func_args_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/avg_func_args_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/control_flow_ratio_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/control_flow_ratio_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/global_drift_arch_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/hit_control_flow_branches_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/hit_control_flow_branches_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/hit_i_o_and_network_boundaries_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/hit_i_o_and_network_boundaries_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/import_count_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/import_count_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/max_func_complexity_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/max_func_complexity_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/ownership_entropy_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/ownership_entropy_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_api_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_api_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_civil_war_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_civil_war_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_cognitive_load_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_cognitive_load_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_concurrency_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_concurrency_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_documentation_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_documentation_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_error_and_exception_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_error_and_exception_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_exploit_generation_surface_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_exploit_generation_surface_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_graveyard_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_graveyard_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_hardcoded_payload_artifacts_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_hardcoded_payload_artifacts_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_instability_exposure_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_instability_exposure_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_obfuscation_and_evasion_surface_lang_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "docs/wiki/assets/analyses_ridgeplots/risk_obfuscation_and_evasion_surface_ridgeplot.png",
+    "added": "-",
+    "deleted": "-"
+   }
+  ],
+  "n_files": 68,
+  "engine_functions_touched": [
+   "gitgalaxy/audit_recorder.py::generate_report",
+   "gitgalaxy/audit_recorder.py::get_nth_degree_count",
+   "gitgalaxy/galaxyscope.py::__init__",
+   "gitgalaxy/galaxyscope.py::run_mission",
+   "gitgalaxy/gitgalaxy_standards_v1.py::get_policy",
+   "gitgalaxy/gpu_recorder.py::record_mission",
+   "gitgalaxy/llm_recorder.py::_build_markdown",
+   "gitgalaxy/llm_recorder.py::get_nth_count",
+   "gitgalaxy/signal_processor.py::_calc_concurrency",
+   "gitgalaxy/signal_processor.py::_calc_state_flux"
+  ],
+  "n_engine_functions_touched": 10
+ },
+ {
+  "id": 5,
+  "subject": "temporal & sec upgrades",
+  "commit_message": "temporal & sec upgrades\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "galaxy_master_db.db",
+    "added": "0",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/analysis_lens.py",
+    "added": "1081",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/audit_recorder.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/chronometer.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/detector.py",
+    "added": "119",
+    "deleted": "48"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "211",
+    "deleted": "57"
+   },
+   {
+    "path": "gitgalaxy/gitgalaxy_config.py",
+    "added": "320",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/gitgalaxy_standards_v1.py",
+    "added": "0",
+    "deleted": "11811"
+   },
+   {
+    "path": "gitgalaxy/gpu_recorder.py",
+    "added": "5",
+    "deleted": "4"
+   },
+   {
+    "path": "gitgalaxy/guidestar_lens.py",
+    "added": "47",
+    "deleted": "3"
+   },
+   {
+    "path": "gitgalaxy/language_lens.py",
+    "added": "2",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/language_standards.py",
+    "added": "10517",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/llm_recorder.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/prism.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/record_keeper.py",
+    "added": "288",
+    "deleted": "375"
+   },
+   {
+    "path": "gitgalaxy/security_auditor.py",
+    "added": "10",
+    "deleted": "4"
+   },
+   {
+    "path": "gitgalaxy/security_lens.py",
+    "added": "68",
+    "deleted": "3"
+   },
+   {
+    "path": "gitgalaxy/signal_processor.py",
+    "added": "8",
+    "deleted": "8"
+   },
+   {
+    "path": "updated_results_2/Carbon_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/Carbon_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/CodeIgniter_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/CodeIgniter_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/WordPress_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/WordPress_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/cakephp_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/cakephp_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/guzzle_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/guzzle_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/laravel_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/laravel_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/magento2_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/magento2_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/monolog_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/monolog_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/symfony_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/symfony_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/yii2_galaxy_graph.sqlite",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "updated_results_2/yii2_galaxy_master.db",
+    "added": "-",
+    "deleted": "-"
+   }
+  ],
+  "n_files": 38,
+  "engine_functions_touched": [
+   "gitgalaxy/detector.py::__init__",
+   "gitgalaxy/detector.py::_correlate_signals",
+   "gitgalaxy/detector.py::_extract_semantic_name",
+   "gitgalaxy/detector.py::_function_slice",
+   "gitgalaxy/detector.py::_process_satellite_physics",
+   "gitgalaxy/detector.py::_slice_by_keywords",
+   "gitgalaxy/detector.py::_slice_by_labels",
+   "gitgalaxy/detector.py::_slice_by_terminator",
+   "gitgalaxy/detector.py::coding_analysis",
+   "gitgalaxy/detector.py::fast_shield",
+   "gitgalaxy/detector.py::index_aligned_shield",
+   "gitgalaxy/detector.py::preserve_newlines",
+   "gitgalaxy/detector.py::splice",
+   "gitgalaxy/galaxyscope.py::__init__",
+   "gitgalaxy/galaxyscope.py::_calculate_galactic_popularity",
+   "gitgalaxy/galaxyscope.py::_init_worker",
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/galaxyscope.py::main",
+   "gitgalaxy/galaxyscope.py::run_mission",
+   "gitgalaxy/gpu_recorder.py::__init__",
+   "gitgalaxy/gpu_recorder.py::record_mission",
+   "gitgalaxy/guidestar_lens.py::_survey_gitattributes",
+   "gitgalaxy/guidestar_lens.py::align_telescope",
+   "gitgalaxy/language_standards.py::get_policy",
+   "gitgalaxy/record_keeper.py::__init__"
+  ],
+  "n_engine_functions_touched": 43
+ },
+ {
+  "id": 6,
+  "subject": "Merge pull request #87 from squid-protocol/feature/clarity_updates_5",
+  "commit_message": "Merge pull request #87 from squid-protocol/feature/clarity_updates_5\n\nFeature/clarity updates 5\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": ".gitignore",
+    "added": "2",
+    "deleted": "0"
+   },
+   {
+    "path": "README.md",
+    "added": "42",
+    "deleted": "42"
+   },
+   {
+    "path": "gitgalaxy/README.md",
+    "added": "26",
+    "deleted": "23"
+   },
+   {
+    "path": "gitgalaxy/cobol_refractor_controller.py",
+    "added": "33",
+    "deleted": "75"
+   },
+   {
+    "path": "gitgalaxy/cobol_to_java_controller.py",
+    "added": "65",
+    "deleted": "96"
+   },
+   {
+    "path": "gitgalaxy/core/README.md",
+    "added": "59",
+    "deleted": "26"
+   },
+   {
+    "path": "gitgalaxy/core/aperture.py",
+    "added": "35",
+    "deleted": "36"
+   },
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "172",
+    "deleted": "364"
+   },
+   {
+    "path": "gitgalaxy/core/guidestar_lens.py",
+    "added": "58",
+    "deleted": "42"
+   },
+   {
+    "path": "gitgalaxy/core/network_risk_sensor.py",
+    "added": "32",
+    "deleted": "75"
+   },
+   {
+    "path": "gitgalaxy/core/prism.py",
+    "added": "56",
+    "deleted": "105"
+   },
+   {
+    "path": "gitgalaxy/core/spatial_mapper.py",
+    "added": "32",
+    "deleted": "42"
+   },
+   {
+    "path": "gitgalaxy/core/state_rehydrator.py",
+    "added": "16",
+    "deleted": "10"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "218",
+    "deleted": "532"
+   },
+   {
+    "path": "gitgalaxy/licensing.py",
+    "added": "3",
+    "deleted": "11"
+   },
+   {
+    "path": "gitgalaxy/metrics/README.md",
+    "added": "48",
+    "deleted": "21"
+   },
+   {
+    "path": "gitgalaxy/metrics/chronometer.py",
+    "added": "20",
+    "deleted": "39"
+   },
+   {
+    "path": "gitgalaxy/metrics/signal_processor.py",
+    "added": "179",
+    "deleted": "402"
+   },
+   {
+    "path": "gitgalaxy/metrics/statistical_auditor.py",
+    "added": "43",
+    "deleted": "87"
+   },
+   {
+    "path": "gitgalaxy/metrics/tensor_scanner.py",
+    "added": "12",
+    "deleted": "20"
+   },
+   {
+    "path": "gitgalaxy/recorders/README.md",
+    "added": "27",
+    "deleted": "22"
+   },
+   {
+    "path": "gitgalaxy/recorders/audit_recorder.py",
+    "added": "81",
+    "deleted": "144"
+   },
+   {
+    "path": "gitgalaxy/recorders/gpu_recorder.py",
+    "added": "30",
+    "deleted": "68"
+   },
+   {
+    "path": "gitgalaxy/recorders/llm_recorder.py",
+    "added": "116",
+    "deleted": "327"
+   },
+   {
+    "path": "gitgalaxy/recorders/record_keeper.py",
+    "added": "44",
+    "deleted": "105"
+   },
+   {
+    "path": "gitgalaxy/security/README.md",
+    "added": "54",
+    "deleted": "18"
+   },
+   {
+    "path": "gitgalaxy/security/manifest_parser.py",
+    "added": "12",
+    "deleted": "36"
+   },
+   {
+    "path": "gitgalaxy/security/security_auditor.py",
+    "added": "31",
+    "deleted": "81"
+   },
+   {
+    "path": "gitgalaxy/security/security_lens.py",
+    "added": "39",
+    "deleted": "61"
+   },
+   {
+    "path": "gitgalaxy/standards/README.md",
+    "added": "54",
+    "deleted": "34"
+   },
+   {
+    "path": "gitgalaxy/standards/analysis_lens.py",
+    "added": "88",
+    "deleted": "120"
+   },
+   {
+    "path": "gitgalaxy/standards/gitgalaxy_config.py",
+    "added": "31",
+    "deleted": "19"
+   },
+   {
+    "path": "gitgalaxy/standards/how_to_add_a_language.md",
+    "added": "101",
+    "deleted": "104"
+   },
+   {
+    "path": "gitgalaxy/standards/language_lens.py",
+    "added": "83",
+    "deleted": "217"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "1572",
+    "deleted": "2729"
+   },
+   {
+    "path": "gitgalaxy/tools/README.md",
+    "added": "51",
+    "deleted": "30"
+   },
+   {
+    "path": "gitgalaxy/tools/ai_guardrails/README.md",
+    "added": "52",
+    "deleted": "36"
+   },
+   {
+    "path": "gitgalaxy/tools/ai_guardrails/ai_appsec_sensor.py",
+    "added": "28",
+    "deleted": "28"
+   },
+   {
+    "path": "gitgalaxy/tools/ai_guardrails/dev_agent_firewall.py",
+    "added": "30",
+    "deleted": "27"
+   },
+   {
+    "path": "gitgalaxy/tools/cobol_to_cobol/README.md",
+    "added": "56",
+    "deleted": "55"
+   }
+  ],
+  "n_files": 98,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 7,
+  "subject": "feat(ci): Implement Deterministic Golden Crucible Regression Pipeline",
+  "commit_message": "feat(ci): Implement Deterministic Golden Crucible Regression Pipeline\n\n### Description of Structural Changes\nThis PR completely overhauls the GitGalaxy macro-testing architecture. It deprecates local, static test fixtures in favor of a dynamic, deterministic DevSecOps pipeline designed to stress-test the blAST engine against 50+ programming languages simultaneously.\n\n**Key Architectural Upgrades:**\n* **The Golden Crucible Target:** The pipeline now anonymously clones the external `squid-protocol/language-crucible` repository\u2014a hyper-dense, uncompilable honeypot of edge-case architectural paradigms.\n* **Deterministic Structural Lock:** Introduced `tests/golden_master_audit.json` as the immutable telemetry baseline. Every PR will now run the engine against the Crucible and diff the live JSON output against this master file to mathematically guarantee zero structural regression. \n* **Zero-Trust CI/CD Bypass:** Engineered a raw `git clone` bypass to evade GitHub Actions' cross-repository scoped-token auth traps, ensuring the runner maintains a read-only, execution-free boundary when handling the radioactive test fixture.\n* **Legacy Cleanup:** Nixed the obsolete `iwubi_frankenstein_test` fixture and its localized Pytest module to strictly separate unit testing from macroscopic integration testing.\n\n### Visual Observatory Testing\n- [x] I tested the output JSON on GitGalaxy.io OR the Airgap Observatory.\n- [x] Flexbox constraints, HUD elements, and 3D rendering remain intact.\n\n### The Differential Scan Acknowledgement\n- [x] I understand that my PR will be subjected to a Full Differential Scan.\n- [x] I have provided the link to the specific repository this PR addresses so it can be tested alongside the 80-repo calibrated baseline. *(Target: [https://github.com/squid-protocol/language-crucible](https://github.com/squid-protocol/language-crucible))*\n- [x] I believe these changes will measurably improve the engine's Accuracy, Speed, Utility, or Ethos without causing regressions.\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": ".github/workflows/golden-crucible.yml",
+    "added": "54",
+    "deleted": "0"
+   },
+   {
+    "path": ".gitignore",
+    "added": "12",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "55",
+    "deleted": "0"
+   },
+   {
+    "path": "pyproject.toml",
+    "added": "10",
+    "deleted": "9"
+   },
+   {
+    "path": "tests/core_engine/test_galaxyscope.py",
+    "added": "0",
+    "deleted": "79"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/.gitattributes",
+    "added": "0",
+    "deleted": "14"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/.gitignore",
+    "added": "0",
+    "deleted": "3"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/LICENSE",
+    "added": "0",
+    "deleted": "201"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/Makefile",
+    "added": "0",
+    "deleted": "30"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/README.md",
+    "added": "0",
+    "deleted": "66"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/bufio.go",
+    "added": "0",
+    "deleted": "842"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/bufio_test.go",
+    "added": "0",
+    "deleted": "1999"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/example_test.go",
+    "added": "0",
+    "deleted": "200"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/export_test.go",
+    "added": "0",
+    "deleted": "29"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/net_test.go",
+    "added": "0",
+    "deleted": "96"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/scan.go",
+    "added": "0",
+    "deleted": "427"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/bufio/scan_test.go",
+    "added": "0",
+    "deleted": "596"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/config.py",
+    "added": "0",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/convert_em.F",
+    "added": "0",
+    "deleted": "167"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/dnn_converters.cpp",
+    "added": "0",
+    "deleted": "138"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/dnn_converters.hpp",
+    "added": "0",
+    "deleted": "37"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/insert_pinyin_to_db.py",
+    "added": "0",
+    "deleted": "28"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/iwubi.py",
+    "added": "0",
+    "deleted": "637"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/iwubi.svg",
+    "added": "0",
+    "deleted": "3"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/iwubi.xml",
+    "added": "0",
+    "deleted": "30"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/logconfig.py",
+    "added": "0",
+    "deleted": "41"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/logconfig.yaml",
+    "added": "0",
+    "deleted": "25"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/pinyin_simp.dict.csv",
+    "added": "0",
+    "deleted": "65113"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/screenshot/add.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/screenshot/iwubi.gif",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/screenshot/set_ibus.png",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/fixtures/iwubi_frankenstein_test/wubi-jidian86.db",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_diff.py",
+    "added": "92",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "369361",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 34,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 8,
+  "subject": "Merge pull request #122 from squid-protocol/feature/121-minified-fallback-screen",
+  "commit_message": "Merge pull request #122 from squid-protocol/feature/121-minified-fallback-screen\n\nCloses #121\n\n**Description of Structural Changes**\nThis PR implements a blazing-fast $O(N)$ literal string fallback screen for heavily minified payloads. It bypasses the `< 250` character anti-ReDoS armor for files where 90% of the mass is stripped, ensuring blatant execution hooks (`eval`, `fetch`, `child_process`) are still caught in the raw buffer without risking OOM crashes or Catastrophic Backtracking.\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/security/security_lens.py",
+    "added": "44",
+    "deleted": "23"
+   },
+   {
+    "path": "tests/security_auditing/test_security_lens.py",
+    "added": "119",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 2,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 9,
+  "subject": "feat(sarif): inject exact LOC precision into security dashboard alerts",
+  "commit_message": "feat(sarif): inject exact LOC precision into security dashboard alerts\n\nResolves #200 \n\n### \ud83c\udf0c Overview\nThis PR upgrades the SARIF exporter to provide exact Line of Code (LOC) precision for security dashboard alerts. Previously, structural threat signatures were pinned to the top of the file (line 1), forcing developers to manually hunt for the specific vulnerability within the artifact. \n\nBy mapping regex character offsets to physical line numbers during the optical extraction phase, we achieve pinpoint alert accuracy natively in GitHub Advanced Security without sacrificing the speed of our AST-free parsing.\n\n### \ud83d\udee0\ufe0f Architectural Changes\n* **`detector.py`**: Upgraded `coding_analysis` to dynamically calculate line numbers from `re.finditer` character offsets (`m.start()`) and capture them in a new `threat_locations` dictionary.\n* **`signal_processor.py`**: Plumbed the `threat_locations` object through the core math engine so exact physical coordinates are preserved in the final telemetry payload across all execution pathways (Executable, Minified, Static, and Leaks).\n* **`sarif_recorder.py`**: Replaced the hardcoded line `1` fallback. The exporter now aligns the specific vulnerability snippet with its exact `startLine` coordinate.\n* **Regression Fix**: Restored the `150.0` mass spike and alert context for the Critical Leak bypass pathway that was inadvertently dropped.\n\n### \ud83e\uddea Testing & Verification\n- [x] Added `test_detector_exact_loc_mapping` to verify offset-to-line mathematical accuracy.\n- [x] Added `test_sarif_exact_loc_injection` to ensure the final JSON payload correctly mounts the `startLine`.\n- [x] Fixed tuple unpacking in `test_detector_empty_pattern_continuations`.\n- [x] All 740+ CI tests passing green.\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "18",
+    "deleted": "5"
+   },
+   {
+    "path": "gitgalaxy/metrics/signal_processor.py",
+    "added": "8",
+    "deleted": "4"
+   },
+   {
+    "path": "gitgalaxy/recorders/sarif_recorder.py",
+    "added": "10",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/core_engine/test_detector.py",
+    "added": "32",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/core_engine/test_signal_processor.py",
+    "added": "49",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 5,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::coding_analysis",
+   "gitgalaxy/core/detector.py::splice",
+   "gitgalaxy/metrics/signal_processor.py::calculate_risk_vector",
+   "gitgalaxy/recorders/sarif_recorder.py::generate_report",
+   "tests/core_engine/test_detector.py::test_detector_empty_pattern_continuations",
+   "tests/core_engine/test_detector.py::test_detector_zero_branch_massive_state",
+   "tests/core_engine/test_signal_processor.py::test_signal_processor_inline_suppressions"
+  ],
+  "n_engine_functions_touched": 7
+ },
+ {
+  "id": 10,
+  "subject": "Fix prism.py's comment-family taxonomy -- comment/code separation was completely broken for all 58 languages (#386) (#389)",
+  "commit_message": "Fix prism.py's comment-family taxonomy -- comment/code separation was completely broken for all 58 languages (#386) (#389)\n\nRoot cause (see #386 for the full empirical investigation): split_streams()\nspecial-cased exactly three family names (\"recursive_c_style\",\n\"column_sensitive\", \"single_line_only\") for dedicated stripping logic, and\nfell back to a REGEX_MATRIX built from comment_definitions.get(\n\"mechanical_families\", {}) for everything else -- a key nothing ever wrote\n(#378's original dead-key finding). But even fixing that key name alone\nwouldn't have been enough: none of the three special-cased names, nor the\nmatrix-building fam_keys (\"c_style_comment\", \"single_line_only\",\n\"embedded_syntax\", \"multi_style_dash\"), matched the REAL per-language\n\"lexical_family\" taxonomy actually used across language_standards.py\n(standard_block: 29 languages, line_exclusive: 21, recursive_block: 3,\npositional_anchored: 3, block_exclusive: 1, non_lexical: 1). So every\nsingle language fell through to the always-empty generic stripper --\nverified empirically: `Prism(...).split_streams(\"x = 1  # comment\",\n\"python\")` returned the comment still embedded in code_stream, comment_\nstream empty, even for Python.\n\nThis went undetected because test_prism.py's entire suite ran against a\nhand-built mock config (MOCK_COMMENT_DEFS/MOCK_LANG_DEFS) using a\nfictional, internally-consistent taxonomy that matched split_streams()'s\nspecial cases but never matched the real config -- every test passed\nwithout ever exercising real data.\n\nFix: renamed prism.py's three special-cased family checks and\n_compile_regex_matrix()'s fam_key checks to the real taxonomy\n(recursive_c_style -> recursive_block, column_sensitive ->\npositional_anchored, single_line_only -> line_exclusive, c_style_comment ->\nstandard_block), plus the default \"lexical_family\" fallback. Verified\nempirically post-fix: C, Python, Rust, and COBOL (one language per\npreviously-broken family) now correctly separate comments from code.\nContained entirely to prism.py -- no changes to gitgalaxy_config.py or any\nof the 58 language definitions, per the scoped plan in #386.\n\nKNOWN LIMITATIONS, tracked but not fixed here (per the approved scope --\nsee #386):\n- \"standard_block\"'s real delimiter list has 9 entries (C-style, SQL/\n  Lua-style --/--[[/]], Haskell-style {-/-}, and a trailing #), but the\n  regex-building branch only uses the first 3 (// and /* */). The ~24\n  C-style languages in this family (c, cpp, java, javascript, go, etc.)\n  are fully fixed; the 5 that don't use C-style delimiters at all\n  (sqlite, lua, haskell, powershell, perl) are unchanged from before --\n  not a regression, since nothing was stripped for them either way.\n- \"block_exclusive\" (xml, 1 language) has its own separately malformed\n  delimiter data ([\"\", \"--!>\"]) and isn't covered by this fix.\n- golden_master.json is not regenerated here. This fix will very likely\n  shift LOC/signal counts across most of the corpus now that comments\n  actually stop leaking",
+  "pr_title": "Fix prism.py's comment-family taxonomy -- comment/code separation was broken for all 58 languages (#386)",
+  "pr_body_start": "## Summary Closes #386, closes #378. **Comment/code separation was completely broken for every one of the 58 supported languages**, verified empirically -- `Prism(REAL_CONFIG).split_streams(\"x = 1 # comment\", \"python\")` returned the comment still embedded in `code_stream`, `comment_stream` empty, even for Python. ### Root cause `split_streams()` special-cased exactly three family names (`\"recursive_c_style\"`, `\"column_sensitive\"`, `\"single_line_only\"`) for dedicated stripping logic, and fell back to a `REGEX_MATRIX` built from `comment_definitions.get(\"mechanical_families\", {})` for everything else -- a key nothing ever wrote (#378's original dead-key finding). But fixing that key name alone wouldn't have been enough: **none** of the three special-cased names, nor the matrix-building `fam_key`s (`\"c_style_comment\"`, `\"single_line_only\"`, `\"embedded_syntax\"`, `\"multi_style_dash\"`), matched the **real** per-language `\"lexical_family\"` taxonomy actually used across `language_standards.py` (`standard_block`: 29 languages, `line_exclusive`: 21, `recursive_block`: 3, `positional_anchored`: 3, `block_exclusive`: 1, `non_lexical`: 1). So every single language fell through to the always-empty generic stripper. This went undetected because `test_prism.py`'s entire suite ran against a hand-built mock config (`MOCK_COMMENT_DEFS`/`MOCK_LANG_DEFS`) using a fictional, internally-consistent taxonomy that matched `split_streams()`'s special cases but never matched the real config -- every tes",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/prism.py",
+    "added": "41",
+    "deleted": "10"
+   },
+   {
+    "path": "tests/core_engine/test_prism.py",
+    "added": "71",
+    "deleted": "15"
+   },
+   {
+    "path": "tests/dead_key_audit_baseline.json",
+    "added": "1",
+    "deleted": "3"
+   }
+  ],
+  "n_files": 3,
+  "engine_functions_touched": [
+   "gitgalaxy/core/prism.py::__init__",
+   "gitgalaxy/core/prism.py::_compile_regex_matrix",
+   "gitgalaxy/core/prism.py::_strip_segment_comments",
+   "gitgalaxy/core/prism.py::split_streams",
+   "tests/core_engine/test_prism.py::test_prism_embedded_syntax_fourth_delimiter_not_dropped",
+   "tests/core_engine/test_prism.py::test_prism_php_string_extraction",
+   "tests/core_engine/test_prism.py::test_prism_regex_matrix_calibration_edge_cases"
+  ],
+  "n_engine_functions_touched": 7
+ },
+ {
+  "id": 11,
+  "subject": "fix(extraction): Harden Dart syntax extraction (#969)",
+  "commit_message": "fix(extraction): Harden Dart syntax extraction (#969)\n\n* fix(extraction): Harden dart syntax extraction regexes\n\nAddresses #828\n- Hardened class_start for mixin class, abstract base class\n- Hardened func_start to exclude Function name and correctly capture constructors\n- Hardened args against ReDoS with 3-level parens nesting\n- Added xfail rules for func_start, class_start, _dependency_capture due to lack of AST block shielding\n- Generated adversarial test suite for Dart and passed all tests\n- Updated golden masters via crucible_check.py\n\n* fix(extraction): Resolve func_start capturing class declarations in Dart and update goldens\n\n* fix(extraction): Generate zero dependency golden master for Dart\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\n",
+  "pr_title": "fix(extraction): Harden Dart syntax extraction",
+  "pr_body_start": "Addresses #828 - Hardened class_start for mixin class, abstract base class - Hardened func_start to exclude Function name and correctly capture constructors - Hardened args against ReDoS with 3-level parens nesting - Added xfail rules for func_start, class_start, _dependency_capture due to lack of AST block shielding - Generated adversarial test suite for Dart and passed all tests - Updated golden masters via crucible_check.py PR metrics: - 131 tests added - 12 parsing errors fixed - 1 ReDoS found and mitigated - Known regex limitations: class_start and func_start lack block shielding and can hallucinate matches inside strings or comments; _dependency_capture can hallucinate matches inside comments.",
+  "files_changed": [
+   {
+    "path": "LESSONS_LEARNED.md",
+    "added": "26",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "10",
+    "deleted": "17"
+   },
+   {
+    "path": "scripts/update_golden_masters.sh",
+    "added": "23",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/extraction/languages/test_dart.py",
+    "added": "214",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "50469",
+    "deleted": "51700"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "50469",
+    "deleted": "51700"
+   },
+   {
+    "path": "tests/tools/update_golden_master.py",
+    "added": "3",
+    "deleted": "3"
+   }
+  ],
+  "n_files": 7,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 12,
+  "subject": "Extraction hardening: php (#968)",
+  "commit_message": "Extraction hardening: php (#968)\n\n* Hardened PHP extraction regexes and updated goldens\n\n* fix(extraction): Harden PHP extraction regexes and update goldens\n\n* docs: add update_golden_masters script and lessons learned\n\n* Hardened Dart func_start regex to eliminate ReDoS. Modified return type capture to use bounded {0,5} quantifiers instead of unbounded {1,100}, strictly preserving semantics while solving the 15s CI timeouts. Updated golden master drift.\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\n",
+  "pr_title": "Extraction hardening: php",
+  "pr_body_start": "## \ud83d\ude80 Hardening & Stability Upgrades This PR implements critical extraction hardening for **PHP** and resolves a catastrophic parsing vulnerability in **Dart** that was causing intermittent CI failures. ### \ud83d\udc18 PHP Extraction Hardening - **ReDoS Elimination**: Hardened PHP `func_start` and `class_start` regexes by bounding wildcards (replacing unbounded `*` lookaheads with strict `{0,3}` limits). - **Modern Syntax Support**: Greatly improved extraction accuracy for PHP 8+ features, specifically handling modern attributes (`#[Attribute]`) and closures. - **Testing**: Added 53 new adversarial test cases targeting PHP regex edge-cases (0 failures). ### \ud83c\udfaf Dart ReDoS & Timeout Resolution - **The Issue**: The Golden Crucible CI pipeline was failing intermittently due to 15-second parsing timeouts on large framework files (e.g., Flutter's `framework.dart`). We traced this to a catastrophic backtracking vulnerability (ReDoS) in the Dart `func_start` regular expression, specifically in how it greedily consumed complex return types using `{1,100}?`. - **The Fix**: Replaced the unbounded token capture with a strictly bounded, non-greedy token sequence `(?:(?:[\\w<>\\[\\],?(){}]+[ \\t\\n]+){0,5}?)`. - **Performance Impact**: Parsing time for `framework.dart` dropped from a guaranteed 15s timeout to **0.02 seconds (a 700x speedup)**. ### \ud83e\uddea Validation & Crucible Updates - Brought the `zero-dependency` audit mode into parity with the full precision engine. - Successfully regenerated and synced the ",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "14",
+    "deleted": "13"
+   },
+   {
+    "path": "pr_body.txt",
+    "added": "10",
+    "deleted": "0"
+   },
+   {
+    "path": "ruby_lessons.txt",
+    "added": "7",
+    "deleted": "0"
+   },
+   {
+    "path": "scratch_regex.py",
+    "added": "21",
+    "deleted": "0"
+   },
+   {
+    "path": "scratch_ruby.py",
+    "added": "120",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_language_standards_strict.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/extraction/languages/test_css.py",
+    "added": "18",
+    "deleted": "7"
+   },
+   {
+    "path": "tests/extraction/languages/test_dockerfile.py",
+    "added": "24",
+    "deleted": "11"
+   },
+   {
+    "path": "tests/extraction/languages/test_html.py",
+    "added": "52",
+    "deleted": "39"
+   },
+   {
+    "path": "tests/extraction/languages/test_php.py",
+    "added": "270",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/extraction/test_dependency_extraction_strict.py",
+    "added": "16",
+    "deleted": "6"
+   },
+   {
+    "path": "tests/extraction/test_function_extraction_strict.py",
+    "added": "15",
+    "deleted": "6"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "46441",
+    "deleted": "44251"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "46427",
+    "deleted": "44237"
+   },
+   {
+    "path": "zig_lessons.txt",
+    "added": "6",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 15,
+  "engine_functions_touched": [
+   "tests/core_engine/test_language_standards_strict.py::test_embedded_python_generics_redos_immunity",
+   "tests/extraction/languages/test_css.py::test_css_args_redos",
+   "tests/extraction/languages/test_css.py::test_css_args_valid",
+   "tests/extraction/languages/test_css.py::test_css_class_start_invalid",
+   "tests/extraction/languages/test_css.py::test_css_class_start_redos",
+   "tests/extraction/languages/test_css.py::test_css_class_start_valid",
+   "tests/extraction/languages/test_css.py::test_css_dependency_invalid",
+   "tests/extraction/languages/test_css.py::test_css_dependency_valid",
+   "tests/extraction/languages/test_css.py::test_css_func_start_invalid",
+   "tests/extraction/languages/test_css.py::test_css_func_start_redos",
+   "tests/extraction/languages/test_css.py::test_css_func_start_valid",
+   "tests/extraction/languages/test_dockerfile.py::test_args_invalid",
+   "tests/extraction/languages/test_dockerfile.py::test_args_redos",
+   "tests/extraction/languages/test_dockerfile.py::test_args_valid",
+   "tests/extraction/languages/test_dockerfile.py::test_class_start_invalid",
+   "tests/extraction/languages/test_dockerfile.py::test_class_start_redos",
+   "tests/extraction/languages/test_dockerfile.py::test_class_start_valid",
+   "tests/extraction/languages/test_dockerfile.py::test_dependency_invalid",
+   "tests/extraction/languages/test_dockerfile.py::test_dependency_valid",
+   "tests/extraction/languages/test_dockerfile.py::test_func_start_invalid",
+   "tests/extraction/languages/test_dockerfile.py::test_func_start_pathological",
+   "tests/extraction/languages/test_dockerfile.py::test_func_start_redos",
+   "tests/extraction/languages/test_dockerfile.py::test_func_start_valid",
+   "tests/extraction/languages/test_html.py::test_html_args_invalid",
+   "tests/extraction/languages/test_html.py::test_html_args_pathological"
+  ],
+  "n_engine_functions_touched": 35
+ },
+ {
+  "id": 13,
+  "subject": "fix(core): give core_var_decl/design_* naming-convention signatures real producers (#1151)",
+  "commit_message": "fix(core): give core_var_decl/design_* naming-convention signatures real producers (#1151)\n\n* fix(core): give core_var_decl/design_* naming-convention signatures real producers (#1145)\n\n7 SIGNAL_SCHEMA columns (struct_var_decl, struct_camel_case, struct_snake_case,\nstruct_pascal_case, struct_upper_case, struct_short_vars, struct_long_vars) had\nzero producers anywhere in language_standards.py -- permanently 0 in every scan.\ncore_var_decl is also a live consumer: signal_processor.py's encapsulation_ratio\nused it as a denominator term, which its permanent 0 silently floored to 0.0 for\nany file with a nonzero `globals` hit.\n\nImplemented as one universal (not per-language) mechanism in detector.py, the\nsame \"single regex for every language\" precedent indent_tabs/indent_spaces\nalready establish -- identifier casing is a lexical/formatting property, not a\nlanguage-semantic one needing 59 hand-tuned regexes. A bounded var-decl pattern\ncaptures the identifier immediately before an unguarded `=`, tolerating an\noptional prefix so it reaches bare, keyword-led (let/const/var/val/mut), and\nC-style typed declarations alike; a small classifier buckets each captured name\nby casing and length.\n\nAdds a strict/adversarial test suite (tests/core_engine/test_naming_convention_signatures.py)\nin the spirit of the per-language test_<lang>_strict.py methodology: verified\npositive/negative cases, a ReDoS scaling sweep, ambiguity/mutual-exclusivity\nchecks, and documented known limitations (chained assignment, no-space default\nparams, the code_stream-already-comment-stripped precondition). Also adds\nregression coverage in test_signal_processor.py for the encapsulation_ratio fix.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>\n\n* test: rebless golden crucible fixtures for #1145's naming-convention signatures\n\nRegenerated both tests/golden_master_audit.json (full-precision) and\ntests/golden_master_zero_dep_audit.json (zero-dependency) via\ntests/tools/update_golden_master.py against the pinned v1.0 language-crucible\ncorpus, per this repo's Differential Scan protocol for any PR touching parsing\nlogic.\n\nBoth fixtures showed identical drift (18947 diffs each), fully categorized and\nexplained before blessing -- none were off-target:\n  - 712  core_var_decl -- the new signal itself, direct and expected\n  - 1692 design_camel_case/snake_case/pascal_case/upper_case/short_vars/long_vars\n         -- same, direct and expected\n  - 13196 + 3347 archetype/ML-cluster/z-score/drift/fingerprint reshuffling --\n         indirect but expected: these 7 SIGNAL_SCHEMA columns feed\n         signal_processor.py's K-Means archetype-classification feature vector\n         (see analysis_lens.py's SIGNAL_SCHEMA-ordering comment). They were a\n         constant-0 dimension across the entire corpus before this fix, so\n         giving them real per-file variance necessarily reclassifies a\n         meaningful fraction of files' archetypes -- the same effect #1020\n         already documented for this feat",
+  "pr_title": "fix(core): give core_var_decl/design_* naming-convention signatures real producers",
+  "pr_body_start": "## Summary - Fixes #1145: `struct_var_decl`/`struct_camel_case`/`struct_snake_case`/`struct_pascal_case`/`struct_upper_case`/`struct_short_vars`/`struct_long_vars` had zero producers anywhere in `language_standards.py` \u2014 permanently 0 in every scan. - `core_var_decl` was also a live consumer, not just an unused column: `signal_processor.py`'s `encapsulation_ratio` used it as a denominator term, so its permanent 0 silently floored that ratio to 0.0 for any file with a nonzero `globals` hit, regardless of how much state was actually locked inside functions. - Implemented as **one universal, not per-language, mechanism** in `detector.py` \u2014 the same \"single regex for every language\" precedent `indent_tabs`/`indent_spaces` already establish, since identifier casing is a lexical/formatting property rather than a language-semantic one. A bounded var-decl regex captures the identifier immediately before an unguarded `=` (tolerating an optional prefix so it reaches bare, keyword-led `let`/`const`/`var`/`val`/`mut`, and C-style typed declarations alike), and a small pure-Python classifier buckets each captured name by casing/length. Confirmed via manual scaling sweep that this stays linear, not quadratic, under adversarial input. ## Golden Crucible re-bless This PR touches `detector.py` parsing logic, so `tests/golden_master_audit.json` and `tests/golden_master_zero_dep_audit.json` needed regenerating per the Differential Scan protocol. Verified against the pinned v1.0 `language-crucib",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "54",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_naming_convention_signatures.py",
+    "added": "319",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_signal_processor.py",
+    "added": "29",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "19478",
+    "deleted": "19439"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "19478",
+    "deleted": "19439"
+   },
+   {
+    "path": "tests/ruff_audit_baseline.json",
+    "added": "7",
+    "deleted": "7"
+   }
+  ],
+  "n_files": 6,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::__init__",
+   "gitgalaxy/core/detector.py::splice",
+   "tests/core_engine/test_signal_processor.py::test_signal_processor_empty_tiny_file_scores_true_zero"
+  ],
+  "n_engine_functions_touched": 3
+ },
+ {
+  "id": 14,
+  "subject": "fix(core): prevent Prism from swallowing code due to quotes in comments (fixes #1222) (#1234)",
+  "commit_message": "fix(core): prevent Prism from swallowing code due to quotes in comments (fixes #1222) (#1234)\n\n* fix(core): func_start Invocation Shield missing for 6 languages -- closes #1221\n\n`func_start`'s method-shorthand/bare-signature branch had no requirement\nthat a real body/terminator follow, unlike this same file's own `args`\nregex (which already implements this \"Invocation Shield\" for the identical\nambiguity). Any bare call statement at true line start (`next();`) was\ntherefore misidentified as a function/method definition -- confirmed on\nreal corpus code (expressjs/express: ~15% of reported JS functions were\nphantom call-sites).\n\nFixed for javascript, typescript, java, apex, dart, and groovy, each with\na fix shape tailored to that language's own legitimate leniency\nrequirements (zero-prefix constructors, interface/abstract stubs ending in\nbare `;`, etc. -- see each rule's own inline comment). csharp is\ndeliberately left untouched: its func_start already defers this exact\ncheck to a detector.py pipeline-level post-hoc terminator scan (#789),\nconfirmed independently robust end-to-end.\n\nAlso fixes a Rule-14-shaped ReDoS regression the typescript fix's first\ndraft introduced (two adjacent unbounded whitespace quantifiers separated\nby an optional group) -- bounded, confirmed back to linear scaling.\n\ntests/golden_master_audit.json / tests/golden_master_zero_dep_audit.json\nregenerated via tests/tools/update_golden_master.py: the ~80-repo corpus\ndiff (2213 differences, both full-precision and zero-dependency modes)\nis entirely composition/tech_debt/impact drops for javascript, typescript,\njava, dart, and groovy directory groups -- exactly the expected signature\nof removing phantom function counts, no unrelated languages affected.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>\n\n* fix(core): single-pass regex for literals and comments to prevent swallowed code (#1222)\n\n- Fixes issue #1222 where a quote inside a comment (e.g. an apostrophe) would be incorrectly matched as a literal string by Prism's pre-stripper.\n- Refactors _strip_segment_comments to process literals and comments in a single atomic pass, preventing false-starts and properly replacing comments with exact newline counts.\n- Adds regression test test_prism_issue_1222.py to prevent regressions.\n\n* test(core): update golden masters for improved function recall (#1222)\n\n- Regenerates golden_master_audit.json and golden_master_zero_dep_audit.json\n- Reflects the intentional function recall improvement after fixing the single-pass literal shielding bug in Prism.\n- Differences are expected increases in total_loc/function counts on affected files and downstream structural metrics (PageRank, coords, etc.).\n\n* style: fix ruff formatting and warnings in test and prism.py\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5 <noreply@anthropic.com>\n",
+  "pr_title": "fix(core): prevent Prism from swallowing code due to quotes in comments (fixes #1222)",
+  "pr_body_start": "Closes #1222 **Problem:** The tokenizer in `Prism` was incorrectly matching quotes inside comments (e.g., apostrophes in `// doesn't`) as the start of string literals. This caused it to mask all the code following the comment until the next valid quote, effectively merging those lines. The subsequent pass to strip comments would then indiscriminately delete all that masked code, leading to severe function extraction failures (as seen in `site/tools/search.js` where 9 out of 10 methods were swallowed). **Solution:** Refactored `_strip_segment_comments` in `gitgalaxy/core/prism.py` to process literals and comments in a single atomic regex pass. By evaluating both concurrently in a single alternation, the engine correctly gives precedence to whichever sequence starts first. If a comment begins, any quotes within it are safely ignored. **Testing:** - Added `test_prism_issue_1222.py` as a permanent regression test to ensure quotes in comments never again disrupt function extraction. - Ran full `pytest` suite, resulting in `6815` passing tests. - Regenerated the full-precision and zero-dependency golden masters to safely bless the intentionally improved downstream structural metrics and function extraction recall.",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/prism.py",
+    "added": "9",
+    "deleted": "19"
+   },
+   {
+    "path": "tests/core_engine/test_prism_issue_1222.py",
+    "added": "41",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "282246",
+    "deleted": "220139"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "282246",
+    "deleted": "220139"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/core/prism.py::_strip_segment_comments",
+   "gitgalaxy/core/prism.py::shield_callback",
+   "gitgalaxy/core/prism.py::strip_callback"
+  ],
+  "n_engine_functions_touched": 3
+ },
+ {
+  "id": 15,
+  "subject": "docs: auto-update tree-sitter accuracy data (#1475)",
+  "commit_message": "docs: auto-update tree-sitter accuracy data (#1475)\n\nCo-authored-by: squid-protocol <254786755+squid-protocol@users.noreply.github.com>\n",
+  "pr_title": "docs: auto-update tree-sitter accuracy data",
+  "pr_body_start": "Automated update from the latest tree-sitter accuracy measurement on `main`. ## Notable changes since the previous batch - **csharp** Class Precision improved 16.6pp (56.7% \u2192 73.3%) - **csharp** Class Recall improved 2.2pp (89.5% \u2192 91.7%) - Appends one row per language to `docs/self_scan/tree_sitter_accuracy_history.csv`. - Regenerates the summary table in `gitgalaxy/standards/language_standards.py`. - Re-renders `docs/self_scan/tree_sitter_accuracy_chart.svg` from that same batch. Never touches `tests/tree_sitter_accuracy_baseline_*.json` -- those stay human-reviewed via `tree_sitter_accuracy_audit.py --regenerate`.",
+  "files_changed": [
+   {
+    "path": "docs/self_scan/tree_sitter_accuracy_chart.svg",
+    "added": "5",
+    "deleted": "5"
+   },
+   {
+    "path": "docs/self_scan/tree_sitter_accuracy_history.csv",
+    "added": "31",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 2,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 16,
+  "subject": "Save current state before TS diagnostics",
+  "commit_message": "Save current state before TS diagnostics\n\n",
+  "pr_title": "",
+  "pr_body_start": "",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "158",
+    "deleted": "67"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "2",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "9",
+    "deleted": "16"
+   },
+   {
+    "path": "tests/core_engine/test_detector.py",
+    "added": "54",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/extraction/languages/test_typescript.py",
+    "added": "8",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "2025",
+    "deleted": "2755"
+   },
+   {
+    "path": "tests/tools/tree_sitter_accuracy_audit.py",
+    "added": "41",
+    "deleted": "30"
+   }
+  ],
+  "n_files": 7,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_calculate_block_metrics",
+   "gitgalaxy/core/detector.py::_count_colon_selector_segments",
+   "gitgalaxy/core/detector.py::_count_haskell_pattern_list",
+   "gitgalaxy/core/detector.py::_count_tcl_arg_list",
+   "gitgalaxy/core/detector.py::_count_top_level_args",
+   "gitgalaxy/core/detector.py::_dart_is_closure_invocation",
+   "gitgalaxy/core/detector.py::_dart_scan_terminator",
+   "gitgalaxy/core/detector.py::_decode_comment_stream",
+   "gitgalaxy/core/detector.py::_extract_documentation_tether",
+   "gitgalaxy/core/detector.py::_find_slash_terminator",
+   "gitgalaxy/core/detector.py::_matching_paren_end",
+   "gitgalaxy/core/detector.py::_partition_segments",
+   "gitgalaxy/core/detector.py::_slice_by_braces",
+   "gitgalaxy/core/detector.py::_slice_by_indentation",
+   "gitgalaxy/core/detector.py::_slice_by_keywords",
+   "gitgalaxy/core/detector.py::_slice_by_labels",
+   "gitgalaxy/core/detector.py::coding_analysis",
+   "gitgalaxy/core/detector.py::preserve_newlines",
+   "gitgalaxy/core/detector.py::splice",
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "tests/core_engine/test_detector.py::encode",
+   "tests/core_engine/test_detector.py::test_detector_zig_single_quote_bound_prevents_cross_line_swallow",
+   "tests/tools/tree_sitter_accuracy_audit.py::_count_haskell_signature_arrows",
+   "tests/tools/tree_sitter_accuracy_audit.py::_get_node_name",
+   "tests/tools/tree_sitter_accuracy_audit.py::run_engine_scan"
+  ],
+  "n_engine_functions_touched": 26
+ },
+ {
+  "id": 17,
+  "subject": "Fix #2051: C# args regex truncation (#2147)",
+  "commit_message": "Fix #2051: C# args regex truncation (#2147)\n\n* Fix #2051: C# args regex truncation on tuples and generic methods\n\n* docs: add golden master generation rules to prevent CI poisoning\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\n",
+  "pr_title": "Fix #2051: C# args regex truncation",
+  "pr_body_start": "Fixes #2051. C# args regex now correctly matches tuple return types, tuple-typed parameters, and generic methods.",
+  "files_changed": [
+   {
+    "path": ".claude/rules/golden-master-guidelines.md",
+    "added": "19",
+    "deleted": "0"
+   },
+   {
+    "path": "docs/gitgalaxy_architecture_brief.md",
+    "added": "67",
+    "deleted": "67"
+   },
+   {
+    "path": "docs/self_scan/tri_comparison_ledger.json",
+    "added": "181",
+    "deleted": "181"
+   },
+   {
+    "path": "docs/self_scan/tri_comparison_points_of_interest.md",
+    "added": "118",
+    "deleted": "117"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "3",
+    "deleted": "3"
+   },
+   {
+    "path": "tests/extraction/languages/test_csharp_strict.py",
+    "added": "26",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "287",
+    "deleted": "287"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "287",
+    "deleted": "287"
+   }
+  ],
+  "n_files": 9,
+  "engine_functions_touched": [
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "tests/extraction/languages/test_csharp_strict.py::test_csharp_redos_immunity_sweep"
+  ],
+  "n_engine_functions_touched": 2
+ },
+ {
+  "id": 18,
+  "subject": "fix(regex): resolve ReDoS timeout in typescript args extraction (#2156)",
+  "commit_message": "fix(regex): resolve ReDoS timeout in typescript args extraction (#2156)\n\n* fix(regex): resolve ReDoS timeout in typescript args extraction\n\n* test: regenerate golden masters for typescript args fix\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\n",
+  "pr_title": "fix(regex): resolve ReDoS timeout in typescript args extraction",
+  "pr_body_start": "### What\\nThis PR fixes a Regular Expression Denial of Service (ReDoS) vulnerability in the `args` extraction rule for TypeScript, which was causing the CI pipeline to timeout after 180 seconds.\\n\\n### Why\\nThe `args` regex had an overlapping alternative in its nested parentheses matcher: `\\((?:[^()]|\\([^()]*\\)|\\((?:[^()]|\\([^()]*\\))*\\))*\\)`. The middle alternative `\\([^()]*\\)` was fully subsumed by the third alternative, which matched up to depth 2. This created a classic ReDoS structure `(A|B|C)*` where B and C overlap, causing catastrophic backtracking on long inputs that ultimately fail to match.\\n\\n### How\\nRemoved the redundant `\\([^()]*\\)` alternative from the three branches of the TypeScript `args` regex, converting it to `\\((?:[^()]|\\((?:[^()]|\\([^()]*\\))*\\))*\\)`. This maintains the exact same depth-3 matching capabilities while eliminating the exponential backtracking. Verified by running the TypeScript test suite.",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/standards/language_standards.py",
+    "added": "3",
+    "deleted": "3"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "7",
+    "deleted": "7"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "7",
+    "deleted": "7"
+   }
+  ],
+  "n_files": 3,
+  "engine_functions_touched": [],
+  "n_engine_functions_touched": 0
+ },
+ {
+  "id": 19,
+  "subject": "fix(#2415): anchor aperture infra_path_pattern to a real left boundary (#2418)",
+  "commit_message": "fix(#2415): anchor aperture infra_path_pattern to a real left boundary (#2418)\n\n`aperture.py`'s Semantic Path Shield had an optional `[-_./\\\\]?` prefix and\nno left word boundary, so an infra word (`gen`/`lib`/`out`/`test`/`spec`/\n`build`/`dist`/`docs`/`deps`/`scripts`/...) matched as the *suffix* of any\npath component sitting right before a `.` or `/`. Real source files were\nsilently dropped at the perimeter whenever no manifest supplied an Intent\nLock: `MAPGEN.jcl` (`gen`), `DBRMLIB.jcl` (`lib`), `layout.tsx` /\n`checkout.rb` / `rollout.js` (`out`), `pytest.ini` (`test`), ...\n\nFix: require `(?:^|[-_./\\\\])` before the alternation so it only matches\nwhole path segments / separator-delimited tokens (the stated intent).\nAlso escape the two literal dots in `.github` / `.gitlab`.\n\nDifferential Scan (full ~80-repo language-crucible v1.1.0 corpus):\n- 20 previously-dropped real source files now scanned, 0 removed, 0\n  unrelated changes: codegen.c, layout.html, autogen.sh, mkdist.sh,\n  update-codegen.sh, adbgen.sh, dtest.sh, ztest.sh, Alamofire.podspec\n  (ruby), CBL0106v01ClausulaImagen.cbl, CommonLibrary.psm1 x2,\n  Capture-MonitorLayout.ps1, XStreamDOMTest.data{1,2}.xml, regtest.csh,\n  revhtml5urllibrary.livecodescript, testlib.lcb, MAPGEN.jcl, DBRMLIB.jcl.\n- Both golden masters re-blessed (crucible_check --update, both modes\n  PASS on re-check). The large diff is downstream aggregate recompute\n  (PageRank, topological coords, risk %, per-language rollups) from the\n  +20 graph nodes -- every changed value traces to a newly-included file.\n- ast_accuracy_baseline.json regenerated: 225->226 files, 2379->2381\n  functions, 61->62 classes, all still extracted at 100% (found == real,\n  extra == 0) -- one gitgalaxy source file, tests/core_engine/\n  test_chronometer_timeout.py, was itself caught by the `out` suffix bug.\n- ruff baseline: 4 SIM102 findings in aperture.py are pure line-shifts\n  from the added comment; baseline regenerated.\n\nmanual_verification.json:\n- jcl function 370->375, class 116->117 -- the fix restores MAPGEN.jcl /\n  DBRMLIB.jcl, so pipeline now matches the raw-corpus truth this PR's\n  predecessor (#2416) already verified. jcl.md #9 updated.\n- livecode class 57->58 -- testlib.lcb's `module com.livecode.__INTERNAL.\n  _testlib.tests` is now visible and correctly extracted; keeps livecode's\n  precision badge from going stale post-merge.\n\ntri_comparison_chart.svg / ledger.json not regenerated here on purpose --\nthat's tri-comparison-history.yml's post-merge job (aperture.py isn't a\ntri-comparison-audit.yml trigger path).\n\n\nClaude-Session: https://claude.ai/code/session_019Zm1uVBpVEZJ9SB7bWFR8S\n\nCo-authored-by: Claude Sonnet 5 <noreply@anthropic.com>\n",
+  "pr_title": "fix(#2415): anchor aperture infra_path_pattern to a real left boundary",
+  "pr_body_start": "Fixes #2415. ## Root cause `aperture.py`'s Semantic Path Shield (`infra_path_pattern`) had an optional `[-_./\\\\]?` prefix and **no left word boundary**, so an infra word (`gen` / `lib` / `out` / `test` / `spec` / `build` / `dist` / `docs` / `deps` / `scripts` / \u2026) matched as the **suffix of any path component sitting right before a `.` or `/`**. Real source files were silently dropped at the perimeter whenever no manifest supplied an Intent Lock: | file | matched | | :-- | :-- | | `MAPGEN.jcl` | `gen` | | `DBRMLIB.jcl` | `lib` | | `layout.tsx` / `checkout.rb` / `rollout.js` | `out` | | `pytest.ini` | `test` | | `codegen.c`, `autogen.sh`, `Alamofire.podspec`, \u2026 | `gen` / `spec` | ## Fix One regex change in `aperture.py`: leading `[-_./\\\\]?` \u2192 `(?:^|[-_./\\\\])` (require start-of-path or a real separator before the alternation, so it only matches whole path segments). Also escaped the two literal dots in `.github` / `.gitlab`. New regression test in `tests/core_engine/test_aperture.py`. ## Differential Scan (full ~80-repo `language-crucible` v1.1.0 corpus) **20 previously-dropped real source files now scanned, 0 removed, 0 unrelated changes.** Every one is a genuine file whose name ends in an infra word: `codegen.c` \u00b7 `layout.html` \u00b7 `autogen.sh` \u00b7 `mkdist.sh` \u00b7 `update-codegen.sh` \u00b7 `adbgen.sh` \u00b7 `dtest.sh` \u00b7 `ztest.sh` \u00b7 `Alamofire.podspec` (ruby) \u00b7 `CBL0106v01ClausulaImagen.cbl` \u00b7 `CommonLibrary.psm1` \u00d72 \u00b7 `Capture-MonitorLayout.ps1` \u00b7 `XStreamDOMTest.data{1,2}.xml` \u00b7 `regtest",
+  "files_changed": [
+   {
+    "path": "docs/language_status/jcl.md",
+    "added": "24",
+    "deleted": "24"
+   },
+   {
+    "path": "docs/self_scan/manual_verification.json",
+    "added": "10",
+    "deleted": "10"
+   },
+   {
+    "path": "gitgalaxy/core/aperture.py",
+    "added": "7",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/ast_accuracy_baseline.json",
+    "added": "7",
+    "deleted": "7"
+   },
+   {
+    "path": "tests/core_engine/test_aperture.py",
+    "added": "48",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "227678",
+    "deleted": "222038"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "227584",
+    "deleted": "221944"
+   },
+   {
+    "path": "tests/ruff_audit_baseline.json",
+    "added": "4",
+    "deleted": "4"
+   }
+  ],
+  "n_files": 8,
+  "engine_functions_touched": [
+   "gitgalaxy/core/aperture.py::__init__",
+   "tests/core_engine/test_aperture.py::test_aperture_semantic_path_and_intent"
+  ],
+  "n_engine_functions_touched": 2
+ },
+ {
+  "id": 20,
+  "subject": "fix(core-engine): the orphan census counts references, not name repetitions (#2727, #2728) (#2754)",
+  "commit_message": "fix(core-engine): the orphan census counts references, not name repetitions (#2727, #2728) (#2754)\n\n* fix(core-engine): the orphan census counts references, not name repetitions (#2727, #2728)\n\n`orphaned_logic` was decided by `token_counts[name] <= 1` over the whole code\nstream, so whether a function read as orphaned depended on how many times the\nlanguage's syntax writes its name -- not on whether anything calls it. Three\ndistinct defects came out of that one line.\n\n1. #2727 -- syntax that repeats the name masked every orphan. Ada closes with\n   `end Probe_Globals;`, LiveCode ends a handler by name, Haskell writes the\n   type signature above the equation: the count is already 2 before anything\n   calls the function. livecode reported 3 orphans across the crucible where\n   the scoped test finds 127; ada and livecode reported 0 per file in\n   keyword-rosetta against a 2.50 baseline.\n\n   The test is now scoped to each function's own span, with a correction the\n   issue's fix shape missed. The span does NOT reliably contain the\n   declaration: shell's Mode-B spans start at the `{`, so a K&R `make_module()`\n   on the previous line sits outside its own body, and ruby's spans are offset\n   outright (66 of 132 sampled functions). Counting outside the span naively\n   makes the declaration itself read as a reference: ruby fell 51 -> 44\n   orphans that way, html 5 -> 2, shell 8 -> 3, losing real ones. So when the\n   span holds no occurrence of the name, the definition site is outside it by\n   construction and exactly one outside occurrence is discounted. With the\n   correction no language decreases for this reason.\n\n2. A third defect neither issue named: `\\b\\w+\\b` cannot produce a token\n   containing `-`, `:` or `.`, so any name holding one counted ZERO and\n   satisfied `<= 1` unconditionally. Every C++ `Class::method`, PowerShell\n   `Verb-Noun`, Tcl `::ns::proc`, Scheme hyphenated define and COBOL paragraph\n   was an orphan however many times it was called: cpp 1054 -> 720, tcl\n   210 -> 148, powershell 56 -> 3, scheme 60 -> 10, abap 41 -> 8. This also\n   corrects part of #2727's own analysis -- for the hyphenated members of its\n   \"name never recurs\" row the cause was tokenization, not invocation form.\n\n3. #2728 -- igniter-keyword buckets entered the checks as ordinary functions.\n   dockerfile's four same-bodied `RUN` slices scored `state_slop_duplicates` 1,\n   the only nonzero duplicate cell across 46 corpus languages and a phantom;\n   css's `keyframes` slices cleared each other's orphan flag by repeating the\n   keyword. The bucket set is DERIVED from each language's own `func_start`\n   (`_closed_literal_capture`), never hand-listed, so it cannot drift: exactly\n   css, dockerfile and html have a capture that is provably a closed literal\n   set, and a test pins that membership.\n\n   Deliberately NOT added to `_UNCOUNTABLE_SLICE_NAMES`: that set governs the\n   function POPULATION (#2691), and removing css's ~150 at-rule slices would\n   take `functions_foun",
+  "pr_title": "fix(core-engine): the orphan census counts references, not name repetitions (#2727, #2728)",
+  "pr_body_start": "Closes #2727. Closes #2728. Part of #2669 (F.4). `orphaned_logic` was decided by one line \u2014 `token_counts[name] <= 1` over the whole code stream \u2014 so whether a function read as orphaned depended on how many times the language's syntax writes its name, not on whether anything calls it. Three distinct defects fall out of that, two filed and one found while fixing them. ## 1. #2727 \u2014 syntax that repeats the name masked every orphan Ada closes with `end Probe_Globals;`, LiveCode ends a handler by name, Haskell writes the type signature above the equation. The count is already 2 before anything calls the function, so those languages could never report one: `livecode` found **3** orphans across the crucible where the scoped test finds **127**; `ada` and `livecode` read 0 per file in keyword-rosetta against a 2.50 baseline. **The fix shape as filed was unsafe, and I corrected it.** \"Count outside `[start_idx, end_idx)`\" assumes the span contains the function's declaration. It often doesn't: * `shell` \u2014 Mode-B spans start at the `{`, so a K&R `make_module()` on the previous line sits outside its own body (`curl/initscript.sh`); * `ruby` \u2014 spans are offset outright; 66 of 132 sampled functions have the declaration outside. Counting naively there makes the **declaration itself** read as a reference and clears the flag \u2014 measured: `ruby` 51 \u2192 44 orphans, `html` 5 \u2192 2, `shell` 8 \u2192 3, all real ones lost. So when the span holds no occurrence of the name, the definition site is outside it b",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "136",
+    "deleted": "6"
+   },
+   {
+    "path": "tests/core_engine/test_detector.py",
+    "added": "118",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "58540",
+    "deleted": "58540"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "58547",
+    "deleted": "58547"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::__init__",
+   "gitgalaxy/core/detector.py::_calculate_block_metrics",
+   "gitgalaxy/core/detector.py::_resolve_class_start_match",
+   "gitgalaxy/core/detector.py::splice",
+   "tests/core_engine/test_detector.py::test_detector_yacc_grammar_without_a_union_declares_no_class"
+  ],
+  "n_engine_functions_touched": 5
+ },
+ {
+  "id": 21,
+  "subject": "fix(#2978): run the security lens on inert data formats (#3009)",
+  "commit_message": "fix(#2978): run the security lens on inert data formats (#3009)\n\ngalaxyscope.py classified plaintext/markdown/json/yaml/csv as \"inert\" and\nskipped Phase 5.5 (SecurityLens.scan_content) for all of them, so a\nhardcoded credential in an ordinary config.yaml/settings.json was\ninvisible to sec_hardcoded_secrets -- the filename/extension-based\nCRITICAL-LEAK shunt in aperture.py only catches credential-named files\n(.env, .pem), not an arbitrary config with a secret embedded in it.\n\nThe lens now runs on all five inert formats by default, opt-out via a new\nSECURITY_SCAN_INERT_FORMATS config flag (wired through config_resolver.py\nthe same way STRICT_IMPORT_MODE/FIREWALL_NETWORK_WEIGHTING are) for repos\nwhere that trades too much doc/config noise (README code-fence examples,\nCI YAML secrets: blocks) for the extra coverage.\n\nsignal_processor.py's Static Literature Override separately blanket-zeroed\nthe whole risk vector for markdown/plaintext/rst/text (by design, for\ndimensions like cognitive load and authorship centralization that\ngenuinely don't apply to prose) -- carved out secrets_risk there too,\nreusing the same graduated _calc_secrets_risk formula non-doc languages\nget, so a real leak in a README doesn't silently score 0 regardless of the\nraw hit count.\n\nAlso fixes tests/tools/update_golden_master.py, which was missing the\nGITGALAXY_DISABLE_GIT_HISTORY=1 env var test_golden_crucible.py already\nsets (added for #2976) -- without it, a bless run against a full local\ncorpus clone picks up real git-log-derived signals (Architect/Authorship\nCentralization/Raw Churn Frequency) the check path never sees, producing\n~8500 unrelated differences on every future bless. This is gitgalaxy#3005's\nroot cause.\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5 <noreply@anthropic.com>\n",
+  "pr_title": "fix(#2978): run the security lens on inert data formats",
+  "pr_body_start": "## What `galaxyscope.py` classified `plaintext`/`markdown`/`json`/`yaml`/`csv` as \"inert\" and wrapped Phase 5.5 (`SecurityLens.scan_content`) in `if not is_inert:`, so a hardcoded credential in an ordinary `config.yaml`/`settings.json` was invisible to `sec_hardcoded_secrets` \u2014 the filename/extension-based CRITICAL-LEAK shunt in `aperture.py` only catches credential-*named* files (`.env`, `.pem`), not an arbitrary config with a secret embedded in it. Confirmed by a keyword-rosetta corpus probe that planted an identical secret in every language: the 44 lens-covered languages all read the hit, markdown/yaml (of these 5 formats) read 0. This PR: 1. Removes the `is_inert` guard around Phase 5.5 in `gitgalaxy/galaxyscope.py`, so the lens runs on all 5 formats. Phase 4/5 structural extraction already ran on them unconditionally, so this adds no new cost; `SecurityLens.scan_content()` is pure raw-text regex/entropy with no dependency on extracted `functions`; the downstream Active Hemorrhage / DB Injection Funnel correlations degrade gracefully (confirmed via `spatial_correlation.correlate_scoped()`) when a format has no `functions`/`api`/`telemetry` rules. The other two `is_inert` gates in the same function (named-token capture, popularity census) are untouched \u2014 those are about code-symbol analysis, not security. 2. Adds `SECURITY_SCAN_INERT_FORMATS` (default `True`) as an opt-out, following the exact precedent of `STRICT_IMPORT_MODE`/`FIREWALL_NETWORK_WEIGHTING` in `gitgalaxy_con",
+  "files_changed": [
+   {
+    "path": "README.md",
+    "added": "8",
+    "deleted": "4"
+   },
+   {
+    "path": "docs/validation.md",
+    "added": "5",
+    "deleted": "3"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "9",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/metrics/signal_processor.py",
+    "added": "13",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/config_resolver.py",
+    "added": "2",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/gitgalaxy_config.py",
+    "added": "13",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_config_resolver.py",
+    "added": "12",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_galaxyscope.py",
+    "added": "117",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_signal_processor.py",
+    "added": "34",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "31",
+    "deleted": "31"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "31",
+    "deleted": "31"
+   },
+   {
+    "path": "tests/ruff_audit_baseline.json",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/tools/update_golden_master.py",
+    "added": "15",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 13,
+  "engine_functions_touched": [
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/metrics/signal_processor.py::calculate_risk_vector",
+   "tests/core_engine/test_config_resolver.py::test_cli_overrides_default_with_no_yaml",
+   "tests/core_engine/test_galaxyscope.py::test_direct_worker_execution",
+   "tests/core_engine/test_signal_processor.py::test_signal_processor_doc_and_secrets_bypass",
+   "tests/tools/update_golden_master.py::main"
+  ],
+  "n_engine_functions_touched": 6
+ },
+ {
+  "id": 22,
+  "subject": "perf: kill ReDoS + O(N^2) splice hot paths behind v2.7.0 speed outliers (#3043)",
+  "commit_message": "perf: kill ReDoS + O(N^2) splice hot paths behind v2.7.0 speed outliers (#3043)\n\nRanking the v2.7.0 batch (gitgalaxy-raw-output speed_summary.json) by\nactual/predicted against the published rate model surfaced a handful of\nlarge-repo outliers. Drilling in found three distinct root causes, all\nfixed here with byte-for-byte match parity (pure speed, no detection change):\n\n1. zig::class_start \u2014 catastrophic backtracking. A bounded `{0,150}` gap fed a\n   `*`-group nesting `+` over overlapping whitespace/word classes; on ordinary\n   `const x = ...` lines with no type keyword the engine exploded (ghostty's\n   DiskCache.zig: one 18KB file took 406s). Rewrote only the step-over as a\n   bounded {0,8} of non-overlapping single-line branches; the tempered gap is\n   unchanged. 406s -> 0.5ms; 0 mismatches / 4,971 corpus files.\n\n2. detector.py::_is_orphan \u2014 O(functions x filesize). The #2727 rewrite replaced\n   a whole-file frequency table with a per-function finditer over the entire\n   code_stream. Precompute one word-token offset index and answer each function\n   by bisect; non-\\w names keep the exact fallback. 0 mismatches / 2,275 fns.\n\n3. detector.py line numbering \u2014 O(matches x filesize) via per-match/per-class\n   `code_stream.count(\"\\n\", 0, idx)`. Precompute newline offsets once per\n   stream/segment, look up by bisect (algebraically identical).\n\n4. yaml::func_start + class_start \u2014 ReDoS that only fires on the indentation-safe\n   stream (blank lines make the bounded step-over backtrack). Same linear\n   rewrite; 40s -> 2ms; 0 mismatches / ~394 files.\n\nCombined splice on sokol_gfx.h (1MB, 928 fns): 16.1s -> 1.7s. End-to-end\n(licensed, no friction delay): ghostty 477s->15.6s, ansible 156s->18.7s,\nesphome 110s->26.5s -- all now on the rate-model fit line.\n\nFull extraction + core_engine suite: 8450 passed, 0 failures. Ruff clean.\n\n\nClaude-Session: https://claude.ai/code/session_014gkhy3FWC4ovUWkMDonGMr\n\nCo-authored-by: Claude Opus 4.8 <noreply@anthropic.com>\n",
+  "pr_title": "perf: kill ReDoS + O(N^2) splice hot paths behind v2.7.0 speed outliers",
+  "pr_body_start": "## Why Ranking the **v2.7.0 batch** (`gitgalaxy-raw-output/v2.7.0/speed_summary.json`) by `actual / predicted` against the published rate model surfaced a handful of large-repo scan-time outliers (ghostty 26.6\u00d7, bootstrap, discourse, ansible, zap, sokol-zig, esphome\u2026). Drilling into each found **three distinct root causes** \u2014 two regex ReDoS and two O(N\u00b2) algorithmic hot paths \u2014 not one. All are fixed here. Every change is a **pure speed fix with byte-for-byte match parity** \u2014 detection output is unchanged. ## What | # | Fix | File | Root cause | |---|-----|------|-----------| | 1 | `class_start` step-over rewrite | `zig.py` | catastrophic backtracking (nested `+`-in-`*` over overlapping classes) | | 2 | `_is_orphan` \u2192 whole-file word-index + bisect | `detector.py` | O(functions \u00d7 filesize) full-stream rescan per function (regressed in #2727) | | 3 | line numbering \u2192 precomputed newline offsets + bisect | `detector.py` | O(matches \u00d7 filesize) `str.count(\"\\n\",0,idx)` per class/match | | 4 | `func_start` + `class_start` step-over rewrite | `yaml.py` | ReDoS that only fires on the indentation-safe stream | For #1/#2/#4 the non-buggy structure is preserved; only the pathological quantifier/loop is replaced. #2 keeps the exact `finditer` fallback for names with non-word chars (ruby `empty?`, C++ `operator==`). ## Impact (end-to-end, licensed runs) - `sokol_gfx.h` (1 MB, 928 fns) splice: **16.1s \u2192 1.7s** - ghostty **477s \u2192 15.6s**, ansible **156s \u2192 18.7s**, esphome **110s \u2192 26.5s**",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "94",
+    "deleted": "5"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/yaml.py",
+    "added": "19",
+    "deleted": "3"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/zig.py",
+    "added": "11",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 3,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_is_orphan",
+   "gitgalaxy/core/detector.py::_name_boundary_pattern",
+   "gitgalaxy/core/detector.py::coding_analysis",
+   "gitgalaxy/core/detector.py::splice"
+  ],
+  "n_engine_functions_touched": 4
+ },
+ {
+  "id": 23,
+  "subject": "perf(detector): skip =-less lines before the var-decl backtracking regex (#3063)",
+  "commit_message": "perf(detector): skip =-less lines before the var-decl backtracking regex (#3063)\n\nFrom exploring the nx (TypeScript) speed residual: _var_decl_pattern\n(^[ \\t]*(?:[^=\\n]{0,80}[ \\t]+)?([A-Za-z_]\\w{0,63})[ \\t]*=(?!=)) backtracked its\ngreedy [^=\\n]{0,80} prefix across every line before failing -- and it can never\nmatch a line without a bare '=' (the pattern requires one and [^=\\n] can't cross\na newline). Profiling put this at ~a quarter of splice() on large TS files.\n\nFix: iterate lines and skip those without '='; .match per line is identical to\nthe original re.M ^-anchored finditer (anchors at line start, <=1 match per line,\nin line order), so every equations count is byte-for-byte unchanged.\n\nParity: identifier lists identical over 800 real TS/JS files (0 mismatches); BOTH\ngolden-crucible legs pass (full-precision + zero-dependency, corpus-wide\nextraction unchanged); 8,124 extraction tests, ruff, mypy all green.\n\nImpact: 8.2x on the var-decl pass, ~15% on a 561KB TS file. NOTE: this reduces\nper-file CPU work, but a whole-repo scan's PASS_1 is parallel across cores, so\nnx's wall-time is parallelism-bound and barely moves (77.1s -> 76.4s) -- nx's 4x\nresidual is structural (heavy TS per-LOC work), not a single hot loop. Shipped as\na CPU/backtracking-efficiency fix that helps the whole corpus and any\nsingle-threaded path.\n\n\nClaude-Session: https://claude.ai/code/session_014gkhy3FWC4ovUWkMDonGMr\n\nCo-authored-by: Claude Opus 4.8 <noreply@anthropic.com>\n",
+  "pr_title": "perf(detector): skip =-less lines before the var-decl backtracking regex",
+  "pr_body_start": "From exploring the nx (TypeScript) speed residual. ### The bug `_var_decl_pattern` = `^[ \\t]*(?:[^=\\n]{0,80}[ \\t]+)?([A-Za-z_]\\w{0,63})[ \\t]*=(?!=)` (re.M) backtracked its greedy `[^=\\n]{0,80}` prefix across **every line** before failing \u2014 but it can **never** match a line without a bare `=` (the pattern requires one, and `[^=\\n]` can't cross a newline). Profiling put this at ~a quarter of `splice()` on large TS files. ### The fix Iterate lines, skip those without `=` (cheap membership test). `.match` per line is identical to the original re.M `^`-anchored `finditer` (anchors at line start, \u22641 match/line, in line order), so every `equations` count is byte-for-byte unchanged. ### Parity (behavior unchanged) - Identifier lists **identical over 800 real TS/JS files** (0 mismatches). - **Both golden-crucible legs pass** (full-precision + zero-dependency) \u2014 corpus-wide extraction output unchanged across all languages. - 8,124 extraction tests, ruff, mypy all green. ### Impact \u2014 and an honest caveat - **8.2\u00d7 on the var-decl pass**, ~15% on a 561 KB TS file. - **But** a whole-repo scan's `PASS_1` is parallel across cores, so nx's wall-time is parallelism-bound and barely moves (77.1 s \u2192 76.4 s). nx's 4\u00d7 residual is **structural** (heavy TS per-LOC work across the brace-slicer + coding-rules + var-decl passes), not a single hot loop. - Shipped as a CPU/backtracking-efficiency fix: it removes real wasted work across the whole 280 M-LOC corpus and helps any single-threaded path, even t",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "15",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 1,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_line_at"
+  ],
+  "n_engine_functions_touched": 1
+ },
+ {
+  "id": 24,
+  "subject": "perf(detector): required-literal prefilter for the shared coding_analysis rule pass (#3070)",
+  "commit_message": "perf(detector): required-literal prefilter for the shared coding_analysis rule pass (#3070)\n\n* perf(detector): derive required-literal prefilter gates from rule regexes (#3069)\n\nNew stdlib-only gitgalaxy/core/rule_prefilter.py: derive_literal_gate()\nwalks a compiled rule pattern's AST (re._parser, sre_parse fallback) and\nreturns a one-of literal set with the one-sided invariant \"no literal in\nthe segment => the regex cannot match\", or None when no safe gate exists\n(opcode whitelist -- anything unrecognized refuses to gate). ASCII-only\ncasefolded literals for IGNORECASE rules, matched via fold_haystack(),\nwhich repairs the two Turkish-i casefold/simple-fold mismatches the unit\nsuite's Unicode adversarials caught (U+0130 dot insertion, U+0131 left\nunfolded).\n\nGroundwork for gating coding_analysis's ~40 full-segment finditer sweeps\nper file; the detector wiring lands separately.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\n\n* perf(detector): gate coding_analysis finditer sweeps behind required-literal prefilters (#3069)\n\nWire rule_prefilter into the shared rule pass: _active_coding_rules now\ncaches (rule_name, pattern, mapped_key, gate) quads, and coding_analysis\nskips a rule's full-segment finditer when none of its required literals\noccur in the segment -- a few C-speed substring probes instead of a\ncompiled-regex sweep over up-to-1MB of text. The skip mirrors the\nzero-match path exactly: spatial_map still gets its empty-list key\n(spatial_correlation and the rce_funnel amplifier do `in` presence\ntests) and the regex_telemetry key absorbs the gate-check time so\nprofiling attributes gate overhead honestly. The fold_haystack view for\nIGNORECASE gates is computed lazily, once per segment, only for\nlanguages that have case-insensitive rules.\n\nAlso precompile the two per-segment indentation-signature patterns that\npreviously paid an re-cache lookup per segment.\n\nGated-vs-ungated integration parity is asserted on the full 5-tuple\n(counts, mitigations, spatial maps incl. key presence, parents, threat\nlocations) across c/typescript/cobol/python samples.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\n\n* test(tools): corpus-wide one-sided-invariant audit for the rule prefilter (#3069)\n\ngate_parity_audit.py sweeps every compiled rule of every language over\nthe language-crucible and keyword-rosetta corpora (raw content + Prism\ncode stream) and asserts that wherever the derived gate rejects, the\nrule's finditer finds nothing -- stronger than golden-master A/B because\nit checks the invariant directly, per (language, rule, file) triple.\nAlso reports the per-language gate reject rate, the win metric for the\nprefilter.\n\nFirst full run: zero violations; 121,661 of 198,644 rule sweeps (61.2%)\neliminated across the two corpora.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\n\n* perf(detector): let the multilingual debt rules gate -- foldsafe non-ASCII literals, wider cap (#3069)\n\nThe planned_debt/fragile_debt rules are among the most expensi",
+  "pr_title": "perf(detector): required-literal prefilter for the shared coding_analysis rule pass",
+  "pr_body_start": "Closes #3069 (Phase 1: the per-rule content pre-filter; see the deferral note below for the combined-scan idea). ## What `coding_analysis` runs each language's full rule set (~30-45 compiled regexes, 2,065 rules across 47 languages) as `pattern.finditer(seg_code)` over the whole segment \u2014 the structural cost that dominates the remaining speed residuals (nx 4.1\u00d7, node-linux-x64 3.0\u00d7, sokol-zig 2.0\u00d7). This PR generalizes #3063's `'=' in line` gate to the whole pass: - **`gitgalaxy/core/rule_prefilter.py`** (new, stdlib-only): `derive_literal_gate()` walks a compiled rule's AST (`re._parser`, `sre_parse` fallback) and derives a one-of literal set with the one-sided contract *\"no literal in the segment \u21d2 the regex cannot match\"*. Opcode **whitelist** \u2014 any construct the walker wasn't written against refuses to gate, so unknown regex features can never mis-gate. IGNORECASE literals are matched against a `fold_haystack()` view with a per-char fold-safety check built on sre's own `re._casefix._EXTRA_CASES` equivalence table (the dotted/dotless-i and long-s/Kelvin classes are the interesting cases; the unit suite attacks them directly). - **`detector.py`**: `_active_coding_rules` caches `(rule, pattern, mapped_key, gate)` quads; the hot loop skips a rule's `finditer` when its gate rejects. The skip mirrors the zero-match path exactly \u2014 `spatial_map` keeps its empty-list key (presence-tested by `spatial_correlation` and the rce_funnel amplifier) and the `regex_telemetry` key absorbs t",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "65",
+    "deleted": "11"
+   },
+   {
+    "path": "gitgalaxy/core/rule_prefilter.py",
+    "added": "305",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_rule_prefilter.py",
+    "added": "379",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/tools/gate_parity_audit.py",
+    "added": "162",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_active_coding_rules",
+   "gitgalaxy/core/detector.py::_correlate_signals",
+   "gitgalaxy/core/detector.py::_seg_line",
+   "gitgalaxy/core/detector.py::get_token_mass"
+  ],
+  "n_engine_functions_touched": 4
+ },
+ {
+  "id": 25,
+  "subject": "feat(mainframe): capture the CICS transaction map (#3211-followup, epic #3122) (#3251)",
+  "commit_message": "feat(mainframe): capture the CICS transaction map (#3211-followup, epic #3122) (#3251)\n\nPR1 of two: the engine now reads the CICS transaction map -- which 4-char\ntransaction id a user submits and which program CICS routes it to -- the\nexternal entry points a modernizer turns into service/API boundaries. Before\nthis the CSD resource definitions shipped in the corpora were never parsed, and\n`EXEC CICS RETURN/START/RUN TRANSID(...)` routing was only counted as arch_ipc,\nnever captured.\n\n- New `csd` language handler (modeled on bms.py): `.csd` decks classify as csd\n  and opt into the boundary channel via top-level `boundary_extraction: \"csd\"`.\n- mainframe_boundary: a paren-balanced CSD record walker reads\n  `DEFINE TRANSACTION(TTTT) ... PROGRAM(PPPP)` (and PROGRAM autoinstall\n  `TRANSID(...)` pairings) from standalone `.csd` files, hand-written DFHCSDUP\n  SYSIN members, and DFHCSDUP SYSIN inline in JCL; DB2TRAN's TRANSID excluded.\n  COBOL routing verbs (RETURN/START/RUN TRANSID) are captured with\n  working-storage VALUE resolution (runtime-dynamic -> target None).\n- invocation_resolver.resolve_transactions joins each transaction's PROGRAM to\n  its file; new `transaction_data` table (modeled on dataset_data -- a transid\n  is not a file). Routing rides in call_site_data under its own verbs and is\n  never program-resolved.\n- galaxyscope wires it through the full and incremental paths;\n  state_rehydrator restores transaction_defs so a delta scan keeps an unchanged\n  deck's transactions.\n- galaxy_ir: EngineTransaction, EngineFile.transactions, and\n  GalaxyIR.transaction_map() name each program's entry transaction(s); TRANSID\n  routing is excluded from unresolved_calls.\n- registry pins updated for the new language (strictness row, positional\n  family, dead-key allowlist); READMEs documented.\n\nVerified end to end: CBSA scans to 17 transactions (14 resolving to their COBOL\nfile, 3 NULL for external programs); carddemo parses all five decks incl. the\ninline-JCL DFHCSDUP deck. 10k+ tests green; ruff + mypy clean.\n\n\nClaude-Session: https://claude.ai/code/session_01MAB5YVsfYc3NtvDDPM15z2\n\nCo-authored-by: Claude Opus 4.8 <noreply@anthropic.com>\n",
+  "pr_title": "feat(mainframe): capture the CICS transaction map (#3211-followup, PR1 of 2)",
+  "pr_body_start": "**Epic #3122; conceptual sibling of #3246 (data-division items). PR1 of two.** ## Why The engine builds the internal mainframe control-flow graph (COBOL CALL, CICS LINK/XCTL, JCL EXEC PGM= \u2014 #3200) and dataset lineage (#3201), but it did **not** capture the CICS transaction map: which 4-char transaction IDs exist and which program each one entry-points into. In a CICS app the transaction is the *front door* \u2014 a user submits a TRANSID and CICS routes it to a program \u2014 so without it we have the internal call graph but not the external entry points a modernizer turns into service/API boundaries. Two gaps closed: - **No CSD/RDO parser.** There was no `.csd` handler, so the shipped `DEFINE TRANSACTION(xxxx) PROGRAM(yyyy)` definitions were never read. - **In-source routing was only counted.** `EXEC CICS RETURN/START/XCTL/RUN TRANSID(...)` only bumped `arch_ipc`/`arch_concurrency`; the operand was discarded. ## What (PR1 \u2014 engine reads, persists, exposes) | Layer | Change | |---|---| | Handler | new `csd` language (`languages/csd.py`, modeled on `bms.py`); registered; top-level `boundary_extraction: \"csd\"` | | Extract | `mainframe_boundary`: a paren-balanced CSD record walker reads `DEFINE TRANSACTION(...) PROGRAM(...)` and PROGRAM autoinstall `TRANSID(...)` from standalone `.csd` files, hand-written DFHCSDUP SYSIN members, and DFHCSDUP SYSIN inline in JCL; `DB2TRAN`'s TRANSID excluded. COBOL `RETURN/START/RUN TRANSID` routing captured with working-storage `VALUE` resolution (runtim",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/README.md",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/core/invocation_resolver.py",
+    "added": "35",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/core/mainframe_boundary.py",
+    "added": "251",
+    "deleted": "16"
+   },
+   {
+    "path": "gitgalaxy/core/state_rehydrator.py",
+    "added": "30",
+    "deleted": "8"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "18",
+    "deleted": "4"
+   },
+   {
+    "path": "gitgalaxy/recorders/README.md",
+    "added": "16",
+    "deleted": "2"
+   },
+   {
+    "path": "gitgalaxy/recorders/record_keeper.py",
+    "added": "80",
+    "deleted": "2"
+   },
+   {
+    "path": "gitgalaxy/standards/analysis_lens.py",
+    "added": "1",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/__init__.py",
+    "added": "2",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/csd.py",
+    "added": "233",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py",
+    "added": "100",
+    "deleted": "7"
+   },
+   {
+    "path": "tests/cobol_mainframe/test_galaxy_ir.py",
+    "added": "81",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/core_engine/test_mainframe_boundary.py",
+    "added": "151",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/core_engine/test_unreferenced_by_name_contract_2806.py",
+    "added": "7",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/dead_key_audit.py",
+    "added": "9",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit.json",
+    "added": "403",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit.json",
+    "added": "403",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/tools_recorders/test_boundary_data.py",
+    "added": "103",
+    "deleted": "1"
+   }
+  ],
+  "n_files": 18,
+  "engine_functions_touched": [
+   "gitgalaxy/core/invocation_resolver.py::resolve_invocations",
+   "gitgalaxy/core/mainframe_boundary.py::_jcl_boundary",
+   "gitgalaxy/core/mainframe_boundary.py::_shielded",
+   "gitgalaxy/core/mainframe_boundary.py::extract_boundary",
+   "gitgalaxy/core/state_rehydrator.py::load_state",
+   "gitgalaxy/galaxyscope.py::__init__",
+   "gitgalaxy/galaxyscope.py::_box",
+   "gitgalaxy/galaxyscope.py::_process_file_worker",
+   "gitgalaxy/galaxyscope.py::execute_incremental_scan",
+   "gitgalaxy/recorders/record_keeper.py::_seq_base",
+   "gitgalaxy/recorders/record_keeper.py::record_mission",
+   "gitgalaxy/standards/analysis_lens.py::get_policy",
+   "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::load_galaxy_ir",
+   "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::occurs",
+   "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py::unresolved_calls",
+   "tests/cobol_mainframe/test_galaxy_ir.py::test_main_refuses_a_db_of_another_target",
+   "tests/core_engine/test_mainframe_boundary.py::test_an_unterminated_exec_cics_cannot_scan_the_whole_file",
+   "tests/core_engine/test_mainframe_boundary.py::test_only_the_declared_dialects_extract_anything",
+   "tests/core_engine/test_unreferenced_by_name_contract_2806.py::_declared_model",
+   "tests/tools_recorders/test_boundary_data.py::test_a_caller_predating_3200_writes_no_boundary_rows"
+  ],
+  "n_engine_functions_touched": 20
+ },
+ {
+  "id": 26,
+  "subject": "#3814 (part 1): UAX #31 names for Python, Java, JavaScript and TypeScript (#3847)",
+  "commit_message": "#3814 (part 1): UAX #31 names for Python, Java, JavaScript and TypeScript (#3847)\n\nName patterns were `[A-Za-z_]\\w*`: a non-Latin name was missed, and even `\\w` is not enough --\nit has no combining marks, so a Devanagari / Tamil name (vowel signs, viramas: Mn/Mc) or a\ndecomposed `\u00e9` (e + U+0301) was cut at the mark.\n\n- standards/language_standards/identifiers.py: ID_START / ID_CONTINUE (UAX #31: letters, Nl,\n  `_`; + Mn Mc Nd Pc and ZWNJ/ZWJ), CAPITAL (what `[A-Z]` meant: Lu Lt and caseless Lo) and\n  VIRAMA (ccc 9), built once from unicodedata over planes 0-3 and 14 (~45 ms, no dependency)\n- python / java / javascript / typescript definitions and the shared call patterns (C-style,\n  Ruby, Rust, Go): every name class; each keeps its old meaning on ASCII -- an anonymous\n  `function (` still has an empty name, a Java constructor still starts with a capital\n- detector: _extract_name, and Python's reference / receiver machinery (a cut `def` header had\n  left the parameters looking like references); lookbehinds use the same class so a match\n  cannot start mid-name after a combining mark\n- wrapper_extractor: unqualified calls and name matching\n- security_lens: a ZWNJ / ZWJ right AFTER A VIRAMA is Indic spelling (UAX #31 A1/A2), no longer\n  \"invisible Unicode\"; bare joiners, ZWSP, BOM and bidi controls are still flagged\n\nEvidence: golden masters byte-identical (both modes -- ASCII behaviour unchanged); Unicode\nGauntlet 397 -> 418 (Devanagari, Tamil, ZWJ and NFD cells for python/js/ts; no new failures;\nbaseline lowered); full suite 12178 passed. Not done here: the other languages (#3814c), the\nmainframe national names (#3814b), and the Greek/Cyrillic \"homoglyph\" cells, which the\ngauntlet's mixed-script names trigger by design.\n\nFirst drafted by a sandboxed Gemini fleet agent; review fixed the ASCII meaning changes it\nintroduced and extended it to the detector, wrapper census and security lens.\n\n\nClaude-Session: https://claude.ai/code/session_017ZsVaAkb86P5r5JXDC2Y9g\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "#3814 (part 1): UAX #31 names for Python, Java, JavaScript and TypeScript",
+  "pr_body_start": "Part 1 of #3814 (epic #3811). This covers the core identifier classes plus Python, Java, JavaScript and TypeScript. ## Why Name patterns were `[A-Za-z_]\\w*`, so a non-Latin name was simply missed. Even `\\w` wouldn't be enough: Python's `\\w` has no combining marks, so a Devanagari or Tamil name was cut at its first vowel sign or virama. For example, `\u0928\u093e\u092e` came out as `\u0928`. A decomposed `\u00e9` (`e` + U+0301) was cut the same way. ## What - **`identifiers.py` (new)** provides the UAX #31 classes, built once from `unicodedata` over planes 0\u20133 and 14 (~45 ms, no new dependency): - `ID_START` and `ID_CONTINUE`: letters and `_`, plus marks, digits, connectors and ZWNJ/ZWJ for continuation; - `CAPITAL`: what `[A-Z]` meant, i.e. Lu, Lt and caseless Lo; - `VIRAMA`. - **Language definitions** for Python, Java, JS and TS, plus the shared call patterns (C-style, Ruby, Rust, Go): every name class is swapped. **Each keeps its old meaning on ASCII**: an anonymous `function (` still has an empty name, and a Java constructor still starts with a capital. - **detector:** `_extract_name` and Python's reference and receiver machinery are updated. A `def` header cut short at a vowel sign had left the function's parameters looking like references. Lookbehinds use the same class, so a match can't start mid-name. - **wrapper_extractor:** unqualified calls and name matching are updated. - **security_lens:** a ZWNJ or ZWJ **directly after a virama** is Indic spelling (UAX #31 A1/A2), not hidden text, so onl",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "28",
+    "deleted": "16"
+   },
+   {
+    "path": "gitgalaxy/core/wrapper_extractor.py",
+    "added": "10",
+    "deleted": "5"
+   },
+   {
+    "path": "gitgalaxy/security/security_lens.py",
+    "added": "4",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/_shared_patterns.py",
+    "added": "31",
+    "deleted": "9"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/identifiers.py",
+    "added": "73",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/java.py",
+    "added": "45",
+    "deleted": "9"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/javascript.py",
+    "added": "51",
+    "deleted": "9"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/python.py",
+    "added": "58",
+    "deleted": "10"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/typescript.py",
+    "added": "80",
+    "deleted": "12"
+   },
+   {
+    "path": "tests/extraction/test_unicode_identifiers.py",
+    "added": "69",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/unicode_gauntlet/baseline.json",
+    "added": "10",
+    "deleted": "34"
+   }
+  ],
+  "n_files": 11,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_drop_nested_declaration_calls",
+   "gitgalaxy/core/detector.py::_preserve_brackets",
+   "gitgalaxy/core/detector.py::_python_bindings",
+   "gitgalaxy/core/detector.py::_python_locals",
+   "gitgalaxy/core/detector.py::note",
+   "gitgalaxy/core/detector.py::reaches_def",
+   "gitgalaxy/core/wrapper_extractor.py::extract_wrapper_facts",
+   "gitgalaxy/security/security_lens.py::__init__"
+  ],
+  "n_engine_functions_touched": 8
+ },
+ {
+  "id": 27,
+  "subject": "#3814 (part 5): UAX #31 names for Rust, Swift, Dart, PHP and Ruby (#3877)",
+  "commit_message": "#3814 (part 5): UAX #31 names for Rust, Swift, Dart, PHP and Ruby (#3877)\n\n* #3814 (part 5): UAX #31 names for Rust, Swift, Dart, PHP and Ruby\n\nTheir name patterns were `[A-Za-z_]\\w*` / `\\w+` / `[A-Z]\\w*` (PHP's `[a-zA-Z_\\x80-\\xff]`, which on a\nstr pattern is Latin-1 only), so a unit named in Devanagari, Tamil, Han, Hangul or with a\ndecomposed accent was missed or cut at its first combining mark.\n\n- rust / swift / dart / php / ruby: every name class uses identifiers.ID_START / ID_CONTINUE /\n  CAPITAL, its ASCII meaning kept exactly; a `\\b` bounding a name also refuses a combining mark.\n  PHP keeps its own rule -- a name takes ANY byte 0x80-0xff, i.e. every non-ASCII code point of\n  UTF-8 source -- so `\\x80-\\xff` became `\\x80-\\U0010ffff`.\n- detector: Ruby's Mode D name reader (`def probe_\u0928\u093e\u092e` was recorded as `probe_\u0928`), the Ruby /\n  Elixir inline-modifier guard (`\u0928\u093e\u092e = if x` opened no block, desyncing `end`), Dart's enclosing\n  class lookup and the Rust / Zig lifetime check in the literal shield\n- _shared_patterns: CALLS_OUT_RUBY's receiver / command lookarounds (a receiver `\u0baa\u0bc6\u0baf\u0bb0\u0bcd.save` ends\n  in a virama; the cheap `(?<=\\.)` runs first) and CALLS_OUT_RUST's tuple-pattern name\n- tests/extraction/test_unicode_identifiers_modern.py: each language finds units named \u0928\u093e\u092e,\n  \u0baa\u0bc6\u0baf\u0bb0\u0bcd, caf\u00e9, cafe + U+0301, BEL\u00d8P, \u5909\u6570 and \uc774\ub984 whole and counts a call to them\n\nEvery changed rule matches identically on the ASCII crucible and rosetta files (checked rule by\nrule against origin/main); golden masters byte-identical (both modes). Unicode Gauntlet 639 ->\n688 of 934 cells on main, no new failures, baseline lowered. The 20 cells left for these\nlanguages fail only in shift_jis / gb18030, as every language's do.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* #3814 (part 5): drop the six baseline cells the union merge brought back\n\nParts 4 and 5 each removed baseline lines at the same hunk boundary, and the union merge kept\nboth sides' copies: objective-c nfd / tamil and php arabic now pass (gauntlet 720 / 934, no\nline for a passing cell, no duplicate).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "#3814 (part 5): UAX #31 names for Rust, Swift, Dart, PHP and Ruby",
+  "pr_body_start": "Part 5 of #3814 (epic #3811). Rust, Swift, Dart, PHP and Ruby named units with `[A-Za-z_]\\w*` / `\\w+` / `[A-Z]\\w*`. PHP used `[a-zA-Z_\\x80-\\xff]`, which on a `str` pattern covers Latin-1 only. As a result, a unit named in Devanagari, Tamil, Han, Hangul or with a decomposed accent was missed or cut at its first combining mark. ## What changed - **rust / swift / dart / php / ruby**: every name class uses `identifiers.ID_START` / `ID_CONTINUE` / `CAPITAL`, spliced (no literal Unicode runs), with the ASCII meaning kept exactly. - A `\\b` that bounds a name also refuses a combining mark: `\\b(?<![ID_CONTINUE])` before it and `(?![ID_CONTINUE])` after it. - `[A-Za-z]\\w*` becomes `(?!_)[ID_START][ID_CONTINUE]*`, so a leading `_` is still refused. - PHP keeps its own rule, per php.net: a name may contain ANY byte 0x80-0xff. On UTF-8 source that means every non-ASCII code point, so `\\x80-\\xff` becomes `\\x80-\\U0010ffff`. - **detector.py** (e-language hunks only): - Ruby's Mode D name reader `_extract_semantic_name`: `def probe_\u0928\u093e\u092e` was recorded as `probe_\u0928`. This was the cause of the Ruby cells. - The Ruby / Elixir inline-modifier guard: `\u0928\u093e\u092e = if x` was read as a trailing modifier, which desynced `end`. - Dart's enclosing-class lookup. - The Rust / Zig lifetime look-ahead in the literal shield. - **_shared_patterns.py**: - `CALLS_OUT_RUBY`'s receiver and command-position lookarounds. A receiver such as `\u0baa\u0bc6\u0baf\u0bb0\u0bcd.save` ends in a virama, which is not `\\w`. A cheap `(?<=\\.)` now runs first, s",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "8",
+    "deleted": "5"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/_shared_patterns.py",
+    "added": "14",
+    "deleted": "5"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/dart.py",
+    "added": "215",
+    "deleted": "33"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/php.py",
+    "added": "29",
+    "deleted": "13"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/ruby.py",
+    "added": "72",
+    "deleted": "15"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/rust.py",
+    "added": "37",
+    "deleted": "9"
+   },
+   {
+    "path": "gitgalaxy/standards/language_standards/languages/swift.py",
+    "added": "90",
+    "deleted": "14"
+   },
+   {
+    "path": "tests/extraction/test_unicode_identifiers_modern.py",
+    "added": "56",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/unicode_gauntlet/baseline.txt",
+    "added": "2",
+    "deleted": "51"
+   }
+  ],
+  "n_files": 9,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::_extract_semantic_name",
+   "gitgalaxy/core/detector.py::_slice_by_braces",
+   "gitgalaxy/core/detector.py::_slice_by_keywords",
+   "gitgalaxy/core/detector.py::fast_shield"
+  ],
+  "n_engine_functions_touched": 4
+ },
+ {
+  "id": 28,
+  "subject": "#3814: identifier classes stay cheap on a miss (astral gaps filled) (#3900)",
+  "commit_message": "#3814: identifier classes stay cheap on a miss (astral gaps filled) (#3900)\n\n`re` tests each astral range of a character class one after another on every character the\nclass rejects. UAX #31's ~280 astral ranges made a class miss 135-189x an ASCII class, so the\nblanked-template ReDoS gate (#3182, 1 s budget) failed on CI: javascript func_start 25 -> 153 ms,\ntypescript 56 -> 183 ms locally.\n\nAstral gaps are now filled unless they hold a format / space / control / private-use character\n(or a letter of the case CAPITAL / SMALL exclude) or touch U+1F000-U+1FFFF (emoji). The BMP and\nthe emoji blocks stay exact; ~280 ranges become 5-9 (ID_START / ID_CONTINUE), misses are 5-7x\nan ASCII class, and func_start is back to 27 / 59 ms. Build time unchanged (runs, not code points).\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "#3814: identifier classes stay cheap on a miss (astral gaps filled)",
+  "pr_body_start": "Fixes the `full-suite` failure on #3895 (and every PR since #3814's UAX #31 classes): `test_func_start_blanked_template_run_is_linear_3182[typescript]` hit its 1 s ReDoS budget on CI. ## Cause Python's `re` puts a class's BMP members in one bitmap, but keeps each **astral** range as its own test, tried one after another whenever the bitmap misses. So every character a class *rejects* (every blank, every punctuation mark) walks ~280 ranges. | class, miss on 400k blanks, vs `[A-Za-z_]` | main | this PR | |---|---:|---:| | ID_START | 189x | 4.8x | | ID_CONTINUE | 175x | 6.9x | | CAPITAL | 135x | 23x | | SMALL | 138x | 25x | javascript / typescript `func_start` on the #3182 blanked template: 153 / 183 ms on main, **27 / 59 ms** here (25 / 56 ms before #3847). ## Fix (`identifiers.py`) An astral gap between two class members is filled, **unless** it holds a format (Cf), space, control, private-use or surrogate character, or a letter of the case the class excludes (CAPITAL: Ll; SMALL: Lu/Lt), or it touches U+1F000\u2013U+1FFFF (emoji and pictographs). - The BMP stays exact, and so does the emoji block. - What is newly admitted: historic scripts' own punctuation and symbols, and musical and math symbols. None of that is text a name could run into by accident. - The build works on runs, not code points, so import time is unchanged (~85 ms). ## Tests `tests/extraction/test_identifier_astral_fill.py`: - Every UAX #31 member is kept; anything added is astral, outside the emoji block, and not",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/standards/language_standards/identifiers.py",
+    "added": "60",
+    "deleted": "14"
+   },
+   {
+    "path": "tests/extraction/test_identifier_astral_fill.py",
+    "added": "60",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 2,
+  "engine_functions_touched": [
+   "gitgalaxy/standards/language_standards/identifiers.py::_build",
+   "gitgalaxy/standards/language_standards/identifiers.py::_esc"
+  ],
+  "n_engine_functions_touched": 2
+ },
+ {
+  "id": 29,
+  "subject": "Claude/fork precompile (#3931)",
+  "commit_message": "Claude/fork precompile (#3931)\n\n* #3914: memo compiled rule dicts per extractor; compile the scan's languages before a fork\n\nA/B on the crucible corpus (3 alternating rounds, A-vs-A control +-0.3%)\nmeasured the lazy registry at +2.4% wall / +0.8% detector phase:\n\n- _compiled_rules rescanned a language's rules on every per-segment lookup;\n  each extractor now memoises the rule dicts it has compiled (non-empty ones:\n  a temporary `{}`'s id can be reused).\n- a forked pool's workers inherited nothing compiled, so each compiled every\n  language it met; the parent now compiles the scan's active languages (the\n  ones _init_worker warms, now one shared _active_languages helper) once\n  before a fork. Spawned pools are left alone: their state comes from\n  pickles, where a pattern travels as its source.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5\n\n* #3929: phase_ab reports the whole command's time next to the pipeline wall\n\n`wall` is the engine's own PIPELINE_SUCCESS duration, timed inside the\nscan: it excludes the import. #3914 moved rule compilation from the import\n(uncounted) into the scan (counted), so `wall` charged the lazy registry for\nwork the baseline did before its clock started. `process` times the whole\nsubprocess, the import included -- what a user waits for -- and is reported\nbeside `wall`, per round and in the means.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5\n\n* #3929: compile every claimant of the scan's extensions before a fork\n\nThe language lens's lexical scan runs every rule of every language that\nclaims an ambiguous extension (`.h`: c and objective-c). Pre-compiling only\neach extension's first claimant left objective-c to every forked worker --\neach compiled it (0.44 s) the first time it met a header: the\n3_Language_Detector CPU rise #3929 measured on curl. On the crucible corpus a\ncompile trace now shows forked workers compiling 0.012 s in total (was 0.5 s),\nthe parent compiling the 55 active languages once.\n\n_init_worker still warms an extractor for first claimants only.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5\n\n---------\n\nCo-authored-by: Claude <noreply@anthropic.com>\n",
+  "pr_title": "Claude/fork precompile",
+  "pr_body_start": "### Description <!-- Describe your changes in detail --> ### Core Engine Modification Checklist If your PR changes the core parsing engine (`language_standards.py`, `detector.py`, `prism.py`), you **MUST** complete the following validation gauntlet before merging: - [ ] **Golden Master Verification**: Ran `crucible_check.py` to verify diffs, and ran `crucible_check.py --update --yes` if the baseline changed due to intentional parsing improvements. - [ ] **Tri-Comparison Audit**: Handled by CI automatically, but you should run `python tests/tools/tri_comparison_chart.py --all --ci` locally first. If you intentionally improved precision, regenerate the baseline: `python tests/tools/tri_comparison_chart.py --regenerate --languages <lang>`. - [ ] **Tree-Sitter Accuracy**: Ran `python tests/tools/tree_sitter_accuracy_audit.py --ci --all`. If ground truth drifted for valid reasons, regenerated the baseline with `python tests/tools/tree_sitter_accuracy_audit.py --regenerate --lang <lang>`. > **Note for AI Agents**: If you are an AI agent generating this PR, you MUST invoke the `ci-push-checklist` skill to ensure these steps are completed properly.",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/detector.py",
+    "added": "20",
+    "deleted": "8"
+   },
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "33",
+    "deleted": "7"
+   },
+   {
+    "path": "tests/core_engine/test_lazy_re.py",
+    "added": "23",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/tools/phase_ab.py",
+    "added": "14",
+    "deleted": "6"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/core/detector.py::__init__",
+   "gitgalaxy/core/detector.py::_active_coding_rules",
+   "gitgalaxy/core/detector.py::_function_slice",
+   "gitgalaxy/core/detector.py::coding_analysis",
+   "gitgalaxy/core/detector.py::comment_analysis",
+   "gitgalaxy/core/detector.py::splice",
+   "gitgalaxy/galaxyscope.py::_can_run_inline",
+   "gitgalaxy/galaxyscope.py::_extract_features_parallel",
+   "gitgalaxy/galaxyscope.py::_init_worker",
+   "tests/core_engine/test_lazy_re.py::test_the_detector_runs_on_real_patterns",
+   "tests/tools/phase_ab.py::_mean",
+   "tests/tools/phase_ab.py::_run",
+   "tests/tools/phase_ab.py::main"
+  ],
+  "n_engine_functions_touched": 13
+ },
+ {
+  "id": 30,
+  "subject": "#3929: pre-compile before a fork only for scans of 500+ files (small scans keep #3923's 30% win) (#3939)",
+  "commit_message": "#3929: pre-compile before a fork only for scans of 500+ files (small scans keep #3923's 30% win) (#3939)\n\n* #3929: pre-compile before a fork only for a scan of 500+ files\n\nThree-way A/B (pre-#3914 / main / fix, A-vs-A control, whole-command time):\npre-compiling every claimant in the parent took the 3,280-file crucible\ncorpus to -0.7% (main +0.2%), but made a 40-file C scan slower than main\n(-21% vs -26% against pre-#3914): its 3 workers start on idle cores, where\ncompiling lazily -- in parallel, only what each meets (never objective-c\nthere) -- beats one serial compile. Large scans keep every core busy to the\nend, where a worker's own compile is wall time (#3929: curl -0.47 s).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5\n\n* #3914: ReDoS harnesses send their child a plain compiled pattern\n\nassert_redos_immune spawns a child and allows it timeout_sec (1 s) from\nstart(). Since #3923 a registry rule is a LazyPattern, which unpickles\nthrough gitgalaxy's language registry: the child imported 74 gitgalaxy\nmodules (258 ms here, more on a loaded runner) inside that window and a\nlinear rule read as hung (macOS 3.9 on #3939: agc_assembly func_start).\n\n_plain() compiles the rule in the parent; a plain pattern unpickles through\n`re` alone (0.6 ms, no gitgalaxy import). _best_of_timing compiles before\nits clock too. A disabled rule (None) passes through as before.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01X9PBcL8evG7CEzff1zE8v5\n\n---------\n\nCo-authored-by: Claude <noreply@anthropic.com>\n",
+  "pr_title": "#3929: pre-compile before a fork only for scans of 500+ files (small scans keep #3923's 30% win)",
+  "pr_body_start": "## Summary Closes #3929. This is the last commit of the #3929 work. #3931 was squash-merged at `093be90a`, one commit before this one. #3931 made the parent process compile, before forking the pool, the rules of every language that claims one of the scan's extensions. That fixed the regression on large scans. But the same A/B showed it **losing** #3923's gain on small scans. A small scan's workers start on idle cores. There, compiling lazily wins: - in parallel; - only the languages each worker meets. On this 40-file C set, the workers never need objective-c. One serial compile of every claimant in the parent is slower. Large scans keep every core busy to the end, so there a worker's own compile adds to wall time and compiling once in the parent wins. This PR gates the pre-fork compile on `total_files >= 500` (`_PRECOMPILE_MIN_FILES`). It is a 10-line change to `galaxyscope.py`. ## Measured `tests/tools/phase_ab.py` on a 4-core Linux box: alternating rounds, an A-vs-A control, and `GITGALAXY_LICENSE_KEY` set. The `process` column is the whole command, the import included. #3931 added it because `wall` (`PIPELINE_SUCCESS`) starts after the import. #3923 moved about 2 s of rule compilation out of the import and into the scan, so `wall` charges that work to #3923 while the baseline's same work sits before its clock starts. **40 C files** (`language-crucible/data/c`, 5 rounds), all relative to pre-#3923 main: | engine | process | wall | |---|---:|---:| | A-vs-A control | +0.7% | ",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/galaxyscope.py",
+    "added": "9",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/extraction/_extraction_harness.py",
+    "added": "11",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/extraction/languages/_strict_harness.py",
+    "added": "12",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/extraction/languages/test_livecode_strict.py",
+    "added": "2",
+    "deleted": "2"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/galaxyscope.py::_active_languages",
+   "gitgalaxy/galaxyscope.py::_extract_features_parallel",
+   "tests/extraction/_extraction_harness.py::assert_redos_immune",
+   "tests/extraction/languages/_strict_harness.py::_best_of_timing",
+   "tests/extraction/languages/_strict_harness.py::assert_redos_immune",
+   "tests/extraction/languages/test_livecode_strict.py::_measure_scaling_point"
+  ],
+  "n_engine_functions_touched": 6
+ },
+ {
+  "id": 31,
+  "subject": "aperture: payload guards keep files with function definitions beside a data table (Part of #5460) (#5493)",
+  "commit_message": "aperture: payload guards keep files with function definitions beside a data table (Part of #5460) (#5493)\n\n* aperture: payload guards keep a file that has function definitions beside a data table (Part of #5460)\n\nGate 3.4 (hex, array/matrix), 4.1 (saturation) and 5.1 (monotony, two definitions) now ask\n_has_definitions first; a pure table has none and is still excluded.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* golden: re-bless for aperture payload guards keeping files with definitions (Part of #5460)\n\nSeven crucible files leave the excluded queue (typescript builtins/parser/emitter, tokio_udp.rs,\ned_test.sh, generate_ids_from_drivers.sh, zls langref.html.in); the rest is the repo-wide\nPageRank / rollup re-solve that follows.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* golden: re-bless after merging main (checker.ts joins the 7 admitted files) (Part of #5460)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* golden: re-bless on merged tree after feature_flags retirement (Part of #5460)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* tests: fix UP031 and ARG001 in the #5460 aperture guard tests (Part of #5460)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "aperture: payload guards keep files with function definitions beside a data table (Part of #5460)",
+  "pr_body_start": "Part of #5460 (slice 1 of the payload-guard class). Does not close it. ## Change `ApertureFilter._has_definitions(lines, need=1)`: a linear, bounded-quantifier scan for function definitions (`type name(args) {`, lone `{` after a closing `)`, GNU style name-on-its-own-line, args over several lines). Gates that would block a file first ask it: | member | gate | status | |---|---|---| | Embedded Hex Payload | 3.4 | fixed, kept when >=1 definition | | Embedded Array/Matrix Payload | 3.4 | fixed, same | | Saturation (long line in head) | 4.1 | fixed, same | | Lexical Monotony | 5.1 | fixed, needs >=2 definitions (one function round an unrolled loop is still generated; `test_aperture_machine_gen_and_monotony` pins it) | | Packed Payload Guard (rho > 3.0) | `statistical_auditor.py` | NOT here (post-extraction density; different mechanism) | | Zero-Density, Machine-Generated | | OK per issue | A pure table has no definition and is still excluded (test per guard). ## Evidence - DOOM corpus (3,884 C-family files >20 KB): 76 files newly admitted by the old-vs-new gate comparison, 0 of them without ctags-visible functions (2,192 functions). The 4 `tables.c` still blocked have 0 ctags functions. A galaxyscope scan of 5 of them (srb2 / linuxdoom `tables.c`, `aes_prng.c`, `d_dehtbl.cpp`, `r_bmaps.c`) yields 54 functions, none excluded. - language-crucible (re-measured at head b4dad26e1 against merge-base 08c28bb74): exactly 8 files leave the excluded queue (typescript `builtins.ts`/`parser.",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/aperture.py",
+    "added": "69",
+    "deleted": "2"
+   },
+   {
+    "path": "tests/core_engine/test_aperture_payload_guards_5460.py",
+    "added": "106",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/gpu_json.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/graph_sqlite.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/llm_brief.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/sarif.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/composition.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/directory_groups.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/ecosystem_audits.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/ecosystem_fingerprint.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/file_composition_distribution.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/function_archetype_distribution.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/global_architectural_fingerprint.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/health.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/network_macro.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/summary.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/unparsable_files.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/3_forensic_security_vulnerability_audit/raw_threat_signature_hits_total_repository_occurrences.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/3_forensic_security_vulnerability_audit/scope.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/4_high_value_forensic_report/exposures.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/4_high_value_forensic_report/file_impact.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/4_high_value_forensic_report/systemic_bottlenecks.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/5_unparsable_artifacts_excluded_artifacts_queue.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/_groups.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/calls_out_to.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/fan_in.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/fan_out.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/function_archetype.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/function_z_score.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/import_edges.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/pagerank.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/11_scan_db_snapshot/usage_status.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/architect.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/doc_umbrella.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/filename.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/folder_dominant_lang.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/identity_proof.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/indentation_style.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/language.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/6_parsed_files_scanned_artifacts/files/1_artifact_identity/lock_tier.json",
+    "added": "-",
+    "deleted": "-"
+   }
+  ],
+  "n_files": 366,
+  "engine_functions_touched": [
+   "gitgalaxy/core/aperture.py::_check_artifact_integrity"
+  ],
+  "n_engine_functions_touched": 1
+ },
+ {
+  "id": 32,
+  "subject": "aperture: vendored trees under any name -- third_party_* prefixes, *_libs containers, foreign-license directories (Part of #5464) (#5512)",
+  "commit_message": "aperture: vendored trees under any name -- third_party_* prefixes, *_libs containers, foreign-license directories (Part of #5464) (#5512)\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "aperture: vendored trees under any name (third_party_*, *_libs, foreign-license dirs) (Part of #5464)",
+  "pr_body_start": "Part of #5457 ## What `VendorDirectoryDetector` (aperture.py) no longer needs a candidate *name* before probing a directory. Mechanisms from #5464: - **(a)** `third_party_*` / `third-party-*` / `3rdparty-*` prefixes are excluded by name, like `third_party/` (psydoom `third_party_libs/`, 367k LOC of SDL2). `*_libs` / `*-libraries` / `*_deps` / `*_extern(al)` join the container rule (half of non-empty children carry a foreign license). - **(b)** ANY directory carrying a license of its own that differs from the root's is vendored (eternity `libpng/`, zandronum `game-music-emu/` `dumb/`, doomretro `src/yyjson/` `src/miniz/`). A root license is still required (no root license, no evidence). - Licenses compare by *family* (first 40 normalized chars, copyright lines dropped): fastdoom's `FASTDOOM/LICENSE` is the root's GPL-2 with another FSF address and must not count as foreign (found by walking the 39-port corpus). - Callers (aperture, guidestar_lens, chronometer) drop the `is_candidate_name` pre-filter (removed with `_VERSIONED_DIR`; versioned dirs are now just a case of (b)). Aperture probes directories only, never the file component. ## Class: vendored trees by naming shape | shape | status | |---|---| | `third_party_*` prefix (psydoom) | fixed, test | | `*_libs` container | fixed, test | | foreign-license dir, any name (libpng, game-music-emu, dumb, yyjson, miniz, bzip2, rnnoise, GeoIP) | fixed, tests | | first-party `src/sdl/`, `client/sdl/`, same-license subdirs | stay scann",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/aperture.py",
+    "added": "29",
+    "deleted": "10"
+   },
+   {
+    "path": "gitgalaxy/core/guidestar_lens.py",
+    "added": "1",
+    "deleted": "4"
+   },
+   {
+    "path": "gitgalaxy/metrics/chronometer.py",
+    "added": "1",
+    "deleted": "4"
+   },
+   {
+    "path": "tests/core_engine/test_vendored_dirs_4545.py",
+    "added": "60",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/core/aperture.py::__init__",
+   "gitgalaxy/core/aperture.py::_check_ignore_rules",
+   "gitgalaxy/core/aperture.py::_license_texts",
+   "gitgalaxy/core/aperture.py::_probe",
+   "gitgalaxy/core/aperture.py::is_candidate_name",
+   "gitgalaxy/core/aperture.py::looks_like_virtualenv",
+   "gitgalaxy/core/guidestar_lens.py::_calculate_documentation_coverage",
+   "gitgalaxy/metrics/chronometer.py::_determine_commit_bounds",
+   "tests/core_engine/test_vendored_dirs_4545.py::test_scan_root_is_never_a_candidate"
+  ],
+  "n_engine_functions_touched": 9
+ },
+ {
+  "id": 33,
+  "subject": "Fix the three red legs of the Full Suite Gate on main (Part of #5531) (#5534)",
+  "commit_message": "Fix the three red legs of the Full Suite Gate on main (Part of #5531) (#5534)\n\n- wrapper_extractor: two per-function ID_CONTINUE regexes overflowed re's 512-entry cache and cost\n  15 s of a 17 s scan of a 3,900-function C file; on CI that ran into the 60 s ReDoS fuse\n  (test_aperture_large_single_file[big.c] counted 0). Same matches via str.find + one compiled char\n  class; the scan drops to 2 s.\n- doom_speedrun: Windows could not delete a git checkout's read-only objects, so fetch_port hit\n  FileExistsError; read-only-safe _rmtree.\n- test_pr_gates_fleet: the `env -i` PATH test is POSIX-only; skip on win32.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "Fix the three red legs of the Full Suite Gate on main (Part of #5531)",
+  "pr_body_start": "Part of #5531 (the issue closes itself when the workflow next succeeds on main). Run 39161700560 had three real failures (no infra flakes): | Failure | Root cause | Fix | |---|---|---| | `test_aperture_large_single_file[big.c]` (ubuntu 3.12): 0 functions | `wrapper_extractor.extract_wrapper_facts` compiled two `ID_CONTINUE` regexes per function, past `re`'s 512-entry cache: 15 s of a 17 s local scan (cProfile); on CI it passed the 60 s SIGALRM fuse and the file was dropped | `_standalone_spans`: `str.find` plus one compiled char class, same matches. Local scan 17 s -> 2 s | | `test_doom_speedrun::..._pinned_sha` (both Windows legs) | `rmtree(ignore_errors=True)` leaves a git checkout's read-only objects on Windows, then `mkdir` raises `FileExistsError` | `_rmtree` with a chmod-and-retry hook | | `test_pr_gates_fleet::test_matching_tool_off_...` (both Windows legs) | POSIX `env -i` PATH test joins PATH with `:` | skipif win32 | Class: scaling cost / portability traps in code the full suite runs on all legs. Tests: equivalence of `_standalone_spans` with the lookaround regex (ASCII, `$`/`_`, combining mark, astral digit, edges); big-class regex compiles do not grow with function count; read-only rmtree. Gates: `pr_gates --fast` 6/6, `--ratchets` 8/8, tree-wide guards + changed tests 223 passed. Golden masters NOT re-run locally (no language-crucible checkout in this worktree); the wrapper change is output-identical by construction, so `crucible-audit` should show zero diff. Win",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/core/wrapper_extractor.py",
+    "added": "26",
+    "deleted": "5"
+   },
+   {
+    "path": "tests/core_engine/test_wrapper_extractor.py",
+    "added": "44",
+    "deleted": "1"
+   },
+   {
+    "path": "tests/tools/doom_speedrun/doom_speedrun.py",
+    "added": "24",
+    "deleted": "3"
+   },
+   {
+    "path": "tests/tools/test_doom_speedrun.py",
+    "added": "13",
+    "deleted": "0"
+   },
+   {
+    "path": "tests/tools/test_pr_gates_fleet.py",
+    "added": "4",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 5,
+  "engine_functions_touched": [
+   "gitgalaxy/core/wrapper_extractor.py::extract_wrapper_facts",
+   "tests/core_engine/test_wrapper_extractor.py::test_a_qualified_method_call_is_not_a_callee",
+   "tests/tools/doom_speedrun/doom_speedrun.py::_git",
+   "tests/tools/doom_speedrun/doom_speedrun.py::fetch_port",
+   "tests/tools/doom_speedrun/doom_speedrun.py::scan_port",
+   "tests/tools/test_doom_speedrun.py::test_fetch_port_checks_out_exactly_the_pinned_sha",
+   "tests/tools/test_pr_gates_fleet.py::test_audits_always_run_under_env_i_and_print_the_tool_used"
+  ],
+  "n_engine_functions_touched": 7
+ },
+ {
+  "id": 34,
+  "subject": "perf: X-Ray and the vault scan run only the signatures they read (Part of #5500) (#6105)",
+  "commit_message": "perf: X-Ray and the vault scan run only the signatures they read (Part of #5500) (#6105)\n\nrun_xray_audit narrowed SecurityLens.THREAT_SIGNATURES after construction, but\nscan_content walks _scan_plan, built in __init__, so every signature ran on all\nfiles: 14.7 s of the ~40 s serial tail per galaxyscope scan of the crucible\ncorpus. restrict_signatures() rebuilds the plan; X-Ray 14.7 s -> 2.6 s with\nanomalies_found 72 == 72.\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "perf: X-Ray and the vault scan run only the signatures they read (Part of #5500)",
+  "pr_body_start": "Part of #5500. ## Owner decisions Owner OK (phone 2026-10-21): engine work on the single-threaded phases of the path-independence scan step (4.6 min -> ~4 min). ## What `run_xray_audit` (Phase 10 of every galaxyscope scan) narrowed `SecurityLens.THREAT_SIGNATURES` to two keys after constructing the lens, but `scan_content` walks `_scan_plan`, which `__init__` builds once, so the narrowing did nothing: X-Ray ran every signature (plus the hidden-text ones) on every file while reading only the `entropy` and `bitwise_ops` counts. New `SecurityLens.restrict_signatures(keys)` rebuilds the plan; the three call sites use it. - `binary_anomaly_detector.py`: `run_xray_audit` (Phase 10) and the standalone `main` now keep `bitwise_ops` (entropy is always computed). The old `reflection_metaprogramming` key was never read, so it is dropped. - `vault_sentinel.py`: keeps `hardcoded_secrets` (the only count/snippet read); `dead_code` was never read. ## Measured (language-crucible data, 3737 files, 6-core box, via heavy-run.sh) | | before | after | |---|---|---| | `run_xray_audit` alone | 14.7 s | 2.6 s | | `anomalies_found` | 72 | 72 (identical, restricted vs. unrestricted lens on the whole corpus) | Per scan that is ~12 s off the ~40 s serial tail (Phase-10 audits were ~15 s of it), and both parent-path scans pay it. `crucible_path_check.py` still PASSes. I have no same-load before/after wall time for the full step: the box is shared and the earlier 147 s baseline was under different load. T",
+  "files_changed": [
+   {
+    "path": "gitgalaxy/security/security_lens.py",
+    "added": "6",
+    "deleted": "0"
+   },
+   {
+    "path": "gitgalaxy/tools/supply_chain_security/binary_anomaly_detector.py",
+    "added": "4",
+    "deleted": "8"
+   },
+   {
+    "path": "gitgalaxy/tools/supply_chain_security/vault_sentinel.py",
+    "added": "2",
+    "deleted": "5"
+   },
+   {
+    "path": "tests/security_auditing/test_binary_anomaly_detector.py",
+    "added": "40",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 4,
+  "engine_functions_touched": [
+   "gitgalaxy/security/security_lens.py::__init__",
+   "gitgalaxy/tools/supply_chain_security/binary_anomaly_detector.py::main",
+   "gitgalaxy/tools/supply_chain_security/binary_anomaly_detector.py::run_xray_audit",
+   "gitgalaxy/tools/supply_chain_security/vault_sentinel.py::main",
+   "tests/security_auditing/test_binary_anomaly_detector.py::test_yaml_config_flag_actually_changes_standalone_xray_behavior"
+  ],
+  "n_engine_functions_touched": 5
+ },
+ {
+  "id": 35,
+  "subject": "security: every one-line signature reads lines of 250+ chars in chunks (Part of #8429) (#8615)",
+  "commit_message": "security: every one-line signature reads lines of 250+ chars in chunks (Part of #8429) (#8615)\n\n* security: every one-line signature reads lines of 250+ chars in chunks (Part of #8429)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* tests: re-bless golden masters, X-Ray anomalies_found 63 -> 64 from long-line chunking (Part of #8429)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Joe Esquibel <squid-protocol@users.noreply.github.com>\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+  "pr_title": "security: every one-line signature reads lines of 250+ chars in chunks (Part of #8429)",
+  "pr_body_start": "Part of #8429 (slice 2 of 3, after #8603). ## What `SecurityLens._armor` empties every line of 250+ characters. #8603 re-read those lines in overlapping 200-character pieces for `hardcoded_secrets` only. This slice does the same for every other one-line `THREAT_SIGNATURES` key: the loop in `scan_content` now walks the scan plan, reads the code stream for `CODE_STREAM_SIGNALS`, honours `prose` and the `high_risk_execution` language scope, and merges counts, snippets, sites and positions. A hit seen in two pieces counts once. ## Class / Sibling gaps Class: every `THREAT_SIGNATURES` key on a line of 250+ characters (13 keys). Handled here: `reflection_metaprogramming`, `safety_bypasses`, `io`, `high_risk_execution`, `state_mutation`, `bitwise_ops`, `shadow_imports`, `db_hooks`, `unicode_steganography`, `self_propagation` (each with a planted case, a near-miss and a chunk-overlap case in `test_security_lens.py`), plus `hardcoded_secrets` (#8603). Documented as blind spots in `docs/known_blind_spots.md` (not chunked): `dead_code` (reads comment text the code stream blanks), `homoglyphs` (needs the whole line to judge a script). **Sibling gaps** (slice 3 / not here): string-literal entropy over literals longer than ~248 chars (slice 3); `--fail-on-secrets` CLI test with a long-line secret (slice 3); SBOM payload audit in `sbom_recorder.py` (unverified whether it calls `scan_content`); a match longer than the 200-character piece is still missed; the minified nine-literal fallback an",
+  "files_changed": [
+   {
+    "path": "docs/known_blind_spots.md",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/security/README.md",
+    "added": "1",
+    "deleted": "1"
+   },
+   {
+    "path": "gitgalaxy/security/security_lens.py",
+    "added": "26",
+    "deleted": "17"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/gpu_json.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/12_scan_output_snapshots/llm_brief.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_audit/2_global_ecosystem_summary/ecosystem_audits.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit/12_scan_output_snapshots/gpu_json.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit/12_scan_output_snapshots/llm_brief.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/golden_master_zero_dep_audit/2_global_ecosystem_summary/ecosystem_audits.json",
+    "added": "-",
+    "deleted": "-"
+   },
+   {
+    "path": "tests/security_auditing/test_security_lens.py",
+    "added": "78",
+    "deleted": "0"
+   }
+  ],
+  "n_files": 10,
+  "engine_functions_touched": [
+   "gitgalaxy/security/security_lens.py::_calculate_shannon_entropy",
+   "gitgalaxy/security/security_lens.py::_line_starts",
+   "tests/security_auditing/test_security_lens.py::test_a_poison_long_line_stays_bounded_8429"
+  ],
+  "n_engine_functions_touched": 3
+ }
+]

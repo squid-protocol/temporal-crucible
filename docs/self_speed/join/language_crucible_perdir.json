@@ -1,0 +1,1470 @@
+{
+ "abap": {
+  "disk": 10,
+  "mapped": 9,
+  "functions": 124,
+  "loc": 2921,
+  "excluded": 1,
+  "by_detected": {
+   "abap": [
+    7,
+    124
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "xml": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.7
+ },
+ "ada": {
+  "disk": 54,
+  "mapped": 52,
+  "functions": 959,
+  "loc": 18837,
+  "excluded": 2,
+  "by_detected": {
+   "ada": [
+    49,
+    959
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 2.1
+ },
+ "agc_assembly": {
+  "disk": 13,
+  "mapped": 13,
+  "functions": 812,
+  "loc": 7708,
+  "excluded": 0,
+  "by_detected": {
+   "agc_assembly": [
+    10,
+    812
+   ],
+   "markdown": [
+    3,
+    0
+   ]
+  },
+  "secs": 2.1
+ },
+ "apex": {
+  "disk": 9,
+  "mapped": 9,
+  "functions": 38,
+  "loc": 686,
+  "excluded": 0,
+  "by_detected": {
+   "apex": [
+    4,
+    38
+   ],
+   "json": [
+    2,
+    0
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "xml": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.7
+ },
+ "assembly": {
+  "disk": 249,
+  "mapped": 236,
+  "functions": 1525,
+  "loc": 41558,
+  "excluded": 13,
+  "by_detected": {
+   "assembly": [
+    227,
+    1485
+   ],
+   "c": [
+    1,
+    28
+   ],
+   "makefile": [
+    3,
+    12
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    3,
+    0
+   ]
+  },
+  "secs": 2.7
+ },
+ "batch": {
+  "disk": 8,
+  "mapped": 4,
+  "functions": 1,
+  "loc": 298,
+  "excluded": 4,
+  "by_detected": {
+   "batch": [
+    3,
+    1
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "blueprint": {
+  "disk": 7,
+  "mapped": 6,
+  "functions": 0,
+  "loc": 424,
+  "excluded": 1,
+  "by_detected": {
+   "blp": [
+    5,
+    0
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "bms": {
+  "disk": 15,
+  "mapped": 12,
+  "functions": 15,
+  "loc": 1229,
+  "excluded": 3,
+  "by_detected": {
+   "bms": [
+    10,
+    15
+   ],
+   "markdown": [
+    2,
+    0
+   ]
+  },
+  "secs": 1.8
+ },
+ "c": {
+  "disk": 45,
+  "mapped": 40,
+  "functions": 2096,
+  "loc": 49338,
+  "excluded": 5,
+  "by_detected": {
+   "c": [
+    33,
+    1732
+   ],
+   "makefile": [
+    1,
+    244
+   ],
+   "markdown": [
+    3,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "yacc": [
+    1,
+    120
+   ]
+  },
+  "secs": 3.1
+ },
+ "cobol": {
+  "disk": 610,
+  "mapped": 585,
+  "functions": 11430,
+  "loc": 160657,
+  "excluded": 25,
+  "by_detected": {
+   "c": [
+    3,
+    401
+   ],
+   "cobol": [
+    568,
+    9875
+   ],
+   "m4": [
+    1,
+    0
+   ],
+   "markdown": [
+    9,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "yacc": [
+    2,
+    1154
+   ]
+  },
+  "secs": 10.3
+ },
+ "cpp": {
+  "disk": 51,
+  "mapped": 45,
+  "functions": 1765,
+  "loc": 42196,
+  "excluded": 6,
+  "by_detected": {
+   "cpp": [
+    31,
+    1381
+   ],
+   "markdown": [
+    5,
+    0
+   ],
+   "plaintext": [
+    3,
+    0
+   ],
+   "powershell": [
+    1,
+    2
+   ],
+   "python": [
+    5,
+    382
+   ]
+  },
+  "secs": 5.0
+ },
+ "csd": {
+  "disk": 15,
+  "mapped": 11,
+  "functions": 42,
+  "loc": 1106,
+  "excluded": 4,
+  "by_detected": {
+   "csd": [
+    6,
+    42
+   ],
+   "markdown": [
+    4,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.8
+ },
+ "csharp": {
+  "disk": 8,
+  "mapped": 8,
+  "functions": 964,
+  "loc": 18830,
+  "excluded": 0,
+  "by_detected": {
+   "csharp": [
+    6,
+    964
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 5.1
+ },
+ "css": {
+  "disk": 50,
+  "mapped": 31,
+  "functions": 164,
+  "loc": 18844,
+  "excluded": 19,
+  "by_detected": {
+   "css": [
+    27,
+    164
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ]
+  },
+  "secs": 7.5
+ },
+ "dart": {
+  "disk": 9,
+  "mapped": 8,
+  "functions": 1750,
+  "loc": 22485,
+  "excluded": 1,
+  "by_detected": {
+   "dart": [
+    7,
+    1750
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 6.2
+ },
+ "db2_sql": {
+  "disk": 13,
+  "mapped": 11,
+  "functions": 0,
+  "loc": 1058,
+  "excluded": 2,
+  "by_detected": {
+   "db2_sql": [
+    8,
+    0
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.5
+ },
+ "dockerfile": {
+  "disk": 72,
+  "mapped": 61,
+  "functions": 468,
+  "loc": 8281,
+  "excluded": 11,
+  "by_detected": {
+   "dockerfile": [
+    4,
+    71
+   ],
+   "go": [
+    55,
+    397
+   ],
+   "markdown": [
+    2,
+    0
+   ]
+  },
+  "secs": 1.9
+ },
+ "embedded_python": {
+  "disk": 15,
+  "mapped": 15,
+  "functions": 135,
+  "loc": 2621,
+  "excluded": 0,
+  "by_detected": {
+   "embedded_python": [
+    14,
+    135
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 2.1
+ },
+ "fortran": {
+  "disk": 16,
+  "mapped": 16,
+  "functions": 176,
+  "loc": 28526,
+  "excluded": 0,
+  "by_detected": {
+   "fortran": [
+    6,
+    139
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ],
+   "python": [
+    2,
+    33
+   ],
+   "shell": [
+    6,
+    4
+   ]
+  },
+  "secs": 5.8
+ },
+ "go": {
+  "disk": 22,
+  "mapped": 18,
+  "functions": 917,
+  "loc": 15978,
+  "excluded": 4,
+  "by_detected": {
+   "go": [
+    16,
+    917
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 2.3
+ },
+ "groovy": {
+  "disk": 330,
+  "mapped": 319,
+  "functions": 1162,
+  "loc": 16071,
+  "excluded": 11,
+  "by_detected": {
+   "groovy": [
+    305,
+    745
+   ],
+   "java": [
+    7,
+    417
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    6,
+    0
+   ]
+  },
+  "secs": 2.4
+ },
+ "haskell": {
+  "disk": 13,
+  "mapped": 12,
+  "functions": 147,
+  "loc": 1805,
+  "excluded": 1,
+  "by_detected": {
+   "haskell": [
+    7,
+    147
+   ],
+   "markdown": [
+    4,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.9
+ },
+ "hlasm": {
+  "disk": 26,
+  "mapped": 23,
+  "functions": 7,
+  "loc": 688,
+  "excluded": 3,
+  "by_detected": {
+   "hlasm": [
+    20,
+    7
+   ],
+   "markdown": [
+    3,
+    0
+   ]
+  },
+  "secs": 2.0
+ },
+ "hlo": {
+  "disk": 5,
+  "mapped": 4,
+  "functions": 0,
+  "loc": 48,
+  "excluded": 1,
+  "by_detected": {
+   "hlo": [
+    3,
+    0
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "html": {
+  "disk": 69,
+  "mapped": 65,
+  "functions": 37,
+  "loc": 4919,
+  "excluded": 4,
+  "by_detected": {
+   "html": [
+    54,
+    37
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    9,
+    0
+   ]
+  },
+  "secs": 1.7
+ },
+ "java": {
+  "disk": 16,
+  "mapped": 14,
+  "functions": 385,
+  "loc": 4238,
+  "excluded": 2,
+  "by_detected": {
+   "java": [
+    10,
+    385
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    3,
+    0
+   ]
+  },
+  "secs": 2.2
+ },
+ "javascript": {
+  "disk": 38,
+  "mapped": 33,
+  "functions": 837,
+  "loc": 22691,
+  "excluded": 5,
+  "by_detected": {
+   "javascript": [
+    29,
+    834
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ],
+   "typescript": [
+    1,
+    3
+   ]
+  },
+  "secs": 2.5
+ },
+ "jcl": {
+  "disk": 194,
+  "mapped": 187,
+  "functions": 376,
+  "loc": 5837,
+  "excluded": 7,
+  "by_detected": {
+   "jcl": [
+    185,
+    376
+   ],
+   "markdown": [
+    2,
+    0
+   ]
+  },
+  "secs": 2.1
+ },
+ "json": {
+  "disk": 6,
+  "mapped": 5,
+  "functions": 0,
+  "loc": 241,
+  "excluded": 1,
+  "by_detected": {
+   "json": [
+    4,
+    0
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.6
+ },
+ "kotlin": {
+  "disk": 8,
+  "mapped": 8,
+  "functions": 28,
+  "loc": 500,
+  "excluded": 0,
+  "by_detected": {
+   "kotlin": [
+    6,
+    28
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.7
+ },
+ "livecode": {
+  "disk": 100,
+  "mapped": 99,
+  "functions": 964,
+  "loc": 18042,
+  "excluded": 1,
+  "by_detected": {
+   "livecode": [
+    98,
+    964
+   ],
+   "markdown": [
+    1,
+    0
+   ]
+  },
+  "secs": 2.4
+ },
+ "lua": {
+  "disk": 121,
+  "mapped": 117,
+  "functions": 623,
+  "loc": 18140,
+  "excluded": 4,
+  "by_detected": {
+   "lua": [
+    111,
+    623
+   ],
+   "markdown": [
+    3,
+    0
+   ],
+   "plaintext": [
+    3,
+    0
+   ]
+  },
+  "secs": 2.0
+ },
+ "m4": {
+  "disk": 12,
+  "mapped": 10,
+  "functions": 39,
+  "loc": 7204,
+  "excluded": 2,
+  "by_detected": {
+   "m4": [
+    7,
+    39
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ]
+  },
+  "secs": 2.0
+ },
+ "makefile": {
+  "disk": 3,
+  "mapped": 3,
+  "functions": 1,
+  "loc": 16,
+  "excluded": 0,
+  "by_detected": {
+   "makefile": [
+    1,
+    1
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "markdown": {
+  "disk": 6,
+  "mapped": 4,
+  "functions": 0,
+  "loc": 0,
+  "excluded": 2,
+  "by_detected": {
+   "markdown": [
+    3,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "matlab": {
+  "disk": 10,
+  "mapped": 8,
+  "functions": 23,
+  "loc": 3669,
+  "excluded": 2,
+  "by_detected": {
+   "markdown": [
+    2,
+    0
+   ],
+   "matlab": [
+    6,
+    23
+   ]
+  },
+  "secs": 1.9
+ },
+ "mlir": {
+  "disk": 5,
+  "mapped": 4,
+  "functions": 0,
+  "loc": 132,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "mlir": [
+    3,
+    0
+   ]
+  },
+  "secs": 1.5
+ },
+ "nix": {
+  "disk": 11,
+  "mapped": 8,
+  "functions": 1,
+  "loc": 629,
+  "excluded": 3,
+  "by_detected": {
+   "markdown": [
+    2,
+    0
+   ],
+   "nix": [
+    5,
+    0
+   ],
+   "zig": [
+    1,
+    1
+   ]
+  },
+  "secs": 1.6
+ },
+ "objective-c": {
+  "disk": 8,
+  "mapped": 7,
+  "functions": 195,
+  "loc": 2130,
+  "excluded": 1,
+  "by_detected": {
+   "c": [
+    1,
+    41
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "objective-c": [
+    5,
+    154
+   ]
+  },
+  "secs": 1.9
+ },
+ "perl": {
+  "disk": 32,
+  "mapped": 27,
+  "functions": 943,
+  "loc": 32377,
+  "excluded": 5,
+  "by_detected": {
+   "json": [
+    1,
+    0
+   ],
+   "markdown": [
+    3,
+    0
+   ],
+   "perl": [
+    23,
+    943
+   ]
+  },
+  "secs": 3.3
+ },
+ "php": {
+  "disk": 45,
+  "mapped": 42,
+  "functions": 1707,
+  "loc": 27365,
+  "excluded": 3,
+  "by_detected": {
+   "markdown": [
+    3,
+    0
+   ],
+   "php": [
+    37,
+    1707
+   ],
+   "plaintext": [
+    2,
+    0
+   ]
+  },
+  "secs": 3.1
+ },
+ "plaintext": {
+  "disk": 12,
+  "mapped": 7,
+  "functions": 0,
+  "loc": 0,
+  "excluded": 5,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    6,
+    0
+   ]
+  },
+  "secs": 1.6
+ },
+ "pli": {
+  "disk": 18,
+  "mapped": 17,
+  "functions": 46,
+  "loc": 2320,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    4,
+    0
+   ],
+   "pli": [
+    13,
+    46
+   ]
+  },
+  "secs": 1.8
+ },
+ "powershell": {
+  "disk": 130,
+  "mapped": 129,
+  "functions": 490,
+  "loc": 24704,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    4,
+    0
+   ],
+   "powershell": [
+    124,
+    490
+   ]
+  },
+  "secs": 2.6
+ },
+ "proto": {
+  "disk": 5,
+  "mapped": 4,
+  "functions": 0,
+  "loc": 73,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "proto": [
+    3,
+    0
+   ]
+  },
+  "secs": 1.5
+ },
+ "protobuf": {
+  "disk": 2,
+  "mapped": 2,
+  "functions": 0,
+  "loc": 12,
+  "excluded": 0,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "proto": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.4
+ },
+ "python": {
+  "disk": 329,
+  "mapped": 305,
+  "functions": 3905,
+  "loc": 68235,
+  "excluded": 24,
+  "by_detected": {
+   "binary_threat": [
+    2,
+    0
+   ],
+   "c": [
+    1,
+    10
+   ],
+   "markdown": [
+    8,
+    0
+   ],
+   "plaintext": [
+    9,
+    0
+   ],
+   "python": [
+    285,
+    3895
+   ]
+  },
+  "secs": 4.8
+ },
+ "rexx": {
+  "disk": 30,
+  "mapped": 30,
+  "functions": 115,
+  "loc": 4184,
+  "excluded": 0,
+  "by_detected": {
+   "markdown": [
+    3,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "rexx": [
+    25,
+    115
+   ]
+  },
+  "secs": 1.7
+ },
+ "ruby": {
+  "disk": 11,
+  "mapped": 11,
+  "functions": 133,
+  "loc": 1152,
+  "excluded": 0,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "ruby": [
+    8,
+    133
+   ]
+  },
+  "secs": 1.7
+ },
+ "rust": {
+  "disk": 61,
+  "mapped": 57,
+  "functions": 2127,
+  "loc": 27704,
+  "excluded": 4,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    7,
+    0
+   ],
+   "rust": [
+    49,
+    2127
+   ]
+  },
+  "secs": 7.9
+ },
+ "scala": {
+  "disk": 9,
+  "mapped": 8,
+  "functions": 541,
+  "loc": 9347,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "scala": [
+    7,
+    541
+   ]
+  },
+  "secs": 2.7
+ },
+ "scheme": {
+  "disk": 9,
+  "mapped": 8,
+  "functions": 612,
+  "loc": 29008,
+  "excluded": 1,
+  "by_detected": {
+   "c": [
+    2,
+    395
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ],
+   "scheme": [
+    4,
+    217
+   ]
+  },
+  "secs": 4.3
+ },
+ "shell": {
+  "disk": 287,
+  "mapped": 271,
+  "functions": 1053,
+  "loc": 25703,
+  "excluded": 16,
+  "by_detected": {
+   "dockerfile": [
+    1,
+    4
+   ],
+   "markdown": [
+    3,
+    0
+   ],
+   "plaintext": [
+    7,
+    0
+   ],
+   "ruby": [
+    6,
+    216
+   ],
+   "shell": [
+    254,
+    833
+   ]
+  },
+  "secs": 2.6
+ },
+ "solidity": {
+  "disk": 9,
+  "mapped": 8,
+  "functions": 105,
+  "loc": 881,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "solidity": [
+    7,
+    105
+   ]
+  },
+  "secs": 1.5
+ },
+ "sql": {
+  "disk": 15,
+  "mapped": 13,
+  "functions": 19,
+  "loc": 1161,
+  "excluded": 2,
+  "by_detected": {
+   "markdown": [
+    2,
+    0
+   ],
+   "php": [
+    1,
+    15
+   ],
+   "plaintext": [
+    3,
+    0
+   ],
+   "postgresql": [
+    2,
+    4
+   ],
+   "sqlite": [
+    5,
+    0
+   ]
+  },
+  "secs": 1.6
+ },
+ "sqlite": {
+  "disk": 83,
+  "mapped": 80,
+  "functions": 0,
+  "loc": 3071,
+  "excluded": 3,
+  "by_detected": {
+   "markdown": [
+    4,
+    0
+   ],
+   "plaintext": [
+    3,
+    0
+   ],
+   "sqlite": [
+    73,
+    0
+   ]
+  },
+  "secs": 1.8
+ },
+ "swift": {
+  "disk": 9,
+  "mapped": 8,
+  "functions": 133,
+  "loc": 2425,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "ruby": [
+    1,
+    0
+   ],
+   "swift": [
+    6,
+    133
+   ]
+  },
+  "secs": 1.9
+ },
+ "tabular": {
+  "disk": 10,
+  "mapped": 8,
+  "functions": 0,
+  "loc": 28,
+  "excluded": 2,
+  "by_detected": {
+   "csv": [
+    6,
+    0
+   ],
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ]
+  },
+  "secs": 1.5
+ },
+ "tcl": {
+  "disk": 158,
+  "mapped": 41,
+  "functions": 394,
+  "loc": 10580,
+  "excluded": 117,
+  "by_detected": {
+   "markdown": [
+    9,
+    0
+   ],
+   "tcl": [
+    32,
+    394
+   ]
+  },
+  "secs": 2.0
+ },
+ "td": {
+  "disk": 6,
+  "mapped": 5,
+  "functions": 0,
+  "loc": 1341,
+  "excluded": 1,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "td": [
+    4,
+    0
+   ]
+  },
+  "secs": 1.6
+ },
+ "text": {
+  "disk": 2,
+  "mapped": 2,
+  "functions": 0,
+  "loc": 0,
+  "excluded": 0,
+  "by_detected": {
+   "markdown": [
+    2,
+    0
+   ]
+  },
+  "secs": 1.5
+ },
+ "typescript": {
+  "disk": 61,
+  "mapped": 52,
+  "functions": 8471,
+  "loc": 114427,
+  "excluded": 9,
+  "by_detected": {
+   "javascript": [
+    1,
+    0
+   ],
+   "json": [
+    2,
+    0
+   ],
+   "markdown": [
+    5,
+    0
+   ],
+   "plaintext": [
+    8,
+    0
+   ],
+   "typescript": [
+    36,
+    8471
+   ]
+  },
+  "secs": 15.9
+ },
+ "xml": {
+  "disk": 27,
+  "mapped": 22,
+  "functions": 25,
+  "loc": 462,
+  "excluded": 5,
+  "by_detected": {
+   "apex": [
+    3,
+    22
+   ],
+   "csharp": [
+    2,
+    3
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "python": [
+    1,
+    0
+   ],
+   "xml": [
+    12,
+    0
+   ]
+  },
+  "secs": 1.7
+ },
+ "yacc": {
+  "disk": 4,
+  "mapped": 4,
+  "functions": 27,
+  "loc": 577,
+  "excluded": 0,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    1,
+    0
+   ],
+   "yacc": [
+    2,
+    27
+   ]
+  },
+  "secs": 1.6
+ },
+ "yaml": {
+  "disk": 52,
+  "mapped": 42,
+  "functions": 226,
+  "loc": 4167,
+  "excluded": 10,
+  "by_detected": {
+   "markdown": [
+    1,
+    0
+   ],
+   "plaintext": [
+    2,
+    0
+   ],
+   "yaml": [
+    39,
+    226
+   ]
+  },
+  "secs": 1.6
+ },
+ "zig": {
+  "disk": 48,
+  "mapped": 41,
+  "functions": 3542,
+  "loc": 105363,
+  "excluded": 7,
+  "by_detected": {
+   "html": [
+    1,
+    2
+   ],
+   "markdown": [
+    2,
+    0
+   ],
+   "powershell": [
+    1,
+    1
+   ],
+   "shell": [
+    1,
+    1
+   ],
+   "zig": [
+    36,
+    3538
+   ]
+  },
+  "secs": 5.8
+ }
+}

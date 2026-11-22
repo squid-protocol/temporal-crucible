@@ -1,0 +1,601 @@
+<title>Evolution of gitgalaxy-engine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout concept: a single reading column of numbered-by-content sections; charts share one quarterly x axis so they read as one timeline. */
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --fg: #14171a;
+  --fg2: #4b5561;
+  --fg3: #737c88;
+  --line: #e0e3e8;
+  --grid: #eceef1;
+  --s1: #2a78d6;   /* organic / new code */
+  --s2: #eb6834;   /* sweeps / removed */
+  --s3: #1baf7a;   /* fixes */
+  --s4: #9aa3ad;   /* mechanical / moved */
+  --s4b: #c5cbd2;
+  --accent: #2a78d6;
+  --ramp-new: #d3e4fa;
+  --ramp-old: #1d4a96;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+    --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1114; --card: #171a1e; --fg: #eceef1; --fg2: #b3bac3; --fg3: #848c97; --line: #262b31; --grid: #1f2328;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #6b737d; --s4b: #424951; --accent: #3987e5;
+  --ramp-new: #a9cbf7; --ramp-old: #2b4f86;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.1; }
+h2 { font-size: 22px; line-height: 1.2; }
+h3 { font-size: 16px; }
+p { margin: 0; max-width: 68ch; }
+.kicker { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); font-weight: 600; }
+.lede { color: var(--fg2); font-size: 16px; }
+header { display: flex; flex-direction: column; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--fg2); font-size: 13px; }
+.meta b { color: var(--fg); font-weight: 600; }
+.notice { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; color: var(--fg2); font-size: 13px; max-width: 90ch; }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.chip { font-size: 12px; color: var(--fg2); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--fg2); display: inline-block; }
+.chip.strong i { background: var(--fg2); }
+.chip.moderate i { background: linear-gradient(90deg, var(--fg2) 50%, transparent 50%); }
+.chip.explor i { background: transparent; }
+.sowhat { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; color: var(--fg); max-width: 72ch; }
+.sowhat span { color: var(--fg3); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; display: block; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+.fig { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fig h3 { display: flex; justify-content: flex-start; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.fig .cap { color: var(--fg3); font-size: 12.5px; max-width: 70ch; }
+.box { position: relative; height: 270px; }
+.box.tall { height: 320px; }
+.id { font-family: var(--font-head); font-size: 11px; color: var(--fg3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-right: 6px; font-weight: 600; }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 2px solid var(--line); }
+.stat b { font-family: var(--font-head); font-size: 26px; line-height: 1.1; font-weight: 600; }
+.stat span { color: var(--fg2); font-size: 12.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--fg2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.bar { display: flex; height: 26px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.bar div { min-width: 2px; }
+.cmp { display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font-weight: 600; color: var(--fg2); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+td.num, th.num { text-align: right; padding-right: 14px; }
+.inbar { display: inline-block; height: 8px; border-radius: 2px; background: var(--s1); vertical-align: middle; }
+.hop { display: grid; grid-template-columns: 150px 1fr 52px; gap: 8px 12px; align-items: center; font-size: 13px; color: var(--fg2); }
+.hoptrack { position: relative; height: 14px; background: var(--grid); border-radius: 3px; }
+.hoptrack div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--s1); border-radius: 3px; }
+.hoptrack u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--fg); text-decoration: none; }
+.example { background: var(--grid); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--fg2); display: grid; gap: 4px; max-width: 80ch; }
+.example code { font-family: var(--font-head); color: var(--fg); font-weight: 600; }
+.status { font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); color: var(--fg2); white-space: nowrap; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.card h3 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.card p { color: var(--fg2); font-size: 13px; }
+button.tog { font: inherit; font-size: 12.5px; color: var(--fg2); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 3px 10px; cursor: pointer; }
+button.tog[aria-pressed="true"] { color: var(--fg); border-color: var(--fg2); background: var(--grid); }
+button.tog:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+footer { color: var(--fg3); font-size: 12.5px; max-width: 80ch; }
+@media (max-width: 520px) { .hop { grid-template-columns: 110px 1fr 46px; } .box { height: 240px; } }
+</style>
+<style>
+.more { font-size: 13px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.more:hover { border-bottom-color: var(--accent); }
+.gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px 20px; font-size: 13.5px; color: var(--fg2); }
+.gloss b { color: var(--fg); display: block; font-weight: 600; }
+details.how { font-size: 13px; color: var(--fg2); }
+details.how summary { cursor: pointer; color: var(--fg3); }
+details.how[open] summary { margin-bottom: 6px; }
+.empty { color: var(--fg3); font-size: 13.5px; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; max-width: 80ch; }
+</style><style>
+.tablewrap td:nth-child(2) { word-break: break-all; font-size: 12.5px; color: var(--fg2); }
+#checkTable td:nth-child(2) { word-break: normal; font-size: 13.5px; color: var(--fg); min-width: 180px; }
+.stagebox { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
+.stagebox > div { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.stagebox b { font-family: var(--font-head); font-size: 22px; }
+.warnbox { border: 1px solid var(--s2); border-left-width: 4px; border-radius: 8px; padding: 10px 14px; max-width: 82ch; font-size: 14px; }
+.pill { font-size: 11.5px; font-weight: 600; border-radius: 999px; padding: 1px 8px; border: 1px solid var(--line); white-space: nowrap; }
+.pill.ok { color: var(--fg); }
+.pill.warn { border-color: var(--s2); }
+.pill.fail { background: var(--s2); color: #fff; border-color: var(--s2); }
+.facts { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; max-width: 82ch; }
+.spark { width: 96px; height: 24px; display: block; }
+.stack { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.box.xtall { height: 380px; }
+.verdict { font-size: 18px; color: var(--fg); max-width: 70ch; }
+.sowhat b { font-weight: 400; display: block; }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">GitGalaxy · repository evolution</div>
+  <h1 id="title"></h1>
+  <p class="verdict" id="verdict"></p>
+  <div class="meta" id="meta"></div>
+  <div class="notice" id="modeNote"></div>
+</header>
+
+<section id="glance">
+  <div class="sec-head"><h2>At a glance</h2><span class="chip strong"><i></i>Strong · counting rules</span></div>
+  <div class="glance" id="glanceStats"></div>
+  <div class="fig">
+    <h3>Where the function edits went</h3>
+    <div class="bar" id="compBar" role="img" aria-label="Share of function edits by kind"></div>
+    <div class="legend" id="compLegend"></div>
+    <p class="cap">A function edit is one function named in one commit's diff headers; a function changed in two commits counts twice.</p>
+  </div>
+  <div class="sowhat" id="sw_glance"><span>So what</span><b></b></div>
+  <details class="how"><summary>Terms and confidence labels</summary>
+    <div class="gloss">
+      <div><b>Sweep</b>One commit that edits more than 60 functions: a rename, an API conversion, a reformat. Usually planned and mechanical.</div>
+      <div><b>Organic change</b>Ordinary work: new features, refactors, new code, removals.</div>
+      <div><b>Fix</b>A commit that says it fixes something: a Fixes: trailer, or a fix-like subject.</div>
+      <div><b>Cause</b>The earlier commit a fix repairs, named in the fix or found by git blame. "Later blamed for a fix" means a commit was the cause of at least one fix.</div>
+      <div><b>Strong</b>A counting rule, or a result that held on other projects.</div>
+      <div><b>Moderate</b>Rests on a label with known error, such as fix-like subjects.</div>
+      <div><b>Exploratory</b>One project, no replication yet.</div>
+    </div>
+  </details>
+  <a class="more" data-wiki="08-30-evolution-report" href="#">What this report measures and how →</a>
+</section>
+
+<section id="now">
+  <div class="sec-head"><h2>Where it stands now</h2><span class="chip strong"><i></i>Strong · facts read from the data, no prediction</span></div>
+  <div class="stagebox" id="stageBox" hidden><div><span class="kicker">Stage</span><b id="stageLabel"></b><span class="chip explor"><i></i>Exploratory</span></div><p id="stageText"></p><details class="how"><summary>How the stage is decided</summary><p id="stageRule"></p></details></div>
+  <div class="warnbox" id="cgWarn" hidden></div>
+  <ul class="facts" id="factList"></ul>
+  <div id="hubBlock" hidden>
+    <div class="grid2">
+      <div class="fig"><h3>Most-called functions</h3><div class="tablewrap"><table id="hubCallers"><thead><tr><th>Function</th><th>File</th><th class="num">Callers</th><th>Over time</th></tr></thead><tbody></tbody></table></div></div>
+      <div class="fig"><h3>Most central functions</h3><div class="tablewrap"><table id="hubCentral"><thead><tr><th>Function</th><th>File</th><th class="num">Age (y)</th><th>Callers over time</th></tr></thead><tbody></tbody></table></div></div>
+    </div>
+    <p class="cap" id="hubCap"></p>
+    <div class="fig" id="formerFig" hidden><h3>Former hubs</h3><div class="tablewrap"><table id="formerTable"><thead><tr><th>Function</th><th>File</th><th class="num">Peak callers</th><th>Peak</th><th class="num">Callers now</th></tr></thead><tbody></tbody></table></div></div>
+  </div>
+  <details class="how"><summary>Facts as data, for an assistant or a script</summary>
+    <p><button class="tog" id="copyFacts">Copy facts as JSON</button> <span id="copyNote" class="cap"></span></p>
+    <pre id="factsJson" style="max-height:260px;overflow:auto;font-size:12px;background:var(--grid);padding:10px;border-radius:8px;white-space:pre-wrap"></pre>
+  </details>
+  <a class="more" data-wiki="08-40-evolution-stands-now" href="#">What these facts are and how they are read →</a>
+</section>
+
+<section id="growth" hidden>
+  <div class="sec-head"><h2 data-base="Growth">Growth</h2><span class="chip strong"><i></i>Strong · from the quarterly scans</span></div>
+  <div class="fig"><h3>How big the code base is</h3><div class="box tall"><canvas id="cSize" role="img" aria-label="Functions in the code base per quarter"></canvas></div><p class="cap">Functions found by the scan at each quarter.</p></div>
+  <div class="fig" id="gifFig" hidden><h3>The call graph over time</h3><img id="gifImg" alt="Animation of the call graph growing over the quarterly scans" style="max-width:100%;border-radius:8px;border:1px solid var(--line)"><p class="cap">Every file is a circle and every function a dot in it; roads between files carry calls, wider for more calls. Green flashes are new functions, amber removed ones. Drawn by <a class="more" href="https://github.com/squid-protocol/historical-call-graph-gif" target="_blank" rel="noopener">historical-call-graph-gif</a> from the same scans.</p></div>
+  <div class="stack">
+    <div class="fig"><h3>What the growth is made of</h3><div class="box"><canvas id="cBirths" role="img" aria-label="New and removed functions per quarter"></canvas></div><p class="cap">Above zero: new functions. Below: functions that disappeared. "Moved" means the same name reappears in another file, so it is reorganisation, not creation or loss.</p></div>
+    <div class="fig" id="langFig" hidden><h3>Language mix over time</h3><div class="box xtall"><canvas id="cLang" role="img" aria-label="Share of code lines by language over time"></canvas></div><p class="cap">Share of code lines by language at each scan, as the scanner classifies files (markup and data files are included). The eight largest languages today; the rest are grouped.</p></div>
+    <div class="fig"><h3>Age layers</h3><div class="box xtall"><canvas id="cCohorts" role="img" aria-label="Functions by the year they first appeared"></canvas></div><p class="cap">Functions present at each quarter, grouped by the year they first appeared. File moves count as new births, so the layers lean young.</p></div>
+  </div>
+  <div class="sowhat" id="sw_growth"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-31-evolution-growth" href="#">How growth is measured →</a>
+</section>
+
+<section id="lifetimes" hidden>
+  <div class="sec-head"><h2 data-base="Function lifetimes">Function lifetimes</h2><span class="chip moderate"><i></i>Moderate · quarterly scans; a moved function counts as a death and a birth</span></div>
+  <div class="glance" id="lifeStats"></div>
+  <div class="fig"><h3>How long functions last</h3><div class="box"><canvas id="cSurv" role="img" aria-label="Share of functions still present after a number of years"></canvas></div><p class="cap" id="survCap"></p></div>
+  <div class="grid2">
+    <div class="fig"><h3>Longest-lived functions that have since gone</h3><div class="tablewrap"><table id="diedTable"><thead><tr><th>Function</th><th>File</th><th class="num">Years</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="fig"><h3>Largest functions present since the first scan</h3><div class="tablewrap"><table id="oldTable"><thead><tr><th>Function</th><th>File</th><th class="num">Lines</th></tr></thead><tbody></tbody></table></div></div>
+  </div>
+  <div class="sowhat" id="sw_life"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-38-evolution-lifetimes" href="#">How lifetimes are measured →</a>
+</section>
+
+<section id="types" hidden>
+  <div class="sec-head"><h2 data-base="Kinds of functions">Kinds of functions</h2><span class="chip moderate"><i></i>Moderate · the engine's function types; exploratory over time</span></div>
+  <div class="glance" id="typeStats"></div>
+  <div class="stack">
+    <div class="fig"><h3>What the code is made of today</h3><div class="tablewrap"><table id="typeTable"><thead><tr><th>Function type</th><th class="num">Share</th><th>What it means</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="fig"><h3>The mix over time</h3><div class="box xtall"><canvas id="cTypes" role="img" aria-label="Function types over time"></canvas></div><p class="cap">The eight most common types today; the rest are grouped. Top of the key is the top layer.</p></div>
+  </div>
+  <div class="fig"><h3>Do functions keep their type?</h3><div class="tablewrap"><table id="retTable"><thead><tr><th></th><th class="num">Kept the same type a year later</th><th class="num">Compared</th></tr></thead><tbody></tbody></table></div><p class="cap" id="retCap"></p></div>
+  <div class="sowhat" id="sw_types"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-41-evolution-function-types" href="#">What the function types are →</a>
+</section>
+
+<section id="activity">
+  <div class="sec-head"><h2 data-base="Where the work goes">Where the work goes</h2><span class="chip strong"><i></i>Strong · from git history</span></div>
+  <div class="fig"><h3>Function edits by kind, per quarter
+    <span style="margin-left:auto"><button class="tog" id="tAbs" aria-pressed="true">Edits</button> <button class="tog" id="tShare" aria-pressed="false">Share</button></span></h3>
+    <div class="box tall"><canvas id="cWork" role="img" aria-label="Function edits by kind per quarter"></canvas></div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Organic change</span><span><i style="background:var(--s2)"></i>Sweeps</span><span><i style="background:var(--s3)"></i>Fixes</span><span><i style="background:var(--s4)"></i>Mechanical (tests-only, comments, formatting, reverts)</span></div>
+    <p class="cap" id="partialNote"></p>
+  </div>
+  <div class="grid2">
+    <div class="fig"><h3>Active authors per quarter</h3><div class="box"><canvas id="cAuthors" role="img" aria-label="Distinct authors per quarter"></canvas></div><p class="cap">Distinct author e-mail addresses (one person with two addresses counts twice; bots count).</p></div>
+    <div class="fig"><h3>Share of commits by the busiest author</h3><div class="box"><canvas id="cTop" role="img" aria-label="Share of commits by the most active author"></canvas></div><p class="cap">A high and steady share means one person carries the project.</p></div>
+    <div class="fig" id="heatFig"><h3>How much of the code is alive</h3><div class="box"><canvas id="cHeat" role="img" aria-label="Share of functions edited and untouched"></canvas></div><p class="cap">Edited this quarter, and untouched for four quarters (among functions that already existed four quarters earlier).</p></div>
+    <div class="fig" id="fixFig"><h3>Fixes that ship with a test</h3><div class="box"><canvas id="cFixTest" role="img" aria-label="Share of fix commits touching a test file"></canvas></div><p class="cap">Share of fix commits that touch a file under a test directory.</p></div>
+  </div>
+  <div class="sowhat" id="sw_work"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-32-evolution-work" href="#">How edits are classified →</a>
+</section>
+
+<section id="sweeps">
+  <div class="sec-head"><h2 data-base="Sweeps">Sweeps</h2><span class="chip strong"><i></i>Strong · rule: over 60 functions in one commit</span></div>
+  <p id="sweepIntro"></p>
+  <div class="tablewrap"><table id="sweepTable"><thead><tr><th>Date</th><th class="num">Functions</th><th>Subject</th><th class="num" id="sweepCol">Fixes that name it as their cause</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat" id="sw_sweeps"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-33-evolution-sweeps" href="#">How sweeps are found →</a>
+</section>
+
+<section id="repairs">
+  <div class="sec-head"><h2 data-base="Repairs: when, and how close">Repairs: when, and how close</h2><span class="chip moderate" id="repChip"><i></i>Moderate</span></div>
+  <div id="repairsEmpty" class="empty" hidden></div>
+  <div class="grid2" id="repairsGrid">
+    <div class="fig"><h3>How long fixes took</h3><div class="box"><canvas id="cLag" role="img" aria-label="Histogram of time from cause to fix"></canvas></div><p class="cap" id="lagCap"></p></div>
+    <div class="fig" id="hopFig" hidden><h3>How close fixes land to the change that caused them</h3><div class="hop" id="hops"></div><p class="cap">Compared with same-sized functions in the same file. The vertical line is 1.0: no pattern. 2.0 means a fix is about twice as likely as chance to land there.</p></div>
+  </div>
+  <div class="fig" id="causeFig">
+    <h3>What kind of change caused the fixes</h3>
+    <div class="tablewrap"><table id="causeTable"><thead><tr><th>Causing change</th><th class="num">Fixes</th><th>Fix lands in the same function</th><th class="num">Median days to fix</th></tr></thead><tbody></tbody></table></div>
+    <p class="cap" id="causeCap"></p>
+  </div>
+  <div class="example" id="example"></div>
+  <div class="sowhat" id="sw_repairs"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-34-evolution-repairs" href="#">How repairs are matched to causes →</a>
+</section>
+
+<section id="sizes">
+  <div class="sec-head"><h2 data-base="Which changes get repaired">Which changes get repaired</h2><span class="chip strong" id="sizeChip"><i></i>Strong</span></div>
+  <div class="fig"><h3>Share of changes later blamed for a fix, by size</h3><div class="box"><canvas id="cSize2" role="img" aria-label="Share of changes later blamed for a fix by number of functions edited"></canvas></div><p class="cap" id="sizeCap"></p></div>
+  <div class="sowhat" id="sw_sizes"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-36-evolution-which-changes" href="#">How this was measured →</a>
+</section>
+
+<section id="repeat">
+  <div class="sec-head"><h2 data-base="Repeat spots">Repeat spots</h2><span class="chip strong"><i></i>Strong · counts of fix edits</span></div>
+  <div class="glance" id="repeatStats"></div>
+  <div class="tablewrap"><table id="fixedTable"><thead><tr><th>Most repaired functions</th><th>File</th><th class="num">Fixes</th></tr></thead><tbody></tbody></table></div>
+  <div class="sowhat" id="sw_repeat"><span>So what</span><b></b></div>
+  <a class="more" data-wiki="08-35-evolution-repeat-spots" href="#">How repeat spots are counted →</a>
+</section>
+
+<section id="comments" hidden>
+  <div class="sec-head"><h2 data-base="Comments">Comments</h2><span class="chip moderate"><i></i>Moderate · counts from the scanner</span></div>
+  <div class="grid2">
+    <div class="fig"><h3>Comment lines per line of code</h3><div class="box"><canvas id="cDens" role="img" aria-label="Comment lines per line of code over time"></canvas></div><p class="cap">Includes licence banners and commented-out code.</p></div>
+    <div class="fig"><h3>Functions with a comment above them</h3><div class="box"><canvas id="cHdr" role="img" aria-label="Share of functions with a header comment"></canvas></div><p class="cap">A comment block directly above the function, and a doc-style comment.</p></div>
+    <div class="fig"><h3>Debt and fragility markers per 1,000 lines of code</h3><div class="box"><canvas id="cMark" role="img" aria-label="Debt and fragility markers per thousand lines of code"></canvas></div><p class="cap">Planned: TODO-type notes. Fragile: HACK, FIXME and similar warnings.</p></div>
+  </div>
+  <div class="sowhat" id="sw_comments"><span>So what</span><b></b></div>
+  <div class="empty">From our research on nine C projects (not computed for this repository): about three quarters of TODO, FIXME and XXX comments are eventually removed, though projects range from 38% to 98%; about half are cleared by their own author, mostly in clean-ups rather than fixes; and a file's commenting style stays stable for years.</div>
+  <a class="more" data-wiki="08-39-evolution-comments" href="#">How comments are measured →</a>
+</section>
+
+<section id="quality">
+  <div class="sec-head"><h2>How far to trust this report</h2><span class="chip strong"><i></i>Strong · counts</span></div>
+  <div id="selfCheck" hidden>
+    <h3>Self-check</h3>
+    <p id="ratingText"></p>
+    <div class="tablewrap"><table id="checkTable"><thead><tr><th>Check</th><th>Result</th><th></th></tr></thead><tbody></tbody></table></div>
+    <p class="cap">Each check compares the report with git or with an independent tree-sitter parse of the same snapshot. They never change a figure; they say how far to trust it. The call-graph baseline matches plain calls by name, so it cannot see calls through function pointers or macros, which GitGalaxy can.</p>
+  </div>
+  <div class="cards" id="qualityCards"></div>
+  <div class="empty">Whether a particular change will need a fix is not something this report can say; size predicts it, little else does. How well this repository's "look first" and triage lists work is measured separately by <code>gitgalaxy backtest</code>.</div>
+  <a class="more" data-wiki="08-37-evolution-label-quality" href="#">Label quality and limits →</a>
+</section>
+
+<footer>Built by GitGalaxy from the repository's git history<span id="scanFoot"></span>. Definitions, measured behaviour and caveats are in the <a class="more" id="repoLink" href="https://github.com/squid-protocol/gitgalaxy">GitGalaxy repository</a> wiki. Figures describe the past; they are not forecasts.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const DATA = {"name":"gitgalaxy-engine","lang":"python","generated":"2026-11-20","mode":"scans","span":["2026 Q1","2026 Q4"],"commits":6919,"commits_with_functions":3581,"function_edits":22144,"composition_edits":{"organic":0.5794797687861272,"sweeps":0.1446893063583815,"fixes":0.14464414739884393,"mechanical":0.1311867774566474},"composition_commits":{"organic":0.5920134040770735,"sweeps":0.003909522479754258,"fixes":0.19631387880480314,"mechanical":0.20776319463836918},"categories":{"adds code":{"commits":1807,"edits":10508},"comment or whitespace only":{"commits":2,"edits":9},"fix, cause by blame":{"commits":519,"edits":2459},"fix, no cause found":{"commits":184,"edits":744},"formatting, docs, licence (subject)":{"commits":170,"edits":677},"modifies":{"commits":293,"edits":2192},"none":{"commits":3338,"edits":0},"removes code":{"commits":20,"edits":132},"revert":{"commits":1,"edits":23},"sweep":{"commits":14,"edits":3204},"tests only":{"commits":571,"edits":2196}},"label_quality":{"fixes_trailer_share_of_function_commits":0.0,"fixes_trailer_share_of_all":0.0,"cc_stable_share":0.0,"reported_by_share":0.0,"named_pairs":0,"unnamed_fix_like":746,"blame":{"sampled":746,"found":552,"unnamed_fix_like":746,"coverage":1.0},"fix_like_subject_share":0.1371585489232548},"largest_sweeps":[{"date":"2026-10-10","functions":818,"subject":"ruff: autofix the py310 upgrade findings; baseline 957 -\u003e 76 (Fixes #4496) (#4846)","cited_as_cause":false,"fixes_citing":0},{"date":"2026-07-29","functions":456,"subject":"fix(livecode): route native hash and dash comments to comment stream (#754)","cited_as_cause":false,"fixes_citing":0},{"date":"2026-05-29","functions":444,"subject":"style: apply Black and Ruff formatting repository-wide","cited_as_cause":true,"fixes_citing":28},{"date":"2026-06-18","functions":375,"subject":"chore: standardize codebase formatting with ruff","cited_as_cause":true,"fixes_citing":1},{"date":"2026-07-25","functions":211,"subject":"Adopt ruff for linting and formatting, replacing flake8 (#469) (#470)","cited_as_cause":true,"fixes_citing":5},{"date":"2026-06-24","functions":168,"subject":"style: apply global ruff formatting rules","cited_as_cause":true,"fixes_citing":6},{"date":"2026-05-29","functions":156,"subject":"test: upgrade extraction gauntlets and integrate licensing bypasses for CI/CD environments","cited_as_cause":false,"fixes_citing":0},{"date":"2026-06-18","functions":116,"subject":"feat(orchestrator): integrate new optical and spatial classes into GalaxyScope pipeline","cited_as_cause":true,"fixes_citing":7},{"date":"2026-08-17","functions":95,"subject":"Fix: multiple language parsing improvements (TS, JS, Go, Rust, C) (#1816)","cited_as_cause":true,"fixes_citing":1},{"date":"2026-09-04","functions":92,"subject":"feat(core-engine): per-file dynamism replaces the flat language irc in four risk equations (#271","cited_as_cause":false,"fixes_citing":0},{"date":"2026-06-18","functions":74,"subject":"refactor(metrics): translate signal processor physics to enterprise AppSec and Data Science term","cited_as_cause":false,"fixes_citing":0},{"date":"2026-09-27","functions":73,"subject":"#3869: the measurement tools read source losslessly; the lint gate covers tests/ (#3873)","cited_as_cause":false,"fixes_citing":0}],"sweep_count":14,"lag_hist":[{"bin":"under a week","pairs":204},{"bin":"1-4 weeks","pairs":113},{"bin":"1-3 months","pairs":95},{"bin":"3-6 months","pairs":50},{"bin":"6-12 months","pairs":2},{"bin":"1-2 years","pairs":0},{"bin":"over 2 years","pairs":0}],"lag_median_days":9.90773148148148,"pairs":464,"pairs_all":552,"cause_types":[{"cause":"other","pairs":220,"same_function":0.5909090909090909,"median_lag":26.940711805555555},{"cause":"fix","pairs":171,"same_function":0.6608187134502924,"median_lag":1.982962962962963},{"cause":"restructure","pairs":60,"same_function":0.18333333333333332,"median_lag":12.172662037037037},{"cause":"feature","pairs":10,"same_function":0.8,"median_lag":36.14747685185185},{"cause":"optimization","pairs":3,"same_function":0.6666666666666666,"median_lag":20.48832175925926}],"stable_lag":{"with":null,"without":9.90773148148148,"n_with":0},"repeat_spots":{"fix_edits":3203,"functions_fixed":1990,"share_in_fixed_2plus":0.522322822354043,"share_in_fixed_5plus":0.2360287230721199,"functions_fixed_2plus_share":0.23115577889447236},"most_fixed":[{"function":"_slice_by_braces","file":"gitgalaxy/core/detector.py","fixes":41},{"function":"_calculate_block_metrics","file":"gitgalaxy/core/detector.py","fixes":28},{"function":"record_mission","file":"gitgalaxy/recorders/record_keeper.py","fixes":26},{"function":"_process_file_worker","file":"gitgalaxy/galaxyscope.py","fixes":24},{"function":"get_mode","file":"gitgalaxy/core/detector.py","fixes":24},{"function":"splice","file":"gitgalaxy/core/detector.py","fixes":23},{"function":"_get_node_name","file":"tests/tools/tree_sitter_accuracy_audit.py","fixes":23},{"function":"_get_param_count","file":"tests/tools/tree_sitter_accuracy_audit.py","fixes":23},{"function":"_dart_scan_terminator","file":"gitgalaxy/core/detector.py","fixes":22},{"function":"walk","file":"tests/tools/tree_sitter_accuracy_audit.py","fixes":19}],"size_bands":[{"band":"1 function","commits":0,"later_repaired":null},{"band":"2-3","commits":0,"later_repaired":null},{"band":"4-10","commits":0,"later_repaired":null},{"band":"11-30","commits":0,"later_repaired":null},{"band":"31-60","commits":0,"later_repaired":null}],"pairs_dropped_no_function_share":0.1594202898550725,"same_function_overall":0.5689655172413793,"fix_definition":{"trailer_fixes":0,"subject_only_fixes":746,"trailer_habit":false},"blame_complete":true,"size_bands_basis":"named + blame sample (understates)","git_quarters":[{"label":"2026 Q1","commits":47,"edits_organic":94,"edits_sweeps":0,"edits_fixes":14,"edits_mechanical":18,"authors":1,"top_author_share":1.0,"fix_commits":4,"fix_with_test":0,"partial":false},{"label":"2026 Q2","commits":373,"edits_organic":746,"edits_sweeps":1394,"edits_fixes":172,"edits_mechanical":147,"authors":5,"top_author_share":0.8632707774798928,"fix_commits":51,"fix_with_test":23,"partial":false},{"label":"2026 Q3","commits":2792,"edits_organic":3402,"edits_sweeps":927,"edits_fixes":1903,"edits_mechanical":376,"authors":13,"top_author_share":0.9340974212034384,"fix_commits":462,"fix_with_test":435,"partial":false},{"label":"2026 Q4","commits":3707,"edits_organic":8590,"edits_sweeps":883,"edits_fixes":1114,"edits_mechanical":2364,"authors":4,"top_author_share":0.9867817642298354,"fix_commits":186,"fix_with_test":185,"partial":true}],"quarters":[{"label":"2026-03 (start)","date":"2026-03-21","functions":186,"cohorts":{"2026":186},"comments":{"density":0.22621184919210055,"planned_per_kloc":0.16321201240411295,"fragile_per_kloc":0.16321201240411295,"header_share":0.03608247422680412,"documented_share":0.5360824742268041}},{"label":"2026-03","date":"2026-03-30","functions":166,"cohorts":{"2026":166},"births_new_code":19,"births_moved":1,"deaths_removed":30,"deaths_moved":10,"edits_organic":94,"edits_sweeps":0,"edits_fixes":12,"edits_mechanical":18,"edited_functions":61,"untouched_4q_share":null,"partial":true,"comments":{"density":0.26417680315230424,"planned_per_kloc":0.17132088401576154,"fragile_per_kloc":0.6852835360630462,"header_share":0.04142011834319527,"documented_share":0.5976331360946746}},{"label":"2026-04","date":"2026-04-29","functions":245,"cohorts":{"2026":245},"births_new_code":82,"births_moved":144,"deaths_removed":26,"deaths_moved":121,"edits_organic":283,"edits_sweeps":0,"edits_fixes":9,"edits_mechanical":9,"edited_functions":90,"untouched_4q_share":null,"partial":true,"comments":{"density":0.3474329347935296,"planned_per_kloc":0.8037777554506179,"fragile_per_kloc":0.10047221943132724,"header_share":0.04032258064516129,"documented_share":0.6411290322580645}},{"label":"2026-05","date":"2026-05-31","functions":260,"cohorts":{"2026":260},"births_new_code":11,"births_moved":4,"deaths_removed":0,"deaths_moved":0,"edits_organic":53,"edits_sweeps":600,"edits_fixes":26,"edits_mechanical":53,"edited_functions":245,"untouched_4q_share":null,"partial":true,"comments":{"density":0.3043250915066856,"planned_per_kloc":0.5975946814073354,"fragile_per_kloc":0.07469933517591693,"header_share":0.034220532319391636,"documented_share":0.55893536121673}},{"label":"2026-06","date":"2026-06-27","functions":263,"cohorts":{"2026":263},"births_new_code":42,"births_moved":54,"deaths_removed":41,"deaths_moved":52,"edits_organic":410,"edits_sweeps":794,"edits_fixes":137,"edits_mechanical":85,"edited_functions":226,"untouched_4q_share":0.0,"partial":true,"comments":{"density":0.36799083269671506,"planned_per_kloc":0.7639419404125286,"fragile_per_kloc":0.0,"header_share":0.03787878787878788,"documented_share":0.5871212121212122}},{"label":"2026-07","date":"2026-07-31","functions":293,"cohorts":{"2026":293},"births_new_code":25,"births_moved":8,"deaths_removed":0,"deaths_moved":3,"edits_organic":312,"edits_sweeps":667,"edits_fixes":416,"edits_mechanical":33,"edited_functions":215,"untouched_4q_share":0.0,"partial":true,"comments":{"density":0.4112819086040203,"planned_per_kloc":0.7651109410864575,"fragile_per_kloc":0.3477777004938443,"header_share":0.061224489795918366,"documented_share":0.564625850340136}},{"label":"2026-08","date":"2026-08-31","functions":331,"cohorts":{"2026":331},"births_new_code":47,"births_moved":0,"deaths_removed":9,"deaths_moved":0,"edits_organic":378,"edits_sweeps":95,"edits_fixes":657,"edits_mechanical":137,"edited_functions":110,"untouched_4q_share":0.0,"partial":true,"comments":{"density":0.5161745749186667,"planned_per_kloc":0.675219446320054,"fragile_per_kloc":1.657356822785587,"header_share":0.056716417910447764,"documented_share":0.5850746268656717}},{"label":"2026-09","date":"2026-09-30","functions":1351,"cohorts":{"2026":1351},"births_new_code":1004,"births_moved":28,"deaths_removed":6,"deaths_moved":6,"edits_organic":2731,"edits_sweeps":165,"edits_fixes":830,"edits_mechanical":206,"edited_functions":543,"untouched_4q_share":0.02580645161290318,"partial":true,"comments":{"density":0.5254047496850651,"planned_per_kloc":4.0125040824896185,"fragile_per_kloc":1.0264545327299024,"header_share":0.018129079042784626,"documented_share":0.6127628716461204}},{"label":"2026-10","date":"2026-10-31","functions":3524,"cohorts":{"2026":3524},"births_new_code":2036,"births_moved":145,"deaths_removed":6,"deaths_moved":2,"edits_organic":6528,"edits_sweeps":883,"edits_fixes":960,"edits_mechanical":1636,"edited_functions":1117,"untouched_4q_share":0.08298755186721996,"partial":true,"comments":{"density":0.4552637810486434,"planned_per_kloc":4.648728142876728,"fragile_per_kloc":0.5483754377656194,"header_share":0.1346782988004362,"documented_share":0.6046892039258451}},{"label":"2026-11","date":"2026-11-20","functions":4079,"cohorts":{"2026":4079},"births_new_code":491,"births_moved":99,"deaths_removed":3,"deaths_moved":32,"edits_organic":2043,"edits_sweeps":0,"edits_fixes":154,"edits_mechanical":728,"edited_functions":413,"untouched_4q_share":0.20664206642066418,"partial":true,"comments":{"density":0.42781218430184037,"planned_per_kloc":4.392322220758115,"fragile_per_kloc":0.7686563886326702,"header_share":0.13029162746942616,"documented_share":0.6065380997177798}}],"cohort_years":["2026"],"lifetimes":{"since":"2026-03 (start)","years_observed":0.6680355920602327,"grid":[0.0,0.25,0.5],"curves":{"born":[1.0,0.7757308908851339,0.7201665975163352],"initial":[1.0,0.0752688172043011,0.04301075268817206]},"survive":{"born":{"1":null,"2":null,"5":null,"10":null},"initial":{"1":null,"2":null,"5":null,"10":null}},"counts":{"born":{"functions":4235,"died":164,"alive":4071,"median_years":null},"initial":{"functions":186,"died":178,"alive":8,"median_years":0.25}},"longest_died":[{"function":"run_firewall_audit","file":"gitgalaxy/tools/supply_chain_security/supply_chain_firewall.py","years":0.6,"born":"2026-04","died":"2026-11","at_least":false},{"function":"main","file":"gitgalaxy/tools/supply_chain_security/supply_chain_firewall.py","years":0.6,"born":"2026-04","died":"2026-11","at_least":false},{"function":"_extract_execution_triggers","file":"gitgalaxy/core/guidestar_lens.py","years":0.5,"born":"2026-04","died":"2026-10","at_least":false},{"function":"count_nines","file":"gitgalaxy/tools/cobol_to_java/cobol_to_java_spring_forge.py","years":0.4,"born":"2026-04","died":"2026-09","at_least":false},{"function":"count_nines","file":"gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py","years":0.4,"born":"2026-04","died":"2026-09","at_least":false},{"function":"evaluate_ecosystem","file":"gitgalaxy/tools/ai_guardrails/dev_agent_firewall.py","years":0.4,"born":"2026-04","died":"2026-09","at_least":false},{"function":"__init__","file":"gitgalaxy/tools/ai_guardrails/dev_agent_firewall.py","years":0.4,"born":"2026-04","died":"2026-09","at_least":false},{"function":"hunt_threats","file":"gitgalaxy/tools/ai_guardrails/ai_appsec_sensor.py","years":0.4,"born":"2026-04","died":"2026-09","at_least":false}],"oldest_alive":[{"function":"_process_file_worker","file":"gitgalaxy/galaxyscope.py","lines":778},{"function":"_init_worker","file":"gitgalaxy/galaxyscope.py","lines":85},{"function":"_summarize_anomalies","file":"gitgalaxy/galaxyscope.py","lines":54},{"function":"_get_git_audit","file":"gitgalaxy/galaxyscope.py","lines":54},{"function":"_prepare_target","file":"gitgalaxy/galaxyscope.py","lines":33},{"function":"cleanup","file":"gitgalaxy/galaxyscope.py","lines":13},{"function":"_record_anomaly","file":"gitgalaxy/galaxyscope.py","lines":5},{"function":"__init__","file":"gitgalaxy/galaxyscope.py","lines":5}],"initial_still_alive":8,"alive_now":4079,"alive_now_older_than_observed":0.001961265015935278,"median_age_alive_years":0.05475701574264202},"languages":{"labels":["python","java","cobol","other"],"lines":{"python":[5713,5837,9953,13387,13090,14377,16291,42866,71089,80344],"java":[0,0,0,0,0,0,0,0,8935,10511],"cobol":[0,0,0,0,0,0,0,0,213,213],"other":[414,0,0,0,0,0,0,0,0,0]},"files":{"python":[20,13,43,47,47,50,50,114,181,217],"java":[0,0,0,0,0,0,0,0,49,54],"cobol":[0,0,0,0,0,0,0,0,11,11],"other":[1,0,13,14,14,13,13,12,13,13]},"biggest_shifts":[{"language":"java","from":0.0,"to":0.11541924715597136},{"language":"python","from":0.9324302268646972,"to":0.882241841261475},{"language":"cobol","from":0.0,"to":0.002338911582553696}]},"hubs":{"now":{"callers":[{"function":"__init__","file":"gitgalaxy/core/detector.py","callers":478,"centrality":0.006206194626398164,"age_years":0.7,"since_first_scan":true,"spark":[2,3,2,24,48,74,166,314,419,478],"spark_callers":[2,3,2,24,48,74,166,314,419,478]},{"function":"splice","file":"gitgalaxy/core/detector.py","callers":353,"centrality":0.005125306037732366,"age_years":0.7,"since_first_scan":true,"spark":[1,1,1,20,34,46,87,199,296,353],"spark_callers":[1,1,1,20,34,46,87,199,296,353]},{"function":"read_source","file":"gitgalaxy/core/source_text.py","callers":237,"centrality":0.003941088432304223,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,76,193,237],"spark_callers":[0,0,0,0,0,0,0,76,193,237]},{"function":"load_galaxy_ir","file":"gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py","callers":207,"centrality":0.001484214560296835,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,132,188,207],"spark_callers":[0,0,0,0,0,0,0,132,188,207]},{"function":"split_streams","file":"gitgalaxy/core/prism.py","callers":161,"centrality":0.0015495536338630657,"age_years":0.4,"since_first_scan":false,"spark":[0,0,0,0,10,36,62,123,155,161],"spark_callers":[0,0,0,0,10,36,62,123,155,161]},{"function":"resolve_calls","file":"gitgalaxy/core/call_resolver.py","callers":148,"centrality":0.0013239224189673029,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,63,113,148],"spark_callers":[0,0,0,0,0,0,0,63,113,148]},{"function":"store","file":"gitgalaxy/tools/cobol_to_java/det/cobolrt/Cobol.java","callers":141,"centrality":0.0004974891658661107,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,1,91,141],"spark_callers":[0,0,0,0,0,0,0,1,91,141]},{"function":"extract_boundary","file":"gitgalaxy/core/mainframe_boundary.py","callers":124,"centrality":0.004000960638384451,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,77,117,124],"spark_callers":[0,0,0,0,0,0,0,77,117,124]},{"function":"storage","file":"gitgalaxy/tools/cobol_to_java/det/cobolrt/Field.java","callers":97,"centrality":0.0008139645677479306,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0,92,97],"spark_callers":[0,0,0,0,0,0,0,0,92,97]},{"function":"num","file":"gitgalaxy/tools/cobol_to_java/det/cobolrt/Cobol.java","callers":91,"centrality":0.000407435372677145,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0,48,91],"spark_callers":[0,0,0,0,0,0,0,0,48,91]}],"centrality":[{"function":"__init__","file":"gitgalaxy/core/detector.py","callers":478,"centrality":0.006206194626398164,"age_years":0.7,"since_first_scan":true,"spark":[0.0022996747982278807,0.00013691058530357133,0.0028258726200676696,0.009241700278848144,0.01581574587825334,0.008558172965192061,0.013373884783189434,0.009547886989558118,0.006136147581099092,0.006206194626398164],"spark_callers":[2,3,2,24,48,74,166,314,419,478]},{"function":"splice","file":"gitgalaxy/core/detector.py","callers":353,"centrality":0.005125306037732366,"age_years":0.7,"since_first_scan":true,"spark":[0.0020398698240780707,9.987264192454608e-05,0.0024890227061177776,0.008131472253147923,0.011602612887547667,0.00544816256852004,0.0072384159010396186,0.006497429027966526,0.004885569119628231,0.005125306037732366],"spark_callers":[1,1,1,20,34,46,87,199,296,353]},{"function":"decode_source","file":"gitgalaxy/core/source_text.py","callers":36,"centrality":0.0043306564759755155,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.006185706800465215,0.00438086167217411,0.0043306564759755155],"spark_callers":[0,0,0,0,0,0,0,33,33,36]},{"function":"extract_boundary","file":"gitgalaxy/core/mainframe_boundary.py","callers":124,"centrality":0.004000960638384451,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.009000042023022322,0.0046445232959761214,0.004000960638384451],"spark_callers":[0,0,0,0,0,0,0,77,117,124]},{"function":"read_source","file":"gitgalaxy/core/source_text.py","callers":237,"centrality":0.003941088432304223,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.005406481270081795,0.003970387839319341,0.003941088432304223],"spark_callers":[0,0,0,0,0,0,0,76,193,237]},{"function":"_rules_of","file":"gitgalaxy/core/detector.py","callers":6,"centrality":0.002118838329380067,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.003457402232804443,0.002215783261998137,0.002118838329380067],"spark_callers":[0,0,0,0,0,0,0,6,6,6]},{"function":"_compiled_rules","file":"gitgalaxy/core/detector.py","callers":3,"centrality":0.0019234594155258238,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.003029916282886691,0.0020247589920008545,0.0019234594155258238],"spark_callers":[0,0,0,0,0,0,0,3,3,3]},{"function":"get_mode","file":"gitgalaxy/core/detector.py","callers":6,"centrality":0.0018394725360993459,"age_years":0.7,"since_first_scan":true,"spark":[0.0020594625532326886,9.873330568054909e-05,0.002442951380824455,0.001170262608978296,0.0011032382928394513,0.0003751289093595714,0.0003227486742386444,0.0029424729239311284,0.0018329319473162128,0.0018394725360993459],"spark_callers":[1,1,1,1,1,1,1,6,6,6]},{"function":"_closed_literal_capture","file":"gitgalaxy/core/detector.py","callers":2,"centrality":0.0017906335951710381,"age_years":0.1,"since_first_scan":false,"spark":[0,0,0,0,0,0,0,0.0027901328723233957,0.001772373313314941,0.0017906335951710381],"spark_callers":[0,0,0,0,0,0,0,2,2,2]},{"function":"get_config","file":"gitgalaxy/core/detector.py","callers":3,"centrality":0.0016498230996418706,"age_years":0.7,"since_first_scan":true,"spark":[0.0042993001422975425,0.00020615963786107806,0.005107106139378665,0.002325926228044595,0.0021231835737464937,0.0007570701130644286,0.000592805712258682,0.0025770092764016853,0.001652694008011087,0.0016498230996418706],"spark_callers":[3,3,3,3,3,3,3,3,3,3]}]},"in_both_lists":4,"persistence":{},"former":[{"function":"enforce_licensing_guard","file":"gitgalaxy/licensing.py","peak_callers":22,"peak_quarter":"2026-05","callers_now":null,"gone":true,"still_defined_in":null},{"function":"int_","file":"gitgalaxy/tools/cobol_to_java/det/cics.py","peak_callers":18,"peak_quarter":"2026-10","callers_now":5,"gone":false,"still_defined_in":null},{"function":"outcome","file":"gitgalaxy/tools/cobol_to_java/det/cics.py","peak_callers":16,"peak_quarter":"2026-10","callers_now":13,"gone":false,"still_defined_in":null},{"function":"_build_markdown","file":"gitgalaxy/recorders/llm_recorder.py","peak_callers":14,"peak_quarter":"2026-11","callers_now":14,"gone":false,"still_defined_in":null},{"function":"_ticks","file":"gitgalaxy/recorders/llm_recorder.py","peak_callers":14,"peak_quarter":"2026-10","callers_now":14,"gone":false,"still_defined_in":null}],"labels":["2026-03 (start)","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10","2026-11"],"identity":"function name"},"archetypes":{"definitions_source":"gitgalaxy/standards/analysis_lens.py FUNCTION_ARCHETYPE_DEFINITIONS at origin/main 489e7f8a92","now":[{"label":"Stateful Encapsulated Methods","count":1141,"share":0.2797254228977691,"meaning":"method that holds state behind private scope (label from an older engine set; meaning approximate)"},{"label":"Generic / Templated Code","count":720,"share":0.17651385143417506,"meaning":"generic / type-parameterized (templated) function"},{"label":"Encapsulated Accessors","count":578,"share":0.14170139740132384,"meaning":"getters/setters and private-scope accessors"},{"label":"Compute Cores","count":485,"share":0.11890169159107625,"meaning":"dense algorithmic logic (high decision density per line)"},{"label":"Many-Argument Workhorses","count":434,"share":0.10639862711448884,"meaning":"large, many-parameter procedural function doing heavy lifting"},{"label":"Parameter Forwarders","count":282,"share":0.06913459181171856,"meaning":"thin, many-argument glue that forwards to other code"},{"label":"Defensive Guards","count":170,"share":0.04167688158862466,"meaning":"validation and error handling (null checks, guards, early bailouts)"},{"label":"Type Conversions","count":112,"share":0.027457710223093897,"meaning":"cast- and conversion-heavy function"},{"label":"Interface Declarations","count":56,"share":0.013728855111546949,"meaning":"signature/entry function exposing an API with minimal logic"},{"label":"Callbacks \u0026 Closures","count":36,"share":0.008825692571708753,"meaning":"built around closures or callbacks (handlers, async continuations)"},{"label":"I/O \u0026 Config Routines","count":32,"share":0.007845060063741112,"meaning":"dominated by I/O and configuration handling"},{"label":"State Mutators","count":28,"share":0.006864427555773474,"meaning":"general-purpose function that reassigns or mutates state"},{"label":"Annotated \u0026 Test Methods","count":5,"share":0.001225790634959549,"meaning":"annotated or test method (label from an older engine set; meaning approximate)"}],"mix":{"labels":["Stateful Encapsulated Methods","Generic / Templated Code","Encapsulated Accessors","Compute Cores","Many-Argument Workhorses","Parameter Forwarders","Defensive Guards","Type Conversions","Other types"],"series":{"Stateful Encapsulated Methods":[66,67,58,58,60,69,87,443,966,1141],"Generic / Templated Code":[16,15,22,23,25,29,28,252,625,720],"Encapsulated Accessors":[14,13,12,11,11,13,21,179,502,578],"Compute Cores":[15,11,30,29,29,27,28,169,430,485],"Many-Argument Workhorses":[45,49,71,84,84,101,113,206,385,434],"Parameter Forwarders":[3,4,5,5,5,5,5,8,248,282],"Defensive Guards":[10,5,10,11,10,11,11,28,147,170],"Type Conversions":[2,0,10,10,10,10,10,34,105,112],"Other types":[15,2,27,29,29,28,28,32,116,157]}},"retention_function":{"edited_kept":null,"edited_n":0,"unedited_kept":null,"unedited_n":0,"transitions":[]},"retention_file":{"edited_kept":null,"edited_n":0,"unedited_kept":null,"unedited_n":0,"transitions":[]},"years":1.0,"label_note":"Labels are the engine's; scans made by an older engine can carry older names (marked in the table)."},"current_extra":{"languages":{"python":217,"java":54,"markdown":13,"cobol":11},"files":295,"public_share":0.5115239887111948,"unreferenced_share":0.17168391345249295,"graph_ok":true,"archetypes_ok":true,"top_dirs":[{"dir":"gitgalaxy/tools","functions":2574},{"dir":"gitgalaxy/core","functions":1142},{"dir":"gitgalaxy/recorders","functions":108},{"dir":"gitgalaxy/metrics","functions":97},{"dir":"gitgalaxy/security","functions":78},{"dir":"gitgalaxy/galaxyscope.py","functions":60},{"dir":"gitgalaxy/cobol_refractor_controller.py","functions":13},{"dir":"gitgalaxy/cobol_to_java_controller.py","functions":6}],"largest_functions":[{"function":"record_mission","file":"gitgalaxy/recorders/record_keeper.py","lines":2297},{"function":"_slice_by_braces","file":"gitgalaxy/core/detector.py","lines":1478},{"function":"_build_markdown","file":"gitgalaxy/recorders/llm_recorder.py","lines":1091},{"function":"splice","file":"gitgalaxy/core/detector.py","lines":1018},{"function":"_translate","file":"gitgalaxy/tools/cobol_to_java/det/program.py","lines":928}]},"baseline_check":{"functions":{"tree_sitter":3286,"gitgalaxy":4079,"both":3286,"recall":1.0,"precision":0.8055896052954156},"edges":{"baseline":6907,"gitgalaxy":3810,"both":3676,"recall":0.532213696250181,"precision":0.9648293963254593,"ambiguous_calls_skipped_by_baseline":1272},"file_pairs":{"baseline":817,"gitgalaxy":438,"both":419,"recall":0.5128518971848225,"precision":0.95662100456621},"files_parsed":2096},"self_check":{"rows":[{"id":"commits","what":"Commit count matches git","value":"6,919 vs 6,919","status":"ok","detail":"The report's commits are the non-merge commits reachable from HEAD."},{"id":"reconcile","what":"Every function edit is in exactly one category","value":"22,144 of 22,144","status":"ok","detail":"The categories partition the function edits; a mismatch means a classification gap."},{"id":"shares","what":"Work-mix shares add up","value":"100.0%","status":"ok","detail":"Organic, sweeps, fixes and mechanical."},{"id":"pairs","what":"Fixes matched to a cause","value":"552 pairs","status":"ok","detail":"Repair timing needs at least 30 pairs (the report hides it below that); 100 or more give stable figures."},{"id":"coverage","what":"Code files the scan read","value":"226 of 2,096 code files; 0 vendored on purpose, 1,870 unexplained","status":"fail","detail":"Not read and not vendored: 1,870 files, largest groups tests/cobol_mainframe (505), tests/tools (488), tests/extraction/languages (269), tests/core_engine (224)","data":{"code_files":2096,"scanned":226,"recorded_excluded":9,"missing":1870,"vendored_on_purpose":0,"unexplained":1870,"top_missing":[{"directory":"tests/cobol_mainframe","files":505,"default_ignore_name":false},{"directory":"tests/tools","files":488,"default_ignore_name":false},{"directory":"tests/extraction/languages","files":269,"default_ignore_name":false},{"directory":"tests/core_engine","files":224,"default_ignore_name":false},{"directory":"gitgalaxy/standards/language_standards","files":87,"default_ignore_name":false},{"directory":"tests/cics_crucible","files":60,"default_ignore_name":false},{"directory":"tests/tools_recorders","files":48,"default_ignore_name":false},{"directory":"tests/security_auditing","files":39,"default_ignore_name":false}]}},{"id":"imports","what":"Import graph vs a text-and-path baseline","value":"GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline","status":"warn","detail":"Baseline at the level of files: each include or import that names exactly one target in the repository (relative path first, then a unique match by trailing path; Go: the module path to a package directory; Rust: `mod x;`, `use crate::...` and other workspace crates). Edges only GitGalaxy has are usually includes it resolved among several same-named files (for example gitgalaxy/cobol_refractor_controller.py to gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py). No standing research rating exists yet for the import graph.","data":{"baseline":490,"gitgalaxy":463,"both":413,"recall":0.8428571428571429,"precision":0.8920086393088553,"ambiguous_includes_skipped_by_baseline":2,"gitgalaxy_only_examples":[{"from":"gitgalaxy/cobol_refractor_controller.py","to":"gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py"},{"from":"gitgalaxy/cobol_refractor_controller.py","to":"gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py"},{"from":"gitgalaxy/cobol_refractor_controller.py","to":"gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py"}]}},{"id":"functions","what":"Functions found vs a tree-sitter parse","value":"recall 100%, precision 81%","status":"ok","detail":"3,286 of 3,286 function definitions found by a plain parse are in the scan; 793 scan functions the parse did not find (macro-generated and renamed forms).","data":{"tree_sitter":3286,"gitgalaxy":4079,"both":3286,"recall":1.0,"precision":0.8055896052954156}},{"id":"calls","what":"Call edges found vs a tree-sitter name-matching baseline","value":"GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline","status":"fail","detail":"Baseline: each call to a name that exactly one function defines (or one in the same file) is an edge; calls through function pointers, fields and macros are not. GitGalaxy finds fewer of these plain calls because it keeps only edges that resolve to one definition. Treat hub lists, repair radius and call counts as lower bounds.","data":{"baseline":6907,"gitgalaxy":3810,"both":3676,"recall":0.532213696250181,"precision":0.9648293963254593,"ambiguous_calls_skipped_by_baseline":1272}},{"id":"filepairs","what":"Cross-file call pairs (what `gitgalaxy reach` counts)","value":"recall 51%, precision 96% against the baseline","status":"fail","detail":"The same comparison at file level.","data":{"baseline":817,"gitgalaxy":438,"both":419,"recall":0.5128518971848225,"precision":0.95662100456621}}],"rating":{"label":"Limited","worst_check":"coverage","standing":{"reference":"pyan3","precision":0.53,"recall":0.65,"tree_sitter_recall":0.48,"note":"one to three repositories"},"standing_label":"Fair","compiler_grade":null,"text":"Consistency with a tree-sitter name matcher on this repository: Limited. (In our reference set this cheap check passed every C repository at 98 to 99% while compiler-grade recall ranged from 69% to 88%, so it does not predict the compiler-grade result.) Standing rating against a compiler-grade reference (pyan3), from our research on pinned python repositories: Fair. GitGalaxy's strict call edges had precision 53% and recall 65% there; a tree-sitter name matcher had recall 48%."},"standing":{"reference":"pyan3","precision":0.53,"recall":0.65,"tree_sitter_recall":0.48,"note":"one to three repositories"}},"facts":{"repository":"gitgalaxy-engine","language":"python","first_commit":"2026-03-21","latest_commit":"2026-11-20","age_years":0.7,"commits":6919,"last_12_months":{"commits":6919,"authors":15,"function_edits":22144,"edits_by_kind":{"organic":12832,"sweeps":3204,"fixes":3203,"mechanical":2905},"sweeps":14,"fix_commits":703,"previous_12_months":{"commits":0,"function_edits":0}},"size":{"functions":4079,"files":295,"languages":{"python":217,"java":54,"markdown":13,"cobol":11},"top_directories":[{"dir":"gitgalaxy/tools","functions":2574},{"dir":"gitgalaxy/core","functions":1142},{"dir":"gitgalaxy/recorders","functions":108},{"dir":"gitgalaxy/metrics","functions":97},{"dir":"gitgalaxy/security","functions":78},{"dir":"gitgalaxy/galaxyscope.py","functions":60},{"dir":"gitgalaxy/cobol_refractor_controller.py","functions":13},{"dir":"gitgalaxy/cobol_to_java_controller.py","functions":6}],"public_function_share":0.512,"functions_never_called_share":0.172},"age_of_code":{"median_function_age_years":0.1,"share_present_since_first_scan":0.002,"first_scan":"2026-03 (start)"},"hubs":{"most_called":[{"function":"__init__","file":"gitgalaxy/core/detector.py","callers":478,"centrality":0.006206194626398164,"age_years":0.7,"since_first_scan":true},{"function":"splice","file":"gitgalaxy/core/detector.py","callers":353,"centrality":0.005125306037732366,"age_years":0.7,"since_first_scan":true},{"function":"read_source","file":"gitgalaxy/core/source_text.py","callers":237,"centrality":0.003941088432304223,"age_years":0.1,"since_first_scan":false},{"function":"load_galaxy_ir","file":"gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py","callers":207,"centrality":0.001484214560296835,"age_years":0.1,"since_first_scan":false},{"function":"split_streams","file":"gitgalaxy/core/prism.py","callers":161,"centrality":0.0015495536338630657,"age_years":0.4,"since_first_scan":false}],"most_central":[{"function":"__init__","file":"gitgalaxy/core/detector.py","callers":478,"centrality":0.006206194626398164,"age_years":0.7,"since_first_scan":true},{"function":"splice","file":"gitgalaxy/core/detector.py","callers":353,"centrality":0.005125306037732366,"age_years":0.7,"since_first_scan":true},{"function":"decode_source","file":"gitgalaxy/core/source_text.py","callers":36,"centrality":0.0043306564759755155,"age_years":0.1,"since_first_scan":false},{"function":"extract_boundary","file":"gitgalaxy/core/mainframe_boundary.py","callers":124,"centrality":0.004000960638384451,"age_years":0.1,"since_first_scan":false},{"function":"read_source","file":"gitgalaxy/core/source_text.py","callers":237,"centrality":0.003941088432304223,"age_years":0.1,"since_first_scan":false}],"in_both_lists_of_ten":4,"persistence":{},"former_hubs":[{"function":"enforce_licensing_guard","file":"gitgalaxy/licensing.py","peak_callers":22,"peak_quarter":"2026-05","callers_now":null,"gone":true,"still_defined_in":null},{"function":"int_","file":"gitgalaxy/tools/cobol_to_java/det/cics.py","peak_callers":18,"peak_quarter":"2026-10","callers_now":5,"gone":false,"still_defined_in":null},{"function":"outcome","file":"gitgalaxy/tools/cobol_to_java/det/cics.py","peak_callers":16,"peak_quarter":"2026-10","callers_now":13,"gone":false,"still_defined_in":null}]},"function_types":{"most_common":[{"label":"Stateful Encapsulated Methods","share":0.28},{"label":"Generic / Templated Code","share":0.177},{"label":"Encapsulated Accessors","share":0.142}],"kept_type_after_a_year":{"edited":null,"unedited":null}},"languages_by_lines":{"python":0.882,"java":0.115,"cobol":0.002},"largest_functions":[{"function":"record_mission","file":"gitgalaxy/recorders/record_keeper.py","lines":2297},{"function":"_slice_by_braces","file":"gitgalaxy/core/detector.py","lines":1478},{"function":"_build_markdown","file":"gitgalaxy/recorders/llm_recorder.py","lines":1091},{"function":"splice","file":"gitgalaxy/core/detector.py","lines":1018},{"function":"_translate","file":"gitgalaxy/tools/cobol_to_java/det/program.py","lines":928}],"comments":{"comment_lines_per_code_line":0.428,"functions_with_comment_above":0.13,"todo_markers_per_kloc":4.39,"fragile_markers_per_kloc":0.77},"most_repaired_function":{"function":"_slice_by_braces","file":"gitgalaxy/core/detector.py","fixes":41},"work_mix":{"organic":0.579,"sweeps":0.145,"fixes":0.145,"mechanical":0.131},"median_days_from_change_to_fix":10,"stage":null,"sentences":["gitgalaxy-engine has 6,919 commits over 0.7 years (first 2026-03-21, latest 2026-11-20).","In the last 12 months: 6,919 commits by 15 authors, 22,144 function edits, 14 sweeps and 703 fix commits.","Today the code base has 4,079 functions in 295 files; main languages: python (217 files), java (54 files), markdown (13 files). The largest areas by functions are gitgalaxy/tools (2,574), gitgalaxy/core (1,142), gitgalaxy/recorders (108).","The median function is 0.1 years old (counted from the first scan 2026-03 (start) or its birth); 0% of today's functions were already there at the first scan.","The most-called function is __init__ (478 callers, gitgalaxy/core/detector.py); the most central is __init__ (gitgalaxy/core/detector.py). 4 of the top ten appear in both lists.","enforce_licensing_guard was once a hub (peak 22 callers in 2026-05); it is no longer in the code.","The most common function types are Stateful Encapsulated Methods (28%), Generic / Templated Code (18%), Encapsulated Accessors (14%).","By lines of code: python 88%, java 12%, cobol 0%. The biggest shift since the first scan: java went from 0% to 12%.","The largest function is record_mission (2,297 lines, gitgalaxy/recorders/record_keeper.py).","The most repaired function is _slice_by_braces (41 fix commits, gitgalaxy/core/detector.py).","Across its history 58% of function edits are organic change, 14% sweeps and 14% fixes; a fix arrives a median 10 days after the change that caused it.","Self-check of the call graph against a tree-sitter baseline on this repository: limited; import graph vs a text-and-path baseline: GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline; functions found vs a tree-sitter parse: recall 100%, precision 81%; call edges found vs a tree-sitter name-matching baseline: GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline."],"call_graph_self_check":{"rating":"Limited","checks":[{"id":"coverage","status":"fail","value":"226 of 2,096 code files; 0 vendored on purpose, 1,870 unexplained"},{"id":"imports","status":"warn","value":"GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline"},{"id":"functions","status":"ok","value":"recall 100%, precision 81%"},{"id":"calls","status":"fail","value":"GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline"},{"id":"filepairs","status":"fail","value":"recall 51%, precision 96% against the baseline"}]},"reliability":{"call_graph":"not yet evaluated"}},"link_base":"https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki"};
+const Q = DATA.quarters || null;
+const GQ = DATA.git_quarters;
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const pct = (x, d = 0) => x == null ? "n/a" : (100 * x).toFixed(d) + "%";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const el = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const sw = (id, text) => { const e = el(id); if (!text) { e.hidden = true; } else e.querySelector("b").textContent = text; };
+const charts = [];
+const C = DATA.composition_edits, CC = DATA.composition_commits;
+const complete = DATA.blame_complete;
+const LQ = DATA.label_quality;
+const covPct = LQ.blame ? pct(LQ.blame.coverage) : null;
+
+document.querySelectorAll("a.more[data-wiki]").forEach(a => { a.href = DATA.link_base + "/" + a.dataset.wiki + ".md"; a.target = "_blank"; a.rel = "noopener"; });
+el("title").textContent = "Evolution of " + DATA.name;
+const lastQ = Q ? Q[Q.length - 1] : null;
+if (Q) { el("scanFoot").textContent = " and " + Q.length + " quarterly scans"; el("growth").hidden = false; }
+el("meta").innerHTML = `<span><b>Span</b> ${esc(DATA.span[0])} to ${esc(DATA.span[1])}</span><span><b>Commits</b> ${fmt(DATA.commits)}</span>` + (lastQ ? `<span><b>Functions now</b> ${fmt(lastQ.functions)}</span><span><b>Scans</b> ${Q.length} quarterly</span>` : `<span><b>Mode</b> git history only</span>`) + `<span><b>Language</b> ${esc(DATA.lang)}</span><span><b>Generated</b> ${esc(DATA.generated)}</span>`;
+let verdict = `${pct(C.organic)} of ${DATA.name}'s function edits were ordinary organic work, ${pct(C.sweeps)} were mechanical sweeps and ${pct(C.fixes)} were fixes.`;
+if (DATA.lag_median_days != null && DATA.pairs >= 30) verdict += ` A fix arrived a median ${Math.round(DATA.lag_median_days)} days after the change that caused it.`;
+if (lastQ) verdict += ` The code base grew from ${fmt(Q[0].functions)} to ${fmt(lastQ.functions)} functions.`;
+el("verdict").textContent = verdict;
+el("modeNote").textContent = Q ? "Built from git history and quarterly scans of the code." + (DATA.radius ? " Includes how close fixes land to the change that caused them." : "") : "Built from git history only. Not available without scans: growth, age layers, how much of the code is alive, and how close fixes land to the change that caused them.";
+const fd = DATA.fix_definition;
+const stats = [[fmt(DATA.function_edits), "function edits in total"], [pct(C.sweeps), "of edits are sweeps (" + pct(CC.sweeps, 1) + " of the commits that change functions)"], [pct(C.fixes), "of edits are fixes"], [pct(C.organic), "are organic change"]];
+if (DATA.lag_median_days != null && DATA.pairs >= 30) stats.push([Math.round(DATA.lag_median_days) + " days", "median time from a change to the fix it caused"]);
+if (DATA.repeat_spots.share_in_fixed_2plus != null) stats.push([pct(DATA.repeat_spots.share_in_fixed_2plus), "of fix edits land in a function fixed more than once"]);
+el("glanceStats").innerHTML = stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+const comp = [["Organic change", "organic", "--s1"], ["Sweeps", "sweeps", "--s2"], ["Fixes", "fixes", "--s3"], ["Mechanical", "mechanical", "--s4"]];
+el("compBar").innerHTML = comp.map(([n, k, c]) => `<div title="${n} ${pct(C[k], 1)}" style="flex:${Math.max(C[k], 0.0005)};background:var(${c})"></div>`).join("");
+el("compLegend").innerHTML = comp.map(([n, k, c]) => `<span><i style="background:var(${c})"></i>${n} ${pct(C[k], 1)}</span>`).join("");
+sw("sw_glance", `Sweeps are ${pct(CC.sweeps, 1)} of the commits that change functions but ${pct(C.sweeps)} of the function edits. Setting them apart from ordinary work makes the other trends readable.` + (fd.trailer_habit ? "" : " Fixes here are found from commit subjects only: this project does not use Fixes: trailers."));
+
+// work
+const totals = GQ.filter(q => !q.partial).map(q => ["organic", "sweeps", "fixes", "mechanical"].reduce((a, k) => a + q["edits_" + k], 0));
+const sorted = totals.slice().sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)];
+const busiest = GQ.filter(q => !q.partial)[totals.indexOf(Math.max(...totals))];
+let workText = `The busiest quarter (${busiest.label}) had ${fmt(Math.max(...totals))} function edits; the median quarter had ${fmt(med)}.`;
+if (lastQ) { const u = Q.filter(q => q.untouched_4q_share != null && !q.partial).slice(-1)[0]; if (u) workText += ` Of the functions older than a year, ${pct(u.untouched_4q_share)} were not edited in the last four quarters (${u.label}).`; }
+sw("sw_work", workText);
+if (GQ[GQ.length - 1].partial) el("partialNote").textContent = "The latest quarter (" + GQ[GQ.length - 1].label + ") is not finished and is left out of the charts' trends where noted.";
+
+// sweeps
+el("sweepIntro").textContent = fmt(DATA.sweep_count) + " commits edit more than 60 functions at once. The largest twelve:";
+if (!complete) el("sweepCol").textContent = "Fixes found that name it as their cause (sampled)";
+el("sweepTable").querySelector("tbody").innerHTML = DATA.largest_sweeps.map(s => `<tr><td>${esc(s.date)}</td><td class="num">${fmt(s.functions)}</td><td>${esc(s.subject)}</td><td class="num">${s.fixes_citing > 0 ? fmt(s.fixes_citing) : (complete ? "0" : "none found")}</td></tr>`).join("");
+const big = DATA.largest_sweeps[0], blamedN = DATA.largest_sweeps.filter(s => s.fixes_citing > 0).length;
+sw("sw_sweeps", `The largest sweep (${big.date}, ${fmt(big.functions)} functions) is "${big.subject}". ${blamedN} of the twelve largest were later named as the cause of at least one fix` + (complete ? "." : `; blame covers only ${covPct} of the unnamed fixes, so this is a lower bound.`));
+
+// repairs
+const names = { feature: "A feature", restructure: "A restructure", fix: "A fix (a fix of a fix)", other: "Other, unclassified", optimization: "An optimisation" };
+el("repChip").innerHTML = "<i></i>" + (complete ? "Moderate · causes named by Fixes: trailers" : `Moderate · causes found by blame on a sample (${covPct} of unnamed fixes)`);
+if (!DATA.pairs || DATA.pairs < 30) {
+  el("repairsGrid").hidden = true; el("causeFig").hidden = true; el("example").hidden = true;
+  el("repairsEmpty").hidden = false;
+  el("repairsEmpty").textContent = "Too few fixes name their cause in this repository (" + (DATA.pairs || 0) + " pairs) to describe repair timing. Run with --blame to find causes by blame.";
+  sw("sw_repairs", "");
+} else {
+  const lagTxt = `${fmt(DATA.pairs)} fix and cause pairs. Median ${Math.round(DATA.lag_median_days)} days; ${pct((DATA.lag_hist[5].pairs + DATA.lag_hist[6].pairs) / DATA.pairs)} of fixes arrive more than a year after the change that caused them.` + (DATA.stable_lag.with != null && DATA.stable_lag.without != null ? ` Fixes tagged Cc: stable took ${Math.round(DATA.stable_lag.with)} days; untagged fixes ${Math.round(DATA.stable_lag.without)}.` : "") + (complete ? "" : " With blame, the lag is the time since the fixed lines last changed, which can be later than when the bug was introduced.") + ` ${pct(DATA.pairs_dropped_no_function_share)} of the pairs were left out because one commit names no function.`;
+  el("lagCap").textContent = lagTxt;
+  const other = DATA.cause_types.find(r => r.cause === "other"), otherShare = other ? other.pairs / DATA.pairs : 0;
+  el("causeTable").querySelector("tbody").innerHTML = DATA.cause_types.map(r => `<tr><td>${esc(names[r.cause] || r.cause)}</td><td class="num">${fmt(r.pairs)}</td><td>${r.same_function == null ? "n/a" : `<span class="inbar" style="width:${160 * r.same_function}px"></span> ${pct(r.same_function)}`}</td><td class="num">${Math.round(r.median_lag)}</td></tr>`).join("");
+  el("causeCap").textContent = "Cause type is read from the first verb of the causing commit's subject (a fix-like subject counts as a fix). " + (otherShare > 0.4 ? `${pct(otherShare)} of the causes fit no verb, so treat this table as indicative.` : `${pct(otherShare)} fit no verb.`);
+  if (DATA.radius) {
+    el("hopFig").hidden = false;
+    const lab = { either1: "Within one call of the change", either2: "Within two calls", callers1: "In a function that calls it", callees1: "In a function it calls" };
+    const hs = ["either1", "either2", "callers1", "callees1"].map(k => [lab[k], DATA.radius[k]]).filter(h => h[1]);
+    el("hops").innerHTML = hs.map(([l, h]) => `<span>${l}</span><div class="hoptrack"><div style="width:${100 * Math.min(h.ratio, 2.6) / 2.6}%"></div><u style="left:${100 / 2.6}%"></u></div><b style="color:var(--fg)">${h.ratio.toFixed(2)}x</b>`).join("");
+  }
+  const sf = DATA.same_function_overall;
+  el("example").innerHTML = `<div><code>Day 1</code> function B changes.</div><div><code>Months later</code> a bug appears (median ${Math.round(DATA.lag_median_days)} days here). The fix edits B itself in ${pct(sf)} of the cases in this repository.</div>` + (DATA.radius && DATA.radius.either2 ? `<div>When it does not, the fix is about ${DATA.radius.either2.ratio.toFixed(1)} times as likely as chance to land within two calls of B.</div>` : "");
+  const rows = DATA.cause_types.filter(r => r.cause !== "other" && r.pairs >= 30 && r.same_function != null).sort((a, b) => b.same_function - a.same_function);
+  sw("sw_repairs", rows.length >= 2 ? `In this repository, fixes of ${names[rows[0].cause].toLowerCase()} land in the same function ${pct(rows[0].same_function)} of the time and fixes of ${names[rows[rows.length - 1].cause].toLowerCase()} ${pct(rows[rows.length - 1].same_function)}.` : `Fixes land in the same function ${pct(sf)} of the time.`);
+}
+
+// sizes
+const sb = DATA.size_bands.filter(b => b.later_repaired != null && b.commits >= 20);
+el("sizeChip").innerHTML = "<i></i>" + (complete ? "Strong · size is the one per-change signal that held up" : "Moderate · lower bounds from a blame sample");
+el("sizeCap").textContent = "Organic changes at least three years old (so each had time to be repaired); size is the number of functions edited." + (complete ? "" : ` Causes come from blame on ${covPct} of the unnamed fixes, so shares are lower bounds and not comparable with repositories that name their causes.`);
+if (sb.length >= 2) sw("sw_sizes", `Changes that edit ${sb[sb.length - 1].band} functions were later blamed for a fix ${pct(sb[sb.length - 1].later_repaired)} of the time, against ${pct(sb[0].later_repaired)} for ${sb[0].band === "1 function" ? "single-function changes" : sb[0].band + " functions"}. Nothing else we measured (author experience, reviewer trailers, structure) added much beyond size.`); else el("sw_sizes").hidden = true;
+
+// repeat
+const RS = DATA.repeat_spots;
+el("repeatStats").innerHTML = [[fmt(RS.fix_edits), "fix edits in total"], [fmt(RS.functions_fixed), "distinct functions fixed"], [pct(RS.share_in_fixed_2plus), "of fix edits in functions fixed 2+ times"], [pct(RS.functions_fixed_2plus_share), "of the functions ever fixed were fixed 2+ times"]].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+el("fixedTable").querySelector("tbody").innerHTML = DATA.most_fixed.map(f => `<tr><td><code>${esc(f.function)}</code></td><td>${esc(f.file)}</td><td class="num">${f.fixes}</td></tr>`).join("");
+sw("sw_repeat", `${pct(RS.share_in_fixed_2plus)} of fix edits land in functions that were fixed before. The share is higher in older projects and in projects with fewer functions, so compare it only with similar ones.`);
+
+// quality
+const qc = [
+  ["How fixes are found", fd.trailer_habit ? `${pct(LQ.fixes_trailer_share_of_function_commits)} of the commits that change functions carry a Fixes: trailer, which names the cause (${fmt(LQ.named_pairs)} usable pairs). Fix-like subjects add ${fmt(fd.subject_only_fixes)} more fixes.` : `This project does not use Fixes: trailers (${pct(LQ.fixes_trailer_share_of_function_commits, 1)} of commits). Fixes are found from commit subjects, and causes by blame${LQ.blame ? ` on a sample covering ${covPct} of ${fmt(LQ.blame.unnamed_fix_like)} unnamed fixes; blame found a cause for ${pct(LQ.blame.found / LQ.blame.sampled)} of those` : ". Run with --blame to find causes"}.`],
+  ["Fix labels", `${pct(LQ.fix_like_subject_share)} of commit subjects look like fixes. In hand checks on DPDK and Mesa (a narrower rule than this one) the subject rule missed roughly 8 to 20% of fixes in the remainder, so the fix share is a floor.`],
+  ["Pairs left out", `${pct(DATA.pairs_dropped_no_function_share)} of fix and cause pairs are left out because one of the commits names no function (header-only, macro and struct-level bugs disappear). Fixes are matched to a cause only if one can be found, so lag is measured on fixes that exist.`],
+  ["What the scan skips", "The scanner skips directories named log, logs, tmp, temp, docs and licences, and build outputs, by default. Code in such a directory (DPDK's lib/log, a logging library) is missing from the call-graph figures, so a hub that lives there is not counted."],
+  ["Function names", "Functions come from git diff headers; roughly one in ten names a neighbour of the function actually edited. Counts are indicators, not exact."],
+  ["Shipped bugs", `${pct(LQ.cc_stable_share, 1)} of commits carry Cc: stable and ${pct(LQ.reported_by_share, 1)} Reported-by. Where used, Cc: stable marks bugs that reached a release.`],
+  ["Cannot say", "Fixes with no findable cause are shown as such, never as 'extrinsic'. Whether a given change will need a fix is not predicted."],
+];
+el("qualityCards").innerHTML = qc.map(([t, d]) => `<div class="card"><h3>${t}</h3><p>${d}</p></div>`).join("");
+
+// where it stands now (facts first)
+const F = DATA.facts;
+const ST = F.stage;
+if (ST) {
+  el("stageBox").hidden = false;
+  el("stageLabel").textContent = ST.label.charAt(0).toUpperCase() + ST.label.slice(1);
+  const i = ST.indicators;
+  el("stageText").textContent = `${ST.summary}. The code base grew ${(100 * i.growth_per_year).toFixed(1)}% a year over the last three years; each function was edited ${i.edits_per_function_per_year.toFixed(2)} times a year on average; ${pct(i.fix_share_last_year)} of last year's edits were fixes and ${pct(i.sweep_share_last_year)} were sweeps; ${i.untouched_share != null ? pct(i.untouched_share) + " of older functions were untouched for four quarters. " : ""}The project is ${F.age_years} years old.`;
+  el("stageRule").textContent = ST.rule;
+}
+el("factList").innerHTML = F.sentences.filter(t => !t.startsWith("Stage (exploratory)")).map(t => `<li>${esc(t)}</li>`).join("");
+el("factsJson").textContent = JSON.stringify(F, null, 1);
+el("copyFacts").onclick = () => { const t = JSON.stringify(F, null, 1); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { el("copyNote").textContent = "Copied."; }).catch(() => { const r = document.createRange(); r.selectNodeContents(el("factsJson")); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); el("copyNote").textContent = "Select and copy the text below."; }); };
+function spark(vals) {
+  const w = 96, h = 24, mx = Math.max(...vals, 1), pts = vals.map((v, i) => `${(i * (w - 2) / Math.max(vals.length - 1, 1) + 1).toFixed(1)},${(h - 2 - (h - 4) * v / mx).toFixed(1)}`).join(" ");
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Callers over time, peak ${fmt(mx)}"><polyline points="${pts}" fill="none" stroke="var(--s1)" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+const HB = DATA.hubs;
+if (HB) {
+  el("hubBlock").hidden = false;
+  el("hubCallers").querySelector("tbody").innerHTML = HB.now.callers.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.callers)}</td><td>${spark(r.spark)}</td></tr>`).join("");
+  el("hubCentral").querySelector("tbody").innerHTML = HB.now.centrality.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${r.since_first_scan ? "&ge; " : ""}${r.age_years}</td><td>${spark(r.spark_callers || r.spark)}</td></tr>`).join("");
+  const p1 = HB.persistence["callers_1 year"], p5 = HB.persistence["callers_5 years"], c1 = HB.persistence["centrality_1 year"];
+  el("hubCap").textContent = "Callers: how many functions call it. Central: its PageRank in the call graph, so it also counts callers that are themselves important. " + (p1 ? `Of the top 1% most-called functions, ${pct(p1.including_removed)} were still in the top 5% a year later` + (p5 ? `, ${pct(p5.including_removed)} five years later` : "") + (c1 ? `; for centrality ${pct(c1.including_removed)} after a year` : "") + " (removed functions count as gone). " : "") + (DATA.facts.reliability ? "Call-graph reliability for this language: " + DATA.facts.reliability.call_graph + "." : "") + (DATA.self_check && DATA.self_check.rating ? " Self-check on this repository: " + DATA.self_check.rating.label.toLowerCase() + " (see the end of the report)." : "");
+  if (HB.former.length) { el("formerFig").hidden = false; el("formerTable").querySelector("tbody").innerHTML = HB.former.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.peak_callers)}</td><td>${esc(r.peak_quarter)}</td><td class="num">${r.still_defined_in ? "defined in " + esc(r.still_defined_in) + ", not in the latest scan" : (r.gone ? "gone" : fmt(r.callers_now))}</td></tr>`).join(""); }
+}
+
+// kinds of functions (archetypes)
+const AR = DATA.archetypes;
+if (AR && AR.now && AR.now.length) {
+  el("types").hidden = false;
+  const rf = AR.retention_function, rc = AR.retention_file;
+  const st = [[AR.now[0].label, pct(AR.now[0].share) + " of functions are the most common type"]];
+  if (rf.unedited_kept != null) st.push([pct(rf.unedited_kept, 1), "of functions nobody edited kept their type after a year"]);
+  if (rf.edited_kept != null) st.push([pct(rf.edited_kept), "of edited functions kept their type"]);
+  el("typeStats").innerHTML = st.map(([b, s_]) => `<div class="stat"><b>${esc(b)}</b><span>${s_}</span></div>`).join("");
+  el("typeTable").querySelector("tbody").innerHTML = AR.now.slice(0, 10).map(r => `<tr><td>${esc(r.label)}</td><td class="num">${pct(r.share, 1)}</td><td>${esc(r.meaning)}</td></tr>`).join("");
+  const rows = [["Functions that were edited", rf.edited_kept, rf.edited_n], ["Functions nobody edited", rf.unedited_kept, rf.unedited_n], ["Files (by what their functions are) that were edited", rc.edited_kept, rc.edited_n], ["Files nobody edited", rc.unedited_kept, rc.unedited_n]];
+  el("retTable").querySelector("tbody").innerHTML = rows.filter(r => r[1] != null).map(([l, v, n_]) => `<tr><td>${l}</td><td class="num">${pct(v, 1)}</td><td class="num">${fmt(n_)}</td></tr>`).join("");
+  const tr = rf.transitions.slice(0, 3).map(t_ => `${esc(t_.from)} to ${esc(t_.to)} (${fmt(t_.count)})`).join("; ");
+  el("retCap").textContent = "Compared over all one-year windows in the scans, for functions present at both ends. " + (tr ? "The most common changes of type: " + tr + ". " : "") + AR.label_note;
+  sw("sw_types", rf.unedited_kept != null && rf.edited_kept != null ? `A function's type is decided by its code, so untouched code never changes type (${pct(rf.unedited_kept, 1)}), and ${pct(rf.edited_kept)} of edited functions keep theirs: edits rarely change what a function is.` : "");
+}
+
+// gif, lifetimes, comments (scan mode)
+const L = DATA.lifetimes, CM = Q ? Q.map(q => q.comments) : null;
+if (DATA.gif_data_uri) { el("gifFig").hidden = false; el("gifImg").src = DATA.gif_data_uri; }
+if (L && L.counts && (L.counts.born || L.counts.initial)) {
+  el("lifetimes").hidden = false;
+  const b = L.counts.born, ini = L.counts.initial, sb_ = L.survive.born || {}, si = L.survive.initial || {};
+  const st = [];
+  if (L.median_age_alive_years != null) st.push([L.median_age_alive_years.toFixed(1) + " years", "median age of today's functions (counted from the first scan or their birth)"]);
+  st.push([pct(L.alive_now_older_than_observed), `of today's functions were already there at the first scan (${L.since}), ${L.years_observed.toFixed(1)} years ago`]);
+  if (b) { const s5 = sb_["5"], s1 = sb_["1"]; if (s1 != null) st.push([pct(s1), "of functions born during the scans were still there a year later"]); if (s5 != null) st.push([pct(s5), "were still there after five years"]); }
+  if (b && b.median_years != null) st.push([b.median_years.toFixed(1) + " years", "half-life of a new function (half are gone by then)"]);
+  el("lifeStats").innerHTML = st.map(([x, y]) => `<div class="stat"><b>${x}</b><span>${y}</span></div>`).join("");
+  el("survCap").textContent = (b ? `${fmt(b.functions)} functions were born during the scans (${fmt(b.died)} have gone); ` : "") + (ini ? `${fmt(ini.functions)} were already there at the first scan (${fmt(ini.died)} have gone). ` : "") + "A function that moved or was renamed counts as gone and new, so lifetimes are a lower bound.";
+  el("diedTable").querySelector("tbody").innerHTML = L.longest_died.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${r.at_least ? "at least " : ""}${r.years}</td></tr>`).join("");
+  el("oldTable").querySelector("tbody").innerHTML = L.oldest_alive.map(r => `<tr><td><code>${esc(r.function)}</code></td><td>${esc(r.file)}</td><td class="num">${fmt(r.lines)}</td></tr>`).join("");
+  const parts = [];
+  if (b && sb_["5"] != null) parts.push(`${pct(sb_["5"])} of functions born during the scans lasted five years`);
+  if (ini && si["5"] != null) parts.push(`${pct(si["5"])} of those already there at the start are still present five years on`);
+  sw("sw_life", parts.length ? parts.join(", and ") + "." : "");
+}
+if (CM && CM.some(c => c && c.density > 0)) {
+  el("comments").hidden = false;
+  const f0 = CM.find(c => c.density > 0), fl = CM[CM.length - 1];
+  const parts = [`Comment lines per line of code went from ${f0.density.toFixed(2)} to ${fl.density.toFixed(2)}`];
+  if (fl.header_share != null) parts.push(`${pct(fl.header_share)} of functions now have a comment block above them`);
+  parts.push(`${fl.planned_per_kloc.toFixed(2)} TODO-type and ${fl.fragile_per_kloc.toFixed(2)} fragility markers per 1,000 lines`);
+  sw("sw_comments", parts.join("; ") + ".");
+}
+let secN = 1;
+["growth", "lifetimes", "types", "activity", "sweeps", "repairs", "sizes", "repeat", "comments"].forEach(id => { const sec = el(id), h = sec.querySelector("h2[data-base]"); if (!sec.hidden && h) h.textContent = (secN++) + " · " + h.dataset.base; });
+
+// self-check
+const SCK = DATA.self_check;
+if (SCK && SCK.rows && SCK.rows.length) {
+  el("selfCheck").hidden = false;
+  const lab = { ok: "Pass", warn: "Warning", fail: "Fail", info: "Info" };
+  el("checkTable").querySelector("tbody").innerHTML = SCK.rows.map(r => `<tr><td><b>${esc(r.what)}</b><br><span class="cap">${esc(r.detail)}</span></td><td>${esc(r.value)}</td><td><span class="pill ${r.status}">${lab[r.status] || r.status}</span></td></tr>`).join("");
+  const rt = SCK.rating;
+  if (rt) {
+    el("ratingText").textContent = rt.text;
+    const cgl = rt.compiler_grade && rt.compiler_grade.label !== "Not rated" ? rt.compiler_grade.label : null, bad = rt.label !== "Good" || (cgl && cgl !== "Good"), st = rt.standing, stBad = rt.standing_label && rt.standing_label !== "Good";
+    if (bad || stBad) {
+      const w = el("cgWarn"); w.hidden = false;
+      const calls = SCK.rows.find(r => r.id === "calls");
+      w.textContent = (bad ? "Warning: " : "Note: ") + `call-graph rating ${(cgl || (bad ? rt.label : rt.standing_label)).toLowerCase()}. ` + (st ? `Against ${st.reference} (a compiler-grade reference) our research found GitGalaxy recovers ${pct(st.recall)} of cross-file call edges in ${DATA.lang === "c" ? "C" : DATA.lang} with ${pct(st.precision)} precision; a tree-sitter name matcher recovers ${pct(st.tree_sitter_recall)}. ` : "") + (rt.compiler_grade ? `On this repository, against ${rt.compiler_grade.reference}, GitGalaxy found ${pct(rt.compiler_grade.recall)} of the call edges (precision ${pct(rt.compiler_grade.precision)}) in the ${pct(rt.compiler_grade.parsed_share)} of files where libclang found functions. ` : "") + (calls ? `Against an independent name matcher it found ${pct(calls.data.recall)} of the calls; calls hidden from a name matcher (function pointers, macros) and anything a compiler resolves that neither tool does are not covered. ` : "") + "Hub lists, repair radius and call counts are lower bounds.";
+    }
+  }
+}
+
+// charts
+function base(extra) {
+  const fg2 = css("--fg2"), grid = css("--grid");
+  return Object.assign({ responsive: true, maintainAspectRatio: false, animation: false, interaction: { mode: "index", intersect: false },
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: css("--card"), titleColor: css("--fg"), bodyColor: css("--fg2"), borderColor: css("--line"), borderWidth: 1, padding: 10 } },
+    scales: { x: { grid: { display: false }, ticks: { color: fg2, maxTicksLimit: 8, maxRotation: 0, autoSkipPadding: 18 }, border: { color: css("--line") } }, y: { grid: { color: grid }, ticks: { color: fg2 }, border: { display: false } } } }, extra || {});
+}
+function isDark() { const m = css("--bg").match(/[0-9a-f]{2}/gi); return m ? (parseInt(m[0], 16) + parseInt(m[1], 16) + parseInt(m[2], 16)) / 3 < 128 : false; }
+// spectrum from violet (first) to red (last); light and dark themes get different lightness so every band reads on its own background
+function rainbow(n, i) { const h = n <= 1 ? 0 : 270 - 270 * i / (n - 1); return isDark() ? `hsl(${h.toFixed(0)} 68% 60%)` : `hsl(${h.toFixed(0)} 74% 46%)`; }
+const sideLegend = () => ({ display: true, position: window.innerWidth < 640 ? "bottom" : "right", reverse: true, labels: { color: css("--fg2"), boxWidth: 14, boxHeight: 14, font: { size: 12 }, padding: 8 } });
+function lerp(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
+const legendOn = () => ({ display: true, labels: { color: css("--fg2"), boxWidth: 12, boxHeight: 12 } });
+function line(id, labels, data, color, fmtTip, yopts) {
+  const o = base(); o.scales.y = Object.assign(o.scales.y, yopts || {}); o.plugins.tooltip.callbacks = { label: c => fmtTip(c.parsed.y) };
+  charts.push(new Chart(el(id), { type: "line", data: { labels, datasets: [{ data, borderColor: color, backgroundColor: color, borderWidth: 2, pointRadius: 0, tension: 0.2 }] }, options: o }));
+}
+let workMode = "abs";
+function render() {
+  charts.splice(0).forEach(c => c.destroy());
+  const s1 = css("--s1"), s2 = css("--s2"), s3 = css("--s3"), s4 = css("--s4"), s4b = css("--s4b");
+  if (Q) {
+    const labels = Q.map(q => q.label);
+    line("cSize", labels, Q.map(q => q.functions), s1, v => "Functions: " + fmt(v), { ticks: { color: css("--fg2"), callback: v => fmt(v) } });
+    const q1 = Q.slice(1), l1 = q1.map(q => q.label);
+    const o2 = base(); o2.scales.x.stacked = true; o2.scales.y.stacked = true; o2.scales.y.ticks.callback = v => fmt(Math.abs(v)); o2.plugins.legend = legendOn(); o2.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(Math.abs(c.parsed.y)) };
+    charts.push(new Chart(el("cBirths"), { type: "bar", data: { labels: l1, datasets: [
+      { label: "New code", data: q1.map(q => q.births_new_code), backgroundColor: s1, borderSkipped: false }, { label: "Moved in", data: q1.map(q => q.births_moved), backgroundColor: s4b, borderSkipped: false },
+      { label: "Removed", data: q1.map(q => -q.deaths_removed), backgroundColor: s2, borderSkipped: false }, { label: "Moved out", data: q1.map(q => -q.deaths_moved), backgroundColor: s4, borderSkipped: false } ] }, options: o2 }));
+    const years = DATA.cohort_years, ramp = css("--ramp-new").replace("#", ""), rampOld = css("--ramp-old").replace("#", "");
+    const o3 = base(); o3.scales.y.stacked = true; o3.scales.y.ticks.callback = v => fmt(v);
+    o3.plugins.legend = sideLegend(); o3.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    charts.push(new Chart(el("cCohorts"), { type: "line", data: { labels, datasets: years.map((y, i) => ({ label: i === 0 ? y + " or earlier" : y, data: Q.map(q => q.cohorts[y]), fill: true, stack: "a", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: rainbow(years.length, i) })) }, options: o3 }));
+    const q4 = Q.filter(q => q.untouched_4q_share != null && !q.partial), l4 = q4.map(q => q.label);
+    const o4 = base(); o4.scales.y.ticks.callback = v => v + "%"; o4.scales.y.min = 0; o4.scales.y.max = 100; o4.plugins.legend = legendOn(); o4.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "%" };
+    charts.push(new Chart(el("cHeat"), { type: "line", data: { labels: l4, datasets: [
+      { label: "Untouched for four quarters", data: q4.map(q => 100 * q.untouched_4q_share), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Edited this quarter", data: q4.map(q => 100 * q.edited_functions / q.functions), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o4 }));
+    const sizes = Q.map(q => q.functions), g = sizes[sizes.length - 1] / sizes[0], births = Q.slice(1).reduce((a, q) => a + q.births_new_code, 0), moved = Q.slice(1).reduce((a, q) => a + q.births_moved, 0);
+    sw("sw_growth", `The code base grew ${g.toFixed(1)} times, from ${fmt(sizes[0])} to ${fmt(sizes[sizes.length - 1])} functions. Of the functions that appeared over the scans, ${pct(births / (births + moved))} were new code and ${pct(moved / (births + moved))} were existing names reappearing elsewhere (moves and renames).`);
+  } else { el("heatFig").hidden = true; }
+
+
+
+  if (DATA.languages) {
+    el("langFig").hidden = false;
+    const LG = DATA.languages, tot = Q.map((q, i) => LG.labels.reduce((a, k) => a + LG.lines[k][i], 0) || 1), named = LG.labels.filter(k => k !== "other").length;
+    const o = base(); o.scales.y.stacked = true; o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%";
+    o.plugins.legend = sideLegend(); o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(1) + "% of lines" };
+    charts.push(new Chart(el("cLang"), { type: "line", data: { labels: Q.map(q => q.label), datasets: LG.labels.map((k, i) => ({ label: k, data: LG.lines[k].map((v, j) => 100 * v / tot[j]), fill: true, stack: "lg", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: k === "other" ? css("--s4b") : rainbow(named, named - 1 - i) })) }, options: o }));
+  }
+  if (AR && AR.mix) {
+    const o = base(); o.scales.y.stacked = true; o.scales.y.ticks.callback = v => fmt(v);
+    o.plugins.legend = sideLegend(); o.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + fmt(c.parsed.y) };
+    const labs = AR.mix.labels, named = labs.filter(k => k !== "Other types").length;
+    charts.push(new Chart(el("cTypes"), { type: "line", data: { labels: Q.map(q => q.label), datasets: labs.map((k, i) => ({ label: k, data: AR.mix.series[k], fill: true, stack: "t", borderWidth: 0.5, borderColor: css("--card"), pointRadius: 0, backgroundColor: k === "Other types" ? css("--s4b") : rainbow(named, named - 1 - i) })) }, options: o }));
+  }
+  if (L && L.curves && Object.keys(L.curves).length) {
+    const o = base(); o.scales.y.min = 0; o.scales.y.max = 100; o.scales.y.ticks.callback = v => v + "%"; o.scales.x.ticks.callback = function (v) { const g = L.grid[v]; return g % 1 === 0 ? g + " y" : ""; };
+    o.plugins.legend = legendOn(); o.plugins.tooltip.callbacks = { title: items => items[0].label + " years", label: c => c.dataset.label + ": " + c.parsed.y.toFixed(0) + "% still present" };
+    const ds = [];
+    if (L.curves.born) ds.push({ label: "Born during the scans", data: L.curves.born.map(v => 100 * v), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, stepped: true });
+    if (L.curves.initial) ds.push({ label: "Already there at the first scan", data: L.curves.initial.map(v => 100 * v), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, stepped: true });
+    charts.push(new Chart(el("cSurv"), { type: "line", data: { labels: L.grid.map(v => String(v)), datasets: ds }, options: o }));
+  }
+  if (CM && CM.some(c => c && c.density > 0)) {
+    const ql = Q.map(q => q.label);
+    line("cDens", ql, CM.map(c => c.density), s1, v => v.toFixed(2) + " comment lines per code line", { ticks: { color: css("--fg2"), callback: v => v.toFixed(2) }, min: 0 });
+    const o2c = base(); o2c.plugins.legend = legendOn(); o2c.scales.y.min = 0; o2c.scales.y.max = 100; o2c.scales.y.ticks.callback = v => v + "%"; o2c.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(0) + "%" };
+    charts.push(new Chart(el("cHdr"), { type: "line", data: { labels: ql, datasets: [
+      { label: "Comment block above", data: CM.map(c => c.header_share == null ? null : 100 * c.header_share), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Doc-style comment", data: CM.map(c => c.documented_share == null ? null : 100 * c.documented_share), borderColor: s3, backgroundColor: s3, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o2c }));
+    const o3c = base(); o3c.plugins.legend = legendOn(); o3c.scales.y.min = 0; o3c.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + c.parsed.y.toFixed(2) };
+    charts.push(new Chart(el("cMark"), { type: "line", data: { labels: ql, datasets: [
+      { label: "Planned (TODO-type)", data: CM.map(c => c.planned_per_kloc), borderColor: s4, backgroundColor: s4, borderWidth: 2, pointRadius: 0, tension: 0.2 },
+      { label: "Fragile (HACK, FIXME-type)", data: CM.map(c => c.fragile_per_kloc), borderColor: s2, backgroundColor: s2, borderWidth: 2, pointRadius: 0, tension: 0.2 } ] }, options: o3c }));
+  }
+  const gq = GQ.filter(q => !q.partial), gl = gq.map(q => q.label), keys = ["organic", "sweeps", "fixes", "mechanical"], cols = [s1, s2, s3, s4], names2 = ["Organic change", "Sweeps", "Fixes", "Mechanical"];
+  const o5 = base(); o5.scales.y.stacked = true; o5.scales.y.ticks.callback = v => workMode === "abs" ? fmt(v) : v + "%"; if (workMode === "share") o5.scales.y.max = 100;
+  o5.plugins.tooltip.callbacks = { label: c => c.dataset.label + ": " + (workMode === "abs" ? fmt(c.parsed.y) + " edits" : c.parsed.y.toFixed(1) + "%") };
+  charts.push(new Chart(el("cWork"), { type: "line", data: { labels: gl, datasets: keys.map((k, i) => ({ label: names2[i], data: gq.map(q => { const t = keys.reduce((a, kk) => a + q["edits_" + kk], 0) || 1; return workMode === "abs" ? q["edits_" + k] : 100 * q["edits_" + k] / t; }), fill: true, borderColor: cols[i], backgroundColor: cols[i], borderWidth: 1, pointRadius: 0, stack: "w", tension: 0.15 })) }, options: o5 }));
+  line("cAuthors", gl, gq.map(q => q.authors), s1, v => fmt(v) + " authors", { ticks: { color: css("--fg2"), callback: v => fmt(v) }, min: 0 });
+  line("cTop", gl, gq.map(q => 100 * q.top_author_share), s2, v => v.toFixed(0) + "% of commits", { ticks: { color: css("--fg2"), callback: v => v + "%" }, min: 0, max: 100 });
+  const gf = gq.filter(q => q.fix_commits >= 5);
+  line("cFixTest", gf.map(q => q.label), gf.map(q => 100 * q.fix_with_test / q.fix_commits), s3, v => v.toFixed(0) + "% of fix commits touch a test", { ticks: { color: css("--fg2"), callback: v => v + "%" }, min: 0, max: 100 });
+  if (DATA.pairs >= 30) {
+    const o8 = base(); o8.scales.y.ticks.callback = v => fmt(v); o8.plugins.tooltip.callbacks = { label: c => fmt(c.parsed.y) + " fixes" };
+    charts.push(new Chart(el("cLag"), { type: "bar", data: { labels: DATA.lag_hist.map(b => b.bin), datasets: [{ label: "Fixes", data: DATA.lag_hist.map(b => b.pairs), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o8, { interaction: { mode: "nearest", intersect: true } }) }));
+  }
+  const o9 = base(); o9.scales.y.ticks.callback = v => v + "%"; o9.scales.y.min = 0; o9.plugins.tooltip.callbacks = { label: c => c.parsed.y.toFixed(0) + "% later blamed for a fix" };
+  charts.push(new Chart(el("cSize2"), { type: "bar", data: { labels: sb.map(b => b.band + " (" + fmt(b.commits) + " commits)"), datasets: [{ label: "Later blamed", data: sb.map(b => 100 * b.later_repaired), backgroundColor: s1, borderRadius: 4, borderSkipped: false }] }, options: Object.assign(o9, { interaction: { mode: "nearest", intersect: true } }) }));
+}
+function setMode(m) { workMode = m; el("tAbs").setAttribute("aria-pressed", m === "abs"); el("tShare").setAttribute("aria-pressed", m === "share"); render(); }
+el("tAbs").onclick = () => setMode("abs"); el("tShare").onclick = () => setMode("share");
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>

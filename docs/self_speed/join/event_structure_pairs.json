@@ -1,0 +1,95 @@
+[
+ {
+  "event": "E1",
+  "sha": "6b604f91a731a1c7a257db8ffb29f350f370fefb",
+  "files": 4,
+  "engine_files": [
+   [
+    "gitgalaxy/galaxyscope.py",
+    "9",
+    "1"
+   ]
+  ],
+  "born": 2,
+  "died": 0,
+  "changed": 2,
+  "changed_list": [
+   [
+    "gitgalaxy/galaxyscope.py",
+    "_extract_features_parallel"
+   ],
+   [
+    "tests/extraction/languages/_strict_harness.py",
+    "_best_of_timing"
+   ]
+  ]
+ },
+ {
+  "event": "E2",
+  "sha": "14fc9c7a55cd5d980e3008e586195046057b97c2",
+  "files": 4,
+  "engine_files": [
+   [
+    "gitgalaxy/core/aperture.py",
+    "29",
+    "10"
+   ],
+   [
+    "gitgalaxy/core/guidestar_lens.py",
+    "1",
+    "4"
+   ],
+   [
+    "gitgalaxy/metrics/chronometer.py",
+    "1",
+    "4"
+   ]
+  ],
+  "born": 10,
+  "died": 1,
+  "changed": 4,
+  "changed_list": [
+   [
+    "gitgalaxy/core/aperture.py",
+    "_check_ignore_rules"
+   ],
+   [
+    "gitgalaxy/core/aperture.py",
+    "_probe"
+   ],
+   [
+    "gitgalaxy/core/guidestar_lens.py",
+    "_calculate_documentation_coverage"
+   ],
+   [
+    "gitgalaxy/metrics/chronometer.py",
+    "_determine_commit_bounds"
+   ]
+  ]
+ },
+ {
+  "event": "E3",
+  "sha": "89d86da58ad7e69bdc6827c6f8999985e8903185",
+  "files": 4,
+  "engine_files": [
+   [
+    "gitgalaxy/core/prism.py",
+    "9",
+    "19"
+   ]
+  ],
+  "born": 1,
+  "died": 0,
+  "changed": 2,
+  "changed_list": [
+   [
+    "gitgalaxy/core/prism.py",
+    "_strip_segment_comments"
+   ],
+   [
+    "gitgalaxy/core/prism.py",
+    "strip_callback"
+   ]
+  ]
+ }
+]

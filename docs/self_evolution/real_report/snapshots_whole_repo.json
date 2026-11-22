@@ -1,0 +1,62 @@
+[
+ {
+  "label": "2026-03 (start)",
+  "date": "2026-03-21",
+  "commit": "34ad7879c9d2d6ceefb87122f891f6dac57fc71a",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-03-21_34ad7879c9.db"
+ },
+ {
+  "label": "2026-03",
+  "date": "2026-03-30",
+  "commit": "e8d7c14240faf97ef309f43a9b7d8ec62d5db7a6",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-03-30_e8d7c14240.db"
+ },
+ {
+  "label": "2026-04",
+  "date": "2026-04-29",
+  "commit": "650b6b40f4dda0caa9111ecf46cc934a431d40dc",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-04-29_650b6b40f4.db"
+ },
+ {
+  "label": "2026-05",
+  "date": "2026-05-31",
+  "commit": "e720430ef32490d16b5c06e9f50dfc45f1ac74e3",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-05-31_e720430ef3.db"
+ },
+ {
+  "label": "2026-06",
+  "date": "2026-06-27",
+  "commit": "47941cb40d39567e1ef4411779a897f982f42581",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-06-27_47941cb40d.db"
+ },
+ {
+  "label": "2026-07",
+  "date": "2026-07-31",
+  "commit": "12e5dec476f047b31e4225ce36aa71140658bd76",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-07-31_12e5dec476.db"
+ },
+ {
+  "label": "2026-08",
+  "date": "2026-08-31",
+  "commit": "625716d6e30ed7c0c2d25785586ba7056ad16626",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-08-31_625716d6e3.db"
+ },
+ {
+  "label": "2026-09",
+  "date": "2026-09-30",
+  "commit": "e1ca9ec6781ae4d721a35621e03c5050fb60e4b7",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-09-30_e1ca9ec678.db"
+ },
+ {
+  "label": "2026-10",
+  "date": "2026-10-31",
+  "commit": "ee4072535f75af05c8371cca90e330aa8c009b38",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-10-31_ee4072535f.db"
+ },
+ {
+  "label": "2026-11",
+  "date": "2026-11-20",
+  "commit": "7203d2555753ca2b29e180de3cb8d7845aca6a06",
+  "db": "/srv/storage_16tb/projects/gitgalaxy-history/dbs/2026-11-20_7203d25557.db"
+ }
+]

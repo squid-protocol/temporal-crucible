@@ -1,0 +1,2457 @@
+{
+ "name": "gitgalaxy-engine",
+ "lang": "python",
+ "generated": "2026-11-20",
+ "mode": "scans",
+ "span": [
+  "2026 Q1",
+  "2026 Q4"
+ ],
+ "commits": 6919,
+ "commits_with_functions": 3581,
+ "function_edits": 22144,
+ "composition_edits": {
+  "organic": 0.5794797687861272,
+  "sweeps": 0.1446893063583815,
+  "fixes": 0.14464414739884393,
+  "mechanical": 0.1311867774566474
+ },
+ "composition_commits": {
+  "organic": 0.5920134040770735,
+  "sweeps": 0.003909522479754258,
+  "fixes": 0.19631387880480314,
+  "mechanical": 0.20776319463836918
+ },
+ "categories": {
+  "adds code": {
+   "commits": 1807,
+   "edits": 10508
+  },
+  "comment or whitespace only": {
+   "commits": 2,
+   "edits": 9
+  },
+  "fix, cause by blame": {
+   "commits": 519,
+   "edits": 2459
+  },
+  "fix, no cause found": {
+   "commits": 184,
+   "edits": 744
+  },
+  "formatting, docs, licence (subject)": {
+   "commits": 170,
+   "edits": 677
+  },
+  "modifies": {
+   "commits": 293,
+   "edits": 2192
+  },
+  "none": {
+   "commits": 3338,
+   "edits": 0
+  },
+  "removes code": {
+   "commits": 20,
+   "edits": 132
+  },
+  "revert": {
+   "commits": 1,
+   "edits": 23
+  },
+  "sweep": {
+   "commits": 14,
+   "edits": 3204
+  },
+  "tests only": {
+   "commits": 571,
+   "edits": 2196
+  }
+ },
+ "label_quality": {
+  "fixes_trailer_share_of_function_commits": 0.0,
+  "fixes_trailer_share_of_all": 0.0,
+  "cc_stable_share": 0.0,
+  "reported_by_share": 0.0,
+  "named_pairs": 0,
+  "unnamed_fix_like": 746,
+  "blame": {
+   "sampled": 746,
+   "found": 552,
+   "unnamed_fix_like": 746,
+   "coverage": 1.0
+  },
+  "fix_like_subject_share": 0.1371585489232548
+ },
+ "largest_sweeps": [
+  {
+   "date": "2026-10-10",
+   "functions": 818,
+   "subject": "ruff: autofix the py310 upgrade findings; baseline 957 -> 76 (Fixes #4496) (#4846)",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  },
+  {
+   "date": "2026-07-29",
+   "functions": 456,
+   "subject": "fix(livecode): route native hash and dash comments to comment stream (#754)",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  },
+  {
+   "date": "2026-05-29",
+   "functions": 444,
+   "subject": "style: apply Black and Ruff formatting repository-wide",
+   "cited_as_cause": true,
+   "fixes_citing": 28
+  },
+  {
+   "date": "2026-06-18",
+   "functions": 375,
+   "subject": "chore: standardize codebase formatting with ruff",
+   "cited_as_cause": true,
+   "fixes_citing": 1
+  },
+  {
+   "date": "2026-07-25",
+   "functions": 211,
+   "subject": "Adopt ruff for linting and formatting, replacing flake8 (#469) (#470)",
+   "cited_as_cause": true,
+   "fixes_citing": 5
+  },
+  {
+   "date": "2026-06-24",
+   "functions": 168,
+   "subject": "style: apply global ruff formatting rules",
+   "cited_as_cause": true,
+   "fixes_citing": 6
+  },
+  {
+   "date": "2026-05-29",
+   "functions": 156,
+   "subject": "test: upgrade extraction gauntlets and integrate licensing bypasses for CI/CD environments",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  },
+  {
+   "date": "2026-06-18",
+   "functions": 116,
+   "subject": "feat(orchestrator): integrate new optical and spatial classes into GalaxyScope pipeline",
+   "cited_as_cause": true,
+   "fixes_citing": 7
+  },
+  {
+   "date": "2026-08-17",
+   "functions": 95,
+   "subject": "Fix: multiple language parsing improvements (TS, JS, Go, Rust, C) (#1816)",
+   "cited_as_cause": true,
+   "fixes_citing": 1
+  },
+  {
+   "date": "2026-09-04",
+   "functions": 92,
+   "subject": "feat(core-engine): per-file dynamism replaces the flat language irc in four risk equations (#271",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  },
+  {
+   "date": "2026-06-18",
+   "functions": 74,
+   "subject": "refactor(metrics): translate signal processor physics to enterprise AppSec and Data Science term",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  },
+  {
+   "date": "2026-09-27",
+   "functions": 73,
+   "subject": "#3869: the measurement tools read source losslessly; the lint gate covers tests/ (#3873)",
+   "cited_as_cause": false,
+   "fixes_citing": 0
+  }
+ ],
+ "sweep_count": 14,
+ "lag_hist": [
+  {
+   "bin": "under a week",
+   "pairs": 204
+  },
+  {
+   "bin": "1-4 weeks",
+   "pairs": 113
+  },
+  {
+   "bin": "1-3 months",
+   "pairs": 95
+  },
+  {
+   "bin": "3-6 months",
+   "pairs": 50
+  },
+  {
+   "bin": "6-12 months",
+   "pairs": 2
+  },
+  {
+   "bin": "1-2 years",
+   "pairs": 0
+  },
+  {
+   "bin": "over 2 years",
+   "pairs": 0
+  }
+ ],
+ "lag_median_days": 9.90773148148148,
+ "pairs": 464,
+ "pairs_all": 552,
+ "cause_types": [
+  {
+   "cause": "other",
+   "pairs": 220,
+   "same_function": 0.5909090909090909,
+   "median_lag": 26.940711805555555
+  },
+  {
+   "cause": "fix",
+   "pairs": 171,
+   "same_function": 0.6608187134502924,
+   "median_lag": 1.982962962962963
+  },
+  {
+   "cause": "restructure",
+   "pairs": 60,
+   "same_function": 0.18333333333333332,
+   "median_lag": 12.172662037037037
+  },
+  {
+   "cause": "feature",
+   "pairs": 10,
+   "same_function": 0.8,
+   "median_lag": 36.14747685185185
+  },
+  {
+   "cause": "optimization",
+   "pairs": 3,
+   "same_function": 0.6666666666666666,
+   "median_lag": 20.48832175925926
+  }
+ ],
+ "stable_lag": {
+  "with": null,
+  "without": 9.90773148148148,
+  "n_with": 0
+ },
+ "repeat_spots": {
+  "fix_edits": 3203,
+  "functions_fixed": 1990,
+  "share_in_fixed_2plus": 0.522322822354043,
+  "share_in_fixed_5plus": 0.2360287230721199,
+  "functions_fixed_2plus_share": 0.23115577889447236
+ },
+ "most_fixed": [
+  {
+   "function": "_slice_by_braces",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 41
+  },
+  {
+   "function": "_calculate_block_metrics",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 28
+  },
+  {
+   "function": "record_mission",
+   "file": "gitgalaxy/recorders/record_keeper.py",
+   "fixes": 26
+  },
+  {
+   "function": "_process_file_worker",
+   "file": "gitgalaxy/galaxyscope.py",
+   "fixes": 24
+  },
+  {
+   "function": "get_mode",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 24
+  },
+  {
+   "function": "splice",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 23
+  },
+  {
+   "function": "_get_node_name",
+   "file": "tests/tools/tree_sitter_accuracy_audit.py",
+   "fixes": 23
+  },
+  {
+   "function": "_get_param_count",
+   "file": "tests/tools/tree_sitter_accuracy_audit.py",
+   "fixes": 23
+  },
+  {
+   "function": "_dart_scan_terminator",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 22
+  },
+  {
+   "function": "walk",
+   "file": "tests/tools/tree_sitter_accuracy_audit.py",
+   "fixes": 19
+  }
+ ],
+ "size_bands": [
+  {
+   "band": "1 function",
+   "commits": 0,
+   "later_repaired": null
+  },
+  {
+   "band": "2-3",
+   "commits": 0,
+   "later_repaired": null
+  },
+  {
+   "band": "4-10",
+   "commits": 0,
+   "later_repaired": null
+  },
+  {
+   "band": "11-30",
+   "commits": 0,
+   "later_repaired": null
+  },
+  {
+   "band": "31-60",
+   "commits": 0,
+   "later_repaired": null
+  }
+ ],
+ "pairs_dropped_no_function_share": 0.1594202898550725,
+ "same_function_overall": 0.5689655172413793,
+ "fix_definition": {
+  "trailer_fixes": 0,
+  "subject_only_fixes": 746,
+  "trailer_habit": false
+ },
+ "blame_complete": true,
+ "size_bands_basis": "named + blame sample (understates)",
+ "git_quarters": [
+  {
+   "label": "2026 Q1",
+   "commits": 47,
+   "edits_organic": 94,
+   "edits_sweeps": 0,
+   "edits_fixes": 14,
+   "edits_mechanical": 18,
+   "authors": 1,
+   "top_author_share": 1.0,
+   "fix_commits": 4,
+   "fix_with_test": 0,
+   "partial": false
+  },
+  {
+   "label": "2026 Q2",
+   "commits": 373,
+   "edits_organic": 746,
+   "edits_sweeps": 1394,
+   "edits_fixes": 172,
+   "edits_mechanical": 147,
+   "authors": 5,
+   "top_author_share": 0.8632707774798928,
+   "fix_commits": 51,
+   "fix_with_test": 23,
+   "partial": false
+  },
+  {
+   "label": "2026 Q3",
+   "commits": 2792,
+   "edits_organic": 3402,
+   "edits_sweeps": 927,
+   "edits_fixes": 1903,
+   "edits_mechanical": 376,
+   "authors": 13,
+   "top_author_share": 0.9340974212034384,
+   "fix_commits": 462,
+   "fix_with_test": 435,
+   "partial": false
+  },
+  {
+   "label": "2026 Q4",
+   "commits": 3707,
+   "edits_organic": 8590,
+   "edits_sweeps": 883,
+   "edits_fixes": 1114,
+   "edits_mechanical": 2364,
+   "authors": 4,
+   "top_author_share": 0.9867817642298354,
+   "fix_commits": 186,
+   "fix_with_test": 185,
+   "partial": true
+  }
+ ],
+ "quarters": [
+  {
+   "label": "2026-03 (start)",
+   "date": "2026-03-21",
+   "functions": 186,
+   "cohorts": {
+    "2026": 186
+   },
+   "comments": {
+    "density": 0.22621184919210055,
+    "planned_per_kloc": 0.16321201240411295,
+    "fragile_per_kloc": 0.16321201240411295,
+    "header_share": 0.03608247422680412,
+    "documented_share": 0.5360824742268041
+   }
+  },
+  {
+   "label": "2026-03",
+   "date": "2026-03-30",
+   "functions": 166,
+   "cohorts": {
+    "2026": 166
+   },
+   "births_new_code": 19,
+   "births_moved": 1,
+   "deaths_removed": 30,
+   "deaths_moved": 10,
+   "edits_organic": 94,
+   "edits_sweeps": 0,
+   "edits_fixes": 12,
+   "edits_mechanical": 18,
+   "edited_functions": 61,
+   "untouched_4q_share": null,
+   "partial": true,
+   "comments": {
+    "density": 0.26417680315230424,
+    "planned_per_kloc": 0.17132088401576154,
+    "fragile_per_kloc": 0.6852835360630462,
+    "header_share": 0.04142011834319527,
+    "documented_share": 0.5976331360946746
+   }
+  },
+  {
+   "label": "2026-04",
+   "date": "2026-04-29",
+   "functions": 245,
+   "cohorts": {
+    "2026": 245
+   },
+   "births_new_code": 82,
+   "births_moved": 144,
+   "deaths_removed": 26,
+   "deaths_moved": 121,
+   "edits_organic": 283,
+   "edits_sweeps": 0,
+   "edits_fixes": 9,
+   "edits_mechanical": 9,
+   "edited_functions": 90,
+   "untouched_4q_share": null,
+   "partial": true,
+   "comments": {
+    "density": 0.3474329347935296,
+    "planned_per_kloc": 0.8037777554506179,
+    "fragile_per_kloc": 0.10047221943132724,
+    "header_share": 0.04032258064516129,
+    "documented_share": 0.6411290322580645
+   }
+  },
+  {
+   "label": "2026-05",
+   "date": "2026-05-31",
+   "functions": 260,
+   "cohorts": {
+    "2026": 260
+   },
+   "births_new_code": 11,
+   "births_moved": 4,
+   "deaths_removed": 0,
+   "deaths_moved": 0,
+   "edits_organic": 53,
+   "edits_sweeps": 600,
+   "edits_fixes": 26,
+   "edits_mechanical": 53,
+   "edited_functions": 245,
+   "untouched_4q_share": null,
+   "partial": true,
+   "comments": {
+    "density": 0.3043250915066856,
+    "planned_per_kloc": 0.5975946814073354,
+    "fragile_per_kloc": 0.07469933517591693,
+    "header_share": 0.034220532319391636,
+    "documented_share": 0.55893536121673
+   }
+  },
+  {
+   "label": "2026-06",
+   "date": "2026-06-27",
+   "functions": 263,
+   "cohorts": {
+    "2026": 263
+   },
+   "births_new_code": 42,
+   "births_moved": 54,
+   "deaths_removed": 41,
+   "deaths_moved": 52,
+   "edits_organic": 410,
+   "edits_sweeps": 794,
+   "edits_fixes": 137,
+   "edits_mechanical": 85,
+   "edited_functions": 226,
+   "untouched_4q_share": 0.0,
+   "partial": true,
+   "comments": {
+    "density": 0.36799083269671506,
+    "planned_per_kloc": 0.7639419404125286,
+    "fragile_per_kloc": 0.0,
+    "header_share": 0.03787878787878788,
+    "documented_share": 0.5871212121212122
+   }
+  },
+  {
+   "label": "2026-07",
+   "date": "2026-07-31",
+   "functions": 293,
+   "cohorts": {
+    "2026": 293
+   },
+   "births_new_code": 25,
+   "births_moved": 8,
+   "deaths_removed": 0,
+   "deaths_moved": 3,
+   "edits_organic": 312,
+   "edits_sweeps": 667,
+   "edits_fixes": 416,
+   "edits_mechanical": 33,
+   "edited_functions": 215,
+   "untouched_4q_share": 0.0,
+   "partial": true,
+   "comments": {
+    "density": 0.4112819086040203,
+    "planned_per_kloc": 0.7651109410864575,
+    "fragile_per_kloc": 0.3477777004938443,
+    "header_share": 0.061224489795918366,
+    "documented_share": 0.564625850340136
+   }
+  },
+  {
+   "label": "2026-08",
+   "date": "2026-08-31",
+   "functions": 331,
+   "cohorts": {
+    "2026": 331
+   },
+   "births_new_code": 47,
+   "births_moved": 0,
+   "deaths_removed": 9,
+   "deaths_moved": 0,
+   "edits_organic": 378,
+   "edits_sweeps": 95,
+   "edits_fixes": 657,
+   "edits_mechanical": 137,
+   "edited_functions": 110,
+   "untouched_4q_share": 0.0,
+   "partial": true,
+   "comments": {
+    "density": 0.5161745749186667,
+    "planned_per_kloc": 0.675219446320054,
+    "fragile_per_kloc": 1.657356822785587,
+    "header_share": 0.056716417910447764,
+    "documented_share": 0.5850746268656717
+   }
+  },
+  {
+   "label": "2026-09",
+   "date": "2026-09-30",
+   "functions": 1351,
+   "cohorts": {
+    "2026": 1351
+   },
+   "births_new_code": 1004,
+   "births_moved": 28,
+   "deaths_removed": 6,
+   "deaths_moved": 6,
+   "edits_organic": 2731,
+   "edits_sweeps": 165,
+   "edits_fixes": 830,
+   "edits_mechanical": 206,
+   "edited_functions": 543,
+   "untouched_4q_share": 0.02580645161290318,
+   "partial": true,
+   "comments": {
+    "density": 0.5254047496850651,
+    "planned_per_kloc": 4.0125040824896185,
+    "fragile_per_kloc": 1.0264545327299024,
+    "header_share": 0.018129079042784626,
+    "documented_share": 0.6127628716461204
+   }
+  },
+  {
+   "label": "2026-10",
+   "date": "2026-10-31",
+   "functions": 3524,
+   "cohorts": {
+    "2026": 3524
+   },
+   "births_new_code": 2036,
+   "births_moved": 145,
+   "deaths_removed": 6,
+   "deaths_moved": 2,
+   "edits_organic": 6528,
+   "edits_sweeps": 883,
+   "edits_fixes": 960,
+   "edits_mechanical": 1636,
+   "edited_functions": 1117,
+   "untouched_4q_share": 0.08298755186721996,
+   "partial": true,
+   "comments": {
+    "density": 0.4552637810486434,
+    "planned_per_kloc": 4.648728142876728,
+    "fragile_per_kloc": 0.5483754377656194,
+    "header_share": 0.1346782988004362,
+    "documented_share": 0.6046892039258451
+   }
+  },
+  {
+   "label": "2026-11",
+   "date": "2026-11-20",
+   "functions": 4079,
+   "cohorts": {
+    "2026": 4079
+   },
+   "births_new_code": 491,
+   "births_moved": 99,
+   "deaths_removed": 3,
+   "deaths_moved": 32,
+   "edits_organic": 2043,
+   "edits_sweeps": 0,
+   "edits_fixes": 154,
+   "edits_mechanical": 728,
+   "edited_functions": 413,
+   "untouched_4q_share": 0.20664206642066418,
+   "partial": true,
+   "comments": {
+    "density": 0.42781218430184037,
+    "planned_per_kloc": 4.392322220758115,
+    "fragile_per_kloc": 0.7686563886326702,
+    "header_share": 0.13029162746942616,
+    "documented_share": 0.6065380997177798
+   }
+  }
+ ],
+ "cohort_years": [
+  "2026"
+ ],
+ "lifetimes": {
+  "since": "2026-03 (start)",
+  "years_observed": 0.6680355920602327,
+  "grid": [
+   0.0,
+   0.25,
+   0.5
+  ],
+  "curves": {
+   "born": [
+    1.0,
+    0.7757308908851339,
+    0.7201665975163352
+   ],
+   "initial": [
+    1.0,
+    0.0752688172043011,
+    0.04301075268817206
+   ]
+  },
+  "survive": {
+   "born": {
+    "1": null,
+    "2": null,
+    "5": null,
+    "10": null
+   },
+   "initial": {
+    "1": null,
+    "2": null,
+    "5": null,
+    "10": null
+   }
+  },
+  "counts": {
+   "born": {
+    "functions": 4235,
+    "died": 164,
+    "alive": 4071,
+    "median_years": null
+   },
+   "initial": {
+    "functions": 186,
+    "died": 178,
+    "alive": 8,
+    "median_years": 0.25
+   }
+  },
+  "longest_died": [
+   {
+    "function": "run_firewall_audit",
+    "file": "gitgalaxy/tools/supply_chain_security/supply_chain_firewall.py",
+    "years": 0.6,
+    "born": "2026-04",
+    "died": "2026-11",
+    "at_least": false
+   },
+   {
+    "function": "main",
+    "file": "gitgalaxy/tools/supply_chain_security/supply_chain_firewall.py",
+    "years": 0.6,
+    "born": "2026-04",
+    "died": "2026-11",
+    "at_least": false
+   },
+   {
+    "function": "_extract_execution_triggers",
+    "file": "gitgalaxy/core/guidestar_lens.py",
+    "years": 0.5,
+    "born": "2026-04",
+    "died": "2026-10",
+    "at_least": false
+   },
+   {
+    "function": "count_nines",
+    "file": "gitgalaxy/tools/cobol_to_java/cobol_to_java_spring_forge.py",
+    "years": 0.4,
+    "born": "2026-04",
+    "died": "2026-09",
+    "at_least": false
+   },
+   {
+    "function": "count_nines",
+    "file": "gitgalaxy/tools/cobol_to_cobol/cobol_schema_forge.py",
+    "years": 0.4,
+    "born": "2026-04",
+    "died": "2026-09",
+    "at_least": false
+   },
+   {
+    "function": "evaluate_ecosystem",
+    "file": "gitgalaxy/tools/ai_guardrails/dev_agent_firewall.py",
+    "years": 0.4,
+    "born": "2026-04",
+    "died": "2026-09",
+    "at_least": false
+   },
+   {
+    "function": "__init__",
+    "file": "gitgalaxy/tools/ai_guardrails/dev_agent_firewall.py",
+    "years": 0.4,
+    "born": "2026-04",
+    "died": "2026-09",
+    "at_least": false
+   },
+   {
+    "function": "hunt_threats",
+    "file": "gitgalaxy/tools/ai_guardrails/ai_appsec_sensor.py",
+    "years": 0.4,
+    "born": "2026-04",
+    "died": "2026-09",
+    "at_least": false
+   }
+  ],
+  "oldest_alive": [
+   {
+    "function": "_process_file_worker",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 778
+   },
+   {
+    "function": "_init_worker",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 85
+   },
+   {
+    "function": "_summarize_anomalies",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 54
+   },
+   {
+    "function": "_get_git_audit",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 54
+   },
+   {
+    "function": "_prepare_target",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 33
+   },
+   {
+    "function": "cleanup",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 13
+   },
+   {
+    "function": "_record_anomaly",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 5
+   },
+   {
+    "function": "__init__",
+    "file": "gitgalaxy/galaxyscope.py",
+    "lines": 5
+   }
+  ],
+  "initial_still_alive": 8,
+  "alive_now": 4079,
+  "alive_now_older_than_observed": 0.001961265015935278,
+  "median_age_alive_years": 0.05475701574264202
+ },
+ "languages": {
+  "labels": [
+   "python",
+   "java",
+   "cobol",
+   "other"
+  ],
+  "lines": {
+   "python": [
+    5713,
+    5837,
+    9953,
+    13387,
+    13090,
+    14377,
+    16291,
+    42866,
+    71089,
+    80344
+   ],
+   "java": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8935,
+    10511
+   ],
+   "cobol": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    213,
+    213
+   ],
+   "other": [
+    414,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "files": {
+   "python": [
+    20,
+    13,
+    43,
+    47,
+    47,
+    50,
+    50,
+    114,
+    181,
+    217
+   ],
+   "java": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    49,
+    54
+   ],
+   "cobol": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    11,
+    11
+   ],
+   "other": [
+    1,
+    0,
+    13,
+    14,
+    14,
+    13,
+    13,
+    12,
+    13,
+    13
+   ]
+  },
+  "biggest_shifts": [
+   {
+    "language": "java",
+    "from": 0.0,
+    "to": 0.11541924715597136
+   },
+   {
+    "language": "python",
+    "from": 0.9324302268646972,
+    "to": 0.882241841261475
+   },
+   {
+    "language": "cobol",
+    "from": 0.0,
+    "to": 0.002338911582553696
+   }
+  ]
+ },
+ "hubs": {
+  "now": {
+   "callers": [
+    {
+     "function": "__init__",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 478,
+     "centrality": 0.006206194626398164,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      2,
+      3,
+      2,
+      24,
+      48,
+      74,
+      166,
+      314,
+      419,
+      478
+     ],
+     "spark_callers": [
+      2,
+      3,
+      2,
+      24,
+      48,
+      74,
+      166,
+      314,
+      419,
+      478
+     ]
+    },
+    {
+     "function": "splice",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 353,
+     "centrality": 0.005125306037732366,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      1,
+      1,
+      1,
+      20,
+      34,
+      46,
+      87,
+      199,
+      296,
+      353
+     ],
+     "spark_callers": [
+      1,
+      1,
+      1,
+      20,
+      34,
+      46,
+      87,
+      199,
+      296,
+      353
+     ]
+    },
+    {
+     "function": "read_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 237,
+     "centrality": 0.003941088432304223,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      76,
+      193,
+      237
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      76,
+      193,
+      237
+     ]
+    },
+    {
+     "function": "load_galaxy_ir",
+     "file": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py",
+     "callers": 207,
+     "centrality": 0.001484214560296835,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      132,
+      188,
+      207
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      132,
+      188,
+      207
+     ]
+    },
+    {
+     "function": "split_streams",
+     "file": "gitgalaxy/core/prism.py",
+     "callers": 161,
+     "centrality": 0.0015495536338630657,
+     "age_years": 0.4,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      10,
+      36,
+      62,
+      123,
+      155,
+      161
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      10,
+      36,
+      62,
+      123,
+      155,
+      161
+     ]
+    },
+    {
+     "function": "resolve_calls",
+     "file": "gitgalaxy/core/call_resolver.py",
+     "callers": 148,
+     "centrality": 0.0013239224189673029,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      63,
+      113,
+      148
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      63,
+      113,
+      148
+     ]
+    },
+    {
+     "function": "store",
+     "file": "gitgalaxy/tools/cobol_to_java/det/cobolrt/Cobol.java",
+     "callers": 141,
+     "centrality": 0.0004974891658661107,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      91,
+      141
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      91,
+      141
+     ]
+    },
+    {
+     "function": "extract_boundary",
+     "file": "gitgalaxy/core/mainframe_boundary.py",
+     "callers": 124,
+     "centrality": 0.004000960638384451,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      77,
+      117,
+      124
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      77,
+      117,
+      124
+     ]
+    },
+    {
+     "function": "storage",
+     "file": "gitgalaxy/tools/cobol_to_java/det/cobolrt/Field.java",
+     "callers": 97,
+     "centrality": 0.0008139645677479306,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      92,
+      97
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      92,
+      97
+     ]
+    },
+    {
+     "function": "num",
+     "file": "gitgalaxy/tools/cobol_to_java/det/cobolrt/Cobol.java",
+     "callers": 91,
+     "centrality": 0.000407435372677145,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      48,
+      91
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      48,
+      91
+     ]
+    }
+   ],
+   "centrality": [
+    {
+     "function": "__init__",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 478,
+     "centrality": 0.006206194626398164,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      0.0022996747982278807,
+      0.00013691058530357133,
+      0.0028258726200676696,
+      0.009241700278848144,
+      0.01581574587825334,
+      0.008558172965192061,
+      0.013373884783189434,
+      0.009547886989558118,
+      0.006136147581099092,
+      0.006206194626398164
+     ],
+     "spark_callers": [
+      2,
+      3,
+      2,
+      24,
+      48,
+      74,
+      166,
+      314,
+      419,
+      478
+     ]
+    },
+    {
+     "function": "splice",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 353,
+     "centrality": 0.005125306037732366,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      0.0020398698240780707,
+      9.987264192454608e-05,
+      0.0024890227061177776,
+      0.008131472253147923,
+      0.011602612887547667,
+      0.00544816256852004,
+      0.0072384159010396186,
+      0.006497429027966526,
+      0.004885569119628231,
+      0.005125306037732366
+     ],
+     "spark_callers": [
+      1,
+      1,
+      1,
+      20,
+      34,
+      46,
+      87,
+      199,
+      296,
+      353
+     ]
+    },
+    {
+     "function": "decode_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 36,
+     "centrality": 0.0043306564759755155,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.006185706800465215,
+      0.00438086167217411,
+      0.0043306564759755155
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      33,
+      33,
+      36
+     ]
+    },
+    {
+     "function": "extract_boundary",
+     "file": "gitgalaxy/core/mainframe_boundary.py",
+     "callers": 124,
+     "centrality": 0.004000960638384451,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.009000042023022322,
+      0.0046445232959761214,
+      0.004000960638384451
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      77,
+      117,
+      124
+     ]
+    },
+    {
+     "function": "read_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 237,
+     "centrality": 0.003941088432304223,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.005406481270081795,
+      0.003970387839319341,
+      0.003941088432304223
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      76,
+      193,
+      237
+     ]
+    },
+    {
+     "function": "_rules_of",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 6,
+     "centrality": 0.002118838329380067,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.003457402232804443,
+      0.002215783261998137,
+      0.002118838329380067
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      6,
+      6,
+      6
+     ]
+    },
+    {
+     "function": "_compiled_rules",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 3,
+     "centrality": 0.0019234594155258238,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.003029916282886691,
+      0.0020247589920008545,
+      0.0019234594155258238
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "function": "get_mode",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 6,
+     "centrality": 0.0018394725360993459,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      0.0020594625532326886,
+      9.873330568054909e-05,
+      0.002442951380824455,
+      0.001170262608978296,
+      0.0011032382928394513,
+      0.0003751289093595714,
+      0.0003227486742386444,
+      0.0029424729239311284,
+      0.0018329319473162128,
+      0.0018394725360993459
+     ],
+     "spark_callers": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      6,
+      6,
+      6
+     ]
+    },
+    {
+     "function": "_closed_literal_capture",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 2,
+     "centrality": 0.0017906335951710381,
+     "age_years": 0.1,
+     "since_first_scan": false,
+     "spark": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.0027901328723233957,
+      0.001772373313314941,
+      0.0017906335951710381
+     ],
+     "spark_callers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "function": "get_config",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 3,
+     "centrality": 0.0016498230996418706,
+     "age_years": 0.7,
+     "since_first_scan": true,
+     "spark": [
+      0.0042993001422975425,
+      0.00020615963786107806,
+      0.005107106139378665,
+      0.002325926228044595,
+      0.0021231835737464937,
+      0.0007570701130644286,
+      0.000592805712258682,
+      0.0025770092764016853,
+      0.001652694008011087,
+      0.0016498230996418706
+     ],
+     "spark_callers": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  },
+  "in_both_lists": 4,
+  "persistence": {},
+  "former": [
+   {
+    "function": "enforce_licensing_guard",
+    "file": "gitgalaxy/licensing.py",
+    "peak_callers": 22,
+    "peak_quarter": "2026-05",
+    "callers_now": null,
+    "gone": true,
+    "still_defined_in": null
+   },
+   {
+    "function": "int_",
+    "file": "gitgalaxy/tools/cobol_to_java/det/cics.py",
+    "peak_callers": 18,
+    "peak_quarter": "2026-10",
+    "callers_now": 5,
+    "gone": false,
+    "still_defined_in": null
+   },
+   {
+    "function": "outcome",
+    "file": "gitgalaxy/tools/cobol_to_java/det/cics.py",
+    "peak_callers": 16,
+    "peak_quarter": "2026-10",
+    "callers_now": 13,
+    "gone": false,
+    "still_defined_in": null
+   },
+   {
+    "function": "_build_markdown",
+    "file": "gitgalaxy/recorders/llm_recorder.py",
+    "peak_callers": 14,
+    "peak_quarter": "2026-11",
+    "callers_now": 14,
+    "gone": false,
+    "still_defined_in": null
+   },
+   {
+    "function": "_ticks",
+    "file": "gitgalaxy/recorders/llm_recorder.py",
+    "peak_callers": 14,
+    "peak_quarter": "2026-10",
+    "callers_now": 14,
+    "gone": false,
+    "still_defined_in": null
+   }
+  ],
+  "labels": [
+   "2026-03 (start)",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10",
+   "2026-11"
+  ],
+  "identity": "function name"
+ },
+ "archetypes": {
+  "definitions_source": "gitgalaxy/standards/analysis_lens.py FUNCTION_ARCHETYPE_DEFINITIONS at origin/main 489e7f8a92",
+  "now": [
+   {
+    "label": "Stateful Encapsulated Methods",
+    "count": 1141,
+    "share": 0.2797254228977691,
+    "meaning": "method that holds state behind private scope (label from an older engine set; meaning approximate)"
+   },
+   {
+    "label": "Generic / Templated Code",
+    "count": 720,
+    "share": 0.17651385143417506,
+    "meaning": "generic / type-parameterized (templated) function"
+   },
+   {
+    "label": "Encapsulated Accessors",
+    "count": 578,
+    "share": 0.14170139740132384,
+    "meaning": "getters/setters and private-scope accessors"
+   },
+   {
+    "label": "Compute Cores",
+    "count": 485,
+    "share": 0.11890169159107625,
+    "meaning": "dense algorithmic logic (high decision density per line)"
+   },
+   {
+    "label": "Many-Argument Workhorses",
+    "count": 434,
+    "share": 0.10639862711448884,
+    "meaning": "large, many-parameter procedural function doing heavy lifting"
+   },
+   {
+    "label": "Parameter Forwarders",
+    "count": 282,
+    "share": 0.06913459181171856,
+    "meaning": "thin, many-argument glue that forwards to other code"
+   },
+   {
+    "label": "Defensive Guards",
+    "count": 170,
+    "share": 0.04167688158862466,
+    "meaning": "validation and error handling (null checks, guards, early bailouts)"
+   },
+   {
+    "label": "Type Conversions",
+    "count": 112,
+    "share": 0.027457710223093897,
+    "meaning": "cast- and conversion-heavy function"
+   },
+   {
+    "label": "Interface Declarations",
+    "count": 56,
+    "share": 0.013728855111546949,
+    "meaning": "signature/entry function exposing an API with minimal logic"
+   },
+   {
+    "label": "Callbacks & Closures",
+    "count": 36,
+    "share": 0.008825692571708753,
+    "meaning": "built around closures or callbacks (handlers, async continuations)"
+   },
+   {
+    "label": "I/O & Config Routines",
+    "count": 32,
+    "share": 0.007845060063741112,
+    "meaning": "dominated by I/O and configuration handling"
+   },
+   {
+    "label": "State Mutators",
+    "count": 28,
+    "share": 0.006864427555773474,
+    "meaning": "general-purpose function that reassigns or mutates state"
+   },
+   {
+    "label": "Annotated & Test Methods",
+    "count": 5,
+    "share": 0.001225790634959549,
+    "meaning": "annotated or test method (label from an older engine set; meaning approximate)"
+   }
+  ],
+  "mix": {
+   "labels": [
+    "Stateful Encapsulated Methods",
+    "Generic / Templated Code",
+    "Encapsulated Accessors",
+    "Compute Cores",
+    "Many-Argument Workhorses",
+    "Parameter Forwarders",
+    "Defensive Guards",
+    "Type Conversions",
+    "Other types"
+   ],
+   "series": {
+    "Stateful Encapsulated Methods": [
+     66,
+     67,
+     58,
+     58,
+     60,
+     69,
+     87,
+     443,
+     966,
+     1141
+    ],
+    "Generic / Templated Code": [
+     16,
+     15,
+     22,
+     23,
+     25,
+     29,
+     28,
+     252,
+     625,
+     720
+    ],
+    "Encapsulated Accessors": [
+     14,
+     13,
+     12,
+     11,
+     11,
+     13,
+     21,
+     179,
+     502,
+     578
+    ],
+    "Compute Cores": [
+     15,
+     11,
+     30,
+     29,
+     29,
+     27,
+     28,
+     169,
+     430,
+     485
+    ],
+    "Many-Argument Workhorses": [
+     45,
+     49,
+     71,
+     84,
+     84,
+     101,
+     113,
+     206,
+     385,
+     434
+    ],
+    "Parameter Forwarders": [
+     3,
+     4,
+     5,
+     5,
+     5,
+     5,
+     5,
+     8,
+     248,
+     282
+    ],
+    "Defensive Guards": [
+     10,
+     5,
+     10,
+     11,
+     10,
+     11,
+     11,
+     28,
+     147,
+     170
+    ],
+    "Type Conversions": [
+     2,
+     0,
+     10,
+     10,
+     10,
+     10,
+     10,
+     34,
+     105,
+     112
+    ],
+    "Other types": [
+     15,
+     2,
+     27,
+     29,
+     29,
+     28,
+     28,
+     32,
+     116,
+     157
+    ]
+   }
+  },
+  "retention_function": {
+   "edited_kept": null,
+   "edited_n": 0,
+   "unedited_kept": null,
+   "unedited_n": 0,
+   "transitions": []
+  },
+  "retention_file": {
+   "edited_kept": null,
+   "edited_n": 0,
+   "unedited_kept": null,
+   "unedited_n": 0,
+   "transitions": []
+  },
+  "years": 1.0,
+  "label_note": "Labels are the engine's; scans made by an older engine can carry older names (marked in the table)."
+ },
+ "current_extra": {
+  "languages": {
+   "python": 217,
+   "java": 54,
+   "markdown": 13,
+   "cobol": 11
+  },
+  "files": 295,
+  "public_share": 0.5115239887111948,
+  "unreferenced_share": 0.17168391345249295,
+  "graph_ok": true,
+  "archetypes_ok": true,
+  "top_dirs": [
+   {
+    "dir": "gitgalaxy/tools",
+    "functions": 2574
+   },
+   {
+    "dir": "gitgalaxy/core",
+    "functions": 1142
+   },
+   {
+    "dir": "gitgalaxy/recorders",
+    "functions": 108
+   },
+   {
+    "dir": "gitgalaxy/metrics",
+    "functions": 97
+   },
+   {
+    "dir": "gitgalaxy/security",
+    "functions": 78
+   },
+   {
+    "dir": "gitgalaxy/galaxyscope.py",
+    "functions": 60
+   },
+   {
+    "dir": "gitgalaxy/cobol_refractor_controller.py",
+    "functions": 13
+   },
+   {
+    "dir": "gitgalaxy/cobol_to_java_controller.py",
+    "functions": 6
+   }
+  ],
+  "largest_functions": [
+   {
+    "function": "record_mission",
+    "file": "gitgalaxy/recorders/record_keeper.py",
+    "lines": 2297
+   },
+   {
+    "function": "_slice_by_braces",
+    "file": "gitgalaxy/core/detector.py",
+    "lines": 1478
+   },
+   {
+    "function": "_build_markdown",
+    "file": "gitgalaxy/recorders/llm_recorder.py",
+    "lines": 1091
+   },
+   {
+    "function": "splice",
+    "file": "gitgalaxy/core/detector.py",
+    "lines": 1018
+   },
+   {
+    "function": "_translate",
+    "file": "gitgalaxy/tools/cobol_to_java/det/program.py",
+    "lines": 928
+   }
+  ]
+ },
+ "baseline_check": {
+  "functions": {
+   "tree_sitter": 3286,
+   "gitgalaxy": 4079,
+   "both": 3286,
+   "recall": 1.0,
+   "precision": 0.8055896052954156
+  },
+  "edges": {
+   "baseline": 6907,
+   "gitgalaxy": 3810,
+   "both": 3676,
+   "recall": 0.532213696250181,
+   "precision": 0.9648293963254593,
+   "ambiguous_calls_skipped_by_baseline": 1272
+  },
+  "file_pairs": {
+   "baseline": 817,
+   "gitgalaxy": 438,
+   "both": 419,
+   "recall": 0.5128518971848225,
+   "precision": 0.95662100456621
+  },
+  "files_parsed": 2096
+ },
+ "self_check": {
+  "rows": [
+   {
+    "id": "commits",
+    "what": "Commit count matches git",
+    "value": "6,919 vs 6,919",
+    "status": "ok",
+    "detail": "The report's commits are the non-merge commits reachable from HEAD."
+   },
+   {
+    "id": "reconcile",
+    "what": "Every function edit is in exactly one category",
+    "value": "22,144 of 22,144",
+    "status": "ok",
+    "detail": "The categories partition the function edits; a mismatch means a classification gap."
+   },
+   {
+    "id": "shares",
+    "what": "Work-mix shares add up",
+    "value": "100.0%",
+    "status": "ok",
+    "detail": "Organic, sweeps, fixes and mechanical."
+   },
+   {
+    "id": "pairs",
+    "what": "Fixes matched to a cause",
+    "value": "552 pairs",
+    "status": "ok",
+    "detail": "Repair timing needs at least 30 pairs (the report hides it below that); 100 or more give stable figures."
+   },
+   {
+    "id": "coverage",
+    "what": "Code files the scan read",
+    "value": "226 of 2,096 code files; 0 vendored on purpose, 1,870 unexplained",
+    "status": "fail",
+    "detail": "Not read and not vendored: 1,870 files, largest groups tests/cobol_mainframe (505), tests/tools (488), tests/extraction/languages (269), tests/core_engine (224)",
+    "data": {
+     "code_files": 2096,
+     "scanned": 226,
+     "recorded_excluded": 9,
+     "missing": 1870,
+     "vendored_on_purpose": 0,
+     "unexplained": 1870,
+     "top_missing": [
+      {
+       "directory": "tests/cobol_mainframe",
+       "files": 505,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/tools",
+       "files": 488,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/extraction/languages",
+       "files": 269,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/core_engine",
+       "files": 224,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "gitgalaxy/standards/language_standards",
+       "files": 87,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/cics_crucible",
+       "files": 60,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/tools_recorders",
+       "files": 48,
+       "default_ignore_name": false
+      },
+      {
+       "directory": "tests/security_auditing",
+       "files": 39,
+       "default_ignore_name": false
+      }
+     ]
+    }
+   },
+   {
+    "id": "imports",
+    "what": "Import graph vs a text-and-path baseline",
+    "value": "GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline",
+    "status": "warn",
+    "detail": "Baseline at the level of files: each include or import that names exactly one target in the repository (relative path first, then a unique match by trailing path; Go: the module path to a package directory; Rust: `mod x;`, `use crate::...` and other workspace crates). Edges only GitGalaxy has are usually includes it resolved among several same-named files (for example gitgalaxy/cobol_refractor_controller.py to gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py). No standing research rating exists yet for the import graph.",
+    "data": {
+     "baseline": 490,
+     "gitgalaxy": 463,
+     "both": 413,
+     "recall": 0.8428571428571429,
+     "precision": 0.8920086393088553,
+     "ambiguous_includes_skipped_by_baseline": 2,
+     "gitgalaxy_only_examples": [
+      {
+       "from": "gitgalaxy/cobol_refractor_controller.py",
+       "to": "gitgalaxy/tools/cobol_to_cobol/cobol_jcl_forge.py"
+      },
+      {
+       "from": "gitgalaxy/cobol_refractor_controller.py",
+       "to": "gitgalaxy/tools/cobol_to_cobol/cobol_microservice_slicer.py"
+      },
+      {
+       "from": "gitgalaxy/cobol_refractor_controller.py",
+       "to": "gitgalaxy/tools/cobol_to_cobol/cobol_system_limits_reporter.py"
+      }
+     ]
+    }
+   },
+   {
+    "id": "functions",
+    "what": "Functions found vs a tree-sitter parse",
+    "value": "recall 100%, precision 81%",
+    "status": "ok",
+    "detail": "3,286 of 3,286 function definitions found by a plain parse are in the scan; 793 scan functions the parse did not find (macro-generated and renamed forms).",
+    "data": {
+     "tree_sitter": 3286,
+     "gitgalaxy": 4079,
+     "both": 3286,
+     "recall": 1.0,
+     "precision": 0.8055896052954156
+    }
+   },
+   {
+    "id": "calls",
+    "what": "Call edges found vs a tree-sitter name-matching baseline",
+    "value": "GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline",
+    "status": "fail",
+    "detail": "Baseline: each call to a name that exactly one function defines (or one in the same file) is an edge; calls through function pointers, fields and macros are not. GitGalaxy finds fewer of these plain calls because it keeps only edges that resolve to one definition. Treat hub lists, repair radius and call counts as lower bounds.",
+    "data": {
+     "baseline": 6907,
+     "gitgalaxy": 3810,
+     "both": 3676,
+     "recall": 0.532213696250181,
+     "precision": 0.9648293963254593,
+     "ambiguous_calls_skipped_by_baseline": 1272
+    }
+   },
+   {
+    "id": "filepairs",
+    "what": "Cross-file call pairs (what `gitgalaxy reach` counts)",
+    "value": "recall 51%, precision 96% against the baseline",
+    "status": "fail",
+    "detail": "The same comparison at file level.",
+    "data": {
+     "baseline": 817,
+     "gitgalaxy": 438,
+     "both": 419,
+     "recall": 0.5128518971848225,
+     "precision": 0.95662100456621
+    }
+   }
+  ],
+  "rating": {
+   "label": "Limited",
+   "worst_check": "coverage",
+   "standing": {
+    "reference": "pyan3",
+    "precision": 0.53,
+    "recall": 0.65,
+    "tree_sitter_recall": 0.48,
+    "note": "one to three repositories"
+   },
+   "standing_label": "Fair",
+   "compiler_grade": null,
+   "text": "Consistency with a tree-sitter name matcher on this repository: Limited. (In our reference set this cheap check passed every C repository at 98 to 99% while compiler-grade recall ranged from 69% to 88%, so it does not predict the compiler-grade result.) Standing rating against a compiler-grade reference (pyan3), from our research on pinned python repositories: Fair. GitGalaxy's strict call edges had precision 53% and recall 65% there; a tree-sitter name matcher had recall 48%."
+  },
+  "standing": {
+   "reference": "pyan3",
+   "precision": 0.53,
+   "recall": 0.65,
+   "tree_sitter_recall": 0.48,
+   "note": "one to three repositories"
+  }
+ },
+ "facts": {
+  "repository": "gitgalaxy-engine",
+  "language": "python",
+  "first_commit": "2026-03-21",
+  "latest_commit": "2026-11-20",
+  "age_years": 0.7,
+  "commits": 6919,
+  "last_12_months": {
+   "commits": 6919,
+   "authors": 15,
+   "function_edits": 22144,
+   "edits_by_kind": {
+    "organic": 12832,
+    "sweeps": 3204,
+    "fixes": 3203,
+    "mechanical": 2905
+   },
+   "sweeps": 14,
+   "fix_commits": 703,
+   "previous_12_months": {
+    "commits": 0,
+    "function_edits": 0
+   }
+  },
+  "size": {
+   "functions": 4079,
+   "files": 295,
+   "languages": {
+    "python": 217,
+    "java": 54,
+    "markdown": 13,
+    "cobol": 11
+   },
+   "top_directories": [
+    {
+     "dir": "gitgalaxy/tools",
+     "functions": 2574
+    },
+    {
+     "dir": "gitgalaxy/core",
+     "functions": 1142
+    },
+    {
+     "dir": "gitgalaxy/recorders",
+     "functions": 108
+    },
+    {
+     "dir": "gitgalaxy/metrics",
+     "functions": 97
+    },
+    {
+     "dir": "gitgalaxy/security",
+     "functions": 78
+    },
+    {
+     "dir": "gitgalaxy/galaxyscope.py",
+     "functions": 60
+    },
+    {
+     "dir": "gitgalaxy/cobol_refractor_controller.py",
+     "functions": 13
+    },
+    {
+     "dir": "gitgalaxy/cobol_to_java_controller.py",
+     "functions": 6
+    }
+   ],
+   "public_function_share": 0.512,
+   "functions_never_called_share": 0.172
+  },
+  "age_of_code": {
+   "median_function_age_years": 0.1,
+   "share_present_since_first_scan": 0.002,
+   "first_scan": "2026-03 (start)"
+  },
+  "hubs": {
+   "most_called": [
+    {
+     "function": "__init__",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 478,
+     "centrality": 0.006206194626398164,
+     "age_years": 0.7,
+     "since_first_scan": true
+    },
+    {
+     "function": "splice",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 353,
+     "centrality": 0.005125306037732366,
+     "age_years": 0.7,
+     "since_first_scan": true
+    },
+    {
+     "function": "read_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 237,
+     "centrality": 0.003941088432304223,
+     "age_years": 0.1,
+     "since_first_scan": false
+    },
+    {
+     "function": "load_galaxy_ir",
+     "file": "gitgalaxy/tools/cobol_to_cobol/galaxy_ir.py",
+     "callers": 207,
+     "centrality": 0.001484214560296835,
+     "age_years": 0.1,
+     "since_first_scan": false
+    },
+    {
+     "function": "split_streams",
+     "file": "gitgalaxy/core/prism.py",
+     "callers": 161,
+     "centrality": 0.0015495536338630657,
+     "age_years": 0.4,
+     "since_first_scan": false
+    }
+   ],
+   "most_central": [
+    {
+     "function": "__init__",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 478,
+     "centrality": 0.006206194626398164,
+     "age_years": 0.7,
+     "since_first_scan": true
+    },
+    {
+     "function": "splice",
+     "file": "gitgalaxy/core/detector.py",
+     "callers": 353,
+     "centrality": 0.005125306037732366,
+     "age_years": 0.7,
+     "since_first_scan": true
+    },
+    {
+     "function": "decode_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 36,
+     "centrality": 0.0043306564759755155,
+     "age_years": 0.1,
+     "since_first_scan": false
+    },
+    {
+     "function": "extract_boundary",
+     "file": "gitgalaxy/core/mainframe_boundary.py",
+     "callers": 124,
+     "centrality": 0.004000960638384451,
+     "age_years": 0.1,
+     "since_first_scan": false
+    },
+    {
+     "function": "read_source",
+     "file": "gitgalaxy/core/source_text.py",
+     "callers": 237,
+     "centrality": 0.003941088432304223,
+     "age_years": 0.1,
+     "since_first_scan": false
+    }
+   ],
+   "in_both_lists_of_ten": 4,
+   "persistence": {},
+   "former_hubs": [
+    {
+     "function": "enforce_licensing_guard",
+     "file": "gitgalaxy/licensing.py",
+     "peak_callers": 22,
+     "peak_quarter": "2026-05",
+     "callers_now": null,
+     "gone": true,
+     "still_defined_in": null
+    },
+    {
+     "function": "int_",
+     "file": "gitgalaxy/tools/cobol_to_java/det/cics.py",
+     "peak_callers": 18,
+     "peak_quarter": "2026-10",
+     "callers_now": 5,
+     "gone": false,
+     "still_defined_in": null
+    },
+    {
+     "function": "outcome",
+     "file": "gitgalaxy/tools/cobol_to_java/det/cics.py",
+     "peak_callers": 16,
+     "peak_quarter": "2026-10",
+     "callers_now": 13,
+     "gone": false,
+     "still_defined_in": null
+    }
+   ]
+  },
+  "function_types": {
+   "most_common": [
+    {
+     "label": "Stateful Encapsulated Methods",
+     "share": 0.28
+    },
+    {
+     "label": "Generic / Templated Code",
+     "share": 0.177
+    },
+    {
+     "label": "Encapsulated Accessors",
+     "share": 0.142
+    }
+   ],
+   "kept_type_after_a_year": {
+    "edited": null,
+    "unedited": null
+   }
+  },
+  "languages_by_lines": {
+   "python": 0.882,
+   "java": 0.115,
+   "cobol": 0.002
+  },
+  "largest_functions": [
+   {
+    "function": "record_mission",
+    "file": "gitgalaxy/recorders/record_keeper.py",
+    "lines": 2297
+   },
+   {
+    "function": "_slice_by_braces",
+    "file": "gitgalaxy/core/detector.py",
+    "lines": 1478
+   },
+   {
+    "function": "_build_markdown",
+    "file": "gitgalaxy/recorders/llm_recorder.py",
+    "lines": 1091
+   },
+   {
+    "function": "splice",
+    "file": "gitgalaxy/core/detector.py",
+    "lines": 1018
+   },
+   {
+    "function": "_translate",
+    "file": "gitgalaxy/tools/cobol_to_java/det/program.py",
+    "lines": 928
+   }
+  ],
+  "comments": {
+   "comment_lines_per_code_line": 0.428,
+   "functions_with_comment_above": 0.13,
+   "todo_markers_per_kloc": 4.39,
+   "fragile_markers_per_kloc": 0.77
+  },
+  "most_repaired_function": {
+   "function": "_slice_by_braces",
+   "file": "gitgalaxy/core/detector.py",
+   "fixes": 41
+  },
+  "work_mix": {
+   "organic": 0.579,
+   "sweeps": 0.145,
+   "fixes": 0.145,
+   "mechanical": 0.131
+  },
+  "median_days_from_change_to_fix": 10,
+  "stage": null,
+  "sentences": [
+   "gitgalaxy-engine has 6,919 commits over 0.7 years (first 2026-03-21, latest 2026-11-20).",
+   "In the last 12 months: 6,919 commits by 15 authors, 22,144 function edits, 14 sweeps and 703 fix commits.",
+   "Today the code base has 4,079 functions in 295 files; main languages: python (217 files), java (54 files), markdown (13 files). The largest areas by functions are gitgalaxy/tools (2,574), gitgalaxy/core (1,142), gitgalaxy/recorders (108).",
+   "The median function is 0.1 years old (counted from the first scan 2026-03 (start) or its birth); 0% of today's functions were already there at the first scan.",
+   "The most-called function is __init__ (478 callers, gitgalaxy/core/detector.py); the most central is __init__ (gitgalaxy/core/detector.py). 4 of the top ten appear in both lists.",
+   "enforce_licensing_guard was once a hub (peak 22 callers in 2026-05); it is no longer in the code.",
+   "The most common function types are Stateful Encapsulated Methods (28%), Generic / Templated Code (18%), Encapsulated Accessors (14%).",
+   "By lines of code: python 88%, java 12%, cobol 0%. The biggest shift since the first scan: java went from 0% to 12%.",
+   "The largest function is record_mission (2,297 lines, gitgalaxy/recorders/record_keeper.py).",
+   "The most repaired function is _slice_by_braces (41 fix commits, gitgalaxy/core/detector.py).",
+   "Across its history 58% of function edits are organic change, 14% sweeps and 14% fixes; a fix arrives a median 10 days after the change that caused it.",
+   "Self-check of the call graph against a tree-sitter baseline on this repository: limited; import graph vs a text-and-path baseline: GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline; functions found vs a tree-sitter parse: recall 100%, precision 81%; call edges found vs a tree-sitter name-matching baseline: GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline."
+  ],
+  "call_graph_self_check": {
+   "rating": "Limited",
+   "checks": [
+    {
+     "id": "coverage",
+     "status": "fail",
+     "value": "226 of 2,096 code files; 0 vendored on purpose, 1,870 unexplained"
+    },
+    {
+     "id": "imports",
+     "status": "warn",
+     "value": "GitGalaxy found 84% of the baseline's 490 edges; 89% of its 463 edges are in the baseline"
+    },
+    {
+     "id": "functions",
+     "status": "ok",
+     "value": "recall 100%, precision 81%"
+    },
+    {
+     "id": "calls",
+     "status": "fail",
+     "value": "GitGalaxy found 53% of the baseline's 6,907 edges; 96% of its 3,810 edges are in the baseline"
+    },
+    {
+     "id": "filepairs",
+     "status": "fail",
+     "value": "recall 51%, precision 96% against the baseline"
+    }
+   ]
+  },
+  "reliability": {
+   "call_graph": "not yet evaluated"
+  }
+ },
+ "link_base": "https://github.com/squid-protocol/gitgalaxy/blob/main/docs/wiki"
+}

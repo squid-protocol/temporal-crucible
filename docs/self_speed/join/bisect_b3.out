@@ -1,0 +1,48 @@
+=== B3: 2026-07-27 -> 2026-08-13, language-crucible CPU 130 -> 176 (up), threshold 153
+675 commits in window; target language-crucible metric cpu_s threshold 153.0 up
+  idx  337 3ed0ed10e 2026-08-07 chore(deps): bump fonttools from 4.62.1 to 4.63.0 (#1133)               cpu_s=131.74 cpu=131.74 files=2898
+  idx  505 34a573168 2026-08-12 docs: auto-update LLM architectural brief (#1358)                       cpu_s=174.3 cpu=174.3 files=2945
+  idx  421 e5bb16a8c 2026-08-11 docs: auto-update LLM architectural brief (#1254)                       cpu_s=173.1 cpu=173.1 files=2945
+  idx  379 7e32aab25 2026-08-10 fix(core): correct function_data.args counting for Python (#1199) (#120 cpu_s=150.61 cpu=150.61 files=2945
+  idx  400 d5abf498e 2026-08-10 docs: add SCOPE/LIMITATIONS and BASELINE sections to tree_sitter_accura cpu_s=151.21 cpu=151.21 files=2945
+  idx  410 7d224e863 2026-08-10 feat(ci): roll out Web and Config language cluster for tree-sitter accu cpu_s=173.33 cpu=173.33 files=2945
+  idx  405 53ec00b3b 2026-08-10 docs: auto-update LLM architectural brief (#1237)                       cpu_s=173.54 cpu=173.54 files=2945
+  idx  402 89d86da58 2026-08-10 fix(core): prevent Prism from swallowing code due to quotes in comments cpu_s=174.48 cpu=174.48 files=2945
+  idx  401 7b3f6ab7f 2026-08-10 docs: auto-update LLM architectural brief (#1233)                       cpu_s=149.99 cpu=149.99 files=2945
+FIRST COMMIT PAST THRESHOLD: 89d86da58ad7e69bdc6827c6f8999985e8903185
+89d86da58 2026-08-10
+fix(core): prevent Prism from swallowing code due to quotes in comments (fixes #1222) (#1234)
+
+* fix(core): func_start Invocation Shield missing for 6 languages -- closes #1221
+
+`func_start`'s method-shorthand/bare-signature branch had no requirement
+that a real body/terminator follow, unlike this same file's own `args`
+regex (which already implements this "Invocation Shield" for the identical
+ambiguity). Any bare call statement at true line start (`next();`) was
+therefore misidentified as a function/method definition -- confirmed on
+real corpus code (expressjs/express: ~15% of reported JS functions were
+phantom call-sites).
+
+Fixed for javascript, typescript, java, apex, dart, and groovy, each with
+a fix shape tailored to that language's own legitimate leniency
+requirements (zero-prefix constructors, interface/abstract stubs ending in
+bare `;`, etc. -- see each rule's own inline comment). csharp is
+deliberately left untouched: its func_start already defers this exact
+check to a detector.py pipeline-level post-hoc terminator scan (#789),
+confirmed independently robust end-to-end.
+
+Also fixes a Rule-14-shaped ReDoS regression the typescript fix's first
+draft introduced (two adjacent unbounded whitespace quantifiers separated
+by an optional group) -- bounded, confirmed back to linear scaling.
+
+tests/golden_master_audit.json / tests/golden_master_zero_dep_audit.json
+regenerated via tests/tools/update_golden_master.py: the ~80-repo corpus
+diff (2213 differences, both full-precision and zero-dependency modes)
+is entirely composition/tech_debt/impact drops for javascript, typescript,
+java, dart, and groovy directory groups -- exactly the expected signature
+of removing phantom function counts, no unrelated languages affected.
+
+Co-Authored-By: Claude Sonnet 
+boundary check (parent vs found commit), 2 repeats each:
+  idx  401 7b3f6ab7f 2026-08-10 docs: auto-update LLM architectural brief (#1233)                       cpu_s=149.885 cpu=149.885 files=2945
+  idx  402 89d86da58 2026-08-10 fix(core): prevent Prism from swallowing code due to quotes in comments cpu_s=173.27 cpu=173.27 files=2945
