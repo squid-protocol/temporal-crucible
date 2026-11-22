@@ -1,0 +1,220 @@
+{
+ "language": "go",
+ "matched": 7935,
+ "unmatched": 0,
+ "families": [
+  {
+   "family": "complexity",
+   "definition": "decision points: if, loops, case clauses, catch handlers, conditional expressions, && and ||",
+   "oracle_functions": 4394,
+   "family_functions": 4394,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 0.997,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_branch",
+   "definition": "same count as complexity",
+   "oracle_functions": 4394,
+   "family_functions": 4394,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 0.997,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 5883,
+   "family_functions": 5882,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 0.999,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_closures",
+   "definition": "function literals, lambdas and closures defined inside the function",
+   "oracle_functions": 1858,
+   "family_functions": 5076,
+   "recall": 0.998,
+   "precision": 0.365,
+   "rho": 0.625,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_decorators",
+   "definition": "annotations, attributes or decorators on the function",
+   "oracle_functions": 0,
+   "family_functions": 19,
+   "recall": null,
+   "precision": 0.0,
+   "rho": null,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "definition": "throw / panic / process-exit",
+   "oracle_functions": 229,
+   "family_functions": 233,
+   "recall": 0.996,
+   "precision": 0.979,
+   "rho": 0.987,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "log.Fatalln",
+     3
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ ~ (& and | are address-of, pipes, bounds and closures too, so left out)",
+   "oracle_functions": 74,
+   "family_functions": 115,
+   "recall": 1.0,
+   "precision": 0.643,
+   "rho": 0.801,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_print_hits",
+   "definition": "output to the console",
+   "oracle_functions": 117,
+   "family_functions": 40,
+   "recall": 0.342,
+   "precision": 1.0,
+   "rho": 0.584,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "fmt.Fprintf",
+     79
+    ],
+    [
+     "fmt.Fprintln",
+     42
+    ],
+    [
+     "fmt.Fprint",
+     18
+    ],
+    [
+     "log.Println",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "state_halt_hits",
+   "definition": "sleeps and timed waits",
+   "oracle_functions": 167,
+   "family_functions": 150,
+   "recall": 0.892,
+   "precision": 0.993,
+   "rho": 0.941,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "time.NewTicker",
+     18
+    ],
+    [
+     "time.Tick",
+     1
+    ],
+    [
+     "time.NewTimer",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "arch_regex",
+   "definition": "executes or builds a regular expression",
+   "oracle_functions": 26,
+   "family_functions": 41,
+   "recall": 0.885,
+   "precision": 0.561,
+   "rho": 0.704,
+   "status": "over-counts",
+   "missed_tokens": [
+    [
+     "regexp.",
+     5
+    ]
+   ]
+  },
+  {
+   "family": "arch_time",
+   "definition": "reads a clock",
+   "oracle_functions": 278,
+   "family_functions": 479,
+   "recall": 0.827,
+   "precision": 0.48,
+   "rho": 0.619,
+   "status": "over-counts",
+   "missed_tokens": [
+    [
+     "time.Unix",
+     103
+    ],
+    [
+     "time.Date",
+     8
+    ]
+   ]
+  },
+  {
+   "family": "arch_io",
+   "definition": "opens or reads/writes a file or a network connection",
+   "oracle_functions": 280,
+   "family_functions": 149,
+   "recall": 0.332,
+   "precision": 0.624,
+   "rho": 0.443,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "os.ReadDir",
+     70
+    ],
+    [
+     "os.RemoveAll",
+     56
+    ],
+    [
+     "os.MkdirAll",
+     46
+    ],
+    [
+     "os.WriteFile",
+     42
+    ],
+    [
+     "os.OpenFile",
+     32
+    ]
+   ]
+  },
+  {
+   "family": "is_documented",
+   "definition": "a doc comment directly above",
+   "oracle_functions": 2983,
+   "family_functions": 2599,
+   "recall": 0.762,
+   "precision": 0.875,
+   "rho": 0.718,
+   "status": "misses",
+   "missed_tokens": []
+  }
+ ]
+}

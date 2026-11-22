@@ -1,0 +1,26 @@
+language python: 72044 functions matched to the oracle, 0 unmatched (left out)
+
+family                  oracle  family  recall   prec    rho  status        missed tokens
+struct_branch            63759   64497    0.99   0.98   0.98  ok            
+args                     71405   71405    1.00   1.00   1.00  ok            
+struct_closures           4016    4100    1.00   0.98   0.99  ok            
+struct_comprehensions    23243   21228    0.83   0.91   0.85  ok            map:57
+struct_decorators         4156       0    0.00    -      -    dead          staticmethod:1952, property:728, classmethod:621, contextlib.contextmanager:391, _reads:336
+arch_io                   2528    1467    0.25   0.43   0.31  both          read_text:1746, rglob:713, glob:691, read:154, write_text:135
+arch_regex               20707   11040    0.53   1.00   0.72  misses        finditer:5153, fullmatch:3390, match:3186, search:2777, findall:1873
+arch_time                 1210     652    0.54   1.00   0.74  misses        perf_counter:1183, now:23, strftime:17
+arch_serialization         699       0    0.00    -      -    dead          dumps:978, loads:416, safe_load:105, load:54, dump:30
+state_danger               503     354    0.56   0.79   0.66  both          check_output:540
+state_halt_hits              0       0     -      -      -    no-instances  
+state_bailout_hits       12266   12413    1.00   0.99   0.99  ok            _exit:22
+state_print_hits           509     525    1.00   0.97   0.98  ok            
+state_cast_hits          19599   20117    1.00   0.97   0.98  ok            str:1
+bitwise_ops               2294    6700    0.43   0.15   0.22  both          BitOr:1014, BitAnd:925
+lazy_evaluation            613     646    1.00   0.95   0.97  ok            
+def_telemetry             1389    4899    1.00   0.28   0.53  over-counts   
+arch_concurrency           371     555    0.71   0.48   0.58  both          ProcessPoolExecutor:106, submit:106
+def_sync_locks               1      96    1.00   0.01   0.10  over-counts   
+arch_globals               988     508    0.51   1.00   0.71  misses        global:480
+arch_import               3670    3675    1.00   1.00   1.00  ok            
+def_cleanup               4284     864    0.14   0.70   0.30  both          with:3069, finally:1033, del:972, rmtree:131, remove:9
+is_documented            50961   45715    0.89   0.99   0.83  ok            
