@@ -1,0 +1,16 @@
+language go: 7935 functions matched to the oracle, 0 unmatched (left out)
+
+family                  oracle  family  recall   prec    rho  status        missed tokens
+complexity                4394    4394    1.00   1.00   1.00  ok            
+struct_branch             4394    4394    1.00   1.00   1.00  ok            
+args                      5883    5882    1.00   1.00   1.00  ok            
+struct_closures           1858    5076    1.00   0.36   0.62  over-counts   
+struct_decorators            0      19     -     0.00    -    over-counts   
+state_bailout_hits         229     233    1.00   0.98   0.99  ok            log.Fatalln:3
+bitwise_ops                 74     115    1.00   0.64   0.80  over-counts   
+state_print_hits           117      40    0.34   1.00   0.58  misses        fmt.Fprintf:79, fmt.Fprintln:42, fmt.Fprint:18, log.Println:1
+state_halt_hits            167     150    0.89   0.99   0.94  ok            time.NewTicker:18, time.Tick:1, time.NewTimer:1
+arch_regex                  26      41    0.89   0.56   0.70  over-counts   regexp.:5
+arch_time                  278     479    0.83   0.48   0.62  over-counts   time.Unix:103, time.Date:8
+arch_io                    280     149    0.33   0.62   0.44  both          os.ReadDir:70, os.RemoveAll:56, os.MkdirAll:46, os.WriteFile:42, os.OpenFile:32
+is_documented             2983    2599    0.76   0.88   0.72  misses        

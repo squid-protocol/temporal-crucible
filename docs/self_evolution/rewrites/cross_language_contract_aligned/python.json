@@ -1,0 +1,444 @@
+{
+ "language": "python",
+ "matched": 72044,
+ "unmatched": 0,
+ "families": [
+  {
+   "family": "struct_branch",
+   "rule": "branch",
+   "definition": "decision points: if, loops, conditional expressions, except handlers, asserts, boolean operators, comprehension filters",
+   "oracle_functions": 63759,
+   "family_functions": 64497,
+   "recall": 0.993,
+   "precision": 0.981,
+   "rho": 0.981,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "args",
+   "rule": "args",
+   "definition": "declared parameters",
+   "oracle_functions": 71405,
+   "family_functions": 71405,
+   "recall": 1.0,
+   "precision": 1.0,
+   "rho": 1.0,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_closures",
+   "rule": "closures",
+   "definition": "anonymous callables: lambdas (nested named functions are declarations, not closures)",
+   "oracle_functions": 4016,
+   "family_functions": 4100,
+   "recall": 1.0,
+   "precision": 0.98,
+   "rho": 0.989,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "struct_comprehensions",
+   "rule": "comprehensions",
+   "definition": "comprehensions, generator expressions and map/filter/reduce calls",
+   "oracle_functions": 23243,
+   "family_functions": 21228,
+   "recall": 0.831,
+   "precision": 0.91,
+   "rho": 0.851,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "map",
+     57
+    ]
+   ]
+  },
+  {
+   "family": "struct_decorators",
+   "rule": "decorators",
+   "definition": "decorators on the function itself",
+   "oracle_functions": 4156,
+   "family_functions": 0,
+   "recall": 0.0,
+   "precision": null,
+   "rho": null,
+   "status": "dead",
+   "missed_tokens": [
+    [
+     "staticmethod",
+     1952
+    ],
+    [
+     "property",
+     728
+    ],
+    [
+     "classmethod",
+     621
+    ],
+    [
+     "contextlib.contextmanager",
+     391
+    ],
+    [
+     "_reads",
+     336
+    ]
+   ]
+  },
+  {
+   "family": "arch_io",
+   "rule": "io",
+   "definition": "opens or reads/writes a file, lists or globs a directory (not path string work, not process exit)",
+   "oracle_functions": 2528,
+   "family_functions": 1467,
+   "recall": 0.251,
+   "precision": 0.433,
+   "rho": 0.314,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "read_text",
+     1746
+    ],
+    [
+     "rglob",
+     713
+    ],
+    [
+     "glob",
+     691
+    ],
+    [
+     "read",
+     154
+    ],
+    [
+     "write_text",
+     135
+    ]
+   ]
+  },
+  {
+   "family": "arch_regex",
+   "rule": "regex_execution",
+   "definition": "evaluates a regular expression: re.* module calls or a match/search/fullmatch/finditer/findall/sub/subn call",
+   "oracle_functions": 20707,
+   "family_functions": 11040,
+   "recall": 0.533,
+   "precision": 1.0,
+   "rho": 0.718,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "finditer",
+     5153
+    ],
+    [
+     "fullmatch",
+     3390
+    ],
+    [
+     "match",
+     3186
+    ],
+    [
+     "search",
+     2777
+    ],
+    [
+     "findall",
+     1873
+    ]
+   ]
+  },
+  {
+   "family": "arch_time",
+   "rule": "time_date_logic",
+   "definition": "instantiates or computes with a clock or calendar value: now/time/date constructors, durations, formatting and timezone calls",
+   "oracle_functions": 1210,
+   "family_functions": 652,
+   "recall": 0.539,
+   "precision": 1.0,
+   "rho": 0.736,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "perf_counter",
+     1183
+    ],
+    [
+     "now",
+     23
+    ],
+    [
+     "strftime",
+     17
+    ]
+   ]
+  },
+  {
+   "family": "arch_serialization",
+   "rule": "serialization_parsing",
+   "definition": "encodes to or decodes from a structured interchange format: json, yaml, csv, xml, pickle, marshal, protobuf calls",
+   "oracle_functions": 699,
+   "family_functions": 0,
+   "recall": 0.0,
+   "precision": null,
+   "rho": null,
+   "status": "dead",
+   "missed_tokens": [
+    [
+     "dumps",
+     978
+    ],
+    [
+     "loads",
+     416
+    ],
+    [
+     "safe_load",
+     105
+    ],
+    [
+     "load",
+     54
+    ],
+    [
+     "dump",
+     30
+    ]
+   ]
+  },
+  {
+   "family": "state_danger",
+   "rule": "high_risk_execution",
+   "definition": "hands control out of the program's semantics: eval, exec, subprocess calls, os.system, process exit",
+   "oracle_functions": 503,
+   "family_functions": 354,
+   "recall": 0.559,
+   "precision": 0.794,
+   "rho": 0.664,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "check_output",
+     540
+    ]
+   ]
+  },
+  {
+   "family": "state_halt_hits",
+   "rule": "thread_sleeps",
+   "definition": "blocks the thread or forces a delay: sleep calls",
+   "oracle_functions": 0,
+   "family_functions": 0,
+   "recall": null,
+   "precision": null,
+   "rho": null,
+   "status": "no-instances",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_bailout_hits",
+   "rule": "panics_and_aborts",
+   "definition": "ends the execution context: raise statements and process-exit calls",
+   "oracle_functions": 12266,
+   "family_functions": 12413,
+   "recall": 0.999,
+   "precision": 0.987,
+   "rho": 0.993,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "_exit",
+     22
+    ]
+   ]
+  },
+  {
+   "family": "state_print_hits",
+   "rule": "debug_prints",
+   "definition": "ad-hoc debug output: print calls",
+   "oracle_functions": 509,
+   "family_functions": 525,
+   "recall": 1.0,
+   "precision": 0.97,
+   "rho": 0.985,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "state_cast_hits",
+   "rule": "explicit_casts",
+   "definition": "explicit type conversion: int, str, float, bool, bytes, list, dict, set, tuple calls",
+   "oracle_functions": 19599,
+   "family_functions": 20117,
+   "recall": 1.0,
+   "precision": 0.974,
+   "rho": 0.982,
+   "status": "ok",
+   "missed_tokens": [
+    [
+     "str",
+     1
+    ]
+   ]
+  },
+  {
+   "family": "bitwise_ops",
+   "rule": "bitwise_ops",
+   "definition": "bitwise operators in operator position: << >> ^ & | ~",
+   "oracle_functions": 2294,
+   "family_functions": 6700,
+   "recall": 0.427,
+   "precision": 0.146,
+   "rho": 0.217,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "BitOr",
+     1014
+    ],
+    [
+     "BitAnd",
+     925
+    ]
+   ]
+  },
+  {
+   "family": "lazy_evaluation",
+   "rule": "lazy_evaluation",
+   "definition": "deferred execution: yield / yield from, or a Generator / Iterator annotation (generator expressions are not listed in the contract)",
+   "oracle_functions": 613,
+   "family_functions": 646,
+   "recall": 1.0,
+   "precision": 0.949,
+   "rho": 0.974,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "def_telemetry",
+   "rule": "telemetry",
+   "definition": "logger calls",
+   "oracle_functions": 1389,
+   "family_functions": 4899,
+   "recall": 1.0,
+   "precision": 0.284,
+   "rho": 0.529,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_concurrency",
+   "rule": "concurrency",
+   "definition": "threads, pools, processes, queues, executor submits",
+   "oracle_functions": 371,
+   "family_functions": 555,
+   "recall": 0.714,
+   "precision": 0.477,
+   "rho": 0.581,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "ProcessPoolExecutor",
+     106
+    ],
+    [
+     "submit",
+     106
+    ]
+   ]
+  },
+  {
+   "family": "def_sync_locks",
+   "rule": "sync_locks",
+   "definition": "locks, semaphores, acquire and release",
+   "oracle_functions": 1,
+   "family_functions": 96,
+   "recall": 1.0,
+   "precision": 0.01,
+   "rho": 0.102,
+   "status": "over-counts",
+   "missed_tokens": []
+  },
+  {
+   "family": "arch_globals",
+   "rule": "globals",
+   "definition": "global / nonlocal statements and reads of os.environ, sys.argv, sys.path",
+   "oracle_functions": 988,
+   "family_functions": 508,
+   "recall": 0.514,
+   "precision": 1.0,
+   "rho": 0.715,
+   "status": "misses",
+   "missed_tokens": [
+    [
+     "global",
+     480
+    ]
+   ]
+  },
+  {
+   "family": "arch_import",
+   "rule": "import",
+   "definition": "import statements inside the function",
+   "oracle_functions": 3670,
+   "family_functions": 3675,
+   "recall": 1.0,
+   "precision": 0.999,
+   "rho": 0.999,
+   "status": "ok",
+   "missed_tokens": []
+  },
+  {
+   "family": "def_cleanup",
+   "rule": "cleanup",
+   "definition": "destroys state or releases a held resource: with blocks, try/finally, close/remove/unlink/rmtree calls, del",
+   "oracle_functions": 4284,
+   "family_functions": 864,
+   "recall": 0.141,
+   "precision": 0.701,
+   "rho": 0.303,
+   "status": "both",
+   "missed_tokens": [
+    [
+     "with",
+     3069
+    ],
+    [
+     "finally",
+     1033
+    ],
+    [
+     "del",
+     972
+    ],
+    [
+     "rmtree",
+     131
+    ],
+    [
+     "remove",
+     9
+    ]
+   ]
+  },
+  {
+   "family": "is_documented",
+   "rule": "doc",
+   "definition": "has a docstring (structured documentation)",
+   "oracle_functions": 50961,
+   "family_functions": 45715,
+   "recall": 0.892,
+   "precision": 0.994,
+   "rho": 0.831,
+   "status": "ok",
+   "missed_tokens": []
+  }
+ ]
+}
