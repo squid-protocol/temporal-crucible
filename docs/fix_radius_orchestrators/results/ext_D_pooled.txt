@@ -1,0 +1,24 @@
+-- C: 6 repos
+   orchestrator (8)         1.13x (0.95-1.35)  I2=0.86 repos=6 lift>1 in 5/6
+   consumer-ish             1.06x (0.90-1.26)  I2=0.91 repos=6 lift>1 in 5/6
+   producer-ish             0.93x (0.80-1.08)  I2=0.71 repos=6 lift>1 in 4/6
+   fan-out partial rho: median +0.15, positive in 6/6;   fan-in partial rho: median +0.00, positive in 3/6
+   fix radius vs directory-matched null: median lift 2.1x, >=1.5x in 6/6 repos (min 1.8x, max 2.6x)
+-- Go: 8 repos
+   orchestrator (8)         1.33x (1.21-1.45)* I2=0.48 repos=7 lift>1 in 6/7
+   consumer-ish             1.21x (1.16-1.26)* I2=0.00 repos=8 lift>1 in 8/8
+   producer-ish             0.93x (0.87-0.99)* I2=0.00 repos=8 lift>1 in 2/8
+   fan-out partial rho: median +0.21, positive in 8/8;   fan-in partial rho: median -0.05, positive in 1/8
+   fix radius vs directory-matched null: median lift 1.6x, >=1.5x in 6/8 repos (min 1.3x, max 2.0x)
+-- Java: 7 repos
+   orchestrator (8)         1.13x (1.03-1.25)* I2=0.68 repos=7 lift>1 in 6/7
+   consumer-ish             1.17x (1.05-1.29)* I2=0.91 repos=7 lift>1 in 6/7
+   producer-ish             0.80x (0.74-0.87)* I2=0.67 repos=7 lift>1 in 0/7
+   fan-out partial rho: median +0.19, positive in 7/7;   fan-in partial rho: median -0.10, positive in 0/7
+   fix radius vs directory-matched null: median lift 1.9x, >=1.5x in 6/6 repos (min 1.6x, max 2.1x)
+-- ALL: 21 repos
+   orchestrator (8)         1.19x (1.11-1.28)* I2=0.78 repos=20 lift>1 in 17/20
+   consumer-ish             1.15x (1.09-1.22)* I2=0.86 repos=21 lift>1 in 19/21
+   producer-ish             0.88x (0.83-0.93)* I2=0.64 repos=21 lift>1 in 6/21
+   fan-out partial rho: median +0.20, positive in 21/21;   fan-in partial rho: median -0.05, positive in 4/21
+   fix radius vs directory-matched null: median lift 1.9x, >=1.5x in 18/20 repos (min 1.3x, max 2.6x)

@@ -1,0 +1,12 @@
+Written 2026-11-22 BEFORE any fresh repo (libuv, libgit2, git, haproxy) is scanned or mined.
+Derived from curl/redis/nginx/openssl, so those four are NOT valid evidence for these hypotheses.
+Fix definition B = subject matches fix|fixes|fixed|bug|regression AND does NOT match any memory term
+(leak, free, freed, uaf, use-after, overflow, heap, stack, oob, out-of-bounds, null deref, double, memory, alloc, dangling, refcount).
+Lift = observed fix touches / fix touches predicted by Poisson regression on log(1+LOC), log(1+complexity), same repo.
+H1: orchestrators (fan-in<8, fan-out>=8) have lift > 1 under def B, in a majority of fresh repos with CI excluding 1.
+H2: lifecycle-named (free|close|destroy|cleanup|finalize|shutdown|teardown|release|done|disconnect|unlink|remove|delete)
+    AND fan-in>=8 have lift > 1 under def B, in a majority of fresh repos (pooled CI excluding 1).
+H3: fan-out partial Spearman (controls LOC, complexity) with fix touches > 0 in a majority of fresh repos.
+H4: consumer-ish functions (fan-in ratio < 0.2) have lift > producer-ish (> 0.8) under def B.
+Time split: H1/H2 must hold in both the older and newer half of history on the original four repos.
+Anything that fails is reported as failed.

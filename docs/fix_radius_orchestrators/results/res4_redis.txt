@@ -1,0 +1,37 @@
+### redis: 818 files, 7160 funcs, 2695 commits (touching .c/.h), 930 fix-like (35%)
+
+[file-level] n=194 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.48   partial|LOC=+0.06 (p=0.402)   rho(fix_share,bc)|LOC,commits=-0.21 (p=0.003)
+  pr: raw rho(fix_count, pr)=+0.12   partial|LOC=+0.06 (p=0.449)   rho(fix_share,pr)|LOC,commits=-0.26 (p=0.003)
+  br: raw rho(fix_count, br)=+0.12   partial|LOC=+0.06 (p=0.502)   rho(fix_share,br)|LOC,commits=-0.26 (p=0.003)
+  size baseline: rho(fix_count, LOC)=+0.72, rho(fix_count, total commits)=+0.84
+
+[function graph] 6492 nodes in graph, 23410 edges, 13 multi-function cycles (153 funcs)
+  funcs touched by >=1 fix commit: 1555/7160
+  size baseline: rho(fix_touches, LOC)=+0.33, rho(fix_touches, complexity)=+0.27
+  betweenness: raw rho=+0.09   partial|LOC,complexity=+0.05 (p=0.003)
+  fan_in: raw rho=-0.04   partial|LOC,complexity=-0.03 (p=0.053)
+  fan_out: raw rho=+0.31   partial|LOC,complexity=+0.14 (p=0.003)
+  top-5% betweenness funcs: 325 funcs = 9% of LOC, receive 13% of fix touches
+  cycle members: 153 funcs = 4.1% of LOC, receive 5.1% of fix touches; mean touches 0.81 vs 0.36
+
+[grid, threshold=8] 6492 funcs; size-adjusted = observed fixes / fixes predicted from LOC+complexity
+  quadrant                                  n    LOC    cx fix/func %touched share_of_fixes     adj. lift (95% CI)
+  ordinary (low/low)                     5261     18   3.7     0.25      19%            53%      0.87x (0.81-0.92)
+  utility (high in, low out)              457     12   2.5     0.25      19%             5%      1.20x (0.97-1.50)
+  orchestrator (low in, high out)         749    103  24.2     1.30      56%            40%      1.21x (1.10-1.31)
+  hub (high in, high out)                  25     97  24.0     1.48      64%             2%      1.42x (0.89-2.16)
+
+  most fixes beyond size-expectation in orchestrator (low in, high out): (excess | fixes | in | out | loc)
+      9.5 | 12 |   1 |  39 |  257 | src/server.c::initServer
+      9.1 | 12 |   0 |  32 |  344 | src/module.c::RM_Call
+      8.9 | 12 |   1 |  48 |  383 | src/server.c::processCommand
+      8.9 | 19 |   3 | 131 | 1708 | src/rdb.c::rdbLoadObject
+      8.5 | 14 |   4 |  69 |  777 | src/server.c::genRedisInfoString
+
+  most fixes beyond size-expectation in hub (high in, high out): (excess | fixes | in | out | loc)
+      5.1 |  7 |  25 |  38 |  197 | src/networking.c::freeClient
+      4.2 |  5 |   8 |  22 |   58 | src/db.c::dbGenericDelete
+      2.2 |  4 |   9 |  16 |  151 | src/networking.c::createClient
+      1.6 |  2 |  30 |   9 |   29 | src/module.c::moduleFreeContext
+      1.5 |  3 |   9 |   8 |  147 | src/t_stream.c::streamIteratorGetID

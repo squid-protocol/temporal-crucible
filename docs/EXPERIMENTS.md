@@ -181,6 +181,7 @@ exploratory docs claim no p-values and feed future registrations.
 - `bh_eval.md` (mid-band cells) — exploratory context outside the registered family
 - gitgalaxy [`docs/research/outcome_label_pilot.md`](https://github.com/squid-protocol/gitgalaxy/blob/main/docs/research/outcome_label_pilot.md) — the outcome-label pilot (#2720): language strictness and per-file dynamism vs later fix commits, Mantel-Haenszel at equal size + evidence; not pre-registered, so exploratory here → DYN-H1/DYN-H2
 - `agent_selfscan_ab_explore.md` — the gitgalaxy#4479 self-scan DB A/B (agent cost and fix quality, 5 pairs), logged with the rubric's gaps → AG-H1..H3 proposed (quality-first historical replay)
+- `fix_radius_orchestrators.md` — call-graph position vs fix history, 30 repos in C / Go / Java (fan-out and orchestrators, betweenness and PageRank vs size, fan-in, the fix radius against repo-wide and directory-matched nulls); informal pre-registration, unaudited keyword label, any-commit control; scripts in `tools/fixgraph/`; gitgalaxy#8955-#8958
 
 ------------------------------------------------------------------------
 
