@@ -1,0 +1,64 @@
+C    memcached         commits=  520 fix=  165 funcs= 1054 | orch 0.92x(n=35) cons 1.06x(n=123) prod 0.63x(n=103) | fanout_rho +0.03 | radius 45% vs dir-null 24% (1.8x, n=242)
+C    tmux              commits= 1823 fix=  224 funcs= 3820 | orch 1.05x(n=339) cons 0.97x(n=632) prod 0.80x(n=475) | fanout_rho +0.07 | radius 48% vs dir-null 24% (2.0x, n=683)
+C    lua               commits=  482 fix=   45 funcs= 1457 | orch 0.98x(n=91) cons 1.06x(n=264) prod 0.75x(n=154) | fanout_rho +0.10 | radius 51% vs dir-null 24% (2.1x, n=172)
+C    libssh2           commits= 1107 fix=  213 funcs=  759 | orch 1.34x(n=69) cons 1.32x(n=162) prod 0.58x(n=93) | fanout_rho +0.26 | radius 45% vs dir-null 31% (1.5x, n=533)
+C    mbedtls           commits= 9627 fix= 1677 funcs= 1067 | orch 1.05x(n=51) cons 1.00x(n=109) prod 0.95x(n=130) | fanout_rho +0.16 | radius 47% vs dir-null 20% (2.4x, n=1025)
+C    zstd              commits= 1504 fix=  354 funcs= 2377 | orch 1.39x(n=132) cons 1.09x(n=294) prod 0.76x(n=255) | fanout_rho +0.07 | radius 54% vs dir-null 33% (1.6x, n=783)
+Go   caddy             commits= 1626 fix=  319 funcs= 1828 | orch 1.11x(n=130) cons 1.06x(n=351) prod 1.21x(n=160) | fanout_rho +0.06 | radius 47% vs dir-null 39% (1.2x, n=1203)
+Go   prometheus        commits= 4409 fix=  836 funcs= 5333 | orch 1.28x(n=307) cons 1.18x(n=659) prod 0.96x(n=568) | fanout_rho +0.13 | radius 51% vs dir-null 34% (1.5x, n=2368)
+Go   hugo              commits= 2503 fix=  543 funcs= 4778 | orch 1.21x(n=239) cons 1.16x(n=576) prod 0.93x(n=555) | fanout_rho +0.15 | radius 30% vs dir-null 18% (1.6x, n=1611)
+Go   fzf               commits=  957 fix=  230 funcs=  740 | orch 1.22x(n=35) cons 1.08x(n=66) prod 0.81x(n=97) | fanout_rho +0.17 | radius 59% vs dir-null 35% (1.7x, n=422)
+Go   cli               commits= 5619 fix=  865 funcs= 1364 | orch 0.41x(n=45) cons 1.16x(n=183) prod 1.91x(n=153) | fanout_rho +0.08 | radius 53% vs dir-null 47% (1.1x, n=112)
+Go   traefik           commits= 1232 fix=  259 funcs= 2301 | orch 1.19x(n=87) cons 1.11x(n=262) prod 0.90x(n=188) | fanout_rho +0.05 | radius 44% vs dir-null 35% (1.3x, n=660)
+Go   grpc-go           commits= 2274 fix=  264 funcs= 3490 | orch 1.25x(n=169) cons 1.21x(n=507) prod 0.91x(n=295) | fanout_rho +0.10 | radius 39% vs dir-null 33% (1.2x, n=826)
+Go   gin               commits=  365 fix=  125 funcs=  428 | orch -(n=3) cons 0.96x(n=23) prod 1.26x(n=30) | fanout_rho +0.09 | radius 37% vs dir-null 27% (1.4x, n=118)
+Java commons-lang      commits= 2623 fix=  225 funcs= 3652 | orch 1.30x(n=53) cons 1.01x(n=307) prod 0.71x(n=287) | fanout_rho +0.17 | radius 54% vs dir-null 36% (1.5x, n=1062)
+Java commons-io        commits= 2324 fix=  208 funcs= 2492 | orch 2.00x(n=12) cons 1.38x(n=170) prod 0.59x(n=207) | fanout_rho +0.14 | radius 42% vs dir-null 20% (2.1x, n=914)
+Java jsoup             commits=  730 fix=   42 funcs= 2047 | orch 1.09x(n=135) cons 1.50x(n=319) prod 0.76x(n=232) | fanout_rho +0.11 | radius 43% vs dir-null 34% (1.3x, n=155)
+Java jackson-databind  commits= 2553 fix=  840 funcs= 7571 | orch 1.32x(n=419) cons 1.42x(n=1134) prod 0.71x(n=869) | fanout_rho +0.16 | radius 37% vs dir-null 19% (1.9x, n=2243)
+Java guava             commits= 1813 fix=  156 funcs=10148 | orch 1.04x(n=184) cons 1.16x(n=1039) prod 0.61x(n=1030) | fanout_rho +0.06 | radius 38% vs dir-null 30% (1.3x, n=475)
+Java mockito           commits=  244 fix=   65 funcs= 2048 | orch -(n=36) cons 1.08x(n=216) prod 0.83x(n=177) | fanout_rho +0.05 | radius n=17 (too few)
+Java maven             commits= 1919 fix=  485 funcs=10395 | orch 1.12x(n=822) cons 1.11x(n=1802) prod 0.86x(n=1470) | fanout_rho +0.10 | radius 51% vs dir-null 42% (1.2x, n=1666)
+Java okhttp            SKIPPED (touches=0 funcs=5846)
+
+==== POOLED (def B), random effects (DerSimonian-Laird); I2 = between-repo heterogeneity
+-- C: 6 repos
+   orchestrator (8)         1.19x (1.04-1.36)* I2=0.34 repos=6 lift>1 in 4/6
+   orchestrator (pctile)    1.18x (1.09-1.28)* I2=0.00 repos=6 lift>1 in 6/6
+   utility                  0.87x (0.69-1.10)  I2=0.00 repos=6 lift>1 in 2/6
+   hub                      too few repos (1)
+   consumer-ish             1.09x (0.97-1.23)  I2=0.56 repos=6 lift>1 in 5/6
+   intermediate             1.02x (0.89-1.17)  I2=0.72 repos=6 lift>1 in 3/6
+   producer-ish             0.76x (0.64-0.90)* I2=0.00 repos=6 lift>1 in 0/6
+   fan-out partial rho: median +0.09, positive in 6/6;   fan-in partial rho: median -0.00, positive in 3/6
+   fix radius vs directory-matched null: median lift 1.9x, >=1.5x in 5/6 repos (min 1.5x, max 2.4x)
+-- Go: 8 repos
+   orchestrator (8)         1.21x (1.12-1.30)* I2=0.00 repos=7 lift>1 in 6/7
+   orchestrator (pctile)    1.14x (1.06-1.22)* I2=0.00 repos=8 lift>1 in 6/8
+   utility                  1.26x (0.99-1.59)  I2=0.32 repos=8 lift>1 in 6/8
+   hub                      too few repos (1)
+   consumer-ish             1.14x (1.07-1.22)* I2=0.00 repos=8 lift>1 in 7/8
+   intermediate             1.00x (0.89-1.12)  I2=0.66 repos=8 lift>1 in 3/8
+   producer-ish             1.01x (0.89-1.15)  I2=0.00 repos=8 lift>1 in 3/8
+   fan-out partial rho: median +0.09, positive in 8/8;   fan-in partial rho: median -0.02, positive in 3/8
+   fix radius vs directory-matched null: median lift 1.3x, >=1.5x in 2/8 repos (min 1.1x, max 1.7x)
+-- Java: 7 repos
+   orchestrator (8)         1.25x (1.09-1.42)* I2=0.47 repos=6 lift>1 in 6/6
+   orchestrator (pctile)    1.21x (1.14-1.27)* I2=0.05 repos=7 lift>1 in 7/7
+   utility                  0.79x (0.60-1.04)  I2=0.70 repos=6 lift>1 in 1/6
+   hub                      0.36x (0.16-0.80)* I2=0.00 repos=2 lift>1 in 0/2
+   consumer-ish             1.25x (1.10-1.41)* I2=0.78 repos=7 lift>1 in 7/7
+   intermediate             0.90x (0.79-1.03)  I2=0.82 repos=7 lift>1 in 3/7
+   producer-ish             0.71x (0.64-0.79)* I2=0.09 repos=7 lift>1 in 0/7
+   fan-out partial rho: median +0.11, positive in 7/7;   fan-in partial rho: median -0.07, positive in 0/7
+   fix radius vs directory-matched null: median lift 1.4x, >=1.5x in 3/6 repos (min 1.2x, max 2.1x)
+-- ALL: 21 repos
+   orchestrator (8)         1.22x (1.15-1.29)* I2=0.20 repos=19 lift>1 in 16/19
+   orchestrator (pctile)    1.18x (1.14-1.22)* I2=0.00 repos=21 lift>1 in 19/21
+   utility                  0.95x (0.80-1.13)  I2=0.59 repos=20 lift>1 in 9/20
+   hub                      0.80x (0.27-2.35)  I2=0.71 repos=4 lift>1 in 2/4
+   consumer-ish             1.16x (1.09-1.24)* I2=0.64 repos=21 lift>1 in 19/21
+   intermediate             0.97x (0.90-1.04)  I2=0.74 repos=21 lift>1 in 9/21
+   producer-ish             0.82x (0.74-0.91)* I2=0.43 repos=21 lift>1 in 3/21
+   fan-out partial rho: median +0.10, positive in 21/21;   fan-in partial rho: median -0.03, positive in 6/21
+   fix radius vs directory-matched null: median lift 1.5x, >=1.5x in 10/20 repos (min 1.1x, max 2.4x)

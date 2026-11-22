@@ -1,0 +1,17 @@
+Written 2026-11-22 BEFORE any of the 22 extension repos had its git history mined or analysed.
+Wave 2 repos: C (memcached tmux lua libssh2 mbedtls zstd), Go (caddy prometheus hugo fzf cli traefik grpc-go gin),
+Java (commons-lang commons-io jsoup jackson-databind guava mockito maven okhttp). Engine 981e9ec.
+Same method as PREREGISTERED.txt (Poisson size baseline on log(1+LOC), log(1+complexity), per repo; fix def B = fix|bug|regression minus memory words;
+D = any commit control; "orig" reported but not the primary).
+Hypotheses, each judged per language stratum (C, Go, Java) and overall, primary def B:
+ H1: orchestrators (fan-in<8, fan-out>=8) lift > 1. PASS if the random-effects pooled CI excludes 1 in the stratum.
+ H1b: same with a per-repo percentile definition (fan-out >= p90 of fan-out, fan-in < p90 of fan-in); must agree in sign with H1.
+ H3: fan-out partial Spearman (controls LOC, complexity) > 0 in a majority of repos in the stratum.
+ H4: consumer-ish (in/(in+out) < 0.2, >=3 edges) lift > producer-ish (> 0.8) lift, pooled CIs non-overlapping or consumer CI above 1 and producer CI below.
+ H5 (fix radius): the share of co-changed function pairs (same fix commit, <=12 functions) within 2 call hops exceeds a DIRECTORY-MATCHED null
+     (b replaced by a random fix-touched function in b's directory, same file when the pair is same-file) by >= 1.5x in a majority of repos with >= 100 pairs.
+Also reported, no hypothesis: utility and hub quadrants; heterogeneity (I-squared) of the orchestrator lift.
+Dropped (not re-tested): lifecycle-named functions (retracted: churn effect); file-level producer ratio (no signal).
+Known limits stated in advance: hunk-header function attribution depends on git's built-in golang/java diff drivers; Java overloads share a name and are all
+credited; call graph is from HEAD; fix detection is commit-subject keywords; Go/Java call-graph resolution quality is unmeasured here.
+Failures are reported as failures. Comparisons beyond the above are exploratory.

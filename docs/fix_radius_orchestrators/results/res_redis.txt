@@ -1,0 +1,20 @@
+### redis: 818 files, 7160 funcs, 2695 commits (touching .c/.h), 930 fix-like (35%)
+
+[file-level] n=194 files with >=3 commits
+  bc: raw rho(fix_count, bc)=+0.48   partial|LOC=+0.06 (p=0.402)   rho(fix_share,bc)|LOC,commits=-0.21 (p=0.003)
+  pr: raw rho(fix_count, pr)=+0.12   partial|LOC=+0.06 (p=0.449)   rho(fix_share,pr)|LOC,commits=-0.26 (p=0.003)
+  br: raw rho(fix_count, br)=+0.12   partial|LOC=+0.06 (p=0.502)   rho(fix_share,br)|LOC,commits=-0.26 (p=0.003)
+  size baseline: rho(fix_count, LOC)=+0.72, rho(fix_count, total commits)=+0.84
+
+[function graph] 6492 nodes in graph, 23410 edges, 13 multi-function cycles (153 funcs)
+  funcs touched by >=1 fix commit: 1555/7160
+  size baseline: rho(fix_touches, LOC)=+0.33, rho(fix_touches, complexity)=+0.27
+  betweenness: raw rho=+0.09   partial|LOC,complexity=+0.05 (p=0.003)
+  fan_in: raw rho=-0.04   partial|LOC,complexity=-0.03 (p=0.053)
+  fan_out: raw rho=+0.31   partial|LOC,complexity=+0.14 (p=0.003)
+  top-5% betweenness funcs: 325 funcs = 9% of LOC, receive 13% of fix touches
+  cycle members: 153 funcs = 4.1% of LOC, receive 5.1% of fix touches; mean touches 0.81 vs 0.36
+
+[co-change locality] 2678 function pairs changed together in one fix commit (<=12 funcs per commit)
+  all pairs: n=2678  within 2 call hops: 52.7%   null (random fix-touched pairs): 9.1% (range 8.8-9.3)   lift x5.8
+  cross-file pairs only: n=1295  within 2 call hops: 40.8%   null (random fix-touched pairs): 8.3% (range 7.3-9.5)   lift x4.9

@@ -1,0 +1,380 @@
+
+### curl | def=orig | half=old | commits=3732 fix-like=736 touches=789 funcs=4321 | fanout partial=+0.08 fanin partial=-0.01
+   orchestrator (in<8,out>=8)           n=  440 1.34x (1.08-1.60)*
+   utility (in>=8,out<8)                n=  245 0.68x (0.42-1.03) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.07x (0.66-1.51) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   62 1.72x (0.64-2.69) 
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.16x (0.96-1.38) 
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 0.97x (0.82-1.18) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 0.51x (0.26-0.73)*
+   file consumer (<0.2)                 n=   92 0.97x  (obs 574 / exp 590)
+   file transceiver                     n=  153 1.04x  (obs 291 / exp 280)
+   file producer (>0.8)                 n=   97 1.06x  (obs 102 / exp 96)
+
+### curl | def=B(no-memory) | half=old | commits=3732 fix-like=663 touches=713 funcs=4321 | fanout partial=+0.08 fanin partial=-0.01
+   orchestrator (in<8,out>=8)           n=  440 1.32x (1.09-1.56)*
+   utility (in>=8,out<8)                n=  245 0.67x (0.36-1.06) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.04x (0.67-1.42) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   62 1.50x (0.69-2.37) 
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.15x (0.96-1.37) 
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 0.99x (0.79-1.20) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 0.51x (0.31-0.81)*
+   file consumer (<0.2)                 n=   92 0.96x  (obs 510 / exp 530)
+   file transceiver                     n=  153 1.06x  (obs 273 / exp 258)
+   file producer (>0.8)                 n=   97 1.07x  (obs 97 / exp 91)
+
+### curl | def=D(any commit) | half=old | commits=3732 fix-like=3732 touches=8049 funcs=4321 | fanout partial=+0.13 fanin partial=+0.04
+   orchestrator (in<8,out>=8)           n=  440 1.30x (1.11-1.49)*
+   utility (in>=8,out<8)                n=  245 0.97x (0.71-1.23) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.32x (1.02-1.63)*
+   lifecycle & in>=8                    n=   21 1.82x (0.18-4.05) 
+   lifecycle & out>=5                   n=   62 2.19x (1.41-2.92)*
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.12x (1.00-1.27) 
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 1.08x (0.94-1.26) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 0.86x (0.70-1.05) 
+
+### curl | def=orig | half=new | commits=3732 fix-like=652 touches=2488 funcs=4321 | fanout partial=+0.09 fanin partial=+0.01
+   orchestrator (in<8,out>=8)           n=  440 1.18x (1.08-1.28)*
+   utility (in>=8,out<8)                n=  245 1.23x (1.04-1.48)*
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.10x (0.91-1.28) 
+   lifecycle & in>=8                    n=   21 2.24x (1.51-3.11)*
+   lifecycle & out>=5                   n=   62 1.24x (0.80-1.72) 
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.10x (1.01-1.17)*
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 0.94x (0.87-1.01) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 1.08x (0.93-1.22) 
+   file consumer (<0.2)                 n=  123 0.98x  (obs 858 / exp 874)
+   file transceiver                     n=  224 1.00x  (obs 513 / exp 512)
+   file producer (>0.8)                 n=  133 1.10x  (obs 222 / exp 201)
+
+### curl | def=B(no-memory) | half=new | commits=3732 fix-like=534 touches=2363 funcs=4321 | fanout partial=+0.08 fanin partial=+0.00
+   orchestrator (in<8,out>=8)           n=  440 1.19x (1.09-1.31)*
+   utility (in>=8,out<8)                n=  245 1.20x (0.96-1.40) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.03x (0.85-1.21) 
+   lifecycle & in>=8                    n=   21 1.86x (1.07-2.79)*
+   lifecycle & out>=5                   n=   62 1.21x (0.84-1.70) 
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.09x (1.01-1.18)*
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 0.94x (0.88-1.01) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 1.06x (0.91-1.25) 
+   file consumer (<0.2)                 n=  123 0.98x  (obs 791 / exp 810)
+   file transceiver                     n=  224 1.01x  (obs 486 / exp 482)
+   file producer (>0.8)                 n=  133 1.11x  (obs 212 / exp 192)
+
+### curl | def=D(any commit) | half=new | commits=3732 fix-like=3732 touches=15520 funcs=4321 | fanout partial=+0.28 fanin partial=+0.05
+   orchestrator (in<8,out>=8)           n=  440 1.28x (1.20-1.37)*
+   utility (in>=8,out<8)                n=  245 0.97x (0.85-1.11) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  427 1.18x (1.06-1.32)*
+   lifecycle & in>=8                    n=   21 1.24x (0.82-1.63) 
+   lifecycle & out>=5                   n=   62 1.59x (1.26-1.92)*
+   consumer-ish ratio<0.2 (tot>=3)      n=  921 1.17x (1.11-1.23)*
+   intermediate 0.2-0.8 (tot>=3)        n= 1608 1.02x (0.97-1.06) 
+   producer-ish ratio>0.8 (tot>=3)      n=  436 0.86x (0.78-0.93)*
+
+### redis | def=orig | half=old | commits=1348 fix-like=442 touches=1059 funcs=6492 | fanout partial=+0.10 fanin partial=-0.03
+   orchestrator (in<8,out>=8)           n=  749 1.17x (1.03-1.33)*
+   utility (in>=8,out<8)                n=  457 1.18x (0.84-1.53) 
+   hub (in>=8,out>=8)                   n=   25 1.16x (0.59-1.76) 
+   lifecycle-named (all)                n=  572 0.87x (0.58-1.17) 
+   lifecycle & in>=8                    n=   45 1.10x (0.39-1.97) 
+   lifecycle & out>=5                   n=  124 0.86x (0.52-1.15) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.08x (0.97-1.21) 
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.97x (0.86-1.09) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 0.93x (0.66-1.20) 
+   file consumer (<0.2)                 n=   35 0.89x  (obs 235 / exp 265)
+   file transceiver                     n=   78 1.06x  (obs 562 / exp 532)
+   file producer (>0.8)                 n=   55 0.99x  (obs 102 / exp 103)
+
+### redis | def=B(no-memory) | half=old | commits=1348 fix-like=350 touches=886 funcs=6492 | fanout partial=+0.09 fanin partial=-0.03
+   orchestrator (in<8,out>=8)           n=  749 1.15x (0.98-1.32) 
+   utility (in>=8,out<8)                n=  457 1.25x (0.92-1.76) 
+   hub (in>=8,out>=8)                   n=   25 1.06x (0.53-1.66) 
+   lifecycle-named (all)                n=  572 0.91x (0.60-1.21) 
+   lifecycle & in>=8                    n=   45 1.12x (0.43-1.93) 
+   lifecycle & out>=5                   n=  124 0.87x (0.54-1.29) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.06x (0.91-1.19) 
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.96x (0.85-1.08) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 1.02x (0.72-1.33) 
+   file consumer (<0.2)                 n=   35 0.87x  (obs 168 / exp 193)
+   file transceiver                     n=   78 1.10x  (obs 415 / exp 378)
+   file producer (>0.8)                 n=   55 0.75x  (obs 38 / exp 50)
+
+### redis | def=D(any commit) | half=old | commits=1348 fix-like=1348 touches=5332 funcs=6492 | fanout partial=+0.14 fanin partial=-0.04
+   orchestrator (in<8,out>=8)           n=  749 1.17x (1.06-1.33)*
+   utility (in>=8,out<8)                n=  457 1.41x (1.17-1.70)*
+   hub (in>=8,out>=8)                   n=   25 1.72x (0.82-2.83) 
+   lifecycle-named (all)                n=  572 0.91x (0.76-1.08) 
+   lifecycle & in>=8                    n=   45 1.64x (0.97-2.35) 
+   lifecycle & out>=5                   n=  124 0.93x (0.67-1.19) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.10x (0.99-1.21) 
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.94x (0.85-1.02) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 1.09x (0.88-1.29) 
+
+### redis | def=orig | half=new | commits=1347 fix-like=488 touches=1358 funcs=6492 | fanout partial=+0.12 fanin partial=-0.00
+   orchestrator (in<8,out>=8)           n=  749 1.24x (1.11-1.39)*
+   utility (in>=8,out<8)                n=  457 1.21x (0.86-1.63) 
+   hub (in>=8,out>=8)                   n=   25 1.62x (0.80-2.42) 
+   lifecycle-named (all)                n=  572 1.34x (1.07-1.59)*
+   lifecycle & in>=8                    n=   45 2.73x (1.45-4.04)*
+   lifecycle & out>=5                   n=  124 1.37x (1.01-1.86)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.16x (1.06-1.29)*
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.90x (0.80-1.00) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 0.95x (0.72-1.24) 
+   file consumer (<0.2)                 n=   44 0.76x  (obs 175 / exp 231)
+   file transceiver                     n=  113 1.11x  (obs 590 / exp 533)
+   file producer (>0.8)                 n=   69 1.00x  (obs 49 / exp 49)
+
+### redis | def=B(no-memory) | half=new | commits=1347 fix-like=359 touches=980 funcs=6492 | fanout partial=+0.06 fanin partial=-0.01
+   orchestrator (in<8,out>=8)           n=  749 1.20x (1.05-1.35)*
+   utility (in>=8,out<8)                n=  457 1.26x (0.86-1.74) 
+   hub (in>=8,out>=8)                   n=   25 1.98x (0.87-3.29) 
+   lifecycle-named (all)                n=  572 1.33x (1.00-1.67) 
+   lifecycle & in>=8                    n=   45 3.26x (1.56-5.45)*
+   lifecycle & out>=5                   n=  124 1.33x (0.78-1.90) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.09x (0.97-1.23) 
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.90x (0.76-1.01) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 1.05x (0.76-1.37) 
+   file consumer (<0.2)                 n=   44 0.76x  (obs 133 / exp 175)
+   file transceiver                     n=  113 1.09x  (obs 440 / exp 403)
+   file producer (>0.8)                 n=   69 1.16x  (obs 42 / exp 36)
+
+### redis | def=D(any commit) | half=new | commits=1347 fix-like=1347 touches=7328 funcs=6492 | fanout partial=+0.20 fanin partial=+0.03
+   orchestrator (in<8,out>=8)           n=  749 1.29x (1.18-1.43)*
+   utility (in>=8,out<8)                n=  457 1.48x (1.29-1.66)*
+   hub (in>=8,out>=8)                   n=   25 2.05x (1.18-3.12)*
+   lifecycle-named (all)                n=  572 1.27x (1.06-1.46)*
+   lifecycle & in>=8                    n=   45 2.20x (1.34-3.02)*
+   lifecycle & out>=5                   n=  124 1.59x (1.22-1.94)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 1286 1.18x (1.07-1.28)*
+   intermediate 0.2-0.8 (tot>=3)        n= 2479 0.95x (0.88-1.01) 
+   producer-ish ratio>0.8 (tot>=3)      n=  770 1.12x (0.97-1.28) 
+
+### nginx | def=orig | half=old | commits=621 fix-like=131 touches=177 funcs=2959 | fanout partial=+0.08 fanin partial=+0.05
+   orchestrator (in<8,out>=8)           n=  197 1.30x (0.91-1.81) 
+   utility (in>=8,out<8)                n=  139 0.75x (0.15-1.51) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.51x (0.65-2.49) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   14 (too few)
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.10x (0.85-1.36) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 1.40x (1.07-1.77)*
+   producer-ish ratio>0.8 (tot>=3)      n=  216 0.73x (0.14-1.46) 
+   file consumer (<0.2)                 n=  185 0.90x  (obs 246 / exp 273)
+   file transceiver                     n=  158 1.13x  (obs 224 / exp 198)
+   file producer (>0.8)                 n=   41 1.00x  (obs 47 / exp 47)
+
+### nginx | def=B(no-memory) | half=old | commits=621 fix-like=123 touches=171 funcs=2959 | fanout partial=+0.09 fanin partial=+0.05
+   orchestrator (in<8,out>=8)           n=  197 1.32x (0.82-1.85) 
+   utility (in>=8,out<8)                n=  139 0.62x (0.00-1.45) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.58x (0.60-2.74) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   14 (too few)
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.13x (0.84-1.43) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 1.39x (1.03-1.77)*
+   producer-ish ratio>0.8 (tot>=3)      n=  216 0.63x (0.13-1.33) 
+   file consumer (<0.2)                 n=  185 0.91x  (obs 244 / exp 268)
+   file transceiver                     n=  158 1.12x  (obs 218 / exp 195)
+   file producer (>0.8)                 n=   41 1.01x  (obs 47 / exp 46)
+
+### nginx | def=D(any commit) | half=old | commits=621 fix-like=621 touches=1466 funcs=2959 | fanout partial=+0.05 fanin partial=+0.04
+   orchestrator (in<8,out>=8)           n=  197 1.28x (1.00-1.59) 
+   utility (in>=8,out<8)                n=  139 0.65x (0.38-1.00)*
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.51x (0.97-2.07) 
+   lifecycle & in>=8                    n=   21 1.67x (0.36-3.65) 
+   lifecycle & out>=5                   n=   14 3.09x (1.41-5.13)*
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.12x (0.93-1.37) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 1.17x (0.99-1.34) 
+   producer-ish ratio>0.8 (tot>=3)      n=  216 0.87x (0.55-1.21) 
+
+### nginx | def=orig | half=new | commits=621 fix-like=128 touches=205 funcs=2959 | fanout partial=+0.07 fanin partial=-0.03
+   orchestrator (in<8,out>=8)           n=  197 1.48x (1.13-1.91)*
+   utility (in>=8,out<8)                n=  139 0.26x (0.00-0.69)*
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.35x (0.43-2.48) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   14 (too few)
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.15x (0.91-1.38) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 1.00x (0.79-1.31) 
+   producer-ish ratio>0.8 (tot>=3)      n=  216 0.32x (0.00-0.69)*
+   file consumer (<0.2)                 n=  122 1.02x  (obs 118 / exp 115)
+   file transceiver                     n=   97 0.99x  (obs 65 / exp 65)
+   file producer (>0.8)                 n=   19 0.71x  (obs 7 / exp 10)
+
+### nginx | def=B(no-memory) | half=new | commits=621 fix-like=103 touches=169 funcs=2959 | fanout partial=+0.07 fanin partial=-0.03
+   orchestrator (in<8,out>=8)           n=  197 1.45x (1.05-1.87)*
+   utility (in>=8,out<8)                n=  139 0.32x (0.00-0.87)*
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.02x (0.30-1.96) 
+   lifecycle & in>=8                    n=   21 (too few)
+   lifecycle & out>=5                   n=   14 (too few)
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.21x (0.99-1.46) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 0.98x (0.68-1.29) 
+   producer-ish ratio>0.8 (tot>=3)      n=  216 0.40x (0.00-0.98)*
+   file consumer (<0.2)                 n=  122 1.06x  (obs 104 / exp 98)
+   file transceiver                     n=   97 0.90x  (obs 50 / exp 56)
+   file producer (>0.8)                 n=   19 0.83x  (obs 7 / exp 8)
+
+### nginx | def=D(any commit) | half=new | commits=621 fix-like=621 touches=1538 funcs=2959 | fanout partial=+0.03 fanin partial=-0.01
+   orchestrator (in<8,out>=8)           n=  197 1.20x (0.99-1.44) 
+   utility (in>=8,out<8)                n=  139 0.65x (0.34-1.08) 
+   hub (in>=8,out>=8)                   n=    5 (too few)
+   lifecycle-named (all)                n=  191 1.10x (0.81-1.53) 
+   lifecycle & in>=8                    n=   21 1.18x (0.19-2.74) 
+   lifecycle & out>=5                   n=   14 1.47x (0.37-3.09) 
+   consumer-ish ratio<0.2 (tot>=3)      n=  779 1.05x (0.94-1.14) 
+   intermediate 0.2-0.8 (tot>=3)        n=  843 0.99x (0.85-1.12) 
+   producer-ish ratio>0.8 (tot>=3)      n=  216 1.00x (0.64-1.41) 
+
+### openssl | def=orig | half=old | commits=4804 fix-like=1146 touches=2195 funcs=15837 | fanout partial=+0.11 fanin partial=+0.02
+   orchestrator (in<8,out>=8)           n= 1133 1.28x (1.18-1.43)*
+   utility (in>=8,out<8)                n=  879 1.13x (0.93-1.36) 
+   hub (in>=8,out>=8)                   n=   27 1.17x (0.42-2.01) 
+   lifecycle-named (all)                n=  829 1.11x (0.87-1.38) 
+   lifecycle & in>=8                    n=   73 0.44x (0.00-1.01) 
+   lifecycle & out>=5                   n=   48 2.00x (1.05-3.08)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.16x (1.06-1.25)*
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 1.12x (1.02-1.22)*
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 0.89x (0.73-1.01) 
+   file consumer (<0.2)                 n=  598 1.11x  (obs 907 / exp 815)
+   file transceiver                     n=  641 0.86x  (obs 682 / exp 793)
+   file producer (>0.8)                 n=  195 1.12x  (obs 171 / exp 153)
+
+### openssl | def=B(no-memory) | half=old | commits=4804 fix-like=865 touches=1838 funcs=15837 | fanout partial=+0.11 fanin partial=+0.01
+   orchestrator (in<8,out>=8)           n= 1133 1.26x (1.13-1.38)*
+   utility (in>=8,out<8)                n=  879 1.05x (0.81-1.30) 
+   hub (in>=8,out>=8)                   n=   27 1.10x (0.30-2.03) 
+   lifecycle-named (all)                n=  829 0.90x (0.68-1.15) 
+   lifecycle & in>=8                    n=   73 0.00x (0.00-0.00)*
+   lifecycle & out>=5                   n=   48 1.76x (0.74-3.11) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.17x (1.08-1.28)*
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 1.10x (1.01-1.19)*
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 0.87x (0.71-1.05) 
+   file consumer (<0.2)                 n=  598 1.13x  (obs 761 / exp 672)
+   file transceiver                     n=  641 0.83x  (obs 546 / exp 656)
+   file producer (>0.8)                 n=  195 1.15x  (obs 150 / exp 131)
+
+### openssl | def=D(any commit) | half=old | commits=4804 fix-like=4804 touches=14130 funcs=15837 | fanout partial=+0.16 fanin partial=+0.05
+   orchestrator (in<8,out>=8)           n= 1133 1.25x (1.16-1.32)*
+   utility (in>=8,out<8)                n=  879 1.52x (1.38-1.71)*
+   hub (in>=8,out>=8)                   n=   27 1.25x (0.89-1.71) 
+   lifecycle-named (all)                n=  829 1.34x (1.19-1.56)*
+   lifecycle & in>=8                    n=   73 1.86x (1.36-2.34)*
+   lifecycle & out>=5                   n=   48 2.51x (1.71-3.31)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.14x (1.08-1.21)*
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 1.06x (1.00-1.11)*
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 1.17x (1.07-1.28)*
+
+### openssl | def=orig | half=new | commits=4803 fix-like=1090 touches=1658 funcs=15837 | fanout partial=+0.05 fanin partial=+0.01
+   orchestrator (in<8,out>=8)           n= 1133 1.07x (0.96-1.17) 
+   utility (in>=8,out<8)                n=  879 1.40x (1.09-1.71)*
+   hub (in>=8,out>=8)                   n=   27 0.98x (0.44-1.58) 
+   lifecycle-named (all)                n=  829 1.75x (1.38-2.16)*
+   lifecycle & in>=8                    n=   73 3.13x (1.96-4.69)*
+   lifecycle & out>=5                   n=   48 3.66x (2.13-5.83)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.02x (0.95-1.10) 
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 1.07x (0.97-1.19) 
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 1.19x (0.91-1.43) 
+   file consumer (<0.2)                 n=  659 0.99x  (obs 689 / exp 695)
+   file transceiver                     n=  764 1.00x  (obs 659 / exp 658)
+   file producer (>0.8)                 n=  223 1.05x  (obs 116 / exp 111)
+
+### openssl | def=B(no-memory) | half=new | commits=4803 fix-like=736 touches=1188 funcs=15837 | fanout partial=+0.05 fanin partial=-0.01
+   orchestrator (in<8,out>=8)           n= 1133 1.08x (0.95-1.20) 
+   utility (in>=8,out<8)                n=  879 1.22x (0.87-1.60) 
+   hub (in>=8,out>=8)                   n=   27 0.61x (0.18-1.18) 
+   lifecycle-named (all)                n=  829 1.02x (0.58-1.39) 
+   lifecycle & in>=8                    n=   73 0.59x (0.00-1.41) 
+   lifecycle & out>=5                   n=   48 1.64x (0.66-2.97) 
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.07x (0.98-1.17) 
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 0.99x (0.89-1.11) 
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 1.06x (0.83-1.31) 
+   file consumer (<0.2)                 n=  659 0.95x  (obs 475 / exp 500)
+   file transceiver                     n=  764 1.02x  (obs 484 / exp 473)
+   file producer (>0.8)                 n=  223 1.18x  (obs 94 / exp 80)
+
+### openssl | def=D(any commit) | half=new | commits=4803 fix-like=4803 touches=19933 funcs=15837 | fanout partial=+0.18 fanin partial=+0.01
+   orchestrator (in<8,out>=8)           n= 1133 1.13x (1.08-1.18)*
+   utility (in>=8,out<8)                n=  879 1.10x (1.00-1.18)*
+   hub (in>=8,out>=8)                   n=   27 0.95x (0.63-1.34) 
+   lifecycle-named (all)                n=  829 1.01x (0.91-1.11) 
+   lifecycle & in>=8                    n=   73 1.39x (1.02-1.82)*
+   lifecycle & out>=5                   n=   48 1.71x (1.32-2.19)*
+   consumer-ish ratio<0.2 (tot>=3)      n= 2570 1.11x (1.07-1.14)*
+   intermediate 0.2-0.8 (tot>=3)        n= 4533 1.08x (1.04-1.11)*
+   producer-ish ratio>0.8 (tot>=3)      n= 1725 0.92x (0.88-0.98)*
+
+==== POOLED over repos [curl,redis,nginx,openssl] (sum observed / sum expected; CI by within-repo bootstrap)
+-- def=B(no-memory) half=new
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.17x (1.09-1.24)*   per-repo: 1.19 1.20 1.45 1.08
+   utility (in>=8,out<8)                n= 1720 pooled 1.19x (1.04-1.34)*   per-repo: 1.20 1.26 0.32 1.22
+   hub (in>=8,out>=8)                   n=   62 pooled 1.17x (0.70-1.86)    per-repo: 0.63 1.98   -  0.61
+   lifecycle-named (all)                n= 2019 pooled 1.10x (0.95-1.24)    per-repo: 1.03 1.33 1.02 1.02
+   lifecycle & in>=8                    n=  160 pooled 2.08x (1.29-2.77)*   per-repo: 1.86 3.26   -  0.59
+   lifecycle & out>=5                   n=  248 pooled 1.29x (0.98-1.64)    per-repo: 1.21 1.33   -  1.64
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.09x (1.04-1.15)*   per-repo: 1.09 1.09 1.21 1.07
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 0.94x (0.90-1.01)    per-repo: 0.94 0.90 0.98 0.99
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 1.04x (0.93-1.16)    per-repo: 1.06 1.05 0.40 1.06
+   fan-out partial rho per repo: +0.08 +0.06 +0.07 +0.05   (positive in 4/4)
+-- def=B(no-memory) half=old
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.24x (1.15-1.34)*   per-repo: 1.32 1.15 1.32 1.26
+   utility (in>=8,out<8)                n= 1720 pooled 1.02x (0.83-1.17)    per-repo: 0.67 1.25 0.62 1.05
+   hub (in>=8,out>=8)                   n=   62 pooled 1.27x (0.82-1.85)    per-repo:   -  1.06   -  1.10
+   lifecycle-named (all)                n= 2019 pooled 0.97x (0.82-1.18)    per-repo: 1.04 0.91 1.58 0.90
+   lifecycle & in>=8                    n=  160 pooled 0.87x (0.29-1.52)    per-repo:   -  1.12   -  0.00
+   lifecycle & out>=5                   n=  248 pooled 1.25x (0.92-1.69)    per-repo: 1.50 0.87   -  1.76
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.14x (1.08-1.21)*   per-repo: 1.15 1.06 1.13 1.17
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 1.05x (0.98-1.12)    per-repo: 0.99 0.96 1.39 1.10
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 0.84x (0.73-0.99)*   per-repo: 0.51 1.02 0.63 0.87
+   fan-out partial rho per repo: +0.08 +0.09 +0.09 +0.11   (positive in 4/4)
+-- def=D(any commit) half=new
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.22x (1.17-1.27)*   per-repo: 1.28 1.29 1.20 1.13
+   utility (in>=8,out<8)                n= 1720 pooled 1.11x (1.04-1.18)*   per-repo: 0.97 1.48 0.65 1.10
+   hub (in>=8,out>=8)                   n=   62 pooled 1.35x (0.97-1.74)    per-repo: 1.00 2.05 2.36 0.95
+   lifecycle-named (all)                n= 2019 pooled 1.14x (1.06-1.21)*   per-repo: 1.18 1.27 1.10 1.01
+   lifecycle & in>=8                    n=  160 pooled 1.55x (1.23-1.87)*   per-repo: 1.24 2.20 1.18 1.39
+   lifecycle & out>=5                   n=  248 pooled 1.61x (1.39-1.87)*   per-repo: 1.59 1.59 1.47 1.71
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.14x (1.10-1.18)*   per-repo: 1.17 1.18 1.05 1.11
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 1.03x (1.00-1.05)*   per-repo: 1.02 0.95 0.99 1.08
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 0.93x (0.89-0.99)*   per-repo: 0.86 1.12 1.00 0.92
+   fan-out partial rho per repo: +0.28 +0.20 +0.03 +0.18   (positive in 4/4)
+-- def=D(any commit) half=old
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.25x (1.17-1.31)*   per-repo: 1.30 1.17 1.28 1.25
+   utility (in>=8,out<8)                n= 1720 pooled 1.32x (1.21-1.44)*   per-repo: 0.97 1.41 0.65 1.52
+   hub (in>=8,out>=8)                   n=   62 pooled 1.59x (1.10-2.14)*   per-repo: 2.58 1.72 1.91 1.25
+   lifecycle-named (all)                n= 2019 pooled 1.23x (1.09-1.35)*   per-repo: 1.32 0.91 1.51 1.34
+   lifecycle & in>=8                    n=  160 pooled 1.77x (1.22-2.41)*   per-repo: 1.82 1.64 1.67 1.86
+   lifecycle & out>=5                   n=  248 pooled 1.75x (1.43-2.12)*   per-repo: 2.19 0.93 3.09 2.51
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.13x (1.07-1.18)*   per-repo: 1.12 1.10 1.12 1.14
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 1.04x (0.99-1.11)    per-repo: 1.08 0.94 1.17 1.06
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 1.07x (0.99-1.14)    per-repo: 0.86 1.09 0.87 1.17
+   fan-out partial rho per repo: +0.13 +0.14 +0.05 +0.16   (positive in 4/4)
+-- def=orig half=new
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.17x (1.11-1.23)*   per-repo: 1.18 1.24 1.48 1.07
+   utility (in>=8,out<8)                n= 1720 pooled 1.24x (1.10-1.40)*   per-repo: 1.23 1.21 0.26 1.40
+   hub (in>=8,out>=8)                   n=   62 pooled 1.18x (0.76-1.70)    per-repo: 0.59 1.62   -  0.98
+   lifecycle-named (all)                n= 2019 pooled 1.28x (1.13-1.42)*   per-repo: 1.10 1.34 1.35 1.75
+   lifecycle & in>=8                    n=  160 pooled 2.57x (2.00-3.34)*   per-repo: 2.24 2.73   -  3.13
+   lifecycle & out>=5                   n=  248 pooled 1.51x (1.21-1.89)*   per-repo: 1.24 1.37   -  3.66
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.09x (1.04-1.15)*   per-repo: 1.10 1.16 1.15 1.02
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 0.97x (0.92-1.02)    per-repo: 0.94 0.90 1.00 1.07
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 1.06x (0.95-1.19)    per-repo: 1.08 0.95 0.32 1.19
+   fan-out partial rho per repo: +0.09 +0.12 +0.07 +0.05   (positive in 4/4)
+-- def=orig half=old
+   orchestrator (in<8,out>=8)           n= 2519 pooled 1.26x (1.16-1.35)*   per-repo: 1.34 1.17 1.30 1.28
+   utility (in>=8,out<8)                n= 1720 pooled 1.06x (0.92-1.23)    per-repo: 0.68 1.18 0.75 1.13
+   hub (in>=8,out>=8)                   n=   62 pooled 1.31x (0.87-1.81)    per-repo:   -  1.16   -  1.17
+   lifecycle-named (all)                n= 2019 pooled 1.02x (0.86-1.19)    per-repo: 1.07 0.87 1.51 1.11
+   lifecycle & in>=8                    n=  160 pooled 0.99x (0.52-1.63)    per-repo:   -  1.10   -  0.44
+   lifecycle & out>=5                   n=  248 pooled 1.33x (1.01-1.72)*   per-repo: 1.72 0.86   -  2.00
+   consumer-ish ratio<0.2 (tot>=3)      n= 5556 pooled 1.13x (1.06-1.21)*   per-repo: 1.16 1.08 1.10 1.16
+   intermediate 0.2-0.8 (tot>=3)        n= 9463 pooled 1.06x (1.00-1.12)    per-repo: 0.97 0.97 1.40 1.12
+   producer-ish ratio>0.8 (tot>=3)      n= 3147 pooled 0.84x (0.73-0.95)*   per-repo: 0.51 0.93 0.73 0.89
+   fan-out partial rho per repo: +0.08 +0.10 +0.08 +0.11   (positive in 4/4)
